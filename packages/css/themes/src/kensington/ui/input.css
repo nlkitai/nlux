@@ -1,0 +1,17 @@
+.nluxc-root.nluxc-theme-kensington {
+    --nluxc-input-border-color: var(--nluxc-neutral-6);
+    --nluxc-input-text-color: var(--nluxc-neutral-black);
+    --nluxc-input-background-color: transparent;
+
+    --nluxc-input-hover-text-color: var(--nluxc-neutral-black);
+    --nluxc-input-hover-border-color: var(--nluxc-neutral-6);
+    --nluxc-input-hover-background-color: transparent;
+
+    --nluxc-input-active-text-color: var(--nluxc-neutral-black);
+    --nluxc-input-active-border-color: var(--nluxc-neutral-6);
+    --nluxc-input-active-background-color: transparent;
+
+    --nluxc-input-disabled-text-color: var(--nluxc-neutral-6);
+    --nluxc-input-disabled-border-color: var(--nluxc-neutral-6);
+    --nluxc-input-disabled-background-color: transparent;
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>NLUX React Demo!</title>
+    <meta content="Salmen Hichri" name="author">
+    <link href="https://use.typekit.net/nny7qsb.css" rel="stylesheet">
+    <script src="./require.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        requirejs.config({
+            paths: {
+                "@nlux/nlux": "/packages/@nlux/nlux/umd/nlux",
+                "@nlux/openai": "/packages/@nlux/openai/umd/openai",
+                "@nlux/nlux-react": "/packages/@nlux/nlux-react/umd/nlux-react",
+                "@nlux/openai-react": "/packages/@nlux/openai-react/umd/openai-react",
+                "react": "/packages/react/umd/react.development",
+                "react-dom": "/packages/react-dom/umd/react-dom.development",
+                "nluxEmulatorReactExample": "./index"
+            }
+        });
+    </script>
+    <link href="/packages/@nlux/themes/kensington.css" rel="stylesheet">
+    <script defer type="text/javascript">
+        const applyLightRandomColor = () => {
+            // Generate a random RGB color where each value is between 230-255
+            const r = Math.floor(Math.random() * 26) + 230;
+            const g = Math.floor(Math.random() * 26) + 230;
+            const b = Math.floor(Math.random() * 26) + 230;
+
+            // Set the background color of the body
+            // document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        };
+
+        document.addEventListener('DOMContentLoaded', () => applyLightRandomColor());
+        document.addEventListener('DOMContentLoaded', () => {
+            requirejs(['nluxEmulatorReactExample'], function (nluxEmulatorReactExample) {
+                nluxEmulatorReactExample();
+            });
+        });
+    </script>
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .chat-emulator {
+            min-height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-emulator" id="convopit-root"></div>
+
+</body>
+</html>

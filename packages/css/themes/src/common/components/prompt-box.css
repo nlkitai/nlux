@@ -1,0 +1,20 @@
+.nluxc-prompt-box-container {
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    padding: var(--nluxc-padding);
+    cursor: pointer;
+
+    gap: var(--nluxc-flex-gap);
+
+    > .nluxc-prompt-box-text-input {
+        flex: 1;
+        resize: none;
+    }
+
+    > .nluxc-prompt-box-send-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

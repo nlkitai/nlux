@@ -1,0 +1,9 @@
+.nluxc-root {
+    font-family: var(--nluxc-font-family);
+    font-size: var(--nluxc-font-size);
+    font-weight: var(--nluxc-font-weight);
+    line-height: var(--nluxc-line-height);
+
+    padding: var(--nluxc-padding);
+    color: var(--nluxc-text-color);
+}

@@ -1,0 +1,33 @@
+.nluxc-root {
+    > .nluxc-chat-room-container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        gap: 0;
+
+        > .nluxc-chat-room-conversation-container {
+            display: flex;
+            overflow: auto;
+            flex: 1;
+            flex-direction: column;
+            padding: var(--nluxc-padding-l) var(--nluxc-padding-l) 0 var(--nluxc-padding-l);
+            gap: var(--nluxc-flex-gap);
+
+            > .nluxc-conversation-messages-container {
+                overflow: scroll;
+                flex: 1;
+            }
+        }
+
+        > .nluxc-chat-room-prompt-box {
+            flex: 0;
+            border-radius: var(--nluxc-border-radius-l);
+            box-shadow: 0px -10px 30px -20px rgba(0, 0, 0, 0.5);
+        }
+
+        > .nluxc-chat-room-footer {
+            flex: 0;
+        }
+    }
+}

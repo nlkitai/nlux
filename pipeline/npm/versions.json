@@ -1,0 +1,9 @@
+{
+  "inherit": true,
+  "nlux": "0.1.7-beta",
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "openai": "4.11.1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@nlux-dev/themes",
+  "version": "0.0.0-latest",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule",
+    "watch": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/rollup-plugin-generate-package-json": "^3.2.5",
+    "postcss": "^8.4.31",
+    "postcss-import": "^15.1.0",
+    "rollup": "^4.1.4",
+    "rollup-plugin-generate-package-json": "^3.2.0",
+    "rollup-plugin-postcss": "^4.0.2"
+  }
+}

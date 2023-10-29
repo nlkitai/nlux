@@ -1,0 +1,51 @@
+.nluxc-root {
+    .nluxc-text-message-container {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: var(--nluxc-padding-l);
+
+        > .nluxc-text-message-content {
+            max-width: 80%;
+            padding: var(--nluxc-text-message-content-padding);
+            text-align: left;
+
+            border-width: var(--nluxc-text-message-content-border-width);
+            border-style: solid;
+            border-color: transparent;
+
+            border-radius: var(--nluxc-border-radius-m);
+            outline: none;
+            box-shadow: var(--nluxc-text-message-shadow);
+        }
+
+        &.nluxc-text-message-received {
+            align-items: flex-start;
+
+            > .nluxc-text-message-content {
+                color: var(--nluxc-message-received-text-color);
+                background-color: var(--nluxc-message-received-background-color);
+            }
+
+            > .nluxc-text-message-content:focus,
+            > .nluxc-text-message-content:active {
+                color: var(--nluxc-message-received-focused-text-color);
+                background-color: var(--nluxc-message-received-focused-background-color);
+            }
+        }
+
+        &.nluxc-text-message-sent {
+            align-items: flex-end;
+
+            > .nluxc-text-message-content {
+                color: var(--nluxc-message-sent-text-color);
+                background-color: var(--nluxc-message-sent-background-color);
+            }
+
+            > .nluxc-text-message-content:focus,
+            > .nluxc-text-message-content:active {
+                color: var(--nluxc-message-sent-focused-text-color);
+                background-color: var(--nluxc-message-sent-focused-background-color);
+            }
+        }
+    }
+}

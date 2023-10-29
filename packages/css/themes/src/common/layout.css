@@ -1,0 +1,18 @@
+.nluxc-root {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    -webkit-user-select: none; /* Safari */
+    user-select: none; /* Standard syntax */
+
+    & h1, & h2, & h3, & h4, & h5, & h6 {
+        margin: 0;
+        padding: 0;
+    }
+
+    > .nluxc-chat-room-container {
+        max-width: 600px;
+    }
+}

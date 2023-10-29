@@ -1,0 +1,13 @@
+{
+  "name": "@nlux/openai-react",
+  "version": "{versions.nlux}",
+  "description": "The OpenAI adapters for NLUX React, the React JS library for building conversational AI interfaces.",
+  "repository": {
+    "directory": "packages/react/openai"
+  },
+  "dependencies": {
+    "@nlux/nlux": "^{versions.nlux}",
+    "@nlux/openai": "^{versions.nlux}",
+    "react": "^{versions.dependencies.react}"
+  }
+}

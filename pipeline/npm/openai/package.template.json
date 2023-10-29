@@ -1,0 +1,12 @@
+{
+  "name": "@nlux/openai",
+  "version": "{versions.nlux}",
+  "description": "The OpenAI adapters for NLUX, the javascript library for building conversational AI interfaces.",
+  "repository": {
+    "directory": "packages/js/openai"
+  },
+  "dependencies": {
+    "@nlux/nlux": "^{versions.nlux}",
+    "openai": "^{versions.dependencies.openai}"
+  }
+}

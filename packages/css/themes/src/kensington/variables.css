@@ -1,0 +1,30 @@
+.nluxc-root.nluxc-theme-kensington {
+    --nluxc-font-family: source-sans-pro, sans-serif;
+    --nluxc-text-color: var(--nluxc-neutral-black);
+    --nluxc-font-weight: 400;
+    --nluxc-line-height: 1.5;
+
+    --nluxc-font-size-s: 0.8rem;
+    --nluxc-font-size: 1rem;
+    --nluxc-font-size-m: 1.2rem;
+    --nluxc-font-size-l: 1.5rem;
+
+    --nluxc-padding-s: 0.3rem;
+    --nluxc-padding: 0.6rem;
+    --nluxc-padding-m: 0.8rem;
+    --nluxc-padding-l: 1rem;
+
+    --nluxc-flex-gap: 0.5rem;
+
+    --nluxc-border-radius-s: 10px;
+    --nluxc-border-radius: 12px;
+    --nluxc-border-radius-m: 14px;
+    --nluxc-border-radius-l: 16px;
+
+    --nluxc-border-width-s: 0;
+    --nluxc-border-width: 1px;
+    --nluxc-border-width-m: 3px;
+    --nluxc-border-width-l: 4px;
+
+    --nluxc-box-shadow: 0 0 2px rgb(0 0 0 / 20%);
+}

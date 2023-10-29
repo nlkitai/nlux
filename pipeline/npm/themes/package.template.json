@@ -1,0 +1,8 @@
+{
+  "name": "@nlux/themes",
+  "version": "{versions.nlux}",
+  "description": "Themes and CSS files for NLUX, the Javascript and React library for building conversational AI interfaces.",
+  "repository": {
+    "directory": "packages/css/themes"
+  }
+}

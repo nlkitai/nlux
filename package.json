@@ -1,0 +1,73 @@
+{
+  "name": "@nlux/monorepo",
+  "version": "0.1.7-beta",
+  "description": "NLUX is a JavaScript and React library for building conversational AI experiences.",
+  "author": "Salmen Hichri",
+  "license": "MPL-2.0",
+  "homepage": "https://nlux.ai",
+  "private": false,
+  "workspaces": [
+    "dist/dev/*",
+    "packages/*",
+    "packages/**/*",
+    "samples/*"
+  ],
+  "scripts": {
+    "cleanup": "node pipeline/scripts/cleanup.mjs",
+    "set": "node pipeline/scripts/set.mjs",
+    "reset": "yarn run cleanup && yarn run set",
+    "build": "node pipeline/scripts/build.mjs",
+    "dev": "node pipeline/scripts/dev.mjs",
+    "watch": "node pipeline/scripts/watch.mjs"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jsdom": "^22.1.0",
+    "serve": "^14.2.1",
+    "typescript": "5.2.2"
+  },
+  "bugs": "https://github.com/nluxai/nlux/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nluxai/nlux.git"
+  },
+  "keywords": [
+    "nlux",
+    "nlux",
+    "js",
+    "llm",
+    "large-language-model",
+    "convo",
+    "chatgpt",
+    "openai",
+    "gpt",
+    "gpt3",
+    "gpt4",
+    "typescript",
+    "javascript",
+    "react",
+    "generative-ai",
+    "conversational",
+    "conversational-ui",
+    "conversational-interface",
+    "interface",
+    "chatbot",
+    "chat",
+    "bot",
+    "ai",
+    "artificial-intelligence",
+    "artificial",
+    "intelligence",
+    "natural",
+    "language",
+    "processing",
+    "nlp",
+    "nlu",
+    "nlg",
+    "natural",
+    "language",
+    "natural-language",
+    "understanding"
+  ]
+}
