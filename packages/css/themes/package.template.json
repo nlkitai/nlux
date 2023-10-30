@@ -7,6 +7,7 @@
     "watch": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --watch"
   },
   "dependencies": {},
+  "peerDependencies": {},
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/rollup-plugin-generate-package-json": "^3.2.5",

@@ -4,5 +4,7 @@
   "description": "NLUX is Javascript and React library for building conversational AI interfaces, with support for OpenAI ChatGPT.",
   "repository": {
     "directory": "packages/js/nlux"
-  }
+  },
+  "dependencies": {},
+  "peerDependencies": {}
 }

@@ -2,47 +2,54 @@ import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import {join} from 'path';
+import {cwd} from 'process';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
-import {replaceImportedModules} from '../../pipeline/utils/rollup/replaceImportedModules';
 
-const distPath = join('..', '..', 'dist');
-const nodeModulesPath = join('..', '..', 'node_modules');
+const distPath = join(cwd(), '..', '..', 'dist');
 const outputFolder = join(distPath, 'dev', 'emulator');
-const isProduction = process.env.NODE_ENV === 'production';
+const nodeModulesPath = join(outputFolder, 'packages');
 
 const externals = [
     '@nlux/nlux',
     '@nlux/openai',
     '@nlux/nlux-react',
     '@nlux/openai-react',
+    'openai',
     'react',
     'react-dom',
 ];
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
+    //
+    // Pure JS in ESM format
+    //
     {
         input: './src/examples/index.ts',
         logLevel: 'silent',
-        treeshake: 'safest',
-        strictDeprecations: true,
+        external: externals,
         plugins: [
             esbuild(),
             nodeResolve({
                 modulePaths: [
-                    distPath,
+                    join(distPath, 'dev'),
+                    join(cwd(), '..', '..', 'node_modules'),
                 ],
+                browser: true,
             }),
-            !isProduction && replaceImportedModules(),
             replace({
                 delimiters: ['', ''],
                 preventAssignment: false,
                 values: {
                     'process.env.NODE_ENV': JSON.stringify('development'),
+                    'from \'@nlux/nlux\'': `from '/packages/@nlux/nlux/esm/nlux.js'`,
+                    'from \'@nlux/openai\'': `from '/packages/@nlux/openai/esm/openai.js'`,
+                    'from \'openai\'': `from '/packages/openai/index.mjs'`,
                 },
             }),
         ],
-        external: externals,
         output: [
             {
                 file: `${outputFolder}/examples/index.mjs`,
@@ -52,10 +59,11 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             },
         ],
     },
+    //
+    // React JS in UMD format
+    //
     {
         input: './src/examples-react/index.tsx',
-        logLevel: 'silent',
-        strictDeprecations: true,
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -64,9 +72,9 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             }),
             nodeResolve({
                 modulePaths: [
-                    distPath,
                     nodeModulesPath,
                 ],
+                rootDir: '/packages',
                 browser: true,
             }),
             commonjs(),

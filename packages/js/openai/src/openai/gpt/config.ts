@@ -5,7 +5,7 @@ import {encode as fetchEncode} from './codec/fetch/encode';
 import {decode as streamDecode} from './codec/stream/decode';
 import {encode as streamEncode} from './codec/stream/encode';
 
-export const gpt4StreamingAdapterConfig: AdapterConfig<
+export const gptStreamingAdapterConfig: AdapterConfig<
     OpenAI.Chat.Completions.ChatCompletionChunk,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > = Object.freeze({
@@ -13,7 +13,7 @@ export const gpt4StreamingAdapterConfig: AdapterConfig<
     decodeMessage: streamDecode,
 });
 
-export const gpt4FetchAdapterConfig: AdapterConfig<
+export const gptFetchAdapterConfig: AdapterConfig<
     OpenAI.Chat.Completions.ChatCompletion,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > = Object.freeze({
@@ -22,7 +22,7 @@ export const gpt4FetchAdapterConfig: AdapterConfig<
 });
 
 export const info: AdapterInfo = {
-    id: 'nlux-gpt4-adapter',
+    id: 'nlux-gpt-adapter',
     connectionType: 'http',
     capabilities: {
         textChat: true,
@@ -37,4 +37,4 @@ export const info: AdapterInfo = {
     outputFormats: ['text'],
 };
 
-export const gpt4AdapterInfo = Object.freeze(info) as AdapterInfo;
+export const gptAdapterInfo = Object.freeze(info) as AdapterInfo;

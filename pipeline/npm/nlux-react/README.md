@@ -39,20 +39,19 @@ import {ConvoPit} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 
 const MyChatComp = () => {
-    const gpt4Adapter = useAdapter('openai/gpt4', {
+    const chatGptAdapter = useAdapter('openai/gpt', {
         apiKey: 'YOUR_OPEN_AI_API_KEY',
-        dataExchangeMode: 'stream',
         // 👇 Instruct ChatGPT how to behave (optional)
-        initialSystemMessage: 'I am a PHD student doing a thesis about ' +
-            'nuclear physics. Act as a Nobel Prize in Physics winner ' +
-            'who is helping me in my research.'
+        initialSystemMessage:
+            'Act as a Nobel Prize in Physics winner who is ' +
+            'helping a PHD student in their research'
     });
 
     return (
         <ConvoPit
-            adapter={gpt4Adapter}
+            adapter={chatGptAdapter}
             promptBoxOptions={{
-                placeholder: 'How can I help?'
+                placeholder: 'Ask me anything about nuclear physics!'
             }}
         />
     );
@@ -70,7 +69,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.7-beta/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.9-beta/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

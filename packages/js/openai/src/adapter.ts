@@ -1,17 +1,18 @@
 import {NluxUsageError} from '@nlux/nlux';
-import {OpenAiGpt4Builder} from './openai/gpt4/builders/builder';
+import {OpenAIGptAbstractBuilder} from './openai/gpt/builders/abstractBuilder.ts';
+import {OpenAIGptStreamingBuilder} from './openai/gpt/builders/streamingBuilder';
 
 const source = 'createAdapter';
 
-export type ProvidedAdapterType = 'openai/gpt4';
+export type ProvidedAdapterType = 'openai/gpt';
 
-export const createAdapter = (adapterType: ProvidedAdapterType): OpenAiGpt4Builder => {
-    if (adapterType !== 'openai/gpt4') {
+export const createAdapter = (adapterType: ProvidedAdapterType): OpenAIGptAbstractBuilder => {
+    if (adapterType !== 'openai/gpt') {
         throw new NluxUsageError({
             source,
             message: 'Adapter type not supported',
         });
     }
 
-    return new OpenAiGpt4Builder();
+    return new OpenAIGptStreamingBuilder();
 };

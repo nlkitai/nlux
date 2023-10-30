@@ -27,7 +27,7 @@ export interface Adapter<InboundPayload, OutboundPayload> {
 
     get info(): AdapterInfo;
 
-    send(message: Message): Observable<Message>;
+    send(message: Message): Observable<Message> | Promise<Message>;
 
     get status(): AdapterStatus;
 }

@@ -3,7 +3,7 @@ import {useAdapter} from '@nlux/openai-react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
-const apiKey = 'YOUR_OPEN_AI_API_KEY';
+const apiKey = 'YOUR_API_KEY_HERE';
 
 const ExampleWrapper = () => {
     const [height, setHeight] = useState<number>(550);
@@ -13,10 +13,12 @@ const ExampleWrapper = () => {
         setHeight(newHeight);
     }, []);
 
-    const adapter = useAdapter('openai/gpt4', {
+    const adapter = useAdapter('openai/gpt', {
         apiKey,
+        // model: 'gpt-3.5-turbo',
         dataExchangeMode: 'stream',
-        initialSystemMessage: 'Act as a Nobel Prize winner teaching PHD students about the nuclear physics.',
+        // dataExchangeMode: 'fetch',
+        initialSystemMessage: 'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research',
     });
 
     if (!adapter) {

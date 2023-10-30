@@ -1,4 +1,6 @@
 import commonjs from '@rollup/plugin-commonjs';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
 import {join} from 'path';
 import {RollupOptions} from 'rollup';
@@ -34,7 +36,14 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 include: '**/*.(mjs|js|ts)',
                 functions: ['debug', 'console.log', 'console.info'],
             }),
+            !isProduction && nodeResolve(),
             !isProduction && replaceImportedModules(),
+            replace({
+                values: {
+                    'process.env.NLUX_DEBUG_ENABLED': isProduction ? 'false' : 'true',
+                },
+                preventAssignment: true,
+            }),
             isProduction && terser(),
             generatePackageJson({
                 outputFolder,
@@ -44,9 +53,6 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                     types: `${outputFile}.d.ts`,
                     module: `esm/${outputFile}.js`,
                     browser: `umd/${outputFile}.js`,
-                },
-                additionalDependencies: {
-                    ...packageJsonData.dependencies,
                 },
             }),
         ],

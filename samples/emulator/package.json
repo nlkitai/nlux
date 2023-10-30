@@ -8,23 +8,21 @@
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule"
   },
   "dependencies": {
-    "@nlux/nlux": "0.0.0-latest",
-    "@nlux/openai": "0.0.0-latest",
-    "@nlux/nlux-react": "0.0.0-latest",
-    "@nlux/openai-react": "0.0.0-latest",
-    "@nlux/themes": "0.0.0-latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.4",
+    "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "@types/rollup-plugin-generate-package-json": "^3.2.5",
+    "esbuild": "^0.19.5",
     "rollup": "^4.1.4",
-    "rollup-plugin-esbuild": "^6.1.0"
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.0",
+    "tslib": "^2.6.2"
   }
 }

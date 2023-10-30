@@ -35,24 +35,24 @@ _(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-
 OpenAI dashboard)_
 
 ```js
-import {createNlux} from '@nlux/nlux';
+import {createConvoPit} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
-const gpt4Adapter = createAdapter('openai/gpt4')
+const chatGptAdapter = createAdapter('openai/gpt')
     .withApiKey('YOUR_OPEN_AI_API_KEY')
-    .useStreamingMode()
     // 👇 Instruct ChatGPT how to behave (optional)
-    .withInitialSystemMessage('I am a PHD student doing a thesis about ' +
-        'nuclear physics. Act as a Nobel Prize in Physics winner ' +
-        'who is helping me in my research.')
+    .withInitialSystemMessage(
+        'Act as a Nobel Prize in Physics winner who is ' +
+        'helping a PHD student in their research'
+    );
 ```
 
 Then render the **Nlux UI component** `Convo Pit` into your web page:
 
 ```js
 const convoPit = createConvoPit()
-    .withAdapter(gpt4Adapter)
-    .withPromptBoxOptions({placeholder: 'How can I help?'});
+    .withAdapter(chatGptAdapter)
+    .withPromptBoxOptions({placeholder: 'Ask me anything about nuclear physics!'});
 
 convoPit.mount(document.getElementById('chatroom-div'));
 ```
@@ -67,7 +67,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.7-beta/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.9-beta/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

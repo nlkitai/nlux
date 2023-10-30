@@ -1,0 +1,23 @@
+# Top level
+/.idea/
+
+# Build output
+build/
+built/
+dist/
+publish/
+
+# Cache
+.rollup.cache/
+
+# Packages
+node_modules/
+packages/*/package.json
+packages/*/**/package.json
+
+# Pipeline Built Files
+pipeline/utils/rollup/*.js
+rollup.config-*.js
+rollup.config-*.mjs
+yarn-error.log
+.DS_Store

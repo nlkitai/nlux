@@ -24,7 +24,7 @@ const readVersionsFile = () => {
     const versionsPath = 'pipeline/npm/versions.json';
 
     if (!existsSync(versionsPath)) {
-        throwError(`Dependencies file cannot be found: ${versionsPath}`);
+        throwError(`PeerDependencies file cannot be found: ${versionsPath}`);
     }
 
     const result = JSON.parse(readFileSync(versionsPath, 'utf8'));
@@ -33,42 +33,65 @@ const readVersionsFile = () => {
         throwError(`Invalid versions file: ${versionsPath} - Missing main version!`);
     }
 
-    if (!result.dependencies) {
-        throwError(`Invalid versions file: ${versionsPath} - Missing dependencies!`);
+    if (!result.peerDependencies) {
+        throwError(`Invalid versions file: ${versionsPath} - Missing peerDependencies!`);
     }
 
     info('Versions file read successfully! ✅ ' + versionsPath);
     info('NLUX version 🌟 : ' + result.nlux);
-    info('Dependencies versions: ');
+    info('PeerDependencies versions: ');
+    rawLog(JSON.stringify(result.peerDependencies));
     rawLog(JSON.stringify(result.dependencies));
 
     return {
         nlux: result.nlux,
-        dependencies: result.dependencies
+        peerDependencies: result.peerDependencies,
+        dependencies: result.dependencies,
     };
 }
 
-const replaceDependencyVersions = (dependencies, nluxVersion, dependenciesVersions) => {
-    if (typeof dependencies !== 'object' || !dependencies) {
+const replacePeerDependencyVersions = (peerDependencies, nluxVersion, peerDependenciesVersions) => {
+    if (typeof peerDependencies !== 'object' || !peerDependencies) {
+        return peerDependencies;
+    }
+
+    let peerDependenciesAsString = JSON.stringify(peerDependencies);
+    peerDependenciesAsString = peerDependenciesAsString.replace('{versions.nlux}', nluxVersion);
+
+    Object.keys(peerDependenciesVersions).forEach(peerDependency => {
+        const peerDependencyVersion = peerDependenciesVersions[peerDependency];
+        peerDependenciesAsString = peerDependenciesAsString.replace(
+            `{versions.peerDependencies.${peerDependency}}`,
+            peerDependencyVersion,
+        );
+    });
+
+    const updatedPeerDependencies = JSON.parse(peerDependenciesAsString);
+    Object.keys(updatedPeerDependencies).forEach(peerDependency => {
+        if (peerDependency.startsWith('@nlux/')) {
+            updatedPeerDependencies[peerDependency] = nluxVersion;
+        }
+    });
+
+    return updatedPeerDependencies;
+};
+
+const replaceDependencyVersions = (dependencies, dependenciesVersions) => {
+    if (typeof dependencies !== 'object' || !dependencies || !dependenciesVersions || Object.keys(dependencies).length === 0) {
         return dependencies;
     }
 
     let dependenciesAsString = JSON.stringify(dependencies);
-    dependenciesAsString = dependenciesAsString.replace('{versions.nlux}', nluxVersion);
 
     Object.keys(dependenciesVersions).forEach(dependency => {
         const dependencyVersion = dependenciesVersions[dependency];
-        dependenciesAsString = dependenciesAsString.replace(`{versions.dependencies.${dependency}}`, dependencyVersion);
+        dependenciesAsString = dependenciesAsString.replace(
+            `{versions.dependencies.${dependency}}`,
+            dependencyVersion,
+        );
     });
 
-    const updatedDependencies = JSON.parse(dependenciesAsString);
-    Object.keys(updatedDependencies).forEach(dependency => {
-        if (dependency.startsWith('@nlux/')) {
-            updatedDependencies[dependency] = nluxVersion;
-        }
-    });
-
-    return updatedDependencies;
+    return JSON.parse(dependenciesAsString);
 };
 
 export const applyDevVersion = (packagesPath) => {
@@ -79,17 +102,28 @@ export const applyDevVersion = (packagesPath) => {
         versionsFileContent = readVersionsFile();
     }
 
-    const {dependencies: dependenciesVersions} = versionsFileContent;
+    const {
+        peerDependencies: peerDependenciesVersions,
+        dependencies: dependenciesVersions,
+    } = versionsFileContent;
 
     packageJsonTemplateFiles.forEach(packageJsonTemplatePath => {
-        info('Reading template: ' + packageJsonTemplatePath);
+        info('Reading Dev Template: ' + packageJsonTemplatePath);
         const packageJson = JSON.parse(readFileSync(packageJsonTemplatePath, 'utf8'));
         packageJson.version = nluxVersion;
+
+        packageJson.peerDependencies = replacePeerDependencyVersions(
+            packageJson.peerDependencies,
+            nluxVersion,
+            peerDependenciesVersions
+        ) ?? {};
+
         packageJson.dependencies = replaceDependencyVersions(
             packageJson.dependencies,
-            nluxVersion,
             dependenciesVersions
-        );
+        ) ?? {};
+
+        console.log('packageJson', packageJson);
 
         const newPackageJsonPath = packageJsonTemplatePath.replace('package.template.json', 'package.json');
         writeFileSync(newPackageJsonPath, JSON.stringify(packageJson, null, 2));
@@ -108,16 +142,26 @@ export const applyReleaseVersion = (packagesPath) => {
     info('Applying release version to packages: ' + packagesPath);
     info(versionsFileContent);
 
-    const {dependencies: dependenciesVersions, nlux: nluxVersion} = versionsFileContent;
+    const {
+        nlux: nluxVersion,
+        peerDependencies: peerDependenciesVersions,
+        dependencies: dependenciesVersions,
+    } = versionsFileContent;
 
     packageJsonFiles.forEach(packageJsonPath => {
         let packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
         packageJson.version = nluxVersion;
+
+        packageJson.peerDependencies = replacePeerDependencyVersions(
+            packageJson.peerDependencies,
+            nluxVersion,
+            peerDependenciesVersions
+        ) ?? {};
+
         packageJson.dependencies = replaceDependencyVersions(
             packageJson.dependencies,
-            nluxVersion,
             dependenciesVersions
-        );
+        ) ?? {};
 
         const packageTemplateJson = JSON.parse(readFileSync('pipeline/npm/package-template.json', 'utf8'));
         packageTemplateJson.version = nluxVersion;

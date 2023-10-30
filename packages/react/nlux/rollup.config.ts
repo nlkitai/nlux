@@ -40,14 +40,15 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 functions: ['debug', 'console.log', 'console.info'],
             }),
             !isProduction && replaceImportedModules(),
-            isProduction && terser(),
             replace({
                 delimiters: ['', ''],
                 preventAssignment: false,
                 values: {
+                    'process.env.NLUX_DEBUG_ENABLED': isProduction ? 'false' : 'true',
                     'process.env.NODE_ENV': isProduction ? JSON.stringify('production') : JSON.stringify('development'),
                 },
             }),
+            isProduction && terser(),
             generatePackageJson({
                 outputFolder,
                 baseContents: {
@@ -56,9 +57,6 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                     types: `${outputFile}.d.ts`,
                     module: `esm/${outputFile}.js`,
                     browser: `umd/${outputFile}.js`,
-                },
-                additionalDependencies: {
-                    ...packageJsonData.dependencies,
                 },
             }),
         ],

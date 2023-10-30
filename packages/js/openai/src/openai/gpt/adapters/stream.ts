@@ -1,46 +1,37 @@
 import {Message, NluxUsageError, Observable} from '@nlux/nlux';
 import OpenAI from 'openai';
-import {gpt4StreamingAdapterConfig} from '../config';
-import {Gpt4AbstractAdapter} from './adapter';
+import {gptStreamingAdapterConfig} from '../config';
+import {OpenAIChatModel} from '../types/models.ts';
+import {GptAbstractAdapter} from './adapter';
 
-export class Gpt4StreamingAdapter extends Gpt4AbstractAdapter<
+export class GptStreamingAdapter extends GptAbstractAdapter<
     OpenAI.Chat.Completions.ChatCompletionChunk,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > {
-    private initialSystemMessage: string | null = null;
-    private shouldSendInitialSystemMessage: boolean = false;
-
     constructor({
-        actAs,
         apiKey,
-        timeout,
-        historyDepthToInclude,
+        model,
         initialSystemMessage,
     }: {
-        actAs?: string;
         apiKey: string;
-        timeout: number,
-        historyDepthToInclude: number | 'max',
+        model: OpenAIChatModel,
         initialSystemMessage?: string;
     }) {
         super({
-            actAs,
             apiKey,
-            timeout,
-            historyDepthToInclude,
-            dataExchangeMode: 'fetch',
+            model,
+            initialSystemMessage,
+            dataExchangeMode: 'stream',
         });
 
         if (initialSystemMessage !== undefined && initialSystemMessage.length > 0) {
             this.initialSystemMessage = initialSystemMessage;
-            this.shouldSendInitialSystemMessage = true;
         }
     }
 
     get config() {
-        return gpt4StreamingAdapterConfig;
+        return gptStreamingAdapterConfig;
     }
-
 
     send(message: Message): Observable<Message> {
         if (typeof message !== 'string' || message.length === 0) {
@@ -51,25 +42,15 @@ export class Gpt4StreamingAdapter extends Gpt4AbstractAdapter<
         }
 
         const observable = new Observable<Message>();
+
+        // TODO - Only send system message once per conversation, when history is included
         const messagesToSend: {
             role: 'system' | 'user',
             content: string
-        }[] = this.actAsMessage ? [{
+        }[] = this.initialSystemMessage ? [{
             role: 'system',
-            content: this.actAsMessage,
+            content: this.initialSystemMessage,
         }] : [];
-
-        console.dir(this.shouldSendInitialSystemMessage);
-        console.log(this.initialSystemMessage);
-        if (this.shouldSendInitialSystemMessage) {
-            messagesToSend.push({
-                role: 'system',
-                content: this.initialSystemMessage!,
-            });
-
-            // TODO - Only set this to false after the initial system message has been sent
-            this.shouldSendInitialSystemMessage = false;
-        }
 
         messagesToSend.push({
             role: 'user',
@@ -78,9 +59,9 @@ export class Gpt4StreamingAdapter extends Gpt4AbstractAdapter<
 
         this.openai.chat.completions.create({
             stream: true,
-            model: 'gpt-4',
+            model: this.model,
             messages: messagesToSend,
-        }).then(async (response) => {
+        }).then(async (response: any) => {
             const fullResponse: string[] = [];
             let it = response[Symbol.asyncIterator]();
             let result = await it.next();

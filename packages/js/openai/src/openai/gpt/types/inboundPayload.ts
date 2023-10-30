@@ -1,4 +1,4 @@
-export type Gpt4InboundPayload = Readonly<{
+export type GptInboundPayload = Readonly<{
     success: boolean;
     data?: {
         id: string;

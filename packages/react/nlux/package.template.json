@@ -6,9 +6,9 @@
     "build": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --jsx",
     "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --jsx --watch"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@nlux/nlux": "{versions.nlux}",
-    "react": "^{versions.dependencies.react}"
+    "react": "^{versions.peerDependencies.react}"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

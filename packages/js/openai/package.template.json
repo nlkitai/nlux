@@ -7,8 +7,10 @@
     "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
   "dependencies": {
-    "@nlux/nlux": "{versions.nlux}",
     "openai": "^{versions.dependencies.openai}"
+  },
+  "peerDependencies": {
+    "@nlux/nlux": "{versions.nlux}"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

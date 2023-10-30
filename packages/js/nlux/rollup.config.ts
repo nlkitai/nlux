@@ -1,4 +1,5 @@
 import commonjs from '@rollup/plugin-commonjs';
+import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
 import {join} from 'path';
 import {LogLevelOption, RollupOptions} from 'rollup';
@@ -8,7 +9,6 @@ import {terser} from 'rollup-plugin-terser';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 import {readJsonFile} from '../../../pipeline/utils/rollup/readJsonFile';
-import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
 
 const distPath = join('..', '..', '..', 'dist');
 const prodDistFolder = join(distPath, 'prod', 'nlux');
@@ -34,7 +34,12 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 include: '**/*.(mjs|js|ts)',
                 functions: ['debug', 'console.log', 'console.info'],
             }),
-            !isProduction && replaceImportedModules(),
+            replace({
+                values: {
+                    'process.env.NLUX_DEBUG_ENABLED': isProduction ? 'false' : 'true',
+                },
+                preventAssignment: true,
+            }),
             isProduction && terser(),
             generatePackageJson({
                 outputFolder,
@@ -45,8 +50,8 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                     module: `esm/${outputFile}.js`,
                     browser: `umd/${outputFile}.js`,
                     dependencies: {},
+                    peerDependencies: {},
                 },
-                additionalDependencies: {},
             }),
         ],
         output: generateOutputConfig(packageName, outputFile, outputFolder, isProduction),

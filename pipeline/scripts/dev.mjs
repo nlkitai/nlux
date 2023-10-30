@@ -75,15 +75,18 @@ try {
     await run('cp -r samples/emulator/src/examples-react/require.min.js dist/dev/emulator/examples-react/require.min.js');
 
     info('Symlinking packages to emulator folder');
+
+    // Symlink built NLUX packages to emulator folder
     symlinkBuiltPackageToEmulatorFolder('nlux');
     symlinkBuiltPackageToEmulatorFolder('nlux-react');
     symlinkBuiltPackageToEmulatorFolder('openai');
     symlinkBuiltPackageToEmulatorFolder('openai-react');
-
     symlinkBuiltPackageToEmulatorFolder('themes');
 
+    // Symlink dependencies to emulator folder
     symlinkNodeModuleToEmulatorFolder('react');
     symlinkNodeModuleToEmulatorFolder('react-dom');
+    symlinkNodeModuleToEmulatorFolder('openai');
 
     info('Emulator ready! Starting dev server ✅ 💫 ...');
 

@@ -1,24 +1,42 @@
 import replace from '@rollup/plugin-replace';
 
-export const importMap = {
-    '@nlux/nlux': '/packages/@nlux/nlux/esm/nlux.js',
-    '@nlux/nlux-react': '/packages/@nlux/nlux-react/esm/nlux-react.js',
-    '@nlux/openai': '/packages/@nlux/openai/esm/openai.js',
-    '@nlux/openai-react': '/packages/@nlux/openai-react/esm/openai-react.js',
-    'react': '/packages/react/index.js',
-    'react-dom': '/packages/react-dom/index.js',
+export const nluxImportMap = {
+    '@nlux/nlux': '/packages/@nlux/nlux/{nluxBundlerPackageType}/nlux.js',
+    '@nlux/nlux-react': '/packages/@nlux/nlux-react/{nluxBundlerPackageType}/nlux-react.js',
+    '@nlux/openai': '/packages/@nlux/openai/{nluxBundlerPackageType}/openai.js',
+    '@nlux/openai-react': '/packages/@nlux/openai-react/{nluxBundlerPackageType}/openai-react.js',
 };
 
-export const replaceImportedModules = () => {
-    const keys = Object.keys(importMap);
-    const values = Object.values(importMap);
+export const reactImportsByPackageType = (nluxBundlerPackageType: 'esm' | 'cjs' | 'umd') => ({
+    'react': `/packages/react/${nluxBundlerPackageType === 'cjs' ? 'cjs' : 'umd'}/react.development.js`,
+    'react-dom': `/packages/react-dom/${nluxBundlerPackageType === 'cjs' ? 'cjs' : 'umd'}/react-dom.development.js`,
+    'react-dom/client': `/packages/react-dom/client.js`, // CJS only
+});
 
-    return replace({
-        delimiters: ['', ''],
-        preventAssignment: false,
-        values: keys.reduce((acc: any, key, index) => {
-            acc[`from '${key}'`] = `from '${values[index]}'`;
-            return acc;
-        }, {}),
-    });
+const packageTypeFromEnv = process?.env?.NLUX_BUNDLER_PACKAGE_TYPE?.toLowerCase() as any;
+const defaultPackageType: 'cjs' | 'esm' | 'umd' = ['cjs', 'esm', 'umd'].includes(packageTypeFromEnv)
+    ? packageTypeFromEnv
+    : 'esm';
+
+export const replaceImportedModules = (nluxBundlerPackageType: 'cjs' | 'esm' | 'umd' = defaultPackageType) => {
+    const updatedReactImports = reactImportsByPackageType(nluxBundlerPackageType);
+    const allImports: {[key: string]: string} = {
+        ...updatedReactImports,
+        ...nluxImportMap,
+    };
+
+    const keys = Object.keys(allImports);
+    const values = Object.values(allImports);
+
+    return [
+        replace({
+            delimiters: ['', ''],
+            preventAssignment: false,
+            values: keys.reduce((acc: any, key, index) => {
+                const value = values[index].replace('{nluxBundlerPackageType}', nluxBundlerPackageType);
+                acc[`from '${key}'`] = `from '${value}'`;
+                return acc;
+            }, {}),
+        }),
+    ];
 };

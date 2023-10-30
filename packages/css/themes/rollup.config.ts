@@ -32,6 +32,7 @@ const cssEntry = (input: string, output: string) => ({
                 main: 'kensington.css',
                 ...packageJsonData,
                 dependencies: {},
+                peerDependencies: {},
             },
         }),
     ],

@@ -1,33 +1,30 @@
 import {AdapterConfig, AdapterInfo, AdapterStatus, ISseAdapter, Message, Observable} from '@nlux/nlux';
 import OpenAI from 'openai';
-import {gpt4AdapterInfo} from '../config';
+import {warn} from '../../../x/debug.ts';
+import {gptAdapterInfo} from '../config';
+import {OpenAIChatModel} from '../types/models.ts';
 
-export abstract class Gpt4AbstractAdapter<InboundPayload, OutboundPayload> implements ISseAdapter<
+export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implements ISseAdapter<
     InboundPayload, OutboundPayload
 > {
-    protected actAsMessage: string | null = 'Act as a helpful assistant to the user';
     protected currentStatus: AdapterStatus = 'disconnected';
     protected readonly dataExchangeMode: 'stream' | 'fetch' = 'fetch';
-    protected readonly historyDepthToInclude: number | 'max';
+    protected initialSystemMessage: string | null = 'Act as a helpful assistant to the user';
+    protected readonly model: OpenAIChatModel;
     protected readonly openai: OpenAI;
-    protected readonly timeout;
 
     protected constructor({
-        actAs,
+        initialSystemMessage,
         apiKey,
-        timeout,
-        historyDepthToInclude,
         dataExchangeMode,
+        model,
     }: {
-        actAs?: string;
+        initialSystemMessage?: string;
         apiKey: string;
-        timeout: number,
-        historyDepthToInclude: number | 'max',
         dataExchangeMode: 'stream' | 'fetch',
+        model: OpenAIChatModel,
     }) {
         this.currentStatus = 'disconnected';
-        this.historyDepthToInclude = historyDepthToInclude ?? 2;
-        this.timeout = timeout;
         this.dataExchangeMode = dataExchangeMode;
 
         this.openai = new OpenAI({
@@ -35,11 +32,13 @@ export abstract class Gpt4AbstractAdapter<InboundPayload, OutboundPayload> imple
             dangerouslyAllowBrowser: true,
         });
 
-        if (actAs) {
-            this.actAsMessage = actAs;
+        this.model = model;
+
+        if (initialSystemMessage) {
+            this.initialSystemMessage = initialSystemMessage;
         }
 
-        console.warn('GPT-4 adapter has been initialized in browser mode using option "dangerouslyAllowBrowser". '
+        warn('OpenAI GPT adapter has been initialized in browser mode using option "dangerouslyAllowBrowser". '
             + 'This is not recommended for production use. We recommend that you implement a server-side proxy '
             + 'and configure a customized adapter for it. Read more at '
             + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety');
@@ -52,7 +51,7 @@ export abstract class Gpt4AbstractAdapter<InboundPayload, OutboundPayload> imple
     }
 
     get info(): AdapterInfo {
-        return gpt4AdapterInfo;
+        return gptAdapterInfo;
     }
 
     get status(): AdapterStatus {
@@ -70,5 +69,5 @@ export abstract class Gpt4AbstractAdapter<InboundPayload, OutboundPayload> imple
         return encodeMessage(message);
     }
 
-    abstract send(message: Message): Observable<Message>;
+    abstract send(message: Message): Observable<Message> | Promise<Message>;
 }

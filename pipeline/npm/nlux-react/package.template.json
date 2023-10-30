@@ -5,8 +5,9 @@
   "repository": {
     "directory": "packages/react/nlux"
   },
-  "dependencies": {
+  "dependencies": {},
+  "peerDependencies": {
     "@nlux/nlux": "^{versions.nlux}",
-    "react": "^{versions.dependencies.react}"
+    "react": "^{versions.peerDependencies.react}"
   }
 }

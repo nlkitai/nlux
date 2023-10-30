@@ -8,8 +8,8 @@ import {CompTextMessageActions, CompTextMessageElements, CompTextMessageEvents, 
 
 export const __ = (styleName: string) => `nluxc-text-message-${styleName}`;
 
-const html = ({initialContent, createdAt}: CompTextMessageProps) => `` +
-    `<div class="${__('content')}" tabindex="0">${textToHtml(initialContent)}</div>` +
+const html = ({content, createdAt}: CompTextMessageProps) => `` +
+    `<div class="${__('content')}" tabindex="0">${content ? textToHtml(content) : ''}</div>` +
     ``;
 
 export const renderTextMessage: CompRenderer<
@@ -74,14 +74,28 @@ export const renderTextMessage: CompRenderer<
             focus: () => {
                 contentContainer.focus();
             },
-            appendText: (text: string) => {
-                const el = document.createElement('span');
-                el.innerHTML = textToHtml(text);
+            appendText: (text: any) => {
+                if (typeof text !== 'string' && !Array.isArray(text)) {
+                    throw new NluxRenderingError({
+                        source: source('text-message', 'render'),
+                        message: `Unsupported text type: ${typeof text}! Only strings are supported!`,
+                    });
+                }
+
+                const textAsArray = Array.isArray(text)
+                    ? text.filter(item => typeof item === 'string') as string[]
+                    : [text];
 
                 const fragment = document.createDocumentFragment();
-                while (el.childNodes.length > 0) {
-                    fragment.append(el.childNodes[0]);
-                }
+
+                textAsArray.forEach(text => {
+                    const el = document.createElement('span');
+                    el.innerHTML = textToHtml(text);
+
+                    while (el.childNodes.length > 0) {
+                        fragment.append(el.childNodes[0]);
+                    }
+                });
 
                 contentContainer.append(fragment);
             },

@@ -2,7 +2,7 @@ import {ConvoPit, createConvoPit} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 import {debug} from '../x/debug';
 
-const apiKey = 'YOUR_OPEN_AI_API_KEY';
+const apiKey = 'YOUR_API_KEY_HERE';
 
 let convoPit: ConvoPit | null = null;
 let rootElement: HTMLElement | null = null;
@@ -20,18 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Root element not found');
     }
 
-    const adapter = createAdapter('openai/gpt4')
+    const adapter = createAdapter('openai/gpt')
         .withApiKey(apiKey)
-        .useStreamingMode()
-        .withHistoryDepth(5)
-        .withInitialSystemMessage('As as a teacher who is explaining complex concepts to an 8 years old student, '
-            + 'I want to be able to explain the concept in a simple way so that the student can understand it easily. '
-            + 'I want you to use stories and examples to explain the concept.');
+        // .withModel('gpt-4')
+        // .useStreamingMode()
+        .useFetchingMode()
+        // .useStreamingMode()
+        .withInitialSystemMessage(
+            'Act as a Nobel Prize in Physics winner who is ' +
+            'helping a PHD student in their research',
+        );
 
     convoPit = createConvoPit()
         .withAdapter(adapter)
         .withPromptBoxOptions({
-            placeholder: 'Type something...',
+            placeholder: 'Ask me anything about nuclear physics!',
             autoFocus: true,
         })
         .withContainerMaxHeight(300);

@@ -1,36 +1,92 @@
+import {Observable} from '../../../core/bus/observable.ts';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {debug} from '../../../x/debug';
+import {debug, warn} from '../../../x/debug';
 import {renderTextMessage} from './render';
 import {CompTextMessageActions, CompTextMessageElements, CompTextMessageEvents, CompTextMessageProps} from './types';
 import {updateTextMessage} from './update';
+
+const appendIntervalInMilliseconds = 200;
 
 @Model('text-message', renderTextMessage, updateTextMessage)
 export class CompTextMessage extends BaseComp<
     CompTextMessageProps, CompTextMessageElements, CompTextMessageEvents, CompTextMessageActions
 > {
-    scrollToMessageEndOnResize = () => {
-        if (this.shouldKeepVisibleWhenGeneratingContent) {
-            this.executeDomAction('scrollToMessageEndContainer');
-        }
-    };
+    // IMPORTANT: When the component is created, it's in loading state. It's changed to loaded state asynchronously.
+    // When 'content' prop is provided, the contentStatus changes to 'loaded' instantly but also asynchronously.
+    // When the content is set via 'contentPromise' or 'contentStream', the status is changed to loaded
+    // when the promise is resolved or when the stream emits the last value.
+    // When contentStatus switches to 'loaded', there is a gurantee that 'content' is set to a string value.
+    private content?: string;
+    private readonly contentLoadingModeFromProps: 'promise' | 'stream' | 'static';
+    private contentStatus: 'loading' | 'streaming' | 'loaded' | 'error' = 'loading';
+    private contentStatusUpdateListeners: Set<Function> = new Set();
+    private contentToAppend: string[] = [];
+    private lastAppendTimestamp: number = 0;
 
-    private contentAppended: string;
     private resizeListeners: Set<Function> = new Set();
     private shouldKeepVisibleWhenGeneratingContent: boolean = false;
 
     constructor(instanceId: string, props: CompTextMessageProps) {
+        if (!props.content && !props.contentPromise && !props.contentStream) {
+            throw new Error(`CompTextMessage: content, contentPromise or contentStream must be provided!`);
+        }
+
+        if ([props.content, props.contentPromise, props.contentStream].filter(Boolean).length > 1) {
+            throw new Error(`CompTextMessage: only one of content, contentPromise or contentStream must be provided!`);
+        }
+
         super(instanceId, props);
-        this.contentAppended = props.initialContent;
+
+        if (props.onMessageStatusUpdated) {
+            this.contentStatusUpdateListeners.add(props.onMessageStatusUpdated);
+        }
+
+        // Initial status is always 'loading'
+        this.contentStatus = 'loading';
+
+        setTimeout(() => {
+            this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loading'));
+        }, 0);
+
+        // Change content status to 'loaded' if the content is actually provided.
+        // Do it, asynchronously via setTimeout because other components expect message to be in loading
+        // when it's constructed (ref guarantee in doc comments above 'content' and 'contentStatus' props).
+        setTimeout(() => {
+            if (typeof props.content === 'string') {
+                this.contentStatus = 'loaded';
+                this.content = props.content;
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
+                this.cleanupContentStatusUpdateListeners();
+            }
+        }, 0);
+
+        // Handle content loaded asynchronously via promise.
+        if (props.contentPromise) {
+            this.listenToContentGenerationPromise(props.contentPromise);
+            this.contentLoadingModeFromProps = 'promise';
+        } else {
+            // Handle content loaded asynchronously via stream.
+            if (props.contentStream) {
+                this.listenToContentGenerationStream(props.contentStream);
+                this.contentLoadingModeFromProps = 'stream';
+            } else {
+                this.contentLoadingModeFromProps = 'static';
+            }
+        }
     }
 
-    public appendText(text: string) {
-        this.executeDomAction('appendText', text);
-        this.contentAppended += text;
+    public get contentLoaded(): boolean {
+        return this.contentStatus === 'loaded';
+    }
+
+    public get contentLoadingMode(): 'promise' | 'stream' | 'static' {
+        return this.contentLoadingModeFromProps;
     }
 
     public destroy() {
         this.resizeListeners.clear();
+        this.cleanupContentStatusUpdateListeners();
         super.destroy();
     }
 
@@ -58,15 +114,103 @@ export class CompTextMessage extends BaseComp<
         this.executeDomAction('scrollToMessageEndContainer');
     }
 
+    private appendText(text: string[]) {
+        // TODO - Update to handle markdown and html
+        this.executeDomAction('appendText', text);
+
+        // TODO - Better handling of content tracked in message
+        // TODO - Maybe no need to keep it in memory ? and copy from DOM when needed
+        this.content += text.join('');
+    }
+
+    private bufferAndAppendText(text: string) {
+        this.contentToAppend.push(text);
+        const now = Date.now();
+        if (now - this.lastAppendTimestamp > appendIntervalInMilliseconds) {
+            this.appendText(this.contentToAppend);
+            this.contentToAppend = [];
+            this.lastAppendTimestamp = now;
+        }
+    }
+
+    private bufferClear() {
+        if (this.contentToAppend) {
+            this.appendText(this.contentToAppend);
+            this.contentToAppend = [];
+        }
+
+        this.lastAppendTimestamp = 0;
+    }
+
+    private cleanupContentStatusUpdateListeners() {
+        this.contentStatusUpdateListeners.forEach(listener => listener(this.id, this.contentStatus));
+    }
+
     @CompEventListener('copy-to-clipboard-triggered')
     private handleCompCopyToClipboardTriggered(event: ClipboardEvent) {
         event.preventDefault();
-        debug(`Copying selected message to clipboard!`);
-        navigator.clipboard.writeText(this.contentAppended);
+        if (this.content) {
+            debug(`Copying selected message to clipboard!`);
+            navigator.clipboard.writeText(this.content);
+        }
+    }
+
+    private handleContentLoadingError(source?: string, errorMessage?: string) {
+        warn(`Failed to load content for message ${this.id} from ${source}: ${errorMessage}`);
+        this.contentStatus = 'error';
+        this.setProp('erred', true);
     }
 
     @CompEventListener('message-container-resized')
     private handleResize() {
         this.resizeListeners.forEach(listener => listener());
+    }
+
+    private listenToContentGenerationPromise(contentPromise: Promise<string>) {
+        contentPromise.then(
+            (content) => {
+                this.appendText([content]);
+                this.content = content;
+                this.contentStatus = 'loaded';
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
+                this.cleanupContentStatusUpdateListeners();
+            },
+            (error) => {
+                this.setProp('erred', true);
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
+                this.cleanupContentStatusUpdateListeners();
+                this.handleContentLoadingError(
+                    'contentPromise',
+                    error?.toString() || 'Failed to load content',
+                );
+            },
+        );
+    }
+
+    private listenToContentGenerationStream(contentStream: Observable<string>) {
+        this.contentStatus = 'streaming';
+        this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'streaming'));
+
+        contentStream.subscribe({
+            next: (content) => {
+                this.bufferAndAppendText(content);
+            },
+            error: (error) => {
+                this.bufferClear();
+                this.setProp('erred', true);
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
+                this.cleanupContentStatusUpdateListeners();
+                this.handleContentLoadingError(
+                    'contentStream',
+                    error?.toString() || 'Failed to load content',
+                );
+            },
+            complete: () => {
+                this.bufferClear();
+                this.contentStatus = 'loaded';
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
+                this.cleanupContentStatusUpdateListeners();
+            },
+        });
     }
 }

@@ -1,15 +1,12 @@
 import {AdapterBuilder} from '@nlux/nlux';
 import {useEffect, useState} from 'react';
+import {OpenAIUseAdapterOptions} from '../types/options.ts';
 import {warn} from '../x/debug.ts';
 import {initAdapter} from './initAdapter.ts';
 
 const source = 'hooks/useAdapter';
 
-export const useAdapter = (adapterType: 'openai/gpt4', options: {
-    apiKey: string;
-    dataExchangeMode?: 'stream' | 'fetch';
-    initialSystemMessage?: string;
-}) => {
+export const useAdapter = (adapterType: 'openai/gpt', options: OpenAIUseAdapterOptions) => {
     const [adapter] = useState<AdapterBuilder<any, any>>(
         initAdapter(adapterType, options),
     );

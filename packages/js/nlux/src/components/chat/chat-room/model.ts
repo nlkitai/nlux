@@ -1,9 +1,11 @@
+import {Observable} from '../../../core/bus/observable.ts';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
 import {CompConversation} from '../conversation/model.ts';
 import {CompChatbox} from '../prompt-box/model';
 import {CompTextMessage} from '../text-message/model';
+import type {TextMessageContentLoadingStatus} from '../text-message/types.ts';
 import {renderChatRoom} from './render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './types';
 import {updateChatRoom} from './update';
@@ -13,6 +15,37 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
 
     private context: NluxContext;
     private conversation: CompConversation;
+
+    private handleMessageContentStatus = (messageId: string, contentStatus: TextMessageContentLoadingStatus) => {
+        if (contentStatus === 'loading') {
+            this.messagesInLoadingState.add(messageId);
+        } else {
+            this.messagesInLoadingState.delete(messageId);
+        }
+
+        if (contentStatus === 'streaming') {
+            this.messagesInStreamingState.add(messageId);
+        } else {
+            this.messagesInStreamingState.delete(messageId);
+        }
+
+        if (contentStatus === 'loaded' || contentStatus === 'error') {
+            this.messagesInLoadingState.delete(messageId);
+            this.messagesInStreamingState.delete(messageId);
+
+            if (this.promptBoxInstance) {
+                this.promptBoxInstance.enableTextInput(true);
+                this.promptBoxInstance.focusTextInput();
+
+                if (contentStatus === 'loaded') {
+                    this.promptBoxInstance.resetTextInput();
+                }
+            }
+        }
+    };
+
+    private messagesInLoadingState: Set<string> = new Set();
+    private messagesInStreamingState: Set<string> = new Set();
     private promptBoxInstance: CompChatbox;
     private promptBoxText: string = '';
 
@@ -102,6 +135,12 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
         this.addSubComponent(this.promptBoxInstance.id, this.promptBoxInstance, 'promptBoxContainer');
     }
 
+    private handleMessageStatusUpdatedFactory() {
+        return (messageId: string, status: 'loading' | 'streaming' | 'loaded' | 'error') => {
+            this.handleMessageContentStatus(messageId, status);
+        };
+    }
+
     private handlePromptBoxSubmit() {
         if (!this.promptBoxInstance) {
             return;
@@ -113,45 +152,28 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
         const messageToSent = this.promptBoxText;
         this.conversation.addMessage('out', messageToSent, new Date());
 
-        const observable = this.context.adapter.send(messageToSent);
-        const messageRef: {current: CompTextMessage | undefined} = {
-            current: undefined,
-        };
+        const outMessageContentLoader: 'promise' | 'observable' = 'observable';
+        const messageContentLoader: Observable<string> | Promise<string> = this.context.adapter.send(messageToSent);
 
-        observable.subscribe({
-            next: (messageReceived) => {
-                if (!messageReceived) {
-                    return;
-                }
+        const messageId = this.conversation.addMessage(
+            'in',
+            messageContentLoader,
+            new Date(),
+            this.handleMessageStatusUpdatedFactory(),
+        );
 
-                if (!messageRef.current) {
-                    const messageId = this.conversation.addMessage('in', messageReceived, new Date());
-                    messageRef.current = this.conversation.getMessageById(messageId) as any;
-                    this.conversation.markMessageAsStreaming(messageId);
-                } else {
-                    messageRef.current.appendText(messageReceived);
-                }
-            },
-            error: (error) => {
-                promptBoxInstance.enableTextInput(true);
-                promptBoxInstance.focusTextInput();
+        const message: CompTextMessage | undefined = this.conversation.getMessageById(messageId) as any;
+        if (!message) {
+            return;
+        }
 
-                if (messageRef.current) {
-                    this.conversation.markMessageAsNotStreaming(messageRef.current.id);
-                    messageRef.current = undefined;
-                }
-            },
-            complete: () => {
-                promptBoxInstance.enableTextInput(true);
-                promptBoxInstance.resetTextInput();
-                promptBoxInstance.focusTextInput();
-
-                if (messageRef.current) {
-                    this.conversation.markMessageAsNotStreaming(messageRef.current.id);
-                    messageRef.current = undefined;
-                }
-            },
-        });
+        if (!message.contentLoaded) {
+            if (outMessageContentLoader === 'observable') {
+                this.messagesInStreamingState.add(messageId);
+            } else {
+                this.messagesInLoadingState.add(messageId);
+            }
+        }
     }
 
     private handlePromptBoxTextChange(newValue: string) {
