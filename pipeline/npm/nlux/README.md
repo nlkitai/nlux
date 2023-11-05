@@ -47,7 +47,7 @@ const chatGptAdapter = createAdapter('openai/gpt')
     );
 ```
 
-Then render the **Nlux UI component** `Convo Pit` into your web page:
+Then render the **NLUX UI component** `Convo Pit` into your web page:
 
 ```js
 const convoPit = createConvoPit()
@@ -67,7 +67,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.9-beta/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.2.6-beta/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

@@ -1,7 +1,7 @@
 import {ConvoPit as ConvoPitType, createConvoPit} from '@nlux/nlux';
 import React, {useEffect, useRef, useState} from 'react';
-import {handleNewPropsReceived} from './handleNewPropsReceived.ts';
-import {ConvoPitProps} from './props.ts';
+import {handleNewPropsReceived} from './handleNewPropsReceived';
+import {ConvoPitProps} from './props';
 
 export const ConvoPit = (props: Readonly<ConvoPitProps>) => {
     const {className} = props;
@@ -16,33 +16,27 @@ export const ConvoPit = (props: Readonly<ConvoPitProps>) => {
 
         const {
             adapter,
-            containerMaxHeight,
-            theme,
-            messageOptions,
+            layoutOptions,
             conversationOptions,
             promptBoxOptions,
         } = props;
 
         let newInstance = createConvoPit().withAdapter(adapter);
 
-        if (containerMaxHeight) {
-            newInstance = newInstance.withContainerMaxHeight(containerMaxHeight);
-        }
-
-        if (theme) {
-            newInstance = newInstance.withTheme(theme);
+        if (layoutOptions) {
+            newInstance = newInstance.withLayoutOptions(layoutOptions);
         }
 
         if (promptBoxOptions) {
             newInstance = newInstance.withPromptBoxOptions(promptBoxOptions);
         }
 
-        if (messageOptions) {
-            newInstance = newInstance.withMessageOptions(messageOptions);
-        }
-
         if (conversationOptions) {
             newInstance = newInstance.withConversationOptions(conversationOptions);
+        }
+
+        if (className) {
+            newInstance = newInstance.withClassName(className);
         }
 
         newInstance.mount(rootElement.current);
@@ -72,6 +66,6 @@ export const ConvoPit = (props: Readonly<ConvoPitProps>) => {
     }, [props]);
 
     return (
-        <div ref={rootElement} className={className}></div>
+        <div ref={rootElement}></div>
     );
 };

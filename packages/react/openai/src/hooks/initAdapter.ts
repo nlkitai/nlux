@@ -1,6 +1,6 @@
 import {NluxUsageError} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
-import {OpenAIUseAdapterOptions} from '../types/options.ts';
+import {OpenAIUseAdapterOptions} from '../types/options';
 
 const source = 'hooks/initAdapter';
 

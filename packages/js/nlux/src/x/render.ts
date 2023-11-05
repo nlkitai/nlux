@@ -1,4 +1,4 @@
-import {debug, warn} from './debug.ts';
+import {debug, warn} from './debug';
 
 export const render = (html: string): DocumentFragment | HTMLElement | undefined => {
     debug(html);
@@ -8,7 +8,7 @@ export const render = (html: string): DocumentFragment | HTMLElement | undefined
 
     const fragment = document.createDocumentFragment();
     while (template.firstChild) {
-        fragment.appendChild(template.firstChild);
+        fragment.append(template.firstChild);
     }
 
     if (!fragment.firstChild) {

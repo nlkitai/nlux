@@ -1,20 +1,41 @@
-.nluxc-prompt-box-container {
-    display: flex;
-    align-items: stretch;
-    flex-direction: row;
-    padding: var(--nluxc-padding);
-    cursor: pointer;
+@import './prompt-box-loading.css';
 
-    gap: var(--nluxc-flex-gap);
-
-    > .nluxc-prompt-box-text-input {
-        flex: 1;
-        resize: none;
-    }
-
-    > .nluxc-prompt-box-send-button {
+.nluxc-root {
+    .nluxc-prompt-box-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: stretch;
+        flex-direction: row;
+        padding: var(--nluxc-padding);
+        cursor: pointer;
+
+        gap: var(--nluxc-flex-gap);
+
+        > .nluxc-prompt-box-text-input {
+            flex: 1;
+            resize: none;
+        }
+
+        > .nluxc-prompt-box-send-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 65px;
+
+            > .loader {
+                display: none;
+            }
+        }
+
+        > .nluxc-prompt-box-send-button.nluxc-prompt-box-send-button-loading {
+            > svg {
+                display: none;
+            }
+
+            > .loader {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 }

@@ -1,0 +1,35 @@
+.nluxc-root {
+    position: relative;
+
+    > .nluxc-exceptions-box-container {
+        position: absolute;
+        top: 0;
+
+        display: flex;
+        align-content: center;
+        align-self: center;
+
+        flex-direction: row;
+        flex-grow: 1;
+        justify-content: center;
+        gap: 0;
+        justify-self: center;
+
+        > .nluxc-exceptions-box-exception {
+            padding: var(--nluxc-padding-s) var(--nluxc-border-radius);
+            border-radius: var(--nluxc-border-radius-s);
+            background-color: var(--nluxc-exceptions-box-exception-background-color);
+
+            > .nluxc-exceptions-box-icon > span {
+                display: none;
+            }
+
+            > .nluxc-exceptions-box-close-button > span {
+                display: none;
+            }
+
+            > .nluxc-exceptions-box-message {
+            }
+        }
+    }
+}

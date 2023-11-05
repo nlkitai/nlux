@@ -1,5 +1,5 @@
 export const debug = (...messages: any[]) => {
-    if (!process.env.NLUX_DEBUG_ENABLED) {
+    if (process.env.NLUX_DEBUG_ENABLED !== 'true') {
         return;
     }
 
@@ -14,10 +14,14 @@ export const debug = (...messages: any[]) => {
 };
 
 export const warn = (message: any) => {
+    const prefix = (process.env.NLUX_DEBUG_ENABLED === 'true')
+        ? '[nlux]: '
+        : '';
+
     if (typeof message === 'string') {
-        console.warn(`[nlux] ${message}`);
+        console.warn(`${prefix}${message}`);
     } else {
-        console.warn('[nlux]:');
+        prefix && console.warn(prefix);
         console.warn(message);
     }
 };

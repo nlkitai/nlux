@@ -1,5 +1,6 @@
 import {NluxUsageError} from '@nlux/nlux';
-import {OpenAIGptAbstractBuilder} from './openai/gpt/builders/abstractBuilder.ts';
+
+import {OpenAIGptAbstractBuilder} from './openai/gpt/builders/abstractBuilder';
 import {OpenAIGptStreamingBuilder} from './openai/gpt/builders/streamingBuilder';
 
 const source = 'createAdapter';

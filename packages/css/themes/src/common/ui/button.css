@@ -1,73 +1,81 @@
-.bt-primary-filled {
-    font-family: var(--nluxc-font-family);
-    font-size: var(--nluxc-font-size);
-    font-weight: var(--nluxc-font-weight);
-    line-height: var(--nluxc-line-height);
+.nluxc-root {
+    .bt-primary-filled {
+        font-family: var(--nluxc-font-family);
+        font-size: var(--nluxc-font-size);
+        font-weight: var(--nluxc-font-weight);
+        line-height: var(--nluxc-line-height);
 
-    padding: var(--nluxc-padding) var(--nluxc-padding-l);
+        padding: var(--nluxc-padding) var(--nluxc-padding-l);
 
-    cursor: pointer;
-    color: var(--nluxc-action-primary-inverted);
+        cursor: pointer;
+        color: var(--nluxc-action-primary-inverted);
 
-    border-width: var(--nluxc-border-width);
-    border-style: solid;
+        border-width: var(--nluxc-border-width);
+        border-style: solid;
 
-    border-color: var(--nluxc-bt-primary-filled);
-    border-radius: var(--nluxc-border-radius-l);
-    background-color: var(--nluxc-bt-primary-filled);
+        border-color: var(--nluxc-bt-primary-filled);
+        border-radius: var(--nluxc-border-radius-l);
+        background-color: var(--nluxc-bt-primary-filled);
 
-    &:active,
-    &:hover {
+        > .loader,
+        > .loader:after {
+            color: var(--nluxc-action-primary-inverted);
+        }
+    }
+
+    .bt-primary-filled:active,
+    .bt-primary-filled:hover {
         color: var(--nluxc-action-primary-inverted);
         border-color: var(--nluxc-action-primary-hover);
         background-color: var(--nluxc-action-primary-hover);
     }
 
-    &:disabled {
+    .bt-primary-filled:disabled {
         color: var(--nluxc-action-primary-inverted);
         border-color: var(--nluxc-action-primary-disabled);
         background-color: var(--nluxc-action-primary-disabled);
     }
 
-    &:focus {
+    .bt-primary-filled:focus {
         border-color: var(--nluxc-action-primary-active);
         outline: var(--nluxc-action-primary-active);
     }
-}
 
-.bt-secondary-filled {
-    font-family: var(--nluxc-font-family);
-    font-size: var(--nluxc-font-size);
-    font-weight: var(--nluxc-font-weight);
-    line-height: var(--nluxc-line-height);
+    .bt-secondary-filled {
+        font-family: var(--nluxc-font-family);
+        font-size: var(--nluxc-font-size);
+        font-weight: var(--nluxc-font-weight);
+        line-height: var(--nluxc-line-height);
 
-    padding: var(--nluxc-padding) var(--nluxc-padding-l);
+        padding: var(--nluxc-padding) var(--nluxc-padding-l);
 
-    cursor: pointer;
-    color: var(--nluxc-action-secondary-inverted);
+        cursor: pointer;
+        color: var(--nluxc-action-secondary-inverted);
 
-    border-width: var(--nluxc-border-width);
-    border-style: solid;
+        border-width: var(--nluxc-border-width);
+        border-style: solid;
 
-    border-color: var(--nluxc-bt-secondary-filled);
-    border-radius: var(--nluxc-border-radius);
-    background-color: var(--nluxc-bt-secondary-filled);
+        border-color: var(--nluxc-bt-secondary-filled);
+        border-radius: var(--nluxc-border-radius);
+        background-color: var(--nluxc-bt-secondary-filled);
+    }
 
-    &:active,
-    &:hover {
+    .bt-secondary-filled:active,
+    .bt-secondary-filled:hover {
         color: var(--nluxc-action-secondary-inverted);
         border-color: var(--nluxc-action-secondary-hover);
         background-color: var(--nluxc-action-secondary-hover);
     }
 
-    &:disabled {
+    .bt-secondary-filled:disabled {
         color: var(--nluxc-action-secondary-inverted);
         border-color: var(--nluxc-action-secondary-disabled);
         background-color: var(--nluxc-action-secondary-disabled);
     }
 
-    &:focus {
+    .bt-secondary-filled:focus {
         border-color: var(--nluxc-action-secondary-active);
         outline: var(--nluxc-action-secondary-active);
     }
 }
+

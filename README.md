@@ -56,7 +56,7 @@ const gpt4Adapter = createAdapter('openai/gpt')
     .withApiKey('YOUR_OPEN_AI_API_KEY');
 ```
 
-Then render the **Nlux UI component** `Convo Pit` into your web page:
+Then render the **NLUX UI component** `Convo Pit` into your web page:
 
 ```js
 const convoPit = createConvoPit()
@@ -118,7 +118,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.1.9-beta/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.2.6-beta/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.
@@ -154,7 +154,7 @@ The following design principles guide the development of NLUX:
 ## License 📃
 
 NLUX is licensed under the terms of the [Mozilla Public License 2.0](https://www.mozilla.org/en-US/MPL/2.0/).<br />
-Want to know what that means? Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
+Wondering what that means? Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
 
 ## Mission 👨‍🚀
 
@@ -169,7 +169,6 @@ cross platforms, with a focus on performance and usability.
 
 ## About The Developer 👨‍💻
 
-NLUX is an open-source project that's being led by [Salmen Hichri](https://github.com/salmenus). With over a decade of
-experience building user interfaces and developer tools at companies like Amazon and
-Goldman Sachs, and contributions to open-source projects, Salmen brings valuable
-expertise to NLUX.
+NLUX is an open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
+engineer based in London, with over a decade of experience building user interfaces and developer
+tools at companies like Amazon and Goldman Sachs, and contributions to open-source projects.

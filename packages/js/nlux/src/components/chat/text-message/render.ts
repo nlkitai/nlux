@@ -2,9 +2,15 @@ import {NluxRenderingError} from '../../../core/error';
 import {listenToElement} from '../../../dom/listenToElement';
 import {CompRenderer} from '../../../types/comp';
 import {textToHtml} from '../../../x/parseTextMessage';
-import {render} from '../../../x/render.ts';
-import {source} from '../../../x/source.ts';
-import {CompTextMessageActions, CompTextMessageElements, CompTextMessageEvents, CompTextMessageProps} from './types';
+import {render} from '../../../x/render';
+import {source} from '../../../x/source';
+import {
+    CompTextMessageActions,
+    CompTextMessageElements,
+    CompTextMessageEvents,
+    CompTextMessageProps,
+    TextMessageContentLoadingStatus,
+} from './types';
 
 export const __ = (styleName: string) => `nluxc-text-message-${styleName}`;
 
@@ -15,6 +21,7 @@ const html = ({content, createdAt}: CompTextMessageProps) => `` +
 export const renderTextMessage: CompRenderer<
     CompTextMessageProps, CompTextMessageElements, CompTextMessageEvents, CompTextMessageActions
 > = ({appendToRoot, props, compEvent}) => {
+    let isMessageContentAppended = false;
     if (props.format !== 'text') {
         throw new NluxRenderingError({
             source: source('text-message', 'render'),
@@ -30,10 +37,13 @@ export const renderTextMessage: CompRenderer<
         });
     }
 
-    const classFromDirection = props.direction === 'in' ? 'received' : 'sent';
     const container = document.createElement('div');
+    const classFromDirection = props.direction === 'in' ? 'received' : 'sent';
+    let classFromLoadingStatus = `loading-status-${props.loadingStatus}`;
     container.append(dom);
-    container.className = __('container') + ' ' + __(classFromDirection);
+    container.classList.add(__('container'));
+    container.classList.add(__(classFromDirection));
+    container.classList.add(classFromLoadingStatus);
 
     const [contentContainer, removeContentContainerListeners] = listenToElement(container,
         `:scope > .${__('content')}`)
@@ -98,6 +108,10 @@ export const renderTextMessage: CompRenderer<
                 });
 
                 contentContainer.append(fragment);
+                if (!isMessageContentAppended) {
+                    container.append(dom);
+                    isMessageContentAppended = true;
+                }
             },
             scrollToMessageEndContainer: () => {
                 container.scrollIntoView({
@@ -105,6 +119,11 @@ export const renderTextMessage: CompRenderer<
                     inline: 'end',
                     behavior: 'smooth',
                 });
+            },
+            setLoadingStatus: (status: TextMessageContentLoadingStatus) => {
+                container.classList.remove(classFromLoadingStatus);
+                classFromLoadingStatus = `loading-status-${status}`;
+                container.classList.add(classFromLoadingStatus);
             },
         },
         onDestroy: () => {

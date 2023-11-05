@@ -1,19 +1,22 @@
-import {Observable} from '../../../core/bus/observable.ts';
+import {Observable} from '../../../core/bus/observable';
 import {BaseComp} from '../../../core/comp/base';
+import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
-import {CompConversation} from '../conversation/model.ts';
-import {CompChatbox} from '../prompt-box/model';
+import {Message} from '../../../types/message';
+import {CompConversation} from '../conversation/model';
+import {CompConversationProps} from '../conversation/types';
+import {CompPromptBox} from '../prompt-box/model';
 import {CompTextMessage} from '../text-message/model';
-import type {TextMessageContentLoadingStatus} from '../text-message/types.ts';
+import type {TextMessageContentLoadingStatus} from '../text-message/types';
 import {renderChatRoom} from './render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './types';
 import {updateChatRoom} from './update';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
-export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions> {
-
-    private context: NluxContext;
+export class CompChatRoom extends BaseComp<
+    CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+> {
     private conversation: CompConversation;
 
     private handleMessageContentStatus = (messageId: string, contentStatus: TextMessageContentLoadingStatus) => {
@@ -29,36 +32,27 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
             this.messagesInStreamingState.delete(messageId);
         }
 
-        if (contentStatus === 'loaded' || contentStatus === 'error') {
+        if (contentStatus === 'loaded' || contentStatus === 'loading-error') {
             this.messagesInLoadingState.delete(messageId);
             this.messagesInStreamingState.delete(messageId);
-
-            if (this.promptBoxInstance) {
-                this.promptBoxInstance.enableTextInput(true);
-                this.promptBoxInstance.focusTextInput();
-
-                if (contentStatus === 'loaded') {
-                    this.promptBoxInstance.resetTextInput();
-                }
-            }
         }
     };
 
     private messagesInLoadingState: Set<string> = new Set();
     private messagesInStreamingState: Set<string> = new Set();
-    private promptBoxInstance: CompChatbox;
+    private promptBoxInstance: CompPromptBox;
     private promptBoxText: string = '';
 
-    constructor(instanceId: string, context: NluxContext, {
+    constructor(context: NluxContext, {
+        containerMaxWidth,
         containerMaxHeight,
+        scrollWhenGenerating,
         visible = true,
         promptBox,
     }: CompChatRoomProps) {
-        super(instanceId, {visible, containerMaxHeight});
+        super(context, {visible, containerMaxWidth, containerMaxHeight, scrollWhenGenerating});
 
-        this.context = context;
-
-        this.addConversation();
+        this.addConversation(scrollWhenGenerating);
         this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
 
         // @ts-ignore
@@ -78,7 +72,15 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
 
     public setProps(props: Partial<CompChatRoomProps>) {
         if (props.hasOwnProperty('containerMaxHeight')) {
-            this.setProp('containerMaxHeight', props.containerMaxHeight ?? null);
+            this.setProp('containerMaxHeight', props.containerMaxHeight ?? undefined);
+        }
+
+        if (props.hasOwnProperty('containerMaxWidth')) {
+            this.setProp('containerMaxWidth', props.containerMaxWidth ?? undefined);
+        }
+
+        if (props.hasOwnProperty('scrollWhenGenerating')) {
+            this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
         }
     }
 
@@ -100,11 +102,13 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
         this.promptBoxInstance?.focusTextInput();
     }
 
-    private addConversation() {
-        this.conversation = new CompConversation(
-            'main-conversation',
-            {},
-        );
+    private addConversation(scrollWhenGenerating?: boolean) {
+        this.conversation = comp(CompConversation)
+            .withContext(this.context)
+            .withProps<CompConversationProps>({
+                scrollWhenGenerating,
+            })
+            .create();
 
         this.addSubComponent(
             this.conversation.id,
@@ -117,26 +121,25 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
         placeholder?: string,
         autoFocus?: boolean,
     ) {
-        this.promptBoxInstance = new CompChatbox(
-            'main-prompt-box',
-            {
+        this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
+            props: {
                 enableTextInput: true,
-                enableSendButton: false,
+                sendButtonStatus: 'disabled',
                 textInputValue: '',
                 placeholder,
                 autoFocus,
             },
-            {
+            eventListeners: {
                 onTextUpdated: (newValue: string) => this.handlePromptBoxTextChange(newValue),
                 onSubmit: () => this.handlePromptBoxSubmit(),
             },
-        );
+        }).create();
 
         this.addSubComponent(this.promptBoxInstance.id, this.promptBoxInstance, 'promptBoxContainer');
     }
 
     private handleMessageStatusUpdatedFactory() {
-        return (messageId: string, status: 'loading' | 'streaming' | 'loaded' | 'error') => {
+        return (messageId: string, status: 'loading' | 'streaming' | 'loaded' | 'loading-error') => {
             this.handleMessageContentStatus(messageId, status);
         };
     }
@@ -148,12 +151,14 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
 
         const {promptBoxInstance} = this;
         promptBoxInstance.enableTextInput(false);
+        promptBoxInstance.setSendButtonStatus('loading');
 
-        const messageToSent = this.promptBoxText;
-        this.conversation.addMessage('out', messageToSent, new Date());
+        const messageToSend = this.promptBoxText;
+        const outMessageId = this.conversation.addMessage('out', messageToSend, new Date());
 
         const outMessageContentLoader: 'promise' | 'observable' = 'observable';
-        const messageContentLoader: Observable<string> | Promise<string> = this.context.adapter.send(messageToSent);
+        const messageContentLoader: Observable<Message> | Promise<Message> =
+            this.context.adapter.send(messageToSend);
 
         const messageId = this.conversation.addMessage(
             'in',
@@ -161,6 +166,20 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
             new Date(),
             this.handleMessageStatusUpdatedFactory(),
         );
+
+        if (messageContentLoader instanceof Promise) {
+            this.listenToContentGenerationPromise(
+                messageContentLoader,
+                outMessageId,
+                messageId,
+            );
+        } else {
+            this.listenToContentGenerationObservable(
+                messageContentLoader,
+                outMessageId,
+                messageId,
+            );
+        }
 
         const message: CompTextMessage | undefined = this.conversation.getMessageById(messageId) as any;
         if (!message) {
@@ -178,5 +197,61 @@ export class CompChatRoom extends BaseComp<CompChatRoomProps, CompChatRoomElemen
 
     private handlePromptBoxTextChange(newValue: string) {
         this.promptBoxText = newValue;
+    }
+
+    private listenToContentGenerationObservable(
+        observable: Observable<Message>,
+        outMessageId: string,
+        inMessageId: string,
+    ) {
+        observable.subscribe({
+            next: () => {
+                // Do nothing
+            },
+            complete: () => {
+                if (!this.promptBoxInstance) {
+                    return;
+                }
+
+                this.resetPromptBox(true);
+            },
+            error: () => {
+                this.conversation.removeMessage(outMessageId);
+                this.conversation.removeMessage(inMessageId);
+                this.resetPromptBox();
+            },
+        });
+    }
+
+    private listenToContentGenerationPromise(
+        promise: Promise<Message>,
+        outMessageId: string,
+        inMessageId: string,
+    ) {
+        promise.then(() => {
+            if (!this.promptBoxInstance) {
+                return;
+            }
+
+            this.resetPromptBox(true);
+        }).catch((error: any) => {
+            this.conversation.removeMessage(outMessageId);
+            this.conversation.removeMessage(inMessageId);
+            this.resetPromptBox();
+        });
+    }
+
+    private resetPromptBox(resetTextInput: boolean = false) {
+        if (!this.promptBoxInstance) {
+            return;
+        }
+
+        this.promptBoxInstance.enableTextInput(true);
+        if (resetTextInput) {
+            this.promptBoxInstance.resetTextInput();
+        }
+
+        this.promptBoxInstance.resetSendButtonStatus();
+        this.promptBoxInstance.focusTextInput();
     }
 }

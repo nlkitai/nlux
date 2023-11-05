@@ -1,16 +1,16 @@
-import {NluxRenderingError} from '../../../core/error.ts';
-import {listenToElement} from '../../../dom/listenToElement.ts';
-import {CompRenderer} from '../../../types/comp.ts';
-import {render} from '../../../x/render.ts';
-import {source} from '../../../x/source.ts';
-import {throttle} from '../../../x/throttle.ts';
+import {NluxRenderingError} from '../../../core/error';
+import {listenToElement} from '../../../dom/listenToElement';
+import {CompRenderer} from '../../../types/comp';
+import {render} from '../../../x/render';
+import {source} from '../../../x/source';
+import {throttle} from '../../../x/throttle';
 import {
     CompConversationActions,
     CompConversationElements,
     CompConversationEvents,
     CompConversationProps,
-} from './types.ts';
-import {messagesScrollHandlerFactory} from './utils/messagesScrollHandler.ts';
+} from './types';
+import {messagesScrollHandlerFactory} from './utils/messagesScrollHandler';
 
 const __ = (styleName: string) => `nluxc-conversation-${styleName}`;
 

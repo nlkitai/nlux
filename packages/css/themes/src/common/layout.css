@@ -7,12 +7,12 @@
     -webkit-user-select: none; /* Safari */
     user-select: none; /* Standard syntax */
 
-    & h1, & h2, & h3, & h4, & h5, & h6 {
+    :is(h1, h2, h3, h4, h5, h6) {
         margin: 0;
         padding: 0;
     }
 
     > .nluxc-chat-room-container {
-        max-width: 600px;
+        min-height: 200px;
     }
 }

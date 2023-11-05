@@ -3,9 +3,11 @@ export type CompPromptBoxEvents = 'text-updated'
     | 'escape-key-pressed'
     | 'enter-key-pressed';
 
+export type CompPromptBoxButtonStatus = 'enabled' | 'disabled' | 'loading';
+
 export type CompPromptBoxProps = Readonly<{
+    sendButtonStatus: CompPromptBoxButtonStatus;
     enableTextInput: boolean;
-    enableSendButton: boolean;
     textInputValue: string;
     placeholder?: string;
     autoFocus?: boolean;
@@ -24,4 +26,5 @@ export type CompPromptBoxElements = Readonly<{
 
 export type CompPromptBoxActions = Readonly<{
     focusTextInput: () => void;
+    updateButtonStatus: (status: CompPromptBoxButtonStatus) => void;
 }>;

@@ -1,6 +1,6 @@
 {
   "name": "@nlux/monorepo",
-  "version": "0.1.9-beta",
+  "version": "0.2.6-beta",
   "description": "NLUX is a JavaScript and React library for building conversational AI experiences.",
   "author": "Salmen Hichri",
   "license": "MPL-2.0",
@@ -10,7 +10,8 @@
     "dist/dev/*",
     "packages/*",
     "packages/**/*",
-    "samples/*"
+    "samples/*",
+    "*"
   ],
   "scripts": {
     "cleanup": "node pipeline/scripts/cleanup.mjs",
@@ -19,14 +20,12 @@
     "build": "node pipeline/scripts/build.mjs",
     "dev": "node pipeline/scripts/dev.mjs",
     "watch": "node pipeline/scripts/watch.mjs",
-    "umd:reset": "NLUX_BUNDLER_PACKAGE_TYPE=umd yarn run reset",
-    "umd:dev": "NLUX_BUNDLER_PACKAGE_TYPE=umd yarn run dev",
-    "cjs:reset": "NLUX_BUNDLER_PACKAGE_TYPE=cjs yarn run reset",
-    "cjs:dev": "NLUX_BUNDLER_PACKAGE_TYPE=cjs yarn run dev"
+    "test": "node pipeline/scripts/test.mjs"
   },
   "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
+    "cli-color": "^2.0.3",
     "jsdom": "^22.1.0",
     "serve": "^14.2.1",
     "typescript": "5.2.2"

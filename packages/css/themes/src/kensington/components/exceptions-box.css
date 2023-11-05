@@ -1,0 +1,10 @@
+.nluxc-root.nluxc-theme-kensington {
+    > .nluxc-exceptions-box-container.warning-exception {
+        --nluxc-exceptions-box-exception-background-color: var(--nluxc-action-secondary-active-2);
+    }
+
+    > .nluxc-exceptions-box-container.error-exception {
+        color: var(--nluxc-neutral-10);
+        --nluxc-exceptions-box-exception-background-color: var(--nluxc-action-tertiary-90);
+    }
+}

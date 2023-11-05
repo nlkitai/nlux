@@ -1,9 +1,11 @@
-@import 'colors.css';
-@import 'variables.css';
-@import 'font.css';
+@import './colors.css';
+@import './variables.css';
+@import './font.css';
 
 @import '../common/nlux.css';
 
-@import 'ui/button.css';
-@import 'ui/input.css';
-@import 'ui/text-message.css';
+@import './ui/button.css';
+@import './ui/input.css';
+
+@import './components/text-message.css';
+@import './components/exceptions-box.css';

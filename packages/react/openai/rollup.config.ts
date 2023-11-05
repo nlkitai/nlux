@@ -6,21 +6,18 @@ import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 import generatePackageJson from 'rollup-plugin-generate-package-json';
 import {terser} from 'rollup-plugin-terser';
+// @ts-ignore
+import {outputFolder} from '../../../pipeline/utils/paths.mjs';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 import {readJsonFile} from '../../../pipeline/utils/rollup/readJsonFile';
 import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
 
-const distPath = join('..', '..', '..', 'dist');
-const prodDistFolder = join(distPath, 'prod', 'openai-react');
-const devDistFolder = join(distPath, 'dev', 'openai-react');
-
 const isProduction = process.env.NODE_ENV === 'production';
-
 const packageName = '@nlux/openai-react';
 const outputFile = 'openai-react';
-const outputFolder = isProduction ? prodDistFolder : devDistFolder;
-const packageJsonData = readJsonFile(join(outputFolder, 'package.json'));
+const packageOutputFolder = outputFolder(outputFile);
+const packageJsonData = readJsonFile(join(packageOutputFolder, 'package.json'));
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     {
@@ -38,13 +35,13 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             !isProduction && replaceImportedModules(),
             replace({
                 values: {
-                    'process.env.NLUX_DEBUG_ENABLED': isProduction ? 'false' : 'true',
+                    'process.env.NLUX_DEBUG_ENABLED': JSON.stringify(isProduction ? 'false' : 'true'),
                 },
                 preventAssignment: true,
             }),
             isProduction && terser(),
             generatePackageJson({
-                outputFolder,
+                outputFolder: packageOutputFolder,
                 baseContents: {
                     ...packageJsonData,
                     main: `index.js`,
@@ -56,12 +53,12 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
         external: [
             '@nlux/nlux',
+            '@nlux/openai',
             'react',
-            'react-dom',
         ],
-        output: generateOutputConfig(packageName, outputFile, outputFolder, isProduction),
+        output: generateOutputConfig(packageName, outputFile, packageOutputFolder, isProduction),
     },
-    generateDts(outputFolder, outputFile),
+    generateDts(packageOutputFolder, outputFile),
 ]);
 
 export default packageConfig;

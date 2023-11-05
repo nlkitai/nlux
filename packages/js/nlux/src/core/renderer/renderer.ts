@@ -1,59 +1,58 @@
 import {CompChatRoom} from '../../components/chat/chat-room/model';
+import {CompChatRoomProps} from '../../components/chat/chat-room/types';
+import {CompExceptionsBox} from '../../components/miscellaneous/exceptions-box/model';
 import {NluxContext} from '../../types/context';
-import {NluxProps} from '../../types/props.ts';
-import {hasCssClass} from '../../x/hasCssClass';
-import {BaseComp} from '../comp/base';
+import {ExceptionType} from '../../types/exception';
+import {NluxProps} from '../../types/props';
+import {warn} from '../../x/debug';
+import {comp} from '../comp/comp';
+import {CompRegistry} from '../comp/registry';
 import {NluxRenderingError} from '../error';
-import {ConversationOptions} from '../options/conversationOptions.ts';
-import {MessageOptions} from '../options/messageOptions.ts';
-import {PromptBoxOptions} from '../options/promptBoxOptions.ts';
+import {ConversationOptions} from '../options/conversationOptions';
+import {LayoutOptions} from '../options/layoutOptions';
+import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<InboundPayload, OutboundPayload> {
     private static readonly defaultThemeName = 'kensington';
-
+    private readonly context: NluxContext;
+    private readonly rootClassName: string = 'nluxc-root';
     private chatRoom: CompChatRoom | null = null;
-    private readonly context: NluxContext<InboundPayload, OutboundPayload>;
-
+    private exceptionsBox: CompExceptionsBox | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
-    private rootClassName: string = 'nluxc-root';
-    private rootCompClass: typeof BaseComp | null = null;
+    private rootCompId: string | null = null;
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
-
-    // TODO - Use all options in renderer
-    private theContainerMaxHeight: number | null = null;
-    private theConversationOptions: Readonly<ConversationOptions> | null = null;
-    private theMessageOptions: Readonly<MessageOptions> | null = null;
-    private thePromptBoxOptions: Readonly<PromptBoxOptions> | null = null;
+    private theClassName: string | null = null;
+    private theConversationOptions: Readonly<ConversationOptions> = {};
+    private theLayoutOptions: Readonly<LayoutOptions> = {};
+    private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
     private theThemeId: string | null = null;
 
     constructor(
-        context: NluxContext<InboundPayload, OutboundPayload>,
-        rootCompClass: typeof BaseComp,
+        context: NluxContext,
+        rootCompId: string,
         rootElement: HTMLElement,
-        props?: NluxProps,
+        props: NluxProps | null = null,
     ) {
-        const RootCompClass = rootCompClass as any;
-        if (!RootCompClass || typeof RootCompClass !== 'function') {
+        if (!rootCompId) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
-                message: 'Root component model is not a class',
+                message: 'Root component ID is not a valid component name',
             });
         }
 
         this.context = context;
         this.rootElement = rootElement;
         this.rootElementInitialClassName = rootElement.className;
-        this.rootCompClass = rootCompClass;
+        this.rootCompId = rootCompId;
         this.chatRoom = null;
 
+        this.theClassName = props?.className ?? null;
         this.theThemeId = props?.themeId ?? null;
-        this.theContainerMaxHeight = props?.containerMaxHeight ?? null;
-
-        this.theConversationOptions = props?.conversationOptions ?? null;
-        this.thePromptBoxOptions = props?.promptBoxOptions ?? null;
-        this.theMessageOptions = props?.messageOptions ?? null;
+        this.theLayoutOptions = props?.layoutOptions ?? {};
+        this.theConversationOptions = props?.conversationOptions ?? {};
+        this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
     }
 
     public get mounted() {
@@ -76,17 +75,15 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         this.rootElement = null;
         this.rootElementInitialClassName = null;
 
-        this.rootCompClass = null;
+        this.rootCompId = null;
         this.chatRoom = null;
         this.isMounted = false;
         this.isDestroyed = true;
 
         this.theThemeId = null;
-        this.theContainerMaxHeight = null;
-
-        this.theConversationOptions = null;
-        this.thePromptBoxOptions = null;
-        this.theMessageOptions = null;
+        this.theLayoutOptions = {};
+        this.theConversationOptions = {};
+        this.thePromptBoxOptions = {};
     }
 
     hide() {
@@ -98,6 +95,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         }
 
         this.chatRoom?.hide();
+        this.exceptionsBox?.removeAllAlerts();
     }
 
     mount() {
@@ -108,56 +106,78 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             });
         }
 
-        if (!this.rootCompClass || !this.rootElement) {
+        if (!this.rootCompId || !this.rootElement) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
                 message: 'Root component or root class is not set',
             });
         }
 
-        const CompChatRoomConstructor: typeof CompChatRoom | undefined = this.rootCompClass as any;
-        if (!CompChatRoomConstructor || typeof CompChatRoomConstructor !== 'function') {
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: 'Root component model is not a class',
-            });
-        }
+        let rootComp: CompChatRoom | null = null;
+        let exceptionAlert: CompExceptionsBox | null = null;
 
-        const rootComp = new CompChatRoomConstructor('nluxc', this.context, {
-            containerMaxHeight: this.theContainerMaxHeight || undefined,
-            visible: true,
-            promptBox: {
-                placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
-                autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
-            },
-        });
+        try {
+            // Root component can only be a chat room component.
+            if (this.rootCompId !== 'chat-room') {
+                throw new NluxRenderingError({
+                    source: this.constructor.name,
+                    message: 'Root component is not a chat room',
+                });
+            }
 
-        if (!rootComp) {
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: 'Root component failed to instantiate',
-            });
-        }
+            //
+            // IMPORTANT ✨ This is where the CompChatRoom is instantiated!
+            //
+            rootComp = comp(CompChatRoom).withContext(this.context).withProps<CompChatRoomProps>({
+                visible: true,
+                scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating ?? undefined,
+                containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
+                containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
+                promptBox: {
+                    placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
+                    autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
+                },
+            }).create();
 
-        if (!hasCssClass(this.rootElement, this.rootClassName)) {
-            this.rootElement.classList.add(this.rootClassName);
-        }
+            const CompExceptionsBoxConstructor: typeof CompExceptionsBox | undefined = CompRegistry
+                .retrieve('exceptions-box')?.model as any;
 
-        const themeCssClass = `nluxc-theme-${this.themeId}`;
-        this.rootElement.classList.add(themeCssClass);
+            if (CompExceptionsBoxConstructor) {
+                exceptionAlert = comp(CompExceptionsBox).withContext(this.context).create();
+            } else {
+                warn('Exception alert component is not registered! No exceptions will be shown.');
+            }
 
-        rootComp.render(this.rootElement);
+            if (!rootComp) {
+                throw new NluxRenderingError({
+                    source: this.constructor.name,
+                    message: 'Root component failed to instantiate',
+                });
+            }
 
-        if (!rootComp.rendered) {
+            this.setRootElementClassNames();
+
+            if (exceptionAlert) {
+                exceptionAlert.render(this.rootElement);
+            }
+
+            rootComp.render(this.rootElement);
+
+            if (rootComp && !rootComp.rendered) {
+                this.rootElement.className = this.rootElementInitialClassName || '';
+
+                throw new NluxRenderingError({
+                    source: this.constructor.name,
+                    message: 'Root component did not render',
+                });
+            } else {
+                this.chatRoom = rootComp;
+                this.exceptionsBox = exceptionAlert ?? null;
+                this.isMounted = true;
+            }
+        } catch (e) {
             this.rootElement.className = this.rootElementInitialClassName || '';
-
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: 'Root component did not render',
-            });
-        } else {
-            this.chatRoom = rootComp;
-            this.isMounted = true;
+            this.renderEx('error', e?.toString() ?? 'Unknown error');
         }
     }
 
@@ -174,10 +194,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
     unmount() {
         if (this.isDestroyed) {
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: 'Renderer is already destroyed and cannot be unmounted',
-            });
+            warn('Renderer is destroyed and cannot be unmounted');
+            return;
         }
 
         if (!this.chatRoom || !this.rootElement) {
@@ -187,6 +205,10 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             });
         }
 
+        if (this.exceptionsBox) {
+            this.exceptionsBox.destroy();
+        }
+
         this.chatRoom.destroy();
         if (this.rootElement) {
             this.rootElement.innerHTML = '';
@@ -194,34 +216,88 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         }
 
         this.chatRoom = null;
+        this.exceptionsBox = null;
         this.isMounted = false;
     }
 
-    public updateProps(props: NluxProps) {
+    public updateProps(props: NluxProps | undefined) {
         if (!props) {
             return;
         }
 
-        if (props.hasOwnProperty('themeId')) {
-            this.theThemeId = props.themeId ?? null;
-            // TODO - Apply new theme
+        if (props.hasOwnProperty('className')) {
+            const newClassName = props.className || undefined;
+            if (newClassName) {
+                if (this.theClassName) {
+                    this.rootElement?.classList.remove(this.theClassName);
+                }
+
+                this.theClassName = newClassName;
+                this.rootElement?.classList.add(newClassName);
+            } else {
+                if (this.theClassName) {
+                    this.rootElement?.classList.remove(this.theClassName);
+                    this.theClassName = null;
+                }
+            }
         }
 
-        if (props.hasOwnProperty('containerMaxHeight')) {
-            this.theContainerMaxHeight = props.containerMaxHeight ?? null;
-            this.chatRoom?.setProps({containerMaxHeight: props.containerMaxHeight});
+        if (props.hasOwnProperty('layoutOptions')) {
+            const propsToUpdate: Partial<CompChatRoomProps> = {};
+            if (props.layoutOptions?.hasOwnProperty('maxHeight')) {
+                propsToUpdate.containerMaxHeight = props.layoutOptions.maxHeight;
+            }
+
+            if (props.layoutOptions?.hasOwnProperty('maxWidth')) {
+                propsToUpdate.containerMaxWidth = props.layoutOptions.maxWidth;
+            }
+
+            this.theLayoutOptions = {
+                ...this.theLayoutOptions,
+                ...props.layoutOptions,
+            };
+
+            this.chatRoom?.setProps(propsToUpdate);
         }
 
         if (props.hasOwnProperty('conversationOptions')) {
-            // TODO - Apply new conversation options
-        }
-
-        if (props.hasOwnProperty('messageOptions')) {
-            // TODO - Apply new message options
+            this.theConversationOptions = props.conversationOptions ?? {};
+            this.chatRoom?.setProps({
+                scrollWhenGenerating: props.conversationOptions?.scrollWhenGenerating ?? undefined,
+            });
         }
 
         if (props.hasOwnProperty('promptBoxOptions')) {
             // TODO - Apply new prompt box options
         }
+    }
+
+    private renderEx(type: ExceptionType, message: string) {
+        if (!this.mounted) {
+            warn('Renderer is not mounted and cannot render exceptions');
+            throw new NluxRenderingError({
+                source: this.constructor.name,
+                message: message,
+            });
+
+            return;
+        }
+
+        this.exceptionsBox?.showAlert(type, message);
+    }
+
+    private setRootElementClassNames() {
+        if (!this.rootElement) {
+            return;
+        }
+
+        this.rootElement.classList.add(this.rootClassName);
+
+        if (this.theClassName) {
+            this.rootElement.classList.add(this.theClassName);
+        }
+
+        const themeCssClass = `nluxc-theme-${this.themeId}`;
+        this.rootElement.classList.add(themeCssClass);
     }
 }

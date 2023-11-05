@@ -1,13 +1,12 @@
+import clc from 'cli-color';
+import {info, nl} from '../utils/log.mjs';
 import {run} from './run.mjs';
-import {info, nl} from "../utils/log.mjs";
-
 
 nl(1);
-info('###############################################');
-info(`# 🏗️  Pipeline Step: Build                     #`);
-info('###############################################');
+info(clc.bgWhite.red(' ############################################### '));
+info(clc.bgWhite.red(` # 🏗️  Pipeline Step: Build                     # `));
+info(clc.bgWhite.red(' ############################################### '));
 nl(1);
-
 
 try {
     await run('NODE_ENV=production yarn workspace @nlux-dev/nlux build');

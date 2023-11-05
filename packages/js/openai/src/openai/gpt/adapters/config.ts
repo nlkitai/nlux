@@ -1,4 +1,4 @@
-import {OpenAIChatModel} from '../types/models.ts';
+import {OpenAIChatModel} from '../types/models';
 
 export const defaultChatGptModel: OpenAIChatModel = 'gpt-4';
 

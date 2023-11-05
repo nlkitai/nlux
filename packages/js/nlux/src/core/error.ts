@@ -1,10 +1,12 @@
 export type NluxRawError = {
     readonly message?: string;
     readonly type?: string;
-    source?: string;
+    readonly source?: string;
+    readonly exceptionId?: string;
 };
 
 export class NluxError extends Error {
+    readonly exceptionId?: string;
     readonly message: string;
     readonly source?: string;
     readonly type: string;
@@ -15,6 +17,7 @@ export class NluxError extends Error {
         this.message = rawError.message ?? '';
         this.source = rawError.source;
         this.type = this.constructor.name;
+        this.exceptionId = rawError.exceptionId;
     }
 }
 

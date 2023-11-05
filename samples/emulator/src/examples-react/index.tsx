@@ -3,21 +3,23 @@ import {useAdapter} from '@nlux/openai-react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
-const apiKey = 'YOUR_API_KEY_HERE';
+debugger;
+const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
 const ExampleWrapper = () => {
-    const [height, setHeight] = useState<number>(550);
+    const [maxHeight, setMaxHeight] = useState<number>(550);
     const [key, setKey] = useState<number>(0);
     const handleRandomContainerHeight = useCallback(() => {
         const newHeight = Math.floor(Math.random() * 1000);
-        setHeight(newHeight);
+        setMaxHeight(newHeight);
     }, []);
 
     const adapter = useAdapter('openai/gpt', {
         apiKey,
         // model: 'gpt-3.5-turbo',
+        // dataExchangeMode: 'stream',
+        // model: 'gpt-3.5-turbo',
         dataExchangeMode: 'stream',
-        // dataExchangeMode: 'fetch',
         initialSystemMessage: 'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research',
     });
 
@@ -32,13 +34,19 @@ const ExampleWrapper = () => {
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
             <ConvoPit
                 key={key}
-                className="chat-emulator"
+                className="chat-emulator-pit"
                 adapter={adapter}
-                containerMaxHeight={height}
+                layoutOptions={{
+                    maxHeight,
+                    maxWidth: 500,
+                }}
+                conversationOptions={{
+                    scrollWhenGenerating: true,
+                }}
                 // Optional: Instruct ChatGPT how to behave during the conversation.
                 promptBoxOptions={{
                     placeholder: 'Tell me ?',
-                    autoFocus: true,
+                    autoFocus: false,
                 }}
             />,
         </>

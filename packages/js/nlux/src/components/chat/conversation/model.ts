@@ -1,38 +1,43 @@
-import {Observable} from '../../../core/bus/observable.ts';
-import {BaseComp} from '../../../core/comp/base.ts';
-import {CompEventListener, Model} from '../../../core/comp/decorators.ts';
-import {CompList} from '../../list/model.ts';
-import {messageInList, textMessage} from '../chat-room/utils/textMessage.ts';
-import {CompTextMessage} from '../text-message/model.ts';
-import type {TextMessageContentLoadingStatus} from '../text-message/types.ts';
-import {renderConversation} from './render.ts';
+import {Observable} from '../../../core/bus/observable';
+import {BaseComp} from '../../../core/comp/base';
+import {comp} from '../../../core/comp/comp';
+import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {NluxContext} from '../../../types/context';
+import {domOp} from '../../../x/domOp';
+import {CompList} from '../../miscellaneous/list/model';
+import {messageInList, textMessage} from '../chat-room/utils/textMessage';
+import {CompTextMessage} from '../text-message/model';
+import type {TextMessageContentLoadingStatus} from '../text-message/types';
+import {renderConversation} from './render';
 import {
     CompConversationActions,
     CompConversationElements,
     CompConversationEvents,
     CompConversationProps,
-} from './types.ts';
-import {updateConversation} from './update.ts';
+} from './types';
+import {updateConversation} from './update';
 
 @Model('conversation', renderConversation, updateConversation)
 export class CompConversation extends BaseComp<
     CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private autoScrollToStreamingMessage: boolean = true;
-
     private handleMessageStatusUpdatedFactory = (onMessageStatusUpdated?: (messageId: string, status: TextMessageContentLoadingStatus) => void) => {
         return (messageId: string, status: TextMessageContentLoadingStatus) => {
             onMessageStatusUpdated?.(messageId, status);
             if (status === 'streaming' || status === 'loading') {
-                requestAnimationFrame(() => {
+                domOp(() => {
                     this.markMessageAsStreaming(messageId);
                 });
             }
 
-            if (status === 'loaded' || status === 'error') {
-                requestAnimationFrame(() => {
+            if (status === 'loaded' || status === 'loading-error') {
+                domOp(() => {
                     this.markMessageAsNotStreaming(messageId);
                 });
+
+                if (status === 'loading-error') {
+                    return;
+                }
             }
 
             const message = this.getMessageById(messageId);
@@ -41,33 +46,41 @@ export class CompConversation extends BaseComp<
             }
         };
     };
-
     private messagesBeingStreamed: Set<string> = new Set();
     private messagesBeingStreamedResizeListeners: Map<string, Function> = new Map();
     private messagesList: CompList<CompTextMessage> | undefined;
 
-    constructor(instanceId: string, props: CompConversationProps) {
-        super(instanceId, props);
+    private scrollWhenGeneratingUserOption: boolean;
+    private scrollingStickToConversationEnd: boolean = true;
+
+    constructor(context: NluxContext, props: CompConversationProps) {
+        super(context, props);
         this.addConversation();
+        this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
     }
 
-    public addMessage(
+    public addMessage<Message = string>(
         direction: 'in' | 'out',
-        source: string | Promise<string> | Observable<string>,
+        source: string | Promise<Message> | Observable<Message>,
         createdAt: Date,
         onMessageStatusUpdated?: (messageId: string, status: TextMessageContentLoadingStatus) => void,
     ): string {
-        const handleMessageStatusUpdated = this.handleMessageStatusUpdatedFactory(onMessageStatusUpdated);
+        if (!this.messagesList) {
+            throw new Error(`CompConversation: messagesList is not initialized! Make sure you call` +
+                `addConversation() before calling addMessage()!`);
+        }
 
+        const handleMessageStatusUpdated = this.handleMessageStatusUpdatedFactory(onMessageStatusUpdated);
         const message = textMessage(
+            this.context,
             direction,
-            source,
+            source as string | Promise<string> | Observable<string>, // TODO - Make more generic
             createdAt,
             handleMessageStatusUpdated,
         );
 
-        this.messagesList?.appendComponent(message, messageInList);
-        requestAnimationFrame(() => message.scrollToMessage());
+        this.messagesList.appendComponent(message, messageInList);
+        message.scrollToMessage();
 
         return message.id;
     }
@@ -93,8 +106,12 @@ export class CompConversation extends BaseComp<
         this.messagesList?.removeComponentById(messageId);
     }
 
+    public toggleAutoScrollToStreamingMessage(autoScrollToStreamingMessage: boolean) {
+        this.scrollWhenGeneratingUserOption = autoScrollToStreamingMessage;
+    }
+
     private addConversation() {
-        this.messagesList = new CompList<CompTextMessage>('conversation', {});
+        this.messagesList = comp(CompList<CompTextMessage>).withContext(this.context).create();
         this.addSubComponent(this.messagesList.id, this.messagesList, 'messagesContainer');
     }
 
@@ -105,7 +122,8 @@ export class CompConversation extends BaseComp<
         }
 
         return () => {
-            if (this.autoScrollToStreamingMessage &&
+            if (this.scrollWhenGeneratingUserOption &&
+                this.scrollingStickToConversationEnd &&
                 this.messagesBeingStreamed.size === 1 &&
                 this.messagesBeingStreamed.has(messageId)
             ) {
@@ -115,8 +133,13 @@ export class CompConversation extends BaseComp<
     }
 
     @CompEventListener('user-scrolled')
-    private handleUserScrolled({scrolledToBottom}: {scrolledToBottom: boolean}) {
-        this.autoScrollToStreamingMessage = scrolledToBottom;
+    private handleUserScrolled({scrolledToBottom}: {
+        scrolledToBottom: boolean
+    }) {
+        // Turn this flag to `true` when the user scrolls to the end of the conversation
+        // Along with `scrollWhenGeneratingUserOption`, this flag is used to determine whether to scroll to the end
+        // of the conversation when a new message is added or being generated.
+        this.scrollingStickToConversationEnd = scrolledToBottom;
     }
 
     private markMessageAsStreaming(messageId: string) {

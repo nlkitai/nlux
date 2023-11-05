@@ -37,7 +37,7 @@ export type CompRenderer<PropsType, ElementsType, EventsType, ActionsType = unde
  */
 export type CompUpdater<PropsType, ElementsType, ActionsType> = (params: {
     propName: keyof PropsType,
-    newValue: string | number | boolean | undefined,
+    newValue: PropsType[keyof PropsType] | undefined | null,
     dom: {
         root: HTMLElement | DocumentFragment,
         elements?: ElementsType,

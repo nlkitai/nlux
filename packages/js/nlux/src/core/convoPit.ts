@@ -1,36 +1,22 @@
-import {registerAllComponents} from '../components/registerAll';
+import {registerAllComponents} from '../components/components';
 import {Adapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
-import {NluxProps} from '../types/props.ts';
-import {debug} from '../x/debug';
-import {ExposedConfig} from './config';
+import {NluxProps} from '../types/props';
+import {debug, warn} from '../x/debug';
 import {NluxController} from './controller/controller';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from './error';
 import {IConvoPit} from './interface';
-import {ConversationOptions} from './options/conversationOptions.ts';
-import {MessageOptions} from './options/messageOptions.ts';
-import {PromptBoxOptions} from './options/promptBoxOptions.ts';
+import {ConversationOptions} from './options/conversationOptions';
+import {LayoutOptions} from './options/layoutOptions';
+import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class ConvoPit implements IConvoPit {
-    protected exposedConfig: ExposedConfig = {
-        adapter: null,
-        theme: null,
-        containerMaxHeight: null,
-        promptPlaceholder: null,
-    };
-
     protected theAdapter: Adapter<any, any> | null = null;
-    protected theContainerMaxHeight: number | null = null;
+    protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
-    protected theMessageOptions: MessageOptions | null = null;
+    protected theLayoutOptions: LayoutOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
-    protected theTheme: string | null = null;
-    private componentsRegistered: boolean = false;
     private controller: NluxController | null = null;
-
-    public get config(): ExposedConfig {
-        return this.exposedConfig;
-    }
 
     public get mounted(): boolean {
         return this.controller?.mounted ?? false;
@@ -64,23 +50,21 @@ export class ConvoPit implements IConvoPit {
             });
         }
 
-        if (!this.componentsRegistered) {
-            registerAllComponents();
-            this.componentsRegistered = true;
-        }
+        registerAllComponents();
 
         rootElement.innerHTML = '';
         const controller = new NluxController(
             this.theAdapter,
             rootElement,
             {
-                themeId: this.theTheme ?? undefined,
-                containerMaxHeight: this.theContainerMaxHeight ?? undefined,
-                promptBoxOptions: this.thePromptBoxOptions ?? undefined,
-                messageOptions: this.theMessageOptions ?? undefined,
-                conversationOptions: this.theConversationOptions ?? undefined,
+                themeId: 'kensington', // Hardcoded for now - TODO: Make configurable
+                className: this.theClassName ?? undefined,
+                layoutOptions: this.theLayoutOptions ?? {},
+                promptBoxOptions: this.thePromptBoxOptions ?? {},
+                conversationOptions: this.theConversationOptions ?? {},
             },
         );
+
         controller.mount();
 
         if (controller.mounted) {
@@ -88,7 +72,7 @@ export class ConvoPit implements IConvoPit {
         } else {
             throw new NluxRenderingError({
                 source: this.constructor.name,
-                message: 'Root component did not render.',
+                message: 'ConvoPit root component did not render.',
             });
         }
     };
@@ -108,14 +92,11 @@ export class ConvoPit implements IConvoPit {
         debug('Unmounting NLUX.');
 
         if (!this.controller) {
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: 'Unable to unmount. NLUX is not mounted.',
-            });
+            warn('Invalid call to convoPit.unmount() on an already unmounted NLUX instance!');
+            return;
         }
 
         this.controller.unmount();
-
         if (this.controller.mounted) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -126,7 +107,7 @@ export class ConvoPit implements IConvoPit {
         this.controller = null;
     }
 
-    public updateProps(props: Partial<NluxProps>) {
+    public updateProps(props: NluxProps) {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -152,38 +133,26 @@ export class ConvoPit implements IConvoPit {
             });
         }
 
-        const adapter = adapterBuilder.create();
-
-        this.theAdapter = adapter;
-        this.exposedConfig = {
-            ...this.exposedConfig,
-            adapter: adapter.constructor.name,
-        };
-
+        this.theAdapter = adapterBuilder.create();
         return this;
     };
 
-    withContainerMaxHeight(containerMaxHeight: number) {
+    public withClassName(className: string) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set container max height. NLUX is already mounted.',
+                message: 'Unable to set class name. NLUX is already mounted.',
             });
         }
 
-        if (this.theContainerMaxHeight !== null) {
+        if (this.theClassName) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to change config. A container max height was already set.',
+                message: 'Unable to change config. A class name was already set.',
             });
         }
 
-        this.theContainerMaxHeight = containerMaxHeight;
-        this.exposedConfig = {
-            ...this.exposedConfig,
-            containerMaxHeight,
-        };
-
+        this.theClassName = className;
         return this;
     }
 
@@ -206,22 +175,23 @@ export class ConvoPit implements IConvoPit {
         return this;
     }
 
-    public withMessageOptions(messageOptions: MessageOptions) {
+    withLayoutOptions(layoutOptions: LayoutOptions) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set message options. NLUX is already mounted.',
+                message: 'Unable to set layout options. NLUX is already mounted.',
             });
         }
 
-        if (this.theMessageOptions) {
+        if (this.theLayoutOptions) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to change config. Message options were already set.',
+                message: 'Unable to change config. Layout options were already set.',
             });
         }
 
-        this.theMessageOptions = messageOptions;
+        this.theLayoutOptions = layoutOptions;
+
         return this;
     }
 
@@ -241,30 +211,6 @@ export class ConvoPit implements IConvoPit {
         }
 
         this.thePromptBoxOptions = promptBoxOptions;
-        return this;
-    }
-
-    public withTheme(theme: string) {
-        if (this.mounted) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set theme. NLUX is already mounted.',
-            });
-        }
-
-        if (this.theTheme) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to change config. A theme was already set.',
-            });
-        }
-
-        this.theTheme = theme;
-        this.exposedConfig = {
-            ...this.exposedConfig,
-            theme,
-        };
-
         return this;
     }
 }

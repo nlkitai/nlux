@@ -1,17 +1,17 @@
 import {AdapterConfig, AdapterInfo, AdapterStatus, ISseAdapter, Message, Observable} from '@nlux/nlux';
 import OpenAI from 'openai';
-import {warn} from '../../../x/debug.ts';
+import {warn} from '../../../x/debug';
 import {gptAdapterInfo} from '../config';
-import {OpenAIChatModel} from '../types/models.ts';
+import {OpenAIChatModel} from '../types/models';
 
 export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implements ISseAdapter<
     InboundPayload, OutboundPayload
 > {
-    protected currentStatus: AdapterStatus = 'disconnected';
     protected readonly dataExchangeMode: 'stream' | 'fetch' = 'fetch';
-    protected initialSystemMessage: string | null = 'Act as a helpful assistant to the user';
     protected readonly model: OpenAIChatModel;
     protected readonly openai: OpenAI;
+    protected currentStatus: AdapterStatus = 'disconnected';
+    protected initialSystemMessage: string | null = 'Act as a helpful assistant to the user';
 
     protected constructor({
         initialSystemMessage,

@@ -1,6 +1,6 @@
+import {info, nl} from '../utils/log.mjs';
 import {run} from './run.mjs';
 import {applyDevVersion, applyReleaseVersion} from './version.mjs';
-import {info, nl} from "../utils/log.mjs";
 
 const copyStructure = async (env) => {
     await run(`mkdir dist/${env}`);

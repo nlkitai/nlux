@@ -1,10 +1,10 @@
-import {CompTextMessageProps} from '../text-message/types.ts';
+import {CompTextMessageProps} from '../text-message/types';
 
 export type CompConversationEvents = 'user-scrolled';
 
 export type CompConversationProps = Readonly<{
     messages?: CompTextMessageProps[];
-    autoScrollOnGenerate?: boolean;
+    scrollWhenGenerating?: boolean;
 }>;
 
 export type CompConversationEventListeners = Partial<{}>;

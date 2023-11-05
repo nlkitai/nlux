@@ -1,10 +1,11 @@
+import clc from 'cli-color';
 import {run} from './run.mjs';
-import {info, nl} from "../utils/log.mjs";
+import {info, nl} from '../utils/log.mjs';
 
 nl(1);
-info('###############################################');
-info(`# 🔎 Pipeline Step: Watch                     #`);
-info('###############################################');
+info(clc.bgWhite.red(' ############################################### '));
+info(clc.bgWhite.red(` # 🔎 Pipeline Step: Watch                     # `));
+info(clc.bgWhite.red(' ############################################### '));
 nl(1);
 
 try {

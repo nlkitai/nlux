@@ -76,7 +76,7 @@ const replacePeerDependencyVersions = (peerDependencies, nluxVersion, peerDepend
     return updatedPeerDependencies;
 };
 
-const replaceDependencyVersions = (dependencies, dependenciesVersions) => {
+const replaceDependencyVersions = (dependencies, nluxVersion, dependenciesVersions) => {
     if (typeof dependencies !== 'object' || !dependencies || !dependenciesVersions || Object.keys(dependencies).length === 0) {
         return dependencies;
     }
@@ -91,7 +91,14 @@ const replaceDependencyVersions = (dependencies, dependenciesVersions) => {
         );
     });
 
-    return JSON.parse(dependenciesAsString);
+    const updatedDependencies = JSON.parse(dependenciesAsString);
+    Object.keys(updatedDependencies).forEach(peerDependency => {
+        if (peerDependency.startsWith('@nlux/')) {
+            updatedDependencies[peerDependency] = nluxVersion;
+        }
+    });
+
+    return updatedDependencies;
 };
 
 export const applyDevVersion = (packagesPath) => {
@@ -120,6 +127,7 @@ export const applyDevVersion = (packagesPath) => {
 
         packageJson.dependencies = replaceDependencyVersions(
             packageJson.dependencies,
+            nluxVersion,
             dependenciesVersions
         ) ?? {};
 
@@ -160,6 +168,7 @@ export const applyReleaseVersion = (packagesPath) => {
 
         packageJson.dependencies = replaceDependencyVersions(
             packageJson.dependencies,
+            nluxVersion,
             dependenciesVersions
         ) ?? {};
 

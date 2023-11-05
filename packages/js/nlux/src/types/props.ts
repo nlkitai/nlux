@@ -1,11 +1,14 @@
-import {ConversationOptions} from '../core/options/conversationOptions.ts';
-import {MessageOptions} from '../core/options/messageOptions.ts';
-import {PromptBoxOptions} from '../core/options/promptBoxOptions.ts';
+import {ConversationOptions} from '../core/options/conversationOptions';
+import {LayoutOptions} from '../core/options/layoutOptions';
+import {PromptBoxOptions} from '../core/options/promptBoxOptions';
 
-export type NluxProps = Partial<{
+/**
+ * Properties for the Nlux Vanilla JS component from the builder and from the React component.
+ */
+export type NluxProps = {
     themeId?: string;
-    containerMaxHeight?: number;
-    promptBoxOptions?: Partial<PromptBoxOptions>;
-    messageOptions?: Partial<MessageOptions>;
-    conversationOptions?: Partial<ConversationOptions>;
-}>;
+    className?: string;
+    promptBoxOptions: Partial<PromptBoxOptions>;
+    conversationOptions: Partial<ConversationOptions>;
+    layoutOptions: Partial<LayoutOptions>;
+};

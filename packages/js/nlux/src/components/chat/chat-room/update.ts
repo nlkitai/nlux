@@ -14,7 +14,16 @@ export const updateChatRoom: CompUpdater<CompChatRoomProps, CompChatRoomElements
     }
 
     if (propName === 'containerMaxHeight' && elements?.chatRoomContainer) {
-        elements.chatRoomContainer.style.maxHeight = typeof newValue === 'number' ? `${newValue}px` : '';
+        elements.chatRoomContainer.style.maxHeight = typeof newValue === 'number'
+            ? `${newValue}px`
+            : (typeof newValue === 'string' ? newValue : '');
+        return;
+    }
+
+    if (propName === 'containerMaxWidth' && elements?.chatRoomContainer) {
+        elements.chatRoomContainer.style.maxWidth = typeof newValue === 'number'
+            ? `${newValue}px`
+            : (typeof newValue === 'string' ? newValue : '');
         return;
     }
 };

@@ -5,10 +5,11 @@
   "repository": {
     "directory": "packages/react/openai"
   },
-  "dependencies": {},
-  "peerDependencies": {
+  "dependencies": {
     "@nlux/nlux": "^{versions.nlux}",
-    "@nlux/openai": "^{versions.nlux}",
+    "@nlux/openai": "^{versions.nlux}"
+  },
+  "peerDependencies": {
     "react": "^{versions.peerDependencies.react}"
   }
 }

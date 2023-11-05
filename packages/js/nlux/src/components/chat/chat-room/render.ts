@@ -1,9 +1,9 @@
-import {NluxRenderingError} from '../../../core/error.ts';
+import {NluxRenderingError} from '../../../core/error';
 import {getElement} from '../../../dom/getElement';
 import {listenToElement} from '../../../dom/listenToElement';
 import {CompRenderer} from '../../../types/comp';
-import {render} from '../../../x/render.ts';
-import {source} from '../../../x/source.ts';
+import {render} from '../../../x/render';
+import {source} from '../../../x/source';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './types';
 
 const __ = (styleName: string) => `nluxc-chat-room-${styleName}`;
@@ -31,12 +31,24 @@ export const renderChatRoom: CompRenderer<
     const visibleProp = props.visible ?? true;
     const chatRoomElement = document.createElement('div');
 
-    chatRoomElement.className = 'nluxc-chat-room-container';
+    chatRoomElement.className = __('container');
     chatRoomElement.append(dom);
     chatRoomElement.style.display = visibleProp ? '' : 'none';
 
     if (typeof props.containerMaxHeight === 'number') {
         chatRoomElement.style.maxHeight = `${props.containerMaxHeight}px`;
+    } else {
+        if (typeof props.containerMaxHeight === 'string') {
+            chatRoomElement.style.maxHeight = props.containerMaxHeight;
+        }
+    }
+
+    if (typeof props.containerMaxWidth === 'number') {
+        chatRoomElement.style.maxWidth = `${props.containerMaxWidth}px`;
+    } else {
+        if (typeof props.containerMaxWidth === 'string') {
+            chatRoomElement.style.maxWidth = props.containerMaxWidth;
+        }
     }
 
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,

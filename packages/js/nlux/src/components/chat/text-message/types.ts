@@ -1,6 +1,6 @@
-import {Observable} from '../../../core/bus/observable.ts';
+import {Observable} from '../../../core/bus/observable';
 
-export type TextMessageContentLoadingStatus = 'loading' | 'streaming' | 'loaded' | 'error';
+export type TextMessageContentLoadingStatus = 'loading' | 'streaming' | 'loaded' | 'loading-error';
 
 export type CompTextMessageEvents = 'copy-to-clipboard-triggered'
     | 'message-container-resized';
@@ -8,6 +8,7 @@ export type CompTextMessageEvents = 'copy-to-clipboard-triggered'
 export type CompTextMessageProps = Readonly<{
     format: 'text' | 'markdown' | 'html';
     direction: 'in' | 'out';
+    loadingStatus: TextMessageContentLoadingStatus;
     content?: string;
     contentPromise?: Promise<string>;
     contentStream?: Observable<string>;
@@ -28,4 +29,5 @@ export type CompTextMessageActions = Readonly<{
     focus: () => void;
     appendText: (text: string) => void;
     scrollToMessageEndContainer: () => void;
+    setLoadingStatus: (status: TextMessageContentLoadingStatus) => void;
 }>;

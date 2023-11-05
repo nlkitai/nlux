@@ -1,5 +1,5 @@
 .nluxc-root.nluxc-theme-kensington {
-    --nluxc-bt-primary-filled: var(--nluxc-primary-color);
+    --nluxc-bt-primary-filled: var(--nluxc-action-primary-default);
     --nluxc-bt-primary-filled-disabled: var(--nluxc-action-primary-disabled);
 
     --nluxc-bt-secondary-filled: var(--nluxc-secondary-color);

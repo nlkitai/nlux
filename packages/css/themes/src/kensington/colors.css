@@ -1,5 +1,5 @@
 .nluxc-root.nluxc-theme-kensington {
-    --nluxc-primary-color: #10c17d;
+    --nluxc-primary-color: #00a667;
     --nluxc-secondary-color: #ffb800;
     --nluxc-tertiary1-color: #6d5ffd;
     --nluxc-tertiary2-color: #ff1843;
@@ -24,10 +24,15 @@
     --nluxc-accents-5: #8dc4d4;
     --nluxc-accents-6: #d16854;
 
-    --nluxc-action-primary-default: #59be83;
+    --nluxc-smoother-1: #fffbfb;
+    --nluxc-smoother-2: #f6f9ff;
+    --nluxc-smoother-3: #f6f8fb;
+    --nluxc-smoother-4: #d7ffe3;
+
+    --nluxc-action-primary-default: #5fe094;
     --nluxc-action-primary-hover: #6cca9b;
     --nluxc-action-primary-active: #469868;
-    --nluxc-action-primary-disabled: #9cdec0;
+    --nluxc-action-primary-disabled: #c5d7c9;
     --nluxc-action-primary-hover-2: #eaf8f2;
     --nluxc-action-primary-active-2: #d6f2e6;
     --nluxc-action-primary-inverted: #ffffff;
@@ -39,6 +44,17 @@
     --nluxc-action-secondary-hover-2: #fef8e7;
     --nluxc-action-secondary-active-2: #fdf2d0;
     --nluxc-action-secondary-inverted: #ffffff;
+
+    --nluxc-action-tertiary: #ff1843;
+    --nluxc-action-tertiary-90: rgba(255, 23, 65, 0.9);
+    --nluxc-action-tertiary-80: rgba(255, 23, 65, 0.8);
+    --nluxc-action-tertiary-70: rgba(255, 23, 65, 0.7);
+    --nluxc-action-tertiary-60: rgba(255, 23, 65, 0.6);
+    --nluxc-action-tertiary-50: rgba(255, 23, 65, 0.5);
+    --nluxc-action-tertiary-40: rgba(255, 23, 65, 0.4);
+    --nluxc-action-tertiary-30: rgba(255, 23, 65, 0.3);
+    --nluxc-action-tertiary-20: rgba(255, 23, 65, 0.2);
+    --nluxc-action-tertiary-10: rgba(255, 23, 65, 0.1);
 
     --nluxc-action-neutral-default: #9298a0;
     --nluxc-action-neutral-hover: #868c93;

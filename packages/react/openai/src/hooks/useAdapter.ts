@@ -1,8 +1,8 @@
 import {AdapterBuilder} from '@nlux/nlux';
 import {useEffect, useState} from 'react';
-import {OpenAIUseAdapterOptions} from '../types/options.ts';
-import {warn} from '../x/debug.ts';
-import {initAdapter} from './initAdapter.ts';
+import {OpenAIUseAdapterOptions} from '../types/options';
+import {warn} from '../x/debug';
+import {initAdapter} from './initAdapter';
 
 const source = 'hooks/useAdapter';
 

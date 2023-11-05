@@ -11,6 +11,7 @@ export const reactImportsByPackageType = (nluxBundlerPackageType: 'esm' | 'cjs' 
     'react': `/packages/react/${nluxBundlerPackageType === 'cjs' ? 'cjs' : 'umd'}/react.development.js`,
     'react-dom': `/packages/react-dom/${nluxBundlerPackageType === 'cjs' ? 'cjs' : 'umd'}/react-dom.development.js`,
     'react-dom/client': `/packages/react-dom/client.js`, // CJS only
+    'openai': `/packages/openai/index.${nluxBundlerPackageType === 'esm' ? 'mjs' : 'js'}`,
 });
 
 const packageTypeFromEnv = process?.env?.NLUX_BUNDLER_PACKAGE_TYPE?.toLowerCase() as any;

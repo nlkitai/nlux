@@ -1,8 +1,10 @@
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {NluxContext} from '../../../types/context';
 import {renderChatbox} from './render';
 import {
     CompPromptBoxActions,
+    CompPromptBoxButtonStatus,
     CompPromptBoxElements,
     CompPromptBoxEventListeners,
     CompPromptBoxEvents,
@@ -11,12 +13,15 @@ import {
 import {updateChatbox} from './update';
 
 @Model('prompt-box', renderChatbox, updateChatbox)
-export class CompChatbox extends BaseComp<CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions> {
+export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions> {
 
     private userEventListeners?: CompPromptBoxEventListeners;
 
-    constructor(instanceId: string, props: CompPromptBoxProps, eventListeners?: CompPromptBoxEventListeners) {
-        super(instanceId, props);
+    constructor(context: NluxContext, {props, eventListeners}: {
+        props: CompPromptBoxProps,
+        eventListeners?: CompPromptBoxEventListeners
+    }) {
+        super(context, props);
         this.userEventListeners = eventListeners;
     }
 
@@ -66,9 +71,9 @@ export class CompChatbox extends BaseComp<CompPromptBoxProps, CompPromptBoxEleme
         }
 
         if (newValue === '') {
-            this.setProp('enableSendButton', false);
+            this.setProp('sendButtonStatus', 'disabled');
         } else {
-            this.setProp('enableSendButton', true);
+            this.setProp('sendButtonStatus', 'enabled');
         }
     }
 
@@ -82,7 +87,19 @@ export class CompChatbox extends BaseComp<CompPromptBoxProps, CompPromptBoxEleme
         this.handleTextChange(target.value);
     }
 
+    public resetSendButtonStatus() {
+        if (this.getProp('textInputValue') === '') {
+            this.setProp('sendButtonStatus', 'disabled');
+        } else {
+            this.setProp('sendButtonStatus', 'enabled');
+        }
+    }
+
     public resetTextInput() {
         this.handleTextChange('');
+    }
+
+    public setSendButtonStatus(newStatus: CompPromptBoxButtonStatus) {
+        this.setProp('sendButtonStatus', newStatus);
     }
 }

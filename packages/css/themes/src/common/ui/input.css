@@ -1,5 +1,5 @@
 .nluxc-root {
-    & input, & select, & textarea {
+    :is(input, select, textarea) {
         font-family: var(--nluxc-font-family);
         font-size: 1rem;
         font-weight: 400;
@@ -17,23 +17,24 @@
         border-radius: var(--nluxc-border-radius-l);
         outline: none;
         background-color: var(--nluxc-input-background-color);
+    }
 
-        &:hover {
-            color: var(--nluxc-input-hover-text-color);
-            border-color: var(--nluxc-input-hover-border-color);
-            background-color: var(--nluxc-input-hover-background-color);
-        }
+    :is(input, select, textarea):hover {
+        color: var(--nluxc-input-hover-text-color);
+        border-color: var(--nluxc-input-hover-border-color);
+        background-color: var(--nluxc-input-hover-background-color);
+    }
 
-        &:focus, &:active {
-            color: var(--nluxc-input-active-text-color);
-            border-color: var(--nluxc-input-active-border-color);
-            background-color: var(--nluxc-input-active-background-color);
-        }
+    :is(input, select, textarea):focus,
+    :is(input, select, textarea):active {
+        color: var(--nluxc-input-active-text-color);
+        border-color: var(--nluxc-input-active-border-color);
+        background-color: var(--nluxc-input-active-background-color);
+    }
 
-        &:disabled {
-            color: var(--nluxc-input-disabled-text-color);
-            border-color: var(--nluxc-input-disabled-border-color);
-            background-color: var(--nluxc-input-disabled-background-color);
-        }
+    :is(input, select, textarea):disabled {
+        color: var(--nluxc-input-disabled-text-color);
+        border-color: var(--nluxc-input-disabled-border-color);
+        background-color: var(--nluxc-input-disabled-background-color);
     }
 }

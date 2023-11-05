@@ -1,0 +1,20 @@
+.nluxc-root.nluxc-theme-kensington {
+    .nluxc-text-message-container {
+        --nluxc-text-message-shadow: var(--nluxc-box-shadow);
+
+        --nluxc-text-message-content-padding: var(--nluxc-padding) var(--nluxc-padding-l);
+        --nluxc-text-message-content-border-width: var(--nluxc-border-width);
+
+        --nluxc-message-received-text-color: var(--nluxc-neutral-black);
+        --nluxc-message-received-background-color: var(--nluxc-neutral-9);
+
+        --nluxc-message-received-focused-text-color: var(--nluxc-neutral-black);
+        --nluxc-message-received-focused-background-color: var(--nluxc-neutral-6);
+
+        --nluxc-message-sent-text-color: var(--nluxc-neutral-black);
+        --nluxc-message-sent-background-color: var(--nluxc-smoother-4);
+
+        --nluxc-message-sent-focused-text-color: var(--nluxc-neutral-black);
+        --nluxc-message-sent-focused-background-color: var(--nluxc-action-primary-disabled);
+    }
+}

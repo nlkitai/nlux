@@ -1,7 +1,8 @@
 import {Message, NluxUsageError} from '@nlux/nlux';
 import OpenAI from 'openai';
+import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
 import {gptFetchAdapterConfig} from '../config';
-import {OpenAIChatModel} from '../types/models.ts';
+import {OpenAIChatModel} from '../types/models';
 import {GptAbstractAdapter} from './adapter';
 
 export class GptFetchAdapter extends GptAbstractAdapter<
@@ -69,6 +70,12 @@ export class GptFetchAdapter extends GptAbstractAdapter<
                 } else {
                     resolve(message);
                 }
+            }).catch((error: any) => {
+                reject(new NluxUsageError({
+                    source: this.constructor.name,
+                    message: error.message,
+                    exceptionId: adapterErrorToExceptionId(error) ?? undefined,
+                }));
             });
         });
     }

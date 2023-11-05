@@ -1,8 +1,8 @@
 import {ConvoPit, createConvoPit} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
-import {debug} from '../x/debug';
 
-const apiKey = 'YOUR_API_KEY_HERE';
+debugger;
+const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
 let convoPit: ConvoPit | null = null;
 let rootElement: HTMLElement | null = null;
@@ -33,16 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     convoPit = createConvoPit()
         .withAdapter(adapter)
+        .withLayoutOptions({
+            maxWidth: 300,
+            maxHeight: 500,
+        })
         .withPromptBoxOptions({
             placeholder: 'Ask me anything about nuclear physics!',
             autoFocus: true,
-        })
-        .withContainerMaxHeight(300);
+        });
 
     convoPit.mount(rootElement);
-
-    debug(
-        'Instance config:',
-        JSON.stringify(convoPit.config, null, 2),
-    );
 });

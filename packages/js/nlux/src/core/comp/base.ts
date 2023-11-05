@@ -1,9 +1,12 @@
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../types/comp';
+import {NluxContext} from '../../types/context';
 import {warn} from '../../x/debug';
+import {domOp} from '../../x/domOp';
+import {uid} from '../../x/uid';
 import {NluxError, NluxUsageError} from '../error';
 import {CompRegistry} from './registry';
 
-export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType = undefined> {
+export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType> {
     static __compEventListeners: Map<string | number | symbol, string[]> | null = null;
     static __compId: string | null = null;
     static __renderer: CompRenderer<any, any, any, any> | null = null;
@@ -13,13 +16,14 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
      * @protected
      */
     protected readonly def: CompDef<PropsType, ElementsType, EventsType, ActionsType> | null;
+    private readonly __instanceId: string;
     /**
      * Props that are used to render the component and update the DOM tree.
      * This map is constructed from the props provided by the user, but it can be modified by
      * the component using the setProp() method.
      * @protected
      */
-    protected elementProps: Map<keyof PropsType, string | number | boolean>;
+    protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType] | undefined | null>;
     /**
      * A reference to the DOM tree of the current component, and a callback that is called when the
      * component is destroyed.
@@ -41,6 +45,10 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
     protected rendererProps: PropsType;
     /**
      * A reference to the root element of the current component.
+     * This could be an HTML element (for most of the cases when the component is rendered in the DOM tree)
+     * or it could be a document fragment (for cases when the component is rendered in a virtual DOM tree).
+     * This property is set to null when the component is not rendered.
+     *
      * @protected
      */
     protected renderingRoot: HTMLElement | DocumentFragment | null;
@@ -57,11 +65,9 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
      * @private
      */
     protected subComponents: Map<string, BaseComp<any, any, any, any>> = new Map();
-
+    private __context: Readonly<NluxContext> | null = null;
     private __destroyed: boolean = false;
-    private readonly __instanceId: string;
     private actionsOnDomReady: Function[] = [];
-
     private compEventGetter = (eventName: EventsType) => {
         const callback = this.rendererEventListeners.get(eventName as any);
         if (!callback) {
@@ -81,7 +87,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
      */
     private props?: PropsType;
 
-    protected constructor(instanceId: string, props: PropsType) {
+    protected constructor(context: NluxContext, props: PropsType) {
         const compId = Object.getPrototypeOf(this).constructor.__compId;
         if (!compId) {
             throw new NluxUsageError({
@@ -102,8 +108,9 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
             });
         }
 
-        this.__instanceId = instanceId;
+        this.__instanceId = uid();
         this.__destroyed = false;
+        this.__context = context;
 
         this.renderedDom = null;
         this.renderingRoot = null;
@@ -152,6 +159,17 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
         return this.renderingRoot;
     }
 
+    protected get context(): Readonly<NluxContext> {
+        if (!this.__context) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to get context because it\'s not set',
+            });
+        }
+
+        return this.__context;
+    }
+
     public destroy() {
         this.destroyComponent();
     }
@@ -170,44 +188,53 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
      *
      * @param root The root element where the component should be rendered.
      */
-    public render(root: HTMLElement | DocumentFragment) {
-        this.throwIfDestroyed();
-
+    public render(root: HTMLElement) {
         if (!this.def) {
-            return null;
+            return;
         }
 
-        // IMPORTANT: This is where rendering happens
+        if (this.destroyed) {
+            console.warn(`Unable to render component "${this.def?.id}" because it is already destroyed`);
+            return;
+        }
+
+        if (this.rendered || this.renderedDom) {
+            warn(`Unable to render component "${this.def.id}" because it is already rendered`);
+            return;
+        }
+
+        // IMPORTANT: This is where rendering happens!
         // We initially render the component in a virtual root element (document fragment)
         // Then we render the sub-components in their respective portals
         // Then we append the virtual root element to the actual root element
 
-        if (!this.renderedDom) {
-            const virtualRoot = document.createDocumentFragment();
-            const compId = Object.getPrototypeOf(this).constructor.__compId;
-            const renderedDom = this.executeRenderer(virtualRoot, this.__instanceId);
-            if (!renderedDom) {
-                throw new NluxError({
-                    source: this.constructor.name,
-                    message: `Unable to render component "${compId}" because renderer returned null`,
-                });
-            }
-
-            this.renderedDom = renderedDom;
-
-            for (const [, subComponent] of this.subComponents) {
-                const portal = this.getSubComponentPortal(subComponent.id);
-                if (portal) {
-                    this.mountSubComponentToPortal(subComponent.id, portal);
-                }
-            }
-
-            requestAnimationFrame(() => {
-                if (!this.destroyed) {
-                    root.appendChild(virtualRoot);
-                }
+        const virtualRoot = document.createDocumentFragment();
+        const compId = Object.getPrototypeOf(this).constructor.__compId;
+        const renderedDom = this.executeRenderer(virtualRoot);
+        if (!renderedDom) {
+            throw new NluxError({
+                source: this.constructor.name,
+                message: `Unable to render component "${compId}" because renderer returned null`,
             });
         }
+
+        this.renderedDom = renderedDom;
+
+        // We render sub-components in their respective portals
+        for (const [, subComponent] of this.subComponents) {
+            const portal = this.getSubComponentPortal(subComponent.id);
+            if (portal) {
+                this.mountSubComponentToPortal(subComponent.id, portal);
+            }
+        }
+
+        // We append the virtual root element to the actual root element
+        domOp(() => {
+            if (!this.destroyed) {
+                root.append(virtualRoot);
+                this.renderingRoot = root;
+            }
+        });
     }
 
     updateSubComponent(subComponentId: string, propName: string, newValue: any) {
@@ -215,7 +242,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
 
         const subComp = this.subComponents.get(subComponentId);
         if (subComp && !subComp.destroyed) {
-            // @ts-ignore
             subComp.setProp(propName, newValue);
         }
     }
@@ -279,7 +305,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
             const actionsOnDomReady = this.actionsOnDomReady;
             this.actionsOnDomReady = [];
             for (const action of actionsOnDomReady) {
-                action();
+                domOp(() => action());
             }
         }
 
@@ -292,10 +318,10 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
             });
         }
 
-        return requestAnimationFrame(() => action(...args));
+        return domOp(() => action(...args));
     };
 
-    protected executeRenderer(root: HTMLElement | DocumentFragment, nluxId: string) {
+    protected executeRenderer(root: HTMLElement | DocumentFragment) {
         const renderer = this.def?.render;
         if (!renderer) {
             return null;
@@ -309,24 +335,20 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
         }
 
         const result = renderer({
-            appendToRoot: (element: HTMLElement) => root.appendChild(element),
+            appendToRoot: (element: HTMLElement) => root.append(element),
             compEvent: this.compEventGetter,
             props: this.rendererProps,
         });
 
         if (result) {
-            // Only keep a reference to the root element of the component
-            // on successful rendering.
+            // Only keep a reference to the root element of the component on successful rendering.
             this.renderingRoot = root;
-            if (this.renderingRoot instanceof HTMLElement) {
-                this.renderingRoot.dataset.nluxId = nluxId;
-            }
         }
 
         return result;
     }
 
-    protected getProp(name: keyof PropsType): string | number | boolean | null {
+    protected getProp(name: keyof PropsType): PropsType[keyof PropsType] | null {
         this.throwIfDestroyed();
         return this.elementProps.get(name) ?? null;
     }
@@ -364,8 +386,11 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
      * @param value
      * @protected
      */
-    protected setProp(name: keyof PropsType, value: string | number | boolean | null) {
-        this.throwIfDestroyed();
+    protected setProp(name: keyof PropsType, value: PropsType[keyof PropsType] | undefined | null) {
+        if (this.destroyed) {
+            warn(`Unable to set prop "${String(name)}" because component "${this.constructor.name}" is destroyed`);
+            return;
+        }
 
         if (value === null) {
             this.elementProps.delete(name);
@@ -419,9 +444,9 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
             }
 
             // IMPORTANT:
-            // Clean up removed DOM elements asynchronously using requestAnimationFrame
+            // Clean up removed DOM elements asynchronously
             const renderingRoot = this.renderingRoot;
-            requestAnimationFrame(() => {
+            domOp(() => {
                 if (!renderingRoot) {
                     return;
                 }
@@ -431,11 +456,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
                         renderingRoot.removeChild(renderingRoot.firstChild);
                     }
                 } else {
-                    if (renderingRoot.dataset?.nluxId === this.__instanceId) {
-                        renderingRoot.dataset.nluxId = '';
-                        delete renderingRoot.dataset.nluxId;
-                    }
-
                     if (isListItem) {
                         renderingRoot.parentElement?.removeChild(renderingRoot);
                     } else {
@@ -449,6 +469,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
         }
 
         this.__destroyed = true;
+        this.__context = null;
         this.props = undefined;
 
         this.rendererEventListeners.clear();
@@ -486,9 +507,8 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType 
             return;
         }
 
-        requestAnimationFrame(() => {
+        domOp(() => {
             updater({
-                // @ts-ignore
                 propName,
                 newValue,
                 dom: {

@@ -1,7 +1,9 @@
 import {Message, NluxUsageError, Observable} from '@nlux/nlux';
 import OpenAI from 'openai';
+import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
+import {warn} from '../../../x/debug';
 import {gptStreamingAdapterConfig} from '../config';
-import {OpenAIChatModel} from '../types/models.ts';
+import {OpenAIChatModel} from '../types/models';
 import {GptAbstractAdapter} from './adapter';
 
 export class GptStreamingAdapter extends GptAbstractAdapter<
@@ -61,7 +63,7 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
             stream: true,
             model: this.model,
             messages: messagesToSend,
-        }).then(async (response: any) => {
+        }).then(async (response) => {
             const fullResponse: string[] = [];
             let it = response[Symbol.asyncIterator]();
             let result = await it.next();
@@ -73,12 +75,20 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
                     observable.next(message);
                 } else {
                     // TODO - Handle undecodable messages
+                    warn('Undecodable message');
+                    warn(value);
                 }
 
                 result = await it.next();
             }
 
             observable.complete();
+        }).catch((error: any) => {
+            observable.error(new NluxUsageError({
+                source: this.constructor.name,
+                message: error.message,
+                exceptionId: adapterErrorToExceptionId(error) ?? undefined,
+            }));
         });
 
         return observable;

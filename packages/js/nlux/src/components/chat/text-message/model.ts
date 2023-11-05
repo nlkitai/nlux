@@ -1,7 +1,10 @@
-import {Observable} from '../../../core/bus/observable.ts';
+import {Observable} from '../../../core/bus/observable';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {debug, warn} from '../../../x/debug';
+import {NluxError} from '../../../core/error';
+import {defaultAdapterExceptionId} from '../../../exceptions/exceptions';
+import {NluxContext} from '../../../types/context';
+import {debug} from '../../../x/debug';
 import {renderTextMessage} from './render';
 import {CompTextMessageActions, CompTextMessageElements, CompTextMessageEvents, CompTextMessageProps} from './types';
 import {updateTextMessage} from './update';
@@ -14,12 +17,12 @@ export class CompTextMessage extends BaseComp<
 > {
     // IMPORTANT: When the component is created, it's in loading state. It's changed to loaded state asynchronously.
     // When 'content' prop is provided, the contentStatus changes to 'loaded' instantly but also asynchronously.
-    // When the content is set via 'contentPromise' or 'contentStream', the status is changed to loaded
+    // When the content is set via 'contentPromise' or 'contentStream', the loadingStatus is changed to loaded
     // when the promise is resolved or when the stream emits the last value.
+    private readonly contentLoadingModeFromProps: 'promise' | 'stream' | 'static';
     // When contentStatus switches to 'loaded', there is a gurantee that 'content' is set to a string value.
     private content?: string;
-    private readonly contentLoadingModeFromProps: 'promise' | 'stream' | 'static';
-    private contentStatus: 'loading' | 'streaming' | 'loaded' | 'error' = 'loading';
+    private contentStatus: 'loading' | 'streaming' | 'loaded' | 'loading-error' = 'loading';
     private contentStatusUpdateListeners: Set<Function> = new Set();
     private contentToAppend: string[] = [];
     private lastAppendTimestamp: number = 0;
@@ -27,7 +30,7 @@ export class CompTextMessage extends BaseComp<
     private resizeListeners: Set<Function> = new Set();
     private shouldKeepVisibleWhenGeneratingContent: boolean = false;
 
-    constructor(instanceId: string, props: CompTextMessageProps) {
+    constructor(context: NluxContext, props: CompTextMessageProps) {
         if (!props.content && !props.contentPromise && !props.contentStream) {
             throw new Error(`CompTextMessage: content, contentPromise or contentStream must be provided!`);
         }
@@ -36,25 +39,25 @@ export class CompTextMessage extends BaseComp<
             throw new Error(`CompTextMessage: only one of content, contentPromise or contentStream must be provided!`);
         }
 
-        super(instanceId, props);
+        super(context, props);
 
         if (props.onMessageStatusUpdated) {
             this.contentStatusUpdateListeners.add(props.onMessageStatusUpdated);
         }
 
-        // Initial status is always 'loading'
-        this.contentStatus = 'loading';
+        // Initial loadingStatus is always 'loading'
+        this.setContentLoadingStatus('loading');
 
         setTimeout(() => {
             this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loading'));
         }, 0);
 
-        // Change content status to 'loaded' if the content is actually provided.
+        // Change content loadingStatus to 'loaded' if the content is actually provided.
         // Do it, asynchronously via setTimeout because other components expect message to be in loading
         // when it's constructed (ref guarantee in doc comments above 'content' and 'contentStatus' props).
         setTimeout(() => {
             if (typeof props.content === 'string') {
-                this.contentStatus = 'loaded';
+                this.setContentLoadingStatus('loaded');
                 this.content = props.content;
                 this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
                 this.cleanupContentStatusUpdateListeners();
@@ -156,9 +159,7 @@ export class CompTextMessage extends BaseComp<
     }
 
     private handleContentLoadingError(source?: string, errorMessage?: string) {
-        warn(`Failed to load content for message ${this.id} from ${source}: ${errorMessage}`);
-        this.contentStatus = 'error';
-        this.setProp('erred', true);
+        this.setContentLoadingStatus('loading-error');
     }
 
     @CompEventListener('message-container-resized')
@@ -167,50 +168,66 @@ export class CompTextMessage extends BaseComp<
     }
 
     private listenToContentGenerationPromise(contentPromise: Promise<string>) {
-        contentPromise.then(
-            (content) => {
-                this.appendText([content]);
-                this.content = content;
-                this.contentStatus = 'loaded';
-                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
-                this.cleanupContentStatusUpdateListeners();
-            },
-            (error) => {
-                this.setProp('erred', true);
-                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
-                this.cleanupContentStatusUpdateListeners();
-                this.handleContentLoadingError(
-                    'contentPromise',
-                    error?.toString() || 'Failed to load content',
-                );
-            },
-        );
+        contentPromise.then((content) => {
+            this.appendText([content]);
+            this.content = content;
+            this.setContentLoadingStatus('loaded');
+            this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
+            this.cleanupContentStatusUpdateListeners();
+        }).catch((error) => {
+            this.handleContentLoadingError(
+                'contentPromise',
+                error?.toString() || 'Failed to load content',
+            );
+
+            if (typeof error.exceptionId === 'string') {
+                this.context.exception(error.exceptionId);
+            } else {
+                this.context.exception(defaultAdapterExceptionId);
+            }
+
+            this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
+            this.cleanupContentStatusUpdateListeners();
+        });
     }
 
     private listenToContentGenerationStream(contentStream: Observable<string>) {
-        this.contentStatus = 'streaming';
+        this.setContentLoadingStatus('streaming');
         this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'streaming'));
 
         contentStream.subscribe({
             next: (content) => {
                 this.bufferAndAppendText(content);
             },
-            error: (error) => {
+            error: (error: NluxError) => {
                 this.bufferClear();
                 this.setProp('erred', true);
-                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
-                this.cleanupContentStatusUpdateListeners();
+
                 this.handleContentLoadingError(
                     'contentStream',
                     error?.toString() || 'Failed to load content',
                 );
+
+                if (typeof error.exceptionId === 'string') {
+                    this.context.exception(error.exceptionId);
+                } else {
+                    this.context.exception(defaultAdapterExceptionId);
+                }
+
+                this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'error'));
+                this.cleanupContentStatusUpdateListeners();
             },
             complete: () => {
                 this.bufferClear();
-                this.contentStatus = 'loaded';
+                this.setContentLoadingStatus('loaded');
                 this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
                 this.cleanupContentStatusUpdateListeners();
             },
         });
+    }
+
+    private setContentLoadingStatus(status: 'loading' | 'streaming' | 'loaded' | 'loading-error') {
+        this.contentStatus = status;
+        this.setProp('loadingStatus', status);
     }
 }
