@@ -2,7 +2,9 @@ import {Exception} from '../types/exception';
 
 export const defaultAdapterExceptionId = 'NX-AD-001';
 
-const networkExceptions: {[key: string]: Exception} = {
+const networkExceptions: {
+    [key: string]: Exception
+} = {
     'NX-NT-001': {
         type: 'error',
         message: 'Connection error. Please try again.',
@@ -13,14 +15,18 @@ const networkExceptions: {[key: string]: Exception} = {
     },
 };
 
-const adapterExceptions: {[key: string]: Exception} = {
+const adapterExceptions: {
+    [key: string]: Exception
+} = {
     'NX-AD-001': {
         type: 'error',
         message: 'Failed to load content. Please try again.',
     },
 };
 
-export const NluxExceptions: {[key: string]: Exception} = {
+export const NluxExceptions: {
+    [key: string]: Exception
+} = {
     ...networkExceptions,
     ...adapterExceptions,
 };

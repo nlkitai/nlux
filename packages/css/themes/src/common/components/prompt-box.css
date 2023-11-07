@@ -6,7 +6,6 @@
         align-items: stretch;
         flex-direction: row;
         padding: var(--nluxc-padding);
-        cursor: pointer;
 
         gap: var(--nluxc-flex-gap);
 
@@ -37,5 +36,9 @@
                 height: 30px;
             }
         }
+    }
+
+    .nluxc-prompt-box-container.loading {
+        cursor: auto;
     }
 }

@@ -1,6 +1,7 @@
 import {CompChatRoom} from '../../components/chat/chat-room/model';
 import {CompChatRoomProps} from '../../components/chat/chat-room/types';
 import {CompExceptionsBox} from '../../components/miscellaneous/exceptions-box/model';
+import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-box/types';
 import {NluxContext} from '../../types/context';
 import {ExceptionType} from '../../types/exception';
 import {NluxProps} from '../../types/props';
@@ -143,7 +144,13 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 .retrieve('exceptions-box')?.model as any;
 
             if (CompExceptionsBoxConstructor) {
-                exceptionAlert = comp(CompExceptionsBox).withContext(this.context).create();
+                exceptionAlert = comp(CompExceptionsBox).withContext(this.context)
+                    .withProps<CompExceptionsBoxProps>({
+                        containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
+                        message: undefined,
+                        visible: false,
+                        type: 'error',
+                    }).create();
             } else {
                 warn('Exception alert component is not registered! No exceptions will be shown.');
             }

@@ -14,27 +14,39 @@
         border-style: solid;
         border-color: var(--nluxc-input-border-color);
 
-        border-radius: var(--nluxc-border-radius-l);
+        border-radius: var(--nluxc-border-radius-m);
         outline: none;
         background-color: var(--nluxc-input-background-color);
     }
 
-    :is(input, select, textarea):hover {
-        color: var(--nluxc-input-hover-text-color);
-        border-color: var(--nluxc-input-hover-border-color);
-        background-color: var(--nluxc-input-hover-background-color);
-    }
-
-    :is(input, select, textarea):focus,
-    :is(input, select, textarea):active {
-        color: var(--nluxc-input-active-text-color);
-        border-color: var(--nluxc-input-active-border-color);
-        background-color: var(--nluxc-input-active-background-color);
-    }
-
-    :is(input, select, textarea):disabled {
+    :is(input, select, textarea):disabled,
+    :is(input, select, textarea):disabled:hover {
+        cursor: auto;
         color: var(--nluxc-input-disabled-text-color);
         border-color: var(--nluxc-input-disabled-border-color);
         background-color: var(--nluxc-input-disabled-background-color);
+    }
+
+    :is(input, select, textarea)::placeholder {
+        color: var(--nluxc-input-placeholder-color);
+    }
+
+    :is(input, select, textarea):focus,
+    :is(input, select, textarea):active,
+    :is(input, select, textarea):hover {
+        color: var(--nluxc-input-active-text-color);
+        border-color: var(--nluxc-input-active-border-color);
+        background-color: var(--nluxc-input-active-background-color);
+        box-shadow: var(--nluxc-box-shadow);
+    }
+
+    :is(input, select, textarea)::placeholder:focus,
+    :is(input, select, textarea)::placeholder:active,
+    :is(input, select, textarea)::placeholder:hover {
+        color: var(--nluxc-input-active-placeholder-color);
+    }
+
+    :is(input, select, textarea)::placeholder:disabled {
+        color: var(--nluxc-input-disabled-placeholder-color);
     }
 }

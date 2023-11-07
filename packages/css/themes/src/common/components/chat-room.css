@@ -20,12 +20,7 @@
             }
         }
 
-        > .nluxc-chat-room-prompt-box {
-            flex: 0;
-            border-radius: var(--nluxc-border-radius-l);
-            box-shadow: 0px -10px 30px -20px rgba(0, 0, 0, 0.5);
-        }
-
+        > .nluxc-chat-room-prompt-box,
         > .nluxc-chat-room-footer {
             flex: 0;
         }

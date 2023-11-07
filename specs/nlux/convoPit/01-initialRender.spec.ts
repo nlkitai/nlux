@@ -1,17 +1,13 @@
 import {AdapterBuilder, ConvoPit, createConvoPit} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 import '@testing-library/jest-dom';
-import {queryBuilder} from '../../utils/query';
+import {queries} from '../../utils/selectors';
 import {waitForRenderCycle} from '../../utils/wait';
 
 const apiKey = 'YOUR_API_KEY_HERE';
 
 describe('On ConvoPit initial load', () => {
     const adapter: AdapterBuilder<any, any> = createAdapter('openai/gpt').withApiKey(apiKey);
-    const queryChatRoom = queryBuilder('> .nluxc-chat-room-container').query;
-    const queryPromptBox = queryBuilder(
-        '> .nluxc-chat-room-container > .nluxc-chat-room-prompt-box-container > .nluxc-prompt-box-container').query;
-    const queryExceptionsBox = queryBuilder('> .nluxc-exceptions-box-container').query;
 
     let rootElement: HTMLElement | undefined;
     let convoPit: ConvoPit | undefined;
@@ -41,7 +37,7 @@ describe('On ConvoPit initial load', () => {
             convoPit.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queryChatRoom()).toBeInTheDocument();
+            expect(queries.chatRoom()).toBeInTheDocument();
         });
 
         it('exceptions box container should render', async () => {
@@ -49,7 +45,7 @@ describe('On ConvoPit initial load', () => {
             convoPit.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queryExceptionsBox()).toBeInTheDocument();
+            expect(queries.exceptionsBox()).toBeInTheDocument();
         });
 
         it('prompt box container should render', async () => {
@@ -57,8 +53,7 @@ describe('On ConvoPit initial load', () => {
             convoPit.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queryChatRoom('> .nluxc-chat-room-prompt-box-container'))
-                .toBeInTheDocument();
+            expect(queries.promptBoxContainer()).toBeInTheDocument();
         });
 
         it('conversation container should render', async () => {
@@ -66,8 +61,7 @@ describe('On ConvoPit initial load', () => {
             convoPit.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queryChatRoom('> .nluxc-chat-room-conversation-container'))
-                .toBeInTheDocument();
+            expect(queries.conversationContainer()).toBeInTheDocument();
         });
     });
 

@@ -14,8 +14,7 @@ const __ = (styleName: string) => `nluxc-exceptions-box-${styleName}`;
 
 const html = (props: CompExceptionsBoxProps) => `` +
     `<div class="${__('container')}">` +
-    `<div class="${__('exception')}" style="display: none">` +
-    `<div class="${__('icon')}"><span>Exception Alert Icon</span></div>` +
+    `<div class="${__('exception-container')}" style="display: none">` +
     `<div class="${__('message')}">${props.message ?? ''}</div>` +
     `</div>` +
     `</div>`;
@@ -56,6 +55,14 @@ export const renderExceptionsBox: CompRenderer<
         });
     }
 
+    if (typeof props.containerMaxWidth === 'number') {
+        exceptionsBoxRoot.style.maxWidth = `${props.containerMaxWidth}px`;
+    } else {
+        if (typeof props.containerMaxWidth === 'string') {
+            exceptionsBoxRoot.style.maxWidth = props.containerMaxWidth;
+        }
+    }
+
     appendToRoot(exceptionsBoxRoot);
 
     return {
@@ -74,6 +81,17 @@ export const renderExceptionsBox: CompRenderer<
             setMessageType: (type: ExceptionType) => {
                 exceptionsBoxRoot.classList.remove('error-exception', 'warning-exception');
                 exceptionsBoxRoot.classList.add(`${type}-exception`);
+            },
+            updateContainerMaxWidth: (maxWidth: number | string | undefined) => {
+                if (typeof maxWidth === 'number') {
+                    exceptionsBoxRoot.style.maxWidth = `${maxWidth}px`;
+                } else {
+                    if (typeof maxWidth === 'string') {
+                        exceptionsBoxRoot.style.maxWidth = maxWidth;
+                    } else {
+                        exceptionsBoxRoot.style.maxWidth = '';
+                    }
+                }
             },
         },
         onDestroy: () => {

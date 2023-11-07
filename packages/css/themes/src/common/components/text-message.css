@@ -5,14 +5,13 @@
         padding-bottom: var(--nluxc-padding-l);
 
         > .nluxc-text-message-content {
-            min-width: 60px;
+            min-width: 40px;
             max-width: 80%;
-            padding: var(--nluxc-text-message-content-padding);
+            padding: var(--nluxc-padding) var(--nluxc-padding-l);
             text-align: left;
 
-            border-width: var(--nluxc-text-message-content-border-width);
+            border-width: var(--nluxc-border-width);
             border-style: solid;
-            border-color: transparent;
 
             border-radius: var(--nluxc-border-radius-m);
             outline: none;
@@ -27,14 +26,18 @@
         align-items: flex-start;
 
         > .nluxc-text-message-content {
+            margin-left: var(--nluxc-padding-s);
             color: var(--nluxc-message-received-text-color);
+            border-color: var(--nluxc-message-received-border-color);
             background-color: var(--nluxc-message-received-background-color);
         }
 
         > .nluxc-text-message-content:focus,
         > .nluxc-text-message-content:active {
-            color: var(--nluxc-message-received-focused-text-color);
-            background-color: var(--nluxc-message-received-focused-background-color);
+            color: var(--nluxc-message-received-active-text-color);
+            border-color: var(--nluxc-message-received-active-border-color);
+            background-color: var(--nluxc-message-received-active-background-color);
+            box-shadow: var(--nluxc-box-shadow);
         }
     }
 
@@ -42,14 +45,18 @@
         align-items: flex-end;
 
         > .nluxc-text-message-content {
+            margin-right: var(--nluxc-padding-s);
             color: var(--nluxc-message-sent-text-color);
+            border-color: var(--nluxc-message-sent-border-color);
             background-color: var(--nluxc-message-sent-background-color);
         }
 
         > .nluxc-text-message-content:focus,
         > .nluxc-text-message-content:active {
-            color: var(--nluxc-message-sent-focused-text-color);
-            background-color: var(--nluxc-message-sent-focused-background-color);
+            color: var(--nluxc-message-sent-active-text-color);
+            border-color: var(--nluxc-message-sent-active-border-color);
+            background-color: var(--nluxc-message-sent-active-background-color);
+            box-shadow: var(--nluxc-box-shadow);
         }
     }
 }

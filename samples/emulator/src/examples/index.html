@@ -10,17 +10,17 @@
     <link href="/packages/@nlux/themes/kensington.css" rel="stylesheet">
     <script defer src="./index.mjs" type="module"></script>
     <script defer type="text/javascript">
-        const applyLightRandomColor = () => {
+        const applyRandomBodyBackgroundColor = () => {
             // Generate a random RGB color where each value is between 230-255
             const r = Math.floor(Math.random() * 26) + 230;
             const g = Math.floor(Math.random() * 26) + 230;
             const b = Math.floor(Math.random() * 26) + 230;
 
             // Set the background color of the body
-            // document.body.style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+            document.body.style.backgroundColor = Math.random() > 0.5 ? `rgb(${255 - r}, ${255 - g}, ${255 - b})` : `rgb(${r}, ${g}, ${b})`;
         };
 
-        document.addEventListener('DOMContentLoaded', () => applyLightRandomColor());
+        document.addEventListener('DOMContentLoaded', () => applyRandomBodyBackgroundColor());
     </script>
     <style>
         html, body {

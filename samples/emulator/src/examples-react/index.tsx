@@ -46,7 +46,7 @@ const ExampleWrapper = () => {
                 // Optional: Instruct ChatGPT how to behave during the conversation.
                 promptBoxOptions={{
                     placeholder: 'Tell me ?',
-                    autoFocus: false,
+                    autoFocus: true,
                 }}
             />,
         </>

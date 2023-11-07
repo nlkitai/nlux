@@ -92,14 +92,6 @@ export const renderChatbox: CompRenderer<
         textBoxElement.setSelectionRange(textBoxElement.value.length, textBoxElement.value.length);
     });
 
-    const onPromptBoxClick = (event: MouseEvent) => {
-        focusTextInput();
-        event.stopPropagation();
-        event.preventDefault();
-    };
-
-    promptBoxRoot.addEventListener('click', onPromptBoxClick);
-
     return {
         elements: {
             textInput: textBoxElement,
@@ -116,7 +108,6 @@ export const renderChatbox: CompRenderer<
         onDestroy: () => {
             removeTextBoxListeners();
             removeSendButtonListeners();
-            promptBoxRoot.removeEventListener('click', onPromptBoxClick);
         },
     };
 };

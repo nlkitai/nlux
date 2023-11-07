@@ -6,7 +6,6 @@ import {renderExceptionsBox} from './render';
 import {
     CompExceptionsBoxActions,
     CompExceptionsBoxElements,
-    CompExceptionsBoxEventListeners,
     CompExceptionsBoxEvents,
     CompExceptionsBoxProps,
 } from './types';
@@ -24,19 +23,12 @@ export class CompExceptionsBox extends BaseComp<
     private alertExpiryTimer?: ReturnType<typeof setTimeout> | null;
     private alertShowing = false;
     private alertsQueue: Exception[] = [];
-    private userEventListeners?: CompExceptionsBoxEventListeners;
 
     constructor(
         context: NluxContext,
-        eventListeners?: CompExceptionsBoxEventListeners,
+        props: CompExceptionsBoxProps,
     ) {
-        super(context, {
-            type: 'warning',
-            message: undefined,
-            visible: false,
-        });
-
-        this.userEventListeners = eventListeners;
+        super(context, props);
     }
 
     public destroy() {

@@ -28,4 +28,9 @@ export const updateExceptionsBox: CompUpdater<
         actions.setMessageType(newValue as ExceptionType);
         return;
     }
+
+    if ((propName === 'containerMaxWidth') && actions) {
+        actions.updateContainerMaxWidth(newValue as number | string | undefined);
+        return;
+    }
 };

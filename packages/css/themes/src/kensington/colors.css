@@ -1,76 +1,50 @@
 .nluxc-root.nluxc-theme-kensington {
-    --nluxc-primary-color: #00a667;
-    --nluxc-secondary-color: #ffb800;
-    --nluxc-tertiary1-color: #6d5ffd;
-    --nluxc-tertiary2-color: #ff1843;
+    --nluxc-text-color: #1d1e1bff;
 
-    --nluxc-neutral-black: #0a101c;
+    --nluxc-input-background-color: #ffffff;
+    --nluxc-input-border-color: #c5d7c9;
+    --nluxc-input-text-color: #18210c;
+    --nluxc-input-placeholder-color: #c5d7c9;
 
-    --nluxc-neutral-1: #2f3a4a;
-    --nluxc-neutral-2: #3b4451;
-    --nluxc-neutral-3: #565d68;
-    --nluxc-neutral-4: #6f757f;
-    --nluxc-neutral-5: #868c93;
-    --nluxc-neutral-6: #a6abb2;
-    --nluxc-neutral-7: #dbdee2;
-    --nluxc-neutral-8: #ebeef2;
-    --nluxc-neutral-9: #f4f6f9;
-    --nluxc-neutral-10: #ffffff;
+    --nluxc-input-active-background-color: #ffffff;
+    --nluxc-input-active-border-color: #c5d7c9;
+    --nluxc-input-active-text-color: #18210c;
+    --nluxc-input-active-placeholder-color: #c5d7c9;
 
-    --nluxc-accents-1: #e3b4ee;
-    --nluxc-accents-2: #3d6969;
-    --nluxc-accents-3: #e0af91;
-    --nluxc-accents-4: #20186f;
-    --nluxc-accents-5: #8dc4d4;
-    --nluxc-accents-6: #d16854;
+    --nluxc-input-disabled-background-color: #ffffff;
+    --nluxc-input-disabled-border-color: #c5d7c9;
+    --nluxc-input-disabled-text-color: #959993;
+    --nluxc-input-disabled-placeholder-color: #c5d7c9;
 
-    --nluxc-smoother-1: #fffbfb;
-    --nluxc-smoother-2: #f6f9ff;
-    --nluxc-smoother-3: #f6f8fb;
-    --nluxc-smoother-4: #d7ffe3;
+    --nluxc-button-background-color: #5fe095;
+    --nluxc-button-border-color: #5fe095;
+    --nluxc-button-text-color: #ffffff;
 
-    --nluxc-action-primary-default: #5fe094;
-    --nluxc-action-primary-hover: #6cca9b;
-    --nluxc-action-primary-active: #469868;
-    --nluxc-action-primary-disabled: #c5d7c9;
-    --nluxc-action-primary-hover-2: #eaf8f2;
-    --nluxc-action-primary-active-2: #d6f2e6;
-    --nluxc-action-primary-inverted: #ffffff;
+    --nluxc-button-active-background-color: #72e7a1ff;
+    --nluxc-button-active-border-color: #72e7a1ff;
+    --nluxc-button-active-text-color: #ffffff;
 
-    --nluxc-action-secondary-default: #f4bb40;
-    --nluxc-action-secondary-hover: #f4bb40;
-    --nluxc-action-secondary-active: #f4bb40;
-    --nluxc-action-secondary-disabled: #f9dc8d;
-    --nluxc-action-secondary-hover-2: #fef8e7;
-    --nluxc-action-secondary-active-2: #fdf2d0;
-    --nluxc-action-secondary-inverted: #ffffff;
+    --nluxc-button-disabled-background-color: #c5d7c9;
+    --nluxc-button-disabled-border-color: #c5d7c9;
+    --nluxc-button-disabled-text-color: #ffffff;
 
-    --nluxc-action-tertiary: #ff1843;
-    --nluxc-action-tertiary-90: rgba(255, 23, 65, 0.9);
-    --nluxc-action-tertiary-80: rgba(255, 23, 65, 0.8);
-    --nluxc-action-tertiary-70: rgba(255, 23, 65, 0.7);
-    --nluxc-action-tertiary-60: rgba(255, 23, 65, 0.6);
-    --nluxc-action-tertiary-50: rgba(255, 23, 65, 0.5);
-    --nluxc-action-tertiary-40: rgba(255, 23, 65, 0.4);
-    --nluxc-action-tertiary-30: rgba(255, 23, 65, 0.3);
-    --nluxc-action-tertiary-20: rgba(255, 23, 65, 0.2);
-    --nluxc-action-tertiary-10: rgba(255, 23, 65, 0.1);
+    --nluxc-message-sent-background-color: #5fe095;
+    --nluxc-message-sent-border-color: #6fc693;
+    --nluxc-message-sent-text-color: #ffffff;
 
-    --nluxc-action-neutral-default: #9298a0;
-    --nluxc-action-neutral-hover: #868c93;
-    --nluxc-action-neutral-active: #7a8086;
-    --nluxc-action-neutral-disabled: #b2b7bc;
-    --nluxc-action-neutral-hover-2: #f0f1f2;
-    --nluxc-action-neutral-active-2: #e2e3e6;
-    --nluxc-action-neutral-inverted: #ffffff;
+    --nluxc-message-sent-active-background-color: #5fe095;
+    --nluxc-message-sent-active-border-color: #6fc693;
+    --nluxc-message-sent-active-text-color: #ffffff;
 
-    --nluxc-success: #51a55f;
-    --nluxc-warning: #ac5620;
-    --nluxc-error: #c83025;
-    --nluxc-info: #3959a6;
+    --nluxc-message-received-background-color: #f4f6f9;
+    --nluxc-message-received-border-color: #dde5e2ff;
+    --nluxc-message-received-text-color: #18210c;
 
-    --nluxc-success-bg: #eff9f1;
-    --nluxc-warning-bg: #fdf4ed;
-    --nluxc-error-bg: #fbefef;
-    --nluxc-info-bg: #eff2f9;
+    --nluxc-message-received-active-background-color: #f4f6f9;
+    --nluxc-message-received-active-border-color: #dde5e2ff;
+    --nluxc-message-received-active-text-color: #18210c;
+
+    --nluxc-exceptions-box-error-background-color: #d05858;
+    --nluxc-exceptions-box-error-border-color: #d05858;
+    --nluxc-exceptions-box-error-text-color: #ffffff;
 }

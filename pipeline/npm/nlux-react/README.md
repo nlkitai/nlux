@@ -69,7 +69,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.2.6-beta/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.0/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.
