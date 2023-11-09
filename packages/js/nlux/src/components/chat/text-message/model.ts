@@ -195,12 +195,15 @@ export class CompTextMessage extends BaseComp<
         this.setContentLoadingStatus('streaming');
         this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'streaming'));
 
+        const renderingStream = new Observable<string>();
+        this.executeDomAction('subscribeToContentStream', contentStream);
+
         contentStream.subscribe({
             next: (content) => {
-                this.bufferAndAppendText(content);
+                renderingStream.next(content);
             },
             error: (error: NluxError) => {
-                this.bufferClear();
+                renderingStream.error(error);
                 this.setProp('erred', true);
 
                 this.handleContentLoadingError(
@@ -218,7 +221,7 @@ export class CompTextMessage extends BaseComp<
                 this.cleanupContentStatusUpdateListeners();
             },
             complete: () => {
-                this.bufferClear();
+                renderingStream.complete();
                 this.setContentLoadingStatus('loaded');
                 this.contentStatusUpdateListeners.forEach(listener => listener(this.id, 'loaded'));
                 this.cleanupContentStatusUpdateListeners();

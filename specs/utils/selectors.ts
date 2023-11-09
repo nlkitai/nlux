@@ -3,7 +3,7 @@ const rootNode = '.nluxc-root';
 const chatRoomContainer = '> .nluxc-chat-room-container';
 
 const exceptionsBoxContainer = '> .nluxc-exceptions-box-container';
-const exceptionContainer = '> .nluxc-exceptions-box-exception';
+const exceptionContainer = '> .nluxc-exceptions-box-exception-container';
 const exceptionMessage = '> .nluxc-exceptions-box-message';
 
 const promptBox = '> .nluxc-chat-room-prompt-box-container';

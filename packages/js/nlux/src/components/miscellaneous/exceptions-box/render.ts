@@ -37,7 +37,7 @@ export const renderExceptionsBox: CompRenderer<
         });
     }
 
-    const exceptionContainerSelector = ':scope > .' + __('exception');
+    const exceptionContainerSelector = ':scope > .' + __('exception-container');
     const exceptionContainer = exceptionsBoxRoot.querySelector(exceptionContainerSelector);
     if (!(exceptionContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
@@ -46,7 +46,7 @@ export const renderExceptionsBox: CompRenderer<
         });
     }
 
-    const messageSelector = ':scope > .' + __('exception') + ' > .' + __('message');
+    const messageSelector = ':scope > .' + __('exception-container') + ' > .' + __('message');
     const messageElement = exceptionsBoxRoot.querySelector(messageSelector);
     if (!(messageElement instanceof HTMLElement)) {
         throw new NluxRenderingError({

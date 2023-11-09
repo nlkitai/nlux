@@ -1,6 +1,6 @@
 import {NluxRenderingError} from '../../../core/error';
-import {listenToElement} from '../../../dom/listenToElement';
 import {CompRenderer} from '../../../types/comp';
+import {listenToElement} from '../../../utils/dom/listenToElement';
 import {domOp} from '../../../x/domOp';
 import {render} from '../../../x/render';
 import {source} from '../../../x/source';

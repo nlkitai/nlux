@@ -30,4 +30,6 @@ export type CompTextMessageActions = Readonly<{
     appendText: (text: string) => void;
     scrollToMessageEndContainer: () => void;
     setLoadingStatus: (status: TextMessageContentLoadingStatus) => void;
+    subscribeToContentStream: (contentStream: Observable<string>) => void;
+    unsubscribeFromContentStream: () => void;
 }>;

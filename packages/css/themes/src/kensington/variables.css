@@ -1,10 +1,13 @@
 .nluxc-root.nluxc-theme-kensington {
     --nluxc-font-family: source-sans-pro, sans-serif;
+    --nluxc-mono-font-family: monospace;
+
     --nluxc-text-color: var(--nluxc-text-color);
     --nluxc-font-weight: 400;
     --nluxc-line-height: 1.5;
 
     --nluxc-font-size: 1rem;
+    --nluxc-font-size-s: 0.8rem;
 
     --nluxc-padding-s: 0.3rem;
     --nluxc-padding: 0.6rem;

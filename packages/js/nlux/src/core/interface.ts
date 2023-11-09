@@ -4,7 +4,7 @@ import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
-export interface IConvoPit {
+export interface INluxConvo {
     mount(rootElement: HTMLElement): void;
 
     get mounted(): boolean;
@@ -15,21 +15,21 @@ export interface IConvoPit {
 
     withAdapter<InboundPayload, OutboundPayload>(
         adapterBuilder: AdapterBuilder<InboundPayload, OutboundPayload>,
-    ): IConvoPit;
+    ): INluxConvo;
 
     withClassName(
         className: string,
-    ): IConvoPit;
+    ): INluxConvo;
 
     withConversationOptions(
         conversationOptions: ConversationOptions,
-    ): IConvoPit;
+    ): INluxConvo;
 
     withLayoutOptions(
         layoutOptions: LayoutOptions,
-    ): IConvoPit;
+    ): INluxConvo;
 
     withPromptBoxOptions(
         promptBoxOptions: PromptBoxOptions,
-    ): IConvoPit;
+    ): INluxConvo;
 }

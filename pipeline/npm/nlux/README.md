@@ -35,7 +35,7 @@ _(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-
 OpenAI dashboard)_
 
 ```js
-import {createConvoPit} from '@nlux/nlux';
+import {createNluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
 const chatGptAdapter = createAdapter('openai/gpt')
@@ -47,14 +47,14 @@ const chatGptAdapter = createAdapter('openai/gpt')
     );
 ```
 
-Then render the **NLUX UI component** `Convo Pit` into your web page:
+Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
-const convoPit = createConvoPit()
+const nluxConvo = createNluxConvo()
     .withAdapter(chatGptAdapter)
     .withPromptBoxOptions({placeholder: 'Ask me anything about nuclear physics!'});
 
-convoPit.mount(document.getElementById('chatroom-div'));
+nluxConvo.mount(document.getElementById('chatroom-div'));
 ```
 
 You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page.
@@ -67,7 +67,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.0/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.1/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

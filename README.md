@@ -13,7 +13,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 * **Build Custom ChatGPT Interfaces In Minutes** - Easily build chatbot and conversational interfaces with just a few
   lines of code.
-* **React Components & Hooks** - `<ConvoPit />` for UI and `useAdapter` hook for easy integration.
+* **React Components & Hooks** - `<NluxConvo />` for UI and `useAdapter` hook for easy integration.
 * **Flexible LLM Adapters** - Provided adapter for `ChatGPT`. More coming soon.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
@@ -49,17 +49,17 @@ _(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-
 OpenAI dashboard)_
 
 ```js
-import {createConvoPit} from '@nlux/nlux';
+import {createNluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
 const gpt4Adapter = createAdapter('openai/gpt')
     .withApiKey('YOUR_OPEN_AI_API_KEY');
 ```
 
-Then render the **NLUX UI component** `Convo Pit` into your web page:
+Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
-const convoPit = createConvoPit()
+const nluxConvo = createNluxConvo()
     .withAdapter(gpt4Adapter)
     .withPromptBoxOptions({
         placeholder: 'Ask me anything about nuclear physics!'
@@ -69,7 +69,7 @@ const convoPit = createConvoPit()
         'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research'
     );
 
-convoPit.mount(document.getElementById('chatroom-div'));
+nluxConvo.mount(document.getElementById('chatroom-div'));
 ```
 
 You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page.
@@ -82,11 +82,11 @@ Install and import dependencies:
 npm install @nlux/nlux-react @nlux/openai-react
 ```
 
-Then include `<ConvoPit />` in your React app to get started.<br />
+Then include `<NluxConvo />` in your React app to get started.<br />
 Use the `useAdapter` hook to configure an adapter for your LLM.
 
 ```jsx
-import {ConvoPit} from '@nlux/nlux-react';
+import {NluxConvo} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 
 const MyChatComp = () => {
@@ -99,7 +99,7 @@ const MyChatComp = () => {
     });
 
     return (
-        <ConvoPit
+        <NluxConvo
             adapter={chatGptAdapter}
             promptBoxOptions={{
                 placeholder: 'Ask me anything about nuclear physics!'
@@ -120,7 +120,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.0/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.1/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

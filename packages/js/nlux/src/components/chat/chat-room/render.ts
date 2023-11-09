@@ -1,7 +1,7 @@
 import {NluxRenderingError} from '../../../core/error';
-import {getElement} from '../../../dom/getElement';
-import {listenToElement} from '../../../dom/listenToElement';
 import {CompRenderer} from '../../../types/comp';
+import {getElement} from '../../../utils/dom/getElement';
+import {listenToElement} from '../../../utils/dom/listenToElement';
 import {render} from '../../../x/render';
 import {source} from '../../../x/source';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './types';

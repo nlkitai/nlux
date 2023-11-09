@@ -1,3 +1,3 @@
-export {ConvoPit} from './components/ConvoPit';
+export {NluxConvo} from './components/NluxConvo';
 
-export type {ConvoPitProps} from './components/ConvoPit/props';
+export type {NluxConvoProps} from './components/NluxConvo/props';

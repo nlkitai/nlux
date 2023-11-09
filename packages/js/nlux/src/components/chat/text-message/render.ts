@@ -1,6 +1,9 @@
+import {Observable} from '../../../core/bus/observable';
+import {IObserver} from '../../../core/bus/observer';
 import {NluxRenderingError} from '../../../core/error';
-import {listenToElement} from '../../../dom/listenToElement';
 import {CompRenderer} from '../../../types/comp';
+import {listenToElement} from '../../../utils/dom/listenToElement';
+import {createMdStreamRenderer} from '../../../utils/md/streamParser';
 import {textToHtml} from '../../../x/parseTextMessage';
 import {render} from '../../../x/render';
 import {source} from '../../../x/source';
@@ -73,6 +76,8 @@ export const renderTextMessage: CompRenderer<
         compEvent('message-container-resized')();
     });
 
+    let mdStreamRenderer: IObserver<string> | undefined;
+
     resizeObserver.observe(contentContainer);
 
     return {
@@ -84,6 +89,38 @@ export const renderTextMessage: CompRenderer<
             focus: () => {
                 contentContainer.focus();
             },
+            subscribeToContentStream: (contentStream: Observable<string>) => {
+                if (mdStreamRenderer) {
+                    throw new NluxRenderingError({
+                        source: source('text-message', 'render'),
+                        message: 'Content stream already subscribed! You should wait for stream completion or call '
+                            + 'unsubscribe before subscribing again!',
+                    });
+                }
+
+                contentStream.subscribe({
+                    next: (chunk: string) => {
+                        if (!mdStreamRenderer) {
+                            mdStreamRenderer = createMdStreamRenderer(contentContainer);
+                        }
+
+                        mdStreamRenderer.next(chunk);
+                    },
+                    complete: () => {
+                        if (mdStreamRenderer?.complete) {
+                            mdStreamRenderer.complete();
+                        }
+
+                        mdStreamRenderer = undefined;
+                    },
+                });
+            },
+            unsubscribeFromContentStream: () => {
+                if (mdStreamRenderer?.complete) {
+                    mdStreamRenderer.complete();
+                    mdStreamRenderer = undefined;
+                }
+            },
             appendText: (text: any) => {
                 if (typeof text !== 'string' && !Array.isArray(text)) {
                     throw new NluxRenderingError({
@@ -92,26 +129,28 @@ export const renderTextMessage: CompRenderer<
                     });
                 }
 
+                if (mdStreamRenderer) {
+                    throw new NluxRenderingError({
+                        source: source('text-message', 'render'),
+                        message: 'Content stream already subscribed! You should wait for stream completion before '
+                            + 'appending text!',
+                    });
+                }
+
                 const textAsArray = Array.isArray(text)
                     ? text.filter(item => typeof item === 'string') as string[]
-                    : [text];
+                    : (typeof text === 'string' ? [text] : []);
 
-                const fragment = document.createDocumentFragment();
-
-                textAsArray.forEach(text => {
-                    const el = document.createElement('span');
-                    el.innerHTML = textToHtml(text);
-
-                    while (el.childNodes.length > 0) {
-                        fragment.append(el.childNodes[0]);
-                    }
-                });
-
-                contentContainer.append(fragment);
-                if (!isMessageContentAppended) {
-                    container.append(dom);
-                    isMessageContentAppended = true;
+                mdStreamRenderer = createMdStreamRenderer(contentContainer);
+                for (const textItem of textAsArray) {
+                    mdStreamRenderer.next(textItem);
                 }
+
+                if (mdStreamRenderer.complete) {
+                    mdStreamRenderer.complete();
+                }
+
+                mdStreamRenderer = undefined;
             },
             scrollToMessageEndContainer: () => {
                 container.scrollIntoView({

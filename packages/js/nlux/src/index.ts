@@ -1,10 +1,11 @@
-import {ConvoPit} from './core/convoPit';
+import {NluxConvo} from './core/nluxConvo';
 
-export {ConvoPit} from './core/convoPit';
-export const createConvoPit = (): ConvoPit => new ConvoPit();
+export {NluxConvo} from './core/nluxConvo';
+export const createNluxConvo = (): NluxConvo => new NluxConvo();
 
 export {Observable} from './core/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
+export {createMdStreamRenderer} from './utils/md/streamParser';
 
 export type {ConversationOptions} from './core/options/conversationOptions';
 export type {PromptBoxOptions} from './core/options/promptBoxOptions';

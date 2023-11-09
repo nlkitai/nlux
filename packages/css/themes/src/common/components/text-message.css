@@ -20,6 +20,19 @@
         > .nluxc-text-message-content:empty {
             display: none;
         }
+
+        > .nluxc-text-message-content pre {
+            font-family: var(--nluxc-mono-font-family);
+            font-size: var(--nluxc-font-size-s);
+            overflow: scroll;
+            padding: var(--nluxc-padding) var(--nluxc-padding-m);
+
+            color: var(--nlux-code-block-text-color);
+            border: none;
+            border-radius: var(--nluxc-border-radius-s);
+            background-color: var(--nlux-code-block-background-color);
+            box-shadow: var(--nluxc-box-shadow);
+        }
     }
 
     .nluxc-text-message-container.nluxc-text-message-received {

@@ -1,17 +1,17 @@
-import {ConvoPit, createConvoPit} from '@nlux/nlux';
+import {createNluxConvo, NluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
-let convoPit: ConvoPit | null = null;
+let nluxConvo: NluxConvo | null = null;
 let rootElement: HTMLElement | null = null;
 
 (window as any).demo = {
-    mount: () => rootElement && convoPit?.mount(rootElement),
-    unmount: () => convoPit?.unmount(),
-    show: () => convoPit?.show(),
-    hide: () => convoPit?.hide(),
+    mount: () => rootElement && nluxConvo?.mount(rootElement),
+    unmount: () => nluxConvo?.unmount(),
+    show: () => nluxConvo?.show(),
+    hide: () => nluxConvo?.hide(),
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', () => {
             'helping a PHD student in their research',
         );
 
-    convoPit = createConvoPit()
+    nluxConvo = createNluxConvo()
         .withAdapter(adapter)
         .withLayoutOptions({
-            maxWidth: 300,
+            maxWidth: 500,
             maxHeight: 500,
         })
         .withPromptBoxOptions({
@@ -42,5 +42,5 @@ document.addEventListener('DOMContentLoaded', () => {
             autoFocus: true,
         });
 
-    convoPit.mount(rootElement);
+    nluxConvo.mount(rootElement);
 });

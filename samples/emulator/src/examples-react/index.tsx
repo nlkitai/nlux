@@ -1,4 +1,4 @@
-import {ConvoPit} from '@nlux/nlux-react';
+import {NluxConvo} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -32,9 +32,9 @@ const ExampleWrapper = () => {
             <span>{key}</span>
             <button onClick={() => setKey(key + 1)}>Reset</button>
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
-            <ConvoPit
+            <NluxConvo
                 key={key}
-                className="chat-emulator-pit"
+                className="chat-emulator-convo"
                 adapter={adapter}
                 layoutOptions={{
                     maxHeight,
@@ -54,7 +54,7 @@ const ExampleWrapper = () => {
 };
 
 export default () => {
-    const root = document.getElementById('convopit-root');
+    const root = document.getElementById('nlux-convo-root');
     if (!root) {
         throw new Error('Root element not found');
     }
