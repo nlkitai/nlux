@@ -1,31 +1,35 @@
-import {Sequence, Tag} from '../tag';
+import {Markdown, Sequence} from '../markdown';
 
-export const code: Tag = {
-    name: 'code',
+export const underscore1: Markdown = {
+    code: '_',
+    tagName: 'em',
+    canContain: ['code', 'strong', 'em', 'del'],
     characterChecks: {
         canStartSequence: (character: string, previousCharacter: string | null) => (
-            character === '`' && (previousCharacter === null || previousCharacter === '\n')
+            character === '_'
         ),
         canBePartOfOpeningSequence: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) =>
-            false
+            currentSequence?.value === '_'
         ,
         shouldOpen: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => (
-            character !== '`' && currentSequence?.value === '`'
+            currentSequence?.value === '_' && character !== '_'
         ),
         canStartClosingSequence: (character: string, previousCharacter: string | null) =>
-            false
+            character === '_'
         ,
         canBePartOfClosingSequence: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) =>
-            false,
+            currentSequence?.value === '_'
+        ,
         shouldClose: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) =>
-            previousCharacter === '`'
+            (currentSequence?.value === '_' && character !== '_')
         ,
     },
     create: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => {
-        const newElement = document.createElement('code');
+        return document.createElement('em');
+    },
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => {
         if (character) {
-            newElement.append(character);
+            element.append(character);
         }
-        return newElement;
     },
 };

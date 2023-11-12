@@ -1,16 +1,18 @@
-import {Sequence, Tag} from '../tag';
+import {Markdown, Sequence} from '../markdown';
 
-export const h1: Tag = {
-    name: 'h1',
+export const header3: Markdown = {
+    code: '###',
+    tagName: 'h3',
+    canContain: ['code', 'strong', 'em', 'del'],
     characterChecks: {
         canStartSequence: (character: string, previousCharacter: string | null) => (
             character === '#' && (previousCharacter === null || previousCharacter === '\n')
         ),
         canBePartOfOpeningSequence: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) =>
-            false
+            character === '#'
         ,
         shouldOpen: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => (
-            character !== '#' && currentSequence?.value === '#'
+            character !== '#' && currentSequence?.value === '###'
         ),
         canStartClosingSequence: (character: string, previousCharacter: string | null) => (
             character === '\n'
@@ -21,10 +23,15 @@ export const h1: Tag = {
             character === '\n',
     },
     create: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => {
-        const newElement = document.createElement('h1');
-        if (character && character !== ' ' && character !== '\n') {
-            newElement.append(character);
+        return document.createElement('h3');
+    },
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => {
+        if (character) {
+            if (element.innerHTML === '' && (character === '\n' || character === ' ')) {
+                return;
+            }
+
+            element.append(character);
         }
-        return newElement;
     },
 };

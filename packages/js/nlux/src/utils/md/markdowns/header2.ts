@@ -1,7 +1,9 @@
-import {Sequence, Tag} from '../tag';
+import {Markdown, Sequence} from '../markdown';
 
-export const h2: Tag = {
-    name: 'h2',
+export const header2: Markdown = {
+    code: '##',
+    tagName: 'h2',
+    canContain: ['code', 'strong', 'em', 'del'],
     characterChecks: {
         canStartSequence: (character: string, previousCharacter: string | null) => (
             character === '#' && (previousCharacter === null || previousCharacter === '\n')
@@ -21,10 +23,15 @@ export const h2: Tag = {
             character === '\n',
     },
     create: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => {
-        const newElement = document.createElement('h2');
-        if (character && character !== ' ' && character !== '\n') {
-            newElement.append(character);
+        return document.createElement('h2');
+    },
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => {
+        if (character) {
+            if (element.innerHTML === '' && (character === '\n' || character === ' ')) {
+                return;
+            }
+
+            element.append(character);
         }
-        return newElement;
     },
 };

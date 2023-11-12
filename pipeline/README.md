@@ -10,7 +10,7 @@ For example, we use `yarn` for mono-repo packages structure instead of lerna.
 
 ### Running The Dev Server
 
-In order to run the dev server, you can following the following steps (that
+In order to run the dev server, you can follow the following steps (that
 should be run from the root of the repository):
 
 ```bash

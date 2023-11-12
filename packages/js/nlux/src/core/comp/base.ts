@@ -194,7 +194,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         }
 
         if (this.destroyed) {
-            console.warn(`Unable to render component "${this.def?.id}" because it is already destroyed`);
+            warn(`Unable to render component "${this.def?.id}" because it is already destroyed`);
             return;
         }
 

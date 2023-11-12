@@ -1,7 +1,8 @@
-import {Sequence, Tag} from '../tag';
+import {Markdown, Sequence} from '../markdown';
 
-export const pre: Tag = {
-    name: 'pre',
+export const backtick3: Markdown = {
+    code: '```',
+    tagName: 'pre',
     characterChecks: {
         canStartSequence: (character: string, previousCharacter: string | null) => (
             character === '`'
@@ -16,7 +17,7 @@ export const pre: Tag = {
             character === '\n' && currentSequence !== null && currentSequence.value.startsWith('```')
         ),
         canStartClosingSequence: (character: string, previousCharacter: string | null) =>
-            character === '`'
+            character === '`' && previousCharacter === '\n'
         ,
         canBePartOfClosingSequence: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) =>
             currentSequence !== null && currentSequence.value.startsWith('`') && character === '`'
@@ -40,7 +41,11 @@ export const pre: Tag = {
             element.dataset.title = title;
         }
 
-        element.append('\n');
         return element;
+    },
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => {
+        if (character && (character !== '\n' || element.innerHTML !== '')) {
+            element.append(character);
+        }
     },
 };

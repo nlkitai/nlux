@@ -40,8 +40,11 @@
     --nluxc-message-received-border-color: #dde5e2ff;
     --nluxc-message-received-text-color: #18210c;
 
-    --nlux-code-block-background-color: #595b57;
+    --nlux-code-block-background-color: #535b56;
     --nlux-code-block-text-color: #dde5e2ff;
+
+    --nlux-inline-code-background-color: #d5dad1;
+    --nlux-inline-code-text-color: #18210c;
 
     --nluxc-message-received-active-background-color: #f4f6f9;
     --nluxc-message-received-active-border-color: #dde5e2ff;

@@ -1,7 +1,7 @@
 import {IObserver} from '../../core/bus/observer';
 import {warn} from '../../x/debug';
+import {Markdown, Sequence} from './markdown';
 import {parse} from './parser';
-import {Sequence} from './tag';
 
 //
 // Parsers of a stream of markdown strings.
@@ -34,11 +34,21 @@ import {Sequence} from './tag';
 // * Tag: The character can be part of a tag (depending on context), but it can also be rendered as is.
 // * Escape: The character is part of an escape sequence, we render the escaped character.
 
-export const createMdStreamRenderer = (root: HTMLElement): IObserver<string> => {
+export const createMdStreamRenderer = (
+    root: HTMLElement,
+    nestedMarkdownFromParent: Markdown | undefined = undefined,
+): IObserver<string> => {
     let isRendering = true;
-    let currentElement: HTMLElement | null = null;
-    let currentSequence: Sequence | null = null;
     let previousCharacter: string | null = null;
+
+    let currentElement: HTMLElement | null = nestedMarkdownFromParent ? root : null;
+    let currentMarkdown: Markdown | null = nestedMarkdownFromParent || null;
+    let currentSequence: Sequence | null = null;
+
+    let nestedElement: HTMLElement | null = null;
+    let nestedMarkdown: Markdown | null = null;
+    let nestedSequence: Sequence | null = null;
+    let nestedElementParser: IObserver<string> | null = null;
 
     return {
         next: (chunk: string) => {
@@ -50,9 +60,96 @@ export const createMdStreamRenderer = (root: HTMLElement): IObserver<string> => 
             // Parse chunk character by character
             for (let i = 0; i < chunk.length; i++) {
                 const character = chunk[i];
+
+                //
+                // Case 1️⃣ - If there is a nested element.
+                //
+                // We check if the character can be part of the closing sequence of the nested element.
+                // Otherwise we pass the character to the nested element.
+                //
+                if (nestedElement) {
+                    if (!nestedElementParser || !nestedMarkdown) {
+                        warn(
+                            'Inconsistent MD parser state: nestedElement without nestedElementParser or nestedMarkdown '
+                            + 'or nestedSequence',
+                        );
+                        nestedElement = null;
+                        continue;
+                    }
+
+                    // Important: The character results in a closing of the nested element.
+                    if (nestedMarkdown.characterChecks.shouldClose(
+                        character,
+                        previousCharacter,
+                        nestedSequence,
+                    )) {
+                        if (nestedElementParser.complete) {
+                            nestedElementParser.complete();
+                        }
+
+                        nestedElement = null;
+                        nestedMarkdown = null;
+                        nestedSequence = null;
+                        nestedElementParser = null;
+
+                        // Important: We do not 'continue' here, as the closing character should be processed
+                        // as part of the current element.
+                        // NO continue;
+                    } else {
+                        if (nestedSequence) {
+                            if (nestedMarkdown.characterChecks.canBePartOfClosingSequence(
+                                character,
+                                previousCharacter,
+                                nestedSequence,
+                            )) {
+                                // We update the closing sequence.
+                                nestedSequence.value += character;
+                                previousCharacter = character;
+                                continue;
+                            } else {
+                                // The case when the nested sequence won't result is a closing sequence -
+                                // We stream the sequence and the character to the nested element.
+                                for (let j = 0; j < nestedSequence.value.length; j++) {
+                                    nestedElementParser.next(nestedSequence.value[j]);
+                                    previousCharacter = nestedSequence.value[j];
+                                }
+
+                                nestedElementParser.next(character);
+                                previousCharacter = character;
+                                nestedSequence = null;
+                                continue;
+                            }
+                        } else {
+                            if (nestedMarkdown.characterChecks.canStartClosingSequence(character, previousCharacter)) {
+                                nestedSequence = {
+                                    type: 'closing',
+                                    value: character,
+                                    possibleMarkdowns: new Set([nestedMarkdown]),
+                                };
+                                previousCharacter = character;
+                            } else {
+                                // There is no nested sequence, we stream the character to the nested element.
+                                nestedElementParser.next(character);
+                                previousCharacter = character;
+                                continue;
+                            }
+                        }
+                    }
+                }
+
+                // A second check - as the nested element might have been closed in the previous step.
+                if (nestedElement) {
+                    continue;
+                }
+
+                //
+                // Case 2️⃣ - If there is no current element, we pass the character to the parser.
+                //
                 const result = parse(
                     currentElement,
+                    currentMarkdown,
                     currentSequence,
+                    nestedSequence,
                     previousCharacter,
                     character,
                 );
@@ -64,27 +161,17 @@ export const createMdStreamRenderer = (root: HTMLElement): IObserver<string> => 
                 }
 
                 if (result.actionPerformed === 'elementCreated') {
-                    if (result.element) {
-                        currentElement = result.element;
-                        root.append(currentElement);
-                    } else {
-                        warn('Inconsistent MD parser state: elementCreated without element returned');
-                    }
+                    currentElement = result.element;
+                    currentMarkdown = result.markdown;
+                    nestedSequence = result.nestedSequence;
 
+                    root.append(currentElement);
                     currentSequence = null;
+
                     continue;
                 }
 
                 if (result.actionPerformed === 'elementUpdated') {
-                    if (result.sequence) {
-                        currentSequence = result.sequence;
-                    }
-
-                    if (result.element) {
-                        currentElement = result.element;
-                    } else {
-                        warn('Inconsistent MD parser state: elementUpdated without element returned');
-                    }
                     continue;
                 }
 
@@ -94,16 +181,45 @@ export const createMdStreamRenderer = (root: HTMLElement): IObserver<string> => 
                     }
 
                     currentElement = null;
-                    currentSequence = result.sequence;
+                    currentMarkdown = null;
+
+                    // The character can simultaneously close an element and be part of a new element.
+                    // Example: # after \n closes the previous paragraph and can be part of a new header.
+                    currentSequence = result.newSequence;
                     continue;
                 }
 
                 if (result.actionPerformed === 'possibleSequenceFound') {
-                    if (result.sequence) {
-                        currentSequence = result.sequence;
-                    } else {
-                        warn('Inconsistent MD parser state: possibleSequenceFound without sequence returned');
+                    currentSequence = result.sequence;
+                    nestedSequence = null;
+                    continue;
+                }
+
+                if (result.actionPerformed === 'possibleNestedSequenceFound') {
+                    nestedSequence = result.nestedSequence;
+                    currentSequence = null;
+                    continue;
+                }
+
+                if (result.actionPerformed === 'nestedElementCreated') {
+                    nestedSequence = null;
+                    currentSequence = null;
+
+                    if (!currentElement) {
+                        warn('Inconsistent MD parser state: nestedElementCreated without currentElement');
+                        continue;
                     }
+
+                    nestedElement = result.nestedElement;
+                    nestedMarkdown = result.nestedMarkdown;
+                    nestedElementParser = createMdStreamRenderer(
+                        nestedElement,
+                        nestedMarkdown,
+                    );
+
+                    currentElement.append(nestedElement);
+                    nestedElementParser.next(character);
+
                     continue;
                 }
             }

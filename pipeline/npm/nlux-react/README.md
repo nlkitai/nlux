@@ -61,6 +61,12 @@ const MyChatComp = () => {
 You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page
 or import it in your React app.
 
+## And The Result Is ✨
+
+A fully functional chatbot UI that can advise you on nuclear physics, coding, and even tell you a joke or two!
+
+[![Nlux Convo](https://nlux.ai/images/demos/chat-convo-nobel-prize-in-physics-winner.gif)](https://nlux.ai)
+
 ## Theme File and CSS 🎨
 
 You should include a **theme CSS file** into your HTML page.<br />
@@ -69,7 +75,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.1/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.7/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

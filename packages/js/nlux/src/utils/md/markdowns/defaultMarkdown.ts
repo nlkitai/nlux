@@ -1,7 +1,9 @@
-import {Sequence, specialMarkdownCharacters, Tag} from '../tag';
+import {Markdown, Sequence, specialMarkdownCharacters} from '../markdown';
 
-export const p: Tag = {
-    name: 'p',
+export const defaultMarkdown: Markdown = {
+    code: 'default',
+    tagName: 'p',
+    canContain: ['code', 'strong', 'em', 'del'],
     characterChecks: {
         canStartSequence: (character: string, previousCharacter: string | null) => (
             character !== '\n'
@@ -24,10 +26,26 @@ export const p: Tag = {
         ,
     },
     create: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => {
-        const newElement = document.createElement('p');
+        return document.createElement('p');
+    },
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => {
         if (character) {
-            newElement.append(character);
+            if (character === '\n' && previousCharacter === '\n') {
+                element.append(document.createElement('br'));
+                return;
+            }
+
+            if (previousCharacter === '\n' && !specialMarkdownCharacters.has(character)) {
+                element.append(document.createElement('br'));
+
+                if (character !== '\n') {
+                    element.append(character);
+                }
+            } else {
+                if (character !== '\n') {
+                    element.append(character);
+                }
+            }
         }
-        return newElement;
     },
 };

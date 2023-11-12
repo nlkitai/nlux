@@ -9,6 +9,7 @@
     --nluxc-font-size: 1rem;
     --nluxc-font-size-s: 0.8rem;
 
+    --nluxc-padding-xs: 0.1rem;
     --nluxc-padding-s: 0.3rem;
     --nluxc-padding: 0.6rem;
     --nluxc-padding-m: 0.8rem;
@@ -16,6 +17,7 @@
 
     --nluxc-flex-gap: 0.5rem;
 
+    --nluxc-border-radius-xs: 5px;
     --nluxc-border-radius-s: 10px;
     --nluxc-border-radius: 12px;
     --nluxc-border-radius-m: 14px;

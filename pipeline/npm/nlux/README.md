@@ -43,7 +43,7 @@ const chatGptAdapter = createAdapter('openai/gpt')
     // 👇 Instruct ChatGPT how to behave (optional)
     .withInitialSystemMessage(
         'Act as a Nobel Prize in Physics winner who is ' +
-        'helping a PHD student in their research'
+        'helping a PHD student in their research. Write short answers. Be funny!'
     );
 ```
 
@@ -52,12 +52,21 @@ Then render the **NLUX UI component** `Nlux Convo` into your web page:
 ```js
 const nluxConvo = createNluxConvo()
     .withAdapter(chatGptAdapter)
+    .withConversationOptions({
+        scrollWhenGenerating: true,
+    })
     .withPromptBoxOptions({placeholder: 'Ask me anything about nuclear physics!'});
 
 nluxConvo.mount(document.getElementById('chatroom-div'));
 ```
 
 You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page.
+
+## And The Result Is ✨
+
+A fully functional chatbot UI that can advise you on nuclear physics, coding, and even tell you a joke or two!
+
+[![Nlux Convo](https://nlux.ai/images/demos/chat-convo-nobel-prize-in-physics-winner.gif)](https://nlux.ai)
 
 ## Theme File and CSS 🎨
 
@@ -67,7 +76,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.1/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.3.7/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

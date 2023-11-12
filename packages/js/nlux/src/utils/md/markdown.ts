@@ -1,23 +1,18 @@
-export type TagName = 'h1' | 'h2' | 'h3' |
-    'p' | 'code' | 'pre' |
-    'br' | 'hr' |
-    'strong' | 'em' | 'del'
-    | 'a' | 'img' | 'url' |
-    'ul' | 'ol' | 'li' |
-    'blockquote';
-
-export const defaultTagName = 'p';
+import {TagName} from './tags';
 
 export const specialMarkdownCharacters = new Set([
     '\\', '`', '*', '_', '{', '}', '[', ']', '<', '>', '(', ')', '#', '+', '-', '.', '!', '|',
 ]);
 
+export type MarkdownCode = 'default' | '*' | '**' | '`' | '```' | '_' | '__' | '#' | '##' | '###';
+
 // 'url' is not a tag, but it's the () syntax for links and images.
 // 'table', 'thead', 'tbody', 'tr', 'th', 'td' are not supported yet.
 // 'h4', 'h5', 'h6' will not be supported.
 
-export type Tag = {
-    name: TagName;
+export type Markdown = {
+    code: MarkdownCode;
+    tagName: TagName;
     characterChecks: {
         // Check if a character can be part the first part of a sequence that would open a tag.
         // One such a character is found, we start a sequence.
@@ -39,15 +34,30 @@ export type Tag = {
     // For links and images, when we have a URL that follows the tag.
     mustBeFollowedBy?: TagName;
 
+    // Other that it can contain.
+    canContain?: TagName[];
+
     // The character passed is the one that triggered the opening of the tag.
     // Example: The first space ' ' after '##' opened the <h2 /> tag.
     // Example: The first alphanumerical character after '[' opened the <a /> tag.
     // We pass it to the tag so it can be inserted in the tag if needed (it's the case for the tag).
     create: (character: string, previousCharacter: string | null, currentSequence: Sequence | null) => HTMLElement;
+
+    // Appends a character to the tag.
+    append: (element: HTMLElement, character: string, previousCharacter: string | null) => void;
 }
 
-export type Sequence = {
-    type: 'opening' | 'closing';
+export type OpeningSequence = {
+    type: 'opening';
     value: string;
-    possibleTags: Set<string>;
+    possibleMarkdowns: Set<Markdown>;
 }
+
+export type ClosingSequence = {
+    type: 'closing';
+    value: string;
+    possibleMarkdowns: Set<Markdown>;
+}
+
+export type Sequence = OpeningSequence | ClosingSequence;
+

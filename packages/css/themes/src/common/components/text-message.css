@@ -33,6 +33,20 @@
             background-color: var(--nlux-code-block-background-color);
             box-shadow: var(--nluxc-box-shadow);
         }
+
+        > .nluxc-text-message-content code {
+            font-family: var(--nluxc-mono-font-family);
+            font-size: var(--nluxc-font-size-s);
+            padding: var(--nluxc-padding-xs) var(--nluxc-padding-s);
+
+            color: var(--nlux-inline-code-text-color);
+            border-radius: var(--nluxc-border-radius-xs);
+            background-color: var(--nlux-inline-code-background-color);
+        }
+
+        > .nluxc-text-message-content strong {
+            font-weight: bold;
+        }
     }
 
     .nluxc-text-message-container.nluxc-text-message-received {
