@@ -1,6 +1,6 @@
-import {Adapter} from '../adapter';
+import {NluxAdapter} from '../adapter';
 
-export interface ISseAdapter<InboundPayload, OutboundPayload> extends Adapter<
+export interface ISseAdapter<InboundPayload, OutboundPayload> extends NluxAdapter<
     InboundPayload, OutboundPayload
 > {
     connect?(): Promise<void>;

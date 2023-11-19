@@ -6,7 +6,7 @@ export type InputFormat = 'text';
 export type AdapterEncodeFunction<OutboundPayload> = (input: Message) => Promise<OutboundPayload>;
 export type AdapterDecodeFunction<InboundPayload> = (output: InboundPayload) => Promise<Message>;
 
-export type AdapterInfo = Readonly<{
+export type NluxAdapterInfo = Readonly<{
     id: string;
     connectionType: 'ws' | 'http';
     capabilities: Readonly<{
@@ -22,7 +22,7 @@ export type AdapterInfo = Readonly<{
     outputFormats: ReadonlyArray<OutputFormat>;
 }>;
 
-export type AdapterConfig<InboundPayload, OutboundPayload> = Readonly<{
+export type NluxAdapterConfig<InboundPayload, OutboundPayload> = Readonly<{
     encodeMessage: AdapterEncodeFunction<OutboundPayload>;
     decodeMessage: AdapterDecodeFunction<InboundPayload>;
 }>;

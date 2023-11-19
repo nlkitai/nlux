@@ -1,23 +1,23 @@
-import {Observable} from '../core/bus/observable';
-import {AdapterConfig, AdapterInfo} from './adapterConfig';
+import {NluxAdapterConfig, NluxAdapterInfo} from './adapterConfig';
+import {StreamingAdapter, StreamingAdapterObserver} from './adapterInterface';
 import {Message} from './message';
 
-export type AdapterStatus = 'disconnected'
+export type NluxAdapterStatus = 'disconnected'
     | 'connecting'
     | 'connected'
     | 'disconnecting'
     | 'idle'
     | 'error';
 
-export type AdapterEvent = 'state-change'
+export type NluxAdapterEvent = 'state-change'
     | 'message-received'
     | 'message-sent'
     | 'chunk-received';
 
-export type AdapterEventData = Message | AdapterStatus;
+export type AdapterEventData = Message | NluxAdapterStatus;
 
-export interface Adapter<InboundPayload, OutboundPayload> {
-    get config(): AdapterConfig<InboundPayload, OutboundPayload>;
+export interface NluxAdapter<InboundPayload, OutboundPayload> extends StreamingAdapter {
+    get config(): NluxAdapterConfig<InboundPayload, OutboundPayload>;
 
     decode(payload: InboundPayload): Promise<Message>;
 
@@ -25,9 +25,9 @@ export interface Adapter<InboundPayload, OutboundPayload> {
 
     get id(): string;
 
-    get info(): AdapterInfo;
+    get info(): NluxAdapterInfo;
 
-    send(message: Message): Observable<Message> | Promise<Message>;
+    send(message: Message, observer: StreamingAdapterObserver): void;
 
-    get status(): AdapterStatus;
+    get status(): NluxAdapterStatus;
 }

@@ -1,5 +1,5 @@
-import {CompChatRoom} from '../../components/chat/chat-room/model';
-import {CompChatRoomProps} from '../../components/chat/chat-room/types';
+import {CompChatRoom} from '../../components/chat/chat-room/chat-room.model';
+import {CompChatRoomProps} from '../../components/chat/chat-room/chat-room.types';
 import {CompExceptionsBox} from '../../components/miscellaneous/exceptions-box/model';
 import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-box/types';
 import {NluxContext} from '../../types/context';
@@ -188,6 +188,18 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         }
     }
 
+    public renderEx(type: ExceptionType, message: string) {
+        if (!this.mounted) {
+            warn('Renderer is not mounted and cannot render exceptions');
+            throw new NluxRenderingError({
+                source: this.constructor.name,
+                message: message,
+            });
+        }
+
+        this.exceptionsBox?.showAlert(type, message);
+    }
+
     show() {
         if (!this.mounted) {
             throw new NluxRenderingError({
@@ -277,20 +289,6 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         if (props.hasOwnProperty('promptBoxOptions')) {
             // TODO - Apply new prompt box options
         }
-    }
-
-    private renderEx(type: ExceptionType, message: string) {
-        if (!this.mounted) {
-            warn('Renderer is not mounted and cannot render exceptions');
-            throw new NluxRenderingError({
-                source: this.constructor.name,
-                message: message,
-            });
-
-            return;
-        }
-
-        this.exceptionsBox?.showAlert(type, message);
     }
 
     private setRootElementClassNames() {

@@ -14,6 +14,6 @@ export const warn = (message: any) => {
         console.warn(`[nlux-emulator] ${message}`);
     } else {
         console.warn('[nlux-emulator] Debug:');
-        console.warn(message);
+        console.log(JSON.stringify(message, null, 2));
     }
 };

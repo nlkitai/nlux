@@ -1,4 +1,4 @@
-import {Message, NluxUsageError, Observable} from '@nlux/nlux';
+import {Message, NluxUsageError, StreamingAdapterObserver} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
 import {warn} from '../../../x/debug';
@@ -35,15 +35,14 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
         return gptStreamingAdapterConfig;
     }
 
-    send(message: Message): Observable<Message> {
-        if (typeof message !== 'string' || message.length === 0) {
+    send(message: Message, observer: StreamingAdapterObserver<Message>): void {
+        const messageAsAny = message as any;
+        if (typeof messageAsAny !== 'string' || messageAsAny.length === 0) {
             throw new NluxUsageError({
                 source: this.constructor.name,
                 message: 'Cannot send empty messages',
             });
         }
-
-        const observable = new Observable<Message>();
 
         // TODO - Only send system message once per conversation, when history is included
         const messagesToSend: {
@@ -56,7 +55,7 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
 
         messagesToSend.push({
             role: 'user',
-            content: message,
+            content: messageAsAny,
         });
 
         this.openai.chat.completions.create({
@@ -72,7 +71,7 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
                 const value = result.value;
                 const message = await this.decode(value);
                 if (message !== undefined) {
-                    observable.next(message);
+                    observer.next(message);
                 } else {
                     // TODO - Handle undecodable messages
                     warn('Undecodable message');
@@ -82,15 +81,14 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
                 result = await it.next();
             }
 
-            observable.complete();
+            observer.complete();
         }).catch((error: any) => {
-            observable.error(new NluxUsageError({
+            warn(error);
+            observer.error(new NluxUsageError({
                 source: this.constructor.name,
                 message: error.message,
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
             }));
         });
-
-        return observable;
     }
 }

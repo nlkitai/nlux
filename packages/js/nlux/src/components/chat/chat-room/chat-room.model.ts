@@ -1,0 +1,146 @@
+import {BaseComp} from '../../../core/comp/base';
+import {comp} from '../../../core/comp/comp';
+import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {NluxContext} from '../../../types/context';
+import {CompConversation} from '../conversation/conversation.model';
+import {CompConversationProps} from '../conversation/conversation.types';
+import {CompPromptBox} from '../prompt-box/prompt-box.model';
+import {submitPromptFactory} from './actions/submitPrompt';
+import {renderChatRoom} from './chat-room.render';
+import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
+import {updateChatRoom} from './chat-room.update';
+
+@Model('chat-room', renderChatRoom, updateChatRoom)
+export class CompChatRoom extends BaseComp<
+    CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+> {
+    private conversation: CompConversation;
+
+    private messagesInLoadingState: Set<string> = new Set();
+    private messagesInStreamingState: Set<string> = new Set();
+    private promptBoxInstance: CompPromptBox;
+    private promptBoxText: string = '';
+
+    constructor(context: NluxContext, {
+        containerMaxWidth,
+        containerMaxHeight,
+        scrollWhenGenerating,
+        visible = true,
+        promptBox,
+    }: CompChatRoomProps) {
+        super(context, {visible, containerMaxWidth, containerMaxHeight, scrollWhenGenerating});
+
+        this.addConversation(scrollWhenGenerating);
+        this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
+
+        // @ts-ignore
+        if (!this.conversation || !this.promptBoxInstance) {
+            throw new Error('Conversation is not initialized');
+        }
+    }
+
+    public hide() {
+        this.setProp('visible', false);
+    }
+
+    @CompEventListener('messages-container-clicked')
+    messagesContainerClicked() {
+        this.promptBoxInstance?.focusTextInput();
+    }
+
+    public setProps(props: Partial<CompChatRoomProps>) {
+        if (props.hasOwnProperty('containerMaxHeight')) {
+            this.setProp('containerMaxHeight', props.containerMaxHeight ?? undefined);
+        }
+
+        if (props.hasOwnProperty('containerMaxWidth')) {
+            this.setProp('containerMaxWidth', props.containerMaxWidth ?? undefined);
+        }
+
+        if (props.hasOwnProperty('scrollWhenGenerating')) {
+            this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
+        }
+    }
+
+    public show() {
+        this.setProp('visible', true);
+    }
+
+    @CompEventListener('show-chat-room-clicked')
+    showChatRoom(event: MouseEvent) {
+        if (event.stopPropagation) {
+            event.stopPropagation();
+        }
+
+        if (event.preventDefault) {
+            event.preventDefault();
+        }
+
+        this.setProp('visible', true);
+        this.promptBoxInstance?.focusTextInput();
+    }
+
+    private addConversation(scrollWhenGenerating?: boolean) {
+        this.conversation = comp(CompConversation)
+            .withContext(this.context)
+            .withProps<CompConversationProps>({
+                scrollWhenGenerating,
+            })
+            .create();
+
+        this.addSubComponent(
+            this.conversation.id,
+            this.conversation,
+            'conversationContainer',
+        );
+    }
+
+    private addPromptBox(
+        placeholder?: string,
+        autoFocus?: boolean,
+    ) {
+        this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
+            props: {
+                enableTextInput: true,
+                sendButtonStatus: 'disabled',
+                textInputValue: '',
+                placeholder,
+                autoFocus,
+            },
+            eventListeners: {
+                onTextUpdated: (newValue: string) => this.handlePromptBoxTextChange(newValue),
+                onSubmit: () => this.handlePromptBoxSubmit(),
+            },
+        }).create();
+
+        this.addSubComponent(this.promptBoxInstance.id, this.promptBoxInstance, 'promptBoxContainer');
+    }
+
+    private handlePromptBoxSubmit() {
+        submitPromptFactory({
+            context: this.context,
+            promptBoxInstance: this.promptBoxInstance,
+            conversation: this.conversation,
+            messageToSend: this.promptBoxText,
+            resetPromptBox: (resetTextInput?: boolean) => this.resetPromptBox(resetTextInput),
+        })();
+    }
+
+    private handlePromptBoxTextChange(newValue: string) {
+        this.promptBoxText = newValue;
+    }
+
+    private resetPromptBox(resetTextInput: boolean = false) {
+        if (!this.promptBoxInstance) {
+            return;
+        }
+
+        this.promptBoxInstance.enableTextInput(true);
+        if (resetTextInput) {
+            this.promptBoxInstance.resetTextInput();
+        }
+
+        this.promptBoxInstance.resetSendButtonStatus();
+        this.promptBoxInstance.focusTextInput();
+    }
+}

@@ -1,16 +1,23 @@
-import {AdapterConfig, AdapterInfo, AdapterStatus, ISseAdapter, Message, Observable} from '@nlux/nlux';
+import {
+    Message,
+    NluxAdapter,
+    NluxAdapterConfig,
+    NluxAdapterInfo,
+    NluxAdapterStatus,
+    StreamingAdapterObserver,
+} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {warn} from '../../../x/debug';
 import {gptAdapterInfo} from '../config';
 import {OpenAIChatModel} from '../types/models';
 
-export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implements ISseAdapter<
+export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implements NluxAdapter<
     InboundPayload, OutboundPayload
 > {
     protected readonly dataExchangeMode: 'stream' | 'fetch' = 'fetch';
     protected readonly model: OpenAIChatModel;
     protected readonly openai: OpenAI;
-    protected currentStatus: AdapterStatus = 'disconnected';
+    protected currentStatus: NluxAdapterStatus = 'disconnected';
     protected initialSystemMessage: string | null = 'Act as a helpful assistant to the user';
 
     protected constructor({
@@ -44,17 +51,17 @@ export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implem
             + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety');
     }
 
-    abstract get config(): AdapterConfig<InboundPayload, OutboundPayload>;
+    abstract get config(): NluxAdapterConfig<InboundPayload, OutboundPayload>;
 
     get id() {
         return this.info.id;
     }
 
-    get info(): AdapterInfo {
+    get info(): NluxAdapterInfo {
         return gptAdapterInfo;
     }
 
-    get status(): AdapterStatus {
+    get status(): NluxAdapterStatus {
         return this.currentStatus;
     }
 
@@ -69,5 +76,5 @@ export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implem
         return encodeMessage(message);
     }
 
-    abstract send(message: Message): Observable<Message> | Promise<Message>;
+    abstract send(message: Message, observer: StreamingAdapterObserver): void;
 }

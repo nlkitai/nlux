@@ -8,7 +8,7 @@ export const debug = (...messages: any[]) => {
             console.log(`[nlux] ${message}`);
         } else {
             console.log('[nlux] Debug:');
-            console.log(message);
+            console.log(JSON.stringify(message, null, 2));
         }
     }
 };
@@ -22,6 +22,6 @@ export const warn = (message: any) => {
         console.warn(`${prefix}${message}`);
     } else {
         prefix && console.warn(prefix);
-        console.warn(message);
+        console.log(JSON.stringify(message, null, 2));
     }
 };

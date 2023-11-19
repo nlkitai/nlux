@@ -1,9 +1,9 @@
 import {CompRegistry} from '../core/comp/registry';
 import {getGlobalNlux} from '../core/global';
-import {CompChatRoom} from './chat/chat-room/model';
-import {CompConversation} from './chat/conversation/model';
-import {CompPromptBox} from './chat/prompt-box/model';
-import {CompTextMessage} from './chat/text-message/model';
+import {CompChatRoom} from './chat/chat-room/chat-room.model';
+import {CompConversation} from './chat/conversation/conversation.model';
+import {CompMessage} from './chat/message/message.model';
+import {CompPromptBox} from './chat/prompt-box/prompt-box.model';
 import {CompExceptionsBox} from './miscellaneous/exceptions-box/model';
 import {CompList} from './miscellaneous/list/model';
 
@@ -13,7 +13,7 @@ const componentsById = () => ({
     'exceptions-box': CompExceptionsBox,
     'conversation': CompConversation,
     'prompt-box': CompPromptBox,
-    'text-message': CompTextMessage,
+    'message': CompMessage,
 });
 
 export const registerAllComponents = () => {

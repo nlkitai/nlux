@@ -1,15 +1,15 @@
-import {Adapter, AdapterEvent, AdapterEventData} from '../adapter';
+import {AdapterEventData, NluxAdapter, NluxAdapterEvent} from '../adapter';
 
-export interface IFetchAdapter<InboundPayload, OutboundPayload> extends Adapter<
+export interface IFetchAdapter<InboundPayload, OutboundPayload> extends NluxAdapter<
     InboundPayload, OutboundPayload
 > {
     subscribe<PayloadType extends AdapterEventData>(
-        event: AdapterEvent,
+        event: NluxAdapterEvent,
         callback: (eventPayload: PayloadType) => {},
     ): void;
 
     unsubscribe<PayloadType extends AdapterEventData>(
-        event: AdapterEvent,
+        event: NluxAdapterEvent,
         callback: (eventPayload: PayloadType) => {},
     ): void;
 }

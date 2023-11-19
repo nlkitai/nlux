@@ -1,4 +1,4 @@
-import {Adapter, AdapterBuilder, NluxUsageError} from '@nlux/nlux';
+import {AdapterBuilder, NluxAdapter, NluxUsageError} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {defaultChatGptModel, defaultDataExchangeMode} from '../adapters/config';
 import {GptFetchAdapter} from '../adapters/fetch';
@@ -33,7 +33,7 @@ export abstract class OpenAIGptAbstractBuilder implements AdapterBuilder<
         }
     }
 
-    abstract create(): (GptFetchAdapter | GptStreamingAdapter) & Adapter<any, any>;
+    abstract create(): (GptFetchAdapter | GptStreamingAdapter) & NluxAdapter<any, any>;
 
     abstract useFetchingMode(): OpenAIGptAbstractBuilder;
 

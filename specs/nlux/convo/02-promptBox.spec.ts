@@ -2,8 +2,9 @@ import {AdapterBuilder, createNluxConvo, NluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
+import {createPromiseAdapterController, PromiseAdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
-import {waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
+import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 const apiKey = 'YOUR_API_KEY_HERE';
 
@@ -83,9 +84,7 @@ describe('When typing a prompt ', () => {
 });
 
 describe('When sending a chat message ', () => {
-    let adapter: AdapterBuilder<any, any> = createAdapter('openai/gpt')
-        .withApiKey(apiKey)
-        .useFetchingMode();
+    let adapterController: PromiseAdapterController | undefined = undefined;
 
     let rootElement: HTMLElement | undefined;
     let nluxConvo: NluxConvo | undefined;
@@ -96,9 +95,7 @@ describe('When sending a chat message ', () => {
     });
 
     afterEach(() => {
-        adapter = createAdapter('openai/gpt')
-            .withApiKey(apiKey)
-            .useFetchingMode();
+        adapterController = undefined;
 
         nluxConvo?.unmount();
         rootElement?.remove();
@@ -108,14 +105,10 @@ describe('When sending a chat message ', () => {
 
     describe('When the user clicks the send button', () => {
         it('should display the user message in conversation container', async () => {
-            (adapter as any).create = () => ({
-                send: async () => {
-                    // Do nothing
-                },
-            });
-
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            adapterController = createPromiseAdapterController();
+            nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
+
             await waitForRenderCycle();
 
             const textInput: any = queries.promptBoxTextInput() as any;
@@ -135,13 +128,8 @@ describe('When sending a chat message ', () => {
         });
 
         it('should display a loading indicator', async () => {
-            (adapter as any).create = () => ({
-                send: () => new Promise(() => {
-                    // Do nothing
-                }),
-            });
-
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            adapterController = createPromiseAdapterController();
+            nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
 
             await waitForRenderCycle();
@@ -165,14 +153,10 @@ describe('When sending a chat message ', () => {
 
         describe('When the API call fails', () => {
             it('should display an error message', async () => {
-                (adapter as any).create = () => ({
-                    send: () => new Promise(() => {
-                        throw new Error('API call failed');
-                    }),
-                });
-
-                nluxConvo = createNluxConvo().withAdapter(adapter);
+                adapterController = createPromiseAdapterController();
+                nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
+
                 await waitForRenderCycle();
 
                 const textInput: any = queries.promptBoxTextInput() as any;
@@ -188,20 +172,18 @@ describe('When sending a chat message ', () => {
                 await userEvent.click(sendButton);
                 await waitForRenderCycle();
 
+                expect(adapterController.getLastMessage()).toBe('Hello');
+                adapterController.reject('Something went wrong');
+                await waitForRenderCycle();
+
                 expect(queries.exceptionMessage()).not.toBeEmptyDOMElement();
             });
 
             it('Should remove the initial user message', async () => {
                 const delayBeforeSendingResponse = 100;
-                (adapter as any).create = () => ({
-                    send: () => new Promise((resolve, reject) => {
-                        waitForMilliseconds(delayBeforeSendingResponse).then(() => {
-                            reject(new Error('API call failed'));
-                        });
-                    }),
-                });
+                adapterController = createPromiseAdapterController();
 
-                nluxConvo = createNluxConvo().withAdapter(adapter);
+                nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
                 await waitForRenderCycle();
 
@@ -218,18 +200,16 @@ describe('When sending a chat message ', () => {
                 await waitForMilliseconds(delayBeforeSendingResponse / 2);
                 expect(queries.conversationMessagesContainer()).toContainHTML('Hello');
 
+                adapterController.reject('Something went wrong');
+                await waitForRenderCycle();
                 await waitForMilliseconds(delayBeforeSendingResponse + 10);
                 expect(queries.conversationMessagesContainer()).not.toContainHTML('Hello');
             });
 
             it('should keep the content of the prompt box', async () => {
-                (adapter as any).create = () => ({
-                    send: () => new Promise(() => {
-                        throw new Error('API call failed');
-                    }),
-                });
+                adapterController = createPromiseAdapterController();
 
-                nluxConvo = createNluxConvo().withAdapter(adapter);
+                nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
                 await waitForRenderCycle();
 
@@ -252,7 +232,9 @@ describe('When sending a chat message ', () => {
 
     describe('When using invalid API key', () => {
         it('should render error message', async () => {
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            const openAiAdapter = createAdapter('openai/gpt')
+                .withApiKey('invalid-api-key').create();
+            nluxConvo = createNluxConvo().withAdapter(openAiAdapter);
             nluxConvo.mount(rootElement);
             await waitForRenderCycle();
 
@@ -267,51 +249,43 @@ describe('When sending a chat message ', () => {
 
             userEvent.click(sendButton);
             await waitForRenderCycle();
-
             expect(queries.exceptionMessage().innerHTML).toBe('Failed to load content. Please try again.');
         });
     });
 
     describe('When the user receives a response', () => {
         it('should display the response', async () => {
-            const delayBeforeSendingResponse = 100;
-            (adapter as any).create = () => ({
-                send: async () => {
-                    await waitForMilliseconds(delayBeforeSendingResponse);
-                    return 'Hello back!';
-                },
-            });
+            const delayBeforeSendingResponse = 200;
+            adapterController = createPromiseAdapterController();
 
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
             await waitForRenderCycle();
 
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
+            await userEvent.type(textInput, 'Hi');
             await waitForRenderCycle();
 
-            expect(textInput.value).toBe('Hello');
+            expect(textInput.value).toBe('Hi');
             expect(sendButton).not.toBeDisabled();
 
             userEvent.click(sendButton);
-            await waitForMilliseconds(delayBeforeSendingResponse);
             await waitForRenderCycle();
 
+            adapterController.resolve('Hello back!');
+            await waitForRenderCycle();
+
+            await waitForMdStreamToComplete();
             expect(queries.conversationContainer()).toHaveTextContent('Hello back!');
         });
 
         it('should remove the loading indicator', async () => {
             const delayBeforeSendingResponse = 100;
-            (adapter as any).create = () => ({
-                send: async () => {
-                    await waitForMilliseconds(delayBeforeSendingResponse);
-                    return 'Hello back!';
-                },
-            });
+            adapterController = createPromiseAdapterController();
 
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
             await waitForRenderCycle();
 
@@ -325,22 +299,20 @@ describe('When sending a chat message ', () => {
             expect(sendButton).not.toBeDisabled();
 
             userEvent.click(sendButton);
-            await waitForMilliseconds(delayBeforeSendingResponse);
             await waitForRenderCycle();
 
+            adapterController.resolve('Hello back!');
+            await waitForRenderCycle();
+
+            await waitForMilliseconds(delayBeforeSendingResponse);
             expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
         });
 
         it('should empty the prompt box', async () => {
             const delayBeforeSendingResponse = 100;
-            (adapter as any).create = () => ({
-                send: async () => {
-                    await waitForMilliseconds(delayBeforeSendingResponse);
-                    return 'Hello back!';
-                },
-            });
+            adapterController = createPromiseAdapterController();
 
-            nluxConvo = createNluxConvo().withAdapter(adapter);
+            nluxConvo = createNluxConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
             await waitForRenderCycle();
 
@@ -354,9 +326,12 @@ describe('When sending a chat message ', () => {
             expect(sendButton).not.toBeDisabled();
 
             userEvent.click(sendButton);
-            await waitForMilliseconds(delayBeforeSendingResponse);
             await waitForRenderCycle();
 
+            adapterController.resolve('Hello back!');
+            await waitForRenderCycle();
+
+            await waitForMilliseconds(delayBeforeSendingResponse);
             expect(textInput.value).toBe('');
         });
     });

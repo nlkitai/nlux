@@ -32,23 +32,25 @@ const ExampleWrapper = () => {
             <span>{key}</span>
             <button onClick={() => setKey(key + 1)}>Reset</button>
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
-            <NluxConvo
-                key={key}
-                className="chat-emulator-convo"
-                adapter={adapter}
-                layoutOptions={{
-                    maxHeight,
-                    maxWidth: 500,
-                }}
-                conversationOptions={{
-                    scrollWhenGenerating: true,
-                }}
-                // Optional: Instruct ChatGPT how to behave during the conversation.
-                promptBoxOptions={{
-                    placeholder: 'Tell me ?',
-                    autoFocus: true,
-                }}
-            />,
+            <div style={{height: '550px'}}>
+                <NluxConvo
+                    key={key}
+                    className="chat-emulator-convo"
+                    adapter={adapter}
+                    layoutOptions={{
+                        maxHeight,
+                        maxWidth: 500,
+                    }}
+                    conversationOptions={{
+                        scrollWhenGenerating: true,
+                    }}
+                    // Optional: Instruct ChatGPT how to behave during the conversation.
+                    promptBoxOptions={{
+                        placeholder: 'How can I help you today?',
+                        autoFocus: true,
+                    }}
+                />
+            </div>
         </>
     );
 };

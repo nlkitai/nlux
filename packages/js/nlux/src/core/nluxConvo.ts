@@ -1,6 +1,7 @@
 import {registerAllComponents} from '../components/components';
-import {Adapter} from '../types/adapter';
+import {NluxAdapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
+import {Adapter, PromiseAdapter, StreamingAdapter} from '../types/adapterInterface';
 import {NluxProps} from '../types/props';
 import {debug, warn} from '../x/debug';
 import {NluxController} from './controller/controller';
@@ -11,7 +12,9 @@ import {LayoutOptions} from './options/layoutOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class NluxConvo implements INluxConvo {
-    protected theAdapter: Adapter<any, any> | null = null;
+    protected theAdapter: Adapter | null = null;
+    protected theAdapterBuilder: NluxAdapter<any, any> | null = null;
+    protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
@@ -42,11 +45,17 @@ export class NluxConvo implements INluxConvo {
             });
         }
 
-        if (!this.theAdapter) {
+        const adapterToUser: Adapter | NluxAdapter<any, any> | null =
+            this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
+                : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
+                    ? this.theAdapterBuilder
+                    : null;
+
+        if (!adapterToUser) {
             throw new NluxValidationError({
                 source: this.constructor.name,
-                message: 'Unable to create NLUX instance. Adapter is not set. '
-                    + 'You should call `withAdapter(Adapter)` method before mounting NLUX.',
+                message: 'Unable to create NLUX instance. Adapter is not properly set. '
+                    + 'You should call `withAdapter(adapter)` method before mounting NLUX.',
             });
         }
 
@@ -54,7 +63,7 @@ export class NluxConvo implements INluxConvo {
 
         rootElement.innerHTML = '';
         const controller = new NluxController(
-            this.theAdapter,
+            adapterToUser,
             rootElement,
             {
                 themeId: 'kensington', // Hardcoded for now - TODO: Make configurable
@@ -118,7 +127,7 @@ export class NluxConvo implements INluxConvo {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapterBuilder: AdapterBuilder<any, any>) {
+    public withAdapter(adapter: StreamingAdapter | PromiseAdapter | AdapterBuilder<any, any>) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -126,15 +135,38 @@ export class NluxConvo implements INluxConvo {
             });
         }
 
-        if (this.theAdapter) {
+        if (this.theAdapterBuilder || this.theAdapter) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to change config. A adapter was already set.',
+                message: 'Unable to change config. A adapter or adapter builder was already set.',
             });
         }
 
-        this.theAdapter = adapterBuilder.create();
-        return this;
+        if (typeof adapter !== 'object' || adapter === null) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set adapter. Invalid adapter or adapter-builder type.',
+            });
+        }
+
+        const anAdapterOrAdapterBuilder = adapter as any;
+
+        if (typeof anAdapterOrAdapterBuilder.create === 'function') {
+            this.theAdapterType = 'builder';
+            this.theAdapterBuilder = anAdapterOrAdapterBuilder.create();
+            return this;
+        }
+
+        if (typeof anAdapterOrAdapterBuilder.send === 'function') {
+            this.theAdapterType = 'instance';
+            this.theAdapter = anAdapterOrAdapterBuilder;
+            return this;
+        }
+
+        throw new NluxUsageError({
+            source: this.constructor.name,
+            message: 'Unable to set adapter. Invalid adapter or adapter-builder implementation.',
+        });
     };
 
     public withClassName(className: string) {

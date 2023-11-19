@@ -33,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nluxConvo = createNluxConvo()
         .withAdapter(adapter)
+        // .withAdapter(myCustomStreamingAdapter)
+        // .withAdapter(myCustomPromiseAdapter)
         .withLayoutOptions({
             maxWidth: 500,
             maxHeight: 500,

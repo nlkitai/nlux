@@ -1,5 +1,5 @@
-import {Adapter} from './adapter';
+import {NluxAdapter} from './adapter';
 
 export interface AdapterBuilder<InboundPayload, OutboundPayload> {
-    create(): Adapter<InboundPayload, OutboundPayload>;
+    create(): NluxAdapter<InboundPayload, OutboundPayload>;
 }

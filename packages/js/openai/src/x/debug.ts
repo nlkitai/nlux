@@ -22,6 +22,6 @@ export const warn = (message: any) => {
         console.warn(`${prefix}${message}`);
     } else {
         prefix && console.warn(prefix);
-        console.warn(message);
+        console.warn(JSON.stringify(message, null, 2));
     }
 };

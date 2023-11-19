@@ -300,15 +300,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
             });
         }
 
-        // Execute actions from actionsOnDomReady queue and clear the queue
-        if (this.actionsOnDomReady.length > 0) {
-            const actionsOnDomReady = this.actionsOnDomReady;
-            this.actionsOnDomReady = [];
-            for (const action of actionsOnDomReady) {
-                domOp(() => action());
-            }
-        }
-
         // Execute the action
         const action = (<any>this.renderedDom.actions)[actionName];
         if (!action) {
@@ -335,7 +326,11 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         }
 
         const result = renderer({
-            appendToRoot: (element: HTMLElement) => root.append(element),
+            appendToRoot: (element: HTMLElement) => {
+                root.append(element);
+                // Run pending DOM actions that were queued before the component was rendered
+                this.runDomActionsQueue();
+            },
             compEvent: this.compEventGetter,
             props: this.rendererProps,
         });
@@ -375,6 +370,18 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
         this.subComponents.delete(id);
         this.subComponentElementIds.delete(id);
+    }
+
+    protected runDomActionsQueue() {
+        requestAnimationFrame(() => {
+            if (this.actionsOnDomReady.length > 0 && this.rendered) {
+                const actionsOnDomReady = this.actionsOnDomReady;
+                this.actionsOnDomReady = [];
+                for (const action of actionsOnDomReady) {
+                    domOp(() => action());
+                }
+            }
+        });
     }
 
     /**
