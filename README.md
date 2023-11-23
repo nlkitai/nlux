@@ -52,15 +52,14 @@ OpenAI dashboard)_
 import {createNluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
-const gpt4Adapter = createAdapter('openai/gpt')
-    .withApiKey('YOUR_OPEN_AI_API_KEY');
+const gptAdapter = createAdapter().withApiKey('YOUR_OPEN_AI_API_KEY');
 ```
 
 Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
 const nluxConvo = createNluxConvo()
-    .withAdapter(gpt4Adapter)
+    .withAdapter(gptAdapter)
     .withPromptBoxOptions({
         placeholder: 'Ask me anything about nuclear physics!'
     })
@@ -90,7 +89,7 @@ import {NluxConvo} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 
 const MyChatComp = () => {
-    const gpt4Adapter = useAdapter('openai/gpt', {
+    const gptAdapter = useAdapter({
         apiKey: 'YOUR_OPEN_AI_API_KEY',
         // 👇 Instruct ChatGPT how to behave (optional)
         initialSystemMessage:
@@ -100,7 +99,7 @@ const MyChatComp = () => {
 
     return (
         <NluxConvo
-            adapter={chatGptAdapter}
+            adapter={gptAdapter}
             promptBoxOptions={{
                 placeholder: 'Ask me anything about nuclear physics!'
             }}
