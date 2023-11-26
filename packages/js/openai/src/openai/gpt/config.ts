@@ -1,11 +1,11 @@
-import {NluxAdapterConfig, NluxAdapterInfo} from '@nlux/nlux';
+import {StandardAdapterConfig, StandardAdapterInfo} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {decode as fetchDecode} from './codec/fetch/decode';
 import {encode as fetchEncode} from './codec/fetch/encode';
 import {decode as streamDecode} from './codec/stream/decode';
 import {encode as streamEncode} from './codec/stream/encode';
 
-export const gptStreamingAdapterConfig: NluxAdapterConfig<
+export const gptStreamingAdapterConfig: StandardAdapterConfig<
     OpenAI.Chat.Completions.ChatCompletionChunk,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > = Object.freeze({
@@ -13,7 +13,7 @@ export const gptStreamingAdapterConfig: NluxAdapterConfig<
     decodeMessage: streamDecode,
 });
 
-export const gptFetchAdapterConfig: NluxAdapterConfig<
+export const gptFetchAdapterConfig: StandardAdapterConfig<
     OpenAI.Chat.Completions.ChatCompletion,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > = Object.freeze({
@@ -21,9 +21,8 @@ export const gptFetchAdapterConfig: NluxAdapterConfig<
     decodeMessage: fetchDecode,
 });
 
-export const info: NluxAdapterInfo = {
+export const info: StandardAdapterInfo = {
     id: 'nlux-gpt-adapter',
-    connectionType: 'http',
     capabilities: {
         textChat: true,
         audio: false,
@@ -37,4 +36,4 @@ export const info: NluxAdapterInfo = {
     outputFormats: ['text'],
 };
 
-export const gptAdapterInfo = Object.freeze(info) as NluxAdapterInfo;
+export const gptAdapterInfo = Object.freeze(info) as StandardAdapterInfo;

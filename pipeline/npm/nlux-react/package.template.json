@@ -1,7 +1,7 @@
 {
   "name": "@nlux/nlux-react",
   "version": "{versions.nlux}",
-  "description": "NLUX React is a library for building conversational AI interfaces, with support for OpenAI ChatGPT.",
+  "description": "NLUX React is a library for building conversational AI interfaces, with support for OpenAI, HuggingFace, and more.",
   "repository": {
     "directory": "packages/react/nlux"
   },
@@ -10,5 +10,9 @@
   },
   "peerDependencies": {
     "react": "^{versions.peerDependencies.react}"
-  }
+  },
+  "main": "index.js",
+  "types": "nlux-react.d.ts",
+  "module": "esm/nlux-react.js",
+  "browser": "umd/nlux-react.js"
 }

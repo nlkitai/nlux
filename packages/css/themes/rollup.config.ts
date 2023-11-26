@@ -3,7 +3,6 @@ import {join} from 'path';
 import csso from 'postcss-csso';
 import postcssImport from 'postcss-import';
 import {LogLevel, RollupOptions} from 'rollup';
-import generatePackageJson from 'rollup-plugin-generate-package-json';
 import postcss from 'rollup-plugin-postcss';
 // @ts-ignore
 import {outputFolder} from '../../../pipeline/utils/paths.mjs';
@@ -25,15 +24,6 @@ const cssEntry = (input: string, output: string) => ({
                     plugins: [csso({comments: false, restructure: false})],
                 }),
             ],
-        }),
-        generatePackageJson({
-            outputFolder: themesOutputFolder,
-            baseContents: {
-                main: 'kensington.css',
-                ...packageJsonData,
-                dependencies: {},
-                peerDependencies: {},
-            },
         }),
     ],
     output: [

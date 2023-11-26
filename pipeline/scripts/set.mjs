@@ -8,6 +8,8 @@ const copyStructure = async (env) => {
     await run(`cp -r pipeline/npm/nlux-react dist/${env}/nlux-react`);
     await run(`cp -r pipeline/npm/openai dist/${env}/openai`);
     await run(`cp -r pipeline/npm/openai-react dist/${env}/openai-react`);
+    await run(`cp -r pipeline/npm/hf dist/${env}/hf`);
+    await run(`cp -r pipeline/npm/hf-react dist/${env}/hf-react`);
     await run(`cp -r pipeline/npm/themes dist/${env}/themes`);
 };
 
@@ -39,16 +41,20 @@ try {
 
     await run('yarn workspace @nlux-dev/nlux install');
     await run('yarn workspace @nlux-dev/openai install');
+    await run('yarn workspace @nlux-dev/hf install');
     await run('yarn workspace @nlux-dev/nlux-react install');
     await run('yarn workspace @nlux-dev/openai-react install');
+    await run('yarn workspace @nlux-dev/hf-react install');
     await run('yarn workspace @nlux-dev/themes install');
 
     await run('cd pipeline/utils && tsc --project tsconfig.json');
 
     await run('yarn workspace @nlux-dev/nlux build');
     await run('yarn workspace @nlux-dev/openai build');
+    await run('yarn workspace @nlux-dev/hf build');
     await run('yarn workspace @nlux-dev/nlux-react build');
     await run('yarn workspace @nlux-dev/openai-react build');
+    await run('yarn workspace @nlux-dev/hf-react build');
     await run('yarn workspace @nlux-dev/themes build');
 
 } catch (e) {

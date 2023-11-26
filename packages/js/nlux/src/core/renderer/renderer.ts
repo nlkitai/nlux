@@ -14,7 +14,7 @@ import {LayoutOptions} from '../options/layoutOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<InboundPayload, OutboundPayload> {
-    private static readonly defaultThemeName = 'kensington';
+    private static readonly defaultThemeId = 'kensington';
     private readonly context: NluxContext;
     private readonly rootClassName: string = 'nluxc-root';
     private chatRoom: CompChatRoom | null = null;
@@ -28,7 +28,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private theConversationOptions: Readonly<ConversationOptions> = {};
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
-    private theThemeId: string | null = null;
+    private theThemeId: string;
 
     constructor(
         context: NluxContext,
@@ -50,7 +50,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         this.chatRoom = null;
 
         this.theClassName = props?.className ?? null;
-        this.theThemeId = props?.themeId ?? null;
+        this.theThemeId = props?.themeId ?? NluxRenderer.defaultThemeId;
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
@@ -61,7 +61,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     }
 
     public get themeId() {
-        return this.theThemeId || NluxRenderer.defaultThemeName;
+        return this.theThemeId;
     }
 
     destroy() {
@@ -81,7 +81,6 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         this.isMounted = false;
         this.isDestroyed = true;
 
-        this.theThemeId = null;
         this.theLayoutOptions = {};
         this.theConversationOptions = {};
         this.thePromptBoxOptions = {};

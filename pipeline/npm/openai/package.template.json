@@ -6,9 +6,13 @@
     "directory": "packages/js/openai"
   },
   "dependencies": {
-    "@nlux/nlux": "^{versions.nlux}",
-    "openai": "^{versions.dependencies.openai}"
+    "openai": "^{versions.dependencies.openai}",
+    "@nlux/nlux": "^{versions.nlux}"
   },
   "peerDependencies": {
-  }
+  },
+  "main": "index.js",
+  "types": "openai.d.ts",
+  "module": "esm/openai.js",
+  "browser": "umd/openai.js"
 }

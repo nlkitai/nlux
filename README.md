@@ -14,7 +14,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Build Custom ChatGPT Interfaces In Minutes** - Easily build chatbot and conversational interfaces with just a few
   lines of code.
 * **React Components & Hooks** - `<NluxConvo />` for UI and `useAdapter` hook for easy integration.
-* **Flexible LLM Adapters** - Provided adapter for `ChatGPT`. More coming soon.
+* **Flexible LLM Adapters** - Provided adapters for `ChatGPT` and `HuggingFace` LLMs, and the ability to create
+  your own custom adapters.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 **And Also ✨**
@@ -28,10 +29,21 @@ can add conversational AI capabilities and interact with your favourite LLM.
 This Github repository contains the source code for the NLUX library.<br />
 It is a monorepo that contains the following NPM packages:
 
-* [`@nlux/nlux`](https://www.npmjs.com/package/@nlux/nlux) - The NLUX Vanilla JS library.
-* [`@nlux/openai`](https://www.npmjs.com/package/@nlux/openai) - An adapter for the OpenAI API.
+**React JS Packages:**
+
 * [`@nlux/nlux-react`](https://www.npmjs.com/package/@nlux/nlux-react) - React JS components for NLUX.
 * [`@nlux/openai-react`](https://www.npmjs.com/package/@nlux/openai-react) - React hooks for the OpenAI API.
+* [`@nlux/hf-react`](https://www.npmjs.com/package/@nlux/hf-react) - React hooks and pre-processors for the Hugging Face
+  Inference API
+
+**Vanilla JS Packages:**
+
+* [`@nlux/nlux`](https://www.npmjs.com/package/@nlux/nlux) - The NLUX Vanilla JS library.
+* [`@nlux/openai`](https://www.npmjs.com/package/@nlux/openai) - Adapter for the OpenAI API.
+* [`@nlux/hf`](https://www.npmjs.com/package/@nlux/hf) - Adapter and pre-processors for the Hugging Face Inference API.
+
+**Themes Package:**
+
 * [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) - Themes and CSS styles for NLUX.
 
 Please visit each package's NPM page for information on how to use it.
@@ -49,7 +61,7 @@ _(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-
 OpenAI dashboard)_
 
 ```js
-import {createNluxConvo} from '@nlux/nlux';
+import {createConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
 const gptAdapter = createAdapter().withApiKey('YOUR_OPEN_AI_API_KEY');
@@ -58,13 +70,14 @@ const gptAdapter = createAdapter().withApiKey('YOUR_OPEN_AI_API_KEY');
 Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
-const nluxConvo = createNluxConvo()
+=======
+const nluxConvo = createConvo()
     .withAdapter(gptAdapter)
     .withPromptBoxOptions({
         placeholder: 'Ask me anything about nuclear physics!'
     })
     // 👇 Instruct ChatGPT how to behave (optional)
-    .withInitialSystemMessage(
+    .withSystemMessage(
         'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research'
     );
 
@@ -92,7 +105,7 @@ const MyChatComp = () => {
     const gptAdapter = useAdapter({
         apiKey: 'YOUR_OPEN_AI_API_KEY',
         // 👇 Instruct ChatGPT how to behave (optional)
-        initialSystemMessage:
+        systemMessage:
             'Act as a Nobel Prize in Physics winner who is ' +
             'helping a PHD student in their research'
     });
@@ -125,7 +138,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.4.1/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.5.9/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

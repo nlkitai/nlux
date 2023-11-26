@@ -1,48 +1,45 @@
 import {
+    DataTransferMode,
     Message,
-    NluxAdapter,
-    NluxAdapterConfig,
-    NluxAdapterInfo,
-    NluxAdapterStatus,
+    StandardAdapter,
+    StandardAdapterConfig,
+    StandardAdapterInfo,
+    StandardAdapterStatus,
     StreamingAdapterObserver,
+    warn,
 } from '@nlux/nlux';
 import OpenAI from 'openai';
-import {warn} from '../../../x/debug';
 import {gptAdapterInfo} from '../config';
-import {OpenAIChatModel} from '../types/models';
+import {OpenAiAdapterOptions} from '../types/adapterOptions';
+import {OpenAIModel} from '../types/model';
+import {defaultChatGptModel, defaultDataTransferMode} from './config';
 
-export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implements NluxAdapter<
+export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> implements StandardAdapter<
     InboundPayload, OutboundPayload
 > {
-    protected readonly dataExchangeMode: 'stream' | 'fetch' = 'fetch';
-    protected readonly model: OpenAIChatModel;
+    protected readonly model: OpenAIModel;
     protected readonly openai: OpenAI;
-    protected currentStatus: NluxAdapterStatus = 'disconnected';
-    protected initialSystemMessage: string | null = 'Act as a helpful assistant to the user';
+    protected readonly theDataTransferMode: DataTransferMode;
+    protected currentStatus: StandardAdapterStatus = 'disconnected';
+    protected systemMessage: string | null = 'Act as a helpful assistant to the user';
 
     protected constructor({
-        initialSystemMessage,
+        systemMessage,
         apiKey,
-        dataExchangeMode,
+        dataTransferMode,
         model,
-    }: {
-        initialSystemMessage?: string;
-        apiKey: string;
-        dataExchangeMode: 'stream' | 'fetch',
-        model: OpenAIChatModel,
-    }) {
+    }: OpenAiAdapterOptions) {
         this.currentStatus = 'disconnected';
-        this.dataExchangeMode = dataExchangeMode;
+        this.theDataTransferMode = dataTransferMode ?? defaultDataTransferMode;
+        this.model = model ?? defaultChatGptModel;
 
         this.openai = new OpenAI({
             apiKey,
             dangerouslyAllowBrowser: true,
         });
 
-        this.model = model;
-
-        if (initialSystemMessage) {
-            this.initialSystemMessage = initialSystemMessage;
+        if (systemMessage) {
+            this.systemMessage = systemMessage;
         }
 
         warn('OpenAI GPT adapter has been initialized in browser mode using option "dangerouslyAllowBrowser". '
@@ -51,20 +48,23 @@ export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implem
             + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety');
     }
 
-    abstract get config(): NluxAdapterConfig<InboundPayload, OutboundPayload>;
+    abstract get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
+
+    get dataTransferMode(): DataTransferMode {
+        return this.theDataTransferMode;
+    }
 
     get id() {
         return this.info.id;
     }
 
-    get info(): NluxAdapterInfo {
+    get info(): StandardAdapterInfo {
         return gptAdapterInfo;
     }
 
-    get status(): NluxAdapterStatus {
+    get status(): StandardAdapterStatus {
         return this.currentStatus;
     }
-
 
     async decode(payload: InboundPayload): Promise<Message> {
         const {decodeMessage} = this.config;
@@ -75,6 +75,8 @@ export abstract class GptAbstractAdapter<InboundPayload, OutboundPayload> implem
         const {encodeMessage} = this.config;
         return encodeMessage(message);
     }
+
+    abstract send(message: Message): Promise<Message>;
 
     abstract send(message: Message, observer: StreamingAdapterObserver): void;
 }

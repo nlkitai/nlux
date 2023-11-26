@@ -1,28 +1,20 @@
-import {NluxUsageError} from '@nlux/nlux';
-import {createAdapter} from '@nlux/openai';
-import {OpenAIUseAdapterOptions} from '../types/options';
+import {NluxUsageError} from '@nlux/nlux-react';
+import {createAdapter, OpenAiAdapterOptions} from '@nlux/openai';
 
 const source = 'hooks/initAdapter';
 
-export const initAdapter = (adapterType: 'openai/gpt', options: OpenAIUseAdapterOptions) => {
+export const initAdapter = (options: OpenAiAdapterOptions) => {
     const {
         apiKey,
-        dataExchangeMode,
-        initialSystemMessage,
+        dataTransferMode,
+        systemMessage,
         model,
     } = options || {};
 
-    if (adapterType !== 'openai/gpt') {
+    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
         throw new NluxUsageError({
             source,
-            message: 'Adapter type not supported',
-        });
-    }
-
-    if (dataExchangeMode && dataExchangeMode !== 'stream' && dataExchangeMode !== 'fetch') {
-        throw new NluxUsageError({
-            source,
-            message: 'Data exchange mode not supported',
+            message: 'Data transfer mode not supported',
         });
     }
 
@@ -33,59 +25,18 @@ export const initAdapter = (adapterType: 'openai/gpt', options: OpenAIUseAdapter
         });
     }
 
-    let newAdapter: any = createAdapter(adapterType);
+    let newAdapter = createAdapter().withApiKey(apiKey);
 
     if (model !== undefined) {
-        if (typeof newAdapter.withModel !== 'function') {
-            throw new NluxUsageError({
-                source,
-                message: 'Model provided as option but adapter does not support setting a model',
-            });
-        }
-
         newAdapter = newAdapter.withModel(model);
     }
 
-    if (typeof newAdapter.withApiKey !== 'function') {
-        throw new NluxUsageError({
-            source,
-            message: 'Adapter does not support API key',
-        });
-    } else {
-        newAdapter = newAdapter.withApiKey(apiKey);
+    if (dataTransferMode) {
+        newAdapter = newAdapter.withDataTransferMode(dataTransferMode);
     }
 
-    if (dataExchangeMode === 'stream') {
-        if (typeof newAdapter.useStreamingMode !== 'function') {
-            throw new NluxUsageError({
-                source,
-                message: 'Adapter does not support streaming mode',
-            });
-        }
-
-        newAdapter = newAdapter.useStreamingMode();
-    }
-
-    if (dataExchangeMode === 'fetch') {
-        if (typeof newAdapter.useFetchingMode !== 'function') {
-            throw new NluxUsageError({
-                source,
-                message: 'Adapter does not support fetch mode',
-            });
-        }
-
-        newAdapter = newAdapter.useFetchingMode();
-    }
-
-    if (initialSystemMessage) {
-        if (typeof newAdapter.withInitialSystemMessage !== 'function') {
-            throw new NluxUsageError({
-                source,
-                message: 'Adapter does not support initial system message',
-            });
-        }
-
-        newAdapter = newAdapter.withInitialSystemMessage(initialSystemMessage);
+    if (systemMessage) {
+        newAdapter = newAdapter.withSystemMessage(systemMessage);
     }
 
     return newAdapter;

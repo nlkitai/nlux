@@ -23,14 +23,14 @@ try {
         await run(commands[i]);
     }
 
-    ['nlux', 'nlux-react', 'openai', 'openai-react', 'themes'].forEach((name) => {
+    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'themes'].forEach((name) => {
         symlinkBuiltPackageToEmulatorFolder(name);
     });
 
     //
     // Symlink dependencies to emulator folder
     //
-    ['react', 'react-dom', 'openai'].forEach((name) => {
+    ['react', 'react-dom', 'openai', 'hf'].forEach((name) => {
         symlinkNodeModuleToEmulatorFolder(name);
     });
 

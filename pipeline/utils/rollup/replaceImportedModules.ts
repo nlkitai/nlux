@@ -5,6 +5,8 @@ export const nluxImportMap = {
     '@nlux/nlux-react': '/packages/@nlux/nlux-react/{nluxBundlerPackageType}/nlux-react.js',
     '@nlux/openai': '/packages/@nlux/openai/{nluxBundlerPackageType}/openai.js',
     '@nlux/openai-react': '/packages/@nlux/openai-react/{nluxBundlerPackageType}/openai-react.js',
+    '@nlux/hf': '/packages/@nlux/hf/{nluxBundlerPackageType}/hf.js',
+    '@nlux/hf-react': '/packages/@nlux/hf-react/{nluxBundlerPackageType}/hf-react.js',
 };
 
 export const reactImportsByPackageType = (nluxBundlerPackageType: 'esm' | 'cjs' | 'umd') => ({
@@ -12,6 +14,7 @@ export const reactImportsByPackageType = (nluxBundlerPackageType: 'esm' | 'cjs' 
     'react-dom': `/packages/react-dom/${nluxBundlerPackageType === 'cjs' ? 'cjs' : 'umd'}/react-dom.development.js`,
     'react-dom/client': `/packages/react-dom/client.js`, // CJS only
     'openai': `/packages/openai/index.${nluxBundlerPackageType === 'esm' ? 'mjs' : 'js'}`,
+    'hf': `/packages/hf/index.${nluxBundlerPackageType === 'esm' ? 'mjs' : 'js'}`,
 });
 
 const packageTypeFromEnv = process?.env?.NLUX_BUNDLER_PACKAGE_TYPE?.toLowerCase() as any;

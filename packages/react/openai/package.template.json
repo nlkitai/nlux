@@ -6,23 +6,27 @@
     "build": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
+  "dependencies": {
+    "@nlux/openai": "{versions.nlux}"
+  },
   "peerDependencies": {
-    "@nlux/nlux": "{versions.nlux}",
-    "@nlux/openai": "{versions.nlux}",
+    "@nlux/nlux-react": "{versions.nlux}",
     "react": "^{versions.peerDependencies.react}"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
-    "@rollup/plugin-replace": "^5.0.4",
+    "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-strip": "^3.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@types/rollup-plugin-generate-package-json": "^3.2.5",
-    "rollup": "^4.1.4",
+    "rollup": "^4.5.2",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
-    "rollup-plugin-generate-package-json": "^3.2.0",
-    "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.6.2"
-  }
+  },
+  "main": "index.js",
+  "types": "openai-react.d.ts",
+  "module": "esm/openai-react.js",
+  "browser": "umd/openai-react.js"
 }

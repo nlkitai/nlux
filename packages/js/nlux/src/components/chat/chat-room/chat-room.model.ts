@@ -2,6 +2,7 @@ import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
+import {isStandardAdapter, StandardAdapter} from '../../../types/standardAdapter';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';
@@ -117,7 +118,11 @@ export class CompChatRoom extends BaseComp<
     }
 
     private handlePromptBoxSubmit() {
+        const adapterAsStandardAdapter: StandardAdapter<any, any> | undefined = isStandardAdapter(this.context.adapter as any)
+            ? this.context.adapter as any : undefined;
+
         submitPromptFactory({
+            dataTransferMode: adapterAsStandardAdapter ? adapterAsStandardAdapter.dataTransferMode : undefined,
             context: this.context,
             promptBoxInstance: this.promptBoxInstance,
             conversation: this.conversation,

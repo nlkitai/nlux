@@ -20,16 +20,16 @@ export interface INluxConvo {
     withClassName(
         className: string,
     ): INluxConvo;
-
     withConversationOptions(
         conversationOptions: ConversationOptions,
     ): INluxConvo;
-
     withLayoutOptions(
         layoutOptions: LayoutOptions,
     ): INluxConvo;
-
     withPromptBoxOptions(
         promptBoxOptions: PromptBoxOptions,
+    ): INluxConvo;
+    withTheme(
+        themeId: string,
     ): INluxConvo;
 }

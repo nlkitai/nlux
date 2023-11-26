@@ -1,6 +1,6 @@
-import {OpenAIChatModel} from '../types/models';
+import {DataTransferMode} from '@nlux/nlux';
+import {OpenAIModel} from '../types/model';
 
-export const defaultChatGptModel: OpenAIChatModel = 'gpt-4';
+export const defaultChatGptModel: OpenAIModel = 'gpt-4';
 
-export const defaultDataExchangeMode: 'stream' | 'fetch' = 'stream';
-
+export const defaultDataTransferMode: DataTransferMode = 'stream';

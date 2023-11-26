@@ -1,0 +1,19 @@
+{
+  "name": "@nlux/hf-react",
+  "version": "{versions.nlux}",
+  "description": "The Hugging Face adapters for NLUX React, the React JS library for building conversational AI interfaces.",
+  "repository": {
+    "directory": "packages/react/hf"
+  },
+  "dependencies": {
+    "@nlux/hf": "^{versions.nlux}"
+  },
+  "peerDependencies": {
+    "@nlux/nlux-react": "{versions.nlux}",
+    "react": "^{versions.peerDependencies.react}"
+  },
+  "main": "index.js",
+  "types": "hf-react.d.ts",
+  "module": "esm/hf-react.js",
+  "browser": "umd/hf-react.js"
+}

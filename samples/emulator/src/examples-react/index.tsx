@@ -14,13 +14,12 @@ const ExampleWrapper = () => {
         setMaxHeight(newHeight);
     }, []);
 
-    const adapter = useAdapter('openai/gpt', {
+    const adapter = useAdapter({
         apiKey,
-        // model: 'gpt-3.5-turbo',
-        // dataExchangeMode: 'stream',
-        // model: 'gpt-3.5-turbo',
-        dataExchangeMode: 'stream',
-        initialSystemMessage: 'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research',
+        model: 'gpt-3.5-turbo',
+        // dataTransferMode: 'stream',
+        dataTransferMode: 'fetch',
+        systemMessage: 'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research',
     });
 
     if (!adapter) {
@@ -28,21 +27,20 @@ const ExampleWrapper = () => {
     }
 
     return (
-        <>
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <span>{key}</span>
             <button onClick={() => setKey(key + 1)}>Reset</button>
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
-            <div style={{height: '550px'}}>
+            <div style={{height: '550px', width: '600px'}}>
                 <NluxConvo
                     key={key}
                     className="chat-emulator-convo"
                     adapter={adapter}
-                    layoutOptions={{
-                        maxHeight,
-                        maxWidth: 500,
-                    }}
                     conversationOptions={{
                         scrollWhenGenerating: true,
+                    }}
+                    layoutOptions={{
+                        maxHeight,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
                     promptBoxOptions={{
@@ -51,7 +49,7 @@ const ExampleWrapper = () => {
                     }}
                 />
             </div>
-        </>
+        </div>
     );
 };
 

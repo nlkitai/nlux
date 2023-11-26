@@ -1,6 +1,7 @@
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
+import {Message} from '../../../types/message';
 import {debug, warn} from '../../../x/debug';
 import {renderMessage} from './message.render';
 import {
@@ -98,7 +99,7 @@ export class CompMessage extends BaseComp<
      * It should be called when the promise is resolved.
      * @param {string} content
      */
-    public setContent(content: string) {
+    public setContent(content: Message) {
         if (this.contentType !== 'promise') {
             throw new Error(`CompMessage: content can only be set when contentType is 'promise'!`);
         }

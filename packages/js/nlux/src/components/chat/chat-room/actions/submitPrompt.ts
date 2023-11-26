@@ -1,5 +1,6 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
+import {DataTransferMode, SendInFetchMode, SendInStreamMode} from '../../../../types/adapter';
 import {NluxContext} from '../../../../types/context';
 import {Message} from '../../../../types/message';
 import {CompConversation} from '../../conversation/conversation.model';
@@ -12,7 +13,9 @@ export const submitPromptFactory = ({
     conversation,
     messageToSend,
     resetPromptBox,
+    dataTransferMode,
 }: {
+    dataTransferMode?: DataTransferMode;
     context: NluxContext;
     promptBoxInstance: CompPromptBox;
     conversation: CompConversation;
@@ -35,11 +38,15 @@ export const submitPromptFactory = ({
 
             //
             // Important: This is where we sent the message
-            // We don't know if the message is sent as a promise or as an observable, that's why we always
-            // send it with an observable, and then we check the response type.
+            // When dataTransferMode is 'fetch', the adapter will send the message as a promise.
+            // When the dataTransferMode is 'stream', or when the dataTransferMode is not specified, we always send
+            // the message along with an observable as a second parameter, and let the adapter decide if it wants to
+            // use it or not.
             //
             const observable = new Observable<Message>({replay: true});
-            const sentResponse = context.adapter.send(messageToSend, observable);
+            const sentResponse = dataTransferMode === 'fetch'
+                ? (context.adapter.send as SendInFetchMode)(messageToSend)
+                : (context.adapter.send as SendInFetchMode | SendInStreamMode)(messageToSend, observable);
 
             // Here we determine if the message was sent as a promise or as an observable
             let messageContentType: MessageContentType;

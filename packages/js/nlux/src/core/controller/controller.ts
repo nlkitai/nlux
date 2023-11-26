@@ -1,14 +1,14 @@
 import {ExceptionId, NluxExceptions} from '../../exceptions/exceptions';
-import {NluxAdapter} from '../../types/adapter';
-import {Adapter} from '../../types/adapterInterface';
+import {Adapter} from '../../types/adapter';
 import {NluxContext} from '../../types/context';
 import {NluxProps} from '../../types/props';
+import {StandardAdapter} from '../../types/standardAdapter';
 import {warn} from '../../x/debug';
 import {uid} from '../../x/uid';
 import {NluxRenderer} from '../renderer/renderer';
 
 export class NluxController<InboundPayload = any, OutboundPayload = any> {
-    private readonly adapter: Adapter | NluxAdapter<any, any>;
+    private readonly adapter: Adapter | StandardAdapter<any, any>;
     private readonly nluxInstanceId = uid();
     private readonly rootCompId: string;
     private readonly rootElement: HTMLElement;
@@ -33,7 +33,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
     private renderer: NluxRenderer<InboundPayload, OutboundPayload> | null = null;
 
     constructor(
-        adapter: Adapter | NluxAdapter<any, any>,
+        adapter: Adapter | StandardAdapter<any, any>,
         rootElement: HTMLElement,
         props: NluxProps | null = null,
     ) {

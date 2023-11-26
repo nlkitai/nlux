@@ -1,4 +1,4 @@
-import {createNluxConvo, NluxConvo} from '@nlux/nlux';
+import {createConvo, NluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
 debugger;
@@ -20,18 +20,16 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Root element not found');
     }
 
-    const adapter = createAdapter('openai/gpt')
+    const adapter = createAdapter()
         .withApiKey(apiKey)
         // .withModel('gpt-4')
-        // .useStreamingMode()
-        .useFetchingMode()
-        // .useStreamingMode()
-        .withInitialSystemMessage(
+        .withDataTransferMode('stream')
+        .withSystemMessage(
             'Act as a Nobel Prize in Physics winner who is ' +
             'helping a PHD student in their research',
         );
 
-    nluxConvo = createNluxConvo()
+    nluxConvo = createConvo()
         .withAdapter(adapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)

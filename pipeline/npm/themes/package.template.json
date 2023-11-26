@@ -6,5 +6,6 @@
     "directory": "packages/css/themes"
   },
   "dependencies": {},
-  "peerDependencies": {}
+  "peerDependencies": {},
+  "main": "kensington.css"
 }

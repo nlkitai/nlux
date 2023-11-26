@@ -13,8 +13,10 @@ const nodeModulesPath = join(outputFolder, 'packages');
 const externals = [
     '@nlux/nlux',
     '@nlux/openai',
+    '@nlux/hf',
     '@nlux/nlux-react',
     '@nlux/openai-react',
+    '@nlux/hf-react',
     'openai',
     'react',
     'react-dom',
@@ -46,6 +48,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                     'process.env.NODE_ENV': JSON.stringify('development'),
                     'from \'@nlux/nlux\'': `from '/packages/@nlux/nlux/esm/nlux.js'`,
                     'from \'@nlux/openai\'': `from '/packages/@nlux/openai/esm/openai.js'`,
+                    'from \'@nlux/hf\'': `from '/packages/@nlux/hf/esm/hf.js'`,
                     'from \'openai\'': `from '/packages/openai/index.mjs'`,
                 },
             }),
@@ -90,6 +93,45 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         output: [
             {
                 file: `${outputFolder}/examples-react/index.js`,
+                format: 'umd',
+                sourcemap: true,
+                strict: true,
+                esModule: false,
+                name: 'nluxEmulatorReactExample',
+            },
+        ],
+    },
+    //
+    // React JS + HF in UMD format
+    //
+    {
+        input: './src/examples-react-hf/index.tsx',
+        plugins: [
+            esbuild({
+                jsx: 'transform',
+                jsxFactory: 'React.createElement',
+                jsxFragment: 'React.Fragment',
+            }),
+            nodeResolve({
+                modulePaths: [
+                    nodeModulesPath,
+                ],
+                rootDir: '/packages',
+                browser: true,
+            }),
+            commonjs(),
+            replace({
+                delimiters: ['', ''],
+                preventAssignment: false,
+                values: {
+                    'process.env.NODE_ENV': JSON.stringify('development'),
+                },
+            }),
+        ],
+        external: externals,
+        output: [
+            {
+                file: `${outputFolder}/examples-react-hf/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,

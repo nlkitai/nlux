@@ -2,23 +2,19 @@ import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
-import {join} from 'path';
+import terser from '@rollup/plugin-terser';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
-import generatePackageJson from 'rollup-plugin-generate-package-json';
-import {terser} from 'rollup-plugin-terser';
 // @ts-ignore
 import {outputFolder} from '../../../pipeline/utils/paths.mjs';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
-import {readJsonFile} from '../../../pipeline/utils/rollup/readJsonFile';
 import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const packageName = '@nlux/openai';
 const outputFile = 'openai';
 const packageOutputFolder = outputFolder(outputFile);
-const packageJsonData = readJsonFile(join(packageOutputFolder, 'package.json'));
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     {
@@ -42,16 +38,6 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 preventAssignment: true,
             }),
             isProduction && terser(),
-            generatePackageJson({
-                outputFolder: packageOutputFolder,
-                baseContents: {
-                    ...packageJsonData,
-                    main: `index.js`,
-                    types: `${outputFile}.d.ts`,
-                    module: `esm/${outputFile}.js`,
-                    browser: `umd/${outputFile}.js`,
-                },
-            }),
         ],
         external: [
             '@nlux/nlux',

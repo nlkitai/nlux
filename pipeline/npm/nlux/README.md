@@ -10,7 +10,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 * **Build Custom ChatGPT Interfaces In Minutes** - Easily build chatbot and conversational interfaces with just a few
   lines of code.
-* **Flexible LLM Adapters** - Provided adapter for `ChatGPT`. More coming soon.
+* **Flexible LLM Adapters** - Provided adapters for `ChatGPT` and `HuggingFace` LLMs, and the ability to create
+  your own custom adapters.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 * **ChatGPT System Messages** - Instruct ChatGPT to "act as" a specific persona, give it more context,
   and get more personalized responses to all your prompts.
@@ -35,13 +36,13 @@ _(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-
 OpenAI dashboard)_
 
 ```js
-import {createNluxConvo} from '@nlux/nlux';
+import {createConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
-const chatGptAdapter = createAdapter('openai/gpt')
+const chatGptAdapter = createAdapter()
     .withApiKey('YOUR_OPEN_AI_API_KEY')
     // 👇 Instruct ChatGPT how to behave (optional)
-    .withInitialSystemMessage(
+    .withSystemMessage(
         'Act as a Nobel Prize in Physics winner who is ' +
         'helping a PHD student in their research. Write short answers. Be funny!'
     );
@@ -50,7 +51,7 @@ const chatGptAdapter = createAdapter('openai/gpt')
 Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
-const nluxConvo = createNluxConvo()
+const nluxConvo = createConvo()
     .withAdapter(chatGptAdapter)
     .withConversationOptions({
         scrollWhenGenerating: true,
@@ -76,7 +77,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.4.1/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.5.9/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

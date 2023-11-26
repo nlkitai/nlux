@@ -1,8 +1,8 @@
 import {registerAllComponents} from '../components/components';
-import {NluxAdapter} from '../types/adapter';
+import {Adapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
-import {Adapter, PromiseAdapter, StreamingAdapter} from '../types/adapterInterface';
 import {NluxProps} from '../types/props';
+import {StandardAdapter} from '../types/standardAdapter';
 import {debug, warn} from '../x/debug';
 import {NluxController} from './controller/controller';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from './error';
@@ -13,12 +13,13 @@ import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class NluxConvo implements INluxConvo {
     protected theAdapter: Adapter | null = null;
-    protected theAdapterBuilder: NluxAdapter<any, any> | null = null;
+    protected theAdapterBuilder: StandardAdapter<any, any> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
+    protected theThemeId: string | null = null;
     private controller: NluxController | null = null;
 
     public get mounted(): boolean {
@@ -45,7 +46,7 @@ export class NluxConvo implements INluxConvo {
             });
         }
 
-        const adapterToUser: Adapter | NluxAdapter<any, any> | null =
+        const adapterToUser: Adapter | StandardAdapter<any, any> | null =
             this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
                 : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
                     ? this.theAdapterBuilder
@@ -66,7 +67,7 @@ export class NluxConvo implements INluxConvo {
             adapterToUser,
             rootElement,
             {
-                themeId: 'kensington', // Hardcoded for now - TODO: Make configurable
+                themeId: this.theThemeId ?? undefined,
                 className: this.theClassName ?? undefined,
                 layoutOptions: this.theLayoutOptions ?? {},
                 promptBoxOptions: this.thePromptBoxOptions ?? {},
@@ -127,7 +128,7 @@ export class NluxConvo implements INluxConvo {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapter: StreamingAdapter | PromiseAdapter | AdapterBuilder<any, any>) {
+    public withAdapter(adapter: Adapter | AdapterBuilder<any, any>) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -243,6 +244,18 @@ export class NluxConvo implements INluxConvo {
         }
 
         this.thePromptBoxOptions = promptBoxOptions;
+        return this;
+    }
+
+    withTheme(themeId: string): INluxConvo {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set theme. NLUX is already mounted.',
+            });
+        }
+
+        this.theThemeId = themeId;
         return this;
     }
 }

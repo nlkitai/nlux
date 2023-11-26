@@ -1,11 +1,12 @@
 import {NluxConvo} from './core/nluxConvo';
 
 export {NluxConvo} from './core/nluxConvo';
-export const createNluxConvo = (): NluxConvo => new NluxConvo();
+export const createConvo = (): NluxConvo => new NluxConvo();
 
 export {Observable} from './core/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
 export {createMdStreamRenderer} from './utils/md/streamParser';
+export {debug, warn} from './x/debug';
 
 export type {ExceptionId} from './exceptions/exceptions';
 export type {ConversationOptions} from './core/options/conversationOptions';
@@ -16,19 +17,28 @@ export type {IObserver} from './core/bus/observer';
 export type {ExposedConfig} from './core/config';
 
 export type {NluxProps} from './types/props';
-export type {NluxAdapter, NluxAdapterStatus, NluxAdapterEvent, AdapterEventData} from './types/adapter';
-export type {NluxAdapterConfig, NluxAdapterInfo} from './types/adapterConfig';
 
 export type {
-    PromiseAdapter,
-    StreamingAdapter,
+    StandardAdapter,
+    StandardAdapterEvent,
+    StandardAdapterStatus,
+    StandardAdapterEventData,
+} from './types/standardAdapter';
+
+export type {
+    StandardAdapterConfig,
+    StandardAdapterInfo,
+} from './types/standardAdapterConfig';
+
+export type {
+    DataTransferMode,
+    Adapter,
+    SendInStreamMode,
+    SendInFetchMode,
     StreamingAdapterObserver,
-} from './types/adapterInterface';
+} from './types/adapter';
 
 export type {AdapterBuilder} from './types/adapterBuilder';
-export type {IFetchAdapter} from './types/adapter/fetchAdapter';
-export type {ISseAdapter} from './types/adapter/sseAdapter';
-export type {IWebSocketAdapter} from './types/adapter/webSocketAdapter';
 
 export type {Participant} from './types/participant';
 export type {Message} from './types/message';

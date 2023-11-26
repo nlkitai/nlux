@@ -11,7 +11,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Build Custom ChatGPT Interfaces In Minutes** - Easily build chatbot and conversational interfaces with just a few
   lines of code.
 * **React Components & Hooks** - `<NluxConvo />` for UI and `useAdapter` hook for easy integration.
-* **Flexible LLM Adapters** - Provided adapter for `ChatGPT`. More coming soon.
+* **Flexible LLM Adapters** - Provided adapters for `ChatGPT` and `HuggingFace` LLMs, and the ability to create
+  your own custom adapters.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 * **ChatGPT System Messages** - Instruct ChatGPT to "act as" a specific persona, give it more context,
   and get more personalized responses to all your prompts.
@@ -39,17 +40,17 @@ import {NluxConvo} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 
 const MyChatComp = () => {
-    const chatGptAdapter = useAdapter('openai/gpt', {
+    const gptAdapter = useAdapter({
         apiKey: 'YOUR_OPEN_AI_API_KEY',
         // 👇 Instruct ChatGPT how to behave (optional)
-        initialSystemMessage:
+        systemMessage:
             'Act as a Nobel Prize in Physics winner who is ' +
             'helping a PHD student in their research'
     });
 
     return (
         <NluxConvo
-            adapter={chatGptAdapter}
+            adapter={gptAdapter}
             promptBoxOptions={{
                 placeholder: 'Ask me anything about nuclear physics!'
             }}
@@ -75,7 +76,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.4.1/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.5.9/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

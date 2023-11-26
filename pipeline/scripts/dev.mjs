@@ -18,7 +18,7 @@ try {
     //
     // Check that all build folders exist
     //
-    if (['nlux', 'openai', 'nlux-react', 'openai-react', 'themes'].some(
+    if (['nlux', 'openai', 'hf', 'nlux-react', 'openai-react', 'hf-react', 'themes'].some(
         (buildFolder) => !existsSync(devDistPath(buildFolder))
     )) {
         const errorMessage = 'Error ❗️ One or multiple build folders are missing.\n' +
@@ -36,6 +36,7 @@ try {
         'mkdir dist/dev/emulator',
         'mkdir dist/dev/emulator/examples',
         'mkdir dist/dev/emulator/examples-react',
+        'mkdir dist/dev/emulator/examples-react-hf',
         'mkdir dist/dev/emulator/packages',
         'mkdir dist/dev/emulator/packages/@nlux',
     ];
@@ -59,13 +60,15 @@ try {
     await run('cp -r samples/emulator/src/examples/index.html dist/dev/emulator/examples/index.html');
     await run('cp -r samples/emulator/src/examples-react/index.html dist/dev/emulator/examples-react/index.html');
     await run('cp -r samples/emulator/src/examples-react/require.min.js dist/dev/emulator/examples-react/require.min.js');
+    await run('cp -r samples/emulator/src/examples-react-hf/index.html dist/dev/emulator/examples-react-hf/index.html');
+    await run('cp -r samples/emulator/src/examples-react-hf/require.min.js dist/dev/emulator/examples-react-hf/require.min.js');
 
     info('Symlinking packages to emulator folder');
 
     //
     // Symlink built NLUX packages to emulator folder
     //
-    ['nlux', 'nlux-react', 'openai', 'openai-react', 'themes'].forEach((name) => {
+    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'themes'].forEach((name) => {
         symlinkBuiltPackageToEmulatorFolder(name);
     });
 

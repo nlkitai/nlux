@@ -1,4 +1,4 @@
-import {createNluxConvo, NluxConvo as NluxConvoType} from '@nlux/nlux';
+import {createConvo, NluxConvo as NluxConvoType} from '@nlux/nlux';
 import React, {useEffect, useRef, useState} from 'react';
 import {handleNewPropsReceived} from './handleNewPropsReceived';
 import {NluxConvoProps} from './props';
@@ -21,7 +21,7 @@ export const NluxConvo = (props: Readonly<NluxConvoProps>) => {
             promptBoxOptions,
         } = props;
 
-        let newInstance = createNluxConvo().withAdapter(adapter);
+        let newInstance = createConvo().withAdapter(adapter);
 
         if (layoutOptions) {
             newInstance = newInstance.withLayoutOptions(layoutOptions);

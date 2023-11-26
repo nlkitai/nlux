@@ -11,14 +11,16 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-strip": "^3.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
-    "@types/rollup-plugin-generate-package-json": "^3.2.5",
     "esbuild": "^0.19.5",
-    "rollup": "^4.1.4",
+    "rollup": "^4.5.2",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
-    "rollup-plugin-generate-package-json": "^3.2.0",
-    "rollup-plugin-terser": "^7.0.2",
     "tslib": "^2.6.2"
-  }
+  },
+  "main": "index.js",
+  "types": "nlux.d.ts",
+  "module": "esm/nlux.js",
+  "browser": "umd/nlux.js"
 }

@@ -1,33 +1,28 @@
-import {Message, NluxUsageError, StreamingAdapterObserver} from '@nlux/nlux';
+import {Message, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
-import {warn} from '../../../x/debug';
 import {gptStreamingAdapterConfig} from '../config';
-import {OpenAIChatModel} from '../types/models';
-import {GptAbstractAdapter} from './adapter';
+import {OpenAiAdapterOptions} from '../types/adapterOptions';
+import {OpenAiAbstractAdapter} from './adapter';
 
-export class GptStreamingAdapter extends GptAbstractAdapter<
+export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
     OpenAI.Chat.Completions.ChatCompletionChunk,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > {
     constructor({
         apiKey,
         model,
-        initialSystemMessage,
-    }: {
-        apiKey: string;
-        model: OpenAIChatModel,
-        initialSystemMessage?: string;
-    }) {
+        systemMessage,
+    }: OpenAiAdapterOptions) {
         super({
             apiKey,
             model,
-            initialSystemMessage,
-            dataExchangeMode: 'stream',
+            systemMessage,
+            dataTransferMode: 'stream',
         });
 
-        if (initialSystemMessage !== undefined && initialSystemMessage.length > 0) {
-            this.initialSystemMessage = initialSystemMessage;
+        if (systemMessage !== undefined && systemMessage.length > 0) {
+            this.systemMessage = systemMessage;
         }
     }
 
@@ -35,7 +30,16 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
         return gptStreamingAdapterConfig;
     }
 
-    send(message: Message, observer: StreamingAdapterObserver<Message>): void {
+    send(message: Message): Promise<Message>;
+    send(message: Message, observer: StreamingAdapterObserver): void;
+    send(message: Message, observer?: StreamingAdapterObserver<Message>): Promise<Message> | void {
+        if (!observer) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'An observer must be provided as a second parameter when using the streaming adapter!',
+            });
+        }
+
         const messageAsAny = message as any;
         if (typeof messageAsAny !== 'string' || messageAsAny.length === 0) {
             throw new NluxUsageError({
@@ -48,9 +52,9 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
         const messagesToSend: {
             role: 'system' | 'user',
             content: string
-        }[] = this.initialSystemMessage ? [{
+        }[] = this.systemMessage ? [{
             role: 'system',
-            content: this.initialSystemMessage,
+            content: this.systemMessage,
         }] : [];
 
         messagesToSend.push({
@@ -69,11 +73,15 @@ export class GptStreamingAdapter extends GptAbstractAdapter<
 
             while (!result.done) {
                 const value = result.value;
+                const finishReason = value.choices?.length > 0 ? value.choices[0].finish_reason : undefined;
+                if (finishReason === 'stop') {
+                    break;
+                }
+
                 const message = await this.decode(value);
                 if (message !== undefined) {
                     observer.next(message);
                 } else {
-                    // TODO - Handle undecodable messages
                     warn('Undecodable message');
                     warn(value);
                 }

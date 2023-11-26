@@ -1,9 +1,9 @@
-import {PromiseAdapter, StreamingAdapter, StreamingAdapterObserver} from '@nlux/nlux';
+import {Adapter, StreamingAdapterObserver} from '@nlux/nlux';
 
-export const myCustomStreamingAdapter: StreamingAdapter = {
+export const myCustomStreamingAdapter: Adapter = {
     send: (
         message: string,
-        observer: StreamingAdapterObserver,
+        observer: StreamingAdapterObserver<string>,
     ) => {
         setTimeout(() => {
             const messageToStream = 'Lorem stream ipsum **dolor** sit amet, consectetur adipiscing elit. ' +
@@ -20,7 +20,7 @@ export const myCustomStreamingAdapter: StreamingAdapter = {
     },
 };
 
-export const myCustomPromiseAdapter: PromiseAdapter = {
+export const myCustomPromiseAdapter: Adapter = {
     send(message: string): Promise<string> {
         return new Promise((resolve) => {
             setTimeout(() => {

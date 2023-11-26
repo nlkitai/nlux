@@ -1,33 +1,23 @@
-import {NluxAdapterConfig, NluxAdapterInfo} from './adapterConfig';
-import {StreamingAdapter, StreamingAdapterObserver} from './adapterInterface';
-import {Message} from './message';
+export type DataTransferMode = 'stream' | 'fetch';
 
-export type NluxAdapterStatus = 'disconnected'
-    | 'connecting'
-    | 'connected'
-    | 'disconnecting'
-    | 'idle'
-    | 'error';
+export type SendInStreamMode<MessageType = string> = (message: MessageType, observer: StreamingAdapterObserver) => void;
+export type SendInFetchMode<MessageType = string> = (message: MessageType) => Promise<MessageType> | void;
 
-export type NluxAdapterEvent = 'state-change'
-    | 'message-received'
-    | 'message-sent'
-    | 'chunk-received';
+export interface Adapter<MessageType = string> {
+    /**
+     * This method should be implemented by any adapter to be used with Nlux.
+     * Either send a message to the API and notify the observer of any new message received (as in `SendInStreamMode`),
+     * or return a promise that resolves to a message (as in `SendInFetchMode`).
+     *
+     * @param {MessageType} message
+     * @param {StreamingAdapterObserver} observer
+     * @returns {Promise<MessageType> | void}
+     */
+    send: SendInStreamMode | SendInFetchMode;
+}
 
-export type AdapterEventData = Message | NluxAdapterStatus;
-
-export interface NluxAdapter<InboundPayload, OutboundPayload> extends StreamingAdapter {
-    get config(): NluxAdapterConfig<InboundPayload, OutboundPayload>;
-
-    decode(payload: InboundPayload): Promise<Message>;
-
-    encode(message: Message): Promise<OutboundPayload>;
-
-    get id(): string;
-
-    get info(): NluxAdapterInfo;
-
-    send(message: Message, observer: StreamingAdapterObserver): void;
-
-    get status(): NluxAdapterStatus;
+export interface StreamingAdapterObserver<MessageType = string> {
+    complete(): void;
+    error(error: Error): void;
+    next(message: MessageType): void;
 }

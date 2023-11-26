@@ -1,17 +1,18 @@
-import {AdapterBuilder, ConversationOptions, LayoutOptions, PromptBoxOptions} from '@nlux/nlux';
+import {Adapter, AdapterBuilder, ConversationOptions, LayoutOptions, PromptBoxOptions} from '@nlux/nlux';
 
 /**
  * Properties for the NluxConvo React component.
  */
 export type NluxConvoProps = {
     /**
-     * The adapter builder to use for the conversation. This can be obtained via useAdapter() hook for provided
-     * adapters or by creating your own adapter.
+     * The adapter or adapter builder to use for the conversation.
+     * This can be obtained via useAdapter() hook for standard adapters or by creating your own custom adapter
+     * that implements `StreamingAdapter` or `PromiseAdapter` interfaces.
      */
-    adapter: AdapterBuilder<any, any>;
+    adapter: Adapter | AdapterBuilder<any, any>;
 
     /**
-     * CSS class name
+     * CSS class name to be applied to the root element.
      */
     className?: string;
 

@@ -11,6 +11,14 @@ const networkExceptions = {
         type: 'error',
         message: 'Invalid API key. Please update it and try again.',
     },
+    'NX-NT-003': {
+        type: 'error',
+        message: 'Sorry, cannot call API. HTTP server side error.',
+    },
+    'NX-NT-004': {
+        type: 'error',
+        message: 'Sorry, cannot call API. HTTP client side error.',
+    },
 };
 
 const adapterExceptions = {

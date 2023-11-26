@@ -1,33 +1,28 @@
-import {Message, NluxUsageError, StreamingAdapterObserver} from '@nlux/nlux';
+import {Message, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
-import {warn} from '../../../x/debug';
 import {gptFetchAdapterConfig} from '../config';
-import {OpenAIChatModel} from '../types/models';
-import {GptAbstractAdapter} from './adapter';
+import {OpenAiAdapterOptions} from '../types/adapterOptions';
+import {OpenAiAbstractAdapter} from './adapter';
 
-export class GptFetchAdapter extends GptAbstractAdapter<
+export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
     OpenAI.Chat.Completions.ChatCompletion,
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > {
     constructor({
         apiKey,
         model,
-        initialSystemMessage,
-    }: {
-        apiKey: string;
-        model: OpenAIChatModel,
-        initialSystemMessage?: string;
-    }) {
+        systemMessage,
+    }: OpenAiAdapterOptions) {
         super({
             apiKey,
             model,
-            initialSystemMessage,
-            dataExchangeMode: 'fetch',
+            systemMessage,
+            dataTransferMode: 'fetch',
         });
 
-        if (initialSystemMessage !== undefined && initialSystemMessage.length > 0) {
-            this.initialSystemMessage = initialSystemMessage;
+        if (systemMessage !== undefined && systemMessage.length > 0) {
+            this.systemMessage = systemMessage;
         }
     }
 
@@ -35,7 +30,16 @@ export class GptFetchAdapter extends GptAbstractAdapter<
         return gptFetchAdapterConfig;
     }
 
-    send(message: Message, observer: StreamingAdapterObserver<Message>): void {
+    send(message: Message): Promise<Message>;
+    send(message: Message, observer: StreamingAdapterObserver): void;
+    async send(message: Message, observer?: StreamingAdapterObserver<Message>): Promise<Message> {
+        if (observer) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Only one parameter "message" is allowed when using the fetch adapter!',
+            });
+        }
+
         const messageAsAny = message as any;
         if (typeof messageAsAny !== 'string' || messageAsAny.length === 0) {
             throw new NluxUsageError({
@@ -47,9 +51,9 @@ export class GptFetchAdapter extends GptAbstractAdapter<
         const messagesToSend: {
             role: 'system' | 'user',
             content: string
-        }[] = this.initialSystemMessage ? [{
+        }[] = this.systemMessage ? [{
             role: 'system',
-            content: this.initialSystemMessage,
+            content: this.systemMessage,
         }] : [];
 
         messagesToSend.push({
@@ -57,28 +61,21 @@ export class GptFetchAdapter extends GptAbstractAdapter<
             content: messageAsAny,
         });
 
-        this.openai.chat.completions.create({
-            stream: false,
-            model: this.model,
-            messages: messagesToSend,
-        }).then(async (response: any) => {
-            const message: any = await this.decode(response);
-            if (typeof message !== 'string') {
-                observer.error(new NluxUsageError({
-                    source: this.constructor.name,
-                    message: 'Unable to decode response from OpenAI',
-                }));
-            } else {
-                observer.next(message);
-            }
-        }).catch((error: any) => {
+        try {
+            const response = await this.openai.chat.completions.create({
+                stream: false,
+                model: this.model,
+                messages: messagesToSend,
+            });
+            return this.decode(response);
+        } catch (error: any) {
             warn('Error while making API call to OpenAI');
             warn(error);
-            observer.error(new NluxUsageError({
+            throw new NluxUsageError({
                 source: this.constructor.name,
-                message: error.message,
+                message: error?.message || 'Error while making API call to OpenAI',
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
-            }));
-        });
+            });
+        }
     }
 }
