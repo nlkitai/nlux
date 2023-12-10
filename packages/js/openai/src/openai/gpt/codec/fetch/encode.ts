@@ -1,8 +1,7 @@
-import {Message} from '@nlux/nlux';
 import OpenAI from 'openai';
 
 export const encode = async (
-    message: Message,
+    message: string,
 ): Promise<
     OpenAI.Chat.Completions.ChatCompletionMessageParam
 > => {

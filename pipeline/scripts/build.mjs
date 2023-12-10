@@ -17,6 +17,7 @@ try {
     await run('NODE_ENV=production yarn workspace @nlux-dev/openai-react build');
     await run('NODE_ENV=production yarn workspace @nlux-dev/hf-react build');
 
+    await run('NODE_ENV=production yarn workspace @nlux-dev/highlighter build');
     await run('NODE_ENV=production yarn workspace @nlux-dev/themes build');
 } catch (e) {
     process.exit(1);

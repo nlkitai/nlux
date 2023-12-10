@@ -1,8 +1,8 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
-import {DataTransferMode, SendInFetchMode, SendInStreamMode} from '../../../../types/adapter';
+import {DataTransferMode} from '../../../../types/adapter';
 import {NluxContext} from '../../../../types/context';
-import {Message} from '../../../../types/message';
+import {warn} from '../../../../x/debug';
 import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
 import {CompPromptBox} from '../../prompt-box/prompt-box.model';
@@ -27,8 +27,6 @@ export const submitPromptFactory = ({
             'out', 'static', new Date(), messageToSend,
         );
 
-        let inMessageId: string | undefined = undefined;
-
         try {
             //
             // Disable prompt while sending message
@@ -43,19 +41,54 @@ export const submitPromptFactory = ({
             // the message along with an observable as a second parameter, and let the adapter decide if it wants to
             // use it or not.
             //
-            const observable = new Observable<Message>({replay: true});
-            const sentResponse = dataTransferMode === 'fetch'
-                ? (context.adapter.send as SendInFetchMode)(messageToSend)
-                : (context.adapter.send as SendInFetchMode | SendInStreamMode)(messageToSend, observable);
-
-            // Here we determine if the message was sent as a promise or as an observable
+            const adapter = context.adapter;
+            let observable: Observable<string> | undefined;
+            let sentResponse: Promise<string> | undefined;
             let messageContentType: MessageContentType;
-            if (sentResponse instanceof Promise) {
-                observable.complete();
-                observable.reset();
-                messageContentType = 'promise';
-            } else {
+            const supportedDataTransferModes: DataTransferMode[] = [];
+            if (typeof adapter.fetchText === 'function') {
+                supportedDataTransferModes.push('fetch');
+            }
+
+            if (typeof adapter.streamText === 'function') {
+                supportedDataTransferModes.push('stream');
+            }
+
+            if (supportedDataTransferModes.length === 0) {
+                throw new Error(
+                    'Adapter does not support any data transfer mode! The provided adapter must implement either '
+                    + '`fetchText()` or `streamText()` methods.',
+                );
+            }
+
+            if (dataTransferMode && !supportedDataTransferModes.includes(dataTransferMode)) {
+                throw new Error(
+                    `Adapter does not support the requested data transfer mode: ${dataTransferMode}. The supported ` +
+                    `data transfer modes for the provided adapter are: ${supportedDataTransferModes.join(', ')}`,
+                );
+            }
+
+            // Set the default data transfer mode based on the adapter's capabilities
+            const defaultDataTransferMode = supportedDataTransferModes.length === 1 ?
+                supportedDataTransferModes[0] : 'stream';
+            const dataTransferModeToUse = dataTransferMode ?? defaultDataTransferMode;
+
+            if (dataTransferModeToUse === 'stream') {
+                if (!context.adapter.streamText) {
+                    throw new Error('Streaming mode requested but adapter does not implement streamText');
+                }
+
+                observable = new Observable<string>();
+                context.adapter.streamText(messageToSend, observable);
                 messageContentType = 'stream';
+            } else {
+                if (!context.adapter.fetchText) {
+                    throw new Error('Fetch mode requested but adapter does not implement fetchText');
+                }
+
+                observable = undefined;
+                sentResponse = context.adapter.fetchText(messageToSend);
+                messageContentType = 'promise';
             }
 
             // We add the receiving message to the conversation + we track its loading status.
@@ -92,7 +125,6 @@ export const submitPromptFactory = ({
                 // Use case: Websocket adapters
                 //
                 if (messageContentType === 'stream' && observable) {
-                    conversation.markMessageAsStreaming(inMessageId);
                     observable.subscribe({
                         next: (streamContent) => {
                             if (typeof streamContent === 'string') {
@@ -102,7 +134,6 @@ export const submitPromptFactory = ({
                         error: (error: any) => {
                             message.setErrored();
                             conversation.removeMessage(outMessageId);
-                            conversation.markMessageAsStreaming(inMessageId);
                             resetPromptBox(false);
 
                             const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
@@ -110,7 +141,6 @@ export const submitPromptFactory = ({
                         },
                         complete: () => {
                             message.commitContent();
-                            conversation.markMessageAsStreaming(inMessageId);
                             resetPromptBox(true);
                         },
                     });
@@ -122,6 +152,7 @@ export const submitPromptFactory = ({
                 }
             }
         } catch (error) {
+            warn(error);
             resetPromptBox(false);
         }
     };

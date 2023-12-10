@@ -188,7 +188,6 @@ export const applyReleaseVersion = (packagesPath) => {
         };
 
         info('File to be created: ' + packageJsonPath.replace('package.template.json', 'package.json'));
-        info(packageJson);
 
         const newPackageJsonPath = packageJsonPath.replace('package.template.json', 'package.json');
 

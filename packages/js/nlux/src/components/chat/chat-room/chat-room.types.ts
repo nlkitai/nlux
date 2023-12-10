@@ -6,6 +6,8 @@ export type CompChatRoomProps = {
     scrollWhenGenerating?: boolean;
     containerMaxHeight?: number | string;
     containerMaxWidth?: number | string;
+    containerHeight?: number | string;
+    containerWidth?: number | string;
     visible?: boolean;
     promptBox?: {
         placeholder?: string;

@@ -1,8 +1,8 @@
 import {IObserver} from '../../../core/bus/observer';
 import {NluxRenderingError} from '../../../core/error';
+import {createMdStreamRenderer} from '../../../core/markdown/streamParser';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {createMdStreamRenderer} from '../../../utils/md/streamParser';
 import {textToHtml} from '../../../x/parseTextMessage';
 import {render} from '../../../x/render';
 import {source} from '../../../x/source';
@@ -22,7 +22,7 @@ const html = ({content, createdAt}: CompMessageProps) => `` +
 
 export const renderMessage: CompRenderer<
     CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
-> = ({appendToRoot, props, compEvent}) => {
+> = ({appendToRoot, props, context, compEvent}) => {
     if (props.format !== 'text') {
         throw new NluxRenderingError({
             source: source('message', 'render'),
@@ -69,14 +69,13 @@ export const renderMessage: CompRenderer<
 
     appendToRoot(container);
 
-    const resizeListeners = new Set<Function>();
-    const resizeObserver: ResizeObserver = new ResizeObserver(() => {
+    let resizeObserver: ResizeObserver | undefined = new ResizeObserver(() => {
         compEvent('message-container-resized')();
     });
 
-    let mdStreamRenderer: IObserver<string> | undefined;
-
     resizeObserver.observe(contentContainer);
+
+    let mdStreamRenderer: IObserver<string> | undefined;
 
     return {
         elements: {
@@ -89,7 +88,10 @@ export const renderMessage: CompRenderer<
             },
             appendContent: (content: string) => {
                 if (!mdStreamRenderer) {
-                    mdStreamRenderer = createMdStreamRenderer(contentContainer);
+                    mdStreamRenderer = createMdStreamRenderer(
+                        contentContainer,
+                        context.syntaxHighlighter,
+                    );
                 }
 
                 mdStreamRenderer.next(content);
@@ -99,14 +101,8 @@ export const renderMessage: CompRenderer<
                     mdStreamRenderer.complete();
                 }
 
+                // Reset the stream renderer.
                 mdStreamRenderer = undefined;
-            },
-            scrollToMessageEndContainer: () => {
-                container.scrollIntoView({
-                    block: 'end',
-                    inline: 'end',
-                    behavior: 'smooth',
-                });
             },
             setContentStatus: (status: MessageContentLoadingStatus) => {
                 container.classList.remove(classFromLoadingStatus);
@@ -116,7 +112,7 @@ export const renderMessage: CompRenderer<
         },
         onDestroy: () => {
             removeContentContainerListeners();
-            resizeObserver.disconnect();
+            resizeObserver?.disconnect();
         },
     };
 };

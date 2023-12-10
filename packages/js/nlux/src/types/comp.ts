@@ -1,4 +1,5 @@
 import {BaseComp} from '../core/comp/base';
+import {NluxContext} from './context';
 
 /**
  * This interface represents a component that is mounted in the DOM tree.
@@ -27,6 +28,7 @@ export type CompRenderer<PropsType, ElementsType, EventsType, ActionsType = unde
     appendToRoot: (element: HTMLElement) => void,
     compEvent: (eventName: EventsType) => Function,
     props: Readonly<PropsType>,
+    context: NluxContext,
 }) => CompDom<ElementsType, ActionsType>;
 
 /**

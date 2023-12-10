@@ -1,14 +1,19 @@
 import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
+import {HighlighterExtension} from '../../highlighter/highlighter';
 import {SequenceParser} from '../sequenceParser';
 
 export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterface {
+
+    private readonly __initialContent: string | undefined;
+    private readonly __markdownElementName: MarkdownElementName;
+    private readonly __openingSequence?: string;
+    private readonly __syntaxHighlighter: HighlighterExtension | undefined;
+
     protected __parent: MarkdownProcessorInterface | undefined;
     private __element: HTMLElement | undefined;
-    private __initialContent: string | undefined;
     private __initialized: boolean = false;
     private __last3Characters: string = '';
-    private __markdownElementName: MarkdownElementName;
     private __parsingChild: MarkdownProcessorInterface | undefined;
     private __sequenceParser: SequenceParser | undefined;
     private __yielded: boolean = false;
@@ -16,13 +21,17 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
     protected constructor(
         parent: MarkdownProcessorInterface | null,
         elementName: MarkdownElementName,
-        initialContent?: string,
+        openingSequence: string | null,
+        initialContent: string | null,
+        syntaxHighlighter: HighlighterExtension | null,
     ) {
         this.__markdownElementName = elementName;
         this.__parent = parent ?? undefined;
+        this.__syntaxHighlighter = syntaxHighlighter ?? undefined;
+        this.__openingSequence = openingSequence ?? undefined;
 
         if (elementName !== 'Root') {
-            this.__initialContent = initialContent;
+            this.__initialContent = initialContent ?? undefined;
         } else {
             this.__initialContent = undefined;
         }
@@ -79,19 +88,24 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         return this.__last3Characters;
     }
 
+    protected get syntaxHighlighter(): HighlighterExtension | undefined {
+        return this.__syntaxHighlighter;
+    }
+
     /**
      * Create a nested markdown element and append it to the current markdown element
      * Used when a child element yields a markdown element to its parent
      * Example: When # header is detected inside a paragraph, the paragraph should yield and the header should be
      * @param {MarkdownElementName} elementName
+     * @param {string} openingSequence
      */
-    abstract createAndAppendMarkdown(elementName: MarkdownElementName): void;
+    abstract createAndAppendMarkdown(elementName: MarkdownElementName, openingSequence?: string): void;
 
     /**
      * Create the DOM element that will be used to render the markdown element
      * @returns {HTMLElement}
      */
-    abstract createElement(): HTMLElement;
+    abstract createElement(openingSequence?: string): HTMLElement;
 
     // It should be called after construction and before processing any characters or attaching to the parent element
     public init(): void {
@@ -102,7 +116,7 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         this.__initialized = true;
 
         if (this.__markdownElementName !== 'Root') {
-            this.__element = this.createElement();
+            this.__element = this.createElement(this.__openingSequence);
         } else {
             this.__element = undefined;
         }
@@ -122,11 +136,13 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
      *
      * @param {MarkdownProcessorInterface} child
      * @param {MarkdownElementName} elementToCreateAtParentLevel
+     * @param {string} openingSequence
      * @param {string} characterToAppendToParentLevel
      */
     public parsingChildYielded(
         child: MarkdownProcessorInterface,
         elementToCreateAtParentLevel?: MarkdownElementName,
+        openingSequence?: string,
         characterToAppendToParentLevel?: string,
     ): void {
         if (this.__parsingChild === child) {
@@ -134,7 +150,10 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         }
 
         if (elementToCreateAtParentLevel) {
-            this.createAndAppendMarkdown(elementToCreateAtParentLevel);
+            this.createAndAppendMarkdown(
+                elementToCreateAtParentLevel,
+                openingSequence,
+            );
         }
 
         if (characterToAppendToParentLevel) {
@@ -225,6 +244,10 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
             return;
         }
 
+        const openingSequence = (
+            this.__sequenceParser && !this.__sequenceParser?.shouldCloseCurrentMarkdown
+        ) ? this.__sequenceParser?.sequence : undefined;
+
         this.__yielded = true;
         this.__sequenceParser = undefined;
 
@@ -243,7 +266,12 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         }
 
         if (this.__parent) {
-            this.__parent.parsingChildYielded(this, elementToCreateAtParentLevel, characterToAppendToParent);
+            this.__parent.parsingChildYielded(
+                this,
+                elementToCreateAtParentLevel,
+                openingSequence,
+                characterToAppendToParent,
+            );
             this.__parent = undefined;
         }
     }

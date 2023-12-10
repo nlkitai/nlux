@@ -16,20 +16,26 @@ export class CompChatRoom extends BaseComp<
     CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
     private conversation: CompConversation;
-
-    private messagesInLoadingState: Set<string> = new Set();
-    private messagesInStreamingState: Set<string> = new Set();
     private promptBoxInstance: CompPromptBox;
     private promptBoxText: string = '';
 
     constructor(context: NluxContext, {
-        containerMaxWidth,
         containerMaxHeight,
+        containerHeight,
+        containerMaxWidth,
+        containerWidth,
         scrollWhenGenerating,
         visible = true,
         promptBox,
     }: CompChatRoomProps) {
-        super(context, {visible, containerMaxWidth, containerMaxHeight, scrollWhenGenerating});
+        super(context, {
+            visible,
+            containerMaxHeight,
+            containerHeight,
+            containerMaxWidth,
+            containerWidth,
+            scrollWhenGenerating,
+        });
 
         this.addConversation(scrollWhenGenerating);
         this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
@@ -54,8 +60,16 @@ export class CompChatRoom extends BaseComp<
             this.setProp('containerMaxHeight', props.containerMaxHeight ?? undefined);
         }
 
+        if (props.hasOwnProperty('containerHeight')) {
+            this.setProp('containerHeight', props.containerHeight ?? undefined);
+        }
+
         if (props.hasOwnProperty('containerMaxWidth')) {
             this.setProp('containerMaxWidth', props.containerMaxWidth ?? undefined);
+        }
+
+        if (props.hasOwnProperty('containerWidth')) {
+            this.setProp('containerWidth', props.containerWidth ?? undefined);
         }
 
         if (props.hasOwnProperty('scrollWhenGenerating')) {

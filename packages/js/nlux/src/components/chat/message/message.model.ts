@@ -1,7 +1,6 @@
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
-import {Message} from '../../../types/message';
 import {debug, warn} from '../../../x/debug';
 import {renderMessage} from './message.render';
 import {
@@ -14,6 +13,8 @@ import {
 } from './message.types';
 import {updateMessage} from './message.update';
 
+export type MessageContentStatusChangeListener = (status: MessageContentLoadingStatus) => void;
+
 @Model('message', renderMessage, updateMessage)
 export class CompMessage extends BaseComp<
     CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
@@ -23,6 +24,7 @@ export class CompMessage extends BaseComp<
     private contentStatus: MessageContentLoadingStatus;
 
     private resizeListeners: Set<Function> = new Set();
+    private contentStatusChangeListeners: Set<MessageContentStatusChangeListener> = new Set();
 
     constructor(context: NluxContext, props: CompMessageProps) {
         super(context, props);
@@ -79,6 +81,7 @@ export class CompMessage extends BaseComp<
 
     public destroy() {
         this.resizeListeners.clear();
+        this.contentStatusChangeListeners.clear();
         super.destroy();
     }
 
@@ -86,12 +89,16 @@ export class CompMessage extends BaseComp<
         this.resizeListeners.add(listener);
     }
 
+    onContentStatusChange(listener: MessageContentStatusChangeListener) {
+        this.contentStatusChangeListeners.add(listener);
+    }
+
     removeResizeListener(listener: Function) {
         this.resizeListeners.delete(listener);
     }
 
-    public scrollToMessage() {
-        this.executeDomAction('scrollToMessageEndContainer');
+    removeContentStatusChangeListener(listener: MessageContentStatusChangeListener) {
+        this.contentStatusChangeListeners.delete(listener);
     }
 
     /**
@@ -99,7 +106,7 @@ export class CompMessage extends BaseComp<
      * It should be called when the promise is resolved.
      * @param {string} content
      */
-    public setContent(content: Message) {
+    public setContent(content: string) {
         if (this.contentType !== 'promise') {
             throw new Error(`CompMessage: content can only be set when contentType is 'promise'!`);
         }
@@ -153,5 +160,12 @@ export class CompMessage extends BaseComp<
 
         this.contentStatus = status;
         this.setProp('loadingStatus', status);
+
+        this.contentStatusChangeListeners.forEach(listener => listener(this.contentStatus));
+
+        // Final status - clear all listeners.
+        if (status === 'loaded' || status === 'loading-error') {
+            this.contentStatusChangeListeners.clear();
+        }
     }
 }

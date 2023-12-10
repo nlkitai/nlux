@@ -1,8 +1,7 @@
 export type {
     Adapter,
-    SendInStreamMode,
-    SendInFetchMode,
     StandardAdapter,
+    StreamingAdapterObserver,
     DataTransferMode,
 } from '@nlux/nlux';
 

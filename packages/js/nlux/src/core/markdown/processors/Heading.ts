@@ -8,12 +8,15 @@ export class HeadingProcessor extends ProcessorWithChildren {
     constructor(
         headingLevel: 1 | 2 | 3 | 4 | 5 | 6,
         parent: MarkdownProcessorInterface,
+        openSequence?: string,
         initialContent?: string,
     ) {
         super(
             parent,
             headingNameFromLevel(headingLevel),
-            initialContent,
+            openSequence ?? null,
+            initialContent ?? null,
+            null,
         );
 
         this.__headingLevel = headingLevel;

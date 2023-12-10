@@ -333,6 +333,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
             },
             compEvent: this.compEventGetter,
             props: this.rendererProps,
+            context: this.context,
         });
 
         if (result) {

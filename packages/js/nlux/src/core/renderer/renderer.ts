@@ -9,6 +9,7 @@ import {warn} from '../../x/debug';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {NluxRenderingError} from '../error';
+import {HighlighterExtension} from '../highlighter/highlighter';
 import {ConversationOptions} from '../options/conversationOptions';
 import {LayoutOptions} from '../options/layoutOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
@@ -28,6 +29,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private theConversationOptions: Readonly<ConversationOptions> = {};
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
+    private theSyntaxHighlighter: HighlighterExtension | null = null;
     private theThemeId: string;
 
     constructor(
@@ -51,6 +53,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         this.theClassName = props?.className ?? null;
         this.theThemeId = props?.themeId ?? NluxRenderer.defaultThemeId;
+        this.theSyntaxHighlighter = props?.syntaxHighlighter ?? null;
+
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
@@ -132,7 +136,9 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 visible: true,
                 scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating ?? undefined,
                 containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
+                containerHeight: this.theLayoutOptions?.height || undefined,
                 containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
+                containerWidth: this.theLayoutOptions?.width || undefined,
                 promptBox: {
                     placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
                     autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
@@ -266,8 +272,16 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 propsToUpdate.containerMaxHeight = props.layoutOptions.maxHeight;
             }
 
+            if (props.layoutOptions?.hasOwnProperty('height')) {
+                propsToUpdate.containerHeight = props.layoutOptions.height;
+            }
+
             if (props.layoutOptions?.hasOwnProperty('maxWidth')) {
                 propsToUpdate.containerMaxWidth = props.layoutOptions.maxWidth;
+            }
+
+            if (props.layoutOptions?.hasOwnProperty('width')) {
+                propsToUpdate.containerWidth = props.layoutOptions.width;
             }
 
             this.theLayoutOptions = {
@@ -287,6 +301,10 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         if (props.hasOwnProperty('promptBoxOptions')) {
             // TODO - Apply new prompt box options
+        }
+
+        if (props.hasOwnProperty('syntaxHighlighter')) {
+            // TODO - Handle syntax highlighter change
         }
     }
 

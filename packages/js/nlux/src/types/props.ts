@@ -1,3 +1,4 @@
+import {HighlighterExtension} from '../core/highlighter/highlighter';
 import {ConversationOptions} from '../core/options/conversationOptions';
 import {LayoutOptions} from '../core/options/layoutOptions';
 import {PromptBoxOptions} from '../core/options/promptBoxOptions';
@@ -8,6 +9,7 @@ import {PromptBoxOptions} from '../core/options/promptBoxOptions';
 export type NluxProps = {
     themeId?: string;
     className?: string;
+    syntaxHighlighter?: HighlighterExtension;
     promptBoxOptions: Partial<PromptBoxOptions>;
     conversationOptions: Partial<ConversationOptions>;
     layoutOptions: Partial<LayoutOptions>;

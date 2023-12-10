@@ -1,5 +1,4 @@
 import {Adapter, DataTransferMode, StreamingAdapterObserver} from './adapter';
-import {Message} from './message';
 import {StandardAdapterConfig, StandardAdapterInfo} from './standardAdapterConfig';
 
 export type StandardAdapterStatus = 'disconnected'
@@ -14,18 +13,18 @@ export type StandardAdapterEvent = 'state-change'
     | 'message-sent'
     | 'chunk-received';
 
-export type StandardAdapterEventData = Message | StandardAdapterStatus;
+export type StandardAdapterEventData = string | StandardAdapterStatus;
 
-export interface StandardAdapter<InboundPayload, OutboundPayload> extends Adapter<Message> {
+export interface StandardAdapter<InboundPayload, OutboundPayload> extends Adapter {
     get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
     get dataTransferMode(): DataTransferMode;
-    decode(payload: InboundPayload): Promise<Message>;
-    encode(message: Message): Promise<OutboundPayload>;
+    decode(payload: InboundPayload): Promise<string>;
+    encode(message: string): Promise<OutboundPayload>;
+    fetchText(message: string): Promise<string>;
     get id(): string;
     get info(): StandardAdapterInfo;
-    send(message: Message, observer: StreamingAdapterObserver): void;
-    send(message: Message): Promise<Message>;
     get status(): StandardAdapterStatus;
+    streamText(message: string, observer: StreamingAdapterObserver): void;
 }
 
 export const isStandardAdapter = (adapter: Adapter): boolean => {
@@ -35,6 +34,6 @@ export const isStandardAdapter = (adapter: Adapter): boolean => {
         && 'encode' in adapter
         && 'id' in adapter
         && 'info' in adapter
-        && 'send' in adapter
-        && 'status' in adapter;
+        && 'status' in adapter
+        && ('fetchText' in adapter || 'streamText' in adapter);
 };

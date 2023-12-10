@@ -1,4 +1,4 @@
-import {Message, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
+import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
 import {gptStreamingAdapterConfig} from '../config';
@@ -30,24 +30,14 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
         return gptStreamingAdapterConfig;
     }
 
-    send(message: Message): Promise<Message>;
-    send(message: Message, observer: StreamingAdapterObserver): void;
-    send(message: Message, observer?: StreamingAdapterObserver<Message>): Promise<Message> | void {
-        if (!observer) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'An observer must be provided as a second parameter when using the streaming adapter!',
-            });
-        }
+    fetchText(message: string): Promise<string> {
+        throw new NluxUsageError({
+            source: this.constructor.name,
+            message: 'Cannot fetch text from the streaming adapter!',
+        });
+    }
 
-        const messageAsAny = message as any;
-        if (typeof messageAsAny !== 'string' || messageAsAny.length === 0) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot send empty messages',
-            });
-        }
-
+    streamText(message: string, observer: StreamingAdapterObserver): void {
         // TODO - Only send system message once per conversation, when history is included
         const messagesToSend: {
             role: 'system' | 'user',
@@ -59,7 +49,7 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
 
         messagesToSend.push({
             role: 'user',
-            content: messageAsAny,
+            content: message,
         });
 
         this.openai.chat.completions.create({

@@ -1,5 +1,6 @@
 import {AdapterBuilder} from '../types/adapterBuilder';
 import {NluxProps} from '../types/props';
+import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
@@ -28,6 +29,9 @@ export interface INluxConvo {
     ): INluxConvo;
     withPromptBoxOptions(
         promptBoxOptions: PromptBoxOptions,
+    ): INluxConvo;
+    withSyntaxHighlighter(
+        syntaxHighlighter: HighlighterExtension,
     ): INluxConvo;
     withTheme(
         themeId: string,

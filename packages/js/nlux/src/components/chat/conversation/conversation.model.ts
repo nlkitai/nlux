@@ -5,6 +5,7 @@ import {NluxContext} from '../../../types/context';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
 import {CompMessage} from '../message/message.model';
+import {MessageContentLoadingStatus} from '../message/message.types';
 import type {MessageContentType} from '../message/message.types';
 import {renderConversation} from './conversation.render';
 import {
@@ -19,8 +20,8 @@ import {updateConversation} from './conversation.update';
 export class CompConversation extends BaseComp<
     CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private messagesBeingStreamed: Set<string> = new Set();
-    private messagesBeingStreamedResizeListeners: Map<string, Function> = new Map();
+    private lastMessageId?: string;
+    private lastMessageResizedListener?: Function;
     private messagesList: CompList<CompMessage> | undefined;
 
     private scrollWhenGeneratingUserOption: boolean;
@@ -32,11 +33,11 @@ export class CompConversation extends BaseComp<
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
     }
 
-    public addMessage<Message = string>(
+    public addMessage(
         direction: 'in' | 'out',
         contentType: MessageContentType,
         createdAt: Date,
-        content?: Message,
+        content?: string,
     ): string {
         if (!this.messagesList) {
             throw new Error(`CompConversation: messagesList is not initialized! Make sure you call` +
@@ -51,8 +52,27 @@ export class CompConversation extends BaseComp<
             createdAt,
         );
 
+        // Clean up last message resize listener
+        if (this.lastMessageId && this.lastMessageResizedListener) {
+            const lastMessage = this.getMessageById(this.lastMessageId);
+            if (lastMessage) {
+                lastMessage.removeResizeListener(this.lastMessageResizedListener);
+            }
+
+            this.lastMessageId = undefined;
+            this.lastMessageResizedListener = undefined;
+        }
+
+        // Add new message
         this.messagesList.appendComponent(message, messageInList);
-        message.scrollToMessage();
+        this.executeDomAction('scrollToBottom');
+
+        // Listen to the new message resize event
+        this.lastMessageId = message.id;
+        this.lastMessageResizedListener = this.createMessageResizedListener(message.id);
+        if (this.lastMessageResizedListener) {
+            message.onResize(this.lastMessageResizedListener);
+        }
 
         return message.id;
     }
@@ -61,42 +81,7 @@ export class CompConversation extends BaseComp<
         return this.messagesList?.getComponentById(messageId);
     }
 
-    public markMessageAsNotStreaming(messageId: string) {
-        const onResizeListener = this.messagesBeingStreamedResizeListeners.get(messageId);
-        this.messagesBeingStreamed.delete(messageId);
-        this.messagesBeingStreamedResizeListeners.delete(messageId);
-
-        const message = this.getMessageById(messageId);
-        if (!message || !onResizeListener) {
-            return;
-        }
-
-        message.removeResizeListener(onResizeListener);
-    }
-
-    public markMessageAsStreaming(messageId: string) {
-        const message = this.getMessageById(messageId);
-        if (!message || this.messagesBeingStreamed.has(messageId)) {
-            return;
-        }
-
-        this.messagesBeingStreamed.add(messageId);
-        const messageResizedListener = this.createMessageResizedListener(messageId);
-        if (messageResizedListener) {
-            this.messagesBeingStreamedResizeListeners.set(messageId, messageResizedListener);
-            message.onResize(messageResizedListener);
-
-            // Max time to keep message marked as streaming is 2 minutes
-            // If the message is not marked as not streaming after 2 minutes, it will be marked as not streaming
-            // so that the conversation box does not keep scrolling to the end of the message forever.
-            setTimeout(() => {
-                this.markMessageAsNotStreaming(messageId);
-            }, 120000);
-        }
-    }
-
     public removeMessage(messageId: string) {
-        this.markMessageAsNotStreaming(messageId);
         this.messagesList?.removeComponentById(messageId);
     }
 
@@ -116,12 +101,8 @@ export class CompConversation extends BaseComp<
         }
 
         return () => {
-            if (this.scrollWhenGeneratingUserOption &&
-                this.scrollingStickToConversationEnd &&
-                this.messagesBeingStreamed.size === 1 &&
-                this.messagesBeingStreamed.has(messageId)
-            ) {
-                message.scrollToMessage();
+            if (this.scrollWhenGeneratingUserOption && this.scrollingStickToConversationEnd) {
+                this.executeDomAction('scrollToBottom');
             }
         };
     }

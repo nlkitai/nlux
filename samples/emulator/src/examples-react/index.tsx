@@ -1,17 +1,19 @@
+import {highlighter} from '@nlux/highlighter';
 import {NluxConvo} from '@nlux/nlux-react';
 import {useAdapter} from '@nlux/openai-react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
+import {streamAdapter} from './stream';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
 const ExampleWrapper = () => {
-    const [maxHeight, setMaxHeight] = useState<number>(550);
+    const [height, setHeight] = useState<number>(550);
     const [key, setKey] = useState<number>(0);
     const handleRandomContainerHeight = useCallback(() => {
         const newHeight = Math.floor(Math.random() * 1000);
-        setMaxHeight(newHeight);
+        setHeight(newHeight);
     }, []);
 
     const adapter = useAdapter({
@@ -35,18 +37,20 @@ const ExampleWrapper = () => {
                 <NluxConvo
                     key={key}
                     className="chat-emulator-convo"
-                    adapter={adapter}
+                    adapter={streamAdapter}
                     conversationOptions={{
                         scrollWhenGenerating: true,
                     }}
                     layoutOptions={{
-                        maxHeight,
+                        height,
+                        width: 440,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
                     promptBoxOptions={{
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}
+                    syntaxHighlighter={highlighter}
                 />
             </div>
         </div>

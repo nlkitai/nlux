@@ -1,4 +1,4 @@
-import {Message, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
+import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
 import {gptFetchAdapterConfig} from '../config';
@@ -30,24 +30,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
         return gptFetchAdapterConfig;
     }
 
-    send(message: Message): Promise<Message>;
-    send(message: Message, observer: StreamingAdapterObserver): void;
-    async send(message: Message, observer?: StreamingAdapterObserver<Message>): Promise<Message> {
-        if (observer) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Only one parameter "message" is allowed when using the fetch adapter!',
-            });
-        }
-
-        const messageAsAny = message as any;
-        if (typeof messageAsAny !== 'string' || messageAsAny.length === 0) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot send empty messages',
-            });
-        }
-
+    async fetchText(message: string): Promise<string> {
         const messagesToSend: {
             role: 'system' | 'user',
             content: string
@@ -58,7 +41,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
 
         messagesToSend.push({
             role: 'user',
-            content: messageAsAny,
+            content: message,
         });
 
         try {
@@ -77,5 +60,12 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
             });
         }
+    }
+
+    streamText(message: string, observer: StreamingAdapterObserver): void {
+        throw new NluxUsageError({
+            source: this.constructor.name,
+            message: 'Cannot stream text from the fetch adapter!',
+        });
     }
 }

@@ -8,9 +8,9 @@ const numberOfEmptyChecksBeforeCompletion = Math.ceil(200 / characterProcessingD
 
 let chartersProcessed = 0;
 
-export const createMdStreamRenderer: StreamParser = (root: HTMLElement, options) => {
+export const createMdStreamRenderer: StreamParser = (root: HTMLElement, syntaxHighlighter, options) => {
     const {skipAnimation} = options || {};
-    const rootMarkdownProcessor = new RootProcessor(root);
+    const rootMarkdownProcessor = new RootProcessor(root, undefined, syntaxHighlighter);
     const charactersQueue: string[] = [];
 
     let numberOfChecksWithEmptyCharactersQueue = 0;

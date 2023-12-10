@@ -10,6 +10,7 @@ const copyStructure = async (env) => {
     await run(`cp -r pipeline/npm/openai-react dist/${env}/openai-react`);
     await run(`cp -r pipeline/npm/hf dist/${env}/hf`);
     await run(`cp -r pipeline/npm/hf-react dist/${env}/hf-react`);
+    await run(`cp -r pipeline/npm/highlighter dist/${env}/highlighter`);
     await run(`cp -r pipeline/npm/themes dist/${env}/themes`);
 };
 
@@ -45,6 +46,7 @@ try {
     await run('yarn workspace @nlux-dev/nlux-react install');
     await run('yarn workspace @nlux-dev/openai-react install');
     await run('yarn workspace @nlux-dev/hf-react install');
+    await run('yarn workspace @nlux-dev/highlighter install');
     await run('yarn workspace @nlux-dev/themes install');
 
     await run('cd pipeline/utils && tsc --project tsconfig.json');
@@ -55,6 +57,7 @@ try {
     await run('yarn workspace @nlux-dev/nlux-react build');
     await run('yarn workspace @nlux-dev/openai-react build');
     await run('yarn workspace @nlux-dev/hf-react build');
+    await run('yarn workspace @nlux-dev/highlighter build');
     await run('yarn workspace @nlux-dev/themes build');
 
 } catch (e) {

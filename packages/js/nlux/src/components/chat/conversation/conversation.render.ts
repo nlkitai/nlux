@@ -49,6 +49,14 @@ export const renderConversation: CompRenderer<
         elements: {
             messagesContainer,
         },
+        actions: {
+            scrollToBottom: () => {
+                messagesContainer.scrollTo({
+                    top: messagesContainer.scrollHeight,
+                    behavior: 'instant',
+                });
+            },
+        },
         onDestroy: () => {
             scrollListeners.clear();
             removeMessagesContainerListeners();

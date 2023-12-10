@@ -1,3 +1,4 @@
+import {highlighter} from '@nlux/highlighter';
 import {createConvo, NluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withAdapter(adapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
+        .withSyntaxHighlighter(highlighter)
         .withLayoutOptions({
             maxWidth: 500,
             maxHeight: 500,

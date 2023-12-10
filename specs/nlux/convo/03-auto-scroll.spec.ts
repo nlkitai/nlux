@@ -1,12 +1,12 @@
 import {createConvo, NluxConvo} from '@nlux/nlux';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {createPromiseAdapterController, PromiseAdapterController} from '../../utils/adapters';
+import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the create a Convo box with default auto-scroll enabled', () => {
-    let adapterController: PromiseAdapterController | undefined = undefined;
+    let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement | undefined;
     let nluxConvo: NluxConvo | undefined;
@@ -27,7 +27,7 @@ describe('When the create a Convo box with default auto-scroll enabled', () => {
 
     describe('When the user added a long message that exceeds displayed area', () => {
         it.skip('should scroll to the bottom', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
 

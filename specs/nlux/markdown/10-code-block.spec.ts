@@ -7,7 +7,7 @@ describe('Code Block Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
     });
 
     it('should render a 1 line code block without trailing or leading new line', async () => {
@@ -55,11 +55,11 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<pre>const a = 1;</pre>');
+        expect(rootElement.innerHTML).toBe('<pre data-language="js">const a = 1;</pre>');
     });
 
     it('should render code block at root level', async () => {
-        streamRenderer.next('Some code:```js\nconst a = 1;\n```');
+        streamRenderer.next('Some code:```\nconst a = 1;\n```');
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
@@ -71,7 +71,7 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<h1>Heading</h1><pre>const a = 1;</pre>');
+        expect(rootElement.innerHTML).toBe('<h1>Heading</h1><pre data-language="js">const a = 1;</pre>');
     });
 
     it('should render code block even when empty', async () => {
@@ -79,7 +79,7 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<pre></pre>');
+        expect(rootElement.innerHTML).toBe('<pre data-language="js"></pre>');
     });
 
     it('should render code block even when empty with new line inside', async () => {
@@ -87,7 +87,7 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<pre></pre>');
+        expect(rootElement.innerHTML).toBe('<pre data-language="js"></pre>');
     });
 
     it('should render code block followed by a heading', async () => {
@@ -95,7 +95,7 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<pre>const a = 1;</pre><h1>Heading</h1>');
+        expect(rootElement.innerHTML).toBe('<pre data-language="js">const a = 1;</pre><h1>Heading</h1>');
     });
 
     it('should render code block followed by a paragraph', async () => {
@@ -103,6 +103,6 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<pre>const a = 1;</pre><p>Some paragraph</p>');
+        expect(rootElement.innerHTML).toBe('<pre data-language="js">const a = 1;</pre><p>Some paragraph</p>');
     });
 });

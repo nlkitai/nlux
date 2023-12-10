@@ -5,7 +5,7 @@ export const createConvo = (): NluxConvo => new NluxConvo();
 
 export {Observable} from './core/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
-export {createMdStreamRenderer} from './utils/md/streamParser';
+export {createMdStreamRenderer} from './core/markdown/streamParser';
 export {debug, warn} from './x/debug';
 
 export type {ExceptionId} from './exceptions/exceptions';
@@ -33,14 +33,18 @@ export type {
 export type {
     DataTransferMode,
     Adapter,
-    SendInStreamMode,
-    SendInFetchMode,
     StreamingAdapterObserver,
 } from './types/adapter';
+
+export type {
+    Highlighter,
+    HighlighterExtension,
+    HighlighterColorMode,
+    CreateHighlighterOptions,
+} from './core/highlighter/highlighter';
 
 export type {AdapterBuilder} from './types/adapterBuilder';
 
 export type {Participant} from './types/participant';
-export type {Message} from './types/message';
 export type {FragmentType, Fragment} from './types/fragment';
 export type {NluxContext} from './types/context';

@@ -1,5 +1,6 @@
 import {MarkdownElementName} from '../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {HighlighterExtension} from '../highlighter/highlighter';
 import {BoldAsteriskProcessor} from './processors/BoldAsterisk';
 import {BoldUnderscoreProcessor} from './processors/BoldUnderscore';
 import {CodeProcessor} from './processors/Code';
@@ -13,11 +14,14 @@ import {ParagraphProcessor} from './processors/Paragraph';
 export const createMarkdownProcessor = (
     markdownElementName: MarkdownElementName,
     parent: MarkdownProcessorInterface,
+    sequence?: string,
     initialContent?: string,
+    syntaxHighlighter?: HighlighterExtension,
 ): void => {
     if (markdownElementName === 'Paragraph') {
         const newParagraph = new ParagraphProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -29,6 +33,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'LineBreak') {
         const newLineBreak = new LineBreakProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -48,6 +53,7 @@ export const createMarkdownProcessor = (
         const newHeading = new HeadingProcessor(
             headingLevel as 1 | 2 | 3 | 4 | 5 | 6,
             parent,
+            sequence,
             initialContent,
         );
 
@@ -59,6 +65,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'Code') {
         const newCode = new CodeProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -70,7 +77,9 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'CodeBlock') {
         const newCode = new CodeBlock(
             parent,
+            sequence,
             initialContent,
+            syntaxHighlighter,
         );
 
         newCode.init();
@@ -81,6 +90,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'BoldAsterisk') {
         const newBold = new BoldAsteriskProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -92,6 +102,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'BoldUnderscore') {
         const newBold = new BoldUnderscoreProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -103,6 +114,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'ItalicAsterisk') {
         const newItalic = new ItalicAsteriskProcessor(
             parent,
+            sequence,
             initialContent,
         );
 
@@ -114,6 +126,7 @@ export const createMarkdownProcessor = (
     if (markdownElementName === 'ItalicUnderscore') {
         const newItalic = new ItalicUnderscoreProcessor(
             parent,
+            sequence,
             initialContent,
         );
 

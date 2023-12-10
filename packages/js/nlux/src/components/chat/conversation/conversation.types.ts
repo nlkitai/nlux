@@ -11,4 +11,6 @@ export type CompConversationElements = Readonly<{
     messagesContainer: HTMLElement;
 }>;
 
-export type CompConversationActions = Readonly<{}>;
+export type CompConversationActions = Readonly<{
+    scrollToBottom: () => void;
+}>;

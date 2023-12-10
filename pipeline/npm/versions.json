@@ -1,12 +1,13 @@
 {
   "inherit": true,
-  "nlux": "0.5.9",
+  "nlux": "0.6.8",
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "dependencies": {
     "openai": "4.20.0",
-    "@huggingface/inference": "2.6.4"
+    "hfInference": "2.6.4",
+    "highlightJs": "11.9.0"
   }
 }

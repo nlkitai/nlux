@@ -40,6 +40,11 @@ export const handleNewPropsReceived = (
         somethingChanged = true;
     }
 
+    if (currentProps.syntaxHighlighter !== newProps.syntaxHighlighter) {
+        propsToUpdate.syntaxHighlighter = newProps.syntaxHighlighter;
+        somethingChanged = true;
+    }
+
     if (!somethingChanged) {
         return;
     }

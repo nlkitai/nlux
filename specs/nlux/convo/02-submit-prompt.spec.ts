@@ -2,7 +2,7 @@ import {AdapterBuilder, createConvo, NluxConvo} from '@nlux/nlux';
 import {createAdapter} from '@nlux/openai';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {createPromiseAdapterController, PromiseAdapterController} from '../../utils/adapters';
+import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
@@ -84,7 +84,7 @@ describe('When typing a prompt ', () => {
 });
 
 describe('When sending a chat message ', () => {
-    let adapterController: PromiseAdapterController | undefined = undefined;
+    let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement | undefined;
     let nluxConvo: NluxConvo | undefined;
@@ -105,7 +105,7 @@ describe('When sending a chat message ', () => {
 
     describe('When the user clicks the send button', () => {
         it('should display the user message in conversation container', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
 
@@ -128,7 +128,7 @@ describe('When sending a chat message ', () => {
         });
 
         it('should display a loading indicator', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
 
@@ -153,7 +153,7 @@ describe('When sending a chat message ', () => {
 
         describe('When the API call fails', () => {
             it('should display an error message', async () => {
-                adapterController = createPromiseAdapterController();
+                adapterController = createPromiseAdapterController({includeStreamText: false});
                 nluxConvo = createConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
 
@@ -181,7 +181,7 @@ describe('When sending a chat message ', () => {
 
             it('Should remove the initial user message', async () => {
                 const delayBeforeSendingResponse = 100;
-                adapterController = createPromiseAdapterController();
+                adapterController = createPromiseAdapterController({includeStreamText: false});
 
                 nluxConvo = createConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
@@ -207,7 +207,7 @@ describe('When sending a chat message ', () => {
             });
 
             it('should keep the content of the prompt box', async () => {
-                adapterController = createPromiseAdapterController();
+                adapterController = createPromiseAdapterController({includeStreamText: false});
 
                 nluxConvo = createConvo().withAdapter(adapterController.adapter);
                 nluxConvo.mount(rootElement);
@@ -256,7 +256,7 @@ describe('When sending a chat message ', () => {
     describe('When the user receives a response', () => {
         it('should display the response', async () => {
             const delayBeforeSendingResponse = 200;
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
 
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
@@ -283,7 +283,7 @@ describe('When sending a chat message ', () => {
 
         it('should remove the loading indicator', async () => {
             const delayBeforeSendingResponse = 100;
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
 
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);
@@ -310,7 +310,7 @@ describe('When sending a chat message ', () => {
 
         it('should empty the prompt box', async () => {
             const delayBeforeSendingResponse = 100;
-            adapterController = createPromiseAdapterController();
+            adapterController = createPromiseAdapterController({includeStreamText: false});
 
             nluxConvo = createConvo().withAdapter(adapterController.adapter);
             nluxConvo.mount(rootElement);

@@ -4,7 +4,7 @@
 
     --nluxc-text-color: var(--nluxc-text-color);
     --nluxc-font-weight: 400;
-    --nluxc-line-height: 1.5;
+    --nluxc-line-height: 1.4;
 
     --nluxc-font-size: 1rem;
     --nluxc-font-size-s: 0.8rem;
@@ -17,11 +17,11 @@
 
     --nluxc-flex-gap: 0.5rem;
 
-    --nluxc-border-radius-xs: 5px;
-    --nluxc-border-radius-s: 10px;
-    --nluxc-border-radius: 12px;
-    --nluxc-border-radius-m: 14px;
-    --nluxc-border-radius-l: 16px;
+    --nluxc-border-radius-xs: 4px;
+    --nluxc-border-radius-s: 6px;
+    --nluxc-border-radius: 8px;
+    --nluxc-border-radius-m: 10px;
+    --nluxc-border-radius-l: 12px;
 
     --nluxc-border-width: 1px;
     --nluxc-box-shadow: 0 0 2px rgb(0 0 0 / 30%);

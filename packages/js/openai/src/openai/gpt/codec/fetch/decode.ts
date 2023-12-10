@@ -1,9 +1,8 @@
-import {Message} from '@nlux/nlux';
 import OpenAI from 'openai';
 
 export const decode = async (
     payload: OpenAI.Chat.Completions.ChatCompletion,
-): Promise<Message> => {
+): Promise<string | undefined> => {
     if (!payload.choices || !payload.choices[0]) {
         throw Error('Invalid payload');
     }

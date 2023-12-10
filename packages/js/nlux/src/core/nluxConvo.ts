@@ -6,6 +6,7 @@ import {StandardAdapter} from '../types/standardAdapter';
 import {debug, warn} from '../x/debug';
 import {NluxController} from './controller/controller';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from './error';
+import {HighlighterExtension} from './highlighter/highlighter';
 import {INluxConvo} from './interface';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
@@ -19,6 +20,7 @@ export class NluxConvo implements INluxConvo {
     protected theConversationOptions: ConversationOptions | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
+    protected theSyntaxHighlighter: HighlighterExtension | null = null;
     protected theThemeId: string | null = null;
     private controller: NluxController | null = null;
 
@@ -69,6 +71,7 @@ export class NluxConvo implements INluxConvo {
             {
                 themeId: this.theThemeId ?? undefined,
                 className: this.theClassName ?? undefined,
+                syntaxHighlighter: this.theSyntaxHighlighter ?? undefined,
                 layoutOptions: this.theLayoutOptions ?? {},
                 promptBoxOptions: this.thePromptBoxOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
@@ -158,7 +161,10 @@ export class NluxConvo implements INluxConvo {
             return this;
         }
 
-        if (typeof anAdapterOrAdapterBuilder.send === 'function') {
+        if (
+            (typeof anAdapterOrAdapterBuilder.fetchText === 'function') ||
+            (typeof anAdapterOrAdapterBuilder.streamText === 'function')
+        ) {
             this.theAdapterType = 'instance';
             this.theAdapter = anAdapterOrAdapterBuilder;
             return this;
@@ -166,7 +172,10 @@ export class NluxConvo implements INluxConvo {
 
         throw new NluxUsageError({
             source: this.constructor.name,
-            message: 'Unable to set adapter. Invalid adapter or adapter-builder implementation.',
+            message: 'Unable to set adapter. Invalid adapter or adapter-builder implementation! '
+                + 'When an `AdapterBuilder` is provided, it must implement either `create()` method that returns an '
+                + 'Adapter instance. When an Adapter instance is provided, must implement `fetchText()` and/or '
+                + '`streamText()` methods. None of the above were found.',
         });
     };
 
@@ -208,7 +217,7 @@ export class NluxConvo implements INluxConvo {
         return this;
     }
 
-    withLayoutOptions(layoutOptions: LayoutOptions) {
+    public withLayoutOptions(layoutOptions: LayoutOptions) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -244,6 +253,25 @@ export class NluxConvo implements INluxConvo {
         }
 
         this.thePromptBoxOptions = promptBoxOptions;
+        return this;
+    }
+
+    public withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set code highlighter. NLUX is already mounted.',
+            });
+        }
+
+        if (this.theSyntaxHighlighter) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Code highlighter was already set.',
+            });
+        }
+
+        this.theSyntaxHighlighter = syntaxHighlighter;
         return this;
     }
 

@@ -64,6 +64,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
             instanceId: this.nluxInstanceId,
             exception: this.renderException,
             adapter: this.adapter,
+            syntaxHighlighter: this.props?.syntaxHighlighter,
         };
 
         this.context = Object.freeze(newContext);

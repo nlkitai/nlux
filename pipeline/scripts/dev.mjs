@@ -68,7 +68,7 @@ try {
     //
     // Symlink built NLUX packages to emulator folder
     //
-    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'themes'].forEach((name) => {
+    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
         symlinkBuiltPackageToEmulatorFolder(name);
     });
 

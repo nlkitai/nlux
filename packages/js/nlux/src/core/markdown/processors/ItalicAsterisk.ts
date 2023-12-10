@@ -2,44 +2,39 @@ import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class ParagraphProcessor extends ProcessorWithChildren {
+export class ItalicAsteriskProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
+        openingSequence?: string,
         initialContent?: string,
     ) {
         super(
             parent,
-            'Paragraph',
-            initialContent,
+            'ItalicAsterisk',
+            openingSequence ?? null,
+            initialContent ?? null,
+            null,
         );
     }
 
     get canExistAtRootLevel(): boolean {
-        return true;
+        return false;
     }
 
     get nestedMarkdownElements(): MarkdownElementName[] | 'all' | 'none' {
         return [
-            'LineBreak', 'Blockquote',
+            'LineBreak',
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
-            'Code', 'Link',
+            'Code',
         ];
-    }
-
-    get removeWhenEmpty(): boolean {
-        return true;
     }
 
     get yieldingMarkdownElements(): MarkdownElementName[] | 'none' {
-        return [
-            'Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5', 'Heading6',
-            'CodeBlock', 'UnorderedList', 'OrderedList', 'HorizontalRule',
-            'Image',
-        ];
+        return 'none';
     }
 
     createElement(): HTMLElement {
-        return document.createElement('p');
+        return document.createElement('em');
     }
 }

@@ -5,9 +5,13 @@
         padding-bottom: var(--nluxc-padding-l);
 
         > .nluxc-text-message-content {
-            min-width: 40px;
-            max-width: 80%;
-            padding: var(--nluxc-padding) var(--nluxc-padding-l);
+            display: flex;
+            flex-direction: column;
+            gap: var(--nluxc-flex-gap);
+
+            min-width: 80px;
+            width: 80%;
+            padding: var(--nluxc-padding-m) var(--nluxc-padding-l);
             text-align: left;
 
             border-width: var(--nluxc-border-width);
@@ -15,6 +19,11 @@
 
             border-radius: var(--nluxc-border-radius-m);
             outline: none;
+
+            :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
+                padding: 0;
+                margin: 0;
+            }
         }
 
         > .nluxc-text-message-content:empty {
@@ -22,6 +31,8 @@
         }
 
         > .nluxc-text-message-content pre {
+            position: relative;
+
             font-family: var(--nluxc-mono-font-family);
             font-size: var(--nluxc-font-size-s);
             overflow: scroll;
@@ -32,6 +43,40 @@
             border-radius: var(--nluxc-border-radius-s);
             background-color: var(--nlux-code-block-background-color);
             box-shadow: var(--nluxc-box-shadow);
+        }
+
+        > .nluxc-text-message-content button.copy-button {
+            z-index: 999999;
+            position: relative;
+            width: 25px;
+            height: 24px;
+
+            margin-left: auto;
+            margin-right: 10px;
+            margin-bottom: -23px;
+
+            padding: 4px;
+
+            border: 1px solid var(--nlux-code-block-background-color);
+            border-radius: var(--nluxc-border-radius-xs);
+            background-color: var(--nluxc-message-received-background-color);
+            color: var(--nlux-code-block-background-color);
+            cursor: pointer;
+        }
+
+        > .nluxc-text-message-content button.copy-button:hover * {
+            opacity: 0.5;
+        }
+
+        > .nluxc-text-message-content button.copy-button.clicked,
+        > .nluxc-text-message-content button.copy-button.clicked:hover {
+            background-color: var(--nlux-code-block-background-color);
+            color: var(--nluxc-message-received-background-color);
+            border-color: var(--nlux-code-block-background-color);
+        }
+
+        > .nluxc-text-message-content button.copy-button.clicked:hover * {
+            opacity: 1;
         }
 
         > .nluxc-text-message-content code {

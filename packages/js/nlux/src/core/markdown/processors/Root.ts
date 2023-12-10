@@ -2,16 +2,24 @@ import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {isLineBreakSequence} from '../../../x/character/isLineBreakSequence';
 import {isWhitespaceOrNewLine} from '../../../x/character/isWhitespaceOrNewLine';
 import {isBr} from '../../../x/dom/isBr';
+import {HighlighterExtension} from '../../highlighter/highlighter';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor} from './baseProcessor';
 
 export class RootProcessor extends BaseMarkdownProcessor {
     private __rootDomElement: HTMLElement | undefined;
 
-    constructor(rootDomElement: HTMLElement) {
+    constructor(
+        rootDomElement: HTMLElement,
+        openingSequence?: string,
+        syntaxHighlighter?: HighlighterExtension,
+    ) {
         super(
             null,
             'Root',
+            openingSequence ?? null,
+            null,
+            syntaxHighlighter ?? null,
         );
 
         this.__rootDomElement = rootDomElement;
@@ -47,10 +55,13 @@ export class RootProcessor extends BaseMarkdownProcessor {
         }
     }
 
-    createAndAppendMarkdown(elementName: MarkdownElementName) {
+    createAndAppendMarkdown(elementName: MarkdownElementName, openingSequence?: string): void {
         createMarkdownProcessor(
             elementName,
             this,
+            openingSequence,
+            undefined,
+            this.syntaxHighlighter,
         );
 
         this.sequenceParser.reset();
@@ -88,7 +99,9 @@ export class RootProcessor extends BaseMarkdownProcessor {
             createMarkdownProcessor(
                 nestedElementToCreate,
                 this,
+                this.sequenceParser.sequence,
                 lastCharacter,
+                this.syntaxHighlighter,
             );
 
             const parsingChild = this.parsingChild;
@@ -123,6 +136,7 @@ export class RootProcessor extends BaseMarkdownProcessor {
             createMarkdownProcessor(
                 'Paragraph',
                 this,
+                undefined,
                 lastCharacter,
             );
 

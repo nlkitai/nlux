@@ -30,7 +30,7 @@ try {
     //
     // Symlink dependencies to emulator folder
     //
-    ['react', 'react-dom', 'openai', 'hf'].forEach((name) => {
+    ['react', 'react-dom', 'openai'].forEach((name) => {
         symlinkNodeModuleToEmulatorFolder(name);
     });
 

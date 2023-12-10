@@ -43,11 +43,27 @@ export const renderChatRoom: CompRenderer<
         }
     }
 
+    if (typeof props.containerHeight === 'number') {
+        chatRoomElement.style.height = `${props.containerHeight}px`;
+    } else {
+        if (typeof props.containerHeight === 'string') {
+            chatRoomElement.style.height = props.containerHeight;
+        }
+    }
+
     if (typeof props.containerMaxWidth === 'number') {
         chatRoomElement.style.maxWidth = `${props.containerMaxWidth}px`;
     } else {
         if (typeof props.containerMaxWidth === 'string') {
             chatRoomElement.style.maxWidth = props.containerMaxWidth;
+        }
+    }
+
+    if (typeof props.containerWidth === 'number') {
+        chatRoomElement.style.width = `${props.containerWidth}px`;
+    } else {
+        if (typeof props.containerWidth === 'string') {
+            chatRoomElement.style.width = props.containerWidth;
         }
     }
 

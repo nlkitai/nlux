@@ -1,7 +1,6 @@
 import {HfInference, TextGenerationOutput, TextGenerationStreamOutput} from '@huggingface/inference';
 import {
     DataTransferMode,
-    Message,
     NluxError,
     NluxValidationError,
     StandardAdapter,
@@ -15,12 +14,11 @@ import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
 import {HfAdapterOptions} from '../types/adapterOptions';
 
 export class HfAdapterImpl implements StandardAdapter<any, any> {
-    static baseUrl = 'https://api-inference.huggingface.co/models';
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
 
+    private readonly options: HfAdapterOptions;
     private inference: HfInference;
-    private options: HfAdapterOptions;
 
     constructor(options: HfAdapterOptions) {
         if (!options.model) {
@@ -37,7 +35,7 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
 
     get config(): StandardAdapterConfig<any, any> {
         return {
-            encodeMessage: (message: Message) => {
+            encodeMessage: (message: string) => {
                 return Promise.resolve(message);
             },
             decodeMessage: (payload: any) => {
@@ -75,7 +73,7 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         return 'idle';
     }
 
-    async decode(payload: any): Promise<Message> {
+    async decode(payload: any): Promise<string> {
         const output = (() => {
             if (typeof payload === 'string') {
                 return payload;
@@ -114,7 +112,7 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         }
     }
 
-    async encode(message: Message): Promise<Message> {
+    async encode(message: string): Promise<string> {
         const messageAsAny = message as any;
         const {preProcessors: {input: inputPreProcessor} = {}} = this.options;
         if (inputPreProcessor && messageAsAny) {
@@ -131,51 +129,7 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         return message;
     }
 
-    send(message: Message): Promise<Message>
-
-    send(message: Message, observer: StreamingAdapterObserver): void;
-
-    send(message: string, observer?: StreamingAdapterObserver): void | Promise<Message> {
-        const promise = new Promise<Message>(async (resolve, reject) => {
-            if (!message) {
-                throw new NluxValidationError({
-                    source: this.constructor.name,
-                    message: 'The first argument to the send() method must be a non-empty string',
-                });
-            }
-
-            if (this.dataTransferMode === 'stream' && !observer) {
-                throw new NluxValidationError({
-                    source: this.constructor.name,
-                    message: 'The Hugging Face adapter is set to be used in streaming mode, but no observer was ' +
-                        'provided to the send() method! You should either provide an observer as a second argument ' +
-                        'to the send() method or set the data loading mode to fetch when creating the adapter.',
-                });
-            }
-
-            try {
-                const readyMessage = await this.encode(message);
-
-                // Send message to the Hugging Face API
-                if (this.dataTransferMode === 'stream') {
-                    this.sendStream(readyMessage, observer!);
-                    return;
-                }
-
-                // Return fetch promise when data transfer mode is 'fetch'
-                const result = await this.sendFetch(readyMessage);
-                resolve(result);
-            } catch (error: any) {
-                reject(error);
-            }
-        });
-
-        if (this.dataTransferMode === 'fetch') {
-            return promise;
-        }
-    }
-
-    private async sendFetch(message: Message): Promise<Message> {
+    async fetchText(message: string): Promise<string> {
         if (!this.options.model && !this.options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -214,7 +168,47 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         return await this.decode(output);
     }
 
-    private sendStream(message: Message, observer: StreamingAdapterObserver<Message>) {
+    send(message: string, observer?: StreamingAdapterObserver): void | Promise<string> {
+        const promise = new Promise<string>(async (resolve, reject) => {
+            if (!message) {
+                throw new NluxValidationError({
+                    source: this.constructor.name,
+                    message: 'The first argument to the send() method must be a non-empty string',
+                });
+            }
+
+            if (this.dataTransferMode === 'stream' && !observer) {
+                throw new NluxValidationError({
+                    source: this.constructor.name,
+                    message: 'The Hugging Face adapter is set to be used in streaming mode, but no observer was ' +
+                        'provided to the send() method! You should either provide an observer as a second argument ' +
+                        'to the send() method or set the data loading mode to fetch when creating the adapter.',
+                });
+            }
+
+            try {
+                const readyMessage = await this.encode(message);
+
+                // Send message to the Hugging Face API
+                if (this.dataTransferMode === 'stream') {
+                    this.streamText(readyMessage, observer!);
+                    return;
+                }
+
+                // Return fetch promise when data transfer mode is 'fetch'
+                const result = await this.fetchText(readyMessage);
+                resolve(result);
+            } catch (error: any) {
+                reject(error);
+            }
+        });
+
+        if (this.dataTransferMode === 'fetch') {
+            return promise;
+        }
+    }
+
+    streamText(message: string, observer: StreamingAdapterObserver) {
         Promise.resolve().then(async () => {
             if (!this.options.model && !this.options.endpoint) {
                 throw new NluxValidationError({

@@ -1,12 +1,11 @@
 import {MarkdownElementName} from '../../types/markdown/markdownElement';
 import {allMarkdownElementNames} from './allMarkdownElementNames';
-import {checkSequence, MarkdownSequenceParsers, parsersByMarkdownElementName} from './regex/baseRegexParsers';
+import {checkSequence} from './regex/baseRegexParsers';
 
 export class SequenceParser {
     private readonly __markdownElement: MarkdownElementName;
     private readonly __possibleNestedMarkdownElements: MarkdownElementName[];
     private readonly __possibleYieldingMarkdownElements: MarkdownElementName[];
-    private readonly __sequenceParsers: MarkdownSequenceParsers;
     // Potential states, for sequences that are incomplete:
     private __canLeadToClosingMarkdown: boolean = false;
     private __latestSequenceProcessed: boolean = false;
@@ -32,14 +31,6 @@ export class SequenceParser {
 
         this.__possibleYieldingMarkdownElements = possibleYieldingMarkdownElements === 'none' ? []
             : possibleYieldingMarkdownElements;
-
-        const sequenceParser = parsersByMarkdownElementName.get(markdownElement);
-        if (!sequenceParser) {
-            // It should not happen, unless coding error where a sequence parser is not defined for a markdown element
-            throw new Error(`No sequence parsers found for markdown element ${markdownElement}`);
-        }
-
-        this.__sequenceParsers = sequenceParser;
     }
 
     public get canLeadToClosingOrNewMarkdown(): boolean {

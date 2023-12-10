@@ -15,7 +15,7 @@ export const symlinkBuiltPackageToEmulatorFolder = (name) => {
 export const symlinkNodeModuleToEmulatorFolder = (name) => {
     const modulePath = join(nodeModulesPath(), name);
     if (!existsSync(modulePath)) {
-        throwError(`Could not find built package: ${name}`);
+        throwError(`Could not find built node module: ${name}`);
     }
 
     symlinkSync(modulePath, join(devDistPath(), 'emulator', 'packages', name), 'dir');

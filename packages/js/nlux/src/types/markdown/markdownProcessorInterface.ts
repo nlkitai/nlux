@@ -1,10 +1,10 @@
-import {SequenceParser} from '../../utils/md/sequenceParser';
+import {SequenceParser} from '../../core/markdown/sequenceParser';
 import {MarkdownElementName} from './markdownElement';
 
 export interface MarkdownProcessorInterface {
 
     get canExistAtRootLevel(): boolean;
-    createElement(): HTMLElement;
+    createElement(openingSequence?: string): HTMLElement;
     get domElement(): HTMLElement | undefined;
     init(): void;
     get markdownElementName(): MarkdownElementName;
@@ -13,6 +13,7 @@ export interface MarkdownProcessorInterface {
     parsingChildYielded(
         child: MarkdownProcessorInterface,
         elementToCreateAtParentLevel?: MarkdownElementName,
+        openingSequence?: string,
         characterToAppendToParentLevel?: string,
     ): void;
     preProcessCharacter(character: string): void;

@@ -4,10 +4,17 @@ import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor} from './baseProcessor';
 
 export class LineBreakProcessor extends BaseMarkdownProcessor {
-    constructor(parent: MarkdownProcessorInterface, initialContent?: string) {
+    constructor(
+        parent: MarkdownProcessorInterface,
+        openingSequence?: string,
+        initialContent?: string,
+    ) {
         super(
             parent,
             'LineBreak',
+            openingSequence ?? null,
+            initialContent ?? null,
+            null,
         );
     }
 
@@ -23,10 +30,13 @@ export class LineBreakProcessor extends BaseMarkdownProcessor {
         return 'none';
     }
 
-    createAndAppendMarkdown(elementName: MarkdownElementName) {
+    createAndAppendMarkdown(elementName: MarkdownElementName, openingSequence?: string): void {
         createMarkdownProcessor(
             elementName,
             this,
+            openingSequence,
+            undefined,
+            this.syntaxHighlighter,
         );
 
         this.sequenceParser.reset();

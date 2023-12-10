@@ -88,6 +88,7 @@ removeGeneratedPackageJson('packages/css/themes');
 removeGeneratedPackageJson('packages/js/nlux');
 removeGeneratedPackageJson('packages/js/openai');
 removeGeneratedPackageJson('packages/js/hf');
+removeGeneratedPackageJson('packages/js/highlighter');
 removeGeneratedPackageJson('packages/react/nlux');
 removeGeneratedPackageJson('packages/react/openai');
 removeGeneratedPackageJson('packages/react/hf');

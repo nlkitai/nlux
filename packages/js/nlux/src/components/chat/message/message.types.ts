@@ -26,7 +26,6 @@ export type CompMessageElements = Readonly<{
 
 export type CompMessageActions = Readonly<{
     focus: () => void;
-    scrollToMessageEndContainer: () => void;
     setContentStatus: (status: MessageContentLoadingStatus) => void;
     appendContent: (content: string) => void;
     commitContent: () => void;

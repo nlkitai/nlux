@@ -70,7 +70,6 @@ const gptAdapter = createAdapter().withApiKey('YOUR_OPEN_AI_API_KEY');
 Then render the **NLUX UI component** `Nlux Convo` into your web page:
 
 ```js
-=======
 const nluxConvo = createConvo()
     .withAdapter(gptAdapter)
     .withPromptBoxOptions({
@@ -138,7 +137,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.5.9/kensington.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.6.8/kensington.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

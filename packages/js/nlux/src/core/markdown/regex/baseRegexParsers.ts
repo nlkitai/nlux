@@ -114,4 +114,3 @@ parsersByMarkdownElementName.set('Image', {
     shouldClose: /^$/,
     canClose: /^$/,
 });
-

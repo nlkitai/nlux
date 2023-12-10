@@ -7,7 +7,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
     });
 
     it('should render an italic with asterisk immediately inside bold', async () => {

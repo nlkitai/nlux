@@ -2,15 +2,18 @@ import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class ItalicAsteriskProcessor extends ProcessorWithChildren {
+export class CodeProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
+        openingSequence?: string,
         initialContent?: string,
     ) {
         super(
             parent,
-            'ItalicAsterisk',
-            initialContent,
+            'Code',
+            openingSequence ?? null,
+            initialContent ?? null,
+            null,
         );
     }
 
@@ -20,10 +23,8 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
 
     get nestedMarkdownElements(): MarkdownElementName[] | 'all' | 'none' {
         return [
-            'LineBreak',
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
-            'Code',
         ];
     }
 
@@ -32,6 +33,6 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
     }
 
     createElement(): HTMLElement {
-        return document.createElement('em');
+        return document.createElement('code');
     }
 }

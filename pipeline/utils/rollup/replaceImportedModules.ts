@@ -7,6 +7,7 @@ export const nluxImportMap = {
     '@nlux/openai-react': '/packages/@nlux/openai-react/{nluxBundlerPackageType}/openai-react.js',
     '@nlux/hf': '/packages/@nlux/hf/{nluxBundlerPackageType}/hf.js',
     '@nlux/hf-react': '/packages/@nlux/hf-react/{nluxBundlerPackageType}/hf-react.js',
+    '@nlux/highlighter': '/packages/@nlux/highlighter/{nluxBundlerPackageType}/highlighter.js',
 };
 
 export const reactImportsByPackageType = (nluxBundlerPackageType: 'esm' | 'cjs' | 'umd') => ({

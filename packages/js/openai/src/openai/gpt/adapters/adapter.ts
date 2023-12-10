@@ -1,6 +1,5 @@
 import {
     DataTransferMode,
-    Message,
     StandardAdapter,
     StandardAdapterConfig,
     StandardAdapterInfo,
@@ -66,17 +65,17 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         return this.currentStatus;
     }
 
-    async decode(payload: InboundPayload): Promise<Message> {
+    async decode(payload: InboundPayload): Promise<string> {
         const {decodeMessage} = this.config;
         return decodeMessage(payload);
     }
 
-    async encode(message: Message): Promise<OutboundPayload> {
+    async encode(message: string): Promise<OutboundPayload> {
         const {encodeMessage} = this.config;
         return encodeMessage(message);
     }
 
-    abstract send(message: Message): Promise<Message>;
+    abstract fetchText(message: string): Promise<string>;
 
-    abstract send(message: Message, observer: StreamingAdapterObserver): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver): void;
 }

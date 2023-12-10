@@ -1,6 +1,7 @@
 import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {isLineBreakSequence} from '../../../x/character/isLineBreakSequence';
+import {HighlighterExtension} from '../../highlighter/highlighter';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor} from './baseProcessor';
 
@@ -8,12 +9,16 @@ export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
     constructor(
         parent: MarkdownProcessorInterface,
         elementName: MarkdownElementName,
-        initialContent?: string,
+        openingSequence: string | null,
+        initialContent: string | null,
+        syntaxHighlighter: HighlighterExtension | null,
     ) {
         super(
             parent,
             elementName,
+            openingSequence,
             initialContent,
+            syntaxHighlighter,
         );
     }
 
@@ -23,10 +28,13 @@ export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
 
     abstract get yieldingMarkdownElements(): MarkdownElementName[] | 'none';
 
-    createAndAppendMarkdown(elementName: MarkdownElementName) {
+    createAndAppendMarkdown(elementName: MarkdownElementName, openingSequence?: string): void {
         createMarkdownProcessor(
             elementName,
             this,
+            openingSequence,
+            undefined,
+            this.syntaxHighlighter,
         );
 
         this.sequenceParser.reset();
@@ -116,7 +124,9 @@ export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
             createMarkdownProcessor(
                 nestedElementToCreate,
                 this,
+                this.sequenceParser.sequence,
                 lastCharacter,
+                this.syntaxHighlighter,
             );
 
             this.sequenceParser.reset();

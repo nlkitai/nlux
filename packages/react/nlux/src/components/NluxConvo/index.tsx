@@ -4,7 +4,6 @@ import {handleNewPropsReceived} from './handleNewPropsReceived';
 import {NluxConvoProps} from './props';
 
 export const NluxConvo = (props: Readonly<NluxConvoProps>) => {
-    const {className} = props;
     const rootElement = useRef<HTMLDivElement>(null);
     const [currentProps, setCurrentProps] = useState<Readonly<NluxConvoProps> | null>(null);
     const nluxConvo = useRef<NluxConvoType | null>(null);
@@ -16,6 +15,8 @@ export const NluxConvo = (props: Readonly<NluxConvoProps>) => {
 
         const {
             adapter,
+            className,
+            syntaxHighlighter,
             layoutOptions,
             conversationOptions,
             promptBoxOptions,
@@ -37,6 +38,10 @@ export const NluxConvo = (props: Readonly<NluxConvoProps>) => {
 
         if (className) {
             newInstance = newInstance.withClassName(className);
+        }
+
+        if (syntaxHighlighter) {
+            newInstance = newInstance.withSyntaxHighlighter(syntaxHighlighter);
         }
 
         newInstance.mount(rootElement.current);
