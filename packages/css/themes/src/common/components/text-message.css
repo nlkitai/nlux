@@ -9,8 +9,9 @@
             flex-direction: column;
             gap: var(--nluxc-flex-gap);
 
-            min-width: 80px;
             width: 80%;
+            min-width: 80px;
+            min-height: 25px;
             padding: var(--nluxc-padding-m) var(--nluxc-padding-l);
             text-align: left;
 
@@ -26,23 +27,32 @@
             }
         }
 
-        > .nluxc-text-message-content:empty {
-            display: none;
-        }
-
-        > .nluxc-text-message-content pre {
+        > .nluxc-text-message-content .code-block {
             position: relative;
 
             font-family: var(--nluxc-mono-font-family);
             font-size: var(--nluxc-font-size-s);
             overflow: scroll;
-            padding: var(--nluxc-padding) var(--nluxc-padding-m);
+            padding: var(--nluxc-padding) 0;
 
             color: var(--nlux-code-block-text-color);
             border: none;
             border-radius: var(--nluxc-border-radius-s);
             background-color: var(--nlux-code-block-background-color);
             box-shadow: var(--nluxc-box-shadow);
+        }
+
+        > .nluxc-text-message-content .code-block > pre {
+            width: fit-content;
+            min-width: 100%;
+        }
+
+        > .nluxc-text-message-content .code-block > pre > div {
+            padding: 0 var(--nluxc-padding-m);
+        }
+
+        > .nluxc-text-message-content .code-block > pre > div:hover {
+            background-color: var(--nlux-code-block-hover-background-color);
         }
 
         > .nluxc-text-message-content button.copy-button {
@@ -94,10 +104,58 @@
         }
     }
 
+    .nluxc-text-message-container.message-status-loading,
+    .nluxc-text-message-container.message-status-connecting {
+        > .nluxc-text-message-content {
+            display: none;
+        }
+
+        > .nluxc-text-message-loader {
+            display: flex;
+            gap: var(--nluxc-flex-gap);
+            align-items: center;
+            justify-content: center;
+
+            height: 40px;
+            padding: 0 var(--nluxc-padding-m);
+
+            background-color: var(--nluxc-message-received-background-color);
+            color: var(--nluxc-message-received-text-color);
+
+            border-color: var(--nluxc-message-received-border-color);
+            border-width: var(--nluxc-border-width);
+            border-style: solid;
+
+            border-radius: var(--nluxc-border-radius-m);
+            outline: none;
+
+            > .spinning-loader-container {
+                width: 17px;
+
+                > .spinning-loader {
+                    width: 15px;
+                    height: 15px;
+                    margin-top: 4px;
+                }
+            }
+        }
+    }
+
+    .nluxc-text-message-container:not(.message-status-loading, .message-status-connecting) {
+        > .nluxc-text-message-content {
+            display: flex;
+        }
+
+        > .nluxc-text-message-loader {
+            display: none;
+        }
+    }
+
     .nluxc-text-message-container.nluxc-text-message-received {
         align-items: flex-start;
 
-        > .nluxc-text-message-content {
+        > .nluxc-text-message-content,
+        > .nluxc-text-message-loader {
             margin-left: var(--nluxc-padding-s);
             color: var(--nluxc-message-received-text-color);
             border-color: var(--nluxc-message-received-border-color);
@@ -105,7 +163,9 @@
         }
 
         > .nluxc-text-message-content:focus,
-        > .nluxc-text-message-content:active {
+        > .nluxc-text-message-content:active,
+        > .nluxc-text-message-loader:focus,
+        > .nluxc-text-message-loader:active {
             color: var(--nluxc-message-received-active-text-color);
             border-color: var(--nluxc-message-received-active-border-color);
             background-color: var(--nluxc-message-received-active-background-color);

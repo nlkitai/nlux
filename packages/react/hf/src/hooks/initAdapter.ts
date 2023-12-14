@@ -1,5 +1,5 @@
 import {createAdapter, HfAdapterOptions} from '@nlux/hf';
-import {NluxUsageError} from '@nlux/nlux-react';
+import {NluxUsageError} from '@nlux/react';
 
 const source = 'hooks/initHfAdapter';
 

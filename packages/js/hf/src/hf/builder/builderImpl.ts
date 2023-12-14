@@ -1,4 +1,4 @@
-import {DataTransferMode, NluxUsageError, NluxValidationError} from '@nlux/nlux';
+import {DataTransferMode, NluxUsageError, NluxValidationError} from '@nlux/core';
 import {HfAdapterImpl} from '../adapter/adapter';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';

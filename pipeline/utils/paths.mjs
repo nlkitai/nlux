@@ -23,7 +23,7 @@ export const devDistPath = (packageName = undefined) => {
     return fixedPaths.devDistPath;
 };
 
-export const prodDistPath = (packageName = undefined) => {
+const prodDistPath = (packageName = undefined) => {
     if (packageName) {
         return join(fixedPaths.prodDistPath, packageName);
     }
@@ -31,10 +31,10 @@ export const prodDistPath = (packageName = undefined) => {
     return fixedPaths.prodDistPath;
 };
 
-export const outputFolder = (packageName = undefined) => {
+export const outputFolder = (packageNameOrFolder = undefined) => {
     const basePath = isProduction ? prodDistPath() : devDistPath();
-    if (packageName) {
-        return join(basePath, packageName);
+    if (packageNameOrFolder) {
+        return join(basePath, packageNameOrFolder);
     }
 
     return basePath;

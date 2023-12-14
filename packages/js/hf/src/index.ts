@@ -3,9 +3,9 @@ export type {
     StandardAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-} from '@nlux/nlux';
+} from '@nlux/core';
 
-export {debug} from '@nlux/nlux';
+export {debug} from '@nlux/core';
 
 export type {HfAdapterOptions} from './hf/types/adapterOptions';
 export type {HfAdapterBuilder} from './hf/builder/builder';

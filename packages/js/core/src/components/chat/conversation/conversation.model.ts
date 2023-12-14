@@ -1,0 +1,130 @@
+import {BaseComp} from '../../../core/comp/base';
+import {comp} from '../../../core/comp/comp';
+import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {NluxContext} from '../../../types/context';
+import {CompList} from '../../miscellaneous/list/model';
+import {messageInList, textMessage} from '../chat-room/utils/textMessage';
+import {CompMessage} from '../message/message.model';
+import type {MessageContentType} from '../message/message.types';
+import {renderConversation} from './conversation.render';
+import {
+    CompConversationActions,
+    CompConversationElements,
+    CompConversationEvents,
+    CompConversationProps,
+    CompConversationScrollParams,
+} from './conversation.types';
+import {updateConversation} from './conversation.update';
+
+@Model('conversation', renderConversation, updateConversation)
+export class CompConversation extends BaseComp<
+    CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
+> {
+    private lastMessageId?: string;
+    private lastMessageResizedListener?: Function;
+    private messagesList: CompList<CompMessage> | undefined;
+
+    private scrollWhenGeneratingUserOption: boolean;
+    private scrollingStickToConversationEnd: boolean = true;
+
+    constructor(context: NluxContext, props: CompConversationProps) {
+        super(context, props);
+        this.addConversation();
+        this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
+    }
+
+    public addMessage(
+        direction: 'in' | 'out',
+        contentType: MessageContentType,
+        createdAt: Date,
+        content?: string,
+    ): string {
+        if (!this.messagesList || !this.props) {
+            throw new Error(`CompConversation: messagesList is not initialized! Make sure you call` +
+                `addConversation() before calling addMessage()!`);
+        }
+
+        const trackResizeAndDomChange = this.props.scrollWhenGenerating;
+        const message = textMessage(
+            this.context,
+            direction,
+            trackResizeAndDomChange,
+            contentType,
+            content as string,
+            createdAt,
+        );
+
+        // Clean up last message resize listener
+        if (this.lastMessageId && this.lastMessageResizedListener) {
+            const lastMessage = this.getMessageById(this.lastMessageId);
+            if (lastMessage) {
+                lastMessage.removeResizeListener(this.lastMessageResizedListener);
+                lastMessage.removeDomChangeListener(this.lastMessageResizedListener);
+            }
+
+            this.lastMessageId = undefined;
+            this.lastMessageResizedListener = undefined;
+        }
+
+        // Add new message
+        this.messagesList.appendComponent(message, messageInList);
+        this.executeDomAction('scrollToBottom');
+
+        // Listen to the new message resize event
+        this.lastMessageId = message.id;
+        this.lastMessageResizedListener = this.createMessageResizedListener(message.id);
+        if (this.lastMessageResizedListener) {
+            message.onResize(this.lastMessageResizedListener);
+            message.onDomChange(this.lastMessageResizedListener);
+        }
+
+        return message.id;
+    }
+
+    public getMessageById(messageId: string): CompMessage | undefined {
+        return this.messagesList?.getComponentById(messageId);
+    }
+
+    public removeMessage(messageId: string) {
+        this.messagesList?.removeComponentById(messageId);
+    }
+
+    public toggleAutoScrollToStreamingMessage(autoScrollToStreamingMessage: boolean) {
+        this.scrollWhenGeneratingUserOption = autoScrollToStreamingMessage;
+    }
+
+    private addConversation() {
+        this.messagesList = comp(CompList<CompMessage>).withContext(this.context).create();
+        this.addSubComponent(this.messagesList.id, this.messagesList, 'messagesContainer');
+    }
+
+    private createMessageResizedListener(messageId: string) {
+        const message = this.getMessageById(messageId);
+        if (!message) {
+            return;
+        }
+
+        return () => {
+            if (!this.destroyed && this.scrollWhenGeneratingUserOption && this.scrollingStickToConversationEnd) {
+                this.executeDomAction('scrollToBottom');
+            }
+        };
+    }
+
+    @CompEventListener('user-scrolled')
+    private handleUserScrolled({scrolledToBottom, scrollDirection}: CompConversationScrollParams) {
+        if (this.scrollingStickToConversationEnd) {
+            // When the user is already at the bottom of the conversation, we stick to the bottom
+            // and only unstick when the user scrolls up.
+            if (scrollDirection === 'up') {
+                this.scrollingStickToConversationEnd = false;
+            }
+        } else {
+            // When the user is not at the bottom of the conversation, we only stick to the bottom
+            // when the user scrolls down and reaches the bottom.
+            if (scrollDirection === 'down' && scrolledToBottom) {
+                this.scrollingStickToConversationEnd = true;
+            }
+        }
+    }
+}

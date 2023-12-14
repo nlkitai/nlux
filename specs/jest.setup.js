@@ -9,4 +9,5 @@ console.info = jest.fn();
 
 global.ResizeObserver = ResizeObserver;
 global.HTMLElement.prototype.scroll = jest.fn();
+global.HTMLElement.prototype.scrollTo = jest.fn();
 global.HTMLElement.prototype.scrollIntoView = jest.fn();

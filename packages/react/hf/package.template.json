@@ -10,7 +10,7 @@
     "@nlux/hf": "{versions.nlux}"
   },
   "peerDependencies": {
-    "@nlux/nlux-react": "{versions.nlux}",
+    "@nlux/react": "{versions.nlux}",
     "react": "^{versions.peerDependencies.react}"
   },
   "devDependencies": {
@@ -20,7 +20,7 @@
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
-    "rollup": "^4.5.2",
+    "rollup": "^4.8.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
     "tslib": "^2.6.2"

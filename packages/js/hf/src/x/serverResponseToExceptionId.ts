@@ -1,4 +1,4 @@
-import {ExceptionId} from '@nlux/nlux';
+import {ExceptionId} from '@nlux/core';
 
 export const serverResponseToExceptionId = (response: Response): ExceptionId | null => {
     if (response.ok) {

@@ -1,7 +1,7 @@
 import {OutputOptions} from 'rollup';
 
 export const generateOutputConfig = (
-    packageName: string, // Example: @nlux/nlux-react
+    packageName: string, // Example: @nlux/react
     fileName: string, // Example: nlux-react
     outputFolder: string,
     isProduction: boolean,

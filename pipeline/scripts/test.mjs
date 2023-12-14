@@ -23,7 +23,7 @@ try {
         await run(commands[i]);
     }
 
-    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'themes'].forEach((name) => {
+    ['nlux-core', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
         symlinkBuiltPackageToEmulatorFolder(name);
     });
 
@@ -34,7 +34,12 @@ try {
         symlinkNodeModuleToEmulatorFolder(name);
     });
 
-    await run('cd specs && yarn test', false);
+    //
+    // Run tests
+    //
+    run('cd specs && yarn test', true)
+        .then(() => process.exitCode = 0)
+        .catch(() => process.exitCode = 1);
 } catch (e) {
     process.exit(1);
 }

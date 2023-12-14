@@ -1,4 +1,4 @@
-import {createConvo, NluxConvo} from '@nlux/nlux';
+import {createAiChat, AiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
@@ -8,7 +8,7 @@ import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from
 describe('When a streaming adapter is used to generate text', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement | undefined;
-    let nluxConvo: NluxConvo | undefined;
+    let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -21,16 +21,16 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     afterEach(() => {
-        nluxConvo?.unmount();
+        aiChat?.unmount();
         rootElement?.remove();
-        nluxConvo = undefined;
+        aiChat = undefined;
         rootElement = undefined;
         adapterController = undefined;
     });
 
     it('streamText should be called with the text from the prompt box and an observer', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -53,8 +53,8 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     it('Prompt box should switch to loading state on click', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -76,8 +76,8 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     it('Prompt box should remain in loading state until complete() is called', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -101,8 +101,8 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     it('Prompt box should remain in loading state until error() is called', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -126,8 +126,8 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     it('Prompt box should remain in loading state when text is being streamed', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -157,8 +157,8 @@ describe('When a streaming adapter is used to generate text', () => {
     });
 
     it('Text being returned by the adapter should be rendered as it is streamed', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;

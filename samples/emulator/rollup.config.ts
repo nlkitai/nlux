@@ -11,15 +11,13 @@ const outputFolder = join(distPath, 'dev', 'emulator');
 const nodeModulesPath = join(outputFolder, 'packages');
 
 const externals = [
-    '@nlux/nlux',
+    '@nlux/core',
     '@nlux/openai',
     '@nlux/hf',
-    '@nlux/nlux-react',
+    '@nlux/react',
     '@nlux/openai-react',
     '@nlux/hf-react',
     '@nlux/highlighter',
-    'highlight.js',
-    'openai',
     'react',
     'react-dom',
 ];
@@ -48,11 +46,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 preventAssignment: false,
                 values: {
                     'process.env.NODE_ENV': JSON.stringify('development'),
-                    'from \'@nlux/nlux\'': `from '/packages/@nlux/nlux/esm/nlux.js'`,
+                    'from \'@nlux/core\'': `from '/packages/@nlux/core/esm/nlux-core.js'`,
                     'from \'@nlux/openai\'': `from '/packages/@nlux/openai/esm/openai.js'`,
                     'from \'@nlux/hf\'': `from '/packages/@nlux/hf/esm/hf.js'`,
                     'from \'@nlux/highlighter\'': `from '/packages/@nlux/highlighter/esm/highlighter.js'`,
-                    'from \'openai\'': `from '/packages/openai/index.mjs'`,
                 },
             }),
         ],

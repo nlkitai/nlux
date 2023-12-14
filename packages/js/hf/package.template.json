@@ -7,7 +7,7 @@
     "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
   "dependencies": {
-    "@nlux/nlux": "{versions.nlux}",
+    "@nlux/core": "{versions.nlux}",
     "@huggingface/inference": "^{versions.dependencies.hfInference}"
   },
   "peerDependencies": {
@@ -19,7 +19,7 @@
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
-    "rollup": "^4.5.2",
+    "rollup": "^4.8.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
     "tslib": "^2.6.2"

@@ -6,7 +6,7 @@
     "directory": "packages/js/highlighter"
   },
   "dependencies": {
-    "@nlux/nlux": "{versions.nlux}",
+    "@nlux/core": "{versions.nlux}",
     "highlight.js": "^{versions.dependencies.highlightJs}"
   },
   "peerDependencies": {

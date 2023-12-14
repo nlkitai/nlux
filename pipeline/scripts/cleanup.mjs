@@ -85,11 +85,11 @@ info('Starting cleanup 🧹 ...');
 removeJsFiles('pipeline/utils/rollup');
 
 removeGeneratedPackageJson('packages/css/themes');
-removeGeneratedPackageJson('packages/js/nlux');
+removeGeneratedPackageJson('packages/js/core');
 removeGeneratedPackageJson('packages/js/openai');
 removeGeneratedPackageJson('packages/js/hf');
 removeGeneratedPackageJson('packages/js/highlighter');
-removeGeneratedPackageJson('packages/react/nlux');
+removeGeneratedPackageJson('packages/react/core');
 removeGeneratedPackageJson('packages/react/openai');
 removeGeneratedPackageJson('packages/react/hf');
 

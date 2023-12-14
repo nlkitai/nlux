@@ -1,4 +1,4 @@
-import {createConvo, NluxConvo} from '@nlux/nlux';
+import {createAiChat, AiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
@@ -8,7 +8,7 @@ import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from
 describe('When a fetch adapter is used to generate text', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement | undefined;
-    let nluxConvo: NluxConvo | undefined;
+    let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -21,16 +21,16 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     afterEach(() => {
-        nluxConvo?.unmount();
+        aiChat?.unmount();
         rootElement?.remove();
-        nluxConvo = undefined;
+        aiChat = undefined;
         rootElement = undefined;
         adapterController = undefined;
     });
 
     it('fetchText should be called with the text from the prompt box', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -46,8 +46,8 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     it('Prompt box should switch to loading state', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -69,8 +69,8 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     it('Prompt box should remain in loading state until text is returned', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -96,8 +96,8 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     it('Prompt box should switch back to normal state when text is returned', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -121,8 +121,8 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     it('Text returned from fetchText should be displayed in the conversation', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;
@@ -142,8 +142,8 @@ describe('When a fetch adapter is used to generate text', () => {
     });
 
     it('Prompt box should switch back to normal state when promise is rejected', async () => {
-        nluxConvo = createConvo().withAdapter(adapterController.adapter);
-        nluxConvo.mount(rootElement);
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+        aiChat.mount(rootElement);
         await waitForRenderCycle();
 
         const textInput: any = queries.promptBoxTextInput() as any;

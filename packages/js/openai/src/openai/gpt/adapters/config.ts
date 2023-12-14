@@ -1,4 +1,4 @@
-import {DataTransferMode} from '@nlux/nlux';
+import {DataTransferMode} from '@nlux/core';
 import {OpenAIModel} from '../types/model';
 
 export const defaultChatGptModel: OpenAIModel = 'gpt-4';

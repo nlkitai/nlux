@@ -1,1 +1,1 @@
-export {highlightJsExtension as highlighter} from './highlightJs/highlightJsExtension';
+export {highlightJsExtension as highlighter} from './ext/highlightJsExtension';

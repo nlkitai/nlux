@@ -1,4 +1,4 @@
-import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/nlux';
+import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';
 

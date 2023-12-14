@@ -1,8 +1,8 @@
 import replace from '@rollup/plugin-replace';
 
 export const nluxImportMap = {
-    '@nlux/nlux': '/packages/@nlux/nlux/{nluxBundlerPackageType}/nlux.js',
-    '@nlux/nlux-react': '/packages/@nlux/nlux-react/{nluxBundlerPackageType}/nlux-react.js',
+    '@nlux/core': '/packages/@nlux/core/{nluxBundlerPackageType}/nlux-core.js',
+    '@nlux/react': '/packages/@nlux/react/{nluxBundlerPackageType}/nlux-react.js',
     '@nlux/openai': '/packages/@nlux/openai/{nluxBundlerPackageType}/openai.js',
     '@nlux/openai-react': '/packages/@nlux/openai-react/{nluxBundlerPackageType}/openai-react.js',
     '@nlux/hf': '/packages/@nlux/hf/{nluxBundlerPackageType}/hf.js',

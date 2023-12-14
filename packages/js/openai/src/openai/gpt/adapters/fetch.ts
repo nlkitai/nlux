@@ -1,4 +1,4 @@
-import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/nlux';
+import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
 import {gptFetchAdapterConfig} from '../config';

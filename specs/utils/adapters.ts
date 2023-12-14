@@ -1,4 +1,4 @@
-import {Adapter, StreamingAdapterObserver} from '@nlux/nlux';
+import {Adapter, StreamingAdapterObserver} from '@nlux/core';
 
 export const createPromiseAdapterController = ({
     includeFetchText = true,

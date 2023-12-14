@@ -1,4 +1,4 @@
-import {createConvo, NluxConvo} from '@nlux/nlux';
+import {createAiChat, AiChat} from '@nlux/core';
 import userEvent from '@testing-library/user-event';
 import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
@@ -7,7 +7,7 @@ import {waitForRenderCycle} from '../../utils/wait';
 describe('When a component is loaded', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement | undefined;
-    let nluxConvo: NluxConvo | undefined;
+    let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -15,9 +15,9 @@ describe('When a component is loaded', () => {
     });
 
     afterEach(() => {
-        nluxConvo?.unmount();
+        aiChat?.unmount();
         rootElement?.remove();
-        nluxConvo = undefined;
+        aiChat = undefined;
         rootElement = undefined;
         adapterController = undefined;
     });
@@ -31,8 +31,8 @@ describe('When a component is loaded', () => {
         });
 
         it('streamText should be used', async () => {
-            nluxConvo = createConvo().withAdapter(adapterController.adapter);
-            nluxConvo.mount(rootElement);
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
 
             const textInput: any = queries.promptBoxTextInput() as any;
@@ -58,8 +58,8 @@ describe('When a component is loaded', () => {
         });
 
         it('fetchText should be used', async () => {
-            nluxConvo = createConvo().withAdapter(adapterController.adapter);
-            nluxConvo.mount(rootElement);
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
 
             const textInput: any = queries.promptBoxTextInput() as any;
@@ -85,8 +85,8 @@ describe('When a component is loaded', () => {
         });
 
         it('streamText should be used', async () => {
-            nluxConvo = createConvo().withAdapter(adapterController.adapter);
-            nluxConvo.mount(rootElement);
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
 
             const textInput: any = queries.promptBoxTextInput() as any;
@@ -112,23 +112,23 @@ describe('When a component is loaded', () => {
         });
 
         it('should throw an error', () => {
-            expect(() => createConvo().withAdapter(adapterController.adapter)).toThrowError();
+            expect(() => createAiChat().withAdapter(adapterController.adapter)).toThrowError();
         });
     });
 
     describe('When no adapter is provided', () => {
         it('should throw an error on mount', () => {
-            nluxConvo = createConvo();
-            expect(() => nluxConvo.mount(rootElement)).toThrowError();
+            aiChat = createAiChat();
+            expect(() => aiChat.mount(rootElement)).toThrowError();
         });
     });
 
     describe('When invalid object is provided', () => {
         it('should throw an error as soon as the invalid adapter is set', () => {
-            expect(() => createConvo().withAdapter(undefined)).toThrowError();
-            expect(() => createConvo().withAdapter(null as any)).toThrowError();
-            expect(() => createConvo().withAdapter(123 as any)).toThrowError();
-            expect(() => createConvo().withAdapter('' as any)).toThrowError();
+            expect(() => createAiChat().withAdapter(undefined)).toThrowError();
+            expect(() => createAiChat().withAdapter(null as any)).toThrowError();
+            expect(() => createAiChat().withAdapter(123 as any)).toThrowError();
+            expect(() => createAiChat().withAdapter('' as any)).toThrowError();
         });
     });
 });

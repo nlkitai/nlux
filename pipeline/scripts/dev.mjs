@@ -18,7 +18,7 @@ try {
     //
     // Check that all build folders exist
     //
-    if (['nlux', 'openai', 'hf', 'nlux-react', 'openai-react', 'hf-react', 'themes'].some(
+    if (['nlux-core', 'nlux-react', 'openai', 'hf', 'openai-react', 'hf-react', 'themes'].some(
         (buildFolder) => !existsSync(devDistPath(buildFolder))
     )) {
         const errorMessage = 'Error ❗️ One or multiple build folders are missing.\n' +
@@ -68,14 +68,14 @@ try {
     //
     // Symlink built NLUX packages to emulator folder
     //
-    ['nlux', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
+    ['nlux-core', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
         symlinkBuiltPackageToEmulatorFolder(name);
     });
 
     //
     // Symlink dependencies to emulator folder
     //
-    ['react', 'react-dom', 'openai'].forEach((name) => {
+    ['react', 'react-dom', 'openai', 'highlight.js'].forEach((name) => {
         symlinkNodeModuleToEmulatorFolder(name);
     });
 

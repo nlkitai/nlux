@@ -1,4 +1,4 @@
-import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/nlux';
+import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
 
 export interface OpenAiAdapterBuilder extends AdapterBuilder<any, any> {
     /**

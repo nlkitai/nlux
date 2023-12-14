@@ -9,7 +9,7 @@ import {
     StandardAdapterStatus,
     StreamingAdapterObserver,
     warn,
-} from '@nlux/nlux';
+} from '@nlux/core';
 import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
 import {HfAdapterOptions} from '../types/adapterOptions';
 

@@ -1,4 +1,4 @@
-import {DataTransferMode} from '@nlux/nlux';
+import {DataTransferMode} from '@nlux/core';
 import {OpenAIModel} from './model';
 
 export type OpenAiAdapterOptions = {

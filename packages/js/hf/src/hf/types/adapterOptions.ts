@@ -1,4 +1,4 @@
-import {DataTransferMode} from '@nlux/nlux';
+import {DataTransferMode} from '@nlux/core';
 import {HfInputPreProcessor} from './inputPreProcessor';
 import {HfOutputPreProcessor} from './outputPreProcessor';
 

@@ -1,5 +1,5 @@
 import {llama2InputPreProcessor, llama2OutputPreProcessor, useAdapter} from '@nlux/hf-react';
-import {NluxConvo} from '@nlux/nlux-react';
+import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
@@ -46,9 +46,9 @@ const ExampleWrapper = () => {
             <button onClick={() => setKey(key + 1)}>Reset</button>
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
             <div style={{height: '550px', width: '600px'}}>
-                <NluxConvo
+                <AiChat
                     key={key}
-                    className="chat-emulator-convo"
+                    className="ai-chat-emulator"
                     adapter={adapter}
                     conversationOptions={{
                         scrollWhenGenerating: true,
@@ -68,7 +68,7 @@ const ExampleWrapper = () => {
 };
 
 export default () => {
-    const root = document.getElementById('nlux-convo-root');
+    const root = document.getElementById('nlux-ai-chat-root');
     if (!root) {
         throw new Error('Root element not found');
     }

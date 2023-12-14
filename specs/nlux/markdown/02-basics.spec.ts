@@ -1,8 +1,8 @@
-import {createMdStreamRenderer, IObserver} from '@nlux/nlux';
+import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
 import {waitForMilliseconds} from '../../utils/wait';
 
 describe('MD Stream Parser Streaming', () => {
-    let streamRenderer: IObserver<string>;
+    let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 
     beforeEach(() => {

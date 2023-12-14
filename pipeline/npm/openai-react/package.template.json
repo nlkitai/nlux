@@ -9,7 +9,7 @@
     "@nlux/openai": "^{versions.nlux}"
   },
   "peerDependencies": {
-    "@nlux/nlux-react": "{versions.nlux}",
+    "@nlux/react": "{versions.nlux}",
     "react": "^{versions.peerDependencies.react}"
   },
   "main": "index.js",

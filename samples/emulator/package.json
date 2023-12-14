@@ -19,8 +19,8 @@
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
     "@types/rollup-plugin-generate-package-json": "^3.2.5",
-    "esbuild": "^0.19.5",
-    "rollup": "^4.5.2",
+    "esbuild": "^0.19.9",
+    "rollup": "^4.8.0",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.0",
     "tslib": "^2.6.2"

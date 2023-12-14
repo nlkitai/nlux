@@ -1,12 +1,12 @@
 {
   "inherit": true,
-  "nlux": "0.6.8",
+  "nlux": "0.8.0",
   "peerDependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "dependencies": {
-    "openai": "4.20.0",
+    "openai": "4.20.1",
     "hfInference": "2.6.4",
     "highlightJs": "11.9.0"
   }

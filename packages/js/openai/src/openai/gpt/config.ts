@@ -1,4 +1,4 @@
-import {StandardAdapterConfig, StandardAdapterInfo} from '@nlux/nlux';
+import {StandardAdapterConfig, StandardAdapterInfo} from '@nlux/core';
 import OpenAI from 'openai';
 import {decode as fetchDecode} from './codec/fetch/decode';
 import {encode as fetchEncode} from './codec/fetch/encode';

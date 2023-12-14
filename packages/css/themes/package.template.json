@@ -14,7 +14,7 @@
     "postcss": "^8.4.31",
     "postcss-import": "^15.1.0",
     "postcss-csso": "^6.0.1",
-    "rollup": "^4.5.2",
+    "rollup": "^4.8.0",
     "rollup-plugin-postcss": "^4.0.2"
   }
 }

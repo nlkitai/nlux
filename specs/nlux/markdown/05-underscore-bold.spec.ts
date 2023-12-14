@@ -1,13 +1,13 @@
-import {createMdStreamRenderer, IObserver} from '@nlux/nlux';
+import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Underscore Bold Markdowns Parser', () => {
-    let streamRenderer: IObserver<string>;
+    let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement);
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
     });
 
     it('should render a bold in the middle of a paragraph', async () => {

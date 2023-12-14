@@ -1,4 +1,4 @@
-import {Adapter, StreamingAdapterObserver} from '@nlux/nlux-react';
+import {Adapter, StreamingAdapterObserver} from '@nlux/react';
 
 // A endpoint that connects to OpenAI and returns result
 // as a stream of Server-Sent events

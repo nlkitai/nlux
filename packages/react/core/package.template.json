@@ -1,0 +1,32 @@
+{
+  "name": "@nlux-dev/react",
+  "version": "0.0.0-latest",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --jsx",
+    "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --resolveJsonModule --jsx --watch"
+  },
+  "dependencies": {
+    "@nlux/core": "{versions.nlux}"
+  },
+  "peerDependencies": {
+    "react": "^{versions.peerDependencies.react}"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-replace": "^5.0.5",
+    "@rollup/plugin-strip": "^3.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/react": "^18.2.31",
+    "esbuild": "^0.19.9",
+    "rollup": "^4.8.0",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.0",
+    "tslib": "^2.6.2"
+  },
+  "main": "index.js",
+  "types": "nlux-react.d.ts",
+  "module": "esm/nlux-react.js",
+  "browser": "umd/nlux-react.js"
+}

@@ -6,7 +6,7 @@ import {
     StandardAdapterStatus,
     StreamingAdapterObserver,
     warn,
-} from '@nlux/nlux';
+} from '@nlux/core';
 import OpenAI from 'openai';
 import {gptAdapterInfo} from '../config';
 import {OpenAiAdapterOptions} from '../types/adapterOptions';

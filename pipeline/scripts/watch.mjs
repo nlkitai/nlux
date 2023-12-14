@@ -9,12 +9,15 @@ info(clc.bgWhite.red(' ############################################### '));
 nl(1);
 
 try {
-    run('yarn workspace @nlux-dev/nlux watch');
-    run('yarn workspace @nlux-dev/nlux-react watch');
+    run('yarn workspace @nlux-dev/core watch');
+    run('yarn workspace @nlux-dev/react watch');
+
     run('yarn workspace @nlux-dev/openai watch');
     run('yarn workspace @nlux-dev/openai-react watch');
+
     run('yarn workspace @nlux-dev/hf watch');
     run('yarn workspace @nlux-dev/hf-react watch');
+
     run('yarn workspace @nlux-dev/highlighter watch');
     run('yarn workspace @nlux-dev/themes watch');
 } catch (e) {

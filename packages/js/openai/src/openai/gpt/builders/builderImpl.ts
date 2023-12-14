@@ -1,4 +1,4 @@
-import {DataTransferMode, NluxUsageError} from '@nlux/nlux';
+import {DataTransferMode, NluxUsageError} from '@nlux/core';
 import {defaultDataTransferMode} from '../adapters/config';
 import {OpenAiFetchAdapter} from '../adapters/fetch';
 import {OpenAiStreamingAdapter} from '../adapters/stream';

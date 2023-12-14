@@ -15,9 +15,18 @@ const promptBoxLoadingSpinner = '> span.loader';
 const conversationContainer = '> .nluxc-chat-room-conversation-container';
 const conversationMessagesContainer = '> .nluxc-conversation-messages-container';
 
-const q = (selectorParts: string[]) => () => {
+const sentMessageContainer = '.nluxc-text-message-container.nluxc-text-message-sent';
+const receivedMessageContainer = '.nluxc-text-message-container.nluxc-text-message-received';
+const messageLoader = '.nluxc-text-message-loader';
+
+export const q = (selectorParts: string[]) => () => {
     const selector = selectorParts.join(' ');
     return document.querySelector(selector);
+};
+
+export const qAll = (selectorParts: string[]) => () => {
+    const selector = selectorParts.join(' ');
+    return document.querySelectorAll(selector);
 };
 
 export const selectors = Object.freeze({
@@ -41,6 +50,11 @@ export const selectors = Object.freeze({
     // Conversation container selectors
     conversationContainer: [rootNode, chatRoomContainer, conversationContainer],
     conversationMessagesContainer: [rootNode, chatRoomContainer, conversationContainer, conversationMessagesContainer],
+    conversationMessagesLoadingSpinner: [rootNode, chatRoomContainer, conversationContainer, conversationMessagesContainer, messageLoader],
+
+    // Message selectors
+    sentMessageContainer: [rootNode, chatRoomContainer, conversationContainer, conversationMessagesContainer, sentMessageContainer],
+    receivedMessageContainer: [rootNode, chatRoomContainer, conversationContainer, conversationMessagesContainer, receivedMessageContainer],
 });
 
 export const queries = Object.freeze({
@@ -63,4 +77,9 @@ export const queries = Object.freeze({
     // Conversation container queries
     conversationContainer: q(selectors.conversationContainer),
     conversationMessagesContainer: q(selectors.conversationMessagesContainer),
+
+    // Message queries
+    sentMessageContainer: q(selectors.sentMessageContainer),
+    receivedMessageContainer: q(selectors.receivedMessageContainer),
+    conversationMessagesLoadingSpinner: q(selectors.conversationMessagesLoadingSpinner),
 });

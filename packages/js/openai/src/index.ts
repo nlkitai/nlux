@@ -3,9 +3,9 @@ export type {
     StreamingAdapterObserver,
     StandardAdapter,
     DataTransferMode,
-} from '@nlux/nlux';
+} from '@nlux/core';
 
-export {debug} from '@nlux/nlux';
+export {debug} from '@nlux/core';
 
 export type {OpenAiAdapterOptions} from './openai/gpt/types/adapterOptions';
 export type {OpenAIModel} from './openai/gpt/types/model';

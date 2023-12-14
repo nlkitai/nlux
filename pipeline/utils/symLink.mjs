@@ -3,13 +3,15 @@ import {throwError} from './log.mjs';
 import {join} from 'path';
 import {devDistPath, nodeModulesPath} from './paths.mjs';
 
-export const symlinkBuiltPackageToEmulatorFolder = (name) => {
-    const builtPackagePath = devDistPath(name);
+export const symlinkBuiltPackageToEmulatorFolder = (packageFolder) => {
+    const builtPackagePath = devDistPath(packageFolder);
     if (!existsSync(builtPackagePath)) {
-        throwError(`Could not find built package: ${name}`);
+        throwError(`Could not find built package: ${packageFolder}`);
     }
 
-    symlinkSync(builtPackagePath, join(devDistPath(), 'emulator', 'packages', '@nlux', name), 'dir');
+    // stripe 'nlux-' from package name
+    const packageBuiltName = packageFolder.replace('nlux-', '');
+    symlinkSync(builtPackagePath, join(devDistPath(), 'emulator', 'packages', '@nlux', packageBuiltName), 'dir');
 }
 
 export const symlinkNodeModuleToEmulatorFolder = (name) => {

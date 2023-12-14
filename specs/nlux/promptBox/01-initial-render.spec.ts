@@ -1,16 +1,14 @@
-import {AdapterBuilder, createConvo, NluxConvo} from '@nlux/nlux';
-import {createAdapter} from '@nlux/openai';
+import {createAiChat, AiChat} from '@nlux/core';
+import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
 import '@testing-library/jest-dom';
 import {queries} from '../../utils/selectors';
 import {waitForRenderCycle} from '../../utils/wait';
 
-const apiKey = 'YOUR_API_KEY_HERE';
-
-describe('On NluxConvo is mounted without options', () => {
-    const adapter: AdapterBuilder<any, any> = createAdapter().withApiKey(apiKey);
+describe('On AiChat is mounted without options', () => {
+    let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement | undefined;
-    let nluxConvo: NluxConvo | undefined;
+    let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -18,52 +16,59 @@ describe('On NluxConvo is mounted without options', () => {
     });
 
     afterEach(() => {
-        nluxConvo?.unmount();
+        adapterController = undefined;
+        aiChat?.unmount();
         rootElement?.remove();
-        nluxConvo = undefined;
+        aiChat = undefined;
         rootElement = undefined;
     });
 
     describe('Prompt Box', () => {
         it('should render', async () => {
-            nluxConvo = createConvo().withAdapter(adapter);
-            nluxConvo.mount(rootElement);
+            adapterController = createPromiseAdapterController();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
             expect(queries.promptBoxContainer()).toBeInTheDocument();
         });
 
         it('should render text box for prompt input', async () => {
-            nluxConvo = createConvo().withAdapter(adapter);
-            nluxConvo.mount(rootElement);
+            adapterController = createPromiseAdapterController();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
             expect(queries.promptBoxTextInput()).toBeInTheDocument();
         });
 
         it('should render button to submit prompt', async () => {
-            nluxConvo = createConvo().withAdapter(adapter);
-            nluxConvo.mount(rootElement);
+            adapterController = createPromiseAdapterController();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
             await waitForRenderCycle();
             expect(queries.promptBoxSendButton()).toBeInTheDocument();
         });
 
         describe('Text Input', () => {
             it('should be enabled', async () => {
-                nluxConvo = createConvo().withAdapter(adapter);
-                nluxConvo.mount(rootElement);
+                adapterController = createPromiseAdapterController();
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
                 await waitForRenderCycle();
                 expect(queries.promptBoxTextInput()).not.toBeDisabled();
             });
 
             it('should be empty', async () => {
-                nluxConvo = createConvo().withAdapter(adapter);
-                nluxConvo.mount(rootElement);
+                adapterController = createPromiseAdapterController();
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
                 await waitForRenderCycle();
                 expect(queries.promptBoxTextInput()).toHaveValue('');
             });
 
             it('should not be focused', async () => {
-                nluxConvo = createConvo().withAdapter(adapter);
-                nluxConvo.mount(rootElement);
+                adapterController = createPromiseAdapterController();
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
                 await waitForRenderCycle();
                 expect(queries.promptBoxTextInput()).not.toHaveFocus();
             });
@@ -71,8 +76,9 @@ describe('On NluxConvo is mounted without options', () => {
 
         describe('Submit Button', () => {
             it('should be disabled', async () => {
-                nluxConvo = createConvo().withAdapter(adapter);
-                nluxConvo.mount(rootElement);
+                adapterController = createPromiseAdapterController();
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
                 await waitForRenderCycle();
                 expect(queries.promptBoxTextInput()).not.toBeDisabled();
             });

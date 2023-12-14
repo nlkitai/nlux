@@ -7,17 +7,19 @@ import esbuild from 'rollup-plugin-esbuild';
 const distPath = join(cwd(), '..', '..', 'dist');
 
 const externals = [
-    '@nlux/nlux',
+    '@nlux/core',
+    '@nlux/react',
     '@nlux/openai',
-    '@nlux/nlux-react',
     '@nlux/openai-react',
+    '@nlux/hf',
+    '@nlux/hf-react',
+    '@nlux/highlighter',
     'openai',
+    'highlight.js',
     'react',
     'react-dom',
     'jest',
 ];
-
-const isProduction = process.env.NODE_ENV === 'production';
 
 const getPackageConfig: () => RollupOptions = () => {
     return {

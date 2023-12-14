@@ -1,8 +1,8 @@
-import {createMdStreamRenderer, IObserver} from '@nlux/nlux';
+import {createMdStreamRenderer, IObserver, StandardStreamParserOutput} from '@nlux/core';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Embedded Bold Italic Markdowns Parser', () => {
-    let streamRenderer: IObserver<string>;
+    let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 
     beforeEach(() => {

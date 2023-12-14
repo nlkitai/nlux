@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "openai": "^{versions.dependencies.openai}",
-    "@nlux/nlux": "^{versions.nlux}"
+    "@nlux/core": "^{versions.nlux}"
   },
   "peerDependencies": {
   },

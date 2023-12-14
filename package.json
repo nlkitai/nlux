@@ -1,6 +1,6 @@
 {
   "name": "@nlux/monorepo",
-  "version": "0.6.8",
+  "version": "0.8.0",
   "description": "NLUX is a JavaScript and React library for building conversational AI experiences.",
   "author": "Salmen Hichri",
   "license": "MPL-2.0",
@@ -42,6 +42,9 @@
     "llm",
     "large-language-model",
     "convo",
+    "ai-chatbot",
+    "ai-chat",
+    "AiChat",
     "chatgpt",
     "openai",
     "gpt",

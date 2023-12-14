@@ -40,7 +40,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             isProduction && terser(),
         ],
         external: [
-            '@nlux/nlux',
+            '@nlux/core',
         ],
         output: generateOutputConfig(packageName, outputFile, packageOutputFolder, isProduction),
     },

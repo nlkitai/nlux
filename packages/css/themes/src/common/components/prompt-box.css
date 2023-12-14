@@ -1,5 +1,3 @@
-@import './prompt-box-loading.css';
-
 .nluxc-root {
     .nluxc-prompt-box-container {
         display: flex;
@@ -19,7 +17,7 @@
             justify-content: center;
             width: 65px;
 
-            > .loader {
+            > .spinning-loader {
                 display: none;
             }
         }
@@ -29,7 +27,7 @@
                 display: none;
             }
 
-            > .loader {
+            > .spinning-loader {
                 display: inline-block;
                 width: 30px;
                 height: 30px;

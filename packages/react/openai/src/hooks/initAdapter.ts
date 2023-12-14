@@ -1,4 +1,4 @@
-import {NluxUsageError} from '@nlux/nlux-react';
+import {NluxUsageError} from '@nlux/react';
 import {createAdapter, OpenAiAdapterOptions} from '@nlux/openai';
 
 const source = 'hooks/initAdapter';

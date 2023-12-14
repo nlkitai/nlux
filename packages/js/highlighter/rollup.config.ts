@@ -59,16 +59,18 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             !isProduction && nodeResolve(),
             !isProduction && replaceImportedModules(),
             replace({
+                preventAssignment: false,
+            }),
+            replace({
                 values: {
                     'process.env.NLUX_DEBUG_ENABLED': JSON.stringify(isProduction ? 'false' : 'true'),
                 },
                 preventAssignment: true,
             }),
-            isProduction && terser(),
+            terser(),
         ],
         external: [
-            '@nlux/nlux',
-            'highlight.js',
+            '@nlux/core',
         ],
         output: generateOutputConfig(packageName, outputFile, packageOutputFolder, isProduction),
     },

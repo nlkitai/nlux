@@ -1,18 +1,19 @@
 import {highlighter} from '@nlux/highlighter';
-import {createConvo, NluxConvo} from '@nlux/nlux';
+import {createAiChat, AiChat} from '@nlux/core';
 import {createAdapter} from '@nlux/openai';
+import {myCustomPromiseAdapter, myCustomStreamingAdapter} from './customAdapter';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
-let nluxConvo: NluxConvo | null = null;
+let aiChat: AiChat | null = null;
 let rootElement: HTMLElement | null = null;
 
 (window as any).demo = {
-    mount: () => rootElement && nluxConvo?.mount(rootElement),
-    unmount: () => nluxConvo?.unmount(),
-    show: () => nluxConvo?.show(),
-    hide: () => nluxConvo?.hide(),
+    mount: () => rootElement && aiChat?.mount(rootElement),
+    unmount: () => aiChat?.unmount(),
+    show: () => aiChat?.show(),
+    hide: () => aiChat?.hide(),
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'helping a PHD student in their research',
         );
 
-    nluxConvo = createConvo()
+    aiChat = createAiChat()
         .withAdapter(adapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
@@ -44,5 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
             autoFocus: true,
         });
 
-    nluxConvo.mount(rootElement);
+    aiChat.mount(rootElement);
 });

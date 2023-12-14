@@ -6,7 +6,7 @@
     "directory": "packages/js/hf"
   },
   "dependencies": {
-    "@nlux/nlux": "{versions.nlux}",
+    "@nlux/core": "{versions.nlux}",
     "@huggingface/inference": "^{versions.dependencies.hfInference}"
   },
   "peerDependencies": {

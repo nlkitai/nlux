@@ -2,6 +2,7 @@ import {exec} from 'child_process';
 import {error, info} from '../utils/log.mjs';
 
 export const run = async (cmd, showDone = true) => {
+    let promiseResolved = false;
     info(`Running 🏃 #\n${cmd}\n`);
     return new Promise((resolve, reject) => {
         const child = exec(
@@ -22,45 +23,57 @@ export const run = async (cmd, showDone = true) => {
         });
 
         child.stderr.on('data', (data) => {
-            error(`${data}`);
-        });
-
-        child.on('error', (err) => {
-            error(`${err}`);
-            reject();
+            if (data) {
+                info(`${data}`);
+            }
         });
 
         child.on('disconnect', () => {
+            child.kill(1);
             error(`Process disconnected`);
-            reject();
-        });
 
-        child.on('spawn', () => {
-            info(`Process spawned`);
-        });
-
-        child.on('message', (message) => {
-            info(`Process message: ${message}`);
+            if (!promiseResolved) {
+                reject();
+                promiseResolved = true;
+            }
         });
 
         child.on('exit', (code) => {
-            info(`Process exited with code ${code}`);
+            const exitCode = code === 0 || code === null ? 0 : 1;
+
+            child.kill(exitCode);
+            info(`Process exited with code ${exitCode}`);
 
             if (showDone) {
-                info(`Done 🏃✅‍\n`);
+                info(`Done 🏃✅‍`);
             }
 
-            resolve();
+            if (!promiseResolved) {
+                promiseResolved = true;
+                if (exitCode !== 0) {
+                    reject();
+                } else {
+                    resolve();
+                }
+            }
         })
 
         child.on('close', (code) => {
-            info(`Process exited with code ${code}`);
+            const exitCode = code === 0 || code === null ? 0 : 1;
+            info(`Process closed with code ${code}`);
 
             if (showDone) {
-                info(`Done 🏃✅‍\n`);
+                info(`Done 🏃✅‍`);
             }
 
-            resolve();
+            if (!promiseResolved) {
+                promiseResolved = true;
+                if (exitCode !== 0) {
+                    reject();
+                } else {
+                    resolve();
+                }
+            }
         });
     });
 };
