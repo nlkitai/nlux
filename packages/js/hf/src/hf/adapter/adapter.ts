@@ -116,7 +116,7 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         const {preProcessors: {input: inputPreProcessor} = {}} = this.options;
         if (inputPreProcessor && messageAsAny) {
             if (typeof messageAsAny === 'string') {
-                return inputPreProcessor(messageAsAny, null, this.options);
+                return inputPreProcessor(messageAsAny, this.options);
             } else {
                 warn(
                     'The input pre-processor function was provided, but the message is not a string! ' +
@@ -217,8 +217,9 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
                 });
             }
 
+            const readyMessage = await this.encode(message);
             const parameters = {
-                inputs: message as string,
+                inputs: readyMessage,
                 parameters: {
                     max_new_tokens: this.options.maxNewTokens ?? HfAdapterImpl.defaultMaxNewTokens,
                 },
