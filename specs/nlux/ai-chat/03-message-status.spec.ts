@@ -103,7 +103,7 @@ describe('When user expects a message to be generated', () => {
         });
 
         describe('When the response is received with an error', () => {
-            it('The received message should transition to error status', async () => {
+            it('The received message should be deleted', async () => {
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -124,7 +124,7 @@ describe('When user expects a message to be generated', () => {
                 await waitForRenderCycle();
                 await waitForMilliseconds(delayBeforeCheckingDom);
 
-                expect(queries.receivedMessageContainer()).toHaveClass('message-status-loading-error');
+                expect(queries.receivedMessageContainer()).not.toBeInTheDocument();
             });
         });
     });
@@ -238,7 +238,7 @@ describe('When user expects a message to be generated', () => {
         });
 
         describe('When the stream has errored', () => {
-            it('The received message should transition to error status', async () => {
+            it('The received message should be deleted', async () => {
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -262,7 +262,7 @@ describe('When user expects a message to be generated', () => {
                 adapterController.error(new Error('Error!'));
                 await waitForRenderCycle();
 
-                expect(queries.receivedMessageContainer()).toHaveClass('message-status-loading-error');
+                expect(queries.receivedMessageContainer()).not.toBeInTheDocument();
             });
         });
     });

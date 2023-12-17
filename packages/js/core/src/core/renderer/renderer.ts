@@ -15,7 +15,7 @@ import {LayoutOptions} from '../options/layoutOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<InboundPayload, OutboundPayload> {
-    private static readonly defaultThemeId = 'kensington';
+    private static readonly defaultThemeId = 'nova';
     private readonly context: NluxContext;
     private readonly rootClassName: string = 'nluxc-root';
     private chatRoom: CompChatRoom | null = null;

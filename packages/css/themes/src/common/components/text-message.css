@@ -2,7 +2,7 @@
     .nluxc-text-message-container {
         display: flex;
         flex-direction: column;
-        padding-bottom: var(--nluxc-padding-l);
+        padding-bottom: var(--nluxc-padding-m);
 
         > .nluxc-text-message-content {
             display: flex;
@@ -11,8 +11,8 @@
 
             width: 80%;
             min-width: 80px;
-            min-height: 25px;
-            padding: var(--nluxc-padding-m) var(--nluxc-padding-l);
+            min-height: 20px;
+            padding: var(--nluxc-padding) var(--nluxc-padding-m);
             text-align: left;
 
             border-width: var(--nluxc-border-width);

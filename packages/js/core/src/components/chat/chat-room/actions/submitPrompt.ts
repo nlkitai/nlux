@@ -113,6 +113,7 @@ export const submitPromptFactory = ({
                 }).catch((error) => {
                     message.setErrored();
                     conversation.removeMessage(outMessageId);
+                    conversation.removeMessage(message.id);
                     resetPromptBox(false);
 
                     const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
@@ -133,6 +134,7 @@ export const submitPromptFactory = ({
                         error: (error: any) => {
                             message.setErrored();
                             conversation.removeMessage(outMessageId);
+                            conversation.removeMessage(message.id);
                             resetPromptBox(false);
 
                             const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';

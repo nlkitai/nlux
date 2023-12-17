@@ -3,7 +3,6 @@ import {HfOutputPreProcessor} from '../types/outputPreProcessor';
 
 export const llama2InputPreProcessor: HfInputPreProcessor = (
     input,
-    memorizedConversation,
     adapterOptions,
 ) => {
     const systemMessage = adapterOptions?.systemMessage

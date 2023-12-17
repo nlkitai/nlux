@@ -17,6 +17,10 @@
             justify-content: center;
             width: 65px;
 
+            > svg {
+                width: 80%;
+            }
+
             > .spinning-loader {
                 display: none;
             }

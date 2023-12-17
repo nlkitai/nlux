@@ -206,6 +206,62 @@ describe('When sending a chat message ', () => {
                 expect(queries.conversationMessagesContainer()).not.toContainHTML('Hello');
             });
 
+            it('Should remove received message loader', async () => {
+                adapterController = createPromiseAdapterController({includeStreamText: false});
+
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                const textInput: any = queries.promptBoxTextInput() as any;
+                const sendButton: any = queries.promptBoxSendButton() as any;
+
+                await userEvent.type(textInput, 'Hello');
+                await waitForRenderCycle();
+
+                expect(textInput.value).toBe('Hello');
+                expect(sendButton).not.toBeDisabled();
+
+                await userEvent.click(sendButton);
+                await waitForRenderCycle();
+                await waitForMilliseconds(50);
+
+                expect(queries.conversationMessagesLoadingSpinner()).toBeInTheDocument();
+
+                adapterController.reject('Something went wrong');
+                await waitForRenderCycle();
+
+                expect(queries.conversationMessagesLoadingSpinner()).not.toBeInTheDocument();
+            });
+
+            it('Should remove the received message container', async () => {
+                adapterController = createPromiseAdapterController({includeStreamText: false});
+
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                const textInput: any = queries.promptBoxTextInput() as any;
+                const sendButton: any = queries.promptBoxSendButton() as any;
+
+                await userEvent.type(textInput, 'Hello');
+                await waitForRenderCycle();
+
+                expect(textInput.value).toBe('Hello');
+                expect(sendButton).not.toBeDisabled();
+
+                await userEvent.click(sendButton);
+                await waitForRenderCycle();
+                await waitForMilliseconds(50);
+
+                expect(queries.receivedMessageContainer()).toBeInTheDocument();
+
+                adapterController.reject('Something went wrong');
+                await waitForRenderCycle();
+
+                expect(queries.receivedMessageContainer()).not.toBeInTheDocument();
+            });
+
             it('should keep the content of the prompt box', async () => {
                 adapterController = createPromiseAdapterController({includeStreamText: false});
 

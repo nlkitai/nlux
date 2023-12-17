@@ -1,7 +1,7 @@
 .nluxc-root {
     :is(input, select, textarea) {
         font-family: var(--nluxc-font-family);
-        font-size: 1rem;
+        font-size: var(--nluxc-font-size);
         font-weight: 400;
         line-height: 1.5;
         padding: 0.375rem 0.75rem;
