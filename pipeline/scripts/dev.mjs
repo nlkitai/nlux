@@ -1,9 +1,9 @@
-import {existsSync} from 'fs';
 import clc from 'cli-color';
-import {run} from './run.mjs';
+import {existsSync} from 'fs';
 import {info, nl, throwError} from '../utils/log.mjs';
 import {devDistPath} from '../utils/paths.mjs';
 import {symlinkBuiltPackageToEmulatorFolder, symlinkNodeModuleToEmulatorFolder} from '../utils/symLink.mjs';
+import {run} from './run.mjs';
 
 try {
     nl(1);
@@ -57,11 +57,11 @@ try {
     //
     info('Copying emulator static files');
     await run('cp -r samples/emulator/src/index.html dist/dev/emulator/index.html');
-    await run('cp -r samples/emulator/src/examples/index.html dist/dev/emulator/examples/index.html');
-    await run('cp -r samples/emulator/src/examples-react/index.html dist/dev/emulator/examples-react/index.html');
-    await run('cp -r samples/emulator/src/examples-react/require.min.js dist/dev/emulator/examples-react/require.min.js');
-    await run('cp -r samples/emulator/src/examples-react-hf/index.html dist/dev/emulator/examples-react-hf/index.html');
-    await run('cp -r samples/emulator/src/examples-react-hf/require.min.js dist/dev/emulator/examples-react-hf/require.min.js');
+    await run('cp -r samples/emulator/src/01-vanilla-js-with-adapters/index.html dist/dev/emulator/01-vanilla-js-with-adapters/index.html');
+    await run('cp -r samples/emulator/src/02-react-js-with-hugging-face/index.html dist/dev/emulator/02-react-js-with-hugging-face/index.html');
+    await run('cp -r samples/emulator/src/02-react-js-with-hugging-face/require.min.js dist/dev/emulator/02-react-js-with-hugging-face/require.min.js');
+    await run('cp -r samples/emulator/src/03-react-js-with-adapters/index.html dist/dev/emulator/03-react-js-with-adapters/index.html');
+    await run('cp -r samples/emulator/src/03-react-js-with-adapters/require.min.js dist/dev/emulator/03-react-js-with-adapters/require.min.js');
 
     info('Symlinking packages to emulator folder');
 

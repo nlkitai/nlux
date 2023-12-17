@@ -79,7 +79,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.8.7/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.8.8/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

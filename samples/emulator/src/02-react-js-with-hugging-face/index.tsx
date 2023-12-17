@@ -11,18 +11,18 @@ const ExampleWrapper = () => {
         setMaxHeight(newHeight);
     }, []);
 
-     // const adapter = useMemo(() => {
-     //     return createAdapter()
-     //         .withDataTransferMode('fetch')
-     //         .withEndpoint('https://<LLAMA2 MODEL ENDPOINT>.endpoints.huggingface.cloud')
-     //         .withSystemMessage('Your are a funny assistant. You only response in short sharp daring humour')
-     //         .withInputPreProcessor(llama2InputPreProcessor)
-     //         .withMaxNewTokens(100);
-     // }, []);
+    // const adapter = useMemo(() => {
+    //     return createAdapter()
+    //         .withDataTransferMode('fetch')
+    //         .withEndpoint('https://<LLAMA2 MODEL ENDPOINT>.endpoints.huggingface.cloud')
+    //         .withSystemMessage('Your are a funny assistant. You only response in short sharp daring humour')
+    //         .withInputPreProcessor(llama2InputPreProcessor)
+    //         .withMaxNewTokens(100);
+    // }, []);
 
     const adapter = useAdapter({
         dataTransferMode: 'stream',
-        model: 'https://<LLAMA2 MODEL ENDPOINT>.endpoints.huggingface.cloud',
+        model: 'https://n2srbwelqq8uhu7z.us-east-1.aws.endpoints.huggingface.cloud',
         systemMessage: 'Your are a funny assistant. You only respond in short sharp daring humour',
         preProcessors: {
             input: llama2InputPreProcessor,

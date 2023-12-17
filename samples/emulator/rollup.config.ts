@@ -29,7 +29,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     // Pure JS in ESM format
     //
     {
-        input: './src/examples/index.ts',
+        input: './src/01-vanilla-js-with-adapters/index.ts',
         logLevel: 'silent',
         external: externals,
         plugins: [
@@ -55,7 +55,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
         output: [
             {
-                file: `${outputFolder}/examples/index.mjs`,
+                file: `${outputFolder}/01-vanilla-js-with-adapters/index.mjs`,
                 format: 'esm',
                 sourcemap: true,
                 strict: true,
@@ -66,7 +66,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     // React JS in UMD format
     //
     {
-        input: './src/examples-react/index.tsx',
+        input: './src/03-react-js-with-adapters/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -92,7 +92,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/examples-react/index.js`,
+                file: `${outputFolder}/03-react-js-with-adapters/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -105,7 +105,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     // React JS + HF in UMD format
     //
     {
-        input: './src/examples-react-hf/index.tsx',
+        input: './src/02-react-js-with-hugging-face/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -131,7 +131,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/examples-react-hf/index.js`,
+                file: `${outputFolder}/02-react-js-with-hugging-face/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
