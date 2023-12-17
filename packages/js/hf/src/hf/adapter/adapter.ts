@@ -16,9 +16,8 @@ import {HfAdapterOptions} from '../types/adapterOptions';
 export class HfAdapterImpl implements StandardAdapter<any, any> {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
-
-    private readonly options: HfAdapterOptions;
     private inference: HfInference;
+    private readonly options: HfAdapterOptions;
 
     constructor(options: HfAdapterOptions) {
         if (!options.model) {

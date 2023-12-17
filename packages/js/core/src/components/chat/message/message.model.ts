@@ -19,13 +19,12 @@ export type MessageContentStatusChangeListener = (status: MessageContentLoadingS
 export class CompMessage extends BaseComp<
     CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
 > {
-    private readonly contentType: MessageContentType;
     private content?: string;
     private contentStatus: MessageContentLoadingStatus;
-
-    private resizeListeners: Set<Function> = new Set();
-    private domChangeListeners: Set<Function> = new Set();
     private contentStatusChangeListeners: Set<MessageContentStatusChangeListener> = new Set();
+    private readonly contentType: MessageContentType;
+    private domChangeListeners: Set<Function> = new Set();
+    private resizeListeners: Set<Function> = new Set();
 
     constructor(context: NluxContext, props: CompMessageProps) {
         super(context, props);
@@ -45,7 +44,9 @@ export class CompMessage extends BaseComp<
         }
 
         if (this.contentStatus !== 'streaming' && this.contentStatus !== 'connecting') {
-            throw new Error(`CompMessage: Content can only be appended when contentStatus is 'streaming' or 'connecting'!`);
+            throw new Error(
+                `CompMessage: Content can only be appended when contentStatus is 'streaming' or 'connecting'!`,
+            );
         }
 
         if (this.contentStatus === 'connecting') {
@@ -66,7 +67,9 @@ export class CompMessage extends BaseComp<
         }
 
         if (this.contentStatus !== 'streaming' && this.contentStatus !== 'connecting') {
-            throw new Error(`CompMessage: content can only be committed when contentStatus is 'streaming' or 'connecting'!`);
+            throw new Error(
+                `CompMessage: content can only be committed when contentStatus is 'streaming' or 'connecting'!`,
+            );
         }
 
         this.executeDomAction('commitContent');
@@ -79,10 +82,6 @@ export class CompMessage extends BaseComp<
         super.destroy();
     }
 
-    onResize(listener: Function) {
-        this.resizeListeners.add(listener);
-    }
-
     onContentStatusChange(listener: MessageContentStatusChangeListener) {
         this.contentStatusChangeListeners.add(listener);
     }
@@ -91,8 +90,8 @@ export class CompMessage extends BaseComp<
         this.domChangeListeners.add(listener);
     }
 
-    removeResizeListener(listener: Function) {
-        this.resizeListeners.delete(listener);
+    onResize(listener: Function) {
+        this.resizeListeners.add(listener);
     }
 
     removeContentStatusChangeListener(listener: MessageContentStatusChangeListener) {
@@ -101,6 +100,10 @@ export class CompMessage extends BaseComp<
 
     removeDomChangeListener(listener: Function) {
         this.domChangeListeners.delete(listener);
+    }
+
+    removeResizeListener(listener: Function) {
+        this.resizeListeners.delete(listener);
     }
 
     /**
@@ -142,14 +145,14 @@ export class CompMessage extends BaseComp<
         }
     }
 
-    @CompEventListener('message-container-resized')
-    private handleResize() {
-        this.resizeListeners.forEach(listener => listener());
-    }
-
     @CompEventListener('message-container-dom-changed')
     private handleDomChange() {
         this.domChangeListeners.forEach(listener => listener());
+    }
+
+    @CompEventListener('message-container-resized')
+    private handleResize() {
+        this.resizeListeners.forEach(listener => listener());
     }
 
     private setContentLoadingStatus(status: MessageContentLoadingStatus) {

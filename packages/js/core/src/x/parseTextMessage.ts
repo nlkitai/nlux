@@ -1,5 +1,5 @@
 const spaceToNbsp = (match: string) => {
-    return new Array(match.length + 1).join("&nbsp;");
+    return new Array(match.length + 1).join('&nbsp;');
 };
 
 export const textToHtml = (message: string): string => {

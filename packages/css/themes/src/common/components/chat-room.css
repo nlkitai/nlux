@@ -17,8 +17,8 @@
                 overflow: scroll;
                 flex: 1;
 
-                padding-left: var(--nluxc-padding);
                 padding-right: var(--nluxc-padding);
+                padding-left: var(--nluxc-padding);
             }
         }
 

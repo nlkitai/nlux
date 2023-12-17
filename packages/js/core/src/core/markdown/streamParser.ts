@@ -1,4 +1,4 @@
-import {StandardStreamParser, StreamParser} from '../../types/markdown/streamParser';
+import {StandardStreamParser} from '../../types/markdown/streamParser';
 import {RootProcessor} from './processors/Root';
 
 const characterProcessingDelayInMs = 10;
@@ -19,7 +19,7 @@ export const createMdStreamRenderer: StandardStreamParser = (root: HTMLElement, 
         {
             syntaxHighlighter,
             skipCopyToClipboardButton,
-        }
+        },
     );
 
     const charactersQueue: string[] = [];
@@ -92,6 +92,6 @@ export const createMdStreamRenderer: StandardStreamParser = (root: HTMLElement, 
             if (!yielded) {
                 onCompletionCallbacks.add(completeCallback);
             }
-        }
+        },
     };
 };

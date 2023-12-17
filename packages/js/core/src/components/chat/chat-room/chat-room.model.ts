@@ -135,8 +135,9 @@ export class CompChatRoom extends BaseComp<
     }
 
     private handlePromptBoxSubmit() {
-        const adapterAsStandardAdapter: StandardAdapter<any, any> | undefined = isStandardAdapter(this.context.adapter as any)
-            ? this.context.adapter as any : undefined;
+        const {adapter} = this.context;
+        const adapterAsStandardAdapter: StandardAdapter<any, any> | undefined = isStandardAdapter(adapter as any) ?
+            adapter as any : undefined;
 
         submitPromptFactory({
             dataTransferMode: adapterAsStandardAdapter ? adapterAsStandardAdapter.dataTransferMode : undefined,

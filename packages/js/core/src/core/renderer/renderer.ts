@@ -16,12 +16,12 @@ import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<InboundPayload, OutboundPayload> {
     private static readonly defaultThemeId = 'nova';
-    private readonly context: NluxContext;
-    private readonly rootClassName: string = 'nluxc-root';
     private chatRoom: CompChatRoom | null = null;
+    private readonly context: NluxContext;
     private exceptionsBox: CompExceptionsBox | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
+    private readonly rootClassName: string = 'nluxc-root';
     private rootCompId: string | null = null;
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
@@ -149,9 +149,11 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 .retrieve('exceptions-box')?.model as any;
 
             if (CompExceptionsBoxConstructor) {
-                exceptionAlert = comp(CompExceptionsBox).withContext(this.context)
+                exceptionAlert = comp(CompExceptionsBox)
+                    .withContext(this.context)
                     .withProps<CompExceptionsBoxProps>({
-                        containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
+                        containerMaxWidth: this.theLayoutOptions?.maxWidth
+                            || undefined,
                         message: undefined,
                         visible: false,
                         type: 'error',

@@ -9,13 +9,9 @@ import {NluxRenderer} from '../renderer/renderer';
 
 export class NluxController<InboundPayload = any, OutboundPayload = any> {
     private readonly adapter: Adapter | StandardAdapter<any, any>;
-    private readonly nluxInstanceId = uid();
-    private readonly rootCompId: string;
-    private readonly rootElement: HTMLElement;
-
     private context: NluxContext | null = null;
+    private readonly nluxInstanceId = uid();
     private props: NluxProps | null = null;
-
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
             return null;
@@ -29,8 +25,9 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
         this.renderer.renderEx(exception.type, exception.message);
     };
-
     private renderer: NluxRenderer<InboundPayload, OutboundPayload> | null = null;
+    private readonly rootCompId: string;
+    private readonly rootElement: HTMLElement;
 
     constructor(
         adapter: Adapter | StandardAdapter<any, any>,

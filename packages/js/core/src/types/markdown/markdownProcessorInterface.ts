@@ -19,8 +19,8 @@ export interface MarkdownProcessorInterface {
     preProcessCharacter(character: string): void;
     processCharacter(character: string): void;
     purgeSequence(): void;
-    resetSequenceParser(): void;
     get removeWhenEmpty(): boolean;
+    resetSequenceParser(): void;
     get sequenceParser(): SequenceParser;
     setParsingChild(child: MarkdownProcessorInterface): void;
     yield(): void | never;

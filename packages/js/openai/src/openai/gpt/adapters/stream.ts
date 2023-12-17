@@ -42,10 +42,12 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
         const messagesToSend: {
             role: 'system' | 'user',
             content: string
-        }[] = this.systemMessage ? [{
-            role: 'system',
-            content: this.systemMessage,
-        }] : [];
+        }[] = this.systemMessage ? [
+            {
+                role: 'system',
+                content: this.systemMessage,
+            },
+        ] : [];
 
         messagesToSend.push({
             role: 'user',

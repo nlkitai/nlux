@@ -3,19 +3,20 @@ import {allMarkdownElementNames} from './allMarkdownElementNames';
 import {checkSequence} from './regex/baseRegexParsers';
 
 export class SequenceParser {
-    private readonly __markdownElement: MarkdownElementName;
-    private readonly __possibleNestedMarkdownElements: MarkdownElementName[];
-    private readonly __possibleYieldingMarkdownElements: MarkdownElementName[];
-    // Potential states, for sequences that are incomplete:
     private __canLeadToClosingMarkdown: boolean = false;
     private __latestSequenceProcessed: boolean = false;
+
+    private readonly __markdownElement: MarkdownElementName;
     private __markdownThatShouldBeNested: MarkdownElementName | undefined = undefined;
-    // Markdown elements that can be created (nested or rendered at parent level)
     private __markdownThatShouldBeRenderedAtParentLevel: MarkdownElementName | undefined = undefined;
+
+    private readonly __possibleNestedMarkdownElements: MarkdownElementName[];
+    private readonly __possibleYieldingMarkdownElements: MarkdownElementName[];
+
     private __potentialNestedMarkdownElements: MarkdownElementName[] = [];
     private __potentialYieldingMarkdownElements: MarkdownElementName[] = [];
+
     private __sequence: string = '';
-    // Final states, that should lead to end of sequence and change in DOM structure:
     private __shouldCloseCurrentMarkdown: boolean = false;
 
     constructor(
@@ -102,15 +103,16 @@ export class SequenceParser {
         //
         this.__canLeadToClosingMarkdown = checkSequence(this.__markdownElement, 'canClose')(sequence);
 
-        this.__potentialYieldingMarkdownElements = this.__possibleYieldingMarkdownElements
-            .filter(
-                (markdownElement) => checkSequence(markdownElement, 'canOpen')(sequence),
-            );
+        this.__potentialYieldingMarkdownElements = this.__possibleYieldingMarkdownElements.filter(
+            (markdownElement) => checkSequence(markdownElement,
+                'canOpen',
+            )(sequence),
+        );
 
-        this.__potentialNestedMarkdownElements = this.__possibleNestedMarkdownElements
-            .filter(
-                (markdownElement) => checkSequence(markdownElement, 'canOpen')(sequence),
-            );
+        this.__potentialNestedMarkdownElements = this.__possibleNestedMarkdownElements.filter(
+            (markdownElement) => checkSequence(markdownElement, 'canOpen')(
+                sequence),
+        );
 
         //
         // Final states, that should lead to end of sequence and change in DOM structure:
@@ -119,10 +121,13 @@ export class SequenceParser {
 
         this.__shouldCloseCurrentMarkdown = checkSequence(this.__markdownElement, 'shouldClose')(sequence);
 
-        this.__markdownThatShouldBeRenderedAtParentLevel = this.__possibleYieldingMarkdownElements
-            .find((markdownElement) => checkSequence(markdownElement, 'shouldOpen')(sequence));
+        this.__markdownThatShouldBeRenderedAtParentLevel = this.__possibleYieldingMarkdownElements.find(
+            (markdownElement) => checkSequence(markdownElement,
+                'shouldOpen',
+            )(sequence));
 
-        this.__markdownThatShouldBeNested = this.__possibleNestedMarkdownElements
-            .find((markdownElement) => checkSequence(markdownElement, 'shouldOpen')(sequence));
+        this.__markdownThatShouldBeNested = this.__possibleNestedMarkdownElements.find(
+            (markdownElement) => checkSequence(markdownElement, 'shouldOpen')(
+                sequence));
     }
 }

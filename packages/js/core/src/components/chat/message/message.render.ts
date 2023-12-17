@@ -1,6 +1,7 @@
 import {NluxRenderingError} from '../../../core/error';
 import {createMdStreamRenderer} from '../../../core/markdown/streamParser';
 import {CompRenderer} from '../../../types/comp';
+import {StandardStreamParserOutput} from '../../../types/markdown/streamParser';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {textToHtml} from '../../../x/parseTextMessage';
 import {render} from '../../../x/render';
@@ -12,7 +13,6 @@ import {
     CompMessageProps,
     MessageContentLoadingStatus,
 } from './message.types';
-import {StandardStreamParserOutput} from '../../../types/markdown/streamParser';
 
 export const __ = (styleName: string) => `nluxc-text-message-${styleName}`;
 
@@ -61,8 +61,10 @@ export const renderMessage: CompRenderer<
     container.classList.add(__(classFromDirection));
     container.classList.add(classFromLoadingStatus);
 
-    const [contentContainer, removeContentContainerListeners] = listenToElement(container,
-        `:scope > .${__('content')}`)
+    const [contentContainer, removeContentContainerListeners] = listenToElement(
+        container,
+        `:scope > .${__('content')}`,
+    )
         .on('keydown', (event: KeyboardEvent) => {
             const ctrlDown = event.ctrlKey || event.metaKey;
             if (ctrlDown && event.key === 'c') {
@@ -91,7 +93,7 @@ export const renderMessage: CompRenderer<
     // Other logic related to markdown rendering and resize/scroll tracking
     //
     const {trackResize, trackDomChange} = props;
-    let mdStreamRenderer: StandardStreamParserOutput | undefined
+    let mdStreamRenderer: StandardStreamParserOutput | undefined;
 
     // Only track resize and dom change if trackResize prop is explicitly set to true.
     let resizeObserver: ResizeObserver | undefined;

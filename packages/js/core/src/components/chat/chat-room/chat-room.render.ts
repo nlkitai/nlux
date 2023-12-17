@@ -68,9 +68,9 @@ export const renderChatRoom: CompRenderer<
     }
 
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
-        `:scope > .${__('conversation-container')}`)
-        .on('click', compEvent('messages-container-clicked'))
-        .get();
+        `:scope > .${__('conversation-container')}`,
+    ).on('click', compEvent('messages-container-clicked'))
+     .get();
 
     const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prompt-box-container')}`);
     appendToRoot(chatRoomElement);

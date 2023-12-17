@@ -17,7 +17,7 @@ export const messagesScrollHandlerFactory = (callback: CompConversationScrollCal
         } = target;
 
         const minExpectedScrollTop = scrollHeight - 30;
-        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= minExpectedScrollTop
+        const scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= minExpectedScrollTop;
 
         const scrollDirection = (lastScrollTop === undefined || lastHeight === undefined) ? undefined :
             (scrollTop > lastScrollTop && lastHeight === scrollHeight) ? 'down' :

@@ -16,7 +16,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * @protected
      */
     protected readonly def: CompDef<PropsType, ElementsType, EventsType, ActionsType> | null;
-    private readonly __instanceId: string;
     /**
      * Props that are used to render the component and update the DOM tree.
      * This map is constructed from the props provided by the user, but it can be modified by
@@ -24,6 +23,11 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * @protected
      */
     protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType] | undefined | null>;
+    /**
+     * Props that are provided by the component user.
+     * @protected
+     */
+    protected props?: Readonly<PropsType>;
     /**
      * A reference to the DOM tree of the current component, and a callback that is called when the
      * component is destroyed.
@@ -67,6 +71,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
     protected subComponents: Map<string, BaseComp<any, any, any, any>> = new Map();
     private __context: Readonly<NluxContext> | null = null;
     private __destroyed: boolean = false;
+    private readonly __instanceId: string;
     private actionsOnDomReady: Function[] = [];
     private compEventGetter = (eventName: EventsType) => {
         const callback = this.rendererEventListeners.get(eventName as any);
@@ -81,11 +86,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
         return callback;
     };
-    /**
-     * Props that are provided by the component user.
-     * @protected
-     */
-    protected props?: Readonly<PropsType>;
 
     protected constructor(context: NluxContext, props: PropsType) {
         const compId = Object.getPrototypeOf(this).constructor.__compId;

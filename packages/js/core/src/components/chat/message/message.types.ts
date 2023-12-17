@@ -1,4 +1,3 @@
-
 // Possible values for 'static' content: Loading, Loaded.
 export type MessageStaticContentStatus = 'loading' | 'loaded';
 
@@ -8,7 +7,10 @@ export type MessageStreamContentStatus = 'connecting' | 'streaming' | 'loaded' |
 // Possible values for 'promise' content: Loading, Loaded, LoadingError.
 export type MessagePromiseContentStatus = 'loading' | 'loaded' | 'loading-error';
 
-export type MessageContentLoadingStatus = MessageStaticContentStatus | MessageStreamContentStatus | MessagePromiseContentStatus;
+export type MessageContentLoadingStatus =
+    MessageStaticContentStatus
+    | MessageStreamContentStatus
+    | MessagePromiseContentStatus;
 
 // Static message doesn't change once the message is rendered.
 // Stream will open a markdown stream and render the content as it comes.

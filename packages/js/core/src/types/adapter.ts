@@ -34,10 +34,11 @@ export interface Adapter {
  */
 export interface StreamingAdapterObserver<DataType = string> {
     /**
-     * This method should be called by the adapter when it has new data to send to the AiChat user interface.
-     * @param {DataType} message
+     * This method should be called by the adapter when it has completed sending data to the AiChat user interface.
+     * This will result in the AiChat component removing the loading indicator and resetting the conversation
+     * text input.
      */
-    next(message: DataType): void;
+    complete(): void;
     /**
      * This method should be called by the adapter when it has an error to send to the AiChat user interface.
      * This will result in the AiChat component displaying an error message to the user, resetting the
@@ -50,9 +51,8 @@ export interface StreamingAdapterObserver<DataType = string> {
      */
     error(error: Error): void;
     /**
-     * This method should be called by the adapter when it has completed sending data to the AiChat user interface.
-     * This will result in the AiChat component removing the loading indicator and resetting the conversation
-     * text input.
+     * This method should be called by the adapter when it has new data to send to the AiChat user interface.
+     * @param {DataType} message
      */
-    complete(): void;
+    next(message: DataType): void;
 }

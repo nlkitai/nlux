@@ -3,7 +3,7 @@
         display: flex;
         align-items: stretch;
         flex-direction: row;
-    
+
         gap: var(--nluxc-flex-gap);
 
         > .nluxc-prompt-box-text-input {

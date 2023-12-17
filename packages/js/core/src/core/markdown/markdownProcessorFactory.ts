@@ -1,5 +1,6 @@
 import {MarkdownElementName} from '../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {MarkdownProcessorOptions} from './processors/baseProcessor';
 import {BoldAsteriskProcessor} from './processors/BoldAsterisk';
 import {BoldUnderscoreProcessor} from './processors/BoldUnderscore';
 import {CodeProcessor} from './processors/Code';
@@ -9,7 +10,6 @@ import {ItalicAsteriskProcessor} from './processors/ItalicAsterisk';
 import {ItalicUnderscoreProcessor} from './processors/ItalicUnderscore';
 import {LineBreakProcessor} from './processors/LineBreak';
 import {ParagraphProcessor} from './processors/Paragraph';
-import {MarkdownProcessorOptions} from './processors/baseProcessor';
 
 export const createMarkdownProcessor = (
     markdownElementName: MarkdownElementName,

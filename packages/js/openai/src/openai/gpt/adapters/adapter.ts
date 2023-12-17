@@ -16,11 +16,11 @@ import {defaultChatGptModel, defaultDataTransferMode} from './config';
 export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> implements StandardAdapter<
     InboundPayload, OutboundPayload
 > {
+    protected currentStatus: StandardAdapterStatus = 'disconnected';
     protected readonly model: OpenAIModel;
     protected readonly openai: OpenAI;
-    protected readonly theDataTransferMode: DataTransferMode;
-    protected currentStatus: StandardAdapterStatus = 'disconnected';
     protected systemMessage: string | null = 'Act as a helpful assistant to the user';
+    protected readonly theDataTransferMode: DataTransferMode;
 
     protected constructor({
         systemMessage,

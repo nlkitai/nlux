@@ -10,15 +10,14 @@ export type MarkdownProcessorOptions = {
 
 export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterface {
 
+    protected __parent: MarkdownProcessorInterface | undefined;
+    private __element: HTMLElement | undefined;
     private readonly __initialContent: string | undefined;
+    private __initialized: boolean = false;
+    private __last3Characters: string = '';
     private readonly __markdownElementName: MarkdownElementName;
     private readonly __openingSequence?: string;
     private readonly __options: MarkdownProcessorOptions = {};
-
-    protected __parent: MarkdownProcessorInterface | undefined;
-    private __element: HTMLElement | undefined;
-    private __initialized: boolean = false;
-    private __last3Characters: string = '';
     private __parsingChild: MarkdownProcessorInterface | undefined;
     private __sequenceParser: SequenceParser | undefined;
     private __yielded: boolean = false;
@@ -93,12 +92,12 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         return this.__last3Characters;
     }
 
-    protected get syntaxHighlighter(): HighlighterExtension | undefined {
-        return this.__options.syntaxHighlighter;
-    }
-
     protected get markdownProcessorOptions(): Readonly<MarkdownProcessorOptions> {
         return this.__options;
+    }
+
+    protected get syntaxHighlighter(): HighlighterExtension | undefined {
+        return this.__options.syntaxHighlighter;
     }
 
     /**

@@ -1,4 +1,4 @@
-import {createAiChat, AiChat as AiChatType} from '@nlux/core';
+import {AiChat as AiChatType, createAiChat} from '@nlux/core';
 import React, {useEffect, useRef, useState} from 'react';
 import {handleNewPropsReceived} from './handleNewPropsReceived';
 import {AiChatProps} from './props';

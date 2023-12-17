@@ -7,31 +7,31 @@
         > .nluxc-text-message-content {
             display: flex;
             flex-direction: column;
-            gap: var(--nluxc-flex-gap);
-
             width: 80%;
+
             min-width: 80px;
             min-height: 20px;
             padding: var(--nluxc-padding) var(--nluxc-padding-m);
             text-align: left;
-
             border-width: var(--nluxc-border-width);
-            border-style: solid;
 
+            border-style: solid;
             border-radius: var(--nluxc-border-radius-m);
+
             outline: none;
+            gap: var(--nluxc-flex-gap);
 
             :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
-                padding: 0;
                 margin: 0;
+                padding: 0;
             }
         }
 
         > .nluxc-text-message-content .code-block {
-            position: relative;
-
             font-family: var(--nluxc-mono-font-family);
+
             font-size: var(--nluxc-font-size-s);
+            position: relative;
             overflow: scroll;
             padding: var(--nluxc-padding) 0;
 
@@ -56,22 +56,22 @@
         }
 
         > .nluxc-text-message-content button.copy-button {
-            z-index: 999999;
             position: relative;
+            z-index: 999999;
             width: 25px;
             height: 24px;
 
-            margin-left: auto;
             margin-right: 10px;
             margin-bottom: -23px;
+            margin-left: auto;
 
             padding: 4px;
 
+            cursor: pointer;
+            color: var(--nlux-code-block-background-color);
             border: 1px solid var(--nlux-code-block-background-color);
             border-radius: var(--nluxc-border-radius-xs);
             background-color: var(--nluxc-message-received-background-color);
-            color: var(--nlux-code-block-background-color);
-            cursor: pointer;
         }
 
         > .nluxc-text-message-content button.copy-button:hover * {
@@ -80,9 +80,9 @@
 
         > .nluxc-text-message-content button.copy-button.clicked,
         > .nluxc-text-message-content button.copy-button.clicked:hover {
-            background-color: var(--nlux-code-block-background-color);
             color: var(--nluxc-message-received-background-color);
             border-color: var(--nlux-code-block-background-color);
+            background-color: var(--nlux-code-block-background-color);
         }
 
         > .nluxc-text-message-content button.copy-button.clicked:hover * {
@@ -112,22 +112,22 @@
 
         > .nluxc-text-message-loader {
             display: flex;
-            gap: var(--nluxc-flex-gap);
             align-items: center;
             justify-content: center;
-
             height: 40px;
-            padding: 0 var(--nluxc-padding-m);
 
-            background-color: var(--nluxc-message-received-background-color);
+            padding: 0 var(--nluxc-padding-m);
             color: var(--nluxc-message-received-text-color);
 
-            border-color: var(--nluxc-message-received-border-color);
             border-width: var(--nluxc-border-width);
             border-style: solid;
 
+            border-color: var(--nluxc-message-received-border-color);
             border-radius: var(--nluxc-border-radius-m);
             outline: none;
+
+            background-color: var(--nluxc-message-received-background-color);
+            gap: var(--nluxc-flex-gap);
 
             > .spinning-loader-container {
                 width: 17px;

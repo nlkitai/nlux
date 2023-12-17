@@ -4,11 +4,10 @@ type ObservableOperator = (observable: Observable<any>) => Observable<any>;
 
 export class Observable<DataType> {
 
-    private readonly isReplayObservable: boolean = false;
-
     private buffer: DataType[] = [];
     private errorReceived: Error | null = null;
     private isCompleted: boolean = false;
+    private readonly isReplayObservable: boolean = false;
     private subscribers: Set<IObserver<DataType>> = new Set();
 
     constructor({replay}: {replay?: boolean} = {}) {

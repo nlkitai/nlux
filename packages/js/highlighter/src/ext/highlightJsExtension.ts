@@ -1,15 +1,7 @@
+import {CreateHighlighterOptions, Highlighter, HighlighterColorMode, HighlighterExtension, warn} from '@nlux/core';
 import hljs from 'highlight.js/lib/common';
-import {
-    CreateHighlighterOptions,
-    Highlighter,
-    HighlighterColorMode,
-    HighlighterExtension,
-    warn,
-} from '@nlux/core';
 
-import {
-    languageAliases,
-} from '../highlightJs/languages';
+import {languageAliases} from '../highlightJs/languages';
 
 const createExtension = (): HighlighterExtension => {
     const defaultColorMode: HighlighterColorMode = 'dark';
