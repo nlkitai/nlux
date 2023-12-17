@@ -16,12 +16,12 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Flexible LLM Adapters** - `ChatGPT` and `HuggingFace`, and an API to **Create Your Own Adapter** for any LLM.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
-* **Personalize The Conversation** - Provide context using system messages, and instruct LLM how to behave.
+* **Personalized Conversation** - Provide context using system messages, and instruct LLM how to behave.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 ## Repo Content 📦
 
-This Github repository contains the source code for the NLUX library.<br />
+This GitHub repository contains the source code for the NLUX library.<br />
 It is a monorepo that contains the following NPM packages:
 
 **React JS Packages:**
@@ -81,7 +81,7 @@ cross platforms, with a focus on performance and usability.
 ## Community and Support 🙏
 
 * **Star The Repo** 🌟 - If you like NLUX, please star the repo to show your support.
-* **[Github Discussions](https://github.com/nluxai/nlux/discussions)** - Ask questions, share ideas, and get help from
+* **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** - Ask questions, share ideas, and get help from
   the community.
 * **[Docs Website](https://docs.nlux.ai/)** - To learn more about NLUX and contribute.
 

@@ -12,7 +12,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Flexible LLM Adapters** - `ChatGPT` `HuggingFace` and an API to **Create Your Own Adapter** for any LLM.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
-* **Personalize The Conversation** - Provide context using system message, and instruct the LLM how to behave.
+* **Personalized Conversation** - Provide context using system message, and instruct the LLM how to behave.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 ## Docs Website 📖
@@ -45,8 +45,8 @@ const chatGptAdapter = createAdapter()
     .withApiKey('YOUR_OPEN_AI_API_KEY')
     // 👇 Instruct ChatGPT how to behave (optional)
     .withSystemMessage(
-        'Act as a Nobel Prize in Physics winner who is ' +
-        'helping a PHD student in their research. Write short answers. Be funny!'
+        'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. ' +
+        'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.'
     );
 ```
 
@@ -58,7 +58,7 @@ const aiChat = createAiChat()
     .withConversationOptions({
         scrollWhenGenerating: true,
     })
-    .withPromptBoxOptions({placeholder: 'Ask me anything about nuclear physics!'});
+    .withPromptBoxOptions({placeholder: 'How can I help you today?'})
 
 aiChat.mount(document.getElementById('root'));
 ```
@@ -67,19 +67,19 @@ You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your 
 
 ## And The Result Is ✨
 
-A fully functional chatbot UI that can advise you on nuclear physics, coding, and even tell you a joke or two!
+An AI chatbot, experienced in personal finance, that can give your users sound, tailored financial advice:
 
-[![Nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-nobel-prize-in-physics-winner.gif)](https://nlux.ai)
+[![Nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 
 ## Theme File and CSS 🎨
 
 You should include a **theme CSS file** into your HTML page.<br />
-You can download and host the `Kensington Theme` CSS file
+You can download and host the `Nova Theme` CSS file
 from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.8.4/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.8.7/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

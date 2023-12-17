@@ -1,7 +1,6 @@
+import {AiChat, createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
-import {createAiChat, AiChat} from '@nlux/core';
 import {createAdapter} from '@nlux/openai';
-import {myCustomPromiseAdapter, myCustomStreamingAdapter} from './customAdapter';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
@@ -27,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // .withModel('gpt-4')
         .withDataTransferMode('stream')
         .withSystemMessage(
-            'Act as a Nobel Prize in Physics winner who is ' +
-            'helping a PHD student in their research',
+            'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. ' +
+            'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.',
         );
 
     aiChat = createAiChat()
@@ -41,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             maxHeight: 500,
         })
         .withPromptBoxOptions({
-            placeholder: 'Ask me anything about nuclear physics!',
+            placeholder: 'How can I help you today?',
             autoFocus: true,
         });
 

@@ -1,15 +1,14 @@
 import {highlighter} from '@nlux/highlighter';
-import {AiChat} from '@nlux/react';
 import {useAdapter} from '@nlux/openai-react';
+import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {streamAdapter} from './stream';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
 const ExampleWrapper = () => {
-    const [height, setHeight] = useState<number>(550);
+    const [height, setHeight] = useState<number>(350);
     const [key, setKey] = useState<number>(0);
     const handleRandomContainerHeight = useCallback(() => {
         const newHeight = Math.floor(Math.random() * 1000);
@@ -20,8 +19,9 @@ const ExampleWrapper = () => {
         apiKey,
         model: 'gpt-3.5-turbo',
         // dataTransferMode: 'stream',
-        dataTransferMode: 'fetch',
-        systemMessage: 'Act as a Nobel Prize in Physics winner who is helping a PHD student in their research',
+        dataTransferMode: 'stream',
+        systemMessage: 'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. '
+            + 'Only recommend legal, ethical practices. Be friendly and patient. Write concise answers under 5 sentences.',
     });
 
     if (!adapter) {
@@ -33,17 +33,17 @@ const ExampleWrapper = () => {
             <span>{key}</span>
             <button onClick={() => setKey(key + 1)}>Reset</button>
             <button onClick={handleRandomContainerHeight}>Random Container Height</button>
-            <div style={{height: '550px', width: '600px'}}>
+            <div style={{marginTop: '50px'}}>
                 <AiChat
                     key={key}
                     className="ai-chat-emulator"
-                    adapter={streamAdapter}
+                    adapter={adapter}
                     conversationOptions={{
                         scrollWhenGenerating: true,
                     }}
                     layoutOptions={{
                         height,
-                        width: 440,
+                        width: 420,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
                     promptBoxOptions={{
