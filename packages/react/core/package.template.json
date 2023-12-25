@@ -10,7 +10,8 @@
     "@nlux/core": "{versions.nlux}"
   },
   "peerDependencies": {
-    "react": "^{versions.peerDependencies.react}"
+    "react": "^{versions.peerDependencies.react}",
+    "react-dom": "^{versions.peerDependencies.reactDom}"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",

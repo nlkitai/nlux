@@ -62,6 +62,8 @@ try {
     await run('cp -r samples/emulator/src/02-react-js-with-hugging-face/require.min.js dist/dev/emulator/02-react-js-with-hugging-face/require.min.js');
     await run('cp -r samples/emulator/src/03-react-js-with-adapters/index.html dist/dev/emulator/03-react-js-with-adapters/index.html');
     await run('cp -r samples/emulator/src/03-react-js-with-adapters/require.min.js dist/dev/emulator/03-react-js-with-adapters/require.min.js');
+    await run('cp -r samples/emulator/src/04-react-js-personas/index.html dist/dev/emulator/04-react-js-personas/index.html');
+    await run('cp -r samples/emulator/src/04-react-js-personas/require.min.js dist/dev/emulator/04-react-js-personas/require.min.js');
 
     info('Symlinking packages to emulator folder');
 

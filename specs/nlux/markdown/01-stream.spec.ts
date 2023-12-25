@@ -32,7 +32,7 @@ describe('MD Stream Parser Streaming', () => {
             await waitForMilliseconds(50);
             expect(rootElement.innerHTML).toBe('<p>Hello</p>');
 
-            streamRenderer.complete();
+            streamRenderer.complete!();
         });
     });
 
@@ -66,7 +66,7 @@ describe('MD Stream Parser Streaming', () => {
             await waitForMilliseconds(50);
             expect(rootElement.innerHTML).toBe('<h1>Hello</h1>');
 
-            streamRenderer.complete();
+            streamRenderer.complete!();
         });
     });
 
@@ -104,7 +104,7 @@ describe('MD Stream Parser Streaming', () => {
             await waitForMilliseconds(50);
             expect(rootElement.innerHTML).toBe('<h2>Hello</h2>');
 
-            streamRenderer.complete();
+            streamRenderer.complete!();
         });
     });
 });

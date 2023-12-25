@@ -12,7 +12,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     it('should render a code in the middle of a paragraph', async () => {
         streamRenderer.next('Hello `World` !');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p>Hello <code>World</code> !</p>');
@@ -20,7 +20,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     it('should render a code at the end of a paragraph', async () => {
         streamRenderer.next('Hello `World`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p>Hello <code>World</code></p>');
@@ -28,7 +28,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     it('should render a code at the beginning of a paragraph', async () => {
         streamRenderer.next('`Hello` World');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code>Hello</code> World</p>');
@@ -36,7 +36,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     it('should wrap inline code in a paragraph', async () => {
         streamRenderer.next('`Hello World`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code>Hello World</code></p>');
@@ -44,7 +44,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     it('Should embed code into a paragraph, and bold into the code', async () => {
         streamRenderer.next('`Hello **World**`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code>Hello <strong>World</strong></code></p>');

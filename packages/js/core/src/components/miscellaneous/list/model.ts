@@ -102,6 +102,10 @@ export class CompList<CompType extends BaseComp<any, any, any, any>>
         });
     }
 
+    public forEachComponent(callback: (component: CompType, index: number) => void) {
+        this.renderedComponents.forEach(callback);
+    }
+
     public getComponentAt(index: number): CompType | undefined {
         if (index < 0 || index >= this.renderedComponents.length) {
             return;

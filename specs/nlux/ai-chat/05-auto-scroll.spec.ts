@@ -1,15 +1,15 @@
-import {createAiChat, AiChat} from '@nlux/core';
+import {AiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the create a AiChat box', () => {
-    let adapterController: AdapterController | undefined = undefined;
-
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -17,17 +17,13 @@ describe('When the create a AiChat box', () => {
     });
 
     afterEach(() => {
-        adapterController = undefined;
-
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
     });
 
     describe('When the user adds a message to an AiChat', () => {
         it('should scroll to the bottom when scrollWhenGenerating is set to true', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
+            adapterController = adapterBuilder().withFetchText().create();
 
             aiChat = new AiChat()
                 .withAdapter(adapterController.adapter)
@@ -53,11 +49,11 @@ describe('When the create a AiChat box', () => {
             await waitForMdStreamToComplete(50);
 
             const scrollToParams = {behavior: 'instant', top: 50000};
-            expect(messagesContainer.scrollTo).toHaveBeenCalledWith(scrollToParams);
+            expect(messagesContainer?.scrollTo).toHaveBeenCalledWith(scrollToParams);
         });
 
         it('should scroll to the bottom when scrollWhenGenerating is set to false', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
+            adapterController = adapterBuilder().withFetchText().create();
 
             aiChat = new AiChat()
                 .withAdapter(adapterController.adapter)
@@ -83,13 +79,13 @@ describe('When the create a AiChat box', () => {
             await waitForMdStreamToComplete(50);
 
             const scrollToParams = {behavior: 'instant', top: 50000};
-            expect(messagesContainer.scrollTo).toHaveBeenCalledWith(scrollToParams);
+            expect(messagesContainer?.scrollTo).toHaveBeenCalledWith(scrollToParams);
         });
     });
 
     describe('When a message is being streamed to an AiChat', () => {
         it('should keep scrolling to the bottom when scrollWhenGenerating is true', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: true});
+            adapterController = adapterBuilder().withStreamText().create();
 
             aiChat = new AiChat()
                 .withAdapter(adapterController.adapter)
@@ -111,16 +107,16 @@ describe('When the create a AiChat box', () => {
 
             expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
 
-            const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer.scrollTo as any)?.mock.calls.length;
+            const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
             adapterController.next('Hi LLM!');
             await waitForMdStreamToComplete(50);
 
-            const timesScrollToBottomCalledAfterNextChunk = (messagesContainer.scrollTo as any)?.mock.calls.length;
+            const timesScrollToBottomCalledAfterNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
             expect(timesScrollToBottomCalledAfterNextChunk).toBeGreaterThan(timesScrollToBottomCalledBeforeNextChunk);
         });
 
         it('should not keep scrolling to the bottom when scrollWhenGenerating is false', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: true});
+            adapterController = adapterBuilder().withStreamText().create();
 
             aiChat = new AiChat()
                 .withAdapter(adapterController.adapter)
@@ -142,11 +138,11 @@ describe('When the create a AiChat box', () => {
 
             expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
 
-            const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer.scrollTo as any)?.mock.calls.length;
+            const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
             adapterController.next('Hi LLM!');
             await waitForMdStreamToComplete(50);
 
-            const timesScrollToBottomCalledAfterNextChunk = (messagesContainer.scrollTo as any)?.mock.calls.length;
+            const timesScrollToBottomCalledAfterNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
             expect(timesScrollToBottomCalledAfterNextChunk).toEqual(timesScrollToBottomCalledBeforeNextChunk);
         });
     });

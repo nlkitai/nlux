@@ -1,3 +1,4 @@
+import {BotPersona, UserPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
@@ -22,8 +23,8 @@ export class CompConversation extends BaseComp<
 > {
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
+    private messagesContainerRendered: boolean = false;
     private messagesList: CompList<CompMessage> | undefined;
-
     private scrollWhenGeneratingUserOption: boolean;
     private scrollingStickToConversationEnd: boolean = true;
 
@@ -44,7 +45,19 @@ export class CompConversation extends BaseComp<
                 `addConversation() before calling addMessage()!`);
         }
 
+        //
+        // Remove welcome persona message and show messages container
+        //
+        if (!this.messagesContainerRendered) {
+            this.executeDomAction('removeWelcomeMessage');
+            this.messagesContainerRendered = true;
+        }
+
+        //
+        // Create new message to add
+        //
         const trackResizeAndDomChange = this.props.scrollWhenGenerating;
+        const {botPersona, userPersona} = this.props;
         const message = textMessage(
             this.context,
             direction,
@@ -52,9 +65,13 @@ export class CompConversation extends BaseComp<
             contentType,
             content as string,
             createdAt,
+            botPersona,
+            userPersona,
         );
 
+        //
         // Clean up last message resize listener
+        //
         if (this.lastMessageId && this.lastMessageResizedListener) {
             const lastMessage = this.getMessageById(this.lastMessageId);
             if (lastMessage) {
@@ -66,11 +83,15 @@ export class CompConversation extends BaseComp<
             this.lastMessageResizedListener = undefined;
         }
 
+        //
         // Add new message
+        //
         this.messagesList.appendComponent(message, messageInList);
         this.executeDomAction('scrollToBottom');
 
+        //
         // Listen to the new message resize event
+        //
         this.lastMessageId = message.id;
         this.lastMessageResizedListener = this.createMessageResizedListener(message.id);
         if (this.lastMessageResizedListener) {
@@ -87,6 +108,30 @@ export class CompConversation extends BaseComp<
 
     public removeMessage(messageId: string) {
         this.messagesList?.removeComponentById(messageId);
+        if (!this.messagesList || this.messagesList.size === 0) {
+            this.executeDomAction('resetWelcomeMessage');
+            this.messagesContainerRendered = false;
+        }
+    }
+
+    public setBotPersona(botPersona: BotPersona | undefined) {
+        this.setProp('botPersona', botPersona);
+
+        this.messagesList?.forEachComponent((message) => {
+            if (message.direction === 'in') {
+                message.setPersona(botPersona);
+            }
+        });
+    }
+
+    public setUserPersona(userPersona: UserPersona | undefined) {
+        this.setProp('userPersona', userPersona);
+
+        this.messagesList?.forEachComponent((message) => {
+            if (message.direction === 'out') {
+                message.setPersona(userPersona);
+            }
+        });
     }
 
     public toggleAutoScrollToStreamingMessage(autoScrollToStreamingMessage: boolean) {

@@ -12,7 +12,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render an italic in the middle of a paragraph', async () => {
         streamRenderer.next('Hello *World* !');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em> !</p>');
@@ -20,7 +20,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render an italic at the end of a paragraph', async () => {
         streamRenderer.next('Hello *World*');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em></p>');
@@ -28,7 +28,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render an italic at the beginning of a paragraph', async () => {
         streamRenderer.next('*Hello* World');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><em>Hello</em> World</p>');
@@ -36,7 +36,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should wrap italic in a paragraph', async () => {
         streamRenderer.next('*Hello World*');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><em>Hello World</em></p>');
@@ -44,7 +44,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should embed italic into a paragraph, and code into the italic', async () => {
         streamRenderer.next('*Hello `World`*');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><em>Hello <code>World</code></em></p>');
@@ -52,7 +52,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should embed code into a paragraph, and italic into the code', async () => {
         streamRenderer.next('`Hello *World*`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code>Hello <em>World</em></code></p>');
@@ -60,7 +60,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should embed italic at the beginning of inline code', async () => {
         streamRenderer.next('`*Hello* World`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code><em>Hello</em> World</code></p>');
@@ -68,7 +68,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should embed italic at the end of inline code', async () => {
         streamRenderer.next('`Hello *World*`');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe('<p><code>Hello <em>World</em></code></p>');

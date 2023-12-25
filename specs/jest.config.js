@@ -18,6 +18,15 @@ module.exports = {
                 "configPlugin": "@rollup/plugin-typescript"
             },
             "--resolveJsonModule"
+        ],
+        "\\.tsx$": [
+            "rollup-jest",
+            {
+                "configPlugin": "@rollup/plugin-typescript",
+                "configFile": "./rollup.config.ts",
+            },
+            "--resolveJsonModule",
+            "--jsx"
         ]
     },
 };

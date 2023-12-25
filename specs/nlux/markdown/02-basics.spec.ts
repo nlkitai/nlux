@@ -12,7 +12,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should render text in a single paragraph', async () => {
         streamRenderer.next('Hello World');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Hello World</p>');
@@ -20,7 +20,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should not render text in a single paragraph when all it containers is spaces', async () => {
         streamRenderer.next('    ');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('');
@@ -28,7 +28,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should render text in a p even when it ends with pending sequence', async () => {
         streamRenderer.next('Hello World ##');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Hello World ##</p>');
@@ -36,7 +36,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should render text in a p even when it ends with uncompleted sequence followed by # markdown', async () => {
         streamRenderer.next('A##\n# B');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>A##</p><h1>B</h1>');
@@ -44,7 +44,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should render text in a p even when it ends with uncompleted sequence followed by other markdown', async () => {
         streamRenderer.next('Hello World ##\n# Header');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Hello World ##</p><h1>Header</h1>');
@@ -53,15 +53,16 @@ describe('MD Stream Parser Streaming', () => {
     it('should render short text in a p even when it ends with uncompleted sequence followed by other markdown',
         async () => {
             streamRenderer.next('A#\n# H');
-            streamRenderer.complete();
+            streamRenderer.complete!();
             await waitForMilliseconds(200);
 
             expect(rootElement.innerHTML).toBe('<p>A#</p><h1>H</h1>');
-        });
+        },
+    );
 
     it('should render a single paragraph with a line break', async () => {
         streamRenderer.next('Hello World\n');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Hello World</p>');
@@ -69,7 +70,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should close a paragraph and start new one after 2 empty lines', async () => {
         streamRenderer.next('Paragraph 1\n\nParagraph 2');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Paragraph 1</p><p>Paragraph 2</p>');
@@ -77,7 +78,7 @@ describe('MD Stream Parser Streaming', () => {
 
     it('should render paragraph followed by heading when separated by 1 line break', async () => {
         streamRenderer.next('Paragraph\n# Header');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMilliseconds(200);
 
         expect(rootElement.innerHTML).toBe('<p>Paragraph</p><h1>Header</h1>');

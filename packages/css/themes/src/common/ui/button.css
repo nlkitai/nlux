@@ -21,29 +21,28 @@
         > .loader:after {
             color: var(--nluxc-button-text-color);
         }
-    }
 
-    .bt-primary-filled:active,
-    .bt-primary-filled:hover {
-        color: var(--nluxc-button-active-text-color);
-        border-color: var(--nluxc-button-active-border-color);
-        background-color: var(--nluxc-button-active-background-color);
-    }
+        &:active,
+        &:hover {
+            color: var(--nluxc-button-active-text-color);
+            border-color: var(--nluxc-button-active-border-color);
+            background-color: var(--nluxc-button-active-background-color);
+        }
 
-    .bt-primary-filled:focus-visible,
-    .bt-primary-filled:focus-within,
-    .bt-primary-filled:focus {
-        color: var(--nluxc-button-active-text-color);
-        border-color: var(--nluxc-button-active-border-color);
-        outline: none;
-        background-color: var(--nluxc-button-active-background-color);
-        box-shadow: var(--nluxc-box-shadow);
-    }
+        &:focus-visible,
+        &:focus-within,
+        &:focus {
+            color: var(--nluxc-button-active-text-color);
+            border-color: var(--nluxc-button-active-border-color);
+            outline: none;
+            background-color: var(--nluxc-button-active-background-color);
+            box-shadow: var(--nluxc-box-shadow);
+        }
 
-    .bt-primary-filled:disabled {
-        color: var(--nluxc-button-disabled-text-color);
-        border-color: var(--nluxc-button-disabled-border-color);
-        background-color: var(--nluxc-button-disabled-background-color);
+        &:disabled {
+            color: var(--nluxc-button-disabled-text-color);
+            border-color: var(--nluxc-button-disabled-border-color);
+            background-color: var(--nluxc-button-disabled-background-color);
+        }
     }
 }
-

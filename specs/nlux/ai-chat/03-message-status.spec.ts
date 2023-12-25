@@ -1,16 +1,17 @@
-import {createAiChat, AiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {qAll, queries, selectors} from '../../utils/selectors';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 const delayBeforeCheckingDom = 50;
 
 describe('When user expects a message to be generated', () => {
-    let adapterController: AdapterController | undefined = undefined;
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -18,20 +19,13 @@ describe('When user expects a message to be generated', () => {
     });
 
     afterEach(() => {
-        adapterController = undefined;
-
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
     });
 
     describe('When a prompt is submitted in fetch mode', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: true,
-                includeStreamText: false,
-            });
+            adapterController = adapterBuilder().withFetchText().create();
         });
 
         it('The sent message should immediately transition to loaded status', async () => {
@@ -131,10 +125,7 @@ describe('When user expects a message to be generated', () => {
 
     describe('When a prompt is submitted in stream mode', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: false,
-                includeStreamText: true,
-            });
+            adapterController = adapterBuilder().withStreamText().create();
         });
 
         it('The sent message should render in loaded status', async () => {
@@ -232,7 +223,7 @@ describe('When user expects a message to be generated', () => {
                 await waitForRenderCycle();
                 await waitForMdStreamToComplete(100);
 
-                expect(queries.receivedMessageContainer().innerHTML).toContain('Hello');
+                expect(queries.receivedMessageContainer()).toHaveTextContent('Hello');
                 expect(queries.receivedMessageContainer()).toHaveClass('message-status-loaded');
             });
         });

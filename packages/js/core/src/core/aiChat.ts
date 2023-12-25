@@ -10,6 +10,7 @@ import {HighlighterExtension} from './highlighter/highlighter';
 import {IAiChat} from './interface';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
+import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class AiChat implements IAiChat {
@@ -19,6 +20,7 @@ export class AiChat implements IAiChat {
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
+    protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
     protected theSyntaxHighlighter: HighlighterExtension | null = null;
     protected theThemeId: string | null = null;
@@ -66,15 +68,16 @@ export class AiChat implements IAiChat {
 
         rootElement.innerHTML = '';
         const controller = new NluxController(
-            adapterToUser,
             rootElement,
             {
                 themeId: this.theThemeId ?? undefined,
+                adapter: adapterToUser,
                 className: this.theClassName ?? undefined,
                 syntaxHighlighter: this.theSyntaxHighlighter ?? undefined,
                 layoutOptions: this.theLayoutOptions ?? {},
                 promptBoxOptions: this.thePromptBoxOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
+                personaOptions: this.thePersonasOptions ?? {},
             },
         );
 
@@ -120,7 +123,7 @@ export class AiChat implements IAiChat {
         this.controller = null;
     }
 
-    public updateProps(props: NluxProps) {
+    public updateProps(props: Partial<NluxProps>) {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -234,6 +237,25 @@ export class AiChat implements IAiChat {
 
         this.theLayoutOptions = layoutOptions;
 
+        return this;
+    }
+
+    public withPersonaOptions(personaOptions: PersonaOptions) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set personaOptions. NLUX is already mounted.',
+            });
+        }
+
+        if (this.thePersonasOptions) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Personas were already set.',
+            });
+        }
+
+        this.thePersonasOptions = personaOptions;
         return this;
     }
 

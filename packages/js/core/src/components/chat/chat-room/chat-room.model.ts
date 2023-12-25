@@ -1,6 +1,7 @@
 import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {NluxContext} from '../../../types/context';
 import {isStandardAdapter, StandardAdapter} from '../../../types/standardAdapter';
 import {CompConversation} from '../conversation/conversation.model';
@@ -27,6 +28,8 @@ export class CompChatRoom extends BaseComp<
         scrollWhenGenerating,
         visible = true,
         promptBox,
+        botPersona,
+        userPersona,
     }: CompChatRoomProps) {
         super(context, {
             visible,
@@ -35,12 +38,14 @@ export class CompChatRoom extends BaseComp<
             containerMaxWidth,
             containerWidth,
             scrollWhenGenerating,
+            botPersona,
+            userPersona,
         });
 
         // Set scroll when generating default value to true, when not specified
         const scrollWhenGeneratingUserOption = scrollWhenGenerating ?? true;
 
-        this.addConversation(scrollWhenGeneratingUserOption);
+        this.addConversation(scrollWhenGeneratingUserOption, botPersona, userPersona);
         this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
 
         // @ts-ignore
@@ -78,6 +83,14 @@ export class CompChatRoom extends BaseComp<
         if (props.hasOwnProperty('scrollWhenGenerating')) {
             this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
         }
+
+        if (props.hasOwnProperty('botPersona')) {
+            this.conversation?.setBotPersona(props.botPersona ?? undefined);
+        }
+
+        if (props.hasOwnProperty('userPersona')) {
+            this.conversation?.setUserPersona(props.userPersona ?? undefined);
+        }
     }
 
     public show() {
@@ -98,11 +111,17 @@ export class CompChatRoom extends BaseComp<
         this.promptBoxInstance?.focusTextInput();
     }
 
-    private addConversation(scrollWhenGenerating: boolean) {
+    private addConversation(
+        scrollWhenGenerating: boolean,
+        botPersona?: BotPersona,
+        userPersona?: UserPersona,
+    ) {
         this.conversation = comp(CompConversation)
             .withContext(this.context)
             .withProps<CompConversationProps>({
                 scrollWhenGenerating,
+                botPersona,
+                userPersona,
             })
             .create();
 

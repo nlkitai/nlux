@@ -1,15 +1,13 @@
-import {NluxProps} from '@nlux-dev/core/src';
-import {AiChat as AiChatType} from '@nlux/core';
-import {optionsUpdater} from './optionsUpdater';
+import {NluxProps, warn} from '@nlux/core';
+import {adapterParamToUsableAdapter} from '../../utils/adapterParamToUsableAdapter';
+import {optionsUpdater} from '../../utils/optionsUpdater';
+import {personaOptionsUpdater} from '../../utils/personasUpdater';
 import type {AiChatProps} from './props';
 
-export const handleNewPropsReceived = (
-    instance: AiChatType,
+export const handleNewPropsReceived = async (
     currentProps: AiChatProps,
     newProps: AiChatProps,
-) => {
-    let somethingChanged = false;
-
+): Promise<Partial<NluxProps> | undefined> => {
     const layoutOptions = optionsUpdater(
         currentProps.layoutOptions,
         newProps.layoutOptions,
@@ -25,29 +23,57 @@ export const handleNewPropsReceived = (
         newProps.promptBoxOptions,
     );
 
-    if ([layoutOptions, conversationOptions, promptBoxOptions].some((x) => x !== undefined)) {
-        somethingChanged = true;
+    const personaOptions = await personaOptionsUpdater(
+        currentProps.personaOptions,
+        newProps.personaOptions,
+    );
+
+    const propsToUpdate: Partial<NluxProps> = {};
+
+    if (layoutOptions !== undefined) {
+        propsToUpdate.layoutOptions = layoutOptions ?? {};
     }
 
-    const propsToUpdate: NluxProps = {
-        layoutOptions: layoutOptions ?? {},
-        conversationOptions: conversationOptions ?? {},
-        promptBoxOptions: promptBoxOptions ?? {},
-    };
+    if (conversationOptions !== undefined) {
+        propsToUpdate.conversationOptions = conversationOptions ?? {};
+    }
+
+    if (promptBoxOptions !== undefined) {
+        propsToUpdate.promptBoxOptions = promptBoxOptions ?? {};
+    }
+
+    if (personaOptions !== undefined) {
+        propsToUpdate.personaOptions = personaOptions ?? {};
+    }
+
+    const newAdapterProp = currentProps.adapter !== newProps.adapter
+        ? newProps.adapter
+        : undefined;
+
+    if (newAdapterProp !== undefined) {
+        const newAdapter = adapterParamToUsableAdapter(newAdapterProp);
+        if (!newAdapter) {
+            warn({
+                message: 'Invalid new adapter property provided! The adapter must be an instance of Adapter or AdapterBuilder.',
+                type: 'invalid-adapter',
+            });
+        } else {
+            propsToUpdate.adapter = newAdapter;
+        }
+    }
 
     if (currentProps.className !== newProps.className) {
         propsToUpdate.className = newProps.className;
-        somethingChanged = true;
     }
 
     if (currentProps.syntaxHighlighter !== newProps.syntaxHighlighter) {
         propsToUpdate.syntaxHighlighter = newProps.syntaxHighlighter;
-        somethingChanged = true;
     }
 
+    const somethingChanged = Object.keys(propsToUpdate).length > 0;
     if (!somethingChanged) {
         return;
     }
 
-    instance.updateProps(propsToUpdate);
+    return propsToUpdate;
 };

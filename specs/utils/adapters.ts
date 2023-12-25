@@ -1,8 +1,8 @@
 import {Adapter, StreamingAdapterObserver} from '@nlux/core';
 
-export const createPromiseAdapterController = ({
-    includeFetchText = true,
-    includeStreamText = true,
+export const createAdapterController = ({
+    includeFetchText = false,
+    includeStreamText = false,
 } = {}) => {
     let resolvePromise: Function | null = null;
     let rejectPromise: Function | null = null;
@@ -61,4 +61,4 @@ export const createPromiseAdapterController = ({
     });
 };
 
-export type AdapterController = ReturnType<typeof createPromiseAdapterController>;
+export type AdapterController = ReturnType<typeof createAdapterController>;

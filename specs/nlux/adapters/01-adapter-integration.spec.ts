@@ -1,13 +1,14 @@
-import {createAiChat, AiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux/core';
 import userEvent from '@testing-library/user-event';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForRenderCycle} from '../../utils/wait';
 
 describe('When a component is loaded', () => {
-    let adapterController: AdapterController | undefined;
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -17,17 +18,14 @@ describe('When a component is loaded', () => {
     afterEach(() => {
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
-        adapterController = undefined;
     });
 
     describe('When the custom adapter provided implements both fetchText and streamText methods', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: true,
-                includeStreamText: true,
-            });
+            adapterController = adapterBuilder()
+                .withFetchText()
+                .withStreamText()
+                .create();
         });
 
         it('streamText should be used', async () => {
@@ -51,10 +49,7 @@ describe('When a component is loaded', () => {
 
     describe('When the custom adapter provided implements only the fetchText method', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: true,
-                includeStreamText: false,
-            });
+            adapterController = adapterBuilder().withFetchText().create();
         });
 
         it('fetchText should be used', async () => {
@@ -78,10 +73,7 @@ describe('When a component is loaded', () => {
 
     describe('When the custom adapter provided implements only the streamText method', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: false,
-                includeStreamText: true,
-            });
+            adapterController = adapterBuilder().withStreamText().create();
         });
 
         it('streamText should be used', async () => {
@@ -105,10 +97,7 @@ describe('When a component is loaded', () => {
 
     describe('When the custom adapter provided implements none of the fetch/streamText methods', () => {
         beforeEach(() => {
-            adapterController = createPromiseAdapterController({
-                includeFetchText: false,
-                includeStreamText: false,
-            });
+            adapterController = adapterBuilder().create();
         });
 
         it('should throw an error', () => {
@@ -125,7 +114,7 @@ describe('When a component is loaded', () => {
 
     describe('When invalid object is provided', () => {
         it('should throw an error as soon as the invalid adapter is set', () => {
-            expect(() => createAiChat().withAdapter(undefined)).toThrowError();
+            expect(() => createAiChat().withAdapter(undefined as any)).toThrowError();
             expect(() => createAiChat().withAdapter(null as any)).toThrowError();
             expect(() => createAiChat().withAdapter(123 as any)).toThrowError();
             expect(() => createAiChat().withAdapter('' as any)).toThrowError();

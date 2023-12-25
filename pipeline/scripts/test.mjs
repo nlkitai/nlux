@@ -1,7 +1,7 @@
 import clc from 'cli-color';
-import {run} from './run.mjs';
 import {info, nl} from '../utils/log.mjs';
 import {symlinkBuiltPackageToEmulatorFolder, symlinkNodeModuleToEmulatorFolder} from '../utils/symLink.mjs';
+import {run} from './run.mjs';
 
 nl(1);
 info(clc.bgWhite.red(' ############################################### '));
@@ -30,7 +30,7 @@ try {
     //
     // Symlink dependencies to emulator folder
     //
-    ['react', 'react-dom', 'openai'].forEach((name) => {
+    ['react', 'react-dom', 'openai', 'highlight.js'].forEach((name) => {
         symlinkNodeModuleToEmulatorFolder(name);
     });
 

@@ -10,3 +10,7 @@ export const waitForMdStreamToComplete = (streamLength: number = 20) => new Prom
     const duration = streamLength * 10; // 10ms wait per character
     setTimeout(resolve, duration);
 });
+
+// In milliseconds
+export const delayBeforeSendingResponse = 200;
+export const shortDelayBeforeSendingResponse = 100;

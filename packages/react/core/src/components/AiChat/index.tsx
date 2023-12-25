@@ -1,5 +1,6 @@
-import {AiChat as AiChatType, createAiChat} from '@nlux/core';
+import {AiChat as AiChatType, createAiChat, warn} from '@nlux/core';
 import React, {useEffect, useRef, useState} from 'react';
+import {reactPersonasToCorePersonas} from '../../utils/reactPersonasToCorePersonas';
 import {handleNewPropsReceived} from './handleNewPropsReceived';
 import {AiChatProps} from './props';
 
@@ -13,6 +14,8 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             throw new Error('Root element is not defined');
         }
 
+        let shouldMount = true;
+
         const {
             adapter,
             className,
@@ -20,6 +23,7 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             layoutOptions,
             conversationOptions,
             promptBoxOptions,
+            personaOptions,
         } = props;
 
         let newInstance = createAiChat().withAdapter(adapter);
@@ -44,31 +48,60 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             newInstance = newInstance.withSyntaxHighlighter(syntaxHighlighter);
         }
 
-        newInstance.mount(rootElement.current);
-        aiChat.current = newInstance;
+        if (personaOptions) {
+            reactPersonasToCorePersonas(personaOptions).then((corePersonas) => {
+                newInstance = newInstance.withPersonaOptions(corePersonas);
+                if (!shouldMount) {
+                    return;
+                }
+
+                if (!rootElement.current) {
+                    warn('Root element is not defined! AiChat cannot be mounted.');
+                    return;
+                }
+
+                newInstance.mount(rootElement.current);
+                aiChat.current = newInstance;
+            });
+        } else {
+            newInstance.mount(rootElement.current);
+            aiChat.current = newInstance;
+        }
 
         return () => {
+            shouldMount = false;
             newInstance?.unmount();
         };
     }, []);
 
     useEffect(() => {
+        let isUseEffectCancelled = false;
+
         if (!currentProps) {
             setCurrentProps(props);
             return;
         }
 
-        if (currentProps.adapter !== props.adapter) {
-            throw new Error(
-                'Adapter passed to <AiChat /> component cannot be changed. '
-                + 'Make sure you use React\s useMemo hook to memoize the adapter instance.',
-            );
+        if (aiChat.current) {
+            handleNewPropsReceived(currentProps, props).then((newProps) => {
+                if (isUseEffectCancelled || !newProps) {
+                    return;
+                }
+
+                if (!aiChat.current) {
+                    warn('AiChat is not defined! Cannot update.');
+                    return;
+                }
+
+                setCurrentProps(props);
+                aiChat.current.updateProps(newProps);
+            });
         }
 
-        if (aiChat.current) {
-            handleNewPropsReceived(aiChat.current, currentProps, props);
-        }
-    }, [props]);
+        return () => {
+            isUseEffectCancelled = true;
+        };
+    }, [props, currentProps]);
 
     return (
         <div ref={rootElement}></div>

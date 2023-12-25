@@ -407,6 +407,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         }
 
         this.schedulePropUpdate(name);
+        this.props = Object.freeze(Object.fromEntries(this.elementProps)) as Readonly<PropsType>;
     }
 
     protected throwIfDestroyed() {

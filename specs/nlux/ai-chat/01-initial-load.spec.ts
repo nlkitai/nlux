@@ -1,6 +1,7 @@
-import {AdapterBuilder, createAiChat, AiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForRenderCycle} from '../../utils/wait';
 
@@ -9,7 +10,7 @@ const apiKey = 'YOUR_API_KEY_HERE';
 describe('On AiChat initial load', () => {
     let adapterController: AdapterController | undefined = undefined;
 
-    let rootElement: HTMLElement | undefined;
+    let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
@@ -22,11 +23,10 @@ describe('On AiChat initial load', () => {
         aiChat?.unmount();
         rootElement?.remove();
         aiChat = undefined;
-        rootElement = undefined;
     });
 
     it('should not initially render anything is DOM', async () => {
-        adapterController = createPromiseAdapterController();
+        adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat().withAdapter(adapterController.adapter);
         await waitForRenderCycle();
         expect(rootElement?.innerHTML).toBe('');
@@ -34,7 +34,7 @@ describe('On AiChat initial load', () => {
 
     describe('When mount() is called', () => {
         it('chat room container should render', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -43,7 +43,7 @@ describe('On AiChat initial load', () => {
         });
 
         it('exceptions box container should render', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -52,7 +52,7 @@ describe('On AiChat initial load', () => {
         });
 
         it('prompt box container should render', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -61,7 +61,7 @@ describe('On AiChat initial load', () => {
         });
 
         it('conversation container should render', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -72,7 +72,7 @@ describe('On AiChat initial load', () => {
 
     describe('When mount() is called twice', () => {
         it('should throw an error', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -81,7 +81,7 @@ describe('On AiChat initial load', () => {
         });
 
         it('should not render anything new in DOM', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();

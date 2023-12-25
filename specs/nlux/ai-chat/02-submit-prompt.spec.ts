@@ -1,17 +1,22 @@
-import {createAiChat, AiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
-import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
+import {
+    delayBeforeSendingResponse,
+    waitForMdStreamToComplete,
+    waitForMilliseconds,
+    waitForRenderCycle,
+} from '../../utils/wait';
 
 const apiKey = 'YOUR_API_KEY_HERE';
 
 describe('When typing a prompt ', () => {
-    let adapterController: AdapterController | undefined = undefined;
-
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -19,16 +24,13 @@ describe('When typing a prompt ', () => {
     });
 
     afterEach(() => {
-        adapterController = undefined;
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
     });
 
     describe('Initial state', () => {
         it('should render an empty prompt box with disabled button', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -43,7 +45,7 @@ describe('When typing a prompt ', () => {
 
     describe('When the user types a prompt', () => {
         it('should enable the send button', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -61,7 +63,7 @@ describe('When typing a prompt ', () => {
 
     describe('When the user clears the prompt', () => {
         it('should disable the send button', async () => {
-            adapterController = createPromiseAdapterController();
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -85,9 +87,9 @@ describe('When typing a prompt ', () => {
 });
 
 describe('When sending a chat message ', () => {
-    let adapterController: AdapterController | undefined = undefined;
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
         rootElement = document.createElement('div');
@@ -95,17 +97,13 @@ describe('When sending a chat message ', () => {
     });
 
     afterEach(() => {
-        adapterController = undefined;
-
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
     });
 
     describe('When the user clicks the send button', () => {
         it('should display the user message in conversation container', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
+            adapterController = adapterBuilder().withStreamText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
 
@@ -128,7 +126,7 @@ describe('When sending a chat message ', () => {
         });
 
         it('should display a loading indicator', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
+            adapterController = adapterBuilder().withStreamText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
 
@@ -153,7 +151,7 @@ describe('When sending a chat message ', () => {
 
         describe('When the API call fails', () => {
             it('should display an error message', async () => {
-                adapterController = createPromiseAdapterController({includeStreamText: false});
+                adapterController = adapterBuilder().withFetchText().create();
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
 
@@ -180,8 +178,7 @@ describe('When sending a chat message ', () => {
             });
 
             it('Should remove the initial user message', async () => {
-                const delayBeforeSendingResponse = 100;
-                adapterController = createPromiseAdapterController({includeStreamText: false});
+                adapterController = adapterBuilder().withFetchText().create();
 
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
@@ -207,7 +204,7 @@ describe('When sending a chat message ', () => {
             });
 
             it('Should remove received message loader', async () => {
-                adapterController = createPromiseAdapterController({includeStreamText: false});
+                adapterController = adapterBuilder().withFetchText().create();
 
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
@@ -235,7 +232,7 @@ describe('When sending a chat message ', () => {
             });
 
             it('Should remove the received message container', async () => {
-                adapterController = createPromiseAdapterController({includeStreamText: false});
+                adapterController = adapterBuilder().withFetchText().create();
 
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
@@ -263,7 +260,7 @@ describe('When sending a chat message ', () => {
             });
 
             it('should keep the content of the prompt box', async () => {
-                adapterController = createPromiseAdapterController({includeStreamText: false});
+                adapterController = adapterBuilder().withFetchText().create();
 
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
                 aiChat.mount(rootElement);
@@ -288,10 +285,7 @@ describe('When sending a chat message ', () => {
 
     describe('When API call fails', () => {
         it('should render error message', async () => {
-            adapterController = createPromiseAdapterController({
-                includeStreamText: false,
-                includeFetchText: true,
-            });
+            adapterController = adapterBuilder().withFetchText().create();
 
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
@@ -312,14 +306,13 @@ describe('When sending a chat message ', () => {
             adapterController.reject('Something went wrong');
             await waitForRenderCycle();
 
-            expect(queries.exceptionMessage().innerHTML).toBe('Failed to load content. Please try again.');
+            expect(queries.exceptionMessage()).toHaveTextContent('Failed to load content. Please try again.');
         });
     });
 
     describe('When the user receives a response', () => {
         it('should display the response', async () => {
-            const delayBeforeSendingResponse = 200;
-            adapterController = createPromiseAdapterController({includeStreamText: false});
+            adapterController = adapterBuilder().withFetchText().create();
 
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
@@ -345,8 +338,7 @@ describe('When sending a chat message ', () => {
         });
 
         it('should remove the loading indicator', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
-
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -371,8 +363,7 @@ describe('When sending a chat message ', () => {
         });
 
         it('should empty the prompt box', async () => {
-            adapterController = createPromiseAdapterController({includeStreamText: false});
-
+            adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();

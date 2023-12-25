@@ -26,7 +26,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     //
-    // Pure JS in ESM format
+    // 01 - Pure JS in ESM format
     //
     {
         input: './src/01-vanilla-js-with-adapters/index.ts',
@@ -63,7 +63,46 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // React JS in UMD format
+    // 02 - React JS + HF Adapter in UMD format
+    //
+    {
+        input: './src/02-react-js-with-hugging-face/index.tsx',
+        plugins: [
+            esbuild({
+                jsx: 'transform',
+                jsxFactory: 'React.createElement',
+                jsxFragment: 'React.Fragment',
+            }),
+            nodeResolve({
+                modulePaths: [
+                    nodeModulesPath,
+                ],
+                rootDir: '/packages',
+                browser: true,
+            }),
+            commonjs(),
+            replace({
+                delimiters: ['', ''],
+                preventAssignment: false,
+                values: {
+                    'process.env.NODE_ENV': JSON.stringify('development'),
+                },
+            }),
+        ],
+        external: externals,
+        output: [
+            {
+                file: `${outputFolder}/02-react-js-with-hugging-face/index.js`,
+                format: 'umd',
+                sourcemap: true,
+                strict: true,
+                esModule: false,
+                name: 'nluxEmulatorReactExample',
+            },
+        ],
+    },
+    //
+    // 03 - React JS in UMD format + Custom Adapters
     //
     {
         input: './src/03-react-js-with-adapters/index.tsx',
@@ -102,10 +141,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // React JS + HF in UMD format
+    // 04 - React JS + OpenAI in UMD format + Persona Demo
     //
     {
-        input: './src/02-react-js-with-hugging-face/index.tsx',
+        input: './src/04-react-js-personas/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -131,7 +170,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/02-react-js-with-hugging-face/index.js`,
+                file: `${outputFolder}/04-react-js-personas/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,

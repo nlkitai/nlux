@@ -1,17 +1,15 @@
 import {ExceptionId, NluxExceptions} from '../../exceptions/exceptions';
-import {Adapter} from '../../types/adapter';
-import {NluxContext} from '../../types/context';
+import {createContext, NluxContext} from '../../types/context';
 import {NluxProps} from '../../types/props';
-import {StandardAdapter} from '../../types/standardAdapter';
 import {warn} from '../../x/debug';
 import {uid} from '../../x/uid';
 import {NluxRenderer} from '../renderer/renderer';
 
 export class NluxController<InboundPayload = any, OutboundPayload = any> {
-    private readonly adapter: Adapter | StandardAdapter<any, any>;
-    private context: NluxContext | null = null;
+
     private readonly nluxInstanceId = uid();
-    private props: NluxProps | null = null;
+    private props: NluxProps;
+
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
             return null;
@@ -30,12 +28,10 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
     private readonly rootElement: HTMLElement;
 
     constructor(
-        adapter: Adapter | StandardAdapter<any, any>,
         rootElement: HTMLElement,
-        props: NluxProps | null = null,
+        props: NluxProps,
     ) {
         this.rootCompId = 'chat-room';
-        this.adapter = adapter;
         this.rootElement = rootElement;
         this.props = props;
     }
@@ -57,14 +53,13 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
             return;
         }
 
-        const newContext: NluxContext = {
+        const newContext: NluxContext = createContext({
             instanceId: this.nluxInstanceId,
             exception: this.renderException,
-            adapter: this.adapter,
-            syntaxHighlighter: this.props?.syntaxHighlighter,
-        };
+            adapter: this.props.adapter,
+            syntaxHighlighter: this.props.syntaxHighlighter,
+        });
 
-        this.context = Object.freeze(newContext);
         this.renderer = new NluxRenderer(
             newContext,
             this.rootCompId,
@@ -90,10 +85,9 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
         this.renderer?.unmount();
         this.renderer = null;
-        this.context = null;
     }
 
-    public updateProps(props: NluxProps) {
+    public updateProps(props: Partial<NluxProps>) {
         this.renderer?.updateProps(props);
     }
 }

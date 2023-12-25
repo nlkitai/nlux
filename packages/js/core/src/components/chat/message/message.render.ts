@@ -1,5 +1,6 @@
 import {NluxRenderingError} from '../../../core/error';
 import {createMdStreamRenderer} from '../../../core/markdown/streamParser';
+import {BotPersona} from '../../../core/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {StandardStreamParserOutput} from '../../../types/markdown/streamParser';
 import {listenToElement} from '../../../utils/dom/listenToElement';
@@ -13,6 +14,7 @@ import {
     CompMessageProps,
     MessageContentLoadingStatus,
 } from './message.types';
+import {createPersonaDom} from './utils/createPersonaDom';
 
 export const __ = (styleName: string) => `nluxc-text-message-${styleName}`;
 
@@ -44,8 +46,23 @@ export const renderMessage: CompRenderer<
         });
     }
 
-    // Render main HTML
+    // Render and append persona photo
+    let personaDom: HTMLElement | undefined;
+    if (props.direction === 'in' && props.botPersona) {
+        personaDom = createPersonaDom(props.botPersona);
+    } else {
+        if (props.direction === 'out' && props.userPersona) {
+            personaDom = createPersonaDom(props.userPersona);
+        }
+    }
+
+    // Render and attach persona - if provided
     const container = document.createElement('div');
+    if (personaDom) {
+        container.prepend(personaDom);
+    }
+
+    // Render main message HTML
     const classFromDirection = props.direction === 'in' ? 'received' : 'sent';
     let classFromLoadingStatus = `message-status-${props.loadingStatus}`;
     container.append(dom);
@@ -167,6 +184,17 @@ export const renderMessage: CompRenderer<
                         !loader.parentNode && container.append(loader);
                     } else {
                         loader.parentNode && loader.remove();
+                    }
+                }
+            },
+            updatePersona: (botPersona: BotPersona | undefined) => {
+                personaDom?.remove();
+                personaDom = undefined;
+
+                if (botPersona) {
+                    personaDom = createPersonaDom(botPersona);
+                    if (personaDom) {
+                        container.prepend(personaDom);
                     }
                 }
             },

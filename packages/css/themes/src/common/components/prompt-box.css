@@ -24,22 +24,22 @@
             > .spinning-loader {
                 display: none;
             }
+
+            &.nluxc-prompt-box-send-button-loading {
+                > svg {
+                    display: none;
+                }
+
+                > .spinning-loader {
+                    display: inline-block;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
         }
 
-        > .nluxc-prompt-box-send-button.nluxc-prompt-box-send-button-loading {
-            > svg {
-                display: none;
-            }
-
-            > .spinning-loader {
-                display: inline-block;
-                width: 30px;
-                height: 30px;
-            }
+        &.loading {
+            cursor: auto;
         }
-    }
-
-    .nluxc-prompt-box-container.loading {
-        cursor: auto;
     }
 }

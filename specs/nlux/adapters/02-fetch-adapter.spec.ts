@@ -1,31 +1,25 @@
-import {createAiChat, AiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import {AdapterController, createPromiseAdapterController} from '../../utils/adapters';
+import {adapterBuilder} from '../../utils/adapterBuilder';
+import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When a fetch adapter is used to generate text', () => {
-    let adapterController: AdapterController | undefined;
-    let rootElement: HTMLElement | undefined;
-    let aiChat: AiChat | undefined;
+    let adapterController: AdapterController;
+    let rootElement: HTMLElement;
+    let aiChat: AiChat;
 
     beforeEach(() => {
+        adapterController = adapterBuilder().withFetchText().create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
-
-        adapterController = createPromiseAdapterController({
-            includeFetchText: true,
-            includeStreamText: false,
-        });
     });
 
     afterEach(() => {
         aiChat?.unmount();
         rootElement?.remove();
-        aiChat = undefined;
-        rootElement = undefined;
-        adapterController = undefined;
     });
 
     it('fetchText should be called with the text from the prompt box', async () => {

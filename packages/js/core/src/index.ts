@@ -13,6 +13,12 @@ export type {ConversationOptions} from './core/options/conversationOptions';
 export type {PromptBoxOptions} from './core/options/promptBoxOptions';
 export type {LayoutOptions} from './core/options/layoutOptions';
 
+export type {
+    PersonaOptions,
+    BotPersona,
+    UserPersona,
+} from './core/options/personaOptions';
+
 export type {IObserver} from './core/bus/observer';
 export type {ExposedConfig} from './core/config';
 

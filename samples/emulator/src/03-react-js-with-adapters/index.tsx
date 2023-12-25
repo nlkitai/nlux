@@ -3,6 +3,7 @@ import {useAdapter} from '@nlux/openai-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
+import {personaOptions} from './personaOptions';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
@@ -28,6 +29,13 @@ const ExampleWrapper = () => {
         return <div>Loading...</div>;
     }
 
+    const style = {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(yellow, orange)',
+    };
+
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <span>{key}</span>
@@ -51,6 +59,7 @@ const ExampleWrapper = () => {
                         autoFocus: true,
                     }}
                     syntaxHighlighter={highlighter}
+                    personaOptions={personaOptions}
                 />
             </div>
         </div>

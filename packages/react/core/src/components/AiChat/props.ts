@@ -6,6 +6,7 @@ import {
     LayoutOptions,
     PromptBoxOptions,
 } from '@nlux/core';
+import {PersonaOptions} from './personaOptions';
 
 /**
  * Properties for the AiChat React component.
@@ -43,4 +44,9 @@ export type AiChatProps = {
      * The options to use for the prompt box.
      */
     promptBoxOptions?: PromptBoxOptions;
+
+    /**
+     * The options to use for the personaOptions.
+     */
+    personaOptions?: PersonaOptions
 };

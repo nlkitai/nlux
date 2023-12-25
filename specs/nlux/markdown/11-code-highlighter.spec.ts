@@ -1,5 +1,5 @@
-import {highlighter} from '@nlux/highlighter';
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
+import {highlighter} from '@nlux/highlighter';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Code Block Markdown Parser With Syntax Highlighter', () => {
@@ -16,7 +16,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
 
     it('should highlight code block with language', async () => {
         streamRenderer.next('```js\nconst a = 1;\n```');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
@@ -26,7 +26,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
 
     it('should extract language from code block and add to data attribute', async () => {
         streamRenderer.next('```js\nconst a = 1;\n```');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
@@ -41,7 +41,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         });
 
         streamRenderer.next('```js\nconst a = 1;\n```');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.querySelector('.copy-button')).toBeFalsy();
@@ -54,7 +54,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         });
 
         streamRenderer.next('```js\nconst a = 1;\n```');
-        streamRenderer.complete();
+        streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
         expect(rootElement.querySelector('.copy-button')).toBeTruthy();

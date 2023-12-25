@@ -1,3 +1,4 @@
+import {BotPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
@@ -34,6 +35,10 @@ export class CompMessage extends BaseComp<
         this.contentStatus = props.loadingStatus;
     }
 
+    public get direction() {
+        return this.props?.direction;
+    };
+
     /**
      * Called to append content to the message, when the content is provided via stream.
      * @param {string} content
@@ -53,6 +58,7 @@ export class CompMessage extends BaseComp<
             this.setContentLoadingStatus('streaming');
         }
 
+        this.content = this.content ? this.content + content : content;
         this.executeDomAction('appendContent', content);
     }
 
@@ -131,6 +137,14 @@ export class CompMessage extends BaseComp<
         }
 
         this.setContentLoadingStatus('loading-error');
+    }
+
+    public setPersona(botPersona: BotPersona | undefined) {
+        if (!this.props) {
+            throw new Error(`CompMessage: Cannot set bot persona before props are initialized!`);
+        }
+
+        this.executeDomAction('updatePersona', botPersona);
     }
 
     @CompEventListener('copy-to-clipboard-triggered')

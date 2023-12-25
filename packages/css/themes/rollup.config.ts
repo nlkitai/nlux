@@ -2,6 +2,8 @@ import {join} from 'path';
 // @ts-ignore
 import csso from 'postcss-csso';
 import postcssImport from 'postcss-import';
+// @ts-ignore
+import postcssNested from 'postcss-nested';
 import {LogLevel, RollupOptions} from 'rollup';
 import postcss from 'rollup-plugin-postcss';
 // @ts-ignore
@@ -21,7 +23,10 @@ const cssEntry = (input: string, output: string) => ({
             sourceMap: !isProduction,
             plugins: [
                 postcssImport({
-                    plugins: [csso({comments: false, restructure: false})],
+                    plugins: [
+                        postcssNested(),
+                        csso({comments: false, restructure: false}),
+                    ],
                 }),
             ],
         }),

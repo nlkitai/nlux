@@ -3,6 +3,7 @@ import {NluxProps} from '../types/props';
 import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
+import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export interface IAiChat {
@@ -26,6 +27,9 @@ export interface IAiChat {
     ): IAiChat;
     withLayoutOptions(
         layoutOptions: LayoutOptions,
+    ): IAiChat;
+    withPersonaOptions(
+        personaOptions: PersonaOptions,
     ): IAiChat;
     withPromptBoxOptions(
         promptBoxOptions: PromptBoxOptions,

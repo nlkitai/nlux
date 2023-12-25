@@ -59,9 +59,13 @@ const replacePeerDependencyVersions = (peerDependencies, nluxVersion, peerDepend
     peerDependenciesAsString = peerDependenciesAsString.replace('{versions.nlux}', nluxVersion);
 
     Object.keys(peerDependenciesVersions).forEach(peerDependency => {
+        const peerDependencyCamelCase = peerDependency.replace(/-/g, ' ').replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+            return index === 0 ? word.toLowerCase() : word.toUpperCase();
+        }).replace(/\s+/g, '');
+
         const peerDependencyVersion = peerDependenciesVersions[peerDependency];
         peerDependenciesAsString = peerDependenciesAsString.replace(
-            `{versions.peerDependencies.${peerDependency}}`,
+            `{versions.peerDependencies.${peerDependencyCamelCase}}`,
             peerDependencyVersion,
         );
     });

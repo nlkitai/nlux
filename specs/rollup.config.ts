@@ -1,3 +1,4 @@
+import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import {join} from 'path';
 import {cwd} from 'process';
@@ -26,7 +27,13 @@ const getPackageConfig: () => RollupOptions = () => {
         logLevel: 'silent',
         external: externals,
         plugins: [
-            esbuild(),
+            commonjs(),
+            esbuild({
+                jsx: 'transform',
+                jsxFactory: 'React.createElement',
+                jsxFragment: 'React.Fragment',
+                tsconfig: join(cwd(), 'tsconfig.json'),
+            }),
             nodeResolve({
                 modulePaths: [
                     join(distPath, 'dev', 'emulator', 'packages'),

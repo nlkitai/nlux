@@ -1,20 +1,22 @@
 .nluxc-root {
     .nluxc-text-message-container {
         display: flex;
-        flex-direction: column;
+        align-items: stretch;
+        justify-content: stretch;
         padding-bottom: var(--nluxc-padding-m);
 
         > .nluxc-text-message-content {
             display: flex;
             flex-direction: column;
-            width: 80%;
+            flex-grow: 1;
+            flex-shrink: initial;
 
             min-width: 80px;
             min-height: 20px;
             padding: var(--nluxc-padding) var(--nluxc-padding-m);
             text-align: left;
-            border-width: var(--nluxc-border-width);
 
+            border-width: var(--nluxc-border-width);
             border-style: solid;
             border-radius: var(--nluxc-border-radius-m);
 
@@ -74,121 +76,172 @@
             background-color: var(--nluxc-message-received-background-color);
         }
 
-        > .nluxc-text-message-content button.copy-button:hover * {
-            opacity: 0.5;
-        }
-
-        > .nluxc-text-message-content button.copy-button.clicked,
-        > .nluxc-text-message-content button.copy-button.clicked:hover {
-            color: var(--nluxc-message-received-background-color);
-            border-color: var(--nlux-code-block-background-color);
-            background-color: var(--nlux-code-block-background-color);
-        }
-
-        > .nluxc-text-message-content button.copy-button.clicked:hover * {
-            opacity: 1;
-        }
-
-        > .nluxc-text-message-content code {
-            font-family: var(--nluxc-mono-font-family);
-            font-size: var(--nluxc-font-size-s);
-            padding: var(--nluxc-padding-xs) var(--nluxc-padding-s);
-
-            color: var(--nlux-inline-code-text-color);
-            border-radius: var(--nluxc-border-radius-xs);
-            background-color: var(--nlux-inline-code-background-color);
-        }
-
-        > .nluxc-text-message-content strong {
-            font-weight: bold;
-        }
-    }
-
-    .nluxc-text-message-container.message-status-loading,
-    .nluxc-text-message-container.message-status-connecting {
         > .nluxc-text-message-content {
-            display: none;
+            button.copy-button {
+                &.clicked,
+                &.clicked:hover {
+                    color: var(--nluxc-message-received-background-color);
+                    border-color: var(--nlux-code-block-background-color);
+                    background-color: var(--nlux-code-block-background-color);
+                }
+
+                &:hover * {
+                    opacity: 0.5;
+                }
+
+                &.clicked:hover * {
+                    opacity: 1;
+                }
+            }
+
+            code {
+                font-family: var(--nluxc-mono-font-family);
+                font-size: var(--nluxc-font-size-s);
+                padding: var(--nluxc-padding-xs) var(--nluxc-padding-s);
+
+                color: var(--nlux-inline-code-text-color);
+                border-radius: var(--nluxc-border-radius-xs);
+                background-color: var(--nlux-inline-code-background-color);
+            }
+
+            strong {
+                font-weight: bold;
+            }
         }
 
-        > .nluxc-text-message-loader {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 40px;
+        > .nluxc-text-message-persona {
+            flex-grow: 0;
+            flex-shrink: 0;
 
-            padding: 0 var(--nluxc-padding-m);
-            color: var(--nluxc-message-received-text-color);
+            > .nluxc-text-message-persona-photo-container {
+                position: relative;
+                overflow: hidden;
+                width: 40px;
+                height: 40px;
 
-            border-width: var(--nluxc-border-width);
-            border-style: solid;
+                border-width: 0;
+                border-radius: 50%;
 
-            border-color: var(--nluxc-message-received-border-color);
-            border-radius: var(--nluxc-border-radius-m);
-            outline: none;
+                /* We use !important because those styles could apply to user-provided elements
+                 (when the user provides JSX for persona profile picture) and we want to force full
+                 stretch of the parent element of the JSX ! */
 
-            background-color: var(--nluxc-message-received-background-color);
-            gap: var(--nluxc-flex-gap);
+                > * {
+                    position: absolute !important;
+                    top: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    left: 0 !important;
+                }
 
-            > .spinning-loader-container {
-                width: 17px;
+                > .nluxc-text-message-persona-letter {
+                    font-size: var(--nluxc-font-size-l);
+                    z-index: 888888;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 5px;
+                    border-radius: 50%;
+                }
 
-                > .spinning-loader {
-                    width: 15px;
-                    height: 15px;
-                    margin-top: 4px;
+                > .nluxc-text-message-persona-rendered-photo {
+                    z-index: 999999;
+                    background-position: center center;
+                    background-size: cover;
                 }
             }
         }
-    }
 
-    .nluxc-text-message-container:not(.message-status-loading, .message-status-connecting) {
-        > .nluxc-text-message-content {
-            display: flex;
+        &.message-status-loading,
+        &.message-status-connecting {
+            > .nluxc-text-message-content {
+                display: none;
+            }
+
+            > .nluxc-text-message-loader {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 40px;
+
+                padding: 0 var(--nluxc-padding-m);
+                color: var(--nluxc-message-received-text-color);
+
+                border-width: var(--nluxc-border-width);
+                border-style: solid;
+
+                border-color: var(--nluxc-message-received-border-color);
+                border-radius: var(--nluxc-border-radius-m);
+                outline: none;
+
+                background-color: var(--nluxc-message-received-background-color);
+                gap: var(--nluxc-flex-gap);
+
+                > .spinning-loader-container {
+                    width: 17px;
+
+                    > .spinning-loader {
+                        width: 15px;
+                        height: 15px;
+                        margin-top: 4px;
+                    }
+                }
+            }
         }
 
-        > .nluxc-text-message-loader {
-            display: none;
-        }
-    }
+        &:not(.message-status-loading, .message-status-connecting) {
+            > .nluxc-text-message-content {
+                display: flex;
+            }
 
-    .nluxc-text-message-container.nluxc-text-message-received {
-        align-items: flex-start;
-
-        > .nluxc-text-message-content,
-        > .nluxc-text-message-loader {
-            margin-left: var(--nluxc-padding-s);
-            color: var(--nluxc-message-received-text-color);
-            border-color: var(--nluxc-message-received-border-color);
-            background-color: var(--nluxc-message-received-background-color);
+            > .nluxc-text-message-loader {
+                display: none;
+            }
         }
 
-        > .nluxc-text-message-content:focus,
-        > .nluxc-text-message-content:active,
-        > .nluxc-text-message-loader:focus,
-        > .nluxc-text-message-loader:active {
-            color: var(--nluxc-message-received-active-text-color);
-            border-color: var(--nluxc-message-received-active-border-color);
-            background-color: var(--nluxc-message-received-active-background-color);
-            box-shadow: var(--nluxc-box-shadow);
+        &.nluxc-text-message-received {
+            flex-direction: row;
+            padding-right: 65px;
+
+            > .nluxc-text-message-content,
+            > .nluxc-text-message-loader,
+            > .nluxc-text-message-persona > .nluxc-text-message-persona-photo-container {
+                margin-left: var(--nluxc-padding-s);
+                color: var(--nluxc-message-received-text-color);
+                border-color: var(--nluxc-message-received-border-color);
+                background-color: var(--nluxc-message-received-background-color);
+            }
+
+            > .nluxc-text-message-content:focus,
+            > .nluxc-text-message-content:active,
+            > .nluxc-text-message-loader:focus,
+            > .nluxc-text-message-loader:active {
+                color: var(--nluxc-message-received-active-text-color);
+                border-color: var(--nluxc-message-received-active-border-color);
+                background-color: var(--nluxc-message-received-active-background-color);
+                box-shadow: var(--nluxc-box-shadow);
+            }
         }
-    }
 
-    .nluxc-text-message-container.nluxc-text-message-sent {
-        align-items: flex-end;
+        &.nluxc-text-message-sent {
+            flex-direction: row-reverse;
+            padding-left: 65px;
 
-        > .nluxc-text-message-content {
-            margin-right: var(--nluxc-padding-s);
-            color: var(--nluxc-message-sent-text-color);
-            border-color: var(--nluxc-message-sent-border-color);
-            background-color: var(--nluxc-message-sent-background-color);
-        }
+            > .nluxc-text-message-content,
+            > .nluxc-text-message-persona > .nluxc-text-message-persona-photo-container {
+                margin-right: var(--nluxc-padding-s);
+                color: var(--nluxc-message-sent-text-color);
+                border-color: var(--nluxc-message-sent-border-color);
+                background-color: var(--nluxc-message-sent-background-color);
+            }
 
-        > .nluxc-text-message-content:focus,
-        > .nluxc-text-message-content:active {
-            color: var(--nluxc-message-sent-active-text-color);
-            border-color: var(--nluxc-message-sent-active-border-color);
-            background-color: var(--nluxc-message-sent-active-background-color);
-            box-shadow: var(--nluxc-box-shadow);
+            > .nluxc-text-message-content:focus,
+            > .nluxc-text-message-content:active {
+                color: var(--nluxc-message-sent-active-text-color);
+                border-color: var(--nluxc-message-sent-active-border-color);
+                background-color: var(--nluxc-message-sent-active-background-color);
+                box-shadow: var(--nluxc-box-shadow);
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
+import {UserPersona} from '@nlux/core';
 import {NluxRenderingError} from '../../../core/error';
+import {BotPersona} from '../../../core/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {render} from '../../../x/render';
@@ -10,9 +12,10 @@ import {
     CompConversationEvents,
     CompConversationProps,
 } from './conversation.types';
+import {createEmptyWelcomeMessage, createWelcomeMessage} from './utils/createWelcomeMessage';
 import {messagesScrollHandlerFactory} from './utils/messagesScrollHandler';
 
-const __ = (styleName: string) => `nluxc-conversation-${styleName}`;
+export const __ = (styleName: string) => `nluxc-conversation-${styleName}`;
 
 const html = () => `` +
     `<div class="${__('messages-container')}"></div>` +
@@ -23,7 +26,16 @@ export const renderConversation: CompRenderer<
 > = ({
     appendToRoot,
     compEvent,
+    props,
 }) => {
+    const renderingContext: {
+        botPersona: BotPersona | undefined;
+        welcomeMessageContainer: HTMLElement | undefined;
+    } = {
+        botPersona: props.botPersona,
+        welcomeMessageContainer: undefined,
+    };
+
     const messagesContainer = render(html());
     if (!(messagesContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
@@ -45,6 +57,20 @@ export const renderConversation: CompRenderer<
 
     appendToRoot(messagesContainer);
 
+    //
+    // Create welcome message container
+    // and append it to the root if personaOptions are provided
+    //
+    if (props.botPersona) {
+        const bot = props.botPersona;
+        renderingContext.welcomeMessageContainer = createWelcomeMessage(bot);
+        if (renderingContext.welcomeMessageContainer) {
+            messagesContainer.append(renderingContext.welcomeMessageContainer);
+        }
+    } else {
+        renderingContext.welcomeMessageContainer = createEmptyWelcomeMessage();
+    }
+
     return {
         elements: {
             messagesContainer,
@@ -59,6 +85,49 @@ export const renderConversation: CompRenderer<
                     top: 50000,
                     behavior: 'instant',
                 });
+            },
+            removeWelcomeMessage: () => {
+                if (renderingContext.welcomeMessageContainer) {
+                    renderingContext.welcomeMessageContainer.remove();
+                    renderingContext.welcomeMessageContainer = undefined;
+                }
+            },
+            resetWelcomeMessage: () => {
+                if (renderingContext.welcomeMessageContainer) {
+                    renderingContext.welcomeMessageContainer.remove();
+                    renderingContext.welcomeMessageContainer = undefined;
+                }
+
+                renderingContext.welcomeMessageContainer = renderingContext.botPersona
+                    ? createWelcomeMessage(renderingContext.botPersona)
+                    : createEmptyWelcomeMessage();
+
+                if (renderingContext.welcomeMessageContainer) {
+                    messagesContainer.append(renderingContext.welcomeMessageContainer);
+                }
+            },
+            updateBotPersona: (newValue: BotPersona | undefined) => {
+                renderingContext.botPersona = newValue;
+
+                // If the welcome personas container is rendered, remove it and re-render it
+                // This is different from resetWelcomeMessage, which removes the welcome message container
+                // and ALWAYS re-renders it. Here we only re-render/update the welcome message container if it is
+                // already rendered.
+                if (renderingContext.welcomeMessageContainer) {
+                    renderingContext.welcomeMessageContainer.remove();
+                    renderingContext.welcomeMessageContainer = undefined;
+
+                    renderingContext.welcomeMessageContainer = renderingContext.botPersona
+                        ? createWelcomeMessage(renderingContext.botPersona)
+                        : createEmptyWelcomeMessage();
+
+                    if (renderingContext.welcomeMessageContainer) {
+                        messagesContainer.append(renderingContext.welcomeMessageContainer);
+                    }
+                }
+            },
+            updateUserPersona: (newValue: UserPersona | undefined) => {
+                // TODO - Update messages where user persona is used
             },
         },
         onDestroy: () => {

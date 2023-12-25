@@ -9,15 +9,17 @@ import {warn} from '../../x/debug';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {NluxRenderingError} from '../error';
-import {HighlighterExtension} from '../highlighter/highlighter';
 import {ConversationOptions} from '../options/conversationOptions';
 import {LayoutOptions} from '../options/layoutOptions';
+import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<InboundPayload, OutboundPayload> {
     private static readonly defaultThemeId = 'nova';
+
+    private readonly __context: NluxContext;
+
     private chatRoom: CompChatRoom | null = null;
-    private readonly context: NluxContext;
     private exceptionsBox: CompExceptionsBox | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
@@ -28,8 +30,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private theClassName: string | null = null;
     private theConversationOptions: Readonly<ConversationOptions> = {};
     private theLayoutOptions: Readonly<LayoutOptions> = {};
+    private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
-    private theSyntaxHighlighter: HighlighterExtension | null = null;
     private theThemeId: string;
 
     constructor(
@@ -45,7 +47,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             });
         }
 
-        this.context = context;
+        this.__context = context;
+
         this.rootElement = rootElement;
         this.rootElementInitialClassName = rootElement.className;
         this.rootCompId = rootCompId;
@@ -53,11 +56,15 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         this.theClassName = props?.className ?? null;
         this.theThemeId = props?.themeId ?? NluxRenderer.defaultThemeId;
-        this.theSyntaxHighlighter = props?.syntaxHighlighter ?? null;
 
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
+        this.thePersonasOptions = props?.personaOptions ?? {};
+    }
+
+    get context() {
+        return this.__context;
     }
 
     public get mounted() {
@@ -134,6 +141,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             //
             rootComp = comp(CompChatRoom).withContext(this.context).withProps<CompChatRoomProps>({
                 visible: true,
+                botPersona: this.thePersonasOptions?.bot ?? undefined,
+                userPersona: this.thePersonasOptions?.user ?? undefined,
                 scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating ?? undefined,
                 containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
                 containerHeight: this.theLayoutOptions?.height || undefined,
@@ -246,11 +255,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         this.isMounted = false;
     }
 
-    public updateProps(props: NluxProps | undefined) {
-        if (!props) {
-            return;
-        }
-
+    public updateProps(props: Partial<NluxProps>) {
         if (props.hasOwnProperty('className')) {
             const newClassName = props.className || undefined;
             if (newClassName) {
@@ -266,6 +271,12 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                     this.theClassName = null;
                 }
             }
+        }
+
+        if (props.hasOwnProperty('adapter') && props.adapter) {
+            this.context.update({
+                adapter: props.adapter,
+            });
         }
 
         if (props.hasOwnProperty('layoutOptions')) {
@@ -307,6 +318,30 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         if (props.hasOwnProperty('syntaxHighlighter')) {
             // TODO - Handle syntax highlighter change
+        }
+
+        if (props.hasOwnProperty('personaOptions')) {
+            const changedPersonaProps: Partial<CompChatRoomProps> = {};
+            if (
+                props.personaOptions?.hasOwnProperty('bot') &&
+                props.personaOptions.bot !== this.thePersonasOptions?.bot
+            ) {
+                changedPersonaProps.botPersona = props.personaOptions?.bot ?? undefined;
+            }
+
+            if (
+                props.personaOptions?.hasOwnProperty('user') &&
+                props.personaOptions?.user !== this.thePersonasOptions?.user
+            ) {
+                changedPersonaProps.userPersona = props.personaOptions?.user ?? undefined;
+            }
+
+            this.thePersonasOptions = {
+                ...this.thePersonasOptions,
+                ...props.personaOptions,
+            };
+
+            this.chatRoom?.setProps(changedPersonaProps);
         }
     }
 

@@ -1,7 +1,8 @@
+import {BotPersona, UserPersona} from '@nlux/core';
 import {comp} from '../../../../core/comp/comp';
 import {NluxContext} from '../../../../types/context';
 import {CompMessage} from '../../message/message.model';
-import {CompMessageProps, MessageContentType} from '../../message/message.types';
+import {CommonMessageProps, CompMessageProps, MessageContentType} from '../../message/message.types';
 
 export const textMessage = (
     context: NluxContext,
@@ -10,19 +11,33 @@ export const textMessage = (
     contentType: MessageContentType,
     content?: string,
     createdAt?: Date,
+    botPersona?: BotPersona,
+    userPersona?: UserPersona,
 ): CompMessage => {
     const defaultContentStatus = contentType === 'stream' ? 'connecting' :
         contentType === 'promise' ? 'loading' : 'loaded';
-    return comp(CompMessage).withContext(context).withProps<CompMessageProps>({
+
+    const commonProps: CommonMessageProps = {
         format: 'text',
         loadingStatus: defaultContentStatus,
-        direction,
         contentType,
         content,
         createdAt: createdAt ?? new Date(),
         trackResize: trackResizeAndDomChange,
         trackDomChange: trackResizeAndDomChange,
-    }).create();
+    };
+
+    const props: CompMessageProps = direction === 'in' ? {
+        ...commonProps,
+        direction,
+        botPersona: botPersona,
+    } : {
+        ...commonProps,
+        direction,
+        userPersona: userPersona,
+    };
+
+    return comp(CompMessage).withContext(context).withProps<CompMessageProps>(props).create();
 };
 
 export const messageInList = 'message-container-in-list';
