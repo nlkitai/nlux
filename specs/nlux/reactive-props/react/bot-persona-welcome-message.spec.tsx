@@ -1,8 +1,7 @@
 import {AiChat, PersonaOptions} from '@nlux/react';
-import {render} from '@testing-library/react';
+import {act, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-// @ts-ignore
 import React from 'react';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -57,7 +56,7 @@ describe('When the personaOptions is used with a React component', () => {
                 expect(queries.welcomeMessage()).toHaveTextContent('Mr Bot');
                 expect(queries.welcomeMessage()).toHaveTextContent('AI Assistant');
 
-                rerender(<AiChat adapter={adapterController.adapter}/>);
+                await act(async () => rerender(<AiChat adapter={adapterController.adapter}/>));
                 await waitForRenderCycle();
 
                 expect(queries.promptBoxTextInput()).toBeInTheDocument();
@@ -81,13 +80,15 @@ describe('When the personaOptions is used with a React component', () => {
             expect(queries.promptBoxTextInput()).toBeDefined();
             expect(queries.welcomeMessage()).toBeDefined();
 
-            rerender(<AiChat adapter={adapterController.adapter}/>);
+            await act(async () => rerender(<AiChat adapter={adapterController.adapter}/>));
             await waitForRenderCycle();
 
             expect(queries.promptBoxTextInput()).toBeInTheDocument();
             expect(queries.welcomeMessage()).not.toBeInTheDocument();
 
-            rerender(<AiChat adapter={adapterController.adapter} personaOptions={personasWithBot}/>);
+            await act(async () => rerender(
+                <AiChat adapter={adapterController.adapter} personaOptions={personasWithBot}/>,
+            ));
             await waitForRenderCycle();
 
             expect(queries.promptBoxTextInput()).toBeInTheDocument();
@@ -135,7 +136,10 @@ describe('When the personaOptions is used with a React component', () => {
             expect(queries.conversationMessagesContainer()).toHaveTextContent('Hello');
             expect(queries.welcomeMessage()).not.toBeInTheDocument();
 
-            rerender(<AiChat adapter={adapterController.adapter} personaOptions={secondPersonaWithBot}/>);
+            await act(async () => rerender(
+                <AiChat adapter={adapterController.adapter} personaOptions={secondPersonaWithBot}/>,
+            ));
+
             await waitForRenderCycle();
 
             expect(queries.promptBoxTextInput()).toBeInTheDocument();

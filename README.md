@@ -14,6 +14,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Build AI Chat Interfaces In Minutes** - High quality conversational AI interfaces with just a few lines of code.
 * **React Components & Hooks** - `<AiChat />` for UI and `useAdapter` hook for easy integration.
 * **Flexible LLM Adapters** - `ChatGPT` and `HuggingFace`, and an API to **Create Your Own Adapter** for any LLM.
+* **Bot and User Personas** - Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
 * **Personalized Conversation** - Provide context using system messages, and instruct LLM how to behave.

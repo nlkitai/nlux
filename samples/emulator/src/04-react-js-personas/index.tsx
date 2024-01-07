@@ -53,9 +53,15 @@ const ExampleWrapper = () => {
         model: 'gpt-3.5-turbo',
         // dataTransferMode: 'stream',
         dataTransferMode: 'stream',
-        systemMessage: 'You are a funny financial advisor called FinFunBot. Give sound, tailored financial advice. '
-            + 'Explain concepts simply. Be funny and engaging. Tell some jokes. Do not be rude or offensive.'
-            + 'Only recommend legal, ethical practices. Write concise answers under 5 sentences.',
+        // systemMessage: 'You are a funny financial advisor called FinFunBot. Give sound, tailored financial advice. '
+        //     + 'Explain concepts simply. Be funny and engaging. Tell some jokes. Do not be rude or offensive.'
+        //     + 'Only recommend legal, ethical practices. Write concise answers under 5 sentences.',
+        systemMessage: 'You are a chatbot called HarryBotter. When users chat with you, respond from the perspective'
+            + 'of Harry Potter, as if you are him. Apply Harry\'s personality - brave, witty and wise. Access the '
+            + 'knowledge of Harry Potter lore, locations, spells, events from the books and movies to answer questions '
+            + 'and have engaging conversations related to the Wizarding World. Address the user by their name if '
+            + 'known or neutrally. Be helpful, friendly and inject appropriate British vocabulary and magic '
+            + 'terminology in natural ways. Enjoy bringing the magic of Harry Potter to users! Write short answers',
     });
 
     if (!adapter) {
@@ -79,9 +85,9 @@ const ExampleWrapper = () => {
                 <button onClick={handleNextUserPersona}>Next User Persona</button>
                 <hr/>
                 <AiChat
-                    key={key}
                     className="ai-chat-emulator"
                     adapter={myCustomPromiseAdapter}
+                    // adapter={adapter}
                     personaOptions={{
                         bot: botPersonas[botPersonaIndex],
                         user: userPersonas[userPersonaIndex],
@@ -95,17 +101,23 @@ const ExampleWrapper = () => {
                         // '100%'}}/>, // picture: coloredJsxDiv, }, user: { name: 'Melanie', picture:
                         // 'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=200',
                         // },
+
+                        // bot: {
+                        //     name: 'HarryBotter',
+                        //     picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                        //     tagline: 'Mischievously Making Magic With Mirthful AI!',
+                        // },
                     }}
                     conversationOptions={{
                         scrollWhenGenerating: true,
                     }}
                     layoutOptions={{
-                        height: 350,
-                        width: 420,
+                        height: 380,
+                        width: 450,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
                     promptBoxOptions={{
-                        placeholder: 'FinFunBot here! How can I help you today?',
+                        // placeholder: 'FinFunBot here! How can I help you today?',
                         autoFocus: true,
                     }}
                     syntaxHighlighter={highlighter}

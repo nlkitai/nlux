@@ -2,12 +2,16 @@ import {AiChat} from '@nlux/react';
 import {act, render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
-// @ts-ignore
 import React from 'react';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {queries} from '../../../utils/selectors';
-import {delayBeforeSendingResponse, waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
+import {
+    delayBeforeSendingResponse,
+    shortDelayBeforeSendingResponse,
+    waitForMilliseconds,
+    waitForRenderCycle,
+} from '../../../utils/wait';
 
 describe('When the adapter is used with a React component', () => {
     let adapterController: AdapterController;
@@ -61,28 +65,27 @@ describe('When the adapter is used with a React component', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await act(() => userEvent.type(textInput, 'Hello'));
+        await userEvent.type(textInput, 'Hello');
         await waitForRenderCycle();
 
-        await act(() => userEvent.click(sendButton));
+        await userEvent.click(sendButton);
         await waitForMilliseconds(delayBeforeSendingResponse / 2);
 
         adapterController.resolve('Yo!');
-        await waitForMilliseconds(delayBeforeSendingResponse);
+        await waitForMilliseconds(shortDelayBeforeSendingResponse);
 
         expect(queries.conversationMessagesContainer()).toHaveTextContent('Yo!');
         expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(1);
         expect(adapterController2.fetchTextMock).toHaveBeenCalledTimes(0);
 
         // Update the adapter
-        act(() => rerender(<AiChat adapter={adapterController2.adapter}/>));
-
+        await act(async () => rerender(<AiChat adapter={adapterController2.adapter}/>));
         await waitForRenderCycle();
 
-        await act(() => userEvent.type(textInput, 'Hello2'));
+        await userEvent.type(textInput, 'Hello2');
         await waitForRenderCycle();
 
-        await act(() => userEvent.click(sendButton));
+        await userEvent.click(sendButton);
         await waitForMilliseconds(delayBeforeSendingResponse / 2);
 
         adapterController2.resolve('Yo2!');

@@ -1,6 +1,7 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 import {createAdapter} from '@nlux/openai';
+import {personaOptions} from './personaOptions';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
@@ -42,7 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .withPromptBoxOptions({
             placeholder: 'How can I help you today?',
             autoFocus: true,
-        });
+        })
+        .withPersonaOptions(personaOptions);
 
     aiChat.mount(rootElement);
 });

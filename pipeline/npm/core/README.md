@@ -10,6 +10,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 * **Build AI Chat Interfaces In Minutes** - High quality conversational AI interfaces with just a few lines of code.
 * **Flexible LLM Adapters** - `ChatGPT` `HuggingFace` and an API to **Create Your Own Adapter** for any LLM.
+* **Bot and User Personas** - Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
 * **Personalized Conversation** - Provide context using system message, and instruct the LLM how to behave.
@@ -79,7 +80,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.8.13/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.9.0/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

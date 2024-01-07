@@ -1,7 +1,6 @@
 import {AiChat, PersonaOptions} from '@nlux/react';
-import {render} from '@testing-library/react';
+import {act, render} from '@testing-library/react';
 import '@testing-library/jest-dom';
-// @ts-ignore
 import React from 'react';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -101,7 +100,9 @@ describe('When the personaOptions.bot is used with conversation', () => {
         expect(queries.receivedMessagePersonaPhotoLetter()).toHaveTextContent('M');
         expect(queries.receivedMessagePersonaPhotoLetter()).not.toHaveTextContent('N');
 
-        rerender(<AiChat adapter={adapterController.adapter} personaOptions={newPersonaOptions}/>);
+        await act(async () => rerender(
+            <AiChat adapter={adapterController.adapter} personaOptions={newPersonaOptions}/>,
+        ));
 
         await waitForRenderCycle();
         await waitForMilliseconds(delayBeforeSendingResponse);
@@ -134,7 +135,9 @@ describe('When the personaOptions.bot is used with conversation', () => {
             },
         };
 
-        rerender(<AiChat adapter={adapterController.adapter} personaOptions={newPersonaOptions}/>);
+        await act(async () => rerender(
+            <AiChat adapter={adapterController.adapter} personaOptions={newPersonaOptions}/>,
+        ));
         await waitForMilliseconds(delayBeforeSendingResponse);
 
         expect(document.querySelectorAll(newPersonasPhotoQuery)).toHaveLength(1);
