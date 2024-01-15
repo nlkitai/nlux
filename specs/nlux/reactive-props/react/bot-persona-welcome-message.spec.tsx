@@ -1,12 +1,12 @@
 import {AiChat, PersonaOptions} from '@nlux/react';
 import {act, render} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import React from 'react';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {queries} from '../../../utils/selectors';
-import {delayBeforeSendingResponse, waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
+import {submit, type} from '../../../utils/userInteractions';
+import {waitForRenderCycle} from '../../../utils/wait';
 
 describe('When the personaOptions is used with a React component', () => {
     let adapterController: AdapterController;
@@ -121,14 +121,8 @@ describe('When the personaOptions is used with a React component', () => {
             expect(queries.promptBoxTextInput()).toBeDefined();
             expect(queries.welcomeMessage()).toBeDefined();
 
-            const textInput: any = queries.promptBoxTextInput() as any;
-            const sendButton: any = queries.promptBoxSendButton() as any;
-
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
-            await waitForMilliseconds(delayBeforeSendingResponse / 2);
+            await type('Hello');
+            await submit();
 
             adapterController.resolve('Hello');
             await waitForRenderCycle();

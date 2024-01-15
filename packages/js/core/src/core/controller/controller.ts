@@ -1,14 +1,18 @@
 import {ExceptionId, NluxExceptions} from '../../exceptions/exceptions';
-import {createContext, NluxContext} from '../../types/context';
+import {NluxContext} from '../../types/context';
+import {EventCallback, EventName} from '../../types/event';
 import {NluxProps} from '../../types/props';
 import {warn} from '../../x/debug';
 import {uid} from '../../x/uid';
+import {createContext} from '../context';
+import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
 
 export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
+    private readonly eventManager = new EventManager();
     private readonly nluxInstanceId = uid();
-    private props: NluxProps;
+    private readonly props: NluxProps;
 
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
@@ -23,6 +27,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
         this.renderer.renderEx(exception.type, exception.message);
     };
+
     private renderer: NluxRenderer<InboundPayload, OutboundPayload> | null = null;
     private readonly rootCompId: string;
     private readonly rootElement: HTMLElement;
@@ -58,7 +63,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
             exception: this.renderException,
             adapter: this.props.adapter,
             syntaxHighlighter: this.props.syntaxHighlighter,
-        });
+        }, this.eventManager.emit);
 
         this.renderer = new NluxRenderer(
             newContext,
@@ -68,6 +73,22 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
         );
 
         this.renderer.mount();
+    }
+
+    public on(event: EventName, callback: EventCallback) {
+        this.eventManager.on(event, callback);
+    }
+
+    removeAllEventListeners(eventName: EventName) {
+        this.eventManager.removeAllEventListeners(eventName);
+    }
+
+    removeAllEventListenersForAllEvent() {
+        this.eventManager.removeAllEventListenersForAllEvent();
+    }
+
+    removeEventListener(event: EventName, callback: EventCallback) {
+        this.eventManager.removeEventListener(event, callback);
     }
 
     public show() {
@@ -89,5 +110,9 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
     public updateProps(props: Partial<NluxProps>) {
         this.renderer?.updateProps(props);
+        if (props.events) {
+            this.props.events = props.events;
+            this.eventManager.updateEventListeners(props.events);
+        }
     }
 }

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the user persona is set', () => {
@@ -39,8 +40,7 @@ describe('When the user persona is set', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
+        await type('Hello LLM');
 
         expect(textInput.value).toBe('Hello LLM');
         expect(sendButton).not.toBeDisabled();
@@ -67,16 +67,10 @@ describe('When the user persona is set', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
+        await type('Hello LLM');
+        await submit();
 
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
         await waitForMilliseconds(100);
-
         expect(queries.sentMessagePersonaRenderedPhoto()).toHaveAttribute(
             'style',
             'background-image: url(https://user-image-url);',
@@ -106,14 +100,9 @@ describe('When the user persona is set', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
+        await type('Hello LLM');
+        await submit();
 
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
         await waitForMilliseconds(100);
 
         expect(queries.sentMessagePersonaContainer()).toHaveTextContent('User Image');

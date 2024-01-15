@@ -120,6 +120,46 @@ describe('When user expects a message to be generated', () => {
 
                 expect(queries.receivedMessageContainer()).not.toBeInTheDocument();
             });
+
+            it('The user should be able to send a new prompt', async () => {
+                aiChat = createAiChat().withAdapter(adapterController.adapter);
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                const textInput: any = queries.promptBoxTextInput();
+                const sendButton: any = queries.promptBoxSendButton();
+
+                await userEvent.type(textInput, 'Hi');
+                await waitForRenderCycle();
+
+                await userEvent.click(sendButton);
+                await waitForRenderCycle();
+                await waitForMilliseconds(delayBeforeCheckingDom);
+
+                expect(queries.receivedMessageContainer()).toHaveClass('message-status-loading');
+
+                adapterController.reject('Error!');
+                await waitForRenderCycle();
+                await waitForMilliseconds(delayBeforeCheckingDom);
+
+                expect(queries.receivedMessageContainer()).not.toBeInTheDocument();
+
+                await userEvent.type(textInput, 'Hi');
+                await waitForRenderCycle();
+
+                await userEvent.click(sendButton);
+                await waitForRenderCycle();
+                await waitForMilliseconds(delayBeforeCheckingDom);
+
+                expect(queries.receivedMessageContainer()).toHaveClass('message-status-loading');
+
+                adapterController.resolve('Hello back!');
+                await waitForRenderCycle();
+                await waitForMdStreamToComplete(20);
+
+                expect(queries.receivedMessageContainer()).toHaveClass('message-status-loaded');
+                expect(queries.receivedMessageContainer()).toHaveTextContent('Hello back!');
+            });
         });
     });
 

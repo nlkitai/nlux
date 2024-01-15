@@ -1,9 +1,9 @@
 import {AiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the create a AiChat box', () => {
@@ -33,17 +33,13 @@ describe('When the create a AiChat box', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput();
-            const sendButton: any = queries.promptBoxSendButton();
             const messagesContainer = queries.conversationMessagesContainer();
 
-            await userEvent.type(textInput, 'Hello LLM!');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
+            await type('Hello LLM');
+            await submit();
             await waitForMdStreamToComplete();
 
-            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
+            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM');
 
             adapterController.resolve('Hi\n\n\n\n\nLLM!');
             await waitForMdStreamToComplete(50);
@@ -63,23 +59,17 @@ describe('When the create a AiChat box', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput();
-            const sendButton: any = queries.promptBoxSendButton();
-            const messagesContainer = queries.conversationMessagesContainer();
-
-            await userEvent.type(textInput, 'Hello LLM!');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
+            await type('Hello LLM');
+            await submit();
             await waitForMdStreamToComplete();
 
-            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
+            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM');
 
-            adapterController.resolve('Hi LLM!');
+            adapterController.resolve('Hi LLM');
             await waitForMdStreamToComplete(50);
 
             const scrollToParams = {behavior: 'instant', top: 50000};
-            expect(messagesContainer?.scrollTo).toHaveBeenCalledWith(scrollToParams);
+            expect(queries.conversationMessagesContainer()?.scrollTo).toHaveBeenCalledWith(scrollToParams);
         });
     });
 
@@ -95,20 +85,16 @@ describe('When the create a AiChat box', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput();
-            const sendButton: any = queries.promptBoxSendButton();
-            const messagesContainer = queries.conversationMessagesContainer();
-
-            await userEvent.type(textInput, 'Hello LLM!');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
+            await type('Hello LLM');
+            await submit();
             await waitForMdStreamToComplete();
 
-            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
+            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM');
 
+            const messagesContainer = queries.conversationMessagesContainer();
             const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
-            adapterController.next('Hi LLM!');
+
+            adapterController.next('Hi LLM');
             await waitForMdStreamToComplete(50);
 
             const timesScrollToBottomCalledAfterNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
@@ -126,20 +112,16 @@ describe('When the create a AiChat box', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput();
-            const sendButton: any = queries.promptBoxSendButton();
             const messagesContainer = queries.conversationMessagesContainer();
 
-            await userEvent.type(textInput, 'Hello LLM!');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
+            await type('Hello LLM');
+            await submit();
             await waitForMdStreamToComplete();
 
-            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM!');
+            expect(queries.conversationMessagesContainer()).toContainHTML('Hello LLM');
 
             const timesScrollToBottomCalledBeforeNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;
-            adapterController.next('Hi LLM!');
+            adapterController.next('Hi LLM');
             await waitForMdStreamToComplete(50);
 
             const timesScrollToBottomCalledAfterNextChunk = (messagesContainer?.scrollTo as any)?.mock.calls.length;

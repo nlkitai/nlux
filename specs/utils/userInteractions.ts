@@ -5,7 +5,7 @@ import {waitForRenderCycle} from './wait';
 export const type = async (text: string) => {
     await waitForRenderCycle();
     const textInput = queries.promptBoxTextInput() as Element;
-    await userEvent.type(textInput, 'Hello');
+    await userEvent.type(textInput, text);
     await waitForRenderCycle();
 };
 

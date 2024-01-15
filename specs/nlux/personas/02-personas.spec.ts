@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the user provides personaOptions', () => {
@@ -43,8 +44,7 @@ describe('When the user provides personaOptions', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
+        await type('Hello LLM');
 
         expect(textInput.value).toBe('Hello LLM');
         expect(sendButton).not.toBeDisabled();
@@ -82,17 +82,8 @@ describe('When no personaOptions is provided', () => {
 
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        expect(textInput.value).toBe('Hello LLM');
-        expect(sendButton).not.toBeDisabled();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello LLM');
+        await submit();
         await waitForMilliseconds(100);
 
         expect(queries.sentMessagePersonaContainer()).not.toBeInTheDocument();

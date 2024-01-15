@@ -12,7 +12,7 @@ export const createAdapterController = ({
     let fetchTextMock = jest.fn();
     let streamTextMock = jest.fn();
 
-    const fetchText = (message: string) => {
+    const createNewFetchTextMock = () => (message: string) => {
         lastMessageSent = message;
         fetchTextMock(message);
 
@@ -22,7 +22,7 @@ export const createAdapterController = ({
         });
     };
 
-    const streamText = (message: string, observer: StreamingAdapterObserver) => {
+    const createNewStreamTextMock = () => (message: string, observer: StreamingAdapterObserver) => {
         lastMessageSent = message;
         streamTextObserver = observer;
         streamTextMock(message, observer);
@@ -34,8 +34,8 @@ export const createAdapterController = ({
     };
 
     const adapter: Adapter = {
-        fetchText: includeFetchText ? fetchText : undefined,
-        streamText: includeStreamText ? streamText : undefined,
+        fetchText: includeFetchText ? createNewFetchTextMock() : undefined,
+        streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
 
     return Object.freeze({
@@ -45,18 +45,30 @@ export const createAdapterController = ({
         streamTextMock,
         resolve: (message: string) => {
             resolvePromise && resolvePromise(message);
+            if (adapter.fetchText) {
+                adapter.fetchText = createNewFetchTextMock();
+            }
         },
         reject: (message: string) => {
             rejectPromise && rejectPromise(message);
+            if (adapter.fetchText) {
+                adapter.fetchText = createNewFetchTextMock();
+            }
         },
         next: (message: string) => {
             streamTextObserver && streamTextObserver.next(message);
         },
         complete: () => {
             streamTextObserver && streamTextObserver.complete();
+            if (adapter.streamText) {
+                adapter.streamText = createNewStreamTextMock();
+            }
         },
         error: (error: Error) => {
             streamTextObserver && streamTextObserver.error(error);
+            if (adapter.streamText) {
+                adapter.streamText = createNewStreamTextMock();
+            }
         },
     });
 };

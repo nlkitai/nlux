@@ -1,6 +1,7 @@
 import {registerAllComponents} from '../components/components';
 import {Adapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
+import {EventCallback, EventName, EventsMap} from '../types/event';
 import {NluxProps} from '../types/props';
 import {StandardAdapter} from '../types/standardAdapter';
 import {debug, warn} from '../x/debug';
@@ -25,6 +26,7 @@ export class AiChat implements IAiChat {
     protected theSyntaxHighlighter: HighlighterExtension | null = null;
     protected theThemeId: string | null = null;
     private controller: NluxController | null = null;
+    private unregisteredEventListeners: Map<EventName, Set<EventCallback>> = new Map();
 
     public get mounted(): boolean {
         return this.controller?.mounted ?? false;
@@ -81,10 +83,18 @@ export class AiChat implements IAiChat {
             },
         );
 
+        // Register all unregistered event listeners
+        for (const [eventName, eventListeners] of this.unregisteredEventListeners.entries()) {
+            for (const eventCallback of eventListeners) {
+                controller.on(eventName, eventCallback);
+            }
+        }
+
         controller.mount();
 
         if (controller.mounted) {
             this.controller = controller;
+            this.unregisteredEventListeners.clear();
         } else {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -92,6 +102,40 @@ export class AiChat implements IAiChat {
             });
         }
     };
+
+    on(event: EventName, callback: EventsMap[EventName]) {
+        if (this.controller) {
+            this.controller.on(event, callback);
+
+            // No need to keep track of event callbacks if the controller is already mounted.
+            return this;
+        }
+
+        if (!this.unregisteredEventListeners.has(event)) {
+            this.unregisteredEventListeners.set(event, new Set());
+        }
+
+        this.unregisteredEventListeners.get(event)?.add(callback);
+        return this;
+    }
+
+    removeAllEventListeners(event?: EventName) {
+        // When no event is provided, remove all event listeners for all events.
+        if (!event) {
+            this.controller?.removeAllEventListenersForAllEvent();
+            this.unregisteredEventListeners.clear();
+            return;
+        }
+
+        // When an event is provided, remove all event listeners for that specific event.
+        this.controller?.removeAllEventListeners(event);
+        this.unregisteredEventListeners.get(event)?.clear();
+    }
+
+    removeEventListener(event: EventName, callback: EventCallback) {
+        this.controller?.removeEventListener(event, callback);
+        this.unregisteredEventListeners.get(event)?.delete(callback);
+    }
 
     show() {
         if (!this.controller) {
@@ -121,6 +165,7 @@ export class AiChat implements IAiChat {
         }
 
         this.controller = null;
+        this.unregisteredEventListeners.clear();
     }
 
     public updateProps(props: Partial<NluxProps>) {

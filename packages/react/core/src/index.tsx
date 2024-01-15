@@ -8,6 +8,9 @@ export type {
     PromptBoxOptions,
     ConversationOptions,
     HighlighterExtension,
+    EventName,
+    EventCallback,
+    ExceptionId,
 } from '@nlux/core';
 
 export type {

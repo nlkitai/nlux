@@ -103,6 +103,11 @@ export const submitPromptFactory = ({
             }
 
             //
+            // Emit matching events
+            //
+            context.emit('messageSent', messageToSend);
+
+            //
             // Handles messages sent as promises:
             // Use case: Fetch adapters
             //
@@ -110,6 +115,7 @@ export const submitPromptFactory = ({
                 sentResponse.then((promiseContent) => {
                     message.setContent(promiseContent);
                     resetPromptBox(true);
+                    context.emit('messageReceived', promiseContent);
                 }).catch((error) => {
                     message.setErrored();
                     conversation.removeMessage(outMessageId);
@@ -118,6 +124,11 @@ export const submitPromptFactory = ({
 
                     const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
                     context.exception(exceptionId);
+
+                    context.emit('error', {
+                        errorId: exceptionId,
+                        message: error.message || 'An error occurred while sending message via Promise.',
+                    });
                 });
             } else {
                 //
@@ -139,10 +150,18 @@ export const submitPromptFactory = ({
 
                             const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
                             context.exception(exceptionId);
+
+                            context.emit('error', {
+                                errorId: exceptionId,
+                                message: error.message || 'An error occurred while sending message via Observable.',
+                            });
                         },
                         complete: () => {
                             message.commitContent();
                             resetPromptBox(true);
+                            if (message.content) {
+                                context.emit('messageReceived', message.content);
+                            }
                         },
                     });
                 } else {

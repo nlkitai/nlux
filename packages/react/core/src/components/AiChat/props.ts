@@ -2,6 +2,7 @@ import {
     Adapter,
     AdapterBuilder,
     ConversationOptions,
+    EventsMap,
     HighlighterExtension,
     LayoutOptions,
     PromptBoxOptions,
@@ -18,6 +19,11 @@ export type AiChatProps = {
      * that implements `Adapter` or `AdapterBuilder` interfaces.
      */
     adapter: Adapter | AdapterBuilder<any, any>;
+
+    /**
+     * Event listeners to be attached to chat room events.
+     */
+    events?: Partial<EventsMap>;
 
     /**
      * CSS class name to be applied to the root element.

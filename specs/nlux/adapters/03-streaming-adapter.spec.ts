@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When a streaming adapter is used to generate text', () => {
@@ -27,14 +28,8 @@ describe('When a streaming adapter is used to generate text', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(adapterController.streamTextMock).toHaveBeenCalledWith(
             'Hello',
@@ -54,12 +49,13 @@ describe('When a streaming adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
+        await type('Hello');
 
         expect(textInput).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
         expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+
+        await submit();
 
         await userEvent.click(sendButton);
         await waitForRenderCycle();
@@ -77,11 +73,8 @@ describe('When a streaming adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
@@ -102,11 +95,8 @@ describe('When a streaming adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
@@ -127,11 +117,8 @@ describe('When a streaming adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
@@ -155,14 +142,8 @@ describe('When a streaming adapter is used to generate text', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(queries.conversationMessagesContainer()).not.toContainHTML('Yo');
         adapterController.next('Yo');

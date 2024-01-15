@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {
     delayBeforeSendingResponse,
     waitForMdStreamToComplete,
@@ -53,8 +54,7 @@ describe('When typing a prompt ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
+            await type('Hello');
 
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
@@ -71,9 +71,7 @@ describe('When typing a prompt ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
+            await type('Hello');
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
 
@@ -112,8 +110,7 @@ describe('When sending a chat message ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello LLM');
-            await waitForRenderCycle();
+            await type('Hello LLM');
 
             expect(textInput.value).toBe('Hello LLM');
             expect(sendButton).not.toBeDisabled();
@@ -135,14 +132,13 @@ describe('When sending a chat message ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
+            await type('Hello');
 
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
             expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
 
-            await userEvent.click(sendButton);
+            await submit();
             await waitForRenderCycle();
 
             expect(sendButton).toBeDisabled();
@@ -160,8 +156,7 @@ describe('When sending a chat message ', () => {
                 const textInput: any = queries.promptBoxTextInput() as any;
                 const sendButton: any = queries.promptBoxSendButton() as any;
 
-                await userEvent.type(textInput, 'Hello');
-                await waitForRenderCycle();
+                await type('Hello');
 
                 expect(textInput.value).toBe('Hello');
                 expect(sendButton).not.toBeDisabled();
@@ -187,13 +182,12 @@ describe('When sending a chat message ', () => {
                 const textInput: any = queries.promptBoxTextInput() as any;
                 const sendButton: any = queries.promptBoxSendButton() as any;
 
-                await userEvent.type(textInput, 'Hello');
-                await waitForRenderCycle();
+                await type('Hello');
 
                 expect(textInput.value).toBe('Hello');
                 expect(sendButton).not.toBeDisabled();
 
-                await userEvent.click(sendButton);
+                await submit();
                 await waitForMilliseconds(delayBeforeSendingResponse / 2);
                 expect(queries.conversationMessagesContainer()).toContainHTML('Hello');
 
@@ -213,8 +207,7 @@ describe('When sending a chat message ', () => {
                 const textInput: any = queries.promptBoxTextInput() as any;
                 const sendButton: any = queries.promptBoxSendButton() as any;
 
-                await userEvent.type(textInput, 'Hello');
-                await waitForRenderCycle();
+                await type('Hello');
 
                 expect(textInput.value).toBe('Hello');
                 expect(sendButton).not.toBeDisabled();
@@ -241,8 +234,7 @@ describe('When sending a chat message ', () => {
                 const textInput: any = queries.promptBoxTextInput() as any;
                 const sendButton: any = queries.promptBoxSendButton() as any;
 
-                await userEvent.type(textInput, 'Hello');
-                await waitForRenderCycle();
+                await type('Hello');
 
                 expect(textInput.value).toBe('Hello');
                 expect(sendButton).not.toBeDisabled();
@@ -269,13 +261,11 @@ describe('When sending a chat message ', () => {
                 const textInput: any = queries.promptBoxTextInput() as any;
                 const sendButton: any = queries.promptBoxSendButton() as any;
 
-                await userEvent.type(textInput, 'Hello');
-                await waitForRenderCycle();
-
+                await type('Hello');
                 expect(textInput.value).toBe('Hello');
                 expect(sendButton).not.toBeDisabled();
 
-                await userEvent.click(sendButton);
+                await submit();
                 await waitForMilliseconds(100);
 
                 expect(textInput.value).toBe('Hello');
@@ -294,13 +284,12 @@ describe('When sending a chat message ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
+            await type('Hello');
 
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
 
-            await userEvent.click(sendButton);
+            await submit();
             await waitForRenderCycle();
 
             adapterController.reject('Something went wrong');
@@ -346,15 +335,11 @@ describe('When sending a chat message ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
+            await type('Hello');
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
 
-            await userEvent.click(sendButton);
-            await waitForRenderCycle();
-
+            await submit();
             adapterController.resolve('Hello back!');
             await waitForRenderCycle();
 
@@ -371,13 +356,13 @@ describe('When sending a chat message ', () => {
             const textInput: any = queries.promptBoxTextInput() as any;
             const sendButton: any = queries.promptBoxSendButton() as any;
 
-            await userEvent.type(textInput, 'Hello');
+            await type('Hello');
             await waitForRenderCycle();
 
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
 
-            await userEvent.click(sendButton);
+            await submit();
             await waitForRenderCycle();
 
             adapterController.resolve('Hello back!');
@@ -385,6 +370,41 @@ describe('When sending a chat message ', () => {
             await waitForMdStreamToComplete();
 
             expect(textInput.value).toBe('');
+        });
+
+        it('should be able to submit another prompt', async () => {
+            adapterController = adapterBuilder().withFetchText().create();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            const textInput: any = queries.promptBoxTextInput() as any;
+            const sendButton: any = queries.promptBoxSendButton() as any;
+            const conversationContainer: any = queries.conversationContainer() as any;
+
+            await type('Hello');
+            await submit();
+
+            adapterController.resolve('Hello back!');
+            await waitForRenderCycle();
+            await waitForMdStreamToComplete();
+
+            expect(conversationContainer).toHaveTextContent('Hello back!');
+
+            await userEvent.type(textInput, 'How are you?');
+            await waitForRenderCycle();
+
+            expect(textInput.value).toBe('How are you?');
+            expect(sendButton).not.toBeDisabled();
+
+            await userEvent.click(sendButton);
+            await waitForRenderCycle();
+
+            adapterController.resolve('I am fine!');
+            await waitForRenderCycle();
+            await waitForMdStreamToComplete();
+
+            expect(conversationContainer).toHaveTextContent('I am fine!');
         });
     });
 });

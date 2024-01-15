@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>NLUX JS Demo!</title>
+    <meta content="Salmen Hichri" name="author">
+    <link href="https://use.typekit.net/nny7qsb.css" rel="stylesheet">
+    <link href="/packages/@nlux/themes/nova.css" rel="stylesheet">
+    <link href="/packages/@nlux/highlighter/dark-theme.css" rel="stylesheet">
+    <link href="/packages/@nlux/highlighter/light-theme.css" rel="stylesheet">
+    <script defer src="./index.mjs" type="module"></script>
+    <script defer type="text/javascript">
+        const applyRandomBodyBackgroundColor = () => {
+            // Generate a random RGB color where each value is between 230-255
+            const r = Math.floor(Math.random() * 26) + 230;
+            const g = Math.floor(Math.random() * 26) + 230;
+            const b = Math.floor(Math.random() * 26) + 230;
+
+            // Set the background color of the body
+            document.body.style.backgroundColor = Math.random() > 0.5 ? `rgb(${255 - r}, ${255 - g}, ${255 - b})` : `rgb(${r}, ${g}, ${b})`;
+        };
+
+        document.addEventListener('DOMContentLoaded', () => applyRandomBodyBackgroundColor());
+    </script>
+    <style>
+        html, body {
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .demo-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            background-color: black;
+            gap: 1rem;
+        }
+
+        .chat-emulator {
+            min-height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="demo-controls">
+    <button onclick="demo.mount()">Mount</button>
+    <button onclick="demo.unmount()">Unmount</button>
+    <button onclick="demo.show()">Show</button>
+    <button onclick="demo.hide()">Hide</button>
+</div>
+
+<div class="chat-emulator" id="nluxc-root"></div>
+
+</body>
+</html>

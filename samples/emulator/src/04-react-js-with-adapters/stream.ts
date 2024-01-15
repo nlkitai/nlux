@@ -31,8 +31,6 @@ export const streamAdapter: Adapter = {
             }
 
             const content = textDecoder.decode(value);
-            console.dir(content);
-            console.log('--');
             if (content) {
                 observer.next(content);
             }

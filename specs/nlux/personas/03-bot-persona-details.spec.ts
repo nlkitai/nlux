@@ -1,9 +1,9 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When the bot persona is set', () => {
@@ -36,17 +36,8 @@ describe('When the bot persona is set', () => {
 
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        expect(textInput.value).toBe('Hello LLM');
-        expect(sendButton).not.toBeDisabled();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello LLM');
+        await submit();
         await waitForMilliseconds(100);
 
         expect(queries.sentMessagePersonaContainer()).not.toBeInTheDocument();
@@ -67,14 +58,8 @@ describe('When the bot persona is set', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello LLM');
+        await submit();
         await waitForMilliseconds(100);
 
         expect(queries.receivedMessagePersonaRenderedPhoto()).toHaveAttribute(
@@ -99,14 +84,8 @@ describe('When the bot persona is set', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello LLM');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello LLM');
+        await submit();
         await waitForMilliseconds(100);
 
         expect(queries.receivedMessagePersonaContainer()).toHaveTextContent('Bot Image');

@@ -1,8 +1,7 @@
 import {AiChat, createAiChat} from '@nlux/core';
-import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
-import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForRenderCycle} from '../../utils/wait';
 
 describe('When a component is loaded', () => {
@@ -33,14 +32,8 @@ describe('When a component is loaded', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput() as any;
-            const sendButton: any = queries.promptBoxSendButton() as any;
-
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
-            await waitForRenderCycle();
+            await type('Hello');
+            await submit();
 
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
             expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);
@@ -57,14 +50,8 @@ describe('When a component is loaded', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput() as any;
-            const sendButton: any = queries.promptBoxSendButton() as any;
-
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
-            await waitForRenderCycle();
+            await type('Hello');
+            await submit();
 
             expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
             expect(adapterController.streamTextMock).toHaveBeenCalledTimes(0);
@@ -81,14 +68,8 @@ describe('When a component is loaded', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textInput: any = queries.promptBoxTextInput() as any;
-            const sendButton: any = queries.promptBoxSendButton() as any;
-
-            await userEvent.type(textInput, 'Hello');
-            await waitForRenderCycle();
-
-            await userEvent.click(sendButton);
-            await waitForRenderCycle();
+            await type('Hello');
+            await submit();
 
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
             expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);

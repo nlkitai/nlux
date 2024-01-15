@@ -13,7 +13,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Bot and User Personas** - Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
-* **Personalized Conversation** - Provide context using system message, and instruct the LLM how to behave.
+* **Personalized Conversation** - Provide context using system messages, and instruct the LLM how to behave.
+* **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 ## Docs Website 📖
@@ -80,7 +81,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.9.0/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.9.3/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

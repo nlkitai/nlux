@@ -1,9 +1,9 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../utils/wait';
 
 describe('When a fetch adapter is used to generate text', () => {
@@ -27,14 +27,8 @@ describe('When a fetch adapter is used to generate text', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
     });
@@ -47,14 +41,13 @@ describe('When a fetch adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
+        await type('Hello');
 
         expect(textInput).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
         expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
 
-        await userEvent.click(sendButton);
+        await submit();
         await waitForRenderCycle();
 
         expect(textInput).toBeDisabled();
@@ -70,11 +63,8 @@ describe('When a fetch adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
@@ -97,11 +87,8 @@ describe('When a fetch adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
@@ -119,14 +106,8 @@ describe('When a fetch adapter is used to generate text', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         adapterController.resolve('Hi Human!');
         await waitForRenderCycle();
@@ -143,11 +124,8 @@ describe('When a fetch adapter is used to generate text', () => {
         const textInput: any = queries.promptBoxTextInput() as any;
         const sendButton: any = queries.promptBoxSendButton() as any;
 
-        await userEvent.type(textInput, 'Hello');
-        await waitForRenderCycle();
-
-        await userEvent.click(sendButton);
-        await waitForRenderCycle();
+        await type('Hello');
+        await submit();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');

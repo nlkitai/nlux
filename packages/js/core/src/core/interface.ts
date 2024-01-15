@@ -1,4 +1,5 @@
 import {AdapterBuilder} from '../types/adapterBuilder';
+import {EventCallback, EventName, EventsMap} from '../types/event';
 import {NluxProps} from '../types/props';
 import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
@@ -8,17 +9,17 @@ import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export interface IAiChat {
     mount(rootElement: HTMLElement): void;
-
     get mounted(): boolean;
 
+    on(event: EventName, callback: EventsMap[EventName]): IAiChat;
+    removeAllEventListeners(event?: EventName): void;
+    removeEventListener(event: EventName, callback: EventCallback): void;
+
     unmount(): void;
-
     updateProps(props: Partial<NluxProps>): void;
-
     withAdapter<InboundPayload, OutboundPayload>(
         adapterBuilder: AdapterBuilder<InboundPayload, OutboundPayload>,
     ): IAiChat;
-
     withClassName(
         className: string,
     ): IAiChat;

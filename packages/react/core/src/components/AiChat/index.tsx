@@ -24,6 +24,7 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             conversationOptions,
             promptBoxOptions,
             personaOptions,
+            events,
         } = props;
 
         let newInstance = createAiChat().withAdapter(adapter);
@@ -46,6 +47,16 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
 
         if (syntaxHighlighter) {
             newInstance = newInstance.withSyntaxHighlighter(syntaxHighlighter);
+        }
+
+        if (events) {
+            const keys: (keyof typeof events)[] = Object.keys(events) as any;
+            for (const eventName of keys) {
+                const handler = events[eventName];
+                if (handler) {
+                    newInstance.on(eventName, handler);
+                }
+            }
         }
 
         if (personaOptions) {
@@ -93,8 +104,8 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
                     return;
                 }
 
-                setCurrentProps(props);
                 aiChat.current.updateProps(newProps);
+                setCurrentProps(props);
             });
         }
 

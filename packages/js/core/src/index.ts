@@ -25,6 +25,16 @@ export type {ExposedConfig} from './core/config';
 export type {NluxProps} from './types/props';
 
 export type {
+    EventName,
+    EventCallback,
+    ErrorCallback,
+    ErrorEventDetails,
+    EventsMap,
+    MessageSentCallback,
+    MessageReceivedCallback,
+} from './types/event';
+
+export type {
     StandardAdapter,
     StandardAdapterEvent,
     StandardAdapterStatus,

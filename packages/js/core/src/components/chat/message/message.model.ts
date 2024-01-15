@@ -20,7 +20,7 @@ export type MessageContentStatusChangeListener = (status: MessageContentLoadingS
 export class CompMessage extends BaseComp<
     CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
 > {
-    private content?: string;
+    private __content?: string;
     private contentStatus: MessageContentLoadingStatus;
     private contentStatusChangeListeners: Set<MessageContentStatusChangeListener> = new Set();
     private readonly contentType: MessageContentType;
@@ -30,9 +30,13 @@ export class CompMessage extends BaseComp<
     constructor(context: NluxContext, props: CompMessageProps) {
         super(context, props);
 
-        this.content = props.content;
+        this.__content = props.content;
         this.contentType = props.contentType;
         this.contentStatus = props.loadingStatus;
+    }
+
+    public get content() {
+        return this.__content;
     }
 
     public get direction() {
@@ -58,7 +62,7 @@ export class CompMessage extends BaseComp<
             this.setContentLoadingStatus('streaming');
         }
 
-        this.content = this.content ? this.content + content : content;
+        this.__content = this.content ? this.content + content : content;
         this.executeDomAction('appendContent', content);
     }
 
@@ -126,7 +130,7 @@ export class CompMessage extends BaseComp<
             throw new Error(`CompMessage: content can only be set when contentStatus is 'loading'!`);
         }
 
-        this.content = content;
+        this.__content = content;
         this.setContentLoadingStatus('loaded');
         this.executeDomAction('appendContent', content);
     }
@@ -150,9 +154,9 @@ export class CompMessage extends BaseComp<
     @CompEventListener('copy-to-clipboard-triggered')
     private handleCompCopyToClipboardTriggered(event: ClipboardEvent) {
         event.preventDefault();
-        if (this.content) {
+        if (this.__content) {
             debug(`Copying selected message to clipboard!`);
-            navigator.clipboard.writeText(this.content).catch(error => {
+            navigator.clipboard.writeText(this.__content).catch(error => {
                 warn('Failed to copy selected message to clipboard!');
                 debug(error);
             });

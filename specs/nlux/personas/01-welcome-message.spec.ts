@@ -1,9 +1,9 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import '@testing-library/jest-dom';
-import userEvent from '@testing-library/user-event';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {queries} from '../../utils/selectors';
+import {submit, type} from '../../utils/userInteractions';
 import {waitForRenderCycle} from '../../utils/wait';
 
 describe('Personas config is provided', () => {
@@ -57,16 +57,10 @@ describe('Personas config is provided', () => {
 
         expect(queries.welcomeMessage()).toBeInTheDocument();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await textInput.focus();
-        await userEvent.type(textInput, 'Hello LLM');
-
-        await waitForRenderCycle();
+        await type('Hello LLM');
         expect(queries.welcomeMessage()).toBeInTheDocument();
 
-        await sendButton.click();
+        await submit();
         await waitForRenderCycle();
 
         expect(queries.welcomeMessage()).not.toBeInTheDocument();
@@ -79,17 +73,8 @@ describe('Personas config is provided', () => {
 
         expect(queries.welcomeMessage()).toBeInTheDocument();
 
-        const textInput: any = queries.promptBoxTextInput() as any;
-        const sendButton: any = queries.promptBoxSendButton() as any;
-
-        await textInput.focus();
-        await userEvent.type(textInput, 'Hello LLM');
-
-        await waitForRenderCycle();
-        expect(queries.welcomeMessage()).toBeInTheDocument();
-
-        await sendButton.click();
-        await waitForRenderCycle();
+        await type('Hello LLM');
+        await submit();
 
         expect(queries.welcomeMessage()).not.toBeInTheDocument();
 

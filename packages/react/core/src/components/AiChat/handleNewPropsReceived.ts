@@ -8,6 +8,11 @@ export const handleNewPropsReceived = async (
     currentProps: AiChatProps,
     newProps: AiChatProps,
 ): Promise<Partial<NluxProps> | undefined> => {
+    const eventListeners = optionsUpdater(
+        currentProps.events,
+        newProps.events,
+    );
+
     const layoutOptions = optionsUpdater(
         currentProps.layoutOptions,
         newProps.layoutOptions,
@@ -29,6 +34,10 @@ export const handleNewPropsReceived = async (
     );
 
     const propsToUpdate: Partial<NluxProps> = {};
+
+    if (eventListeners !== undefined) {
+        propsToUpdate.events = eventListeners ?? {};
+    }
 
     if (layoutOptions !== undefined) {
         propsToUpdate.layoutOptions = layoutOptions ?? {};

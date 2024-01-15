@@ -58,12 +58,17 @@ try {
     info('Copying emulator static files');
     await run('cp -r samples/emulator/src/index.html dist/dev/emulator/index.html');
     await run('cp -r samples/emulator/src/01-vanilla-js-with-adapters/index.html dist/dev/emulator/01-vanilla-js-with-adapters/index.html');
-    await run('cp -r samples/emulator/src/02-react-js-with-hugging-face/index.html dist/dev/emulator/02-react-js-with-hugging-face/index.html');
-    await run('cp -r samples/emulator/src/02-react-js-with-hugging-face/require.min.js dist/dev/emulator/02-react-js-with-hugging-face/require.min.js');
-    await run('cp -r samples/emulator/src/03-react-js-with-adapters/index.html dist/dev/emulator/03-react-js-with-adapters/index.html');
-    await run('cp -r samples/emulator/src/03-react-js-with-adapters/require.min.js dist/dev/emulator/03-react-js-with-adapters/require.min.js');
-    await run('cp -r samples/emulator/src/04-react-js-personas/index.html dist/dev/emulator/04-react-js-personas/index.html');
-    await run('cp -r samples/emulator/src/04-react-js-personas/require.min.js dist/dev/emulator/04-react-js-personas/require.min.js');
+    await run('cp -r samples/emulator/src/02-vanilla-js-with-events/index.html dist/dev/emulator/02-vanilla-js-with-events/index.html');
+
+    await Promise.all([
+        '03-react-js-with-hugging-face',
+        '04-react-js-with-adapters',
+        '05-react-js-personas',
+        '06-react-js-events',
+    ].map(async (name) => {
+        await run(`cp -r samples/emulator/src/${name}/index.html dist/dev/emulator/${name}/index.html`);
+        await run(`cp -r samples/emulator/src/${name}/require.min.js dist/dev/emulator/${name}/require.min.js`);
+    }));
 
     info('Symlinking packages to emulator folder');
 
