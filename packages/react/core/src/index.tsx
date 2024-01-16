@@ -8,9 +8,17 @@ export type {
     PromptBoxOptions,
     ConversationOptions,
     HighlighterExtension,
+    ExceptionId,
+} from '@nlux/core';
+
+export type {
     EventName,
     EventCallback,
-    ExceptionId,
+    ErrorCallback,
+    ErrorEventDetails,
+    EventsMap,
+    MessageSentCallback,
+    MessageReceivedCallback,
 } from '@nlux/core';
 
 export type {

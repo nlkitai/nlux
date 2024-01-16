@@ -19,6 +19,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
 * **Personalized Conversation** - Provide context using system messages, and instruct LLM how to behave.
 * **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
+* **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 ## Repo Content 📦
