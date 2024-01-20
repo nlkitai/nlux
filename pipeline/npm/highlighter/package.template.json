@@ -1,7 +1,7 @@
 {
   "name": "@nlux/highlighter",
   "version": "{versions.nlux}",
-  "description": "Syntax highlighter for Nlux",
+  "description": "Syntax highlighter for NLUX",
   "repository": {
     "directory": "packages/js/highlighter"
   },

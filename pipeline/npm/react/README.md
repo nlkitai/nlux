@@ -65,7 +65,7 @@ or import it in your React app.
 
 An AI chatbot, experienced in personal finance, that can give your users sound, tailored financial advice:
 
-[![Nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
+[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 
 ## Theme File and CSS 🎨
 

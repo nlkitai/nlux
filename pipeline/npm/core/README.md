@@ -72,7 +72,7 @@ You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your 
 
 An AI chatbot, experienced in personal finance, that can give your users sound, tailored financial advice:
 
-[![Nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
+[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 
 ## Theme File and CSS 🎨
 
