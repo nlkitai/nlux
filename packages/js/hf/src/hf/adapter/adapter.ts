@@ -8,6 +8,7 @@ import {
     StandardAdapterInfo,
     StandardAdapterStatus,
     StreamingAdapterObserver,
+    uid,
     warn,
 } from '@nlux/core';
 import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
@@ -16,6 +17,9 @@ import {HfAdapterOptions} from '../types/adapterOptions';
 export class HfAdapterImpl implements StandardAdapter<any, any> {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
+
+    private readonly __instanceId: string;
+
     private inference: HfInference;
     private readonly options: HfAdapterOptions;
 
@@ -27,6 +31,8 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
                     + 'using the "endpoint" option!',
             });
         }
+
+        this.__instanceId = `${this.info.id}-${uid()}`;
 
         this.options = {...options};
         this.inference = new HfInference(options.authToken);
@@ -48,23 +54,19 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
     }
 
     get id(): string {
-        return '';
+        return this.__instanceId;
     }
 
     get info(): StandardAdapterInfo {
         return {
-            id: '',
+            id: 'hugging-face-adapter',
             capabilities: {
                 textChat: true,
                 audio: false,
                 fileUpload: false,
-                replyToSingleMessage: false,
-            },
-            remote: {
-                url: '',
             },
             inputFormats: ['text'],
-            outputFormats: ['text'],
+            outputFormats: ['text', 'markdown'],
         };
     }
 

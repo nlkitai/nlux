@@ -2,7 +2,8 @@ import {BotPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {NluxContext} from '../../../types/context';
-import {debug, warn} from '../../../x/debug';
+import {debug} from '../../../x/debug';
+import {warn} from '../../../x/warn';
 import {renderMessage} from './message.render';
 import {
     CompMessageActions,

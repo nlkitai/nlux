@@ -1,4 +1,5 @@
-import {debug, warn} from './debug';
+import {debug} from './debug';
+import {warn} from './warn';
 
 export const render = (html: string): DocumentFragment | HTMLElement | undefined => {
     debug(html);

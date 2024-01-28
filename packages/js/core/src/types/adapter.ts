@@ -39,6 +39,7 @@ export interface StreamingAdapterObserver<DataType = string> {
      * text input.
      */
     complete(): void;
+
     /**
      * This method should be called by the adapter when it has an error to send to the AiChat user interface.
      * This will result in the AiChat component displaying an error message to the user, resetting the
@@ -50,6 +51,7 @@ export interface StreamingAdapterObserver<DataType = string> {
      * @param {Error} error
      */
     error(error: Error): void;
+
     /**
      * This method should be called by the adapter when it has new data to send to the AiChat user interface.
      * @param {DataType} message

@@ -1,8 +1,8 @@
-export type OutputFormat = 'text' | 'audio' | 'html' | 'image' | 'video' | 'file';
+export type OutputFormat = 'text' | 'audio' | 'markdown' | 'html' | 'image' | 'video' | 'file';
 export type InputFormat = 'text';
 
 export type AdapterEncodeFunction<OutboundPayload> = (input: string) => Promise<OutboundPayload>;
-export type AdapterDecodeFunction<InboundPayload> = (output: InboundPayload) => Promise<string>;
+export type AdapterDecodeFunction<InboundPayload> = (output: InboundPayload) => Promise<string | undefined>;
 
 export type StandardAdapterInfo = Readonly<{
     id: string;
@@ -10,11 +10,7 @@ export type StandardAdapterInfo = Readonly<{
         textChat: boolean;
         audio: boolean;
         fileUpload: boolean;
-        replyToSingleMessage: boolean;
     }>;
-    readonly remote: Readonly<{
-        url: string;
-    }>,
     inputFormats: ReadonlyArray<InputFormat>;
     outputFormats: ReadonlyArray<OutputFormat>;
 }>;

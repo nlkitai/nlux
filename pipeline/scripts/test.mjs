@@ -1,6 +1,7 @@
 import clc from 'cli-color';
 import {info, nl} from '../utils/log.mjs';
 import {symlinkBuiltPackageToEmulatorFolder, symlinkNodeModuleToEmulatorFolder} from '../utils/symLink.mjs';
+import {packagesList} from "./packages.mjs";
 import {run} from './run.mjs';
 
 nl(1);
@@ -13,8 +14,6 @@ try {
     const commands = [
         'rm -fr dist/dev/emulator',
         'mkdir dist/dev/emulator',
-        'mkdir dist/dev/emulator/examples',
-        'mkdir dist/dev/emulator/examples-react',
         'mkdir dist/dev/emulator/packages',
         'mkdir dist/dev/emulator/packages/@nlux',
     ];
@@ -23,8 +22,8 @@ try {
         await run(commands[i]);
     }
 
-    ['nlux-core', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
-        symlinkBuiltPackageToEmulatorFolder(name);
+    packagesList.forEach(pkg => {
+        symlinkBuiltPackageToEmulatorFolder(pkg.name);
     });
 
     //

@@ -1,5 +1,5 @@
-import {warn} from '../../../../x/debug';
 import {render} from '../../../../x/render';
+import {warn} from '../../../../x/warn';
 import {__} from '../conversation.render';
 
 const welcomeMessageHtml = () => `` +

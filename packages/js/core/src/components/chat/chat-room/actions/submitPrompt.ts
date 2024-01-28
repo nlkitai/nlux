@@ -2,7 +2,7 @@ import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
 import {DataTransferMode} from '../../../../types/adapter';
 import {NluxContext} from '../../../../types/context';
-import {warn} from '../../../../x/debug';
+import {warn} from '../../../../x/warn';
 import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
 import {CompPromptBox} from '../../prompt-box/prompt-box.model';

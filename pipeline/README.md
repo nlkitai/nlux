@@ -25,6 +25,24 @@ It will also symlink all the packages in the repository.
 `yarn run dev` will build the examples present under `samples` folder and will run
 the dev server on port `9090`.
 
+### Running The Specs / Unit Tests
+
+The specs / unit tests are located under `specs/nlux` folder.<br />
+In order to run the specs, you need to first build the project by running:
+
+```bash
+yarn run set
+
+// or
+yarn run reset
+```
+
+Then you can run the specs using the following command:
+
+```bash
+yarn run test
+```
+
 ### Watching File Changes
 
 If you're editing code when the dev server is running, you can use the following

@@ -6,7 +6,9 @@ export const createAiChat = (): AiChat => new AiChat();
 export {Observable} from './core/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
 export {createMdStreamRenderer} from './core/markdown/streamParser';
-export {debug, warn} from './x/debug';
+export {debug} from './x/debug';
+export {warn, warnOnce} from './x/warn';
+export {uid} from './x/uid';
 
 export type {ExceptionId} from './exceptions/exceptions';
 export type {ConversationOptions} from './core/options/conversationOptions';
@@ -44,6 +46,10 @@ export type {
 export type {
     StandardAdapterConfig,
     StandardAdapterInfo,
+    AdapterEncodeFunction,
+    AdapterDecodeFunction,
+    InputFormat,
+    OutputFormat,
 } from './types/standardAdapterConfig';
 
 export type {

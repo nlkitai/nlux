@@ -1,6 +1,7 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
-import {createAdapter} from '@nlux/openai';
+import {createAdapter as createLangServeAdapter} from '@nlux/langchain';
+import {createAdapter as createOpenAiAdapter} from '@nlux/openai';
 import {personaOptions} from './personaOptions';
 
 debugger;
@@ -22,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Root element not found');
     }
 
-    const adapter = createAdapter()
+    const openAiAdapter = createOpenAiAdapter()
         .withApiKey(apiKey)
         // .withModel('gpt-4')
         .withDataTransferMode('stream')
@@ -31,8 +32,32 @@ document.addEventListener('DOMContentLoaded', () => {
             'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.',
         );
 
+    const langServeAdapter = createLangServeAdapter()
+        .withUrl('http://127.0.0.1:8000/einbot')
+        // .withUrl('http://127.0.0.1:8000/einbot/invoke')
+        // .withUrl('http://127.0.0.1:8000/einbot/stream')
+        // .withInputSchema(false)
+        // .withInputPreProcessor((message: string) => ({
+        //     message,
+        //     year: 1999,
+        // }))
+        // .withOutputPreProcessor((output: any) => {
+        //     if (typeof output === 'string') {
+        //         return output;
+        //     }
+        //
+        //     if (typeof output?.content === 'string') {
+        //         return output.content;
+        //     }
+        //
+        //     return 'Sorry, I did not understand that.';
+        // })
+        // .withDataTransferMode('fetch')
+        .withDataTransferMode('stream');
+
     aiChat = createAiChat()
-        .withAdapter(adapter)
+        .withAdapter(langServeAdapter)
+        // .withAdapter(openAiAdapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
         .withSyntaxHighlighter(highlighter)

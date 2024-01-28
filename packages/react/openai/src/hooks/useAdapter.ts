@@ -1,13 +1,13 @@
-import {debug, OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
+import {OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
 import {useEffect, useState} from 'react';
-import {initAdapter} from './initAdapter';
+import {getAdapterBuilder} from './getAdapterBuilder';
 
 const source = 'hooks/useAdapter';
 
 export const useAdapter = (options: OpenAiAdapterOptions) => {
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter] = useState<OpenAiAdapterBuilder>(
-        initAdapter(options),
+    const [adapter, setAdapter] = useState<OpenAiAdapterBuilder>(
+        getAdapterBuilder(options),
     );
 
     const {
@@ -23,12 +23,8 @@ export const useAdapter = (options: OpenAiAdapterOptions) => {
             return;
         }
 
-        debug({
-            source,
-            message: 'A new parameter has changed in useAdapter(). Adapter cannot be changed after initialization ' +
-                'and the new parameter will not be applied. Please re-initialize the adapter with the new parameter. '
-                + 'or user adapter methods to change the options and behaviour of the adapter.',
-        });
+        const newAdapter = getAdapterBuilder(options);
+        setAdapter(newAdapter);
     }, [
         apiKey,
         dataTransferMode,

@@ -3,6 +3,7 @@ import {existsSync} from 'fs';
 import {info, nl, throwError} from '../utils/log.mjs';
 import {devDistPath} from '../utils/paths.mjs';
 import {symlinkBuiltPackageToEmulatorFolder, symlinkNodeModuleToEmulatorFolder} from '../utils/symLink.mjs';
+import {packagesList} from "./packages.mjs";
 import {run} from './run.mjs';
 
 try {
@@ -18,8 +19,8 @@ try {
     //
     // Check that all build folders exist
     //
-    if (['nlux-core', 'nlux-react', 'openai', 'hf', 'openai-react', 'hf-react', 'themes'].some(
-        (buildFolder) => !existsSync(devDistPath(buildFolder))
+    if (packagesList.some(
+        pkg => !existsSync(devDistPath(pkg.name))
     )) {
         const errorMessage = 'Error ❗️ One or multiple build folders are missing.\n' +
             'Please build the packages first using [yarn set/reset] before running dev server for the first time.';
@@ -34,9 +35,6 @@ try {
     const commands = [
         'rm -fr dist/dev/emulator',
         'mkdir dist/dev/emulator',
-        'mkdir dist/dev/emulator/examples',
-        'mkdir dist/dev/emulator/examples-react',
-        'mkdir dist/dev/emulator/examples-react-hf',
         'mkdir dist/dev/emulator/packages',
         'mkdir dist/dev/emulator/packages/@nlux',
     ];
@@ -62,9 +60,10 @@ try {
 
     await Promise.all([
         '03-react-js-with-hugging-face',
-        '04-react-js-with-adapters',
-        '05-react-js-personas',
-        '06-react-js-events',
+        '04-react-js-with-langserve',
+        '05-react-js-with-adapters',
+        '06-react-js-personas',
+        '07-react-js-events',
     ].map(async (name) => {
         await run(`cp -r samples/emulator/src/${name}/index.html dist/dev/emulator/${name}/index.html`);
         await run(`cp -r samples/emulator/src/${name}/require.min.js dist/dev/emulator/${name}/require.min.js`);
@@ -75,9 +74,9 @@ try {
     //
     // Symlink built NLUX packages to emulator folder
     //
-    ['nlux-core', 'nlux-react', 'openai', 'openai-react', 'hf', 'hf-react', 'highlighter', 'themes'].forEach((name) => {
-        symlinkBuiltPackageToEmulatorFolder(name);
-    });
+    packagesList.forEach(
+        pkg => symlinkBuiltPackageToEmulatorFolder(pkg.name)
+    );
 
     //
     // Symlink dependencies to emulator folder

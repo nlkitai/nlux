@@ -5,7 +5,7 @@ import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-
 import {NluxContext} from '../../types/context';
 import {ExceptionType} from '../../types/exception';
 import {NluxProps} from '../../types/props';
-import {warn} from '../../x/debug';
+import {warn} from '../../x/warn';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {NluxRenderingError} from '../error';

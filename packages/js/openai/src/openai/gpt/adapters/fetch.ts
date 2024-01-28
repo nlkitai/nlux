@@ -52,7 +52,14 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
                 model: this.model,
                 messages: messagesToSend,
             });
-            return this.decode(response);
+
+            const result = await this.decode(response);
+            if (result === undefined) {
+                warn('Undecodable message received from OpenAI');
+                return '';
+            } else {
+                return result;
+            }
         } catch (error: any) {
             warn('Error while making API call to OpenAI');
             warn(error);

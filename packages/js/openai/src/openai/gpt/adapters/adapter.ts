@@ -5,6 +5,7 @@ import {
     StandardAdapterInfo,
     StandardAdapterStatus,
     StreamingAdapterObserver,
+    uid,
     warn,
 } from '@nlux/core';
 import OpenAI from 'openai';
@@ -16,11 +17,14 @@ import {defaultChatGptModel, defaultDataTransferMode} from './config';
 export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> implements StandardAdapter<
     InboundPayload, OutboundPayload
 > {
+
     protected currentStatus: StandardAdapterStatus = 'disconnected';
     protected readonly model: OpenAIModel;
     protected readonly openai: OpenAI;
     protected systemMessage: string | null = 'Act as a helpful assistant to the user';
     protected readonly theDataTransferMode: DataTransferMode;
+
+    private readonly __instanceId: string;
 
     protected constructor({
         systemMessage,
@@ -28,6 +32,8 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         dataTransferMode,
         model,
     }: OpenAiAdapterOptions) {
+        this.__instanceId = `${this.info.id}-${uid()}`;
+
         this.currentStatus = 'disconnected';
         this.theDataTransferMode = dataTransferMode ?? defaultDataTransferMode;
         this.model = model ?? defaultChatGptModel;
@@ -54,7 +60,7 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
     }
 
     get id() {
-        return this.info.id;
+        return this.__instanceId;
     }
 
     get info(): StandardAdapterInfo {
@@ -65,7 +71,7 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         return this.currentStatus;
     }
 
-    async decode(payload: InboundPayload): Promise<string> {
+    async decode(payload: InboundPayload): Promise<string | undefined> {
         const {decodeMessage} = this.config;
         return decodeMessage(payload);
     }

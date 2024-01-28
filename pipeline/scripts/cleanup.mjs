@@ -1,6 +1,7 @@
 import {existsSync, lstatSync, readdirSync, rmSync, unlinkSync} from 'fs';
 import {extname, join} from 'path';
 import {error, info, nl} from '../utils/log.mjs';
+import {packagesList} from "./packages.mjs";
 
 const dirNamesToRemove = [
     'node_modules',
@@ -84,14 +85,9 @@ info('Starting cleanup 🧹 ...');
 
 removeJsFiles('pipeline/utils/rollup');
 
-removeGeneratedPackageJson('packages/css/themes');
-removeGeneratedPackageJson('packages/js/core');
-removeGeneratedPackageJson('packages/js/openai');
-removeGeneratedPackageJson('packages/js/hf');
-removeGeneratedPackageJson('packages/js/highlighter');
-removeGeneratedPackageJson('packages/react/core');
-removeGeneratedPackageJson('packages/react/openai');
-removeGeneratedPackageJson('packages/react/hf');
+packagesList.forEach(
+    pkg => removeGeneratedPackageJson(`packages/${pkg.directory}`)
+);
 
 info('Removing build and dependency folders');
 cleanUp('.');

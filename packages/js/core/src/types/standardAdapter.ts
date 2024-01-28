@@ -18,7 +18,7 @@ export type StandardAdapterEventData = string | StandardAdapterStatus;
 export interface StandardAdapter<InboundPayload, OutboundPayload> extends Adapter {
     get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
     get dataTransferMode(): DataTransferMode;
-    decode(payload: InboundPayload): Promise<string>;
+    decode(payload: InboundPayload): Promise<string | undefined>;
     encode(message: string): Promise<OutboundPayload>;
     fetchText(message: string): Promise<string>;
     get id(): string;

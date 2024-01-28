@@ -1,9 +1,9 @@
-import {createAdapter, OpenAiAdapterOptions} from '@nlux/openai';
+import {createAdapter, OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
 import {NluxUsageError} from '@nlux/react';
 
-const source = 'hooks/initAdapter';
+const source = 'hooks/getAdapterBuilder';
 
-export const initAdapter = (options: OpenAiAdapterOptions) => {
+export const getAdapterBuilder = (options: OpenAiAdapterOptions): OpenAiAdapterBuilder => {
     const {
         apiKey,
         dataTransferMode,

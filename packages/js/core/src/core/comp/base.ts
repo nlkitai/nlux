@@ -1,8 +1,8 @@
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../types/comp';
 import {NluxContext} from '../../types/context';
-import {warn} from '../../x/debug';
 import {domOp} from '../../x/domOp';
 import {uid} from '../../x/uid';
+import {warn} from '../../x/warn';
 import {NluxError, NluxUsageError} from '../error';
 import {CompRegistry} from './registry';
 

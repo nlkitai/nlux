@@ -27,13 +27,9 @@ export const info: StandardAdapterInfo = {
         textChat: true,
         audio: false,
         fileUpload: false,
-        replyToSingleMessage: false,
-    },
-    remote: {
-        url: 'https://api.openai.com/v1/chat/completion',
     },
     inputFormats: ['text'],
-    outputFormats: ['text'],
+    outputFormats: ['text', 'markdown'],
 };
 
 export const gptAdapterInfo = Object.freeze(info) as StandardAdapterInfo;

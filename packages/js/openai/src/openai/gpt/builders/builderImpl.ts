@@ -10,11 +10,11 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
     protected apiKey: string | null = null;
     protected dataTransferMode: DataTransferMode = defaultDataTransferMode;
     protected model: OpenAIModel | null = null;
-    protected setApiKeyCalled: boolean = false;
-    protected setInitialSystemMessageCalled: boolean = false;
-    protected setModelCalled: boolean = false;
-    protected setStreamOrFetchCalled: boolean = false;
     protected systemMessage: string | null = null;
+    protected withApiKeyCalled: boolean = false;
+    protected withDataTransferModeCalled: boolean = false;
+    protected withModelCalled: boolean = false;
+    protected withSystemMessageCalled: boolean = false;
 
     constructor(cloneFrom?: OpenAiAdapterBuilderImpl) {
         if (cloneFrom) {
@@ -23,10 +23,10 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
             this.model = cloneFrom.model;
             this.systemMessage = cloneFrom.systemMessage;
 
-            this.setApiKeyCalled = cloneFrom.setApiKeyCalled;
-            this.setInitialSystemMessageCalled = cloneFrom.setInitialSystemMessageCalled;
-            this.setModelCalled = cloneFrom.setModelCalled;
-            this.setStreamOrFetchCalled = cloneFrom.setStreamOrFetchCalled;
+            this.withApiKeyCalled = cloneFrom.withApiKeyCalled;
+            this.withSystemMessageCalled = cloneFrom.withSystemMessageCalled;
+            this.withModelCalled = cloneFrom.withModelCalled;
+            this.withDataTransferModeCalled = cloneFrom.withDataTransferModeCalled;
         }
     }
 
@@ -54,7 +54,7 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
     }
 
     withApiKey(apiKey: string): OpenAiAdapterBuilderImpl {
-        if (this.setApiKeyCalled) {
+        if (this.withApiKeyCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
                 message: 'Unable to set API key. API key setter has already been called by this builder. ' +
@@ -63,12 +63,12 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
         }
 
         this.apiKey = apiKey;
-        this.setApiKeyCalled = true;
+        this.withApiKeyCalled = true;
         return this;
     }
 
     withDataTransferMode(mode: DataTransferMode): OpenAiAdapterBuilderImpl {
-        if (this.setStreamOrFetchCalled) {
+        if (this.withDataTransferModeCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
                 message: 'Unable to set data loading mode. Stream or fetch setter has already been called ' +
@@ -77,13 +77,13 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
         }
 
         this.dataTransferMode = mode;
-        this.setStreamOrFetchCalled = true;
+        this.withDataTransferModeCalled = true;
 
         return this;
     }
 
     withModel(model: OpenAIModel): OpenAiAdapterBuilderImpl {
-        if (this.setModelCalled) {
+        if (this.withModelCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
                 message: 'Unable to set model. Model setter has already been called ' +
@@ -92,12 +92,12 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
         }
 
         this.model = model;
-        this.setModelCalled = true;
+        this.withModelCalled = true;
         return this;
     }
 
     withSystemMessage(message: string): OpenAiAdapterBuilderImpl {
-        if (this.setInitialSystemMessageCalled) {
+        if (this.withSystemMessageCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
                 message: 'Unable to set initial system message. Initial system message setter has already been ' +
@@ -106,7 +106,7 @@ export class OpenAiAdapterBuilderImpl implements OpenAiAdapterBuilder {
         }
 
         this.systemMessage = message ?? null;
-        this.setInitialSystemMessageCalled = true;
+        this.withSystemMessageCalled = true;
 
         return this;
     }

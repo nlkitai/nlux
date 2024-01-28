@@ -1,11 +1,13 @@
 # NLUX
 
-[![npm version](https://badge.fury.io/js/@nlux%2Fnlux.svg)](https://badge.fury.io/js/@nlux%2Fnlux)
-[![GitHub license](https://img.shields.io/badge/license-MPL%822.0-blue.svg)](https://raw.githubusercontent.com/nlux/nlux-js/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/license-MPL%822.0-blue.svg)](https://github.com/nluxai/nlux/blob/latest/LICENSE)
+[![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react)
+[![Website NLUX.ai](https://img.shields.io/badge/website-NLUX.ai-%23fa896b)](https://nlux.ai)
 
 ## The JS / React Library For Building Conversational AI Interfaces ✨💬
 
-NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
+NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
+integrate
 powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
 can add conversational AI capabilities and interact with your favourite LLM.
 
@@ -13,7 +15,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 * **Build AI Chat Interfaces In Minutes** - High quality conversational AI interfaces with just a few lines of code.
 * **React Components & Hooks** - `<AiChat />` for UI and `useAdapter` hook for easy integration.
-* **Flexible LLM Adapters** - `ChatGPT` and `HuggingFace`, and an API to **Create Your Own Adapter** for any LLM.
+* **LLM Adapters** - Provided for `ChatGPT`, `LangChain` 🦜 LangServe APIs, `HuggingFace` 🤗 Inference API.
+* A flexible interface to **Create Your Own Adapter** for any LLM or API, with support for stream or fetch modes.
 * **Bot and User Personas** - Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
 * **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
@@ -30,6 +33,8 @@ It is a monorepo that contains the following NPM packages:
 **React JS Packages:**
 
 * [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) - React JS components for NLUX.
+* [`@nlux/langchain-react`](https://www.npmjs.com/package/@nlux/langchain-react) - React hooks and adapter for APIs
+  created using LangChain's LangServe library.
 * [`@nlux/openai-react`](https://www.npmjs.com/package/@nlux/openai-react) - React hooks for the OpenAI API.
 * [`@nlux/hf-react`](https://www.npmjs.com/package/@nlux/hf-react) - React hooks and pre-processors for the Hugging Face
   Inference API
@@ -37,10 +42,12 @@ It is a monorepo that contains the following NPM packages:
 **Vanilla JS Packages:**
 
 * [`@nlux/core`](https://www.npmjs.com/package/@nlux/core) - The core Vanilla JS library to use with any web framework.
+* [`@nlux/langchain`](https://www.npmjs.com/package/@nlux/langchain) - Adapter for APIs created using LangChain's
+  LangServe library.
 * [`@nlux/openai`](https://www.npmjs.com/package/@nlux/openai) - Adapter for the OpenAI API.
 * [`@nlux/hf`](https://www.npmjs.com/package/@nlux/hf) - Adapter and pre-processors for the Hugging Face Inference API.
 
-**Other Packages:**
+**Themes And Extensions:**
 
 * [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) - Themes and CSS styles.
 * [`@nlux/highlighter`](https://www.npmjs.com/package/@nlux/highlighter) - Syntax highlighter based on
@@ -50,7 +57,7 @@ Please visit each package's NPM page for information on how to use it.
 
 ## Docs Website And Examples 📖
 
-Please visit [docs.nlux.ai](https://docs.nlux.ai/) for the full documentation and examples.
+Please visit **[docs.nlux.ai](https://docs.nlux.ai/)** for the full documentation and examples.
 
 ## Design principles ⚜️
 
@@ -58,7 +65,7 @@ The following design principles guide the development of NLUX:
 
 * **Natural**: The library should be as natural as possible. It should be easy to
   use and understand. The user experience should be intuitive and pleasant.
-  No teaching or thinking should be required to use the library.
+  No teaching or thinking should be required to use any UI that is built with NLUX.
 
 * **Fast**: The library should be as fast as possible. It should be fast to
   load, fast to render, fast to update, fast to respond to user input.
@@ -84,9 +91,11 @@ cross platforms, with a focus on performance and usability.
 ## Community and Support 🙏
 
 * **Star The Repo** 🌟 - If you like NLUX, please star the repo to show your support.
-* **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** - Ask questions, share ideas, and get help from
-  the community.
-* **[Docs Website](https://docs.nlux.ai/)** - To learn more about NLUX and contribute.
+* **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** - Ask questions, report issues, and share ideas
+  with the community.
+* **[Discord Server](https://discord.gg/USK24KPn)** - Live chat
+  and discussions with the community members.
+* **[Docs Website](https://docs.nlux.ai/)** - For examples, learning resources, and API reference.
 
 ## License 📃
 
@@ -96,5 +105,5 @@ Wondering what that means? Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/e
 ## About The Developer 👨‍💻
 
 NLUX is a new open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
-engineer based in London, with over a decade of experience building user interfaces and developer
+engineer based in London (UK), with over a decade of experience building user interfaces and developer
 tools at companies like Amazon and Goldman Sachs, and contributions to open-source projects.
