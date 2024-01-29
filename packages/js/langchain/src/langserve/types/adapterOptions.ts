@@ -22,7 +22,7 @@ export type LangServeAdapterOptions = {
      * The data transfer mode to use when communicating with the LangServe runnable.
      * If not provided, the `url` will be checked to see if it contains the action
      * to perform (either `/invoke` or `/stream`). If the action is not provided, the default
-     * data transfer mode will be `fetch`. If the action is provided, the data transfer mode
+     * data transfer mode will be `stream`. If the action is provided, the data transfer mode
      * should match the action (either `fetch` mode for `/invoke` or `stream` mode for `/stream`).
      */
     dataTransferMode?: DataTransferMode;

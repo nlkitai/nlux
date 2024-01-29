@@ -18,7 +18,7 @@ import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
 
 export abstract class LangServeAbstractAdapter implements StandardAdapter<string, string | undefined> {
-    static defaultDataTransferMode: DataTransferMode = 'fetch';
+    static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
     private readonly __options: LangServeAdapterOptions;
