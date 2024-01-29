@@ -1,6 +1,6 @@
 # NLUX REACT ✨💬
 
-## Conversational AI UI Library For ChatGPT And Other LLMs
+## The Conversational AI UI Library For Any LLM
 
 NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
 powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
@@ -8,20 +8,19 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 ## Key Features 🌟
 
-* **Build AI Chat Interfaces In Minutes** - High quality conversational AI interfaces with just a few lines of code.
-* **React Components & Hooks** - `<AiChat />` for UI and `useAdapter` hook for easy integration.
-* **Flexible LLM Adapters** - `ChatGPT` `HuggingFace` and an API to **Create Your Own Adapter** for any LLM.
-* **Bot and User Personas** - Customize the bot and user personas with names, images, and descriptions.
-* **Streaming LLM Output** - Streamed the chat response to the UI as it's being generated.
-* **Syntax Highlighting** - Color code snippets in the response. **Copy And Paste** code into your editor.
-* **Personalized Conversation** - Provide context using system messages, and instruct the LLM how to behave.
+* **Build AI Chat Interfaces In Minutes** ― High quality conversational AI interfaces with just a few lines of code.
+* **React Components & Hooks** ― `<AiChat />` for UI and `useAdapter` hook for easy integration.
+* **LLM Adapters** ― For `ChatGPT` / `LangChain` 🦜 LangServe / `HuggingFace` 🤗 Inference.
+* A flexible interface to **Create Your Own Adapter** for any LLM or API.
+* **Bot and User Personas** ― Customize the bot and user personas with names, images, and more.
+* **Streaming LLM Output** ― Streamed the chat response to the UI as it's being generated.
 * **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
-* **Zero Dependencies** - Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
+* **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
 
-## Docs Website 📖
+## Docs & Examples 📖
 
-Please visit [docs.nlux.ai](https://docs.nlux.ai/) for the full documentation and examples.
+For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
 
 ## Get Started With NLUX React and ChatGPT 🚀
 
