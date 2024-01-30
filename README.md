@@ -62,19 +62,18 @@ The following design principles guide the development of NLUX:
   Usage should unfold naturally without obstacles or friction. No teaching or thinking
   should be required to use UI built with NLUX.
 
-* **Performance** ― NLUX should be as fast as possible. Fast to load, fast to render,
-  and fast to update, fast to respond to user input. To achieve that, we should avoid
-  unnecessary work, optimize for performance, minimize bundle size, and not depend on
-  external libraries.
+* **Performance** ― NLUX should be as fast as possible. Fast to load, fast to render
+  and update, fast to respond to user input. To achieve that, we should avoid unnecessary
+  work, optimize for performance, minimize bundle size, and not depend on external libraries.
 
-* **Accessibility** ― UI built with NLUX should be accessible to everyone.
-  It should be usable by people with disabilities, on various devices, and in various
-  environments, using various input methods (keyboard, touch, voice).
+* **Accessibility** ― UI built with NLUX should be accessible to everyone. It should be usable
+  by people with disabilities, on various devices, in various environments, and using various
+  input methods (keyboard, touch, voice).
 
-* **Developer Dedication** ― NLUX recognizes developers as first-class citizens.
-  It should be easy use by developers, easy to understand, and easy to extend. Stellar
-  documentation should be provided. The feature roadmap should evolve aligning to
-  developer needs voiced.
+* **DX** ― NLUX recognizes developers as first-class citizens. The library should enable an
+  optimal DX (developer experience). It should be effortless to use, easy to understand, and
+  simple to extend. Stellar documentation should be provided. The feature roadmap should evolve
+  aligning to developer needs voiced.
 
 ## Mission 👨‍🚀
 
