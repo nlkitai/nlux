@@ -64,9 +64,10 @@ try {
         '05-react-js-with-adapters',
         '06-react-js-personas',
         '07-react-js-events',
+        '08-react-js-with-conv-history',
     ].map(async (name) => {
         await run(`cp -r samples/emulator/src/${name}/index.html dist/dev/emulator/${name}/index.html`);
-        await run(`cp -r samples/emulator/src/${name}/require.min.js dist/dev/emulator/${name}/require.min.js`);
+        await run(`cp -r samples/emulator/dep/loaders/require.min.js dist/dev/emulator/${name}/require.min.js`);
     }));
 
     info('Symlinking packages to emulator folder');

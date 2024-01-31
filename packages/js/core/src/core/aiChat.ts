@@ -1,6 +1,7 @@
 import {registerAllComponents} from '../components/components';
 import {Adapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
+import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
 import {NluxProps} from '../types/props';
 import {StandardAdapter} from '../types/standardAdapter';
@@ -20,6 +21,7 @@ export class AiChat implements IAiChat {
     protected theAdapterBuilder: StandardAdapter<any, any> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
+    protected theConversationHistory: ConversationItem[] | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
@@ -76,10 +78,11 @@ export class AiChat implements IAiChat {
                 themeId: this.theThemeId ?? undefined,
                 adapter: adapterToUser,
                 className: this.theClassName ?? undefined,
+                conversationHistory: this.theConversationHistory ?? undefined,
                 syntaxHighlighter: this.theSyntaxHighlighter ?? undefined,
                 layoutOptions: this.theLayoutOptions ?? {},
-                promptBoxOptions: this.thePromptBoxOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
+                promptBoxOptions: this.thePromptBoxOptions ?? {},
                 personaOptions: this.thePersonasOptions ?? {},
             },
         );
@@ -244,6 +247,25 @@ export class AiChat implements IAiChat {
         }
 
         this.theClassName = className;
+        return this;
+    }
+
+    public withConversationHistory(conversationHistory: ConversationItem[]) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set conversation history. NLUX is already mounted.',
+            });
+        }
+
+        if (this.theConversationHistory) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Conversation history was already set.',
+            });
+        }
+
+        this.theConversationHistory = conversationHistory;
         return this;
     }
 

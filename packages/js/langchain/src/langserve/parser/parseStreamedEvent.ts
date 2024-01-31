@@ -4,7 +4,7 @@ export const parseStreamedEvent = (event: string): {
     event: 'data' | 'end';
     data: any;
 } | undefined => {
-    const regEx = /^event:\s+(?<event>[\w]+)(\n(\r?)data: (?<data>(.|\n)*))?/gm;
+    const regEx = /^event:\s+(?<event>[\w]+)((\r?)\n(\r?)data: (?<data>(.|\n)*))?/gm;
     const match = regEx.exec(event);
     if (!match) {
         return undefined;

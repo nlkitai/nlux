@@ -108,6 +108,16 @@ const ExampleWrapper = () => {
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',
                         // },
                     }}
+                    // conversationHistory={[
+                    //     {
+                    //         role: 'user',
+                    //         message: 'Hello',
+                    //     },
+                    //     {
+                    //         role: 'ai',
+                    //         message: 'Hi There!',
+                    //     },
+                    // ]}
                     conversationOptions={{
                         scrollWhenGenerating: true,
                     }}

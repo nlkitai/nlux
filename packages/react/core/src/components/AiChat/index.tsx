@@ -25,6 +25,7 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             promptBoxOptions,
             personaOptions,
             events,
+            conversationHistory,
         } = props;
 
         let newInstance = createAiChat().withAdapter(adapter);
@@ -47,6 +48,10 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
 
         if (syntaxHighlighter) {
             newInstance = newInstance.withSyntaxHighlighter(syntaxHighlighter);
+        }
+
+        if (conversationHistory) {
+            newInstance = newInstance.withConversationHistory(conversationHistory);
         }
 
         if (events) {

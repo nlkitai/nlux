@@ -1,3 +1,4 @@
+import {escapeHtml} from '../../../../x/dom/escapeHtml';
 import {render} from '../../../../x/render';
 import {warn} from '../../../../x/warn';
 import {__} from '../message.render';
@@ -21,10 +22,11 @@ export const createPersonaDom = (persona: {
         return;
     }
 
+    const escapedName = persona.name ? escapeHtml(persona.name) : '';
     const photoContainer = document.createElement('div');
     photoContainer.classList.add(__('persona-photo-container'));
-    photoContainer.ariaRoleDescription = 'Persona Photo' + (persona.name
-        ? ` For Chat Participant ${persona.name}`
+    photoContainer.ariaRoleDescription = 'Persona Photo' + (escapedName
+        ? ` For Chat Participant ${escapedName}`
         : '');
 
     if (persona.picture instanceof HTMLElement) {

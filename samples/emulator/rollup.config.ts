@@ -298,6 +298,45 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
             },
         ],
     },
+    //
+    // 08 - React JS + Conversation History
+    //
+    {
+        input: './src/08-react-js-with-conv-history/index.tsx',
+        plugins: [
+            esbuild({
+                jsx: 'transform',
+                jsxFactory: 'React.createElement',
+                jsxFragment: 'React.Fragment',
+            }),
+            nodeResolve({
+                modulePaths: [
+                    nodeModulesPath,
+                ],
+                rootDir: '/packages',
+                browser: true,
+            }),
+            commonjs(),
+            replace({
+                delimiters: ['', ''],
+                preventAssignment: false,
+                values: {
+                    'process.env.NODE_ENV': JSON.stringify('development'),
+                },
+            }),
+        ],
+        external: externals,
+        output: [
+            {
+                file: `${outputFolder}/08-react-js-with-conv-history/index.js`,
+                format: 'umd',
+                sourcemap: true,
+                strict: true,
+                esModule: false,
+                name: 'nluxEmulatorReactExample',
+            },
+        ],
+    },
 ]);
 
 export default packageConfig;

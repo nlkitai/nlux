@@ -374,15 +374,13 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
     }
 
     protected runDomActionsQueue() {
-        requestAnimationFrame(() => {
-            if (this.actionsOnDomReady.length > 0 && this.rendered) {
-                const actionsOnDomReady = this.actionsOnDomReady;
-                this.actionsOnDomReady = [];
-                for (const action of actionsOnDomReady) {
-                    domOp(() => action());
-                }
+        if (this.actionsOnDomReady.length > 0 && this.rendered) {
+            const actionsOnDomReady = this.actionsOnDomReady;
+            this.actionsOnDomReady = [];
+            for (const action of actionsOnDomReady) {
+                domOp(() => action());
             }
-        });
+        }
     }
 
     /**

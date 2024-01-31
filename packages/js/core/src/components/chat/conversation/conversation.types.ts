@@ -1,5 +1,5 @@
 import {BotPersona, UserPersona} from '@nlux/core';
-import {CompMessageProps} from '../message/message.types';
+import {ConversationItem} from '../../../types/conversation';
 
 export type CompConversationEvents = 'user-scrolled';
 
@@ -11,7 +11,7 @@ export type CompConversationScrollParams = Readonly<{
 export type CompConversationScrollCallback = (params: CompConversationScrollParams) => void;
 
 export type CompConversationProps = Readonly<{
-    messages?: CompMessageProps[];
+    messages?: readonly ConversationItem[];
     scrollWhenGenerating: boolean;
     botPersona?: BotPersona;
     userPersona?: UserPersona;

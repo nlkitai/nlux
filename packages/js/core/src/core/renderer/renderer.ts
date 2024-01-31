@@ -3,6 +3,7 @@ import {CompChatRoomProps} from '../../components/chat/chat-room/chat-room.types
 import {CompExceptionsBox} from '../../components/miscellaneous/exceptions-box/model';
 import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-box/types';
 import {NluxContext} from '../../types/context';
+import {ConversationItem} from '../../types/conversation';
 import {ExceptionType} from '../../types/exception';
 import {NluxProps} from '../../types/props';
 import {warn} from '../../x/warn';
@@ -28,6 +29,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
     private theClassName: string | null = null;
+    private theConversationHistory: Readonly<ConversationItem[]> | null = null;
     private theConversationOptions: Readonly<ConversationOptions> = {};
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
@@ -59,6 +61,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
+        this.theConversationHistory = props?.conversationHistory ?? null;
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
         this.thePersonasOptions = props?.personaOptions ?? {};
     }
@@ -143,6 +146,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 visible: true,
                 botPersona: this.thePersonasOptions?.bot ?? undefined,
                 userPersona: this.thePersonasOptions?.user ?? undefined,
+                conversationHistory: this.theConversationHistory ?? undefined,
                 scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating ?? undefined,
                 containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
                 containerHeight: this.theLayoutOptions?.height || undefined,

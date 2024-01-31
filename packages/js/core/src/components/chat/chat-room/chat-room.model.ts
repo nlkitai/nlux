@@ -3,6 +3,7 @@ import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {NluxContext} from '../../../types/context';
+import {ConversationItem} from '../../../types/conversation';
 import {isStandardAdapter, StandardAdapter} from '../../../types/standardAdapter';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
@@ -30,6 +31,7 @@ export class CompChatRoom extends BaseComp<
         promptBox,
         botPersona,
         userPersona,
+        conversationHistory,
     }: CompChatRoomProps) {
         super(context, {
             visible,
@@ -45,7 +47,13 @@ export class CompChatRoom extends BaseComp<
         // Set scroll when generating default value to true, when not specified
         const scrollWhenGeneratingUserOption = scrollWhenGenerating ?? true;
 
-        this.addConversation(scrollWhenGeneratingUserOption, botPersona, userPersona);
+        this.addConversation(
+            scrollWhenGeneratingUserOption,
+            botPersona,
+            userPersona,
+            conversationHistory,
+        );
+
         this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
 
         // @ts-ignore
@@ -115,6 +123,7 @@ export class CompChatRoom extends BaseComp<
         scrollWhenGenerating: boolean,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
+        conversationHistory?: readonly ConversationItem[],
     ) {
         this.conversation = comp(CompConversation)
             .withContext(this.context)
@@ -122,6 +131,7 @@ export class CompChatRoom extends BaseComp<
                 scrollWhenGenerating,
                 botPersona,
                 userPersona,
+                messages: conversationHistory,
             })
             .create();
 

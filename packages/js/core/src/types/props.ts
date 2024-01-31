@@ -4,6 +4,7 @@ import {LayoutOptions} from '../core/options/layoutOptions';
 import {PersonaOptions} from '../core/options/personaOptions';
 import {PromptBoxOptions} from '../core/options/promptBoxOptions';
 import {Adapter} from './adapter';
+import {ConversationItem} from './conversation';
 import {EventsMap} from './event';
 import {StandardAdapter} from './standardAdapter';
 
@@ -12,6 +13,7 @@ export type NluxProps = {
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;
+    conversationHistory?: ConversationItem[];
     promptBoxOptions: Partial<PromptBoxOptions>;
     conversationOptions: Partial<ConversationOptions>;
     personaOptions: Partial<PersonaOptions>;

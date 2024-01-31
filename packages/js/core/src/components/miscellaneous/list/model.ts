@@ -61,13 +61,6 @@ export class CompList<CompType extends BaseComp<any, any, any, any>>
             });
         }
 
-        if (!this.renderingRoot) {
-            throw new NluxError({
-                source: this.constructor.name,
-                message: `Unable to append component "${componentToAppend.id}" because rendering root is not set`,
-            });
-        }
-
         // List not rendered yet - add component to list of components to render
         // when the list is rendered.
         if (!this.rendered) {

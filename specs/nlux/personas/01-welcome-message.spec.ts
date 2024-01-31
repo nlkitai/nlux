@@ -83,4 +83,25 @@ describe('Personas config is provided', () => {
 
         expect(queries.welcomeMessage()).toBeInTheDocument();
     });
+
+    it('Welcome message should not be rendered when chat history is provided', async () => {
+        aiChat = createAiChat()
+            .withAdapter(adapterController.adapter)
+            .withPersonaOptions(personasConfig)
+            .withConversationHistory([
+                {
+                    message: 'Hello LLM',
+                    role: 'user',
+                },
+                {
+                    message: 'Hello, how can I help you?',
+                    role: 'ai',
+                },
+            ]);
+
+        aiChat.mount(rootElement);
+        await waitForRenderCycle();
+
+        expect(queries.welcomeMessage()).not.toBeInTheDocument();
+    });
 });

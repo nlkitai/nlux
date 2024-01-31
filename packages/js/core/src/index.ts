@@ -53,10 +53,14 @@ export type {
 } from './types/standardAdapterConfig';
 
 export type {
-    DataTransferMode,
     Adapter,
     StreamingAdapterObserver,
+    DataTransferMode,
 } from './types/adapter';
+
+export type {
+    AdapterBuilder,
+} from './types/adapterBuilder';
 
 export type {
     StreamParser,
@@ -71,8 +75,14 @@ export type {
     CreateHighlighterOptions,
 } from './core/highlighter/highlighter';
 
-export type {AdapterBuilder} from './types/adapterBuilder';
+export type {
+    NluxContext,
+} from './types/context';
 
-export type {Participant} from './types/participant';
-export type {FragmentType, Fragment} from './types/fragment';
-export type {NluxContext} from './types/context';
+export type {
+    ConversationItem,
+} from './types/conversation';
+
+export type {
+    ParticipantRole,
+} from './types/participant';

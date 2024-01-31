@@ -141,6 +141,20 @@ export class CompConversation extends BaseComp<
     private addConversation() {
         this.messagesList = comp(CompList<CompMessage>).withContext(this.context).create();
         this.addSubComponent(this.messagesList.id, this.messagesList, 'messagesContainer');
+
+        const initialMessages = this.props?.messages!;
+        if (initialMessages) {
+            initialMessages
+                .filter((message) => message.role !== 'system')
+                .forEach((message) => {
+                    this.addMessage(
+                        message.role === 'ai' ? 'in' : 'out',
+                        'static',
+                        new Date(),
+                        message.message,
+                    );
+                });
+        }
     }
 
     private createMessageResizedListener(messageId: string) {

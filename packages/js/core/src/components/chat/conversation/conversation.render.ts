@@ -31,9 +31,11 @@ export const renderConversation: CompRenderer<
     const renderingContext: {
         botPersona: BotPersona | undefined;
         welcomeMessageContainer: HTMLElement | undefined;
+        shouldRenderWelcomeMessage: boolean;
     } = {
         botPersona: props.botPersona,
         welcomeMessageContainer: undefined,
+        shouldRenderWelcomeMessage: !props.messages || props.messages.length === 0,
     };
 
     const messagesContainer = render(html());
@@ -61,14 +63,16 @@ export const renderConversation: CompRenderer<
     // Create welcome message container
     // and append it to the root if personaOptions are provided
     //
-    if (props.botPersona) {
-        const bot = props.botPersona;
-        renderingContext.welcomeMessageContainer = createWelcomeMessage(bot);
-        if (renderingContext.welcomeMessageContainer) {
-            messagesContainer.append(renderingContext.welcomeMessageContainer);
+    if (renderingContext.shouldRenderWelcomeMessage) {
+        if (props.botPersona) {
+            const bot = props.botPersona;
+            renderingContext.welcomeMessageContainer = createWelcomeMessage(bot);
+            if (renderingContext.welcomeMessageContainer) {
+                messagesContainer.append(renderingContext.welcomeMessageContainer);
+            }
+        } else {
+            renderingContext.welcomeMessageContainer = createEmptyWelcomeMessage();
         }
-    } else {
-        renderingContext.welcomeMessageContainer = createEmptyWelcomeMessage();
     }
 
     return {

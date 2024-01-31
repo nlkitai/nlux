@@ -1,4 +1,5 @@
 import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
+import {ConversationItem} from '../../../types/conversation';
 
 export type CompChatRoomEvents = 'close-chat-room-clicked'
     | 'show-chat-room-clicked'
@@ -8,6 +9,7 @@ export type CompChatRoomProps = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
+    conversationHistory?: readonly ConversationItem[];
     scrollWhenGenerating?: boolean;
     containerMaxHeight?: number | string;
     containerMaxWidth?: number | string;
