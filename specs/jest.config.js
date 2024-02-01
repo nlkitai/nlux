@@ -3,13 +3,7 @@ module.exports = {
     preset: 'rollup-jest',
     testEnvironment: 'jsdom',
     setupFilesAfterEnv: ['./jest.setup.js'],
-    collectCoverageFrom: [
-        'packages/**/*.{ts,tsx}',
-        '!src/**/*.d.ts',
-        '!src/**/*.test.{js,jsx,ts,tsx}',
-        '!src/**/node_modules/**',
-        '!src/**/vendor/**',
-    ],
+    collectCoverage: false,
     "transform": {
         "\\.ts$": [
             "rollup-jest",

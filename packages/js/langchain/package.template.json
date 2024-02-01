@@ -17,10 +17,10 @@
     "@rollup/plugin-replace": "^5.0.5",
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.5",
-    "rollup": "^4.8.0",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.6",
     "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-esbuild": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.1",
     "tslib": "^2.6.2"
   },
   "main": "index.js",

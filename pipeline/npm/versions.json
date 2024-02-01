@@ -6,7 +6,7 @@
     "react-dom": "18.2.0"
   },
   "dependencies": {
-    "openai": "4.20.1",
+    "openai": "4.26.0",
     "hfInference": "2.6.4",
     "highlightJs": "11.9.0"
   }
