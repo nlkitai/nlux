@@ -1,9 +1,10 @@
 import clc from 'cli-color';
-import {existsSync} from 'fs';
+import {cpSync, existsSync, mkdirSync, rmSync} from 'fs';
+import {join} from 'path';
+import symlinkDir from 'symlink-dir';
 import {info, nl, throwError} from '../utils/log.mjs';
 import {devDistPath} from '../utils/paths.mjs';
-import {symlinkBuiltPackageToEmulatorFolder, symlinkNodeModuleToEmulatorFolder} from '../utils/symLink.mjs';
-import {packagesList} from "./packages.mjs";
+import {packagesList} from './packages.mjs';
 import {run} from './run.mjs';
 
 try {
@@ -32,16 +33,8 @@ try {
     // Run commands to create emulator folder structure
     //
     info('Creating emulator folder structure');
-    const commands = [
-        'rm -fr dist/dev/emulator',
-        'mkdir dist/dev/emulator',
-        'mkdir dist/dev/emulator/packages',
-        'mkdir dist/dev/emulator/packages/@nlux',
-    ];
-
-    for (let i = 0; i < commands.length; i++) {
-        await run(commands[i]);
-    }
+    rmSync('dist/public', {recursive: true, force: true});
+    mkdirSync('dist/public/packages/@nlux', {recursive: true});
 
     //
     // Build emulator code once
@@ -54,11 +47,11 @@ try {
     // Copy static files to emulator folder
     //
     info('Copying emulator static files');
-    await run('cp -r samples/emulator/src/index.html dist/dev/emulator/index.html');
-    await run('cp -r samples/emulator/src/01-vanilla-js-with-adapters/index.html dist/dev/emulator/01-vanilla-js-with-adapters/index.html');
-    await run('cp -r samples/emulator/src/02-vanilla-js-with-events/index.html dist/dev/emulator/02-vanilla-js-with-events/index.html');
+    cpSync('samples/emulator/src/index.html', 'dist/public/index.html');
 
     await Promise.all([
+        '01-vanilla-js-with-adapters',
+        '02-vanilla-js-with-events',
         '03-react-js-with-hugging-face',
         '04-react-js-with-langserve',
         '05-react-js-with-adapters',
@@ -66,25 +59,46 @@ try {
         '07-react-js-events',
         '08-react-js-with-conv-history',
     ].map(async (name) => {
-        await run(`cp -r samples/emulator/src/${name}/index.html dist/dev/emulator/${name}/index.html`);
-        await run(`cp -r samples/emulator/dep/loaders/require.min.js dist/dev/emulator/${name}/require.min.js`);
+        cpSync(`samples/emulator/src/${name}/index.html`, `dist/public/${name}/index.html`);
+        cpSync(`samples/emulator/dep/loaders/require.min.js`, `dist/public/${name}/require.min.js`);
+
+        [
+            'index.mjs',
+            'index.mjs.map',
+            'index.js',
+            'index.js.map',
+        ].forEach((fileToCopy) => {
+            if (existsSync(`dist/dev/emulator/${name}/${fileToCopy}`)) {
+                cpSync(`dist/dev/emulator/${name}/${fileToCopy}`, `dist/public/${name}/${fileToCopy}`);
+            }
+        });
     }));
 
-    info('Symlinking packages to emulator folder');
+    info('Sym-linking packages to emulator folder');
 
     //
     // Symlink built NLUX packages to emulator folder
     //
-    packagesList.forEach(
-        pkg => symlinkBuiltPackageToEmulatorFolder(pkg.name)
-    );
+    await Promise.all(packagesList.map(async (pkg) => {
+        await symlinkDir(
+            join('dist', 'dev', pkg.name),
+            join('dist', 'public', 'packages', pkg.npmName),
+            {overwrite: true}
+        );
+    }));
 
     //
     // Symlink dependencies to emulator folder
     //
-    ['react', 'react-dom', 'openai', 'highlight.js'].forEach((name) => {
-        symlinkNodeModuleToEmulatorFolder(name);
-    });
+    await Promise.all([
+        'react', 'react-dom', 'openai', 'highlight.js',
+    ].map(async (name) => {
+        await symlinkDir(
+            join('node_modules', name),
+            join('dist', 'public', 'packages', name),
+            {overwrite: true}
+        );
+    }));
 
     info('Emulator ready! Starting dev server ✅ 💫 ...');
     const port = process.env.PORT || 9090;
@@ -98,7 +112,7 @@ try {
     //
     // Start dev server
     //
-    await run(`yarn serve --symlinks -p ${port} dist/dev/emulator`);
+    await run(`yarn serve --symlinks -p ${port} dist/public`);
 } catch (e) {
     process.exit(1);
 }

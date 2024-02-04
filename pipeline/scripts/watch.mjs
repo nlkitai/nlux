@@ -1,6 +1,6 @@
 import clc from 'cli-color';
 import {info, nl} from '../utils/log.mjs';
-import {packagesList} from "./packages.mjs";
+import {packagesList} from './packages.mjs';
 import {run} from './run.mjs';
 
 nl(1);

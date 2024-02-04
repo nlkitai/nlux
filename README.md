@@ -1,7 +1,6 @@
-# NLUX
+# [NLUX 🪄](https://nlux.ai)
 
-[![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react)
-[![Docs NLUX.ai](https://img.shields.io/badge/docs_website-NLUX.ai-%23fa896b)](https://nlux.ai)
+[![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/docs_website-NLUX.ai-%23fa896b)](https://nlux.ai)
 
 ## The JS / React Library For Building Conversational AI Interfaces ✨💬
 
@@ -19,10 +18,6 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** ― Streamed the chat response to the UI as it's being generated.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
-
-## Docs & Examples 📖
-
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
 
 ## Repo Content 📦
 
@@ -54,7 +49,11 @@ It is a monorepo that contains the following NPM packages:
 
 Please visit each package's NPM page for information on how to use it.
 
-## Design principles ⚜️
+## Docs & Examples 📖
+
+For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+
+## Design Principles ⚜️
 
 The following design principles guide the development of NLUX:
 
@@ -80,12 +79,12 @@ The following design principles guide the development of NLUX:
 Our mission is **to enable developers to build outstanding LLM front-ends and applications**,
 cross platforms, with a focus on performance and usability.
 
-## Community and Support 🙏
+## Community & Support 🙏
 
 * **Star The Repo** 🌟 ― If you like NLUX, please star the repo to show your support.
 * **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** ― Ask questions, report issues, and share your
   ideas with the community.
-* **[Discord Server](https://discord.gg/USK24KPn)** ― Join our Discord server to chat with the community and get
+* **[Discord Community](https://discord.gg/USK24KPn)** ― Join our Discord server to chat with the community and get
   support.
 * **[Docs Website](https://nlux.ai/)** ― For examples, learning resources, and API reference.
 
@@ -97,5 +96,5 @@ Wondering what that means? Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/e
 ## About The Developer 👨‍💻
 
 NLUX is a new open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
-engineer based in London, with over a decade of experience building user interfaces and developer
+engineer with over a decade of experience building user interfaces and developer
 tools at companies like Amazon and Goldman Sachs, and contributions to open-source projects.

@@ -26,6 +26,7 @@
   "peerDependencies": {},
   "devDependencies": {
     "cli-color": "^2.0.3",
+    "symlink-dir": "^5.2.1",
     "jsdom": "^22.1.0",
     "serve": "^14.2.1",
     "typescript": "5.2.2"

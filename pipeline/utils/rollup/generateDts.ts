@@ -1,15 +1,17 @@
 import {RollupOptions} from 'rollup';
 import dts from 'rollup-plugin-dts';
 
-export const generateDts = (outputFolder: string, outputFile: string, inputFile = './src/index.ts'): RollupOptions => {
+export const generateDts = (fileName: string, isProduction: boolean, sourceFile = './src/index.ts'): RollupOptions => {
+    const folder = isProduction ? 'prod' : 'dev';
+    const path = `../../../dist/${folder}/${fileName}`;
     return {
-        input: inputFile,
+        input: sourceFile,
         logLevel: 'silent',
         plugins: [
             dts(),
         ],
         output: {
-            file: `${outputFolder}/${outputFile}.d.ts`,
+            file: `${path}/${fileName}.d.ts`,
         },
     };
 };

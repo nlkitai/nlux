@@ -6,7 +6,7 @@ import {cwd} from 'process';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 
-const distPath = join(cwd(), '..', '..', 'dist');
+const distPath = join('..', '..', 'dist');
 const outputFolder = join(distPath, 'dev', 'emulator');
 const nodeModulesPath = join(outputFolder, 'packages');
 

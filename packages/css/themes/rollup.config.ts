@@ -1,4 +1,3 @@
-import {join} from 'path';
 // @ts-ignore
 import csso from 'postcss-csso';
 import postcssImport from 'postcss-import';
@@ -6,13 +5,9 @@ import postcssImport from 'postcss-import';
 import postcssNested from 'postcss-nested';
 import {LogLevel, RollupOptions} from 'rollup';
 import postcss from 'rollup-plugin-postcss';
-// @ts-ignore
-import {outputFolder} from '../../../pipeline/utils/paths.mjs';
-import {readJsonFile} from '../../../pipeline/utils/rollup/readJsonFile';
 
 const isProduction = process.env.NODE_ENV === 'production';
-const themesOutputFolder = outputFolder('themes');
-const packageJsonData = readJsonFile(join(themesOutputFolder, 'package.json'));
+const folder = isProduction ? 'prod' : 'dev';
 
 const cssEntry = (input: string, output: string) => ({
     input,
@@ -41,7 +36,7 @@ const cssEntry = (input: string, output: string) => ({
 });
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
-    cssEntry('./src/nova/theme.css', `${themesOutputFolder}/nova.css`),
+    cssEntry('./src/nova/theme.css', `../../../dist/${folder}/themes/nova.css`),
 ]);
 
 export default packageConfig;

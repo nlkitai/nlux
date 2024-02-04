@@ -1,6 +1,7 @@
 {
   "name": "@nlux/langchain-react",
   "version": "{versions.nlux}",
+  "license": "MPL-2.0",
   "description": "The LangServe adapters for NLUX React, the React JS library for building conversational AI interfaces.",
   "repository": {
     "directory": "packages/react/langchain"

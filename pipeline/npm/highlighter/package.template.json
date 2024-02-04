@@ -1,6 +1,7 @@
 {
   "name": "@nlux/highlighter",
   "version": "{versions.nlux}",
+  "license": "MPL-2.0",
   "description": "Syntax highlighter for NLUX",
   "repository": {
     "directory": "packages/js/highlighter"

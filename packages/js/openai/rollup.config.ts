@@ -5,8 +5,6 @@ import strip from '@rollup/plugin-strip';
 import terser from '@rollup/plugin-terser';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
-// @ts-ignore
-import {outputFolder} from '../../../pipeline/utils/paths.mjs';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
@@ -14,7 +12,6 @@ import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImpo
 const isProduction = process.env.NODE_ENV === 'production';
 const packageName = '@nlux/openai';
 const outputFile = 'openai';
-const packageOutputFolder = outputFolder(outputFile);
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
     {
@@ -42,9 +39,9 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: [
             '@nlux/core',
         ],
-        output: generateOutputConfig(packageName, outputFile, packageOutputFolder, isProduction),
+        output: generateOutputConfig(packageName, outputFile, isProduction),
     },
-    generateDts(packageOutputFolder, outputFile),
+    generateDts(outputFile, isProduction),
 ]);
 
 export default packageConfig;

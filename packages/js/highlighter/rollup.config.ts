@@ -9,8 +9,6 @@ import postcssImport from 'postcss-import';
 import {LogLevel, RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
-// @ts-ignore
-import {outputFolder} from '../../../pipeline/utils/paths.mjs';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
@@ -18,7 +16,7 @@ import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImpo
 const isProduction = process.env.NODE_ENV === 'production';
 const packageName = '@nlux/highlighter';
 const outputFile = 'highlighter';
-const packageOutputFolder = outputFolder(outputFile);
+const folder = isProduction ? 'prod' : 'dev';
 
 const cssEntry = (input: string, output: string) => ({
     input,
@@ -72,11 +70,11 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: [
             '@nlux/core',
         ],
-        output: generateOutputConfig(packageName, outputFile, packageOutputFolder, isProduction),
+        output: generateOutputConfig(packageName, outputFile, isProduction),
     },
-    generateDts(packageOutputFolder, outputFile),
-    cssEntry('./src/themes/stackoverflow/dark.css', `${packageOutputFolder}/dark-theme.css`),
-    cssEntry('./src/themes/stackoverflow/light.css', `${packageOutputFolder}/light-theme.css`),
+    generateDts(outputFile, isProduction),
+    cssEntry('./src/themes/stackoverflow/dark.css', `../../../dist/${folder}/${outputFile}/dark-theme.css`),
+    cssEntry('./src/themes/stackoverflow/light.css', `../../../dist/${folder}/${outputFile}/light-theme.css`),
 ]);
 
 export default packageConfig;

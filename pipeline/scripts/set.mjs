@@ -1,13 +1,13 @@
+import {cpSync, mkdirSync, rmSync} from 'fs';
 import {info, nl} from '../utils/log.mjs';
-import {packagesList} from "./packages.mjs";
+import {packagesList} from './packages.mjs';
 import {run} from './run.mjs';
 import {applyDevVersion, applyReleaseVersion} from './version.mjs';
 
 const copyStructure = async (env) => {
-    await run(`mkdir dist/${env}`);
-
+    mkdirSync(`dist/${env}`, {recursive: true});
     packagesList.forEach(pkg => {
-        run(`cp -r ${pkg.npmConfigDirectory} dist/${env}/${pkg.name}`);
+        cpSync(pkg.npmConfigDirectory, `dist/${env}/${pkg.name}`, {recursive: true});
     });
 };
 
@@ -18,8 +18,8 @@ info('###############################################');
 nl(1);
 
 try {
-    await run('rm -fr dist');
-    await run('mkdir dist');
+    rmSync('dist', {recursive: true, force: true});
+    mkdirSync(`dist`, {recursive: true});
 
     await copyStructure('dev');
     await copyStructure('prod');

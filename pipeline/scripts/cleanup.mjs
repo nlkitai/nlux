@@ -1,7 +1,7 @@
 import {existsSync, lstatSync, readdirSync, rmSync, unlinkSync} from 'fs';
 import {extname, join} from 'path';
 import {error, info, nl} from '../utils/log.mjs';
-import {packagesList} from "./packages.mjs";
+import {packagesList} from './packages.mjs';
 
 const dirNamesToRemove = [
     'node_modules',
