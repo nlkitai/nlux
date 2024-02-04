@@ -1,6 +1,6 @@
-# [NLUX 🪄](https://nlux.ai)
+# [NLUX](https://nlux.ai) 🌲✨💬
 
-[![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/docs_website-NLUX.ai-%23fa896b)](https://nlux.ai)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342) [![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/docs_website-NLUX.ai-%23fa896b)](https://nlux.ai)
 
 ## The JS / React Library For Building Conversational AI Interfaces ✨💬
 
