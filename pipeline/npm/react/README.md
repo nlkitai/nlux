@@ -1,8 +1,6 @@
 # [NLUX REACT](https://nlux.ai) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%23b7ed85)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
-
----
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 

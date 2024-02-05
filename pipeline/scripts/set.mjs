@@ -28,6 +28,7 @@ try {
 
     info('Applying versions ⏲️ to source code packages:');
     applyDevVersion('packages/js');
+    applyDevVersion('packages/extra');
     applyDevVersion('packages/react');
     applyDevVersion('packages/css');
 

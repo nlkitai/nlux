@@ -1,5 +1,7 @@
 # NLUX JS LangChain Adapter
 
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+
 This package enables the integration between NLUX and LangChain, the LLM framework.  
 More specifically ― the package include the adapter to connect **NLUX JS** to backends built
 using [LangServe](https://python.langchain.com/docs/langserve).

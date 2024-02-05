@@ -1,8 +1,6 @@
 # [NLUX JS](https://nlux.ai) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%23b7ed85)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
-
----
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 
@@ -85,7 +83,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.10.6/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.10.7/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

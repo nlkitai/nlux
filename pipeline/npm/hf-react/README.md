@@ -1,5 +1,7 @@
 # NLUX React Hugging Face Adapter
 
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+
 This package enables the integration between NLUX and Hugging Face, the AI models platform.  
 More specifically ― the package include the adapter to connect to chat models hosted and exposed
 via [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints/dedicated).
