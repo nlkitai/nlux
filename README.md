@@ -1,6 +1,6 @@
 # [NLUX](https://nlux.ai) 🌲✨💬
 
-![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342) [![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/docs_website-NLUX.ai-%23fa896b)](https://nlux.ai)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342) [![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
 
 ## The JS / React Library For Building Conversational AI Interfaces ✨💬
 
@@ -43,15 +43,17 @@ It is a monorepo that contains the following NPM packages:
 
 **Themes And Extensions:**
 
-* [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― Themes and CSS styles.
+* [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Nova` theme and CSS styles.
+* [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown **stream** parser to render
+  markdown as it's being generated. Example [here](https://nlux.dev/examples/markdown-streaming).
 * [`@nlux/highlighter`](https://www.npmjs.com/package/@nlux/highlighter) ― Syntax highlighter based on
   [Highlight.js](https://highlightjs.org/).
 
 Please visit each package's NPM page for information on how to use it.
 
-## Docs & Examples 📖
+## Docs & Examples 🤩
 
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+* For developer documentation, examples, and API reference ― please visit: **[NLUX.dev](https://nlux.dev/)**
 
 ## Design Principles ⚜️
 
