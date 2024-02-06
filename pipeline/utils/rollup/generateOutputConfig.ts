@@ -9,7 +9,7 @@ export const generateOutputConfig = (
     const path = `../../../dist/${folder}/${fileName}`;
     return [
         {
-            file: `${path}/${fileName}.js`,
+            file: `${path}/esm/${fileName}.js`,
             format: 'esm',
             esModule: true,
             sourcemap: !isProduction,
