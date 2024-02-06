@@ -44,8 +44,8 @@ It is a monorepo that contains the following NPM packages:
 **Themes And Extensions:**
 
 * [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Nova` theme and CSS styles.
-* [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown **stream** parser to render
-  markdown as it's being generated. Example [here](https://nlux.dev/examples/markdown-streaming).
+* [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown stream parser to render
+  markdown as it's being generated.
 * [`@nlux/highlighter`](https://www.npmjs.com/package/@nlux/highlighter) ― Syntax highlighter based on
   [Highlight.js](https://highlightjs.org/).
 
@@ -86,7 +86,7 @@ cross platforms, with a focus on performance and usability.
 * **Star The Repo** 🌟 ― If you like NLUX, please star the repo to show your support.
 * **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** ― Ask questions, report issues, and share your
   ideas with the community.
-* **[Discord Community](https://discord.gg/USK24KPn)** ― Join our Discord server to chat with the community and get
+* **[Discord Community](https://discord.gg/VY4TDaf4)** ― Join our Discord server to chat with the community and get
   support.
 * **[Docs Website](https://nlux.ai/)** ― For examples, learning resources, and API reference.
 
