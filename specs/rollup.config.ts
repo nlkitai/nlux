@@ -1,4 +1,3 @@
-import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import {join} from 'path';
 import {cwd} from 'process';
@@ -15,6 +14,7 @@ const externals = [
     '@nlux/hf',
     '@nlux/hf-react',
     '@nlux/highlighter',
+    '@nlux/markdown',
     'openai',
     'highlight.js',
     'react',
@@ -27,12 +27,10 @@ const getPackageConfig: () => RollupOptions = () => {
         logLevel: 'silent',
         external: externals,
         plugins: [
-            commonjs(),
             esbuild({
                 jsx: 'transform',
                 jsxFactory: 'React.createElement',
                 jsxFragment: 'React.Fragment',
-                tsconfig: join(cwd(), 'tsconfig.json'),
             }),
             nodeResolve({
                 modulePaths: [

@@ -135,8 +135,6 @@ export const applyDevVersion = (packagesPath) => {
             dependenciesVersions
         ) ?? {};
 
-        console.log('packageJson', packageJson);
-
         const newPackageJsonPath = packageJsonTemplatePath.replace('package.template.json', 'package.json');
         writeFileSync(newPackageJsonPath, JSON.stringify(packageJson, null, 2));
         info(`New package.json created: ${newPackageJsonPath}`);
@@ -145,7 +143,6 @@ export const applyDevVersion = (packagesPath) => {
 
 export const applyReleaseVersion = (packagesPath) => {
     const packageJsonFiles = readAllPackageTemplates(packagesPath);
-    rawLog(packageJsonFiles);
 
     if (!versionsFileContent) {
         versionsFileContent = readVersionsFile();

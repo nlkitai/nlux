@@ -1,0 +1,3 @@
+{
+  "extends": "../../../pipeline/config/tsconfig.json"
+}

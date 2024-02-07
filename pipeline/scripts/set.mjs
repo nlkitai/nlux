@@ -38,6 +38,13 @@ try {
     applyReleaseVersion('dist/prod');
 
     //
+    // Copy tsonfig.json to packages
+    //
+    for (const pkg of packagesList) {
+        cpSync('pipeline/config/packageLevelTsConfig.json', `packages/${pkg.directory}/tsconfig.json`);
+    }
+
+    //
     // Install dev packages
     //
     for (const pkg of packagesList) {

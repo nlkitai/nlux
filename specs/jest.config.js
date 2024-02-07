@@ -9,15 +9,15 @@ module.exports = {
             "rollup-jest",
             {
                 "configFile": "./rollup.config.ts",
-                "configPlugin": "@rollup/plugin-typescript"
+                "configPlugin": "typescript={target: \"es2022\", module: \"esnext\", moduleResolution: \"bundler\", isolatedModules: true, noEmit: true}"
             },
             "--resolveJsonModule"
         ],
         "\\.tsx$": [
             "rollup-jest",
             {
-                "configPlugin": "@rollup/plugin-typescript",
-                "configFile": "./rollup.config.ts",
+                "configPlugin": "typescript={target: \"es2022\", module: \"esnext\", moduleResolution: \"bundler\", isolatedModules: true, noEmit: true}",
+                "configFile": "./rollup.config.ts"
             },
             "--resolveJsonModule",
             "--jsx"

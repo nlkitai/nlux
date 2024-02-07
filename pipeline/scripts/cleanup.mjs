@@ -54,7 +54,7 @@ function removeJsFiles(folder) {
 }
 
 function removeGeneratedPackageJson(folder) {
-    info('Deleting package.json files from ' + folder);
+    info('Deleting package.json and tsconfig.json files from ' + folder);
     try {
         // Get array of files
         const files = readdirSync(folder);
@@ -63,11 +63,11 @@ function removeGeneratedPackageJson(folder) {
         for (const file of files) {
             // Check if JS file
             if (file === 'package.json') {
-                // Construct full path
-                const filePath = join(folder, file);
+                unlinkSync(join(folder, file));
+            }
 
-                // Delete file
-                unlinkSync(filePath);
+            if (file === 'tsconfig.json') {
+                unlinkSync(join(folder, file));
             }
         }
     } catch (err) {
