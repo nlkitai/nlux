@@ -1,9 +1,9 @@
 import {AiChat} from '@nlux/react';
 import {act, render} from '@testing-library/react';
 import React from 'react';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import '@testing-library/jest-dom';
 import {submit, type} from '../../../../utils/userInteractions';
 import {delayBeforeSendingResponse, waitForMilliseconds, waitForRenderCycle} from '../../../../utils/wait';
 
@@ -15,7 +15,7 @@ describe('When messageReceived is added as a reactive prop', () => {
     });
 
     it('should be called with message', async () => {
-        const messageReceived = jest.fn();
+        const messageReceived = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
         />;
@@ -53,7 +53,7 @@ describe('When messageReceived is removed as a reactive prop', () => {
     });
 
     it('should not be called with message', async () => {
-        const messageReceived = jest.fn();
+        const messageReceived = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{

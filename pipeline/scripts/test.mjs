@@ -19,7 +19,7 @@ try {
     //
     // Run tests
     //
-    run('cd specs && yarn js:build && yarn js:run', true)
+    run('cd specs && yarn test', true)
         .then(() => process.exitCode = 0)
         .catch(() => process.exitCode = 1);
 } catch (e) {

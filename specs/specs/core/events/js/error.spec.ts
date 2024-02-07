@@ -1,5 +1,5 @@
 import {AiChat, createAiChat} from '@nlux/core';
-import '@testing-library/jest-dom';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {submit, type} from '../../../../utils/userInteractions';
@@ -23,7 +23,7 @@ describe('When error event handler is used with a Vanilla JS Component', () => {
     });
 
     it('should be called when the promise rejects', async () => {
-        const errorCallback = jest.fn();
+        const errorCallback = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()
@@ -49,8 +49,8 @@ describe('When error event handler is used with a Vanilla JS Component', () => {
     });
 
     it('should not be called when matching callback is removed', async () => {
-        const errorCallback1 = jest.fn();
-        const errorCallback2 = jest.fn();
+        const errorCallback1 = vi.fn();
+        const errorCallback2 = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()
@@ -79,8 +79,8 @@ describe('When error event handler is used with a Vanilla JS Component', () => {
     });
 
     it('should not be called when all callbacks for event are removed', async () => {
-        const errorCallback1 = jest.fn();
-        const errorCallback2 = jest.fn();
+        const errorCallback1 = vi.fn();
+        const errorCallback2 = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()
@@ -104,8 +104,8 @@ describe('When error event handler is used with a Vanilla JS Component', () => {
     });
 
     it('should not be called when all callbacks for all events are removed', async () => {
-        const errorCallback1 = jest.fn();
-        const errorCallback2 = jest.fn();
+        const errorCallback1 = vi.fn();
+        const errorCallback2 = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()

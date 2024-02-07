@@ -1,7 +1,7 @@
 import {AiChat} from '@nlux/react';
 import {render} from '@testing-library/react';
-import '@testing-library/jest-dom';
 import React from 'react';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {submit, type} from '../../../../utils/userInteractions';
@@ -15,7 +15,7 @@ describe('When error event handler is used with a Promise adapter', () => {
     });
 
     it('should be called when the promise rejects', async () => {
-        const errorCallback = jest.fn();
+        const errorCallback = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{
@@ -50,7 +50,7 @@ describe('When error event handler is used with a Stream adapter', () => {
     });
 
     it('should be called when the stream throws an error', async () => {
-        const errorCallback = jest.fn();
+        const errorCallback = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{

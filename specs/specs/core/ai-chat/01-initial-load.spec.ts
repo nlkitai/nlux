@@ -1,5 +1,5 @@
 import {AiChat, createAiChat} from '@nlux/core';
-import '@testing-library/jest-dom';
+import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {queries} from '../../../utils/selectors';

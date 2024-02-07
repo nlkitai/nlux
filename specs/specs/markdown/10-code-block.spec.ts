@@ -1,4 +1,5 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
+import {beforeEach, describe, expect, it} from 'vitest';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Code Block Markdowns Parser', () => {

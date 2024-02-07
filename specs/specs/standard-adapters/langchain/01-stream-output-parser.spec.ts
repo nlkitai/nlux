@@ -1,3 +1,4 @@
+import {describe, expect, it} from 'vitest';
 import {parseChunk} from '../../../../packages/js/langchain/src/langserve/parser/parseChunk';
 import multipleMixedEvents from './data/multiple-mixed-events';
 import multipleValidDataEvents from './data/multiple-valid-data-events';

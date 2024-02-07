@@ -36,6 +36,8 @@ export const replaceImportedModules = (nluxBundlerPackageType: 'cjs' | 'esm' | '
     const keys = Object.keys(allImports);
     const values = Object.values(allImports);
 
+    return [];
+
     return [
         replace({
             delimiters: ['', ''],

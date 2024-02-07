@@ -1,4 +1,5 @@
 import {AiChat, createAiChat} from '@nlux/core';
+import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {submit, type} from '../../../utils/userInteractions';

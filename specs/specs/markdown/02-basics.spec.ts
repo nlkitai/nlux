@@ -1,4 +1,5 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
+import {beforeEach, describe, expect, it} from 'vitest';
 import {waitForMilliseconds} from '../../utils/wait';
 
 describe('MD Stream Parser Streaming', () => {

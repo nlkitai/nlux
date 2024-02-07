@@ -1,5 +1,5 @@
 import {AiChat, createAiChat} from '@nlux/core';
-import '@testing-library/jest-dom';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {submit, type} from '../../../../utils/userInteractions';
@@ -23,7 +23,7 @@ describe('When messageSent event handler is used with a Vanilla JS Component', (
     });
 
     it('should be called when the promise resolves', async () => {
-        const messageSentCallback = jest.fn();
+        const messageSentCallback = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()
@@ -46,8 +46,8 @@ describe('When messageSent event handler is used with a Vanilla JS Component', (
     });
 
     it('should not be called when matching callback is removed', async () => {
-        const messageSentCallback1 = jest.fn();
-        const messageSentCallback2 = jest.fn();
+        const messageSentCallback1 = vi.fn();
+        const messageSentCallback2 = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()
@@ -79,8 +79,8 @@ describe('When messageSent event handler is used with a Vanilla JS Component', (
     });
 
     it('should not be called when all callbacks for event are removed', async () => {
-        const messageSentCallback1 = jest.fn();
-        const messageSentCallback2 = jest.fn();
+        const messageSentCallback1 = vi.fn();
+        const messageSentCallback2 = vi.fn();
 
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat()

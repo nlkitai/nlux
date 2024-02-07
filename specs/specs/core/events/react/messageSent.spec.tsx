@@ -1,7 +1,7 @@
 import {AiChat} from '@nlux/react';
 import {render} from '@testing-library/react';
-import '@testing-library/jest-dom';
 import React from 'react';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {submit, type} from '../../../../utils/userInteractions';
@@ -15,7 +15,7 @@ describe('When messageSent event handler is used with a Promise adapter', () => 
     });
 
     it('should be called with message', async () => {
-        const messageSent = jest.fn();
+        const messageSent = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{
@@ -42,7 +42,7 @@ describe('When messageSent event handler is used with a Streaming adapter', () =
     });
 
     it('should be called with message as soon when the message is submitted', async () => {
-        const messageSent = jest.fn();
+        const messageSent = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{
@@ -60,7 +60,7 @@ describe('When messageSent event handler is used with a Streaming adapter', () =
     });
 
     it('should not be called if the content is empty', async () => {
-        const messageReceived = jest.fn();
+        const messageReceived = vi.fn();
         const component = <AiChat
             adapter={adapterController.adapter}
             events={{

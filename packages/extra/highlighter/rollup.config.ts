@@ -11,7 +11,6 @@ import esbuild from 'rollup-plugin-esbuild';
 import postcss from 'rollup-plugin-postcss';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
-import {replaceImportedModules} from '../../../pipeline/utils/rollup/replaceImportedModules';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const packageName = '@nlux/highlighter';
@@ -55,7 +54,6 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
                 functions: ['debug', 'console.log', 'console.info'],
             }),
             !isProduction && nodeResolve(),
-            !isProduction && replaceImportedModules(),
             replace({
                 preventAssignment: false,
             }),

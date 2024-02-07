@@ -1,4 +1,5 @@
 import {Adapter, StreamingAdapterObserver} from '@nlux/core';
+import {vi} from 'vitest';
 
 export const createAdapterController = ({
     includeFetchText = false,
@@ -9,8 +10,8 @@ export const createAdapterController = ({
     let lastMessageSent: string | null = null;
     let streamTextObserver: StreamingAdapterObserver | null = null;
 
-    let fetchTextMock = jest.fn();
-    let streamTextMock = jest.fn();
+    let fetchTextMock = vi.fn();
+    let streamTextMock = vi.fn();
 
     const createNewFetchTextMock = () => (message: string) => {
         lastMessageSent = message;
