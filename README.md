@@ -16,7 +16,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **LLM Adapters** ― For `ChatGPT` ― `LangChain` 🦜 `LangServe` APIs ― `HuggingFace` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** for any LLM or API, with support for stream or fetch modes.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and descriptions.
-* **Streaming LLM Output** ― Streamed the chat response to the UI as it's being generated.
+* **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
 
 ## Repo Content 📦
@@ -41,7 +41,7 @@ It is a monorepo that contains the following NPM packages:
 * [`@nlux/openai`](https://www.npmjs.com/package/@nlux/openai) ― Adapter for the OpenAI API.
 * [`@nlux/hf`](https://www.npmjs.com/package/@nlux/hf) ― Adapter and pre-processors for the Hugging Face Inference API.
 
-**Themes And Extensions:**
+**Themes & Extensions:**
 
 * [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Nova` theme and CSS styles.
 * [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown stream parser to render
@@ -88,7 +88,7 @@ cross platforms, with a focus on performance and usability.
   ideas with the community.
 * **[Discord Community](https://discord.gg/VY4TDaf4)** ― Join our Discord server to chat with the community and get
   support.
-* **[Docs Website](https://nlux.ai/)** ― For examples, learning resources, and API reference.
+* **[NLUX.dev Developer Website](https://nlux.ai/)** ― For examples, learning resources, and API reference.
 
 ## License 📃
 

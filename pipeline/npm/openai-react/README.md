@@ -28,7 +28,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **LLM Adapters** ― For `ChatGPT` / `LangChain` 🦜 LangServe / `HuggingFace` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** for any LLM or API.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and more.
-* **Streaming LLM Output** ― Streamed the chat response to the UI as it's being generated.
+* **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
