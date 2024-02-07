@@ -1,5 +1,5 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {waitForMdStreamToComplete} from '../../utils/wait';
+import {waitForMdStreamToComplete} from '../utils/wait';
 
 describe('Code Block Markdowns Parser', () => {
     let streamRenderer: StandardStreamParserOutput;

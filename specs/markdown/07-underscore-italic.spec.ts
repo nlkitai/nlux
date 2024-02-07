@@ -1,7 +1,7 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {waitForMdStreamToComplete} from '../../utils/wait';
+import {waitForMdStreamToComplete} from '../utils/wait';
 
-describe('Asterisk Italic Markdowns Parser', () => {
+describe('Underscore Italic Markdowns Parser', () => {
     let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 
@@ -11,7 +11,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render an italic in the middle of a paragraph', async () => {
-        streamRenderer.next('Hello *World* !');
+        streamRenderer.next('Hello _World_ !');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -19,7 +19,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render an italic at the end of a paragraph', async () => {
-        streamRenderer.next('Hello *World*');
+        streamRenderer.next('Hello _World_');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -27,7 +27,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render an italic at the beginning of a paragraph', async () => {
-        streamRenderer.next('*Hello* World');
+        streamRenderer.next('_Hello_ World');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -35,7 +35,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should wrap italic in a paragraph', async () => {
-        streamRenderer.next('*Hello World*');
+        streamRenderer.next('_Hello World_');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -43,7 +43,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should embed italic into a paragraph, and code into the italic', async () => {
-        streamRenderer.next('*Hello `World`*');
+        streamRenderer.next('_Hello `World`_');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -51,7 +51,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should embed code into a paragraph, and italic into the code', async () => {
-        streamRenderer.next('`Hello *World*`');
+        streamRenderer.next('`Hello _World_`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -59,7 +59,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should embed italic at the beginning of inline code', async () => {
-        streamRenderer.next('`*Hello* World`');
+        streamRenderer.next('`_Hello_ World`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -67,7 +67,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should embed italic at the end of inline code', async () => {
-        streamRenderer.next('`Hello *World*`');
+        streamRenderer.next('`Hello _World_`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 

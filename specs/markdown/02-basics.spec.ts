@@ -1,5 +1,5 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {waitForMilliseconds} from '../../utils/wait';
+import {waitForMilliseconds} from '../utils/wait';
 
 describe('MD Stream Parser Streaming', () => {
     let streamRenderer: StandardStreamParserOutput;

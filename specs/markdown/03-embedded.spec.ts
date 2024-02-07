@@ -1,5 +1,5 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {waitForMdStreamToComplete} from '../../utils/wait';
+import {waitForMdStreamToComplete} from '../utils/wait';
 
 describe('Basic Embedded Markdowns Parser', () => {
     let streamRenderer: StandardStreamParserOutput;

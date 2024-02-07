@@ -1,7 +1,7 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {waitForMdStreamToComplete} from '../../utils/wait';
+import {waitForMdStreamToComplete} from '../utils/wait';
 
-describe('Underscore Bold Markdowns Parser', () => {
+describe('Asterisk Bold Markdowns Parser', () => {
     let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 
@@ -11,7 +11,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should render a bold in the middle of a paragraph', async () => {
-        streamRenderer.next('Hello __World__ !');
+        streamRenderer.next('Hello **World** !');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -19,7 +19,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should render a bold at the end of a paragraph', async () => {
-        streamRenderer.next('Hello __World__');
+        streamRenderer.next('Hello **World**');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -27,7 +27,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should render a bold at the beginning of a paragraph', async () => {
-        streamRenderer.next('__Hello__ World');
+        streamRenderer.next('**Hello** World');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -35,7 +35,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should wrap bold in a paragraph', async () => {
-        streamRenderer.next('__Hello World__');
+        streamRenderer.next('**Hello World**');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -43,7 +43,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should embed bold into a paragraph, and code into the bold', async () => {
-        streamRenderer.next('__Hello `World`__');
+        streamRenderer.next('**Hello `World`**');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -51,7 +51,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should embed code into a paragraph, and bold into the code', async () => {
-        streamRenderer.next('`Hello __World__`');
+        streamRenderer.next('`Hello **World**`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -59,7 +59,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should embed bold at the beginning of inline code', async () => {
-        streamRenderer.next('`__Hello__ World`');
+        streamRenderer.next('`**Hello** World`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -67,7 +67,7 @@ describe('Underscore Bold Markdowns Parser', () => {
     });
 
     it('should embed bold at the end of inline code', async () => {
-        streamRenderer.next('`Hello __World__`');
+        streamRenderer.next('`Hello **World**`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 

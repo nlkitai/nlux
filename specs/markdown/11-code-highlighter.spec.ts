@@ -1,6 +1,6 @@
 import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
-import {waitForMdStreamToComplete} from '../../utils/wait';
+import {waitForMdStreamToComplete} from '../utils/wait';
 
 describe('Code Block Markdown Parser With Syntax Highlighter', () => {
     let streamRenderer: StandardStreamParserOutput;
