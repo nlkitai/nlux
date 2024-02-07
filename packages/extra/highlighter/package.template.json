@@ -3,8 +3,8 @@
   "version": "0.0.0-latest",
   "license": "MPL-2.0",
   "scripts": {
-    "build": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "watch": "node_modules/.bin/rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
+    "watch": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --watch"
   },
   "dependencies": {
     "@nlux/core": "{versions.nlux}",

@@ -40,7 +40,7 @@ function removeJsFiles(folder) {
         // Loop through each file
         for (const file of files) {
             // Check if JS file
-            if (extname(file) === '.js') {
+            if (extname(file) === '.js' || extname(file) === '.mjs') {
                 // Construct full path
                 const filePath = join(folder, file);
 
@@ -86,7 +86,10 @@ info('Starting cleanup 🧹 ...');
 removeJsFiles('pipeline/utils/rollup');
 
 packagesList.forEach(
-    pkg => removeGeneratedPackageJson(`packages/${pkg.directory}`)
+    pkg => {
+        removeGeneratedPackageJson(`packages/${pkg.directory}`);
+        removeJsFiles(`packages/${pkg.directory}`);
+    }
 );
 
 info('Removing build and dependency folders');
