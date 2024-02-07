@@ -88,7 +88,7 @@ cross platforms, with a focus on performance and usability.
   ideas with the community.
 * **[Discord Community](https://discord.gg/VY4TDaf4)** ― Join our Discord server to chat with the community and get
   support.
-* **[NLUX.dev Developer Website](https://nlux.ai/)** ― For examples, learning resources, and API reference.
+* **[NLUX.dev](https://nlux.ai/)** Developer website ― Examples, learning resources, and API reference.
 
 ## License 📃
 
