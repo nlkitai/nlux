@@ -12,11 +12,15 @@ import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chat-room.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
 import {updateChatRoom} from './chat-room.update';
+import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
 export class CompChatRoom extends BaseComp<
     CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
+    // Set scroll when generating default value to true, when not specified
+    static defaultScrollWhenGeneratingUserOption = true;
+
     private conversation: CompConversation;
     private promptBoxInstance: CompPromptBox;
     private promptBoxText: string = '';
@@ -27,6 +31,7 @@ export class CompChatRoom extends BaseComp<
         containerMaxWidth,
         containerWidth,
         scrollWhenGenerating,
+        streamingAnimationSpeed,
         visible = true,
         promptBox,
         botPersona,
@@ -40,15 +45,17 @@ export class CompChatRoom extends BaseComp<
             containerMaxWidth,
             containerWidth,
             scrollWhenGenerating,
+            streamingAnimationSpeed,
             botPersona,
             userPersona,
         });
 
-        // Set scroll when generating default value to true, when not specified
-        const scrollWhenGeneratingUserOption = scrollWhenGenerating ?? true;
+        const scrollWhenGeneratingUserOption = scrollWhenGenerating
+            ?? CompChatRoom.defaultScrollWhenGeneratingUserOption;
 
         this.addConversation(
             scrollWhenGeneratingUserOption,
+            getStreamingAnimationSpeed(streamingAnimationSpeed),
             botPersona,
             userPersona,
             conversationHistory,
@@ -92,6 +99,12 @@ export class CompChatRoom extends BaseComp<
             this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
         }
 
+        if (props.hasOwnProperty('streamingAnimationSpeed')) {
+            this.conversation?.setStreamingAnimationSpeed(
+                getStreamingAnimationSpeed(props.streamingAnimationSpeed),
+            );
+        }
+
         if (props.hasOwnProperty('botPersona')) {
             this.conversation?.setBotPersona(props.botPersona ?? undefined);
         }
@@ -121,6 +134,7 @@ export class CompChatRoom extends BaseComp<
 
     private addConversation(
         scrollWhenGenerating: boolean,
+        streamingAnimationSpeed: number,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
         conversationHistory?: readonly ConversationItem[],
@@ -129,6 +143,7 @@ export class CompChatRoom extends BaseComp<
             .withContext(this.context)
             .withProps<CompConversationProps>({
                 scrollWhenGenerating,
+                streamingAnimationSpeed,
                 botPersona,
                 userPersona,
                 messages: conversationHistory,

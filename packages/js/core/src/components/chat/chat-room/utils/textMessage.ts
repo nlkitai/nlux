@@ -8,6 +8,7 @@ export const textMessage = (
     context: NluxContext,
     direction: 'in' | 'out',
     trackResizeAndDomChange: boolean,
+    streamingAnimationSpeed: number,
     contentType: MessageContentType,
     content?: string,
     createdAt?: Date,
@@ -20,6 +21,7 @@ export const textMessage = (
     const commonProps: CommonMessageProps = {
         format: 'text',
         loadingStatus: defaultContentStatus,
+        streamingAnimationSpeed,
         contentType,
         content,
         createdAt: createdAt ?? new Date(),

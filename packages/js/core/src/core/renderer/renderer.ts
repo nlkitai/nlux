@@ -147,7 +147,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 botPersona: this.thePersonasOptions?.bot ?? undefined,
                 userPersona: this.thePersonasOptions?.user ?? undefined,
                 conversationHistory: this.theConversationHistory ?? undefined,
-                scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating ?? undefined,
+                scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
+                streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
                 containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
                 containerHeight: this.theLayoutOptions?.height || undefined,
                 containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
@@ -313,6 +314,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             this.theConversationOptions = props.conversationOptions ?? {};
             this.chatRoom?.setProps({
                 scrollWhenGenerating: props.conversationOptions?.scrollWhenGenerating ?? undefined,
+                streamingAnimationSpeed: props.conversationOptions?.streamingAnimationSpeed ?? undefined,
             });
         }
 

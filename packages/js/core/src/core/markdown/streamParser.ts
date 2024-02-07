@@ -1,17 +1,19 @@
 import {StandardStreamParser} from '../../types/markdown/streamParser';
 import {RootProcessor} from './processors/Root';
 
-const characterProcessingDelayInMs = 10;
-
-// If no characters are processed for 500ms, we consider the stream complete
-const numberOfEmptyChecksBeforeCompletion = Math.ceil(200 / characterProcessingDelayInMs);
+export const markdownDefaultStreamingAnimationSpeed = 10; // We render a new character every 10ms (if available)
 
 let chartersProcessed = 0;
 
-export const createMdStreamRenderer: StandardStreamParser = (root: HTMLElement, syntaxHighlighter, options) => {
+export const createMdStreamRenderer: StandardStreamParser = (
+    root: HTMLElement,
+    syntaxHighlighter,
+    options,
+) => {
     const {
-        skipAnimation,
-        skipCopyToClipboardButton,
+        streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
+        skipAnimation = false,
+        skipCopyToClipboardButton = false,
     } = options || {};
     const rootMarkdownProcessor = new RootProcessor(
         root,
@@ -29,13 +31,20 @@ export const createMdStreamRenderer: StandardStreamParser = (root: HTMLElement, 
     let isProcessing = false;
     let yielded = false;
 
+    // skipAnimation => 0 milliseconds between characters (no animation)
+    // streamingAnimationSpeed => speed value that cannot be lower than 0
+    const streamingAnimationSpeedToUse = skipAnimation ? 0 : Math.max(streamingAnimationSpeed, 0);
+
+    // If no characters are processed for 500ms, we consider the stream complete
+    const numberOfEmptyChecksBeforeCompletion = Math.ceil(200 / markdownDefaultStreamingAnimationSpeed);
+
     const processCharactersQueue = () => {
         if (
             charactersQueue.length === 0 &&
             numberOfChecksWithEmptyCharactersQueue < numberOfEmptyChecksBeforeCompletion
         ) {
             numberOfChecksWithEmptyCharactersQueue += 1;
-            setTimeout(processCharactersQueue, skipAnimation ? 0 : characterProcessingDelayInMs);
+            setTimeout(processCharactersQueue, streamingAnimationSpeedToUse);
             return;
         }
 
@@ -68,7 +77,10 @@ export const createMdStreamRenderer: StandardStreamParser = (root: HTMLElement, 
             numberOfChecksWithEmptyCharactersQueue = 0;
         }
 
-        setTimeout(processCharactersQueue, skipAnimation ? 0 : characterProcessingDelayInMs);
+        setTimeout(
+            processCharactersQueue,
+            streamingAnimationSpeedToUse,
+        );
     };
 
     return {

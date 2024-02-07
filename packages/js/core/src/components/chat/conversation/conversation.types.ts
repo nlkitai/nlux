@@ -13,6 +13,7 @@ export type CompConversationScrollCallback = (params: CompConversationScrollPara
 export type CompConversationProps = Readonly<{
     messages?: readonly ConversationItem[];
     scrollWhenGenerating: boolean;
+    streamingAnimationSpeed: number;
     botPersona?: BotPersona;
     userPersona?: UserPersona;
 }>;

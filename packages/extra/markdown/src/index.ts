@@ -8,6 +8,7 @@ export type MarkdownStreamParser = {
 export type MarkdownStreamParserOptions = {
     syntaxHighlighter?: HighlighterExtension;
     skipAnimation?: boolean;
+    streamingAnimationSpeed?: number;
     onComplete?: Function;
 };
 
@@ -20,11 +21,12 @@ export const createMarkdownStreamParser = (
         options?.syntaxHighlighter,
         {
             skipAnimation: options?.skipAnimation,
+            streamingAnimationSpeed: options?.streamingAnimationSpeed,
             skipCopyToClipboardButton: true,
         },
     );
 
-    const markdownStreamParser: MarkdownStreamParser = {
+    return {
         next(value: string) {
             nluxMarkdownStreamRenderer.next(value);
         },
@@ -34,6 +36,4 @@ export const createMarkdownStreamParser = (
             }
         },
     };
-
-    return markdownStreamParser;
 };

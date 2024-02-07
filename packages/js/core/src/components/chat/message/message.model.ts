@@ -152,6 +152,10 @@ export class CompMessage extends BaseComp<
         this.executeDomAction('updatePersona', botPersona);
     }
 
+    public setStreamingAnimationSpeed(speed: number) {
+        this.setProp('streamingAnimationSpeed', speed);
+    }
+
     @CompEventListener('copy-to-clipboard-triggered')
     private handleCompCopyToClipboardTriggered(event: ClipboardEvent) {
         event.preventDefault();

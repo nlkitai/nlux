@@ -57,11 +57,16 @@ export class CompConversation extends BaseComp<
         // Create new message to add
         //
         const trackResizeAndDomChange = this.props.scrollWhenGenerating;
-        const {botPersona, userPersona} = this.props;
+        const {
+            botPersona,
+            userPersona,
+            streamingAnimationSpeed,
+        } = this.props;
         const message = textMessage(
             this.context,
             direction,
             trackResizeAndDomChange,
+            streamingAnimationSpeed,
             contentType,
             content as string,
             createdAt,
@@ -121,6 +126,13 @@ export class CompConversation extends BaseComp<
             if (message.direction === 'in') {
                 message.setPersona(botPersona);
             }
+        });
+    }
+
+    public setStreamingAnimationSpeed(speed: number) {
+        this.setProp('streamingAnimationSpeed', speed);
+        this.messagesList?.forEachComponent((message) => {
+            message.setStreamingAnimationSpeed(speed);
         });
     }
 

@@ -161,6 +161,11 @@ export const renderMessage: CompRenderer<
                     mdStreamRenderer = createMdStreamRenderer(
                         contentContainer,
                         context.syntaxHighlighter,
+                        {
+                            streamingAnimationSpeed: props.streamingAnimationSpeed,
+                            skipAnimation: false,
+                            skipCopyToClipboardButton: false,
+                        },
                     );
 
                     mdStreamRenderer.onComplete(cleanUpOnMdStreamRendererCompletion);

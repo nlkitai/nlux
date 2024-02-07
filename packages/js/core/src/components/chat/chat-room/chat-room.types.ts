@@ -11,6 +11,7 @@ export type CompChatRoomProps = {
     userPersona?: UserPersona,
     conversationHistory?: readonly ConversationItem[];
     scrollWhenGenerating?: boolean;
+    streamingAnimationSpeed?: number | null;
     containerMaxHeight?: number | string;
     containerMaxWidth?: number | string;
     containerHeight?: number | string;

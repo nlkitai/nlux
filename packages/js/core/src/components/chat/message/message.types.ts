@@ -25,6 +25,7 @@ export type CompMessageEvents = 'copy-to-clipboard-triggered'
 export type CommonMessageProps = Readonly<{
     format: 'text' | 'markdown' | 'html';
     loadingStatus: MessageContentLoadingStatus;
+    streamingAnimationSpeed: number;
     content?: string;
     contentType: MessageContentType;
     createdAt: Date;
