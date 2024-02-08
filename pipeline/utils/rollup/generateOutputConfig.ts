@@ -1,39 +1,39 @@
 import {OutputOptions} from 'rollup';
 
 export const generateOutputConfig = (
-    packageName: string, // Example: @nlux/react
-    fileName: string, // Example: nlux-react
+    packageNpmName: string, // Example: @nlux/react
+    packageFileName: string, // Example: nlux-react
     isProduction: boolean,
 ): OutputOptions[] => {
-    const folder = isProduction ? 'prod' : 'dev';
-    const path = `../../../dist/${folder}/${fileName}`;
+    const envFolder = isProduction ? 'prod' : 'dev';
+    const path = `../../../dist/${envFolder}/${packageFileName}`;
     return [
         {
-            file: `${path}/esm/${fileName}.js`,
+            file: `${path}/esm/${packageFileName}.js`,
             format: 'esm',
-            esModule: true,
+            esModule: false,
             sourcemap: !isProduction,
             strict: true,
             exports: 'named',
-            name: packageName,
+            name: packageNpmName,
         },
         {
-            file: `${path}/cjs/${fileName}.js`,
+            file: `${path}/cjs/${packageFileName}.js`,
             format: 'cjs',
             esModule: false,
             sourcemap: !isProduction,
             strict: true,
             exports: 'named',
-            name: packageName,
+            name: packageNpmName,
         },
         {
-            file: `${path}/umd/${fileName}.js`,
+            file: `${path}/umd/${packageFileName}.js`,
             format: 'umd',
             esModule: false,
             sourcemap: !isProduction,
             strict: true,
             exports: 'named',
-            name: packageName,
+            name: packageNpmName,
         },
     ];
 };

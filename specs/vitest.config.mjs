@@ -1,13 +1,17 @@
 import {svelte} from '@sveltejs/vite-plugin-svelte';
 import {defineConfig} from 'vitest/config';
 
-export default defineConfig(({mode}) => ({
-    plugins: [svelte()],
+export default defineConfig(() => ({
+    plugins: [
+        svelte(),
+    ],
     resolve: {
-        conditions: mode === 'test' ? ['browser'] : [],
+        conditions: ['browser'],
     },
     build: {
-        minify: mode === 'test' ? 'esbuild' : 'terser',
+        minify: false,
+        mode: 'development',
+        sourcemap: true,
     },
     test: {
         environment: 'jsdom',

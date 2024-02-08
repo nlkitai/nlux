@@ -1,4 +1,3 @@
-import clc from 'cli-color';
 import {cpSync, existsSync, mkdirSync, rmSync} from 'fs';
 import {join} from 'path';
 import symlinkDir from 'symlink-dir';
@@ -9,9 +8,9 @@ import {run} from './run.mjs';
 
 try {
     nl(1);
-    info(clc.bgWhite.red(' ############################################### '));
-    info(clc.bgWhite.red(` # 🍦 Pipeline Step: Starting Dev Server       # `));
-    info(clc.bgWhite.red(' ############################################### '));
+    info(' ############################################### ');
+    info(` # 🍦 Pipeline Step: Starting Dev Server       # `);
+    info(' ############################################### ');
     nl(1);
 
     info('Starting dev server 🚀 ...');
@@ -104,15 +103,15 @@ try {
     const port = process.env.PORT || 9090;
 
     nl(1);
-    info(clc.bgWhite.red(' ############################################### '));
-    info(clc.bgWhite.red(` #     Starting dev server on port ${port} 🚀     # `));
-    info(clc.bgWhite.red(' ############################################### '));
+    info(' ############################################### ');
+    info(` #     Starting dev server on port ${port} 🚀     # `);
+    info(' ############################################### ');
     nl(1);
 
     //
     // Start dev server
     //
-    await run(`yarn serve --symlinks -p ${port} dist/public`);
+    await run(`vite --port ${port} dist/public`);
 } catch (e) {
     process.exit(1);
 }

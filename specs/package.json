@@ -12,7 +12,9 @@
   "license": "MPL-2.0",
   "private": true,
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "test-ui": "vitest --ui",
+    "test-debug": "vitest --inspect-brk --no-file-parallelism"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.7",
@@ -31,7 +33,6 @@
     "@types/rollup-plugin-generate-package-json": "^3.2.8",
     "@vitest/ui": "^1.2.2",
     "esbuild": "^0.20.0",
-    "glob": "^10.3.10",
     "jsdom": "^22.1.0",
     "nock": "^13.3.8",
     "resize-observer-polyfill": "^1.5.1",
