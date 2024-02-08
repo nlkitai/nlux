@@ -1,4 +1,4 @@
-import {createAdapter, OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
+import {createUnsafeAdapter, OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
 import {NluxUsageError} from '@nlux/react';
 
 const source = 'hooks/getAdapterBuilder';
@@ -25,7 +25,7 @@ export const getAdapterBuilder = (options: OpenAiAdapterOptions): OpenAiAdapterB
         });
     }
 
-    let newAdapter = createAdapter().withApiKey(apiKey);
+    let newAdapter = createUnsafeAdapter().withApiKey(apiKey);
 
     if (model !== undefined) {
         newAdapter = newAdapter.withModel(model);

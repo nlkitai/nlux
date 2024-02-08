@@ -9,8 +9,9 @@ export type {
 
 export {
     createAdapter,
+    createUnsafeAdapter,
     OpenAiStreamingAdapter,
     OpenAiFetchAdapter,
 } from '@nlux/openai';
 
-export {useAdapter} from './hooks/useAdapter';
+export {useAdapter, useUnsafeAdapter} from './hooks/useAdapter';

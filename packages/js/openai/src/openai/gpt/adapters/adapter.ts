@@ -48,9 +48,13 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         }
 
         warn('OpenAI GPT adapter has been initialized in browser mode using option "dangerouslyAllowBrowser". '
-            + 'This is not recommended for production use. We recommend that you implement a server-side proxy '
-            + 'and configure a customized adapter for it. Read more at '
-            + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety');
+            + 'To learn more about OpenAI\' recommendation for handling API keys, please visit:\n'
+            + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety\n'
+            + 'The useUnsafeAdapter/createUnsafeAdapter are only intended for development and testing purposes.\n\n'
+            + 'For production use, we recommend that you implement a server-side proxy and configure a customized '
+            + 'adapter for it. To learn more about how to create custom adapters for NLUX, visit:\n'
+            + 'https://nlux.dev/learn/adapters/custom-adapters'
+        )
     }
 
     abstract get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;

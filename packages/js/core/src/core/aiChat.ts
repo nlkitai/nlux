@@ -6,7 +6,6 @@ import {EventCallback, EventName, EventsMap} from '../types/event';
 import {NluxProps} from '../types/props';
 import {StandardAdapter} from '../types/standardAdapter';
 import {debug} from '../x/debug';
-import {warn} from '../x/warn';
 import {NluxController} from './controller/controller';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from './error';
 import {HighlighterExtension} from './highlighter/highlighter';
@@ -156,7 +155,7 @@ export class AiChat implements IAiChat {
         debug('Unmounting NLUX.');
 
         if (!this.controller) {
-            warn('Invalid call to aiChat.unmount() on an already unmounted NLUX instance!');
+            debug('Invalid call to aiChat.unmount() on an already unmounted NLUX instance!');
             return;
         }
 
