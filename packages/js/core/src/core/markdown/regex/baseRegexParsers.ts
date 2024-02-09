@@ -11,6 +11,7 @@ import {
     Heading6Parsers,
 } from './Heading';
 import {LineBreakParsers} from './LineBreak';
+import {linkParsers} from "./Link";
 
 type SequenceParsingFunction = RegExp | ((sequence: string) => boolean);
 
@@ -55,6 +56,7 @@ parsersByMarkdownElementName.set('BoldUnderscore', BoldUnderscore);
 parsersByMarkdownElementName.set('ItalicAsterisk', ItalicAsterisk);
 parsersByMarkdownElementName.set('ItalicUnderscore', ItalicUnderscore);
 
+parsersByMarkdownElementName.set('Link', linkParsers);
 parsersByMarkdownElementName.set('LineBreak', LineBreakParsers);
 
 // TODO - Same as above, but for all markdown elements
@@ -97,13 +99,6 @@ parsersByMarkdownElementName.set('UnorderedList', {
 parsersByMarkdownElementName.set('HorizontalRule', {
     shouldOpen: /^$/,
     canOpen: /^---$/,
-    shouldClose: /^$/,
-    canClose: /^$/,
-});
-
-parsersByMarkdownElementName.set('Link', {
-    shouldOpen: /^$/,
-    canOpen: /^\[.*\]\(.*\)$/,
     shouldClose: /^$/,
     canClose: /^$/,
 });

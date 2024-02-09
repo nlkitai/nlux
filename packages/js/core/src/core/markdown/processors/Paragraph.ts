@@ -26,7 +26,8 @@ export class ParagraphProcessor extends ProcessorWithChildren {
             'LineBreak', 'Blockquote',
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
-            'Code', 'Link',
+            'Code',
+            'Link',
         ];
     }
 

@@ -94,7 +94,7 @@ export const renderMessage: CompRenderer<
             }
         })
         .on('click', (event: MouseEvent) => {
-            if (event) {
+            if (event && event.target && !(event.target instanceof HTMLAnchorElement)) {
                 event.stopPropagation();
                 event.preventDefault();
             }

@@ -27,6 +27,7 @@ export class BoldAsteriskProcessor extends ProcessorWithChildren {
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
             'Code',
+            'Link',
         ];
     }
 

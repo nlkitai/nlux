@@ -39,7 +39,7 @@ export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
         this.sequenceParser.reset();
     }
 
-    abstract createElement(): HTMLElement;
+    abstract createElement(openingSequence?: string): HTMLElement;
 
     processCharacter(character: string): void {
         this.preProcessCharacter(character);

@@ -9,6 +9,7 @@ import {HeadingProcessor} from './processors/Heading';
 import {ItalicAsteriskProcessor} from './processors/ItalicAsterisk';
 import {ItalicUnderscoreProcessor} from './processors/ItalicUnderscore';
 import {LineBreakProcessor} from './processors/LineBreak';
+import {LinkProcessor} from './processors/Link';
 import {ParagraphProcessor} from './processors/Paragraph';
 
 export const createMarkdownProcessor = (
@@ -39,6 +40,22 @@ export const createMarkdownProcessor = (
 
         newLineBreak.init();
         parent.setParsingChild(newLineBreak);
+        return;
+    }
+
+    if (markdownElementName === 'Link') {
+        const regex = /\[([^\]]+)\]\(([^\)]*)\)/;
+
+        const match = regex.exec(sequence!);
+        const initialContent = (match && match.length >= 3) ? match[1] : '';
+        const newLink = new LinkProcessor(
+            parent,
+            sequence,
+            initialContent,
+        );
+
+        newLink.init();
+        parent.setParsingChild(newLink);
         return;
     }
 

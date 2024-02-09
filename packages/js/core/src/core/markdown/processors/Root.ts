@@ -136,7 +136,7 @@ export class RootProcessor extends BaseMarkdownProcessor {
                 'Paragraph',
                 this,
                 undefined,
-                lastCharacter,
+                this.sequenceParser.sequence,
             );
 
             this.sequenceParser.reset();

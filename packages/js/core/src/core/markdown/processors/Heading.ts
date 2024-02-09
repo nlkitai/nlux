@@ -31,6 +31,7 @@ export class HeadingProcessor extends ProcessorWithChildren {
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
             `Code`,
+            'Link',
         ];
     }
 

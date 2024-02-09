@@ -100,6 +100,10 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         return this.__options.syntaxHighlighter;
     }
 
+    protected get initialContent(): string | undefined {
+        return this.__initialContent;
+    }
+
     /**
      * Create a nested markdown element and append it to the current markdown element
      * Used when a child element yields a markdown element to its parent
