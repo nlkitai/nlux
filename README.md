@@ -1,7 +1,6 @@
 # [NLUX](https://nlux.ai) 🌲✨💬
 
 ![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
-[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 [![npm version](https://img.shields.io/badge/NPM-@nlux/react-1ccb61)](https://www.npmjs.com/package/@nlux/react)
 [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-fa896b)](https://nlux.dev)
 
@@ -21,6 +20,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
+
+[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 
 ## Repo Content 📦
 
