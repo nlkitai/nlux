@@ -1,6 +1,9 @@
 # [NLUX](https://nlux.ai) 🌲✨💬
 
-![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342) [![npm version](https://badge.fury.io/js/@nlux%2Freact.svg)](https://www.npmjs.com/package/@nlux/react) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-006cd5)
+[![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-fa896b)](https://nlux.dev)
+[![npm version](https://img.shields.io/badge/NPM-@nlux/react-1ccb61)](https://www.npmjs.com/package/@nlux/react)
+[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 
 ## The JS / React Library For Building Conversational AI Interfaces ✨💬
 
