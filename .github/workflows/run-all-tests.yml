@@ -5,11 +5,11 @@ name: 200+ Unit Tests
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "latest" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "latest" ]
   workflow_dispatch:
-    branches: [ "main" ]
+    branches: [ "main", "latest" ]
 
 jobs:
   build:
