@@ -1,10 +1,12 @@
-import {Adapter, StreamingAdapterObserver} from '@nlux/core';
+import {Adapter, AdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 
 export const myCustomStreamingAdapter: Adapter = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
+        extras: AdapterExtras,
     ) => {
+        console.dir(extras, {depth: 3});
         setTimeout(() => {
             const messageToStream = 'Lorem stream ipsum **dolor** sit amet, consectetur adipiscing elit. ' +
                 'Sed non risus. Suspendisse lectus tortor, dignissim sit amet, ' +
@@ -21,7 +23,8 @@ export const myCustomStreamingAdapter: Adapter = {
 };
 
 export const myCustomPromiseAdapter: Adapter = {
-    fetchText(message: string): Promise<string> {
+    fetchText(message: string, extras): Promise<string> {
+        console.dir(extras, {depth: 3});
         return new Promise((resolve) => {
             setTimeout(() => {
                 const messageToStream = 'Lorem promise ipsum **dolor** sit amet, consectetur adipiscing elit. ' +

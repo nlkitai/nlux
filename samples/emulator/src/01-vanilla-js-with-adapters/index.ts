@@ -56,11 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .withDataTransferMode('stream');
 
     aiChat = createAiChat()
-        .withAdapter(langServeAdapter)
-        // .withAdapter(openAiAdapter)
+        // .withAdapter(langServeAdapter)
+        .withAdapter(openAiAdapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
         .withSyntaxHighlighter(highlighter)
+        .withConversationOptions({
+            historyPayloadSize: 3,
+        })
         .withLayoutOptions({
             maxWidth: 500,
             maxHeight: 500,

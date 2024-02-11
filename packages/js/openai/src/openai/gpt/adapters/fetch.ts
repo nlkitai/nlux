@@ -1,6 +1,7 @@
-import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import OpenAI from 'openai';
-import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
+import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
+import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {gptFetchAdapterConfig} from '../config';
 import {OpenAiAdapterOptions} from '../types/adapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
@@ -30,16 +31,23 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
         return gptFetchAdapterConfig;
     }
 
-    async fetchText(message: string): Promise<string> {
-        const messagesToSend: {
-            role: 'system' | 'user',
-            content: string
-        }[] = this.systemMessage ? [
+    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
+        const messagesToSend: Array<
+            OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
+            OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
+            OpenAI.Chat.Completions.ChatCompletionAssistantMessageParam
+        > = this.systemMessage ? [
             {
                 role: 'system',
                 content: this.systemMessage,
             },
         ] : [];
+
+        if (extras.conversationHistory) {
+            messagesToSend.push(
+                ...conversationHistoryToMessagesList(extras.conversationHistory),
+            );
+        }
 
         messagesToSend.push({
             role: 'user',
@@ -71,7 +79,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

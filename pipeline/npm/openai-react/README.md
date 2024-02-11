@@ -6,8 +6,19 @@ This package enables the integration between NLUX and OpenAI's API.
 More specifically ― the package include the adapter to connect to text generation models exposed
 via [OpenAI Text Generation APIs](https://platform.openai.com/docs/guides/text-generation).
 
+Please note: This adapter connects to the OpenAI API directly from the browser and requires an API key
+to be used from a web page. It's not recommended to use it in production environments, and it should only
+be used for development and testing purposes.
+
+If you would like to use OpenAI's API in a production environment, you should use the OpenAI API from a server
+(such us a simple Node.js proxy server that you build) and then connect to it from your web page. You can use
+NLUX with any API or LLM by **creating a custom adapter for it**.
+
 For more information on how to use this package, please visit:  
 [https://docs.nlux.ai/api/adapters/open-ai](https://docs.nlux.ai/api/adapters/open-ai)
+
+For more information on how to create custom adapters for your own LLM or API, please visit:  
+[https://docs.nlux.ai/learn/adapters/custom-adapters/create-custom-adapter](https://docs.nlux.ai/learn/adapters/custom-adapters/create-custom-adapter)
 
 ### Vanilla JS 🟨 vs React JS ⚛️
 
@@ -32,6 +43,8 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
+
+[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 
 ### Docs & Examples 📖
 

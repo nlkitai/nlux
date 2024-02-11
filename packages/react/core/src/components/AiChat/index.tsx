@@ -2,11 +2,11 @@ import {AiChat as AiChatType, createAiChat, warn} from '@nlux/core';
 import React, {useEffect, useRef, useState} from 'react';
 import {reactPersonasToCorePersonas} from '../../utils/reactPersonasToCorePersonas';
 import {handleNewPropsReceived} from './handleNewPropsReceived';
-import {AiChatProps} from './props';
+import {AiChatReactProps} from './props';
 
-export const AiChat = (props: Readonly<AiChatProps>) => {
+export const AiChat = (props: Readonly<AiChatReactProps>) => {
     const rootElement = useRef<HTMLDivElement>(null);
-    const [currentProps, setCurrentProps] = useState<Readonly<AiChatProps> | null>(null);
+    const [currentProps, setCurrentProps] = useState<Readonly<AiChatReactProps> | null>(null);
     const aiChat = useRef<AiChatType | null>(null);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             promptBoxOptions,
             personaOptions,
             events,
-            conversationHistory,
+            initialConversation,
         } = props;
 
         let newInstance = createAiChat().withAdapter(adapter);
@@ -50,8 +50,8 @@ export const AiChat = (props: Readonly<AiChatProps>) => {
             newInstance = newInstance.withSyntaxHighlighter(syntaxHighlighter);
         }
 
-        if (conversationHistory) {
-            newInstance = newInstance.withConversationHistory(conversationHistory);
+        if (initialConversation) {
+            newInstance = newInstance.withInitialConversation(initialConversation);
         }
 
         if (events) {

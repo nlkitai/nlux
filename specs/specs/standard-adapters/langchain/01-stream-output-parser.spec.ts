@@ -1,5 +1,5 @@
+import {parseChunk} from '@nlux-dev/langchain/src/langserve/parser/parseChunk';
 import {describe, expect, it} from 'vitest';
-import {parseChunk} from '../../../../packages/js/langchain/src/langserve/parser/parseChunk';
 import multipleMixedEvents from './data/multiple-mixed-events';
 import multipleValidDataEvents from './data/multiple-valid-data-events';
 import multipleValidDataEventsWithSpace from './data/multiple-valid-data-events-with-space';

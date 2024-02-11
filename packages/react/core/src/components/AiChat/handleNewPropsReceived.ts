@@ -1,13 +1,13 @@
-import {NluxProps, warn} from '@nlux/core';
+import {AiChatProps, warn} from '@nlux/core';
 import {adapterParamToUsableAdapter} from '../../utils/adapterParamToUsableAdapter';
 import {optionsUpdater} from '../../utils/optionsUpdater';
 import {personaOptionsUpdater} from '../../utils/personasUpdater';
-import type {AiChatProps} from './props';
+import type {AiChatReactProps} from './props';
 
 export const handleNewPropsReceived = async (
-    currentProps: AiChatProps,
-    newProps: AiChatProps,
-): Promise<Partial<NluxProps> | undefined> => {
+    currentProps: AiChatReactProps,
+    newProps: AiChatReactProps,
+): Promise<Partial<AiChatProps> | undefined> => {
     const eventListeners = optionsUpdater(
         currentProps.events,
         newProps.events,
@@ -33,7 +33,11 @@ export const handleNewPropsReceived = async (
         newProps.personaOptions,
     );
 
-    const propsToUpdate: Partial<NluxProps> = {};
+    type MutableAiChatProps = {
+        -readonly [P in keyof AiChatProps]: AiChatProps[P];
+    };
+
+    const propsToUpdate: Partial<MutableAiChatProps> = {};
 
     if (eventListeners !== undefined) {
         propsToUpdate.events = eventListeners ?? {};

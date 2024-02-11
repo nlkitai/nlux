@@ -1,12 +1,13 @@
 # [NLUX JS](https://nlux.ai) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
+[![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 
-NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
-powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
-can add conversational AI capabilities and interact with your favourite LLM.
+NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
+integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
+of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
 ## Key Features 🌟
 
@@ -19,9 +20,16 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
 
+[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
+
 ## Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+* Developer portal ― [NLUX.dev](https://nlux.dev/)
+* Examples and live code playgrounds ― [NLUX.dev/examples](https://nlux.dev/examples)
+
+
+* [Standard LLM adapters available](https://nlux.dev/learn/adapters)
+* [How to create your own adapter for NLUX](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
 
 ## Vanilla JS 🟨 vs React JS ⚛️
 
@@ -29,40 +37,39 @@ This package `@nlux/core` is the vanilla JS version of NLUX.
 If you're looking for the React JS version, please check
 the [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) package.
 
-## Get Started With NLUX and ChatGPT 🚀
+## Get Started With NLUX 🚀
 
-To get started with NLUX JS and ChatGPT, install the `@nlux/core` and `@nlux/openai` packages:
+The example below demonstrates how to create an AI chat interface using NLUX JS and LangChain, the open source
+framework for building LLM backends. But you can use NLUX **with any LLM** ― either
+via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
+by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
+
+To get started with NLUX JS and LangChain, install the `@nlux/core` and `@nlux/langchain` packages:
 
 ```sh
-npm install @nlux/core @nlux/openai
+npm install @nlux/core @nlux/langchain
 ```
 
-Configure the OpenAI adapter with your API key:<br />
-_(You can [get an API key](https://help.openai.com/en/articles/4936850-where-do-i-find-my-secret-api-key) from your
-OpenAI dashboard)_
+Configure the LangChain LangServe adapter to connect to your API endpoint:
 
 ```js
 import {createAiChat} from '@nlux/core';
-import {createAdapter} from '@nlux/openai';
+import {createAdapter} from '@nlux/langchain';
 
-const chatGptAdapter = createAdapter()
-    .withApiKey('YOUR_OPEN_AI_API_KEY')
-    // 👇 Instruct ChatGPT how to behave (optional)
-    .withSystemMessage(
-        'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. ' +
-        'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.'
-    );
+const langChainAdapter = createAdapter().withUrl('https://<Your LangServe Runnable URL>');
 ```
 
 Then render the `AiChat` component into your web page:
 
 ```js
 const aiChat = createAiChat()
-    .withAdapter(chatGptAdapter)
+    .withAdapter(langChainAdapter)
     .withConversationOptions({
-        scrollWhenGenerating: true,
+        historyPayloadSize: 'max'
     })
-    .withPromptBoxOptions({placeholder: 'How can I help you today?'})
+    .withPromptBoxOptions({
+        placeholder: 'How can I help you today?'
+    })
 
 aiChat.mount(document.getElementById('root'));
 ```
@@ -71,7 +78,7 @@ You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your 
 
 ## And The Result Is ✨
 
-An AI chatbot, experienced in personal finance, that can give your users sound, tailored financial advice:
+An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
 [![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 
@@ -83,7 +90,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.10.11/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v0.11.0/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

@@ -5,7 +5,7 @@ import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-
 import {NluxContext} from '../../types/context';
 import {ConversationItem} from '../../types/conversation';
 import {ExceptionType} from '../../types/exception';
-import {NluxProps} from '../../types/props';
+import {AiChatInternalProps, AiChatProps} from '../../types/props';
 import {warn} from '../../x/warn';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
@@ -29,8 +29,8 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
     private theClassName: string | null = null;
-    private theConversationHistory: Readonly<ConversationItem[]> | null = null;
     private theConversationOptions: Readonly<ConversationOptions> = {};
+    private theInitialConversationContent: Readonly<ConversationItem[]> | null = null;
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
@@ -40,7 +40,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         context: NluxContext,
         rootCompId: string,
         rootElement: HTMLElement,
-        props: NluxProps | null = null,
+        props: AiChatInternalProps | null = null,
     ) {
         if (!rootCompId) {
             throw new NluxRenderingError({
@@ -61,7 +61,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
 
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
-        this.theConversationHistory = props?.conversationHistory ?? null;
+        this.theInitialConversationContent = props?.initialConversation ?? null;
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
         this.thePersonasOptions = props?.personaOptions ?? {};
     }
@@ -146,7 +146,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
                 visible: true,
                 botPersona: this.thePersonasOptions?.bot ?? undefined,
                 userPersona: this.thePersonasOptions?.user ?? undefined,
-                conversationHistory: this.theConversationHistory ?? undefined,
+                initialConversationContent: this.theInitialConversationContent ?? undefined,
                 scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
                 streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
                 containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
@@ -260,7 +260,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
         this.isMounted = false;
     }
 
-    public updateProps(props: Partial<NluxProps>) {
+    public updateProps(props: Partial<AiChatProps>) {
         if (props.hasOwnProperty('className')) {
             const newClassName = props.className || undefined;
             if (newClassName) {

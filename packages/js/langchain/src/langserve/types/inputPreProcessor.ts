@@ -1,3 +1,5 @@
+import {ConversationItem} from '@nlux/core';
+
 /**
  * A function that can be used to pre-process the input before sending it to the runnable.
  * Whatever this function returns will be sent to the runnable under the "input" property.
@@ -8,7 +10,7 @@
  *
  * For the following input processor:
  * ```
- * (message: string) => ({ message, year: 1999 })
+ * (message) => ({ message, year: 1999 })
  *  ```
  *  The following input will be sent to the runnable when the user
  *  types "Hello world":
@@ -23,4 +25,5 @@
  */
 export type LangServeInputPreProcessor = (
     input: string,
+    conversationHistory?: readonly ConversationItem[],
 ) => any;

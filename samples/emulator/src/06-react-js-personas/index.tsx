@@ -108,7 +108,7 @@ const ExampleWrapper = () => {
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',
                         // },
                     }}
-                    // conversationHistory={[
+                    // initialConversationContent={[
                     //     {
                     //         role: 'user',
                     //         message: 'Hello',

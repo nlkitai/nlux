@@ -3,6 +3,7 @@ import {useUnsafeAdapter} from '@nlux/openai-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
+import {myCustomStreamingAdapter} from '../01-vanilla-js-with-adapters/customAdapter';
 import {personaOptions} from './personaOptions';
 
 debugger;
@@ -45,7 +46,7 @@ const ExampleWrapper = () => {
                 <AiChat
                     key={key}
                     className="ai-chat-emulator"
-                    adapter={adapter}
+                    adapter={myCustomStreamingAdapter}
                     conversationOptions={{
                         scrollWhenGenerating: true,
                     }}

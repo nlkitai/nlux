@@ -1,6 +1,6 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
-import {DataTransferMode} from '../../../../types/adapter';
+import {AdapterExtras, DataTransferMode} from '../../../../types/adapter';
 import {NluxContext} from '../../../../types/context';
 import {warn} from '../../../../x/warn';
 import {CompConversation} from '../../conversation/conversation.model';
@@ -70,7 +70,14 @@ export const submitPromptFactory = ({
             // Set the default data transfer mode based on the adapter's capabilities
             const defaultDataTransferMode = supportedDataTransferModes.length === 1 ?
                 supportedDataTransferModes[0] : 'stream';
+
             const dataTransferModeToUse = dataTransferMode ?? defaultDataTransferMode;
+            const extras: AdapterExtras = {
+                aiChatProps: context.aiChatProps,
+                conversationHistory: conversation.getConversationContentForAdapter(
+                    context.aiChatProps?.conversationOptions?.historyPayloadSize,
+                ),
+            };
 
             if (dataTransferModeToUse === 'stream') {
                 if (!context.adapter.streamText) {
@@ -78,7 +85,7 @@ export const submitPromptFactory = ({
                 }
 
                 observable = new Observable<string>();
-                context.adapter.streamText(messageToSend, observable);
+                context.adapter.streamText(messageToSend, observable, extras);
                 messageContentType = 'stream';
             } else {
                 if (!context.adapter.fetchText) {
@@ -86,7 +93,7 @@ export const submitPromptFactory = ({
                 }
 
                 observable = undefined;
-                sentResponse = context.adapter.fetchText(messageToSend);
+                sentResponse = context.adapter.fetchText(messageToSend, extras);
                 messageContentType = 'promise';
             }
 
@@ -115,6 +122,11 @@ export const submitPromptFactory = ({
                 sentResponse.then((promiseContent) => {
                     message.setContent(promiseContent);
                     resetPromptBox(true);
+
+                    // Only add user message to conversation content (used for history, and not displayed) if the
+                    // message was sent successfully and a response was received.
+                    conversation.updateConversationContent({role: 'user', message: messageToSend});
+                    conversation.updateConversationContent({role: 'ai', message: promiseContent});
                     context.emit('messageReceived', promiseContent);
                 }).catch((error) => {
                     message.setErrored();
@@ -159,7 +171,12 @@ export const submitPromptFactory = ({
                         complete: () => {
                             message.commitContent();
                             resetPromptBox(true);
+
                             if (message.content) {
+                                // Only add user message to conversation content (used for history, and not displayed)
+                                // if the message was sent successfully and a response was received.
+                                conversation.updateConversationContent({role: 'user', message: messageToSend});
+                                conversation.updateConversationContent({role: 'ai', message: message.content});
                                 context.emit('messageReceived', message.content);
                             }
                         },

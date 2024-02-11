@@ -1,7 +1,7 @@
 import {ExceptionId, NluxExceptions} from '../../exceptions/exceptions';
 import {NluxContext} from '../../types/context';
 import {EventCallback, EventName} from '../../types/event';
-import {NluxProps} from '../../types/props';
+import {AiChatInternalProps, AiChatProps} from '../../types/props';
 import {uid} from '../../x/uid';
 import {warn} from '../../x/warn';
 import {createContext} from '../context';
@@ -12,7 +12,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
     private readonly eventManager = new EventManager();
     private readonly nluxInstanceId = uid();
-    private readonly props: NluxProps;
+    private props: AiChatInternalProps;
 
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
@@ -34,7 +34,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
     constructor(
         rootElement: HTMLElement,
-        props: NluxProps,
+        props: AiChatInternalProps,
     ) {
         this.rootCompId = 'chat-room';
         this.rootElement = rootElement;
@@ -59,11 +59,34 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
         }
 
         const newContext: NluxContext = createContext({
-            instanceId: this.nluxInstanceId,
-            exception: this.renderException,
-            adapter: this.props.adapter,
-            syntaxHighlighter: this.props.syntaxHighlighter,
-        }, this.eventManager.emit);
+                instanceId: this.nluxInstanceId,
+                exception: this.renderException,
+                adapter: this.props.adapter,
+                syntaxHighlighter: this.props.syntaxHighlighter,
+            },
+            () => {
+                return {
+                    ...this.props,
+                    conversationOptions: this.props.conversationOptions && Object.keys(
+                        this.props.conversationOptions).length > 0
+                        ? this.props.conversationOptions
+                        : undefined,
+                    promptBoxOptions: this.props.promptBoxOptions && Object.keys(
+                        this.props.promptBoxOptions).length > 0
+                        ? this.props.promptBoxOptions
+                        : undefined,
+                    layoutOptions: this.props.layoutOptions && Object.keys(
+                        this.props.layoutOptions).length > 0
+                        ? this.props.layoutOptions
+                        : undefined,
+                    personaOptions: this.props.personaOptions && Object.keys(
+                        this.props.personaOptions).length > 0
+                        ? this.props.personaOptions
+                        : undefined,
+                };
+            },
+            this.eventManager.emit,
+        );
 
         this.renderer = new NluxRenderer(
             newContext,
@@ -108,8 +131,13 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
         this.renderer = null;
     }
 
-    public updateProps(props: Partial<NluxProps>) {
+    public updateProps(props: Partial<AiChatProps>) {
         this.renderer?.updateProps(props);
+        this.props = {
+            ...this.props,
+            ...props,
+        };
+
         if (props.events) {
             this.props.events = props.events;
             this.eventManager.updateEventListeners(props.events);

@@ -1,4 +1,5 @@
 import {
+    AdapterExtras,
     DataTransferMode,
     StandardAdapter,
     StandardAdapterConfig,
@@ -53,8 +54,8 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
             + 'The useUnsafeAdapter/createUnsafeAdapter are only intended for development and testing purposes.\n\n'
             + 'For production use, we recommend that you implement a server-side proxy and configure a customized '
             + 'adapter for it. To learn more about how to create custom adapters for NLUX, visit:\n'
-            + 'https://nlux.dev/learn/adapters/custom-adapters'
-        )
+            + 'https://nlux.dev/learn/adapters/custom-adapters',
+        );
     }
 
     abstract get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
@@ -85,7 +86,7 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         return encodeMessage(message);
     }
 
-    abstract fetchText(message: string): Promise<string>;
+    abstract fetchText(message: string, extras: AdapterExtras): Promise<string>;
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
 }

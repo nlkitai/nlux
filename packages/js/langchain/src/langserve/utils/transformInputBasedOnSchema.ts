@@ -1,6 +1,14 @@
-import {warn} from '@nlux/core';
+import {ConversationItem, warn} from '@nlux/core';
 
-export const transformInputBasedOnSchema = (message: string, schema: any, runnableName: string): any | undefined => {
+export const transformInputBasedOnSchema = (
+    message: string,
+    conversationHistory: readonly ConversationItem[] | undefined,
+    schema: any,
+    runnableName: string,
+): any | undefined => {
+    // TODO - Attempt to include conversation history in the input
+    //   if the schema allows it.
+
     if (!schema || typeof schema.properties !== 'object') {
         return message;
     }

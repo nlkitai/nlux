@@ -66,7 +66,7 @@ const ExampleWrapper = () => {
                             picture: 'https://nlux.ai/images/demos/persona-woman.jpeg',
                         },
                     }}
-                    conversationHistory={[
+                    initialConversation={[
                         {
                             role: 'user',
                             message: 'Hello',

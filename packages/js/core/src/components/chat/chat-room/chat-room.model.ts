@@ -36,7 +36,7 @@ export class CompChatRoom extends BaseComp<
         promptBox,
         botPersona,
         userPersona,
-        conversationHistory,
+        initialConversationContent,
     }: CompChatRoomProps) {
         super(context, {
             visible,
@@ -58,7 +58,7 @@ export class CompChatRoom extends BaseComp<
             getStreamingAnimationSpeed(streamingAnimationSpeed),
             botPersona,
             userPersona,
-            conversationHistory,
+            initialConversationContent,
         );
 
         this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
@@ -137,7 +137,7 @@ export class CompChatRoom extends BaseComp<
         streamingAnimationSpeed: number,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
-        conversationHistory?: readonly ConversationItem[],
+        initialConversationContent?: readonly ConversationItem[],
     ) {
         this.conversation = comp(CompConversation)
             .withContext(this.context)
@@ -146,7 +146,7 @@ export class CompChatRoom extends BaseComp<
                 streamingAnimationSpeed,
                 botPersona,
                 userPersona,
-                messages: conversationHistory,
+                messages: initialConversationContent,
             })
             .create();
 

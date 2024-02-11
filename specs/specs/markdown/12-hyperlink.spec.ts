@@ -1,6 +1,4 @@
-// import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
-import {createMdStreamRenderer} from '@nlux-dev/core/src/core/markdown/streamParser';
-import {StandardStreamParserOutput} from '@nlux-dev/core/src/types/markdown/streamParser';
+import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
 import {beforeEach, describe, expect, it} from 'vitest';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 

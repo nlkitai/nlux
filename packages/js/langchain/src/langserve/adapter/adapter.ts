@@ -1,4 +1,6 @@
 import {
+    AdapterExtras,
+    ConversationItem,
     DataTransferMode,
     StandardAdapter,
     StandardAdapterConfig,
@@ -136,7 +138,7 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
         }
     }
 
-    abstract fetchText(message: string): Promise<string>;
+    abstract fetchText(message: string, extras: AdapterExtras): Promise<string>;
 
     init() {
         if (!this.inputPreProcessor && this.useInputSchema) {
@@ -146,7 +148,7 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
         }
     }
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
 
     protected getDisplayableMessageFromAiOutput(aiMessage: object | string): string | undefined {
         if (this.outputPreProcessor) {
@@ -172,16 +174,16 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
         return undefined;
     }
 
-    protected getRequestBody(message: string): string {
+    protected getRequestBody(message: string, conversationHistory?: readonly ConversationItem[]): string {
         if (this.inputPreProcessor) {
-            const preProcessedInput = this.inputPreProcessor(message);
+            const preProcessedInput = this.inputPreProcessor(message, conversationHistory);
             return JSON.stringify({
                 input: preProcessedInput,
             });
         }
 
         if (this.inputSchema) {
-            const body = transformInputBasedOnSchema(message, this.inputSchema, this.runnableName);
+            const body = transformInputBasedOnSchema(message, conversationHistory, this.inputSchema, this.runnableName);
             if (typeof body !== 'undefined') {
                 return JSON.stringify({
                     input: body,

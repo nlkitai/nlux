@@ -1,4 +1,4 @@
-import {Adapter, DataTransferMode, StreamingAdapterObserver} from './adapter';
+import {Adapter, AdapterExtras, DataTransferMode, StreamingAdapterObserver} from './adapter';
 import {StandardAdapterConfig, StandardAdapterInfo} from './standardAdapterConfig';
 
 export type StandardAdapterStatus = 'disconnected'
@@ -20,11 +20,11 @@ export interface StandardAdapter<InboundPayload, OutboundPayload> extends Adapte
     get dataTransferMode(): DataTransferMode;
     decode(payload: InboundPayload): Promise<string | undefined>;
     encode(message: string): Promise<OutboundPayload>;
-    fetchText(message: string): Promise<string>;
+    fetchText(message: string, extras: AdapterExtras): Promise<string>;
     get id(): string;
     get info(): StandardAdapterInfo;
     get status(): StandardAdapterStatus;
-    streamText(message: string, observer: StreamingAdapterObserver): void;
+    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
 }
 
 export const isStandardAdapter = (adapter: Adapter): boolean => {

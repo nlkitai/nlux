@@ -1,4 +1,4 @@
-import {NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
+import {AdapterExtras, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
 import {LangServeAbstractAdapter} from './adapter';
 
 export class LangServeFetchAdapter extends LangServeAbstractAdapter {
@@ -6,8 +6,8 @@ export class LangServeFetchAdapter extends LangServeAbstractAdapter {
         super(options);
     }
 
-    async fetchText(message: string): Promise<string> {
-        const body = this.getRequestBody(message);
+    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
+        const body = this.getRequestBody(message, extras.conversationHistory);
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
             body,
@@ -29,7 +29,7 @@ export class LangServeFetchAdapter extends LangServeAbstractAdapter {
         return this.getDisplayableMessageFromAiOutput(output) ?? '';
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

@@ -68,8 +68,6 @@ data: {"content":"","additional_kwargs":{},"type":"AIMessageChunk","example":fal
 
 event: end
 `;
-
-            // TODO - parse the result and feed it to the observer
         }
 
         observer.complete();

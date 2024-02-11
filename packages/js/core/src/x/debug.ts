@@ -6,9 +6,15 @@ export const debug = (...messages: any[]) => {
     for (const message of messages) {
         if (typeof message === 'string') {
             console.log(`[nlux] ${message}`);
-        } else {
-            console.log('[nlux] Debug:');
-            console.log(JSON.stringify(message, null, 2));
+            continue;
         }
+
+        if (message && typeof message.toString === 'function') {
+            console.log(`[nlux] ${message.toString()}`);
+            continue;
+        }
+
+        console.log('[nlux] Debug:');
+        console.log(JSON.stringify(message, null, 2));
     }
 };

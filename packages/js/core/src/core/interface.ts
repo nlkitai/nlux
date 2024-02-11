@@ -1,7 +1,7 @@
 import {AdapterBuilder} from '../types/adapterBuilder';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
-import {NluxProps} from '../types/props';
+import {AiChatProps} from '../types/props';
 import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
@@ -19,7 +19,7 @@ export interface IAiChat {
 
     show(): void;
     unmount(): void;
-    updateProps(props: Partial<NluxProps>): void;
+    updateProps(props: Partial<AiChatProps>): void;
 
     withAdapter<InboundPayload, OutboundPayload>(
         adapterBuilder: AdapterBuilder<InboundPayload, OutboundPayload>,
@@ -27,11 +27,11 @@ export interface IAiChat {
     withClassName(
         className: string,
     ): IAiChat;
-    withConversationHistory(
-        conversationHistory: ConversationItem[],
-    ): IAiChat;
     withConversationOptions(
         conversationOptions: ConversationOptions,
+    ): IAiChat;
+    withInitialConversation(
+        initialConversation: ConversationItem[],
     ): IAiChat;
     withLayoutOptions(
         layoutOptions: LayoutOptions,

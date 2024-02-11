@@ -24,7 +24,7 @@ export type {
 export type {IObserver} from './core/bus/observer';
 export type {ExposedConfig} from './core/config';
 
-export type {NluxProps} from './types/props';
+export type {AiChatInternalProps} from './types/props';
 
 export type {
     EventName,
@@ -53,7 +53,12 @@ export type {
 } from './types/standardAdapterConfig';
 
 export type {
+    AiChatProps,
+} from './types/props';
+
+export type {
     Adapter,
+    AdapterExtras,
     StreamingAdapterObserver,
     DataTransferMode,
 } from './types/adapter';

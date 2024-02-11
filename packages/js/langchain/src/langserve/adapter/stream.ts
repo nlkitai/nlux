@@ -1,4 +1,4 @@
-import {NluxError, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {AdapterExtras, NluxError, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import {parseChunk} from '../parser/parseChunk';
 import {adapterErrorToExceptionId} from '../utils/adapterErrorToExceptionId';
 import {LangServeAbstractAdapter} from './adapter';
@@ -8,15 +8,15 @@ export class LangServeStreamAdapter extends LangServeAbstractAdapter {
         super(options);
     }
 
-    async fetchText(message: string): Promise<string> {
+    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver): void {
-        const body = this.getRequestBody(message);
+    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+        const body = this.getRequestBody(message, extras.conversationHistory);
         fetch(this.endpointUrl, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},

@@ -1,6 +1,7 @@
-import {NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import OpenAI from 'openai';
-import {adapterErrorToExceptionId} from '../../../x/adapterErrorToExceptionId';
+import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
+import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {gptStreamingAdapterConfig} from '../config';
 import {OpenAiAdapterOptions} from '../types/adapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
@@ -37,17 +38,23 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver): void {
-        // TODO - Only send system message once per conversation, when history is included
-        const messagesToSend: {
-            role: 'system' | 'user',
-            content: string
-        }[] = this.systemMessage ? [
+    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+        const messagesToSend: Array<
+            OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
+            OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
+            OpenAI.Chat.Completions.ChatCompletionAssistantMessageParam
+        > = this.systemMessage ? [
             {
                 role: 'system',
                 content: this.systemMessage,
             },
         ] : [];
+
+        if (extras.conversationHistory) {
+            messagesToSend.push(
+                ...conversationHistoryToMessagesList(extras.conversationHistory),
+            );
+        }
 
         messagesToSend.push({
             role: 'user',

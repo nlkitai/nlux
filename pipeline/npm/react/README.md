@@ -1,12 +1,14 @@
 # [NLUX REACT](https://nlux.ai) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
+[![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 
-NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
-powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
-can add conversational AI capabilities and interact with your favourite LLM.
+NLUX _(for Natural Language User Experience)_ is an open-source React and Javascript library that makes it super simple
+to
+integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
+of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
 ## Key Features 🌟
 
@@ -20,16 +22,28 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
 
+[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
+
 ## Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+* Developer portal ― [NLUX.dev](https://nlux.dev/)
+* Examples and live code playgrounds ― [NLUX.dev/examples](https://nlux.dev/examples)
 
-## Get Started With NLUX React and ChatGPT 🚀
 
-Install and import dependencies:
+* [Standard LLM adapters available](https://nlux.dev/learn/adapters)
+* [How to create your own adapter for NLUX](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
+
+## Get Started With NLUX React 🚀
+
+The example below demonstrates how to create an AI chat interface using NLUX JS and LangChain, the open source
+framework for building LLM backends. But you can use NLUX **with any LLM** ― either
+via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
+by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
+
+To get started with NLUX JS and LangChain, install the `@nlux/react` and `@nlux/langchain-react` packages:
 
 ```sh
-npm install @nlux/react @nlux/openai-react
+npm install @nlux/react @nlux/langchain-react
 ```
 
 Then include `<AiChat />` in your React app to get started.<br />
@@ -37,15 +51,11 @@ Use the `useAdapter` hook to configure an adapter for your LLM.
 
 ```jsx
 import {AiChat} from '@nlux/react';
-import {useAdapter} from '@nlux/openai-react';
+import {useAdapter} from '@nlux/langchain-react';
 
 const App = () => {
     const gptAdapter = useAdapter({
-        apiKey: 'YOUR_OPEN_AI_API_KEY',
-        // 👇 Instruct ChatGPT how to behave (optional)
-        systemMessage:
-            'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. ' +
-            'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.'
+        url: 'https://<Your LangServe Runnable URL>'
     });
 
     return (
@@ -53,6 +63,9 @@ const App = () => {
             adapter={gptAdapter}
             promptBoxOptions={{
                 placeholder: 'How can I help you today?'
+            }}
+            conversationOptions={{
+                historyPayloadSize: 'max'
             }}
         />
     );
@@ -64,7 +77,7 @@ or import it in your React app.
 
 ## And The Result Is ✨
 
-An AI chatbot, experienced in personal finance, that can give your users sound, tailored financial advice:
+An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
 [![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 

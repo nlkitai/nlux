@@ -88,7 +88,7 @@ describe('Personas config is provided', () => {
         aiChat = createAiChat()
             .withAdapter(adapterController.adapter)
             .withPersonaOptions(personasConfig)
-            .withConversationHistory([
+            .withInitialConversation([
                 {
                     message: 'Hello LLM',
                     role: 'user',

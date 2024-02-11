@@ -3,7 +3,7 @@ import {Adapter} from '../types/adapter';
 import {AdapterBuilder} from '../types/adapterBuilder';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
-import {NluxProps} from '../types/props';
+import {AiChatProps} from '../types/props';
 import {StandardAdapter} from '../types/standardAdapter';
 import {debug} from '../x/debug';
 import {NluxController} from './controller/controller';
@@ -20,8 +20,8 @@ export class AiChat implements IAiChat {
     protected theAdapterBuilder: StandardAdapter<any, any> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
-    protected theConversationHistory: ConversationItem[] | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
+    protected theInitialConversation: ConversationItem[] | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
@@ -77,7 +77,7 @@ export class AiChat implements IAiChat {
                 themeId: this.theThemeId ?? undefined,
                 adapter: adapterToUser,
                 className: this.theClassName ?? undefined,
-                conversationHistory: this.theConversationHistory ?? undefined,
+                initialConversation: this.theInitialConversation ?? undefined,
                 syntaxHighlighter: this.theSyntaxHighlighter ?? undefined,
                 layoutOptions: this.theLayoutOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
@@ -171,7 +171,7 @@ export class AiChat implements IAiChat {
         this.unregisteredEventListeners.clear();
     }
 
-    public updateProps(props: Partial<NluxProps>) {
+    public updateProps(props: Partial<AiChatProps>) {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -249,25 +249,6 @@ export class AiChat implements IAiChat {
         return this;
     }
 
-    public withConversationHistory(conversationHistory: ConversationItem[]) {
-        if (this.mounted) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set conversation history. NLUX is already mounted.',
-            });
-        }
-
-        if (this.theConversationHistory) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to change config. Conversation history was already set.',
-            });
-        }
-
-        this.theConversationHistory = conversationHistory;
-        return this;
-    }
-
     public withConversationOptions(conversationOptions: ConversationOptions) {
         if (this.mounted) {
             throw new NluxUsageError({
@@ -284,6 +265,25 @@ export class AiChat implements IAiChat {
         }
 
         this.theConversationOptions = conversationOptions;
+        return this;
+    }
+
+    public withInitialConversation(initialConversation: ConversationItem[]) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set conversation history. NLUX is already mounted.',
+            });
+        }
+
+        if (this.theInitialConversation) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Conversation history was already set.',
+            });
+        }
+
+        this.theInitialConversation = initialConversation;
         return this;
     }
 

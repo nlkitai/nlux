@@ -1,4 +1,4 @@
-import {Adapter, StreamingAdapterObserver} from '@nlux/core';
+import {Adapter, AdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {vi} from 'vitest';
 
 export const createAdapterController = ({
@@ -9,12 +9,16 @@ export const createAdapterController = ({
     let rejectPromise: Function | null = null;
     let lastMessageSent: string | null = null;
     let streamTextObserver: StreamingAdapterObserver | null = null;
+    let extrasFromLastMessage: AdapterExtras | undefined | null = null;
 
     let fetchTextMock = vi.fn();
     let streamTextMock = vi.fn();
 
-    const createNewFetchTextMock = () => (message: string) => {
+    const createNewFetchTextMock = () => (
+        message: string, extras: AdapterExtras,
+    ) => {
         lastMessageSent = message;
+        extrasFromLastMessage = extras;
         fetchTextMock(message);
 
         return new Promise<string>((resolve, reject) => {
@@ -23,9 +27,13 @@ export const createAdapterController = ({
         });
     };
 
-    const createNewStreamTextMock = () => (message: string, observer: StreamingAdapterObserver) => {
+    const createNewStreamTextMock = () => (
+        message: string, observer: StreamingAdapterObserver, extras: AdapterExtras,
+    ) => {
         lastMessageSent = message;
         streamTextObserver = observer;
+        extrasFromLastMessage = extras;
+
         streamTextMock(message, observer);
 
         return new Promise((resolve, reject) => {
@@ -41,6 +49,7 @@ export const createAdapterController = ({
 
     return Object.freeze({
         getLastMessage: () => lastMessageSent,
+        getLastExtras: () => extrasFromLastMessage,
         adapter: adapter,
         fetchTextMock,
         streamTextMock,

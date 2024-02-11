@@ -9,7 +9,7 @@ export type CompChatRoomProps = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-    conversationHistory?: readonly ConversationItem[];
+    initialConversationContent?: readonly ConversationItem[];
     scrollWhenGenerating?: boolean;
     streamingAnimationSpeed?: number | null;
     containerMaxHeight?: number | string;

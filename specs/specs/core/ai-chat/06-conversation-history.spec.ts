@@ -27,7 +27,7 @@ describe('When AiChat box is created with conversation history', () => {
             aiChat = new AiChat()
                 .withAdapter(adapterController.adapter)
                 .withLayoutOptions({height: '200px'})
-                .withConversationHistory([
+                .withInitialConversation([
                     {message: 'Hello AI!', role: 'user'},
                     {message: 'Hi user!', role: 'ai'},
                 ]);
@@ -60,7 +60,7 @@ describe('When AiChat box is created with conversation history', () => {
                         picture: 'https://i.imgur.com/7QuesI3.png',
                     },
                 })
-                .withConversationHistory([
+                .withInitialConversation([
                     {message: 'Hello AI!', role: 'user'},
                     {message: 'Hi user!', role: 'ai'},
                 ]);

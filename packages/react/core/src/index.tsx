@@ -1,6 +1,7 @@
 export type {
     Adapter,
     AdapterBuilder,
+    AdapterExtras,
     StreamingAdapterObserver,
     StandardAdapter,
     DataTransferMode,
@@ -28,7 +29,7 @@ export type {
 } from './components/AiChat/personaOptions';
 
 export type {
-    AiChatProps,
+    AiChatReactProps,
 } from './components/AiChat/props';
 
 export {

@@ -2,7 +2,10 @@ import {BotPersona, UserPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {HistoryPayloadSize} from '../../../core/options/conversationOptions';
 import {NluxContext} from '../../../types/context';
+import {ConversationItem} from '../../../types/conversation';
+import {warnOnce} from '../../../x/warn';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
 import {CompMessage} from '../message/message.model';
@@ -21,6 +24,7 @@ import {updateConversation} from './conversation.update';
 export class CompConversation extends BaseComp<
     CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
+    private conversationContent: ConversationItem[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;
@@ -32,6 +36,7 @@ export class CompConversation extends BaseComp<
         super(context, props);
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
+        this.conversationContent = props.messages?.map((message) => ({...message})) ?? [];
     }
 
     public addMessage(
@@ -107,6 +112,30 @@ export class CompConversation extends BaseComp<
         return message.id;
     }
 
+    public getConversationContentForAdapter(
+        historyPayloadSize: HistoryPayloadSize = 'max',
+    ): Readonly<ConversationItem[]> | undefined {
+        if (typeof historyPayloadSize === 'number' && historyPayloadSize <= 0) {
+            warnOnce(
+                `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +
+                `Value must be a positive integer or 'all'.`,
+            );
+
+            return undefined;
+        }
+
+        if (historyPayloadSize === 'none') {
+            return undefined;
+        }
+
+        if (historyPayloadSize === 'max') {
+            // We should return a new reference
+            return [...this.conversationContent];
+        }
+
+        return this.conversationContent.slice(-historyPayloadSize);
+    }
+
     public getMessageById(messageId: string): CompMessage | undefined {
         return this.messagesList?.getComponentById(messageId);
     }
@@ -148,6 +177,10 @@ export class CompConversation extends BaseComp<
 
     public toggleAutoScrollToStreamingMessage(autoScrollToStreamingMessage: boolean) {
         this.scrollWhenGeneratingUserOption = autoScrollToStreamingMessage;
+    }
+
+    public updateConversationContent(newItem: ConversationItem) {
+        this.conversationContent.push(newItem);
     }
 
     private addConversation() {
