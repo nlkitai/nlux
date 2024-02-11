@@ -29,9 +29,13 @@ export type {AiChatInternalProps} from './types/props';
 export type {
     EventName,
     EventCallback,
+    EventsMap,
     ErrorCallback,
     ErrorEventDetails,
-    EventsMap,
+    ReadyCallback,
+    ReadyEventDetails,
+    PreDestroyCallback,
+    PreDestroyEventDetails,
     MessageSentCallback,
     MessageReceivedCallback,
 } from './types/event';

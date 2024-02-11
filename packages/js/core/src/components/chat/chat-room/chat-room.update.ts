@@ -6,13 +6,6 @@ export const updateChatRoom: CompUpdater<CompChatRoomProps, CompChatRoomElements
     newValue,
     dom: {elements, actions},
 }) => {
-    if (propName === 'visible') {
-        if (elements?.chatRoomContainer) {
-            elements.chatRoomContainer.style.display = newValue ? '' : 'none';
-        }
-        return;
-    }
-
     if (propName === 'containerMaxHeight' && elements?.chatRoomContainer) {
         elements.chatRoomContainer.style.maxHeight = typeof newValue === 'number'
             ? `${newValue}px`

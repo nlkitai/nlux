@@ -74,6 +74,7 @@ export const renderChatRoom: CompRenderer<
 
     const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prompt-box-container')}`);
     appendToRoot(chatRoomElement);
+    compEvent('chat-room-ready')();
 
     return {
         elements: {

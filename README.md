@@ -86,8 +86,11 @@ cross platforms, with a focus on performance and usability.
 
 ## Community & Support 🙏
 
+---
+
 * **Star The Repo** 🌟 ― If you like NLUX, please star the repo to show your support.
 
+---
 
 * **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** ― Ask questions, report issues, and share your
   ideas with the community.

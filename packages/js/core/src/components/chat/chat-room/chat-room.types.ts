@@ -1,8 +1,7 @@
 import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {ConversationItem} from '../../../types/conversation';
 
-export type CompChatRoomEvents = 'close-chat-room-clicked'
-    | 'show-chat-room-clicked'
+export type CompChatRoomEvents = 'chat-room-ready'
     | 'messages-container-clicked';
 
 export type CompChatRoomProps = {

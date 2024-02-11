@@ -1,20 +1,33 @@
 import {ExceptionId} from '../exceptions/exceptions';
+import {ConversationItem} from './conversation';
+import {AiChatProps} from './props';
 
 export type ErrorEventDetails = {
     errorId: ExceptionId;
     message: string;
 };
 
+export type ReadyEventDetails = {
+    aiChatProps: AiChatProps;
+}
+
+export type PreDestroyEventDetails = {
+    aiChatProps: AiChatProps;
+    conversationHistory: Readonly<ConversationItem[]>;
+}
+
 export type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
-
 export type MessageReceivedCallback = (message: string) => void;
-
 export type MessageSentCallback = (message: string) => void;
+export type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
+export type PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => void;
 
 export type EventsMap = {
-    error: ErrorCallback;
+    ready: ReadyCallback;
+    preDestroy: PreDestroyCallback;
     messageSent: MessageSentCallback;
     messageReceived: MessageReceivedCallback;
+    error: ErrorCallback;
 };
 
 export type EventName = keyof EventsMap;

@@ -15,9 +15,13 @@ export type {
 export type {
     EventName,
     EventCallback,
+    EventsMap,
     ErrorCallback,
     ErrorEventDetails,
-    EventsMap,
+    ReadyCallback,
+    ReadyEventDetails,
+    PreDestroyCallback,
+    PreDestroyEventDetails,
     MessageSentCallback,
     MessageReceivedCallback,
 } from '@nlux/core';

@@ -1,6 +1,7 @@
 import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
+import {HistoryPayloadSize} from '../../../core/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {NluxContext} from '../../../types/context';
 import {ConversationItem} from '../../../types/conversation';
@@ -69,6 +70,10 @@ export class CompChatRoom extends BaseComp<
         }
     }
 
+    public getConversationContentForAdapter(historyPayloadSize: HistoryPayloadSize = 'max') {
+        return this.conversation.getConversationContentForAdapter(historyPayloadSize);
+    }
+
     public hide() {
         this.setProp('visible', false);
     }
@@ -76,6 +81,13 @@ export class CompChatRoom extends BaseComp<
     @CompEventListener('messages-container-clicked')
     messagesContainerClicked() {
         this.promptBoxInstance?.focusTextInput();
+    }
+
+    @CompEventListener('chat-room-ready')
+    onChatRoomReady(event: MouseEvent) {
+        this.context.emit('ready', {
+            aiChatProps: this.context.aiChatProps,
+        });
     }
 
     public setProps(props: Partial<CompChatRoomProps>) {
@@ -116,20 +128,6 @@ export class CompChatRoom extends BaseComp<
 
     public show() {
         this.setProp('visible', true);
-    }
-
-    @CompEventListener('show-chat-room-clicked')
-    showChatRoom(event: MouseEvent) {
-        if (event.stopPropagation) {
-            event.stopPropagation();
-        }
-
-        if (event.preventDefault) {
-            event.preventDefault();
-        }
-
-        this.setProp('visible', true);
-        this.promptBoxInstance?.focusTextInput();
     }
 
     private addConversation(

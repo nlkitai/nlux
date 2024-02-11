@@ -245,6 +245,19 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
             });
         }
 
+        //
+        // Trigger pre-destroy event
+        //
+        this.context.emit('preDestroy', {
+            aiChatProps: this.context.aiChatProps,
+            conversationHistory: this.chatRoom.getConversationContentForAdapter(
+                this.context.aiChatProps.conversationOptions?.historyPayloadSize,
+            ) ?? [],
+        });
+
+        //
+        // Destroy UI components
+        //
         if (this.exceptionsBox) {
             this.exceptionsBox.destroy();
         }
