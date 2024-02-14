@@ -5,7 +5,7 @@
 
 ## The Conversational AI UI Library For Any LLM
 
-nlux _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
+`nlux` _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
 of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
@@ -26,25 +26,23 @@ of code, you can add conversational AI capabilities and interact with your favou
 
 * Developer portal ― [nlux.dev](https://nlux.dev/)
 * Examples and live code playgrounds ― [nlux.dev/examples](https://nlux.dev/examples)
-
-
 * [Standard LLM adapters available](https://nlux.dev/learn/adapters)
 * [How to create your own adapter for nlux](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
 
 ## Vanilla JS 🟨 vs React JS ⚛️
 
-This package `@nlux/core` is the vanilla JS version of nlux.
+This package `@nlux/core` is the vanilla JS version of the library.
 If you're looking for the React JS version, please check
 the [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) package.
 
-## Get Started With nlux 🚀
+## Get Started With `nlux JS` 🚀
 
-The example below demonstrates how to create an AI chat interface using nlux JS and LangChain, the open source
-framework for building LLM backends. But you can use nlux **with any LLM** ― either
+The example below demonstrates how to create an AI chat interface using `nlux JS` and LangChain, the open source
+framework for building LLM backends. But you can use `nlux` **with any LLM** ― either
 via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
 by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
 
-To get started with nlux JS and LangChain, install the `@nlux/core` and `@nlux/langchain` packages:
+To get started with `nlux JS` and `LangChain`, install the `@nlux/core` and `@nlux/langchain` packages:
 
 ```sh
 npm install @nlux/core @nlux/langchain

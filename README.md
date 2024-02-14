@@ -1,4 +1,4 @@
-# [nlux](https://nlux.ai) 🌲✨💬
+# [`nlux`](https://nlux.ai) 🌲✨💬
 
 ![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
 [![npm version](https://img.shields.io/badge/NPM-@nlux/react-1ccb61)](https://www.npmjs.com/package/@nlux/react)
@@ -20,7 +20,8 @@ of code, you can add conversational AI capabilities and interact with your favou
 * A flexible interface to **Create Your Own Adapter** for any LLM or API, with support for stream or fetch modes.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
-* **Zero Dependencies** ― Lightweight codebase, with zero-dependencies except for LLM front-end libraries.
+* **High Customizability** - Tune almost every UI aspect through theming, layout options, and more.
+* **Zero Dependencies** ― Lightweight codebase ― **Core** with zero dependencies and no external UI libraries.
 
 [![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 
@@ -89,10 +90,10 @@ cross platforms, with a focus on performance and usability.
 ## Community & Support 🙏
 
 * **Star The Repo** 🌟 ― If you like `nlux`, please star the repo to show your support.  
-  Your support is what keeps this open-source project going ! 🧡
+  Your support is what keeps this open-source project going 🧡
 * **[GitHub Discussions](https://github.com/nluxai/nlux/discussions)** ― Ask questions, report issues, and share your
   ideas with the community.
-* **[Discord Community](https://discord.gg/VY4TDaf4)** ― Join our Discord server to chat with the community and get
+* **[Discord Community](https://discord.gg/SRwDmZghNB)** ― Join our Discord server to chat with the community and get
   support.
 * **[nlux.dev](https://nlux.dev/)** Developer Website ― Examples, learning resources, and API reference.
 

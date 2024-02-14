@@ -5,7 +5,8 @@
 
 ## The Conversational AI UI Library For Any LLM
 
-nlux _(for Natural Language User Experience)_ is an open-source React and Javascript library that makes it super simple
+`nlux` _(for Natural Language User Experience)_ is an open-source React and Javascript library that makes it super
+simple
 to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
 of code, you can add conversational AI capabilities and interact with your favourite LLM.
@@ -33,14 +34,14 @@ of code, you can add conversational AI capabilities and interact with your favou
 * [Standard LLM adapters available](https://nlux.dev/learn/adapters)
 * [How to create your own adapter for nlux](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
 
-## Get Started With nlux React 🚀
+## Get Started With `nlux React` 🚀
 
-The example below demonstrates how to create an AI chat interface using nlux JS and LangChain, the open source
-framework for building LLM backends. But you can use nlux **with any LLM** ― either
+The example below demonstrates how to create an AI chat interface using `nlux React` and `LangChain`, the open source
+framework for building LLM backends. But you can use `nlux` **with any LLM** ― either
 via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
 by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
 
-To get started with nlux JS and LangChain, install the `@nlux/react` and `@nlux/langchain-react` packages:
+To get started with `nlux React` and LangChain, install the `@nlux/react` and `@nlux/langchain-react` packages:
 
 ```sh
 npm install @nlux/react @nlux/langchain-react
