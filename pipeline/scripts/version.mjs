@@ -38,7 +38,7 @@ const readVersionsFile = () => {
     }
 
     info('Versions file read successfully! ✅ ' + versionsPath);
-    info('NLUX version 🌟 : ' + result.nlux);
+    info('nlux version 🌟 : ' + result.nlux);
     info('PeerDependencies versions: ');
     rawLog(JSON.stringify(result.peerDependencies));
     rawLog(JSON.stringify(result.dependencies));

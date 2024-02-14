@@ -1,16 +1,16 @@
-# Syntax Highlighter Extension for [NLUX](https://nlux.ai) 🌲✨💬
+# Syntax Highlighter Extension for [nlux](https://nlux.ai) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.ai](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
 
 This extension adds syntax highlighting for code displayed in
-the NLUX Conversational AI interface.
+the nlux Conversational AI interface.
 
 To learn more about how to use this package, please visit the
 [documentation](https://docs.nlux.ai/examples/syntax-highlighter) page.
 
-## About NLUX
+## About nlux
 
-NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
+nlux _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
 powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
 can add conversational AI capabilities and interact with your favourite LLM.
 
@@ -28,4 +28,4 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 ### Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+For developer documentation, examples, and API reference ― you can visit: **[nlux.ai](https://nlux.ai/)**

@@ -13,7 +13,7 @@ export type LangServeAdapterOptions = {
      * at the end of the URL. Example: https://api.example.com/v1/my_runnable/stream
      *
      * For more information about the LangServe runnable endpoints and how to use them
-     * with NLUX, please visit https://docs.nlux.ai/learn/adapters/langserve
+     * with nlux, please visit https://docs.nlux.ai/learn/adapters/langserve
      *
      */
     url: string;

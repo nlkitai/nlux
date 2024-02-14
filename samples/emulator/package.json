@@ -1,6 +1,6 @@
 {
   "name": "@nlux-dev/emulator",
-  "description": "Emulator and vanilla JS samples of a real use-case of NLUX to test the library",
+  "description": "Emulator and vanilla JS samples of a real use-case of nlux to test the library",
   "version": "0.0.0-latest",
   "author": "Salmen Hichri",
   "license": "MPL-2.0",

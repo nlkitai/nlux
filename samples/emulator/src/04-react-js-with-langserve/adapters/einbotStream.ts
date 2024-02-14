@@ -1,6 +1,6 @@
 import {Adapter, StreamingAdapterObserver} from '@nlux/react';
 
-// A demo endpoint by NLUX that connects that uses LangServe to connect to OpenAI.
+// A demo endpoint by nlux that connects that uses LangServe to connect to OpenAI.
 const demoProxyServerUrl = 'https://pynlux.api.nlux.ai/einbot/stream';
 
 const promptToBody = (message: string) => {

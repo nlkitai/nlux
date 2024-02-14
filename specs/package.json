@@ -1,7 +1,7 @@
 {
   "name": "@nlux-dev/specifications",
   "version": "0.0.0-latest",
-  "description": "Specs and tests for NLUX packages",
+  "description": "Specs and tests for nlux packages",
   "main": "index.js",
   "bugs": "https://github.com/nluxai/nlux/issues",
   "repository": {

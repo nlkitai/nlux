@@ -1,3 +1,3 @@
 # Contributing
 
-Resources for contributing to the NLUX project.
+Resources for contributing to the nlux project.

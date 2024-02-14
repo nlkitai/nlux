@@ -76,7 +76,7 @@ try {
     info('Sym-linking packages to emulator folder');
 
     //
-    // Symlink built NLUX packages to emulator folder
+    // Symlink built nlux packages to emulator folder
     //
     await Promise.all(packagesList.map(async (pkg) => {
         await symlinkDir(

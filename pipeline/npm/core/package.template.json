@@ -2,7 +2,7 @@
   "name": "@nlux/core",
   "version": "{versions.nlux}",
   "license": "MPL-2.0",
-  "description": "NLUX is Javascript and React library for building conversational AI interfaces, with support for OpenAI, Hugging Face, and more.",
+  "description": "nlux is Javascript and React library for building conversational AI interfaces, with support for OpenAI, Hugging Face, and more.",
   "repository": {
     "directory": "packages/js/core"
   },

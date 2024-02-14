@@ -1,5 +1,5 @@
 export const info = (message, ...args) => {
-    console.log('[NLUX Pipeline]', message, ...args);
+    console.log('[nlux]', message, ...args);
 };
 
 export const nl = (howMany = 1) => {
@@ -7,16 +7,16 @@ export const nl = (howMany = 1) => {
 };
 
 export const error = (message, ...args) => {
-    console.error('[NLUX Pipeline]', message, ...args);
+    console.error('[nlux]', message, ...args);
 };
 
 export const warn = (message, ...args) => {
-    console.warn('[NLUX Pipeline]', message, ...args);
+    console.warn('[nlux]', message, ...args);
 }
 
 export const throwError = (message, ...args) => {
     error(message, ...args);
-    throw new Error(`[NLUX Pipeline] ${message} ${args.join(' ')}`);
+    throw new Error(`[nlux] ${message} ${args.join(' ')}`);
 };
 
 export const rawLog = (message, ...args) => {

@@ -2,7 +2,7 @@
   "name": "@nlux/markdown",
   "version": "{versions.nlux}",
   "license": "MPL-2.0",
-  "description": "A lightweight and fast markdown parser used by NLUX that can be used to parse markdown text streams into DOM.",
+  "description": "A lightweight and fast markdown parser used by nlux that can be used to parse markdown text streams into DOM.",
   "repository": {
     "directory": "packages/extra/markdown"
   },

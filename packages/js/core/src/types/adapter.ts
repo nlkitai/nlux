@@ -23,7 +23,7 @@ export interface Adapter {
     fetchText?: (message: string, extras: AdapterExtras) => Promise<string>;
 
     /**
-     * This method should be implemented by any adapter to be used with NLUX.
+     * This method should be implemented by any adapter to be used with nlux.
      * Either this method or `fetchText` (or both) should be implemented by any adapter.
      *
      * @param {string} message

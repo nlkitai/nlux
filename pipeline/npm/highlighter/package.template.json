@@ -2,7 +2,7 @@
   "name": "@nlux/highlighter",
   "version": "{versions.nlux}",
   "license": "MPL-2.0",
-  "description": "Syntax highlighter for NLUX",
+  "description": "Syntax highlighter for nlux",
   "repository": {
     "directory": "packages/extra/highlighter"
   },

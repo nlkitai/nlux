@@ -1,6 +1,6 @@
 import {Adapter} from '@nlux/react';
 
-// A demo endpoint by NLUX that connects that uses LangServe to connect to OpenAI.
+// A demo endpoint by nlux that connects that uses LangServe to connect to OpenAI.
 const demoLangServerEndpoint = 'https://pynlux.api.nlux.ai/einbot/invoke';
 
 const promptToBody = (message: string) => {

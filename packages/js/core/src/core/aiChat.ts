@@ -38,7 +38,7 @@ export class AiChat implements IAiChat {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
-                message: 'Unable to hide. NLUX is not mounted.',
+                message: 'Unable to hide. nlux is not mounted.',
             });
         }
 
@@ -49,7 +49,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to create NLUX instance. NLUX is already mounted. '
+                message: 'Unable to create nlux instance. nlux is already mounted. '
                     + 'Make sure to call `unmount()` before mounting again.',
             });
         }
@@ -63,8 +63,8 @@ export class AiChat implements IAiChat {
         if (!adapterToUser) {
             throw new NluxValidationError({
                 source: this.constructor.name,
-                message: 'Unable to create NLUX instance. Adapter is not properly set. '
-                    + 'You should call `withAdapter(adapter)` method before mounting NLUX.',
+                message: 'Unable to create nlux instance. Adapter is not properly set. '
+                    + 'You should call `withAdapter(adapter)` method before mounting nlux.',
             });
         }
 
@@ -144,7 +144,7 @@ export class AiChat implements IAiChat {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
-                message: 'Unable to show. NLUX is not mounted.',
+                message: 'Unable to show. nlux is not mounted.',
             });
         }
 
@@ -152,10 +152,10 @@ export class AiChat implements IAiChat {
     }
 
     public unmount() {
-        debug('Unmounting NLUX.');
+        debug('Unmounting nlux.');
 
         if (!this.controller) {
-            debug('Invalid call to aiChat.unmount() on an already unmounted NLUX instance!');
+            debug('Invalid call to aiChat.unmount() on an already unmounted nlux instance!');
             return;
         }
 
@@ -175,7 +175,7 @@ export class AiChat implements IAiChat {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
-                message: 'Unable to update props. NLUX is not mounted.',
+                message: 'Unable to update props. nlux is not mounted.',
             });
         }
 
@@ -186,7 +186,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set adapter. NLUX is already mounted.',
+                message: 'Unable to set adapter. nlux is already mounted.',
             });
         }
 
@@ -234,7 +234,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set class name. NLUX is already mounted.',
+                message: 'Unable to set class name. nlux is already mounted.',
             });
         }
 
@@ -253,7 +253,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set conversation options. NLUX is already mounted.',
+                message: 'Unable to set conversation options. nlux is already mounted.',
             });
         }
 
@@ -272,7 +272,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set conversation history. NLUX is already mounted.',
+                message: 'Unable to set conversation history. nlux is already mounted.',
             });
         }
 
@@ -291,7 +291,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set layout options. NLUX is already mounted.',
+                message: 'Unable to set layout options. nlux is already mounted.',
             });
         }
 
@@ -311,7 +311,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set personaOptions. NLUX is already mounted.',
+                message: 'Unable to set personaOptions. nlux is already mounted.',
             });
         }
 
@@ -330,7 +330,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set prompt box options. NLUX is already mounted.',
+                message: 'Unable to set prompt box options. nlux is already mounted.',
             });
         }
 
@@ -349,7 +349,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set code highlighter. NLUX is already mounted.',
+                message: 'Unable to set code highlighter. nlux is already mounted.',
             });
         }
 
@@ -368,7 +368,7 @@ export class AiChat implements IAiChat {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set theme. NLUX is already mounted.',
+                message: 'Unable to set theme. nlux is already mounted.',
             });
         }
 

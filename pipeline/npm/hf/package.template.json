@@ -2,7 +2,7 @@
   "name": "@nlux/hf",
   "version": "{versions.nlux}",
   "license": "MPL-2.0",
-  "description": "The Hugging Face adapters for NLUX, the javascript library for building conversational AI interfaces.",
+  "description": "The Hugging Face adapters for nlux, the javascript library for building conversational AI interfaces.",
   "repository": {
     "directory": "packages/js/hf"
   },

@@ -1,8 +1,8 @@
-# NLUX JS Hugging Face Adapter
+# nlux JS Hugging Face Adapter
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs NLUX.ai](https://img.shields.io/badge/Docs_Website-NLUX.dev-%23fa896b)](https://nlux.dev)
+[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.ai](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
 
-This package enables the integration between NLUX and Hugging Face, the AI models platform.  
+This package enables the integration between nlux and Hugging Face, the AI models platform.  
 More specifically ― the package include the adapter to connect to chat models hosted and exposed
 via [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints/dedicated).
 
@@ -11,13 +11,13 @@ For more information on how to use this package, please visit:
 
 ### Vanilla JS 🟨 vs React JS ⚛️
 
-This package `@nlux/hf` is meant for use with the vanilla JS version of NLUX.
+This package `@nlux/hf` is meant for use with the vanilla JS version of nlux.
 If you're looking for the React JS version, please check
 the [`@nlux/hf-react`](https://www.npmjs.com/package/@nlux/hf-react) package.
 
-## About NLUX
+## About nlux
 
-NLUX _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
+nlux _(for Natural Language User Experience)_ is an open-source Javascript library that makes it simple to integrate
 powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
 can add conversational AI capabilities and interact with your favourite LLM.
 
@@ -35,4 +35,4 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 ### Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: **[NLUX.ai](https://nlux.ai/)**
+For developer documentation, examples, and API reference ― you can visit: **[nlux.ai](https://nlux.ai/)**

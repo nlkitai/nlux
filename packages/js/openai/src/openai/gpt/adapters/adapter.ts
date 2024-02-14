@@ -28,11 +28,11 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
     private readonly __instanceId: string;
 
     protected constructor({
-        systemMessage,
-        apiKey,
-        dataTransferMode,
-        model,
-    }: OpenAiAdapterOptions) {
+                              systemMessage,
+                              apiKey,
+                              dataTransferMode,
+                              model,
+                          }: OpenAiAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
         this.currentStatus = 'disconnected';
@@ -53,7 +53,7 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
             + 'https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety\n'
             + 'The useUnsafeAdapter/createUnsafeAdapter are only intended for development and testing purposes.\n\n'
             + 'For production use, we recommend that you implement a server-side proxy and configure a customized '
-            + 'adapter for it. To learn more about how to create custom adapters for NLUX, visit:\n'
+            + 'adapter for it. To learn more about how to create custom adapters for nlux, visit:\n'
             + 'https://nlux.dev/learn/adapters/custom-adapters',
         );
     }
