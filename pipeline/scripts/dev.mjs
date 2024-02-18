@@ -51,12 +51,13 @@ try {
     await Promise.all([
         '01-vanilla-js-with-adapters',
         '02-vanilla-js-with-events',
-        '03-react-js-with-hugging-face',
-        '04-react-js-with-langserve',
-        '05-react-js-with-adapters',
-        '06-react-js-personas',
-        '07-react-js-events',
-        '08-react-js-with-conv-history',
+        '03-react-js-with-nlbridge',
+        '04-react-js-with-hugging-face',
+        '05-react-js-with-langserve',
+        '06-react-js-with-adapters',
+        '07-react-js-personas',
+        '08-react-js-events',
+        '09-react-js-with-conv-history',
     ].map(async (name) => {
         cpSync(`samples/emulator/src/${name}/index.html`, `dist/public/${name}/index.html`);
         cpSync(`samples/emulator/dep/loaders/require.min.js`, `dist/public/${name}/require.min.js`);

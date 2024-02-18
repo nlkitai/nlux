@@ -66,7 +66,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 01 - Pure JS in ESM format with Event Listeners
+    // 02 - Pure JS in ESM format with Event Listeners
     //
     {
         input: './src/02-vanilla-js-with-events/index.ts',
@@ -104,10 +104,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 03 - React JS + HF Adapter in UMD format
+    // 03 - React JS + nlbridge adapter in UMD format
     //
     {
-        input: './src/03-react-js-with-hugging-face/index.tsx',
+        input: './src/03-react-js-with-nlbridge/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -133,7 +133,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/03-react-js-with-hugging-face/index.js`,
+                file: `${outputFolder}/03-react-js-with-nlbridge/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -143,10 +143,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 04 - React JS + LangServe Adapter in UMD format
+    // 04 - React JS + HF Adapter in UMD format
     //
     {
-        input: './src/04-react-js-with-langserve/index.tsx',
+        input: './src/04-react-js-with-hugging-face/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -172,7 +172,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/04-react-js-with-langserve/index.js`,
+                file: `${outputFolder}/04-react-js-with-hugging-face/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -182,10 +182,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 05 - React JS in UMD format + Custom Adapters
+    // 05 - React JS + LangServe Adapter in UMD format
     //
     {
-        input: './src/05-react-js-with-adapters/index.tsx',
+        input: './src/05-react-js-with-langserve/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -211,7 +211,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/05-react-js-with-adapters/index.js`,
+                file: `${outputFolder}/05-react-js-with-langserve/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -221,10 +221,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 06 - React JS + OpenAI in UMD format + Persona Demo
+    // 06 - React JS in UMD format + Custom Adapters
     //
     {
-        input: './src/06-react-js-personas/index.tsx',
+        input: './src/06-react-js-with-adapters/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -250,7 +250,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/06-react-js-personas/index.js`,
+                file: `${outputFolder}/06-react-js-with-adapters/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -260,10 +260,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 07 - React JS + OpenAI in UMD format + Event Listeners
+    // 07 - React JS + OpenAI in UMD format + Persona Demo
     //
     {
-        input: './src/07-react-js-events/index.tsx',
+        input: './src/07-react-js-personas/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -289,7 +289,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/07-react-js-events/index.js`,
+                file: `${outputFolder}/07-react-js-personas/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,
@@ -299,10 +299,10 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 08 - React JS + Conversation History
+    // 08 - React JS + OpenAI in UMD format + Event Listeners
     //
     {
-        input: './src/08-react-js-with-conv-history/index.tsx',
+        input: './src/08-react-js-events/index.tsx',
         plugins: [
             esbuild({
                 jsx: 'transform',
@@ -328,7 +328,46 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         external: externals,
         output: [
             {
-                file: `${outputFolder}/08-react-js-with-conv-history/index.js`,
+                file: `${outputFolder}/08-react-js-events/index.js`,
+                format: 'umd',
+                sourcemap: true,
+                strict: true,
+                esModule: false,
+                name: 'nluxEmulatorReactExample',
+            },
+        ],
+    },
+    //
+    // 09 - React JS + Conversation History
+    //
+    {
+        input: './src/09-react-js-with-conv-history/index.tsx',
+        plugins: [
+            esbuild({
+                jsx: 'transform',
+                jsxFactory: 'React.createElement',
+                jsxFragment: 'React.Fragment',
+            }),
+            nodeResolve({
+                modulePaths: [
+                    nodeModulesPath,
+                ],
+                rootDir: '/packages',
+                browser: true,
+            }),
+            commonjs(),
+            replace({
+                delimiters: ['', ''],
+                preventAssignment: false,
+                values: {
+                    'process.env.NODE_ENV': JSON.stringify('development'),
+                },
+            }),
+        ],
+        external: externals,
+        output: [
+            {
+                file: `${outputFolder}/09-react-js-with-conv-history/index.js`,
                 format: 'umd',
                 sourcemap: true,
                 strict: true,

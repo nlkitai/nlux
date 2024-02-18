@@ -4,7 +4,6 @@ import {
     StandardAdapter,
     StandardAdapterConfig,
     StandardAdapterInfo,
-    StandardAdapterStatus,
     StreamingAdapterObserver,
     uid,
     warn,
@@ -19,7 +18,6 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
     InboundPayload, OutboundPayload
 > {
 
-    protected currentStatus: StandardAdapterStatus = 'disconnected';
     protected readonly model: OpenAIModel;
     protected readonly openai: OpenAI;
     protected systemMessage: string | null = 'Act as a helpful assistant to the user';
@@ -28,14 +26,13 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
     private readonly __instanceId: string;
 
     protected constructor({
-                              systemMessage,
-                              apiKey,
-                              dataTransferMode,
-                              model,
-                          }: OpenAiAdapterOptions) {
+        systemMessage,
+        apiKey,
+        dataTransferMode,
+        model,
+    }: OpenAiAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
-        this.currentStatus = 'disconnected';
         this.theDataTransferMode = dataTransferMode ?? defaultDataTransferMode;
         this.model = model ?? defaultChatGptModel;
 
@@ -70,10 +67,6 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
 
     get info(): StandardAdapterInfo {
         return gptAdapterInfo;
-    }
-
-    get status(): StandardAdapterStatus {
-        return this.currentStatus;
     }
 
     async decode(payload: InboundPayload): Promise<string | undefined> {

@@ -6,7 +6,6 @@ import {
     StandardAdapter,
     StandardAdapterConfig,
     StandardAdapterInfo,
-    StandardAdapterStatus,
     StreamingAdapterObserver,
     uid,
     warn,
@@ -68,10 +67,6 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
             inputFormats: ['text'],
             outputFormats: ['text', 'markdown'],
         };
-    }
-
-    get status(): StandardAdapterStatus {
-        return 'idle';
     }
 
     async decode(payload: any): Promise<string> {

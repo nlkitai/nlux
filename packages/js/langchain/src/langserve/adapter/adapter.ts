@@ -5,7 +5,6 @@ import {
     StandardAdapter,
     StandardAdapterConfig,
     StandardAdapterInfo,
-    StandardAdapterStatus,
     StreamingAdapterObserver,
     uid,
     warn,
@@ -98,10 +97,6 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
 
     get runnableName(): string {
         return this.theRunnableNameToUse;
-    }
-
-    get status(): StandardAdapterStatus {
-        return 'idle';
     }
 
     get useInputSchema(): boolean {

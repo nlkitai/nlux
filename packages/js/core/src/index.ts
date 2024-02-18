@@ -42,9 +42,6 @@ export type {
 
 export type {
     StandardAdapter,
-    StandardAdapterEvent,
-    StandardAdapterStatus,
-    StandardAdapterEventData,
 } from './types/standardAdapter';
 
 export type {
