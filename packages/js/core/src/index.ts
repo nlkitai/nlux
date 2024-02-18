@@ -45,7 +45,6 @@ export type {
 } from './types/standardAdapter';
 
 export type {
-    StandardAdapterConfig,
     StandardAdapterInfo,
     AdapterEncodeFunction,
     AdapterDecodeFunction,

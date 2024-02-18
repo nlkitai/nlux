@@ -1,5 +1,5 @@
 import {StandardAdapter} from './standardAdapter';
 
-export interface AdapterBuilder<InboundPayload, OutboundPayload> {
-    create(): StandardAdapter<InboundPayload, OutboundPayload>;
+export interface AdapterBuilder {
+    create(): StandardAdapter;
 }

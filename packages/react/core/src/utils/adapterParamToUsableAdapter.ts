@@ -1,8 +1,8 @@
 import {Adapter, AdapterBuilder, StandardAdapter, warn} from '@nlux/core';
 
 export const adapterParamToUsableAdapter = (
-    anAdapterOrAdapterBuilder: Adapter | AdapterBuilder<any, any>,
-): Adapter | StandardAdapter<any, any> | undefined => {
+    anAdapterOrAdapterBuilder: Adapter | AdapterBuilder,
+): Adapter | StandardAdapter | undefined => {
     let adapterType: 'instance' | 'builder' | 'unknown' = 'unknown';
 
     const adapterAsAny = anAdapterOrAdapterBuilder as any;
@@ -24,7 +24,7 @@ export const adapterParamToUsableAdapter = (
     }
 
     if (adapterType === 'builder') {
-        const adapterBuilder: AdapterBuilder<any, any> = adapterAsAny;
+        const adapterBuilder: AdapterBuilder = adapterAsAny;
         const newAdapter = adapterBuilder.create();
         if (
             (typeof newAdapter?.fetchText === 'function') ||

@@ -9,7 +9,7 @@ import {EventsMap} from './event';
 import {StandardAdapter} from './standardAdapter';
 
 export type AiChatInternalProps = {
-    adapter: Adapter | StandardAdapter<any, any>;
+    adapter: Adapter | StandardAdapter;
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;
@@ -27,7 +27,7 @@ export type AiChatInternalProps = {
  * as part of the `AdapterExtras` attribute.
  */
 export type AiChatProps = Readonly<{
-    adapter: Adapter | StandardAdapter<any, any>;
+    adapter: Adapter | StandardAdapter;
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;

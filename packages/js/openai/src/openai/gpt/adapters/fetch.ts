@@ -2,14 +2,11 @@ import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nl
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {gptFetchAdapterConfig} from '../config';
+import {decode as fetchDecode} from '../codec/fetch/decode';
 import {OpenAiAdapterOptions} from '../types/adapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
-    OpenAI.Chat.Completions.ChatCompletion,
-    OpenAI.Chat.Completions.ChatCompletionMessageParam
-> {
+export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
     constructor({
         apiKey,
         model,
@@ -25,10 +22,6 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
         if (systemMessage !== undefined && systemMessage.length > 0) {
             this.systemMessage = systemMessage;
         }
-    }
-
-    get config() {
-        return gptFetchAdapterConfig;
     }
 
     async fetchText(message: string, extras: AdapterExtras): Promise<string> {
@@ -61,7 +54,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter<
                 messages: messagesToSend,
             });
 
-            const result = await this.decode(response);
+            const result = await fetchDecode(response);
             if (result === undefined) {
                 warn('Undecodable message received from OpenAI');
                 return '';

@@ -21,31 +21,13 @@ export interface IAiChat {
     unmount(): void;
     updateProps(props: Partial<AiChatProps>): void;
 
-    withAdapter<InboundPayload, OutboundPayload>(
-        adapterBuilder: AdapterBuilder<InboundPayload, OutboundPayload>,
-    ): IAiChat;
-    withClassName(
-        className: string,
-    ): IAiChat;
-    withConversationOptions(
-        conversationOptions: ConversationOptions,
-    ): IAiChat;
-    withInitialConversation(
-        initialConversation: ConversationItem[],
-    ): IAiChat;
-    withLayoutOptions(
-        layoutOptions: LayoutOptions,
-    ): IAiChat;
-    withPersonaOptions(
-        personaOptions: PersonaOptions,
-    ): IAiChat;
-    withPromptBoxOptions(
-        promptBoxOptions: PromptBoxOptions,
-    ): IAiChat;
-    withSyntaxHighlighter(
-        syntaxHighlighter: HighlighterExtension,
-    ): IAiChat;
-    withTheme(
-        themeId: string,
-    ): IAiChat;
+    withAdapter(adapterBuilder: AdapterBuilder): IAiChat;
+    withClassName(className: string): IAiChat;
+    withConversationOptions(conversationOptions: ConversationOptions): IAiChat;
+    withInitialConversation(initialConversation: ConversationItem[]): IAiChat;
+    withLayoutOptions(layoutOptions: LayoutOptions): IAiChat;
+    withPersonaOptions(personaOptions: PersonaOptions): IAiChat;
+    withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat;
+    withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension): IAiChat;
+    withTheme(themeId: string): IAiChat;
 }

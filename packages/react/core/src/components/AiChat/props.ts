@@ -19,7 +19,7 @@ export type AiChatReactProps = {
      * This can be obtained via useAdapter() hook for standard adapters or by creating your own custom adapter
      * that implements `Adapter` or `AdapterBuilder` interfaces.
      */
-    adapter: Adapter | AdapterBuilder<any, any>;
+    adapter: Adapter | AdapterBuilder;
 
     /**
      * Event listeners to be attached to chat room events.

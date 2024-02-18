@@ -1,23 +1,18 @@
 import {Adapter, AdapterExtras, DataTransferMode, StreamingAdapterObserver} from './adapter';
-import {StandardAdapterConfig, StandardAdapterInfo} from './standardAdapterConfig';
+import {StandardAdapterInfo} from './standardAdapterConfig';
 
-export interface StandardAdapter<InboundPayload, OutboundPayload> extends Adapter {
-    get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
+export interface StandardAdapter extends Adapter {
     get dataTransferMode(): DataTransferMode;
-    decode(payload: InboundPayload): Promise<string | undefined>;
-    encode(message: string): Promise<OutboundPayload>;
     fetchText(message: string, extras: AdapterExtras): Promise<string>;
     get id(): string;
     get info(): StandardAdapterInfo;
     streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
 }
 
-export const isStandardAdapter = (adapter: Adapter): boolean => {
-    return 'config' in adapter
-        && 'dataTransferMode' in adapter
-        && 'decode' in adapter
-        && 'encode' in adapter
-        && 'id' in adapter
-        && 'info' in adapter
-        && ('fetchText' in adapter || 'streamText' in adapter);
+export const isStandardAdapter = (adapter: any): boolean => {
+    return (typeof adapter === 'object' && adapter !== null)
+        && (typeof adapter.streamText === 'function' || typeof adapter.fetchText === 'function')
+        && ['stream', 'fetch'].includes(adapter.dataTransferMode)
+        && typeof adapter.id === 'string'
+        && (typeof adapter.info === 'object' && adapter.info !== null);
 };

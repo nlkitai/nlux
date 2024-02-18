@@ -1,5 +1,5 @@
+import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import {createAdapter} from '@nlux-dev/langchain/src';
-import {AiChat, createAiChat} from '@nlux/core';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {submit, type} from '../../../utils/userInteractions';
 import {waitForRenderCycle} from '../../../utils/wait';
@@ -110,9 +110,11 @@ describe('When LangServe input pre-processor is used with fetch adapter', () => 
             ]);
 
         aiChat.mount(rootElement);
-
         await waitForRenderCycle();
+
         await type('How is the weather today?');
+        await waitForRenderCycle();
+
         await submit();
         await waitForRenderCycle();
 

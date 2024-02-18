@@ -2,14 +2,11 @@ import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nl
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {gptStreamingAdapterConfig} from '../config';
+import {decode as streamDecode} from '../codec/stream/decode';
 import {OpenAiAdapterOptions} from '../types/adapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
-    OpenAI.Chat.Completions.ChatCompletionChunk,
-    OpenAI.Chat.Completions.ChatCompletionMessageParam
-> {
+export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
     constructor({
         apiKey,
         model,
@@ -25,10 +22,6 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
         if (systemMessage !== undefined && systemMessage.length > 0) {
             this.systemMessage = systemMessage;
         }
-    }
-
-    get config() {
-        return gptStreamingAdapterConfig;
     }
 
     fetchText(message: string): Promise<string> {
@@ -77,7 +70,7 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter<
                     break;
                 }
 
-                const message = await this.decode(value);
+                const message = await streamDecode(value);
                 if (message !== undefined) {
                     observer.next(message);
                 } else {

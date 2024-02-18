@@ -2,7 +2,7 @@ import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';
 
-export interface HfAdapterBuilder extends AdapterBuilder<any, any> {
+export interface HfAdapterBuilder extends AdapterBuilder {
     /**
      * Create a new Hugging Face Inference API adapter.
      * Adapter users don't need to call this method directly. It will be called by nlux when the adapter is expected
@@ -10,7 +10,7 @@ export interface HfAdapterBuilder extends AdapterBuilder<any, any> {
      *
      * @returns {StandardAdapter}
      */
-    create(): StandardAdapter<any, any>;
+    create(): StandardAdapter;
 
     /**
      * The authorization token to use for Hugging Face Inference API.

@@ -16,7 +16,7 @@ export class NlBridgeAdapterBuilderImpl implements NlBridgeAdapterBuilder {
         }
     }
 
-    create(): StandardAdapter<any, any> {
+    create(): StandardAdapter {
         if (!this.theUrl) {
             throw new NluxUsageError({
                 source: this.constructor.name,

@@ -1,6 +1,6 @@
 import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
 
-export interface OpenAiAdapterBuilder extends AdapterBuilder<any, any> {
+export interface OpenAiAdapterBuilder extends AdapterBuilder {
     /**
      * Create a new ChatGPT API adapter.
      * Adapter users don't need to call this method directly. It will be called by nlux when the adapter is expected
@@ -8,7 +8,7 @@ export interface OpenAiAdapterBuilder extends AdapterBuilder<any, any> {
      *
      * @returns {StandardAdapter}
      */
-    create(): StandardAdapter<any, any>;
+    create(): StandardAdapter;
 
     /**
      * The API key to use to connect to ChatGPT API.

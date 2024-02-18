@@ -4,7 +4,6 @@ import {
     NluxError,
     NluxValidationError,
     StandardAdapter,
-    StandardAdapterConfig,
     StandardAdapterInfo,
     StreamingAdapterObserver,
     uid,
@@ -13,7 +12,7 @@ import {
 import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
 import {HfAdapterOptions} from '../types/adapterOptions';
 
-export class HfAdapterImpl implements StandardAdapter<any, any> {
+export class HfAdapterImpl implements StandardAdapter {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
 
@@ -37,17 +36,6 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         this.inference = new HfInference(options.authToken);
     }
 
-    get config(): StandardAdapterConfig<any, any> {
-        return {
-            encodeMessage: (message: string) => {
-                return Promise.resolve(message);
-            },
-            decodeMessage: (payload: any) => {
-                return Promise.resolve(payload);
-            },
-        };
-    }
-
     get dataTransferMode(): DataTransferMode {
         return this.options.dataTransferMode ?? HfAdapterImpl.defaultDataTransferMode;
     }
@@ -60,69 +48,12 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
         return {
             id: 'hugging-face-adapter',
             capabilities: {
-                textChat: true,
-                audio: false,
+                chat: true,
                 fileUpload: false,
+                textToSpeech: false,
+                speechToText: false,
             },
-            inputFormats: ['text'],
-            outputFormats: ['text', 'markdown'],
         };
-    }
-
-    async decode(payload: any): Promise<string> {
-        const output = (() => {
-            if (typeof payload === 'string') {
-                return payload;
-            }
-
-            if (Array.isArray(payload)) {
-                if (payload.length === 0) {
-                    return '';
-                }
-
-                const responseToConsider = payload[0];
-                if (
-                    typeof responseToConsider === 'object' && responseToConsider &&
-                    typeof responseToConsider.generated_text === 'string'
-                ) {
-                    return responseToConsider.generated_text;
-                }
-            }
-
-            if (typeof payload === 'object' && payload && typeof payload.generated_text === 'string') {
-                return payload.generated_text;
-            }
-
-            if (typeof payload === 'object' && payload && typeof payload.text === 'string') {
-                return payload.text;
-            }
-
-            return '';
-        })();
-
-        const {preProcessors: {output: outputPreProcessor} = {}} = this.options;
-        if (outputPreProcessor) {
-            return Promise.resolve(outputPreProcessor(output));
-        } else {
-            return Promise.resolve(output);
-        }
-    }
-
-    async encode(message: string): Promise<string> {
-        const messageAsAny = message as any;
-        const {preProcessors: {input: inputPreProcessor} = {}} = this.options;
-        if (inputPreProcessor && messageAsAny) {
-            if (typeof messageAsAny === 'string') {
-                return inputPreProcessor(messageAsAny, this.options);
-            } else {
-                warn(
-                    'The input pre-processor function was provided, but the message is not a string! ' +
-                    'Input pre-processor will not be applied.',
-                );
-            }
-        }
-
-        return message;
     }
 
     async fetchText(message: string): Promise<string> {
@@ -254,5 +185,61 @@ export class HfAdapterImpl implements StandardAdapter<any, any> {
                 );
             }
         });
+    }
+
+    private async decode(payload: any): Promise<string> {
+        const output = (() => {
+            if (typeof payload === 'string') {
+                return payload;
+            }
+
+            if (Array.isArray(payload)) {
+                if (payload.length === 0) {
+                    return '';
+                }
+
+                const responseToConsider = payload[0];
+                if (
+                    typeof responseToConsider === 'object' && responseToConsider &&
+                    typeof responseToConsider.generated_text === 'string'
+                ) {
+                    return responseToConsider.generated_text;
+                }
+            }
+
+            if (typeof payload === 'object' && payload && typeof payload.generated_text === 'string') {
+                return payload.generated_text;
+            }
+
+            if (typeof payload === 'object' && payload && typeof payload.text === 'string') {
+                return payload.text;
+            }
+
+            return '';
+        })();
+
+        const {preProcessors: {output: outputPreProcessor} = {}} = this.options;
+        if (outputPreProcessor) {
+            return Promise.resolve(outputPreProcessor(output));
+        } else {
+            return Promise.resolve(output);
+        }
+    }
+
+    private async encode(message: string): Promise<string> {
+        const messageAsAny = message as any;
+        const {preProcessors: {input: inputPreProcessor} = {}} = this.options;
+        if (inputPreProcessor && messageAsAny) {
+            if (typeof messageAsAny === 'string') {
+                return inputPreProcessor(messageAsAny, this.options);
+            } else {
+                warn(
+                    'The input pre-processor function was provided, but the message is not a string! ' +
+                    'Input pre-processor will not be applied.',
+                );
+            }
+        }
+
+        return message;
     }
 }

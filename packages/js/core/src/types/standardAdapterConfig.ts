@@ -7,15 +7,9 @@ export type AdapterDecodeFunction<InboundPayload> = (output: InboundPayload) => 
 export type StandardAdapterInfo = Readonly<{
     id: string;
     capabilities: Readonly<{
-        textChat: boolean;
-        audio: boolean;
+        chat: boolean;
         fileUpload: boolean;
+        textToSpeech: boolean;
+        speechToText: boolean;
     }>;
-    inputFormats: ReadonlyArray<InputFormat>;
-    outputFormats: ReadonlyArray<OutputFormat>;
-}>;
-
-export type StandardAdapterConfig<InboundPayload, OutboundPayload> = Readonly<{
-    encodeMessage: AdapterEncodeFunction<OutboundPayload>;
-    decodeMessage: AdapterDecodeFunction<InboundPayload>;
 }>;

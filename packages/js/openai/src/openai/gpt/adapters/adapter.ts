@@ -2,7 +2,6 @@ import {
     AdapterExtras,
     DataTransferMode,
     StandardAdapter,
-    StandardAdapterConfig,
     StandardAdapterInfo,
     StreamingAdapterObserver,
     uid,
@@ -14,9 +13,7 @@ import {OpenAiAdapterOptions} from '../types/adapterOptions';
 import {OpenAIModel} from '../types/model';
 import {defaultChatGptModel, defaultDataTransferMode} from './config';
 
-export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> implements StandardAdapter<
-    InboundPayload, OutboundPayload
-> {
+export abstract class OpenAiAbstractAdapter implements StandardAdapter {
 
     protected readonly model: OpenAIModel;
     protected readonly openai: OpenAI;
@@ -55,8 +52,6 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
         );
     }
 
-    abstract get config(): StandardAdapterConfig<InboundPayload, OutboundPayload>;
-
     get dataTransferMode(): DataTransferMode {
         return this.theDataTransferMode;
     }
@@ -67,16 +62,6 @@ export abstract class OpenAiAbstractAdapter<InboundPayload, OutboundPayload> imp
 
     get info(): StandardAdapterInfo {
         return gptAdapterInfo;
-    }
-
-    async decode(payload: InboundPayload): Promise<string | undefined> {
-        const {decodeMessage} = this.config;
-        return decodeMessage(payload);
-    }
-
-    async encode(message: string): Promise<OutboundPayload> {
-        const {encodeMessage} = this.config;
-        return encodeMessage(message);
     }
 
     abstract fetchText(message: string, extras: AdapterExtras): Promise<string>;

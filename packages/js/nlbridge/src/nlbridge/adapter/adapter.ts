@@ -2,14 +2,13 @@ import {
     AdapterExtras,
     DataTransferMode,
     StandardAdapter,
-    StandardAdapterConfig,
     StandardAdapterInfo,
     StreamingAdapterObserver,
     uid,
 } from '@nlux/core';
 import {NlBridgeAdapterOptions} from '../types/adapterOptions';
 
-export abstract class NlBridgeAbstractAdapter implements StandardAdapter<string, string | undefined> {
+export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
@@ -24,17 +23,6 @@ export abstract class NlBridgeAbstractAdapter implements StandardAdapter<string,
 
         this.theDataTransferModeToUse = options.dataTransferMode ?? NlBridgeAbstractAdapter.defaultDataTransferMode;
         this.theEndpointUrlToUse = options.url;
-    }
-
-    get config(): StandardAdapterConfig<any, any> {
-        return {
-            encodeMessage: (message: string) => {
-                return Promise.resolve(message);
-            },
-            decodeMessage: (payload: any) => {
-                return Promise.resolve(payload);
-            },
-        };
     }
 
     get dataTransferMode(): DataTransferMode {
@@ -53,12 +41,11 @@ export abstract class NlBridgeAbstractAdapter implements StandardAdapter<string,
         return {
             id: 'nlbridge-adapter',
             capabilities: {
-                textChat: true,
-                audio: false,
+                chat: true,
                 fileUpload: false,
+                textToSpeech: false,
+                speechToText: false,
             },
-            inputFormats: ['text'],
-            outputFormats: ['text', 'markdown'],
         };
     }
 

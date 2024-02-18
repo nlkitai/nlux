@@ -8,7 +8,7 @@ import {StandardAdapter} from './standardAdapter';
 export type ContextProps = Readonly<{
     instanceId: string;
     exception: (exceptionId: ExceptionId) => void;
-    adapter: Adapter | StandardAdapter<any, any>;
+    adapter: Adapter | StandardAdapter;
     syntaxHighlighter?: HighlighterExtension;
 }>;
 

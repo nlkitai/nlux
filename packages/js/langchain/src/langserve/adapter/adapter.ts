@@ -3,7 +3,6 @@ import {
     ConversationItem,
     DataTransferMode,
     StandardAdapter,
-    StandardAdapterConfig,
     StandardAdapterInfo,
     StreamingAdapterObserver,
     uid,
@@ -18,7 +17,7 @@ import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
 
-export abstract class LangServeAbstractAdapter implements StandardAdapter<string, string | undefined> {
+export abstract class LangServeAbstractAdapter implements StandardAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
@@ -47,17 +46,6 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
         this.init();
     }
 
-    get config(): StandardAdapterConfig<any, any> {
-        return {
-            encodeMessage: (message: string) => {
-                return Promise.resolve(message);
-            },
-            decodeMessage: (payload: any) => {
-                return Promise.resolve(payload);
-            },
-        };
-    }
-
     get dataTransferMode(): DataTransferMode {
         return this.theDataTransferModeToUse;
     }
@@ -74,12 +62,11 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
         return {
             id: 'langserve-adapter',
             capabilities: {
-                textChat: true,
-                audio: false,
+                chat: true,
                 fileUpload: false,
+                textToSpeech: false,
+                speechToText: false,
             },
-            inputFormats: ['text'],
-            outputFormats: ['text', 'markdown'],
         };
     }
 
@@ -105,16 +92,6 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter<string
 
     private get inputSchemaUrl(): string {
         return this.theInputSchemaUrlToUse;
-    }
-
-    async decode(payload: string): Promise<string | undefined> {
-        const {decodeMessage} = this.config;
-        return decodeMessage(payload);
-    }
-
-    async encode(message: string): Promise<string | undefined> {
-        const {encodeMessage} = this.config;
-        return encodeMessage(message);
     }
 
     async fetchSchema(url: string): Promise<object | undefined> {

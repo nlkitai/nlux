@@ -17,7 +17,7 @@ import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class AiChat implements IAiChat {
     protected theAdapter: Adapter | null = null;
-    protected theAdapterBuilder: StandardAdapter<any, any> | null = null;
+    protected theAdapterBuilder: StandardAdapter | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
@@ -54,7 +54,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        const adapterToUser: Adapter | StandardAdapter<any, any> | null =
+        const adapterToUser: Adapter | StandardAdapter | null =
             this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
                 : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
                     ? this.theAdapterBuilder
@@ -182,7 +182,7 @@ export class AiChat implements IAiChat {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapter: Adapter | AdapterBuilder<any, any>) {
+    public withAdapter(adapter: Adapter | AdapterBuilder) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
