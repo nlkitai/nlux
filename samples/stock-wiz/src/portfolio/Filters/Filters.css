@@ -1,0 +1,83 @@
+.filter {
+    font-size: 0.8em;
+    display: flex;
+    overflow: hidden;
+    flex-flow: row nowrap;
+    width: 100%;
+    min-width: 600px;
+    max-width: 100%;
+    min-height: 150px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.filter > .criterion {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    padding: 20px 10px;
+    border-left: 1px solid #e0e0e0;
+}
+
+.filter > .criterion:first-child {
+    border-left: none;
+}
+
+.filter > .criterion > .title {
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+.filter > .criterion.exchange {
+    flex-grow: 3;
+}
+
+.filter > .criterion.market-cap {
+    flex-grow: 2;
+}
+
+.filter > .criterion.exchange > .options,
+.filter > .criterion.market-cap > .options {
+    display: flex;
+    flex-flow: column nowrap;
+    min-width: 100px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        text-align: left;
+    }
+}
+
+.filter > .criterion.sector {
+    flex-grow: 2;
+
+    > div {
+        width: 100%;
+
+        > select {
+            width: 100%;
+            min-width: 100px;
+        }
+    }
+}
+
+.filter > .criterion.w-change,
+.filter > .criterion.m-change,
+.filter > .criterion.y-change {
+    flex-grow: 1;
+
+    input {
+        width: 50px;
+        padding: 5px;
+        text-align: center;
+    }
+}

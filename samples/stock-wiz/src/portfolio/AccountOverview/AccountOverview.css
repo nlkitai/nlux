@@ -1,0 +1,27 @@
+.account-overview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding: 7px 0;
+    color: #ffffff;
+    border-radius: 10px;
+    background-color: #696b69;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.account-overview > * > h3 {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
+}
+
+.invested-capital {
+}
+
+.current-value {
+}
+
+.total-gain {
+}
+

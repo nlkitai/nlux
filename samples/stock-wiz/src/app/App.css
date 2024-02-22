@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+
+    color: #213547;
+    background-color: #ffffff;
+    color-scheme: light dark;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+input, select, button {
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 0.6em 1.2em;
+    transition: border-color 0.25s;
+    color: inherit;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+select[multiple] {
+    padding: 0.6em 0;
+}
+
+a {
+    font-weight: 500;
+    text-decoration: inherit;
+    color: #646cff;
+}
+
+a:hover {
+    color: #747bff;
+}
+
+body {
+    display: flex;
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background-color: beige;
+    place-items: center;
+}
+
+h1 {
+    font-size: 1.4em;
+    line-height: 1.1;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 600;
+    padding: 0.6em 1.2em;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: #5f6b42;
+    border: 2px solid #bac4a3;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+button:hover {
+    font-weight: 700;
+    color: #606060;
+    border-color: #606060;
+}
+
+button[disabled] {
+    font-weight: 500;
+    cursor: not-allowed;
+    color: #cdcdcd;
+    border-color: #e3e3e3;
+    background-color: transparent;
+}
+
+button[disabled]:hover {
+    font-weight: 500;
+    cursor: not-allowed;
+    color: #cdcdcd;
+    border-color: #e3e3e3;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}

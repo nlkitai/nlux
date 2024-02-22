@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 13px;
+    text-align: left;
+    color: #ffffff;
+    border-radius: 10px;
+    background-color: #2c2c2c;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.header .debug {
+    font-size: 0.8em;
+    cursor: pointer;
+    opacity: 0.5;
+}

@@ -1,0 +1,28 @@
+.status-bar {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 7px 0;
+    color: #202020;
+    border-radius: 10px;
+    background-color: #f5fcee;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.status-bar > .items-selected {
+    padding: 0 20px
+}
+
+.status-bar > .actions {
+    display: flex;
+    flex-direction: row;
+    padding: 0 10px;
+    gap: 10px;
+}
+
+.status-bar > .actions > button {
+    width: 150px;
+}
