@@ -1,7 +1,7 @@
-import {AdapterBuilder} from '../types/adapterBuilder';
+import {AdapterBuilder} from '../types/aiChat/adapterBuilder';
+import {AiChatProps} from '../types/aiChat/props';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
-import {AiChatProps} from '../types/props';
 import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';

@@ -1,6 +1,6 @@
 import {ExceptionId} from '../exceptions/exceptions';
+import {AiChatProps} from './aiChat/props';
 import {ConversationItem} from './conversation';
-import {AiChatProps} from './props';
 
 export type ErrorEventDetails = {
     errorId: ExceptionId;

@@ -24,7 +24,7 @@ export type {
 export type {IObserver} from './core/bus/observer';
 export type {ExposedConfig} from './core/config';
 
-export type {AiChatInternalProps} from './types/props';
+export type {AiChatInternalProps} from './types/aiChat/props';
 
 export type {
     EventName,
@@ -42,7 +42,7 @@ export type {
 
 export type {
     StandardAdapter,
-} from './types/standardAdapter';
+} from './types/aiChat/standardAdapter';
 
 export type {
     StandardAdapterInfo,
@@ -50,22 +50,22 @@ export type {
     AdapterDecodeFunction,
     InputFormat,
     OutputFormat,
-} from './types/standardAdapterConfig';
+} from './types/aiChat/standardAdapterConfig';
 
 export type {
     AiChatProps,
-} from './types/props';
+} from './types/aiChat/props';
 
 export type {
     Adapter,
     AdapterExtras,
     StreamingAdapterObserver,
     DataTransferMode,
-} from './types/adapter';
+} from './types/aiChat/adapter';
 
 export type {
     AdapterBuilder,
-} from './types/adapterBuilder';
+} from './types/aiChat/adapterBuilder';
 
 export type {
     StreamParser,
@@ -74,15 +74,19 @@ export type {
 } from './types/markdown/streamParser';
 
 export type {
+    AiContextAdapter,
+} from './types/aiContext/adapter';
+
+export type {
+    ContextAdapterBuilder,
+} from './types/aiContext/builder';
+
+export type {
     Highlighter,
     HighlighterExtension,
     HighlighterColorMode,
     CreateHighlighterOptions,
 } from './core/highlighter/highlighter';
-
-export type {
-    NluxContext,
-} from './types/context';
 
 export type {
     ConversationItem,

@@ -1,4 +1,4 @@
-import {ConversationItem} from './conversation';
+import {ConversationItem} from '../conversation';
 import {AiChatProps} from './props';
 
 /**

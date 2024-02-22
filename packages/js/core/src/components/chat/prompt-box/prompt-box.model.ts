@@ -1,6 +1,6 @@
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {NluxContext} from '../../../types/context';
+import {ControllerContext} from '../../../types/controllerContext';
 import {renderChatbox} from './prompt-box.render';
 import {
     CompPromptBoxActions,
@@ -17,7 +17,7 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
 
     private userEventListeners?: CompPromptBoxEventListeners;
 
-    constructor(context: NluxContext, {props, eventListeners}: {
+    constructor(context: ControllerContext, {props, eventListeners}: {
         props: CompPromptBoxProps,
         eventListeners?: CompPromptBoxEventListeners
     }) {

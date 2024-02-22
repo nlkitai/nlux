@@ -1,9 +1,9 @@
-import {NluxContext} from '../../types/context';
+import {ControllerContext} from '../../types/controllerContext';
 import {CompRegistry} from './registry';
 
 export const comp = <CompClass extends abstract new (...args: any) => any>(
     compClass: CompClass,
-    // context: NluxContext,
+    // context: ControllerContext,
     // props: any | null = null,
     // compInstanceId: string | null = null,
 ) => {
@@ -20,7 +20,7 @@ export const comp = <CompClass extends abstract new (...args: any) => any>(
     // IMPORTANT ✨ The lines below are responsible for creating all instances of all components.
 
     return {
-        withContext: (newContext: NluxContext) => {
+        withContext: (newContext: ControllerContext) => {
             return {
                 create: (): InstanceType<CompClass> => {
                     return new CompClass(newContext, {});

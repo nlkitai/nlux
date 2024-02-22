@@ -3,9 +3,9 @@ import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {HistoryPayloadSize} from '../../../core/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
-import {NluxContext} from '../../../types/context';
+import {isStandardAdapter, StandardAdapter} from '../../../types/aiChat/standardAdapter';
+import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationItem} from '../../../types/conversation';
-import {isStandardAdapter, StandardAdapter} from '../../../types/standardAdapter';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';
@@ -26,7 +26,7 @@ export class CompChatRoom extends BaseComp<
     private promptBoxInstance: CompPromptBox;
     private promptBoxText: string = '';
 
-    constructor(context: NluxContext, {
+    constructor(context: ControllerContext, {
         containerMaxHeight,
         containerHeight,
         containerMaxWidth,

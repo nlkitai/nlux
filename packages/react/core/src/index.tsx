@@ -1,3 +1,4 @@
+/** COMPONENTS ***************************************************************/
 export type {
     Adapter,
     AdapterBuilder,
@@ -46,3 +47,24 @@ export {
 } from '@nlux/core';
 
 export {AiChat} from './components/AiChat';
+
+export type {
+    UpdateContextItem,
+    ClearContextItem,
+} from './providers/useAiContext';
+
+/** CONTEXT *******************************************************************/
+
+export {
+    useAiContext,
+} from './providers/useAiContext';
+
+export type {
+    AiContext,
+    AiContextProviderProps,
+    AiContextData,
+} from './types/AiContext';
+
+export {
+    createAiContext,
+} from './providers/createAiContext';

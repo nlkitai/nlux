@@ -1,10 +1,10 @@
 import {registerAllComponents} from '../components/components';
-import {Adapter} from '../types/adapter';
-import {AdapterBuilder} from '../types/adapterBuilder';
+import {Adapter} from '../types/aiChat/adapter';
+import {AdapterBuilder} from '../types/aiChat/adapterBuilder';
+import {AiChatProps} from '../types/aiChat/props';
+import {StandardAdapter} from '../types/aiChat/standardAdapter';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
-import {AiChatProps} from '../types/props';
-import {StandardAdapter} from '../types/standardAdapter';
 import {debug} from '../x/debug';
 import {NluxController} from './controller/controller';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from './error';

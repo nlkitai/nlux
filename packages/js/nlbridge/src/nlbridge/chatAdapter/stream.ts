@@ -23,6 +23,7 @@ export class NlBridgeStreamAdapter extends NlBridgeAbstractAdapter {
                 action: 'chat-stream',
                 payload: {
                     message,
+                    contextId: this.contextId,
                 },
             }),
         }).then(async (response) => {

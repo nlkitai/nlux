@@ -13,9 +13,10 @@ export class NlBridgeFetchAdapter extends NlBridgeAbstractAdapter {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                action: 'chat',
+                action: this.contextId ? 'assist' : 'chat',
                 payload: {
                     message,
+                    contextId: this.contextId,
                 },
             }),
         });
@@ -33,7 +34,20 @@ export class NlBridgeFetchAdapter extends NlBridgeAbstractAdapter {
             typeof body.result === 'object' && body.result !== null &&
             typeof body.result.response === 'string'
         ) {
-            return body.result.response;
+            const {
+                response,
+                task,
+            } = body.result;
+
+            if (
+                this.taskRunner && task
+                && typeof task === 'object' && typeof task.taskId === 'string'
+                && Array.isArray(task.parameters)
+            ) {
+                this.taskRunner(task.taskId, task.parameters);
+            }
+
+            return response;
         } else {
             throw new NluxError({
                 source: this.constructor.name,

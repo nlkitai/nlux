@@ -6,23 +6,29 @@ import {
     StreamingAdapterObserver,
     uid,
 } from '@nlux/core';
-import {NlBridgeAdapterOptions} from '../types/adapterOptions';
+import {AiTaskRunner} from '../types/aiTaskRunner';
+import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
 export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
-    private readonly __options: NlBridgeAdapterOptions;
-
+    private readonly theContextIdToUse: string | undefined;
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
+    private readonly theTaskRunnerToUse: AiTaskRunner | undefined;
 
-    constructor(options: NlBridgeAdapterOptions) {
+    constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
-        this.__options = {...options};
 
         this.theDataTransferModeToUse = options.dataTransferMode ?? NlBridgeAbstractAdapter.defaultDataTransferMode;
         this.theEndpointUrlToUse = options.url;
+        this.theContextIdToUse = options.contextId;
+        this.theTaskRunnerToUse = options.taskRunner;
+    }
+
+    get contextId(): string | undefined {
+        return this.theContextIdToUse;
     }
 
     get dataTransferMode(): DataTransferMode {
@@ -47,6 +53,10 @@ export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
                 speechToText: false,
             },
         };
+    }
+
+    get taskRunner(): AiTaskRunner | undefined {
+        return this.theTaskRunnerToUse;
     }
 
     async decode(payload: string): Promise<string | undefined> {

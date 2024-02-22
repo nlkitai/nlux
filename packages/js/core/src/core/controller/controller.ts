@@ -1,12 +1,12 @@
 import {ExceptionId, NluxExceptions} from '../../exceptions/exceptions';
-import {NluxContext} from '../../types/context';
+import {AiChatInternalProps, AiChatProps} from '../../types/aiChat/props';
+import {ControllerContext} from '../../types/controllerContext';
 import {EventCallback, EventName} from '../../types/event';
-import {AiChatInternalProps, AiChatProps} from '../../types/props';
 import {uid} from '../../x/uid';
 import {warn} from '../../x/warn';
-import {createContext} from '../context';
 import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
+import {createControllerContext} from './context';
 
 export class NluxController<InboundPayload = any, OutboundPayload = any> {
 
@@ -58,7 +58,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
             return;
         }
 
-        const newContext: NluxContext = createContext({
+        const newContext: ControllerContext = createControllerContext({
                 instanceId: this.nluxInstanceId,
                 exception: this.renderException,
                 adapter: this.props.adapter,

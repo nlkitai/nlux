@@ -1,9 +1,9 @@
-import {BotPersona, UserPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {comp} from '../../../core/comp/comp';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
 import {HistoryPayloadSize} from '../../../core/options/conversationOptions';
-import {NluxContext} from '../../../types/context';
+import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
+import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationItem} from '../../../types/conversation';
 import {warnOnce} from '../../../x/warn';
 import {CompList} from '../../miscellaneous/list/model';
@@ -32,7 +32,7 @@ export class CompConversation extends BaseComp<
     private scrollWhenGeneratingUserOption: boolean;
     private scrollingStickToConversationEnd: boolean = true;
 
-    constructor(context: NluxContext, props: CompConversationProps) {
+    constructor(context: ControllerContext, props: CompConversationProps) {
         super(context, props);
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;

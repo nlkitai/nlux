@@ -1,4 +1,4 @@
-import {BotPersona, UserPersona} from '@nlux/core';
+import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {ConversationItem} from '../../../types/conversation';
 
 export type CompConversationEvents = 'user-scrolled';

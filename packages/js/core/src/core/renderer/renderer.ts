@@ -2,10 +2,10 @@ import {CompChatRoom} from '../../components/chat/chat-room/chat-room.model';
 import {CompChatRoomProps} from '../../components/chat/chat-room/chat-room.types';
 import {CompExceptionsBox} from '../../components/miscellaneous/exceptions-box/model';
 import {CompExceptionsBoxProps} from '../../components/miscellaneous/exceptions-box/types';
-import {NluxContext} from '../../types/context';
+import {AiChatInternalProps, AiChatProps} from '../../types/aiChat/props';
+import {ControllerContext} from '../../types/controllerContext';
 import {ConversationItem} from '../../types/conversation';
 import {ExceptionType} from '../../types/exception';
-import {AiChatInternalProps, AiChatProps} from '../../types/props';
 import {warn} from '../../x/warn';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
@@ -18,7 +18,7 @@ import {PromptBoxOptions} from '../options/promptBoxOptions';
 export class NluxRenderer<InboundPayload, OutboundPayload> {
     private static readonly defaultThemeId = 'nova';
 
-    private readonly __context: NluxContext;
+    private readonly __context: ControllerContext;
 
     private chatRoom: CompChatRoom | null = null;
     private exceptionsBox: CompExceptionsBox | null = null;
@@ -37,7 +37,7 @@ export class NluxRenderer<InboundPayload, OutboundPayload> {
     private theThemeId: string;
 
     constructor(
-        context: NluxContext,
+        context: ControllerContext,
         rootCompId: string,
         rootElement: HTMLElement,
         props: AiChatInternalProps | null = null,

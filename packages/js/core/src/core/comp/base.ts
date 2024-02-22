@@ -1,5 +1,5 @@
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../types/comp';
-import {NluxContext} from '../../types/context';
+import {ControllerContext} from '../../types/controllerContext';
 import {domOp} from '../../x/domOp';
 import {uid} from '../../x/uid';
 import {warn} from '../../x/warn';
@@ -69,7 +69,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * @private
      */
     protected subComponents: Map<string, BaseComp<any, any, any, any>> = new Map();
-    private __context: Readonly<NluxContext> | null = null;
+    private __context: Readonly<ControllerContext> | null = null;
     private __destroyed: boolean = false;
     private readonly __instanceId: string;
     private actionsOnDomReady: Function[] = [];
@@ -87,7 +87,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         return callback;
     };
 
-    protected constructor(context: NluxContext, props: PropsType) {
+    protected constructor(context: ControllerContext, props: PropsType) {
         const compId = Object.getPrototypeOf(this).constructor.__compId;
         if (!compId) {
             throw new NluxUsageError({
@@ -159,7 +159,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         return this.renderingRoot;
     }
 
-    protected get context(): Readonly<NluxContext> {
+    protected get context(): Readonly<ControllerContext> {
         if (!this.__context) {
             throw new NluxUsageError({
                 source: this.constructor.name,

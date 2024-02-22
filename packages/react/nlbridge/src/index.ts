@@ -3,12 +3,23 @@ export type {
     StandardAdapter,
     DataTransferMode,
     StreamingAdapterObserver,
-    NlBridgeAdapterOptions,
-    NlBridgeAdapterBuilder,
+    ChatAdapterOptions,
+    ChatAdapterBuilder,
 } from '@nlux/nlbridge';
 
 export {
-    createAdapter,
+    createChatAdapter,
+    createContextAdapter,
 } from '@nlux/nlbridge';
 
-export {useAdapter} from './hooks/useAdapter';
+export type {
+    ContextAdapter,
+} from '@nlux/nlbridge';
+
+export {
+    useChatAdapter,
+} from './hooks/useChatAdapter';
+
+export type {
+    ReactChatAdapterOptions,
+} from './hooks/useChatAdapter';

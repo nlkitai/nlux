@@ -1,18 +1,23 @@
 import {DataTransferMode, NluxUsageError, StandardAdapter} from '@nlux/core';
-import {NlBridgeAbstractAdapter} from '../adapter/adapter';
-import {NlBridgeFetchAdapter} from '../adapter/fetch';
-import {NlBridgeStreamAdapter} from '../adapter/stream';
-import {NlBridgeAdapterOptions} from '../types/adapterOptions';
-import {NlBridgeAdapterBuilder} from './builder';
+import {AiTaskRunner} from '../../types/aiTaskRunner';
+import {ChatAdapterOptions} from '../../types/chatAdapterOptions';
+import {NlBridgeAbstractAdapter} from '../adapter';
+import {NlBridgeFetchAdapter} from '../fetch';
+import {NlBridgeStreamAdapter} from '../stream';
+import {ChatAdapterBuilder} from './builder';
 
-export class NlBridgeAdapterBuilderImpl implements NlBridgeAdapterBuilder {
+export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
+    private theContextId?: string;
     private theDataTransferMode?: DataTransferMode;
+    private theTaskRunner: AiTaskRunner | undefined;
     private theUrl?: string;
 
     constructor(cloneFrom?: NlBridgeAdapterBuilderImpl) {
         if (cloneFrom) {
             this.theDataTransferMode = cloneFrom.theDataTransferMode;
             this.theUrl = cloneFrom.theUrl;
+            this.theContextId = cloneFrom.theContextId;
+            this.theTaskRunner = cloneFrom.theTaskRunner;
         }
     }
 
@@ -25,9 +30,11 @@ export class NlBridgeAdapterBuilderImpl implements NlBridgeAdapterBuilder {
             });
         }
 
-        const options: NlBridgeAdapterOptions = {
+        const options: ChatAdapterOptions = {
             url: this.theUrl,
             dataTransferMode: this.theDataTransferMode,
+            contextId: this.theContextId,
+            taskRunner: this.theTaskRunner,
         };
 
         const dataTransferModeToUse = options.dataTransferMode
@@ -40,7 +47,19 @@ export class NlBridgeAdapterBuilderImpl implements NlBridgeAdapterBuilder {
         return new NlBridgeFetchAdapter(options);
     }
 
-    withDataTransferMode(mode: DataTransferMode): NlBridgeAdapterBuilder {
+    withContextId(contextId: string): ChatAdapterBuilder {
+        if (this.theContextId !== undefined) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Cannot set the context ID option more than once',
+            });
+        }
+
+        this.theContextId = contextId;
+        return this;
+    }
+
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder {
         if (this.theDataTransferMode !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -52,7 +71,19 @@ export class NlBridgeAdapterBuilderImpl implements NlBridgeAdapterBuilder {
         return this;
     }
 
-    withUrl(endpointUrl: string): NlBridgeAdapterBuilder {
+    withTaskRunner(callback: AiTaskRunner): ChatAdapterBuilder {
+        if (this.theTaskRunner !== undefined) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Cannot set the task runner option more than once',
+            });
+        }
+
+        this.theTaskRunner = callback;
+        return this;
+    }
+
+    withUrl(endpointUrl: string): ChatAdapterBuilder {
         if (this.theUrl !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,

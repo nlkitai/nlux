@@ -1,11 +1,11 @@
-import {BotPersona, UserPersona} from '@nlux/core';
 import {comp} from '../../../../core/comp/comp';
-import {NluxContext} from '../../../../types/context';
+import {BotPersona, UserPersona} from '../../../../core/options/personaOptions';
+import {ControllerContext} from '../../../../types/controllerContext';
 import {CompMessage} from '../../message/message.model';
 import {CommonMessageProps, CompMessageProps, MessageContentType} from '../../message/message.types';
 
 export const textMessage = (
-    context: NluxContext,
+    context: ControllerContext,
     direction: 'in' | 'out',
     trackResizeAndDomChange: boolean,
     streamingAnimationSpeed: number,

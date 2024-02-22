@@ -1,7 +1,7 @@
 import {BaseComp} from '../../../core/comp/base';
 import {Model} from '../../../core/comp/decorators';
 import {NluxError} from '../../../core/error';
-import {NluxContext} from '../../../types/context';
+import {ControllerContext} from '../../../types/controllerContext';
 import {domOp} from '../../../x/domOp';
 import {renderList} from './render';
 import {CompListElements, CompListEvents, CompListProps} from './types';
@@ -20,7 +20,7 @@ export class CompList<CompType extends BaseComp<any, any, any, any>>
     private componentsToRender: Array<ItemToRender<CompType>> = [];
     private renderedComponents: Array<CompType> = [];
 
-    constructor(context: NluxContext, props: CompListProps) {
+    constructor(context: ControllerContext, props: CompListProps) {
         super(context, props);
     }
 

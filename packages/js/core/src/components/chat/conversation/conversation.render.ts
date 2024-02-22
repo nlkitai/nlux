@@ -1,6 +1,5 @@
-import {UserPersona} from '@nlux/core';
 import {NluxRenderingError} from '../../../core/error';
-import {BotPersona} from '../../../core/options/personaOptions';
+import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {render} from '../../../x/render';

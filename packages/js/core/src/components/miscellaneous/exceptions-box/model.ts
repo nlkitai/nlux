@@ -1,6 +1,6 @@
 import {BaseComp} from '../../../core/comp/base';
 import {Model} from '../../../core/comp/decorators';
-import {NluxContext} from '../../../types/context';
+import {ControllerContext} from '../../../types/controllerContext';
 import {Exception, ExceptionType} from '../../../types/exception';
 import {renderExceptionsBox} from './render';
 import {
@@ -25,7 +25,7 @@ export class CompExceptionsBox extends BaseComp<
     private alertsQueue: Exception[] = [];
 
     constructor(
-        context: NluxContext,
+        context: ControllerContext,
         props: CompExceptionsBoxProps,
     ) {
         super(context, props);

@@ -1,18 +1,18 @@
-import {ContextProps, NluxContext} from '../types/context';
-import {EventName, EventsMap} from '../types/event';
-import {AiChatProps} from '../types/props';
+import {AiChatProps} from '../../types/aiChat/props';
+import {ControllerContext, ControllerContextProps} from '../../types/controllerContext';
+import {EventName, EventsMap} from '../../types/event';
 
-export const createContext = (
-    props: ContextProps,
+export const createControllerContext = (
+    props: ControllerContextProps,
     getAiChatProps: () => Readonly<AiChatProps>,
     emitEvent: <EventToEmit extends EventName>(
         event: EventToEmit,
         ...params: Parameters<EventsMap[EventToEmit]>
     ) => void,
-): NluxContext => {
-    const context: NluxContext = {
+): ControllerContext => {
+    const context: ControllerContext = {
         ...props,
-        update: (newProps: Partial<ContextProps>) => {
+        update: (newProps: Partial<ControllerContextProps>) => {
             Object.assign(context, newProps);
         },
         emit: <EventToEmit extends EventName>(

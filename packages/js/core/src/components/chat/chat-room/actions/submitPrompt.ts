@@ -1,7 +1,7 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
-import {AdapterExtras, DataTransferMode} from '../../../../types/adapter';
-import {NluxContext} from '../../../../types/context';
+import {AdapterExtras, DataTransferMode} from '../../../../types/aiChat/adapter';
+import {ControllerContext} from '../../../../types/controllerContext';
 import {warn} from '../../../../x/warn';
 import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
@@ -16,7 +16,7 @@ export const submitPromptFactory = ({
     dataTransferMode,
 }: {
     dataTransferMode?: DataTransferMode;
-    context: NluxContext;
+    context: ControllerContext;
     promptBoxInstance: CompPromptBox;
     conversation: CompConversation;
     messageToSend: string;

@@ -1,7 +1,7 @@
-import {BotPersona} from '@nlux/core';
 import {BaseComp} from '../../../core/comp/base';
 import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {NluxContext} from '../../../types/context';
+import {BotPersona} from '../../../core/options/personaOptions';
+import {ControllerContext} from '../../../types/controllerContext';
 import {debug} from '../../../x/debug';
 import {warn} from '../../../x/warn';
 import {renderMessage} from './message.render';
@@ -28,7 +28,7 @@ export class CompMessage extends BaseComp<
     private domChangeListeners: Set<Function> = new Set();
     private resizeListeners: Set<Function> = new Set();
 
-    constructor(context: NluxContext, props: CompMessageProps) {
+    constructor(context: ControllerContext, props: CompMessageProps) {
         super(context, props);
 
         this.__content = props.content;
