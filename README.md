@@ -13,9 +13,9 @@
     <a href="https://nlux.dev">Docs Website</a> | <a href="https://discord.gg/SRwDmZghNB">Discord Community</a> | <a href="https://twitter.com/nluxai">X</a>
 </p>
 <p align="center">
-    Love the project ? Please star the repo to show your support 🌟 🧡
+    Do you like this project ? Please star the repo to show your support 🌟 🧡
     <br />
-    Building with nlux ? <a href="https://calendar.app.google/6t54aKt6fPVHtcXC9">Get in touch</a> - we'd love to hear from you.
+    Building with <code>nlux</code> ? <a href="https://calendar.app.google/6t54aKt6fPVHtcXC9">Get in touch</a> - we'd love to hear from you.
 </p>
 
 ------
