@@ -100,7 +100,7 @@ try {
         );
     }));
 
-    info('Emulator ready! Starting dev server ✅ 💫 ...');
+    info('\x1b[32mEmulator ready! Starting dev server 🏃 ✓' + '\x1b[0m');
     const port = process.env.PORT || 9090;
 
     nl(1);

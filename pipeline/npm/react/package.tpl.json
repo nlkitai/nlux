@@ -1,0 +1,20 @@
+{
+  "name": "@nlux/react",
+  "version": "{versions.nlux}",
+  "license": "MPL-2.0",
+  "description": "nlux React is a library for building conversational AI interfaces, with support for OpenAI, HuggingFace, and more.",
+  "repository": {
+    "directory": "packages/react/core"
+  },
+  "dependencies": {
+    "@nlux/core": "^{versions.nlux}"
+  },
+  "peerDependencies": {
+    "react": "^{versions.peerDependencies.react}",
+    "react-dom": "^{versions.peerDependencies.reactDom}"
+  },
+  "main": "index.js",
+  "types": "nlux-react.d.ts",
+  "module": "esm/nlux-react.js",
+  "browser": "umd/nlux-react.js"
+}

@@ -10,7 +10,7 @@ const readAllPackageTemplates = (packagesPath) => {
     readdirSync(packagesPath).forEach(file => {
         const filePath = join(packagesPath, file);
         if (statSync(filePath).isDirectory()) {
-            const packageJsonPath = join(filePath, 'package.template.json');
+            const packageJsonPath = join(filePath, 'package.tpl.json');
             if (existsSync(packageJsonPath)) {
                 result.push(packageJsonPath);
             }
@@ -37,7 +37,7 @@ const readVersionsFile = () => {
         throwError(`Invalid versions file: ${versionsPath} - Missing peerDependencies!`);
     }
 
-    info('Versions file read successfully! ✅ ' + versionsPath);
+    info('Versions file read successfully \x1b[32m ✓ \x1b[0m | ' + versionsPath);
     info('nlux version 🌟 : ' + result.nlux);
     info('PeerDependencies versions: ');
     rawLog(JSON.stringify(result.peerDependencies));
@@ -135,7 +135,7 @@ export const applyDevVersion = (packagesPath) => {
             dependenciesVersions
         ) ?? {};
 
-        const newPackageJsonPath = packageJsonTemplatePath.replace('package.template.json', 'package.json');
+        const newPackageJsonPath = packageJsonTemplatePath.replace('package.tpl.json', 'package.json');
         writeFileSync(newPackageJsonPath, JSON.stringify(packageJson, null, 2));
         info(`New package.json created: ${newPackageJsonPath}`);
     });
@@ -188,9 +188,9 @@ export const applyReleaseVersion = (packagesPath) => {
             ...packageJson
         };
 
-        info('File to be created: ' + packageJsonPath.replace('package.template.json', 'package.json'));
+        info('File to be created: ' + packageJsonPath.replace('package.tpl.json', 'package.json'));
 
-        const newPackageJsonPath = packageJsonPath.replace('package.template.json', 'package.json');
+        const newPackageJsonPath = packageJsonPath.replace('package.tpl.json', 'package.json');
 
         writeFileSync(newPackageJsonPath, JSON.stringify(packageJson, null, 2));
         unlinkSync(packageJsonPath);

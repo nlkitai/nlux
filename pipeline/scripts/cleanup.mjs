@@ -95,4 +95,5 @@ packagesList.forEach(
 info('Removing build and dependency folders');
 cleanUp('.');
 
-info('Cleanup complete! ✅');
+info('\x1b[32mCleanup Done 🏃 ✓' + '\x1b[0m');
+

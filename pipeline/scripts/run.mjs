@@ -3,7 +3,7 @@ import {error, info} from '../utils/log.mjs';
 
 export const run = async (cmd, showDone = true) => {
     let promiseResolved = false;
-    info(`Running 🏃 #\n${cmd}\n`);
+    info(`Running 🏃 # ${cmd}`);
     return new Promise((resolve, reject) => {
         const child = exec(
             cmd,
@@ -42,10 +42,12 @@ export const run = async (cmd, showDone = true) => {
             const exitCode = code === 0 || code === null ? 0 : 1;
 
             child.kill(exitCode);
-            info(`Process exited with code ${exitCode}`);
+            if (exitCode !== 0) {
+                info(`Process exited with code ${exitCode}`);
+            }
 
             if (showDone) {
-                info(`Done 🏃✅‍`);
+                info('\x1b[32mDone 🏃 ✓' + '\x1b[0m');
             }
 
             if (!promiseResolved) {
@@ -60,12 +62,6 @@ export const run = async (cmd, showDone = true) => {
 
         child.on('close', (code) => {
             const exitCode = code === 0 || code === null ? 0 : 1;
-            info(`Process closed with code ${code}`);
-
-            if (showDone) {
-                info(`Done 🏃✅‍`);
-            }
-
             if (!promiseResolved) {
                 promiseResolved = true;
                 if (exitCode !== 0) {

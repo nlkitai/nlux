@@ -1,0 +1,26 @@
+{
+  "name": "@nlux-dev/core",
+  "version": "0.0.0-latest",
+  "license": "MPL-2.0",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --resolveJsonModule",
+    "watch": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --resolveJsonModule --watch"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-strip": "^3.0.4",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "esbuild": "^0.20.0",
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-esbuild": "^6.1.1",
+    "tslib": "^2.6.2"
+  },
+  "main": "index.js",
+  "types": "nlux-core.d.ts",
+  "module": "esm/nlux-core.js",
+  "browser": "umd/nlux-core.js"
+}
