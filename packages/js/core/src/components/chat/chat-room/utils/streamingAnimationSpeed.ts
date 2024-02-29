@@ -1,4 +1,4 @@
-import {markdownDefaultStreamingAnimationSpeed} from '../../../../core/markdown/streamParser';
+import {markdownDefaultStreamingAnimationSpeed} from '../../../../core/aiChat/markdown/streamParser';
 
 export const getStreamingAnimationSpeed = (streamingAnimationSpeed?: number | null) => {
     // undefined => default animation speed

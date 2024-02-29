@@ -1,5 +1,5 @@
-import {BaseComp} from '../../../core/comp/base';
-import {Model} from '../../../core/comp/decorators';
+import {BaseComp} from '../../../core/aiChat/comp/base';
+import {Model} from '../../../core/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {Exception, ExceptionType} from '../../../types/exception';
 import {renderExceptionsBox} from './render';

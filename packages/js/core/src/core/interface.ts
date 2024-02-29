@@ -2,11 +2,11 @@ import {AdapterBuilder} from '../types/aiChat/adapterBuilder';
 import {AiChatProps} from '../types/aiChat/props';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
-import {HighlighterExtension} from './highlighter/highlighter';
-import {ConversationOptions} from './options/conversationOptions';
-import {LayoutOptions} from './options/layoutOptions';
-import {PersonaOptions} from './options/personaOptions';
-import {PromptBoxOptions} from './options/promptBoxOptions';
+import {HighlighterExtension} from './aiChat/highlighter/highlighter';
+import {ConversationOptions} from './aiChat/options/conversationOptions';
+import {LayoutOptions} from './aiChat/options/layoutOptions';
+import {PersonaOptions} from './aiChat/options/personaOptions';
+import {PromptBoxOptions} from './aiChat/options/promptBoxOptions';
 
 export interface IAiChat {
     hide(): void;

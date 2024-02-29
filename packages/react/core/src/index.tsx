@@ -1,4 +1,3 @@
-/** COMPONENTS ***************************************************************/
 export type {
     Adapter,
     AdapterBuilder,
@@ -52,8 +51,6 @@ export type {
     UpdateContextItem,
     ClearContextItem,
 } from './providers/useAiContext';
-
-/** CONTEXT *******************************************************************/
 
 export {
     useAiContext,

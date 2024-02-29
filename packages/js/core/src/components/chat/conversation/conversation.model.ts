@@ -1,8 +1,8 @@
-import {BaseComp} from '../../../core/comp/base';
-import {comp} from '../../../core/comp/comp';
-import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {HistoryPayloadSize} from '../../../core/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../core/options/personaOptions';
+import {BaseComp} from '../../../core/aiChat/comp/base';
+import {comp} from '../../../core/aiChat/comp/comp';
+import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
+import {HistoryPayloadSize} from '../../../core/aiChat/options/conversationOptions';
+import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationItem} from '../../../types/conversation';
 import {warnOnce} from '../../../x/warn';

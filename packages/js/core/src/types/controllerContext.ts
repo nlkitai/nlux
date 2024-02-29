@@ -1,4 +1,4 @@
-import {HighlighterExtension} from '../core/highlighter/highlighter';
+import {HighlighterExtension} from '../core/aiChat/highlighter/highlighter';
 import {ExceptionId} from '../exceptions/exceptions';
 import {Adapter} from './aiChat/adapter';
 import {AiChatProps} from './aiChat/props';

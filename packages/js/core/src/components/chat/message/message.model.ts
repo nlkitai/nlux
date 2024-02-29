@@ -1,6 +1,6 @@
-import {BaseComp} from '../../../core/comp/base';
-import {CompEventListener, Model} from '../../../core/comp/decorators';
-import {BotPersona} from '../../../core/options/personaOptions';
+import {BaseComp} from '../../../core/aiChat/comp/base';
+import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
+import {BotPersona} from '../../../core/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {debug} from '../../../x/debug';
 import {warn} from '../../../x/warn';

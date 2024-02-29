@@ -1,5 +1,5 @@
-import {BaseComp} from '../../../core/comp/base';
-import {Model} from '../../../core/comp/decorators';
+import {BaseComp} from '../../../core/aiChat/comp/base';
+import {Model} from '../../../core/aiChat/comp/decorators';
 import {NluxError} from '../../../core/error';
 import {ControllerContext} from '../../../types/controllerContext';
 import {domOp} from '../../../x/domOp';

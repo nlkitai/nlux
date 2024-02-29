@@ -1,4 +1,4 @@
-import {CompRegistry} from '../core/comp/registry';
+import {CompRegistry} from '../core/aiChat/comp/registry';
 import {getGlobalNlux} from '../core/global';
 import {CompChatRoom} from './chat/chat-room/chat-room.model';
 import {CompConversation} from './chat/conversation/conversation.model';

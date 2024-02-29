@@ -1,4 +1,4 @@
-import {BotPersona} from '../../../core/options/personaOptions';
+import {BotPersona} from '../../../core/aiChat/options/personaOptions';
 import {CompUpdater} from '../../../types/comp';
 import {CompConversationActions, CompConversationElements, CompConversationProps} from './conversation.types';
 

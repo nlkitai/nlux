@@ -1,5 +1,5 @@
-import {comp} from '../../../../core/comp/comp';
-import {BotPersona, UserPersona} from '../../../../core/options/personaOptions';
+import {comp} from '../../../../core/aiChat/comp/comp';
+import {BotPersona, UserPersona} from '../../../../core/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {CompMessage} from '../../message/message.model';
 import {CommonMessageProps, CompMessageProps, MessageContentType} from '../../message/message.types';

@@ -1,30 +1,34 @@
-import {AiChat} from './core/aiChat';
+import {AiChat} from './core/aiChat/aiChat';
 
-export {AiChat} from './core/aiChat';
+export {AiChat} from './core/aiChat/aiChat';
+
 export const createAiChat = (): AiChat => new AiChat();
 
 export {Observable} from './core/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
-export {createMdStreamRenderer} from './core/markdown/streamParser';
+export {createMdStreamRenderer} from './core/aiChat/markdown/streamParser';
 export {debug} from './x/debug';
 export {warn, warnOnce} from './x/warn';
 export {uid} from './x/uid';
 
 export type {ExceptionId} from './exceptions/exceptions';
-export type {ConversationOptions} from './core/options/conversationOptions';
-export type {PromptBoxOptions} from './core/options/promptBoxOptions';
-export type {LayoutOptions} from './core/options/layoutOptions';
+export type {ConversationOptions} from './core/aiChat/options/conversationOptions';
+export type {PromptBoxOptions} from './core/aiChat/options/promptBoxOptions';
+export type {LayoutOptions} from './core/aiChat/options/layoutOptions';
 
 export type {
     PersonaOptions,
     BotPersona,
     UserPersona,
-} from './core/options/personaOptions';
+} from './core/aiChat/options/personaOptions';
 
-export type {IObserver} from './core/bus/observer';
-export type {ExposedConfig} from './core/config';
+export type {
+    IObserver,
+} from './core/bus/observer';
 
-export type {AiChatInternalProps} from './types/aiChat/props';
+export type {
+    AiChatInternalProps,
+} from './types/aiChat/props';
 
 export type {
     EventName,
@@ -86,7 +90,7 @@ export type {
     HighlighterExtension,
     HighlighterColorMode,
     CreateHighlighterOptions,
-} from './core/highlighter/highlighter';
+} from './core/aiChat/highlighter/highlighter';
 
 export type {
     ConversationItem,

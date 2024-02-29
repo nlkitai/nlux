@@ -1,4 +1,4 @@
-import {BaseComp} from '../core/comp/base';
+import {BaseComp} from '../core/aiChat/comp/base';
 import {ControllerContext} from './controllerContext';
 
 /**
