@@ -3,10 +3,14 @@
 [![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.ai](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
 
 This package enables the integration between nlux React and LangChain, the LLM framework.  
-More specifically ― the package include the adapter to connect **nlux React** to backends built
-using [LangServe](https://python.langchain.com/docs/langserve).
+More specifically ― the package includes the adapter to connect **nlux React** to backends built using [LangServe](https://python.langchain.com/docs/langserve).
 
-For more information on how to use this package, please visit:  
+#### Features:
+* Support for both `/invoke` and `/stream` endpoints to allow for responses to be streamed back as they are generated.
+* Can utilize the `/input_schema` to construct a matching payload.
+* Ability to customize the payloads, both sent and received.
+
+For more information on how to use this package, please visit:
 [docs.nlux.ai/api/adapters/langchain-langserve](https://docs.nlux.ai/api/adapters/langchain-langserve)
 
 ### Vanilla JS 🟨 vs React JS ⚛️
