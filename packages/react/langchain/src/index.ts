@@ -1,14 +1,17 @@
 export type {
-    Adapter,
-    StandardAdapter,
+    ChatAdapter,
+    StandardChatAdapter,
     DataTransferMode,
+    ChatAdapterOptions,
+    ChatAdapterBuilder,
+    LangServeEndpointType,
     StreamingAdapterObserver,
-    LangServeAdapterOptions,
-    LangServeAdapterBuilder,
 } from '@nlux/langchain';
 
 export {
-    createAdapter,
+    createChatAdapter,
 } from '@nlux/langchain';
 
-export {useAdapter} from './hooks/useAdapter';
+export {
+    useChatAdapter,
+} from './hooks/useChatAdapter';

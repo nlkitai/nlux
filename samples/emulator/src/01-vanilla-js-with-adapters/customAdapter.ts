@@ -1,10 +1,10 @@
-import {Adapter, AdapterExtras, StreamingAdapterObserver} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 
-export const myCustomStreamingAdapter: Adapter = {
+export const myCustomStreamingAdapter: ChatAdapter = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
-        extras: AdapterExtras,
+        extras: ChatAdapterExtras,
     ) => {
         console.dir(extras, {depth: 3});
         setTimeout(() => {
@@ -22,7 +22,7 @@ export const myCustomStreamingAdapter: Adapter = {
     },
 };
 
-export const myCustomPromiseAdapter: Adapter = {
+export const myCustomPromiseAdapter: ChatAdapter = {
     fetchText(message: string, extras): Promise<string> {
         console.dir(extras, {depth: 3});
         return new Promise((resolve) => {

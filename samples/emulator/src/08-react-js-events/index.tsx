@@ -1,5 +1,5 @@
 import {highlighter} from '@nlux/highlighter';
-import {useAdapter} from '@nlux/openai-react';
+import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat, ErrorCallback, ErrorEventDetails, MessageSentCallback} from '@nlux/react';
 import React, {useCallback} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -9,7 +9,7 @@ debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
 const ExampleWrapper = () => {
-    const adapter = useAdapter({
+    const adapter = useUnsafeChatAdapter({
         apiKey,
         model: 'gpt-3.5-turbo',
         // dataTransferMode: 'stream',

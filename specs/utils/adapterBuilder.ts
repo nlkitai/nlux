@@ -6,7 +6,7 @@ export interface AdapterControllerBuilder {
     create(): AdapterController;
 }
 
-class AdapterBuilder implements AdapterControllerBuilder {
+class ChatAdapterBuilder implements AdapterControllerBuilder {
     private created = false;
     private shouldIncludeFetchText = false;
     private shouldIncludeStreamText = false;
@@ -34,4 +34,4 @@ class AdapterBuilder implements AdapterControllerBuilder {
     }
 }
 
-export const adapterBuilder = () => new AdapterBuilder();
+export const adapterBuilder = () => new ChatAdapterBuilder();

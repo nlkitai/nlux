@@ -1,9 +1,9 @@
 export type {
-    Adapter,
-    AdapterBuilder,
-    AdapterExtras,
+    ChatAdapter,
+    ChatAdapterBuilder,
+    ChatAdapterExtras,
     StreamingAdapterObserver,
-    StandardAdapter,
+    StandardChatAdapter,
     DataTransferMode,
     LayoutOptions,
     PromptBoxOptions,
@@ -33,7 +33,7 @@ export type {
 } from './components/AiChat/personaOptions';
 
 export type {
-    AiChatReactProps,
+    AiChatComponentProps,
 } from './components/AiChat/props';
 
 export {

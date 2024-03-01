@@ -1,4 +1,4 @@
-import {useAdapter} from '@nlux/nlbridge-react';
+import {useChatAdapter} from '@nlux/nlbridge-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -12,7 +12,7 @@ const ExampleWrapper = () => {
         setMaxHeight(newHeight);
     }, []);
 
-    const nlBridge = useAdapter({
+    const nlBridge = useChatAdapter({
         url: 'http://localhost:8899/',
         dataTransferMode: 'stream',
     });

@@ -1,7 +1,7 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
-import {createAdapter as createLangServeAdapter} from '@nlux/langchain';
-import {createAdapter as createOpenAiAdapter} from '@nlux/openai';
+import {createChatAdapter as createLangServeChatAdapter} from '@nlux/langchain';
+import {createUnsafeChatAdapter as createUnsafeOpenAiChatAdapter} from '@nlux/openai';
 import {nlBridgeCustomPromiseAdapter} from './nlBridgeCustomAdapter';
 import {personaOptions} from './personaOptions';
 
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Root element not found');
     }
 
-    const openAiAdapter = createOpenAiAdapter()
+    const openAiAdapter = createUnsafeOpenAiChatAdapter()
         .withApiKey(apiKey)
         // .withModel('gpt-4')
         .withDataTransferMode('stream')
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'Only recommend legal, ethical practices. Be friendly. Write concise answers under 5 sentences.',
         );
 
-    const langServeAdapter = createLangServeAdapter()
+    const langServeAdapter = createLangServeChatAdapter()
         .withUrl('http://127.0.0.1:8000/einbot')
         // .withUrl('http://127.0.0.1:8000/einbot/invoke')
         // .withUrl('http://127.0.0.1:8000/einbot/stream')

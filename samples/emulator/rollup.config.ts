@@ -143,7 +143,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 04 - React JS + HF Adapter in UMD format
+    // 04 - React JS + HF Chat Adapter in UMD format
     //
     {
         input: './src/04-react-js-with-hugging-face/index.tsx',
@@ -182,7 +182,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
     },
     //
-    // 05 - React JS + LangServe Adapter in UMD format
+    // 05 - React JS + LangServe Chat Adapter in UMD format
     //
     {
         input: './src/05-react-js-with-langserve/index.tsx',

@@ -1,5 +1,5 @@
-import {AiContextAdapter} from './adapter';
+import {ContextAdapter} from './contextAdapter';
 
 export interface ContextAdapterBuilder {
-    create(): AiContextAdapter;
+    create(): ContextAdapter;
 }

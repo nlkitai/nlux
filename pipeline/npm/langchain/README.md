@@ -7,6 +7,7 @@ More specifically ― the package includes the adapter to connect **nlux JS** to
 using [LangServe](https://python.langchain.com/docs/langserve).
 
 #### Features:
+
 * Support for both `/invoke` and `/stream` endpoints to allow for responses to be streamed back as they are generated.
 * Can utilize the `/input_schema` to construct a matching payload.
 * Ability to customize the payloads, both sent and received.
@@ -29,7 +30,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 ### Key Features 🌟
 
 * **Build AI Chat Interfaces In Minutes** ― High quality conversational AI interfaces with just a few lines of code.
-* **React Components & Hooks** ― `<AiChat />` for UI and `useAdapter` hook for easy integration.
+* **React Components & Hooks** ― `<AiChat />` for UI and `useChatAdapter` hook for easy integration.
 * **LLM Adapters** ― For `ChatGPT` / `LangChain` 🦜 LangServe / `HuggingFace` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** for any LLM or API.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and more.

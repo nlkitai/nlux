@@ -1,4 +1,4 @@
-import {llama2InputPreProcessor, llama2OutputPreProcessor, useAdapter} from '@nlux/hf-react';
+import {llama2InputPreProcessor, llama2OutputPreProcessor, useChatAdapter} from '@nlux/hf-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -12,7 +12,7 @@ const ExampleWrapper = () => {
     }, []);
 
     // const adapter = useMemo(() => {
-    //     return createAdapter()
+    //     return createChatAdapter()
     //         .withDataTransferMode('fetch')
     //         .withEndpoint('https://<LLAMA2 MODEL ENDPOINT>.endpoints.huggingface.cloud')
     //         .withSystemMessage('Your are a funny assistant. You only response in short sharp daring humour')
@@ -20,7 +20,7 @@ const ExampleWrapper = () => {
     //         .withMaxNewTokens(100);
     // }, []);
 
-    const adapter = useAdapter({
+    const adapter = useChatAdapter({
         dataTransferMode: 'stream',
         model: 'https://n2srbwelqq8uhu7z.us-east-1.aws.endpoints.huggingface.cloud',
         systemMessage: 'Your are a funny assistant. You only respond in short sharp daring humour',

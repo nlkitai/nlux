@@ -1,6 +1,6 @@
 import {
-    Adapter,
-    AdapterBuilder,
+    ChatAdapter,
+    ChatAdapterBuilder,
     ConversationItem,
     ConversationOptions,
     EventsMap,
@@ -13,13 +13,13 @@ import {PersonaOptions} from './personaOptions';
 /**
  * Properties for the AiChat React component.
  */
-export type AiChatReactProps = {
+export type AiChatComponentProps = {
     /**
      * The adapter or adapter builder to use for the conversation.
-     * This can be obtained via useAdapter() hook for standard adapters or by creating your own custom adapter
-     * that implements `Adapter` or `AdapterBuilder` interfaces.
+     * This can be obtained via useChatAdapter() hook for standard adapters or by creating your own custom adapter
+     * that implements `ChatAdapter` or `ChatAdapterBuilder` interfaces.
      */
-    adapter: Adapter | AdapterBuilder;
+    adapter: ChatAdapter | ChatAdapterBuilder;
 
     /**
      * Event listeners to be attached to chat room events.

@@ -1,8 +1,8 @@
-import {Adapter, AdapterBuilder, StandardAdapter, warn} from '@nlux/core';
+import {ChatAdapter, ChatAdapterBuilder, StandardChatAdapter, warn} from '@nlux/core';
 
 export const adapterParamToUsableAdapter = (
-    anAdapterOrAdapterBuilder: Adapter | AdapterBuilder,
-): Adapter | StandardAdapter | undefined => {
+    anAdapterOrAdapterBuilder: ChatAdapter | ChatAdapterBuilder,
+): ChatAdapter | StandardChatAdapter | undefined => {
     let adapterType: 'instance' | 'builder' | 'unknown' = 'unknown';
 
     const adapterAsAny = anAdapterOrAdapterBuilder as any;
@@ -14,7 +14,7 @@ export const adapterParamToUsableAdapter = (
             (typeof adapterAsAny?.streamText === 'function')
         ) {
             adapterType = 'instance';
-            return anAdapterOrAdapterBuilder as Adapter;
+            return anAdapterOrAdapterBuilder as ChatAdapter;
         }
     }
 
@@ -24,18 +24,18 @@ export const adapterParamToUsableAdapter = (
     }
 
     if (adapterType === 'builder') {
-        const adapterBuilder: AdapterBuilder = adapterAsAny;
+        const adapterBuilder: ChatAdapterBuilder = adapterAsAny;
         const newAdapter = adapterBuilder.create();
         if (
             (typeof newAdapter?.fetchText === 'function') ||
             (typeof newAdapter?.streamText === 'function')
         ) {
-            return newAdapter as Adapter;
+            return newAdapter as ChatAdapter;
         } else {
             warn('The adapter builder did not return a valid adapter.');
             return undefined;
         }
     }
 
-    return anAdapterOrAdapterBuilder as Adapter;
+    return anAdapterOrAdapterBuilder as ChatAdapter;
 };

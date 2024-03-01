@@ -1,9 +1,9 @@
-import {AiContextAdapter} from '@nlux-dev/core/src';
+import {ContextAdapter} from '@nlux/core';
 import {Context, ReactNode} from 'react';
 
 export type AiContextData = {
     contextId: string;
-    adapter: AiContextAdapter;
+    adapter: ContextAdapter;
     data: {
         [key: string]: any;
     };

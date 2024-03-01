@@ -1,7 +1,12 @@
-import {AdapterBuilder, AiTaskRunner, DataTransferMode, StandardAdapter} from '@nlux/core';
+import {
+    AiTaskRunner,
+    ChatAdapterBuilder as CoreChatAdapterBuilder,
+    DataTransferMode,
+    StandardChatAdapter,
+} from '@nlux/core';
 
-export interface ChatAdapterBuilder extends AdapterBuilder {
-    create(): StandardAdapter;
+export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
+    create(): StandardChatAdapter;
     withContextId(contextId: string): ChatAdapterBuilder;
     withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder;
     withTaskRunner(taskRunner: AiTaskRunner): ChatAdapterBuilder;

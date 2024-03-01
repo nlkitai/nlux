@@ -2,11 +2,11 @@ import {AiChat as AiChatType, createAiChat, warn} from '@nlux/core';
 import React, {useEffect, useRef, useState} from 'react';
 import {reactPersonasToCorePersonas} from '../../utils/reactPersonasToCorePersonas';
 import {handleNewPropsReceived} from './handleNewPropsReceived';
-import {AiChatReactProps} from './props';
+import {AiChatComponentProps} from './props';
 
-export const AiChat = (props: Readonly<AiChatReactProps>) => {
+export const AiChat = (props: Readonly<AiChatComponentProps>) => {
     const rootElement = useRef<HTMLDivElement>(null);
-    const [currentProps, setCurrentProps] = useState<Readonly<AiChatReactProps> | null>(null);
+    const [currentProps, setCurrentProps] = useState<Readonly<AiChatComponentProps> | null>(null);
     const aiChat = useRef<AiChatType | null>(null);
 
     useEffect(() => {

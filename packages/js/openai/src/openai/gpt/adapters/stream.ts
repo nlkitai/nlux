@@ -1,9 +1,9 @@
-import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {decode as streamDecode} from '../codec/stream/decode';
-import {OpenAiAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
 export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
@@ -11,7 +11,7 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
         apiKey,
         model,
         systemMessage,
-    }: OpenAiAdapterOptions) {
+    }: ChatAdapterOptions) {
         super({
             apiKey,
             model,
@@ -31,7 +31,7 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |

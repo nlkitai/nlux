@@ -1,19 +1,19 @@
-import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
-import {NlBridgeAbstractAdapter} from './adapter';
+import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {NLBridgeAbstractAdapter} from './adapter';
 
-export class NlBridgeStreamAdapter extends NlBridgeAbstractAdapter {
+export class NLBridgeStreamAdapter extends NLBridgeAbstractAdapter {
     constructor(options: any) {
         super(options);
     }
 
-    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
+    async fetchText(message: string, extras: ChatAdapterExtras): Promise<string> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
         fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
@@ -28,11 +28,11 @@ export class NlBridgeStreamAdapter extends NlBridgeAbstractAdapter {
             }),
         }).then(async (response) => {
             if (!response.ok) {
-                throw new Error(`NlBridge adapter returned status code: ${response.status}`);
+                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
             }
 
             if (!response.body) {
-                throw new Error(`NlBridge adapter returned status code: ${response.status}`);
+                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
             }
 
             // Read a stream of server-sent events
@@ -52,7 +52,7 @@ export class NlBridgeStreamAdapter extends NlBridgeAbstractAdapter {
                     const chunk = textDecoder.decode(value);
                     observer.next(chunk);
                 } catch (err) {
-                    warn(`Error parsing chunk by NlBridgeStreamAdapter: ${err}`);
+                    warn(`Error parsing chunk by NLBridgeStreamAdapter: ${err}`);
                 }
             }
 

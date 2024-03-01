@@ -6,7 +6,7 @@ import {GetContextDataCallback} from './get';
 import {SetContextCallback} from './set';
 import {UpdateContextCallback} from './update';
 
-export interface AiContextAdapter {
+export interface ContextAdapter {
     assist: AssistCallback;
     clear: ClearContextCallback;
     get: GetContextDataCallback;

@@ -1,9 +1,9 @@
-import {createAdapter, HfAdapterOptions} from '@nlux/hf';
+import {ChatAdapterOptions, createChatAdapter} from '@nlux/hf';
 import {NluxUsageError} from '@nlux/react';
 
-const source = 'hooks/initHfAdapter';
+const source = 'hooks/initChatAdapter';
 
-export const initAdapter = (options: HfAdapterOptions) => {
+export const initChatAdapter = (options: ChatAdapterOptions) => {
     const {
         model,
         authToken,
@@ -27,7 +27,7 @@ export const initAdapter = (options: HfAdapterOptions) => {
         });
     }
 
-    let newAdapter: any = createAdapter().withModel(model);
+    let newAdapter: any = createChatAdapter().withModel(model);
 
     if (authToken !== undefined) {
         newAdapter = newAdapter.withAuthToken(authToken);

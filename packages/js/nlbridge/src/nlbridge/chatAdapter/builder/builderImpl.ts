@@ -1,17 +1,17 @@
-import {AiTaskRunner, DataTransferMode, NluxUsageError, StandardAdapter} from '@nlux/core';
+import {AiTaskRunner, DataTransferMode, NluxUsageError, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapterOptions} from '../../types/chatAdapterOptions';
-import {NlBridgeAbstractAdapter} from '../adapter';
-import {NlBridgeFetchAdapter} from '../fetch';
-import {NlBridgeStreamAdapter} from '../stream';
+import {NLBridgeAbstractAdapter} from '../adapter';
+import {NLBridgeFetchAdapter} from '../fetch';
+import {NLBridgeStreamAdapter} from '../stream';
 import {ChatAdapterBuilder} from './builder';
 
-export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
+export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
     private theContextId?: string;
     private theDataTransferMode?: DataTransferMode;
     private theTaskRunner: AiTaskRunner | undefined;
     private theUrl?: string;
 
-    constructor(cloneFrom?: NlBridgeAdapterBuilderImpl) {
+    constructor(cloneFrom?: ChatAdapterBuilderImpl) {
         if (cloneFrom) {
             this.theDataTransferMode = cloneFrom.theDataTransferMode;
             this.theUrl = cloneFrom.theUrl;
@@ -20,11 +20,11 @@ export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
         }
     }
 
-    create(): StandardAdapter {
+    create(): StandardChatAdapter {
         if (!this.theUrl) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to create NlBridge adapter. URL is missing. ' +
+                message: 'Unable to create NLBridge adapter. URL is missing. ' +
                     'Make sure you are calling withUrl() before calling create().',
             });
         }
@@ -37,16 +37,16 @@ export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
         };
 
         const dataTransferModeToUse = options.dataTransferMode
-            ?? NlBridgeAbstractAdapter.defaultDataTransferMode;
+            ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
 
         if (dataTransferModeToUse === 'stream') {
-            return new NlBridgeStreamAdapter(options);
+            return new NLBridgeStreamAdapter(options);
         }
 
-        return new NlBridgeFetchAdapter(options);
+        return new NLBridgeFetchAdapter(options);
     }
 
-    withContextId(contextId: string): ChatAdapterBuilder {
+    withContextId(contextId: string): ChatAdapterBuilderImpl {
         if (this.theContextId !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -58,7 +58,7 @@ export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder {
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilderImpl {
         if (this.theDataTransferMode !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -70,7 +70,7 @@ export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withTaskRunner(callback: AiTaskRunner): ChatAdapterBuilder {
+    withTaskRunner(callback: AiTaskRunner): ChatAdapterBuilderImpl {
         if (this.theTaskRunner !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -82,7 +82,7 @@ export class NlBridgeAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withUrl(endpointUrl: string): ChatAdapterBuilder {
+    withUrl(endpointUrl: string): ChatAdapterBuilderImpl {
         if (this.theUrl !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,

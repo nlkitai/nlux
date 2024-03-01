@@ -1,6 +1,6 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
-import {AdapterExtras, DataTransferMode} from '../../../../types/aiChat/adapter';
+import {ChatAdapterExtras, DataTransferMode} from '../../../../types/aiChat/chatAdapter';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {warn} from '../../../../x/warn';
 import {CompConversation} from '../../conversation/conversation.model';
@@ -55,15 +55,16 @@ export const submitPromptFactory = ({
 
             if (supportedDataTransferModes.length === 0) {
                 throw new Error(
-                    'Adapter does not support any data transfer mode! The provided adapter must implement either '
+                    'ChatAdapter does not support any data transfer mode! The provided adapter must implement either '
                     + '`fetchText()` or `streamText()` methods.',
                 );
             }
 
             if (dataTransferMode && !supportedDataTransferModes.includes(dataTransferMode)) {
                 throw new Error(
-                    `Adapter does not support the requested data transfer mode: ${dataTransferMode}. The supported ` +
-                    `data transfer modes for the provided adapter are: ${supportedDataTransferModes.join(', ')}`,
+                    `ChatAdapter does not support the requested data transfer mode: ${dataTransferMode}. ` +
+                    `The supported data transfer modes for the provided adapter are: `
+                    + `${supportedDataTransferModes.join(', ')}`,
                 );
             }
 
@@ -72,7 +73,7 @@ export const submitPromptFactory = ({
                 supportedDataTransferModes[0] : 'stream';
 
             const dataTransferModeToUse = dataTransferMode ?? defaultDataTransferMode;
-            const extras: AdapterExtras = {
+            const extras: ChatAdapterExtras = {
                 aiChatProps: context.aiChatProps,
                 conversationHistory: conversation.getConversationContentForAdapter(
                     context.aiChatProps?.conversationOptions?.historyPayloadSize,

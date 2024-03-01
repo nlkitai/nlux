@@ -1,16 +1,19 @@
 export type {
-    Adapter,
-    StandardAdapter,
+    ChatAdapter,
+    StandardChatAdapter,
     DataTransferMode,
-    HfAdapterOptions,
-    HfAdapterBuilder,
+    ChatAdapterOptions,
+    ChatAdapterBuilder,
     HfInputPreProcessor,
+    StreamingAdapterObserver,
 } from '@nlux/hf';
 
 export {
-    createAdapter,
+    createChatAdapter,
     llama2InputPreProcessor,
     llama2OutputPreProcessor,
 } from '@nlux/hf';
 
-export {useAdapter} from './hooks/useAdapter';
+export {
+    useChatAdapter,
+} from './hooks/useChatAdapter';

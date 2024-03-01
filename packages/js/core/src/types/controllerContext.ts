@@ -1,14 +1,14 @@
 import {HighlighterExtension} from '../core/aiChat/highlighter/highlighter';
 import {ExceptionId} from '../exceptions/exceptions';
-import {Adapter} from './aiChat/adapter';
+import {ChatAdapter} from './aiChat/chatAdapter';
 import {AiChatProps} from './aiChat/props';
-import {StandardAdapter} from './aiChat/standardAdapter';
+import {StandardChatAdapter} from './aiChat/standardChatAdapter';
 import {EventName, EventsMap} from './event';
 
 export type ControllerContextProps = Readonly<{
     instanceId: string;
     exception: (exceptionId: ExceptionId) => void;
-    adapter: Adapter | StandardAdapter;
+    adapter: ChatAdapter | StandardChatAdapter;
     syntaxHighlighter?: HighlighterExtension;
 }>;
 

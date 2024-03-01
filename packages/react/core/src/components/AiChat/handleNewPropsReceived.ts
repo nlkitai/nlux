@@ -2,11 +2,11 @@ import {AiChatProps, warn} from '@nlux/core';
 import {adapterParamToUsableAdapter} from '../../utils/adapterParamToUsableAdapter';
 import {optionsUpdater} from '../../utils/optionsUpdater';
 import {personaOptionsUpdater} from '../../utils/personasUpdater';
-import type {AiChatReactProps} from './props';
+import type {AiChatComponentProps} from './props';
 
 export const handleNewPropsReceived = async (
-    currentProps: AiChatReactProps,
-    newProps: AiChatReactProps,
+    currentProps: AiChatComponentProps,
+    newProps: AiChatComponentProps,
 ): Promise<Partial<AiChatProps> | undefined> => {
     const eventListeners = optionsUpdater(
         currentProps.events,
@@ -67,7 +67,8 @@ export const handleNewPropsReceived = async (
         const newAdapter = adapterParamToUsableAdapter(newAdapterProp);
         if (!newAdapter) {
             warn({
-                message: 'Invalid new adapter property provided! The adapter must be an instance of Adapter or AdapterBuilder.',
+                message: 'Invalid new adapter property provided! The adapter must be an instance of ChatAdapter '
+                    + 'or ChatAdapterBuilder.',
                 type: 'invalid-adapter',
             });
         } else {

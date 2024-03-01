@@ -14,7 +14,7 @@ of code, you can add conversational AI capabilities and interact with your favou
 ## Key Features 🌟
 
 * **Build AI Chat Interfaces In Minutes** ― High quality conversational AI interfaces with just a few lines of code.
-* **React Components & Hooks** ― `<AiChat />` for UI and `useAdapter` hook for easy integration.
+* **React Components & Hooks** ― `<AiChat />` for UI and `useChatAdapter` hook for easy integration.
 * **LLM Adapters** ― For `ChatGPT` / `LangChain` 🦜 LangServe / `HuggingFace` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** for any LLM or API.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and more.
@@ -48,14 +48,14 @@ npm install @nlux/react @nlux/langchain-react
 ```
 
 Then include `<AiChat />` in your React app to get started.<br />
-Use the `useAdapter` hook to configure an adapter for your LLM.
+Use the `useChatAdapter` hook to configure an adapter for your LLM.
 
 ```jsx
 import {AiChat} from '@nlux/react';
-import {useAdapter} from '@nlux/langchain-react';
+import {useChatAdapter} from '@nlux/langchain-react';
 
 const App = () => {
-    const gptAdapter = useAdapter({
+    const gptAdapter = useChatAdapter({
         url: 'https://<Your LangServe Runnable URL>'
     });
 

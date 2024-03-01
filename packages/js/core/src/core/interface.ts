@@ -1,4 +1,4 @@
-import {AdapterBuilder} from '../types/aiChat/adapterBuilder';
+import {ChatAdapterBuilder} from '../types/aiChat/chatAdapterBuilder';
 import {AiChatProps} from '../types/aiChat/props';
 import {ConversationItem} from '../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../types/event';
@@ -21,7 +21,7 @@ export interface IAiChat {
     unmount(): void;
     updateProps(props: Partial<AiChatProps>): void;
 
-    withAdapter(adapterBuilder: AdapterBuilder): IAiChat;
+    withAdapter(adapterBuilder: ChatAdapterBuilder): IAiChat;
     withClassName(className: string): IAiChat;
     withConversationOptions(conversationOptions: ConversationOptions): IAiChat;
     withInitialConversation(initialConversation: ConversationItem[]): IAiChat;

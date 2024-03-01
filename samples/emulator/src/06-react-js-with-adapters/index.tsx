@@ -1,5 +1,5 @@
 import {highlighter} from '@nlux/highlighter';
-import {useUnsafeAdapter} from '@nlux/openai-react';
+import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -17,7 +17,7 @@ const ExampleWrapper = () => {
         setHeight(newHeight);
     }, []);
 
-    const adapter = useUnsafeAdapter({
+    const adapter = useUnsafeChatAdapter({
         apiKey,
         model: 'gpt-3.5-turbo',
         // dataTransferMode: 'stream',

@@ -1,14 +1,14 @@
-import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
+import {ChatAdapterBuilder as CoreChatAdapterBuilder, DataTransferMode, StandardChatAdapter} from '@nlux/core';
 
-export interface OpenAiAdapterBuilder extends AdapterBuilder {
+export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
     /**
      * Create a new ChatGPT API adapter.
      * Adapter users don't need to call this method directly. It will be called by nlux when the adapter is expected
      * to be created.
      *
-     * @returns {StandardAdapter}
+     * @returns {StandardChatAdapter}
      */
-    create(): StandardAdapter;
+    create(): StandardChatAdapter;
 
     /**
      * The API key to use to connect to ChatGPT API.
@@ -16,9 +16,9 @@ export interface OpenAiAdapterBuilder extends AdapterBuilder {
      *
      * @optional
      * @param {string} apiKey
-     * @returns {AdapterBuilder}
+     * @returns {ChatAdapterBuilder}
      */
-    withApiKey(apiKey: string): OpenAiAdapterBuilder;
+    withApiKey(apiKey: string): ChatAdapterBuilder;
 
     /**
      * Instruct the adapter to connect to API and load data either in streaming mode or in fetch mode.
@@ -28,9 +28,9 @@ export interface OpenAiAdapterBuilder extends AdapterBuilder {
      *
      * @optional
      * @default 'stream'
-     * @returns {AdapterBuilder}
+     * @returns {ChatAdapterBuilder}
      */
-    withDataTransferMode(mode: DataTransferMode): OpenAiAdapterBuilder;
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder;
 
     /**
      * The model or the endpoint to use for ChatGPT Inference API.
@@ -39,16 +39,16 @@ export interface OpenAiAdapterBuilder extends AdapterBuilder {
      * [nlux ChatGPT documentation](https://docs.nlux.ai/category/nlux-with-openai-face).
      *
      * @param {string} model
-     * @returns {AdapterBuilder}
+     * @returns {ChatAdapterBuilder}
      */
-    withModel(model: string): OpenAiAdapterBuilder;
+    withModel(model: string): ChatAdapterBuilder;
 
     /**
      * The initial system to send to ChatGPT API.
      *
      * @optional
      * @param {string} message
-     * @returns {AdapterBuilder}
+     * @returns {ChatAdapterBuilder}
      */
-    withSystemMessage(message: string): OpenAiAdapterBuilder;
+    withSystemMessage(message: string): ChatAdapterBuilder;
 }

@@ -1,17 +1,15 @@
 export type {
-    Adapter,
-    StandardAdapter,
+    ChatAdapter,
+    StandardChatAdapter,
     DataTransferMode,
-    OpenAiAdapterOptions,
-    OpenAiAdapterBuilder,
-    OpenAIModel,
+    ChatAdapterOptions,
+    ChatAdapterBuilder,
+    OpenAiModel,
+    StreamingAdapterObserver,
 } from '@nlux/openai';
 
 export {
-    createAdapter,
-    createUnsafeAdapter,
-    OpenAiStreamingAdapter,
-    OpenAiFetchAdapter,
+    createUnsafeChatAdapter,
 } from '@nlux/openai';
 
-export {useAdapter, useUnsafeAdapter} from './hooks/useAdapter';
+export {useUnsafeChatAdapter} from './hooks/useUnsafeChatAdapter';

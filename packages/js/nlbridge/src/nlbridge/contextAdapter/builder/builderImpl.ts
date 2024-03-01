@@ -1,19 +1,19 @@
-import {AiContextAdapter} from '@nlux/core';
-import {ContextAdapter} from '../contextAdapter';
-import {NlBridgeContextAdapterBuilder} from './builder';
+import {ContextAdapter} from '@nlux/core';
+import {NLBridgeContextAdapter} from '../contextAdapter';
+import {ContextAdapterBuilder} from './builder';
 
-export class NlBridgeContextAdapterBuilderImpl implements NlBridgeContextAdapterBuilder {
+export class ContextAdapterBuilderImpl implements ContextAdapterBuilder {
     private endpointUrl: string | undefined = undefined;
 
-    create(): AiContextAdapter {
+    create(): ContextAdapter {
         if (!this.endpointUrl) {
             throw new Error('Endpoint URL is required');
         }
 
-        return new ContextAdapter(this.endpointUrl);
+        return new NLBridgeContextAdapter(this.endpointUrl);
     }
 
-    withUrl(endpointUrl: string): NlBridgeContextAdapterBuilderImpl {
+    withUrl(endpointUrl: string): ContextAdapterBuilderImpl {
         if (this.endpointUrl !== undefined && this.endpointUrl !== endpointUrl) {
             throw new Error('Cannot set the endpoint URL more than once');
         }

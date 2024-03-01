@@ -1,10 +1,10 @@
-import {LangServeAdapterBuilder, LangServeAdapterOptions} from '@nlux/langchain';
+import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/langchain';
 import {useEffect, useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 
-export const useAdapter = (options: LangServeAdapterOptions) => {
+export const useChatAdapter = (options: ChatAdapterOptions) => {
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter, setAdapter] = useState<LangServeAdapterBuilder>(
+    const [adapter, setAdapter] = useState<ChatAdapterBuilder>(
         getAdapterBuilder(options),
     );
 

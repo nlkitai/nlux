@@ -2,13 +2,13 @@ import {DataTransferMode, NluxUsageError} from '@nlux/core';
 import {LangServeAbstractAdapter} from '../adapter/adapter';
 import {LangServeFetchAdapter} from '../adapter/fetch';
 import {LangServeStreamAdapter} from '../adapter/stream';
-import {LangServeAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
-import {LangServeAdapterBuilder} from './builder';
+import {ChatAdapterBuilder} from './builder';
 
-export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
+export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
     private theDataTransferMode?: DataTransferMode;
     private theInputPreProcessor?: LangServeInputPreProcessor;
     private theOutputPreProcessor?: LangServeOutputPreProcessor;
@@ -33,7 +33,7 @@ export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
             });
         }
 
-        const options: LangServeAdapterOptions = {
+        const options: ChatAdapterOptions = {
             url: this.theUrl,
             dataTransferMode: this.theDataTransferMode,
             inputPreProcessor: this.theInputPreProcessor,
@@ -61,7 +61,7 @@ export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
         return this;
     }
 
-    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): LangServeAdapterBuilder {
+    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder {
         if (this.theInputPreProcessor !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -73,7 +73,7 @@ export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
         return this;
     }
 
-    withInputSchema(useInputSchema: boolean): LangServeAdapterBuilder {
+    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder {
         if (this.theUseInputSchema !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -85,7 +85,7 @@ export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
         return this;
     }
 
-    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor): LangServeAdapterBuilder {
+    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor): ChatAdapterBuilder {
         if (this.theOutputPreProcessor !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -97,7 +97,7 @@ export class LangServeAdapterBuilderImpl implements LangServeAdapterBuilder {
         return this;
     }
 
-    withUrl(runnableUrl: string): LangServeAdapterBuilder {
+    withUrl(runnableUrl: string): ChatAdapterBuilder {
         if (this.theUrl !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,

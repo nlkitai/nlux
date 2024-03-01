@@ -1,10 +1,10 @@
-import {Adapter, AdapterExtras, StreamingAdapterObserver} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 
-export const nlBridgeCustomStreamingAdapter: Adapter = {
+export const nlBridgeCustomStreamingAdapter: ChatAdapter = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
-        extras: AdapterExtras,
+        extras: ChatAdapterExtras,
     ) => {
         const endpoint = 'http://localhost:8899/';
         fetch(endpoint, {
@@ -20,11 +20,11 @@ export const nlBridgeCustomStreamingAdapter: Adapter = {
             }),
         }).then(async (response) => {
             if (!response.ok) {
-                throw new Error(`NlBridge adapter returned status code: ${response.status}`);
+                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
             }
 
             if (!response.body) {
-                throw new Error(`NlBridge adapter returned status code: ${response.status}`);
+                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
             }
 
             // Read a stream of server-sent events
@@ -53,7 +53,7 @@ export const nlBridgeCustomStreamingAdapter: Adapter = {
     },
 };
 
-export const nlBridgeCustomPromiseAdapter: Adapter = {
+export const nlBridgeCustomPromiseAdapter: ChatAdapter = {
     async fetchText(message: string, extras): Promise<string> {
         const endpoint = 'http://localhost:8899/';
         const response = await fetch(endpoint, {
@@ -70,7 +70,7 @@ export const nlBridgeCustomPromiseAdapter: Adapter = {
         });
 
         if (!response.ok) {
-            throw new Error(`NlBridge adapter returned status code: ${response.status}`);
+            throw new Error(`NLBridge adapter returned status code: ${response.status}`);
         }
 
         const body = await response.json();
@@ -81,7 +81,7 @@ export const nlBridgeCustomPromiseAdapter: Adapter = {
         ) {
             return body.result.response;
         } else {
-            throw new Error('NlBridge adapter returned invalid response');
+            throw new Error('NLBridge adapter returned invalid response');
         }
     },
 };

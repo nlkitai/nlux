@@ -1,9 +1,9 @@
-import {AdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
+import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from '@nlux/core';
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {decode as fetchDecode} from '../codec/fetch/decode';
-import {OpenAiAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
 export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
@@ -11,7 +11,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
         apiKey,
         model,
         systemMessage,
-    }: OpenAiAdapterOptions) {
+    }: ChatAdapterOptions) {
         super({
             apiKey,
             model,
@@ -24,7 +24,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
         }
     }
 
-    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
+    async fetchText(message: string, extras: ChatAdapterExtras): Promise<string> {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
@@ -72,7 +72,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

@@ -1,8 +1,7 @@
 export type {
-    AiContextAdapter,
-    ContextAdapterBuilder,
-    Adapter,
-    StandardAdapter,
+    ContextAdapter,
+    ChatAdapter,
+    StandardChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
     AiTaskRunner,
@@ -25,8 +24,8 @@ export {
 } from './nlbridge/chatAdapter/builder/createChatAdapter';
 
 export type {
-    ContextAdapter,
-} from './nlbridge/contextAdapter/contextAdapter';
+    ContextAdapterBuilder,
+} from './nlbridge/contextAdapter/builder/builder';
 
 export {
     createContextAdapter,

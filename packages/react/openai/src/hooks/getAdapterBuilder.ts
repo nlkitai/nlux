@@ -1,9 +1,9 @@
-import {createUnsafeAdapter, OpenAiAdapterBuilder, OpenAiAdapterOptions} from '@nlux/openai';
+import {ChatAdapterBuilder, ChatAdapterOptions, createUnsafeChatAdapter} from '@nlux/openai';
 import {NluxUsageError} from '@nlux/react';
 
 const source = 'hooks/getAdapterBuilder';
 
-export const getAdapterBuilder = (options: OpenAiAdapterOptions): OpenAiAdapterBuilder => {
+export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuilder => {
     const {
         apiKey,
         dataTransferMode,
@@ -25,7 +25,7 @@ export const getAdapterBuilder = (options: OpenAiAdapterOptions): OpenAiAdapterB
         });
     }
 
-    let newAdapter = createUnsafeAdapter().withApiKey(apiKey);
+    let newAdapter = createUnsafeChatAdapter().withApiKey(apiKey);
 
     if (model !== undefined) {
         newAdapter = newAdapter.withModel(model);

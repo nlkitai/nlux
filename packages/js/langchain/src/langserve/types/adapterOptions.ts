@@ -2,7 +2,7 @@ import {DataTransferMode} from '@nlux/core';
 import {LangServeInputPreProcessor} from './inputPreProcessor';
 import {LangServeOutputPreProcessor} from './outputPreProcessor';
 
-export type LangServeAdapterOptions = {
+export type ChatAdapterOptions = {
     /**
      * The URL of the LangServe runnable.
      *

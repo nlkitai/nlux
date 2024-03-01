@@ -1,10 +1,10 @@
 import {DataTransferMode, warnOnce} from '@nlux/core';
 import {LangServeAbstractAdapter} from '../adapter/adapter';
-import {LangServeAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/adapterOptions';
 import {getDataTransferModeFromEndpointType} from './getDataTransferModeFromEndpointType';
 import {getEndpointTypeFromUrl} from './getEndpointTypeFromUrl';
 
-export const getDataTransferModeToUse = (adapterOptions: LangServeAdapterOptions): DataTransferMode => {
+export const getDataTransferModeToUse = (adapterOptions: ChatAdapterOptions): DataTransferMode => {
     const runnableEndpointAction = getEndpointTypeFromUrl(
         adapterOptions.url,
     );

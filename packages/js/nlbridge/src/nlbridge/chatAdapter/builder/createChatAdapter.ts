@@ -1,4 +1,4 @@
 import {ChatAdapterBuilder} from './builder';
-import {NlBridgeAdapterBuilderImpl} from './builderImpl';
+import {ChatAdapterBuilderImpl} from './builderImpl';
 
-export const createChatAdapter = (): ChatAdapterBuilder => new NlBridgeAdapterBuilderImpl();
+export const createChatAdapter = (): ChatAdapterBuilder => new ChatAdapterBuilderImpl();

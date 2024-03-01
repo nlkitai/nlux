@@ -1,10 +1,10 @@
 import {DataTransferMode, NluxUsageError, NluxValidationError} from '@nlux/core';
-import {HfAdapterImpl} from '../adapter/adapter';
+import {HfChatAdapterImpl} from '../adapter/chatAdapter';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';
-import {HfAdapterBuilder} from './builder';
+import {ChatAdapterBuilder} from './builder';
 
-export class AdapterBuilderImpl implements HfAdapterBuilder {
+export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
     private theAuthToken: string | null = null;
     private theDataTransferMode: DataTransferMode = 'stream';
     private theEndpoint: string | null = null;
@@ -16,7 +16,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
 
     private withDataTransferModeCalled = false;
 
-    create(): HfAdapterImpl {
+    create(): HfChatAdapterImpl {
         if (!this.theModel && !this.theEndpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -25,7 +25,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
             });
         }
 
-        return new HfAdapterImpl({
+        return new HfChatAdapterImpl({
             dataTransferMode: this.theDataTransferMode,
             model: this.theModel ?? undefined,
             endpoint: this.theEndpoint ?? undefined,
@@ -39,7 +39,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         });
     }
 
-    withAuthToken(authToken: string): HfAdapterBuilder {
+    withAuthToken(authToken: string): ChatAdapterBuilder {
         if (this.theAuthToken !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -51,7 +51,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withDataTransferMode(mode: DataTransferMode): HfAdapterBuilder {
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder {
         if (this.withDataTransferModeCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -64,7 +64,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withEndpoint(endpoint: string): HfAdapterBuilder {
+    withEndpoint(endpoint: string): ChatAdapterBuilder {
         if (this.theEndpoint !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -76,7 +76,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withInputPreProcessor(inputPreProcessor: HfInputPreProcessor): HfAdapterBuilder {
+    withInputPreProcessor(inputPreProcessor: HfInputPreProcessor): ChatAdapterBuilder {
         if (this.theInputPreProcessor !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -88,7 +88,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withMaxNewTokens(maxNewTokens: number): HfAdapterBuilder {
+    withMaxNewTokens(maxNewTokens: number): ChatAdapterBuilder {
         if (this.theMaxNewTokens !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -112,7 +112,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withOutputPreProcessor(outputPreProcessor: HfOutputPreProcessor): HfAdapterBuilder {
+    withOutputPreProcessor(outputPreProcessor: HfOutputPreProcessor): ChatAdapterBuilder {
         if (this.theOutputPreProcessor !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -124,7 +124,7 @@ export class AdapterBuilderImpl implements HfAdapterBuilder {
         return this;
     }
 
-    withSystemMessage(message: string): HfAdapterBuilder {
+    withSystemMessage(message: string): ChatAdapterBuilder {
         if (this.theSystemMessage !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,

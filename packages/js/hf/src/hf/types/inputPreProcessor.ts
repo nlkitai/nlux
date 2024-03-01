@@ -1,6 +1,6 @@
-import {HfAdapterOptions} from './adapterOptions';
+import {ChatAdapterOptions} from './chatAdapterOptions';
 
 export type HfInputPreProcessor = (
     input: string,
-    adapterOptions: Readonly<HfAdapterOptions>,
+    adapterOptions: Readonly<ChatAdapterOptions>,
 ) => string;

@@ -1,4 +1,4 @@
-import {Adapter} from '@nlux/react';
+import {ChatAdapter} from '@nlux/react';
 
 // A demo endpoint by nlux that connects that uses LangServe to connect to OpenAI.
 const demoLangServerEndpoint = 'https://pynlux.api.nlux.ai/einbot/invoke';
@@ -11,7 +11,7 @@ const promptToBody = (message: string) => {
     });
 };
 
-export const fetchAdapter: Adapter = {
+export const fetchAdapter: ChatAdapter = {
     fetchText: async (prompt: string): Promise<string> => {
         const response = await fetch(demoLangServerEndpoint, {
             method: 'POST',

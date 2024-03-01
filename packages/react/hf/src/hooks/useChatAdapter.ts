@@ -1,17 +1,17 @@
-import {debug, HfAdapterBuilder, HfAdapterOptions} from '@nlux/hf';
+import {ChatAdapterBuilder, ChatAdapterOptions, debug} from '@nlux/hf';
 import {useEffect, useState} from 'react';
-import {initAdapter} from './initAdapter';
+import {initChatAdapter} from './initChatAdapter';
 
-const source = 'hooks/useAdapter';
+const source = 'hooks/useChatAdapter';
 
-export const useAdapter = (options: HfAdapterOptions) => {
+export const useChatAdapter = (options: ChatAdapterOptions) => {
     if (!options.model) {
         throw new Error('You must provide either a model or an endpoint to use Hugging Face Inference API.');
     }
 
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter] = useState<HfAdapterBuilder>(
-        initAdapter(options),
+    const [adapter] = useState<ChatAdapterBuilder>(
+        initChatAdapter(options),
     );
 
     const {
@@ -34,9 +34,10 @@ export const useAdapter = (options: HfAdapterOptions) => {
 
         debug({
             source,
-            message: 'A new parameter has changed in useHfAdapter(). Adapter cannot be changed after initialization ' +
-                'and the new parameter will not be applied. Please re-initialize the adapter with the new parameter. '
-                + 'or user adapter methods to change the options and behaviour of the adapter.',
+            message: 'A new parameter has changed in useChatAdapter(). Adapter cannot be changed after ' +
+                'initialization and the new parameter will not be applied. Please re-initialize the adapter ' +
+                'with the new parameter. or user adapter methods to change the options and behaviour of ' +
+                'the adapter.',
         });
     }, [
         authToken,

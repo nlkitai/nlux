@@ -3,7 +3,7 @@ import {comp} from '../../../core/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
 import {HistoryPayloadSize} from '../../../core/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
-import {isStandardAdapter, StandardAdapter} from '../../../types/aiChat/standardAdapter';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/aiChat/standardChatAdapter';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationItem} from '../../../types/conversation';
 import {CompConversation} from '../conversation/conversation.model';
@@ -178,7 +178,7 @@ export class CompChatRoom extends BaseComp<
 
     private handlePromptBoxSubmit() {
         const {adapter} = this.context;
-        const adapterAsStandardAdapter: StandardAdapter | undefined = isStandardAdapter(adapter as any) ?
+        const adapterAsStandardAdapter: StandardChatAdapter | undefined = isStandardChatAdapter(adapter as any) ?
             adapter as any : undefined;
 
         submitPromptFactory({

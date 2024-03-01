@@ -10,17 +10,17 @@ export type DataTransferMode = 'stream' | 'fetch';
  * This interface exposes methods that should be implemented by any adapter to connect the AiChat component
  * to any API or AI backend.
  */
-export interface Adapter {
+export interface ChatAdapter {
     /**
      * This method should be implemented by any adapter that wants to request data from the API in fetch mode.
      * It should return a promise that resolves to the response from the API.
      * Either this method or `streamText` (or both) should be implemented by any adapter.
      *
      * @param `string` message
-     * @param `AdapterExtras` extras
+     * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    fetchText?: (message: string, extras: AdapterExtras) => Promise<string>;
+    fetchText?: (message: string, extras: ChatAdapterExtras) => Promise<string>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
@@ -28,9 +28,9 @@ export interface Adapter {
      *
      * @param {string} message
      * @param {StreamingAdapterObserver} observer
-     * @param {AdapterExtras} extras
+     * @param {ChatAdapterExtras} extras
      */
-    streamText?: (message: string, observer: StreamingAdapterObserver, extras: AdapterExtras) => void;
+    streamText?: (message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras) => void;
 }
 
 /**
@@ -67,7 +67,7 @@ export interface StreamingAdapterObserver {
 /**
  * Additional data sent to the adapter when a message is sent.
  */
-export type AdapterExtras = {
+export type ChatAdapterExtras = {
     /**
      * This attribute contains the properties used with the AiChat component.
      */

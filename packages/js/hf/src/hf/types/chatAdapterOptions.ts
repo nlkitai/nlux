@@ -2,7 +2,7 @@ import {DataTransferMode} from '@nlux/core';
 import {HfInputPreProcessor} from './inputPreProcessor';
 import {HfOutputPreProcessor} from './outputPreProcessor';
 
-export type HfAdapterOptions = {
+export type ChatAdapterOptions = {
     dataTransferMode?: DataTransferMode;
     model?: string;
     endpoint?: string;

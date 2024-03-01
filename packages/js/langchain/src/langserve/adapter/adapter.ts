@@ -1,14 +1,14 @@
 import {
-    AdapterExtras,
+    ChatAdapterExtras,
     ConversationItem,
     DataTransferMode,
-    StandardAdapter,
     StandardAdapterInfo,
+    StandardChatAdapter,
     StreamingAdapterObserver,
     uid,
     warn,
 } from '@nlux/core';
-import {LangServeAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
@@ -17,11 +17,11 @@ import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
 
-export abstract class LangServeAbstractAdapter implements StandardAdapter {
+export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
-    private readonly __options: LangServeAdapterOptions;
+    private readonly __options: ChatAdapterOptions;
 
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
@@ -30,7 +30,7 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter {
     private readonly theRunnableNameToUse: string;
     private readonly theUseInputSchemaOptionToUse: boolean;
 
-    constructor(options: LangServeAdapterOptions) {
+    constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
         this.__options = {...options};
 
@@ -110,7 +110,7 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter {
         }
     }
 
-    abstract fetchText(message: string, extras: AdapterExtras): Promise<string>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras): Promise<string>;
 
     init() {
         if (!this.inputPreProcessor && this.useInputSchema) {
@@ -120,7 +120,7 @@ export abstract class LangServeAbstractAdapter implements StandardAdapter {
         }
     }
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void;
 
     protected getDisplayableMessageFromAiOutput(aiMessage: object | string): string | undefined {
         if (this.outputPreProcessor) {

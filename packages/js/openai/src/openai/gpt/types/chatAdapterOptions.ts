@@ -1,9 +1,9 @@
 import {DataTransferMode} from '@nlux/core';
-import {OpenAIModel} from './model';
+import {OpenAiModel} from './model';
 
-export type OpenAiAdapterOptions = {
+export type ChatAdapterOptions = {
     dataTransferMode?: DataTransferMode;
-    model?: OpenAIModel;
+    model?: OpenAiModel;
     apiKey: string;
     systemMessage?: string;
 };

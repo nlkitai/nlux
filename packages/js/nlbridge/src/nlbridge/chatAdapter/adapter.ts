@@ -1,15 +1,15 @@
 import {
-    AdapterExtras,
     AiTaskRunner,
+    ChatAdapterExtras,
     DataTransferMode,
-    StandardAdapter,
     StandardAdapterInfo,
+    StandardChatAdapter,
     StreamingAdapterObserver,
     uid,
 } from '@nlux/core';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
-export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
+export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
@@ -21,7 +21,7 @@ export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
     constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
-        this.theDataTransferModeToUse = options.dataTransferMode ?? NlBridgeAbstractAdapter.defaultDataTransferMode;
+        this.theDataTransferModeToUse = options.dataTransferMode ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
         this.theEndpointUrlToUse = options.url;
         this.theContextIdToUse = options.contextId;
         this.theTaskRunnerToUse = options.taskRunner;
@@ -67,7 +67,7 @@ export abstract class NlBridgeAbstractAdapter implements StandardAdapter {
         return undefined;
     }
 
-    abstract fetchText(message: string, extras: AdapterExtras): Promise<string>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras): Promise<string>;
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void;
 }

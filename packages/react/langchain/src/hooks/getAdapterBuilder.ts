@@ -1,8 +1,8 @@
-import {createAdapter, LangServeAdapterBuilder, LangServeAdapterOptions} from '@nlux/langchain';
+import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/langchain';
 
 const source = 'hooks/getAdapterBuilder';
 
-export const getAdapterBuilder = (options: LangServeAdapterOptions): LangServeAdapterBuilder => {
+export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuilder => {
     const {
         url,
         dataTransferMode,
@@ -19,7 +19,7 @@ export const getAdapterBuilder = (options: LangServeAdapterOptions): LangServeAd
         throw new Error(`Runnable URL is required`);
     }
 
-    let newAdapter = createAdapter().withUrl(url);
+    let newAdapter = createChatAdapter().withUrl(url);
 
     if (dataTransferMode) {
         newAdapter = newAdapter.withDataTransferMode(dataTransferMode);

@@ -5,11 +5,11 @@ import {PersonaOptions} from '../../core/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../core/aiChat/options/promptBoxOptions';
 import {ConversationItem} from '../conversation';
 import {EventsMap} from '../event';
-import {Adapter} from './adapter';
-import {StandardAdapter} from './standardAdapter';
+import {ChatAdapter} from './chatAdapter';
+import {StandardChatAdapter} from './standardChatAdapter';
 
 export type AiChatInternalProps = {
-    adapter: Adapter | StandardAdapter;
+    adapter: ChatAdapter | StandardChatAdapter;
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;
@@ -24,10 +24,10 @@ export type AiChatInternalProps = {
 /**
  * These are the props that are exposed to the user of the AiChat component.
  * They can be updated using the `updateProps` method, and they are provided to certain adapter methods
- * as part of the `AdapterExtras` attribute.
+ * as part of the `ChatAdapterExtras` attribute.
  */
 export type AiChatProps = Readonly<{
-    adapter: Adapter | StandardAdapter;
+    adapter: ChatAdapter | StandardChatAdapter;
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;

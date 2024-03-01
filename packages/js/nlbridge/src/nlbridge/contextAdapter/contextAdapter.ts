@@ -1,14 +1,16 @@
-import {AssistResult} from '@nlux-dev/core/src/types/aiAssistant/assist';
-import {RegisterTaskResult} from '@nlux-dev/core/src/types/aiAssistant/registerTask';
-import {UnregisterTaskResult} from '@nlux-dev/core/src/types/aiAssistant/unregisterTask';
-import {ClearContextResult} from '@nlux-dev/core/src/types/aiContext/clear';
-import {ContextData} from '@nlux-dev/core/src/types/aiContext/data';
-import {GetContextDataResult} from '@nlux-dev/core/src/types/aiContext/get';
-import {SetContextResult} from '@nlux-dev/core/src/types/aiContext/set';
-import {UpdateContextResult} from '@nlux-dev/core/src/types/aiContext/update';
-import {AiContextAdapter} from '@nlux/core';
+import {
+    AssistResult,
+    ClearContextResult,
+    ContextAdapter,
+    ContextData,
+    GetContextDataResult,
+    RegisterTaskResult,
+    SetContextResult,
+    UnregisterTaskResult,
+    UpdateContextResult,
+} from '@nlux/core';
 
-export class ContextAdapter implements AiContextAdapter {
+export class NLBridgeContextAdapter implements ContextAdapter {
     private url: string;
 
     constructor(url: string) {

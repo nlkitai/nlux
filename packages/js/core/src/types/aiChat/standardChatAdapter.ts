@@ -1,15 +1,15 @@
-import {Adapter, AdapterExtras, DataTransferMode, StreamingAdapterObserver} from './adapter';
+import {ChatAdapter, ChatAdapterExtras, DataTransferMode, StreamingAdapterObserver} from './chatAdapter';
 import {StandardAdapterInfo} from './standardAdapterConfig';
 
-export interface StandardAdapter extends Adapter {
+export interface StandardChatAdapter extends ChatAdapter {
     get dataTransferMode(): DataTransferMode;
-    fetchText(message: string, extras: AdapterExtras): Promise<string>;
+    fetchText(message: string, extras: ChatAdapterExtras): Promise<string>;
     get id(): string;
     get info(): StandardAdapterInfo;
-    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void;
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void;
 }
 
-export const isStandardAdapter = (adapter: any): boolean => {
+export const isStandardChatAdapter = (adapter: any): boolean => {
     return (typeof adapter === 'object' && adapter !== null)
         && (typeof adapter.streamText === 'function' || typeof adapter.fetchText === 'function')
         && ['stream', 'fetch'].includes(adapter.dataTransferMode)

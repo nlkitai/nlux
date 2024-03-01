@@ -1,4 +1,4 @@
-export type OpenAIModel = (string & {})
+export type OpenAiModel = (string & {})
     | 'gpt-4-0125-preview'
     | 'gpt-4-turbo-preview'
     | 'gpt-4-1106-preview'

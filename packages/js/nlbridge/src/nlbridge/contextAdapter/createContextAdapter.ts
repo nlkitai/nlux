@@ -1,6 +1,6 @@
-import {NlBridgeContextAdapterBuilder} from './builder/builder';
-import {NlBridgeContextAdapterBuilderImpl} from './builder/builderImpl';
+import {ContextAdapterBuilder} from './builder/builder';
+import {ContextAdapterBuilderImpl} from './builder/builderImpl';
 
-export const createContextAdapter = (): NlBridgeContextAdapterBuilder => {
-    return new NlBridgeContextAdapterBuilderImpl();
+export const createContextAdapter = (): ContextAdapterBuilder => {
+    return new ContextAdapterBuilderImpl();
 };

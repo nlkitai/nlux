@@ -3,25 +3,25 @@ import {
     DataTransferMode,
     NluxError,
     NluxValidationError,
-    StandardAdapter,
     StandardAdapterInfo,
+    StandardChatAdapter,
     StreamingAdapterObserver,
     uid,
     warn,
 } from '@nlux/core';
 import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
-import {HfAdapterOptions} from '../types/adapterOptions';
+import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
-export class HfAdapterImpl implements StandardAdapter {
+export class HfChatAdapterImpl implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
 
     private readonly __instanceId: string;
 
     private inference: HfInference;
-    private readonly options: HfAdapterOptions;
+    private readonly options: ChatAdapterOptions;
 
-    constructor(options: HfAdapterOptions) {
+    constructor(options: ChatAdapterOptions) {
         if (!options.model) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -37,7 +37,7 @@ export class HfAdapterImpl implements StandardAdapter {
     }
 
     get dataTransferMode(): DataTransferMode {
-        return this.options.dataTransferMode ?? HfAdapterImpl.defaultDataTransferMode;
+        return this.options.dataTransferMode ?? HfChatAdapterImpl.defaultDataTransferMode;
     }
 
     get id(): string {
@@ -68,7 +68,7 @@ export class HfAdapterImpl implements StandardAdapter {
         const parameters = {
             inputs: message as string,
             parameters: {
-                max_new_tokens: this.options.maxNewTokens ?? HfAdapterImpl.defaultMaxNewTokens,
+                max_new_tokens: this.options.maxNewTokens ?? HfChatAdapterImpl.defaultMaxNewTokens,
             },
         };
 
@@ -149,7 +149,7 @@ export class HfAdapterImpl implements StandardAdapter {
             const parameters = {
                 inputs: readyMessage,
                 parameters: {
-                    max_new_tokens: this.options.maxNewTokens ?? HfAdapterImpl.defaultMaxNewTokens,
+                    max_new_tokens: this.options.maxNewTokens ?? HfChatAdapterImpl.defaultMaxNewTokens,
                 },
             };
 

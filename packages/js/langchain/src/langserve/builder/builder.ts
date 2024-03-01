@@ -1,12 +1,12 @@
-import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
+import {ChatAdapterBuilder as CoreChatAdapterBuilder, DataTransferMode, StandardChatAdapter} from '@nlux/core';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 
-export interface LangServeAdapterBuilder extends AdapterBuilder {
-    create(): StandardAdapter;
-    withDataTransferMode(mode: DataTransferMode): LangServeAdapterBuilder;
-    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): LangServeAdapterBuilder;
-    withInputSchema(useInputSchema: boolean): LangServeAdapterBuilder;
-    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor): LangServeAdapterBuilder;
-    withUrl(runnableUrl: string): LangServeAdapterBuilder;
+export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
+    create(): StandardChatAdapter;
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder;
+    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder;
+    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder;
+    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor): ChatAdapterBuilder;
+    withUrl(runnableUrl: string): ChatAdapterBuilder;
 }

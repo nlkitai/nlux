@@ -52,9 +52,9 @@ Configure the LangChain LangServe adapter to connect to your API endpoint:
 
 ```js
 import {createAiChat} from '@nlux/core';
-import {createAdapter} from '@nlux/langchain';
+import {createChatAdapter} from '@nlux/langchain';
 
-const langChainAdapter = createAdapter().withUrl('https://<Your LangServe Runnable URL>');
+const langChainAdapter = createChatAdapter().withUrl('https://<Your LangServe Runnable URL>');
 ```
 
 Then render the `AiChat` component into your web page:
@@ -88,7 +88,7 @@ from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
 CDN hosted version from below:
 
 ```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v0.12.1/nova.css"/>
+<link rel="stylesheet" href="https://themes.nlux.ai/v1.0.0/nova.css"/>
 ```
 
 This CDN is provided for demo purposes only and it's not scalable.

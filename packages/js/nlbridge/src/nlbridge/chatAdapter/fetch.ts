@@ -1,12 +1,12 @@
-import {AdapterExtras, NluxError, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
-import {NlBridgeAbstractAdapter} from './adapter';
+import {ChatAdapterExtras, NluxError, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
+import {NLBridgeAbstractAdapter} from './adapter';
 
-export class NlBridgeFetchAdapter extends NlBridgeAbstractAdapter {
+export class NLBridgeFetchAdapter extends NLBridgeAbstractAdapter {
     constructor(options: any) {
         super(options);
     }
 
-    async fetchText(message: string, extras: AdapterExtras): Promise<string> {
+    async fetchText(message: string, extras: ChatAdapterExtras): Promise<string> {
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
@@ -24,7 +24,7 @@ export class NlBridgeFetchAdapter extends NlBridgeAbstractAdapter {
         if (!response.ok) {
             throw new NluxError({
                 source: this.constructor.name,
-                message: `NlBridge adapter returned status code: ${response.status}`,
+                message: `NLBridge adapter returned status code: ${response.status}`,
             });
         }
 
@@ -51,12 +51,12 @@ export class NlBridgeFetchAdapter extends NlBridgeAbstractAdapter {
         } else {
             throw new NluxError({
                 source: this.constructor.name,
-                message: 'Invalid response from NlBridge: String expected.',
+                message: 'Invalid response from NLBridge: String expected.',
             });
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: AdapterExtras): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

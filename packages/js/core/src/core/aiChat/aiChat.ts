@@ -1,8 +1,8 @@
 import {registerAllComponents} from '../../components/components';
-import {Adapter} from '../../types/aiChat/adapter';
-import {AdapterBuilder} from '../../types/aiChat/adapterBuilder';
+import {ChatAdapter} from '../../types/aiChat/chatAdapter';
+import {ChatAdapterBuilder} from '../../types/aiChat/chatAdapterBuilder';
 import {AiChatProps} from '../../types/aiChat/props';
-import {StandardAdapter} from '../../types/aiChat/standardAdapter';
+import {StandardChatAdapter} from '../../types/aiChat/standardChatAdapter';
 import {ConversationItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {debug} from '../../x/debug';
@@ -16,8 +16,8 @@ import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class AiChat implements IAiChat {
-    protected theAdapter: Adapter | null = null;
-    protected theAdapterBuilder: StandardAdapter | null = null;
+    protected theAdapter: ChatAdapter | null = null;
+    protected theAdapterBuilder: StandardChatAdapter | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
@@ -54,7 +54,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        const adapterToUser: Adapter | StandardAdapter | null =
+        const adapterToUser: ChatAdapter | StandardChatAdapter | null =
             this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
                 : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
                     ? this.theAdapterBuilder
@@ -63,7 +63,7 @@ export class AiChat implements IAiChat {
         if (!adapterToUser) {
             throw new NluxValidationError({
                 source: this.constructor.name,
-                message: 'Unable to create nlux instance. Adapter is not properly set. '
+                message: 'Unable to create nlux instance. ChatAdapter is not properly set. '
                     + 'You should call `withAdapter(adapter)` method before mounting nlux.',
             });
         }
@@ -182,7 +182,7 @@ export class AiChat implements IAiChat {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapter: Adapter | AdapterBuilder) {
+    public withAdapter(adapter: ChatAdapter | ChatAdapterBuilder) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -224,8 +224,8 @@ export class AiChat implements IAiChat {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Unable to set adapter. Invalid adapter or adapter-builder implementation! '
-                + 'When an `AdapterBuilder` is provided, it must implement either `create()` method that returns an '
-                + 'Adapter instance. When an Adapter instance is provided, must implement `fetchText()` and/or '
+                + 'When an `ChatAdapterBuilder` is provided, it must implement either `create()` method that returns an '
+                + 'ChatAdapter instance. When an ChatAdapter instance is provided, must implement `fetchText()` and/or '
                 + '`streamText()` methods. None of the above were found.',
         });
     };

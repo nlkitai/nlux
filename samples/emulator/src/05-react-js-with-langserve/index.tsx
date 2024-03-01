@@ -1,4 +1,4 @@
-import {useAdapter} from '@nlux/langchain-react';
+import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
 import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
@@ -12,7 +12,7 @@ const ExampleWrapper = () => {
         setMaxHeight(newHeight);
     }, []);
 
-    const langServeAdapter = useAdapter({
+    const langServeAdapter = useChatAdapter({
         url: 'http://127.0.0.1:8000/einbot',
         dataTransferMode: 'fetch',
     });

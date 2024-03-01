@@ -1,3 +1,5 @@
+// CHAT --------
+
 import {AiChat} from './core/aiChat/aiChat';
 
 export {AiChat} from './core/aiChat/aiChat';
@@ -49,8 +51,8 @@ export type {
 } from './types/event';
 
 export type {
-    StandardAdapter,
-} from './types/aiChat/standardAdapter';
+    StandardChatAdapter,
+} from './types/aiChat/standardChatAdapter';
 
 export type {
     StandardAdapterInfo,
@@ -65,15 +67,15 @@ export type {
 } from './types/aiChat/props';
 
 export type {
-    Adapter,
-    AdapterExtras,
+    ChatAdapter,
+    ChatAdapterExtras,
     StreamingAdapterObserver,
     DataTransferMode,
-} from './types/aiChat/adapter';
+} from './types/aiChat/chatAdapter';
 
 export type {
-    AdapterBuilder,
-} from './types/aiChat/adapterBuilder';
+    ChatAdapterBuilder,
+} from './types/aiChat/chatAdapterBuilder';
 
 export type {
     StreamParser,
@@ -81,13 +83,57 @@ export type {
     StandardStreamParserOutput,
 } from './types/markdown/streamParser';
 
+// CONTEXT --------
+
 export type {
-    AiContextAdapter,
-} from './types/aiContext/adapter';
+    GetContextDataResult,
+    GetContextDataCallback,
+} from './types/aiContext/get';
+
+export type {
+    SetContextResult,
+    SetContextCallback,
+} from './types/aiContext/set';
+
+export type {
+    UpdateContextResult,
+    UpdateContextCallback,
+} from './types/aiContext/update';
+
+export type {
+    ClearContextResult,
+    ClearContextCallback,
+} from './types/aiContext/clear';
+
+export type {
+    ContextData,
+} from './types/aiContext/data';
+
+export type {
+    ContextAdapter,
+} from './types/aiContext/contextAdapter';
 
 export type {
     ContextAdapterBuilder,
 } from './types/aiContext/builder';
+
+// ASSISTANT --------
+
+export type {
+    AssistResult,
+} from './types/aiAssistant/assist';
+
+export type {
+    RegisterTaskResult,
+    RegisterTaskCallback,
+} from './types/aiAssistant/registerTask';
+
+export type {
+    UnregisterTaskResult,
+    UnregisterTaskCallback,
+} from './types/aiAssistant/unregisterTask';
+
+// HIGHLIGHTER --------
 
 export type {
     Highlighter,
@@ -95,6 +141,8 @@ export type {
     HighlighterColorMode,
     CreateHighlighterOptions,
 } from './core/aiChat/highlighter/highlighter';
+
+// OTHERS --------
 
 export type {
     ConversationItem,

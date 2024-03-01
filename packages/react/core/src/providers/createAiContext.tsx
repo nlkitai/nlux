@@ -1,11 +1,11 @@
-import {AiContextAdapter, ContextAdapterBuilder} from '@nlux/core';
+import {ContextAdapter, ContextAdapterBuilder} from '@nlux/core';
 import React, {createContext, useEffect} from 'react';
 import {AiContext, AiContextData, AiContextProviderProps} from '../types/AiContext';
 
-export const createAiContext = (adapter: AiContextAdapter | ContextAdapterBuilder): AiContext => {
-    const adapterToUse: AiContextAdapter = typeof (adapter as any).create === 'function'
+export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder): AiContext => {
+    const adapterToUse: ContextAdapter = typeof (adapter as any).create === 'function'
         ? (adapter as ContextAdapterBuilder).create()
-        : adapter as AiContextAdapter;
+        : adapter as ContextAdapter;
 
     const context = createContext<AiContextData>({
         contextId: '',
