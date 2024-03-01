@@ -1,28 +1,28 @@
 export type {
+    AiContextAdapter,
+    ContextAdapterBuilder,
     Adapter,
     StandardAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
+    AiTaskRunner,
 } from '@nlux/core';
 
-export {debug} from '@nlux/core';
+export {
+    debug,
+} from '@nlux/core';
 
 export type {
     ChatAdapterOptions,
 } from './nlbridge/types/chatAdapterOptions';
 
 export type {
-    AiTaskRunner,
-} from './nlbridge/types/aiTaskRunner';
+    ChatAdapterBuilder,
+} from './nlbridge/chatAdapter/builder/builder';
 
-export type {ChatAdapterBuilder} from './nlbridge/chatAdapter/builder/builder';
-
-export {createChatAdapter} from './nlbridge/chatAdapter/builder/createChatAdapter';
-
-export type {
-    AiContextAdapter,
-    ContextAdapterBuilder,
-} from '@nlux/core';
+export {
+    createChatAdapter,
+} from './nlbridge/chatAdapter/builder/createChatAdapter';
 
 export type {
     ContextAdapter,

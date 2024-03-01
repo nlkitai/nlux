@@ -11,6 +11,9 @@ coverage/
 # Cache
 .rollup.cache/
 
+# Ignore MD
+*.ignore.md
+
 # Packages
 node_modules/
 packages/*/package.json
@@ -24,4 +27,3 @@ rollup.config-*.js
 rollup.config-*.mjs
 yarn-error.log
 .DS_Store
-

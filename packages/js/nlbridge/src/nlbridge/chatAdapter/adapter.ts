@@ -1,12 +1,12 @@
 import {
     AdapterExtras,
+    AiTaskRunner,
     DataTransferMode,
     StandardAdapter,
     StandardAdapterInfo,
     StreamingAdapterObserver,
     uid,
 } from '@nlux/core';
-import {AiTaskRunner} from '../types/aiTaskRunner';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
 export abstract class NlBridgeAbstractAdapter implements StandardAdapter {

@@ -1,5 +1,4 @@
-import {DataTransferMode, NluxUsageError, StandardAdapter} from '@nlux/core';
-import {AiTaskRunner} from '../../types/aiTaskRunner';
+import {AiTaskRunner, DataTransferMode, NluxUsageError, StandardAdapter} from '@nlux/core';
 import {ChatAdapterOptions} from '../../types/chatAdapterOptions';
 import {NlBridgeAbstractAdapter} from '../adapter';
 import {NlBridgeFetchAdapter} from '../fetch';

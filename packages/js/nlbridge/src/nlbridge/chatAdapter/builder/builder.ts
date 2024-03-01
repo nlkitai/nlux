@@ -1,5 +1,4 @@
-import {AdapterBuilder, DataTransferMode, StandardAdapter} from '@nlux/core';
-import {AiTaskRunner} from '../../types/aiTaskRunner';
+import {AdapterBuilder, AiTaskRunner, DataTransferMode, StandardAdapter} from '@nlux/core';
 
 export interface ChatAdapterBuilder extends AdapterBuilder {
     create(): StandardAdapter;

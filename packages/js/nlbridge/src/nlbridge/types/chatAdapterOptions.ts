@@ -1,5 +1,4 @@
-import {DataTransferMode} from '@nlux/core';
-import {AiTaskRunner} from './aiTaskRunner';
+import {AiTaskRunner, DataTransferMode} from '@nlux/core';
 
 export type ChatAdapterOptions = {
     /**

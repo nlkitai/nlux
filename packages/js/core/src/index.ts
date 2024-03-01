@@ -31,6 +31,10 @@ export type {
 } from './types/aiChat/props';
 
 export type {
+    AiTaskRunner,
+} from './types/aiAssistant/taskRunner';
+
+export type {
     EventName,
     EventCallback,
     EventsMap,
