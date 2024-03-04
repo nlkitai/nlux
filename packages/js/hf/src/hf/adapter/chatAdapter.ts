@@ -22,7 +22,7 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
     private readonly options: ChatAdapterOptions;
 
     constructor(options: ChatAdapterOptions) {
-        if (!options.model) {
+        if (!options.model && !options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
                 message: 'when creating the Hugging Face adapter, you must set either the model or the endpoint '
