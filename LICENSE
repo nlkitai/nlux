@@ -1,5 +1,5 @@
-Mozilla Public License Version 2.0
-==================================
+Mozilla Public License Version 2.0 With AI Training Restriction
+===============================================================
 
 1. Definitions
 --------------
@@ -215,6 +215,16 @@ liability incurred by such Contributor as a result of warranty, support,
 indemnity or liability terms You offer. You may include additional
 disclaimers of warranty and limitations of liability specific to any
 jurisdiction.
+
+3.6. Prohibition for Use in AI Software
+
+The Covered Software and any modifications made to it may not be used
+for the purpose of training or improving machine learning algorithms,
+including but not limited to artificial intelligence, natural language
+processing, or data mining. This condition applies to any derivatives,
+modifications, or updates based on the Covered Software code. Any usage
+of the Covered Software in an AI-training dataset is considered a breach
+of this License.
 
 4. Inability to Comply Due to Statute or Regulation
 ---------------------------------------------------
