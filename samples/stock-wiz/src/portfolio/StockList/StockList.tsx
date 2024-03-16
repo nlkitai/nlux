@@ -1,6 +1,7 @@
 import './StockList.css';
 import {useAiContext} from '@nlux-dev/react/src';
-import {useEffect, useMemo} from 'react';
+import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask.ts';
+import {useMemo} from 'react';
 import {StockRow} from '../../@types/StockData.ts';
 import {MyAiContext} from '../../context.tsx';
 import {columns} from '../../data/columns.ts';
@@ -16,21 +17,21 @@ export const StockList = (props: StockListProps) => {
     const {stockRows, updateRowSelection} = props;
     const cols = useMemo(() => columns, []);
 
-    const compAiContext = useAiContext(MyAiContext, 'stock-list-data');
+    useAiContext(MyAiContext, 'Stock List Data', stockRows);
 
-    useEffect(() => {
-        compAiContext.update(stockRows);
-        const {cancel} = compAiContext.registerTask(
-            'selectStock',
-            (stockId: string | null) => stockId && updateRowSelection(stockId, true),
-            ['a string representing the ID of the stock to select. if no matching stock is found, set it to null'],
-        );
+    useAiTask(
+        MyAiContext,
+        'Select Stock',
+        updateRowSelection,
+        ['a string representing the ID of the stock to select. if no matching stock is found, set it to null'],
+    );
 
-        return () => {
-            cancel();
-            compAiContext.clear();
-        };
-    }, [stockRows, compAiContext, updateRowSelection]);
+    useAiTask(
+        MyAiContext,
+        'Select Stock',
+        updateRowSelection,
+        ['a string representing the ID of the stock to select. if no matching stock is found, set it to null'],
+    );
 
     return (
         <div className="stock-list">

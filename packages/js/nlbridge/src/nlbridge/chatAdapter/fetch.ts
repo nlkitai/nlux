@@ -7,16 +7,20 @@ export class NLBridgeFetchAdapter extends NLBridgeAbstractAdapter {
     }
 
     async fetchText(message: string, extras: ChatAdapterExtras): Promise<string> {
+        if (this.context && this.context.contextId) {
+            await this.context.flush();
+        }
+
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                action: this.contextId ? 'assist' : 'chat',
+                action: 'chat',
                 payload: {
                     message,
-                    contextId: this.contextId,
+                    contextId: this.context?.contextId,
                 },
             }),
         });
@@ -40,11 +44,11 @@ export class NLBridgeFetchAdapter extends NLBridgeAbstractAdapter {
             } = body.result;
 
             if (
-                this.taskRunner && task
+                this.context && task
                 && typeof task === 'object' && typeof task.taskId === 'string'
                 && Array.isArray(task.parameters)
             ) {
-                this.taskRunner(task.taskId, task.parameters);
+                this.context.runTask(task.taskId, task.parameters);
             }
 
             return response;

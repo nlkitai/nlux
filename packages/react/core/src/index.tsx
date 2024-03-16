@@ -49,7 +49,7 @@ export {AiChat} from './components/AiChat';
 
 export type {
     UpdateContextItem,
-    ClearContextItem,
+    DiscardContextItem,
 } from './providers/useAiContext';
 
 export {
@@ -59,7 +59,6 @@ export {
 export type {
     AiContext,
     AiContextProviderProps,
-    AiContextData,
 } from './types/AiContext';
 
 export {

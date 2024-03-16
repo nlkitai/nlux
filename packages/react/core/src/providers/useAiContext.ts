@@ -1,83 +1,47 @@
-import {useContext} from 'react';
+import {ContextItemDataType, ContextItemHandler} from '@nlux/core';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {AiContext} from '../types/AiContext';
 
-export type UpdateContextItem = (data: any) => void;
-export type ClearContextItem = () => void;
-
-export type RegisterAiTask = (id: string, callback: Function, parametersDescription: string[]) => {
-    cancel: () => void;
-};
-
-export type UnregisterAiTask = (id: string) => void;
+export type UpdateContextItem = (itemValue: ContextItemDataType) => void;
+export type DiscardContextItem = () => void;
 
 export const useAiContext = (
     aiContext: AiContext,
-    propertyKey: string,
-): {
-    update: UpdateContextItem,
-    clear: ClearContextItem,
-    registerTask: RegisterAiTask,
-    unregisterTask: UnregisterAiTask,
-} => {
-    const {
-        adapter,
-        contextId,
-        registeredTaskCallbacks,
-    } = useContext(aiContext.ref);
+    itemDescription: string,
+    itemValue: ContextItemDataType,
+) => {
+    const result = useContext(aiContext.ref);
+    const [itemId] = useState(() => {
+        let itemUniqueId: string;
+        do {
+            itemUniqueId = Math.random().toString(36).substring(2, 15);
+        }
+        while (result.hasItem(itemUniqueId));
 
-    const update = (data: any) => {
-        // TODO - Improve + Batch updates
-        adapter.update(contextId, {
-            [propertyKey]: data,
-        }).then((result) => {
-            // TODO - Handle error
-        }).catch(() => {
-            // TODO - Handle exception
-        });
-    };
+        return itemUniqueId;
+    });
 
-    const clear = () => {
-        // TODO - Improve + Batch updates
-        adapter.update(contextId, {
-            [propertyKey]: null,
-        }).then(() => {
-            // TODO - Handle error
-        }).catch(() => {
-            // TODO - Handle exception
-        });
-    };
+    const observerRef = useRef<ContextItemHandler | undefined>();
 
-    const registerTask: RegisterAiTask = (taskId, callback, parametersDescription) => {
-        let cancelled = false;
-        adapter.registerTask(contextId, taskId, parametersDescription).then((result) => {
-            if (result.success && !cancelled) {
-                registeredTaskCallbacks[taskId] = callback;
-            }
-        }).catch(() => {
-            // TODO - Handle exception
-        });
+    // IMPORTANT: Discard when component is unmounted
+    useEffect(() => {
+        observerRef.current = result.observeState(
+            itemId,
+            itemDescription,
+            itemValue,
+        );
 
-        return {
-            cancel: () => {
-                cancelled = true;
-                unregisterTask(taskId);
-            },
+        return () => {
+            observerRef.current?.discard();
+            observerRef.current = undefined;
         };
-    };
+    }, []);
 
-    const unregisterTask = (id: string) => {
-        adapter.unregisterTask(contextId, id).then(() => {
-            // TODO - Handle unregister
-            delete registeredTaskCallbacks[id];
-        }).catch(() => {
-            // TODO - Handle exception
-        });
-    };
+    useEffect(() => {
+        observerRef.current?.setDescription(itemDescription);
+    }, [itemDescription]);
 
-    return {
-        update,
-        clear,
-        registerTask,
-        unregisterTask,
-    };
+    useEffect(() => {
+        observerRef.current?.setData(itemValue);
+    }, [itemValue]);
 };

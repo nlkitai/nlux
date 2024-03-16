@@ -1,5 +1,6 @@
-import {useAiContext} from '@nlux-dev/react/src';
-import {useCallback, useEffect} from 'react';
+import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask.ts';
+import {useAiContext} from '@nlux/react';
+import {useCallback} from 'react';
 import {Exchange} from '../../../@types/Data.ts';
 import {MyAiContext} from '../../../context.tsx';
 
@@ -29,33 +30,22 @@ export const ExchangeFilter = (props: ExchangeFilterProps) => {
         setExchangesFilter(exchanges.map(({id}) => id));
     }, [availableExchanges, setExchangesFilter]);
 
-    const compAiContext = useAiContext(MyAiContext, 'appliedFilter-view');
-    useEffect(() => {
-        const {cancel} = compAiContext.registerTask(
-            'applyExchangeFilter',
-            toggleExchanges,
-            availableExchanges.map(
-                (exchange) => `a boolean, set to true to include exchange `
-                    + `[ ${exchange.label} (${exchange.id}) ] in the appliedFilters, `
-                    + `setFilter to false to exclude it`,
-            ),
-        );
+    useAiContext(
+        MyAiContext,
+        'Applied Filter View',
+        selectedExchanges,
+    );
 
-        return cancel;
-    }, [compAiContext, toggleExchanges, availableExchanges]);
-
-    useEffect(() => {
-        const {cancel} = compAiContext.registerTask(
-            'resetExchangeFilter',
-            () => toggleExchanges(...availableExchanges.map(() => false)),
-            [],
-        );
-
-        return () => {
-            cancel();
-        };
-    }, [toggleExchanges, compAiContext, availableExchanges]);
-
+    useAiTask(
+        MyAiContext,
+        'Apply Exchange Filter',
+        toggleExchanges,
+        availableExchanges.map(
+            (exchange) => `a boolean, set to true to include exchange `
+                + `[ ${exchange.label} (${exchange.id}) ] in the appliedFilters, `
+                + `setFilter to false to exclude it`,
+        ),
+    );
 
     const handleExchangeChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target;

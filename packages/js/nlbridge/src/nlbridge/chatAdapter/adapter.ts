@@ -1,5 +1,5 @@
 import {
-    AiTaskRunner,
+    AiContext as CoreAiContext,
     ChatAdapterExtras,
     DataTransferMode,
     StandardAdapterInfo,
@@ -13,22 +13,20 @@ export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
-    private readonly theContextIdToUse: string | undefined;
+    private readonly theAiContextToUse: CoreAiContext | undefined = undefined;
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
-    private readonly theTaskRunnerToUse: AiTaskRunner | undefined;
 
     constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
         this.theDataTransferModeToUse = options.dataTransferMode ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
         this.theEndpointUrlToUse = options.url;
-        this.theContextIdToUse = options.contextId;
-        this.theTaskRunnerToUse = options.taskRunner;
+        this.theAiContextToUse = options.context;
     }
 
-    get contextId(): string | undefined {
-        return this.theContextIdToUse;
+    get context(): CoreAiContext | undefined {
+        return this.theAiContextToUse;
     }
 
     get dataTransferMode(): DataTransferMode {
@@ -55,19 +53,26 @@ export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
         };
     }
 
-    get taskRunner(): AiTaskRunner | undefined {
-        return this.theTaskRunnerToUse;
-    }
-
-    async decode(payload: string): Promise<string | undefined> {
+    async decode(
+        payload: string,
+    ): Promise<string | undefined> {
         return undefined;
     }
 
-    async encode(message: string): Promise<string | undefined> {
+    async encode(
+        message: string,
+    ): Promise<string | undefined> {
         return undefined;
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras): Promise<string>;
+    abstract fetchText(
+        message: string,
+        extras: ChatAdapterExtras,
+    ): Promise<string>;
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void;
+    abstract streamText(
+        message: string,
+        observer: StreamingAdapterObserver,
+        extras: ChatAdapterExtras,
+    ): void;
 }

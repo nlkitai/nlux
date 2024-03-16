@@ -1,4 +1,4 @@
-import {AiTaskRunner, DataTransferMode} from '@nlux/core';
+import {AiContext as CoreAiContext, DataTransferMode} from '@nlux/core';
 
 export type ChatAdapterOptions = {
     /**
@@ -17,10 +17,5 @@ export type ChatAdapterOptions = {
      * The context ID to use when communicating with NLBridge.
      * Optional. If not provided, the adapter will not use a context.
      */
-    contextId?: string;
-
-    /**
-     * A task runner function that can be used to execute tasks returned by AI.
-     */
-    taskRunner?: AiTaskRunner;
+    context?: CoreAiContext;
 };

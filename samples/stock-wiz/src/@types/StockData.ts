@@ -1,4 +1,4 @@
-import {ExchangeId, MarketCapTypeId, SectorId} from './Data.ts';
+import {ExchangeId, MarketCapCategoryId, SectorId} from './Data.ts';
 
 export type StockData = {
     id: string;
@@ -11,7 +11,7 @@ export type StockData = {
     exchange: ExchangeId;
     sector: SectorId;
     marketCap: string;
-    marketCapType: MarketCapTypeId;
+    marketCapCategoryId: MarketCapCategoryId;
 
     price: number;
     oneDayChange: number;

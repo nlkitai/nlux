@@ -1,4 +1,4 @@
-// CHAT --------
+// CHAT _____________________
 
 import {AiChat} from './core/aiChat/aiChat';
 
@@ -33,10 +33,6 @@ export type {
 } from './types/aiChat/props';
 
 export type {
-    AiTaskRunner,
-} from './types/aiAssistant/taskRunner';
-
-export type {
     EventName,
     EventCallback,
     EventsMap,
@@ -52,7 +48,7 @@ export type {
 
 export type {
     StandardChatAdapter,
-} from './types/aiChat/standardChatAdapter';
+} from './types/adapters/chat/standardChatAdapter';
 
 export type {
     StandardAdapterInfo,
@@ -60,7 +56,7 @@ export type {
     AdapterDecodeFunction,
     InputFormat,
     OutputFormat,
-} from './types/aiChat/standardAdapterConfig';
+} from './types/adapters/chat/standardAdapterConfig';
 
 export type {
     AiChatProps,
@@ -68,14 +64,26 @@ export type {
 
 export type {
     ChatAdapter,
-    ChatAdapterExtras,
     StreamingAdapterObserver,
     DataTransferMode,
-} from './types/aiChat/chatAdapter';
+} from './types/adapters/chat/chatAdapter';
+
+export type {
+    ChatAdapterExtras,
+} from './types/adapters/chat/chaAdapterExtras';
 
 export type {
     ChatAdapterBuilder,
-} from './types/aiChat/chatAdapterBuilder';
+} from './types/adapters/chat/chatAdapterBuilder';
+
+export type {
+    AssistResult,
+    AssistAdapter,
+} from './types/adapters/assist/assistAdapter';
+
+export type {
+    AssistAdapterBuilder,
+} from './types/adapters/assist/assistAdapterBuilder';
 
 export type {
     StreamParser,
@@ -83,57 +91,71 @@ export type {
     StandardStreamParserOutput,
 } from './types/markdown/streamParser';
 
-// CONTEXT --------
+// CONTEXT __________________
 
 export type {
-    GetContextDataResult,
-    GetContextDataCallback,
-} from './types/aiContext/get';
-
-export type {
-    SetContextResult,
-    SetContextCallback,
-} from './types/aiContext/set';
-
-export type {
-    UpdateContextResult,
-    UpdateContextCallback,
-} from './types/aiContext/update';
-
-export type {
-    ClearContextResult,
-    ClearContextCallback,
-} from './types/aiContext/clear';
-
-export type {
-    ContextData,
+    ContextItemDataType,
+    ContextObject,
+    ContextItems,
+    ContextTasks,
+    ContextItem,
+    ContextTask,
 } from './types/aiContext/data';
 
 export type {
     ContextAdapter,
-} from './types/aiContext/contextAdapter';
+} from './types/adapters/context/contextAdapter';
+
+export type {
+    ContextAdapterExtras,
+} from './types/adapters/context/contextAdapterExtras';
+
+export type {
+    ContextTasksAdapter,
+} from './types/adapters/context/contextTasksAdapter';
+
+export type {
+    ContextDataAdapter,
+} from './types/adapters/context/contextDataAdapter';
 
 export type {
     ContextAdapterBuilder,
-} from './types/aiContext/builder';
-
-// ASSISTANT --------
+} from './types/adapters/context/contextAdapterBuilder';
 
 export type {
-    AssistResult,
-} from './types/aiAssistant/assist';
+    AiContext,
+    AiContextStatus,
+} from './types/aiContext/aiContext';
 
 export type {
-    RegisterTaskResult,
-    RegisterTaskCallback,
-} from './types/aiAssistant/registerTask';
+    ContextItemHandler,
+    ContextTaskHandler,
+    ContextDomElementHandler,
+} from './types/aiContext/contextObservers';
 
 export type {
-    UnregisterTaskResult,
-    UnregisterTaskCallback,
-} from './types/aiAssistant/unregisterTask';
+    InitializeContextResult,
+    DestroyContextResult,
+    FlushContextResult,
+    RunTaskResult,
+    ContextActionResult,
+    SetContextResult,
+} from './types/aiContext/contextResults';
 
-// HIGHLIGHTER --------
+export type {
+    DataSyncOptions,
+} from './core/aiContext/options/dataSyncOptions';
+
+export {
+    createAiContext,
+} from './core/aiContext/aiContext';
+
+export {
+    predefinedContextSize,
+} from './core/aiContext/options/dataSyncOptions';
+
+
+// HIGHLIGHTER ______________
 
 export type {
     Highlighter,
@@ -142,7 +164,7 @@ export type {
     CreateHighlighterOptions,
 } from './core/aiChat/highlighter/highlighter';
 
-// OTHERS --------
+// OTHER ____________________
 
 export type {
     ConversationItem,

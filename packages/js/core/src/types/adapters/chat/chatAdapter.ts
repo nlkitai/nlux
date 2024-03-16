@@ -1,5 +1,4 @@
-import {ConversationItem} from '../conversation';
-import {AiChatProps} from './props';
+import {ChatAdapterExtras} from './chaAdapterExtras';
 
 /**
  * This type is used to indicate the mode in which the adapter should request data from the API.
@@ -7,8 +6,12 @@ import {AiChatProps} from './props';
 export type DataTransferMode = 'stream' | 'fetch';
 
 /**
- * This interface exposes methods that should be implemented by any adapter to connect the AiChat component
- * to any API or AI backend.
+ * This interface exposes methods that should be implemented by any chat adapter to connect the AiChat component
+ * to any API or AI backend. Chat adapters can be used to request data from the API in fetch mode or stream mode.
+ *
+ * The difference between this and the `AssistAdapter` interface is that this adapter can only return a text response
+ * to be displayed to the user. It cannot return a task to be executed by the client. If you are using the `AiChat`
+ * component in co-pilot mode, you should use the `AssistAdapter` interface instead.
  */
 export interface ChatAdapter {
     /**
@@ -20,7 +23,10 @@ export interface ChatAdapter {
      * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    fetchText?: (message: string, extras: ChatAdapterExtras) => Promise<string>;
+    fetchText?: (
+        message: string,
+        extras: ChatAdapterExtras,
+    ) => Promise<string>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
@@ -30,7 +36,11 @@ export interface ChatAdapter {
      * @param {StreamingAdapterObserver} observer
      * @param {ChatAdapterExtras} extras
      */
-    streamText?: (message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras) => void;
+    streamText?: (
+        message: string,
+        observer: StreamingAdapterObserver,
+        extras: ChatAdapterExtras,
+    ) => void;
 }
 
 /**
@@ -48,34 +58,22 @@ export interface StreamingAdapterObserver {
     /**
      * This method should be called by the adapter when it has an error to send to the AiChat user interface.
      * This will result in the AiChat component displaying an error message to the user, resetting the
-     * conversation text input, removing the loading indicator, removing the sent message from the conversation.
+     * conversation text input, removing the loading indicator, removing the message sent from the conversation.
      *
-     * The error will be logged to the console but it will not be displayed to the user. A generic error message
+     * The error will be logged to the console, but it will not be displayed to the user. A generic error message
      * will be displayed to the user instead.
      *
      * @param {Error} error
      */
-    error(error: Error): void;
+    error(
+        error: Error,
+    ): void;
 
     /**
      * This method should be called by the adapter when it has new data to send to the AiChat user interface.
      * @param {string} message
      */
-    next(message: string): void;
-}
-
-/**
- * Additional data sent to the adapter when a message is sent.
- */
-export type ChatAdapterExtras = {
-    /**
-     * This attribute contains the properties used with the AiChat component.
-     */
-    aiChatProps: AiChatProps;
-
-    /**
-     * This attribute contains the conversation history.
-     * It's only included if the `conversationOptions.historyPayloadSize` is set to a positive number or 'all'.
-     */
-    conversationHistory?: Readonly<ConversationItem[]>;
+    next(
+        message: string,
+    ): void;
 }

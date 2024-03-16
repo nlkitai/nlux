@@ -5,7 +5,7 @@ import {ContextAdapterBuilder} from './builder';
 export class ContextAdapterBuilderImpl implements ContextAdapterBuilder {
     private endpointUrl: string | undefined = undefined;
 
-    create(): ContextAdapter {
+    build(): ContextAdapter {
         if (!this.endpointUrl) {
             throw new Error('Endpoint URL is required');
         }

@@ -1,13 +1,13 @@
 import {registerAllComponents} from '../../components/components';
-import {ChatAdapter} from '../../types/aiChat/chatAdapter';
-import {ChatAdapterBuilder} from '../../types/aiChat/chatAdapterBuilder';
+import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
+import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
+import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
+import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
-import {StandardChatAdapter} from '../../types/aiChat/standardChatAdapter';
 import {ConversationItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {debug} from '../../x/debug';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../error';
-import {IAiChat} from '../interface';
 import {NluxController} from './controller/controller';
 import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
@@ -205,7 +205,6 @@ export class AiChat implements IAiChat {
         }
 
         const anAdapterOrAdapterBuilder = adapter as any;
-
         if (typeof anAdapterOrAdapterBuilder.create === 'function') {
             this.theAdapterType = 'builder';
             this.theAdapterBuilder = anAdapterOrAdapterBuilder.create();
@@ -264,7 +263,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        this.theConversationOptions = conversationOptions;
+        this.theConversationOptions = {...conversationOptions};
         return this;
     }
 
@@ -283,7 +282,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        this.theInitialConversation = initialConversation;
+        this.theInitialConversation = [...initialConversation];
         return this;
     }
 
@@ -302,8 +301,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        this.theLayoutOptions = layoutOptions;
-
+        this.theLayoutOptions = {...layoutOptions};
         return this;
     }
 
@@ -322,7 +320,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        this.thePersonasOptions = personaOptions;
+        this.thePersonasOptions = {...personaOptions};
         return this;
     }
 
@@ -341,7 +339,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        this.thePromptBoxOptions = promptBoxOptions;
+        this.thePromptBoxOptions = {...promptBoxOptions};
         return this;
     }
 

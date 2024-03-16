@@ -14,7 +14,7 @@ export class NLBridgeStreamAdapter extends NLBridgeAbstractAdapter {
     }
 
     streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
-        fetch(this.endpointUrl, {
+        const submitPrompt = () => fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export class NLBridgeStreamAdapter extends NLBridgeAbstractAdapter {
                 action: 'chat-stream',
                 payload: {
                     message,
-                    contextId: this.contextId,
+                    contextId: this.context?.contextId,
                 },
             }),
         }).then(async (response) => {
@@ -58,5 +58,18 @@ export class NLBridgeStreamAdapter extends NLBridgeAbstractAdapter {
 
             observer.complete();
         });
+
+        if (this.context && this.context.contextId) {
+            this.context.flush().then(() => {
+                submitPrompt();
+            }).catch(() => {
+                // Submit prompt even when flushing fails
+                submitPrompt();
+            });
+
+            return;
+        }
+
+        submitPrompt();
     }
 }

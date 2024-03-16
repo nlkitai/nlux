@@ -4,7 +4,6 @@ export type {
     StandardChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-    AiTaskRunner,
 } from '@nlux/core';
 
 export {

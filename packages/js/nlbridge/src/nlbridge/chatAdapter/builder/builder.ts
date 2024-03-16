@@ -1,5 +1,5 @@
 import {
-    AiTaskRunner,
+    AiContext as CoreAiContext,
     ChatAdapterBuilder as CoreChatAdapterBuilder,
     DataTransferMode,
     StandardChatAdapter,
@@ -7,8 +7,7 @@ import {
 
 export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
     create(): StandardChatAdapter;
-    withContextId(contextId: string): ChatAdapterBuilder;
+    withContext(context: CoreAiContext): ChatAdapterBuilder;
     withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder;
-    withTaskRunner(taskRunner: AiTaskRunner): ChatAdapterBuilder;
     withUrl(endpointUrl: string): ChatAdapterBuilder;
 }

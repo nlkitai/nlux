@@ -8,7 +8,7 @@ export const applyFilter = (stockRows: StockRow[], filter: AppliedFilters): Stoc
             return false;
         }
 
-        if (filter.marketCaps?.length && !filter.marketCaps.includes(data.marketCapType)) {
+        if (filter.marketCaps?.length && !filter.marketCaps.includes(data.marketCapCategoryId)) {
             return false;
         }
 

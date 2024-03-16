@@ -1,11 +1,10 @@
-import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge';
+import {ChatAdapter, ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge';
 
-export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuilder => {
+export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapter => {
     const {
         url,
         dataTransferMode,
-        contextId,
-        taskRunner,
+        context,
     } = options || {};
 
     if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
@@ -22,13 +21,9 @@ export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterB
         newAdapter = newAdapter.withDataTransferMode(dataTransferMode);
     }
 
-    if (contextId) {
-        newAdapter = newAdapter.withContextId(contextId);
+    if (context) {
+        newAdapter = newAdapter.withContext(context);
     }
 
-    if (taskRunner) {
-        newAdapter = newAdapter.withTaskRunner(taskRunner);
-    }
-
-    return newAdapter;
+    return newAdapter.create();
 };

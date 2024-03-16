@@ -1,58 +1,38 @@
-import {AiTaskRunner, ChatAdapterBuilder} from '@nlux/nlbridge';
-import {AiContext, AiContextData} from '@nlux/react';
+import {ChatAdapter} from '@nlux/nlbridge';
+import {AiContext as ReactAiContext} from '@nlux/react';
 import {useContext, useEffect, useState} from 'react';
 import {getChatAdapterBuilder} from './getChatAdapterBuilder';
 
 export type ReactChatAdapterOptions = {
     url: string;
     dataTransferMode?: 'stream' | 'fetch';
-    context?: AiContext;
+    context?: ReactAiContext;
 };
 
-const getTaskRunner = (contextData?: AiContextData): AiTaskRunner | undefined => {
-    if (!contextData) {
-        return;
-    }
-
-    return (taskId: string, parameters: any[]) => {
-        const callback = contextData.registeredTaskCallbacks[taskId];
-        if (callback) {
-            return callback(...parameters);
-        }
-    };
-};
-
-export const useChatAdapter = (options: ReactChatAdapterOptions) => {
-    const {context, url, dataTransferMode} = options || {};
-    const contextData = context ? useContext(context.ref) : undefined;
-    const [isInitialized, setIsInitialized] = useState(false);
-    const [adapterBuilder, setAdapter] = useState<ChatAdapterBuilder>(
+export const useChatAdapter = (options: ReactChatAdapterOptions): ChatAdapter => {
+    const {context, url, dataTransferMode} = options;
+    const coreContext = context?.ref ? useContext(context.ref) : undefined;
+    const [adapter, setAdapter] = useState<ChatAdapter>(
         getChatAdapterBuilder({
-            ...options,
-            taskRunner: getTaskRunner(contextData),
+            url,
+            dataTransferMode,
+            context: coreContext,
         }),
     );
 
     useEffect(() => {
-        if (!isInitialized) {
-            setIsInitialized(true);
-            return;
-        }
-
-        let newAdapterBuilder = getChatAdapterBuilder({
+        let newAdapter = getChatAdapterBuilder({
             url,
             dataTransferMode,
-            contextId: contextData?.contextId,
-            taskRunner: getTaskRunner(contextData),
+            context: coreContext,
         });
 
-        setAdapter(newAdapterBuilder);
+        setAdapter(newAdapter);
     }, [
-        isInitialized,
-        contextData,
-        dataTransferMode,
         url,
+        dataTransferMode,
+        coreContext,
     ]);
 
-    return adapterBuilder;
+    return adapter;
 };

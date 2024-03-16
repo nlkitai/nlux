@@ -1,6 +1,7 @@
 import {Observable} from '../../../../core/bus/observable';
 import {ExceptionId} from '../../../../exceptions/exceptions';
-import {ChatAdapterExtras, DataTransferMode} from '../../../../types/aiChat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../types/adapters/chat/chaAdapterExtras';
+import {DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {warn} from '../../../../x/warn';
 import {CompConversation} from '../../conversation/conversation.model';

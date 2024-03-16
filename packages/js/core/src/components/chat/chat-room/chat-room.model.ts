@@ -3,7 +3,7 @@ import {comp} from '../../../core/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
 import {HistoryPayloadSize} from '../../../core/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
-import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/aiChat/standardChatAdapter';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationItem} from '../../../types/conversation';
 import {CompConversation} from '../conversation/conversation.model';
