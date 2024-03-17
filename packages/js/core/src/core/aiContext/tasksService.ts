@@ -236,7 +236,7 @@ export class TasksService {
         }
 
         try {
-            const result = callback(parameters);
+            const result = callback(...(parameters ?? []));
             return {
                 success: true,
                 result,

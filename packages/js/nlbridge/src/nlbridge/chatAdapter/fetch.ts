@@ -11,13 +11,14 @@ export class NLBridgeFetchAdapter extends NLBridgeAbstractAdapter {
             await this.context.flush();
         }
 
+        const action = this.usageMode === 'copilot' ? 'assist' : 'chat';
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                action: 'chat',
+                action,
                 payload: {
                     message,
                     contextId: this.context?.contextId,

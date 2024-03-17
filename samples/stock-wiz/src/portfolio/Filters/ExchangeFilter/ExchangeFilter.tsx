@@ -38,12 +38,12 @@ export const ExchangeFilter = (props: ExchangeFilterProps) => {
 
     useAiTask(
         MyAiContext,
-        'Apply Exchange Filter',
+        'Filter the stocks displayed in the page by exchange',
         toggleExchanges,
         availableExchanges.map(
-            (exchange) => `a boolean, set to true to include exchange `
-                + `[ ${exchange.label} (${exchange.id}) ] in the appliedFilters, `
-                + `setFilter to false to exclude it`,
+            (exchange) => `A boolean. Set it to true to include exchange `
+                + `"${exchange.label}" (${exchange.id}) ] in the filters applied. Set it to `
+                + `false to exclude "${exchange.label}" (${exchange.id}).`,
         ),
     );
 

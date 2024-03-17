@@ -5,17 +5,17 @@ import {getChatAdapterBuilder} from './getChatAdapterBuilder';
 
 export type ReactChatAdapterOptions = {
     url: string;
-    dataTransferMode?: 'stream' | 'fetch';
+    mode?: 'chat' | 'copilot';
     context?: ReactAiContext;
 };
 
 export const useChatAdapter = (options: ReactChatAdapterOptions): ChatAdapter => {
-    const {context, url, dataTransferMode} = options;
+    const {context, url, mode} = options;
     const coreContext = context?.ref ? useContext(context.ref) : undefined;
     const [adapter, setAdapter] = useState<ChatAdapter>(
         getChatAdapterBuilder({
             url,
-            dataTransferMode,
+            mode,
             context: coreContext,
         }),
     );
@@ -23,14 +23,13 @@ export const useChatAdapter = (options: ReactChatAdapterOptions): ChatAdapter =>
     useEffect(() => {
         let newAdapter = getChatAdapterBuilder({
             url,
-            dataTransferMode,
+            mode,
             context: coreContext,
         });
 
         setAdapter(newAdapter);
     }, [
         url,
-        dataTransferMode,
         coreContext,
     ]);
 

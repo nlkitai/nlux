@@ -7,7 +7,7 @@ import {
     StreamingAdapterObserver,
     uid,
 } from '@nlux/core';
-import {ChatAdapterOptions} from '../types/chatAdapterOptions';
+import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 
 export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
@@ -16,13 +16,15 @@ export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
     private readonly theAiContextToUse: CoreAiContext | undefined = undefined;
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
+    private readonly theUsageMode: ChatAdapterUsageMode | undefined = undefined;
 
-    constructor(options: ChatAdapterOptions) {
+    protected constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
-        this.theDataTransferModeToUse = options.dataTransferMode ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
+        this.theUsageMode = options.mode;
         this.theEndpointUrlToUse = options.url;
         this.theAiContextToUse = options.context;
+        this.theDataTransferModeToUse = options.mode === 'copilot' && options.context ? 'fetch' : 'stream';
     }
 
     get context(): CoreAiContext | undefined {
@@ -51,6 +53,10 @@ export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
                 speechToText: false,
             },
         };
+    }
+
+    get usageMode(): ChatAdapterUsageMode | undefined {
+        return this.theUsageMode;
     }
 
     abstract fetchText(

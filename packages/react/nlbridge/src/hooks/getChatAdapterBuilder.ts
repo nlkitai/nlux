@@ -3,11 +3,11 @@ import {ChatAdapter, ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge
 export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapter => {
     const {
         url,
-        dataTransferMode,
+        mode,
         context,
     } = options || {};
 
-    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
+    if (mode && mode !== 'copilot' && mode !== 'chat') {
         throw new Error(`Data transfer mode not supported`);
     }
 
@@ -17,8 +17,8 @@ export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapter 
 
     let newAdapter = createChatAdapter().withUrl(url);
 
-    if (dataTransferMode) {
-        newAdapter = newAdapter.withDataTransferMode(dataTransferMode);
+    if (mode) {
+        newAdapter = newAdapter.withMode(mode);
     }
 
     if (context) {

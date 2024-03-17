@@ -21,15 +21,8 @@ export const StockList = (props: StockListProps) => {
 
     useAiTask(
         MyAiContext,
-        'Select Stock',
-        updateRowSelection,
-        ['a string representing the ID of the stock to select. if no matching stock is found, set it to null'],
-    );
-
-    useAiTask(
-        MyAiContext,
-        'Select Stock',
-        updateRowSelection,
+        'Select a single stock from the list of stocks displays in the page',
+        (stockId: string) => updateRowSelection(stockId, true),
         ['a string representing the ID of the stock to select. if no matching stock is found, set it to null'],
     );
 

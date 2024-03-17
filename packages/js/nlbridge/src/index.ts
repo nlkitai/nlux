@@ -11,6 +11,7 @@ export {
 } from '@nlux/core';
 
 export type {
+    ChatAdapterUsageMode,
     ChatAdapterOptions,
 } from './nlbridge/types/chatAdapterOptions';
 

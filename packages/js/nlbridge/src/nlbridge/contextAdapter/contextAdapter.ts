@@ -172,6 +172,11 @@ export class NLBridgeContextAdapter implements ContextAdapter {
     }
 
     async updateTasks(contextId: string, tasks: Partial<ContextTasks>, extras: ContextAdapterExtras | undefined): Promise<ContextActionResult> {
-        throw new Error('Method not implemented.');
+        return this.sendAction(
+            contextId,
+            'update-context-tasks',
+            {tasks},
+            extras,
+        );
     }
 }

@@ -12,7 +12,7 @@ export const StockWiz = () => {
     const {state, actions} = usePortfolio(initialState);
     const nlBridgeChatAdapter = useChatAdapter({
         url: 'http://localhost:8899/',
-        dataTransferMode: 'fetch',
+        mode: 'copilot',
         context: MyAiContext,
     });
 

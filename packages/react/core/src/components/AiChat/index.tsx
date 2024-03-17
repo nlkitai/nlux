@@ -92,7 +92,6 @@ export const AiChat = (props: Readonly<AiChatComponentProps>) => {
 
     useEffect(() => {
         let isUseEffectCancelled = false;
-
         if (!currentProps) {
             setCurrentProps(props);
             return;

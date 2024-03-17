@@ -1,5 +1,5 @@
-import {AiContext as CoreAiContext, DataTransferMode, NluxUsageError, StandardChatAdapter} from '@nlux/core';
-import {ChatAdapterOptions} from '../../types/chatAdapterOptions';
+import {AiContext as CoreAiContext, NluxUsageError, StandardChatAdapter} from '@nlux/core';
+import {ChatAdapterOptions, ChatAdapterUsageMode} from '../../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from '../adapter';
 import {NLBridgeFetchAdapter} from '../fetch';
 import {NLBridgeStreamAdapter} from '../stream';
@@ -7,14 +7,13 @@ import {ChatAdapterBuilder} from './builder';
 
 export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
     private theContext?: CoreAiContext | undefined;
-    private theDataTransferMode?: DataTransferMode;
+    private theMode?: ChatAdapterUsageMode;
     private theUrl?: string;
 
     constructor(cloneFrom?: ChatAdapterBuilderImpl) {
         if (cloneFrom) {
-            this.theDataTransferMode = cloneFrom.theDataTransferMode;
             this.theUrl = cloneFrom.theUrl;
-            this.theContext = cloneFrom.theContext;
+            this.theMode = cloneFrom.theMode;
             this.theContext = cloneFrom.theContext;
         }
     }
@@ -30,11 +29,11 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
 
         const options: ChatAdapterOptions = {
             url: this.theUrl,
-            dataTransferMode: this.theDataTransferMode,
+            mode: this.theMode,
             context: this.theContext,
         };
 
-        const dataTransferModeToUse = options.dataTransferMode
+        const dataTransferModeToUse = options.mode
             ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
 
         if (dataTransferModeToUse === 'stream') {
@@ -56,15 +55,15 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilderImpl {
-        if (this.theDataTransferMode !== undefined) {
+    withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilderImpl {
+        if (this.theMode !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Cannot set the data loading mode more than once',
+                message: 'Cannot set the usage mode option more than once',
             });
         }
 
-        this.theDataTransferMode = mode;
+        this.theMode = mode;
         return this;
     }
 
