@@ -9,13 +9,44 @@ import {
 import React, {createContext, useEffect} from 'react';
 import {AiContext, AiContextProviderProps} from '../types/AiContext';
 
+/**
+ * Creates a new AI context with a React context provider that can be used to sync application state
+ * with the backend for AI processing.
+ *
+ * The input is a context adapter that handles the communication with the backend. nlux provides several
+ * context adapters out of the box, but developers can also create their own adapters by implementing the
+ * ContextAdapter interface.
+ *
+ * Usage:
+ *
+ * At the root level of the application, create the AI context and wrap the app with the context provider:
+ * ```tsx
+ * const MyAiContext = createAiContext(contextAdapter);
+ *
+ * const App = () => (
+ *   <MyAiContext.Provider>
+ *     <MyApp/>
+ *   </MyAiContext.Provider>
+ * );
+ * ```
+ *
+ * Then, in any component that needs to access the AI context, use the context reference:
+ *
+ * ```tsx
+ * useAiContext(MyAiContext, 'Description of the data', dataToSync);
+ * useAiTask(MyAiContext, 'Description of the task', callbackFunction, ['Description of the parameters']);
+ * ```
+ *
+ * @param {ContextAdapter | ContextAdapterBuilder} adapter
+ * @returns {AiContext}
+ */
 export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder): AiContext => {
 
-    // Unused because it's only used to initialize the React context
-    // but as soon as the React context is used (in the Provider component)
-    // another value is used.
-    const unusedAiContext = createCoreAiContext().withAdapter(adapter);
-    const reactContext = createContext<CoreAiContext>(unusedAiContext);
+    // The const name below starts with 'unused' because its only purpose is to create the adapter,
+    // As soon as the React context is rendered (via the context.Provider component return below),
+    // a new coreAiContext instance is created used with that adapter.
+    const unusedAiContext = createCoreAiContext();
+    const ReactContext = createContext<CoreAiContext>(unusedAiContext);
 
     return {
         // React component that provides the AI context to the children
@@ -24,8 +55,16 @@ export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder)
             //
             // Provider
             //
-            const [contextId, setContextId] = React.useState<string | undefined>();
-            const [contextInitError, setContextInitError] = React.useState<Error | undefined>();
+            const [
+                contextId,
+                setContextId,
+            ] = React.useState<string | undefined>();
+
+            const [
+                contextInitError,
+                setContextInitError,
+            ] = React.useState<Error | undefined>();
+
             const [
                 coreAiContext,
                 setCoreAiContext,
@@ -46,7 +85,7 @@ export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder)
                 setCoreAiContext(newContext);
 
                 newContext
-                    .initialize(props.initialContext || {})
+                    .initialize(props.initialItems || {})
                     .then((result: InitializeContextResult) => {
                         if (!usableContext) {
                             return;
@@ -68,6 +107,10 @@ export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder)
             const {children} = props;
 
             if (contextInitError) {
+                if (props.errorComponent) {
+                    return <props.errorComponent error={contextInitError.message}/>;
+                }
+
                 return (
                     <div>
                         <h1>Error initializing AI context</h1>
@@ -77,19 +120,19 @@ export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder)
             }
 
             if (!contextId || !coreAiContext) {
-                return (
-                    <div>
-                        <h1>Initializing AI context</h1>
-                    </div>
-                );
+                if (props.loadingComponent) {
+                    return <props.loadingComponent/>;
+                }
+
+                return null;
             }
 
             return (
-                <reactContext.Provider value={coreAiContext}>
+                <ReactContext.Provider value={coreAiContext}>
                     {children}
-                </reactContext.Provider>
+                </ReactContext.Provider>
             );
         },
-        ref: reactContext,
+        ref: ReactContext,
     };
 };

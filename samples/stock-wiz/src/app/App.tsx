@@ -4,11 +4,11 @@ import {MyAiContext} from '../context.tsx';
 import {StockWiz} from '../StockWiz.tsx';
 
 export const App = () => {
-    const initialData = useMemo(() =>
+    const initialContextItems = useMemo(() =>
             ({
                 'appName': {
                     value: 'Stock Wiz',
-                    description: 'The name of the application',
+                    description: 'The name of the application being used',
                 },
                 'appVersion': {
                     value: '0.1.0',
@@ -18,7 +18,7 @@ export const App = () => {
         , []);
 
     return (
-        <MyAiContext.Provider initialContext={initialData}>
+        <MyAiContext.Provider initialItems={initialContextItems}>
             <StockWiz/>
         </MyAiContext.Provider>
     );

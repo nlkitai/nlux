@@ -5,6 +5,25 @@ import {AiContext} from '../types/AiContext';
 export type UpdateContextItem = (itemValue: ContextItemDataType) => void;
 export type DiscardContextItem = () => void;
 
+/**
+ * Use this hook to sync parts of the component state with the AI context.
+ * It will create a new AI context item and will keep it in sync with the AI context.
+ * When the state item changes, the itemValue will should be kept up to date.
+ * When the component is unmounted, the context item will be discarded.
+ *
+ * @param {AiContext} aiContext The AI context instance to use, created with createAiContext()
+ * @param {string} itemDescription The description of the item. This will be used by LLMs to understand context
+ * @param {ContextItemDataType} itemValue The item value to be synced. Changing this value will update the AI context.
+ *
+ * Usage example:
+ *
+ * ```tsx
+ * const MyComponent = () => {
+ *    const [myStateItem, setMyStateItem] = useState('initial value');
+ *    useAiContext(MyAiContext, 'Detailed description of my state item', myStateItem);
+ *    return <div>...</div>;
+ * };
+ */
 export const useAiContext = (
     aiContext: AiContext,
     itemDescription: string,
