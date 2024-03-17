@@ -205,7 +205,7 @@ describe('AiContext observe state', () => {
 
     describe('on handler.discard()', () => {
         describe('on flush', () => {
-            it('when handler.discard() is called after set, only one call to adapter.remove() is made',
+            it('when handler.discard() is called after set, only one call to adapter.removeItems() is made',
                 async () => {
                     // Arrange
                     const aiContext = createAiContext();

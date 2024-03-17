@@ -18,7 +18,6 @@ describe('AI context item hook', () => {
         adapter.updateItems = updateItems;
 
         const aiContext = createAiContext(adapter);
-
         let coreContext: CoreAiContext | undefined = undefined;
         const GetCoreContextFromReactContext = (props: {state: number | string}) => {
             coreContext = useContext(aiContext.ref);
@@ -157,5 +156,55 @@ describe('AI context item hook', () => {
                 description: 'Test state description 2',
             },
         });
+    });
+
+    it('removes item when unmounted', async () => {
+        // Arrange
+        const adapter = createContextAdapterController()
+            .withContextId('contextId123')
+            .create();
+
+        const updateItems = vi.fn();
+        adapter.updateItems = updateItems;
+        adapter.removeItems = vi.fn();
+
+        const aiContext = createAiContext(adapter);
+        let coreContext: CoreAiContext | undefined = undefined;
+
+        const GetCoreContextFromReactContext = (props: {state: number | string}) => {
+            coreContext = useContext(aiContext.ref);
+            useAiContext(aiContext, 'Test state description', props.state);
+            return null;
+        };
+
+        // Act
+        const {rerender} = render(
+            <aiContext.Provider>
+                <GetCoreContextFromReactContext state={'STATE VALUE 1'}/>
+            </aiContext.Provider>,
+        );
+        await waitForRenderCycle();
+        await coreContext!.flush();
+
+        // First assert + Get item ID
+        const itemsUsedInCall1 = updateItems.mock.calls[0][1];
+        const itemIds = Object.keys(itemsUsedInCall1);
+        expect(itemIds).toHaveLength(1);
+        const itemId1 = itemIds[0];
+
+        // Act
+        rerender(
+            <aiContext.Provider>
+                No more components with AI context!
+            </aiContext.Provider>,
+        );
+        await waitForRenderCycle();
+        await coreContext!.flush();
+
+        // Second assert
+        expect(updateItems).toHaveBeenCalledOnce();
+        expect(adapter.removeItems).toHaveBeenCalledOnce();
+        expect(adapter.discard).not.toHaveBeenCalled();
+        expect(adapter.removeItems).toHaveBeenLastCalledWith('contextId123', [itemId1]);
     });
 });

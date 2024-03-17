@@ -62,9 +62,9 @@ export class TasksService {
         }
 
         const itemsInQueue = this.updateQueueByTaskId.keys();
-        const itemsToSet: string[] = [];
-        const itemsToUpdate: string[] = [];
-        const itemsToDelete: string[] = [];
+        const tasksToSet: string[] = [];
+        const tasksToUpdate: string[] = [];
+        const tasksToDelete: string[] = [];
 
         for (const itemId of itemsInQueue) {
             const item = this.updateQueueByTaskId.get(itemId);
@@ -73,30 +73,30 @@ export class TasksService {
             }
 
             if (item.operation === 'delete') {
-                itemsToDelete.push(itemId);
+                tasksToDelete.push(itemId);
                 continue;
             }
 
             if (item.operation === 'set') {
-                itemsToSet.push(itemId);
+                tasksToSet.push(itemId);
                 continue;
             }
 
             if (item.operation === 'update') {
-                itemsToUpdate.push(itemId);
+                tasksToUpdate.push(itemId);
                 continue;
             }
         }
 
-        if (itemsToSet.length === 0 && itemsToUpdate.length === 0 && itemsToDelete.length === 0) {
+        if (tasksToSet.length === 0 && tasksToUpdate.length === 0 && tasksToDelete.length === 0) {
             return;
         }
 
         // At least one item is in the queue, so we need to update the context.
         this.status = 'updating';
 
-        const itemsToSetByItemIdData = this.buildUpdateObject(itemsToSet);
-        const itemsToUpdateByItemIdData = this.buildUpdateObject(itemsToUpdate);
+        const itemsToSetByItemIdData = this.buildUpdateObject(tasksToSet);
+        const itemsToUpdateByItemIdData = this.buildUpdateObject(tasksToUpdate);
         const allItemsToUpdate = {
             ...itemsToSetByItemIdData,
             ...itemsToUpdateByItemIdData,
@@ -130,10 +130,10 @@ export class TasksService {
             }
         }
 
-        if (itemsToDelete.length > 0) {
+        if (tasksToDelete.length > 0) {
             try {
                 const unregisterTasksResult = await this.adapter.removeTasks(
-                    this.contextId, itemsToDelete,
+                    this.contextId, tasksToDelete,
                 );
 
                 if (!unregisterTasksResult.success) {
@@ -142,7 +142,7 @@ export class TasksService {
                         `Error: ${unregisterTasksResult.error}`,
                     );
                 } else {
-                    for (const taskId of itemsToDelete) {
+                    for (const taskId of tasksToDelete) {
                         this.taskCallbacks.delete(taskId);
                         this.updateQueueByTaskId.delete(taskId);
                     }

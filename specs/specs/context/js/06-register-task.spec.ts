@@ -314,4 +314,26 @@ describe('AiContext register task', () => {
             expect(adapter.resetTasks).not.toHaveBeenCalled();
         },
     );
+
+    it('should call adapter.removeTasks when task is removed', async () => {
+        // Arrange
+        const aiContext = createAiContext();
+        const adapterController = createContextAdapterController();
+        const adapter = adapterController.withContextId('context123').create();
+        adapter.removeTasks = vi.fn().mockResolvedValue({success: true});
+        await aiContext.withAdapter(adapter).initialize();
+        const taskId = 'task-id';
+        const description = 'Task description';
+        const callback = vi.fn();
+        const paramDescriptions = ['param1', 'param2'];
+        const taskHandler = aiContext.registerTask(taskId, description, callback, paramDescriptions);
+        await aiContext.flush();
+
+        // Act
+        taskHandler?.discard();
+        await aiContext.flush();
+
+        // Assert
+        expect(adapter.removeTasks).toHaveBeenCalledWith('context123', [taskId]);
+    });
 });
