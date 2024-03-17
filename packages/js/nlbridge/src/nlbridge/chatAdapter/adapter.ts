@@ -53,18 +53,6 @@ export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {
         };
     }
 
-    async decode(
-        payload: string,
-    ): Promise<string | undefined> {
-        return undefined;
-    }
-
-    async encode(
-        message: string,
-    ): Promise<string | undefined> {
-        return undefined;
-    }
-
     abstract fetchText(
         message: string,
         extras: ChatAdapterExtras,

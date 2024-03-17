@@ -2,7 +2,7 @@ import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from 
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {decode as streamDecode} from '../codec/stream/decode';
+import {decodeChunk} from '../../../utils/decodeChunk';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
@@ -70,7 +70,7 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
                     break;
                 }
 
-                const message = await streamDecode(value);
+                const message = await decodeChunk(value);
                 if (message !== undefined) {
                     observer.next(message);
                 } else {

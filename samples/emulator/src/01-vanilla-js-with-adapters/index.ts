@@ -2,7 +2,6 @@ import {AiChat, createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 import {createChatAdapter as createLangServeChatAdapter} from '@nlux/langchain';
 import {createUnsafeChatAdapter as createUnsafeOpenAiChatAdapter} from '@nlux/openai';
-import {nlBridgeCustomPromiseAdapter} from './nlBridgeCustomAdapter';
 import {personaOptions} from './personaOptions';
 
 debugger;
@@ -58,10 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aiChat = createAiChat()
         // .withAdapter(langServeAdapter)
-        // .withAdapter(openAiAdapter)
+        .withAdapter(openAiAdapter)
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
-        .withAdapter(nlBridgeCustomPromiseAdapter)
+        // .withAdapter(nlBridgeCustomPromiseAdapter)
         .withSyntaxHighlighter(highlighter)
         .withConversationOptions({
             historyPayloadSize: 3,

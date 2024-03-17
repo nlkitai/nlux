@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 
-export const decode = async (
+export const decodeChunk = async (
     payload: OpenAI.Chat.Completions.ChatCompletionChunk,
 ): Promise<string | undefined> => {
     if (!payload.choices || !payload.choices[0]) {

@@ -2,7 +2,7 @@ import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver, warn} from 
 import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {decode as fetchDecode} from '../codec/fetch/decode';
+import {decodePayload} from '../../../utils/decodePayload';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
@@ -54,7 +54,7 @@ export class OpenAiFetchAdapter extends OpenAiAbstractAdapter {
                 messages: messagesToSend,
             });
 
-            const result = await fetchDecode(response);
+            const result = await decodePayload(response);
             if (result === undefined) {
                 warn('Undecodable message received from OpenAI');
                 return '';

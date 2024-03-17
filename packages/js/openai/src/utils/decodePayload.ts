@@ -1,7 +1,7 @@
 import {AdapterDecodeFunction} from '@nlux/core';
 import OpenAI from 'openai';
 
-export const decode: AdapterDecodeFunction<
+export const decodePayload: AdapterDecodeFunction<
     OpenAI.Chat.Completions.ChatCompletion
 > = async (
     payload: OpenAI.Chat.Completions.ChatCompletion,
