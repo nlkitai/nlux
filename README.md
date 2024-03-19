@@ -120,9 +120,11 @@ cross platforms, with a focus on performance and usability.
 
 ## License 📃
 
-`nlux` is licensed under an extended license based on Mozilla Public License 2.0.<br />
-The extension consists of one extra paragraph (3.6) to prohibit the use of source code in the training of
-artificial intelligence models. The full license text is available in the [LICENSE](LICENSE) file.
+`nlux` is licensed under under Mozilla Public License Version 2.0 With AI Training Restriction.
+
+One extra paragraph (3.6) was added to original MPL 2.0 license to prohibit the use of source code
+in the training of artificial intelligence models. The full license text is available in the
+[LICENSE](LICENSE) file.
 
 Wondering what it means use software licensed under MPL 2.0?<br />
 Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
