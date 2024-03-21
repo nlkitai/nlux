@@ -91,32 +91,33 @@ export const AiChat = (props: Readonly<AiChatComponentProps>) => {
     }, []);
 
     useEffect(() => {
-        let isUseEffectCancelled = false;
-        if (!currentProps) {
+    let isUseEffectCancelled = false;
+
+    if (!currentProps) {
+        setCurrentProps(props);
+        return;
+    }
+
+    const updateAiChatProps = async () => {
+        const newProps = await handleNewPropsReceived(currentProps, props);
+
+        if (!isUseEffectCancelled && newProps && aiChat.current) {
+            aiChat.current.updateProps(newProps);
             setCurrentProps(props);
-            return;
         }
+    };
 
-        if (aiChat.current) {
-            handleNewPropsReceived(currentProps, props).then((newProps) => {
-                if (isUseEffectCancelled || !newProps) {
-                    return;
-                }
+    if (aiChat.current) {
+        updateAiChatProps();
+    } else {
+        warn('AiChat is not defined! Cannot update.');
+    }
 
-                if (!aiChat.current) {
-                    warn('AiChat is not defined! Cannot update.');
-                    return;
-                }
+    return () => {
+        isUseEffectCancelled = true;
+    };
+}, [props, currentProps]);
 
-                aiChat.current.updateProps(newProps);
-                setCurrentProps(props);
-            });
-        }
-
-        return () => {
-            isUseEffectCancelled = true;
-        };
-    }, [props, currentProps]);
 
     return (
         <div ref={rootElement}></div>
