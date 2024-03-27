@@ -216,15 +216,14 @@ indemnity or liability terms You offer. You may include additional
 disclaimers of warranty and limitations of liability specific to any
 jurisdiction.
 
-3.6. Prohibition for Use in AI Software
+3.6. Prohibition for Use as AI Training Dataset
 
-The Covered Software and any modifications made to it may not be used
-for the purpose of training or improving machine learning algorithms,
-including but not limited to artificial intelligence, natural language
-processing, or data mining. This condition applies to any derivatives,
-modifications, or updates based on the Covered Software code. Any usage
-of the Covered Software in an AI-training dataset is considered a breach
-of this License.
+The Covered Software, any portion of the Covered Software, or any modified
+version of the Covered Software may not be used, in whole or in part, as
+a training dataset when developing, training, fine-tuning, improving, or
+testing artificial intelligence (AI) models, including, but not limited to,
+machine learning, deep learning, neural networks, or reinforcement learning
+algorithms, or systems.
 
 4. Inability to Comply Due to Statute or Regulation
 ---------------------------------------------------

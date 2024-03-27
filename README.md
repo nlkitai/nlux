@@ -120,13 +120,20 @@ cross platforms, with a focus on performance and usability.
 
 ## License 📃
 
-`nlux` is licensed under under Mozilla Public License Version 2.0 With AI Training Restriction.
+`nlux` is licensed under Mozilla Public License Version 2.0 with restriction to use as a
+training dataset to develop or improve AI models.
 
-One extra paragraph (3.6) was added to original MPL 2.0 license to prohibit the use of source code
-in the training of artificial intelligence models. The full license text is available in the
-[LICENSE](LICENSE) file.
+> Paragraph (3.6) was added to the original MPL 2.0 license.  
+> The full license text can be found in the [LICENSE](LICENSE) file.
 
-Wondering what it means use software licensed under MPL 2.0?<br />
+**In a nutshell:**
+
+* You can use `nlux` in your personal projects.
+* You can use `nlux` in commercial projects.
+* You can modify `nlux` and publish your changes under the same license.
+* You can't feed `nlux`'s source code as part of a dataset to train AI models.
+
+Wondering what it means to use software licensed under MPL 2.0?<br />
 Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
 
 ## About The Developer 👨‍💻
