@@ -19,10 +19,7 @@ export class LangServeStreamAdapter extends LangServeAbstractAdapter {
         const body = this.getRequestBody(message, extras.conversationHistory);
         fetch(this.endpointUrl, {
             method: 'POST',
-            headers: {
-                ...extras.headers,
-                'Content-Type': 'application/json'
-            },
+            headers: {'Content-Type': 'application/json'},
             body,
         })
             .then(async (response) => {
