@@ -70,7 +70,7 @@ export type {
 
 export type {
     ChatAdapterExtras,
-} from './types/adapters/chat/chaAdapterExtras';
+} from './types/adapters/chat/chatAdapterExtras';
 
 export type {
     ChatAdapterBuilder,
