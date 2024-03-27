@@ -1,4 +1,4 @@
-import {ChatAdapterExtras} from './chaAdapterExtras';
+import {ChatAdapterExtras} from './chatAdapterExtras';
 
 /**
  * This type is used to indicate the mode in which the adapter should request data from the API.

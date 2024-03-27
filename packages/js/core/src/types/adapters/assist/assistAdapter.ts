@@ -1,4 +1,4 @@
-import {ChatAdapterExtras} from '../chat/chaAdapterExtras';
+import {ChatAdapterExtras} from '../chat/chatAdapterExtras';
 
 /**
  * This type represents the result of an assist request.
