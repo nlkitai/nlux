@@ -1,4 +1,5 @@
 import {DataTransferMode} from '@nlux/core';
+import {LangServeHeaders} from './langServe';
 import {LangServeInputPreProcessor} from './inputPreProcessor';
 import {LangServeOutputPreProcessor} from './outputPreProcessor';
 
@@ -26,6 +27,11 @@ export type ChatAdapterOptions = {
      * should match the action (either `fetch` mode for `/invoke` or `stream` mode for `/stream`).
      */
     dataTransferMode?: DataTransferMode;
+
+    /**
+     * This contains the headers that implementers can use to send additional data such as authentication headers.
+     */
+        headers?: LangServeHeaders;
 
     /**
      * A function to preprocess the user input before sending it to the LangServe runnable.

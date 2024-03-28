@@ -3,6 +3,7 @@ import {LangServeAbstractAdapter} from '../adapter/adapter';
 import {LangServeFetchAdapter} from '../adapter/fetch';
 import {LangServeStreamAdapter} from '../adapter/stream';
 import {ChatAdapterOptions} from '../types/adapterOptions';
+import {LangServeHeaders} from '../types/langServe';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
@@ -10,6 +11,7 @@ import {ChatAdapterBuilder} from './builder';
 
 export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
     private theDataTransferMode?: DataTransferMode;
+    private theHeaders?: LangServeHeaders;
     private theInputPreProcessor?: LangServeInputPreProcessor;
     private theOutputPreProcessor?: LangServeOutputPreProcessor;
     private theUrl?: string;
@@ -18,6 +20,7 @@ export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
     constructor(cloneFrom?: LangServeAdapterBuilderImpl) {
         if (cloneFrom) {
             this.theDataTransferMode = cloneFrom.theDataTransferMode;
+            this.theHeaders = cloneFrom.theHeaders;
             this.theInputPreProcessor = cloneFrom.theInputPreProcessor;
             this.theOutputPreProcessor = cloneFrom.theOutputPreProcessor;
             this.theUrl = cloneFrom.theUrl;
@@ -36,6 +39,7 @@ export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
         const options: ChatAdapterOptions = {
             url: this.theUrl,
             dataTransferMode: this.theDataTransferMode,
+            headers: this.theHeaders,
             inputPreProcessor: this.theInputPreProcessor,
             outputPreProcessor: this.theOutputPreProcessor,
             useInputSchema: this.theUseInputSchema,
@@ -58,6 +62,18 @@ export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
         }
 
         this.theDataTransferMode = mode;
+        return this;
+    }
+    
+    withHeaders(headers: LangServeHeaders): ChatAdapterBuilder {
+        if (this.theHeaders !== undefined) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Cannot set the headers option more than once',
+            });
+        }
+
+        this.theHeaders = headers;
         return this;
     }
 

@@ -6,6 +6,7 @@ export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuild
     const {
         url,
         dataTransferMode,
+        headers,
         inputPreProcessor,
         outputPreProcessor,
         useInputSchema,
@@ -23,6 +24,10 @@ export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuild
 
     if (dataTransferMode) {
         newAdapter = newAdapter.withDataTransferMode(dataTransferMode);
+    }
+
+    if (headers) {
+        headers = newAdapter.withHeaders(headers);
     }
 
     if (inputPreProcessor) {
