@@ -9,6 +9,7 @@ import {
     warn,
 } from '@nlux/core';
 import {ChatAdapterOptions} from '../types/adapterOptions';
+import {LangServeHeaders} from '../types/langServe';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
@@ -16,6 +17,7 @@ import {getEndpointUrlToUse} from '../utils/getEndpointUrlToUse';
 import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
+import { getHeadersToUse } from '../utils/getHeadersToUse';
 
 export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';
@@ -25,6 +27,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
 
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
+    private readonly theHeadersToUse: LangServeHeaders;
     private theInputSchemaToUse: object | undefined;
     private readonly theInputSchemaUrlToUse: string;
     private readonly theRunnableNameToUse: string;
@@ -35,6 +38,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
         this.__options = {...options};
 
         this.theDataTransferModeToUse = getDataTransferModeToUse(options);
+        this.theHeadersToUse = getHeadersToUse(options);
         this.theUseInputSchemaOptionToUse = (typeof options.useInputSchema === 'boolean')
             ? options.useInputSchema
             : true;
@@ -52,6 +56,10 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
 
     get endpointUrl(): string {
         return this.theEndpointUrlToUse;
+    }
+
+    get headers(): LangServeHeaders {
+        return this.theHeadersToUse;
     }
 
     get id(): string {

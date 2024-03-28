@@ -31,7 +31,7 @@ export type ChatAdapterOptions = {
     /**
      * This contains the headers that implementers can use to send additional data such as authentication headers.
      */
-        headers?: LangServeHeaders;
+    headers?: LangServeHeaders;
 
     /**
      * A function to preprocess the user input before sending it to the LangServe runnable.
