@@ -11,6 +11,7 @@ export const useChatAdapter = (options: ChatAdapterOptions) => {
     const {
         url,
         dataTransferMode,
+        headers,
         inputPreProcessor,
         outputPreProcessor,
         useInputSchema,
@@ -28,6 +29,7 @@ export const useChatAdapter = (options: ChatAdapterOptions) => {
         isInitialized,
         url,
         dataTransferMode,
+        headers,
         inputPreProcessor,
         outputPreProcessor,
         useInputSchema,

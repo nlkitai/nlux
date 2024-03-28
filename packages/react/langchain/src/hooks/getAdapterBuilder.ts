@@ -27,7 +27,7 @@ export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuild
     }
 
     if (headers) {
-        headers = newAdapter.withHeaders(headers);
+        newAdapter = newAdapter.withHeaders(headers);
     }
 
     if (inputPreProcessor) {
