@@ -1,5 +1,6 @@
+import {useDeepCompareEffect} from '@nlux/react';
 import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/langchain';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 
 export const useChatAdapter = (options: ChatAdapterOptions) => {
@@ -17,7 +18,7 @@ export const useChatAdapter = (options: ChatAdapterOptions) => {
         useInputSchema,
     } = options || {};
 
-    useEffect(() => {
+    useDeepCompareEffect(() => {
         if (!isInitialized) {
             setIsInitialized(true);
             return;

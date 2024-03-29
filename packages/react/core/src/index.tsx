@@ -1,3 +1,5 @@
+import useDeepCompareEffectHook from './hooks/useDeepCompareEffect';
+
 export type {
     ChatAdapter,
     ChatAdapterBuilder,
@@ -64,3 +66,5 @@ export type {
 export {
     createAiContext,
 } from './providers/createAiContext';
+
+export const useDeepCompareEffect = useDeepCompareEffectHook;
