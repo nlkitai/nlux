@@ -5,15 +5,15 @@
 // * License: MIT
 //
 
-import * as React from 'react';
+import {useEffect, useMemo, useRef} from 'react';
 import {dequal as deepEqual} from '../dequal';
 
-type UseEffectParams = Parameters<typeof React.useEffect>
+type UseEffectParams = Parameters<typeof useEffect>
 type EffectCallback = UseEffectParams[0]
 type DependencyList = UseEffectParams[1]
 // yes, I know it's void, but I like what this communicates about
 // the intent of these functions: It's just like useEffect
-type UseEffectReturn = ReturnType<typeof React.useEffect>
+type UseEffectReturn = ReturnType<typeof useEffect>
 
 function checkDeps(deps: DependencyList) {
     if (!deps || !deps.length) {
@@ -37,8 +37,8 @@ function isPrimitive(val: unknown) {
  * @returns a memoized version of the value as long as it remains deeply equal
  */
 export function useDeepCompareMemoize<T>(value: T) {
-    const ref = React.useRef<T>(value)
-    const signalRef = React.useRef<number>(0)
+    const ref = useRef<T>(value)
+    const signalRef = useRef<number>(0)
 
     if (!deepEqual(value, ref.current)) {
         ref.current = value
@@ -46,7 +46,7 @@ export function useDeepCompareMemoize<T>(value: T) {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return React.useMemo(() => ref.current, [signalRef.current])
+    return useMemo(() => ref.current, [signalRef.current])
 }
 
 function useDeepCompareEffect(
@@ -57,7 +57,7 @@ function useDeepCompareEffect(
         checkDeps(dependencies)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return React.useEffect(callback, useDeepCompareMemoize(dependencies))
+    return useEffect(callback, useDeepCompareMemoize(dependencies))
 }
 
 export function useDeepCompareEffectNoCheck(
@@ -65,7 +65,7 @@ export function useDeepCompareEffectNoCheck(
     dependencies: DependencyList,
 ): UseEffectReturn {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return React.useEffect(callback, useDeepCompareMemoize(dependencies))
+    return useEffect(callback, useDeepCompareMemoize(dependencies))
 }
 
 export default useDeepCompareEffect;
