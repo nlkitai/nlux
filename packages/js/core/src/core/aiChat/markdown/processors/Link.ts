@@ -1,6 +1,7 @@
 import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
+import {MarkdownProcessorOptions} from './baseProcessor';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
 export class LinkProcessor extends ProcessorWithChildren {
@@ -10,13 +11,14 @@ export class LinkProcessor extends ProcessorWithChildren {
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
         initialContent?: string,
+        options: MarkdownProcessorOptions = {},
     ) {
         super(
             parent,
             'Link',
             openingSequence ?? null,
             initialContent ?? null,
-            null,
+            options,
         );
     }
 
@@ -50,6 +52,10 @@ export class LinkProcessor extends ProcessorWithChildren {
 
         if (match && match.length >= 3 && match[2]) {
             link.href = match[2];
+        }
+
+        if(this.markdownProcessorOptions.linksOpenInNewWindow) {
+            link.target = "_blank";
         }
 
         return link;

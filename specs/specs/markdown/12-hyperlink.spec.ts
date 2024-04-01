@@ -19,6 +19,16 @@ describe('Asterisk Italic Markdowns Parser', () => {
         expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi World</a></p>');
     });
 
+    it('should render a link to a new window', async () => {
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true, linksOpenInNewWindow: true});
+
+        streamRenderer.next('[Hi New Window](http://world.com)');
+        streamRenderer.complete!();
+        await waitForMdStreamToComplete();
+
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi New Window</a></p>');
+    });
+
     it('should not render an empty link', async () => {
         streamRenderer.next('[]()');
         streamRenderer.complete!();
