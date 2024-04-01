@@ -6,6 +6,7 @@ import {SequenceParser} from '../sequenceParser';
 export type MarkdownProcessorOptions = {
     syntaxHighlighter?: HighlighterExtension;
     skipCopyToClipboardButton?: boolean;
+    linksOpenInNewWindow?: boolean;
 };
 
 export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterface {

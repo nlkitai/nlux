@@ -52,6 +52,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newLink.init();

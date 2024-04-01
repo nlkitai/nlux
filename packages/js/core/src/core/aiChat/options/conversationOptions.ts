@@ -15,6 +15,13 @@ export interface ConversationOptions {
     historyPayloadSize?: HistoryPayloadSize;
 
     /**
+     * Indicates whether rendered links should open in a new window.
+     *
+     * @default false
+     */
+    linksOpenInNewWindow?: boolean;
+
+    /**
      * Indicates whether the conversation should be scrolled to the bottom when a new message is added.
      *
      * @default true

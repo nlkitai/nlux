@@ -14,6 +14,7 @@ export type StandardStreamParser = (
     root: HTMLElement,
     syntaxHighlighter?: HighlighterExtension,
     options?: {
+        linksOpenInNewWindow?: boolean;
         skipAnimation?: boolean;
         streamingAnimationSpeed?: number;
         skipCopyToClipboardButton?: boolean;
