@@ -58,7 +58,7 @@ export class LinkProcessor extends ProcessorWithChildren {
 
         debug(`create link ${link.href}, ${link.target}`, this.markdownProcessorOptions)
 
-        if(this.markdownProcessorOptions.linksOpenInNewWindow) {
+        if(this.markdownProcessorOptions.openLinksInNewWindow) {
             link.target = "_blank";
         }
 
