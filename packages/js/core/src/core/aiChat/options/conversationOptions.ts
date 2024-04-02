@@ -19,7 +19,7 @@ export interface ConversationOptions {
      *
      * @default false
      */
-    linksOpenInNewWindow?: boolean;
+    openLinksInNewWindow?: boolean;
 
     /**
      * Indicates whether the conversation should be scrolled to the bottom when a new message is added.

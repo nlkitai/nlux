@@ -6,7 +6,7 @@ export type MarkdownStreamParser = {
 };
 
 export type MarkdownStreamParserOptions = {
-    linksOpenInNewWindow?: boolean;
+    openLinksInNewWindow?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     skipAnimation?: boolean;
     streamingAnimationSpeed?: number;
@@ -21,7 +21,7 @@ export const createMarkdownStreamParser = (
         domElement,
         options?.syntaxHighlighter,
         {
-            linksOpenInNewWindow: options?.linksOpenInNewWindow || false,  
+            openLinksInNewWindow: options?.openLinksInNewWindow || false,  
             skipAnimation: options?.skipAnimation,
             streamingAnimationSpeed: options?.streamingAnimationSpeed,
             skipCopyToClipboardButton: true,

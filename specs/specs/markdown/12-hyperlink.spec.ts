@@ -20,7 +20,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render a link to a new window', async () => {
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true, linksOpenInNewWindow: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true, openLinksInNewWindow: true});
 
         streamRenderer.next('[Hi New Window](http://world.com)');
         streamRenderer.complete!();
