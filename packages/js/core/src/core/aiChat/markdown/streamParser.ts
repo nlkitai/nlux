@@ -14,6 +14,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
         streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
         skipAnimation = false,
         skipCopyToClipboardButton = false,
+        openLinksInNewWindow = false,
     } = options || {};
     const rootMarkdownProcessor = new RootProcessor(
         root,
@@ -21,6 +22,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
         {
             syntaxHighlighter,
             skipCopyToClipboardButton,
+            openLinksInNewWindow,
         },
     );
 
