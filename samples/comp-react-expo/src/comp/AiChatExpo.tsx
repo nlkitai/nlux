@@ -4,9 +4,34 @@ import {AiChatComponentProps} from '@nlux-dev/react/src/exp/props.tsx';
 import {ConversationItem} from '@nlux/core';
 import '@nlux-dev/themes/src/naked/components/AiChat.css';
 import {useChatAdapter} from '@nlux/langchain-react';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 
 type MsgTp = {txt: string, color: string, bg: string};
+
+const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
+const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
+
+const CustomMessageComponent = (message: MsgTp) => {
+    const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
+    const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
+
+    if (typeof message === 'object' && message?.txt !== undefined) {
+        return (
+            <div style={{color: message.color, backgroundColor: message.bg}}>
+                {message.txt}
+            </div>
+        );
+    }
+
+    return (
+        <div style={{
+            color,
+            backgroundColor: bg,
+        }}>
+            {`${message}`}
+        </div>
+    );
+};
 
 export const AiChatExpo = () => {
     const langServeAdapter = useChatAdapter({
@@ -63,26 +88,7 @@ export const AiChatExpo = () => {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation: initialConversationCustomMessages,
-        customMessageComponent: (message: MsgTp) => {
-            if (typeof message === 'object' && message?.txt !== undefined) {
-                return (
-                    <div style={{color: message.color, backgroundColor: message.bg}}>
-                        {message.txt}
-                    </div>
-                );
-            }
-
-            const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
-            const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
-            return (
-                <div style={{
-                    color: possibleColors[Math.floor(Math.random() * possibleColors.length)],
-                    backgroundColor: possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)],
-                }}>
-                    {`${message}`}
-                </div>
-            );
-        },
+        customMessageComponent: CustomMessageComponent,
     };
 
     const defaultProps: AiChatComponentProps = {

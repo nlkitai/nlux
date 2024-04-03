@@ -20,7 +20,6 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
                 placeholder={props.placeholder ?? ''}
                 value={props.prompt ?? ''}
                 onChange={(e) => props.onChange?.(e.target.value)}
-                onFocus={() => props.onFocus?.()}
             />
             <button
                 disabled={disableButton}
