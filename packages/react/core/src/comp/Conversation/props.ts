@@ -1,4 +1,4 @@
-import {ConversationItem, ConversationOptions, HighlighterExtension, ParticipantRole} from '@nlux/core';
+import {ConversationOptions, HighlighterExtension, ParticipantRole} from '@nlux/core';
 import {ReactNode} from 'react';
 import {PersonaOptions} from '../../exp/personaOptions';
 
@@ -22,4 +22,9 @@ export type ConversationCompProps<MessageType> = {
     personaOptions?: PersonaOptions;
     customAiMessageComponent?: (message: MessageType) => ReactNode;
     syntaxHighlighter?: HighlighterExtension;
+};
+
+export type ImperativeConversationCompProps = {
+    scrollToBottom: () => void;
+    streamChunk: (messageId: string, chunk: string) => void;
 };

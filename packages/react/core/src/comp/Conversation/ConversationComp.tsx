@@ -1,8 +1,8 @@
 import {MessageDirection, ParticipantRole} from '@nlux/core';
-import React, {ReactElement} from 'react';
+import React, {ReactNode, useImperativeHandle} from 'react';
 import {ConversationItemComp} from '../ConversationItem/ConversationItemComp';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
-import {ConversationCompProps} from './props';
+import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
 const roleToDirection = (role: ParticipantRole): MessageDirection => {
     switch (role) {
@@ -38,15 +38,29 @@ const nameFromMessageAndPersona = (role: ParticipantRole, personaOptions: Conver
 
 };
 
-export const ConversationComp: <MessageType>(
+export type ConversationCompType = <MessageType>(
     props: ConversationCompProps<MessageType>,
-) => ReactElement = (
+    ref: React.Ref<ImperativeConversationCompProps>,
+) => ReactNode;
+
+export const ConversationComp: ConversationCompType = (
     props,
+    ref,
 ) => {
     const {messages, personaOptions} = props;
     const hasMessages = messages && messages.length > 0;
     const hasAiPersona = personaOptions?.bot?.name && personaOptions.bot.picture;
     const showWelcomeMessage = hasAiPersona && !hasMessages;
+
+    useImperativeHandle(ref, () => ({
+        scrollToBottom: () => {
+            // TODO - Implement scroll to bottom
+        },
+        streamChunk: (messageId: string, chunk: string) => {
+            console.log('streamChunk', messageId, chunk);
+            // TODO - Implement stream chunk
+        },
+    }), []);
 
     return (
         <>

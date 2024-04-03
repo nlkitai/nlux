@@ -1,9 +1,9 @@
 import {conversationPartsToMessages} from '@nlux-dev/core/src/utils/chat/conversationPartsToMessages';
 import {reactPropsToCoreProps} from '@nlux-dev/core/src/utils/chat/reactPropsToCoreProps';
 import {ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
-import React, {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
-import {ConversationMessage} from '../comp/Conversation/props';
+import {ConversationMessage, ImperativeConversationCompProps} from '../comp/Conversation/props';
 import {useInitialMessagesOnce} from '../comp/Conversation/utils/useInitialMessagesOnce';
 import {PromptBoxComp} from '../comp/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
@@ -18,6 +18,7 @@ export const AiChat: <MessageType>(
 ) => {
     type MessageType = typeof t;
     const className = `nlux_root` + (props.className ? ` ${props.className}` : '');
+    const conversationRef = useRef<ImperativeConversationCompProps>(null);
 
     const initialMessages = useInitialMessagesOnce<MessageType>(props.initialConversation);
     const [messages, setMessages] = React.useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
@@ -47,7 +48,7 @@ export const AiChat: <MessageType>(
             prompt,
             adapterToUse,
             adapterExtras,
-            'fetch', // TODO - Handle streaming mode
+            'stream',
         );
 
         if (conversationPart.status === 'error') {
@@ -77,6 +78,10 @@ export const AiChat: <MessageType>(
             setPartsRef.current.setParts(newParts);
         });
 
+        conversationPart.on('chunk', (messageId: string, chunk: string) => {
+            conversationRef.current?.streamChunk(messageId, chunk);
+        });
+
         setParts([...parts, conversationPart]);
         setPrompt('');
 
@@ -93,9 +98,14 @@ export const AiChat: <MessageType>(
         ]);
     }, [initialMessages, parts]);
 
+    const ForwardConversationComp = forwardRef(
+        ConversationComp<MessageType>,
+    );
+
     return (
         <div className={className}>
-            <ConversationComp
+            <ForwardConversationComp
+                ref={conversationRef}
                 messages={messages}
                 conversationOptions={props.conversationOptions}
                 personaOptions={props.personaOptions}
