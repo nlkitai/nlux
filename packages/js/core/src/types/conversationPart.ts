@@ -95,15 +95,15 @@ export type ConversationPart<MessageType> = {
  * control the conversation part lifecycle.
  */
 export interface ConversationPartHandler<ResponseType> {
+    addAiMessage: (
+        status: MessageStatus,
+        dataTransferMode: DataTransferMode,
+        content?: ResponseType,
+    ) => string,
     addUserMessage: (
         status: MessageStatus,
         content?: string,
     ) => string;
-    addAiMessage: (
-        status: MessageStatus,
-        dataTransferMode: DataTransferMode,
-        content?: ResponseType
-    ) => string,
     updateMessage: (
         id: string,
         status: MessageStatus,

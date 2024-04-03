@@ -1,21 +1,24 @@
-import {className, personaNameClassName} from '@nlux-dev/core/src/comp/WelcomeMessage/create';
-import {welcomeMessageTextClassName} from '@nlux-dev/core/src/comp/WelcomeMessage/utils/updateWelcomeMessageText';
+import {
+    compWelcomeMessageClassName,
+    compWelcomeMessagePersonaNameClassName,
+    compWelcomeMessageTextClassName,
+} from '@nlux/core';
 import React from 'react';
 import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
 import {WelcomeMessageProps} from './props';
 
 export const WelcomeMessageComp = (props: WelcomeMessageProps) => {
     return (
-        <div className={className}>
+        <div className={compWelcomeMessageClassName}>
             <ChatPictureComp
                 picture={props.picture}
                 name={props.name}
             />
-            <div className={personaNameClassName}>
+            <div className={compWelcomeMessagePersonaNameClassName}>
                 {props.name}
             </div>
             {props.message && (
-                <div className={welcomeMessageTextClassName}>{props.message}</div>
+                <div className={compWelcomeMessageTextClassName}>{props.message}</div>
             )}
         </div>
     );

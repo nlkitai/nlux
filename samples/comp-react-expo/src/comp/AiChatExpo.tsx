@@ -11,7 +11,7 @@ type MsgTp = {txt: string, color: string, bg: string};
 export const AiChatExpo = () => {
     const langServeAdapter = useChatAdapter({
         url: 'https://pynlux.api.nlux.ai/pirate-speak',
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'stream',
     });
 
     const [rendererType, setRendererType] = useState<
@@ -63,7 +63,26 @@ export const AiChatExpo = () => {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation: initialConversationCustomMessages,
-        customMessageComponent: (message: MsgTp) => (<div style={{color: message?.color}}>{message?.txt}</div>),
+        customMessageComponent: (message: MsgTp) => {
+            if (typeof message === 'object' && message?.txt !== undefined) {
+                return (
+                    <div style={{color: message.color, backgroundColor: message.bg}}>
+                        {message.txt}
+                    </div>
+                );
+            }
+
+            const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
+            const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
+            return (
+                <div style={{
+                    color: possibleColors[Math.floor(Math.random() * possibleColors.length)],
+                    backgroundColor: possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)],
+                }}>
+                    {`${message}`}
+                </div>
+            );
+        },
     };
 
     const defaultProps: AiChatComponentProps = {

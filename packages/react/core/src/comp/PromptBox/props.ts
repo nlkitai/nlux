@@ -1,5 +1,4 @@
-import {PromptBoxStatus} from '@nlux-dev/core/src/comp/PromptBox/props';
-import {ChatAdapter, ChatAdapterBuilder, PromptBoxOptions} from '@nlux/core';
+import {ChatAdapter, ChatAdapterBuilder, PromptBoxOptions, PromptBoxStatus} from '@nlux/core';
 
 export type PromptBoxProps = {
     status: PromptBoxStatus;

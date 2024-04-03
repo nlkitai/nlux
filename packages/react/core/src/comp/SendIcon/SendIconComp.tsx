@@ -1,9 +1,9 @@
-import {className} from '@nlux-dev/core/src/comp/SendIcon/create';
+import {compSendIconClassName} from '@nlux/core';
 import React from 'react';
 
 export const SendIconComp = () => {
     return (
-        <div className={className}>
+        <div className={compSendIconClassName}>
             <svg fill="currentColor" version="1.1" viewBox="0 0 495 495" xmlSpace="preserve"
                  xmlns="http://www.w3.org/2000/svg">
                 <path

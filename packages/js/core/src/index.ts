@@ -189,6 +189,72 @@ export type {
     ParticipantRole,
 } from './types/participant';
 
+// DOM COMPONENTS ___________
+
+export type {
+    ChatPictureProps,
+} from './comp/ChatPicture/props';
+
+export {
+    className as compChatPictureClassName,
+} from './comp/ChatPicture/create';
+
+export type {
+    ConversationItemProps,
+} from './comp/ConversationItem/props';
+
+export {
+    className as compConversationItemClassName,
+} from './comp/ConversationItem/create';
+
+export type {
+    ExceptionsBoxProps,
+} from './comp/ExceptionsBox/props';
+
+export {
+    className as compExceptionsBoxClassName,
+} from './comp/ExceptionsBox/create';
+
+export {
+    className as compLoaderClassName,
+} from './comp/Loader/create';
+
+export type {
+    MessageStatus,
+    MessageDirection,
+    MessageProps,
+} from './comp/Message/props';
+
+export {
+    className as compMessageClassName,
+} from './comp/Message/create';
+
+export type {
+    PromptBoxStatus,
+    PromptBoxProps,
+} from './comp/PromptBox/props';
+
+export {
+    className as compPromptBoxClassName,
+} from './comp/PromptBox/create';
+
+export {
+    className as compSendIconClassName,
+} from './comp/SendIcon/create';
+
+export type {
+    WelcomeMessageProps,
+} from './comp/WelcomeMessage/props';
+
+export {
+    className as compWelcomeMessageClassName,
+    personaNameClassName as compWelcomeMessagePersonaNameClassName,
+} from './comp/WelcomeMessage/create';
+
+export {
+    welcomeMessageTextClassName as compWelcomeMessageTextClassName,
+} from './comp/WelcomeMessage/utils/updateWelcomeMessageText';
+
 // SERVICES _________________
 
 export type {
@@ -196,5 +262,5 @@ export type {
 } from './core/aiChat/services/submitPrompt/submitPrompt';
 
 export {
-    submitPrompt
+    submitPrompt,
 } from './core/aiChat/services/submitPrompt/impl';
