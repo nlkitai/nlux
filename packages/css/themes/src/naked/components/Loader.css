@@ -1,0 +1,38 @@
+.nlux_msg_ldr {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    > .spn_ldr_ctn {
+        width: 17px;
+
+        > .spn_ldr {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+
+            transform: rotateZ(45deg);
+            border-radius: 50%;
+            perspective: 1000px;
+
+            &:before,
+            &:after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                display: block;
+                width: inherit;
+                height: inherit;
+                content: '';
+                transform: rotateX(70deg);
+                animation: 1s nlux-loader-spin linear infinite;
+                border-radius: 50%;
+            }
+
+            &:after {
+                transform: rotateY(70deg);
+                animation-delay: .4s;
+            }
+        }
+    }
+}

@@ -164,12 +164,37 @@ export type {
     CreateHighlighterOptions,
 } from './core/aiChat/highlighter/highlighter';
 
-// OTHER ____________________
+// CONVERSATION _____________
 
 export type {
     ConversationItem,
 } from './types/conversation';
 
 export type {
+    ConversationPart,
+    ConversationPartHandler,
+    ConversationPartStatus,
+    ConversationPartAiMessage,
+    ConversationPartUserMessage,
+    ConversationPartItem,
+    ConversationPartItemType,
+    ConversationPartEvent,
+    ConversationPartUpdateCallback,
+    ConversationPartChunkCallback,
+    ConversationPartCompleteCallback,
+    ConversationPartErrorCallback,
+} from './types/conversationPart';
+
+export type {
     ParticipantRole,
 } from './types/participant';
+
+// SERVICES _________________
+
+export type {
+    SubmitPrompt,
+} from './core/aiChat/services/submitPrompt/submitPrompt';
+
+export {
+    submitPrompt
+} from './core/aiChat/services/submitPrompt/impl';

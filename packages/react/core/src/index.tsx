@@ -28,16 +28,6 @@ export type {
     MessageReceivedCallback,
 } from '@nlux/core';
 
-export type {
-    PersonaOptions,
-    BotPersona,
-    UserPersona,
-} from './components/AiChat/personaOptions';
-
-export type {
-    AiChatComponentProps,
-} from './components/AiChat/props';
-
 export {
     NluxError,
     NluxUsageError,
@@ -47,7 +37,19 @@ export {
     debug,
 } from '@nlux/core';
 
-export {AiChat} from './components/AiChat';
+export type {
+    PersonaOptions,
+    BotPersona,
+    UserPersona,
+} from './exp/personaOptions';
+
+export type {
+    AiChatComponentProps,
+} from './exp/props';
+
+export {
+    AiChat,
+} from './exp/AiChat';
 
 export type {
     UpdateContextItem,

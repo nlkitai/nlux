@@ -84,12 +84,4 @@ An AI chatbot, powered by LangChain, that can understand and respond to user mes
 
 You should include a **theme CSS file** into your HTML page.<br />
 You can download and host the `Nova Theme` CSS file
-from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) or use the
-CDN hosted version from below:
-
-```jsx
-<link rel="stylesheet" href="https://themes.nlux.ai/v1.0.5/nova.css"/>
-```
-
-This CDN is provided for demo purposes only and it's not scalable.
-Please download and host the theme files on your own for production use.
+from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) package.

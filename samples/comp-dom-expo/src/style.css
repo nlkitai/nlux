@@ -1,0 +1,29 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    place-items: center;
+}
+
+.card {
+    padding: 2em;
+}
+
+.expo-container {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #b0b0b0;
+    border-radius: 5px;
+    place-items: center;
+
+    .h2, h3 {
+        margin: 0 0 20px 0;
+        padding: 0 0 10px 0;
+        border-bottom: 1px dashed #b0b0b0;
+    }
+}

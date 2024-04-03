@@ -1,0 +1,17 @@
+.nlux_comp_cnv_itm {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+
+    > .nlux_comp_msg {
+        flex: 1;
+    }
+}
+
+.nlux_comp_cnv_itm.nlux_cnv_itm_incoming {
+    flex-direction: row-reverse;
+}
+
+.nlux_comp_cnv_itm.nlux_cnv_itm_outgoing {
+    flex-direction: row;
+}

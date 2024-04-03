@@ -1,0 +1,7 @@
+body {
+    display: flex;
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    place-items: center;
+}

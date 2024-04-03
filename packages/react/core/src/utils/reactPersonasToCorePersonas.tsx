@@ -1,7 +1,7 @@
 import {PersonaOptions} from '@nlux/core';
 import {JSX} from 'react';
 import {render} from 'react-dom';
-import {PersonaOptions as ReactPersonasOptions} from '../components/AiChat/personaOptions';
+import {PersonaOptions as ReactPersonasOptions} from '../exp/personaOptions';
 
 const jsxToHtmlElement = (jsx: JSX.Element): Promise<HTMLElement> => {
     return new Promise((resolve) => {
