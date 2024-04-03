@@ -8,7 +8,6 @@ export type PromptBoxProps = {
 
     onChange?: (value: string) => void;
     onSubmit?: () => void;
-    onFocus?: () => void;
 };
 
 export type PromptBoxControllerProps = {

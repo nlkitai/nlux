@@ -1,9 +1,12 @@
-import {ChatAdapter, ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt} from '@nlux/core';
+import {conversationPartsToMessages} from '@nlux-dev/core/src/utils/chat/conversationPartsToMessages';
+import {reactPropsToCoreProps} from '@nlux-dev/core/src/utils/chat/reactPropsToCoreProps';
+import {ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
 import React, {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
 import {ConversationMessage} from '../comp/Conversation/props';
 import {useInitialMessagesOnce} from '../comp/Conversation/utils/useInitialMessagesOnce';
 import {PromptBoxComp} from '../comp/PromptBox/PromptBoxComp';
+import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {AiChatComponentProps} from './props';
 
 export const AiChat: <MessageType>(
@@ -13,83 +16,80 @@ export const AiChat: <MessageType>(
     props,
     t,
 ) => {
-    type MT = typeof t;
+    type MessageType = typeof t;
     const className = `nlux_root` + (props.className ? ` ${props.className}` : '');
 
-    const initialMessages = useInitialMessagesOnce<MT>(props.initialConversation);
+    const initialMessages = useInitialMessagesOnce<MessageType>(props.initialConversation);
+    const [messages, setMessages] = React.useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
     const [prompt, setPrompt] = React.useState('');
     const [promptBoxStatus, setPromptBoxStatus] = React.useState<PromptBoxStatus>('typing');
-    const [parts, setParts] = React.useState<ConversationPart<MT>[]>([]); // [ConversationPart<MT>
+    const [parts, setParts] = React.useState<ConversationPart<MessageType>[]>([]); // [ConversationPart<MT>
     const setPartsRef = useRef({parts, setParts   });
-    const [messages, setMessages] = React.useState<ConversationMessage<MT>[]>(initialMessages ?? []);
 
-    const adapterExtras: ChatAdapterExtras = useMemo(() => ({aiChatProps: props as any}), [props]);
+    const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
+    const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => {
+        if (adapterToUse) {
+            return {aiChatProps: reactPropsToCoreProps(props, adapterToUse)};
+        }
+    }, [props, adapterToUse]);
+
     const canSubmit = useMemo(() => prompt.length > 0, [prompt]);
     const customAiMessageComponent = useMemo(() => props.customMessageComponent, []);
-    const adapterToUse = useMemo<ChatAdapter>(() => {
-        const adapterAsAny = props.adapter as any;
-        return (typeof adapterAsAny?.create === 'function') ? adapterAsAny.create() : adapterAsAny;
-    }, [props.adapter]);
 
-    const handlePromptChange = useCallback((value: string) => setPrompt(value), []);
-    const handlePromptFocus = useCallback(() => { /* TODO - Focus-specific logic */ }, []);
+    const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitClick = useCallback(() => {
-        const conversationPart: ConversationPart<any> = submitPrompt(prompt, adapterToUse, adapterExtras, 'fetch');
-        if (conversationPart.status !== 'error') {
-
-            // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
-            // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
-            // The actual conversation part was already updated outside of React rendering cycle,
-            // but in order to trigger a check and potentially re-render the React component,
-            // we need to change the reference of the parts array by creating a new array.
-
-            conversationPart.on('complete', () => {
-                const parts = setPartsRef.current.parts;
-                setPartsRef.current.setParts([...parts]);
-            });
-
-            conversationPart.on('update', () => {
-                const parts = setPartsRef.current.parts;
-                setPartsRef.current.setParts([...parts]);
-            });
-
-            setParts([...parts, conversationPart]);
+        if (!adapterToUse || !adapterExtras) {
+            warn('No valid adapter was provided to AiChat component');
+            return;
         }
-    }, [prompt, adapterToUse, setPartsRef]);
+
+        const conversationPart: ConversationPart<any> = submitPrompt(
+            prompt,
+            adapterToUse,
+            adapterExtras,
+            'fetch', // TODO - Handle streaming mode
+        );
+
+        if (conversationPart.status === 'error') {
+            // TODO - Handle error
+            return;
+        }
+
+        // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
+        // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
+        // On 'complete' and 'update' events, the conversation part is updated, but in order
+        // to trigger a check and potentially re-render the React component, we need to change
+        // the reference of the parts array by creating a new array.
+
+        conversationPart.on('complete', () => {
+            const parts = setPartsRef.current.parts;
+            setPartsRef.current.setParts([...parts]);
+        });
+
+        conversationPart.on('update', () => {
+            const parts = setPartsRef.current.parts;
+            setPartsRef.current.setParts([...parts]);
+        });
+
+        conversationPart.on('error', () => {
+            const parts = setPartsRef.current.parts;
+            const newParts = parts.filter((part) => part.uid !== conversationPart.uid);
+            setPartsRef.current.setParts(newParts);
+        });
+
+        setParts([...parts, conversationPart]);
+        setPrompt('');
+
+    }, [parts, prompt, adapterToUse, adapterExtras, setPartsRef]);
 
     useEffect(() => {
         setPartsRef.current = {parts, setParts};
     }, [parts, setParts]);
 
     useEffect(() => {
-        const newMessages: ConversationMessage<MT>[] = [];
-        for (const conversationPart of parts) {
-            if (conversationPart.status === 'error') {
-                continue;
-            }
-
-            conversationPart.messages.forEach((partMessage) => {
-                if (partMessage.participantRole === 'user') {
-                    newMessages.push({
-                        role: 'user',
-                        message: partMessage.content,
-                        id: partMessage.uid,
-                    });
-                } else {
-                    if (partMessage.content !== undefined) {
-                        newMessages.push({
-                            role: 'ai',
-                            message: partMessage.content,
-                            id: partMessage.uid,
-                        });
-                    }
-                }
-            });
-        }
-
         setMessages([
             ...(initialMessages ?? []),
-            ...newMessages,
+            ...conversationPartsToMessages(parts),
         ]);
     }, [initialMessages, parts]);
 
@@ -108,7 +108,6 @@ export const AiChat: <MessageType>(
                 canSubmit={canSubmit}
                 placeholder={props.promptBoxOptions?.placeholder}
                 onChange={handlePromptChange}
-                onFocus={handlePromptFocus}
                 onSubmit={handleSubmitClick}
             />
         </div>
