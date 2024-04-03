@@ -42,7 +42,7 @@
     "svelte": "^4.2.10",
     "ts-node": "^10.9.2",
     "tslib": "^2.6.2",
-    "vite": "^5.0.12",
+    "vite": "^5.0.13",
     "vitest": "^1.2.2"
   },
   "dependencies": {}
