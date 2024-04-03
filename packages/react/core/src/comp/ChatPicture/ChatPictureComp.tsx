@@ -1,4 +1,4 @@
-import {className} from '@nlux-dev/core/src/comp/ChatPicture/create';
+import {compChatPictureClassName} from '@nlux/core';
 import {
     renderedInitialsClassName,
     renderedPhotoClassName,
@@ -12,7 +12,7 @@ export const ChatPictureComp = (props: ChatPictureProps) => {
     const isPictureElement = !isPictureUrl && React.isValidElement(props.picture);
 
     return (
-        <div className={className}>
+        <div className={compChatPictureClassName}>
             {isPictureElement && props.picture}
             {!isPictureElement && isPictureUrl && (
                 <div className={renderedPhotoContainerClassName}>

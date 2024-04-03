@@ -1,4 +1,4 @@
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props';
+import {MessageDirection, MessageStatus} from '@nlux/core';
 import {ReactElement, ReactNode} from 'react';
 
 export type MessageProps = {

@@ -1,5 +1,5 @@
-import {className as coreClassName} from '@nlux-dev/core/src/comp/PromptBox/create';
 import {statusClassName} from '@nlux-dev/core/src/comp/PromptBox/utils/applyNewStatusClassName';
+import {compPromptBoxClassName} from '@nlux/core';
 import React from 'react';
 import {LoaderComp} from '../Loader/LoaderComp';
 import {SendIconComp} from '../SendIcon/SendIconComp';
@@ -7,7 +7,7 @@ import {PromptBoxProps} from './props';
 
 export const PromptBoxComp = (props: PromptBoxProps) => {
     const compClassNameFromStats = statusClassName[props.status] || '';
-    const className = `${coreClassName} ${compClassNameFromStats}`;
+    const className = `${compPromptBoxClassName} ${compClassNameFromStats}`;
 
     const disableTextarea = props.status === 'submitting';
     const disableButton = !props.canSubmit || props.status === 'submitting' || props.status === 'waiting';

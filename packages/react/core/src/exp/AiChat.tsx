@@ -1,6 +1,4 @@
-import {ChatAdapterExtras, submitPrompt, ConversationPart} from '@nlux-dev/core/src';
-import {PromptBoxStatus} from '@nlux-dev/core/src/comp/PromptBox/props';
-import {ChatAdapter} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt} from '@nlux/core';
 import React, {ReactElement, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
 import {ConversationMessage} from '../comp/Conversation/props';
@@ -22,7 +20,7 @@ export const AiChat: <MessageType>(
     const [prompt, setPrompt] = React.useState('');
     const [promptBoxStatus, setPromptBoxStatus] = React.useState<PromptBoxStatus>('typing');
     const [parts, setParts] = React.useState<ConversationPart<MT>[]>([]); // [ConversationPart<MT>
-    const setPartsRef = useRef({ parts, setParts });
+    const setPartsRef = useRef({parts, setParts   });
     const [messages, setMessages] = React.useState<ConversationMessage<MT>[]>(initialMessages ?? []);
 
     const adapterExtras: ChatAdapterExtras = useMemo(() => ({aiChatProps: props as any}), [props]);
@@ -41,7 +39,7 @@ export const AiChat: <MessageType>(
 
             // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
             // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
-            // The actual part was already updated outside of React rendering cycle,
+            // The actual conversation part was already updated outside of React rendering cycle,
             // but in order to trigger a check and potentially re-render the React component,
             // we need to change the reference of the parts array by creating a new array.
 

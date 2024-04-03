@@ -1,5 +1,4 @@
-import {MessageDirection} from '@nlux-dev/core/src/comp/Message/props';
-import {ParticipantRole} from '@nlux/core';
+import {MessageDirection, ParticipantRole} from '@nlux/core';
 import React, {ReactElement} from 'react';
 import {ConversationItemComp} from '../ConversationItem/ConversationItemComp';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
