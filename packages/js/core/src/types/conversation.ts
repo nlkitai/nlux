@@ -1,6 +1,6 @@
 import {ParticipantRole} from './participant';
 
-export type ConversationItem = {
+export type ConversationItem<MessageType = string> = {
     role: ParticipantRole;
-    message: string;
+    message: MessageType;
 }

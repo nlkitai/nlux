@@ -1,0 +1,63 @@
+.nlux_comp_prmpt_box {
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0.5em;
+
+    color: var(--foreground-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.25em;
+    background-color: var(--background-color);
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
+    gap: 0.5em;
+
+    > textarea {
+        flex: 1;
+        resize: none;
+        border: none;
+        background-color: transparent;
+    }
+
+    > button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        padding: 0;
+        aspect-ratio: 1;
+
+        > .nlux_snd_icn {
+            width: 50%;
+        }
+
+        > .nlux_msg_ldr {
+            display: none;
+        }
+    }
+
+    > button:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.nlux_comp_prmpt_box.nlux_prmpt_typing {
+    button > .nlux_snd_icn {
+        display: inline-block;
+    }
+
+    button > .nlux_msg_ldr {
+        display: none;
+    }
+}
+
+.nlux_comp_prmpt_box.nlux_prmpt_submitting,
+.nlux_comp_prmpt_box.nlux_prmpt_waiting {
+    button > .nlux_snd_icn {
+        display: none;
+    }
+
+    button > .nlux_msg_ldr {
+        display: inline-block;
+    }
+}

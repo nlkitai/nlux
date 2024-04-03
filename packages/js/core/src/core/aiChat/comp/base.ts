@@ -6,11 +6,21 @@ import {warn} from '../../../x/warn';
 import {NluxError, NluxUsageError} from '../../error';
 import {CompRegistry} from './registry';
 
+export type CompStatus = 'unmounted' | 'rendered' | 'active' | 'destroyed';
+
 export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType> {
     static __compEventListeners: Map<string | number | symbol, string[]> | null = null;
     static __compId: string | null = null;
     static __renderer: CompRenderer<any, any, any, any> | null = null;
     static __updater: CompUpdater<any, any, any> | null = null;
+
+    /**
+     * The current status of the component.
+     * @type {CompStatus}
+     * @private
+     */
+    private __status: CompStatus = 'unmounted';
+
     /**
      * A reference to the component definition, as retrieved from the registry.
      * @protected
@@ -172,6 +182,10 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
     public destroy() {
         this.destroyComponent();
+    }
+
+    public get status(): CompStatus {
+        return this.__status;
     }
 
     public destroyListItemComponent() {

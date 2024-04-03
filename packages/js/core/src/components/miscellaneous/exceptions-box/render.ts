@@ -70,7 +70,7 @@ export const renderExceptionsBox: CompRenderer<
         actions: {
             hide: () => {
                 exceptionContainer.style.display = 'none';
-                messageElement.innerHTML = '';
+                messageElement.replaceChildren();
             },
             show: () => {
                 exceptionContainer.style.display = '';

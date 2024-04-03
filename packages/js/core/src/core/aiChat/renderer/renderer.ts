@@ -15,7 +15,7 @@ import {LayoutOptions} from '../options/layoutOptions';
 import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
-export class NluxRenderer<InboundPayload, OutboundPayload> {
+export class NluxRenderer {
     private static readonly defaultThemeId = 'nova';
 
     private readonly __context: ControllerContext;

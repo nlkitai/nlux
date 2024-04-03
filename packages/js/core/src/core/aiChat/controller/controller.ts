@@ -8,7 +8,7 @@ import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
 import {createControllerContext} from './context';
 
-export class NluxController<InboundPayload = any, OutboundPayload = any> {
+export class NluxController {
 
     private readonly eventManager = new EventManager();
     private readonly nluxInstanceId = uid();
@@ -28,7 +28,7 @@ export class NluxController<InboundPayload = any, OutboundPayload = any> {
         this.renderer.renderEx(exception.type, exception.message);
     };
 
-    private renderer: NluxRenderer<InboundPayload, OutboundPayload> | null = null;
+    private renderer: NluxRenderer | null = null;
     private readonly rootCompId: string;
     private readonly rootElement: HTMLElement;
 

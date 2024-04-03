@@ -2,7 +2,10 @@ import {EventName, EventsMap} from '../../../types/event';
 
 export class EventManager {
 
-    public emit = <EventToEmit extends EventName>(event: EventToEmit, ...params: Parameters<EventsMap[EventToEmit]>) => {
+    public emit = <EventToEmit extends EventName>(
+        event: EventToEmit,
+        ...params: Parameters<EventsMap[EventToEmit]>
+    ) => {
         if (!this.eventListeners.has(event)) {
             return;
         }
@@ -16,7 +19,10 @@ export class EventManager {
         });
     };
 
-    public on = <EventToAdd extends EventName>(event: EventToAdd, callback: EventsMap[EventToAdd]) => {
+    public on = <EventToAdd extends EventName>(
+        event: EventToAdd,
+        callback: EventsMap[EventToAdd],
+    ) => {
         if (!this.eventListeners.has(event)) {
             this.eventListeners.set(event, new Set());
         }
@@ -28,7 +34,10 @@ export class EventManager {
 
     public removeAllEventListenersForAllEvent = () => this.eventListeners.clear();
 
-    public removeEventListener = <EventToUpdate extends EventName>(event: EventToUpdate, callback: EventsMap[EventToUpdate]) => {
+    public removeEventListener = <EventToUpdate extends EventName>(
+        event: EventToUpdate,
+        callback: EventsMap[EventToUpdate],
+    ) => {
         if (!this.eventListeners.has(event)) {
             return;
         }
@@ -39,7 +48,9 @@ export class EventManager {
         }
     };
 
-    public updateEventListeners = (events: Partial<EventsMap>) => {
+    public updateEventListeners = (
+        events: Partial<EventsMap>,
+    ) => {
         //
         // Replace all listeners for events present in the new events object
         // This overwrites any existing listeners for these events! But it will not remove
