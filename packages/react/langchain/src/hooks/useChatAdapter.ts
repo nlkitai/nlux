@@ -30,7 +30,7 @@ export const useChatAdapter = (options: ChatAdapterOptions) => {
         isInitialized,
         url,
         dataTransferMode,
-        headers,
+        headers || {},
         inputPreProcessor,
         outputPreProcessor,
         useInputSchema,
