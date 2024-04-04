@@ -1,4 +1,4 @@
-import {Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import React, {Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
 
 const domById: Record<string, HTMLDivElement> = {};
 
