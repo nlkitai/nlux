@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import {ChangeEvent, useCallback} from 'react';
 import {MarketCapCategory} from '../../../@types/Data.ts';
 
 export type MarketCapFilterProps = {
@@ -14,7 +14,7 @@ export const MarketCapFilter = (props: MarketCapFilterProps) => {
         setMarketCapsFilter,
     } = props;
 
-    const handleMarketCapChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMarketCapChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target;
         const marketCaps = checked
             ? [...selectedMarketCaps, name]

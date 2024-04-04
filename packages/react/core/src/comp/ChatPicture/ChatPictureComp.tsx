@@ -4,12 +4,12 @@ import {
     renderedPhotoContainerClassName,
 } from '@nlux-dev/core/src/comp/ChatPicture/utils/createPhotoContainerFromUrl';
 import {compChatPictureClassName} from '@nlux/core';
-import React from 'react';
+import React, {isValidElement} from 'react';
 import {ChatPictureProps} from './props';
 
 export const ChatPictureComp = (props: ChatPictureProps) => {
     const isPictureUrl = typeof props.picture === 'string';
-    const isPictureElement = !isPictureUrl && React.isValidElement(props.picture);
+    const isPictureElement = !isPictureUrl && isValidElement(props.picture);
 
     return (
         <div className={compChatPictureClassName}>

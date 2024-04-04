@@ -1,9 +1,9 @@
 import './Header.css';
-import {useCallback} from 'react';
+import {ReactNode, useCallback} from 'react';
 import {State} from '../../@types/State.ts';
 
 export type HeaderProps = {
-    children?: React.ReactNode;
+    children?: ReactNode;
     state?: State;
 }
 

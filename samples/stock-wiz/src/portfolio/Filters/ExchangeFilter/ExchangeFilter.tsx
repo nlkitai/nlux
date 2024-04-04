@@ -1,6 +1,6 @@
 import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask.ts';
 import {useAiContext} from '@nlux/react';
-import {useCallback} from 'react';
+import {ChangeEvent, useCallback} from 'react';
 import {Exchange} from '../../../@types/Data.ts';
 import {MyAiContext} from '../../../context.tsx';
 
@@ -47,7 +47,7 @@ export const ExchangeFilter = (props: ExchangeFilterProps) => {
         ),
     );
 
-    const handleExchangeChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleExchangeChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target;
         const exchanges = checked
             ? [...selectedExchanges, name]

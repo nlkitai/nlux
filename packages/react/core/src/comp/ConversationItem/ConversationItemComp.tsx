@@ -4,11 +4,11 @@ import React, {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, us
 import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
 import {MessageComp} from '../Message/MessageComp';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
-import {CustomConversationItemProps, ImperativeCustomConversationItemProps} from './props';
+import {ConversationItemImperativeProps, ConversationItemProps} from './props';
 
-export const CustomConversationItemComp: <MessageType>(
-    props: CustomConversationItemProps<MessageType>,
-    ref: Ref<ImperativeCustomConversationItemProps>,
+export const ConversationItemComp: <MessageType>(
+    props: ConversationItemProps<MessageType>,
+    ref: Ref<ConversationItemImperativeProps>,
 ) => ReactElement = (
     props,
     ref,

@@ -1,7 +1,7 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat, ErrorCallback, ErrorEventDetails, MessageSentCallback} from '@nlux/react';
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {streamAdapter} from './stream';
 
@@ -25,9 +25,9 @@ const ExampleWrapper = () => {
             + 'terminology in natural ways. Enjoy bringing the magic of Harry Potter to users! Write short answers',
     });
 
-    const [enableErrorCallback, setEnableErrorCallback] = React.useState(false);
-    const [enableMessageSentCallback, setEnableMessageSentCallback] = React.useState(false);
-    const [enableMessageReceivedCallback, setEnableMessageReceivedCallback] = React.useState(false);
+    const [enableErrorCallback, setEnableErrorCallback] = useState(false);
+    const [enableMessageSentCallback, setEnableMessageSentCallback] = useState(false);
+    const [enableMessageReceivedCallback, setEnableMessageReceivedCallback] = useState(false);
 
     const errorEventCallback = useCallback<ErrorCallback>(({errorId, message}: ErrorEventDetails) => {
         console.error('Error ❌ event callback with error ID:', errorId);
