@@ -23,6 +23,7 @@ export const useInitialMessagesOnce: <MessageType>(
                     id: newId,
                     role: item.role,
                     message: item.message,
+                    status: 'rendered',
                 };
             });
         }

@@ -1,5 +1,5 @@
 import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
-import {ConversationItemComp} from '@nlux-dev/react/src/comp/ConversationItem/ConversationItemComp.tsx';
+import {CustomConversationItemComp} from '@nlux-dev/react/src/comp/CustomConversationItem/CustomConversationItemComp.tsx';
 import '@nlux-dev/themes/src/naked/components/ConversationItem.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ReactElement, useState} from 'react';
@@ -68,7 +68,7 @@ export const ConversationItemExpo = () => {
                     />
                 </div>
                 <div className="content">
-                    <ConversationItemComp
+                    <CustomConversationItemComp
                         direction={direction}
                         status={status}
                         message={message}

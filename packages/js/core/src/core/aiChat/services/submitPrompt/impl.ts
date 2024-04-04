@@ -49,12 +49,19 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         content: prompt,
     };
 
-    const aiMessage: ConversationPartAiMessage<ResponseType> = {
+    const aiMessage: ConversationPartAiMessage<ResponseType> = (dataTransferMode === 'stream') ? {
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
-        type: dataTransferMode === 'stream' ? 'stream' : 'message',
-    };
+        type: 'stream',
+        status: 'streaming',
+    } : {
+        uid: uid(),
+        participantRole: 'ai',
+        time: new Date(),
+        type: 'message',
+        status: 'loading',
+    }
 
     const part: ConversationPart<ResponseType> = {
         uid: uid(),

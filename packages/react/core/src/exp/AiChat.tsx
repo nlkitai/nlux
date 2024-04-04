@@ -25,7 +25,7 @@ export const AiChat: <MessageType>(
     const [prompt, setPrompt] = React.useState('');
     const [promptBoxStatus, setPromptBoxStatus] = React.useState<PromptBoxStatus>('typing');
     const [parts, setParts] = React.useState<ConversationPart<MessageType>[]>([]); // [ConversationPart<MT>
-    const setPartsRef = useRef({parts, setParts   });
+    const setPartsRef = useRef({parts, setParts});
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
     const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => {
@@ -101,6 +101,8 @@ export const AiChat: <MessageType>(
     const ForwardConversationComp = forwardRef(
         ConversationComp<MessageType>,
     );
+
+    console.dir(messages);
 
     return (
         <div className={className}>

@@ -10,7 +10,7 @@ describe('When a custom conversation item is rendered', () => {
             direction={'incoming'}
             status={'rendered'}
             message={'Hello'}
-            customRender={(message) => <>{`THE AI SAID [${message}]`}</>}
+            customRenderer={(message) => <>{`THE AI SAID [${message}]`}</>}
         />;
 
         // When
@@ -26,7 +26,7 @@ describe('When a custom conversation item is rendered', () => {
             direction={'incoming'}
             status={'rendered'}
             message={{text: 'Hello Jason!'}}
-            customRender={(message) => <>{`THE AI SAID [${message.text}]`}</>}
+            customRenderer={(message) => <>{`THE AI SAID [${message.text}]`}</>}
         />;
 
         // When

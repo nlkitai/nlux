@@ -31,6 +31,14 @@ export const MessageComp = (props: MessageProps) => {
         );
     }
 
+    if (props.status === 'error') {
+        return (
+            <div className={className}>
+                Error
+            </div>
+        );
+    }
+
     // TODO - Handle markdown rendering
     return (
         <div className={className}>

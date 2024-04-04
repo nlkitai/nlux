@@ -1,5 +1,6 @@
 import {ConversationMessage} from '@nlux-dev/react/src/comp/Conversation/props';
 import {ConversationPart} from '../../types/conversationPart';
+import {getMessageStatusFromPart} from './getMessageStatusFromPart';
 
 export const conversationPartsToMessages = <MessageType>(
     parts: ConversationPart<MessageType>[],
@@ -14,15 +15,25 @@ export const conversationPartsToMessages = <MessageType>(
             if (partMessage.participantRole === 'user') {
                 result.push({
                     id: partMessage.uid,
-                    role: 'user',
                     message: partMessage.content,
+                    role: 'user',
+                    status: 'rendered',
                 });
             } else {
-                if (partMessage.content !== undefined) {
+                const status = getMessageStatusFromPart(conversationPart, partMessage);
+                if (status === 'rendered') {
                     result.push({
                         id: partMessage.uid,
+                        message: partMessage.content!,
                         role: 'ai',
-                        message: partMessage.content,
+                        status: 'rendered',
+                    });
+                } else {
+                    result.push({
+                        id: partMessage.uid,
+                        message: undefined,
+                        role: 'ai',
+                        status,
                     });
                 }
             }
