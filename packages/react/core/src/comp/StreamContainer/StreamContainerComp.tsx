@@ -1,10 +1,10 @@
-import {useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
 
 const domById: Record<string, HTMLDivElement> = {};
 
 export const StreamContainerComp = (
     props: {id: string},
-    ref: React.Ref<{streamChunk: (chunk: string) => void}>,
+    ref: Ref<{streamChunk: (chunk: string) => void}>,
 ) => {
     const streamContainer = useRef<HTMLDivElement>(null);
     const [nbUpdates, setNbUpdates] = useState(0);

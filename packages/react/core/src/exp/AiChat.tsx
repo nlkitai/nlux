@@ -1,7 +1,7 @@
 import {conversationPartsToMessages} from '@nlux-dev/core/src/utils/chat/conversationPartsToMessages';
 import {reactPropsToCoreProps} from '@nlux-dev/core/src/utils/chat/reactPropsToCoreProps';
 import {ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
-import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
 import {ConversationMessage, ImperativeConversationCompProps} from '../comp/Conversation/props';
 import {useInitialMessagesOnce} from '../comp/Conversation/utils/useInitialMessagesOnce';
@@ -21,10 +21,10 @@ export const AiChat: <MessageType>(
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
 
     const initialMessages = useInitialMessagesOnce<MessageType>(props.initialConversation);
-    const [messages, setMessages] = React.useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
-    const [prompt, setPrompt] = React.useState('');
-    const [promptBoxStatus, setPromptBoxStatus] = React.useState<PromptBoxStatus>('typing');
-    const [parts, setParts] = React.useState<ConversationPart<MessageType>[]>([]); // [ConversationPart<MT>
+    const [messages, setMessages] = useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
+    const [prompt, setPrompt] = useState('');
+    const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
+    const [parts, setParts] = useState<ConversationPart<MessageType>[]>([]); // [ConversationPart<MT>
     const setPartsRef = useRef({parts, setParts});
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);

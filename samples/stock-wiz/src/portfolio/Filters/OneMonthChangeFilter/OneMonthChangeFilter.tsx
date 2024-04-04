@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {FocusEvent, useCallback, useState} from 'react';
 
 export type OneMonthChangeFilterProps = {
     oneMonthChange: number | null;
@@ -9,7 +9,7 @@ export const OneMonthChangeFilter = (props: OneMonthChangeFilterProps) => {
     const {oneMonthChange, setOneMonthChangeFilter} = props;
     const [inputValue, setInputValue] = useState<string>(`${oneMonthChange}`);
 
-    const handleOneMonthChangeBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
+    const handleOneMonthChangeBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
         try {
             const oneMonthChange = parseFloat(event.target.value);
             if (isNaN(oneMonthChange)) {

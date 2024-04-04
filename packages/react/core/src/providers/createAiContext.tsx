@@ -6,7 +6,7 @@ import {
     InitializeContextResult,
     predefinedContextSize,
 } from '@nlux/core';
-import React, {createContext, useEffect} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import {AiContext, AiContextProviderProps} from '../types/AiContext';
 
 /**
@@ -58,17 +58,17 @@ export const createAiContext = (adapter: ContextAdapter | ContextAdapterBuilder)
             const [
                 contextId,
                 setContextId,
-            ] = React.useState<string | undefined>();
+            ] = useState<string | undefined>();
 
             const [
                 contextInitError,
                 setContextInitError,
-            ] = React.useState<Error | undefined>();
+            ] = useState<Error | undefined>();
 
             const [
                 coreAiContext,
                 setCoreAiContext,
-            ] = React.useState<CoreAiContext>();
+            ] = useState<CoreAiContext>();
 
             //
             // Initialize the AI context and get the contextId

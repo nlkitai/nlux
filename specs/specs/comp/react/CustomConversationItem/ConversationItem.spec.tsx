@@ -1,4 +1,4 @@
-import {CustomConversationItemComp} from '@nlux-dev/react/src/comp/CustomConversationItem/CustomConversationItemComp';
+import {ConversationItemComp} from '@nlux-dev/react/src/comp/ConversationItem/ConversationItemComp';
 import {render} from '@testing-library/react';
 import React from 'react';
 import {describe, expect, it} from 'vitest';
@@ -6,7 +6,8 @@ import {describe, expect, it} from 'vitest';
 describe('When a custom conversation item is rendered', () => {
     it('should render the custom conversation item', async () => {
         // Given
-        const component = <CustomConversationItemComp
+        const component = <ConversationItemComp
+            id={'1'}
             direction={'incoming'}
             status={'rendered'}
             message={'This is a test message'}

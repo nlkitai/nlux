@@ -1,7 +1,7 @@
 import {MessageDirection, ParticipantRole} from '@nlux/core';
 import React, {createRef, forwardRef, ReactNode, Ref, RefObject, useImperativeHandle, useMemo} from 'react';
-import {CustomConversationItemComp} from '../CustomConversationItem/CustomConversationItemComp';
-import {ImperativeCustomConversationItemProps} from '../CustomConversationItem/props';
+import {ConversationItemComp} from '../ConversationItem/ConversationItemComp';
+import {ConversationItemImperativeProps} from '../ConversationItem/props';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
@@ -54,7 +54,7 @@ export const ConversationComp: ConversationCompType = (
     const showWelcomeMessage = hasAiPersona && !hasMessages;
 
     const conversationItemsRef = useMemo(
-        () => new Map<string, RefObject<ImperativeCustomConversationItemProps>>(), [],
+        () => new Map<string, RefObject<ConversationItemImperativeProps>>(), [],
     );
 
     useImperativeHandle(ref, () => ({
@@ -81,15 +81,15 @@ export const ConversationComp: ConversationCompType = (
 
             )}
             {hasMessages && messages.map((message) => {
-                let ref: RefObject<ImperativeCustomConversationItemProps> | undefined = conversationItemsRef.get(
+                let ref: RefObject<ConversationItemImperativeProps> | undefined = conversationItemsRef.get(
                     message.id);
                 if (!ref) {
-                    ref = createRef<ImperativeCustomConversationItemProps>();
+                    ref = createRef<ConversationItemImperativeProps>();
                     conversationItemsRef.set(message.id, ref);
                 }
 
                 const ForwardRefConversationItemComp = forwardRef(
-                    CustomConversationItemComp<any>,
+                    ConversationItemComp<any>,
                 );
 
                 return (

@@ -1,7 +1,7 @@
 import {MessageDirection} from '@nlux/core';
 import {ReactElement, ReactNode} from 'react';
 
-export type CustomConversationItemProps<MessageType> = {
+export type ConversationItemProps<MessageType> = {
     id: string;
     direction: MessageDirection;
     status: 'rendered' | 'streaming' | 'loading' | 'error';
@@ -12,6 +12,6 @@ export type CustomConversationItemProps<MessageType> = {
     picture?: string | ReactElement;
 };
 
-export type ImperativeCustomConversationItemProps = {
+export type ConversationItemImperativeProps = {
     streamChunk: (chunk: string) => void;
 };

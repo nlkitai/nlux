@@ -1,4 +1,4 @@
-import {useCallback} from 'react';
+import {ChangeEvent, useCallback} from 'react';
 import {Sector} from '../../../@types/Data.ts';
 
 export type SectorFilterProps = {
@@ -14,7 +14,7 @@ export const SectorFilter = (props: SectorFilterProps) => {
         setSectorsFilter,
     } = props;
 
-    const handleSectorChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleSectorChange = useCallback((event: ChangeEvent<HTMLSelectElement>) => {
         const {options} = event.target;
         const sectors = Array.from(options).filter(({selected}) => selected).map(({value}) => value);
         setSectorsFilter(sectors);

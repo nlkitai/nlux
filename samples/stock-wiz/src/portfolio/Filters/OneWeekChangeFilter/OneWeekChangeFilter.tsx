@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {FocusEvent, useCallback, useState} from 'react';
 
 export type OneWeekChangeFilterProps = {
     oneWeekChange: number | null;
@@ -9,7 +9,7 @@ export const OneWeekChangeFilter = (props: OneWeekChangeFilterProps) => {
     const {oneWeekChange, setOneWeekChangeFilter} = props;
     const [inputValue, setInputValue] = useState<string>(`${oneWeekChange ?? ''}`);
 
-    const handleOneWeekChangeBlur = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
+    const handleOneWeekChangeBlur = useCallback((event: FocusEvent<HTMLInputElement>) => {
         try {
             const oneWeekChange = parseFloat(event.target.value);
             if (isNaN(oneWeekChange)) {

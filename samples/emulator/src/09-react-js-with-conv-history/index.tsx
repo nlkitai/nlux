@@ -1,6 +1,6 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
-import React, {useCallback, useState} from 'react';
+import React, {ChangeEvent, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
@@ -18,7 +18,7 @@ const ExampleWrapper = () => {
         dataTransferMode: 'fetch',
     });
 
-    const handleStreamingAnimationSpeedChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleStreamingAnimationSpeedChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (value.toLowerCase() === 'null') {
             setStreamingAnimationSpeed(null);
