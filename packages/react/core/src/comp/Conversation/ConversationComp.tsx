@@ -1,6 +1,7 @@
 import {MessageDirection, ParticipantRole} from '@nlux/core';
-import React, {ReactNode, useImperativeHandle} from 'react';
-import {ConversationItemComp} from '../ConversationItem/ConversationItemComp';
+import React, {createRef, forwardRef, ReactNode, Ref, RefObject, useImperativeHandle, useMemo, useRef} from 'react';
+import {CustomConversationItemComp} from '../CustomConversationItem/CustomConversationItemComp';
+import {ImperativeCustomConversationItemProps} from '../CustomConversationItem/props';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
@@ -40,7 +41,7 @@ const nameFromMessageAndPersona = (role: ParticipantRole, personaOptions: Conver
 
 export type ConversationCompType = <MessageType>(
     props: ConversationCompProps<MessageType>,
-    ref: React.Ref<ImperativeConversationCompProps>,
+    ref: Ref<ImperativeConversationCompProps>,
 ) => ReactNode;
 
 export const ConversationComp: ConversationCompType = (
@@ -52,13 +53,20 @@ export const ConversationComp: ConversationCompType = (
     const hasAiPersona = personaOptions?.bot?.name && personaOptions.bot.picture;
     const showWelcomeMessage = hasAiPersona && !hasMessages;
 
+    const conversationItemsRef = useMemo(
+        () => new Map<string, RefObject<ImperativeCustomConversationItemProps>>(), []
+    );
+
     useImperativeHandle(ref, () => ({
         scrollToBottom: () => {
             // TODO - Implement scroll to bottom
         },
         streamChunk: (messageId: string, chunk: string) => {
             console.log('streamChunk', messageId, chunk);
-            // TODO - Implement stream chunk
+            const messageCompRef = conversationItemsRef.get(messageId);
+            if (messageCompRef?.current) {
+                messageCompRef.current.streamChunk(chunk);
+            }
         },
     }), []);
 
@@ -73,10 +81,22 @@ export const ConversationComp: ConversationCompType = (
 
             )}
             {hasMessages && messages.map((message) => {
+                let ref: RefObject<ImperativeCustomConversationItemProps> | undefined = conversationItemsRef.get(message.id);
+                if (!ref) {
+                    ref = createRef<ImperativeCustomConversationItemProps>();
+                    conversationItemsRef.set(message.id, ref);
+                }
+
+                const ForwardRefConversationItemComp = forwardRef(
+                    CustomConversationItemComp<any>,
+                );
+
                 return (
-                    <ConversationItemComp
+                    <ForwardRefConversationItemComp
+                        ref={ref}
                         key={message.id}
-                        status={'rendered'}
+                        id={message.id}
+                        status={message.status}
                         direction={roleToDirection(message.role)}
                         message={message.message}
                         customRenderer={props.customAiMessageComponent}

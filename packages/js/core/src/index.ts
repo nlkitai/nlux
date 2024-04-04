@@ -199,10 +199,6 @@ export {
     className as compChatPictureClassName,
 } from './comp/ChatPicture/create';
 
-export type {
-    ConversationItemProps,
-} from './comp/ConversationItem/props';
-
 export {
     className as compConversationItemClassName,
 } from './comp/ConversationItem/create';

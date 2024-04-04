@@ -5,13 +5,21 @@ import {PersonaOptions} from '../../exp/personaOptions';
 export type ConversationAiMessage<MessageType> = {
     id: string;
     role: ParticipantRole;
-    message: MessageType;
-}
+} & (
+    {
+        message: undefined;
+        status: 'loading' | 'streaming' | 'error';
+    } | {
+        message: MessageType;
+        status: 'rendered';
+    }
+);
 
 export type ConversationUserMessage = {
     id: string;
     role: ParticipantRole;
     message: string;
+    status: 'rendered';
 }
 
 export type ConversationMessage<MessageType> = ConversationAiMessage<MessageType> | ConversationUserMessage;

@@ -7,9 +7,16 @@ export type ConversationPartAiMessage<MessageType> = {
     uid: string;
     participantRole: 'ai',
     time: Date;
-    type: ConversationPartItemType;
     content?: MessageType;
-}
+} & (
+    {
+        type: 'stream';
+        status: 'streaming' | 'complete' | 'error';
+    } | {
+        type: 'message';
+        status: 'loading' | 'rendered' | 'error';
+    }
+);
 
 export type ConversationPartUserMessage = {
     uid: string;
