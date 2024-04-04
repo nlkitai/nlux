@@ -3,8 +3,8 @@ import {LangServeAbstractAdapter} from '../adapter/adapter';
 import {LangServeFetchAdapter} from '../adapter/fetch';
 import {LangServeStreamAdapter} from '../adapter/stream';
 import {ChatAdapterOptions} from '../types/adapterOptions';
-import {LangServeHeaders} from '../types/langServe';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
+import {LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {ChatAdapterBuilder} from './builder';
@@ -64,7 +64,7 @@ export class LangServeAdapterBuilderImpl implements ChatAdapterBuilder {
         this.theDataTransferMode = mode;
         return this;
     }
-    
+
     withHeaders(headers: LangServeHeaders): ChatAdapterBuilder {
         if (this.theHeaders !== undefined) {
             throw new NluxUsageError({

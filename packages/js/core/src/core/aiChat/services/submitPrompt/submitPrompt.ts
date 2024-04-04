@@ -1,5 +1,5 @@
-import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {ConversationPart} from '../../../../types/conversationPart';
 
 /**

@@ -15,46 +15,33 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
     static __updater: CompUpdater<any, any, any> | null = null;
 
     /**
-     * The current status of the component.
-     * @type {CompStatus}
-     * @private
-     */
-    private __status: CompStatus = 'unmounted';
-
-    /**
      * A reference to the component definition, as retrieved from the registry.
-     * @protected
      */
     protected readonly def: CompDef<PropsType, ElementsType, EventsType, ActionsType> | null;
     /**
      * Props that are used to render the component and update the DOM tree.
      * This map is constructed from the props provided by the user, but it can be modified by
      * the component using the setProp() method.
-     * @protected
      */
     protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType] | undefined | null>;
     /**
      * Props that are provided by the component user.
-     * @protected
      */
     protected props?: Readonly<PropsType>;
     /**
      * A reference to the DOM tree of the current component, and a callback that is called when the
      * component is destroyed.
-     * @protected
      */
     protected renderedDom: CompDom<ElementsType, ActionsType> | null;
     /**
      * Internally used event listeners that are registerer by the renderer.
      * Those events are mounted on the DOM tree of the component by the renderer.
      * This map can be used by components that extend the BaseComp to register listeners.
-     * @protected
      */
     protected rendererEventListeners: Map<EventsType, Function>;
     /**
      * Props that are passed to the renderer.
      * This map is constructed from the props provided by the user.
-     * @private
      */
     protected rendererProps: PropsType;
     /**
@@ -62,27 +49,41 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * This could be an HTML element (for most of the cases when the component is rendered in the DOM tree)
      * or it could be a document fragment (for cases when the component is rendered in a virtual DOM tree).
      * This property is set to null when the component is not rendered.
-     *
-     * @protected
      */
     protected renderingRoot: HTMLElement | DocumentFragment | null;
     /**
      * Element IDs of the sub-components that are mounted in the DOM tree of the current component.
      * The key is the ID of the sub-component and the value is the ID of the element in the DOM tree.
-     * @protected
      */
     protected subComponentElementIds: Map<string, keyof ElementsType> = new Map();
     /**
      * Sub-components that are mounted in the DOM tree of the current component.
      * This list should be filled by user by calling addPart() method in constructor of the component.
-     *
-     * @private
      */
     protected subComponents: Map<string, BaseComp<any, any, any, any>> = new Map();
+    /**
+     * The context of the current chat component.
+     */
     private __context: Readonly<ControllerContext> | null = null;
+    /**
+     * A flag that indicates if the current component is destroyed.
+     * This will prevent the component from being rendered, updated, or used in any way.
+     */
     private __destroyed: boolean = false;
+    /**
+     * A unique identifier of the current component instance.
+     */
     private readonly __instanceId: string;
+    /**
+     * The status of the current component.
+     */
+    private __status: CompStatus = 'unmounted';
+    /**
+     * A queue of actions that should be executed on the DOM tree when the component is rendered.
+     * This queue is used to store actions that are called before the component is rendered.
+     */
     private actionsOnDomReady: Function[] = [];
+
     private compEventGetter = (eventName: EventsType) => {
         const callback = this.rendererEventListeners.get(eventName as any);
         if (!callback) {
@@ -169,6 +170,10 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         return this.renderingRoot;
     }
 
+    public get status(): CompStatus {
+        return this.__status;
+    }
+
     protected get context(): Readonly<ControllerContext> {
         if (!this.__context) {
             throw new NluxUsageError({
@@ -182,10 +187,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
     public destroy() {
         this.destroyComponent();
-    }
-
-    public get status(): CompStatus {
-        return this.__status;
     }
 
     public destroyListItemComponent() {

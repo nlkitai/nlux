@@ -13,10 +13,10 @@ export type ConversationPartAiMessage<MessageType> = {
         type: 'stream';
         status: 'streaming' | 'complete' | 'error';
     } | {
-        type: 'message';
-        status: 'loading' | 'rendered' | 'error';
-    }
-);
+    type: 'message';
+    status: 'loading' | 'rendered' | 'error';
+}
+    );
 
 export type ConversationPartUserMessage = {
     uid: string;
@@ -111,12 +111,12 @@ export interface ConversationPartHandler<ResponseType> {
         status: MessageStatus,
         content?: string,
     ) => string;
+    chunk: (chunk: ResponseType) => void,
+    complete: () => void,
+    error: (error: Error) => void,
     updateMessage: (
         id: string,
         status: MessageStatus,
         content?: string,
     ) => void,
-    chunk: (chunk: ResponseType) => void,
-    complete: () => void,
-    error: (error: Error) => void,
 }

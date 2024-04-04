@@ -1,4 +1,4 @@
-import React, {useEffect, useImperativeHandle, useMemo} from 'react';
+import {useEffect, useImperativeHandle, useRef, useState} from 'react';
 
 const domById: Record<string, HTMLDivElement> = {};
 
@@ -6,8 +6,8 @@ export const StreamContainerComp = (
     props: {id: string},
     ref: React.Ref<{streamChunk: (chunk: string) => void}>,
 ) => {
-    const streamContainer = React.useRef<HTMLDivElement>(null);
-    const [nbUpdates, setNbUpdates] = React.useState(0);
+    const streamContainer = useRef<HTMLDivElement>(null);
+    const [nbUpdates, setNbUpdates] = useState(0);
 
     useEffect(() => {
         if (domById[props.id] === undefined) {
@@ -32,7 +32,7 @@ export const StreamContainerComp = (
             if (domById[props.id]) {
                 domById[props.id].append(
                     // TODO — Handle proper streaming
-                    document.createTextNode(chunk)
+                    document.createTextNode(chunk),
                 );
             }
         },
@@ -44,8 +44,8 @@ export const StreamContainerComp = (
 
     return (
         <div>
-            <div ref={streamContainer} />
+            <div ref={streamContainer}/>
             <div>{nbUpdates}</div>
         </div>
     );
-}
+};

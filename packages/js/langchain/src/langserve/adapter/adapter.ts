@@ -9,15 +9,15 @@ import {
     warn,
 } from '@nlux/core';
 import {ChatAdapterOptions} from '../types/adapterOptions';
-import {LangServeHeaders} from '../types/langServe';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
+import {LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {getEndpointUrlToUse} from '../utils/getEndpointUrlToUse';
+import {getHeadersToUse} from '../utils/getHeadersToUse';
 import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
-import { getHeadersToUse } from '../utils/getHeadersToUse';
 
 export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
     static defaultDataTransferMode: DataTransferMode = 'stream';

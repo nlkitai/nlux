@@ -1,5 +1,5 @@
-import {ChatAdapterExtras} from './chatAdapterExtras';
 import {StreamingAdapterObserver} from './chatAdapter';
+import {ChatAdapterExtras} from './chatAdapterExtras';
 import {StandardAdapterInfo} from './standardAdapterConfig';
 
 /**
