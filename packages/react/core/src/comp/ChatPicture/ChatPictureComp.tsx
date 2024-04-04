@@ -1,9 +1,9 @@
-import {compChatPictureClassName} from '@nlux/core';
 import {
     renderedInitialsClassName,
     renderedPhotoClassName,
     renderedPhotoContainerClassName,
 } from '@nlux-dev/core/src/comp/ChatPicture/utils/createPhotoContainerFromUrl';
+import {compChatPictureClassName} from '@nlux/core';
 import React from 'react';
 import {ChatPictureProps} from './props';
 

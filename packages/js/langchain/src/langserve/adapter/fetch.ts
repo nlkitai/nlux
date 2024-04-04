@@ -12,7 +12,7 @@ export class LangServeFetchAdapter extends LangServeAbstractAdapter {
             method: 'POST',
             headers: {
                 ...this.headers,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body,
         });

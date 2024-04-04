@@ -19,17 +19,17 @@ function checkDeps(deps: DependencyList) {
     if (!deps || !deps.length) {
         throw new Error(
             'useDeepCompareEffect should not be used with no dependencies. Use React.useEffect instead.',
-        )
+        );
     }
     if (deps.every(isPrimitive)) {
         throw new Error(
             'useDeepCompareEffect should not be used with dependencies that are all primitive values. Use React.useEffect instead.',
-        )
+        );
     }
 }
 
 function isPrimitive(val: unknown) {
-    return val == null || /^[sbn]/.test(typeof val)
+    return val == null || /^[sbn]/.test(typeof val);
 }
 
 /**
@@ -37,16 +37,16 @@ function isPrimitive(val: unknown) {
  * @returns a memoized version of the value as long as it remains deeply equal
  */
 export function useDeepCompareMemoize<T>(value: T) {
-    const ref = useRef<T>(value)
-    const signalRef = useRef<number>(0)
+    const ref = useRef<T>(value);
+    const signalRef = useRef<number>(0);
 
     if (!deepEqual(value, ref.current)) {
-        ref.current = value
-        signalRef.current += 1
+        ref.current = value;
+        signalRef.current += 1;
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return useMemo(() => ref.current, [signalRef.current])
+    return useMemo(() => ref.current, [signalRef.current]);
 }
 
 function useDeepCompareEffect(
@@ -54,10 +54,10 @@ function useDeepCompareEffect(
     dependencies: DependencyList,
 ): UseEffectReturn {
     if (process.env.NODE_ENV !== 'production') {
-        checkDeps(dependencies)
+        checkDeps(dependencies);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return useEffect(callback, useDeepCompareMemoize(dependencies))
+    return useEffect(callback, useDeepCompareMemoize(dependencies));
 }
 
 export function useDeepCompareEffectNoCheck(
@@ -65,7 +65,7 @@ export function useDeepCompareEffectNoCheck(
     dependencies: DependencyList,
 ): UseEffectReturn {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    return useEffect(callback, useDeepCompareMemoize(dependencies))
+    return useEffect(callback, useDeepCompareMemoize(dependencies));
 }
 
 export default useDeepCompareEffect;

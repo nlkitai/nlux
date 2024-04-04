@@ -21,7 +21,7 @@ export class LangServeStreamAdapter extends LangServeAbstractAdapter {
             method: 'POST',
             headers: {
                 ...this.headers,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body,
         })

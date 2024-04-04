@@ -2,7 +2,6 @@ import {className as conversationItemCoreClassName} from '@nlux-dev/core/src/com
 import {directionClassName} from '@nlux-dev/core/src/comp/ConversationItem/utils/applyNewDirectionClassName';
 import React, {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
-import {ImperativeConversationCompProps} from '../Conversation/props';
 import {MessageComp} from '../Message/MessageComp';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
 import {CustomConversationItemProps, ImperativeCustomConversationItemProps} from './props';

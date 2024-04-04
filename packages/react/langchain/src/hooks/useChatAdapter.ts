@@ -1,5 +1,5 @@
-import {useDeepCompareEffect} from '@nlux/react';
 import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/langchain';
+import {useDeepCompareEffect} from '@nlux/react';
 import {useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 

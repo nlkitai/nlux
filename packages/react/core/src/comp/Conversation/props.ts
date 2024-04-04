@@ -10,10 +10,10 @@ export type ConversationAiMessage<MessageType> = {
         message: undefined;
         status: 'loading' | 'streaming' | 'error';
     } | {
-        message: MessageType;
-        status: 'rendered';
-    }
-);
+    message: MessageType;
+    status: 'rendered';
+}
+    );
 
 export type ConversationUserMessage = {
     id: string;

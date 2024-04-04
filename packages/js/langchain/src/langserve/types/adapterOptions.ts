@@ -1,6 +1,6 @@
 import {DataTransferMode} from '@nlux/core';
-import {LangServeHeaders} from './langServe';
 import {LangServeInputPreProcessor} from './inputPreProcessor';
+import {LangServeHeaders} from './langServe';
 import {LangServeOutputPreProcessor} from './outputPreProcessor';
 
 export type ChatAdapterOptions = {

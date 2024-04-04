@@ -1,5 +1,5 @@
-import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {
     ConversationPart,
     ConversationPartAiMessage,
@@ -22,18 +22,26 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
 ) => {
     const callbacksByEvent: Map<ConversationPartEvent, Set<Function>> = new Map();
     const addListener = (event: ConversationPartEvent, callback: ConversationPartEventsMap[ConversationPartEvent]) => {
-        if (!callbacksByEvent.has(event)) { callbacksByEvent.set(event, new Set()); }
+        if (!callbacksByEvent.has(event)) {
+            callbacksByEvent.set(event, new Set());
+        }
         callbacksByEvent.get(event)!.add(callback);
     };
 
     const removeListener = (event: ConversationPartEvent, callback: Function) => {
-        if (!callbacksByEvent.has(event)) { return; }
+        if (!callbacksByEvent.has(event)) {
+            return;
+        }
         callbacksByEvent.get(event)!.delete(callback);
-    }
+    };
 
     const supportedDataTransferModes: DataTransferMode[] = [];
-    if (adapter.streamText !== undefined) { supportedDataTransferModes.push('stream'); }
-    if (adapter.fetchText !== undefined) { supportedDataTransferModes.push('fetch'); }
+    if (adapter.streamText !== undefined) {
+        supportedDataTransferModes.push('stream');
+    }
+    if (adapter.fetchText !== undefined) {
+        supportedDataTransferModes.push('fetch');
+    }
     if (supportedDataTransferModes.length === 0) {
         throw new Error('The adapter does not support any data transfer modes');
     }
@@ -61,7 +69,7 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         time: new Date(),
         type: 'message',
         status: 'loading',
-    }
+    };
 
     const part: ConversationPart<ResponseType> = {
         uid: uid(),
@@ -69,7 +77,7 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         messages: [userMessage, aiMessage],
         on: addListener,
         removeListener: removeListener,
-    }
+    };
 
     //
     // Handle message in streaming mode

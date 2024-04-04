@@ -4,8 +4,6 @@ import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {MarkdownProcessorOptions} from './baseProcessor';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-import {debug} from '../../../../x/debug';
-
 export class LinkProcessor extends ProcessorWithChildren {
     private linkContentProcessed: string = '';
 
@@ -56,10 +54,8 @@ export class LinkProcessor extends ProcessorWithChildren {
             link.href = match[2];
         }
 
-        debug(`create link ${link.href}, ${link.target}`, this.markdownProcessorOptions)
-
-        if(this.markdownProcessorOptions.openLinksInNewWindow) {
-            link.target = "_blank";
+        if (this.markdownProcessorOptions.openLinksInNewWindow) {
+            link.target = '_blank';
         }
 
         return link;
