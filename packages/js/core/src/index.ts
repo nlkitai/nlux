@@ -201,7 +201,7 @@ export {
 
 export {
     className as compConversationItemClassName,
-} from './comp/ConversationItem/create';
+} from './comp/ConvItem/create';
 
 export type {
     ExceptionsBoxProps,

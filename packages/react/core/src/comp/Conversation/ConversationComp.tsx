@@ -1,7 +1,7 @@
 import {MessageDirection, ParticipantRole} from '@nlux/core';
 import React, {createRef, forwardRef, ReactNode, Ref, RefObject, useImperativeHandle, useMemo} from 'react';
-import {ConversationItemComp} from '../ConversationItem/ConversationItemComp';
-import {ConversationItemImperativeProps} from '../ConversationItem/props';
+import {ConvItemComp} from '../ConvItem/ConvItemComp';
+import {ConvItemImperativeProps} from '../ConvItem/props';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
@@ -54,7 +54,7 @@ export const ConversationComp: ConversationCompType = (
     const showWelcomeMessage = hasAiPersona && !hasMessages;
 
     const conversationItemsRef = useMemo(
-        () => new Map<string, RefObject<ConversationItemImperativeProps>>(), [],
+        () => new Map<string, RefObject<ConvItemImperativeProps>>(), [],
     );
 
     useImperativeHandle(ref, () => ({
@@ -62,7 +62,6 @@ export const ConversationComp: ConversationCompType = (
             // TODO - Implement scroll to bottom
         },
         streamChunk: (messageId: string, chunk: string) => {
-            console.log('streamChunk', messageId, chunk);
             const messageCompRef = conversationItemsRef.get(messageId);
             if (messageCompRef?.current) {
                 messageCompRef.current.streamChunk(chunk);
@@ -81,15 +80,15 @@ export const ConversationComp: ConversationCompType = (
 
             )}
             {hasMessages && messages.map((message) => {
-                let ref: RefObject<ConversationItemImperativeProps> | undefined = conversationItemsRef.get(
+                let ref: RefObject<ConvItemImperativeProps> | undefined = conversationItemsRef.get(
                     message.id);
                 if (!ref) {
-                    ref = createRef<ConversationItemImperativeProps>();
+                    ref = createRef<ConvItemImperativeProps>();
                     conversationItemsRef.set(message.id, ref);
                 }
 
                 const ForwardRefConversationItemComp = forwardRef(
-                    ConversationItemComp<any>,
+                    ConvItemComp<any>,
                 );
 
                 return (

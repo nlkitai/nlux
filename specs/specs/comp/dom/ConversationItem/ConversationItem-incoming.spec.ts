@@ -1,19 +1,19 @@
-import {createConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
-import {ConversationItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
-import {updateConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
+import {createConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
+import {ConvItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
+import {updateConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a conversation item component is rendered in incoming direction', () => {
     it('should render the item with the right direction class', () => {
         // Given
-        const props: ConversationItemProps = {
+        const props: ConvItemProps = {
             direction: 'incoming',
             status: 'rendered',
             message: 'Hello, World!',
         };
 
         // When
-        const conversationItem = createConversationItemDom(props);
+        const conversationItem = createConvItemDom(props);
 
         // Then
         expect(conversationItem.classList.contains('nlux_cnv_itm_incoming')).toBe(true);
@@ -21,12 +21,12 @@ describe('When a conversation item component is rendered in incoming direction',
 
     it('should render message with the right direction class', () => {
         // Given
-        const props: ConversationItemProps = {
+        const props: ConvItemProps = {
             direction: 'incoming',
             status: 'rendered',
             message: 'Hello, World!',
         };
-        const conversationItem = createConversationItemDom(props);
+        const conversationItem = createConvItemDom(props);
 
         // When
         const message = conversationItem.querySelector('.nlux_comp_msg') as HTMLElement;
@@ -37,14 +37,14 @@ describe('When a conversation item component is rendered in incoming direction',
 
     it('should render profile picture', () => {
         // Given
-        const props: ConversationItemProps = {
+        const props: ConvItemProps = {
             direction: 'incoming',
             status: 'rendered',
             message: 'Hello, World!',
             name: 'John Doe',
             picture: 'https://example.com/john-doe.jpg',
         };
-        const conversationItem = createConversationItemDom(props);
+        const conversationItem = createConvItemDom(props);
 
         // When
         const persona = conversationItem.querySelector('.nlux_comp_cht_pic') as HTMLElement;
@@ -58,19 +58,19 @@ describe('When a conversation item component is rendered in incoming direction',
     describe('and the direction changes to outgoing', () => {
         it('should render the item with the outgoing class', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
                 message: 'Hello, World!',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
 
             // When
-            const newProps: ConversationItemProps = {
+            const newProps: ConvItemProps = {
                 ...props,
                 direction: 'outgoing',
             };
-            updateConversationItemDom(conversationItem, props, newProps);
+            updateConvItemDom(conversationItem, props, newProps);
 
             // Then
             expect(conversationItem.classList.contains('nlux_cnv_itm_incoming')).toBe(false);
@@ -79,19 +79,19 @@ describe('When a conversation item component is rendered in incoming direction',
 
         it('should render message with the outgoing class', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
                 message: 'Hello, World!',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
 
             // When
-            const newProps: ConversationItemProps = {
+            const newProps: ConvItemProps = {
                 ...props,
                 direction: 'outgoing',
             };
-            updateConversationItemDom(conversationItem, props, newProps);
+            updateConvItemDom(conversationItem, props, newProps);
 
             // Then
             const message = conversationItem.querySelector('.nlux_comp_msg') as HTMLElement;

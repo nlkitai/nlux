@@ -1,14 +1,14 @@
-import {className as conversationItemCoreClassName} from '@nlux-dev/core/src/comp/ConversationItem/create';
-import {directionClassName} from '@nlux-dev/core/src/comp/ConversationItem/utils/applyNewDirectionClassName';
+import {className as conversationItemCoreClassName} from '@nlux-dev/core/src/comp/ConvItem/create';
+import {directionClassName} from '@nlux-dev/core/src/comp/ConvItem/utils/applyNewDirectionClassName';
 import React, {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
 import {MessageComp} from '../Message/MessageComp';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
-import {ConversationItemImperativeProps, ConversationItemProps} from './props';
+import {ConvItemImperativeProps, ConvItemProps} from './props';
 
-export const ConversationItemComp: <MessageType>(
-    props: ConversationItemProps<MessageType>,
-    ref: Ref<ConversationItemImperativeProps>,
+export const ConvItemComp: <MessageType>(
+    props: ConvItemProps<MessageType>,
+    ref: Ref<ConvItemImperativeProps>,
 ) => ReactElement = (
     props,
     ref,
