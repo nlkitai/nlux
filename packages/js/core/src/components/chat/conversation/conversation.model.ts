@@ -4,7 +4,7 @@ import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
 import {HistoryPayloadSize} from '../../../core/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ConversationItem} from '../../../types/conversation';
+import {ChatItem} from '../../../types/conversation';
 import {warnOnce} from '../../../x/warn';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
@@ -24,7 +24,7 @@ import {updateConversation} from './conversation.update';
 export class CompConversation extends BaseComp<
     CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private conversationContent: ConversationItem[] = [];
+    private conversationContent: ChatItem[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;
@@ -114,7 +114,7 @@ export class CompConversation extends BaseComp<
 
     public getConversationContentForAdapter(
         historyPayloadSize: HistoryPayloadSize = 'max',
-    ): Readonly<ConversationItem[]> | undefined {
+    ): Readonly<ChatItem[]> | undefined {
         if (typeof historyPayloadSize === 'number' && historyPayloadSize <= 0) {
             warnOnce(
                 `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +
@@ -179,7 +179,7 @@ export class CompConversation extends BaseComp<
         this.scrollWhenGeneratingUserOption = autoScrollToStreamingMessage;
     }
 
-    public updateConversationContent(newItem: ConversationItem) {
+    public updateConversationContent(newItem: ChatItem) {
         this.conversationContent.push(newItem);
     }
 

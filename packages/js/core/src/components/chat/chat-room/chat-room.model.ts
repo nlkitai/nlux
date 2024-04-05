@@ -5,7 +5,7 @@ import {HistoryPayloadSize} from '../../../core/aiChat/options/conversationOptio
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ConversationItem} from '../../../types/conversation';
+import {ChatItem} from '../../../types/conversation';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';
@@ -135,7 +135,7 @@ export class CompChatRoom extends BaseComp<
         streamingAnimationSpeed: number,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
-        initialConversationContent?: readonly ConversationItem[],
+        initialConversationContent?: readonly ChatItem[],
     ) {
         this.conversation = comp(CompConversation)
             .withContext(this.context)

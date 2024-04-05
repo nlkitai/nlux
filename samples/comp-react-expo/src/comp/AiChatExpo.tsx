@@ -1,7 +1,7 @@
 import {PersonaOptions} from '@nlux-dev/react/src';
 import {AiChat} from '@nlux-dev/react/src/exp/AiChat.tsx';
 import {AiChatComponentProps} from '@nlux-dev/react/src/exp/props.tsx';
-import {ConversationItem} from '@nlux/core';
+import {ChatItem} from '@nlux/core';
 import '@nlux-dev/themes/src/naked/components/AiChat.css';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {useMemo, useState} from 'react';
@@ -43,7 +43,7 @@ export const AiChatExpo = () => {
         'default' | 'custom'
     >('default');
 
-    const initialConversationCustomMessages: ConversationItem<MsgTp>[] = [
+    const initialConversationCustomMessages: ChatItem<MsgTp>[] = [
         {
             message: {
                 txt: 'Hi, there!',
@@ -62,7 +62,7 @@ export const AiChatExpo = () => {
         },
     ];
 
-    const initialConversation: ConversationItem[] = [
+    const initialConversation: ChatItem[] = [
         {
             message: 'Hi, there!',
             role: 'user',

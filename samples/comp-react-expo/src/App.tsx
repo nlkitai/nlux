@@ -1,7 +1,7 @@
 import './App.css';
 import {AiChatExpo} from './comp/AiChatExpo.tsx';
 import {AvatarExpo} from './comp/AvatarExpo.tsx';
-import {ConvItemExpo} from './comp/ConvItemExpo.tsx';
+import {ChatItemExpo} from './comp/ChatItemExpo.tsx';
 import {LoaderExpo} from './comp/LoaderExpo.tsx';
 import {MessageExpo} from './comp/MessageExpo.tsx';
 import {PromptBoxExpo} from './comp/PromptBoxExpo.tsx';
@@ -15,7 +15,7 @@ function App() {
             <LoaderExpo/>
             <MessageExpo/>
             <AvatarExpo/>
-            <ConvItemExpo/>
+            <ChatItemExpo/>
             <PromptBoxExpo/>
             <WelcomeMessageExpo/>
             <AiChatExpo/>

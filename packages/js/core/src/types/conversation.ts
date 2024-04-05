@@ -1,6 +1,6 @@
 import {ParticipantRole} from './participant';
 
-export type ConversationItem<MessageType = string> = {
+export type ChatItem<MessageType = string> = {
     role: ParticipantRole;
     message: MessageType;
 }

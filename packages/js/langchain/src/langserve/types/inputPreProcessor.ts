@@ -1,4 +1,4 @@
-import {ConversationItem} from '@nlux/core';
+import {ChatItem} from '@nlux/core';
 
 /**
  * A function that can be used to pre-process the input before sending it to the runnable.
@@ -25,5 +25,5 @@ import {ConversationItem} from '@nlux/core';
  */
 export type LangServeInputPreProcessor = (
     input: string,
-    conversationHistory?: readonly ConversationItem[],
+    conversationHistory?: readonly ChatItem[],
 ) => any;

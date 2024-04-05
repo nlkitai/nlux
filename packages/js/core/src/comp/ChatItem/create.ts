@@ -3,12 +3,12 @@ import {createAvatarDom} from '../Avatar/create';
 import {AvatarProps} from '../Avatar/props';
 import {createMessageDom} from '../Message/create';
 import {MessageProps} from '../Message/props';
-import {ConvItemProps} from './props';
+import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 
-export const className = 'nlux_comp_cnv_itm';
+export const className = 'nlux_comp_cht_itm';
 
-export const createConvItemDom: DomCreator<ConvItemProps> = (
+export const createChatItemDom: DomCreator<ChatItemProps> = (
     props,
 ): HTMLElement => {
     const element = document.createElement('div');

@@ -1,5 +1,5 @@
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
-import {ConversationItem} from '../../../types/conversation';
+import {ChatItem} from '../../../types/conversation';
 
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'messages-container-clicked';
@@ -8,7 +8,7 @@ export type CompChatRoomProps = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-    initialConversationContent?: readonly ConversationItem[];
+    initialConversationContent?: readonly ChatItem[];
     scrollWhenGenerating?: boolean;
     streamingAnimationSpeed?: number | null;
     containerMaxHeight?: number | string;

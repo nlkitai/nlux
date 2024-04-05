@@ -1,7 +1,7 @@
 import {
     ChatAdapter,
     ChatAdapterBuilder,
-    ConversationItem,
+    ChatItem,
     ConversationOptions,
     EventsMap,
     HighlighterExtension,
@@ -15,7 +15,7 @@ export type AiChatComponentProps<MessageType = string> = {
     adapter: ChatAdapter | ChatAdapterBuilder;
     events?: Partial<EventsMap>;
     className?: string;
-    initialConversation?: ConversationItem<MessageType>[];
+    initialConversation?: ChatItem<MessageType>[];
     syntaxHighlighter?: HighlighterExtension;
     conversationOptions?: ConversationOptions;
     customMessageComponent?: (message: MessageType) => ReactElement | null;

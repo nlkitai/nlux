@@ -5,7 +5,7 @@ import {PersonaOptions} from '../../core/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../core/aiChat/options/promptBoxOptions';
 import {ChatAdapter} from '../adapters/chat/chatAdapter';
 import {StandardChatAdapter} from '../adapters/chat/standardChatAdapter';
-import {ConversationItem} from '../conversation';
+import {ChatItem} from '../conversation';
 import {EventsMap} from '../event';
 
 /**
@@ -16,7 +16,7 @@ export type AiChatInternalProps = {
     events?: Partial<EventsMap>;
     themeId?: string;
     className?: string;
-    initialConversation?: ConversationItem[];
+    initialConversation?: ChatItem[];
     promptBoxOptions: PromptBoxOptions;
     conversationOptions: ConversationOptions;
     personaOptions: PersonaOptions;
