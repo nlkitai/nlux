@@ -4,7 +4,7 @@ import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ChatItemComp} from '@nlux-dev/react/src/comp/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useState} from 'react';
 
-export const ChatItemExpo = () => {
+export const ChatItemReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
     const [status, setStatus] = useState<MessageStatus>('rendered');
     const [message, setMessage] = useState<string>('Hello, World!');

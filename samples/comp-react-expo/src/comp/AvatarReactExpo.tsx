@@ -2,7 +2,7 @@ import {AvatarComp} from '@nlux-dev/react/src/comp/Avatar/AvatarComp.tsx';
 import {ReactElement, useEffect, useState} from 'react';
 import '@nlux-dev/themes/src/naked/components/Avatar.css';
 
-export const AvatarExpo = () => {
+export const AvatarReactExpo = () => {
     const [name, setName] = useState('Alex');
     const [url, setUrl] = useState('https://nlux.ai/images/demos/persona-user.jpeg');
     const [type, setType] = useState<'url' | 'img'>('url');

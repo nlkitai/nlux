@@ -4,7 +4,7 @@ import '@nlux-dev/themes/src/naked/components/PromptBox.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {useState} from 'react';
 
-export const PromptBoxExpo = () => {
+export const PromptBoxReactExpo = () => {
     const [status, setStatus] = useState<PromptBoxStatus>('typing');
     const [initialMessage] = useState<string>('Hello, World!');
     const [placeholder, setPlaceholder] = useState<string>('Type your prompt!');
@@ -33,8 +33,8 @@ export const PromptBoxExpo = () => {
                 </div>
                 <div className="content">
                     <PromptBoxComp
+                        prompt={initialMessage}
                         status={status}
-                        initialMessage={initialMessage}
                         placeholder={placeholder}
                     />
                 </div>

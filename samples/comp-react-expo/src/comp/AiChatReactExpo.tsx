@@ -33,7 +33,7 @@ const CustomMessageComponent = (message: MsgTp) => {
     );
 };
 
-export const AiChatExpo = () => {
+export const AiChatReactExpo = () => {
     const langServeAdapter = useChatAdapter({
         url: 'https://pynlux.api.nlux.ai/pirate-speak',
         dataTransferMode: 'stream',
