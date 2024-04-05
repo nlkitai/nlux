@@ -102,8 +102,6 @@ export const AiChat: <MessageType>(
         ConversationComp<MessageType>,
     );
 
-    console.dir(messages);
-
     return (
         <div className={className}>
             <ForwardConversationComp

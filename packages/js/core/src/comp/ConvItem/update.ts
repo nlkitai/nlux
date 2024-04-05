@@ -3,10 +3,10 @@ import {className as chatPictureClassName} from '../ChatPicture/create';
 import {updateChatPictureDom} from '../ChatPicture/update';
 import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
-import {ConversationItemProps} from './props';
+import {ConvItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 
-export const updateConversationItemDom: DomUpdater<ConversationItemProps> = (
+export const updateConvItemDom: DomUpdater<ConvItemProps> = (
     element,
     propsBefore,
     propsAfter,

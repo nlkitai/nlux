@@ -1,22 +1,22 @@
-import {createConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
-import {ConversationItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
-import {updateConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
+import {createConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
+import {ConvItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
+import {updateConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a conversation item component is rendered in incoming direction', () => {
     describe('and the message is updated', () => {
         it('should update the message', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
                 message: 'Hello, World!',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
             const message = conversationItem.querySelector('.nlux_comp_msg') as HTMLElement;
 
             // When
-            updateConversationItemDom(conversationItem, props, {
+            updateConvItemDom(conversationItem, props, {
                 ...props,
                 message: 'Hello, Universe!',
             });
@@ -29,16 +29,16 @@ describe('When a conversation item component is rendered in incoming direction',
     describe('and the status is updated', () => {
         it('should update the message status', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
                 message: 'Hello, World!',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
             const message = conversationItem.querySelector('.nlux_comp_msg') as HTMLElement;
 
             // When
-            updateConversationItemDom(conversationItem, props, {
+            updateConvItemDom(conversationItem, props, {
                 ...props,
                 status: 'loading',
             });
@@ -51,19 +51,19 @@ describe('When a conversation item component is rendered in incoming direction',
     describe('and the loader is updated', () => {
         it('should update the message loader', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'incoming',
                 status: 'loading',
                 message: 'Hello, World!',
                 loader: undefined,
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
             const message = conversationItem.querySelector('.nlux_comp_msg') as HTMLElement;
 
             // When
             const newLoader = document.createElement('div');
             newLoader.innerHTML = 'Loading...';
-            updateConversationItemDom(conversationItem, props, {
+            updateConvItemDom(conversationItem, props, {
                 ...props,
                 loader: newLoader,
             });

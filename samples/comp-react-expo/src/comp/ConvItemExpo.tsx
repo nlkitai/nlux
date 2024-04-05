@@ -1,10 +1,10 @@
 import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
 import '@nlux-dev/themes/src/naked/components/ConversationItem.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
-import {ConversationItemComp} from '@nlux-dev/react/src/comp/ConversationItem/ConversationItemComp.tsx';
-import {ReactElement, useState} from 'react';
+import {ConvItemComp} from '@nlux-dev/react/src/comp/ConvItem/ConvItemComp.tsx';
+import {forwardRef, ReactElement, useState} from 'react';
 
-export const ConversationItemExpo = () => {
+export const ConvItemExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
     const [status, setStatus] = useState<MessageStatus>('rendered');
     const [message, setMessage] = useState<string>('Hello, World!');
@@ -13,12 +13,14 @@ export const ConversationItemExpo = () => {
     const [name, setName] = useState<string>('John Doe');
     const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');
 
+    const ForwardRefConvItemComp = forwardRef(ConvItemComp);
+
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
             <div className="expo-container" style={{borderBottom: '1px dashed #B0B0B0', marginBottom: 20}}>
-                <h3>ConversationItemComp Comp</h3>
+                <h3>ConvItemComp Comp</h3>
             </div>
-            <div className="ConversationItem nlux_root">
+            <div className="ConvItem nlux_root">
                 <div className="controls">
                     <select
                         value={direction}
@@ -68,7 +70,8 @@ export const ConversationItemExpo = () => {
                     />
                 </div>
                 <div className="content">
-                    <ConversationItemComp
+                    <ForwardRefConvItemComp
+                        id={'1'}
                         direction={direction}
                         status={status}
                         message={message}

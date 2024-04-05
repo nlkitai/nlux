@@ -1,27 +1,27 @@
 import {className as chatPersonaPictureClassName} from '@nlux-dev/core/src/comp/ChatPicture/create';
-import {createConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
-import {ConversationItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
-import {updateConversationItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
+import {createConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
+import {ConvItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
+import {updateConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a conversation item component is rendered in outgoing direction', () => {
     describe('when the profile picture is updated', () => {
         it('should update the profile picture', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'outgoing',
                 status: 'rendered',
                 message: 'Hello, World!',
                 name: 'John Doe',
                 picture: 'https://example.com/john-doe.jpg',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
             const persona = conversationItem.querySelector(
                 `.${chatPersonaPictureClassName}`,
             ) as HTMLElement;
 
             // When
-            updateConversationItemDom(conversationItem, props, {
+            updateConvItemDom(conversationItem, props, {
                 ...props,
                 picture: 'https://example.com/jane-doe.jpg',
             });
@@ -34,20 +34,20 @@ describe('When a conversation item component is rendered in outgoing direction',
     describe('when the profile name is updated', () => {
         it('should update the profile name', () => {
             // Given
-            const props: ConversationItemProps = {
+            const props: ConvItemProps = {
                 direction: 'outgoing',
                 status: 'rendered',
                 message: 'Hello, World!',
                 name: 'John Doe',
                 picture: 'https://example.com/john-doe.jpg',
             };
-            const conversationItem = createConversationItemDom(props);
+            const conversationItem = createConvItemDom(props);
             const persona = conversationItem.querySelector(
                 `.${chatPersonaPictureClassName}`,
             ) as HTMLElement;
 
             // When
-            updateConversationItemDom(conversationItem, props, {
+            updateConvItemDom(conversationItem, props, {
                 ...props,
                 name: 'Jane Doe',
             });
