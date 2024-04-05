@@ -171,19 +171,19 @@ export type {
 } from './types/conversation';
 
 export type {
-    ConversationPart,
-    ConversationPartHandler,
-    ConversationPartStatus,
-    ConversationPartAiMessage,
-    ConversationPartUserMessage,
-    ConversationPartItem,
-    ConversationPartItemType,
-    ConversationPartEvent,
-    ConversationPartUpdateCallback,
-    ConversationPartChunkCallback,
-    ConversationPartCompleteCallback,
-    ConversationPartErrorCallback,
-} from './types/conversationPart';
+    ChatSegment,
+    ChatSegmentHandler,
+    ChatSegmentStatus,
+    ChatSegmentAiMessage,
+    ChatSegmentUserMessage,
+    ChatSegmentItem,
+    ChatSegmentItemType,
+    ChatSegmentEvent,
+    ChatSegmentUpdateCallback,
+    ChatSegmentChunkCallback,
+    ChatSegmentCompleteCallback,
+    ChatSegmentErrorCallback,
+} from './types/chatSegment';
 
 export type {
     ParticipantRole,

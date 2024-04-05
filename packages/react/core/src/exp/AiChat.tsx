@@ -1,6 +1,6 @@
-import {conversationPartsToMessages} from '@nlux-dev/core/src/utils/chat/conversationPartsToMessages';
+import {chatSegmentsToMessages} from '@nlux-dev/core/src/utils/chat/chatSegmentsToMessages';
 import {reactPropsToCoreProps} from '@nlux-dev/core/src/utils/chat/reactPropsToCoreProps';
-import {ChatAdapterExtras, ConversationPart, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
+import {ChatAdapterExtras, ChatSegment, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
 import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
 import {ConversationMessage, ImperativeConversationCompProps} from '../comp/Conversation/props';
@@ -24,7 +24,7 @@ export const AiChat: <MessageType>(
     const [messages, setMessages] = useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
     const [prompt, setPrompt] = useState('');
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
-    const [parts, setParts] = useState<ConversationPart<MessageType>[]>([]); // [ConversationPart<MT>
+    const [parts, setParts] = useState<ChatSegment<MessageType>[]>([]); // [ChatSegment<MT>
     const setPartsRef = useRef({parts, setParts});
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
@@ -44,45 +44,45 @@ export const AiChat: <MessageType>(
             return;
         }
 
-        const conversationPart: ConversationPart<any> = submitPrompt(
+        const chatSegment: ChatSegment<any> = submitPrompt(
             prompt,
             adapterToUse,
             adapterExtras,
             'stream',
         );
 
-        if (conversationPart.status === 'error') {
+        if (chatSegment.status === 'error') {
             // TODO - Handle error
             return;
         }
 
         // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
         // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
-        // On 'complete' and 'update' events, the conversation part is updated, but in order
+        // On 'complete' and 'update' events, the chat segment is updated, but in order
         // to trigger a check and potentially re-render the React component, we need to change
         // the reference of the parts array by creating a new array.
 
-        conversationPart.on('complete', () => {
+        chatSegment.on('complete', () => {
             const parts = setPartsRef.current.parts;
             setPartsRef.current.setParts([...parts]);
         });
 
-        conversationPart.on('update', () => {
+        chatSegment.on('update', () => {
             const parts = setPartsRef.current.parts;
             setPartsRef.current.setParts([...parts]);
         });
 
-        conversationPart.on('error', () => {
+        chatSegment.on('error', () => {
             const parts = setPartsRef.current.parts;
-            const newParts = parts.filter((part) => part.uid !== conversationPart.uid);
+            const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
             setPartsRef.current.setParts(newParts);
         });
 
-        conversationPart.on('chunk', (messageId: string, chunk: string) => {
+        chatSegment.on('chunk', (messageId: string, chunk: string) => {
             conversationRef.current?.streamChunk(messageId, chunk);
         });
 
-        setParts([...parts, conversationPart]);
+        setParts([...parts, chatSegment]);
         setPrompt('');
 
     }, [parts, prompt, adapterToUse, adapterExtras, setPartsRef]);
@@ -94,7 +94,7 @@ export const AiChat: <MessageType>(
     useEffect(() => {
         setMessages([
             ...(initialMessages ?? []),
-            ...conversationPartsToMessages(parts),
+            ...chatSegmentsToMessages(parts),
         ]);
     }, [initialMessages, parts]);
 

@@ -1,16 +1,16 @@
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {
-    ConversationPart,
-    ConversationPartAiMessage,
-    ConversationPartChunkCallback,
-    ConversationPartCompleteCallback,
-    ConversationPartErrorCallback,
-    ConversationPartEvent,
-    ConversationPartEventsMap,
-    ConversationPartUpdateCallback,
-    ConversationPartUserMessage,
-} from '../../../../types/conversationPart';
+    ChatSegment,
+    ChatSegmentAiMessage,
+    ChatSegmentChunkCallback,
+    ChatSegmentCompleteCallback,
+    ChatSegmentErrorCallback,
+    ChatSegmentEvent,
+    ChatSegmentEventsMap,
+    ChatSegmentUpdateCallback,
+    ChatSegmentUserMessage,
+} from '../../../../types/chatSegment';
 import {uid} from '../../../../x/uid';
 import {SubmitPrompt} from './submitPrompt';
 
@@ -20,15 +20,15 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
     extras: ChatAdapterExtras,
     preferredDataTransferMode: DataTransferMode,
 ) => {
-    const callbacksByEvent: Map<ConversationPartEvent, Set<Function>> = new Map();
-    const addListener = (event: ConversationPartEvent, callback: ConversationPartEventsMap[ConversationPartEvent]) => {
+    const callbacksByEvent: Map<ChatSegmentEvent, Set<Function>> = new Map();
+    const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap[ChatSegmentEvent]) => {
         if (!callbacksByEvent.has(event)) {
             callbacksByEvent.set(event, new Set());
         }
         callbacksByEvent.get(event)!.add(callback);
     };
 
-    const removeListener = (event: ConversationPartEvent, callback: Function) => {
+    const removeListener = (event: ChatSegmentEvent, callback: Function) => {
         if (!callbacksByEvent.has(event)) {
             return;
         }
@@ -50,14 +50,14 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         ? supportedDataTransferModes[0]
         : preferredDataTransferMode;
 
-    const userMessage: ConversationPartUserMessage = {
+    const userMessage: ChatSegmentUserMessage = {
         uid: uid(),
         participantRole: 'user',
         time: new Date(),
         content: prompt,
     };
 
-    const aiMessage: ConversationPartAiMessage<ResponseType> = (dataTransferMode === 'stream') ? {
+    const aiMessage: ChatSegmentAiMessage<ResponseType> = (dataTransferMode === 'stream') ? {
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
@@ -71,7 +71,7 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         status: 'loading',
     };
 
-    const part: ConversationPart<ResponseType> = {
+    const part: ChatSegment<ResponseType> = {
         uid: uid(),
         status: 'active',
         messages: [userMessage, aiMessage],
@@ -86,14 +86,14 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         adapter.streamText!(prompt, {
             next: (chunk: ResponseType) => {
                 callbacksByEvent.get('chunk')?.forEach(callback => {
-                    const messageCallback = callback as ConversationPartChunkCallback;
+                    const messageCallback = callback as ChatSegmentChunkCallback;
                     messageCallback(aiMessage.uid, chunk);
                 });
             },
             complete: () => {
                 part.status = 'complete';
                 callbacksByEvent.get('complete')?.forEach(callback => {
-                    const completeCallback = callback as ConversationPartCompleteCallback;
+                    const completeCallback = callback as ChatSegmentCompleteCallback;
                     completeCallback();
                 });
                 callbacksByEvent.clear();
@@ -101,7 +101,7 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
             error: (error: Error) => {
                 part.status = 'error';
                 callbacksByEvent.get('error')?.forEach(callback => {
-                    const errorCallback = callback as ConversationPartErrorCallback;
+                    const errorCallback = callback as ChatSegmentErrorCallback;
                     errorCallback(error);
                 });
                 callbacksByEvent.clear();
@@ -118,11 +118,11 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         aiMessage.content = message;
         part.status = 'complete';
         callbacksByEvent.get('update')?.forEach(callback => {
-            const messageCallback = callback as ConversationPartUpdateCallback;
+            const messageCallback = callback as ChatSegmentUpdateCallback;
             messageCallback('ai', 'complete', message);
         });
         callbacksByEvent.get('complete')?.forEach(callback => {
-            const completeCallback = callback as ConversationPartCompleteCallback;
+            const completeCallback = callback as ChatSegmentCompleteCallback;
             completeCallback();
         });
         callbacksByEvent.clear();
