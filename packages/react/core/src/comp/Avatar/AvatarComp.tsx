@@ -2,17 +2,17 @@ import {
     renderedInitialsClassName,
     renderedPhotoClassName,
     renderedPhotoContainerClassName,
-} from '@nlux-dev/core/src/comp/ChatPicture/utils/createPhotoContainerFromUrl';
-import {compChatPictureClassName} from '@nlux/core';
+} from '@nlux-dev/core/src/comp/Avatar/utils/createPhotoContainerFromUrl';
+import {compAvatarClassName} from '@nlux/core';
 import React, {isValidElement} from 'react';
-import {ChatPictureProps} from './props';
+import {AvatarProps} from './props';
 
-export const ChatPictureComp = (props: ChatPictureProps) => {
+export const AvatarComp = (props: AvatarProps) => {
     const isPictureUrl = typeof props.picture === 'string';
     const isPictureElement = !isPictureUrl && isValidElement(props.picture);
 
     return (
-        <div className={compChatPictureClassName}>
+        <div className={compAvatarClassName}>
             {isPictureElement && props.picture}
             {!isPictureElement && isPictureUrl && (
                 <div className={renderedPhotoContainerClassName}>

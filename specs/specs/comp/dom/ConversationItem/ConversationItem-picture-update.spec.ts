@@ -1,4 +1,4 @@
-import {className as chatPersonaPictureClassName} from '@nlux-dev/core/src/comp/ChatPicture/create';
+import {className as chatPersonaPictureClassName} from '@nlux-dev/core/src/comp/Avatar/create';
 import {createConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/create';
 import {ConvItemProps} from '@nlux-dev/core/src/comp/ConversationItem/props';
 import {updateConvItemDom} from '@nlux-dev/core/src/comp/ConversationItem/update';

@@ -1,6 +1,6 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
-import {className as chatPictureClassName} from '../ChatPicture/create';
-import {updateChatPictureDom} from '../ChatPicture/update';
+import {className as avatarClassName} from '../Avatar/create';
+import {updateAvatarDom} from '../Avatar/update';
 import {personaNameClassName} from './create';
 import {WelcomeMessageProps} from './props';
 import {updateWelcomeMessageText} from './utils/updateWelcomeMessageText';
@@ -34,9 +34,9 @@ export const updateWelcomeMessageDom: DomUpdater<WelcomeMessageProps> = (
         propsBefore.picture !== propsAfter.picture ||
         propsBefore.name !== propsAfter.name
     ) {
-        const pictureElement = element.querySelector<HTMLElement>(`.${chatPictureClassName}`);
+        const pictureElement = element.querySelector<HTMLElement>(`.${avatarClassName}`);
         if (pictureElement) {
-            updateChatPictureDom(
+            updateAvatarDom(
                 pictureElement,
                 {
                     name: propsBefore.name,

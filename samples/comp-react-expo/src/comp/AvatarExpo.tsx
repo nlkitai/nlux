@@ -1,8 +1,8 @@
-import {ChatPictureComp} from '@nlux-dev/react/src/comp/ChatPicture/ChatPictureComp.tsx';
+import {AvatarComp} from '@nlux-dev/react/src/comp/Avatar/AvatarComp.tsx';
 import {ReactElement, useEffect, useState} from 'react';
-import '@nlux-dev/themes/src/naked/components/ChatPicture.css';
+import '@nlux-dev/themes/src/naked/components/Avatar.css';
 
-export const ChatPictureExpo = () => {
+export const AvatarExpo = () => {
     const [name, setName] = useState('Alex');
     const [url, setUrl] = useState('https://nlux.ai/images/demos/persona-user.jpeg');
     const [type, setType] = useState<'url' | 'img'>('url');
@@ -19,9 +19,9 @@ export const ChatPictureExpo = () => {
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
             <div className="expo-container" style={{borderBottom: '1px dashed #B0B0B0', marginBottom: 20}}>
-                <h3>ChatPicture Comp</h3>
+                <h3>Avatar Comp</h3>
             </div>
-            <div className="ChatPicture-expo nlux_root">
+            <div className="Avatar-expo nlux_root">
                 <div className="controls">
                     <input
                         type="text"
@@ -44,7 +44,7 @@ export const ChatPictureExpo = () => {
                     </select>
                 </div>
                 <div className="content">
-                    <ChatPictureComp name={name} picture={picture}/>
+                    <AvatarComp name={name} picture={picture}/>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
-import {className as chatPictureClassName} from '../ChatPicture/create';
-import {updateChatPictureDom} from '../ChatPicture/update';
+import {className as avatarClassName} from '../Avatar/create';
+import {updateAvatarDom} from '../Avatar/update';
 import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
 import {ConvItemProps} from './props';
@@ -63,9 +63,9 @@ export const updateConvItemDom: DomUpdater<ConvItemProps> = (
         propsBefore.name !== propsAfter.name ||
         propsBefore.picture !== propsAfter.picture
     ) {
-        const personaDom = element.querySelector<HTMLElement>(`.${chatPictureClassName}`);
+        const personaDom = element.querySelector<HTMLElement>(`.${avatarClassName}`);
         if (personaDom) {
-            updateChatPictureDom(personaDom, {
+            updateAvatarDom(personaDom, {
                 name: propsBefore.name,
                 picture: propsBefore.picture,
             }, {

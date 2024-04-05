@@ -1,5 +1,5 @@
 import {DomCreator} from '../../types/dom/DomCreator';
-import {createChatPictureDom} from '../ChatPicture/create';
+import {createAvatarDom} from '../Avatar/create';
 import {WelcomeMessageProps} from './props';
 import {updateWelcomeMessageText} from './utils/updateWelcomeMessageText';
 
@@ -12,7 +12,7 @@ export const createWelcomeMessageDom: DomCreator<WelcomeMessageProps> = (
     const element = document.createElement('div');
     element.classList.add(className);
 
-    const personaPicture = createChatPictureDom({
+    const personaPicture = createAvatarDom({
         name: props.name,
         picture: props.picture,
     });

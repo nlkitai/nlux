@@ -1,10 +1,10 @@
 import {DomCreator} from '../../types/dom/DomCreator';
-import {ChatPictureProps} from './props';
+import {AvatarProps} from './props';
 import {createPhotoContainerFromUrl} from './utils/createPhotoContainerFromUrl';
 
-export const className = 'nlux_comp_cht_pic';
+export const className = 'nlux_comp_avtr';
 
-export const createChatPictureDom: DomCreator<ChatPictureProps> = (
+export const createAvatarDom: DomCreator<AvatarProps> = (
     props,
 ): HTMLElement => {
     const element = document.createElement('div');

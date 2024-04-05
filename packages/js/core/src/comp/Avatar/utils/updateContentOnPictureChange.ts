@@ -1,10 +1,10 @@
-import {ChatPictureProps} from '../props';
+import {AvatarProps} from '../props';
 import {createPhotoContainerFromUrl} from './createPhotoContainerFromUrl';
 
 export const updateContentOnPictureChange = (
     element: HTMLElement,
-    propsBefore: ChatPictureProps,
-    propsAfter: ChatPictureProps,
+    propsBefore: AvatarProps,
+    propsAfter: AvatarProps,
 ): void => {
     if (propsBefore.picture === propsAfter.picture) {
         return;

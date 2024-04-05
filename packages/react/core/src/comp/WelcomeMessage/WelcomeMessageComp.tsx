@@ -4,13 +4,13 @@ import {
     compWelcomeMessageTextClassName,
 } from '@nlux/core';
 import React from 'react';
-import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
+import {AvatarComp} from '../Avatar/AvatarComp';
 import {WelcomeMessageProps} from './props';
 
 export const WelcomeMessageComp = (props: WelcomeMessageProps) => {
     return (
         <div className={compWelcomeMessageClassName}>
-            <ChatPictureComp
+            <AvatarComp
                 picture={props.picture}
                 name={props.name}
             />
