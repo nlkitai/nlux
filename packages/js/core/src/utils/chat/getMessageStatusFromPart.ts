@@ -1,10 +1,10 @@
 import {ConversationMessage} from '@nlux-dev/react/src/comp/Conversation/props';
-import {ConversationPart, ConversationPartItem} from '../../types/conversationPart';
+import {ChatSegment, ChatSegmentItem} from '../../types/chatSegment';
 import {warn} from '../../x/warn';
 
 export const getMessageStatusFromPart = <MessageType>(
-    part: ConversationPart<MessageType>,
-    item: ConversationPartItem<MessageType>,
+    part: ChatSegment<MessageType>,
+    item: ChatSegmentItem<MessageType>,
 ): ConversationMessage<MessageType>['status'] => {
     if (part.status === 'error') {
         return 'error';

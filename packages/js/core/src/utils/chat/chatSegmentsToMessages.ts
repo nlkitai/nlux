@@ -1,17 +1,17 @@
 import {ConversationMessage} from '@nlux-dev/react/src/comp/Conversation/props';
-import {ConversationPart} from '../../types/conversationPart';
+import {ChatSegment} from '../../types/chatSegment';
 import {getMessageStatusFromPart} from './getMessageStatusFromPart';
 
-export const conversationPartsToMessages = <MessageType>(
-    parts: ConversationPart<MessageType>[],
+export const chatSegmentsToMessages = <MessageType>(
+    parts: ChatSegment<MessageType>[],
 ): ConversationMessage<MessageType>[] => {
     const result: ConversationMessage<MessageType>[] = [];
-    for (const conversationPart of parts) {
-        if (conversationPart.status === 'error') {
+    for (const chatSegment of parts) {
+        if (chatSegment.status === 'error') {
             continue;
         }
 
-        conversationPart.messages.forEach((partMessage) => {
+        chatSegment.messages.forEach((partMessage) => {
             if (partMessage.participantRole === 'user') {
                 result.push({
                     id: partMessage.uid,
@@ -20,7 +20,7 @@ export const conversationPartsToMessages = <MessageType>(
                     status: 'rendered',
                 });
             } else {
-                const status = getMessageStatusFromPart(conversationPart, partMessage);
+                const status = getMessageStatusFromPart(chatSegment, partMessage);
                 if (status === 'rendered') {
                     result.push({
                         id: partMessage.uid,

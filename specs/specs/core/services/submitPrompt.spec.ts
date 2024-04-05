@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {waitForRenderCycle} from '../../../utils/wait';
 
 describe('When submitPrompt is called', () => {
-    it('should return a conversation part', () => {
+    it('should return a chat segment', () => {
         // Arrange
         const adapterController = adapterBuilder().withFetchText().create();
 
@@ -73,7 +73,7 @@ describe('When submitPrompt is called', () => {
             expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
         });
 
-        it('the conversation part should have a message with the prompt', () => {
+        it('the chat segment should have a message with the prompt', () => {
             // Arrange
             const adapterController = adapterBuilder().withFetchText().create();
 
@@ -89,7 +89,7 @@ describe('When submitPrompt is called', () => {
             expect(result.messages[0].content).toBe('Hello');
         });
 
-        it('the conversation part should have a message from the AI', () => {
+        it('the chat segment should have a message from the AI', () => {
             // Arrange
             const adapterController = adapterBuilder().withFetchText().create();
 
@@ -122,10 +122,10 @@ describe('When submitPrompt is called', () => {
         });
 
         describe('when the adapter returns a response', () => {
-            it('should update the conversation part with the response', async () => {
+            it('should update the chat segment with the response', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withFetchText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
@@ -137,13 +137,13 @@ describe('When submitPrompt is called', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(conversationPart.messages[1].content).toBe('Hi there');
+                expect(chatSegment.messages[1].content).toBe('Hi there');
             });
 
-            it('should update the conversation part status to "complete"', async () => {
+            it('should update the chat segment status to "complete"', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withFetchText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
@@ -155,21 +155,21 @@ describe('When submitPrompt is called', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(conversationPart.status).toBe('complete');
+                expect(chatSegment.status).toBe('complete');
             });
 
             describe('when a listener is added for the "complete" event', () => {
-                it('should call the listener when the conversation part is complete', async () => {
+                it('should call the listener when the chat segment is complete', async () => {
                     // Arrange
-                    const adapterController=adapterBuilder().withFetchText().create();
-                    const conversationPart=submitPrompt(
+                    const adapterController = adapterBuilder().withFetchText().create();
+                    const chatSegment = submitPrompt(
                         'Hello',
                         adapterController.adapter,
                         {} as ChatAdapterExtras,
                         'fetch',
                     );
-                    const completeListener= vi.fn();
-                    conversationPart.on('complete', completeListener);
+                    const completeListener = vi.fn();
+                    chatSegment.on('complete', completeListener);
 
                     // Act
                     adapterController.resolve('Hi there');
@@ -181,17 +181,17 @@ describe('When submitPrompt is called', () => {
             });
 
             describe('when a listener is added for the "update" event', () => {
-                it('should call the listener when the conversation part is updated', async () => {
+                it('should call the listener when the chat segment is updated', async () => {
                     // Arrange
                     const adapterController = adapterBuilder().withFetchText().create();
-                    const conversationPart = submitPrompt(
+                    const chatSegment = submitPrompt(
                         'Hello',
                         adapterController.adapter,
                         {} as ChatAdapterExtras,
                         'fetch',
                     );
                     const updateListener = vi.fn();
-                    conversationPart.on('update', updateListener);
+                    chatSegment.on('update', updateListener);
 
                     // Act
                     adapterController.resolve('Hi there');
@@ -203,17 +203,17 @@ describe('When submitPrompt is called', () => {
             });
 
             describe('when a listener is added for the "error" event', () => {
-                it('should not call the listener when the conversation part is complete', async () => {
+                it('should not call the listener when the chat segment is complete', async () => {
                     // Arrange
                     const adapterController = adapterBuilder().withFetchText().create();
-                    const conversationPart = submitPrompt(
+                    const chatSegment = submitPrompt(
                         'Hello',
                         adapterController.adapter,
                         {} as ChatAdapterExtras,
                         'fetch',
                     );
                     const errorListener = vi.fn();
-                    conversationPart.on('error', errorListener);
+                    chatSegment.on('error', errorListener);
 
                     // Act
                     adapterController.resolve('Hi there');
@@ -223,17 +223,17 @@ describe('When submitPrompt is called', () => {
                     expect(errorListener).not.toHaveBeenCalled();
                 });
 
-                it('should not call the listener when the conversation part is updated', async () => {
+                it('should not call the listener when the chat segment is updated', async () => {
                     // Arrange
                     const adapterController = adapterBuilder().withFetchText().create();
-                    const conversationPart = submitPrompt(
+                    const chatSegment = submitPrompt(
                         'Hello',
                         adapterController.adapter,
                         {} as ChatAdapterExtras,
                         'fetch',
                     );
                     const errorListener = vi.fn();
-                    conversationPart.on('error', errorListener);
+                    chatSegment.on('error', errorListener);
 
                     // Act
                     adapterController.resolve('Hi there');
@@ -243,17 +243,17 @@ describe('When submitPrompt is called', () => {
                     expect(errorListener).not.toHaveBeenCalled();
                 });
 
-                it('should call the listener when the conversation part has an error', async () => {
+                it('should call the listener when the chat segment has an error', async () => {
                     // Arrange
                     const adapterController = adapterBuilder().withFetchText().create();
-                    const conversationPart = submitPrompt(
+                    const chatSegment = submitPrompt(
                         'Hello',
                         adapterController.adapter,
                         {} as ChatAdapterExtras,
                         'fetch',
                     );
                     const errorListener = vi.fn();
-                    conversationPart.on('error', errorListener);
+                    chatSegment.on('error', errorListener);
 
                     // Act
                     adapterController.reject('This is an error!');
@@ -306,7 +306,7 @@ describe('When submitPrompt is called', () => {
             );
         });
 
-        it('the conversation part should have a message with the prompt', () => {
+        it('the chat segment should have a message with the prompt', () => {
             // Arrange
             const adapterController = adapterBuilder().withStreamText().create();
 
@@ -322,7 +322,7 @@ describe('When submitPrompt is called', () => {
             expect(result.messages[0].content).toBe('Hello');
         });
 
-        it('the conversation part should have a message from the AI', () => {
+        it('the chat segment should have a message from the AI', () => {
             // Arrange
             const adapterController = adapterBuilder().withStreamText().create();
 
@@ -358,36 +358,36 @@ describe('When submitPrompt is called', () => {
             it('should call the "chunk" listeners', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
                     'stream',
                 );
                 const chunkListener = vi.fn();
-                conversationPart.on('chunk', chunkListener);
+                chatSegment.on('chunk', chunkListener);
 
                 // Act
                 adapterController.next('Hi there');
                 await waitForRenderCycle();
 
                 // Assert
-                expect(chunkListener).toHaveBeenCalledWith(conversationPart.messages[1].uid, 'Hi there');
+                expect(chunkListener).toHaveBeenCalledWith(chatSegment.messages[1].uid, 'Hi there');
             });
         });
 
         describe('when a listener is added for the "complete" event', () => {
-            it('should call the listener when the conversation part is complete', async () => {
+            it('should call the listener when the chat segment is complete', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
                     'stream',
                 );
                 const completeListener = vi.fn();
-                conversationPart.on('complete', completeListener);
+                chatSegment.on('complete', completeListener);
 
                 // Act
                 adapterController.complete();
@@ -399,10 +399,10 @@ describe('When submitPrompt is called', () => {
         });
 
         describe('when streaming is complete', () => {
-            it('should update the conversation part status to "complete"', async () => {
+            it('should update the chat segment status to "complete"', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
@@ -414,20 +414,20 @@ describe('When submitPrompt is called', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(conversationPart.status).toBe('complete');
+                expect(chatSegment.status).toBe('complete');
             });
 
             it('should call the "complete" listeners', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
                     'stream',
                 );
                 const completeListener = vi.fn();
-                conversationPart.on('complete', completeListener);
+                chatSegment.on('complete', completeListener);
 
                 // Act
                 adapterController.complete();
@@ -439,10 +439,10 @@ describe('When submitPrompt is called', () => {
         });
 
         describe('when streaming has an error', () => {
-            it('should update the conversation part status to "error"', async () => {
+            it('should update the chat segment status to "error"', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
@@ -454,20 +454,20 @@ describe('When submitPrompt is called', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(conversationPart.status).toBe('error');
+                expect(chatSegment.status).toBe('error');
             });
 
             it('should call the "error" listeners', async () => {
                 // Arrange
                 const adapterController = adapterBuilder().withStreamText().create();
-                const conversationPart = submitPrompt(
+                const chatSegment = submitPrompt(
                     'Hello',
                     adapterController.adapter,
                     {} as ChatAdapterExtras,
                     'stream',
                 );
                 const errorListener = vi.fn();
-                conversationPart.on('error', errorListener);
+                chatSegment.on('error', errorListener);
 
                 // Act
                 adapterController.error(new Error('This is an error!'));
