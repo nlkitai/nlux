@@ -102,7 +102,7 @@ export const AiChatExpo = () => {
             <div className="expo-container" style={{borderBottom: '1px dashed #B0B0B0', marginBottom: 20}}>
                 <h3>AiChat Comp</h3>
             </div>
-            <div className="ChatPicture-expo">
+            <div className="Avatar-expo">
                 <div className="controls">
                     <select
                         className="rendererType"

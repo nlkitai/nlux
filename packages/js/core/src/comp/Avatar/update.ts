@@ -1,9 +1,9 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
-import {ChatPictureProps} from './props';
+import {AvatarProps} from './props';
 import {updateContentOnPictureChange} from './utils/updateContentOnPictureChange';
 import {updateNameOnPicture} from './utils/updateNameOnPicture';
 
-export const updateChatPictureDom: DomUpdater<ChatPictureProps> = (
+export const updateAvatarDom: DomUpdater<AvatarProps> = (
     element,
     propsBefore,
     propsAfter,

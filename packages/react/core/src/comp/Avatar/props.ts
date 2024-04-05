@@ -1,6 +1,6 @@
 import {ReactElement} from 'react';
 
-export type ChatPictureProps = {
+export type AvatarProps = {
     name?: string;
     picture?: string | ReactElement;
 };

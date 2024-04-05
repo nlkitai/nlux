@@ -42,7 +42,7 @@ describe('When welcome message is rendered', () => {
 
         // When
         const welcomeMessage = createWelcomeMessageDom(props);
-        const personaPicture = welcomeMessage.querySelector('.nlux_comp_cht_pic') as HTMLImageElement;
+        const personaPicture = welcomeMessage.querySelector('.nlux_comp_avtr') as HTMLImageElement;
 
         // Then
         expect(personaPicture).not.toBeNull();

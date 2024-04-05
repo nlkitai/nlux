@@ -1,35 +1,35 @@
-import {createChatPictureDom} from '@nlux-dev/core/src/comp/ChatPicture/create';
-import {ChatPictureProps} from '@nlux-dev/core/src/comp/ChatPicture/props';
-import {updateChatPictureDom} from '@nlux-dev/core/src/comp/ChatPicture/update';
+import {createAvatarDom} from '@nlux-dev/core/src/comp/Avatar/create';
+import {AvatarProps} from '@nlux-dev/core/src/comp/Avatar/props';
+import {updateAvatarDom} from '@nlux-dev/core/src/comp/Avatar/update';
 import {describe, expect, it} from 'vitest';
 
-describe('When a chat picture component is rendered with HTML element as picture', () => {
+describe('When an avatar component is rendered with HTML element as picture', () => {
     it('should render the picture as is', () => {
         // Given
         const name = 'John Doe';
         const picture = document.createElement('img');
         picture.src = 'https://example.com/photo.jpg';
-        const props: ChatPictureProps = {name, picture};
+        const props: AvatarProps = {name, picture};
 
         // When
-        const element = createChatPictureDom(props);
+        const element = createAvatarDom(props);
 
         // Then
         expect(element.outerHTML).toBe(
-            `<div class="nlux_comp_cht_pic" title="${name}"><img src="https://example.com/photo.jpg"></div>`,
+            `<div class="nlux_comp_avtr" title="${name}"><img src="https://example.com/photo.jpg"></div>`,
         );
     });
 
     describe('When no picture or name is provided', () => {
         it('should render an empty div', () => {
             // Given
-            const props: ChatPictureProps = {};
+            const props: AvatarProps = {};
 
             // When
-            const element = createChatPictureDom(props);
+            const element = createAvatarDom(props);
 
             // Then
-            expect(element.outerHTML).toBe('<div class="nlux_comp_cht_pic"></div>');
+            expect(element.outerHTML).toBe('<div class="nlux_comp_avtr"></div>');
         });
     });
 
@@ -37,14 +37,14 @@ describe('When a chat picture component is rendered with HTML element as picture
         it('should render the name first letter', () => {
             // Given
             const name = 'John Doe';
-            const props: ChatPictureProps = {name};
+            const props: AvatarProps = {name};
 
             // When
-            const element = createChatPictureDom(props);
+            const element = createAvatarDom(props);
 
             // Then
             expect(element.outerHTML).toBe(
-                `<div class="nlux_comp_cht_pic" title="John Doe"><div class="cht_pic_ctn"><span class="cht_pic_ltr">J</span></div></div>`,
+                `<div class="nlux_comp_avtr" title="John Doe"><div class="cht_pic_ctn"><span class="cht_pic_ltr">J</span></div></div>`,
             );
         });
     });
@@ -55,13 +55,13 @@ describe('When a chat picture component is rendered with HTML element as picture
             const name = 'John Doe';
             const picture1 = document.createElement('img');
             picture1.src = 'https://example.com/photo1.jpg';
-            const props: ChatPictureProps = {name, picture: picture1};
+            const props: AvatarProps = {name, picture: picture1};
             const picture2 = document.createElement('img');
             picture2.src = 'https://example.com/photo2.jpg';
-            const element = createChatPictureDom(props);
+            const element = createAvatarDom(props);
 
             // When
-            updateChatPictureDom(
+            updateAvatarDom(
                 element,
                 props,
                 {...props, picture: picture2},
@@ -69,7 +69,7 @@ describe('When a chat picture component is rendered with HTML element as picture
 
             // Then
             expect(element.outerHTML).toBe(
-                `<div class="nlux_comp_cht_pic" title="${name}"><img src="https://example.com/photo2.jpg"></div>`,
+                `<div class="nlux_comp_avtr" title="${name}"><img src="https://example.com/photo2.jpg"></div>`,
             );
         });
 
@@ -79,19 +79,19 @@ describe('When a chat picture component is rendered with HTML element as picture
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
-                const props: ChatPictureProps = {
+                const props: AvatarProps = {
                     name,
                     picture: picture1,
                 };
-                const newProps: ChatPictureProps = {
+                const newProps: AvatarProps = {
                     name,
                     picture: 'https://example.com/photo2.jpg',
                 };
                 const picture2 = 'https://example.com/photo2.jpg';
-                const element = createChatPictureDom(props);
+                const element = createAvatarDom(props);
 
                 // When
-                updateChatPictureDom(
+                updateAvatarDom(
                     element,
                     props,
                     newProps,
@@ -99,7 +99,7 @@ describe('When a chat picture component is rendered with HTML element as picture
 
                 // Then
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux_comp_cht_pic" title="John Doe"><div class="cht_pic_ctn">` +
+                    `<div class="nlux_comp_avtr" title="John Doe"><div class="cht_pic_ctn">` +
                     `<span class="cht_pic_ltr">J</span>` +
                     `<div class="cht_pic_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
@@ -111,16 +111,16 @@ describe('When a chat picture component is rendered with HTML element as picture
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
-                const props: ChatPictureProps = {name, picture: picture1};
-                const newProps: ChatPictureProps = {
+                const props: AvatarProps = {name, picture: picture1};
+                const newProps: AvatarProps = {
                     name: 'Alex Doe',
                     picture: 'https://example.com/photo2.jpg',
                 };
                 const picture2 = 'https://example.com/photo2.jpg';
-                const element = createChatPictureDom(props);
+                const element = createAvatarDom(props);
 
                 // When
-                updateChatPictureDom(
+                updateAvatarDom(
                     element,
                     props,
                     newProps,
@@ -128,7 +128,7 @@ describe('When a chat picture component is rendered with HTML element as picture
 
                 // Then
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux_comp_cht_pic" title="Alex Doe"><div class="cht_pic_ctn">` +
+                    `<div class="nlux_comp_avtr" title="Alex Doe"><div class="cht_pic_ctn">` +
                     `<span class="cht_pic_ltr">A</span>` +
                     `<div class="cht_pic_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,

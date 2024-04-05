@@ -1,7 +1,7 @@
 import {className as conversationItemCoreClassName} from '@nlux-dev/core/src/comp/ConvItem/create';
 import {directionClassName} from '@nlux-dev/core/src/comp/ConvItem/utils/applyNewDirectionClassName';
 import React, {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
-import {ChatPictureComp} from '../ChatPicture/ChatPictureComp';
+import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
 import {ConvItemImperativeProps, ConvItemProps} from './props';
@@ -18,7 +18,7 @@ export const ConvItemComp: <MessageType>(
             return null;
         }
 
-        return <ChatPictureComp name={props.name} picture={props.picture}/>;
+        return <AvatarComp name={props.name} picture={props.picture}/>;
     }, [props.picture, props.name]);
 
     const streamContainer = useRef<{

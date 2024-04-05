@@ -1,6 +1,6 @@
 import './App.css';
 import {AiChatExpo} from './comp/AiChatExpo.tsx';
-import {ChatPictureExpo} from './comp/ChatPictureExpo.tsx';
+import {AvatarExpo} from './comp/AvatarExpo.tsx';
 import {ConvItemExpo} from './comp/ConvItemExpo.tsx';
 import {LoaderExpo} from './comp/LoaderExpo.tsx';
 import {MessageExpo} from './comp/MessageExpo.tsx';
@@ -14,7 +14,7 @@ function App() {
             <h1>Comp React Expo</h1>
             <LoaderExpo/>
             <MessageExpo/>
-            <ChatPictureExpo/>
+            <AvatarExpo/>
             <ConvItemExpo/>
             <PromptBoxExpo/>
             <WelcomeMessageExpo/>

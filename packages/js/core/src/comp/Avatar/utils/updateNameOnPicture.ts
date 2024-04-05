@@ -1,9 +1,9 @@
-import {ChatPictureProps} from '../props';
+import {AvatarProps} from '../props';
 
 export const updateNameOnPicture = (
     element: HTMLElement,
-    propsBefore: ChatPictureProps,
-    propsAfter: ChatPictureProps,
+    propsBefore: AvatarProps,
+    propsAfter: AvatarProps,
 ): void => {
     if (propsBefore.name === propsAfter.name) {
         return;

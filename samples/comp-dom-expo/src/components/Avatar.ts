@@ -1,14 +1,14 @@
 import '../style.css';
-import '@nlux-dev/themes/src/naked/components/ChatPicture.css';
-import {createChatPictureDom} from '@nlux-dev/core/src/comp/ChatPicture/create.ts';
-import {ChatPictureProps} from '@nlux-dev/core/src/comp/ChatPicture/props.ts';
-import {updateChatPictureDom} from '@nlux-dev/core/src/comp/ChatPicture/update.ts';
+import '@nlux-dev/themes/src/naked/components/Avatar.css';
+import {createAvatarDom} from '@nlux-dev/core/src/comp/Avatar/create.ts';
+import {AvatarProps} from '@nlux-dev/core/src/comp/Avatar/props.ts';
+import {updateAvatarDom} from '@nlux-dev/core/src/comp/Avatar/update.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `
 <div class="nlux_root expo-container">
-    <h3>ChatPicture Comp</h3>
-    <div class="ChatPicture-expo">
+    <h3>Avatar Comp</h3>
+    <div class="Avatar-expo">
         <div class="controls">
             <input type="text" class="name" />
             <input type="text" class="url" />
@@ -26,7 +26,7 @@ newExpo.innerHTML = `
 
 document.querySelector<HTMLDivElement>('#app')!.append(newExpo);
 
-const imgFromProps = (props: ChatPictureProps): HTMLElement => {
+const imgFromProps = (props: AvatarProps): HTMLElement => {
     if (typeof props.picture !== 'string') {
         return props.picture as HTMLImageElement;
     }
@@ -40,14 +40,14 @@ const imgFromProps = (props: ChatPictureProps): HTMLElement => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector<HTMLDivElement>('.ChatPicture-expo')!;
+    const container = document.querySelector<HTMLDivElement>('.Avatar-expo')!;
     let insertAs: 'url' | 'img' = 'url';
-    let props: ChatPictureProps = {
+    let props: AvatarProps = {
         name: 'Alex Doe',
         picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
     };
 
-    const message = createChatPictureDom(props);
+    const message = createAvatarDom(props);
 
     const nameInput = container.querySelector<HTMLSelectElement>('.controls .name')!;
     const urlInput = container.querySelector<HTMLSelectElement>('.controls .url')!;
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
     select.value = 'url';
 
     nameInput.addEventListener('input', () => {
-        const newProps: ChatPictureProps = {
+        const newProps: AvatarProps = {
             name: nameInput.value,
             picture: insertAs === 'url' ? urlInput.value : imgFromProps({
                 name: nameInput.value,
@@ -66,12 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }),
         };
 
-        updateChatPictureDom(message, props, newProps);
+        updateAvatarDom(message, props, newProps);
         props = newProps;
     });
 
     urlInput.addEventListener('input', () => {
-        const newProps: ChatPictureProps = {
+        const newProps: AvatarProps = {
             name: nameInput.value,
             picture: insertAs === 'url' ? urlInput.value : imgFromProps({
                 name: nameInput.value,
@@ -79,28 +79,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }),
         };
 
-        updateChatPictureDom(message, props, newProps);
+        updateAvatarDom(message, props, newProps);
         props = newProps;
     });
 
     select.addEventListener('change', () => {
         if (select.value === 'url') {
             insertAs = 'url';
-            const newProps: ChatPictureProps = {
+            const newProps: AvatarProps = {
                 name: nameInput.value,
                 picture: urlInput.value,
             };
 
-            updateChatPictureDom(message, props, newProps);
+            updateAvatarDom(message, props, newProps);
             props = newProps;
         } else {
             insertAs = 'img';
-            const newProps: ChatPictureProps = {
+            const newProps: AvatarProps = {
                 name: nameInput.value,
                 picture: imgFromProps(props),
             };
 
-            updateChatPictureDom(message, props, newProps);
+            updateAvatarDom(message, props, newProps);
             props = newProps;
         }
     });

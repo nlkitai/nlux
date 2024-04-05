@@ -47,7 +47,7 @@ describe('When a conversation item component is rendered in incoming direction',
         const conversationItem = createConvItemDom(props);
 
         // When
-        const persona = conversationItem.querySelector('.nlux_comp_cht_pic') as HTMLElement;
+        const persona = conversationItem.querySelector('.nlux_comp_avtr') as HTMLElement;
 
         // Then
         expect(persona).not.toBeNull();

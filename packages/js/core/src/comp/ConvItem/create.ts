@@ -1,6 +1,6 @@
 import {DomCreator} from '../../types/dom/DomCreator';
-import {createChatPictureDom} from '../ChatPicture/create';
-import {ChatPictureProps} from '../ChatPicture/props';
+import {createAvatarDom} from '../Avatar/create';
+import {AvatarProps} from '../Avatar/props';
 import {createMessageDom} from '../Message/create';
 import {MessageProps} from '../Message/props';
 import {ConvItemProps} from './props';
@@ -24,11 +24,11 @@ export const createConvItemDom: DomCreator<ConvItemProps> = (
     const message = createMessageDom(messageProps);
 
     if (props.name !== undefined || props.picture !== undefined) {
-        const chatPictureProps: ChatPictureProps = {
+        const avatarProps: AvatarProps = {
             name: props.name,
             picture: props.picture,
         };
-        const persona = createChatPictureDom(chatPictureProps);
+        const persona = createAvatarDom(avatarProps);
         element.append(persona);
     }
 

@@ -192,12 +192,12 @@ export type {
 // DOM COMPONENTS ___________
 
 export type {
-    ChatPictureProps,
-} from './comp/ChatPicture/props';
+    AvatarProps,
+} from './comp/Avatar/props';
 
 export {
-    className as compChatPictureClassName,
-} from './comp/ChatPicture/create';
+    className as compAvatarClassName,
+} from './comp/Avatar/create';
 
 export {
     className as compConversationItemClassName,

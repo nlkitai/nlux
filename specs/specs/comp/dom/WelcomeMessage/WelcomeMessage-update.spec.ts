@@ -59,7 +59,7 @@ describe('When welcome message is rendered for update', () => {
 
             // When
             updateWelcomeMessageDom(welcomeMessage, props, {...props, picture: newPicture});
-            const personaPicture = welcomeMessage.querySelector('.nlux_comp_cht_pic') as HTMLImageElement;
+            const personaPicture = welcomeMessage.querySelector('.nlux_comp_avtr') as HTMLImageElement;
 
             // Then
             expect(personaPicture).not.toBeNull();
