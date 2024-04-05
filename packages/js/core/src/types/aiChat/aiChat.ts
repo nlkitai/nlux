@@ -4,7 +4,7 @@ import {LayoutOptions} from '../../core/aiChat/options/layoutOptions';
 import {PersonaOptions} from '../../core/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../core/aiChat/options/promptBoxOptions';
 import {ChatAdapterBuilder} from '../adapters/chat/chatAdapterBuilder';
-import {ConversationItem} from '../conversation';
+import {ChatItem} from '../conversation';
 import {EventCallback, EventName, EventsMap} from '../event';
 import {AiChatProps} from './props';
 
@@ -111,10 +111,10 @@ export interface IAiChat {
      * The initial conversation will be used to populate the chat component with a conversation history.
      * This method can be called before mounting the chat component, and it can be called only once.
      *
-     * @param {ConversationItem[]} initialConversation
+     * @param {ChatItem[]} initialConversation
      * @returns {IAiChat}
      */
-    withInitialConversation(initialConversation: ConversationItem[]): IAiChat;
+    withInitialConversation(initialConversation: ChatItem[]): IAiChat;
 
     /**
      * Enables providing layout options to the chat component. The layout options will be used to configure the

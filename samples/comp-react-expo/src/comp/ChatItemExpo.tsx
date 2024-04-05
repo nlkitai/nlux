@@ -1,10 +1,10 @@
 import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
-import '@nlux-dev/themes/src/naked/components/ConversationItem.css';
+import '@nlux-dev/themes/src/naked/components/ChatItem.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
-import {ConvItemComp} from '@nlux-dev/react/src/comp/ConvItem/ConvItemComp.tsx';
+import {ChatItemComp} from '@nlux-dev/react/src/comp/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useState} from 'react';
 
-export const ConvItemExpo = () => {
+export const ChatItemExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
     const [status, setStatus] = useState<MessageStatus>('rendered');
     const [message, setMessage] = useState<string>('Hello, World!');
@@ -13,14 +13,14 @@ export const ConvItemExpo = () => {
     const [name, setName] = useState<string>('John Doe');
     const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');
 
-    const ForwardRefConvItemComp = forwardRef(ConvItemComp);
+    const ForwardRefChatItemComp = forwardRef(ChatItemComp);
 
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
             <div className="expo-container" style={{borderBottom: '1px dashed #B0B0B0', marginBottom: 20}}>
-                <h3>ConvItemComp Comp</h3>
+                <h3>ChatItemComp Comp</h3>
             </div>
-            <div className="ConvItem nlux_root">
+            <div className="ChatItem nlux_root">
                 <div className="controls">
                     <select
                         value={direction}
@@ -70,7 +70,7 @@ export const ConvItemExpo = () => {
                     />
                 </div>
                 <div className="content">
-                    <ForwardRefConvItemComp
+                    <ForwardRefChatItemComp
                         id={'1'}
                         direction={direction}
                         status={status}

@@ -1,6 +1,6 @@
 import {ExceptionId} from '../exceptions/exceptions';
 import {AiChatProps} from './aiChat/props';
-import {ConversationItem} from './conversation';
+import {ChatItem} from './conversation';
 
 export type ErrorEventDetails = {
     errorId: ExceptionId;
@@ -13,7 +13,7 @@ export type ReadyEventDetails = {
 
 export type PreDestroyEventDetails = {
     aiChatProps: AiChatProps;
-    conversationHistory: Readonly<ConversationItem[]>;
+    conversationHistory: Readonly<ChatItem[]>;
 }
 
 /**

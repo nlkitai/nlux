@@ -1,5 +1,5 @@
 import {AiChatProps} from '../../aiChat/props';
-import {ConversationItem} from '../../conversation';
+import {ChatItem} from '../../conversation';
 
 /**
  * Additional data sent to the adapter when a message is sent.
@@ -14,7 +14,7 @@ export type ChatAdapterExtras = {
      * This attribute contains the conversation history.
      * It's only included if the `conversationOptions.historyPayloadSize` is set to a positive number or 'all'.
      */
-    conversationHistory?: Readonly<ConversationItem[]>;
+    conversationHistory?: Readonly<ChatItem[]>;
 
     /**
      * This attribute contains the unique identifier of the context instance.

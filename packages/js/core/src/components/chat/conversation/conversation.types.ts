@@ -1,5 +1,5 @@
 import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
-import {ConversationItem} from '../../../types/conversation';
+import {ChatItem} from '../../../types/conversation';
 
 export type CompConversationEvents = 'user-scrolled';
 
@@ -11,7 +11,7 @@ export type CompConversationScrollParams = Readonly<{
 export type CompConversationScrollCallback = (params: CompConversationScrollParams) => void;
 
 export type CompConversationProps = Readonly<{
-    messages?: readonly ConversationItem[];
+    messages?: readonly ChatItem[];
     scrollWhenGenerating: boolean;
     streamingAnimationSpeed: number;
     botPersona?: BotPersona;

@@ -1,7 +1,7 @@
 import {MessageDirection, ParticipantRole} from '@nlux/core';
 import React, {createRef, forwardRef, ReactNode, Ref, RefObject, useImperativeHandle, useMemo} from 'react';
-import {ConvItemComp} from '../ConvItem/ConvItemComp';
-import {ConvItemImperativeProps} from '../ConvItem/props';
+import {ChatItemComp} from '../ChatItem/ChatItemComp';
+import {ChatItemImperativeProps} from '../ChatItem/props';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
@@ -54,7 +54,7 @@ export const ConversationComp: ConversationCompType = (
     const showWelcomeMessage = hasAiPersona && !hasMessages;
 
     const conversationItemsRef = useMemo(
-        () => new Map<string, RefObject<ConvItemImperativeProps>>(), [],
+        () => new Map<string, RefObject<ChatItemImperativeProps>>(), [],
     );
 
     useImperativeHandle(ref, () => ({
@@ -80,19 +80,19 @@ export const ConversationComp: ConversationCompType = (
 
             )}
             {hasMessages && messages.map((message) => {
-                let ref: RefObject<ConvItemImperativeProps> | undefined = conversationItemsRef.get(
+                let ref: RefObject<ChatItemImperativeProps> | undefined = conversationItemsRef.get(
                     message.id);
                 if (!ref) {
-                    ref = createRef<ConvItemImperativeProps>();
+                    ref = createRef<ChatItemImperativeProps>();
                     conversationItemsRef.set(message.id, ref);
                 }
 
-                const ForwardRefConversationItemComp = forwardRef(
-                    ConvItemComp<any>,
+                const ForwardRefChatItemComp = forwardRef(
+                    ChatItemComp<any>,
                 );
 
                 return (
-                    <ForwardRefConversationItemComp
+                    <ForwardRefChatItemComp
                         ref={ref}
                         key={message.id}
                         id={message.id}

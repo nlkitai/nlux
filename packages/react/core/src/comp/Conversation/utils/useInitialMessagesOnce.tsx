@@ -1,9 +1,9 @@
-import {ConversationItem, uid} from '@nlux/core';
+import {ChatItem, uid} from '@nlux/core';
 import {useMemo} from 'react';
 import {ConversationMessage} from '../props';
 
 export const useInitialMessagesOnce: <MessageType>(
-    initialItems?: ConversationItem<MessageType>[],
+    initialItems?: ChatItem<MessageType>[],
 ) => ConversationMessage<MessageType>[] | undefined = (
     initialItems,
 ) => {

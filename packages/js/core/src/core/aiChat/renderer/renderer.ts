@@ -4,7 +4,7 @@ import {CompExceptionsBox} from '../../../components/miscellaneous/exceptions-bo
 import {CompExceptionsBoxProps} from '../../../components/miscellaneous/exceptions-box/types';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ConversationItem} from '../../../types/conversation';
+import {ChatItem} from '../../../types/conversation';
 import {ExceptionType} from '../../../types/exception';
 import {warn} from '../../../x/warn';
 import {NluxRenderingError} from '../../error';
@@ -30,7 +30,7 @@ export class NluxRenderer {
     private rootElementInitialClassName: string | null;
     private theClassName: string | null = null;
     private theConversationOptions: Readonly<ConversationOptions> = {};
-    private theInitialConversationContent: Readonly<ConversationItem[]> | null = null;
+    private theInitialConversationContent: Readonly<ChatItem[]> | null = null;
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};

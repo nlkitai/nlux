@@ -1,6 +1,6 @@
 import {
     ChatAdapterExtras,
-    ConversationItem,
+    ChatItem,
     DataTransferMode,
     StandardAdapterInfo,
     StandardChatAdapter,
@@ -154,7 +154,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
         return undefined;
     }
 
-    protected getRequestBody(message: string, conversationHistory?: readonly ConversationItem[]): string {
+    protected getRequestBody(message: string, conversationHistory?: readonly ChatItem[]): string {
         if (this.inputPreProcessor) {
             const preProcessedInput = this.inputPreProcessor(message, conversationHistory);
             return JSON.stringify({

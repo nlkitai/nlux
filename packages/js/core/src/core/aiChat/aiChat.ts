@@ -4,7 +4,7 @@ import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
 import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
-import {ConversationItem} from '../../types/conversation';
+import {ChatItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {debug} from '../../x/debug';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../error';
@@ -21,7 +21,7 @@ export class AiChat implements IAiChat {
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
-    protected theInitialConversation: ConversationItem[] | null = null;
+    protected theInitialConversation: ChatItem[] | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
@@ -267,7 +267,7 @@ export class AiChat implements IAiChat {
         return this;
     }
 
-    public withInitialConversation(initialConversation: ConversationItem[]) {
+    public withInitialConversation(initialConversation: ChatItem[]) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,

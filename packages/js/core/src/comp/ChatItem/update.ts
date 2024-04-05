@@ -3,10 +3,10 @@ import {className as avatarClassName} from '../Avatar/create';
 import {updateAvatarDom} from '../Avatar/update';
 import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
-import {ConvItemProps} from './props';
+import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 
-export const updateConvItemDom: DomUpdater<ConvItemProps> = (
+export const updateChatItemDom: DomUpdater<ChatItemProps> = (
     element,
     propsBefore,
     propsAfter,

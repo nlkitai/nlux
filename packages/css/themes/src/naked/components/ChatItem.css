@@ -1,4 +1,4 @@
-.nlux_comp_cnv_itm {
+.nlux_comp_cht_itm {
     display: flex;
     flex-direction: row;
     gap: 0.5em;
@@ -8,10 +8,10 @@
     }
 }
 
-.nlux_comp_cnv_itm.nlux_cnv_itm_incoming {
+.nlux_comp_cht_itm.nlux_cht_itm_incoming {
     flex-direction: row-reverse;
 }
 
-.nlux_comp_cnv_itm.nlux_cnv_itm_outgoing {
+.nlux_comp_cht_itm.nlux_cht_itm_outgoing {
     flex-direction: row;
 }

@@ -1,8 +1,8 @@
-import {ConversationItem, warn} from '@nlux/core';
+import {ChatItem, warn} from '@nlux/core';
 
 export const transformInputBasedOnSchema = (
     message: string,
-    conversationHistory: readonly ConversationItem[] | undefined,
+    conversationHistory: readonly ChatItem[] | undefined,
     schema: any,
     runnableName: string,
 ): any | undefined => {

@@ -167,7 +167,7 @@ export type {
 // CONVERSATION _____________
 
 export type {
-    ConversationItem,
+    ChatItem,
 } from './types/conversation';
 
 export type {
@@ -200,8 +200,8 @@ export {
 } from './comp/Avatar/create';
 
 export {
-    className as compConversationItemClassName,
-} from './comp/ConvItem/create';
+    className as compChatItemClassName,
+} from './comp/ChatItem/create';
 
 export type {
     ExceptionsBoxProps,
