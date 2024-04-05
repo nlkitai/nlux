@@ -1,24 +1,24 @@
 import './App.css';
-import {AiChatExpo} from './comp/AiChatExpo.tsx';
-import {AvatarExpo} from './comp/AvatarExpo.tsx';
-import {ChatItemExpo} from './comp/ChatItemExpo.tsx';
-import {LoaderExpo} from './comp/LoaderExpo.tsx';
-import {MessageExpo} from './comp/MessageExpo.tsx';
-import {PromptBoxExpo} from './comp/PromptBoxExpo.tsx';
-import {WelcomeMessageExpo} from './comp/WelcomeMessageExpo.tsx';
+import {AiChatReactExpo} from './comp/AiChatReactExpo.tsx';
+import {AvatarReactExpo} from './comp/AvatarReactExpo.tsx';
+import {ChatItemReactExpo} from './comp/ChatItemReactExpo.tsx';
+import {LoaderReactExpo} from './comp/LoaderReactExpo.tsx';
+import {MessageReactExpo} from './comp/MessageReactExpo.tsx';
+import {PromptBoxReactExpo} from './comp/PromptBoxReactExpo.tsx';
+import {WelcomeMessageReactExpo} from './comp/WelcomeMessageReactExpo.tsx';
 
 function App() {
 
     return (
         <>
             <h1>Comp React Expo</h1>
-            <LoaderExpo/>
-            <MessageExpo/>
-            <AvatarExpo/>
-            <ChatItemExpo/>
-            <PromptBoxExpo/>
-            <WelcomeMessageExpo/>
-            <AiChatExpo/>
+            <LoaderReactExpo/>
+            <MessageReactExpo/>
+            <AvatarReactExpo/>
+            <ChatItemReactExpo/>
+            <PromptBoxReactExpo/>
+            <WelcomeMessageReactExpo/>
+            <AiChatReactExpo/>
         </>
     );
 }

@@ -19,6 +19,7 @@ newExpo.innerHTML = `
                     <option value="rendered">Rendered</option>
                     <option value="loading">Loading</option>
                     <option value="streaming">Streaming</option>
+                    <option value="error">Error</option>
                 </select>
                 <input type="text" placeholder="Message" />
             </div>

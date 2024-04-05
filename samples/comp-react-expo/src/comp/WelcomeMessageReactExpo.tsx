@@ -3,7 +3,7 @@ import '@nlux-dev/themes/src/naked/components/WelcomeMessage.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ReactElement, useState} from 'react';
 
-export const WelcomeMessageExpo = () => {
+export const WelcomeMessageReactExpo = () => {
     const [message, setMessage] = useState<string>('Hello, World!');
     const [name, setName] = useState<string>('John Doe');
     const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');

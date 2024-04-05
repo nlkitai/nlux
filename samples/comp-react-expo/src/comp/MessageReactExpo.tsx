@@ -4,7 +4,7 @@ import '@nlux-dev/themes/src/naked/components/Message.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ReactElement, useState} from 'react';
 
-export const MessageExpo = () => {
+export const MessageReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
     const [status, setStatus] = useState<MessageStatus>('rendered');
     const [message, setMessage] = useState<string>('Hello, World!');
@@ -31,6 +31,7 @@ export const MessageExpo = () => {
                         <option value="rendered">Rendered</option>
                         <option value="loading">Loading</option>
                         <option value="streaming">Streaming</option>
+                        <option value="error">Error</option>
                     </select>
                     <input
                         type="text"
@@ -54,6 +55,7 @@ export const MessageExpo = () => {
                 </div>
                 <div className="content">
                     <MessageComp
+                        id={'1'}
                         direction={direction}
                         status={status}
                         message={message}
