@@ -23,6 +23,10 @@ export const getMessageStatusFromPart = <MessageType>(
     }
 
     if (item.status === 'complete') {
+        if (item.dataTransferMode === 'stream') {
+            return 'rendered';
+        }
+
         if (item.content === undefined) {
             warn('Message content is undefined');
             return 'error';

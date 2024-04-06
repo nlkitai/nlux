@@ -177,7 +177,6 @@ export type {
     ChatSegmentAiMessage,
     ChatSegmentUserMessage,
     ChatSegmentItem,
-    ChatSegmentItemType,
     ChatSegmentEvent,
     ChatSegmentUpdateCallback,
     ChatSegmentChunkCallback,

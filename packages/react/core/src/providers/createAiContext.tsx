@@ -6,7 +6,7 @@ import {
     InitializeContextResult,
     predefinedContextSize,
 } from '@nlux/core';
-import React, {createContext, useEffect, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
 import {AiContext, AiContextProviderProps} from '../types/AiContext';
 
 /**

@@ -4,7 +4,7 @@ import {
     renderedPhotoContainerClassName,
 } from '@nlux-dev/core/src/comp/Avatar/utils/createPhotoContainerFromUrl';
 import {compAvatarClassName} from '@nlux/core';
-import React, {isValidElement} from 'react';
+import {isValidElement} from 'react';
 import {AvatarProps} from './props';
 
 export const AvatarComp = (props: AvatarProps) => {

@@ -1,6 +1,7 @@
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {
+    AiUnifiedMessage,
     ChatSegment,
     ChatSegmentAiMessage,
     ChatSegmentChunkCallback,
@@ -8,20 +9,21 @@ import {
     ChatSegmentErrorCallback,
     ChatSegmentEvent,
     ChatSegmentEventsMap,
-    ChatSegmentUpdateCallback,
+    ChatSegmentItem,
     ChatSegmentUserMessage,
 } from '../../../../types/chatSegment';
 import {uid} from '../../../../x/uid';
+import {warn} from '../../../../x/warn';
 import {SubmitPrompt} from './submitPrompt';
 
-export const submitPrompt: SubmitPrompt<ResponseType> = (
+export const submitPrompt: SubmitPrompt = <ResponseType>(
     prompt: string,
     adapter: ChatAdapter,
     extras: ChatAdapterExtras,
     preferredDataTransferMode: DataTransferMode,
 ) => {
     const callbacksByEvent: Map<ChatSegmentEvent, Set<Function>> = new Map();
-    const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap[ChatSegmentEvent]) => {
+    const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap<ResponseType>[ChatSegmentEvent]) => {
         if (!callbacksByEvent.has(event)) {
             callbacksByEvent.set(event, new Set());
         }
@@ -52,8 +54,9 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
 
     const userMessage: ChatSegmentUserMessage = {
         uid: uid(),
-        participantRole: 'user',
         time: new Date(),
+        status: 'complete',
+        participantRole: 'user',
         content: prompt,
     };
 
@@ -61,20 +64,20 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
-        type: 'stream',
+        dataTransferMode: 'stream',
         status: 'streaming',
     } : {
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
-        type: 'message',
+        dataTransferMode: 'fetch',
         status: 'loading',
     };
 
-    const part: ChatSegment<ResponseType> = {
+    const chatSegment: ChatSegment<ResponseType> = {
         uid: uid(),
         status: 'active',
-        messages: [userMessage, aiMessage],
+        items: [userMessage, aiMessage],
         on: addListener,
         removeListener: removeListener,
     };
@@ -84,53 +87,79 @@ export const submitPrompt: SubmitPrompt<ResponseType> = (
     //
     if (dataTransferMode === 'stream') {
         adapter.streamText!(prompt, {
-            next: (chunk: ResponseType) => {
+            next: (chunk: string) => {
                 callbacksByEvent.get('chunk')?.forEach(callback => {
                     const messageCallback = callback as ChatSegmentChunkCallback;
                     messageCallback(aiMessage.uid, chunk);
                 });
             },
             complete: () => {
-                part.status = 'complete';
+                const updatedChatSegment = {
+                    ...chatSegment,
+                    status: 'complete',
+                } satisfies ChatSegment<ResponseType>;
+
+                chatSegment.status = 'complete';
                 callbacksByEvent.get('complete')?.forEach(callback => {
-                    const completeCallback = callback as ChatSegmentCompleteCallback;
-                    completeCallback();
+                    const completeCallback = callback as ChatSegmentCompleteCallback<ResponseType>;
+                    completeCallback(updatedChatSegment);
                 });
+
                 callbacksByEvent.clear();
             },
             error: (error: Error) => {
-                part.status = 'error';
+                chatSegment.status = 'error';
                 callbacksByEvent.get('error')?.forEach(callback => {
                     const errorCallback = callback as ChatSegmentErrorCallback;
                     errorCallback(error);
                 });
+
                 callbacksByEvent.clear();
             },
         }, extras);
 
-        return part;
+        return chatSegment;
     }
 
     //
     // Handle message in fetch mode
     //
     adapter.fetchText!(prompt, extras).then((message: any) => {
-        aiMessage.content = message;
-        part.status = 'complete';
-        callbacksByEvent.get('update')?.forEach(callback => {
-            const messageCallback = callback as ChatSegmentUpdateCallback;
-            messageCallback('ai', 'complete', message);
+        if (aiMessage.dataTransferMode !== 'fetch' || aiMessage.status !== 'loading') {
+            warn('The AI message was already completed or is not in fetch mode');
+            return;
+        }
+
+        const newAiMessage: AiUnifiedMessage<ResponseType> = {
+            ...aiMessage,
+            status: 'complete',
+            content: message,
+        };
+
+        const items: ChatSegmentItem<ResponseType>[] = chatSegment.items.map(item => {
+            if (item.uid === aiMessage.uid) {
+                return newAiMessage;
+            }
+
+            return item;
         });
+
+        const newChatSegment: ChatSegment<ResponseType> = {
+            ...chatSegment,
+            status: 'complete',
+            items,
+        };
+
         callbacksByEvent.get('complete')?.forEach(callback => {
-            const completeCallback = callback as ChatSegmentCompleteCallback;
-            completeCallback();
+            const completeCallback = callback as ChatSegmentCompleteCallback<ResponseType>;
+            completeCallback(newChatSegment);
         });
         callbacksByEvent.clear();
     }).catch((error: Error) => {
-        part.status = 'error';
+        chatSegment.status = 'error';
         callbacksByEvent.get('error')?.forEach(callback => callback(error));
         callbacksByEvent.clear();
     });
 
-    return part;
+    return chatSegment;
 };
