@@ -21,6 +21,7 @@ newExpo.innerHTML = `
                     <option value="rendered">Rendered</option>
                     <option value="loading">Loading</option>
                     <option value="streaming">Streaming</option>
+                    <option value="error">Error</option>
                 </select>
                 <input type="text" placeholder="ChatItem" />
             </div>
@@ -34,7 +35,7 @@ newExpo.innerHTML = `
 document.querySelector<HTMLDivElement>('#app')!.append(newExpo);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector<HTMLDivElement>('.ChatItemComp-expo')!;
+    const container = document.querySelector<HTMLDivElement>('.ChatItem-expo')!;
     let props: ChatItemProps = {
         direction: 'incoming',
         status: 'rendered',
