@@ -1,43 +1,9 @@
-import {MessageDirection, ParticipantRole} from '@nlux/core';
-import React, {createRef, forwardRef, ReactNode, Ref, RefObject, useImperativeHandle, useMemo} from 'react';
-import {ChatItemComp} from '../ChatItem/ChatItemComp';
-import {ChatItemImperativeProps} from '../ChatItem/props';
+import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
+import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
+import {ChatSegmentImperativeProps} from '../ChatSegment/props';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
-const roleToDirection = (role: ParticipantRole): MessageDirection => {
-    switch (role) {
-        case 'user':
-            return 'outgoing';
-    }
-
-    return 'incoming';
-};
-
-const pictureFromMessageAndPersona = (role: ParticipantRole, personaOptions: ConversationCompProps<unknown>['personaOptions']) => {
-    if (role === 'ai') {
-        return personaOptions?.bot?.picture;
-    }
-
-    if (role === 'user') {
-        return personaOptions?.user?.picture;
-    }
-
-    return undefined;
-};
-
-const nameFromMessageAndPersona = (role: ParticipantRole, personaOptions: ConversationCompProps<unknown>['personaOptions']) => {
-    if (role === 'ai') {
-        return personaOptions?.bot?.name;
-    }
-
-    if (role === 'user') {
-        return personaOptions?.user?.name;
-    }
-
-    return undefined;
-
-};
 
 export type ConversationCompType = <MessageType>(
     props: ConversationCompProps<MessageType>,
@@ -48,23 +14,38 @@ export const ConversationComp: ConversationCompType = (
     props,
     ref,
 ) => {
-    const {messages, personaOptions} = props;
-    const hasMessages = messages && messages.length > 0;
+    const {segments, personaOptions} = props;
+    const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
     const hasAiPersona = personaOptions?.bot?.name && personaOptions.bot.picture;
     const showWelcomeMessage = hasAiPersona && !hasMessages;
 
-    const conversationItemsRef = useMemo(
-        () => new Map<string, RefObject<ChatItemImperativeProps>>(), [],
+    const chatSegmentsRef = useMemo(
+        () => new Map<string, RefObject<ChatSegmentImperativeProps<any>>>(), [],
     );
+
+    useEffect(() => {
+        if (props.segments.length === 0) {
+            chatSegmentsRef.clear();
+            return;
+        }
+
+        const itemsInRefsMap = new Set<string>(chatSegmentsRef.keys());
+        const itemsInSegments = new Set<string>(props.segments.map((segment) => segment.uid));
+        for (const itemInRefsMap of itemsInRefsMap) {
+            if (!itemsInSegments.has(itemInRefsMap)) {
+                chatSegmentsRef.delete(itemInRefsMap);
+            }
+        }
+    }, [props.segments]);
 
     useImperativeHandle(ref, () => ({
         scrollToBottom: () => {
             // TODO - Implement scroll to bottom
         },
-        streamChunk: (messageId: string, chunk: string) => {
-            const messageCompRef = conversationItemsRef.get(messageId);
-            if (messageCompRef?.current) {
-                messageCompRef.current.streamChunk(chunk);
+        streamChunk: (segmentId: string, messageId: string, chunk: string) => {
+            const chatSegmentRef = chatSegmentsRef.get(segmentId);
+            if (chatSegmentRef?.current) {
+                chatSegmentRef.current.streamChunk(messageId, chunk);
             }
         },
     }), []);
@@ -73,35 +54,29 @@ export const ConversationComp: ConversationCompType = (
         <>
             {showWelcomeMessage && (
                 <WelcomeMessageComp
-                    name={props.personaOptions!.bot!.name}
-                    picture={props.personaOptions!.bot!.picture}
-                    message={props.personaOptions!.bot!.tagline}
+                    name={personaOptions!.bot!.name}
+                    picture={personaOptions!.bot!.picture}
+                    message={personaOptions!.bot!.tagline}
                 />
-
             )}
-            {hasMessages && messages.map((message) => {
-                let ref: RefObject<ChatItemImperativeProps> | undefined = conversationItemsRef.get(
-                    message.id);
+            {segments.map((segment) => {
+                let ref: RefObject<ChatSegmentImperativeProps<any>> | undefined = chatSegmentsRef.get(segment.uid);
                 if (!ref) {
-                    ref = createRef<ChatItemImperativeProps>();
-                    conversationItemsRef.set(message.id, ref);
+                    ref = createRef();
+                    chatSegmentsRef.set(segment.uid, ref);
                 }
 
-                const ForwardRefChatItemComp = forwardRef(
-                    ChatItemComp<any>,
-                );
+                const ForwardRefChatItemComp = forwardRef(ChatSegmentComp);
 
                 return (
                     <ForwardRefChatItemComp
                         ref={ref}
-                        key={message.id}
-                        id={message.id}
-                        status={message.status}
-                        direction={roleToDirection(message.role)}
-                        message={message.message}
-                        customRenderer={props.customAiMessageComponent}
-                        name={nameFromMessageAndPersona(message.role, props.personaOptions)}
-                        picture={pictureFromMessageAndPersona(message.role, props.personaOptions)}
+                        key={segment.uid}
+                        chatSegment={segment}
+                        personaOptions={personaOptions}
+                        loader={props.loader}
+                        customRenderer={props.customRenderer}
+                        syntaxHighlighter={props.syntaxHighlighter}
                     />
                 );
             })}

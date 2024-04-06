@@ -1,12 +1,11 @@
-import {chatSegmentsToMessages} from '@nlux-dev/core/src/utils/chat/chatSegmentsToMessages';
-import {reactPropsToCoreProps} from '@nlux-dev/core/src/utils/chat/reactPropsToCoreProps';
 import {ChatAdapterExtras, ChatSegment, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
-import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../comp/Conversation/ConversationComp';
-import {ConversationMessage, ImperativeConversationCompProps} from '../comp/Conversation/props';
-import {useInitialMessagesOnce} from '../comp/Conversation/utils/useInitialMessagesOnce';
+import {ImperativeConversationCompProps} from '../comp/Conversation/props';
 import {PromptBoxComp} from '../comp/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
+import {chatItemsToChatSegment} from '../utils/chatItemsToChatSegment';
+import {reactPropsToCoreProps} from '../utils/reactPropsToCoreProps';
 import {AiChatComponentProps} from './props';
 
 export const AiChat: <MessageType>(
@@ -20,12 +19,11 @@ export const AiChat: <MessageType>(
     const className = `nlux_root` + (props.className ? ` ${props.className}` : '');
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
 
-    const initialMessages = useInitialMessagesOnce<MessageType>(props.initialConversation);
-    const [messages, setMessages] = useState<ConversationMessage<MessageType>[]>(initialMessages ?? []);
     const [prompt, setPrompt] = useState('');
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
-    const [parts, setParts] = useState<ChatSegment<MessageType>[]>([]); // [ChatSegment<MT>
-    const setPartsRef = useRef({parts, setParts});
+    const [initialSegment, setInitialSegment] = useState<ChatSegment<MessageType>>();
+    const [chatSegments, setChatSegments] = useState<ChatSegment<MessageType>[]>([]);
+    const setSegmentsRef = useRef({chatSegments, setChatSegments});
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
     const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => {
@@ -44,7 +42,7 @@ export const AiChat: <MessageType>(
             return;
         }
 
-        const chatSegment: ChatSegment<any> = submitPrompt(
+        const chatSegment: ChatSegment<MessageType> = submitPrompt(
             prompt,
             adapterToUse,
             adapterExtras,
@@ -52,7 +50,8 @@ export const AiChat: <MessageType>(
         );
 
         if (chatSegment.status === 'error') {
-            // TODO - Handle error
+            warn('Error occurred while submitting prompt');
+            // TODO — Display error message to user
             return;
         }
 
@@ -63,40 +62,55 @@ export const AiChat: <MessageType>(
         // the reference of the parts array by creating a new array.
 
         chatSegment.on('complete', () => {
-            const parts = setPartsRef.current.parts;
-            setPartsRef.current.setParts([...parts]);
+            const segments = setSegmentsRef.current.chatSegments;
+            setSegmentsRef.current.setChatSegments([...segments]);
         });
 
-        chatSegment.on('update', () => {
-            const parts = setPartsRef.current.parts;
-            setPartsRef.current.setParts([...parts]);
+        chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
+            const currentChatSegments = setSegmentsRef.current.chatSegments;
+            const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
+                (currentChatSegment) => {
+                    if (currentChatSegment.uid === newChatSegment.uid) {
+                        return newChatSegment;
+                    }
+
+                    return currentChatSegment;
+                },
+            );
+
+            setSegmentsRef.current.setChatSegments(newChatSegments);
         });
 
         chatSegment.on('error', () => {
-            const parts = setPartsRef.current.parts;
+            const parts = setSegmentsRef.current.chatSegments;
             const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
-            setPartsRef.current.setParts(newParts);
+            setSegmentsRef.current.setChatSegments(newParts);
         });
 
         chatSegment.on('chunk', (messageId: string, chunk: string) => {
-            conversationRef.current?.streamChunk(messageId, chunk);
+            conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
         });
 
-        setParts([...parts, chatSegment]);
+        setChatSegments([...chatSegments, chatSegment]);
         setPrompt('');
 
-    }, [parts, prompt, adapterToUse, adapterExtras, setPartsRef]);
+    }, [chatSegments, prompt, adapterToUse, adapterExtras, setSegmentsRef]);
 
     useEffect(() => {
-        setPartsRef.current = {parts, setParts};
-    }, [parts, setParts]);
+        setSegmentsRef.current = {chatSegments, setChatSegments};
+    }, [chatSegments, setChatSegments]);
 
     useEffect(() => {
-        setMessages([
-            ...(initialMessages ?? []),
-            ...chatSegmentsToMessages(parts),
-        ]);
-    }, [initialMessages, parts]);
+        setInitialSegment(
+            props.initialConversation
+                ? chatItemsToChatSegment(props.initialConversation)
+                : undefined,
+        );
+    }, [props.initialConversation]);
+
+    const conversationSegments = useMemo(() => {
+        return initialSegment ? [initialSegment, ...chatSegments] : chatSegments;
+    }, [initialSegment, chatSegments]);
 
     const ForwardConversationComp = forwardRef(
         ConversationComp<MessageType>,
@@ -106,10 +120,10 @@ export const AiChat: <MessageType>(
         <div className={className}>
             <ForwardConversationComp
                 ref={conversationRef}
-                messages={messages}
+                segments={conversationSegments}
                 conversationOptions={props.conversationOptions}
                 personaOptions={props.personaOptions}
-                customAiMessageComponent={customAiMessageComponent}
+                customRenderer={customAiMessageComponent}
                 syntaxHighlighter={props.syntaxHighlighter}
             />
             <PromptBoxComp

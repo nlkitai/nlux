@@ -18,7 +18,7 @@ export type AiChatComponentProps<MessageType = string> = {
     initialConversation?: ChatItem<MessageType>[];
     syntaxHighlighter?: HighlighterExtension;
     conversationOptions?: ConversationOptions;
-    customMessageComponent?: (message: MessageType) => ReactElement | null;
+    customMessageComponent?: <MessageType>(message: MessageType) => ReactElement | null;
     layoutOptions?: LayoutOptions;
     promptBoxOptions?: PromptBoxOptions;
     personaOptions?: PersonaOptions;

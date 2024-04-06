@@ -7,7 +7,7 @@ import {ChatSegment} from '../../../../types/chatSegment';
  * This function will return a chat segment controller that can be used to control the chat segment
  * that was created as a result of submitting the prompt.
  */
-export type SubmitPrompt<ResponseType> = (
+export type SubmitPrompt = <ResponseType>(
     prompt: string,
     adapter: ChatAdapter,
     adapterExtras: ChatAdapterExtras,

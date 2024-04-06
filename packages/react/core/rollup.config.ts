@@ -40,6 +40,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => ([
         ],
         external: [
             'react',
+            'react-dom',
         ],
         output: generateOutputConfig(packageName, outputFile, isProduction),
     },
