@@ -64,10 +64,12 @@ export const ChatItemComp: <MessageType>(
     return (
         <div className={className}>
             {picture}
-            <ForwardRefStreamContainerComp
-                id={props.id}
-                key={'do-not-change'} ref={streamContainer}
-            />
+            {isStreaming && (
+                <ForwardRefStreamContainerComp
+                    id={props.id}
+                    key={'do-not-change'} ref={streamContainer}
+                />
+            )}
             {!isStreaming && (
                 <MessageComp
                     id={props.id}
