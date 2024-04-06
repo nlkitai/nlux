@@ -31,6 +31,15 @@ export const updateContentOnStatusChange = (
         return;
     }
 
+    if (newStatus === 'error') {
+        const textNode = document.createTextNode('Error');
+        element.classList.add('nlux_msg_error');
+        element.replaceChildren();
+        element.append(textNode);
+
+        return;
+    }
+
     if (newStatus === 'rendered') {
         const innerHtml = propsAfter.message ? propsAfter.message : '';
         const textNode = document.createTextNode(innerHtml);

@@ -24,6 +24,11 @@ export const createMessageDom: DomCreator<MessageProps> = (props): HTMLElement =
         return element;
     }
 
+    if (status === 'error') {
+        element.append(createMessageContent('Error'));
+        return element;
+    }
+
     //
     // Default status is — rendered
     //
