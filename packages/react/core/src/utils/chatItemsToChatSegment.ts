@@ -15,7 +15,7 @@ export const chatItemsToChatSegment = <MessageType>(
     removeListener: ChatSegment<MessageType>['removeListener'] = () => {
     },
 ): ChatSegment<MessageType> => {
-    const segmentItems = chatItems.map((message, index) => {
+    const segmentItems: ChatSegmentItem<MessageType>[] = chatItems.map((message, index) => {
         if (message.role !== 'ai' && message.role !== 'user') {
             warn(
                 `Invalid role for item at index ${index} in initial conversation: ` +
@@ -53,11 +53,10 @@ export const chatItemsToChatSegment = <MessageType>(
             dataTransferMode: 'fetch',
         } satisfies ChatSegmentAiMessage<MessageType>;
     }).filter(
-        (
-            segmentItem: ChatSegmentItem<MessageType> | undefined,
-        ): segmentItem is ChatSegmentItem<MessageType> => {
+        (segmentItem: ChatSegmentItem<MessageType> | undefined): segmentItem is ChatSegmentItem<MessageType> => {
             return segmentItem !== undefined;
-        });
+        },
+    ) as ChatSegmentItem<MessageType>[];
 
     return {
         uid: 'initial',
