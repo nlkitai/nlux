@@ -1,6 +1,4 @@
-import {className as messageDomClassName} from '@nlux-dev/core/src/ui/Message/create';
-import {directionClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewDirectionClassName';
-import {statusClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewStatusClassName';
+import {compMessageClassName, compMessageDirectionClassName, compMessageStatusClassName} from '@nlux/core';
 import {Ref, useEffect, useImperativeHandle, useRef} from 'react';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomServive';
@@ -36,14 +34,14 @@ export const StreamContainerComp = (
     }), []);
 
     const compDirectionClassName = props.direction
-        ? directionClassName[props.direction]
-        : directionClassName['incoming'];
+        ? compMessageDirectionClassName[props.direction]
+        : compMessageDirectionClassName['incoming'];
 
     const compStatusClassName = props.status
-        ? statusClassName[props.status]
-        : statusClassName['rendered'];
+        ? compMessageStatusClassName[props.status]
+        : compMessageStatusClassName['rendered'];
 
-    const className = `${messageDomClassName} ${compStatusClassName} ${compDirectionClassName}`;
+    const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
     return (
         <div className={className} ref={streamContainer}/>

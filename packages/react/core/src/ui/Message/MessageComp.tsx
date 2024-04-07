@@ -1,20 +1,18 @@
-import {className as messageDomClassName} from '@nlux-dev/core/src/ui/Message/create';
-import {directionClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewDirectionClassName';
-import {statusClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewStatusClassName';
+import {compMessageClassName, compMessageDirectionClassName, compMessageStatusClassName} from '@nlux/core';
 import React from 'react';
 import {LoaderComp} from '../Loader/LoaderComp';
 import {MessageProps} from './props';
 
 export const MessageComp = (props: MessageProps) => {
     const compStatusClassName = props.status
-        ? statusClassName[props.status]
-        : statusClassName['rendered'];
+        ? compMessageStatusClassName[props.status]
+        : compMessageStatusClassName['rendered'];
 
     const compDirectionClassName = props.direction
-        ? directionClassName[props.direction]
-        : directionClassName['incoming'];
+        ? compMessageDirectionClassName[props.direction]
+        : compMessageDirectionClassName['incoming'];
 
-    const className = `${messageDomClassName} ${compStatusClassName} ${compDirectionClassName}`;
+    const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
     if (props.status === 'streaming') {
         return (

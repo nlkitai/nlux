@@ -1,4 +1,4 @@
-import {createAiContext} from '@nlux-dev/core/src/core/aiContext/aiContext';
+import {createAiContext} from '@nlux-dev/core/src/exports/aiContext/aiContext';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
 import {waitForMilliseconds} from '../../../utils/wait';

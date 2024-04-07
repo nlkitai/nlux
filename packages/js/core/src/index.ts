@@ -199,8 +199,18 @@ export {
 } from './ui/Avatar/create';
 
 export {
+    renderedInitialsClassName as compAvatarInitialsClassName,
+    renderedPhotoClassName as compAvatarPhotoClassName,
+    renderedPhotoContainerClassName as compAvatarPhotoContainerClassName,
+} from './ui/Avatar/utils/createPhotoContainerFromUrl';
+
+export {
     className as compChatItemClassName,
 } from './ui/ChatItem/create';
+
+export {
+    directionClassName as compChatItemDirectionClassName,
+} from './ui/ChatItem/utils/applyNewDirectionClassName';
 
 export type {
     ExceptionsBoxProps,
@@ -224,6 +234,14 @@ export {
     className as compMessageClassName,
 } from './ui/Message/create';
 
+export {
+    statusClassName as compMessageStatusClassName,
+} from './ui/Message/utils/applyNewStatusClassName';
+
+export {
+    directionClassName as compMessageDirectionClassName,
+} from './ui/Message/utils/applyNewDirectionClassName';
+
 export type {
     PromptBoxStatus,
     PromptBoxProps,
@@ -232,6 +250,10 @@ export type {
 export {
     className as compPromptBoxClassName,
 } from './ui/PromptBox/create';
+
+export {
+    statusClassName as compPromptBoxStatusClassName,
+} from './ui/PromptBox/utils/applyNewStatusClassName';
 
 export {
     className as compSendIconClassName,

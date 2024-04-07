@@ -1,7 +1,7 @@
 import {MessageDirection} from '@nlux/core';
 
 export type StreamContainerProps = {
-    uid: 'string',
+    uid: string,
     direction: MessageDirection,
     status: 'rendered' | 'streaming' | 'error';
 };
