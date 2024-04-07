@@ -13,7 +13,7 @@ export type AiContextProviderProps = {
  * This object is created as a result of calling createAiContext().
  *
  * The Provider property is a React component that provides the AI context to the children.
- * To be used as <aiContextInstance.Provider> context aware app .. </aiContextInstance.Provider>
+ * To be used as <aiContextInstance.Provider> Context Aware App ... </aiContextInstance.Provider>
  *
  * The ref property is a React context that can be used to access the React context value.
  * Do not use the ref property directly, the useAiContext() and useAiTask() hooks should be used instead.

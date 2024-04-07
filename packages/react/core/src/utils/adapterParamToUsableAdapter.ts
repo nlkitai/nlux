@@ -13,7 +13,6 @@ export const adapterParamToUsableAdapter = (
             (typeof adapterAsAny?.fetchText === 'function') ||
             (typeof adapterAsAny?.streamText === 'function')
         ) {
-            adapterType = 'instance';
             return anAdapterOrAdapterBuilder as ChatAdapter;
         }
     }
