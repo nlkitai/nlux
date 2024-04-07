@@ -1,4 +1,4 @@
-import {AvatarComp} from '@nlux-dev/react/src/comp/Avatar/AvatarComp.tsx';
+import {AvatarComp} from '@nlux-dev/react/src/ui/Avatar/AvatarComp.tsx';
 import {ReactElement, useEffect, useState} from 'react';
 import '@nlux-dev/themes/src/naked/components/Avatar.css';
 

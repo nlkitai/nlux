@@ -1,5 +1,5 @@
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
-import {MessageComp} from '@nlux-dev/react/src/comp/Message/MessageComp.tsx';
+import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
+import {MessageComp} from '@nlux-dev/react/src/ui/Message/MessageComp.tsx';
 import '@nlux-dev/themes/src/naked/components/Message.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ReactElement, useState} from 'react';

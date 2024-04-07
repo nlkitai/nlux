@@ -2,10 +2,10 @@ import '../style.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import '@nlux-dev/themes/src/naked/components/ChatItem.css';
 import '@nlux-dev/themes/src/naked/components/Loader.css';
-import {createChatItemDom} from '@nlux-dev/core/src/comp/ChatItem/create.ts';
-import {ChatItemProps} from '@nlux-dev/core/src/comp/ChatItem/props.ts';
-import {updateChatItemDom} from '@nlux-dev/core/src/comp/ChatItem/update.ts';
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
+import {createChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/create.ts';
+import {ChatItemProps} from '@nlux-dev/core/src/ui/ChatItem/props.ts';
+import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update.ts';
+import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `
