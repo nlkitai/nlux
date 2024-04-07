@@ -1,7 +1,7 @@
 import {ContextTasksAdapter} from '../../types/adapters/context/contextTasksAdapter';
 import {ContextActionResult, DestroyContextResult, RunTaskResult} from '../../types/aiContext/contextResults';
 import {ContextTasks} from '../../types/aiContext/data';
-import {warn} from '../../x/warn';
+import {warn} from '../../utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';

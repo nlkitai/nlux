@@ -1,10 +1,10 @@
-import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
-import {NluxRenderingError} from '../../../core/error';
+import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {render} from '../../../x/render';
-import {source} from '../../../x/source';
-import {throttle} from '../../../x/throttle';
+import {render} from '../../../utils/render';
+import {source} from '../../../utils/source';
+import {throttle} from '../../../utils/throttle';
 import {
     CompConversationActions,
     CompConversationElements,

@@ -1,6 +1,6 @@
 import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
-import {isLineBreakSequence} from '../../../../x/character/isLineBreakSequence';
+import {isLineBreakSequence} from '../../../../utils/character/isLineBreakSequence';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor, MarkdownProcessorOptions} from './baseProcessor';
 

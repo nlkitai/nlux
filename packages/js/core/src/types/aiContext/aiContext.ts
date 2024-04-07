@@ -1,4 +1,4 @@
-import {DataSyncOptions} from '../../core/aiContext/options/dataSyncOptions';
+import {DataSyncOptions} from '../../exports/aiContext/options/dataSyncOptions';
 import {ContextAdapter} from '../adapters/context/contextAdapter';
 import {ContextAdapterBuilder} from '../adapters/context/contextAdapterBuilder';
 import {ContextItemHandler, ContextTaskHandler} from './contextObservers';

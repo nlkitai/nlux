@@ -12,8 +12,8 @@ import {
     ChatSegmentItem,
     ChatSegmentUserMessage,
 } from '../../../../types/chatSegment';
-import {uid} from '../../../../x/uid';
-import {warn} from '../../../../x/warn';
+import {uid} from '../../../../utils/uid';
+import {warn} from '../../../../utils/warn';
 import {SubmitPrompt} from './submitPrompt';
 
 export const submitPrompt: SubmitPrompt = <ResponseType>(

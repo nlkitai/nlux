@@ -6,7 +6,7 @@ import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
 import {ExceptionType} from '../../../types/exception';
-import {warn} from '../../../x/warn';
+import {warn} from '../../../utils/warn';
 import {NluxRenderingError} from '../../error';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';

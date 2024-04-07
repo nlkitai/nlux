@@ -1,4 +1,4 @@
-import {ExceptionId} from '../exceptions/exceptions';
+import {ExceptionId} from '../types/exceptions';
 
 export type NluxRawError = {
     readonly message?: string;

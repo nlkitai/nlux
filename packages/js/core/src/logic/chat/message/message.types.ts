@@ -1,5 +1,5 @@
 // Possible values for 'static' content: Loading, Loaded.
-import {BotPersona} from '../../../core/aiChat/options/personaOptions';
+import {BotPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type MessageStaticContentStatus = 'loading' | 'loaded';
 

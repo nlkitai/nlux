@@ -1,5 +1,5 @@
-import {HighlighterExtension} from '../../core/aiChat/highlighter/highlighter';
-import {IObserver} from '../../core/bus/observer';
+import {HighlighterExtension} from '../../exports/aiChat/highlighter/highlighter';
+import {IObserver} from '../../exports/bus/observer';
 
 export type StreamParser = (
     root: HTMLElement,

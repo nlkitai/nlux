@@ -1,9 +1,9 @@
-import {ExceptionId, NluxExceptions} from '../../../exceptions/exceptions';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {EventCallback, EventName} from '../../../types/event';
-import {uid} from '../../../x/uid';
-import {warn} from '../../../x/warn';
+import {ExceptionId, NluxExceptions} from '../../../types/exceptions';
+import {uid} from '../../../utils/uid';
+import {warn} from '../../../utils/warn';
 import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
 import {createControllerContext} from './context';

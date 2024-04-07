@@ -1,4 +1,4 @@
-import {SequenceParser} from '../../core/aiChat/markdown/sequenceParser';
+import {SequenceParser} from '../../exports/aiChat/markdown/sequenceParser';
 import {MarkdownElementName} from './markdownElement';
 
 export interface MarkdownProcessorInterface {

@@ -1,6 +1,6 @@
 import {CompDef} from '../../../types/comp';
-import {debug} from '../../../x/debug';
-import {warn} from '../../../x/warn';
+import {debug} from '../../../utils/debug';
+import {warn} from '../../../utils/warn';
 import {BaseComp} from './base';
 
 export class CompRegistry {

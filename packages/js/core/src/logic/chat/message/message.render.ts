@@ -1,12 +1,12 @@
-import {createMdStreamRenderer} from '../../../core/aiChat/markdown/streamParser';
-import {BotPersona} from '../../../core/aiChat/options/personaOptions';
-import {NluxRenderingError} from '../../../core/error';
+import {createMdStreamRenderer} from '../../../exports/aiChat/markdown/streamParser';
+import {BotPersona} from '../../../exports/aiChat/options/personaOptions';
+import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {StandardStreamParserOutput} from '../../../types/markdown/streamParser';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {textToHtml} from '../../../x/parseTextMessage';
-import {render} from '../../../x/render';
-import {source} from '../../../x/source';
+import {textToHtml} from '../../../utils/parseTextMessage';
+import {render} from '../../../utils/render';
+import {source} from '../../../utils/source';
 import {
     CompMessageActions,
     CompMessageElements,

@@ -1,4 +1,4 @@
-import {NluxRenderingError} from '../../core/error';
+import {NluxRenderingError} from '../../exports/error';
 
 const source = 'dom/listenTo';
 

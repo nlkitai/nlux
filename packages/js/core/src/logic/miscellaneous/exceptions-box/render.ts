@@ -1,8 +1,8 @@
-import {NluxRenderingError} from '../../../core/error';
+import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {ExceptionType} from '../../../types/exception';
-import {render} from '../../../x/render';
-import {source} from '../../../x/source';
+import {render} from '../../../utils/render';
+import {source} from '../../../utils/source';
 import {
     CompExceptionsBoxActions,
     CompExceptionsBoxElements,

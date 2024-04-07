@@ -6,7 +6,7 @@ import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
 import {ChatItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
-import {debug} from '../../x/debug';
+import {debug} from '../../utils/debug';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../error';
 import {NluxController} from './controller/controller';
 import {HighlighterExtension} from './highlighter/highlighter';

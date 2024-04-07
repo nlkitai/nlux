@@ -1,9 +1,9 @@
-import {NluxRenderingError} from '../../../core/error';
+import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {render} from '../../../x/render';
-import {source} from '../../../x/source';
+import {render} from '../../../utils/render';
+import {source} from '../../../utils/source';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
 
 const __ = (styleName: string) => `nluxc-chat-room-${styleName}`;

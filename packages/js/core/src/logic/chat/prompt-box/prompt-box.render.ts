@@ -1,9 +1,9 @@
-import {NluxRenderingError} from '../../../core/error';
+import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {createPromptBoxDom} from '../../../ui/PromptBox/create';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {domOp} from '../../../x/domOp';
-import {source} from '../../../x/source';
+import {domOp} from '../../../utils/domOp';
+import {source} from '../../../utils/source';
 import {CompPromptBoxActions, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxProps} from './prompt-box.types';
 
 export const renderChatbox: CompRenderer<

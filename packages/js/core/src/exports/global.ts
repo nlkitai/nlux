@@ -1,4 +1,4 @@
-import {debug} from '../x/debug';
+import {debug} from '../utils/debug';
 
 const globalNlux: {
     version: string;
