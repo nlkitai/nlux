@@ -37,10 +37,12 @@ export const MessageComp = (props: MessageProps) => {
         );
     }
 
+    const message = typeof props.message === 'function' ? props.message({}) : props.message;
+
     // TODO - Handle markdown rendering
     return (
         <div className={className}>
-            {props.message}
+            {message}
         </div>
     );
 };

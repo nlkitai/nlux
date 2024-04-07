@@ -8,17 +8,17 @@ import {
     LayoutOptions,
     PromptBoxOptions,
 } from '@nlux/core';
-import {ReactElement} from 'react';
+import {FunctionComponent} from 'react';
 import {PersonaOptions} from './personaOptions';
 
-export type AiChatComponentProps<MessageType = string> = {
+export type AiChatComponentProps<MessageType> = {
     adapter: ChatAdapter | ChatAdapterBuilder;
     events?: Partial<EventsMap>;
     className?: string;
     initialConversation?: ChatItem<MessageType>[];
     syntaxHighlighter?: HighlighterExtension;
     conversationOptions?: ConversationOptions;
-    customMessageComponent?: <MessageType>(message: MessageType) => ReactElement | null;
+    aiMessageComponent?: FunctionComponent<{message: MessageType}>;
     layoutOptions?: LayoutOptions;
     promptBoxOptions?: PromptBoxOptions;
     personaOptions?: PersonaOptions;

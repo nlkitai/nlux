@@ -1,5 +1,5 @@
 import {compChatItemClassName, compChatItemDirectionClassName} from '@nlux/core';
-import {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {FC, forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
@@ -8,10 +8,10 @@ import {ChatItemImperativeProps, ChatItemProps} from './props';
 export const ChatItemComp: <MessageType>(
     props: ChatItemProps<MessageType>,
     ref: Ref<ChatItemImperativeProps>,
-) => ReactElement = (
-    props,
-    ref,
-) => {
+) => ReactElement = function <MessageType>(
+    props: ChatItemProps<MessageType>,
+    ref: Ref<ChatItemImperativeProps>,
+): ReactElement {
     const picture = useMemo(() => {
         if (props.picture === undefined && props.name === undefined) {
             return null;
@@ -42,18 +42,18 @@ export const ChatItemComp: <MessageType>(
         : compChatItemDirectionClassName['incoming'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
-    const message: ReactNode = useMemo(() => {
+    const TheMessage: FC<{message: MessageType}> = useMemo(() => {
         if (props.customRenderer) {
             if (props.message === undefined) {
-                return null;
+                return () => null;
             }
 
-            return props.customRenderer(props.message as any);
+            return () => props.customRenderer ? props.customRenderer({
+                message: props.message as MessageType,
+            }) : null;
         }
 
-        return (
-            <>{props.message !== undefined ? props.message : ''}</>
-        );
+        return () => <>{props.message !== undefined ? props.message : ''}</>;
     }, [props.customRenderer, props.message]);
 
     const ForwardRefStreamContainerComp = forwardRef(
@@ -75,7 +75,7 @@ export const ChatItemComp: <MessageType>(
             {!isStreaming && (
                 <MessageComp
                     uid={props.uid}
-                    message={message}
+                    message={TheMessage}
                     status={props.status}
                     loader={props.loader}
                     direction={props.direction}

@@ -10,10 +10,10 @@ export type ConversationCompType = <MessageType>(
     ref: Ref<ImperativeConversationCompProps>,
 ) => ReactNode;
 
-export const ConversationComp: ConversationCompType = (
-    props,
-    ref,
-) => {
+export const ConversationComp: ConversationCompType = function <MessageType>(
+    props: ConversationCompProps<MessageType>,
+    ref: Ref<ImperativeConversationCompProps>,
+): ReactNode {
     const {segments, personaOptions} = props;
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
     const hasAiPersona = personaOptions?.bot?.name && personaOptions.bot.picture;
@@ -66,7 +66,9 @@ export const ConversationComp: ConversationCompType = (
                     chatSegmentsRef.set(segment.uid, ref);
                 }
 
-                const ForwardRefChatItemComp = forwardRef(ChatSegmentComp);
+                const ForwardRefChatItemComp = forwardRef(
+                    ChatSegmentComp<MessageType>,
+                );
 
                 return (
                     <ForwardRefChatItemComp

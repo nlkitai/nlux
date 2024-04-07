@@ -6,12 +6,12 @@ import '@nlux-dev/themes/src/naked/components/AiChat.css';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {useMemo, useState} from 'react';
 
-type MsgTp = {txt: string, color: string, bg: string};
+type MessageObjectType = {txt: string, color: string, bg: string};
 
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent = (message: MsgTp) => {
+const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
@@ -43,13 +43,24 @@ export const AiChatReactExpo = () => {
         'default' | 'custom'
     >('default');
 
-    const initialConversationCustomMessages: ChatItem<MsgTp>[] = [
+    const initialConversationCustomMessages: ChatItem<MessageObjectType>[] = [
         {
+            role: 'user',
+            message: 'Hi, there!',
+        },
+        {
+            role: 'ai',
             message: {
-                txt: 'Hi, there!',
-                color: 'blue',
+                txt: 'Hello, World!',
+                color: 'green',
                 bg: 'white',
             },
+        },
+    ];
+
+    const initialConversation: ChatItem<MessageObjectType>[] = [
+        {
+            message: 'Hi, there!',
             role: 'user',
         },
         {
@@ -58,17 +69,6 @@ export const AiChatReactExpo = () => {
                 color: 'green',
                 bg: 'white',
             },
-            role: 'ai',
-        },
-    ];
-
-    const initialConversation: ChatItem[] = [
-        {
-            message: 'Hi, there!',
-            role: 'user',
-        },
-        {
-            message: 'Hello, World!',
             role: 'ai',
         },
     ];
@@ -84,17 +84,18 @@ export const AiChatReactExpo = () => {
         },
     };
 
-    const customProps: AiChatComponentProps<MsgTp> = {
+    const customProps: AiChatComponentProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation: initialConversationCustomMessages,
-        customMessageComponent: CustomMessageComponent,
+        aiMessageComponent: CustomMessageComponent,
     };
 
-    const defaultProps: AiChatComponentProps = {
+    const defaultProps: AiChatComponentProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation,
+        aiMessageComponent: CustomMessageComponent,
     };
 
     return (

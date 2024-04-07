@@ -1,10 +1,10 @@
 import {ChatSegment, HighlighterExtension} from '@nlux/core';
-import {ReactElement, ReactNode} from 'react';
+import {FunctionComponent, ReactElement} from 'react';
 import {PersonaOptions} from '../../exports/personaOptions';
 
 export type ChatSegmentProps<MessageType> = {
     chatSegment: ChatSegment<MessageType>
-    customRenderer?: <MessageType>(message: MessageType) => ReactNode;
+    customRenderer?: FunctionComponent<{message: MessageType}>;
     loader?: ReactElement;
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;

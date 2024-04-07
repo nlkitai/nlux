@@ -14,7 +14,6 @@ const ExampleWrapper = () => {
 
     const nlBridge = useChatAdapter({
         url: 'http://localhost:8899/',
-        dataTransferMode: 'stream',
     });
 
     return (
