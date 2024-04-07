@@ -41,15 +41,15 @@ export type {
     PersonaOptions,
     BotPersona,
     UserPersona,
-} from './exp/personaOptions';
+} from './exports/personaOptions';
 
 export type {
     AiChatComponentProps,
-} from './exp/props';
+} from './exports/props';
 
 export {
     AiChat,
-} from './exp/AiChat';
+} from './exports/AiChat';
 
 export type {
     UpdateContextItem,

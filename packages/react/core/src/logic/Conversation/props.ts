@@ -1,6 +1,6 @@
 import {ChatSegment, ConversationOptions, HighlighterExtension, ParticipantRole} from '@nlux/core';
 import {ReactElement, ReactNode} from 'react';
-import {PersonaOptions} from '../../exp/personaOptions';
+import {PersonaOptions} from '../../exports/personaOptions';
 
 export type ConversationAiMessage<MessageType> = {
     id: string;

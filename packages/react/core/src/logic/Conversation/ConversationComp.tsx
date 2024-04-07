@@ -1,7 +1,7 @@
 import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
+import {WelcomeMessageComp} from '../../ui/WelcomeMessage/WelcomeMessageComp';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {ChatSegmentImperativeProps} from '../ChatSegment/props';
-import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
 

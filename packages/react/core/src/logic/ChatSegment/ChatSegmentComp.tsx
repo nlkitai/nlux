@@ -1,6 +1,6 @@
 import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
-import {ChatItemComp} from '../ChatItem/ChatItemComp';
-import {ChatItemImperativeProps} from '../ChatItem/props';
+import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
+import {ChatItemImperativeProps} from '../../ui/ChatItem/props';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {nameFromMessageAndPersona} from './utils/nameFromMessageAndPersona';
 import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona';
