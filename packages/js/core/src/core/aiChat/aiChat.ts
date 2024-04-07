@@ -1,4 +1,4 @@
-import {registerAllComponents} from '../../components/components';
+import {registerAllComponents} from '../../logic/components';
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
 import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
