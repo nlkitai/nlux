@@ -23,11 +23,11 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * This map is constructed from the props provided by the user, but it can be modified by
      * the component using the setProp() method.
      */
-    protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType] | undefined | null>;
+    protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType]>;
     /**
      * Props that are provided by the component user.
      */
-    protected props?: Readonly<PropsType>;
+    protected props: Readonly<PropsType>;
     /**
      * A reference to the DOM tree of the current component, and a callback that is called when the
      * component is destroyed.
@@ -191,6 +191,11 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
     public destroyListItemComponent() {
         this.destroyComponent(true);
+    }
+
+    public getProp(name: keyof PropsType): PropsType[keyof PropsType] | null {
+        this.throwIfDestroyed();
+        return this.elementProps.get(name) ?? null;
     }
 
     /**
@@ -359,35 +364,6 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         return result;
     }
 
-    protected getProp(name: keyof PropsType): PropsType[keyof PropsType] | null {
-        this.throwIfDestroyed();
-        return this.elementProps.get(name) ?? null;
-    }
-
-    protected getSubComponent(id: string): BaseComp<any, any, any, any> | undefined {
-        return this.subComponents.get(id);
-    }
-
-    protected hasSubComponent(id: string): boolean {
-        return this.subComponents.has(id);
-    }
-
-    protected removeSubComponent(id: string) {
-        this.throwIfDestroyed();
-
-        const subComp = this.subComponents.get(id);
-        if (!subComp) {
-            return;
-        }
-
-        if (!subComp.destroyed) {
-            subComp.destroy();
-        }
-
-        this.subComponents.delete(id);
-        this.subComponentElementIds.delete(id);
-    }
-
     protected runDomActionsQueue() {
         if (this.actionsOnDomReady.length > 0 && this.rendered) {
             const actionsOnDomReady = this.actionsOnDomReady;
@@ -407,20 +383,25 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
      * @param value
      * @protected
      */
-    protected setProp(name: keyof PropsType, value: PropsType[keyof PropsType] | undefined | null) {
+    protected setProp(name: keyof PropsType, value: PropsType[keyof PropsType]) {
         if (this.destroyed) {
             warn(`Unable to set prop "${String(name)}" because component "${this.constructor.name}" is destroyed`);
             return;
         }
 
-        if (value === null) {
-            this.elementProps.delete(name);
-        } else {
-            this.elementProps.set(name, value);
+        if (!this.elementProps.has(name)) {
+            warn(`Unable to set prop "${String(name)}" because it does not exist in the component props`);
+            return;
         }
 
-        this.schedulePropUpdate(name);
+        this.schedulePropUpdate(
+            name,
+            this.elementProps.get(name)!,
+            value,
+        );
+
         this.props = Object.freeze(Object.fromEntries(this.elementProps)) as Readonly<PropsType>;
+        this.elementProps.set(name, value);
     }
 
     protected throwIfDestroyed() {
@@ -492,8 +473,9 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
 
         this.__destroyed = true;
         this.__context = null;
-        this.props = undefined;
+        this.props = undefined as any;
 
+        this.elementProps.clear();
         this.rendererEventListeners.clear();
         this.subComponents.clear();
     }
@@ -515,12 +497,15 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         subComp?.render(portal);
     }
 
-    private schedulePropUpdate(propName: keyof PropsType) {
+    private schedulePropUpdate(
+        propName: keyof PropsType,
+        currentValue: PropsType[keyof PropsType],
+        newValue: PropsType[keyof PropsType],
+    ) {
         if (!this.renderedDom || !this.def?.update) {
             return;
         }
 
-        const newValue = this.elementProps.get(propName);
         const renderedDom = this.renderedDom;
         const renderingRoot = this.renderingRoot;
         const updater = this.def.update;
@@ -532,6 +517,7 @@ export abstract class BaseComp<PropsType, ElementsType, EventsType, ActionsType>
         domOp(() => {
             updater({
                 propName,
+                currentValue,
                 newValue,
                 dom: {
                     root: renderingRoot,

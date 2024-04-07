@@ -32,7 +32,7 @@ export const AiChat: <MessageType>(
         }
     }, [props, adapterToUse]);
 
-    const canSubmit = useMemo(() => prompt.length > 0, [prompt]);
+    const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const customAiMessageComponent = useMemo(() => props.customMessageComponent, []);
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
@@ -129,7 +129,7 @@ export const AiChat: <MessageType>(
             <PromptBoxComp
                 status={promptBoxStatus}
                 prompt={prompt}
-                canSubmit={canSubmit}
+                hasValidInput={hasValidInput}
                 placeholder={props.promptBoxOptions?.placeholder}
                 onChange={handlePromptChange}
                 onSubmit={handleSubmitClick}

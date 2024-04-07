@@ -34,4 +34,8 @@ export const updateContentOnStatusChange = (
     if (propsBefore.message !== propsAfter.message) {
         textArea.value = propsAfter.message ?? '';
     }
+
+    if (propsBefore.autoFocus !== propsAfter.autoFocus) {
+        textArea.autofocus = propsAfter.autoFocus ?? false;
+    }
 };

@@ -46,8 +46,8 @@ export class CompConversation extends BaseComp<
         content?: string,
     ): string {
         if (!this.messagesList || !this.props) {
-            throw new Error(`CompConversation: messagesList is not initialized! Make sure you call` +
-                `addConversation() before calling addMessage()!`);
+            throw new Error(`CompConversation: messagesList is not initialized! Make sure you call ` +
+                `addConversation() before calling addMessage()`);
         }
 
         //
