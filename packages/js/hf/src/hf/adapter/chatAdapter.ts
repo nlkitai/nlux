@@ -9,7 +9,7 @@ import {
     uid,
     warn,
 } from '@nlux/core';
-import {adapterErrorToExceptionId} from '../../x/adapterErrorToExceptionId';
+import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
 export class HfChatAdapterImpl implements StandardChatAdapter {
