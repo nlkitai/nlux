@@ -6,9 +6,6 @@ import {BaseComp} from './base';
 export class CompRegistry {
     public static componentDefs: Map<string, CompDef<any, any, any, any>> = new Map();
 
-    private constructor() {
-    }
-
     public static register(compClass: typeof BaseComp) {
         const compId = compClass.__compId;
         if (!compId) {

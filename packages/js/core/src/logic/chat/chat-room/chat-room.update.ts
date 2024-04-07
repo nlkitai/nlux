@@ -4,7 +4,7 @@ import {CompChatRoomActions, CompChatRoomElements, CompChatRoomProps} from './ch
 export const updateChatRoom: CompUpdater<CompChatRoomProps, CompChatRoomElements, CompChatRoomActions> = ({
     propName,
     newValue,
-    dom: {elements, actions},
+    dom: {elements},
 }) => {
     if (propName === 'containerMaxHeight' && elements?.chatRoomContainer) {
         elements.chatRoomContainer.style.maxHeight = typeof newValue === 'number'

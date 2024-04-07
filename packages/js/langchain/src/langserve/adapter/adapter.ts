@@ -33,7 +33,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
     private readonly theRunnableNameToUse: string;
     private readonly theUseInputSchemaOptionToUse: boolean;
 
-    constructor(options: ChatAdapterOptions) {
+    protected constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
         this.__options = {...options};
 

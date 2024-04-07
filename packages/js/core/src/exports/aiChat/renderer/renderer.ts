@@ -34,7 +34,7 @@ export class NluxRenderer {
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
-    private theThemeId: string;
+    private readonly theThemeId: string;
 
     constructor(
         context: ControllerContext,

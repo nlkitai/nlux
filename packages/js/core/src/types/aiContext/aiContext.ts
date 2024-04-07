@@ -109,7 +109,7 @@ export interface AiContext {
      * accurate.
      *
      * @param {string} itemId The unique identifier of the state item to observe.
-     * @param {string} description The description of the state item. The description is used to instruct the LLM on the
+     * @param {string} description The description of the state item. The description is used to instruct the LLM on
      *      how the state item is used and its role in the context. e.g. When the state item is 'logged-in-user', the
      *      description could be 'The logged-in user in the marketplace app. It can be used to provide a more
      *      personalized experience to the user.'

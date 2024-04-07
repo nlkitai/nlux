@@ -9,8 +9,6 @@ export type CompExceptionsBoxProps = Readonly<{
     containerMaxWidth?: number | string;
 }>;
 
-export type CompExceptionsBoxEventListeners = Partial<{}>;
-
 export type CompExceptionsBoxElements = Readonly<{}>;
 
 export type CompExceptionsBoxActions = Readonly<{

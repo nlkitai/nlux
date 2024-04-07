@@ -4,7 +4,7 @@ import {isUrlWithSupportedEndpoint} from './isUrlWithSupportedEndpoint';
 /**
  * When the URL provided by the user does not end with /invoke or /stream we assume that the user has provided
  * the base URL. When the URL provided does end with /invoke or /stream, we assume that the user has provided the
- * endpoint URL and we strip the endpoint type from it.
+ * endpoint URL, and we strip the endpoint type from it.
  *
  * Examples:
  *

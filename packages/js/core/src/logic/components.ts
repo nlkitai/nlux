@@ -23,7 +23,7 @@ export const registerAllComponents = () => {
         return;
     }
 
-    Object.entries(componentsById()).forEach(([id, comp]) => {
+    Object.entries(componentsById()).forEach(([, comp]) => {
         CompRegistry.register(comp as any);
     });
 

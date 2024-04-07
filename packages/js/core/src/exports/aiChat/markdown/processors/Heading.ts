@@ -3,7 +3,7 @@ import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownPro
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
 export class HeadingProcessor extends ProcessorWithChildren {
-    private __headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
+    private readonly __headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
 
     constructor(
         headingLevel: 1 | 2 | 3 | 4 | 5 | 6,

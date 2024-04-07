@@ -135,5 +135,4 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         this.theSystemMessage = message;
         return this;
     }
-};
-
+}

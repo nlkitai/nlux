@@ -107,7 +107,7 @@ export type ChatSegment<MessageType> = {
 /**
  * The handler for a chat segment.
  * This handler is used to control the chat segment and add items to it. It's the return value of the
- * submitPrompt function and it should be used to add items to the chat segment, update items, and
+ * submitPrompt function, and it should be used to add items to the chat segment, update items, and
  * control the chat segment lifecycle.
  */
 export interface ChatSegmentHandler<ResponseType> {

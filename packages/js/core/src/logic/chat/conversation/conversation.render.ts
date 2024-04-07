@@ -129,7 +129,7 @@ export const renderConversation: CompRenderer<
                     }
                 }
             },
-            updateUserPersona: (newValue: UserPersona | undefined) => {
+            updateUserPersona: (_newValue: UserPersona | undefined) => {
                 // TODO - Update messages where user persona is used
             },
         },

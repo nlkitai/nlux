@@ -153,7 +153,7 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
                 },
             };
 
-            let output: AsyncGenerator<TextGenerationStreamOutput, any, unknown> | undefined = undefined;
+            let output: AsyncGenerator<TextGenerationStreamOutput> | undefined = undefined;
 
             try {
                 if (this.options.endpoint) {
