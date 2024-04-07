@@ -1,7 +1,7 @@
-import {CompChatRoom} from '../../../components/chat/chat-room/chat-room.model';
-import {CompChatRoomProps} from '../../../components/chat/chat-room/chat-room.types';
-import {CompExceptionsBox} from '../../../components/miscellaneous/exceptions-box/model';
-import {CompExceptionsBoxProps} from '../../../components/miscellaneous/exceptions-box/types';
+import {CompChatRoom} from '../../../logic/chat/chat-room/chat-room.model';
+import {CompChatRoomProps} from '../../../logic/chat/chat-room/chat-room.types';
+import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/model';
+import {CompExceptionsBoxProps} from '../../../logic/miscellaneous/exceptions-box/types';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
