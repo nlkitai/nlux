@@ -34,14 +34,18 @@ const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
 };
 
 export const AiChatReactExpo = () => {
-    const langServeAdapter = useChatAdapter({
-        url: 'https://pynlux.api.nlux.ai/pirate-speak',
-        dataTransferMode: 'stream',
-    });
-
     const [rendererType, setRendererType] = useState<
         'default' | 'custom'
     >('default');
+
+    const [dataTransferMode, setDataTransferMode] = useState<
+        'stream' | 'fetch'
+    >('fetch');
+
+    const langServeAdapter = useChatAdapter({
+        url: 'https://pynlux.api.nlux.ai/pirate-speak',
+        dataTransferMode,
+    });
 
     const initialConversationCustomMessages: ChatItem<MessageObjectType>[] = [
         {
@@ -110,8 +114,16 @@ export const AiChatReactExpo = () => {
                         value={rendererType}
                         onChange={(e) => setRendererType(e.target.value as 'custom' | 'default')}
                     >
-                        <option value="default">Default</option>
-                        <option value="custom">Custom</option>
+                        <option value="default">Default Renderer</option>
+                        <option value="custom">Custom Renderer</option>
+                    </select>
+                    <select
+                        className="dataTransferMode"
+                        value={dataTransferMode}
+                        onChange={(e) => setDataTransferMode(e.target.value as 'stream' | 'fetch')}
+                    >
+                        <option value="stream">Stream Data</option>
+                        <option value="fetch">Fetch Data</option>
                     </select>
                 </div>
                 <div className="content">
