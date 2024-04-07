@@ -1,9 +1,9 @@
-import {HighlighterExtension} from '../core/aiChat/highlighter/highlighter';
-import {ExceptionId} from '../exceptions/exceptions';
+import {HighlighterExtension} from '../exports/aiChat/highlighter/highlighter';
 import {ChatAdapter} from './adapters/chat/chatAdapter';
 import {StandardChatAdapter} from './adapters/chat/standardChatAdapter';
 import {AiChatProps} from './aiChat/props';
 import {EventName, EventsMap} from './event';
+import {ExceptionId} from './exceptions';
 
 export type ControllerContextProps = Readonly<{
     instanceId: string;

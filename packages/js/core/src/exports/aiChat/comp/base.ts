@@ -1,8 +1,8 @@
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';
 import {ControllerContext} from '../../../types/controllerContext';
-import {domOp} from '../../../x/domOp';
-import {uid} from '../../../x/uid';
-import {warn} from '../../../x/warn';
+import {domOp} from '../../../utils/domOp';
+import {uid} from '../../../utils/uid';
+import {warn} from '../../../utils/warn';
 import {NluxError, NluxUsageError} from '../../error';
 import {CompRegistry} from './registry';
 

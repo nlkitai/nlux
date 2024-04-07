@@ -1,4 +1,4 @@
-import {ExceptionType} from '../types/exception';
+import {ExceptionType} from './exception';
 
 export const defaultAdapterExceptionId = 'NX-AD-001';
 

@@ -1,4 +1,4 @@
-import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptions';
+import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ChatItem} from '../../../types/conversation';
 
 export type CompChatRoomEvents = 'chat-room-ready'

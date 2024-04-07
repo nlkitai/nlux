@@ -1,5 +1,5 @@
-import {BaseComp} from '../../../core/aiChat/comp/base';
-import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
+import {BaseComp} from '../../../exports/aiChat/comp/base';
+import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {PromptBoxProps} from '../../../ui/PromptBox/props';
 import {renderChatbox} from './prompt-box.render';

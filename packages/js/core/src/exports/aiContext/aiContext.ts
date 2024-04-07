@@ -12,7 +12,7 @@ import {
 } from '../../types/aiContext/contextResults';
 import {ContextItemDataType, ContextItems} from '../../types/aiContext/data';
 import {isContextTasksAdapter} from '../../utils/adapters/isContextTasksAdapter';
-import {warn} from '../../x/warn';
+import {warn} from '../../utils/warn';
 import {DataSyncService} from './dataSyncService';
 import {DataSyncOptions} from './options/dataSyncOptions';
 import {TasksService} from './tasksService';

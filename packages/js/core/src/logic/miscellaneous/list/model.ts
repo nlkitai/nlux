@@ -1,8 +1,8 @@
-import {BaseComp} from '../../../core/aiChat/comp/base';
-import {Model} from '../../../core/aiChat/comp/decorators';
-import {NluxError} from '../../../core/error';
+import {BaseComp} from '../../../exports/aiChat/comp/base';
+import {Model} from '../../../exports/aiChat/comp/decorators';
+import {NluxError} from '../../../exports/error';
 import {ControllerContext} from '../../../types/controllerContext';
-import {domOp} from '../../../x/domOp';
+import {domOp} from '../../../utils/domOp';
 import {renderList} from './render';
 import {CompListElements, CompListEvents, CompListProps} from './types';
 import {updateList} from './update';

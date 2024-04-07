@@ -1,6 +1,6 @@
 import {ConversationMessage} from '@nlux-dev/react/src/comp/Conversation/props';
 import {ChatSegment, ChatSegmentItem} from '../../types/chatSegment';
-import {warn} from '../../x/warn';
+import {warn} from '../warn';
 
 export const getMessageStatusFromPart = <MessageType>(
     part: ChatSegment<MessageType>,

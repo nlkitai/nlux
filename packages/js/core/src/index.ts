@@ -1,32 +1,32 @@
 // CHAT _____________________
 
-import {AiChat} from './core/aiChat/aiChat';
+import {AiChat} from './exports/aiChat/aiChat';
 
-export {AiChat} from './core/aiChat/aiChat';
+export {AiChat} from './exports/aiChat/aiChat';
 
 export const createAiChat = (): AiChat => new AiChat();
 
-export {Observable} from './core/bus/observable';
-export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './core/error';
-export {createMdStreamRenderer} from './core/aiChat/markdown/streamParser';
-export {debug} from './x/debug';
-export {warn, warnOnce} from './x/warn';
-export {uid} from './x/uid';
+export {Observable} from './exports/bus/observable';
+export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './exports/error';
+export {createMdStreamRenderer} from './exports/aiChat/markdown/streamParser';
+export {debug} from './utils/debug';
+export {warn, warnOnce} from './utils/warn';
+export {uid} from './utils/uid';
 
-export type {ExceptionId} from './exceptions/exceptions';
-export type {ConversationOptions} from './core/aiChat/options/conversationOptions';
-export type {PromptBoxOptions} from './core/aiChat/options/promptBoxOptions';
-export type {LayoutOptions} from './core/aiChat/options/layoutOptions';
+export type {ExceptionId} from './types/exceptions';
+export type {ConversationOptions} from './exports/aiChat/options/conversationOptions';
+export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';
+export type {LayoutOptions} from './exports/aiChat/options/layoutOptions';
 
 export type {
     PersonaOptions,
     BotPersona,
     UserPersona,
-} from './core/aiChat/options/personaOptions';
+} from './exports/aiChat/options/personaOptions';
 
 export type {
     IObserver,
-} from './core/bus/observer';
+} from './exports/bus/observer';
 
 export type {
     AiChatInternalProps,
@@ -144,15 +144,15 @@ export type {
 
 export type {
     DataSyncOptions,
-} from './core/aiContext/options/dataSyncOptions';
+} from './exports/aiContext/options/dataSyncOptions';
 
 export {
     createAiContext,
-} from './core/aiContext/aiContext';
+} from './exports/aiContext/aiContext';
 
 export {
     predefinedContextSize,
-} from './core/aiContext/options/dataSyncOptions';
+} from './exports/aiContext/options/dataSyncOptions';
 
 
 // HIGHLIGHTER ______________
@@ -162,7 +162,7 @@ export type {
     HighlighterExtension,
     HighlighterColorMode,
     CreateHighlighterOptions,
-} from './core/aiChat/highlighter/highlighter';
+} from './exports/aiChat/highlighter/highlighter';
 
 // CONVERSATION _____________
 
@@ -254,8 +254,8 @@ export {
 
 export type {
     SubmitPrompt,
-} from './core/aiChat/services/submitPrompt/submitPrompt';
+} from './exports/aiChat/services/submitPrompt/submitPrompt';
 
 export {
     submitPrompt,
-} from './core/aiChat/services/submitPrompt/impl';
+} from './exports/aiChat/services/submitPrompt/impl';

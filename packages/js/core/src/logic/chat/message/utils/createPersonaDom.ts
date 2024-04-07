@@ -1,6 +1,6 @@
-import {escapeHtml} from '../../../../x/dom/escapeHtml';
-import {render} from '../../../../x/render';
-import {warn} from '../../../../x/warn';
+import {escapeHtml} from '../../../../utils/dom/escapeHtml';
+import {render} from '../../../../utils/render';
+import {warn} from '../../../../utils/warn';
 import {__} from '../message.render';
 
 const personaHtml = () => `` +
