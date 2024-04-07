@@ -1,5 +1,4 @@
-import {className as conversationItemCoreClassName} from '@nlux-dev/core/src/ui/ChatItem/create';
-import {directionClassName} from '@nlux-dev/core/src/ui/ChatItem/utils/applyNewDirectionClassName';
+import {compChatItemClassName, compChatItemDirectionClassName} from '@nlux/core';
 import {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
@@ -39,10 +38,10 @@ export const ChatItemComp: <MessageType>(
     );
 
     const compDirectionClassName = props.direction
-        ? directionClassName[props.direction]
-        : directionClassName['incoming'];
+        ? compChatItemDirectionClassName[props.direction]
+        : compChatItemDirectionClassName['incoming'];
 
-    const className = `${conversationItemCoreClassName} ${compDirectionClassName}`;
+    const className = `${compChatItemClassName} ${compDirectionClassName}`;
     const message: ReactNode = useMemo(() => {
         if (props.customRenderer) {
             if (props.message === undefined) {
@@ -66,8 +65,11 @@ export const ChatItemComp: <MessageType>(
             {picture}
             {isStreaming && (
                 <ForwardRefStreamContainerComp
-                    id={props.id}
-                    key={'do-not-change'} ref={streamContainer}
+                    key={'do-not-change'}
+                    uid={props.id}
+                    status={'streaming'}
+                    direction={props.direction}
+                    ref={streamContainer}
                 />
             )}
             {!isStreaming && (

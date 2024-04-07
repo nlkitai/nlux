@@ -2,7 +2,6 @@ import * as matchers from '@testing-library/jest-dom/matchers';
 import {cleanup} from '@testing-library/react';
 import ResizeObserver from 'resize-observer-polyfill';
 import {afterEach, expect, vi} from 'vitest';
-import '@testing-library/svelte/vitest';
 import '@testing-library/jest-dom/vitest';
 
 expect.extend(matchers);
