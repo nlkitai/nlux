@@ -11,11 +11,10 @@ import {AiChatComponentProps} from './props';
 export const AiChat: <MessageType>(
     props: AiChatComponentProps<MessageType>,
     t: MessageType,
-) => ReactElement = (
-    props,
-    t,
-) => {
-    type MessageType = typeof t;
+) => ReactElement = function <MessageType>(
+    props: AiChatComponentProps<MessageType>,
+    t: MessageType,
+): ReactElement {
     const className = `nlux_root` + (props.className ? ` ${props.className}` : '');
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
 
@@ -33,7 +32,6 @@ export const AiChat: <MessageType>(
     }, [props, adapterToUse]);
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
-    const customAiMessageComponent = useMemo(() => props.customMessageComponent, []);
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitClick = useCallback(() => {
@@ -123,7 +121,7 @@ export const AiChat: <MessageType>(
                 segments={conversationSegments}
                 conversationOptions={props.conversationOptions}
                 personaOptions={props.personaOptions}
-                customRenderer={customAiMessageComponent}
+                customRenderer={props.aiMessageComponent}
                 syntaxHighlighter={props.syntaxHighlighter}
             />
             <PromptBoxComp

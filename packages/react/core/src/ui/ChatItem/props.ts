@@ -1,5 +1,5 @@
 import {MessageDirection} from '@nlux/core';
-import {ReactElement, ReactNode} from 'react';
+import {FunctionComponent, ReactElement} from 'react';
 
 export type ChatItemProps<MessageType> = {
     uid: string;
@@ -7,7 +7,7 @@ export type ChatItemProps<MessageType> = {
     status: 'rendered' | 'streaming' | 'loading' | 'error';
     loader?: ReactElement;
     message?: MessageType | string;
-    customRenderer?: (message: MessageType) => ReactNode;
+    customRenderer?: FunctionComponent<{message: MessageType}>;
     name?: string;
     picture?: string | ReactElement;
 };
