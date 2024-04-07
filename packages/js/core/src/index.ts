@@ -192,63 +192,63 @@ export type {
 
 export type {
     AvatarProps,
-} from './comp/Avatar/props';
+} from './ui/Avatar/props';
 
 export {
     className as compAvatarClassName,
-} from './comp/Avatar/create';
+} from './ui/Avatar/create';
 
 export {
     className as compChatItemClassName,
-} from './comp/ChatItem/create';
+} from './ui/ChatItem/create';
 
 export type {
     ExceptionsBoxProps,
-} from './comp/ExceptionsBox/props';
+} from './ui/ExceptionsBox/props';
 
 export {
     className as compExceptionsBoxClassName,
-} from './comp/ExceptionsBox/create';
+} from './ui/ExceptionsBox/create';
 
 export {
     className as compLoaderClassName,
-} from './comp/Loader/create';
+} from './ui/Loader/create';
 
 export type {
     MessageStatus,
     MessageDirection,
     MessageProps,
-} from './comp/Message/props';
+} from './ui/Message/props';
 
 export {
     className as compMessageClassName,
-} from './comp/Message/create';
+} from './ui/Message/create';
 
 export type {
     PromptBoxStatus,
     PromptBoxProps,
-} from './comp/PromptBox/props';
+} from './ui/PromptBox/props';
 
 export {
     className as compPromptBoxClassName,
-} from './comp/PromptBox/create';
+} from './ui/PromptBox/create';
 
 export {
     className as compSendIconClassName,
-} from './comp/SendIcon/create';
+} from './ui/SendIcon/create';
 
 export type {
     WelcomeMessageProps,
-} from './comp/WelcomeMessage/props';
+} from './ui/WelcomeMessage/props';
 
 export {
     className as compWelcomeMessageClassName,
     personaNameClassName as compWelcomeMessagePersonaNameClassName,
-} from './comp/WelcomeMessage/create';
+} from './ui/WelcomeMessage/create';
 
 export {
     welcomeMessageTextClassName as compWelcomeMessageTextClassName,
-} from './comp/WelcomeMessage/utils/updateWelcomeMessageText';
+} from './ui/WelcomeMessage/utils/updateWelcomeMessageText';
 
 // SERVICES _________________
 

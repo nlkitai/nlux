@@ -1,4 +1,3 @@
-import {PromptBoxProps} from '../../../comp/PromptBox/props';
 import {BaseComp} from '../../../core/aiChat/comp/base';
 import {comp} from '../../../core/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
@@ -7,6 +6,7 @@ import {BotPersona, UserPersona} from '../../../core/aiChat/options/personaOptio
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
+import {PromptBoxProps} from '../../../ui/PromptBox/props';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';
