@@ -44,7 +44,6 @@ export const AiChat: <MessageType>(
             prompt,
             adapterToUse,
             adapterExtras,
-            'stream',
         );
 
         if (chatSegment.status === 'error') {
@@ -59,8 +58,15 @@ export const AiChat: <MessageType>(
         // to trigger a check and potentially re-render the React component, we need to change
         // the reference of the parts array by creating a new array.
 
-        chatSegment.on('complete', () => {
-            const segments = setSegmentsRef.current.chatSegments;
+        chatSegment.on('complete', (newChatSegment) => {
+            const segments = setSegmentsRef.current.chatSegments.map((segment) => {
+                if (segment.uid === chatSegment.uid) {
+                    return newChatSegment;
+                }
+
+                return segment;
+            });
+
             setSegmentsRef.current.setChatSegments([...segments]);
         });
 

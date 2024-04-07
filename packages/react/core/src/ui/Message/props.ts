@@ -1,10 +1,10 @@
 import {MessageDirection} from '@nlux/core';
-import {FunctionComponent, ReactElement, ReactNode} from 'react';
+import {FC, ReactElement, ReactNode} from 'react';
 
-export type MessageProps = {
+export type MessageProps<MessageType> = {
     uid: string;
     direction: MessageDirection;
     status: 'rendered' | 'streaming' | 'loading' | 'error';
     loader?: ReactElement;
-    message?: ReactNode | FunctionComponent;
+    message?: ReactNode | FC<{message: MessageType}>;
 };

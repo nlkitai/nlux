@@ -1,4 +1,4 @@
-import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
+import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {ChatSegment} from '../../../../types/chatSegment';
 
@@ -11,5 +11,4 @@ export type SubmitPrompt = <ResponseType>(
     prompt: string,
     adapter: ChatAdapter,
     adapterExtras: ChatAdapterExtras,
-    preferredDataTransferMode: DataTransferMode,
 ) => ChatSegment<ResponseType>;

@@ -1,5 +1,6 @@
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {
     AiUnifiedMessage,
     ChatSegment,
@@ -20,7 +21,6 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
     prompt: string,
     adapter: ChatAdapter,
     extras: ChatAdapterExtras,
-    preferredDataTransferMode: DataTransferMode,
 ) => {
     const callbacksByEvent: Map<ChatSegmentEvent, Set<Function>> = new Map();
     const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap<ResponseType>[ChatSegmentEvent]) => {
@@ -48,9 +48,17 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         throw new Error('The adapter does not support any data transfer modes');
     }
 
-    const dataTransferMode = supportedDataTransferModes.length === 1
+    const adapterAsStandardAdapter: StandardChatAdapter | undefined = isStandardChatAdapter(adapter as any) ?
+        adapter as any : undefined;
+
+    const adapterDataTransferMode: DataTransferMode | undefined = adapterAsStandardAdapter?.dataTransferMode
+        ?? undefined;
+
+    const defaultDataTransferMode = supportedDataTransferModes.length === 1
         ? supportedDataTransferModes[0]
-        : preferredDataTransferMode;
+        : 'stream';
+
+    const dataTransferModeToUse = adapterDataTransferMode ?? defaultDataTransferMode;
 
     const userMessage: ChatSegmentUserMessage = {
         uid: uid(),
@@ -60,7 +68,7 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         content: prompt,
     };
 
-    const aiMessage: ChatSegmentAiMessage<ResponseType> = (dataTransferMode === 'stream') ? {
+    const aiMessage: ChatSegmentAiMessage<ResponseType> = (dataTransferModeToUse === 'stream') ? {
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
@@ -85,7 +93,7 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
     //
     // Handle message in streaming mode
     //
-    if (dataTransferMode === 'stream') {
+    if (dataTransferModeToUse === 'stream') {
         adapter.streamText!(prompt, {
             next: (chunk: string) => {
                 callbacksByEvent.get('chunk')?.forEach(callback => {
