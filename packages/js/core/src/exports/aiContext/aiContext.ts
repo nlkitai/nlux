@@ -321,7 +321,7 @@ class AiContextImpl implements AiContext {
                     status = 'set';
                 }
             })
-            .catch((error) => {
+            .catch(() => {
                 warn(
                     `${this.constructor.name}.registerTask() failed to register task \'${taskId}\'!\n` +
                     `The task will be marked as deleted and will not be updated anymore.`,
@@ -353,7 +353,7 @@ class AiContextImpl implements AiContext {
                             status = 'set';
                         }
                     })
-                    .catch((error) => {
+                    .catch(() => {
                         if (status === 'updating') {
                             status = 'set';
                         }
@@ -372,7 +372,7 @@ class AiContextImpl implements AiContext {
                             status = 'set';
                         }
                     })
-                    .catch((error) => {
+                    .catch(() => {
                         if (status === 'updating') {
                             status = 'set';
                         }
@@ -393,7 +393,7 @@ class AiContextImpl implements AiContext {
                             status = 'set';
                         }
                     })
-                    .catch((error) => {
+                    .catch(() => {
                         if (status === 'updating') {
                             status = 'set';
                         }

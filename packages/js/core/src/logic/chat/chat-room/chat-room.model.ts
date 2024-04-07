@@ -86,7 +86,7 @@ export class CompChatRoom extends BaseComp<
     }
 
     @CompEventListener('chat-room-ready')
-    onChatRoomReady(event: MouseEvent) {
+    onChatRoomReady() {
         this.context.emit('ready', {
             aiChatProps: this.context.aiChatProps,
         });
