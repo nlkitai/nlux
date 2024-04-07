@@ -27,6 +27,11 @@ export const updatePromptBoxDom: DomUpdater<PromptBoxProps> = (
         textArea.placeholder = propsAfter.placeholder ?? '';
     }
 
+    if (propsBefore.autoFocus !== propsAfter.autoFocus) {
+        const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
+        textArea.autofocus = propsAfter.autoFocus ?? false;
+    }
+
     if (propsBefore.message !== propsAfter.message) {
         const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
         textArea.value = propsAfter.message ?? '';

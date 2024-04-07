@@ -1,3 +1,4 @@
+import {PromptBoxProps} from '../../../comp/PromptBox/props';
 import {BaseComp} from '../../../core/aiChat/comp/base';
 import {comp} from '../../../core/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
@@ -9,6 +10,7 @@ import {ChatItem} from '../../../types/conversation';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';
+import {CompPromptBoxProps} from '../prompt-box/prompt-box.types';
 import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chat-room.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
@@ -161,12 +163,12 @@ export class CompChatRoom extends BaseComp<
     ) {
         this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
             props: {
-                enableTextInput: true,
-                sendButtonStatus: 'disabled',
-                textInputValue: '',
-                placeholder,
-                autoFocus,
-            },
+                domCompProps: {
+                    status: 'typing',
+                    placeholder,
+                    autoFocus,
+                },
+            } satisfies CompPromptBoxProps,
             eventListeners: {
                 onTextUpdated: (newValue: string) => this.handlePromptBoxTextChange(newValue),
                 onSubmit: () => this.handlePromptBoxSubmit(),
@@ -200,12 +202,17 @@ export class CompChatRoom extends BaseComp<
             return;
         }
 
-        this.promptBoxInstance.enableTextInput(true);
+        const currentCompProps = this.promptBoxInstance.getProp('domCompProps') as PromptBoxProps;
+        const newProps: PromptBoxProps = {
+            ...currentCompProps,
+            status: 'typing',
+        };
+
         if (resetTextInput) {
-            this.promptBoxInstance.resetTextInput();
+            newProps.message = '';
         }
 
-        this.promptBoxInstance.resetSendButtonStatus();
+        this.promptBoxInstance.setDomProps(newProps);
         this.promptBoxInstance.focusTextInput();
     }
 }

@@ -1,10 +1,10 @@
+import {PromptBoxProps} from '../../../comp/PromptBox/props';
 import {BaseComp} from '../../../core/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../core/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderChatbox} from './prompt-box.render';
 import {
     CompPromptBoxActions,
-    CompPromptBoxButtonStatus,
     CompPromptBoxElements,
     CompPromptBoxEventListeners,
     CompPromptBoxEvents,
@@ -25,14 +25,6 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
         this.userEventListeners = eventListeners;
     }
 
-    public enableTextInput(enable = true) {
-        this.setProp('enableTextInput', enable);
-
-        if (enable) {
-            this.focusTextInput();
-        }
-    }
-
     public focusTextInput() {
         this.executeDomAction('focusTextInput');
     }
@@ -49,10 +41,6 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
 
     @CompEventListener('send-message-clicked')
     handleSendButtonClick() {
-        if (!this.getProp('textInputValue')) {
-            return;
-        }
-
         const callback = this.userEventListeners?.onSubmit;
         if (callback) {
             callback();
@@ -65,16 +53,11 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
             callback(newValue);
         }
 
-        const oldValue = this.getProp('textInputValue') as string | undefined;
-        if (newValue !== oldValue) {
-            this.setProp('textInputValue', newValue);
-        }
-
-        if (newValue === '') {
-            this.setProp('sendButtonStatus', 'disabled');
-        } else {
-            this.setProp('sendButtonStatus', 'enabled');
-        }
+        const currentCompProps = this.getProp('domCompProps') as PromptBoxProps;
+        this.setDomProps({
+            ...currentCompProps,
+            message: newValue,
+        });
     }
 
     @CompEventListener('text-updated')
@@ -87,19 +70,7 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
         this.handleTextChange(target.value);
     }
 
-    public resetSendButtonStatus() {
-        if (this.getProp('textInputValue') === '') {
-            this.setProp('sendButtonStatus', 'disabled');
-        } else {
-            this.setProp('sendButtonStatus', 'enabled');
-        }
-    }
-
-    public resetTextInput() {
-        this.handleTextChange('');
-    }
-
-    public setSendButtonStatus(newStatus: CompPromptBoxButtonStatus) {
-        this.setProp('sendButtonStatus', newStatus);
+    public setDomProps(props: PromptBoxProps) {
+        this.setProp('domCompProps', props);
     }
 }

@@ -32,8 +32,11 @@ export const submitPromptFactory = ({
             //
             // Disable prompt while sending message
             //
-            promptBoxInstance.enableTextInput(false);
-            promptBoxInstance.setSendButtonStatus('loading');
+            const currentPromptBoxProps = promptBoxInstance.getProp('domCompProps');
+            promptBoxInstance.setDomProps({
+                ...currentPromptBoxProps,
+                status: 'submitting',
+            });
 
             //
             // Important: This is where we send the message via the adapter.

@@ -14,6 +14,10 @@ export const createPromptBoxDom: DomCreator<PromptBoxProps> = (props) => {
     textarea.placeholder = props.placeholder ?? '';
     textarea.value = props.message ?? '';
 
+    if (props.autoFocus) {
+        textarea.autofocus = true;
+    }
+
     const submitButton = document.createElement('button');
     submitButton.append(createSendIconDom());
     submitButton.append(createLoaderDom());
