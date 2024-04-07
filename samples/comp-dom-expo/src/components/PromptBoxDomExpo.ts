@@ -1,9 +1,9 @@
 import '../style.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import '@nlux-dev/themes/src/naked/components/PromptBox.css';
-import {createPromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/create.ts';
-import {PromptBoxProps, PromptBoxStatus} from '@nlux-dev/core/src/comp/PromptBox/props.ts';
-import {updatePromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/update.ts';
+import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create.ts';
+import {PromptBoxProps, PromptBoxStatus} from '@nlux-dev/core/src/ui/PromptBox/props.ts';
+import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

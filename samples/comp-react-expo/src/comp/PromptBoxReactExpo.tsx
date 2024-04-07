@@ -1,5 +1,5 @@
-import {PromptBoxStatus} from '@nlux-dev/core/src/comp/PromptBox/props.ts';
-import {PromptBoxComp} from '@nlux-dev/react/src/comp/PromptBox/PromptBoxComp.tsx';
+import {PromptBoxStatus} from '@nlux-dev/core/src/ui/PromptBox/props.ts';
+import {PromptBoxComp} from '@nlux-dev/react/src/ui/PromptBox/PromptBoxComp.tsx';
 import '@nlux-dev/themes/src/naked/components/PromptBox.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {useState} from 'react';

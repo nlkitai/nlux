@@ -1,5 +1,5 @@
-import {createAvatarDom} from '@nlux-dev/core/src/comp/Avatar/create';
-import {AvatarProps} from '@nlux-dev/core/src/comp/Avatar/props';
+import {createAvatarDom} from '@nlux-dev/core/src/ui/Avatar/create';
+import {AvatarProps} from '@nlux-dev/core/src/ui/Avatar/props';
 import {describe, expect, it} from 'vitest';
 
 describe('When an avatar component is rendered with url as picture', () => {

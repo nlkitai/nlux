@@ -1,6 +1,6 @@
-import {createChatItemDom} from '@nlux-dev/core/src/comp/ChatItem/create';
-import {ChatItemProps} from '@nlux-dev/core/src/comp/ChatItem/props';
-import {updateChatItemDom} from '@nlux-dev/core/src/comp/ChatItem/update';
+import {createChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/create';
+import {ChatItemProps} from '@nlux-dev/core/src/ui/ChatItem/props';
+import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a chat item component is rendered in incoming direction', () => {

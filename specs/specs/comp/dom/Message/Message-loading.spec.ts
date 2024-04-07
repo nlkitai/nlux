@@ -1,6 +1,6 @@
-import {createMessageDom} from '@nlux-dev/core/src/comp/Message/create';
-import {MessageProps} from '@nlux-dev/core/src/comp/Message/props';
-import {updateMessageDom} from '@nlux-dev/core/src/comp/Message/update';
+import {createMessageDom} from '@nlux-dev/core/src/ui/Message/create';
+import {MessageProps} from '@nlux-dev/core/src/ui/Message/props';
+import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a message component is rendered and is in loading status', () => {

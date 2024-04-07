@@ -1,4 +1,4 @@
-import {WelcomeMessageComp} from '@nlux-dev/react/src/comp/WelcomeMessage/WelcomeMessageComp.tsx';
+import {WelcomeMessageComp} from '@nlux-dev/react/src/ui/WelcomeMessage/WelcomeMessageComp.tsx';
 import '@nlux-dev/themes/src/naked/components/WelcomeMessage.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 import {ReactElement, useState} from 'react';

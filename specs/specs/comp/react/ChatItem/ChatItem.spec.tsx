@@ -1,4 +1,4 @@
-import {ChatItemComp} from '@nlux-dev/react/src/comp/ChatItem/ChatItemComp';
+import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp';
 import {render} from '@testing-library/react';
 import React, {forwardRef} from 'react';
 import {describe, expect, it} from 'vitest';

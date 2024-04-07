@@ -2,7 +2,7 @@ import {
     renderedInitialsClassName,
     renderedPhotoClassName,
     renderedPhotoContainerClassName,
-} from '@nlux-dev/core/src/comp/Avatar/utils/createPhotoContainerFromUrl';
+} from '@nlux-dev/core/src/ui/Avatar/utils/createPhotoContainerFromUrl';
 import {compAvatarClassName} from '@nlux/core';
 import {isValidElement} from 'react';
 import {AvatarProps} from './props';

@@ -1,7 +1,7 @@
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/comp/Message/props.ts';
+import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
 import '@nlux-dev/themes/src/naked/components/ChatItem.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
-import {ChatItemComp} from '@nlux-dev/react/src/comp/ChatItem/ChatItemComp.tsx';
+import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useState} from 'react';
 
 export const ChatItemReactExpo = () => {

@@ -1,4 +1,4 @@
-import {createPromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/create';
+import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create';
 import {describe, expect, it} from 'vitest';
 
 describe('When a prompt box component is rendered and is in waiting status', () => {

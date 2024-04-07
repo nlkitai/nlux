@@ -1,6 +1,6 @@
-import {className as messageDomClassName} from '@nlux-dev/core/src/comp/Message/create';
-import {directionClassName} from '@nlux-dev/core/src/comp/Message/utils/applyNewDirectionClassName';
-import {statusClassName} from '@nlux-dev/core/src/comp/Message/utils/applyNewStatusClassName';
+import {className as messageDomClassName} from '@nlux-dev/core/src/ui/Message/create';
+import {directionClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewDirectionClassName';
+import {statusClassName} from '@nlux-dev/core/src/ui/Message/utils/applyNewStatusClassName';
 import {Ref, useEffect, useImperativeHandle, useRef} from 'react';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomServive';

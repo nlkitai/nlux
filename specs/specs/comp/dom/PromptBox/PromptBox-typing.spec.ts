@@ -1,6 +1,6 @@
-import {createPromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/create';
-import {PromptBoxProps} from '@nlux-dev/core/src/comp/PromptBox/props';
-import {updatePromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/update';
+import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create';
+import {PromptBoxProps} from '@nlux-dev/core/src/ui/PromptBox/props';
+import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a prompt box component is rendered and is in typing status', () => {

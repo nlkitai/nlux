@@ -1,4 +1,4 @@
-import {LoaderComp} from '@nlux-dev/react/src/comp/Loader/LoaderComp.tsx';
+import {LoaderComp} from '@nlux-dev/react/src/ui/Loader/LoaderComp.tsx';
 import '@nlux-dev/themes/src/naked/components/Loader.css';
 import '@nlux-dev/themes/src/naked/components/animation.css';
 

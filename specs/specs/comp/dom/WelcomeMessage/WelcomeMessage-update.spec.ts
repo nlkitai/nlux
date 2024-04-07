@@ -1,6 +1,6 @@
-import {createWelcomeMessageDom} from '@nlux-dev/core/src/comp/WelcomeMessage/create';
-import {WelcomeMessageProps} from '@nlux-dev/core/src/comp/WelcomeMessage/props';
-import {updateWelcomeMessageDom} from '@nlux-dev/core/src/comp/WelcomeMessage/update';
+import {createWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/create';
+import {WelcomeMessageProps} from '@nlux-dev/core/src/ui/WelcomeMessage/props';
+import {updateWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When welcome message is rendered for update', () => {

@@ -1,5 +1,5 @@
-import {createPromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/create';
-import {updatePromptBoxDom} from '@nlux-dev/core/src/comp/PromptBox/update';
+import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create';
+import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a prompt box component is rendered and is in submitting status', () => {

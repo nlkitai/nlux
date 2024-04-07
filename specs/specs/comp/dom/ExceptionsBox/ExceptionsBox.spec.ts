@@ -1,6 +1,6 @@
-import {createExceptionsBoxDom} from '@nlux-dev/core/src/comp/ExceptionsBox/create';
-import {ExceptionsBoxProps} from '@nlux-dev/core/src/comp/ExceptionsBox/props';
-import {updateExceptionsBox} from '@nlux-dev/core/src/comp/ExceptionsBox/update';
+import {createExceptionsBoxDom} from '@nlux-dev/core/src/ui/ExceptionsBox/create';
+import {ExceptionsBoxProps} from '@nlux-dev/core/src/ui/ExceptionsBox/props';
+import {updateExceptionsBox} from '@nlux-dev/core/src/ui/ExceptionsBox/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When an exceptions box component is rendered', () => {

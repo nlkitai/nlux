@@ -1,4 +1,4 @@
-import {statusClassName} from '@nlux-dev/core/src/comp/PromptBox/utils/applyNewStatusClassName';
+import {statusClassName} from '@nlux-dev/core/src/ui/PromptBox/utils/applyNewStatusClassName';
 import {compPromptBoxClassName} from '@nlux/core';
 import React from 'react';
 import {LoaderComp} from '../Loader/LoaderComp';
