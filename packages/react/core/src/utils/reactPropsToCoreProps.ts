@@ -1,5 +1,5 @@
 import {AiChatProps, ChatAdapter, StandardChatAdapter} from '@nlux/core';
-import {AiChatComponentProps} from '../exp/props';
+import {AiChatComponentProps} from '../exports/props';
 
 export const reactPropsToCoreProps = <MessageType>(
     props: AiChatComponentProps<MessageType>,

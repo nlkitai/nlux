@@ -1,7 +1,7 @@
 import {PersonaOptions} from '@nlux/core';
 import {JSX} from 'react';
 import {render} from 'react-dom';
-import {PersonaOptions as ReactPersonasOptions} from '../exp/personaOptions';
+import {PersonaOptions as ReactPersonasOptions} from '../exports/personaOptions';
 
 const jsxToHtmlElement = (jsx: JSX.Element): Promise<HTMLElement> => {
     return new Promise((resolve) => {
