@@ -70,7 +70,7 @@ export const ChatSegmentComp: <MessageType>(
                         <ForwardRefChatItemComp
                             ref={ref}
                             key={chatItem.uid}
-                            id={chatItem.uid}
+                            uid={chatItem.uid}
                             status={'rendered'}
                             direction={'outgoing'}
                             message={chatItem.content}
@@ -86,7 +86,7 @@ export const ChatSegmentComp: <MessageType>(
                                 <ForwardRefChatItemComp
                                     ref={ref}
                                     key={chatItem.uid}
-                                    id={chatItem.uid}
+                                    uid={chatItem.uid}
                                     status={'rendered'}
                                     direction={'incoming'}
                                     customRenderer={props.customRenderer}
@@ -101,7 +101,7 @@ export const ChatSegmentComp: <MessageType>(
                                 <ForwardRefChatItemComp
                                     ref={ref}
                                     key={chatItem.uid}
-                                    id={chatItem.uid}
+                                    uid={chatItem.uid}
                                     status={'rendered'}
                                     direction={'incoming'}
                                     message={chatItem.content}
@@ -119,7 +119,7 @@ export const ChatSegmentComp: <MessageType>(
                                 <ForwardRefChatItemComp
                                     ref={ref}
                                     key={chatItem.uid}
-                                    id={chatItem.uid}
+                                    uid={chatItem.uid}
                                     status={chatItem.status as 'loading' | 'streaming'}
                                     direction={'incoming'}
                                     loader={props.loader}

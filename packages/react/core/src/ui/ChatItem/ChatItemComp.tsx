@@ -66,7 +66,7 @@ export const ChatItemComp: <MessageType>(
             {isStreaming && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
-                    uid={props.id}
+                    uid={props.uid}
                     status={'streaming'}
                     direction={props.direction}
                     ref={streamContainer}
@@ -74,7 +74,7 @@ export const ChatItemComp: <MessageType>(
             )}
             {!isStreaming && (
                 <MessageComp
-                    id={props.id}
+                    uid={props.uid}
                     message={message}
                     status={props.status}
                     loader={props.loader}
