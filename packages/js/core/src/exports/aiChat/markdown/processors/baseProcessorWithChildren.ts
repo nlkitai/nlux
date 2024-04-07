@@ -5,7 +5,7 @@ import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor, MarkdownProcessorOptions} from './baseProcessor';
 
 export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
-    constructor(
+    protected constructor(
         parent: MarkdownProcessorInterface,
         elementName: MarkdownElementName,
         openingSequence: string | null,

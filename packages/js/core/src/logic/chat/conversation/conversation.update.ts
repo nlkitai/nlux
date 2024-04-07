@@ -7,7 +7,7 @@ export const updateConversation: CompUpdater<
 > = ({
     propName,
     newValue,
-    dom: {elements, actions},
+    dom: {actions},
 }) => {
     if (propName === 'botPersona') {
         if (!actions) {

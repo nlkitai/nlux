@@ -496,7 +496,7 @@ class AiContextImpl implements AiContext {
             warn(
                 `${this.constructor.name}.unregisterTask() called on a state that has not been initialized! ` +
                 `Use ${this.constructor.name}.initialize() to initialize the context before attempting any task ` +
-                `unregistration.`,
+                `unregister.`,
             );
 
             return Promise.resolve({

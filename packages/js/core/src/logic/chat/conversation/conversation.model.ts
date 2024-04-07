@@ -24,7 +24,7 @@ import {updateConversation} from './conversation.update';
 export class CompConversation extends BaseComp<
     CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private conversationContent: ChatItem[] = [];
+    private readonly conversationContent: ChatItem[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;

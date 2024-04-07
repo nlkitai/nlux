@@ -26,7 +26,6 @@ export const renderExceptionsBox: CompRenderer<
     CompExceptionsBoxActions
 > = ({
     props,
-    compEvent,
     appendToRoot,
 }) => {
     const exceptionsBoxRoot = render(html(props));

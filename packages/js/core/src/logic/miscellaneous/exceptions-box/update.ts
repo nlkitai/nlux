@@ -7,7 +7,7 @@ export const updateExceptionsBox: CompUpdater<
 > = ({
     propName,
     newValue,
-    dom: {elements, actions},
+    dom: {actions},
 }) => {
     if (propName === 'visible' && typeof newValue === 'boolean' && actions) {
         if (newValue) {
