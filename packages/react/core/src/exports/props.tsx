@@ -15,6 +15,7 @@ export type AiChatComponentProps<MessageType> = {
     adapter: ChatAdapter | ChatAdapterBuilder;
     events?: Partial<EventsMap>;
     className?: string;
+    themeId?: string;
     initialConversation?: ChatItem<MessageType>[];
     syntaxHighlighter?: HighlighterExtension;
     conversationOptions?: ConversationOptions;

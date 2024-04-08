@@ -1,4 +1,4 @@
-import {ChatAdapterExtras, ChatSegment, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
+import {ChatAdapterExtras, ChatSegment, getRootClassNames, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
@@ -15,7 +15,6 @@ export const AiChat: <MessageType>(
     props: AiChatComponentProps<MessageType>,
     t: MessageType,
 ): ReactElement {
-    const className = `nlux_root` + (props.className ? ` ${props.className}` : '');
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
 
     const [prompt, setPrompt] = useState('');
@@ -119,6 +118,8 @@ export const AiChat: <MessageType>(
     const ForwardConversationComp = forwardRef(
         ConversationComp<MessageType>,
     );
+
+    const className = getRootClassNames(props).join(' ');
 
     return (
         <div className={className}>
