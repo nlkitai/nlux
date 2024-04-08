@@ -14,7 +14,7 @@ export const updateNameOnPicture = (
             propsAfter.name[0].toUpperCase() : '';
 
         const letterContainer = element.querySelector(
-            '* > .cht_pic_ctn > .cht_pic_ltr',
+            '* > .avtr_ctn > .cht_pic_ltr',
         );
 
         letterContainer?.replaceChildren(letter);

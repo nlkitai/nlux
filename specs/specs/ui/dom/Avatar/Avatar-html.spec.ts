@@ -44,7 +44,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
             // Then
             expect(element.outerHTML).toBe(
-                `<div class="nlux_comp_avtr" title="John Doe"><div class="cht_pic_ctn"><span class="cht_pic_ltr">J</span></div></div>`,
+                `<div class="nlux_comp_avtr" title="John Doe"><div class="avtr_ctn"><span class="cht_pic_ltr">J</span></div></div>`,
             );
         });
     });
@@ -99,7 +99,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
                 // Then
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux_comp_avtr" title="John Doe"><div class="cht_pic_ctn">` +
+                    `<div class="nlux_comp_avtr" title="John Doe"><div class="avtr_ctn">` +
                     `<span class="cht_pic_ltr">J</span>` +
                     `<div class="cht_pic_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
@@ -128,7 +128,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
                 // Then
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux_comp_avtr" title="Alex Doe"><div class="cht_pic_ctn">` +
+                    `<div class="nlux_comp_avtr" title="Alex Doe"><div class="avtr_ctn">` +
                     `<span class="cht_pic_ltr">A</span>` +
                     `<div class="cht_pic_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,

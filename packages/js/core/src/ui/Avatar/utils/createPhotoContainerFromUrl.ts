@@ -1,4 +1,4 @@
-export const renderedPhotoContainerClassName = 'cht_pic_ctn';
+export const renderedPhotoContainerClassName = 'avtr_ctn';
 export const renderedPhotoClassName = 'cht_pic_img';
 export const renderedInitialsClassName = 'cht_pic_ltr';
 
