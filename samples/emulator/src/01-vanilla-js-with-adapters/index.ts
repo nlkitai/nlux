@@ -18,7 +18,7 @@ let rootElement: HTMLElement | null = null;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    rootElement = document.getElementById('nluxc-root');
+    rootElement = document.getElementById('nlux-AiChat-root');
     if (!rootElement) {
         throw new Error('Root element not found');
     }

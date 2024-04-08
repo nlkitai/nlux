@@ -1,44 +1,44 @@
-.nluxc-root.nluxc-theme-nova {
-    --nluxc-text-color: #1d1e1bff;
+.nlux-AiChat-root.nlux-theme-nova {
+    --nlux-text-color: #1d1e1bff;
 
-    --nluxc-input-background-color: #ffffff;
-    --nluxc-input-border-color: #c5d7c9;
-    --nluxc-input-text-color: #18210c;
-    --nluxc-input-placeholder-color: #c5d7c9;
+    --nlux-input-background-color: #ffffff;
+    --nlux-input-border-color: #c5d7c9;
+    --nlux-input-text-color: #18210c;
+    --nlux-input-placeholder-color: #c5d7c9;
 
-    --nluxc-input-active-background-color: #ffffff;
-    --nluxc-input-active-border-color: #c5d7c9;
-    --nluxc-input-active-text-color: #18210c;
-    --nluxc-input-active-placeholder-color: #c5d7c9;
+    --nlux-input-active-background-color: #ffffff;
+    --nlux-input-active-border-color: #c5d7c9;
+    --nlux-input-active-text-color: #18210c;
+    --nlux-input-active-placeholder-color: #c5d7c9;
 
-    --nluxc-input-disabled-background-color: #ffffff;
-    --nluxc-input-disabled-border-color: #c5d7c9;
-    --nluxc-input-disabled-text-color: #959993;
-    --nluxc-input-disabled-placeholder-color: #c5d7c9;
+    --nlux-input-disabled-background-color: #ffffff;
+    --nlux-input-disabled-border-color: #c5d7c9;
+    --nlux-input-disabled-text-color: #959993;
+    --nlux-input-disabled-placeholder-color: #c5d7c9;
 
-    --nluxc-button-background-color: #5fe095;
-    --nluxc-button-border-color: #5fe095;
-    --nluxc-button-text-color: #ffffff;
+    --nlux-button-background-color: #5fe095;
+    --nlux-button-border-color: #5fe095;
+    --nlux-button-text-color: #ffffff;
 
-    --nluxc-button-active-background-color: #72e7a1ff;
-    --nluxc-button-active-border-color: #72e7a1ff;
-    --nluxc-button-active-text-color: #ffffff;
+    --nlux-button-active-background-color: #72e7a1ff;
+    --nlux-button-active-border-color: #72e7a1ff;
+    --nlux-button-active-text-color: #ffffff;
 
-    --nluxc-button-disabled-background-color: #c5d7c9;
-    --nluxc-button-disabled-border-color: #c5d7c9;
-    --nluxc-button-disabled-text-color: #ffffff;
+    --nlux-button-disabled-background-color: #c5d7c9;
+    --nlux-button-disabled-border-color: #c5d7c9;
+    --nlux-button-disabled-text-color: #ffffff;
 
-    --nluxc-message-sent-background-color: #5fe095;
-    --nluxc-message-sent-border-color: #6fc693;
-    --nluxc-message-sent-text-color: #ffffff;
+    --nlux-message-sent-background-color: #5fe095;
+    --nlux-message-sent-border-color: #6fc693;
+    --nlux-message-sent-text-color: #ffffff;
 
-    --nluxc-message-sent-active-background-color: #5fe095;
-    --nluxc-message-sent-active-border-color: #6fc693;
-    --nluxc-message-sent-active-text-color: #ffffff;
+    --nlux-message-sent-active-background-color: #5fe095;
+    --nlux-message-sent-active-border-color: #6fc693;
+    --nlux-message-sent-active-text-color: #ffffff;
 
-    --nluxc-message-received-background-color: #f4f6f9;
-    --nluxc-message-received-border-color: #dde5e2ff;
-    --nluxc-message-received-text-color: #18210c;
+    --nlux-message-received-background-color: #f4f6f9;
+    --nlux-message-received-border-color: #dde5e2ff;
+    --nlux-message-received-text-color: #18210c;
 
     --nlux-code-block-background-color: #303530;
     --nlux-code-block-hover-background-color: #404240;
@@ -47,11 +47,11 @@
     --nlux-inline-code-background-color: #d5dad1;
     --nlux-inline-code-text-color: #18210c;
 
-    --nluxc-message-received-active-background-color: #f4f6f9;
-    --nluxc-message-received-active-border-color: #dde5e2ff;
-    --nluxc-message-received-active-text-color: #18210c;
+    --nlux-message-received-active-background-color: #f4f6f9;
+    --nlux-message-received-active-border-color: #dde5e2ff;
+    --nlux-message-received-active-text-color: #18210c;
 
-    --nluxc-exceptions-box-error-background-color: #d05858;
-    --nluxc-exceptions-box-error-border-color: #d05858;
-    --nluxc-exceptions-box-error-text-color: #ffffff;
+    --nlux-exceptions-box-error-background-color: #d05858;
+    --nlux-exceptions-box-error-border-color: #d05858;
+    --nlux-exceptions-box-error-text-color: #ffffff;
 }

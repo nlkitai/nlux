@@ -53,7 +53,7 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
 
         await submit();
 
@@ -62,7 +62,7 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Prompt box should remain in loading state until complete() is called', async () => {
@@ -78,13 +78,13 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         adapterController.complete();
         await waitForRenderCycle();
 
         expect(textInput).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Prompt box should remain in loading state until error() is called', async () => {
@@ -100,13 +100,13 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         adapterController.error(new Error('Something went wrong'));
         await waitForRenderCycle();
 
         expect(textInput).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Prompt box should remain in loading state when text is being streamed', async () => {
@@ -122,7 +122,7 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         adapterController.next('Hi');
         await waitForRenderCycle();
@@ -134,7 +134,7 @@ describe('When a streaming adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Text being returned by the adapter should be rendered as it is streamed', async () => {

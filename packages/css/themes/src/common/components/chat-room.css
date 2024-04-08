@@ -1,26 +1,26 @@
-.nluxc-root {
-    > .nluxc-chat-room-container {
+.nlux-AiChat-root {
+    > .nlux-chat-room-container {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        gap: var(--nluxc-flex-gap);
+        gap: var(--nlux-flex-gap);
 
-        > .nluxc-chat-room-conversation-container {
+        > .nlux-chat-room-conversation-container {
             display: flex;
             overflow: auto;
             flex: 1;
             flex-direction: column;
             padding: 0;
-            gap: var(--nluxc-flex-gap);
+            gap: var(--nlux-flex-gap);
 
-            > .nluxc-conversation-messages-container {
+            > .nlux-conversation-messages-container {
                 overflow: scroll;
                 flex: 1;
 
-                padding-right: var(--nluxc-padding);
-                padding-left: var(--nluxc-padding);
+                padding-right: var(--nlux-padding);
+                padding-left: var(--nlux-padding);
 
-                > .nluxc-conversation-welcome-message {
+                > .nlux-conversation-welcome-message {
                     display: flex;
                     align-items: center;
                     flex-direction: column;
@@ -28,13 +28,13 @@
                     width: 100%;
                     height: 100%;
 
-                    > .nluxc-conversation-welcome-message-photo-container {
+                    > .nlux-conversation-welcome-message-photo-container {
                         position: relative;
                         display: inline-block;
                         overflow: hidden;
                         width: 80px;
                         height: 80px;
-                        margin-bottom: var(--nluxc-padding-l);
+                        margin-bottom: var(--nlux-padding-l);
                         border-radius: 50%;
 
                         > * {
@@ -45,8 +45,8 @@
                             left: 0 !important;
                         }
 
-                        > .nluxc-conversation-welcome-message-letter {
-                            font-size: var(--nluxc-font-size-l);
+                        > .nlux-conversation-welcome-message-letter {
+                            font-size: var(--nlux-font-size-l);
                             font-weight: 400;
                             z-index: 888888;
                             display: flex;
@@ -54,41 +54,41 @@
                             justify-content: center;
                             margin: 5px;
                             text-align: center;
-                            color: var(--nluxc-text-color);
+                            color: var(--nlux-text-color);
                             border-radius: 50%;
-                            background-color: var(--nluxc-message-received-background-color);
+                            background-color: var(--nlux-message-received-background-color);
                         }
 
-                        > .nluxc-conversation-welcome-message-rendered-photo {
+                        > .nlux-conversation-welcome-message-rendered-photo {
                             z-index: 999999;
                             background-position: center center;
                             background-size: cover;
                         }
                     }
 
-                    > .nluxc-conversation-welcome-message-name-and-tagline {
+                    > .nlux-conversation-welcome-message-name-and-tagline {
                         font-weight: 400;
                         max-width: 80%;
-                        padding: var(--nluxc-padding-l);
+                        padding: var(--nlux-padding-l);
                         text-align: center;
-                        color: var(--nluxc-text-color);
-                        border-color: var(--nluxc-message-received-border-color);
-                        border-radius: var(--nluxc-border-radius-m);
+                        color: var(--nlux-text-color);
+                        border-color: var(--nlux-message-received-border-color);
+                        border-radius: var(--nlux-border-radius-m);
                         outline: none;
-                        background-color: var(--nluxc-message-received-background-color);
+                        background-color: var(--nlux-message-received-background-color);
 
-                        > .nluxc-conversation-welcome-message-name {
-                            font-size: var(--nluxc-font-size-l);
+                        > .nlux-conversation-welcome-message-name {
+                            font-size: var(--nlux-font-size-l);
                             font-weight: 700;
-                            margin-bottom: var(--nluxc-padding-m);
+                            margin-bottom: var(--nlux-padding-m);
                         }
                     }
                 }
             }
         }
 
-        > .nluxc-chat-room-prompt-box,
-        > .nluxc-chat-room-footer {
+        > .nlux-chat-room-prompt-box,
+        > .nlux-chat-room-footer {
             flex: 0;
         }
     }

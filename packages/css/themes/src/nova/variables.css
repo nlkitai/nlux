@@ -1,29 +1,29 @@
-.nluxc-root.nluxc-theme-nova {
-    --nluxc-font-family: 'IBM Plex Sans', sans-serif;
-    --nluxc-mono-font-family: monospace;
+.nlux-AiChat-root.nlux-theme-nova {
+    --nlux-font-family: 'IBM Plex Sans', sans-serif;
+    --nlux-mono-font-family: monospace;
 
-    --nluxc-text-color: var(--nluxc-text-color);
-    --nluxc-font-weight: 400;
-    --nluxc-line-height: 1.2;
+    --nlux-text-color: var(--nlux-text-color);
+    --nlux-font-weight: 400;
+    --nlux-line-height: 1.2;
 
-    --nluxc-font-size: 1rem;
-    --nluxc-font-size-s: 0.8rem;
-    --nluxc-font-size-l: 1.2rem;
+    --nlux-font-size: 1rem;
+    --nlux-font-size-s: 0.8rem;
+    --nlux-font-size-l: 1.2rem;
 
-    --nluxc-padding-xs: 0.1rem;
-    --nluxc-padding-s: 0.3rem;
-    --nluxc-padding: 0.6rem;
-    --nluxc-padding-m: 0.7rem;
-    --nluxc-padding-l: 0.9rem;
+    --nlux-padding-xs: 0.1rem;
+    --nlux-padding-s: 0.3rem;
+    --nlux-padding: 0.6rem;
+    --nlux-padding-m: 0.7rem;
+    --nlux-padding-l: 0.9rem;
 
-    --nluxc-flex-gap: 0.8rem;
+    --nlux-flex-gap: 0.8rem;
 
-    --nluxc-border-radius-xs: 4px;
-    --nluxc-border-radius-s: 6px;
-    --nluxc-border-radius: 8px;
-    --nluxc-border-radius-m: 10px;
-    --nluxc-border-radius-l: 12px;
+    --nlux-border-radius-xs: 4px;
+    --nlux-border-radius-s: 6px;
+    --nlux-border-radius: 8px;
+    --nlux-border-radius-m: 10px;
+    --nlux-border-radius-l: 12px;
 
-    --nluxc-border-width: 1px;
-    --nluxc-box-shadow: 0 0 2px rgb(0 0 0 / 30%);
+    --nlux-border-width: 1px;
+    --nlux-box-shadow: 0 0 2px rgb(0 0 0 / 30%);
 }

@@ -1,4 +1,4 @@
-.nluxc-root {
+.nlux-AiChat-root {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -15,7 +15,7 @@
         padding: 0;
     }
 
-    > .nluxc-chat-room-container {
+    > .nlux-chat-room-container {
         min-height: 200px;
     }
 }

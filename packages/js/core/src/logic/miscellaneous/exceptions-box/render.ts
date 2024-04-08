@@ -10,7 +10,7 @@ import {
     CompExceptionsBoxProps,
 } from './types';
 
-const __ = (styleName: string) => `nluxc-exceptions-box-${styleName}`;
+const __ = (styleName: string) => `nlux-exceptions-box-${styleName}`;
 
 const html = (props: CompExceptionsBoxProps) => `` +
     `<div class="${__('container')}">` +
