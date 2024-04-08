@@ -9,9 +9,6 @@ export const createAiChat = (): AiChat => new AiChat();
 export {Observable} from './exports/bus/observable';
 export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './exports/error';
 export {createMdStreamRenderer} from './exports/aiChat/markdown/streamParser';
-export {debug} from './utils/debug';
-export {warn, warnOnce} from './utils/warn';
-export {uid} from './utils/uid';
 
 export type {ExceptionId} from './types/exceptions';
 export type {ConversationOptions} from './exports/aiChat/options/conversationOptions';
@@ -281,3 +278,10 @@ export type {
 export {
     submitPrompt,
 } from './exports/aiChat/services/submitPrompt/impl';
+
+// UTILS ____________________
+
+export {debug} from './utils/debug';
+export {warn, warnOnce} from './utils/warn';
+export {uid} from './utils/uid';
+export {getRootClassNames} from './utils/dom/getRootClassNames';

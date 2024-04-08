@@ -6,6 +6,7 @@ import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
 import {ExceptionType} from '../../../types/exception';
+import {getRootClassNames} from '../../../utils/dom/getRootClassNames';
 import {warn} from '../../../utils/warn';
 import {NluxRenderingError} from '../../error';
 import {comp} from '../comp/comp';
@@ -24,7 +25,7 @@ export class NluxRenderer {
     private exceptionsBox: CompExceptionsBox | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
-    private readonly rootClassName: string = 'nluxc-root';
+    private readonly rootClassName: string = 'nlux-AiChat-root';
     private rootCompId: string | null = null;
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
@@ -369,13 +370,11 @@ export class NluxRenderer {
             return;
         }
 
-        this.rootElement.classList.add(this.rootClassName);
+        const rootClassNames = getRootClassNames({
+            themeId: this.themeId,
+            rootClassName: this.rootClassName,
+        });
 
-        if (this.theClassName) {
-            this.rootElement.classList.add(this.theClassName);
-        }
-
-        const themeCssClass = `nluxc-theme-${this.themeId}`;
-        this.rootElement.classList.add(themeCssClass);
+        this.rootElement.classList.add(...rootClassNames);
     }
 }
