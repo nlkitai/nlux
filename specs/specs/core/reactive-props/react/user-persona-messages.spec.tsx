@@ -37,7 +37,7 @@ describe('When the personaOptions.user is used with conversation', () => {
     it('Persona details should render before each message', async () => {
         const component = <AiChat adapter={adapterController.adapter} personaOptions={personaOptions}/>;
         const personasPhotoQuery = '[style*="background-image: url(https://user-image-url);"]';
-        const personasNameQuery = '.nluxc-text-message-persona-letter';
+        const personasNameQuery = '.nlux-text-message-persona-letter';
 
         render(component);
 
@@ -67,7 +67,7 @@ describe('When the personaOptions.user is used with conversation', () => {
         const component = <AiChat adapter={adapterController.adapter} personaOptions={personaOptions}/>;
         const personasPhotoQuery = '[style*="background-image: url(https://user-image-url);"]';
         const newPersonasPhotoQuery = '[style*="background-image: url(https://new-user-image-url);"]';
-        const personasNameQuery = '.nluxc-text-message-persona-letter';
+        const personasNameQuery = '.nlux-text-message-persona-letter';
 
         const {rerender} = render(component);
 

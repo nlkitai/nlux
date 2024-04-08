@@ -1,32 +1,32 @@
-const rootNode = '.nluxc-root';
+const rootNode = '.nlux-AiChat-root';
 
-const chatRoomContainer = '> .nluxc-chat-room-container';
+const chatRoomContainer = '> .nlux-chat-room-container';
 
-const exceptionsBoxContainer = '> .nluxc-exceptions-box-container';
-const exceptionContainer = '> .nluxc-exceptions-box-exception-container';
-const exceptionMessage = '> .nluxc-exceptions-box-message';
+const exceptionsBoxContainer = '> .nlux-exceptions-box-container';
+const exceptionContainer = '> .nlux-exceptions-box-exception-container';
+const exceptionMessage = '> .nlux-exceptions-box-message';
 
-const promptBox = '> .nluxc-chat-room-prompt-box-container';
-const promptBoxContainer = '> .nluxc-prompt-box-container';
-const promptBoxTextInput = '> textarea.nluxc-prompt-box-text-input';
-const promptBoxSendButton = '> button.nluxc-prompt-box-send-button';
+const promptBox = '> .nlux-chat-room-prompt-box-container';
+const promptBoxContainer = '> .nlux-prompt-box-container';
+const promptBoxTextInput = '> textarea.nlux-prompt-box-text-input';
+const promptBoxSendButton = '> button.nlux-prompt-box-send-button';
 const promptBoxLoadingSpinner = '> span.loader';
 
-const conversationContainer = '> .nluxc-chat-room-conversation-container';
-const conversationMessagesContainer = '> .nluxc-conversation-messages-container';
+const conversationContainer = '> .nlux-chat-room-conversation-container';
+const conversationMessagesContainer = '> .nlux-conversation-messages-container';
 
-const sentMessageContainer = '.nluxc-text-message-container.nluxc-text-message-sent';
-const receivedMessageContainer = '.nluxc-text-message-container.nluxc-text-message-received';
-const messageLoader = '.nluxc-text-message-loader';
+const sentMessageContainer = '.nlux-text-message-container.nlux-text-message-sent';
+const receivedMessageContainer = '.nlux-text-message-container.nlux-text-message-received';
+const messageLoader = '.nlux-text-message-loader';
 
-const messagePersona = '.nluxc-text-message-persona';
-const messagePersonaPhotoContainer = '.nluxc-text-message-persona-photo-container';
-const messagePersonaPhotoLetter = '.nluxc-text-message-persona-letter';
-const messagePersonaRenderedPhoto = '.nluxc-text-message-persona-rendered-photo';
+const messagePersona = '.nlux-text-message-persona';
+const messagePersonaPhotoContainer = '.nlux-text-message-persona-photo-container';
+const messagePersonaPhotoLetter = '.nlux-text-message-persona-letter';
+const messagePersonaRenderedPhoto = '.nlux-text-message-persona-rendered-photo';
 
-const welcomeMessageContainer = '.nluxc-conversation-welcome-message-name-and-tagline';
-const welcomeMessageBotName = '.nluxc-conversation-welcome-message-name';
-const welcomeMessageBotTagline = '.nluxc-conversation-welcome-message-tagline';
+const welcomeMessageContainer = '.nlux-conversation-welcome-message-name-and-tagline';
+const welcomeMessageBotName = '.nlux-conversation-welcome-message-name';
+const welcomeMessageBotTagline = '.nlux-conversation-welcome-message-tagline';
 
 export const q = (selectorParts: string[]) => () => {
     const selector = selectorParts.join(' ');

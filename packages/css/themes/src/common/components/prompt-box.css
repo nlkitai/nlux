@@ -1,17 +1,17 @@
-.nluxc-root {
-    .nluxc-prompt-box-container {
+.nlux-AiChat-root {
+    .nlux-prompt-box-container {
         display: flex;
         align-items: stretch;
         flex-direction: row;
 
-        gap: var(--nluxc-flex-gap);
+        gap: var(--nlux-flex-gap);
 
-        > .nluxc-prompt-box-text-input {
+        > .nlux-prompt-box-text-input {
             flex: 1;
             resize: none;
         }
 
-        > .nluxc-prompt-box-send-button {
+        > .nlux-prompt-box-send-button {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -25,7 +25,7 @@
                 display: none;
             }
 
-            &.nluxc-prompt-box-send-button-loading {
+            &.nlux-prompt-box-send-button-loading {
                 > svg {
                     display: none;
                 }

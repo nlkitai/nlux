@@ -1,11 +1,11 @@
-.nluxc-root {
-    .nluxc-text-message-container {
+.nlux-AiChat-root {
+    .nlux-text-message-container {
         display: flex;
         align-items: stretch;
         justify-content: stretch;
-        padding-bottom: var(--nluxc-padding-m);
+        padding-bottom: var(--nlux-padding-m);
 
-        > .nluxc-text-message-content {
+        > .nlux-text-message-content {
             display: flex;
             flex-direction: column;
             flex-grow: 1;
@@ -13,15 +13,15 @@
 
             min-width: 80px;
             min-height: 20px;
-            padding: var(--nluxc-padding) var(--nluxc-padding-m);
+            padding: var(--nlux-padding) var(--nlux-padding-m);
             text-align: left;
 
-            border-width: var(--nluxc-border-width);
+            border-width: var(--nlux-border-width);
             border-style: solid;
-            border-radius: var(--nluxc-border-radius-m);
+            border-radius: var(--nlux-border-radius-m);
 
             outline: none;
-            gap: var(--nluxc-flex-gap);
+            gap: var(--nlux-flex-gap);
 
             :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
                 margin: 0;
@@ -29,35 +29,35 @@
             }
         }
 
-        > .nluxc-text-message-content .code-block {
-            font-family: var(--nluxc-mono-font-family);
+        > .nlux-text-message-content .code-block {
+            font-family: var(--nlux-mono-font-family);
 
-            font-size: var(--nluxc-font-size-s);
+            font-size: var(--nlux-font-size-s);
             position: relative;
             overflow: scroll;
-            padding: var(--nluxc-padding) 0;
+            padding: var(--nlux-padding) 0;
 
             color: var(--nlux-code-block-text-color);
             border: none;
-            border-radius: var(--nluxc-border-radius-s);
+            border-radius: var(--nlux-border-radius-s);
             background-color: var(--nlux-code-block-background-color);
-            box-shadow: var(--nluxc-box-shadow);
+            box-shadow: var(--nlux-box-shadow);
         }
 
-        > .nluxc-text-message-content .code-block > pre {
+        > .nlux-text-message-content .code-block > pre {
             width: fit-content;
             min-width: 100%;
         }
 
-        > .nluxc-text-message-content .code-block > pre > div {
-            padding: 0 var(--nluxc-padding-m);
+        > .nlux-text-message-content .code-block > pre > div {
+            padding: 0 var(--nlux-padding-m);
         }
 
-        > .nluxc-text-message-content .code-block > pre > div:hover {
+        > .nlux-text-message-content .code-block > pre > div:hover {
             background-color: var(--nlux-code-block-hover-background-color);
         }
 
-        > .nluxc-text-message-content button.copy-button {
+        > .nlux-text-message-content button.copy-button {
             position: relative;
             z-index: 999999;
             width: 25px;
@@ -72,15 +72,15 @@
             cursor: pointer;
             color: var(--nlux-code-block-background-color);
             border: 1px solid var(--nlux-code-block-background-color);
-            border-radius: var(--nluxc-border-radius-xs);
-            background-color: var(--nluxc-message-received-background-color);
+            border-radius: var(--nlux-border-radius-xs);
+            background-color: var(--nlux-message-received-background-color);
         }
 
-        > .nluxc-text-message-content {
+        > .nlux-text-message-content {
             button.copy-button {
                 &.clicked,
                 &.clicked:hover {
-                    color: var(--nluxc-message-received-background-color);
+                    color: var(--nlux-message-received-background-color);
                     border-color: var(--nlux-code-block-background-color);
                     background-color: var(--nlux-code-block-background-color);
                 }
@@ -95,12 +95,12 @@
             }
 
             code {
-                font-family: var(--nluxc-mono-font-family);
-                font-size: var(--nluxc-font-size-s);
-                padding: var(--nluxc-padding-xs) var(--nluxc-padding-s);
+                font-family: var(--nlux-mono-font-family);
+                font-size: var(--nlux-font-size-s);
+                padding: var(--nlux-padding-xs) var(--nlux-padding-s);
 
                 color: var(--nlux-inline-code-text-color);
-                border-radius: var(--nluxc-border-radius-xs);
+                border-radius: var(--nlux-border-radius-xs);
                 background-color: var(--nlux-inline-code-background-color);
             }
 
@@ -109,11 +109,11 @@
             }
         }
 
-        > .nluxc-text-message-persona {
+        > .nlux-text-message-persona {
             flex-grow: 0;
             flex-shrink: 0;
 
-            > .nluxc-text-message-persona-photo-container {
+            > .nlux-text-message-persona-photo-container {
                 position: relative;
                 overflow: hidden;
                 width: 40px;
@@ -134,8 +134,8 @@
                     left: 0 !important;
                 }
 
-                > .nluxc-text-message-persona-letter {
-                    font-size: var(--nluxc-font-size-l);
+                > .nlux-text-message-persona-letter {
+                    font-size: var(--nlux-font-size-l);
                     z-index: 888888;
                     display: flex;
                     align-items: center;
@@ -144,7 +144,7 @@
                     border-radius: 50%;
                 }
 
-                > .nluxc-text-message-persona-rendered-photo {
+                > .nlux-text-message-persona-rendered-photo {
                     z-index: 999999;
                     background-position: center center;
                     background-size: cover;
@@ -154,28 +154,28 @@
 
         &.message-status-loading,
         &.message-status-connecting {
-            > .nluxc-text-message-content {
+            > .nlux-text-message-content {
                 display: none;
             }
 
-            > .nluxc-text-message-loader {
+            > .nlux-text-message-loader {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 height: 40px;
 
-                padding: 0 var(--nluxc-padding-m);
-                color: var(--nluxc-message-received-text-color);
+                padding: 0 var(--nlux-padding-m);
+                color: var(--nlux-message-received-text-color);
 
-                border-width: var(--nluxc-border-width);
+                border-width: var(--nlux-border-width);
                 border-style: solid;
 
-                border-color: var(--nluxc-message-received-border-color);
-                border-radius: var(--nluxc-border-radius-m);
+                border-color: var(--nlux-message-received-border-color);
+                border-radius: var(--nlux-border-radius-m);
                 outline: none;
 
-                background-color: var(--nluxc-message-received-background-color);
-                gap: var(--nluxc-flex-gap);
+                background-color: var(--nlux-message-received-background-color);
+                gap: var(--nlux-flex-gap);
 
                 > .spinning-loader-container {
                     width: 17px;
@@ -190,57 +190,57 @@
         }
 
         &:not(.message-status-loading, .message-status-connecting) {
-            > .nluxc-text-message-content {
+            > .nlux-text-message-content {
                 display: flex;
             }
 
-            > .nluxc-text-message-loader {
+            > .nlux-text-message-loader {
                 display: none;
             }
         }
 
-        &.nluxc-text-message-received {
+        &.nlux-text-message-received {
             flex-direction: row;
             padding-right: 65px;
 
-            > .nluxc-text-message-content,
-            > .nluxc-text-message-loader,
-            > .nluxc-text-message-persona > .nluxc-text-message-persona-photo-container {
-                margin-left: var(--nluxc-padding-s);
-                color: var(--nluxc-message-received-text-color);
-                border-color: var(--nluxc-message-received-border-color);
-                background-color: var(--nluxc-message-received-background-color);
+            > .nlux-text-message-content,
+            > .nlux-text-message-loader,
+            > .nlux-text-message-persona > .nlux-text-message-persona-photo-container {
+                margin-left: var(--nlux-padding-s);
+                color: var(--nlux-message-received-text-color);
+                border-color: var(--nlux-message-received-border-color);
+                background-color: var(--nlux-message-received-background-color);
             }
 
-            > .nluxc-text-message-content:focus,
-            > .nluxc-text-message-content:active,
-            > .nluxc-text-message-loader:focus,
-            > .nluxc-text-message-loader:active {
-                color: var(--nluxc-message-received-active-text-color);
-                border-color: var(--nluxc-message-received-active-border-color);
-                background-color: var(--nluxc-message-received-active-background-color);
-                box-shadow: var(--nluxc-box-shadow);
+            > .nlux-text-message-content:focus,
+            > .nlux-text-message-content:active,
+            > .nlux-text-message-loader:focus,
+            > .nlux-text-message-loader:active {
+                color: var(--nlux-message-received-active-text-color);
+                border-color: var(--nlux-message-received-active-border-color);
+                background-color: var(--nlux-message-received-active-background-color);
+                box-shadow: var(--nlux-box-shadow);
             }
         }
 
-        &.nluxc-text-message-sent {
+        &.nlux-text-message-sent {
             flex-direction: row-reverse;
             padding-left: 65px;
 
-            > .nluxc-text-message-content,
-            > .nluxc-text-message-persona > .nluxc-text-message-persona-photo-container {
-                margin-right: var(--nluxc-padding-s);
-                color: var(--nluxc-message-sent-text-color);
-                border-color: var(--nluxc-message-sent-border-color);
-                background-color: var(--nluxc-message-sent-background-color);
+            > .nlux-text-message-content,
+            > .nlux-text-message-persona > .nlux-text-message-persona-photo-container {
+                margin-right: var(--nlux-padding-s);
+                color: var(--nlux-message-sent-text-color);
+                border-color: var(--nlux-message-sent-border-color);
+                background-color: var(--nlux-message-sent-background-color);
             }
 
-            > .nluxc-text-message-content:focus,
-            > .nluxc-text-message-content:active {
-                color: var(--nluxc-message-sent-active-text-color);
-                border-color: var(--nluxc-message-sent-active-border-color);
-                background-color: var(--nluxc-message-sent-active-background-color);
-                box-shadow: var(--nluxc-box-shadow);
+            > .nlux-text-message-content:focus,
+            > .nlux-text-message-content:active {
+                color: var(--nlux-message-sent-active-text-color);
+                border-color: var(--nlux-message-sent-active-border-color);
+                background-color: var(--nlux-message-sent-active-background-color);
+                box-shadow: var(--nlux-box-shadow);
             }
         }
     }

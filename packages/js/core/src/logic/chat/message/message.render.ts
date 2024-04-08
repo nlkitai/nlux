@@ -16,7 +16,7 @@ import {
 } from './message.types';
 import {createPersonaDom} from './utils/createPersonaDom';
 
-export const __ = (styleName: string) => `nluxc-text-message-${styleName}`;
+export const __ = (styleName: string) => `nlux-text-message-${styleName}`;
 
 const html = ({content}: CompMessageProps) => `` +
     `<div class="${__('content')}" tabindex="0">${content ? textToHtml(content) : ''}</div>` +

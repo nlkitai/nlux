@@ -1,48 +1,48 @@
-.nluxc-root {
+.nlux-AiChat-root {
     .bt-primary-filled {
-        font-family: var(--nluxc-font-family);
-        font-size: var(--nluxc-font-size);
-        font-weight: var(--nluxc-font-weight);
-        line-height: var(--nluxc-line-height);
+        font-family: var(--nlux-font-family);
+        font-size: var(--nlux-font-size);
+        font-weight: var(--nlux-font-weight);
+        line-height: var(--nlux-line-height);
 
-        padding: var(--nluxc-padding) var(--nluxc-padding-l);
+        padding: var(--nlux-padding) var(--nlux-padding-l);
 
         cursor: pointer;
-        color: var(--nluxc-button-text-color);
+        color: var(--nlux-button-text-color);
 
-        border-width: var(--nluxc-border-width);
+        border-width: var(--nlux-border-width);
         border-style: solid;
 
-        border-color: var(--nluxc-button-border-color);
-        border-radius: var(--nluxc-border-radius-m);
-        background-color: var(--nluxc-button-background-color);
+        border-color: var(--nlux-button-border-color);
+        border-radius: var(--nlux-border-radius-m);
+        background-color: var(--nlux-button-background-color);
 
         > .loader,
         > .loader:after {
-            color: var(--nluxc-button-text-color);
+            color: var(--nlux-button-text-color);
         }
 
         &:active,
         &:hover {
-            color: var(--nluxc-button-active-text-color);
-            border-color: var(--nluxc-button-active-border-color);
-            background-color: var(--nluxc-button-active-background-color);
+            color: var(--nlux-button-active-text-color);
+            border-color: var(--nlux-button-active-border-color);
+            background-color: var(--nlux-button-active-background-color);
         }
 
         &:focus-visible,
         &:focus-within,
         &:focus {
-            color: var(--nluxc-button-active-text-color);
-            border-color: var(--nluxc-button-active-border-color);
+            color: var(--nlux-button-active-text-color);
+            border-color: var(--nlux-button-active-border-color);
             outline: none;
-            background-color: var(--nluxc-button-active-background-color);
-            box-shadow: var(--nluxc-box-shadow);
+            background-color: var(--nlux-button-active-background-color);
+            box-shadow: var(--nlux-box-shadow);
         }
 
         &:disabled {
-            color: var(--nluxc-button-disabled-text-color);
-            border-color: var(--nluxc-button-disabled-border-color);
-            background-color: var(--nluxc-button-disabled-background-color);
+            color: var(--nlux-button-disabled-text-color);
+            border-color: var(--nlux-button-disabled-border-color);
+            background-color: var(--nlux-button-disabled-background-color);
         }
     }
 }

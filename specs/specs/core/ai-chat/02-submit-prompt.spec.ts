@@ -136,13 +136,13 @@ describe('When sending a chat message ', () => {
 
             expect(textInput.value).toBe('Hello');
             expect(sendButton).not.toBeDisabled();
-            expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+            expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
 
             await submit();
             await waitForRenderCycle();
 
             expect(sendButton).toBeDisabled();
-            expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+            expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
         });
 
         describe('When the API call fails', () => {
@@ -344,7 +344,7 @@ describe('When sending a chat message ', () => {
             await waitForRenderCycle();
 
             await waitForMdStreamToComplete();
-            expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+            expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
         });
 
         it('should empty the prompt box', async () => {

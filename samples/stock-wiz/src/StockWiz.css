@@ -22,7 +22,7 @@
     gap: 25px;
 }
 
-.nluxc-root.aichat {
+.nlux-AiChat-root.aichat {
     overflow: hidden;
     flex: 1;
     min-width: 320px;

@@ -45,14 +45,14 @@ describe('When a fetch adapter is used to generate text', () => {
 
         expect(textInput).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
 
         await submit();
         await waitForRenderCycle();
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Prompt box should remain in loading state until text is returned', async () => {
@@ -68,7 +68,7 @@ describe('When a fetch adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         // Wait for a random amount of time between 500ms and 1500ms to simulate the text being returned
         const waitingTime = Math.floor(Math.random() * 1000) + 500;
@@ -76,7 +76,7 @@ describe('When a fetch adapter is used to generate text', () => {
 
         expect(textInput).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Prompt box should switch back to normal state when text is returned', async () => {
@@ -91,14 +91,14 @@ describe('When a fetch adapter is used to generate text', () => {
         await submit();
 
         expect(textInput).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         adapterController.resolve('Hi Human!');
         await waitForRenderCycle();
         await waitForMdStreamToComplete();
 
         expect(textInput).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
     });
 
     it('Text returned from fetchText should be displayed in the conversation', async () => {
@@ -128,13 +128,13 @@ describe('When a fetch adapter is used to generate text', () => {
         await submit();
 
         expect(textInput).toBeDisabled();
-        expect(sendButton).toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).toHaveClass('nlux-prompt-box-send-button-loading');
 
         adapterController.reject('Error');
         await waitForRenderCycle();
         await waitForMdStreamToComplete();
 
         expect(textInput).not.toBeDisabled();
-        expect(sendButton).not.toHaveClass('nluxc-prompt-box-send-button-loading');
+        expect(sendButton).not.toHaveClass('nlux-prompt-box-send-button-loading');
     });
 });
