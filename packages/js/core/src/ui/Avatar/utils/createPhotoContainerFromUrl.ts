@@ -1,6 +1,6 @@
 export const renderedPhotoContainerClassName = 'avtr_ctn';
-export const renderedPhotoClassName = 'cht_pic_img';
-export const renderedInitialsClassName = 'cht_pic_ltr';
+export const renderedPhotoClassName = 'avtr_img';
+export const renderedInitialsClassName = 'avtr_ltr';
 
 export const createPhotoContainerFromUrl = (url: string | undefined, name: string | undefined): HTMLElement => {
     // We print the first letter of the name in the persona photo
