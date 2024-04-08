@@ -14,7 +14,7 @@
     "noImplicitAny": true,
     "composite": false,
     "experimentalDecorators": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "lib": [
       "dom",
       "es2018"

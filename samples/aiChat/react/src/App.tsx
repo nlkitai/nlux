@@ -1,23 +1,17 @@
-import {useState} from 'react';
+import {useChatAdapter} from '@nlux/nlbridge-react';
+import {AiChat} from '@nlux/react';
+import '@nlux/themes/luna.css';
 import './App.css';
 
 function App() {
-    const [count, setCount] = useState(0);
+    const nlBridge = useChatAdapter({
+        url: 'http://localhost:8899/',
+    });
 
     return (
         <>
             <h1>AiChat React + TS</h1>
-            <div className="card">
-                <button onClick={() => setCount((count) => count + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">
-                Click on the Vite and React logos to learn more
-            </p>
+            <AiChat adapter={nlBridge}/>
         </>
     );
 }

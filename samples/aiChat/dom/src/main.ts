@@ -1,16 +1,19 @@
 import './style.css';
-import {setupCounter} from './counter.ts';
+import {createAiChat} from '@nlux/core';
+import {createChatAdapter} from '@nlux/nlbridge';
+import '@nlux/themes/luna.css';
+
+document.addEventListener('DOMContentLoaded', () => {
+    const parent = document.getElementById('aiChat-parent')!;
+    const adapter = createChatAdapter().withUrl('http://localhost:8899/');
+    const aiChat = createAiChat().withAdapter(adapter);
+    aiChat.mount(parent);
+});
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>
     <h1>AiChat Vanilla TS</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+    <div id="aiChat-parent">
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
   </div>
 `;
-
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!);
