@@ -1,5 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/naked/components/Avatar.css';
+import '@nlux-dev/themes/src/luna/components/Avatar.css';
 import {createAvatarDom} from '@nlux-dev/core/src/ui/Avatar/create.ts';
 import {AvatarProps} from '@nlux-dev/core/src/ui/Avatar/props.ts';
 import {updateAvatarDom} from '@nlux-dev/core/src/ui/Avatar/update.ts';

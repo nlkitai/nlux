@@ -1,6 +1,6 @@
 import '../style.css';
-import '@nlux-dev/themes/src/naked/components/animation.css';
-import '@nlux-dev/themes/src/naked/components/PromptBox.css';
+import '@nlux-dev/themes/src/luna/components/animation.css';
+import '@nlux-dev/themes/src/luna/components/PromptBox.css';
 import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create.ts';
 import {PromptBoxProps, PromptBoxStatus} from '@nlux-dev/core/src/ui/PromptBox/props.ts';
 import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update.ts';

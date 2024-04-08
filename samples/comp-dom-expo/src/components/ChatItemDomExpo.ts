@@ -1,7 +1,7 @@
 import '../style.css';
-import '@nlux-dev/themes/src/naked/components/animation.css';
-import '@nlux-dev/themes/src/naked/components/ChatItem.css';
-import '@nlux-dev/themes/src/naked/components/Loader.css';
+import '@nlux-dev/themes/src/luna/components/animation.css';
+import '@nlux-dev/themes/src/luna/components/ChatItem.css';
+import '@nlux-dev/themes/src/luna/components/Loader.css';
 import {createChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/create.ts';
 import {ChatItemProps} from '@nlux-dev/core/src/ui/ChatItem/props.ts';
 import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update.ts';
