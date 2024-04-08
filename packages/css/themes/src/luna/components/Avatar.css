@@ -7,7 +7,7 @@
     width: 50px;
     color: var(--foreground-color);
     border: 1px solid var(--border-color);
-    border-radius: 20%;
+    border-radius: 50%;
     background-color: var(--background-color);
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     aspect-ratio: 1;
@@ -19,7 +19,7 @@
         width: 100%;
         aspect-ratio: 1;
 
-        > .cht_pic_ltr {
+        > .avtr_ltr {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -27,7 +27,7 @@
             height: 100%;
         }
 
-        > .cht_pic_img {
+        > .avtr_img {
             position: absolute;
             top: 0;
             left: 0;

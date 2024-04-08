@@ -1,5 +1,6 @@
 import './App.css';
 import {AiChatReactExpo} from './comp/AiChatReactExpo.tsx';
+import {AiChatWelcomeMessageReactExpo} from './comp/AiChatWelcomeMessageReactExpo.tsx';
 import {AvatarReactExpo} from './comp/AvatarReactExpo.tsx';
 import {ChatItemReactExpo} from './comp/ChatItemReactExpo.tsx';
 import {LoaderReactExpo} from './comp/LoaderReactExpo.tsx';
@@ -19,6 +20,7 @@ function App() {
             <PromptBoxReactExpo/>
             <WelcomeMessageReactExpo/>
             <AiChatReactExpo/>
+            <AiChatWelcomeMessageReactExpo/>
         </>
     );
 }
