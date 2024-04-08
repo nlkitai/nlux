@@ -12,7 +12,7 @@
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     aspect-ratio: 1;
 
-    > .cht_pic_ctn {
+    > .avtr_ctn {
         display: flex;
         align-items: center;
         justify-content: center;

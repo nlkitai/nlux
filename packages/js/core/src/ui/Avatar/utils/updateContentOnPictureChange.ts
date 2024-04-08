@@ -13,7 +13,7 @@ export const updateContentOnPictureChange = (
     if (typeof propsAfter.picture === 'string' && typeof propsBefore.picture === 'string') {
         // When the picture is a string, we update the photo container with the new URL
         const photoDomElement: HTMLElement | null = element.querySelector(
-            '* > .cht_pic_ctn > .cht_pic_img',
+            '* > .avtr_ctn > .cht_pic_img',
         );
 
         if (photoDomElement !== null) {
