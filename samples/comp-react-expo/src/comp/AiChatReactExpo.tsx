@@ -2,7 +2,7 @@ import {PersonaOptions} from '@nlux-dev/react/src';
 import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
 import {AiChatComponentProps} from '@nlux-dev/react/src/exports/props.tsx';
 import {ChatItem} from '@nlux/core';
-import '@nlux-dev/themes/src/naked/components/AiChat.css';
+import '@nlux-dev/themes/src/luna/components/AiChat.css';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {useMemo, useState} from 'react';
 

@@ -1,7 +1,7 @@
 import '../style.css';
 import {createWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/create.ts';
-import '@nlux-dev/themes/src/naked/components/WelcomeMessage.css';
-import '@nlux-dev/themes/src/naked/components/Loader.css';
+import '@nlux-dev/themes/src/luna/components/WelcomeMessage.css';
+import '@nlux-dev/themes/src/luna/components/Loader.css';
 import {WelcomeMessageProps} from '@nlux-dev/core/src/ui/WelcomeMessage/props.ts';
 import {updateWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/update.ts';
 

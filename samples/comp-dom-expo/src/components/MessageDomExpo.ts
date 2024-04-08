@@ -1,7 +1,7 @@
 import '../style.css';
 import {createMessageDom} from '@nlux-dev/core/src/ui/Message/create.ts';
-import '@nlux-dev/themes/src/naked/components/Message.css';
-import '@nlux-dev/themes/src/naked/components/Loader.css';
+import '@nlux-dev/themes/src/luna/components/Message.css';
+import '@nlux-dev/themes/src/luna/components/Loader.css';
 import {MessageDirection, MessageProps, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
 import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update.ts';
 

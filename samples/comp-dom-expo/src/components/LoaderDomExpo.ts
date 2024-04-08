@@ -1,6 +1,6 @@
 import '../style.css';
-import '@nlux-dev/themes/src/naked/components/animation.css';
-import '@nlux-dev/themes/src/naked/components/Loader.css';
+import '@nlux-dev/themes/src/luna/components/animation.css';
+import '@nlux-dev/themes/src/luna/components/Loader.css';
 import {createLoaderDom} from '@nlux-dev/core/src/ui/Loader/create.ts';
 
 const newExpo = document.createElement('div');
