@@ -1,5 +1,5 @@
 import {ChatAdapterExtras, ChatSegment, getRootClassNames, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
-import React, {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
