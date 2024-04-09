@@ -8,12 +8,7 @@ function App() {
         url: 'http://localhost:8899/',
     });
 
-    return (
-        <>
-            <h1>AiChat React + TS</h1>
-            <AiChat adapter={nlBridge}/>
-        </>
-    );
+    return <AiChat adapter={nlBridge}/>;
 }
 
 export default App;
