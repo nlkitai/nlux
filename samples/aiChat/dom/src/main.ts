@@ -10,10 +10,4 @@ document.addEventListener('DOMContentLoaded', () => {
     aiChat.mount(parent);
 });
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <h1>AiChat Vanilla TS</h1>
-    <div id="aiChat-parent">
-    </div>
-  </div>
-`;
+document.querySelector<HTMLDivElement>('#app')!.innerHTML = `<div id="aiChat-parent"></div>`;
