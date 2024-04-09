@@ -1,6 +1,6 @@
-import {useChatAdapter} from '@nlux/nlbridge-react';
-import {AiChat} from '@nlux/react';
-import '@nlux/themes/luna.css';
+import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
+import {AiChat} from '@nlux-dev/react/src';
+import '@nlux-dev/themes/src/luna/theme.css';
 import './App.css';
 
 function App() {

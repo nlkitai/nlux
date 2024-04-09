@@ -1,7 +1,7 @@
 import './style.css';
-import {createAiChat} from '@nlux/core';
-import {createChatAdapter} from '@nlux/nlbridge';
-import '@nlux/themes/luna.css';
+import '@nlux-dev/themes/src/luna/theme.css';
+import {createAiChat} from '@nlux-dev/core/src';
+import {createChatAdapter} from '@nlux-dev/nlbridge/src';
 
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('aiChat-parent')!;
