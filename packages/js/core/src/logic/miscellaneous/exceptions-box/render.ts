@@ -10,10 +10,10 @@ import {
     CompExceptionsBoxProps,
 } from './types';
 
-const __ = (styleName: string) => `nlux-exceptions-box-${styleName}`;
+const __ = (styleName: string) => `nlux-xcptBx-${styleName}`;
 
 const html = (props: CompExceptionsBoxProps) => `` +
-    `<div class="${__('container')}">` +
+    `<div class="${__('cntr')}">` +
     `<div class="${__('exception-container')}" style="display: none">` +
     `<div class="${__('message')}">${props.message ?? ''}</div>` +
     `</div>` +

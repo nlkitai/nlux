@@ -1,4 +1,4 @@
-.nlux_comp_prmpt_box {
+.nlux-comp-prmptBox {
     display: flex;
     align-items: stretch;
     flex-direction: row;
@@ -41,7 +41,7 @@
     }
 }
 
-.nlux_comp_prmpt_box.nlux_prmpt_typing {
+.nlux-comp-prmptBox.nlux_prmpt_typing {
     button > .nlux_snd_icn {
         display: inline-block;
     }
@@ -51,8 +51,8 @@
     }
 }
 
-.nlux_comp_prmpt_box.nlux_prmpt_submitting,
-.nlux_comp_prmpt_box.nlux_prmpt_waiting {
+.nlux-comp-prmptBox.nlux_prmpt_submitting,
+.nlux-comp-prmptBox.nlux_prmpt_waiting {
     button > .nlux_snd_icn {
         display: none;
     }

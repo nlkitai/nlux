@@ -15,7 +15,7 @@ describe('When welcome message is rendered', () => {
         const welcomeMessage = createWelcomeMessageDom(props);
 
         // Then
-        expect(welcomeMessage.classList.contains('nlux_comp_wlc_msg')).toBe(true);
+        expect(welcomeMessage.classList.contains('nlux-comp-wlc_msg')).toBe(true);
     });
 
     it('should render the welcome message with the name', () => {
@@ -27,7 +27,7 @@ describe('When welcome message is rendered', () => {
 
         // When
         const welcomeMessage = createWelcomeMessageDom(props);
-        const name = welcomeMessage.querySelector('.nlux_comp_wlc_msg_prs_nm')!.textContent;
+        const name = welcomeMessage.querySelector('.nlux-comp-wlc_msg_prs_nm')!.textContent;
 
         // Then
         expect(name).toBe(props.name);
@@ -42,7 +42,7 @@ describe('When welcome message is rendered', () => {
 
         // When
         const welcomeMessage = createWelcomeMessageDom(props);
-        const personaPicture = welcomeMessage.querySelector('.nlux_comp_avtr') as HTMLImageElement;
+        const personaPicture = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
 
         // Then
         expect(personaPicture).not.toBeNull();
@@ -61,7 +61,7 @@ describe('When welcome message is rendered', () => {
 
         // When
         const welcomeMessageElement = createWelcomeMessageDom(props);
-        const welcomeMessage = welcomeMessageElement.querySelector('.nlux_comp_wlc_msg_txt')!.textContent;
+        const welcomeMessage = welcomeMessageElement.querySelector('.nlux-comp-wlc_msg_txt')!.textContent;
 
         // Then
         expect(welcomeMessage).toBe('Hello, World!');

@@ -126,22 +126,25 @@ export const AiChat: <MessageType>(
 
     return (
         <div className={rootClassNames}>
-            <ForwardConversationComp
-                ref={conversationRef}
-                segments={conversationSegments}
-                conversationOptions={props.conversationOptions}
-                personaOptions={props.personaOptions}
-                customRenderer={props.aiMessageComponent}
-                syntaxHighlighter={props.syntaxHighlighter}
-            />
-            <PromptBoxComp
-                status={promptBoxStatus}
-                prompt={prompt}
-                hasValidInput={hasValidInput}
-                placeholder={props.promptBoxOptions?.placeholder}
-                onChange={handlePromptChange}
-                onSubmit={handleSubmitClick}
-            />
+            <div className="nlux-xcptBx-cntr"/>
+            <div className="nlux-chtRm-cntr">
+                <ForwardConversationComp
+                    ref={conversationRef}
+                    segments={conversationSegments}
+                    conversationOptions={props.conversationOptions}
+                    personaOptions={props.personaOptions}
+                    customRenderer={props.aiMessageComponent}
+                    syntaxHighlighter={props.syntaxHighlighter}
+                />
+                <PromptBoxComp
+                    status={promptBoxStatus}
+                    prompt={prompt}
+                    hasValidInput={hasValidInput}
+                    placeholder={props.promptBoxOptions?.placeholder}
+                    onChange={handlePromptChange}
+                    onSubmit={handleSubmitClick}
+                />
+            </div>
         </div>
     );
 };

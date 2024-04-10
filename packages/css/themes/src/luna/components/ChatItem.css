@@ -1,17 +1,17 @@
-.nlux_comp_cht_itm {
+.nlux-comp-cht_itm {
     display: flex;
     flex-direction: row;
     gap: 0.5em;
 
-    > .nlux_comp_msg {
+    > .nlux-comp-msg {
         flex: 1;
     }
 }
 
-.nlux_comp_cht_itm.nlux_cht_itm_incoming {
+.nlux-comp-cht_itm.nlux_cht_itm_incoming {
     flex-direction: row-reverse;
 }
 
-.nlux_comp_cht_itm.nlux_cht_itm_outgoing {
+.nlux-comp-cht_itm.nlux_cht_itm_outgoing {
     flex-direction: row;
 }

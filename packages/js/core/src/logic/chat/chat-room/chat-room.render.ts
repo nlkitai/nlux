@@ -6,7 +6,7 @@ import {render} from '../../../utils/render';
 import {source} from '../../../utils/source';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
 
-const __ = (styleName: string) => `nlux-chat-room-${styleName}`;
+const __ = (styleName: string) => `nlux-chtRm-${styleName}`;
 
 const html = () => `` +
     `<div class="${__('conversation-container')}"></div>` +
@@ -31,7 +31,7 @@ export const renderChatRoom: CompRenderer<
     const visibleProp = props.visible ?? true;
     const chatRoomElement = document.createElement('div');
 
-    chatRoomElement.className = __('container');
+    chatRoomElement.className = __('cntr');
     chatRoomElement.append(dom);
     chatRoomElement.style.display = visibleProp ? '' : 'none';
 

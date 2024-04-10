@@ -14,7 +14,7 @@ describe('When a message component is rendered and is in loading status', () => 
 
             // Then
             expect(html).toBe(
-                '<div class="nlux_comp_msg nlux_msg_loading nlux_msg_incoming"><div class="nlux_msg_ldr">' +
+                '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><div class="nlux_msg_ldr">' +
                 '<div class="spn_ldr_ctn"><span class="spn_ldr"></span></div></div></div>',
             );
         });
@@ -33,7 +33,7 @@ describe('When a message component is rendered and is in loading status', () => 
 
             // Then
             expect(html).toBe(
-                '<div class="nlux_comp_msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
+                '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
             );
         });
     });
@@ -53,7 +53,7 @@ describe('When a message component is rendered and is in loading status', () => 
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
+                '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
             );
         });
     });
@@ -69,7 +69,7 @@ describe('When a message component is rendered and is in loading status', () => 
             updateMessageDom(dom, beforeProps, props);
 
             // Then
-            expect(dom.outerHTML).toBe('<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_rendered"></div>');
+            expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered"></div>');
         });
 
         it('should render the message', () => {
@@ -83,7 +83,7 @@ describe('When a message component is rendered and is in loading status', () => 
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
+                '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
         });
     });
 
@@ -98,7 +98,7 @@ describe('When a message component is rendered and is in loading status', () => 
             updateMessageDom(dom, beforeProps, props);
 
             // Then
-            expect(dom.outerHTML).toBe('<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_streaming"></div>');
+            expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_streaming"></div>');
         });
 
         it('should not render the message', () => {
@@ -111,7 +111,7 @@ describe('When a message component is rendered and is in loading status', () => 
             updateMessageDom(dom, beforeProps, props);
 
             // Then
-            expect(dom.outerHTML).toBe('<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_streaming"></div>');
+            expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_streaming"></div>');
         });
     });
 });

@@ -1,4 +1,4 @@
-export const welcomeMessageTextClassName = 'nlux_comp_wlc_msg_txt';
+export const welcomeMessageTextClassName = 'nlux-comp-wlc_msg_txt';
 
 export const updateWelcomeMessageText = (
     root: HTMLElement,

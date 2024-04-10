@@ -1,6 +1,6 @@
 @import './colors.css';
 
-.nlux_comp_msg {
+.nlux-comp-msg {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -15,7 +15,7 @@
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
 }
 
-.nlux_comp_msg.nlux_msg_loading {
+.nlux-comp-msg.nlux_msg_loading {
     display: flex;
     flex: 0;
     justify-content: center;

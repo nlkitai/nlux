@@ -13,7 +13,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux_comp_msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
             // When
             updateChatItemDom(chatItem, props, {
@@ -35,7 +35,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux_comp_msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
             // When
             updateChatItemDom(chatItem, props, {
@@ -58,7 +58,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
                 loader: undefined,
             };
             const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux_comp_msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
             // When
             const newLoader = document.createElement('div');

@@ -6,7 +6,7 @@ import {MessageProps} from '../Message/props';
 import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 
-export const className = 'nlux_comp_cht_itm';
+export const className = 'nlux-comp-cht_itm';
 
 export const createChatItemDom: DomCreator<ChatItemProps> = (
     props,

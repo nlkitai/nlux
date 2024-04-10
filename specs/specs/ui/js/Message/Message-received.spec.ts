@@ -13,7 +13,7 @@ describe('When a message component is rendered and is in rendered status', () =>
             const html = dom.outerHTML;
 
             // Then
-            expect(html).toBe('<div class="nlux_comp_msg nlux_msg_rendered"></div>');
+            expect(html).toBe('<div class="nlux-comp-msg nlux_msg_rendered"></div>');
         });
     });
 
@@ -28,7 +28,7 @@ describe('When a message component is rendered and is in rendered status', () =>
             const html = dom.outerHTML;
 
             // Then
-            expect(html).toBe('<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
+            expect(html).toBe('<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
     });
 
@@ -45,7 +45,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(html).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Hello, World!&lt;/strong&gt;</div>');
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Hello, World!&lt;/strong&gt;</div>');
         });
     });
 
@@ -65,7 +65,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Goodbye, World!</div>',
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Goodbye, World!</div>',
             );
         });
 
@@ -83,7 +83,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Goodbye, World!&lt;/strong&gt;</div>',
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Goodbye, World!&lt;/strong&gt;</div>',
             );
         });
     });
@@ -99,7 +99,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
     });
 
@@ -114,7 +114,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
     });
 
@@ -129,7 +129,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(dom.outerHTML).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
     });
 
@@ -147,10 +147,10 @@ describe('When a message component is rendered and is in rendered status', () =>
 
             // Then
             expect(beforeHtml).toBe(
-                '<div class="nlux_comp_msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>',
+                '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>',
             );
             expect(afterHtml).toBe(
-                '<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_loading"><div class="nlux_msg_ldr">' +
+                '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_loading"><div class="nlux_msg_ldr">' +
                 '<div class="spn_ldr_ctn"><span class="spn_ldr"></span></div></div></div>',
             );
         });
@@ -172,7 +172,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
                 // Then
                 expect(dom.outerHTML).toBe(
-                    '<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_loading"><div class="nlux_msg_ldr">' +
+                    '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_loading"><div class="nlux_msg_ldr">' +
                     '<div class="spn_ldr_ctn"><span class="spn_ldr"></span></div></div></div>');
 
                 // When
@@ -180,7 +180,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
                 // Then
                 expect(dom.outerHTML).toBe(
-                    '<div class="nlux_comp_msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
+                    '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
             });
         });
     });
