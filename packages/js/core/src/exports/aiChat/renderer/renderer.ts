@@ -17,7 +17,7 @@ import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer {
-    private static readonly defaultThemeId = 'nova';
+    private static readonly defaultThemeId = 'luna';
 
     private readonly __context: ControllerContext;
 
@@ -35,7 +35,7 @@ export class NluxRenderer {
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
-    private readonly theThemeId: string;
+    private theThemeId: string;
 
     constructor(
         context: ControllerContext,
@@ -292,6 +292,14 @@ export class NluxRenderer {
             }
         }
 
+        if (props.hasOwnProperty('themeId')) {
+            const newThemeId = props.themeId ?? NluxRenderer.defaultThemeId;
+            if (newThemeId !== this.theThemeId) {
+                this.theThemeId = newThemeId;
+                this.setRootElementClassNames();
+            }
+        }
+
         if (props.hasOwnProperty('adapter') && props.adapter) {
             this.context.update({
                 adapter: props.adapter,
@@ -375,6 +383,11 @@ export class NluxRenderer {
             rootClassName: this.rootClassName,
         });
 
+        if (this.theClassName) {
+            rootClassNames.push(this.theClassName);
+        }
+
+        this.rootElement.className = '';
         this.rootElement.classList.add(...rootClassNames);
     }
 }

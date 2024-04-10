@@ -119,10 +119,13 @@ export const AiChat: <MessageType>(
         ConversationComp<MessageType>,
     );
 
-    const className = getRootClassNames(props).join(' ');
+    const rootClassNames = getRootClassNames({
+        className: props.className,
+        themeId: props.themeId,
+    }).join(' ');
 
     return (
-        <div className={className}>
+        <div className={rootClassNames}>
             <ForwardConversationComp
                 ref={conversationRef}
                 segments={conversationSegments}

@@ -8,7 +8,12 @@ function App() {
         url: 'http://localhost:8899/',
     });
 
-    return <AiChat adapter={nlBridge}/>;
+    return (
+        <AiChat
+            adapter={nlBridge}
+            themeId="bina"
+        />
+    );
 }
 
 export default App;

@@ -70,9 +70,11 @@ export class AiChat implements IAiChat {
 
         registerAllComponents();
 
-        rootElement.innerHTML = '';
+        const aiChatRoot = document.createElement('div');
+        rootElement.appendChild(aiChatRoot);
+
         const controller = new NluxController(
-            rootElement,
+            aiChatRoot,
             {
                 themeId: this.theThemeId ?? undefined,
                 adapter: adapterToUser,
@@ -362,7 +364,7 @@ export class AiChat implements IAiChat {
         return this;
     }
 
-    withTheme(themeId: string): IAiChat {
+    withThemeId(themeId: string) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
