@@ -12,7 +12,7 @@ describe('When a prompt box component is rendered and is in submitting status', 
 
         // Then
         expect(html).toEqual(
-            expect.stringContaining('<div class="nlux_comp_prmpt_box nlux_prmpt_submitting">'),
+            expect.stringContaining('<div class="nlux-comp-prmptBox nlux_prmpt_submitting">'),
         );
         expect(html).toEqual(
             expect.stringContaining('<button disabled=""><div class="nlux_snd_icn"><div class="snd_icn_ctn"><svg'));

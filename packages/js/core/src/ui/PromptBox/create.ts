@@ -4,7 +4,7 @@ import {createSendIconDom} from '../SendIcon/create';
 import {PromptBoxProps} from './props';
 import {applyNewStatusClassName} from './utils/applyNewStatusClassName';
 
-export const className = 'nlux_comp_prmpt_box';
+export const className = 'nlux-comp-prmptBox';
 
 export const createPromptBoxDom: DomCreator<PromptBoxProps> = (props) => {
     const element = document.createElement('div');

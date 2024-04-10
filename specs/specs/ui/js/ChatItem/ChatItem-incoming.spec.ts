@@ -29,7 +29,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         const chatItem = createChatItemDom(props);
 
         // When
-        const message = chatItem.querySelector('.nlux_comp_msg') as HTMLElement;
+        const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
         // Then
         expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
@@ -47,7 +47,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         const chatItem = createChatItemDom(props);
 
         // When
-        const persona = chatItem.querySelector('.nlux_comp_avtr') as HTMLElement;
+        const persona = chatItem.querySelector('.nlux-comp-avtr') as HTMLElement;
 
         // Then
         expect(persona).not.toBeNull();
@@ -94,7 +94,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             updateChatItemDom(chatItem, props, newProps);
 
             // Then
-            const message = chatItem.querySelector('.nlux_comp_msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
             expect(message.classList.contains('nlux_msg_incoming')).toBe(false);
             expect(message.classList.contains('nlux_msg_outgoing')).toBe(true);
         });

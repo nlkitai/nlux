@@ -3,8 +3,8 @@ import {createAvatarDom} from '../Avatar/create';
 import {WelcomeMessageProps} from './props';
 import {updateWelcomeMessageText} from './utils/updateWelcomeMessageText';
 
-export const className = 'nlux_comp_wlc_msg';
-export const personaNameClassName = 'nlux_comp_wlc_msg_prs_nm';
+export const className = 'nlux-comp-wlc_msg';
+export const personaNameClassName = 'nlux-comp-wlc_msg_prs_nm';
 
 export const createWelcomeMessageDom: DomCreator<WelcomeMessageProps> = (
     props,
