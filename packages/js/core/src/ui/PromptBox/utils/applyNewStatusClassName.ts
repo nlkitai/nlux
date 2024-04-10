@@ -1,9 +1,9 @@
 import {PromptBoxStatus} from '../props';
 
 export const statusClassName: {[key: string]: string} = {
-    typing: 'nlux_prmpt_typing',
-    submitting: 'nlux_prmpt_submitting',
-    waiting: 'nlux_prmpt_waiting',
+    typing: 'nlux-prmpt-typing',
+    submitting: 'nlux-prmpt-submitting',
+    waiting: 'nlux-prmpt-waiting',
 };
 
 export const applyNewStatusClassName = (element: HTMLElement, status: PromptBoxStatus) => {

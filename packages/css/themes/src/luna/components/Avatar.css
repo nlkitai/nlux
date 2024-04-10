@@ -5,10 +5,10 @@
     align-items: stretch;
     justify-content: stretch;
     width: 50px;
-    color: var(--foreground-color);
-    border: 1px solid var(--border-color);
+    color: var(--nlux-foreground-color);
+    border: 1px solid var(--nlux-border-color);
     border-radius: 50%;
-    background-color: var(--background-color);
+    background-color: var(--nlux-background-color);
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
     aspect-ratio: 1;
 
