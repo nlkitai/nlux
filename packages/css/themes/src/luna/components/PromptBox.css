@@ -4,30 +4,51 @@
     flex-direction: row;
     justify-content: center;
 
-    color: var(--nlux-foreground-color);
-    border: 1px solid var(--nlux-border-color);
-    border-radius: 0.25em;
-    background-color: var(--nlux-background-color);
-    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
-    gap: 0.5em;
+    border: none;
+    background-color: transparent;
+    gap: var(--nlux-gap);
 
     > textarea {
+        font-family: var(--nlux-font-family);
+        font-size: var(--nlux-font-size);
+
+        font-weight: 400;
+        line-height: 1.5;
         flex: 1;
+        padding: .375rem .75rem;
         resize: none;
-        border: none;
-        background-color: transparent;
+        cursor: pointer;
+        transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, box-shadow .1s ease-in-out;
+        color: var(--nlux-input-text-color);
+        border-width: var(--nlux-border-width);
+        border-style: solid;
+        border-color: var(--nlux-input-border-color);
+        border-radius: var(--nlux-border-radius-m);
+        outline: 0;
+        background-color: var(--nlux-input-background-color);
     }
 
     > button {
+        font-family: var(--nlux-font-family);
+        font-size: var(--nlux-font-size);
+        font-weight: var(--nlux-font-weight);
+        line-height: var(--nlux-line-height);
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 50px;
-        padding: 0;
-        aspect-ratio: 1;
 
-        > .nlux_snd_icn {
-            width: 50%;
+        justify-content: center;
+        width: 65px;
+        padding: var(--nlux-padding) var(--nlux-padding-l);
+        cursor: pointer;
+        color: var(--nlux-button-text-color);
+        border-width: var(--nlux-border-width);
+        border-style: solid;
+        border-color: var(--nlux-button-border-color);
+        border-radius: var(--nlux-border-radius-m);
+        background-color: var(--nlux-button-background-color);
+
+        > .nlux_sndIcn {
+            width: 80%;
         }
 
         > .nlux_msg_ldr {
@@ -37,11 +58,14 @@
 
     > button:disabled {
         cursor: not-allowed;
+        color: var(--nlux-button-disabled-text-color);
+        border-color: var(--nlux-button-disabled-border-color);
+        background-color: var(--nlux-button-disabled-background-color);
     }
 }
 
 .nlux-comp-prmptBox.nlux-prmpt-typing {
-    button > .nlux_snd_icn {
+    button > .nlux_sndIcn {
         display: inline-block;
     }
 
@@ -52,7 +76,7 @@
 
 .nlux-comp-prmptBox.nlux-prmpt-submitting,
 .nlux-comp-prmptBox.nlux-prmpt-waiting {
-    button > .nlux_snd_icn {
+    button > .nlux_sndIcn {
         display: none;
     }
 

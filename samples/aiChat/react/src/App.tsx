@@ -11,7 +11,6 @@ function App() {
     return (
         <AiChat
             adapter={nlBridge}
-            themeId="bina"
         />
     );
 }

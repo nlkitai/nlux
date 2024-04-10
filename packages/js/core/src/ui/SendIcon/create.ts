@@ -1,4 +1,4 @@
-export const className = 'nlux_snd_icn';
+export const className = 'nlux_sndIcn';
 
 export const createSendIconDom = () => {
     const sendIcon = document.createElement('div');
