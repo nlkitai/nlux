@@ -12,7 +12,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         const html = dom.outerHTML;
 
         // Then
-        expect(html).toEqual(expect.stringContaining('<div class="nlux-comp-prmptBox nlux_prmpt_typing">'));
+        expect(html).toEqual(expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-typing">'));
         expect(html).toEqual(expect.stringContaining('<textarea placeholder=""></textarea>'));
         expect(html).toEqual(
             expect.stringContaining('<button><div class="nlux_snd_icn"><div class="snd_icn_ctn"><svg'));
