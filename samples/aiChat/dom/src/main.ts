@@ -7,8 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
     const adapter = createChatAdapter().withUrl('http://localhost:8899/');
     const aiChat = createAiChat()
-        .withAdapter(adapter)
-        .withThemeId('bina');
+        .withAdapter(adapter);
 
     aiChat.mount(parent);
 });

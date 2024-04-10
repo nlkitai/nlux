@@ -1,5 +1,6 @@
-.nlux_root {
+.nlux-AiChat-root.nlux-theme-luna {
     --nlux-foreground-color: #333333;
     --nlux-background-color: #f9f9f9;
     --nlux-border-color: #cccccc;
+    --nlux-gap: 0.5em;
 }
