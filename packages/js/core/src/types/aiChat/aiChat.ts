@@ -156,5 +156,5 @@ export interface IAiChat {
      *
      * @param {string} themeId The id of the theme to be used.
      */
-    withTheme(themeId: string): IAiChat;
+    withThemeId(themeId: string): IAiChat;
 }
