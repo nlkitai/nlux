@@ -11,6 +11,9 @@ function App() {
     return (
         <AiChat
             adapter={nlBridge}
+            promptBoxOptions={{
+                placeholder: 'Type your prompt here',
+            }}
         />
     );
 }

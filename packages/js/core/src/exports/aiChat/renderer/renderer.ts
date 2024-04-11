@@ -341,7 +341,34 @@ export class NluxRenderer {
         }
 
         if (props.hasOwnProperty('promptBoxOptions')) {
-            // TODO - Apply new prompt box options
+            const changedPromptBoxProps: Partial<CompChatRoomProps> = {};
+            if (
+                props.promptBoxOptions?.hasOwnProperty('placeholder')
+                && props.promptBoxOptions.placeholder !== this.thePromptBoxOptions.placeholder
+            ) {
+                changedPromptBoxProps.promptBox = {
+                    placeholder: props.promptBoxOptions.placeholder,
+                };
+            }
+
+            if (
+                props.promptBoxOptions?.hasOwnProperty('autoFocus')
+                && props.promptBoxOptions.autoFocus !== this.thePromptBoxOptions.autoFocus
+            ) {
+                changedPromptBoxProps.promptBox = {
+                    ...changedPromptBoxProps.promptBox,
+                    autoFocus: props.promptBoxOptions.autoFocus,
+                };
+            }
+
+            if (Object.keys(changedPromptBoxProps).length > 0) {
+                this.thePromptBoxOptions = {
+                    ...this.thePromptBoxOptions,
+                    ...props.promptBoxOptions,
+                };
+
+                this.chatRoom?.setProps(changedPromptBoxProps);
+            }
         }
 
         if (props.hasOwnProperty('syntaxHighlighter')) {
