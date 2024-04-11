@@ -126,6 +126,18 @@ export class CompChatRoom extends BaseComp<
         if (props.hasOwnProperty('userPersona')) {
             this.conversation?.setUserPersona(props.userPersona ?? undefined);
         }
+
+        if (props.hasOwnProperty('promptBox')) {
+            if (this.promptBoxInstance) {
+                const currentDomProps = this.promptBoxInstance?.getProp('domCompProps')!;
+                const newProps: PromptBoxProps = {
+                    ...currentDomProps,
+                    ...props.promptBox,
+                };
+
+                this.promptBoxInstance?.setDomProps(newProps);
+            }
+        }
     }
 
     public show() {
