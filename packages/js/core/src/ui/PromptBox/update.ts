@@ -35,5 +35,13 @@ export const updatePromptBoxDom: DomUpdater<PromptBoxProps> = (
     if (propsBefore.message !== propsAfter.message) {
         const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
         textArea.value = propsAfter.message ?? '';
+
+        if (propsAfter.status === 'typing') {
+            const button: HTMLButtonElement = element.querySelector('* > button')!;
+            const disableSubmitButton = propsAfter.message === '';
+            if (button.disabled !== disableSubmitButton) {
+                button.disabled = disableSubmitButton;
+            }
+        }
     }
 };
