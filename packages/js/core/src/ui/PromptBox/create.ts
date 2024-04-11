@@ -35,5 +35,9 @@ export const createPromptBoxDom: DomCreator<PromptBoxProps> = (props) => {
         submitButton.disabled = true;
     }
 
+    if (props.status === 'typing' && !props.message) {
+        submitButton.disabled = true;
+    }
+
     return element;
 };
