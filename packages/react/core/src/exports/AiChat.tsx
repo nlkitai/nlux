@@ -142,6 +142,7 @@ export const AiChat: <MessageType>(
                     hasValidInput={hasValidInput}
                     placeholder={props.promptBoxOptions?.placeholder}
                     autoFocus={props.promptBoxOptions?.autoFocus}
+                    submitShortcut={props.promptBoxOptions?.submitShortcut}
                     onChange={handlePromptChange}
                     onSubmit={handleSubmitClick}
                 />

@@ -20,8 +20,18 @@ export const renderChatbox: CompRenderer<
     const [textBoxElement, removeTextBoxListeners] = listenToElement(promptBoxRoot, ':scope > textarea')
         .on('input', compEvent('text-updated'))
         .on('keydown', (event: KeyboardEvent) => {
-            if (!event.shiftKey && event.key === 'Enter') {
+            const isEnter = event.key === 'Enter';
+            const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+            if (isEnter && !aModifierKeyIsPressed) {
                 compEvent('enter-key-pressed')();
+                event.preventDefault();
+                return;
+            }
+
+            const isCommandEnter = event.getModifierState('Meta') && event.key === 'Enter';
+            const isControlEnter = event.getModifierState('Control') && event.key === 'Enter';
+            if (isCommandEnter || isControlEnter) {
+                compEvent('command-enter-key-pressed')();
                 event.preventDefault();
                 return;
             }

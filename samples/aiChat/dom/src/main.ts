@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withAdapter(adapter)
         .withPromptBoxOptions({
             placeholder: 'Type your prompt here',
+            autoFocus: true,
         });
 
     aiChat.mount(parent);

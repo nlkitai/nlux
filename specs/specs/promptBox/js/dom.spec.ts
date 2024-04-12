@@ -84,12 +84,12 @@ describe('createAiChat() + promptBox', () => {
                 await waitForRenderCycle();
 
                 // When
-                const textArea = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
                 // Then
-                const sendButton = document.querySelector('.nlux-comp-prmptBox > button');
+                const sendButton = rootElement.querySelector('.nlux-comp-prmptBox > button');
                 expect(sendButton).not.toHaveAttribute('disabled');
             });
         });

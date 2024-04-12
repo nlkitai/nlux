@@ -30,7 +30,7 @@ describe('createAiChat() + promptBox + autoFocus', () => {
             await waitForRenderCycle();
 
             // When
-            const promptBox: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
             expect(promptBox.autofocus).toEqual(false);
@@ -48,7 +48,7 @@ describe('createAiChat() + promptBox + autoFocus', () => {
                 await waitForRenderCycle();
 
                 // Then
-                const promptBox: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 expect(promptBox.autofocus).toEqual(true);
             });
         });
@@ -62,7 +62,7 @@ describe('createAiChat() + promptBox + autoFocus', () => {
             await waitForRenderCycle();
 
             // When
-            const promptBox: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
             expect(promptBox.autofocus).toEqual(true);
@@ -80,7 +80,7 @@ describe('createAiChat() + promptBox + autoFocus', () => {
                 await waitForRenderCycle();
 
                 // Then
-                const promptBox: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 expect(promptBox.autofocus).toEqual(false);
             });
         });

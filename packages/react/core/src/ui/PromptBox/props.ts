@@ -7,6 +7,7 @@ export type PromptBoxProps = {
     autoFocus?: boolean;
 
     hasValidInput?: boolean;
+    submitShortcut?: 'Enter' | 'CommandEnter';
 
     onChange?: (value: string) => void;
     onSubmit?: () => void;

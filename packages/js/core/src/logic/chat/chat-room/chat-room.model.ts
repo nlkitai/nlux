@@ -68,6 +68,7 @@ export class CompChatRoom extends BaseComp<
             promptBox?.placeholder,
             promptBox?.autoFocus,
             promptBox?.disableSubmitButton,
+            promptBox?.submitShortcut,
         );
 
         // @ts-ignore
@@ -177,6 +178,7 @@ export class CompChatRoom extends BaseComp<
         placeholder?: string,
         autoFocus?: boolean,
         disableSubmitButton?: boolean,
+        submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
         this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
             props: {
@@ -185,6 +187,7 @@ export class CompChatRoom extends BaseComp<
                     placeholder,
                     autoFocus,
                     disableSubmitButton,
+                    submitShortcut,
                 },
             } satisfies CompPromptBoxProps,
             eventListeners: {

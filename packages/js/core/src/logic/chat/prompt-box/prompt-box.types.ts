@@ -3,7 +3,8 @@ import {PromptBoxProps} from '../../../ui/PromptBox/props';
 export type CompPromptBoxEvents = 'text-updated'
     | 'send-message-clicked'
     | 'escape-key-pressed'
-    | 'enter-key-pressed';
+    | 'enter-key-pressed'
+    | 'command-enter-key-pressed';
 
 export type CompPromptBoxProps = Readonly<{
     domCompProps: PromptBoxProps;

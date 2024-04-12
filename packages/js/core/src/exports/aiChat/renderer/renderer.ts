@@ -158,6 +158,7 @@ export class NluxRenderer {
                     placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
                     autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
                     disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton ?? undefined,
+                    submitShortcut: this.thePromptBoxOptions?.submitShortcut ?? undefined,
                 },
             }).create();
 
@@ -363,6 +364,13 @@ export class NluxRenderer {
                 && props.promptBoxOptions.disableSubmitButton !== this.thePromptBoxOptions.disableSubmitButton
             ) {
                 changedPromptBoxOptions.disableSubmitButton = props.promptBoxOptions.disableSubmitButton;
+            }
+
+            if (
+                props.promptBoxOptions?.hasOwnProperty('submitShortcut')
+                && props.promptBoxOptions.submitShortcut !== this.thePromptBoxOptions.submitShortcut
+            ) {
+                changedPromptBoxOptions.submitShortcut = props.promptBoxOptions.submitShortcut;
             }
 
             if (Object.keys(changedPromptBoxOptions).length > 0) {

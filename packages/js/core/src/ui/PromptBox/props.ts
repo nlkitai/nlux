@@ -17,4 +17,16 @@ export type PromptBoxProps = {
      * Default: Submit button is only enabled when the message is not empty.
      */
     disableSubmitButton?: boolean;
+
+    /**
+     * The shortcut to submit the prompt message.
+     *
+     * - `Enter`: The user can submit the prompt message by pressing the `Enter` key. In order to add a new line, the
+     * user can press `Shift + Enter`.
+     * - `CommandEnter`: When this is used, the user can submit the prompt message by pressing `Ctrl + Enter` on
+     * Windows/Linux or `Cmd + Enter` on macOS. In order to add a new line, the user can press `Enter`.
+     *
+     * @default 'Enter'
+     */
+    submitShortcut?: 'Enter' | 'CommandEnter';
 };
