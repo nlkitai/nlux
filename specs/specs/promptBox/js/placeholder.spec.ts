@@ -31,10 +31,10 @@ describe('createAiChat() + promptBox + placeholder', () => {
             await waitForRenderCycle();
 
             // When
-            const promptBox = document.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
-            expect(promptBox?.placeholder).toBe('');
+            expect(textArea.placeholder).toBe('');
         });
 
         describe('When a placeholder option is added', () => {
@@ -47,10 +47,10 @@ describe('createAiChat() + promptBox + placeholder', () => {
                 // When
                 aiChat.updateProps({promptBoxOptions: {placeholder: 'My prompt-box'}});
                 await waitForRenderCycle();
-                const promptBox = document.querySelector('.nlux-comp-prmptBox > textarea');
+                const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Then
-                expect(promptBox?.placeholder).toBe('My prompt-box');
+                expect(textArea.placeholder).toBe('My prompt-box');
             });
         });
     });
@@ -64,10 +64,10 @@ describe('createAiChat() + promptBox + placeholder', () => {
             await waitForRenderCycle();
 
             // When
-            const promptBox = document.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
-            expect(promptBox?.placeholder).toBe('My prompt-box');
+            expect(textArea.placeholder).toBe('My prompt-box');
         });
     });
 });
