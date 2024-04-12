@@ -34,70 +34,87 @@ export const AiChat: <MessageType>(
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitClick = useCallback(() => {
-        if (!adapterToUse || !adapterExtras) {
-            warn('No valid adapter was provided to AiChat component');
-            return;
-        }
+            if (!adapterToUse || !adapterExtras) {
+                warn('No valid adapter was provided to AiChat component');
+                return;
+            }
 
-        const chatSegment: ChatSegment<MessageType> = submitPrompt(
-            prompt,
-            adapterToUse,
-            adapterExtras,
-        );
+            if (!hasValidInput) {
+                return;
+            }
 
-        if (chatSegment.status === 'error') {
-            warn('Error occurred while submitting prompt');
-            // TODO — Display error message to user
-            return;
-        }
+            if (props.promptBoxOptions?.disableSubmitButton) {
+                return;
+            }
 
-        // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
-        // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
-        // On 'complete' and 'update' events, the chat segment is updated, but in order
-        // to trigger a check and potentially re-render the React component, we need to change
-        // the reference of the parts array by creating a new array.
+            const chatSegment: ChatSegment<MessageType> = submitPrompt(
+                prompt,
+                adapterToUse,
+                adapterExtras,
+            );
 
-        chatSegment.on('complete', (newChatSegment) => {
-            const segments = setSegmentsRef.current.chatSegments.map((segment) => {
-                if (segment.uid === chatSegment.uid) {
-                    return newChatSegment;
-                }
+            if (chatSegment.status === 'error') {
+                warn('Error occurred while submitting prompt');
+                // TODO — Display error message to user
+                return;
+            }
 
-                return segment;
-            });
+            // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
+            // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
+            // On 'complete' and 'update' events, the chat segment is updated, but in order
+            // to trigger a check and potentially re-render the React component, we need to change
+            // the reference of the parts array by creating a new array.
 
-            setSegmentsRef.current.setChatSegments([...segments]);
-        });
-
-        chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
-            const currentChatSegments = setSegmentsRef.current.chatSegments;
-            const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
-                (currentChatSegment) => {
-                    if (currentChatSegment.uid === newChatSegment.uid) {
+            chatSegment.on('complete', (newChatSegment) => {
+                const segments = setSegmentsRef.current.chatSegments.map((segment) => {
+                    if (segment.uid === chatSegment.uid) {
                         return newChatSegment;
                     }
 
-                    return currentChatSegment;
-                },
-            );
+                    return segment;
+                });
 
-            setSegmentsRef.current.setChatSegments(newChatSegments);
-        });
+                setSegmentsRef.current.setChatSegments([...segments]);
+            });
 
-        chatSegment.on('error', () => {
-            const parts = setSegmentsRef.current.chatSegments;
-            const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
-            setSegmentsRef.current.setChatSegments(newParts);
-        });
+            chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
+                const currentChatSegments = setSegmentsRef.current.chatSegments;
+                const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
+                    (currentChatSegment) => {
+                        if (currentChatSegment.uid === newChatSegment.uid) {
+                            return newChatSegment;
+                        }
 
-        chatSegment.on('chunk', (messageId: string, chunk: string) => {
-            conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
-        });
+                        return currentChatSegment;
+                    },
+                );
 
-        setChatSegments([...chatSegments, chatSegment]);
-        setPrompt('');
+                setSegmentsRef.current.setChatSegments(newChatSegments);
+            });
 
-    }, [chatSegments, prompt, adapterToUse, adapterExtras, setSegmentsRef]);
+            chatSegment.on('error', () => {
+                const parts = setSegmentsRef.current.chatSegments;
+                const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
+                setSegmentsRef.current.setChatSegments(newParts);
+            });
+
+            chatSegment.on('chunk', (messageId: string, chunk: string) => {
+                conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
+            });
+
+            setChatSegments([...chatSegments, chatSegment]);
+            setPrompt('');
+
+        },
+        [
+            chatSegments,
+            prompt,
+            adapterToUse,
+            adapterExtras,
+            setSegmentsRef,
+            props.promptBoxOptions?.disableSubmitButton,
+        ],
+    );
 
     useEffect(() => {
         setSegmentsRef.current = {chatSegments, setChatSegments};

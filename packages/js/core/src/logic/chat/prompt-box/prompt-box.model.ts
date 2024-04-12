@@ -31,7 +31,7 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
 
     @CompEventListener('command-enter-key-pressed')
     handleCommandEnterKeyPressed() {
-        const submitShortcut = this.elementProps.get('domCompProps')?.submitShortcut;
+        const submitShortcut = this.getProp('domCompProps')?.submitShortcut;
         if (submitShortcut === 'CommandEnter') {
             this.handleSendButtonClick();
         }
@@ -39,7 +39,7 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
 
     @CompEventListener('enter-key-pressed')
     handleEnterKeyPressed() {
-        const submitShortcut = this.elementProps.get('domCompProps')?.submitShortcut;
+        const submitShortcut = this.getProp('domCompProps')?.submitShortcut;
         if (!submitShortcut || submitShortcut === 'Enter') {
             this.handleSendButtonClick();
         }
@@ -47,6 +47,16 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
 
     @CompEventListener('send-message-clicked')
     handleSendButtonClick() {
+        const domCompProps = this.getProp('domCompProps');
+        if (domCompProps?.disableSubmitButton) {
+            return;
+        }
+
+        const message = domCompProps?.message;
+        if (!message) {
+            return;
+        }
+
         const callback = this.userEventListeners?.onSubmit;
         if (callback) {
             callback();
