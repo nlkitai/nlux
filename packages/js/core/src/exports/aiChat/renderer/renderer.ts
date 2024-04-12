@@ -157,6 +157,7 @@ export class NluxRenderer {
                 promptBox: {
                     placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
                     autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
+                    disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton ?? undefined,
                 },
             }).create();
 
@@ -341,33 +342,38 @@ export class NluxRenderer {
         }
 
         if (props.hasOwnProperty('promptBoxOptions')) {
-            const changedPromptBoxProps: Partial<CompChatRoomProps> = {};
+            const changedPromptBoxOptions: Partial<PromptBoxOptions> = {};
+
             if (
                 props.promptBoxOptions?.hasOwnProperty('placeholder')
                 && props.promptBoxOptions.placeholder !== this.thePromptBoxOptions.placeholder
             ) {
-                changedPromptBoxProps.promptBox = {
-                    placeholder: props.promptBoxOptions.placeholder,
-                };
+                changedPromptBoxOptions.placeholder = props.promptBoxOptions.placeholder;
             }
 
             if (
                 props.promptBoxOptions?.hasOwnProperty('autoFocus')
                 && props.promptBoxOptions.autoFocus !== this.thePromptBoxOptions.autoFocus
             ) {
-                changedPromptBoxProps.promptBox = {
-                    ...changedPromptBoxProps.promptBox,
-                    autoFocus: props.promptBoxOptions.autoFocus,
-                };
+                changedPromptBoxOptions.autoFocus = props.promptBoxOptions.autoFocus;
             }
 
-            if (Object.keys(changedPromptBoxProps).length > 0) {
+            if (
+                props.promptBoxOptions?.hasOwnProperty('disableSubmitButton')
+                && props.promptBoxOptions.disableSubmitButton !== this.thePromptBoxOptions.disableSubmitButton
+            ) {
+                changedPromptBoxOptions.disableSubmitButton = props.promptBoxOptions.disableSubmitButton;
+            }
+
+            if (Object.keys(changedPromptBoxOptions).length > 0) {
                 this.thePromptBoxOptions = {
                     ...this.thePromptBoxOptions,
-                    ...props.promptBoxOptions,
+                    ...changedPromptBoxOptions,
                 };
 
-                this.chatRoom?.setProps(changedPromptBoxProps);
+                this.chatRoom?.setProps({
+                    promptBox: this.thePromptBoxOptions,
+                });
             }
         }
 

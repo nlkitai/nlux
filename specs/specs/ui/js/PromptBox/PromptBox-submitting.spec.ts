@@ -55,7 +55,7 @@ describe('When a prompt box component is rendered and is in submitting status', 
             expect(textarea.disabled).toBe(false);
         });
 
-        it('submit button should be enabled', () => {
+        it('submit button should be disabled', () => {
             // Given
             const dom = createPromptBoxDom({status: 'submitting'});
             const submitButton = dom.querySelector('button')!;
@@ -64,7 +64,7 @@ describe('When a prompt box component is rendered and is in submitting status', 
             updatePromptBoxDom(dom, {status: 'submitting'}, {status: 'typing'});
 
             // Then
-            expect(submitButton.disabled).toBe(false);
+            expect(submitButton.disabled).toBe(true);
         });
     });
 });

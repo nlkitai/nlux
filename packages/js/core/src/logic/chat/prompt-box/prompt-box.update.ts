@@ -6,9 +6,9 @@ export const updateChatbox: CompUpdater<CompPromptBoxProps, CompPromptBoxElement
     propName,
     currentValue,
     newValue,
-    dom: {elements},
+    dom,
 }) => {
-    if (propName === 'domCompProps' && elements?.root) {
-        updatePromptBoxDom(elements.root, currentValue, newValue);
+    if (propName === 'domCompProps' && dom.elements?.root) {
+        updatePromptBoxDom(dom.elements.root, currentValue, newValue);
     }
 };

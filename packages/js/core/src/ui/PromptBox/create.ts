@@ -35,8 +35,8 @@ export const createPromptBoxDom: DomCreator<PromptBoxProps> = (props) => {
         submitButton.disabled = true;
     }
 
-    if (props.status === 'typing' && !props.message) {
-        submitButton.disabled = true;
+    if (props.status === 'typing') {
+        submitButton.disabled = props.disableSubmitButton ?? textarea.value === '';
     }
 
     return element;
