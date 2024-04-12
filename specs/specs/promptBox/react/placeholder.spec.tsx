@@ -49,10 +49,12 @@ describe('<AiChat /> + promptBox + placeholder', () => {
         it('The promptBox should be rendered with a placeholder', async () => {
             // Given
             const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
-            render(<AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>);
+            const {container} = render(
+                <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
+            );
 
             // When
-            const promptBox = document.querySelector('.nlux-comp-prmptBox > textarea');
+            const promptBox = container.querySelector('.nlux-comp-prmptBox > textarea');
 
             // Then
             expect(promptBox?.placeholder).toBe('My prompt-box');

@@ -64,7 +64,11 @@ export class CompChatRoom extends BaseComp<
             initialConversationContent,
         );
 
-        this.addPromptBox(promptBox?.placeholder, promptBox?.autoFocus);
+        this.addPromptBox(
+            promptBox?.placeholder,
+            promptBox?.autoFocus,
+            promptBox?.disableSubmitButton,
+        );
 
         // @ts-ignore
         if (!this.conversation || !this.promptBoxInstance) {
@@ -129,13 +133,13 @@ export class CompChatRoom extends BaseComp<
 
         if (props.hasOwnProperty('promptBox')) {
             if (this.promptBoxInstance) {
-                const currentDomProps = this.promptBoxInstance?.getProp('domCompProps')!;
+                const currentDomProps = this.promptBoxInstance.getProp('domCompProps')!;
                 const newProps: PromptBoxProps = {
                     ...currentDomProps,
                     ...props.promptBox,
                 };
 
-                this.promptBoxInstance?.setDomProps(newProps);
+                this.promptBoxInstance.setDomProps(newProps);
             }
         }
     }
@@ -172,6 +176,7 @@ export class CompChatRoom extends BaseComp<
     private addPromptBox(
         placeholder?: string,
         autoFocus?: boolean,
+        disableSubmitButton?: boolean,
     ) {
         this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
             props: {
@@ -179,6 +184,7 @@ export class CompChatRoom extends BaseComp<
                     status: 'typing',
                     placeholder,
                     autoFocus,
+                    disableSubmitButton,
                 },
             } satisfies CompPromptBoxProps,
             eventListeners: {

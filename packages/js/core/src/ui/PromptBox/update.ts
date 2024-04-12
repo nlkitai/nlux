@@ -11,7 +11,9 @@ export const updatePromptBoxDom: DomUpdater<PromptBoxProps> = (
     if (
         propsBefore.status === propsAfter.status &&
         propsBefore.message === propsAfter.message &&
-        propsBefore.placeholder === propsAfter.placeholder
+        propsBefore.placeholder === propsAfter.placeholder &&
+        propsBefore.autoFocus === propsAfter.autoFocus &&
+        propsBefore.disableSubmitButton === propsAfter.disableSubmitButton
     ) {
         return;
     }
@@ -22,26 +24,29 @@ export const updatePromptBoxDom: DomUpdater<PromptBoxProps> = (
         return;
     }
 
+    const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
+
     if (propsBefore.placeholder !== propsAfter.placeholder) {
-        const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
         textArea.placeholder = propsAfter.placeholder ?? '';
     }
 
     if (propsBefore.autoFocus !== propsAfter.autoFocus) {
-        const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
         textArea.autofocus = propsAfter.autoFocus ?? false;
     }
 
     if (propsBefore.message !== propsAfter.message) {
-        const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
         textArea.value = propsAfter.message ?? '';
+    }
 
-        if (propsAfter.status === 'typing') {
-            const button: HTMLButtonElement = element.querySelector('* > button')!;
-            const disableSubmitButton = propsAfter.message === '';
-            if (button.disabled !== disableSubmitButton) {
-                button.disabled = disableSubmitButton;
-            }
+    if (propsBefore.status === 'typing') {
+        const button: HTMLButtonElement = element.querySelector('* > button')!;
+        const disableSubmitButton = propsBefore.disableSubmitButton !== propsAfter.disableSubmitButton ?
+            propsAfter.disableSubmitButton :
+            propsBefore.disableSubmitButton;
+
+        const shouldDisableSubmit = disableSubmitButton ?? textArea.value === '';
+        if (button.disabled !== shouldDisableSubmit) {
+            button.disabled = shouldDisableSubmit;
         }
     }
 };

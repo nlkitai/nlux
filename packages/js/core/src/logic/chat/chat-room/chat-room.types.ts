@@ -1,5 +1,6 @@
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ChatItem} from '../../../types/conversation';
+import {PromptBoxProps} from '../../../ui/PromptBox/props';
 
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'messages-container-clicked';
@@ -15,10 +16,7 @@ export type CompChatRoomProps = {
     containerMaxWidth?: number | string;
     containerHeight?: number | string;
     containerWidth?: number | string;
-    promptBox?: {
-        placeholder?: string;
-        autoFocus?: boolean;
-    },
+    promptBox?: Partial<PromptBoxProps>;
 };
 
 export type CompChatRoomElements = {

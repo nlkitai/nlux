@@ -19,8 +19,15 @@ export const updateContentOnStatusChange = (
     }
 
     const submitButton: HTMLButtonElement = element.querySelector('* > button')!;
-    if (propsAfter.status === 'typing' && submitButton.disabled) {
-        submitButton.disabled = false;
+    if (propsAfter.status === 'typing') {
+        const disableSubmitButton = propsBefore.disableSubmitButton !== propsAfter.disableSubmitButton ?
+            propsAfter.disableSubmitButton :
+            propsBefore.disableSubmitButton;
+
+        const shouldDisableSubmit = disableSubmitButton ?? textArea.value === '';
+        if (submitButton.disabled !== shouldDisableSubmit) {
+            submitButton.disabled = shouldDisableSubmit;
+        }
     } else {
         if ((propsAfter.status === 'waiting' || propsAfter.status === 'submitting') && !submitButton.disabled) {
             submitButton.disabled = true;

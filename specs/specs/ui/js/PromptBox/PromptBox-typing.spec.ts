@@ -4,7 +4,7 @@ import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a prompt box component is rendered and is in typing status', () => {
-    it('should render the prompt box with a text input', () => {
+    it('should render the prompt box with a textarea and button', () => {
         // Given
         const dom = createPromptBoxDom({status: 'typing'});
 
@@ -15,7 +15,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
         expect(html).toEqual(expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-typing">'));
         expect(html).toEqual(expect.stringContaining('<textarea placeholder=""></textarea>'));
         expect(html).toEqual(
-            expect.stringContaining('<button><div class="nlux_sndIcn"><div class="snd_icn_ctn"><svg'));
+            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn"><svg'),
+        );
     });
 
     it('textarea should be enabled and empty', () => {
@@ -31,7 +32,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         expect(textarea.value).toBe('');
     });
 
-    it('submit button should be enabled', () => {
+    it('submit button should be disabled', () => {
         // Given
         const dom = createPromptBoxDom({status: 'typing'});
         const submitButton = dom.querySelector('button')!;
@@ -40,7 +41,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         const html = dom.outerHTML;
 
         // Then
-        expect(submitButton.disabled).toBe(false);
+        expect(submitButton.disabled).toBe(true);
     });
 
     describe('with a placeholder', () => {
