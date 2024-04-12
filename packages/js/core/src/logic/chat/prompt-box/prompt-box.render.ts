@@ -24,7 +24,6 @@ export const renderChatbox: CompRenderer<
             const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
                 compEvent('enter-key-pressed')();
-                event.preventDefault();
                 return;
             }
 
@@ -32,13 +31,11 @@ export const renderChatbox: CompRenderer<
             const isControlEnter = event.getModifierState('Control') && event.key === 'Enter';
             if (isCommandEnter || isControlEnter) {
                 compEvent('command-enter-key-pressed')();
-                event.preventDefault();
                 return;
             }
 
             if (event.key === 'Escape') {
                 compEvent('escape-key-pressed')();
-                event.preventDefault();
                 return;
             }
         }).get();

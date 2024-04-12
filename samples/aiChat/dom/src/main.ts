@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withPromptBoxOptions({
             placeholder: 'Type your prompt here',
             autoFocus: true,
+            submitShortcut: 'CommandEnter',
         });
 
     aiChat.mount(parent);
