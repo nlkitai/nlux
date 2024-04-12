@@ -21,10 +21,10 @@ describe('<AiChat /> + promptBox + placeholder', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // When
-            const promptBox = container.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
-            expect(promptBox?.placeholder).toBe('');
+            expect(textArea.placeholder).toBe('');
         });
 
         describe('When a placeholder option is added', () => {
@@ -37,10 +37,10 @@ describe('<AiChat /> + promptBox + placeholder', () => {
                     adapter={adapterController!.adapter}
                     promptBoxOptions={{placeholder: 'My prompt-box'}}
                 />);
-                const promptBox = container.querySelector('.nlux-comp-prmptBox > textarea');
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Then
-                expect(promptBox?.placeholder).toBe('My prompt-box');
+                expect(textArea.placeholder).toBe('My prompt-box');
             });
         });
     });
@@ -54,10 +54,10 @@ describe('<AiChat /> + promptBox + placeholder', () => {
             );
 
             // When
-            const promptBox = container.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
-            expect(promptBox?.placeholder).toBe('My prompt-box');
+            expect(textArea.placeholder).toBe('My prompt-box');
         });
     });
 });
