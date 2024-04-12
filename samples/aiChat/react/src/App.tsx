@@ -13,6 +13,7 @@ function App() {
             adapter={nlBridge}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
+                autoFocus: true,
             }}
         />
     );

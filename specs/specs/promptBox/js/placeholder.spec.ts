@@ -31,7 +31,7 @@ describe('createAiChat() + promptBox + placeholder', () => {
             await waitForRenderCycle();
 
             // When
-            const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
             expect(textArea.placeholder).toBe('');
@@ -47,7 +47,7 @@ describe('createAiChat() + promptBox + placeholder', () => {
                 // When
                 aiChat.updateProps({promptBoxOptions: {placeholder: 'My prompt-box'}});
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Then
                 expect(textArea.placeholder).toBe('My prompt-box');
@@ -64,7 +64,7 @@ describe('createAiChat() + promptBox + placeholder', () => {
             await waitForRenderCycle();
 
             // When
-            const textArea: HTMLTextAreaElement = document.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Then
             expect(textArea.placeholder).toBe('My prompt-box');

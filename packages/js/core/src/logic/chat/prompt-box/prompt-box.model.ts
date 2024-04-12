@@ -29,9 +29,20 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
         this.executeDomAction('focusTextInput');
     }
 
+    @CompEventListener('command-enter-key-pressed')
+    handleCommandEnterKeyPressed() {
+        const submitShortcut = this.elementProps.get('domCompProps')?.submitShortcut;
+        if (submitShortcut === 'CommandEnter') {
+            this.handleSendButtonClick();
+        }
+    }
+
     @CompEventListener('enter-key-pressed')
     handleEnterKeyPressed() {
-        this.handleSendButtonClick();
+        const submitShortcut = this.elementProps.get('domCompProps')?.submitShortcut;
+        if (!submitShortcut || submitShortcut === 'Enter') {
+            this.handleSendButtonClick();
+        }
     }
 
     @CompEventListener('escape-key-pressed')
