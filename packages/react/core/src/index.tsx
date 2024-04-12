@@ -58,6 +58,10 @@ export {
     useAiContext,
 } from './providers/useAiContext';
 
+export {
+    useAiTask,
+} from './providers/useAiTask';
+
 export type {
     AiContext,
     AiContextProviderProps,
