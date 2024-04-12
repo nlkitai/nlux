@@ -16,12 +16,16 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
         props.onChange?.(e.target.value);
     }, [props.onChange]);
 
+    const handleSubmit = useMemo(() => () => {
+        props.onSubmit?.();
+    }, [props.onSubmit]);
+
     const handleKeyDown = useMemo(() => (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         if (!props.submitShortcut || props.submitShortcut === 'Enter') {
             const isEnter = e.key === 'Enter';
             const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
-                props.onSubmit?.();
+                handleSubmit();
             }
         } else {
             if (props.submitShortcut === 'CommandEnter') {
@@ -30,11 +34,11 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
                 );
 
                 if (isCommandEnter) {
-                    props.onSubmit?.();
+                    handleSubmit();
                 }
             }
         }
-    }, [props.onSubmit, props.submitShortcut]);
+    }, [handleSubmit, props.submitShortcut]);
 
     return (
         <div className={className}>

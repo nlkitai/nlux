@@ -42,6 +42,25 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
+        it('The prompt should not be submitted when the textarea is empty and the user presses the Enter key',
+            async () => {
+                // Given
+                aiChat = createAiChat().withAdapter(adapterController!.adapter);
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                await waitForRenderCycle();
+
+                // When
+                await userEvent.type(textArea, '{enter}');
+                await waitForRenderCycle();
+
+                // Then
+                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+            },
+        );
+
         it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
             // Given
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
