@@ -33,11 +33,6 @@ export const renderChatbox: CompRenderer<
                 compEvent('command-enter-key-pressed')();
                 return;
             }
-
-            if (event.key === 'Escape') {
-                compEvent('escape-key-pressed')();
-                return;
-            }
         }).get();
 
     const [sendButtonElement, removeSendButtonListeners] = listenToElement(promptBoxRoot, ':scope > button')

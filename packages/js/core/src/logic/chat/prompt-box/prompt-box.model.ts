@@ -45,11 +45,6 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
         }
     }
 
-    @CompEventListener('escape-key-pressed')
-    handleEscapeKeyPressed() {
-        this.handleTextChange('');
-    }
-
     @CompEventListener('send-message-clicked')
     handleSendButtonClick() {
         const callback = this.userEventListeners?.onSubmit;
