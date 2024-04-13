@@ -1,5 +1,5 @@
 import {ChatAdapterExtras, ChatSegment, getRootClassNames, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
-import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
@@ -141,8 +141,21 @@ export const AiChat: <MessageType>(
         themeId: props.themeId,
     }).join(' ');
 
+    const style: CSSProperties = useMemo(() => {
+        const result: CSSProperties = {};
+        if (props.layoutOptions?.width) {
+            result.width = props.layoutOptions.width;
+        }
+
+        if (props.layoutOptions?.height) {
+            result.height = props.layoutOptions.height;
+        }
+
+        return result;
+    }, [props.layoutOptions?.width, props.layoutOptions?.height]);
+
     return (
-        <div className={rootClassNames}>
+        <div className={rootClassNames} style={style}>
             <div className="nlux-xcptBx-cntr"/>
             <div className="nlux-chtRm-cntr">
                 <ForwardConversationComp

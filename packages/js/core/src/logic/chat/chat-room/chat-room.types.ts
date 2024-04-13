@@ -12,10 +12,6 @@ export type CompChatRoomProps = {
     initialConversationContent?: readonly ChatItem[];
     scrollWhenGenerating?: boolean;
     streamingAnimationSpeed?: number | null;
-    containerMaxHeight?: number | string;
-    containerMaxWidth?: number | string;
-    containerHeight?: number | string;
-    containerWidth?: number | string;
     promptBox?: Partial<PromptBoxProps>;
 };
 

@@ -6,7 +6,6 @@ export type CompExceptionsBoxProps = Readonly<{
     type: ExceptionType;
     message: string | undefined;
     visible: boolean;
-    containerMaxWidth?: number | string;
 }>;
 
 export type CompExceptionsBoxElements = Readonly<{}>;
@@ -16,5 +15,4 @@ export type CompExceptionsBoxActions = Readonly<{
     hide: () => void;
     setMessage: (message: string) => void;
     setMessageType: (type: ExceptionType) => void;
-    updateContainerMaxWidth: (maxWidth: number | string | undefined) => void;
 }>;

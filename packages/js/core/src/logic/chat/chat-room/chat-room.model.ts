@@ -29,10 +29,6 @@ export class CompChatRoom extends BaseComp<
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext, {
-        containerMaxHeight,
-        containerHeight,
-        containerMaxWidth,
-        containerWidth,
         scrollWhenGenerating,
         streamingAnimationSpeed,
         visible = true,
@@ -43,10 +39,6 @@ export class CompChatRoom extends BaseComp<
     }: CompChatRoomProps) {
         super(context, {
             visible,
-            containerMaxHeight,
-            containerHeight,
-            containerMaxWidth,
-            containerWidth,
             scrollWhenGenerating,
             streamingAnimationSpeed,
             botPersona,
@@ -98,22 +90,6 @@ export class CompChatRoom extends BaseComp<
     }
 
     public setProps(props: Partial<CompChatRoomProps>) {
-        if (props.hasOwnProperty('containerMaxHeight')) {
-            this.setProp('containerMaxHeight', props.containerMaxHeight ?? undefined);
-        }
-
-        if (props.hasOwnProperty('containerHeight')) {
-            this.setProp('containerHeight', props.containerHeight ?? undefined);
-        }
-
-        if (props.hasOwnProperty('containerMaxWidth')) {
-            this.setProp('containerMaxWidth', props.containerMaxWidth ?? undefined);
-        }
-
-        if (props.hasOwnProperty('containerWidth')) {
-            this.setProp('containerWidth', props.containerWidth ?? undefined);
-        }
-
         if (props.hasOwnProperty('scrollWhenGenerating')) {
             this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
         }
