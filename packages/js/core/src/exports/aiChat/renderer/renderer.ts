@@ -150,10 +150,6 @@ export class NluxRenderer {
                 initialConversationContent: this.theInitialConversationContent ?? undefined,
                 scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
                 streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
-                containerMaxHeight: this.theLayoutOptions?.maxHeight || undefined,
-                containerHeight: this.theLayoutOptions?.height || undefined,
-                containerMaxWidth: this.theLayoutOptions?.maxWidth || undefined,
-                containerWidth: this.theLayoutOptions?.width || undefined,
                 promptBox: {
                     placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
                     autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
@@ -169,8 +165,6 @@ export class NluxRenderer {
                 exceptionAlert = comp(CompExceptionsBox)
                     .withContext(this.context)
                     .withProps<CompExceptionsBoxProps>({
-                        containerMaxWidth: this.theLayoutOptions?.maxWidth
-                            || undefined,
                         message: undefined,
                         visible: false,
                         type: 'error',
@@ -187,6 +181,7 @@ export class NluxRenderer {
             }
 
             this.setRootElementClassNames();
+            this.setRoomElementDimensions(this.theLayoutOptions);
 
             if (exceptionAlert) {
                 exceptionAlert.render(this.rootElement);
@@ -309,29 +304,23 @@ export class NluxRenderer {
         }
 
         if (props.hasOwnProperty('layoutOptions')) {
-            const propsToUpdate: Partial<CompChatRoomProps> = {};
-            if (props.layoutOptions?.hasOwnProperty('maxHeight')) {
-                propsToUpdate.containerMaxHeight = props.layoutOptions.maxHeight;
-            }
-
+            const newLayoutOptions: Partial<LayoutOptions> = {};
             if (props.layoutOptions?.hasOwnProperty('height')) {
-                propsToUpdate.containerHeight = props.layoutOptions.height;
-            }
-
-            if (props.layoutOptions?.hasOwnProperty('maxWidth')) {
-                propsToUpdate.containerMaxWidth = props.layoutOptions.maxWidth;
+                newLayoutOptions.height = props.layoutOptions.height;
             }
 
             if (props.layoutOptions?.hasOwnProperty('width')) {
-                propsToUpdate.containerWidth = props.layoutOptions.width;
+                newLayoutOptions.width = props.layoutOptions.width;
             }
 
-            this.theLayoutOptions = {
-                ...this.theLayoutOptions,
-                ...props.layoutOptions,
-            };
+            if (Object.keys(newLayoutOptions).length > 0) {
+                this.theLayoutOptions = {
+                    ...this.theLayoutOptions,
+                    ...newLayoutOptions,
+                };
 
-            this.chatRoom?.setProps(propsToUpdate);
+                this.setRoomElementDimensions(newLayoutOptions);
+            }
         }
 
         if (props.hasOwnProperty('conversationOptions')) {
@@ -411,6 +400,27 @@ export class NluxRenderer {
             };
 
             this.chatRoom?.setProps(changedPersonaProps);
+        }
+    }
+
+    private setRoomElementDimensions(newDimensions: {
+        width?: number | string;
+        height?: number | string;
+    }) {
+        if (!this.rootElement) {
+            return;
+        }
+
+        if (newDimensions.hasOwnProperty('width')) {
+            this.rootElement.style.width = (typeof newDimensions.width === 'number') ? `${newDimensions.width}px` : (
+                typeof newDimensions.width === 'string' ? newDimensions.width : ''
+            );
+        }
+
+        if (newDimensions.hasOwnProperty('height')) {
+            this.rootElement.style.height = (typeof newDimensions.height === 'number') ? `${newDimensions.height}px` : (
+                typeof newDimensions.height === 'string' ? newDimensions.height : ''
+            );
         }
     }
 

@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
         .withPromptBoxOptions({
             placeholder: 'Type your prompt here',
             autoFocus: true,
-            submitShortcut: 'CommandEnter',
+            // submitShortcut: 'CommandEnter',
+        })
+        .withLayoutOptions({
+            width: '400px',
         });
 
     aiChat.mount(parent);

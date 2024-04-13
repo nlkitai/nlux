@@ -35,38 +35,6 @@ export const renderChatRoom: CompRenderer<
     chatRoomElement.append(dom);
     chatRoomElement.style.display = visibleProp ? '' : 'none';
 
-    if (typeof props.containerMaxHeight === 'number') {
-        chatRoomElement.style.maxHeight = `${props.containerMaxHeight}px`;
-    } else {
-        if (typeof props.containerMaxHeight === 'string') {
-            chatRoomElement.style.maxHeight = props.containerMaxHeight;
-        }
-    }
-
-    if (typeof props.containerHeight === 'number') {
-        chatRoomElement.style.height = `${props.containerHeight}px`;
-    } else {
-        if (typeof props.containerHeight === 'string') {
-            chatRoomElement.style.height = props.containerHeight;
-        }
-    }
-
-    if (typeof props.containerMaxWidth === 'number') {
-        chatRoomElement.style.maxWidth = `${props.containerMaxWidth}px`;
-    } else {
-        if (typeof props.containerMaxWidth === 'string') {
-            chatRoomElement.style.maxWidth = props.containerMaxWidth;
-        }
-    }
-
-    if (typeof props.containerWidth === 'number') {
-        chatRoomElement.style.width = `${props.containerWidth}px`;
-    } else {
-        if (typeof props.containerWidth === 'string') {
-            chatRoomElement.style.width = props.containerWidth;
-        }
-    }
-
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
         `:scope > .${__('conversation-container')}`,
     ).on('click', compEvent('messages-container-clicked'))

@@ -14,7 +14,10 @@ function App() {
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
                 autoFocus: true,
-                submitShortcut: 'CommandEnter',
+                // submitShortcut: 'CommandEnter',
+            }}
+            layoutOptions={{
+                width: 400,
             }}
         />
     );
