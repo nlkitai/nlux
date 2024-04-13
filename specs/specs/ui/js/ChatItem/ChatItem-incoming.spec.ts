@@ -4,7 +4,7 @@ import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a chat item component is rendered in incoming direction', () => {
-    it('should render the item with the right direction class', () => {
+    it('Should render the item with the right direction class', () => {
         // Given
         const props: ChatItemProps = {
             direction: 'incoming',
@@ -19,7 +19,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         expect(chatItem.classList.contains('nlux_cht_itm_incoming')).toBe(true);
     });
 
-    it('should render message with the right direction class', () => {
+    it('Should render message with the right direction class', () => {
         // Given
         const props: ChatItemProps = {
             direction: 'incoming',
@@ -35,7 +35,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
     });
 
-    it('should render profile picture', () => {
+    it('Should render profile picture', () => {
         // Given
         const props: ChatItemProps = {
             direction: 'incoming',
@@ -55,8 +55,8 @@ describe('When a chat item component is rendered in incoming direction', () => {
         expect(persona.outerHTML).toEqual(expect.stringContaining('John Doe'));
     });
 
-    describe('and the direction changes to outgoing', () => {
-        it('should render the item with the outgoing class', () => {
+    describe('When the direction changes to outgoing', () => {
+        it('Should render the item with the outgoing class', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'incoming',
@@ -77,7 +77,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             expect(chatItem.classList.contains('nlux_cht_itm_outgoing')).toBe(true);
         });
 
-        it('should render message with the outgoing class', () => {
+        it('Should render message with the outgoing class', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'incoming',

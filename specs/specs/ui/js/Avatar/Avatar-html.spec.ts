@@ -4,7 +4,7 @@ import {updateAvatarDom} from '@nlux-dev/core/src/ui/Avatar/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When an avatar component is rendered with HTML element as picture', () => {
-    it('should render the picture as is', () => {
+    it('Should render the picture as is', () => {
         // Given
         const name = 'John Doe';
         const picture = document.createElement('img');
@@ -21,7 +21,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
     });
 
     describe('When no picture or name is provided', () => {
-        it('should render an empty div', () => {
+        it('Should render an empty div', () => {
             // Given
             const props: AvatarProps = {};
 
@@ -34,7 +34,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
     });
 
     describe('When only name is provided', () => {
-        it('should render the name first letter', () => {
+        it('Should render the name first letter', () => {
             // Given
             const name = 'John Doe';
             const props: AvatarProps = {name};
@@ -50,7 +50,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
     });
 
     describe('When the picture element is updated', () => {
-        it('should render the new picture as is', () => {
+        it('Should render the new picture as is', () => {
             // Given
             const name = 'John Doe';
             const picture1 = document.createElement('img');
@@ -74,7 +74,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
         });
 
         describe('When the new picture is a string', () => {
-            it('should render the new picture as URL', () => {
+            it('Should render the new picture as URL', () => {
                 // Given
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
@@ -106,7 +106,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
                 );
             });
 
-            it('should render the new picture as URL and change name', () => {
+            it('Should render the new picture as URL and change name', () => {
                 // Given
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');

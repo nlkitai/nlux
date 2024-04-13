@@ -4,8 +4,8 @@ import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a message component is rendered', () => {
-    describe('and the direction is set to incoming', () => {
-        it('should render the message with the incoming class', () => {
+    describe('When the direction is set to incoming', () => {
+        it('Should render the message with the incoming class', () => {
             // Given
             const props: MessageProps = {
                 direction: 'incoming',
@@ -20,8 +20,8 @@ describe('When a message component is rendered', () => {
             expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
         });
 
-        describe('when the direction changes to outgoing', () => {
-            it('should render the message with the outgoing class', () => {
+        describe('When the direction changes to outgoing', () => {
+            it('Should render the message with the outgoing class', () => {
                 // Given
                 const props: MessageProps = {
                     direction: 'incoming',
@@ -45,8 +45,8 @@ describe('When a message component is rendered', () => {
         });
     });
 
-    describe('and the direction is set to outgoing', () => {
-        it('should render the message with the outgoing class', () => {
+    describe('When the direction is set to outgoing', () => {
+        it('Should render the message with the outgoing class', () => {
             const container = document.createElement('div');
             const props: MessageProps = {
                 direction: 'outgoing',
@@ -60,8 +60,8 @@ describe('When a message component is rendered', () => {
             expect(message.classList.contains('nlux_msg_outgoing')).toBe(true);
         });
 
-        describe('when the direction changes to incoming', () => {
-            it('should render the message with the incoming class', () => {
+        describe('When the direction changes to incoming', () => {
+            it('Should render the message with the incoming class', () => {
                 // Given
                 const props: MessageProps = {
                     direction: 'outgoing',

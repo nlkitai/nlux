@@ -4,7 +4,7 @@ import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a message component is rendered and is in streaming status', () => {
-    it('should ignore the message', () => {
+    it('Should ignore the message', () => {
         // Given
         const dom = createMessageDom({direction: 'incoming', status: 'streaming', message: 'Hello, World!'});
 
@@ -16,7 +16,7 @@ describe('When a message component is rendered and is in streaming status', () =
     });
 
     describe('When message is updated', () => {
-        it('should ignore the message', () => {
+        it('Should ignore the message', () => {
             // Given
             const beforeProps: MessageProps = {direction: 'incoming', status: 'streaming', message: 'Hello, World!'};
             const props: MessageProps = {direction: 'incoming', status: 'streaming', message: 'Goodbye, World!'};
