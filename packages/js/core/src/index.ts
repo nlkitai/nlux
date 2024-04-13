@@ -209,10 +209,6 @@ export {
     directionClassName as compChatItemDirectionClassName,
 } from './ui/ChatItem/utils/applyNewDirectionClassName';
 
-export type {
-    ExceptionsBoxProps,
-} from './ui/ExceptionsBox/props';
-
 export {
     className as compExceptionsBoxClassName,
 } from './ui/ExceptionsBox/create';
