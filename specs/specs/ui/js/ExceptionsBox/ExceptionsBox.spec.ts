@@ -20,7 +20,7 @@ describe('When an exceptions box component is rendered', () => {
     });
 
     describe('When an exception occurs', () => {
-        it('It should be displayed in the exceptions box', async () => {
+        it('Should be displayed in the exceptions box', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
             const controller = createExceptionBoxController(exceptionsBox);
@@ -37,7 +37,7 @@ describe('When an exceptions box component is rendered', () => {
             );
         });
 
-        it('It should be removed after 4.5 seconds', async () => {
+        it('Should be removed after 4.5 seconds', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
             const controller = createExceptionBoxController(exceptionsBox);

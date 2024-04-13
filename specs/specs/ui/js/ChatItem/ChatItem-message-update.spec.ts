@@ -4,8 +4,8 @@ import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a chat item component is rendered in incoming direction', () => {
-    describe('and the message is updated', () => {
-        it('should update the message', () => {
+    describe('When the message is updated', () => {
+        it('Should update the message', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'incoming',
@@ -26,8 +26,8 @@ describe('When a chat item component is rendered in incoming direction', () => {
         });
     });
 
-    describe('and the status is updated', () => {
-        it('should update the message status', () => {
+    describe('When the status is updated', () => {
+        it('Should update the message status', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'incoming',
@@ -48,8 +48,8 @@ describe('When a chat item component is rendered in incoming direction', () => {
         });
     });
 
-    describe('and the loader is updated', () => {
-        it('should update the message loader', () => {
+    describe('When the loader is updated', () => {
+        it('Should update the message loader', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'incoming',

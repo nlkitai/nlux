@@ -3,7 +3,7 @@ import {WelcomeMessageProps} from '@nlux-dev/core/src/ui/WelcomeMessage/props';
 import {describe, expect, it} from 'vitest';
 
 describe('When welcome message is rendered', () => {
-    it('should render the message with the incoming class', () => {
+    it('Should render the message with the incoming class', () => {
         // Given
         const props: WelcomeMessageProps = {
             name: 'John Doe',
@@ -18,7 +18,7 @@ describe('When welcome message is rendered', () => {
         expect(welcomeMessage.classList.contains('nlux-comp-wlc_msg')).toBe(true);
     });
 
-    it('should render the welcome message with the name', () => {
+    it('Should render the welcome message with the name', () => {
         // Given
         const props: WelcomeMessageProps = {
             name: 'John Doe',
@@ -33,7 +33,7 @@ describe('When welcome message is rendered', () => {
         expect(name).toBe(props.name);
     });
 
-    it('should render the welcome message with the picture', () => {
+    it('Should render the welcome message with the picture', () => {
         // Given
         const props: WelcomeMessageProps = {
             name: 'John Doe',
@@ -51,7 +51,7 @@ describe('When welcome message is rendered', () => {
         );
     });
 
-    it('should render the welcome message with the message', () => {
+    it('Should render the welcome message with the message', () => {
         // Given
         const props: WelcomeMessageProps = {
             name: 'John Doe',

@@ -4,7 +4,7 @@ import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a prompt box component is rendered and is in typing status', () => {
-    it('should render the prompt box with a textarea and button', () => {
+    it('Should render the prompt box with a textarea and button', () => {
         // Given
         const dom = createPromptBoxDom({status: 'typing'});
 
@@ -19,7 +19,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         );
     });
 
-    it('textarea should be enabled and empty', () => {
+    it('The textarea should be enabled and empty', () => {
         // Given
         const dom = createPromptBoxDom({status: 'typing'});
         const textarea = dom.querySelector('textarea')!;
@@ -32,7 +32,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         expect(textarea.value).toBe('');
     });
 
-    it('submit button should be disabled', () => {
+    it('The submit button should be disabled', () => {
         // Given
         const dom = createPromptBoxDom({status: 'typing'});
         const submitButton = dom.querySelector('button')!;
@@ -44,8 +44,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
         expect(submitButton.disabled).toBe(true);
     });
 
-    describe('with a placeholder', () => {
-        it('should render the placeholder', () => {
+    describe('With a placeholder', () => {
+        it('Should render the placeholder', () => {
             // Given
             const dom = createPromptBoxDom({status: 'typing', placeholder: 'Type here'});
 
@@ -56,8 +56,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
             expect(html).toEqual(expect.stringContaining('<textarea placeholder="Type here"></textarea>'));
         });
 
-        describe('when the placeholder is updated', () => {
-            it('should update the placeholder', () => {
+        describe('When the placeholder is updated', () => {
+            it('Should update the placeholder', () => {
                 // Given
                 const beforeProps: PromptBoxProps = {status: 'typing', placeholder: 'Type here'};
                 const props: PromptBoxProps = {status: 'typing', placeholder: 'Type something else'};
@@ -73,8 +73,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
         });
     });
 
-    describe('with a message', () => {
-        it('should render the message', () => {
+    describe('With a message', () => {
+        it('Should render the message', () => {
             // Given
             const props: PromptBoxProps = {status: 'typing', message: 'Hello, World!'};
             const dom = createPromptBoxDom(props);
@@ -87,8 +87,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
             expect(textarea.value).toBe('Hello, World!');
         });
 
-        describe('when the message is updated', () => {
-            it('should update the message', () => {
+        describe('When the message is updated', () => {
+            it('Should update the message', () => {
                 // Given
                 const beforeProps: PromptBoxProps = {status: 'typing', message: 'Hello, World!'};
                 const props: PromptBoxProps = {status: 'typing', message: 'Goodbye, World!'};
@@ -104,8 +104,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
         });
     });
 
-    describe('when status is updated to submitting', () => {
-        it('should disable the textarea and submit button', () => {
+    describe('When status is updated to submitting', () => {
+        it('Should disable the textarea and submit button', () => {
             // Given
             const beforeProps: PromptBoxProps = {status: 'typing'};
             const props: PromptBoxProps = {status: 'submitting'};
@@ -122,8 +122,8 @@ describe('When a prompt box component is rendered and is in typing status', () =
         });
     });
 
-    describe('when status is updated to waiting', () => {
-        it('should disable submit button and keep textarea enabled', () => {
+    describe('When status is updated to waiting', () => {
+        it('Should disable submit button and keep textarea enabled', () => {
             // Given
             const beforeProps: PromptBoxProps = {status: 'typing'};
             const props: PromptBoxProps = {status: 'waiting'};

@@ -5,7 +5,7 @@ import {describe, expect, it} from 'vitest';
 
 describe('When welcome message is rendered for update', () => {
     describe('When the message is updated', () => {
-        it('should update the message with the new message', () => {
+        it('Should update the message with the new message', () => {
             // Given
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
@@ -25,7 +25,7 @@ describe('When welcome message is rendered for update', () => {
     });
 
     describe('When the name is updated', () => {
-        it('should update the message with the new name', () => {
+        it('Should update the message with the new name', () => {
             // Given
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
@@ -46,7 +46,7 @@ describe('When welcome message is rendered for update', () => {
     });
 
     describe('When the picture URL is updated', () => {
-        it('should update the message with the new picture', () => {
+        it('Should update the message with the new picture', () => {
             // Given
             const props: WelcomeMessageProps = {
                 name: 'John Doe',

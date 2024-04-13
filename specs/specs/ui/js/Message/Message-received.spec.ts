@@ -4,8 +4,8 @@ import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a message component is rendered and is in rendered status', () => {
-    describe('without any message or status', () => {
-        it('should render an empty message in rendered status', () => {
+    describe('When rendered without any message or status', () => {
+        it('Should render an empty message in rendered status', () => {
             // Given
             const dom = createMessageDom({} as any);
 
@@ -17,8 +17,8 @@ describe('When a message component is rendered and is in rendered status', () =>
         });
     });
 
-    describe('with a message', () => {
-        it('should render the message', () => {
+    describe('When rendered with a message', () => {
+        it('Should render the message', () => {
             // Given
             const dom = createMessageDom({
                 direction: 'incoming', status: 'rendered', message: 'Hello, World!',
@@ -32,8 +32,8 @@ describe('When a message component is rendered and is in rendered status', () =>
         });
     });
 
-    describe('when HTML is provided in message body', () => {
-        it('should be escaped', () => {
+    describe('When HTML is provided in message body', () => {
+        it('Should be escaped', () => {
             // Given
             const props: MessageProps = {
                 direction: 'incoming', status: 'rendered', message: '<strong>Hello, World!</strong>',
@@ -50,11 +50,11 @@ describe('When a message component is rendered and is in rendered status', () =>
     });
 
     describe.todo('When markdown is provided in message body', () => {
-        it.todo('should be rendered as HTML');
+        it.todo('Should be rendered as HTML');
     });
 
     describe('When message is updated', () => {
-        it('should update the message', () => {
+        it('Should update the message', () => {
             // Given
             const beforeProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Goodbye, World!'};
@@ -69,7 +69,7 @@ describe('When a message component is rendered and is in rendered status', () =>
             );
         });
 
-        it('should escape HTML in the new message', () => {
+        it('Should escape HTML in the new message', () => {
             // Given
             const beforeProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(beforeProps);
@@ -89,7 +89,7 @@ describe('When a message component is rendered and is in rendered status', () =>
     });
 
     describe('When message is updated with the same message', () => {
-        it('should not update the message', () => {
+        it('Should not update the message', () => {
             // Given
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
@@ -104,7 +104,7 @@ describe('When a message component is rendered and is in rendered status', () =>
     });
 
     describe('When message is updated with the same message and status', () => {
-        it('should not update the message', () => {
+        it('Should not update the message', () => {
             // Given
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
@@ -119,7 +119,7 @@ describe('When a message component is rendered and is in rendered status', () =>
     });
 
     describe('When message is updated with the same status', () => {
-        it('should not update the message', () => {
+        it('Should not update the message', () => {
             // Given
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
@@ -134,7 +134,7 @@ describe('When a message component is rendered and is in rendered status', () =>
     });
 
     describe('When the status changes to loading', () => {
-        it('should remove the message, update class name, and render default loader', () => {
+        it('Should remove the message, update class name, and render default loader', () => {
             // Given
             const initialProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const newProps: MessageProps = {direction: 'incoming', status: 'loading'};
@@ -156,7 +156,7 @@ describe('When a message component is rendered and is in rendered status', () =>
         });
 
         describe('When the status changes back to rendered', () => {
-            it('should remove the loader and render the message', () => {
+            it('Should remove the loader and render the message', () => {
                 // Given
                 const initialProps: MessageProps = {
                     direction: 'incoming',

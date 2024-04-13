@@ -3,7 +3,7 @@ import {AvatarProps} from '@nlux-dev/core/src/ui/Avatar/props';
 import {describe, expect, it} from 'vitest';
 
 describe('When an avatar component is rendered with url as picture', () => {
-    it('should render the photo container with the photo in the foreground', () => {
+    it('Should render the photo container with the photo in the foreground', () => {
         // Given
         const url = 'https://example.com/photo.jpg';
         const name = 'John Doe';

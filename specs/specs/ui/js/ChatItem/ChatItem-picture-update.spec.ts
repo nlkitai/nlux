@@ -5,8 +5,8 @@ import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update';
 import {describe, expect, it} from 'vitest';
 
 describe('When a chat item component is rendered in outgoing direction', () => {
-    describe('when the profile picture is updated', () => {
-        it('should update the profile picture', () => {
+    describe('When the profile picture is updated', () => {
+        it('Should update the profile picture', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'outgoing',
@@ -31,8 +31,8 @@ describe('When a chat item component is rendered in outgoing direction', () => {
         });
     });
 
-    describe('when the profile name is updated', () => {
-        it('should update the profile name', () => {
+    describe('When the profile name is updated', () => {
+        it('Should update the profile name', () => {
             // Given
             const props: ChatItemProps = {
                 direction: 'outgoing',
