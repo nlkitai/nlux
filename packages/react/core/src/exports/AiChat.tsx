@@ -5,10 +5,9 @@ import {
     compExceptionsBoxClassName,
     getRootClassNames,
     PromptBoxStatus,
-    submitPrompt,
-    warn,
 } from '@nlux/core';
 import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {useSubmitPromptHandler} from '../hooks/useSubmitPromptHandler/useSubmitPromptHandler';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
@@ -49,92 +48,16 @@ export const AiChat: <MessageType>(
     }, [props, adapterToUse]);
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
-
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
-    const handleSubmitClick = useCallback(() => {
-            if (!adapterToUse || !adapterExtras) {
-                warn('No valid adapter was provided to AiChat component');
-                return;
-            }
-
-            if (!hasValidInput) {
-                return;
-            }
-
-            if (props.promptBoxOptions?.disableSubmitButton) {
-                return;
-            }
-
-            const chatSegment: ChatSegment<MessageType> = submitPrompt(
-                prompt,
-                adapterToUse,
-                adapterExtras,
-            );
-
-            if (chatSegment.status === 'error') {
-                warn('Error occurred while submitting prompt');
-                showException('Error occurred while submitting prompt');
-                return;
-            }
-
-            // THE FOLLOWING CODE IS USED TO TRIGGER AN UPDATE OF THE REACT STATE.
-            // The 'on' event listeners are implemented by @nlux/core non-React prompt handler.
-            // On 'complete' and 'update' events, the chat segment is updated, but in order
-            // to trigger a check and potentially re-render the React component, we need to change
-            // the reference of the parts array by creating a new array.
-
-            chatSegment.on('complete', (newChatSegment) => {
-                const segments = setSegmentsRef.current.chatSegments.map((segment) => {
-                    if (segment.uid === chatSegment.uid) {
-                        return newChatSegment;
-                    }
-
-                    return segment;
-                });
-
-                setSegmentsRef.current.setChatSegments([...segments]);
-            });
-
-            chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
-                const currentChatSegments = setSegmentsRef.current.chatSegments;
-                const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
-                    (currentChatSegment) => {
-                        if (currentChatSegment.uid === newChatSegment.uid) {
-                            return newChatSegment;
-                        }
-
-                        return currentChatSegment;
-                    },
-                );
-
-                setSegmentsRef.current.setChatSegments(newChatSegments);
-            });
-
-            chatSegment.on('error', () => {
-                const parts = setSegmentsRef.current.chatSegments;
-                const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
-                setSegmentsRef.current.setChatSegments(newParts);
-                showException('Error occurred while processing prompt');
-            });
-
-            chatSegment.on('chunk', (messageId: string, chunk: string) => {
-                conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
-            });
-
-            setChatSegments([...chatSegments, chatSegment]);
-            setPrompt('');
-
-        },
-        [
-            showException,
-            chatSegments,
-            prompt,
-            adapterToUse,
-            adapterExtras,
-            setSegmentsRef,
-            props.promptBoxOptions?.disableSubmitButton,
-        ],
-    );
+    const handleSubmitClick = useSubmitPromptHandler({
+        adapterToUse,
+        adapterExtras,
+        prompt,
+        promptBoxOptions: props.promptBoxOptions,
+        showException,
+        setSegmentsRef,
+        conversationRef,
+    });
 
     useEffect(() => {
         setSegmentsRef.current = {chatSegments, setChatSegments};
