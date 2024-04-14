@@ -1,4 +1,13 @@
-import {ChatAdapterExtras, ChatSegment, getRootClassNames, PromptBoxStatus, submitPrompt, warn} from '@nlux/core';
+import {createExceptionBoxController} from '@nlux-dev/core/src/ui/ExceptionsBox/control';
+import {
+    ChatAdapterExtras,
+    ChatSegment,
+    compExceptionsBoxClassName,
+    getRootClassNames,
+    PromptBoxStatus,
+    submitPrompt,
+    warn,
+} from '@nlux/core';
 import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
@@ -16,6 +25,15 @@ export const AiChat: <MessageType>(
     t: MessageType,
 ): ReactElement {
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
+    const exceptionBoxRef = useRef<HTMLDivElement>(null);
+
+    const exceptionBoxController = useMemo(() => {
+        return exceptionBoxRef.current ? createExceptionBoxController(exceptionBoxRef.current) : undefined;
+    }, [exceptionBoxRef.current]);
+
+    const showException = useCallback((message: string) => {
+        exceptionBoxController?.displayException(message);
+    }, [exceptionBoxController]);
 
     const [prompt, setPrompt] = useState('');
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
@@ -55,7 +73,7 @@ export const AiChat: <MessageType>(
 
             if (chatSegment.status === 'error') {
                 warn('Error occurred while submitting prompt');
-                // TODO — Display error message to user
+                showException('Error occurred while submitting prompt');
                 return;
             }
 
@@ -96,6 +114,7 @@ export const AiChat: <MessageType>(
                 const parts = setSegmentsRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
                 setSegmentsRef.current.setChatSegments(newParts);
+                showException('Error occurred while processing prompt');
             });
 
             chatSegment.on('chunk', (messageId: string, chunk: string) => {
@@ -107,6 +126,7 @@ export const AiChat: <MessageType>(
 
         },
         [
+            showException,
             chatSegments,
             prompt,
             adapterToUse,
@@ -142,7 +162,11 @@ export const AiChat: <MessageType>(
     }).join(' ');
 
     const style: CSSProperties = useMemo(() => {
-        const result: CSSProperties = {};
+        const result: CSSProperties = {
+            minWidth: '280px',
+            minHeight: '280px',
+        };
+
         if (props.layoutOptions?.width) {
             result.width = props.layoutOptions.width;
         }
@@ -156,26 +180,30 @@ export const AiChat: <MessageType>(
 
     return (
         <div className={rootClassNames} style={style}>
-            <div className="nlux-xcptBx-cntr"/>
+            <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
             <div className="nlux-chtRm-cntr">
-                <ForwardConversationComp
-                    ref={conversationRef}
-                    segments={conversationSegments}
-                    conversationOptions={props.conversationOptions}
-                    personaOptions={props.personaOptions}
-                    customRenderer={props.aiMessageComponent}
-                    syntaxHighlighter={props.syntaxHighlighter}
-                />
-                <PromptBoxComp
-                    status={promptBoxStatus}
-                    prompt={prompt}
-                    hasValidInput={hasValidInput}
-                    placeholder={props.promptBoxOptions?.placeholder}
-                    autoFocus={props.promptBoxOptions?.autoFocus}
-                    submitShortcut={props.promptBoxOptions?.submitShortcut}
-                    onChange={handlePromptChange}
-                    onSubmit={handleSubmitClick}
-                />
+                <div className="nlux-chtRm-cnv-cntr">
+                    <ForwardConversationComp
+                        ref={conversationRef}
+                        segments={conversationSegments}
+                        conversationOptions={props.conversationOptions}
+                        personaOptions={props.personaOptions}
+                        customRenderer={props.aiMessageComponent}
+                        syntaxHighlighter={props.syntaxHighlighter}
+                    />
+                </div>
+                <div className="nlux-chtRm-prmptBox-cntr">
+                    <PromptBoxComp
+                        status={promptBoxStatus}
+                        prompt={prompt}
+                        hasValidInput={hasValidInput}
+                        placeholder={props.promptBoxOptions?.placeholder}
+                        autoFocus={props.promptBoxOptions?.autoFocus}
+                        submitShortcut={props.promptBoxOptions?.submitShortcut}
+                        onChange={handlePromptChange}
+                        onSubmit={handleSubmitClick}
+                    />
+                </div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import {createExceptionItemDom} from './create';
 
-const exceptionDisplayTime = 4000;
+const exceptionDisplayTime = 3000;
 const exceptionHideAnimationTime = 500;
 
 export type ExceptionsBoxController = {

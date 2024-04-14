@@ -1,0 +1,16 @@
+.nlux-comp-exp_box {
+    > .nlux-comp-exp_itm {
+        padding: var(--nlux-padding);
+        animation: nlux-fadeInUp 0.15s ease-out forwards;
+        opacity: 0;
+
+        color: var(--nlux-exceptions-box-error-text-color);
+        border-color: var(--nlux-exceptions-box-error-border-color);
+        border-radius: var(--nlux-border-radius);
+        background-color: var(--nlux-exceptions-box-error-background-color);
+    }
+
+    > .nlux-comp-exp_itm.nlux-comp-exp_itm_hide {
+        animation: nlux-fadeOutUp 0.1s ease-in forwards;
+    }
+}

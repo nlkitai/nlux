@@ -1,2 +1,47 @@
+@import '../variables.css';
+
 .nlux-AiChat-root {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    -ms-user-select: none;
+    -webkit-user-select: none; /* Safari */
+    user-select: none;
+
+    :is(h1, h2, h3, h4, h5, h6) {
+        margin: 0;
+        padding: 0;
+    }
+
+    > .nlux-comp-exp_box {
+        position: absolute;
+        z-index: 999999;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+
+    > .nlux-chtRm-cntr {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        width: 100%;
+        height: 100%;
+
+        > .nlux-chtRm-cnv-cntr {
+            overflow-x: hidden;
+            overflow-y: auto;
+            flex: 1;
+            padding: 0;
+        }
+
+        > .nlux-chtRm-prmptBox-cntr {
+            flex: 0 0 auto;
+            padding: 0;
+            gap: var(--nlux-flex-gap);
+        }
+    }
 }
