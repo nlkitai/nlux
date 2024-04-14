@@ -410,6 +410,9 @@ export class NluxRenderer {
             return;
         }
 
+        this.rootElement.style.minWidth = '280px';
+        this.rootElement.style.minHeight = '280px';
+
         if (newDimensions.hasOwnProperty('width')) {
             this.rootElement.style.width = (typeof newDimensions.width === 'number') ? `${newDimensions.width}px` : (
                 typeof newDimensions.width === 'string' ? newDimensions.width : ''

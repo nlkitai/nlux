@@ -9,8 +9,8 @@ import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatR
 const __ = (styleName: string) => `nlux-chtRm-${styleName}`;
 
 const html = () => `` +
-    `<div class="${__('conversation-container')}"></div>` +
-    `<div class="${__('prompt-box-container')}"></div>` +
+    `<div class="${__('cnv-cntr')}"></div>` +
+    `<div class="${__('prmptBox-cntr')}"></div>` +
     ``;
 
 export const renderChatRoom: CompRenderer<
@@ -36,11 +36,11 @@ export const renderChatRoom: CompRenderer<
     chatRoomElement.style.display = visibleProp ? '' : 'none';
 
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
-        `:scope > .${__('conversation-container')}`,
+        `:scope > .${__('cnv-cntr')}`,
     ).on('click', compEvent('messages-container-clicked'))
      .get();
 
-    const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prompt-box-container')}`);
+    const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prmptBox-cntr')}`);
     appendToRoot(chatRoomElement);
     compEvent('chat-room-ready')();
 

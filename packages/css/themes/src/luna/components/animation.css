@@ -25,3 +25,25 @@
         box-shadow: .2em -.2em 0 0 currentcolor;
     }
 }
+
+@keyframes nlux-fadeInUp {
+    0% {
+        margin-top: 20px;
+        opacity: 0;
+    }
+    100% {
+        margin-top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes nlux-fadeOutUp {
+    0% {
+        transform: perspective(800px) rotateX(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: perspective(800px) rotateX(90deg);
+        opacity: 0;
+    }
+}
