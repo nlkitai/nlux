@@ -26,6 +26,7 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
             const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
                 handleSubmit();
+                e.preventDefault();
             }
         } else {
             if (props.submitShortcut === 'CommandEnter') {
@@ -35,6 +36,7 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
 
                 if (isCommandEnter) {
                     handleSubmit();
+                    e.preventDefault();
                 }
             }
         }

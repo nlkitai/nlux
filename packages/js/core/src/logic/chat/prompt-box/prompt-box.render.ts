@@ -23,14 +23,14 @@ export const renderChatbox: CompRenderer<
             const isEnter = event.key === 'Enter';
             const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
-                compEvent('enter-key-pressed')();
+                compEvent('enter-key-pressed')(event);
                 return;
             }
 
             const isCommandEnter = event.getModifierState('Meta') && event.key === 'Enter';
             const isControlEnter = event.getModifierState('Control') && event.key === 'Enter';
             if (isCommandEnter || isControlEnter) {
-                compEvent('command-enter-key-pressed')();
+                compEvent('command-enter-key-pressed')(event);
                 return;
             }
         }).get();

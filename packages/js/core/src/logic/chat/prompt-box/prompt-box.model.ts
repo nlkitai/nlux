@@ -30,18 +30,20 @@ export class CompPromptBox extends BaseComp<CompPromptBoxProps, CompPromptBoxEle
     }
 
     @CompEventListener('command-enter-key-pressed')
-    handleCommandEnterKeyPressed() {
+    handleCommandEnterKeyPressed(event?: KeyboardEvent) {
         const submitShortcut = this.getProp('domCompProps')?.submitShortcut;
         if (submitShortcut === 'CommandEnter') {
             this.handleSendButtonClick();
+            event?.preventDefault();
         }
     }
 
     @CompEventListener('enter-key-pressed')
-    handleEnterKeyPressed() {
+    handleEnterKeyPressed(event?: KeyboardEvent) {
         const submitShortcut = this.getProp('domCompProps')?.submitShortcut;
         if (!submitShortcut || submitShortcut === 'Enter') {
             this.handleSendButtonClick();
+            event?.preventDefault();
         }
     }
 
