@@ -110,7 +110,6 @@ export class NluxRenderer {
         }
 
         this.chatRoom?.hide();
-        this.exceptionsBox?.removeAllAlerts();
     }
 
     mount() {

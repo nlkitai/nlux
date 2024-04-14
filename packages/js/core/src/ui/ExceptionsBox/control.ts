@@ -5,6 +5,7 @@ const exceptionHideAnimationTime = 500;
 
 export type ExceptionsBoxController = {
     displayException: (message: string, ref?: string) => void;
+    destroy: () => void;
 };
 
 export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxController => {
@@ -15,6 +16,7 @@ export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxCo
 
     let exceptionShown: boolean = false;
     let exceptionItem: HTMLElement | null = null;
+    let timeout: ReturnType<typeof setTimeout> | null = null;
 
     const processExceptionsQueue = () => {
         if (exceptionShown) {
@@ -33,14 +35,14 @@ export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxCo
 
         exceptionItem = createExceptionItemDom(victim);
         root.append(exceptionItem);
-        setTimeout(hideException, exceptionDisplayTime);
+        timeout = setTimeout(hideException, exceptionDisplayTime);
     };
 
     const hideException = () => {
         exceptionItem?.classList.add('nlux-comp-exp_itm_hide');
 
         // Wait for animation to finish
-        setTimeout(() => {
+        timeout = setTimeout(() => {
             exceptionShown = false;
             exceptionItem?.remove();
             exceptionItem = null;
@@ -55,6 +57,13 @@ export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxCo
             exceptionsQueue.add({message, ref});
             if (!exceptionShown) {
                 processExceptionsQueue();
+            }
+        },
+        destroy: () => {
+            exceptionsQueue.clear();
+            exceptionItem?.remove();
+            if (timeout) {
+                clearTimeout(timeout);
             }
         },
     };
