@@ -1,5 +1,6 @@
 export const PackageContent = {
     core: 'core',
+    shared: 'shared',
     adapter: 'adapter',
     theme: 'theme',
     extension: 'extension',
@@ -20,6 +21,15 @@ export const packages = {
         devName: '@nlux-dev/core',
         npmName: '@nlux/core',
         npmConfigDirectory: 'pipeline/npm/core',
+    },
+    shared: {
+        name: 'nlux-shared',
+        platform: PackagePlatform.js,
+        content: PackageContent.shared,
+        directory: 'js/shared',
+        devName: '@nlux-dev/shared',
+        npmName: '@nlux/shared',
+        npmConfigDirectory: 'pipeline/npm/shared',
     },
     react: {
         name: 'nlux-react',

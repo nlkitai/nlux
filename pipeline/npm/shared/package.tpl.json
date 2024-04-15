@@ -1,0 +1,16 @@
+{
+  "name": "@nlux/shared",
+  "private": true,
+  "version": "latest",
+  "license": "MPL-2.0",
+  "description": "This package contains shared utilities for the nlux JS and React libraries.",
+  "repository": {
+    "directory": "packages/js/shared"
+  },
+  "dependencies": {},
+  "peerDependencies": {},
+  "main": "index.js",
+  "types": "nlux-shared.d.ts",
+  "module": "esm/nlux-shared.js",
+  "browser": "umd/nlux-shared.js"
+}
