@@ -1,3 +1,4 @@
+import {debug} from '@nlux-dev/shared/src/utils/debug';
 import {registerAllComponents} from '../../logic/components';
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
@@ -6,7 +7,6 @@ import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
 import {ChatItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
-import {debug} from '../../utils/debug';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../error';
 import {NluxController} from './controller/controller';
 import {HighlighterExtension} from './highlighter/highlighter';

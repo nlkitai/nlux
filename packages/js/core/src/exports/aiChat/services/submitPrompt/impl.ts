@@ -1,3 +1,5 @@
+import {uid} from '@nlux-dev/shared/src/utils/uid';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
@@ -13,8 +15,6 @@ import {
     ChatSegmentItem,
     ChatSegmentUserMessage,
 } from '../../../../types/chatSegment';
-import {uid} from '../../../../utils/uid';
-import {warn} from '../../../../utils/warn';
 import {SubmitPrompt} from './submitPrompt';
 
 export const submitPrompt: SubmitPrompt = <ResponseType>(

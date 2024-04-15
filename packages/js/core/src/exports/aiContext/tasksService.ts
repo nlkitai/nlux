@@ -1,7 +1,7 @@
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ContextTasksAdapter} from '../../types/adapters/context/contextTasksAdapter';
 import {ContextActionResult, DestroyContextResult, RunTaskResult} from '../../types/aiContext/contextResults';
 import {ContextTasks} from '../../types/aiContext/data';
-import {warn} from '../../utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';

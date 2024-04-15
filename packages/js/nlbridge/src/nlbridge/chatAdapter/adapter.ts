@@ -1,3 +1,4 @@
+import {uid} from '@nlux-dev/shared/src/utils/uid';
 import {
     AiContext as CoreAiContext,
     ChatAdapterExtras,
@@ -5,7 +6,6 @@ import {
     StandardAdapterInfo,
     StandardChatAdapter,
     StreamingAdapterObserver,
-    uid,
 } from '@nlux/core';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 

@@ -1,9 +1,9 @@
+import {getRootClassNames} from '@nlux-dev/shared/src/dom/getRootClassNames';
 import {
     ChatAdapterExtras,
     ChatSegment,
     compExceptionsBoxClassName,
     createExceptionsBoxController,
-    getRootClassNames,
     PromptBoxStatus,
 } from '@nlux/core';
 import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';

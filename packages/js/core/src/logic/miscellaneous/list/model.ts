@@ -1,8 +1,8 @@
+import {domOp} from '@nlux-dev/shared/src/dom/domOp';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {NluxError} from '../../../exports/error';
 import {ControllerContext} from '../../../types/controllerContext';
-import {domOp} from '../../../utils/domOp';
 import {renderList} from './render';
 import {CompListElements, CompListEvents, CompListProps} from './types';
 import {updateList} from './update';

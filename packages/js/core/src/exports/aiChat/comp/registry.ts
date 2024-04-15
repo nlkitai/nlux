@@ -1,6 +1,6 @@
+import {debug} from '@nlux-dev/shared/src/utils/debug';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {CompDef} from '../../../types/comp';
-import {debug} from '../../../utils/debug';
-import {warn} from '../../../utils/warn';
 import {BaseComp} from './base';
 
 export class CompRegistry {

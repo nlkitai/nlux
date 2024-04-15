@@ -1,3 +1,4 @@
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ContextAdapter} from '../../types/adapters/context/contextAdapter';
 import {ContextAdapterBuilder} from '../../types/adapters/context/contextAdapterBuilder';
 import {ContextTasksAdapter} from '../../types/adapters/context/contextTasksAdapter';
@@ -12,7 +13,6 @@ import {
 } from '../../types/aiContext/contextResults';
 import {ContextItemDataType, ContextItems} from '../../types/aiContext/data';
 import {isContextTasksAdapter} from '../../utils/adapters/isContextTasksAdapter';
-import {warn} from '../../utils/warn';
 import {DataSyncService} from './dataSyncService';
 import {DataSyncOptions} from './options/dataSyncOptions';
 import {TasksService} from './tasksService';

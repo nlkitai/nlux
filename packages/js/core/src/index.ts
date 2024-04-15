@@ -282,10 +282,3 @@ export type {
 export {
     submitPrompt,
 } from './exports/aiChat/services/submitPrompt/impl';
-
-// UTILS ____________________
-
-export {debug} from './utils/debug';
-export {warn, warnOnce} from './utils/warn';
-export {uid} from './utils/uid';
-export {getRootClassNames} from './utils/dom/getRootClassNames';
