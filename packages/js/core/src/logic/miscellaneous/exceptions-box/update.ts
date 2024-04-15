@@ -1,5 +1,5 @@
+import {ExceptionType} from '../../../../../../shared/src/types/exception';
 import {CompUpdater} from '../../../types/comp';
-import {ExceptionType} from '../../../types/exception';
 import {CompExceptionsBoxActions, CompExceptionsBoxElements, CompExceptionsBoxProps} from './types';
 
 export const updateExceptionsBox: CompUpdater<

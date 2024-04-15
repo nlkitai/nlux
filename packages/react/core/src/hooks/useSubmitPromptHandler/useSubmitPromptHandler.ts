@@ -7,6 +7,7 @@ import {
     submitPrompt,
 } from '@nlux/core';
 import {MutableRefObject, useCallback, useMemo} from 'react';
+import {ExceptionId, NluxExceptions} from '../../../../../shared/src/types/exceptions';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
@@ -94,11 +95,17 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 setSegmentsRef.current.setChatSegments(newChatSegments);
             });
 
-            chatSegment.on('error', () => {
+            chatSegment.on('error', (error: any) => {
+                const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
+                const exception = NluxExceptions[exceptionId as ExceptionId];
+
                 const parts = setSegmentsRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
                 setSegmentsRef.current.setChatSegments(newParts);
-                showException('Error occurred while processing prompt');
+
+                showException(
+                    exception?.message || 'An error occurred while submitting prompt',
+                );
             });
 
             chatSegment.on('chunk', (messageId: string, chunk: string) => {

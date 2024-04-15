@@ -1,7 +1,7 @@
+import {ExceptionType} from '../../../../../../shared/src/types/exception';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ExceptionType} from '../../../types/exception';
 import {renderExceptionsBox} from './render';
 import {
     CompExceptionsBoxActions,

@@ -1,9 +1,9 @@
+import {ExceptionId} from '../../../../../../../shared/src/types/exceptions';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {Observable} from '../../../../exports/bus/observable';
 import {DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {ControllerContext} from '../../../../types/controllerContext';
-import {ExceptionId} from '../../../../types/exceptions';
 import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
 import {CompPromptBox} from '../../prompt-box/prompt-box.model';
@@ -144,7 +144,7 @@ export const submitPromptFactory = ({
 
                     context.emit('error', {
                         errorId: exceptionId,
-                        message: error.message || 'An error occurred while sending message via Promise.',
+                        message: error.message || 'An error occurred while submitting prompt',
                     });
                 });
             } else {
