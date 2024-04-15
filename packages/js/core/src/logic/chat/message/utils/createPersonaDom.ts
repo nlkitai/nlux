@@ -1,6 +1,6 @@
-import {escapeHtml} from '@nlux-dev/shared/src/dom/escapeHtml';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
-import {render} from '../../../../utils/render';
+import {escapeHtml} from '../../../../../../../shared/src/dom/escapeHtml';
+import {render} from '../../../../../../../shared/src/dom/render';
+import {warn} from '../../../../../../../shared/src/utils/warn';
 import {__} from '../message.render';
 
 const personaHtml = () => `` +

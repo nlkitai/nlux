@@ -1,4 +1,3 @@
-import {uid} from '@nlux-dev/shared/src/utils/uid';
 import {
     AiContext as CoreAiContext,
     ChatAdapterExtras,
@@ -7,6 +6,7 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
+import {uid} from '../../../../../shared/src/utils/uid';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 
 export abstract class NLBridgeAbstractAdapter implements StandardChatAdapter {

@@ -1,5 +1,5 @@
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {uid} from '../../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {EventCallback, EventName} from '../../../types/event';

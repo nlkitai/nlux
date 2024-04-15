@@ -1,6 +1,6 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
 import OpenAI from 'openai';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {decodeChunk} from '../../../utils/decodeChunk';

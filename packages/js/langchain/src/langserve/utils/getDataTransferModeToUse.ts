@@ -1,5 +1,5 @@
-import {warnOnce} from '@nlux-dev/shared/src/utils/warn';
 import {DataTransferMode} from '@nlux/core';
+import {warnOnce} from '../../../../../shared/src/utils/warn';
 import {LangServeAbstractAdapter} from '../adapter/adapter';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {getDataTransferModeFromEndpointType} from './getDataTransferModeFromEndpointType';

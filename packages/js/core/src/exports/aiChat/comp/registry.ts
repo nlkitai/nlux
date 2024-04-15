@@ -1,5 +1,5 @@
-import {debug} from '@nlux-dev/shared/src/utils/debug';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {debug} from '../../../../../../shared/src/utils/debug';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompDef} from '../../../types/comp';
 import {BaseComp} from './base';
 

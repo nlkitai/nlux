@@ -1,5 +1,5 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {NLBridgeAbstractAdapter} from './adapter';
 
 export class NLBridgeStreamAdapter extends NLBridgeAbstractAdapter {

@@ -1,4 +1,4 @@
-import {warnOnce} from '@nlux-dev/shared/src/utils/warn';
+import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';

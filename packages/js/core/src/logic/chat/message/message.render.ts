@@ -1,3 +1,4 @@
+import {render} from '../../../../../../shared/src/dom/render';
 import {createMdStreamRenderer} from '../../../exports/aiChat/markdown/streamParser';
 import {BotPersona} from '../../../exports/aiChat/options/personaOptions';
 import {NluxRenderingError} from '../../../exports/error';
@@ -5,7 +6,6 @@ import {CompRenderer} from '../../../types/comp';
 import {StandardStreamParserOutput} from '../../../types/markdown/streamParser';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {textToHtml} from '../../../utils/parseTextMessage';
-import {render} from '../../../utils/render';
 import {source} from '../../../utils/source';
 import {
     CompMessageActions,
