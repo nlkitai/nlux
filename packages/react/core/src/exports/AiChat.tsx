@@ -1,8 +1,8 @@
-import {createExceptionBoxController} from '@nlux-dev/core/src/ui/ExceptionsBox/control';
 import {
     ChatAdapterExtras,
     ChatSegment,
     compExceptionsBoxClassName,
+    createExceptionsBoxController,
     getRootClassNames,
     PromptBoxStatus,
 } from '@nlux/core';
@@ -27,7 +27,7 @@ export const AiChat: <MessageType>(
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
 
     const exceptionBoxController = useMemo(() => {
-        return exceptionBoxRef.current ? createExceptionBoxController(exceptionBoxRef.current) : undefined;
+        return exceptionBoxRef.current ? createExceptionsBoxController(exceptionBoxRef.current) : undefined;
     }, [exceptionBoxRef.current]);
 
     const showException = useCallback((message: string) => {

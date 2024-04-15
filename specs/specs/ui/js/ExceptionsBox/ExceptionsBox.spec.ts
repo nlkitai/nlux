@@ -1,5 +1,4 @@
-import {createExceptionBoxController} from '@nlux-dev/core/src/ui/ExceptionsBox/control';
-import {createExceptionsBoxDom} from '@nlux-dev/core/src/ui/ExceptionsBox/create';
+import {createExceptionsBoxController, createExceptionsBoxDom} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 
 describe('When an exceptions box component is rendered', () => {
@@ -23,7 +22,7 @@ describe('When an exceptions box component is rendered', () => {
         it('Should be displayed in the exceptions box', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
-            const controller = createExceptionBoxController(exceptionsBox);
+            const controller = createExceptionsBoxController(exceptionsBox);
 
             // When
             controller.displayException('An error occurred');
@@ -40,7 +39,7 @@ describe('When an exceptions box component is rendered', () => {
         it('Should be removed after 4.5 seconds', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
-            const controller = createExceptionBoxController(exceptionsBox);
+            const controller = createExceptionsBoxController(exceptionsBox);
 
             // When
             controller.displayException('An error occurred');
@@ -55,7 +54,7 @@ describe('When an exceptions box component is rendered', () => {
         it('They should be displayed in the exceptions box one after the other', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
-            const controller = createExceptionBoxController(exceptionsBox);
+            const controller = createExceptionsBoxController(exceptionsBox);
 
             // When
             controller.displayException('An error occurred');
@@ -82,7 +81,7 @@ describe('When an exceptions box component is rendered', () => {
         it('They should be removed one after the other', async () => {
             // Given
             const exceptionsBox = createExceptionsBoxDom();
-            const controller = createExceptionBoxController(exceptionsBox);
+            const controller = createExceptionsBoxController(exceptionsBox);
 
             // When
             controller.displayException('An error occurred');

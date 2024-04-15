@@ -8,7 +8,7 @@ export type ExceptionsBoxController = {
     destroy: () => void;
 };
 
-export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxController => {
+export const createExceptionsBoxController = (root: HTMLElement): ExceptionsBoxController => {
     const exceptionsQueue = new Set<{message: string}>();
 
     let exceptionShown: boolean = false;
