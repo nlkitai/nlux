@@ -11,17 +11,9 @@ export const createExceptionsBoxDom: DomCreator<void> = () => {
 
 export const createExceptionItemDom: DomCreator<{
     message: string;
-    ref?: string;
-}> = ({ref, message}) => {
+}> = ({message}) => {
     const exception = document.createElement('div');
     exception.classList.add('nlux-comp-exp_itm');
-
-    if (ref) {
-        const refElement = document.createElement('span');
-        refElement.classList.add('nlux-comp-exp_itm_ref');
-        refElement.append(document.createTextNode(ref));
-        exception.append(refElement);
-    }
 
     const messageElement = document.createElement('span');
     messageElement.classList.add('nlux-comp-exp_itm_msg');

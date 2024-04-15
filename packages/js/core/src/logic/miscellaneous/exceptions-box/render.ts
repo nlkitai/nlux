@@ -27,8 +27,8 @@ export const renderExceptionsBox: CompRenderer<
             root: exceptionsBoxRoot,
         },
         actions: {
-            displayException: (message: string, ref?: string) => {
-                controller?.displayException(message, ref);
+            displayException: (message: string) => {
+                controller?.displayException(message);
             },
         },
         onDestroy: () => {
