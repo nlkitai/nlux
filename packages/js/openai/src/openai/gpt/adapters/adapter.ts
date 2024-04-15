@@ -1,11 +1,11 @@
+import {uid} from '@nlux-dev/shared/src/utils/uid';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {
     ChatAdapterExtras,
     DataTransferMode,
     StandardAdapterInfo,
     StandardChatAdapter,
     StreamingAdapterObserver,
-    uid,
-    warn,
 } from '@nlux/core';
 import OpenAI from 'openai';
 import {gptAdapterInfo} from '../config';

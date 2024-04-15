@@ -1,3 +1,5 @@
+import {getRootClassNames} from '@nlux-dev/shared/src/dom/getRootClassNames';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chat-room/chat-room.model';
 import {CompChatRoomProps} from '../../../logic/chat/chat-room/chat-room.types';
 import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/model';
@@ -6,8 +8,6 @@ import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
 import {ExceptionType} from '../../../types/exception';
-import {getRootClassNames} from '../../../utils/dom/getRootClassNames';
-import {warn} from '../../../utils/warn';
 import {NluxRenderingError} from '../../error';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';

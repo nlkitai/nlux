@@ -1,8 +1,8 @@
+import {domOp} from '@nlux-dev/shared/src/dom/domOp';
+import {uid} from '@nlux-dev/shared/src/utils/uid';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';
 import {ControllerContext} from '../../../types/controllerContext';
-import {domOp} from '../../../utils/domOp';
-import {uid} from '../../../utils/uid';
-import {warn} from '../../../utils/warn';
 import {NluxError, NluxUsageError} from '../../error';
 import {CompRegistry} from './registry';
 

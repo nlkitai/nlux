@@ -1,3 +1,5 @@
+import {uid} from '@nlux-dev/shared/src/utils/uid';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {
     ChatAdapterExtras,
     ChatItem,
@@ -5,8 +7,6 @@ import {
     StandardAdapterInfo,
     StandardChatAdapter,
     StreamingAdapterObserver,
-    uid,
-    warn,
 } from '@nlux/core';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';

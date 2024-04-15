@@ -1,4 +1,5 @@
-import {ChatAdapterBuilder, ChatAdapterOptions, debug} from '@nlux/hf';
+import {debug} from '@nlux-dev/shared/src/utils/debug';
+import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/hf';
 import {useEffect, useState} from 'react';
 import {initChatAdapter} from './initChatAdapter';
 

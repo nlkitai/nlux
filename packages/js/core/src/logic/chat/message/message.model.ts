@@ -1,9 +1,9 @@
+import {debug} from '@nlux-dev/shared/src/utils/debug';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {BotPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
-import {debug} from '../../../utils/debug';
-import {warn} from '../../../utils/warn';
 import {renderMessage} from './message.render';
 import {
     CompMessageActions,

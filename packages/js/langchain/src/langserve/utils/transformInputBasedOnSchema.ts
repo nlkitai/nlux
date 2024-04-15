@@ -1,4 +1,5 @@
-import {ChatItem, warn} from '@nlux/core';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {ChatItem} from '@nlux/core';
 
 export const transformInputBasedOnSchema = (
     message: string,

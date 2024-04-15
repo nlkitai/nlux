@@ -1,4 +1,4 @@
-import {warnOnce} from '@nlux/core';
+import {warnOnce} from '@nlux-dev/shared/src/utils/warn';
 import {ChatAdapterBuilder} from './openai/gpt/builders/builder';
 import {OpenAiAdapterBuilderImpl} from './openai/gpt/builders/builderImpl';
 

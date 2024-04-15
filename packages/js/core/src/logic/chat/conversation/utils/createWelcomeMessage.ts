@@ -1,5 +1,5 @@
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {render} from '../../../../utils/render';
-import {warn} from '../../../../utils/warn';
 import {__} from '../conversation.render';
 
 const welcomeMessageHtml = () => `` +

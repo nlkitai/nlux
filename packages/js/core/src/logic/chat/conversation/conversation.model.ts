@@ -1,3 +1,4 @@
+import {warnOnce} from '@nlux-dev/shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
@@ -5,7 +6,6 @@ import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOp
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
-import {warnOnce} from '../../../utils/warn';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
 import {CompMessage} from '../message/message.model';

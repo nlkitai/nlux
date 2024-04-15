@@ -5,8 +5,6 @@ export type {
     DataTransferMode,
 } from '@nlux/core';
 
-export {debug} from '@nlux/core';
-
 export type {ChatAdapterBuilder} from './langserve/builder/builder';
 
 export type {

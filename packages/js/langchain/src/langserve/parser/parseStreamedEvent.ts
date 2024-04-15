@@ -1,4 +1,5 @@
-import {debug, warn} from '@nlux/core';
+import {debug} from '@nlux-dev/shared/src/utils/debug';
+import {warn} from '@nlux-dev/shared/src/utils/warn';
 
 export const parseStreamedEvent = (event: string): {
     event: 'data' | 'end';

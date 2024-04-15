@@ -6,10 +6,6 @@ export type {
     DataTransferMode,
 } from '@nlux/core';
 
-export {
-    debug,
-} from '@nlux/core';
-
 export type {
     ChatAdapterUsageMode,
     ChatAdapterOptions,

@@ -34,7 +34,6 @@ export {
     NluxValidationError,
     NluxRenderingError,
     NluxConfigError,
-    debug,
 } from '@nlux/core';
 
 export type {
