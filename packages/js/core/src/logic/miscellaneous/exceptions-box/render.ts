@@ -1,5 +1,5 @@
 import {CompRenderer} from '../../../types/comp';
-import {createExceptionBoxController, ExceptionsBoxController} from '../../../ui/ExceptionsBox/control';
+import {createExceptionsBoxController, ExceptionsBoxController} from '../../../ui/ExceptionsBox/control';
 import {createExceptionsBoxDom} from '../../../ui/ExceptionsBox/create';
 import {
     CompExceptionsBoxActions,
@@ -20,7 +20,7 @@ export const renderExceptionsBox: CompRenderer<
     const exceptionsBoxRoot = createExceptionsBoxDom();
     appendToRoot(exceptionsBoxRoot);
 
-    let controller: ExceptionsBoxController | undefined = createExceptionBoxController(exceptionsBoxRoot);
+    let controller: ExceptionsBoxController | undefined = createExceptionsBoxController(exceptionsBoxRoot);
 
     return {
         elements: {

@@ -265,6 +265,14 @@ export {
     welcomeMessageTextClassName as compWelcomeMessageTextClassName,
 } from './ui/WelcomeMessage/utils/updateWelcomeMessageText';
 
+export {
+    createExceptionsBoxDom,
+} from './ui/ExceptionsBox/create';
+
+export {
+    createExceptionsBoxController,
+} from './ui/ExceptionsBox/control';
+
 // SERVICES _________________
 
 export type {
