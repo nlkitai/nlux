@@ -7,5 +7,5 @@ export type CompExceptionsBoxElements = Readonly<{
 }>;
 
 export type CompExceptionsBoxActions = Readonly<{
-    displayException: (message: string, ref?: string) => void;
+    displayException: (message: string) => void;
 }>;

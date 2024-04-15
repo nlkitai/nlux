@@ -9,10 +9,7 @@ export type ExceptionsBoxController = {
 };
 
 export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxController => {
-    const exceptionsQueue = new Set<{
-        message: string;
-        ref?: string;
-    }>();
+    const exceptionsQueue = new Set<{message: string}>();
 
     let exceptionShown: boolean = false;
     let exceptionItem: HTMLElement | null = null;
@@ -53,8 +50,8 @@ export const createExceptionBoxController = (root: HTMLElement): ExceptionsBoxCo
     };
 
     return {
-        displayException: (message: string, ref?: string) => {
-            exceptionsQueue.add({message, ref});
+        displayException: (message: string) => {
+            exceptionsQueue.add({message});
             if (!exceptionShown) {
                 processExceptionsQueue();
             }

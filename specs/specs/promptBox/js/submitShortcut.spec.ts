@@ -49,10 +49,9 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                await waitForRenderCycle();
 
                 // When
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
