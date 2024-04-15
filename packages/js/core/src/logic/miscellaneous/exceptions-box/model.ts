@@ -30,6 +30,6 @@ export class CompExceptionsBox extends BaseComp<
     }
 
     public showAlert(type: ExceptionType, message: string) {
-        this.executeDomAction('displayException', message, type);
+        this.executeDomAction('displayException', message);
     }
 }
