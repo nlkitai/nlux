@@ -1,5 +1,5 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ChatAdapter, ChatAdapterBuilder, StandardChatAdapter} from '@nlux/core';
+import {warn} from '../../../../shared/src/utils/warn';
 
 export const adapterParamToUsableAdapter = (
     anAdapterOrAdapterBuilder: ChatAdapter | ChatAdapterBuilder,

@@ -1,4 +1,4 @@
-import {domOp} from '@nlux-dev/shared/src/dom/domOp';
+import {domOp} from '../../../../../../shared/src/dom/domOp';
 import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {createPromptBoxDom} from '../../../ui/PromptBox/create';

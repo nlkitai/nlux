@@ -1,6 +1,4 @@
 import {HfInference, TextGenerationOutput, TextGenerationStreamOutput} from '@huggingface/inference';
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {
     DataTransferMode,
     NluxError,
@@ -9,6 +7,8 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
+import {uid} from '../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 

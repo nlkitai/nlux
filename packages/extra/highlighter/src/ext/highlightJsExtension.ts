@@ -1,6 +1,6 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {CreateHighlighterOptions, Highlighter, HighlighterColorMode, HighlighterExtension} from '@nlux/core';
 import hljs from 'highlight.js/lib/common';
+import {warn} from '../../../../shared/src/utils/warn';
 
 import {languageAliases} from '../highlightJs/languages';
 

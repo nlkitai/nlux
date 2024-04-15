@@ -1,4 +1,3 @@
-import {getRootClassNames} from '@nlux-dev/shared/src/dom/getRootClassNames';
 import {
     ChatAdapterExtras,
     ChatSegment,
@@ -7,6 +6,7 @@ import {
     PromptBoxStatus,
 } from '@nlux/core';
 import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {getRootClassNames} from '../../../../shared/src/dom/getRootClassNames';
 import {useSubmitPromptHandler} from '../hooks/useSubmitPromptHandler/useSubmitPromptHandler';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';

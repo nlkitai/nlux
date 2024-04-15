@@ -1,6 +1,6 @@
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {ChatItem, ChatSegment, ChatSegmentAiMessage, ChatSegmentItem, ChatSegmentUserMessage} from '@nlux/core';
+import {uid} from '../../../../shared/src/utils/uid';
+import {warn} from '../../../../shared/src/utils/warn';
 
 export const chatItemsToChatSegment = <MessageType>(
     chatItems: ChatItem<MessageType>[],

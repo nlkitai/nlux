@@ -1,8 +1,8 @@
+import {render} from '../../../../../../shared/src/dom/render';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {render} from '../../../utils/render';
 import {source} from '../../../utils/source';
 import {throttle} from '../../../utils/throttle';
 import {

@@ -1,4 +1,3 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {
     ChatAdapter,
     ChatAdapterExtras,
@@ -8,6 +7,7 @@ import {
     submitPrompt,
 } from '@nlux/core';
 import {MutableRefObject, useCallback, useMemo} from 'react';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
 type SubmitPromptHandlerProps<MessageType> = {

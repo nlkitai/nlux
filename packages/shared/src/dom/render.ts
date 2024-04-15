@@ -1,5 +1,5 @@
-import {debug} from '@nlux-dev/shared/src/utils/debug';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {debug} from '../utils/debug';
+import {warn} from '../utils/warn';
 
 export const render = (html: string): DocumentFragment | HTMLElement | undefined => {
     debug(html);

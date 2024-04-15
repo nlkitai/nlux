@@ -1,5 +1,5 @@
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {uid} from '../../../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';

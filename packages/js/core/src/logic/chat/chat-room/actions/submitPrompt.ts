@@ -1,4 +1,4 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {warn} from '../../../../../../../shared/src/utils/warn';
 import {Observable} from '../../../../exports/bus/observable';
 import {DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';

@@ -1,7 +1,7 @@
-import {isBr} from '@nlux-dev/shared/src/dom/isBr';
+import {isLineBreakSequence} from '../../../../../../../shared/src/character/isLineBreakSequence';
+import {isWhitespaceOrNewLine} from '../../../../../../../shared/src/character/isWhitespaceOrNewLine';
+import {isBr} from '../../../../../../../shared/src/dom/isBr';
 import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
-import {isLineBreakSequence} from '../../../../utils/character/isLineBreakSequence';
-import {isWhitespaceOrNewLine} from '../../../../utils/character/isWhitespaceOrNewLine';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor, MarkdownProcessorOptions} from './baseProcessor';
 

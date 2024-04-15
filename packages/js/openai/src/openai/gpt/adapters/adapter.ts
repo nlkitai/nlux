@@ -1,5 +1,3 @@
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
 import {
     ChatAdapterExtras,
     DataTransferMode,
@@ -8,6 +6,8 @@ import {
     StreamingAdapterObserver,
 } from '@nlux/core';
 import OpenAI from 'openai';
+import {uid} from '../../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {gptAdapterInfo} from '../config';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiModel} from '../types/model';

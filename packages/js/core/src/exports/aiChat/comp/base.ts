@@ -1,6 +1,6 @@
-import {domOp} from '@nlux-dev/shared/src/dom/domOp';
-import {uid} from '@nlux-dev/shared/src/utils/uid';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {domOp} from '../../../../../../shared/src/dom/domOp';
+import {uid} from '../../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';
 import {ControllerContext} from '../../../types/controllerContext';
 import {NluxError, NluxUsageError} from '../../error';

@@ -1,5 +1,5 @@
-import {getRootClassNames} from '@nlux-dev/shared/src/dom/getRootClassNames';
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {getRootClassNames} from '../../../../../../shared/src/dom/getRootClassNames';
+import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chat-room/chat-room.model';
 import {CompChatRoomProps} from '../../../logic/chat/chat-room/chat-room.types';
 import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/model';

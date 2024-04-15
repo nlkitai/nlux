@@ -1,4 +1,4 @@
-import {warn} from '@nlux-dev/shared/src/utils/warn';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {ContextAdapter} from '../../types/adapters/context/contextAdapter';
 import {ContextDataAdapter} from '../../types/adapters/context/contextDataAdapter';
 import {DestroyContextResult, InitializeContextResult} from '../../types/aiContext/contextResults';

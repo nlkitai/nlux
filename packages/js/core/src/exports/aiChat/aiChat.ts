@@ -1,4 +1,4 @@
-import {debug} from '@nlux-dev/shared/src/utils/debug';
+import {debug} from '../../../../../shared/src/utils/debug';
 import {registerAllComponents} from '../../logic/components';
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
