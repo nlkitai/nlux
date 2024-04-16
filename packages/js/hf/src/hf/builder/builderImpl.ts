@@ -1,22 +1,23 @@
-import {DataTransferMode, NluxUsageError, NluxValidationError} from '@nlux/core';
+import {DataTransferMode} from '@nlux/core';
+import {NluxUsageError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {HfChatAdapterImpl} from '../adapter/chatAdapter';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';
 import {ChatAdapterBuilder} from './builder';
 
-export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
+export class ChatAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder<MessageType> {
     private theAuthToken: string | null = null;
     private theDataTransferMode: DataTransferMode = 'stream';
     private theEndpoint: string | null = null;
-    private theInputPreProcessor: HfInputPreProcessor | null = null;
+    private theInputPreProcessor: HfInputPreProcessor<MessageType> | null = null;
     private theMaxNewTokens: number | null = null;
     private theModel: string | null = null;
-    private theOutputPreProcessor: HfOutputPreProcessor | null = null;
+    private theOutputPreProcessor: HfOutputPreProcessor<MessageType> | null = null;
     private theSystemMessage: string | null = null;
 
     private withDataTransferModeCalled = false;
 
-    create(): HfChatAdapterImpl {
+    create(): HfChatAdapterImpl<MessageType> {
         if (!this.theModel && !this.theEndpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -39,7 +40,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         });
     }
 
-    withAuthToken(authToken: string): ChatAdapterBuilder {
+    withAuthToken(authToken: string): ChatAdapterBuilder<MessageType> {
         if (this.theAuthToken !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -51,7 +52,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder {
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<MessageType> {
         if (this.withDataTransferModeCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -64,7 +65,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withEndpoint(endpoint: string): ChatAdapterBuilder {
+    withEndpoint(endpoint: string): ChatAdapterBuilder<MessageType> {
         if (this.theEndpoint !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -76,7 +77,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withInputPreProcessor(inputPreProcessor: HfInputPreProcessor): ChatAdapterBuilder {
+    withInputPreProcessor(inputPreProcessor: HfInputPreProcessor<MessageType>): ChatAdapterBuilder<MessageType> {
         if (this.theInputPreProcessor !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -88,7 +89,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withMaxNewTokens(maxNewTokens: number): ChatAdapterBuilder {
+    withMaxNewTokens(maxNewTokens: number): ChatAdapterBuilder<MessageType> {
         if (this.theMaxNewTokens !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -112,7 +113,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withOutputPreProcessor(outputPreProcessor: HfOutputPreProcessor): ChatAdapterBuilder {
+    withOutputPreProcessor(outputPreProcessor: HfOutputPreProcessor<MessageType>): ChatAdapterBuilder<MessageType> {
         if (this.theOutputPreProcessor !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -124,7 +125,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withSystemMessage(message: string): ChatAdapterBuilder {
+    withSystemMessage(message: string): ChatAdapterBuilder<MessageType> {
         if (this.theSystemMessage !== null) {
             throw new NluxUsageError({
                 source: this.constructor.name,

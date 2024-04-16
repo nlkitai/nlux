@@ -1,7 +1,7 @@
 import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {vi} from 'vitest';
 
-export const createAdapterController = ({
+export const createAdapterController = <MessageType = string>({
     includeFetchText = false,
     includeStreamText = false,
 } = {}) => {
@@ -14,14 +14,15 @@ export const createAdapterController = ({
     let fetchTextMock = vi.fn();
     let streamTextMock = vi.fn();
 
-    const createNewFetchTextMock = () => (
-        message: string, extras: ChatAdapterExtras,
+    const createNewFetchTextMock = <MessageType>() => (
+        message: string,
+        extras: ChatAdapterExtras,
     ) => {
         lastMessageSent = message;
         extrasFromLastMessage = extras;
         fetchTextMock(message);
 
-        return new Promise<string>((resolve, reject) => {
+        return new Promise<MessageType>((resolve, reject) => {
             resolvePromise = resolve;
             rejectPromise = reject;
         });
@@ -42,8 +43,8 @@ export const createAdapterController = ({
         });
     };
 
-    const adapter: ChatAdapter = {
-        fetchText: includeFetchText ? createNewFetchTextMock() : undefined,
+    const adapter: ChatAdapter<MessageType> = {
+        fetchText: includeFetchText ? createNewFetchTextMock<MessageType>() : undefined,
         streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
 

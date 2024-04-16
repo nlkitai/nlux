@@ -19,11 +19,11 @@ import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
 
-export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
+export abstract class LangServeAbstractAdapter<MessageType> implements StandardChatAdapter<MessageType> {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
-    private readonly __options: ChatAdapterOptions;
+    private readonly __options: ChatAdapterOptions<MessageType>;
 
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
@@ -33,7 +33,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
     private readonly theRunnableNameToUse: string;
     private readonly theUseInputSchemaOptionToUse: boolean;
 
-    protected constructor(options: ChatAdapterOptions) {
+    protected constructor(options: ChatAdapterOptions<MessageType>) {
         this.__instanceId = `${this.info.id}-${uid()}`;
         this.__options = {...options};
 
@@ -86,7 +86,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
         return this.theInputSchemaToUse;
     }
 
-    get outputPreProcessor(): LangServeOutputPreProcessor | undefined {
+    get outputPreProcessor(): LangServeOutputPreProcessor<MessageType> | undefined {
         return this.__options.outputPreProcessor;
     }
 
@@ -118,7 +118,7 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
         }
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras): Promise<string>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType>;
 
     init() {
         if (!this.inputPreProcessor && this.useInputSchema) {
@@ -128,30 +128,14 @@ export abstract class LangServeAbstractAdapter implements StandardChatAdapter {
         }
     }
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void;
 
-    protected getDisplayableMessageFromAiOutput(aiMessage: object | string): string | undefined {
+    protected getDisplayableMessageFromAiOutput(aiMessage: object | string): MessageType {
         if (this.outputPreProcessor) {
             return this.outputPreProcessor(aiMessage);
         }
 
-        if (typeof aiMessage === 'string') {
-            return aiMessage;
-        }
-
-        const messageWithContent = aiMessage as any;
-        if (typeof messageWithContent === 'object' && messageWithContent && typeof messageWithContent.content
-            === 'string') {
-            return messageWithContent.content;
-        }
-
-        warn(
-            `LangServe adapter is unable to process output returned from the endpoint:\n ${JSON.stringify(
-                aiMessage,
-            )}`,
-        );
-
-        return undefined;
+        return aiMessage as MessageType;
     }
 
     protected getRequestBody(message: string, conversationHistory?: readonly ChatItem[]): string {

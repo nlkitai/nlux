@@ -15,7 +15,7 @@ import {isUrlWithSupportedEndpoint} from './isUrlWithSupportedEndpoint';
  * The base URL is also: https://pynlux.api.nlux.ai/einbot
  * Since it does not end with /invoke or /stream.
  */
-export const getBaseUrlFromUrlOption = (adapterOptions: ChatAdapterOptions): string => {
+export const getBaseUrlFromUrlOption = (adapterOptions: ChatAdapterOptions<unknown>): string => {
     const urlOption = adapterOptions.url;
     if (!isUrlWithSupportedEndpoint(urlOption)) {
         return urlOption;

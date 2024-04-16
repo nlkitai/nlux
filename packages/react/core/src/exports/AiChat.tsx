@@ -17,10 +17,8 @@ import {AiChatComponentProps} from './props';
 
 export const AiChat: <MessageType>(
     props: AiChatComponentProps<MessageType>,
-    t: MessageType,
 ) => ReactElement = function <MessageType>(
     props: AiChatComponentProps<MessageType>,
-    t: MessageType,
 ): ReactElement {
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
@@ -39,11 +37,11 @@ export const AiChat: <MessageType>(
     const [chatSegments, setChatSegments] = useState<ChatSegment<MessageType>[]>([]);
 
     const adapterToUse = useMemo(
-        () => adapterParamToUsableAdapter(props.adapter), [props.adapter],
+        () => adapterParamToUsableAdapter<MessageType>(props.adapter), [props.adapter],
     );
 
-    const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => (
-        adapterToUse ? {aiChatProps: reactPropsToCoreProps(props, adapterToUse)} : undefined
+    const adapterExtras: ChatAdapterExtras<MessageType> | undefined = useMemo(() => (
+        adapterToUse ? {aiChatProps: reactPropsToCoreProps<MessageType>(props, adapterToUse)} : undefined
     ), [props, adapterToUse]);
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);

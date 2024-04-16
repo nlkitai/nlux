@@ -12,7 +12,7 @@ import {AiChatProps} from './props';
  * The main interface representing AiChat component.
  * It provides methods to instantiate, mount, and unmount the component, and listen to its events.
  */
-export interface IAiChat {
+export interface IAiChat<MessageType> {
     /**
      * Hides the chat component.
      * This does not unmount the component. It will only hide the chat component from the view.
@@ -39,7 +39,7 @@ export interface IAiChat {
      * @param {EventsMap[EventName]} callback The callback to be called, that should match the event type.
      * @returns {IAiChat}
      */
-    on(event: EventName, callback: EventsMap[EventName]): IAiChat;
+    on(event: EventName, callback: EventsMap<MessageType>[EventName]): IAiChat<MessageType>;
 
     /**
      * Removes all event listeners from the chat component.
@@ -56,7 +56,7 @@ export interface IAiChat {
      * @param {EventName} event The name of the event to remove the listener from.
      * @param {EventsMap[EventName]} callback The callback to be removed.
      */
-    removeEventListener(event: EventName, callback: EventCallback): void;
+    removeEventListener(event: EventName, callback: EventCallback<MessageType>): void;
 
     /**
      * Shows the chat component.
@@ -77,7 +77,7 @@ export interface IAiChat {
      *
      * @param {Partial<AiChatProps>} props The properties to be updated.
      */
-    updateProps(props: Partial<AiChatProps>): void;
+    updateProps(props: Partial<AiChatProps<MessageType>>): void;
 
     /**
      * Enabled providing an adapter to the chat component.
@@ -86,7 +86,7 @@ export interface IAiChat {
      *
      * @param {ChatAdapterBuilder} adapterBuilder The builder for the chat adapter.
      **/
-    withAdapter(adapterBuilder: ChatAdapterBuilder): IAiChat;
+    withAdapter(adapterBuilder: ChatAdapterBuilder<MessageType>): IAiChat<MessageType>;
 
     /**
      * Enables providing a class name to the chat component.
@@ -95,7 +95,7 @@ export interface IAiChat {
      *
      * @param {string} className The class name to be added to the chat component.
      */
-    withClassName(className: string): IAiChat;
+    withClassName(className: string): IAiChat<MessageType>;
 
     /**
      * Enables providing conversation options to the chat component.
@@ -104,7 +104,7 @@ export interface IAiChat {
      *
      * @param {ConversationOptions} conversationOptions The conversation options to be used.
      */
-    withConversationOptions(conversationOptions: ConversationOptions): IAiChat;
+    withConversationOptions(conversationOptions: ConversationOptions): IAiChat<MessageType>;
 
     /**
      * Enables providing an initial conversation to the chat component.
@@ -114,7 +114,7 @@ export interface IAiChat {
      * @param {ChatItem[]} initialConversation
      * @returns {IAiChat}
      */
-    withInitialConversation(initialConversation: ChatItem[]): IAiChat;
+    withInitialConversation(initialConversation: ChatItem[]): IAiChat<MessageType>;
 
     /**
      * Enables providing layout options to the chat component. The layout options will be used to configure the
@@ -123,7 +123,7 @@ export interface IAiChat {
      *
      * @param {LayoutOptions} layoutOptions The layout options to be used.
      */
-    withLayoutOptions(layoutOptions: LayoutOptions): IAiChat;
+    withLayoutOptions(layoutOptions: LayoutOptions): IAiChat<MessageType>;
 
     /**
      * Enables providing persona options to the chat component. The persona options will be used to configure
@@ -132,7 +132,7 @@ export interface IAiChat {
      *
      * @param {PersonaOptions} personaOptions The persona options to be used.
      */
-    withPersonaOptions(personaOptions: PersonaOptions): IAiChat;
+    withPersonaOptions(personaOptions: PersonaOptions): IAiChat<MessageType>;
 
     /**
      * Enables providing prompt box options to the chat component.
@@ -140,7 +140,7 @@ export interface IAiChat {
      *
      * @param {PromptBoxOptions} promptBoxOptions The prompt box options to be used.
      */
-    withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat;
+    withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat<MessageType>;
 
     /**
      * Enables providing a syntax highlighter to the chat component.
@@ -148,7 +148,7 @@ export interface IAiChat {
      *
      * @param {HighlighterExtension} syntaxHighlighter The syntax highlighter to be used.
      */
-    withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension): IAiChat;
+    withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension): IAiChat<MessageType>;
 
     /**
      * Enables providing a theme to the chat component.
@@ -156,5 +156,5 @@ export interface IAiChat {
      *
      * @param {string} themeId The id of the theme to be used.
      */
-    withThemeId(themeId: string): IAiChat;
+    withThemeId(themeId: string): IAiChat<MessageType>;
 }

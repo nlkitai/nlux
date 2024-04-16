@@ -18,7 +18,7 @@ import {createPersonaDom} from './utils/createPersonaDom';
 
 export const __ = (styleName: string) => `nlux-text-message-${styleName}`;
 
-const html = ({content}: CompMessageProps) => `` +
+const html = ({content}: CompMessageProps<any>) => `` +
     `<div class="${__('content')}" tabindex="0">${content ? textToHtml(content) : ''}</div>` +
     ``;
 
@@ -29,7 +29,7 @@ const loaderHtml = () => `` +
     + ``;
 
 export const renderMessage: CompRenderer<
-    CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
+    CompMessageProps<any>, CompMessageElements, CompMessageEvents, CompMessageActions
 > = ({appendToRoot, props, context, compEvent}) => {
     if (props.format !== 'text') {
         throw new NluxRenderingError({

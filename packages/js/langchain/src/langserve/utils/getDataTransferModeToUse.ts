@@ -5,7 +5,7 @@ import {ChatAdapterOptions} from '../types/adapterOptions';
 import {getDataTransferModeFromEndpointType} from './getDataTransferModeFromEndpointType';
 import {getEndpointTypeFromUrl} from './getEndpointTypeFromUrl';
 
-export const getDataTransferModeToUse = (adapterOptions: ChatAdapterOptions): DataTransferMode => {
+export const getDataTransferModeToUse = (adapterOptions: ChatAdapterOptions<unknown>): DataTransferMode => {
     const runnableEndpointAction = getEndpointTypeFromUrl(
         adapterOptions.url,
     );

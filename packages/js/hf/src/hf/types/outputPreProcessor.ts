@@ -1,1 +1,1 @@
-export type HfOutputPreProcessor = (output: string) => string;
+export type HfOutputPreProcessor<MessageType> = (output: string) => MessageType;

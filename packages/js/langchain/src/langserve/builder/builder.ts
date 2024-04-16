@@ -3,12 +3,12 @@ import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 
-export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
-    create(): StandardChatAdapter;
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder;
-    withHeaders(headers: LangServeHeaders): ChatAdapterBuilder;
-    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder;
-    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder;
-    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor): ChatAdapterBuilder;
-    withUrl(runnableUrl: string): ChatAdapterBuilder;
+export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<MessageType> {
+    create(): StandardChatAdapter<MessageType>;
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<MessageType>;
+    withHeaders(headers: LangServeHeaders): ChatAdapterBuilder<MessageType>;
+    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder<MessageType>;
+    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder<MessageType>;
+    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor<MessageType>): ChatAdapterBuilder<MessageType>;
+    withUrl(runnableUrl: string): ChatAdapterBuilder<MessageType>;
 }

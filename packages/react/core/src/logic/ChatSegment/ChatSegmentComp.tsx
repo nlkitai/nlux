@@ -1,5 +1,5 @@
-import {AiUnifiedMessage} from '@nlux/core';
 import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
+import {AiUnifiedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../../ui/ChatItem/props';

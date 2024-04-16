@@ -4,17 +4,17 @@ import {ControllerContext} from '../../../../types/controllerContext';
 import {CompMessage} from '../../message/message.model';
 import {CommonMessageProps, CompMessageProps, MessageContentType} from '../../message/message.types';
 
-export const textMessage = (
-    context: ControllerContext,
+export const textMessage = <MessageType>(
+    context: ControllerContext<MessageType>,
     direction: 'in' | 'out',
     trackResizeAndDomChange: boolean,
     streamingAnimationSpeed: number,
     contentType: MessageContentType,
-    content?: string,
+    content?: MessageType | string,
     createdAt?: Date,
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-): CompMessage => {
+): CompMessage<MessageType> => {
     const defaultContentStatus = contentType === 'stream' ? 'connecting' :
         contentType === 'promise' ? 'loading' : 'loaded';
 
@@ -23,23 +23,27 @@ export const textMessage = (
         loadingStatus: defaultContentStatus,
         streamingAnimationSpeed,
         contentType,
-        content,
         createdAt: createdAt ?? new Date(),
         trackResize: trackResizeAndDomChange,
         trackDomChange: trackResizeAndDomChange,
     };
 
-    const props: CompMessageProps = direction === 'in' ? {
+    const props: CompMessageProps<MessageType> = direction === 'in' ? {
         ...commonProps,
         direction,
         botPersona: botPersona,
+        content: content as MessageType,
     } : {
         ...commonProps,
         direction,
         userPersona: userPersona,
+        content: content as string,
     };
 
-    return comp(CompMessage).withContext(context).withProps<CompMessageProps>(props).create();
+    return comp(CompMessage<MessageType>)
+        .withContext(context)
+        .withProps<CompMessageProps<MessageType>>(props)
+        .create();
 };
 
 export const messageInList = 'message-container-in-list';

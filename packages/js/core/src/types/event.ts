@@ -7,12 +7,12 @@ export type ErrorEventDetails = {
     message: string;
 };
 
-export type ReadyEventDetails = {
-    aiChatProps: AiChatProps;
+export type ReadyEventDetails<MessageType> = {
+    aiChatProps: AiChatProps<MessageType>;
 }
 
-export type PreDestroyEventDetails = {
-    aiChatProps: AiChatProps;
+export type PreDestroyEventDetails<MessageType> = {
+    aiChatProps: AiChatProps<MessageType>;
     conversationHistory: Readonly<ChatItem[]>;
 }
 
@@ -45,7 +45,7 @@ export type MessageSentCallback = (message: string) => void;
  *
  * @param readyDetails The details of the ready event such as the AiChatProps used to initialize the chat component.
  */
-export type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
+export type ReadyCallback<MessageType> = (readyDetails: ReadyEventDetails<MessageType>) => void;
 
 /**
  * The callback for when the chat component is about to be destroyed.
@@ -54,16 +54,16 @@ export type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
  * @param preDestroyDetails The details of the pre-destroy event such as the AiChatProps used to initialize the chat
  * component and the conversation history.
  */
-export type PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => void;
+export type PreDestroyCallback<MessageType> = (preDestroyDetails: PreDestroyEventDetails<MessageType>) => void;
 
-export type EventsMap = {
-    ready: ReadyCallback;
-    preDestroy: PreDestroyCallback;
+export type EventsMap<MessageType> = {
+    ready: ReadyCallback<MessageType>;
+    preDestroy: PreDestroyCallback<MessageType>;
     messageSent: MessageSentCallback;
     messageReceived: MessageReceivedCallback;
     error: ErrorCallback;
 };
 
-export type EventName = keyof EventsMap;
+export type EventName = keyof EventsMap<unknown>;
 
-export type EventCallback = EventsMap[EventName];
+export type EventCallback<MessageType> = EventsMap<MessageType>[EventName];

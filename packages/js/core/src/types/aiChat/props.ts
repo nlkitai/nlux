@@ -11,9 +11,9 @@ import {EventsMap} from '../event';
 /**
  * These are the props that are used internally by the AiChat component.
  */
-export type AiChatInternalProps = {
-    adapter: ChatAdapter | StandardChatAdapter;
-    events?: Partial<EventsMap>;
+export type AiChatInternalProps<MessageType> = {
+    adapter: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>;
+    events?: Partial<EventsMap<MessageType>>;
     themeId?: string;
     className?: string;
     initialConversation?: ChatItem[];
@@ -31,9 +31,9 @@ export type AiChatInternalProps = {
  *
  * It excludes properties that are used for initialization such as `initialConversation`.
  */
-export type AiChatProps = Readonly<{
-    adapter: ChatAdapter | StandardChatAdapter;
-    events?: Partial<EventsMap>;
+export type AiChatProps<MessageType = string> = Readonly<{
+    adapter: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>;
+    events?: Partial<EventsMap<MessageType>>;
     themeId?: string;
     className?: string;
     promptBoxOptions?: Readonly<PromptBoxOptions>;

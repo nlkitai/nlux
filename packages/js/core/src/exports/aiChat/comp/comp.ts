@@ -20,7 +20,7 @@ export const comp = <CompClass extends abstract new (...args: any) => any>(
     // IMPORTANT ✨ The lines below are responsible for creating all instances of all components.
 
     return {
-        withContext: (newContext: ControllerContext) => {
+        withContext: (newContext: ControllerContext<any>) => {
             return {
                 create: (): InstanceType<CompClass> => {
                     return new CompClass(newContext, {});

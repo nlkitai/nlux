@@ -4,10 +4,10 @@ import {getAdapterBuilder} from './getAdapterBuilder';
 
 const source = 'hooks/useUnsafeChatAdapter';
 
-export const useUnsafeChatAdapter = (options: ChatAdapterOptions) => {
+export const useUnsafeChatAdapter = <MessageType>(options: ChatAdapterOptions) => {
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter, setAdapter] = useState<ChatAdapterBuilder>(
-        getAdapterBuilder(options),
+    const [adapter, setAdapter] = useState<ChatAdapterBuilder<MessageType>>(
+        getAdapterBuilder<MessageType>(options),
     );
 
     const {
@@ -23,7 +23,7 @@ export const useUnsafeChatAdapter = (options: ChatAdapterOptions) => {
             return;
         }
 
-        const newAdapter = getAdapterBuilder(options);
+        const newAdapter = getAdapterBuilder<MessageType>(options);
         setAdapter(newAdapter);
     }, [
         apiKey,

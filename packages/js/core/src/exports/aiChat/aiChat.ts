@@ -15,9 +15,9 @@ import {LayoutOptions} from './options/layoutOptions';
 import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
-export class AiChat implements IAiChat {
-    protected theAdapter: ChatAdapter | null = null;
-    protected theAdapterBuilder: StandardChatAdapter | null = null;
+export class AiChat<MessageType> implements IAiChat<MessageType> {
+    protected theAdapter: ChatAdapter<MessageType> | null = null;
+    protected theAdapterBuilder: StandardChatAdapter<MessageType> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
@@ -27,8 +27,8 @@ export class AiChat implements IAiChat {
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
     protected theSyntaxHighlighter: HighlighterExtension | null = null;
     protected theThemeId: string | null = null;
-    private controller: NluxController | null = null;
-    private unregisteredEventListeners: Map<EventName, Set<EventCallback>> = new Map();
+    private controller: NluxController<MessageType> | null = null;
+    private unregisteredEventListeners: Map<EventName, Set<EventCallback<MessageType>>> = new Map();
 
     public get mounted(): boolean {
         return this.controller?.mounted ?? false;
@@ -54,7 +54,7 @@ export class AiChat implements IAiChat {
             });
         }
 
-        const adapterToUser: ChatAdapter | StandardChatAdapter | null =
+        const adapterToUser: ChatAdapter<MessageType> | StandardChatAdapter<MessageType> | null =
             this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
                 : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
                     ? this.theAdapterBuilder
@@ -108,7 +108,7 @@ export class AiChat implements IAiChat {
         }
     };
 
-    on(event: EventName, callback: EventsMap[EventName]) {
+    on(event: EventName, callback: EventsMap<MessageType>[EventName]) {
         if (this.controller) {
             this.controller.on(event, callback);
 
@@ -137,7 +137,7 @@ export class AiChat implements IAiChat {
         this.unregisteredEventListeners.get(event)?.clear();
     }
 
-    removeEventListener(event: EventName, callback: EventCallback) {
+    removeEventListener(event: EventName, callback: EventCallback<MessageType>) {
         this.controller?.removeEventListener(event, callback);
         this.unregisteredEventListeners.get(event)?.delete(callback);
     }
@@ -173,7 +173,7 @@ export class AiChat implements IAiChat {
         this.unregisteredEventListeners.clear();
     }
 
-    public updateProps(props: Partial<AiChatProps>) {
+    public updateProps(props: Partial<AiChatProps<MessageType>>) {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,
@@ -184,7 +184,7 @@ export class AiChat implements IAiChat {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapter: ChatAdapter | ChatAdapterBuilder) {
+    public withAdapter(adapter: ChatAdapter<MessageType> | ChatAdapterBuilder<MessageType>) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,

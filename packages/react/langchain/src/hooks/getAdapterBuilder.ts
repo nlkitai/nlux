@@ -2,7 +2,7 @@ import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/l
 
 const source = 'hooks/getAdapterBuilder';
 
-export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuilder => {
+export const getAdapterBuilder = <MessageType>(options: ChatAdapterOptions<MessageType>): ChatAdapterBuilder<MessageType> => {
     const {
         url,
         dataTransferMode,
@@ -20,7 +20,7 @@ export const getAdapterBuilder = (options: ChatAdapterOptions): ChatAdapterBuild
         throw new Error(`Runnable URL is required`);
     }
 
-    let newAdapter = createChatAdapter().withUrl(url);
+    let newAdapter = createChatAdapter<MessageType>().withUrl(url);
 
     if (dataTransferMode) {
         newAdapter = newAdapter.withDataTransferMode(dataTransferMode);

@@ -7,7 +7,7 @@ export class NLBridgeAssistAdapter implements AssistAdapter {
         this.url = url;
     }
 
-    async assist(message: string, extras: ChatAdapterExtras): Promise<AssistResult> {
+    async assist(message: string, extras: ChatAdapterExtras<string>): Promise<AssistResult> {
         if (!extras.contextId) {
             return {
                 success: false,

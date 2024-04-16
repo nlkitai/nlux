@@ -26,15 +26,15 @@ export type CommonMessageProps = Readonly<{
     format: 'text' | 'markdown' | 'html';
     loadingStatus: MessageContentLoadingStatus;
     streamingAnimationSpeed: number;
-    content?: string;
     contentType: MessageContentType;
     createdAt: Date;
     trackResize: boolean;
     trackDomChange: boolean;
 }>;
 
-export type InMessageProps = CommonMessageProps & Readonly<{
+export type InMessageProps<MessageType> = CommonMessageProps & Readonly<{
     direction: 'in';
+    content?: MessageType;
     botPersona?: {
         name: string;
         picture: string | HTMLElement;
@@ -44,13 +44,14 @@ export type InMessageProps = CommonMessageProps & Readonly<{
 
 export type OutMessageProps = CommonMessageProps & Readonly<{
     direction: 'out';
+    content?: string;
     userPersona?: {
         name: string;
         picture: string | HTMLElement;
     };
 }>;
 
-export type CompMessageProps = InMessageProps | OutMessageProps;
+export type CompMessageProps<MessageType> = InMessageProps<MessageType> | OutMessageProps;
 
 export type CompMessageElements = Readonly<{
     container: HTMLElement;

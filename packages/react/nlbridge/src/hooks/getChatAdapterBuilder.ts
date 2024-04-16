@@ -1,6 +1,6 @@
 import {ChatAdapter, ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge';
 
-export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapter => {
+export const getChatAdapterBuilder = <MessageType>(options: ChatAdapterOptions): ChatAdapter<MessageType> => {
     const {
         url,
         mode,
@@ -15,7 +15,7 @@ export const getChatAdapterBuilder = (options: ChatAdapterOptions): ChatAdapter 
         throw new Error(`Runnable URL is required`);
     }
 
-    let newAdapter = createChatAdapter().withUrl(url);
+    let newAdapter = createChatAdapter<MessageType>().withUrl(url);
 
     if (mode) {
         newAdapter = newAdapter.withMode(mode);

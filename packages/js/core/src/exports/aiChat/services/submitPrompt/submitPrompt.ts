@@ -8,11 +8,11 @@ import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtr
  * This function will return a chat segment controller that can be used to control the chat segment
  * that was created as a result of submitting the prompt.
  */
-export type SubmitPrompt = <ResponseType>(
+export type SubmitPrompt = <MessageType>(
     prompt: string,
-    adapter: ChatAdapter,
-    adapterExtras: ChatAdapterExtras,
+    adapter: ChatAdapter<MessageType>,
+    adapterExtras: ChatAdapterExtras<MessageType>,
 ) => {
-    segment: ChatSegment<ResponseType>,
-    observable: ChatSegmentObservable<ResponseType>,
+    segment: ChatSegment<MessageType>,
+    observable: ChatSegmentObservable<MessageType>,
 };

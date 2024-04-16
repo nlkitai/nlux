@@ -19,12 +19,12 @@ export type AiChatComponentProps<MessageType> = {
      * The chat adapter to use.
      * This can be an instance of a chat adapter, or a chat adapter builder.
      */
-    adapter: ChatAdapter | ChatAdapterBuilder;
+    adapter: ChatAdapter<MessageType> | ChatAdapterBuilder<MessageType>;
 
     /**
      * A map of event handlers.
      */
-    events?: Partial<EventsMap>;
+    events?: Partial<EventsMap<MessageType>>;
 
     /**
      * The class name to add to the root element of the component.

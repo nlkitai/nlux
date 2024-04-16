@@ -1,16 +1,17 @@
-import {AiContext as CoreAiContext, NluxUsageError, StandardChatAdapter} from '@nlux/core';
+import {AiContext as CoreAiContext, StandardChatAdapter} from '@nlux/core';
+import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from '../adapter';
 import {NLBridgeFetchAdapter} from '../fetch';
 import {NLBridgeStreamAdapter} from '../stream';
 import {ChatAdapterBuilder} from './builder';
 
-export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
+export class ChatAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder<MessageType> {
     private theContext?: CoreAiContext | undefined;
     private theMode?: ChatAdapterUsageMode;
     private theUrl?: string;
 
-    constructor(cloneFrom?: ChatAdapterBuilderImpl) {
+    constructor(cloneFrom?: ChatAdapterBuilderImpl<MessageType>) {
         if (cloneFrom) {
             this.theUrl = cloneFrom.theUrl;
             this.theMode = cloneFrom.theMode;
@@ -18,7 +19,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         }
     }
 
-    create(): StandardChatAdapter {
+    create(): StandardChatAdapter<MessageType> {
         if (!this.theUrl) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -37,13 +38,13 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
             ?? NLBridgeAbstractAdapter.defaultDataTransferMode;
 
         if (dataTransferModeToUse === 'stream') {
-            return new NLBridgeStreamAdapter(options);
+            return new NLBridgeStreamAdapter<MessageType>(options);
         }
 
-        return new NLBridgeFetchAdapter(options);
+        return new NLBridgeFetchAdapter<MessageType>(options);
     }
 
-    withContext(context: CoreAiContext): ChatAdapterBuilderImpl {
+    withContext(context: CoreAiContext): ChatAdapterBuilderImpl<MessageType> {
         if (this.theContext !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -55,7 +56,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilderImpl {
+    withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilderImpl<MessageType> {
         if (this.theMode !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -67,7 +68,7 @@ export class ChatAdapterBuilderImpl implements ChatAdapterBuilder {
         return this;
     }
 
-    withUrl(endpointUrl: string): ChatAdapterBuilderImpl {
+    withUrl(endpointUrl: string): ChatAdapterBuilderImpl<MessageType> {
         if (this.theUrl !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
