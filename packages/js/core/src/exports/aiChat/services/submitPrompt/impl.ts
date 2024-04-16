@@ -1,16 +1,18 @@
 import {
-    AiMessageChunkReceivedCallback,
     ChatSegment,
-    ChatSegmentCompleteCallback,
-    ChatSegmentErrorCallback,
     ChatSegmentEvent,
-    ChatSegmentEventsMap,
     ChatSegmentItem,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {
     AiUnifiedMessage,
     ChatSegmentAiMessage,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {
+    AiMessageChunkReceivedCallback,
+    ChatSegmentCompleteCallback,
+    ChatSegmentErrorCallback,
+    ChatSegmentEventsMap,
+} from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {uid} from '../../../../../../../shared/src/utils/uid';
