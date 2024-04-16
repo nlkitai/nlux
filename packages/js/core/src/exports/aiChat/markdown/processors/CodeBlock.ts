@@ -1,4 +1,4 @@
-import {isWhitespaceOrNewLine} from '../../../../../../../shared/src/character/isWhitespaceOrNewLine';
+import {isWhitespaceOrNewLine} from '../../../../../../../shared/src/utils/character/isWhitespaceOrNewLine';
 import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
 import {MarkdownProcessorOptions} from './baseProcessor';

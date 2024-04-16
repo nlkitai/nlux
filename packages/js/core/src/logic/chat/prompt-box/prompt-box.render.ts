@@ -1,5 +1,5 @@
-import {domOp} from '../../../../../../shared/src/dom/domOp';
 import {createPromptBoxDom} from '../../../../../../shared/src/ui/PromptBox/create';
+import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';

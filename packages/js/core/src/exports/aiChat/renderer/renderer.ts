@@ -1,5 +1,5 @@
-import {getRootClassNames} from '../../../../../../shared/src/dom/getRootClassNames';
 import {ExceptionType} from '../../../../../../shared/src/types/exception';
+import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chat-room/chat-room.model';
 import {CompChatRoomProps} from '../../../logic/chat/chat-room/chat-room.types';

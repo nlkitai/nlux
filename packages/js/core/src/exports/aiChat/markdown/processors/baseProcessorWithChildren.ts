@@ -1,4 +1,4 @@
-import {isLineBreakSequence} from '../../../../../../../shared/src/character/isLineBreakSequence';
+import {isLineBreakSequence} from '../../../../../../../shared/src/utils/character/isLineBreakSequence';
 import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';

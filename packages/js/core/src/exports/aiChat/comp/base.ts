@@ -1,4 +1,4 @@
-import {domOp} from '../../../../../../shared/src/dom/domOp';
+import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';

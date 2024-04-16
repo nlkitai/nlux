@@ -1,4 +1,4 @@
-import {render} from '../../../../../../shared/src/dom/render';
+import {render} from '../../../../../../shared/src/utils/dom/render';
 import {createMdStreamRenderer} from '../../../exports/aiChat/markdown/streamParser';
 import {BotPersona} from '../../../exports/aiChat/options/personaOptions';
 import {NluxRenderingError} from '../../../exports/error';
