@@ -1,4 +1,4 @@
-import {render} from '../../../../../../shared/src/dom/render';
+import {render} from '../../../../../../shared/src/utils/dom/render';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';

@@ -1,4 +1,4 @@
-import {domOp} from '../../../../../../shared/src/dom/domOp';
+import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {NluxError} from '../../../exports/error';

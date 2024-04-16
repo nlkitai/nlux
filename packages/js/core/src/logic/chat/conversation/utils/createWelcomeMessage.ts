@@ -1,4 +1,4 @@
-import {render} from '../../../../../../../shared/src/dom/render';
+import {render} from '../../../../../../../shared/src/utils/dom/render';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {__} from '../conversation.render';
 

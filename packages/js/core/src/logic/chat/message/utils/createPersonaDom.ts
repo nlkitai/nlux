@@ -1,5 +1,5 @@
-import {escapeHtml} from '../../../../../../../shared/src/dom/escapeHtml';
-import {render} from '../../../../../../../shared/src/dom/render';
+import {escapeHtml} from '../../../../../../../shared/src/utils/dom/escapeHtml';
+import {render} from '../../../../../../../shared/src/utils/dom/render';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {__} from '../message.render';
 
