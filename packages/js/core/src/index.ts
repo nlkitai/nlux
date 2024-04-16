@@ -169,18 +169,34 @@ export type {
 
 export type {
     ChatSegment,
-    ChatSegmentHandler,
     ChatSegmentStatus,
-    ChatSegmentAiMessage,
-    ChatSegmentUserMessage,
     ChatSegmentItem,
     ChatSegmentEvent,
-    ChatSegmentUpdateCallback,
-    ChatSegmentChunkCallback,
+    ChatSegmentEventsMap,
+    UserMessageReceivedCallback,
+    AiMessageReceivedCallback,
+    AiMessageStreamStartedCallback,
+    AiMessageStreamedCallback,
+    AiMessageChunkReceivedCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
+} from './types/chatSegment/chatSegment';
+
+export type {
+    ChatSegmentAiMessage,
     AiUnifiedMessage,
-} from './types/chatSegment';
+    AiUnifiedMessageStatus,
+    AiStreamedMessage,
+    AiStreamedMessageStatus,
+} from './types/chatSegment/chatSegmentAiMessage';
+
+export type {
+    ChatSegmentUserMessage,
+} from './types/chatSegment/chatSegmentUserMessage';
+
+export type {
+    ChatSegmentObservable,
+} from './types/chatSegment/chatSegmentObservable';
 
 export type {
     ParticipantRole,

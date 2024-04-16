@@ -53,7 +53,8 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
         };
     }, [chatSegments, setChatSegments, setPromptBoxStatus, showException]);
 
-    return useCallback(() => {
+    return useCallback(
+        () => {
             if (!adapterToUse || !adapterExtras) {
                 warn('No valid adapter was provided to AiChat component');
                 return;
@@ -68,7 +69,10 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             }
 
             setPromptBoxStatus('submitting');
-            const chatSegment: ChatSegment<MessageType> = submitPrompt(
+            const {
+                segment: chatSegment,
+                observable: chatSegmentObservable,
+            } = submitPrompt<MessageType>(
                 prompt,
                 adapterToUse,
                 adapterExtras,
@@ -87,7 +91,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             // to trigger a check and potentially re-render the React component, we need to change
             // the reference of the parts array by creating a new array.
 
-            chatSegment.on('complete', (newChatSegment) => {
+            chatSegmentObservable.on('complete', (newChatSegment) => {
                 const segments = domToReactRef.current.chatSegments.map((segment) => {
                     if (segment.uid === chatSegment.uid) {
                         return newChatSegment;
@@ -100,7 +104,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 
-            chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
+            chatSegmentObservable.on('update', (newChatSegment: ChatSegment<MessageType>) => {
                 const currentChatSegments = domToReactRef.current.chatSegments;
                 const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
                     (currentChatSegment) => {
@@ -116,7 +120,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 
-            chatSegment.on('error', (error: any) => {
+            chatSegmentObservable.on('error', (error: any) => {
                 const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
                 const exception = NluxExceptions[exceptionId as ExceptionId];
 
@@ -130,7 +134,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 );
             });
 
-            chatSegment.on('chunk', (messageId: string, chunk: string) => {
+            chatSegmentObservable.on('chunk', (messageId: string, chunk: string) => {
                 conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 

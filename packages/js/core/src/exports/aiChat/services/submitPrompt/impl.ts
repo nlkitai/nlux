@@ -4,17 +4,17 @@ import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/cha
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {
-    AiUnifiedMessage,
+    AiMessageChunkReceivedCallback,
     ChatSegment,
-    ChatSegmentAiMessage,
-    ChatSegmentChunkCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
     ChatSegmentEvent,
     ChatSegmentEventsMap,
     ChatSegmentItem,
-    ChatSegmentUserMessage,
-} from '../../../../types/chatSegment';
+} from '../../../../types/chatSegment/chatSegment';
+import {AiUnifiedMessage, ChatSegmentAiMessage} from '../../../../types/chatSegment/chatSegmentAiMessage';
+import {ChatSegmentObservable} from '../../../../types/chatSegment/chatSegmentObservable';
+import {ChatSegmentUserMessage} from '../../../../types/chatSegment/chatSegmentUserMessage';
 import {SubmitPrompt} from './submitPrompt';
 
 export const submitPrompt: SubmitPrompt = <ResponseType>(
@@ -86,8 +86,15 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         uid: uid(),
         status: 'active',
         items: [userMessage, aiMessage],
+    };
+
+    const chatSegmentObservable: ChatSegmentObservable<ResponseType> = {
+        get segmentId() {
+            return chatSegment.uid;
+        },
         on: addListener,
-        removeListener: removeListener,
+        removeListener,
+        destroy: () => callbacksByEvent.clear(),
     };
 
     //
@@ -96,8 +103,8 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
     if (dataTransferModeToUse === 'stream') {
         adapter.streamText!(prompt, {
             next: (chunk: string) => {
-                callbacksByEvent.get('chunk')?.forEach(callback => {
-                    const messageCallback = callback as ChatSegmentChunkCallback;
+                callbacksByEvent.get('aiChunkReceived')?.forEach(callback => {
+                    const messageCallback = callback as AiMessageChunkReceivedCallback;
                     messageCallback(aiMessage.uid, chunk);
                 });
             },
@@ -126,7 +133,10 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
             },
         }, extras);
 
-        return chatSegment;
+        return {
+            segment: chatSegment,
+            observable: chatSegmentObservable,
+        };
     }
 
     //
@@ -169,5 +179,8 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         callbacksByEvent.clear();
     });
 
-    return chatSegment;
+    return {
+        segment: chatSegment,
+        observable: chatSegmentObservable,
+    };
 };
