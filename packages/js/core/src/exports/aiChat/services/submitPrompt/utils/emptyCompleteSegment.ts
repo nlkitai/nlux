@@ -5,6 +5,7 @@ import {
 } from '../../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {uid} from '../../../../../../../../shared/src/utils/uid';
+import {triggerAsyncCallback} from './triggerAsyncCallback';
 
 export const createEmptyCompleteSegment = <AiMsg>(): {
     segment: ChatSegment<AiMsg>,
@@ -22,7 +23,7 @@ export const createEmptyCompleteSegment = <AiMsg>(): {
         items: [],
     };
 
-    setTimeout(() => {
+    triggerAsyncCallback(() => {
         completeListeners.forEach((listener) => {
             listener(segment);
         });

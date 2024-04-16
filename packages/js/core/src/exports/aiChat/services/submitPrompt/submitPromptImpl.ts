@@ -16,6 +16,7 @@ import {SubmitPrompt} from './submitPrompt';
 import {getDataTransferModeToUse} from './utils/dataTransferModeToUse';
 import {createEmptyCompleteSegment} from './utils/emptyCompleteSegment';
 import {createEmptyErrorSegment} from './utils/emptyErrorSegment';
+import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
 
 export const submitPrompt: SubmitPrompt = <AiMsg>(
@@ -31,14 +32,18 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     }
 
     if (adapter.streamText === undefined && adapter.fetchText === undefined) {
-        return createEmptyErrorSegment<AiMsg>('The adapter does not support any data transfer modes');
+        return createEmptyErrorSegment<AiMsg>(
+            'NX-AD-002',
+            'The provided adapter does not support loading data via fetch or streaming modes.',
+        );
     }
 
     //
     // We know that we will attempt to submit the prompt to the adapter.
-    // We create data structure for event listeners.
+    // We create data structures for event listeners and submit function.
     //
     const segmentId = uid();
+    const userMessage = getUserMessageFromPrompt(prompt);
 
     // (a.i). USER MESSAGE RECEIVED + (a.ii) CHAT SEGMENT COMPLETE + (a.iii) CHAT SEGMENT EXCEPTION
     let userMessageReceivedCallbacks: Set<UserMessageReceivedCallback> | undefined = new Set();
@@ -56,12 +61,11 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     //
     // We start by emitting a user message.
     //
-    setTimeout(() => {
+    triggerAsyncCallback(() => {
         if (!userMessageReceivedCallbacks?.size) {
             return;
         }
 
-        const userMessage = getUserMessageFromPrompt(prompt);
         userMessageReceivedCallbacks.forEach((callback) => {
             callback(userMessage);
         });
@@ -74,7 +78,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
         // - We also set the set to indicate that we should not register any more callbacks.
         userMessageReceivedCallbacks.clear();
         userMessageReceivedCallbacks = undefined;
-    }, 0);
+    });
 
     const dataTransferModeToUse = getDataTransferModeToUse(adapter);
 
@@ -84,7 +88,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
         submitInFetchMode(
             segmentId,
-            prompt,
+            userMessage,
             adapter,
             extras,
             aiMessageReceivedCallbacks,
@@ -92,9 +96,10 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             chatSegmentExceptionCallbacks,
         ).finally(() => {
             // Finally -> Final status of the segment.
-            // No more items will be added to the segment after this point.
-            // No more events will be emitted after this point.
-            removeAllListeners();
+            // - No more items will be added to the segment after this point.
+            // - No more events will be emitted after this point.
+            // We remove all listeners in an async manner to ensure that all events have been emitted.
+            triggerAsyncCallback(() => removeAllListeners());
         });
     } else {
         // (c). AI MESSAGE STREAMED ( 3 events ) — Only needed in streaming mode.
@@ -104,7 +109,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
         submitInStreamingMode(
             segmentId,
-            prompt,
+            userMessage,
             adapter,
             extras,
             aiMessageStreamStartedCallbacks,
@@ -116,7 +121,8 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             // Finally -> Final status of the segment.
             // No more items will be added to the segment after this point.
             // No more events will be emitted after this point.
-            removeAllListeners();
+            // We remove all listeners in an async manner to ensure that all events have been emitted.
+            triggerAsyncCallback(() => removeAllListeners());
         });
     }
 

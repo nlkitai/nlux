@@ -24,6 +24,10 @@ const adapterExceptions = {
         type: 'error',
         message: 'Failed to load content. Please try again.',
     },
+    'NX-AD-002': {
+        type: 'error',
+        message: 'Adapter does not support any data transfer modes',
+    },
 };
 
 const AllExceptions = {

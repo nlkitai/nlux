@@ -13,7 +13,7 @@ describe('submitPrompt()', () => {
             };
             const extras = {
                 aiChatProps: {} as any,
-            } satisfies ChatAdapterExtras;
+            } satisfies ChatAdapterExtras<string>;
 
             // Act
             const {observable} = submitPrompt(prompt, adapter, extras);
@@ -24,7 +24,8 @@ describe('submitPrompt()', () => {
             // Assert
             expect(exceptionSpy).toHaveBeenCalledWith({
                 type: 'error',
-                message: 'Adapter does not support any data transfer modes',
+                id: 'NX-AD-002',
+                message: 'The provided adapter does not support loading data via fetch or streaming modes.',
             });
         });
     });
@@ -39,7 +40,7 @@ describe('submitPrompt()', () => {
             };
             const extras = {
                 aiChatProps: {} as any,
-            } satisfies ChatAdapterExtras;
+            } satisfies ChatAdapterExtras<string>;
 
             // Act
             submitPrompt(prompt, adapter, extras);
@@ -59,7 +60,7 @@ describe('submitPrompt()', () => {
             };
             const extras = {
                 aiChatProps: {} as any,
-            } satisfies ChatAdapterExtras;
+            } satisfies ChatAdapterExtras<string>;
 
             // Act
             submitPrompt(prompt, adapter, extras);
@@ -79,7 +80,7 @@ describe('submitPrompt()', () => {
             };
             const extras = {
                 aiChatProps: {} as any,
-            } satisfies ChatAdapterExtras;
+            } satisfies ChatAdapterExtras<string>;
 
             // Act
             submitPrompt(prompt, adapter, extras);
@@ -97,11 +98,11 @@ describe('submitPrompt()', () => {
                 dataTransferMode: 'fetch',
                 id: '123',
                 info: {} as StandardAdapterInfo,
-            } satisfies StandardChatAdapter;
+            } satisfies StandardChatAdapter<string>;
 
             const extras = {
                 aiChatProps: {} as any,
-            } satisfies ChatAdapterExtras;
+            } satisfies ChatAdapterExtras<string>;
 
             // Act
             submitPrompt(prompt, adapter, extras);

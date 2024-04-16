@@ -1,4 +1,4 @@
-import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
+import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux-dev/core/src';
 import {vi} from 'vitest';
 
 export const createAdapterController = <AiMsg = string>({
@@ -9,14 +9,14 @@ export const createAdapterController = <AiMsg = string>({
     let rejectPromise: Function | null = null;
     let lastMessageSent: string | null = null;
     let streamTextObserver: StreamingAdapterObserver | null = null;
-    let extrasFromLastMessage: ChatAdapterExtras | undefined | null = null;
+    let extrasFromLastMessage: ChatAdapterExtras<AiMsg> | undefined | null = null;
 
     let fetchTextMock = vi.fn();
     let streamTextMock = vi.fn();
 
-    const createNewFetchTextMock = <AiMsg>() => (
+    const createNewFetchTextMock = () => (
         message: string,
-        extras: ChatAdapterExtras,
+        extras: ChatAdapterExtras<AiMsg>,
     ) => {
         lastMessageSent = message;
         extrasFromLastMessage = extras;
@@ -29,7 +29,7 @@ export const createAdapterController = <AiMsg = string>({
     };
 
     const createNewStreamTextMock = () => (
-        message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras,
+        message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>,
     ) => {
         lastMessageSent = message;
         streamTextObserver = observer;
@@ -37,14 +37,14 @@ export const createAdapterController = <AiMsg = string>({
 
         streamTextMock(message, observer);
 
-        return new Promise((resolve, reject) => {
+        return new Promise<AiMsg>((resolve, reject) => {
             resolvePromise = resolve;
             rejectPromise = reject;
         });
     };
 
-    const adapter: ChatAdapter<AiMsg> = {
-        fetchText: includeFetchText ? createNewFetchTextMock<AiMsg>() : undefined,
+    const adapter = {
+        fetchText: includeFetchText ? createNewFetchTextMock() : undefined,
         streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
 
@@ -84,4 +84,4 @@ export const createAdapterController = <AiMsg = string>({
     });
 };
 
-export type AdapterController = ReturnType<typeof createAdapterController>;
+export type AdapterController<AiMsg> = ReturnType<typeof createAdapterController<AiMsg>>;

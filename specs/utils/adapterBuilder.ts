@@ -1,12 +1,12 @@
 import {AdapterController, createAdapterController} from './adapters';
 
-export interface AdapterControllerBuilder {
-    withFetchText: (includeFetchText?: boolean) => AdapterControllerBuilder;
-    withStreamText: (includeStreamText?: boolean) => AdapterControllerBuilder;
-    create(): AdapterController;
+export interface AdapterControllerBuilder<AiMsg> {
+    withFetchText: (includeFetchText?: boolean) => AdapterControllerBuilder<AiMsg>;
+    withStreamText: (includeStreamText?: boolean) => AdapterControllerBuilder<AiMsg>;
+    create(): AdapterController<AiMsg>;
 }
 
-class ChatAdapterBuilder implements AdapterControllerBuilder {
+class ChatAdapterBuilder<AiMsg> implements AdapterControllerBuilder<AiMsg> {
     private created = false;
     private shouldIncludeFetchText = false;
     private shouldIncludeStreamText = false;
@@ -17,21 +17,21 @@ class ChatAdapterBuilder implements AdapterControllerBuilder {
         }
 
         this.created = true;
-        return createAdapterController({
+        return createAdapterController<AiMsg>({
             includeFetchText: this.shouldIncludeFetchText,
             includeStreamText: this.shouldIncludeStreamText,
         });
     }
 
-    withFetchText(includeFetchText: boolean = true): AdapterControllerBuilder {
+    withFetchText(includeFetchText: boolean = true): AdapterControllerBuilder<AiMsg> {
         this.shouldIncludeFetchText = includeFetchText;
         return this;
     }
 
-    withStreamText(includeFetchText: boolean = true): AdapterControllerBuilder {
+    withStreamText(includeFetchText: boolean = true): AdapterControllerBuilder<AiMsg> {
         this.shouldIncludeStreamText = includeFetchText;
         return this;
     }
 }
 
-export const adapterBuilder = () => new ChatAdapterBuilder();
+export const adapterBuilder = <AiMsg>() => new ChatAdapterBuilder<AiMsg>();

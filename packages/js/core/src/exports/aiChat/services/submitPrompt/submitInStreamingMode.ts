@@ -5,12 +5,13 @@ import {
     ChatSegmentCompleteCallback,
     ChatSegmentExceptionCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
+import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 
 export const submitInStreamingMode = async <AiMsg>(
     segmentId: string,
-    prompt: string,
+    userMessage: ChatSegmentUserMessage,
     adapter: ChatAdapter<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
     aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback>,

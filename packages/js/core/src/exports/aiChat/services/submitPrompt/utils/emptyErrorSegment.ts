@@ -4,9 +4,12 @@ import {
     ChatSegmentExceptionCallback,
 } from '../../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
+import {ExceptionId} from '../../../../../../../../shared/src/types/exceptions';
 import {uid} from '../../../../../../../../shared/src/utils/uid';
+import {triggerAsyncCallback} from './triggerAsyncCallback';
 
 export const createEmptyErrorSegment = <AiMsg>(
+    exceptionId: ExceptionId,
     errorMessage: string,
 ): {
     segment: ChatSegment<AiMsg>,
@@ -24,10 +27,11 @@ export const createEmptyErrorSegment = <AiMsg>(
         items: [],
     };
 
-    setTimeout(() => {
+    triggerAsyncCallback(() => {
         exceptionListeners.forEach((listener) => {
             listener({
                 type: 'error',
+                id: exceptionId,
                 message: errorMessage,
             });
         });
