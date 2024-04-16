@@ -1,16 +1,17 @@
 import {ChatAdapterExtras, ChatSegment} from '@nlux/core';
-import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {getRootClassNames} from '../../../../shared/src/dom/getRootClassNames';
 import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
 import {PromptBoxStatus} from '../../../../shared/src/ui/PromptBox/props';
-import {useSubmitPromptHandler} from '../hooks/useSubmitPromptHandler/useSubmitPromptHandler';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {chatItemsToChatSegment} from '../utils/chatItemsToChatSegment';
 import {reactPropsToCoreProps} from '../utils/reactPropsToCoreProps';
+import {useAiChatStyle} from './hooks/useAiChatStyle';
+import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatComponentProps} from './props';
 
 export const AiChat: <MessageType>(
@@ -35,30 +36,25 @@ export const AiChat: <MessageType>(
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
     const [initialSegment, setInitialSegment] = useState<ChatSegment<MessageType>>();
     const [chatSegments, setChatSegments] = useState<ChatSegment<MessageType>[]>([]);
-    const setSegmentsRef = useRef({chatSegments, setChatSegments});
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
-    const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => {
-        if (adapterToUse) {
-            return {aiChatProps: reactPropsToCoreProps(props, adapterToUse)};
-        }
-    }, [props, adapterToUse]);
+    const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => (
+        adapterToUse ? {aiChatProps: reactPropsToCoreProps(props, adapterToUse)} : undefined
+    ), [props, adapterToUse]);
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
-    const handleSubmitClick = useSubmitPromptHandler({
+    const handleSubmitPrompt = useSubmitPromptHandler({
         adapterToUse,
         adapterExtras,
         prompt,
         promptBoxOptions: props.promptBoxOptions,
         showException,
-        setSegmentsRef,
+        chatSegments,
+        setChatSegments,
+        setPromptBoxStatus,
         conversationRef,
     });
-
-    useEffect(() => {
-        setSegmentsRef.current = {chatSegments, setChatSegments};
-    }, [chatSegments, setChatSegments]);
 
     useEffect(() => {
         setInitialSegment(
@@ -72,34 +68,18 @@ export const AiChat: <MessageType>(
         return initialSegment ? [initialSegment, ...chatSegments] : chatSegments;
     }, [initialSegment, chatSegments]);
 
-    const ForwardConversationComp = forwardRef(
-        ConversationComp<MessageType>,
-    );
-
+    const rootStyle = useAiChatStyle(props.layoutOptions);
     const rootClassNames = getRootClassNames({
         className: props.className,
         themeId: props.themeId,
     }).join(' ');
 
-    const style: CSSProperties = useMemo(() => {
-        const result: CSSProperties = {
-            minWidth: '280px',
-            minHeight: '280px',
-        };
-
-        if (props.layoutOptions?.width) {
-            result.width = props.layoutOptions.width;
-        }
-
-        if (props.layoutOptions?.height) {
-            result.height = props.layoutOptions.height;
-        }
-
-        return result;
-    }, [props.layoutOptions?.width, props.layoutOptions?.height]);
+    const ForwardConversationComp = forwardRef(
+        ConversationComp<MessageType>,
+    );
 
     return (
-        <div className={rootClassNames} style={style}>
+        <div className={rootClassNames} style={rootStyle}>
             <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
             <div className="nlux-chtRm-cntr">
                 <div className="nlux-chtRm-cnv-cntr">
@@ -121,7 +101,7 @@ export const AiChat: <MessageType>(
                         autoFocus={props.promptBoxOptions?.autoFocus}
                         submitShortcut={props.promptBoxOptions?.submitShortcut}
                         onChange={handlePromptChange}
-                        onSubmit={handleSubmitClick}
+                        onSubmit={handleSubmitPrompt}
                     />
                 </div>
             </div>

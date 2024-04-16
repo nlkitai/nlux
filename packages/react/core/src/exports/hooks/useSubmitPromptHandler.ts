@@ -6,7 +6,7 @@ import {
     StandardChatAdapter,
     submitPrompt,
 } from '@nlux/core';
-import {MutableRefObject, useCallback, useMemo} from 'react';
+import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ExceptionId, NluxExceptions} from '../../../../../shared/src/types/exceptions';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
@@ -16,11 +16,10 @@ type SubmitPromptHandlerProps<MessageType> = {
     adapterExtras?: ChatAdapterExtras;
     prompt: string;
     promptBoxOptions?: PromptBoxOptions;
+    chatSegments: ChatSegment<MessageType>[];
     showException: (message: string) => void;
-    setSegmentsRef: MutableRefObject<{
-        chatSegments: ChatSegment<MessageType>[];
-        setChatSegments: (segments: ChatSegment<MessageType>[]) => void;
-    }>;
+    setChatSegments: (segments: ChatSegment<MessageType>[]) => void;
+    setPromptBoxStatus: (status: 'typing' | 'submitting') => void;
     conversationRef: MutableRefObject<ImperativeConversationCompProps | null>
 };
 
@@ -31,11 +30,29 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
         prompt,
         promptBoxOptions,
         showException,
-        setSegmentsRef,
+        chatSegments,
+        setChatSegments,
+        setPromptBoxStatus,
         conversationRef,
     } = props;
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
+    const domToReactRef = useRef({
+        chatSegments,
+        setChatSegments,
+        setPromptBoxStatus,
+        showException,
+    });
+
+    useEffect(() => {
+        domToReactRef.current = {
+            chatSegments,
+            setChatSegments,
+            setPromptBoxStatus,
+            showException,
+        };
+    }, [chatSegments, setChatSegments, setPromptBoxStatus, showException]);
+
     return useCallback(() => {
             if (!adapterToUse || !adapterExtras) {
                 warn('No valid adapter was provided to AiChat component');
@@ -50,6 +67,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 return;
             }
 
+            setPromptBoxStatus('submitting');
             const chatSegment: ChatSegment<MessageType> = submitPrompt(
                 prompt,
                 adapterToUse,
@@ -59,6 +77,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             if (chatSegment.status === 'error') {
                 warn('Error occurred while submitting prompt');
                 showException('Error occurred while submitting prompt');
+                setPromptBoxStatus('typing');
                 return;
             }
 
@@ -69,7 +88,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             // the reference of the parts array by creating a new array.
 
             chatSegment.on('complete', (newChatSegment) => {
-                const segments = setSegmentsRef.current.chatSegments.map((segment) => {
+                const segments = domToReactRef.current.chatSegments.map((segment) => {
                     if (segment.uid === chatSegment.uid) {
                         return newChatSegment;
                     }
@@ -77,11 +96,12 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                     return segment;
                 });
 
-                setSegmentsRef.current.setChatSegments([...segments]);
+                domToReactRef.current.setChatSegments([...segments]);
+                domToReactRef.current.setPromptBoxStatus('typing');
             });
 
             chatSegment.on('update', (newChatSegment: ChatSegment<MessageType>) => {
-                const currentChatSegments = setSegmentsRef.current.chatSegments;
+                const currentChatSegments = domToReactRef.current.chatSegments;
                 const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
                     (currentChatSegment) => {
                         if (currentChatSegment.uid === newChatSegment.uid) {
@@ -92,18 +112,20 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                     },
                 );
 
-                setSegmentsRef.current.setChatSegments(newChatSegments);
+                domToReactRef.current.setChatSegments(newChatSegments);
+                domToReactRef.current.setPromptBoxStatus('typing');
             });
 
             chatSegment.on('error', (error: any) => {
                 const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
                 const exception = NluxExceptions[exceptionId as ExceptionId];
 
-                const parts = setSegmentsRef.current.chatSegments;
+                const parts = domToReactRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
-                setSegmentsRef.current.setChatSegments(newParts);
 
-                showException(
+                domToReactRef.current.setChatSegments(newParts);
+                domToReactRef.current.setPromptBoxStatus('typing');
+                domToReactRef.current.showException(
                     exception?.message || 'An error occurred while submitting prompt',
                 );
             });
@@ -112,18 +134,17 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 
-            setSegmentsRef.current.setChatSegments([
-                ...setSegmentsRef.current.chatSegments,
+            domToReactRef.current.setChatSegments([
+                ...domToReactRef.current.chatSegments,
                 chatSegment,
             ]);
         },
         [
             showException,
-            setSegmentsRef.current,
+            domToReactRef,
             prompt,
             adapterToUse,
             adapterExtras,
-            setSegmentsRef,
             promptBoxOptions?.disableSubmitButton,
         ],
     );
