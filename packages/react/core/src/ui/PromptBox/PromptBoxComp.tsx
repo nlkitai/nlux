@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {ChangeEvent, createRef, KeyboardEvent, useEffect, useMemo} from 'react';
 import {className as compPromptBoxClassName} from '../../../../../shared/src/ui/PromptBox/create';
 import {
     statusClassName as compPromptBoxStatusClassName,
@@ -15,7 +15,8 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
     const disableButton = !props.hasValidInput || props.status === 'submitting' || props.status === 'waiting';
     const showSendIcon = props.status === 'typing';
 
-    const handleChange = useMemo(() => (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const textareaRef = useMemo(() => createRef<HTMLTextAreaElement>(), []);
+    const handleChange = useMemo(() => (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChange?.(e.target.value);
     }, [props.onChange]);
 
@@ -23,7 +24,13 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
         props.onSubmit?.();
     }, [props.onSubmit]);
 
-    const handleKeyDown = useMemo(() => (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    useEffect(() => {
+        if (props.status === 'typing' && props.autoFocus && textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, [props.autoFocus && textareaRef.current, props.status]);
+
+    const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (!props.submitShortcut || props.submitShortcut === 'Enter') {
             const isEnter = e.key === 'Enter';
             const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
@@ -48,6 +55,7 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
     return (
         <div className={className}>
             <textarea
+                ref={textareaRef}
                 disabled={disableTextarea}
                 placeholder={props.placeholder}
                 value={props.prompt}
