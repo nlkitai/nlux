@@ -2,7 +2,7 @@ import {AiContext as CoreAiContext} from '@nlux-dev/core/src';
 import {createAiContext} from '@nlux-dev/react/src';
 import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask';
 import {render} from '@testing-library/react';
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
 import {waitForRenderCycle} from '../../../utils/wait';

@@ -1,6 +1,6 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import {ChangeEvent, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {

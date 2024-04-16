@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     className as compWelcomeMessageClassName,
     personaNameClassName as compWelcomeMessagePersonaNameClassName,

@@ -1,7 +1,7 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat, BotPersona, UserPersona} from '@nlux/react';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {myCustomPromiseAdapter} from './customAdapter';
 // import profilePic from './funny-bot.jpeg';

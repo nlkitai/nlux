@@ -1,6 +1,6 @@
 import {llama2InputPreProcessor, llama2OutputPreProcessor, useChatAdapter} from '@nlux/hf-react';
 import {AiChat} from '@nlux/react';
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {

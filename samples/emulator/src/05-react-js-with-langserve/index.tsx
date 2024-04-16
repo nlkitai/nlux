@@ -1,6 +1,6 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
@@ -27,7 +27,7 @@ const ExampleWrapper = () => {
             'Accept': 'application/json',
             'Access-Control-Allow-Origin': '*',
             'Authorization': `Bearer ${bearer}`,
-        }
+        },
     });
 
     return (

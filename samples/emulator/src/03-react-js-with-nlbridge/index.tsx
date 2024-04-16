@@ -1,6 +1,6 @@
 import {useChatAdapter} from '@nlux/nlbridge-react';
 import {AiChat} from '@nlux/react';
-import React, {useCallback, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
