@@ -1,7 +1,6 @@
 import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter, submitPrompt} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
-import {ExceptionId, NluxExceptions} from '../../../../../shared/src/types/exceptions';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
@@ -114,10 +113,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             //     domToReactRef.current.setPromptBoxStatus('typing');
             // });
 
-            chatSegmentObservable.on('error', (error: any) => {
-                const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
-                const exception = NluxExceptions[exceptionId as ExceptionId];
-
+            chatSegmentObservable.on('exception', (exception) => {
                 const parts = domToReactRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
 
