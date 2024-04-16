@@ -1,4 +1,3 @@
-import React from 'react';
 import {className as compExceptionsBoxClassName} from '../../../../../shared/src/ui/ExceptionsBox/create';
 import {ExceptionsBoxProps} from './props';
 

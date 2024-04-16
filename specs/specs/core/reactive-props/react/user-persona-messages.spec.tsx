@@ -1,6 +1,5 @@
 import {AiChat, PersonaOptions} from '@nlux/react';
 import {act, render} from '@testing-library/react';
-import React from 'react';
 import {beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';

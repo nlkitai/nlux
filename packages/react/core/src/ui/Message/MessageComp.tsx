@@ -1,4 +1,3 @@
-import React from 'react';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,

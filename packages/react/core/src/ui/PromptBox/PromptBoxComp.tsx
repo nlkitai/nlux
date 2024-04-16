@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import {useMemo} from 'react';
 import {className as compPromptBoxClassName} from '../../../../../shared/src/ui/PromptBox/create';
 import {
     statusClassName as compPromptBoxStatusClassName,

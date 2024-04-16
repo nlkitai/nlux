@@ -1,5 +1,4 @@
 import {PersonaOptions} from '@nlux/react';
-import React from 'react';
 
 export const personaOptions: PersonaOptions = {
     bot: {
