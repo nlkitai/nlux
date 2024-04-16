@@ -1,5 +1,5 @@
-import {MessageStatus} from '../../../../../shared/src/ui/Message/props';
-import {DataTransferMode} from '../adapters/chat/chatAdapter';
+import {DataTransferMode} from '@nlux-dev/core/src/types/adapters/chat/chatAdapter';
+import {MessageStatus} from '../../ui/Message/props';
 
 /**
  * The interface for a controller that can be used to change a chat segment.

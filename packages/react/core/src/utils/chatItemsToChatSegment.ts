@@ -1,13 +1,12 @@
-import {ChatItem, ChatSegment, ChatSegmentAiMessage, ChatSegmentItem, ChatSegmentUserMessage} from '@nlux/core';
+import {ChatItem} from '@nlux/core';
+import {ChatSegment, ChatSegmentItem} from '../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegmentAiMessage} from '../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {ChatSegmentUserMessage} from '../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {uid} from '../../../../shared/src/utils/uid';
 import {warn} from '../../../../shared/src/utils/warn';
 
 export const chatItemsToChatSegment = <MessageType>(
     chatItems: ChatItem<MessageType>[],
-    on: ChatSegment<MessageType>['on'] = () => {
-    },
-    removeListener: ChatSegment<MessageType>['removeListener'] = () => {
-    },
 ): ChatSegment<MessageType> => {
     const segmentItems: ChatSegmentItem<MessageType>[] = chatItems.map((message, index) => {
         if (message.role !== 'ai' && message.role !== 'user') {
@@ -56,7 +55,5 @@ export const chatItemsToChatSegment = <MessageType>(
         uid: 'initial',
         status: 'complete',
         items: segmentItems,
-        on,
-        removeListener,
     } satisfies ChatSegment<MessageType>;
 };

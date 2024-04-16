@@ -1,31 +1,7 @@
-import {ExceptionType} from '../../../../../../shared/src/types/exception';
 import {CompUpdater} from '../../../types/comp';
 import {CompExceptionsBoxActions, CompExceptionsBoxElements, CompExceptionsBoxProps} from './types';
 
 export const updateExceptionsBox: CompUpdater<
     CompExceptionsBoxProps, CompExceptionsBoxElements, CompExceptionsBoxActions
-> = ({
-    propName,
-    newValue,
-    dom: {actions},
-}) => {
-    if (propName === 'visible' && typeof newValue === 'boolean' && actions) {
-        if (newValue) {
-            actions.show();
-        } else {
-            actions.hide();
-        }
-
-        return;
-    }
-
-    if (propName === 'message' && typeof newValue === 'string' && actions) {
-        actions.setMessage(newValue as string);
-        return;
-    }
-
-    if ((propName === 'type') && ['error', 'warning'].includes(newValue as string) && actions) {
-        actions.setMessageType(newValue as ExceptionType);
-        return;
-    }
+> = () => {
 };

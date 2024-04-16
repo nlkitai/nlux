@@ -1,8 +1,3 @@
-import {uid} from '../../../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../../../shared/src/utils/warn';
-import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
-import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
-import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {
     AiMessageChunkReceivedCallback,
     ChatSegment,
@@ -11,10 +6,18 @@ import {
     ChatSegmentEvent,
     ChatSegmentEventsMap,
     ChatSegmentItem,
-} from '../../../../types/chatSegment/chatSegment';
-import {AiUnifiedMessage, ChatSegmentAiMessage} from '../../../../types/chatSegment/chatSegmentAiMessage';
-import {ChatSegmentObservable} from '../../../../types/chatSegment/chatSegmentObservable';
-import {ChatSegmentUserMessage} from '../../../../types/chatSegment/chatSegmentUserMessage';
+} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
+import {
+    AiUnifiedMessage,
+    ChatSegmentAiMessage,
+} from '../../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {ChatSegmentObservable} from '../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
+import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {uid} from '../../../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../../../shared/src/utils/warn';
+import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {SubmitPrompt} from './submitPrompt';
 
 export const submitPrompt: SubmitPrompt = <ResponseType>(

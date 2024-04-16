@@ -1,12 +1,6 @@
-import {
-    ChatAdapter,
-    ChatAdapterExtras,
-    ChatSegment,
-    PromptBoxOptions,
-    StandardChatAdapter,
-    submitPrompt,
-} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter, submitPrompt} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
+import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ExceptionId, NluxExceptions} from '../../../../../shared/src/types/exceptions';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
@@ -104,21 +98,21 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 
-            chatSegmentObservable.on('update', (newChatSegment: ChatSegment<MessageType>) => {
-                const currentChatSegments = domToReactRef.current.chatSegments;
-                const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
-                    (currentChatSegment) => {
-                        if (currentChatSegment.uid === newChatSegment.uid) {
-                            return newChatSegment;
-                        }
-
-                        return currentChatSegment;
-                    },
-                );
-
-                domToReactRef.current.setChatSegments(newChatSegments);
-                domToReactRef.current.setPromptBoxStatus('typing');
-            });
+            // chatSegmentObservable.on('', (newChatSegment: ChatSegment<MessageType>) => {
+            //     const currentChatSegments = domToReactRef.current.chatSegments;
+            //     const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
+            //         (currentChatSegment) => {
+            //             if (currentChatSegment.uid === newChatSegment.uid) {
+            //                 return newChatSegment;
+            //             }
+            //
+            //             return currentChatSegment;
+            //         },
+            //     );
+            //
+            //     domToReactRef.current.setChatSegments(newChatSegments);
+            //     domToReactRef.current.setPromptBoxStatus('typing');
+            // });
 
             chatSegmentObservable.on('error', (error: any) => {
                 const exceptionId: ExceptionId = error?.exceptionId ?? 'NX-AD-001';
@@ -134,7 +128,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 );
             });
 
-            chatSegmentObservable.on('chunk', (messageId: string, chunk: string) => {
+            chatSegmentObservable.on('aiChunkReceived', (messageId: string, chunk: string) => {
                 conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 
