@@ -177,4 +177,4 @@ export type {
 
 export {
     submitPrompt,
-} from './exports/aiChat/services/submitPrompt/impl';
+} from './exports/aiChat/services/submitPrompt/submitPromptImpl';
