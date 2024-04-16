@@ -57,15 +57,16 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
     return (
         <div className={className}>
             <textarea
+                tabIndex={0}
                 ref={textareaRef}
                 disabled={disableTextarea}
                 placeholder={props.placeholder}
                 value={props.prompt}
-                autoFocus={props.autoFocus}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
             <button
+                tabIndex={0}
                 disabled={disableButton}
                 onClick={() => props.onSubmit?.()}
             >
