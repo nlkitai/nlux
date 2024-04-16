@@ -4,7 +4,6 @@ import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {ChatSegmentImperativeProps} from '../ChatSegment/props';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
-
 export type ConversationCompType = <MessageType>(
     props: ConversationCompProps<MessageType>,
     ref: Ref<ImperativeConversationCompProps>,
