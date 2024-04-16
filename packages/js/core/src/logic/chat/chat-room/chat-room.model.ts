@@ -18,17 +18,17 @@ import {updateChatRoom} from './chat-room.update';
 import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
-export class CompChatRoom<MessageType> extends BaseComp<
-    MessageType, CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+export class CompChatRoom<AiMsg> extends BaseComp<
+    AiMsg, CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
     // Set scroll when generating default value to true, when not specified
     static defaultScrollWhenGeneratingUserOption = true;
 
-    private conversation: CompConversation<MessageType>;
-    private promptBoxInstance: CompPromptBox<MessageType>;
+    private conversation: CompConversation<AiMsg>;
+    private promptBoxInstance: CompPromptBox<AiMsg>;
     private promptBoxText: string = '';
 
-    constructor(context: ControllerContext<MessageType>, {
+    constructor(context: ControllerContext<AiMsg>, {
         scrollWhenGenerating,
         streamingAnimationSpeed,
         visible = true,
@@ -133,7 +133,7 @@ export class CompChatRoom<MessageType> extends BaseComp<
         userPersona?: UserPersona,
         initialConversationContent?: readonly ChatItem[],
     ) {
-        this.conversation = comp(CompConversation<MessageType>)
+        this.conversation = comp(CompConversation<AiMsg>)
             .withContext(this.context)
             .withProps<CompConversationProps>({
                 scrollWhenGenerating,
@@ -157,7 +157,7 @@ export class CompChatRoom<MessageType> extends BaseComp<
         disableSubmitButton?: boolean,
         submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
-        this.promptBoxInstance = comp(CompPromptBox<MessageType>).withContext(this.context).withProps({
+        this.promptBoxInstance = comp(CompPromptBox<AiMsg>).withContext(this.context).withProps({
             props: {
                 domCompProps: {
                     status: 'typing',
@@ -178,7 +178,7 @@ export class CompChatRoom<MessageType> extends BaseComp<
 
     private handlePromptBoxSubmit() {
         const {adapter} = this.context;
-        const adapterAsStandardAdapter: StandardChatAdapter<MessageType> | undefined = isStandardChatAdapter(
+        const adapterAsStandardAdapter: StandardChatAdapter<AiMsg> | undefined = isStandardChatAdapter(
             adapter as any) ?
             adapter as any : undefined;
 

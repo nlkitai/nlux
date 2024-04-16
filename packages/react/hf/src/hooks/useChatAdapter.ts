@@ -5,14 +5,14 @@ import {initChatAdapter} from './initChatAdapter';
 
 const source = 'hooks/useChatAdapter';
 
-export const useChatAdapter = <MessageType = string>(options: ChatAdapterOptions<MessageType>) => {
+export const useChatAdapter = <AiMsg = string>(options: ChatAdapterOptions<AiMsg>) => {
     if (!options.model) {
         throw new Error('You must provide either a model or an endpoint to use Hugging Face Inference API.');
     }
 
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter] = useState<ChatAdapterBuilder<MessageType>>(
-        initChatAdapter<MessageType>(options),
+    const [adapter] = useState<ChatAdapterBuilder<AiMsg>>(
+        initChatAdapter<AiMsg>(options),
     );
 
     const {

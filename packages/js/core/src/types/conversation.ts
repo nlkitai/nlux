@@ -1,6 +1,6 @@
-export type ChatItem<MessageType = string> = {
+export type ChatItem<AiMsg = string> = {
     role: 'ai';
-    message: MessageType;
+    message: AiMsg;
 } | {
     role: 'user';
     message: string;

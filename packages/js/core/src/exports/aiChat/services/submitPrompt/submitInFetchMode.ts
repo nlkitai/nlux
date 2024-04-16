@@ -7,13 +7,13 @@ import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 
-export const submitInFetchMode = async <MessageType>(
+export const submitInFetchMode = async <AiMsg>(
     segmentId: string,
     prompt: string,
-    adapter: ChatAdapter<MessageType>,
-    extras: ChatAdapterExtras<MessageType>,
-    aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<MessageType>>,
-    chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<MessageType>>,
+    adapter: ChatAdapter<AiMsg>,
+    extras: ChatAdapterExtras<AiMsg>,
+    aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>>,
+    chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
     chatSegmentExceptionCallbacks: Set<ChatSegmentExceptionCallback>,
 ): Promise<void> => {
     try {

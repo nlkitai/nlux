@@ -8,11 +8,11 @@ import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
 import {createControllerContext} from './context';
 
-export class NluxController<MessageType> {
+export class NluxController<AiMsg> {
 
-    private readonly eventManager = new EventManager<MessageType>();
+    private readonly eventManager = new EventManager<AiMsg>();
     private readonly nluxInstanceId = uid();
-    private props: AiChatInternalProps<MessageType>;
+    private props: AiChatInternalProps<AiMsg>;
 
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
@@ -28,13 +28,13 @@ export class NluxController<MessageType> {
         this.renderer.renderEx(exception.type, exception.message);
     };
 
-    private renderer: NluxRenderer<MessageType> | null = null;
+    private renderer: NluxRenderer<AiMsg> | null = null;
     private readonly rootCompId: string;
     private readonly rootElement: HTMLElement;
 
     constructor(
         rootElement: HTMLElement,
-        props: AiChatInternalProps<MessageType>,
+        props: AiChatInternalProps<AiMsg>,
     ) {
         this.rootCompId = 'chat-room';
         this.rootElement = rootElement;
@@ -58,7 +58,7 @@ export class NluxController<MessageType> {
             return;
         }
 
-        const newContext: ControllerContext<MessageType> = createControllerContext<MessageType>({
+        const newContext: ControllerContext<AiMsg> = createControllerContext<AiMsg>({
                 instanceId: this.nluxInstanceId,
                 exception: this.renderException,
                 adapter: this.props.adapter,
@@ -98,7 +98,7 @@ export class NluxController<MessageType> {
         this.renderer.mount();
     }
 
-    public on(event: EventName, callback: EventCallback<MessageType>) {
+    public on(event: EventName, callback: EventCallback<AiMsg>) {
         this.eventManager.on(event, callback);
     }
 
@@ -110,7 +110,7 @@ export class NluxController<MessageType> {
         this.eventManager.removeAllEventListenersForAllEvent();
     }
 
-    removeEventListener(event: EventName, callback: EventCallback<MessageType>) {
+    removeEventListener(event: EventName, callback: EventCallback<AiMsg>) {
         this.eventManager.removeEventListener(event, callback);
     }
 
@@ -131,7 +131,7 @@ export class NluxController<MessageType> {
         this.renderer = null;
     }
 
-    public updateProps(props: Partial<AiChatProps<MessageType>>) {
+    public updateProps(props: Partial<AiChatProps<AiMsg>>) {
         this.renderer?.updateProps(props);
         this.props = {
             ...this.props,

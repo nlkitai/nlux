@@ -22,13 +22,13 @@ import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtr
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {SubmitPrompt} from './submitPrompt';
 
-export const submitPrompt: SubmitPrompt = <MessageType>(
+export const submitPrompt: SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<MessageType>,
-    extras: ChatAdapterExtras<MessageType>,
+    adapter: ChatAdapter<AiMsg>,
+    extras: ChatAdapterExtras<AiMsg>,
 ) => {
-    const callbacksByEvent: Map<ChatSegmentEvent, Set<ChatSegmentEventsMap<MessageType>[ChatSegmentEvent]>> = new Map();
-    const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap<MessageType>[ChatSegmentEvent]) => {
+    const callbacksByEvent: Map<ChatSegmentEvent, Set<ChatSegmentEventsMap<AiMsg>[ChatSegmentEvent]>> = new Map();
+    const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap<AiMsg>[ChatSegmentEvent]) => {
         if (!callbacksByEvent.has(event)) {
             callbacksByEvent.set(event, new Set());
         }
@@ -37,7 +37,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
     const removeListener = (
         event: ChatSegmentEvent,
-        callback: ChatSegmentEventsMap<MessageType>[ChatSegmentEvent],
+        callback: ChatSegmentEventsMap<AiMsg>[ChatSegmentEvent],
     ) => {
         if (!callbacksByEvent.has(event)) {
             return;
@@ -56,7 +56,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
         throw new Error('The adapter does not support any data transfer modes');
     }
 
-    const adapterAsStandardAdapter: StandardChatAdapter<MessageType> | undefined = isStandardChatAdapter(adapter as any)
+    const adapterAsStandardAdapter: StandardChatAdapter<AiMsg> | undefined = isStandardChatAdapter(adapter as any)
         ?
         adapter as any
         : undefined;
@@ -78,7 +78,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
         content: prompt,
     };
 
-    const aiMessage: ChatSegmentAiMessage<MessageType> = (dataTransferModeToUse === 'stream') ? {
+    const aiMessage: ChatSegmentAiMessage<AiMsg> = (dataTransferModeToUse === 'stream') ? {
         uid: uid(),
         participantRole: 'ai',
         time: new Date(),
@@ -92,13 +92,13 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
         status: 'loading',
     };
 
-    const chatSegment: ChatSegment<MessageType> = {
+    const chatSegment: ChatSegment<AiMsg> = {
         uid: uid(),
         status: 'active',
         items: [userMessage, aiMessage],
     };
 
-    const chatSegmentObservable: ChatSegmentObservable<MessageType> = {
+    const chatSegmentObservable: ChatSegmentObservable<AiMsg> = {
         get segmentId() {
             return chatSegment.uid;
         },
@@ -122,11 +122,11 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
                 const updatedChatSegment = {
                     ...chatSegment,
                     status: 'complete',
-                } satisfies ChatSegment<MessageType>;
+                } satisfies ChatSegment<AiMsg>;
 
                 chatSegment.status = 'complete';
                 callbacksByEvent.get('complete')?.forEach(callback => {
-                    const completeCallback = callback as ChatSegmentCompleteCallback<MessageType>;
+                    const completeCallback = callback as ChatSegmentCompleteCallback<AiMsg>;
                     completeCallback(updatedChatSegment);
                 });
 
@@ -161,13 +161,13 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
             return;
         }
 
-        const newAiMessage: AiUnifiedMessage<MessageType> = {
+        const newAiMessage: AiUnifiedMessage<AiMsg> = {
             ...aiMessage,
             status: 'complete',
             content: message,
         };
 
-        const items: ChatSegmentItem<MessageType>[] = chatSegment.items.map(item => {
+        const items: ChatSegmentItem<AiMsg>[] = chatSegment.items.map(item => {
             if (item.uid === aiMessage.uid) {
                 return newAiMessage;
             }
@@ -175,14 +175,14 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
             return item;
         });
 
-        const newChatSegment: ChatSegment<MessageType> = {
+        const newChatSegment: ChatSegment<AiMsg> = {
             ...chatSegment,
             status: 'complete',
             items,
         };
 
         callbacksByEvent.get('complete')?.forEach(callback => {
-            const completeCallback = callback as ChatSegmentCompleteCallback<MessageType>;
+            const completeCallback = callback as ChatSegmentCompleteCallback<AiMsg>;
             completeCallback(newChatSegment);
         });
         callbacksByEvent.clear();

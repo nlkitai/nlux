@@ -8,7 +8,7 @@ import {
 import {LoaderComp} from '../Loader/LoaderComp';
 import {MessageProps} from './props';
 
-export const MessageComp = function <MessageType>(props: MessageProps<MessageType>) {
+export const MessageComp = function <AiMsg>(props: MessageProps<AiMsg>) {
     const compStatusClassName = props.status
         ? compMessageStatusClassName[props.status]
         : compMessageStatusClassName['rendered'];

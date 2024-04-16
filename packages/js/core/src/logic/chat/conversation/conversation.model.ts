@@ -21,18 +21,18 @@ import {
 import {updateConversation} from './conversation.update';
 
 @Model('conversation', renderConversation, updateConversation)
-export class CompConversation<MessageType> extends BaseComp<
-    MessageType, CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
+export class CompConversation<AiMsg> extends BaseComp<
+    AiMsg, CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
     private readonly conversationContent: ChatItem[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;
-    private messagesList: CompList<CompMessage<MessageType>> | undefined;
+    private messagesList: CompList<CompMessage<AiMsg>> | undefined;
     private scrollWhenGeneratingUserOption: boolean;
     private scrollingStickToConversationEnd: boolean = true;
 
-    constructor(context: ControllerContext<MessageType>, props: CompConversationProps) {
+    constructor(context: ControllerContext<AiMsg>, props: CompConversationProps) {
         super(context, props);
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
@@ -136,7 +136,7 @@ export class CompConversation<MessageType> extends BaseComp<
         return this.conversationContent.slice(-historyPayloadSize);
     }
 
-    public getMessageById(messageId: string): CompMessage<MessageType> | undefined {
+    public getMessageById(messageId: string): CompMessage<AiMsg> | undefined {
         return this.messagesList?.getComponentById(messageId);
     }
 
@@ -184,7 +184,7 @@ export class CompConversation<MessageType> extends BaseComp<
     }
 
     private addConversation() {
-        this.messagesList = comp(CompList<CompMessage<MessageType>>).withContext(this.context).create();
+        this.messagesList = comp(CompList<CompMessage<AiMsg>>).withContext(this.context).create();
         this.addSubComponent(
             this.messagesList.id, this.messagesList, 'messagesContainer',
         );

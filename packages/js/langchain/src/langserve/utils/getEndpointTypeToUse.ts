@@ -3,8 +3,8 @@ import {LangServeEndpointType} from '../types/langServe';
 import {getDataTransferModeToUse} from './getDataTransferModeToUse';
 import {getEndpointTypeFromUrl} from './getEndpointTypeFromUrl';
 
-export const getEndpointTypeToUse = <MessageType>(
-    adapterOptions: ChatAdapterOptions<MessageType>,
+export const getEndpointTypeToUse = <AiMsg>(
+    adapterOptions: ChatAdapterOptions<AiMsg>,
 ): LangServeEndpointType => {
     const urlFromOptions = adapterOptions.url;
     const actionFromUrl = getEndpointTypeFromUrl(urlFromOptions);

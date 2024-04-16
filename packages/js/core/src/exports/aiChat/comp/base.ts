@@ -8,7 +8,7 @@ import {CompRegistry} from './registry';
 
 export type CompStatus = 'unmounted' | 'rendered' | 'active' | 'destroyed';
 
-export abstract class BaseComp<MessageType, PropsType, ElementsType, EventsType, ActionsType> {
+export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, ActionsType> {
     static __compEventListeners: Map<string | number | symbol, string[]> | null = null;
     static __compId: string | null = null;
     static __renderer: CompRenderer<any, any, any, any> | null = null;
@@ -64,7 +64,7 @@ export abstract class BaseComp<MessageType, PropsType, ElementsType, EventsType,
     /**
      * The context of the current chat component.
      */
-    private __context: Readonly<ControllerContext<MessageType>> | null = null;
+    private __context: Readonly<ControllerContext<AiMsg>> | null = null;
     /**
      * A flag that indicates if the current component is destroyed.
      * This will prevent the component from being rendered, updated, or used in any way.
@@ -98,7 +98,7 @@ export abstract class BaseComp<MessageType, PropsType, ElementsType, EventsType,
         return callback;
     };
 
-    protected constructor(context: ControllerContext<MessageType>, props: PropsType) {
+    protected constructor(context: ControllerContext<AiMsg>, props: PropsType) {
         const compId = Object.getPrototypeOf(this).constructor.__compId;
         if (!compId) {
             throw new NluxUsageError({
@@ -174,7 +174,7 @@ export abstract class BaseComp<MessageType, PropsType, ElementsType, EventsType,
         return this.__status;
     }
 
-    protected get context(): Readonly<ControllerContext<MessageType>> {
+    protected get context(): Readonly<ControllerContext<AiMsg>> {
         if (!this.__context) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -268,7 +268,7 @@ export abstract class BaseComp<MessageType, PropsType, ElementsType, EventsType,
 
     protected addSubComponent<SubCompPropsType, SubCompElementsType, SubCompEventsType, SubCompActionsType>(
         id: string,
-        subComponent: BaseComp<MessageType, SubCompPropsType, SubCompElementsType, SubCompEventsType, SubCompActionsType>,
+        subComponent: BaseComp<AiMsg, SubCompPropsType, SubCompElementsType, SubCompEventsType, SubCompActionsType>,
         rendererElementId?: keyof ElementsType,
     ) {
         this.throwIfDestroyed();

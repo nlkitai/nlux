@@ -5,10 +5,10 @@ import {ChatSegmentUserMessage} from '../../../../shared/src/types/chatSegment/c
 import {uid} from '../../../../shared/src/utils/uid';
 import {warn} from '../../../../shared/src/utils/warn';
 
-export const chatItemsToChatSegment = <MessageType>(
-    chatItems: ChatItem<MessageType>[],
-): ChatSegment<MessageType> => {
-    const segmentItems: ChatSegmentItem<MessageType>[] = chatItems.map((message, index) => {
+export const chatItemsToChatSegment = <AiMsg>(
+    chatItems: ChatItem<AiMsg>[],
+): ChatSegment<AiMsg> => {
+    const segmentItems: ChatSegmentItem<AiMsg>[] = chatItems.map((message, index) => {
         if (message.role !== 'ai' && message.role !== 'user') {
             warn(
                 `Invalid role for item at index ${index} in initial conversation: ` +
@@ -44,16 +44,16 @@ export const chatItemsToChatSegment = <MessageType>(
             participantRole: 'ai',
             content: message.message,
             dataTransferMode: 'fetch',
-        } satisfies ChatSegmentAiMessage<MessageType>;
+        } satisfies ChatSegmentAiMessage<AiMsg>;
     }).filter(
-        (segmentItem: ChatSegmentItem<MessageType> | undefined): segmentItem is ChatSegmentItem<MessageType> => {
+        (segmentItem: ChatSegmentItem<AiMsg> | undefined): segmentItem is ChatSegmentItem<AiMsg> => {
             return segmentItem !== undefined;
         },
-    ) as ChatSegmentItem<MessageType>[];
+    ) as ChatSegmentItem<AiMsg>[];
 
     return {
         uid: 'initial',
         status: 'complete',
         items: segmentItems,
-    } satisfies ChatSegment<MessageType>;
+    } satisfies ChatSegment<AiMsg>;
 };

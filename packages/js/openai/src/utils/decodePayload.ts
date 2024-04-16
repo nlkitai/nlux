@@ -3,7 +3,7 @@ import OpenAI from 'openai';
 
 export const decodePayload: AdapterDecodeFunction<
     OpenAI.Chat.Completions.ChatCompletion
-> = async <MessageType>(
+> = async <AiMsg>(
     payload: OpenAI.Chat.Completions.ChatCompletion,
 ) => {
     if (!payload.choices || !payload.choices[0]) {
@@ -17,5 +17,5 @@ export const decodePayload: AdapterDecodeFunction<
 
     // TODO - Handle other types of messages
 
-    return content as unknown as MessageType;
+    return content as unknown as AiMsg;
 };

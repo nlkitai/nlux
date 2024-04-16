@@ -13,7 +13,7 @@ import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiModel} from '../types/model';
 import {defaultChatGptModel, defaultDataTransferMode} from './config';
 
-export abstract class OpenAiAbstractAdapter<MessageType> implements StandardChatAdapter<MessageType> {
+export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapter<AiMsg> {
 
     protected readonly model: OpenAiModel;
     protected readonly openai: OpenAI;
@@ -64,7 +64,7 @@ export abstract class OpenAiAbstractAdapter<MessageType> implements StandardChat
         return gptAdapterInfo;
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg>;
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void;
 }

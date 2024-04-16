@@ -15,10 +15,10 @@ import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatComponentProps} from './props';
 
-export const AiChat: <MessageType>(
-    props: AiChatComponentProps<MessageType>,
-) => ReactElement = function <MessageType>(
-    props: AiChatComponentProps<MessageType>,
+export const AiChat: <AiMsg>(
+    props: AiChatComponentProps<AiMsg>,
+) => ReactElement = function <AiMsg>(
+    props: AiChatComponentProps<AiMsg>,
 ): ReactElement {
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
@@ -33,15 +33,15 @@ export const AiChat: <MessageType>(
 
     const [prompt, setPrompt] = useState('');
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
-    const [initialSegment, setInitialSegment] = useState<ChatSegment<MessageType>>();
-    const [chatSegments, setChatSegments] = useState<ChatSegment<MessageType>[]>([]);
+    const [initialSegment, setInitialSegment] = useState<ChatSegment<AiMsg>>();
+    const [chatSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
 
     const adapterToUse = useMemo(
-        () => adapterParamToUsableAdapter<MessageType>(props.adapter), [props.adapter],
+        () => adapterParamToUsableAdapter<AiMsg>(props.adapter), [props.adapter],
     );
 
-    const adapterExtras: ChatAdapterExtras<MessageType> | undefined = useMemo(() => (
-        adapterToUse ? {aiChatProps: reactPropsToCoreProps<MessageType>(props, adapterToUse)} : undefined
+    const adapterExtras: ChatAdapterExtras<AiMsg> | undefined = useMemo(() => (
+        adapterToUse ? {aiChatProps: reactPropsToCoreProps<AiMsg>(props, adapterToUse)} : undefined
     ), [props, adapterToUse]);
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
@@ -72,7 +72,7 @@ export const AiChat: <MessageType>(
         themeId: props.themeId,
     }).join(' ');
 
-    const ForwardConversationComp = forwardRef(ConversationComp<MessageType>);
+    const ForwardConversationComp = forwardRef(ConversationComp<AiMsg>);
 
     return (
         <div className={rootClassNames} style={rootStyle}>

@@ -3,19 +3,19 @@ import {NluxUsageError} from '../../../../../shared/src/types/error';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {NLBridgeAbstractAdapter} from './adapter';
 
-export class NLBridgeStreamAdapter<MessageType> extends NLBridgeAbstractAdapter<MessageType> {
+export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg> {
     constructor(options: any) {
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         const submitPrompt = () => fetch(this.endpointUrl, {
             method: 'POST',
             headers: {

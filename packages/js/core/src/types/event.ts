@@ -7,12 +7,12 @@ export type ErrorEventDetails = {
     message: string;
 };
 
-export type ReadyEventDetails<MessageType> = {
-    aiChatProps: AiChatProps<MessageType>;
+export type ReadyEventDetails<AiMsg> = {
+    aiChatProps: AiChatProps<AiMsg>;
 }
 
-export type PreDestroyEventDetails<MessageType> = {
-    aiChatProps: AiChatProps<MessageType>;
+export type PreDestroyEventDetails<AiMsg> = {
+    aiChatProps: AiChatProps<AiMsg>;
     conversationHistory: Readonly<ChatItem[]>;
 }
 
@@ -45,7 +45,7 @@ export type MessageSentCallback = (message: string) => void;
  *
  * @param readyDetails The details of the ready event such as the AiChatProps used to initialize the chat component.
  */
-export type ReadyCallback<MessageType> = (readyDetails: ReadyEventDetails<MessageType>) => void;
+export type ReadyCallback<AiMsg> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
 
 /**
  * The callback for when the chat component is about to be destroyed.
@@ -54,11 +54,11 @@ export type ReadyCallback<MessageType> = (readyDetails: ReadyEventDetails<Messag
  * @param preDestroyDetails The details of the pre-destroy event such as the AiChatProps used to initialize the chat
  * component and the conversation history.
  */
-export type PreDestroyCallback<MessageType> = (preDestroyDetails: PreDestroyEventDetails<MessageType>) => void;
+export type PreDestroyCallback<AiMsg> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
 
-export type EventsMap<MessageType> = {
-    ready: ReadyCallback<MessageType>;
-    preDestroy: PreDestroyCallback<MessageType>;
+export type EventsMap<AiMsg> = {
+    ready: ReadyCallback<AiMsg>;
+    preDestroy: PreDestroyCallback<AiMsg>;
     messageSent: MessageSentCallback;
     messageReceived: MessageReceivedCallback;
     error: ErrorCallback;
@@ -66,4 +66,4 @@ export type EventsMap<MessageType> = {
 
 export type EventName = keyof EventsMap<unknown>;
 
-export type EventCallback<MessageType> = EventsMap<MessageType>[EventName];
+export type EventCallback<AiMsg> = EventsMap<AiMsg>[EventName];

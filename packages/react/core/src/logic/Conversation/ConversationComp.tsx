@@ -4,13 +4,13 @@ import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {ChatSegmentImperativeProps} from '../ChatSegment/props';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
-export type ConversationCompType = <MessageType>(
-    props: ConversationCompProps<MessageType>,
+export type ConversationCompType = <AiMsg>(
+    props: ConversationCompProps<AiMsg>,
     ref: Ref<ImperativeConversationCompProps>,
 ) => ReactNode;
 
-export const ConversationComp: ConversationCompType = function <MessageType>(
-    props: ConversationCompProps<MessageType>,
+export const ConversationComp: ConversationCompType = function <AiMsg>(
+    props: ConversationCompProps<AiMsg>,
     ref: Ref<ImperativeConversationCompProps>,
 ): ReactNode {
     const {segments, personaOptions} = props;
@@ -66,7 +66,7 @@ export const ConversationComp: ConversationCompType = function <MessageType>(
                 }
 
                 const ForwardRefChatItemComp = forwardRef(
-                    ChatSegmentComp<MessageType>,
+                    ChatSegmentComp<AiMsg>,
                 );
 
                 return (

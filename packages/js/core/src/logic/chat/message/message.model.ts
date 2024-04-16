@@ -18,10 +18,10 @@ import {updateMessage} from './message.update';
 export type MessageContentStatusChangeListener = (status: MessageContentLoadingStatus) => void;
 
 @Model('message', renderMessage, updateMessage)
-export class CompMessage<MessageType> extends BaseComp<
-    MessageType, CompMessageProps<MessageType>, CompMessageElements, CompMessageEvents, CompMessageActions
+export class CompMessage<AiMsg> extends BaseComp<
+    AiMsg, CompMessageProps<AiMsg>, CompMessageElements, CompMessageEvents, CompMessageActions
 > {
-    private __content?: MessageType | string;
+    private __content?: AiMsg | string;
     private contentStatus: MessageContentLoadingStatus;
     private contentStatusChangeListeners: Set<MessageContentStatusChangeListener> = new Set();
     private readonly contentType: MessageContentType;
@@ -29,8 +29,8 @@ export class CompMessage<MessageType> extends BaseComp<
     private resizeListeners: Set<Function> = new Set();
 
     constructor(
-        context: ControllerContext<MessageType>,
-        props: CompMessageProps<MessageType>,
+        context: ControllerContext<AiMsg>,
+        props: CompMessageProps<AiMsg>,
     ) {
         super(context, props);
 
@@ -125,7 +125,7 @@ export class CompMessage<MessageType> extends BaseComp<
      * It should be called when the promise is resolved.
      * @param {string} content
      */
-    public setContent(content: MessageType) {
+    public setContent(content: AiMsg) {
         if (this.contentType !== 'promise') {
             throw new Error(`CompMessage: content can only be set when contentType is 'promise'!`);
         }

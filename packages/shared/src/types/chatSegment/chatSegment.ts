@@ -12,10 +12,10 @@ import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
  * marked as failed.
  *
  */
-export type ChatSegment<MessageType> = {
+export type ChatSegment<AiMsg> = {
     uid: string;
     status: ChatSegmentStatus;
-    items: ChatSegmentItem<MessageType>[];
+    items: ChatSegmentItem<AiMsg>[];
 };
 
 /**
@@ -30,11 +30,11 @@ export type ChatSegmentStatus = 'active' | 'complete' | 'error';
 /**
  * An item in a chat segment can either be:
  * - A message from the user (Type: ChatSegmentUserMessage) — with 'participantRole' set to 'user'.
- * - A message from the AI (Type: ChatSegmentAiMessage<MessageType>) — with 'participantRole' set to 'ai'.
+ * - A message from the AI (Type: ChatSegmentAiMessage<AiMsg>) — with 'participantRole' set to 'ai'.
  *
  * System messages are not included in the chat segment items.
  */
-export type ChatSegmentItem<MessageType> = ChatSegmentAiMessage<MessageType> | ChatSegmentUserMessage;
+export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage;
 
 /**
  * The events that can be emitted by a chat segment.

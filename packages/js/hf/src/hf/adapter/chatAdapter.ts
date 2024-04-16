@@ -6,16 +6,16 @@ import {warn} from '../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
-export class HfChatAdapterImpl<MessageType> implements StandardChatAdapter<MessageType> {
+export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
 
     private readonly __instanceId: string;
 
     private inference: HfInference;
-    private readonly options: ChatAdapterOptions<MessageType>;
+    private readonly options: ChatAdapterOptions<AiMsg>;
 
-    constructor(options: ChatAdapterOptions<MessageType>) {
+    constructor(options: ChatAdapterOptions<AiMsg>) {
         if (!options.model && !options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -50,7 +50,7 @@ export class HfChatAdapterImpl<MessageType> implements StandardChatAdapter<Messa
         };
     }
 
-    async fetchText(message: string): Promise<MessageType> {
+    async fetchText(message: string): Promise<AiMsg> {
         if (!this.options.model && !this.options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -89,8 +89,8 @@ export class HfChatAdapterImpl<MessageType> implements StandardChatAdapter<Messa
         return await this.decode(output);
     }
 
-    send(message: string, observer?: StreamingAdapterObserver): void | Promise<MessageType> {
-        const promise = new Promise<MessageType>(async (resolve, reject) => {
+    send(message: string, observer?: StreamingAdapterObserver): void | Promise<AiMsg> {
+        const promise = new Promise<AiMsg>(async (resolve, reject) => {
             if (!message) {
                 throw new NluxValidationError({
                     source: this.constructor.name,
@@ -183,7 +183,7 @@ export class HfChatAdapterImpl<MessageType> implements StandardChatAdapter<Messa
         });
     }
 
-    private async decode(payload: any): Promise<MessageType> {
+    private async decode(payload: any): Promise<AiMsg> {
         const output = (() => {
             if (typeof payload === 'string') {
                 return payload;

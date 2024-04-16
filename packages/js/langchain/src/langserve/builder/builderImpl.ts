@@ -10,15 +10,15 @@ import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {ChatAdapterBuilder} from './builder';
 
-export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder<MessageType> {
+export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
     private theDataTransferMode?: DataTransferMode;
     private theHeaders?: LangServeHeaders;
     private theInputPreProcessor?: LangServeInputPreProcessor;
-    private theOutputPreProcessor?: LangServeOutputPreProcessor<MessageType>;
+    private theOutputPreProcessor?: LangServeOutputPreProcessor<AiMsg>;
     private theUrl?: string;
     private theUseInputSchema?: boolean;
 
-    constructor(cloneFrom?: LangServeAdapterBuilderImpl<MessageType>) {
+    constructor(cloneFrom?: LangServeAdapterBuilderImpl<AiMsg>) {
         if (cloneFrom) {
             this.theDataTransferMode = cloneFrom.theDataTransferMode;
             this.theHeaders = cloneFrom.theHeaders;
@@ -28,7 +28,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         }
     }
 
-    create(): LangServeAbstractAdapter<MessageType> {
+    create(): LangServeAbstractAdapter<AiMsg> {
         if (!this.theUrl) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -37,7 +37,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
             });
         }
 
-        const options: ChatAdapterOptions<MessageType> = {
+        const options: ChatAdapterOptions<AiMsg> = {
             url: this.theUrl,
             dataTransferMode: this.theDataTransferMode,
             headers: this.theHeaders,
@@ -48,13 +48,13 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
 
         const dataTransferModeToUse = getDataTransferModeToUse(options);
         if (dataTransferModeToUse === 'stream') {
-            return new LangServeStreamAdapter<MessageType>(options);
+            return new LangServeStreamAdapter<AiMsg>(options);
         }
 
         return new LangServeFetchAdapter(options);
     }
 
-    withDataTransferMode(mode: DataTransferMode): LangServeAdapterBuilderImpl<MessageType> {
+    withDataTransferMode(mode: DataTransferMode): LangServeAdapterBuilderImpl<AiMsg> {
         if (this.theDataTransferMode !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -66,7 +66,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         return this;
     }
 
-    withHeaders(headers: LangServeHeaders): ChatAdapterBuilder<MessageType> {
+    withHeaders(headers: LangServeHeaders): ChatAdapterBuilder<AiMsg> {
         if (this.theHeaders !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -78,7 +78,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         return this;
     }
 
-    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder<MessageType> {
+    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder<AiMsg> {
         if (this.theInputPreProcessor !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -90,7 +90,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         return this;
     }
 
-    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder<MessageType> {
+    withInputSchema(useInputSchema: boolean): ChatAdapterBuilder<AiMsg> {
         if (this.theUseInputSchema !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -102,7 +102,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         return this;
     }
 
-    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor<MessageType>): ChatAdapterBuilder<MessageType> {
+    withOutputPreProcessor(outputPreProcessor: LangServeOutputPreProcessor<AiMsg>): ChatAdapterBuilder<AiMsg> {
         if (this.theOutputPreProcessor !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -114,7 +114,7 @@ export class LangServeAdapterBuilderImpl<MessageType> implements ChatAdapterBuil
         return this;
     }
 
-    withUrl(runnableUrl: string): ChatAdapterBuilder<MessageType> {
+    withUrl(runnableUrl: string): ChatAdapterBuilder<AiMsg> {
         if (this.theUrl !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,

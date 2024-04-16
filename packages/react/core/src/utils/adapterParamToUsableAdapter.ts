@@ -1,9 +1,9 @@
 import {ChatAdapter, ChatAdapterBuilder, StandardChatAdapter} from '@nlux/core';
 import {warn} from '../../../../shared/src/utils/warn';
 
-export const adapterParamToUsableAdapter = <MessageType>(
-    anAdapterOrAdapterBuilder: ChatAdapter<MessageType> | ChatAdapterBuilder<MessageType>,
-): ChatAdapter<MessageType> | StandardChatAdapter<MessageType> | undefined => {
+export const adapterParamToUsableAdapter = <AiMsg>(
+    anAdapterOrAdapterBuilder: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>,
+): ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | undefined => {
     let adapterType: 'instance' | 'builder' | 'unknown' = 'unknown';
 
     const adapterAsAny = anAdapterOrAdapterBuilder as any;
@@ -14,7 +14,7 @@ export const adapterParamToUsableAdapter = <MessageType>(
             (typeof adapterAsAny?.fetchText === 'function') ||
             (typeof adapterAsAny?.streamText === 'function')
         ) {
-            return anAdapterOrAdapterBuilder as ChatAdapter<MessageType>;
+            return anAdapterOrAdapterBuilder as ChatAdapter<AiMsg>;
         }
     }
 
@@ -24,18 +24,18 @@ export const adapterParamToUsableAdapter = <MessageType>(
     }
 
     if (adapterType === 'builder') {
-        const adapterBuilder: ChatAdapterBuilder<MessageType> = adapterAsAny;
+        const adapterBuilder: ChatAdapterBuilder<AiMsg> = adapterAsAny;
         const newAdapter = adapterBuilder.create();
         if (
             (typeof newAdapter?.fetchText === 'function') ||
             (typeof newAdapter?.streamText === 'function')
         ) {
-            return newAdapter as ChatAdapter<MessageType>;
+            return newAdapter as ChatAdapter<AiMsg>;
         } else {
             warn('The adapter builder did not return a valid adapter.');
             return undefined;
         }
     }
 
-    return anAdapterOrAdapterBuilder as ChatAdapter<MessageType>;
+    return anAdapterOrAdapterBuilder as ChatAdapter<AiMsg>;
 };

@@ -13,13 +13,13 @@ import {
 import {updateChatbox} from './prompt-box.update';
 
 @Model('prompt-box', renderChatbox, updateChatbox)
-export class CompPromptBox<MessageType> extends BaseComp<
-    MessageType, CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions
+export class CompPromptBox<AiMsg> extends BaseComp<
+    AiMsg, CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions
 > {
 
     private userEventListeners?: CompPromptBoxEventListeners;
 
-    constructor(context: ControllerContext<MessageType>, {props, eventListeners}: {
+    constructor(context: ControllerContext<AiMsg>, {props, eventListeners}: {
         props: CompPromptBoxProps,
         eventListeners?: CompPromptBoxEventListeners
     }) {

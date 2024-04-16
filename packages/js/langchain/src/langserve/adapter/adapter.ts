@@ -19,11 +19,11 @@ import {getRunnableNameToUse} from '../utils/getRunnableNameToUse';
 import {getSchemaUrlToUse} from '../utils/getSchemaUrlToUse';
 import {transformInputBasedOnSchema} from '../utils/transformInputBasedOnSchema';
 
-export abstract class LangServeAbstractAdapter<MessageType> implements StandardChatAdapter<MessageType> {
+export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAdapter<AiMsg> {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
-    private readonly __options: ChatAdapterOptions<MessageType>;
+    private readonly __options: ChatAdapterOptions<AiMsg>;
 
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
@@ -33,7 +33,7 @@ export abstract class LangServeAbstractAdapter<MessageType> implements StandardC
     private readonly theRunnableNameToUse: string;
     private readonly theUseInputSchemaOptionToUse: boolean;
 
-    protected constructor(options: ChatAdapterOptions<MessageType>) {
+    protected constructor(options: ChatAdapterOptions<AiMsg>) {
         this.__instanceId = `${this.info.id}-${uid()}`;
         this.__options = {...options};
 
@@ -86,7 +86,7 @@ export abstract class LangServeAbstractAdapter<MessageType> implements StandardC
         return this.theInputSchemaToUse;
     }
 
-    get outputPreProcessor(): LangServeOutputPreProcessor<MessageType> | undefined {
+    get outputPreProcessor(): LangServeOutputPreProcessor<AiMsg> | undefined {
         return this.__options.outputPreProcessor;
     }
 
@@ -118,7 +118,7 @@ export abstract class LangServeAbstractAdapter<MessageType> implements StandardC
         }
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg>;
 
     init() {
         if (!this.inputPreProcessor && this.useInputSchema) {
@@ -128,14 +128,14 @@ export abstract class LangServeAbstractAdapter<MessageType> implements StandardC
         }
     }
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void;
+    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void;
 
-    protected getDisplayableMessageFromAiOutput(aiMessage: object | string): MessageType {
+    protected getDisplayableMessageFromAiOutput(aiMessage: object | string): AiMsg {
         if (this.outputPreProcessor) {
             return this.outputPreProcessor(aiMessage);
         }
 
-        return aiMessage as MessageType;
+        return aiMessage as AiMsg;
     }
 
     protected getRequestBody(message: string, conversationHistory?: readonly ChatItem[]): string {

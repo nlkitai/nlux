@@ -3,13 +3,13 @@ import {ChatSegment, ChatSegmentEvent} from './chatSegment';
 import {AiStreamedMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
 
-export type ChatSegmentEventsMap<MessageType> = {
+export type ChatSegmentEventsMap<AiMsg> = {
     userMessageReceived: UserMessageReceivedCallback;
-    aiMessageReceived: AiMessageReceivedCallback<MessageType>;
+    aiMessageReceived: AiMessageReceivedCallback<AiMsg>;
     aiMessageStreamStarted: AiMessageStreamStartedCallback;
     aiChunkReceived: AiMessageChunkReceivedCallback;
     aiMessageStreamed: AiMessageStreamedCallback;
-    complete: ChatSegmentCompleteCallback<MessageType>;
+    complete: ChatSegmentCompleteCallback<AiMsg>;
     exception: ChatSegmentExceptionCallback;
 };
 
@@ -17,9 +17,9 @@ export type UserMessageReceivedCallback = (
     userMessage: ChatSegmentUserMessage,
 ) => void;
 
-export type AiMessageReceivedCallback<MessageType> = (aiMessage: ChatSegmentAiMessage<MessageType> & {
+export type AiMessageReceivedCallback<AiMsg> = (aiMessage: ChatSegmentAiMessage<AiMsg> & {
     status: 'complete';
-    content: MessageType;
+    content: AiMsg;
 }) => void;
 
 export type AiMessageStreamStartedCallback = (aiMessage: AiStreamedMessage & {
@@ -35,8 +35,8 @@ export type AiMessageChunkReceivedCallback = (
     chunk: string,
 ) => void;
 
-export type ChatSegmentCompleteCallback<MessageType> = (
-    updatedChatSegment: ChatSegment<MessageType>,
+export type ChatSegmentCompleteCallback<AiMsg> = (
+    updatedChatSegment: ChatSegment<AiMsg>,
 ) => void;
 
 export type ChatSegmentExceptionCallback = (

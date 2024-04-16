@@ -10,4 +10,4 @@
  * You check your runnable's documentation to see what it returns before you write this function.
  * This function should return a string that will be displayed to the user.
  */
-export type LangServeOutputPreProcessor<MessageType> = (output: any) => MessageType;
+export type LangServeOutputPreProcessor<AiMsg> = (output: any) => AiMsg;

@@ -32,9 +32,9 @@ export type CommonMessageProps = Readonly<{
     trackDomChange: boolean;
 }>;
 
-export type InMessageProps<MessageType> = CommonMessageProps & Readonly<{
+export type InMessageProps<AiMsg> = CommonMessageProps & Readonly<{
     direction: 'in';
-    content?: MessageType;
+    content?: AiMsg;
     botPersona?: {
         name: string;
         picture: string | HTMLElement;
@@ -51,7 +51,7 @@ export type OutMessageProps = CommonMessageProps & Readonly<{
     };
 }>;
 
-export type CompMessageProps<MessageType> = InMessageProps<MessageType> | OutMessageProps;
+export type CompMessageProps<AiMsg> = InMessageProps<AiMsg> | OutMessageProps;
 
 export type CompMessageElements = Readonly<{
     container: HTMLElement;

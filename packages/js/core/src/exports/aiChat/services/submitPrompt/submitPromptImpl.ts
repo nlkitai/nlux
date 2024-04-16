@@ -18,20 +18,20 @@ import {createEmptyCompleteSegment} from './utils/emptyCompleteSegment';
 import {createEmptyErrorSegment} from './utils/emptyErrorSegment';
 import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
 
-export const submitPrompt: SubmitPrompt = <MessageType>(
+export const submitPrompt: SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<MessageType>,
-    extras: ChatAdapterExtras<MessageType>,
+    adapter: ChatAdapter<AiMsg>,
+    extras: ChatAdapterExtras<AiMsg>,
 ) => {
     //
     // We check if the prompt is empty and that the adapter supports at least one data transfer mode.
     //
     if (!prompt) {
-        return createEmptyCompleteSegment<MessageType>();
+        return createEmptyCompleteSegment<AiMsg>();
     }
 
     if (adapter.streamText === undefined && adapter.fetchText === undefined) {
-        return createEmptyErrorSegment<MessageType>('The adapter does not support any data transfer modes');
+        return createEmptyErrorSegment<AiMsg>('The adapter does not support any data transfer modes');
     }
 
     //
@@ -42,11 +42,11 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
     // (a.i). USER MESSAGE RECEIVED + (a.ii) CHAT SEGMENT COMPLETE + (a.iii) CHAT SEGMENT EXCEPTION
     let userMessageReceivedCallbacks: Set<UserMessageReceivedCallback> | undefined = new Set();
-    let chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<MessageType>> | undefined = new Set();
+    let chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>> | undefined = new Set();
     let chatSegmentExceptionCallbacks: Set<ChatSegmentExceptionCallback> | undefined = new Set();
 
     // (b). AI MESSAGE RECEIVED
-    let aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<MessageType>> | undefined = undefined;
+    let aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>> | undefined = undefined;
 
     // (c). AI MESSAGE STREAMED ( 3 events )
     let aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback> | undefined = undefined;
@@ -164,7 +164,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
                 if (event === 'aiMessageReceived' && aiMessageReceivedCallbacks) {
                     aiMessageReceivedCallbacks.add(
-                        callback as AiMessageReceivedCallback<MessageType>,
+                        callback as AiMessageReceivedCallback<AiMsg>,
                     );
                     return;
                 }
@@ -192,7 +192,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
                 if (event === 'complete' && chatSegmentCompleteCallbacks) {
                     chatSegmentCompleteCallbacks.add(
-                        callback as unknown as ChatSegmentCompleteCallback<MessageType>,
+                        callback as unknown as ChatSegmentCompleteCallback<AiMsg>,
                     );
                     return;
                 }
@@ -214,7 +214,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
                 if (event === 'aiMessageReceived') {
                     aiMessageReceivedCallbacks?.delete(
-                        callback as AiMessageReceivedCallback<MessageType>,
+                        callback as AiMessageReceivedCallback<AiMsg>,
                     );
                     return;
                 }
@@ -242,7 +242,7 @@ export const submitPrompt: SubmitPrompt = <MessageType>(
 
                 if (event === 'complete') {
                     chatSegmentCompleteCallbacks?.delete(
-                        callback as unknown as ChatSegmentCompleteCallback<MessageType>,
+                        callback as unknown as ChatSegmentCompleteCallback<AiMsg>,
                     );
                     return;
                 }

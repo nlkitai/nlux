@@ -3,7 +3,7 @@ import {NluxUsageError} from '../../../../shared/src/types/error';
 
 const source = 'hooks/initChatAdapter';
 
-export const initChatAdapter = <MessageType>(options: ChatAdapterOptions<MessageType>) => {
+export const initChatAdapter = <AiMsg>(options: ChatAdapterOptions<AiMsg>) => {
     const {
         model,
         authToken,

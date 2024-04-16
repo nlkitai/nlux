@@ -8,11 +8,11 @@ import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
 
-export const ChatItemComp: <MessageType>(
-    props: ChatItemProps<MessageType>,
+export const ChatItemComp: <AiMsg>(
+    props: ChatItemProps<AiMsg>,
     ref: Ref<ChatItemImperativeProps>,
-) => ReactElement = function <MessageType>(
-    props: ChatItemProps<MessageType>,
+) => ReactElement = function <AiMsg>(
+    props: ChatItemProps<AiMsg>,
     ref: Ref<ChatItemImperativeProps>,
 ): ReactElement {
     const picture = useMemo(() => {
@@ -52,7 +52,7 @@ export const ChatItemComp: <MessageType>(
             }
 
             return () => props.customRenderer ? props.customRenderer({
-                message: props.message as MessageType,
+                message: props.message as AiMsg,
             }) : null;
         }
 
