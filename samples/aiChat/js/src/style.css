@@ -17,3 +17,7 @@ body {
     padding: 2rem;
     text-align: center;
 }
+
+:focus {
+    outline: 2px solid #646cff !important;
+}

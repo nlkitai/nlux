@@ -141,20 +141,22 @@ export class NluxRenderer {
             //
             // IMPORTANT ✨ This is where the CompChatRoom is instantiated!
             //
-            rootComp = comp(CompChatRoom).withContext(this.context).withProps<CompChatRoomProps>({
-                visible: true,
-                botPersona: this.thePersonasOptions?.bot ?? undefined,
-                userPersona: this.thePersonasOptions?.user ?? undefined,
-                initialConversationContent: this.theInitialConversationContent ?? undefined,
-                scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
-                streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
-                promptBox: {
-                    placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
-                    autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
-                    disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton ?? undefined,
-                    submitShortcut: this.thePromptBoxOptions?.submitShortcut ?? undefined,
-                },
-            }).create();
+            rootComp = comp(CompChatRoom)
+                .withContext(this.context)
+                .withProps<CompChatRoomProps>({
+                    visible: true,
+                    botPersona: this.thePersonasOptions?.bot ?? undefined,
+                    userPersona: this.thePersonasOptions?.user ?? undefined,
+                    initialConversationContent: this.theInitialConversationContent ?? undefined,
+                    scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
+                    streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
+                    promptBox: {
+                        placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
+                        autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
+                        disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton ?? undefined,
+                        submitShortcut: this.thePromptBoxOptions?.submitShortcut ?? undefined,
+                    },
+                }).create();
 
             const CompExceptionsBoxConstructor: typeof CompExceptionsBox | undefined = CompRegistry
                 .retrieve('exceptions-box')?.model as any;

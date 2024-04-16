@@ -1,4 +1,4 @@
-import {ChangeEvent, createRef, KeyboardEvent, useEffect, useMemo} from 'react';
+import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {className as compPromptBoxClassName} from '../../../../../shared/src/ui/PromptBox/create';
 import {
     statusClassName as compPromptBoxStatusClassName,
@@ -15,7 +15,13 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
     const disableButton = !props.hasValidInput || props.status === 'submitting' || props.status === 'waiting';
     const showSendIcon = props.status === 'typing';
 
-    const textareaRef = useMemo(() => createRef<HTMLTextAreaElement>(), []);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    useEffect(() => {
+        if (props.status === 'typing' && props.autoFocus && textareaRef.current) {
+            textareaRef.current.focus();
+        }
+    }, [props.status, props.autoFocus, textareaRef.current]);
+
     const handleChange = useMemo(() => (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.onChange?.(e.target.value);
     }, [props.onChange]);
@@ -23,12 +29,6 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
     const handleSubmit = useMemo(() => () => {
         props.onSubmit?.();
     }, [props.onSubmit]);
-
-    useEffect(() => {
-        if (props.status === 'typing' && props.autoFocus && textareaRef.current) {
-            textareaRef.current.focus();
-        }
-    }, [props.autoFocus && textareaRef.current, props.status]);
 
     const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (!props.submitShortcut || props.submitShortcut === 'Enter') {
@@ -38,16 +38,18 @@ export const PromptBoxComp = (props: PromptBoxProps) => {
                 handleSubmit();
                 e.preventDefault();
             }
-        } else {
-            if (props.submitShortcut === 'CommandEnter') {
-                const isCommandEnter = e.key === 'Enter' && (
-                    e.getModifierState('Control') || e.getModifierState('Meta')
-                );
 
-                if (isCommandEnter) {
-                    handleSubmit();
-                    e.preventDefault();
-                }
+            return;
+        }
+
+        if (props.submitShortcut === 'CommandEnter') {
+            const isCommandEnter = e.key === 'Enter' && (
+                e.getModifierState('Control') || e.getModifierState('Meta')
+            );
+
+            if (isCommandEnter) {
+                handleSubmit();
+                e.preventDefault();
             }
         }
     }, [handleSubmit, props.submitShortcut]);

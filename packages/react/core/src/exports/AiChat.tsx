@@ -37,7 +37,10 @@ export const AiChat: <MessageType>(
     const [initialSegment, setInitialSegment] = useState<ChatSegment<MessageType>>();
     const [chatSegments, setChatSegments] = useState<ChatSegment<MessageType>[]>([]);
 
-    const adapterToUse = useMemo(() => adapterParamToUsableAdapter(props.adapter), [props.adapter]);
+    const adapterToUse = useMemo(
+        () => adapterParamToUsableAdapter(props.adapter), [props.adapter],
+    );
+
     const adapterExtras: ChatAdapterExtras | undefined = useMemo(() => (
         adapterToUse ? {aiChatProps: reactPropsToCoreProps(props, adapterToUse)} : undefined
     ), [props, adapterToUse]);
@@ -56,13 +59,11 @@ export const AiChat: <MessageType>(
         conversationRef,
     });
 
-    useEffect(() => {
-        setInitialSegment(
-            props.initialConversation
-                ? chatItemsToChatSegment(props.initialConversation)
-                : undefined,
-        );
-    }, [props.initialConversation]);
+    useEffect(() => setInitialSegment(
+        props.initialConversation
+            ? chatItemsToChatSegment(props.initialConversation)
+            : undefined,
+    ), [props.initialConversation]);
 
     const conversationSegments = useMemo(() => {
         return initialSegment ? [initialSegment, ...chatSegments] : chatSegments;
@@ -74,9 +75,7 @@ export const AiChat: <MessageType>(
         themeId: props.themeId,
     }).join(' ');
 
-    const ForwardConversationComp = forwardRef(
-        ConversationComp<MessageType>,
-    );
+    const ForwardConversationComp = forwardRef(ConversationComp<MessageType>);
 
     return (
         <div className={rootClassNames} style={rootStyle}>
