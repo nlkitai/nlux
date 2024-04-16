@@ -68,4 +68,4 @@ export type ChatSegmentEvent =
     'aiChunkReceived' |
     'aiMessageStreamed' |
     'complete' |
-    'error';
+    'exception';

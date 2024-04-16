@@ -10,8 +10,8 @@ import {
 import {
     AiMessageChunkReceivedCallback,
     ChatSegmentCompleteCallback,
-    ChatSegmentErrorCallback,
     ChatSegmentEventsMap,
+    ChatSegmentExceptionCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
@@ -27,7 +27,7 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
     adapter: ChatAdapter,
     extras: ChatAdapterExtras,
 ) => {
-    const callbacksByEvent: Map<ChatSegmentEvent, Set<Function>> = new Map();
+    const callbacksByEvent: Map<ChatSegmentEvent, Set<ChatSegmentEventsMap<ResponseType>[ChatSegmentEvent]>> = new Map();
     const addListener = (event: ChatSegmentEvent, callback: ChatSegmentEventsMap<ResponseType>[ChatSegmentEvent]) => {
         if (!callbacksByEvent.has(event)) {
             callbacksByEvent.set(event, new Set());
@@ -35,7 +35,10 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         callbacksByEvent.get(event)!.add(callback);
     };
 
-    const removeListener = (event: ChatSegmentEvent, callback: Function) => {
+    const removeListener = (
+        event: ChatSegmentEvent,
+        callback: ChatSegmentEventsMap<ResponseType>[ChatSegmentEvent],
+    ) => {
         if (!callbacksByEvent.has(event)) {
             return;
         }
@@ -129,9 +132,12 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
             },
             error: (error: Error) => {
                 chatSegment.status = 'error';
-                callbacksByEvent.get('error')?.forEach(callback => {
-                    const errorCallback = callback as ChatSegmentErrorCallback;
-                    errorCallback(error);
+                callbacksByEvent.get('exception')?.forEach(callback => {
+                    const errorCallback = callback as ChatSegmentExceptionCallback;
+                    errorCallback({
+                        type: 'error',
+                        message: error.message,
+                    });
                 });
 
                 callbacksByEvent.clear();
@@ -180,7 +186,13 @@ export const submitPrompt: SubmitPrompt = <ResponseType>(
         callbacksByEvent.clear();
     }).catch((error: Error) => {
         chatSegment.status = 'error';
-        callbacksByEvent.get('error')?.forEach(callback => callback(error));
+        callbacksByEvent.get('exception')?.forEach(callback => {
+            const errorCallback = callback as ChatSegmentExceptionCallback;
+            errorCallback({
+                type: 'error',
+                message: error.message,
+            });
+        });
         callbacksByEvent.clear();
     });
 

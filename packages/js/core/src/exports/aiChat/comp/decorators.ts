@@ -1,5 +1,5 @@
+import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {CompRenderer, CompUpdater} from '../../../types/comp';
-import {NluxUsageError} from '../../error';
 
 export const Model = <PropsType, ElementsType, EventsType, ActionsType>(
     compId: string,

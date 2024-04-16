@@ -1,4 +1,5 @@
-import {ChatSegmentEvent, ChatSegmentEventsMap} from './chatSegment';
+import {ChatSegmentEvent} from './chatSegment';
+import {ChatSegmentEventsMap} from './chatSegmentEvents';
 
 /**
  * An interface for listening to events related to a chat segment.

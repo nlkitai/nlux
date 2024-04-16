@@ -1,9 +1,9 @@
+import {NluxError, NluxUsageError} from '../../../../../../shared/src/types/error';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';
 import {ControllerContext} from '../../../types/controllerContext';
-import {NluxError, NluxUsageError} from '../../error';
 import {CompRegistry} from './registry';
 
 export type CompStatus = 'unmounted' | 'rendered' | 'active' | 'destroyed';
