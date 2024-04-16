@@ -21,7 +21,7 @@ const html = () => `` +
     ``;
 
 export const renderConversation: CompRenderer<
-    CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
+    CompConversationProps<unknown>, CompConversationElements, CompConversationEvents, CompConversationActions
 > = ({
     appendToRoot,
     compEvent,

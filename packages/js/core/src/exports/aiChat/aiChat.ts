@@ -21,7 +21,7 @@ export class AiChat<AiMsg> implements IAiChat<AiMsg> {
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
-    protected theInitialConversation: ChatItem[] | null = null;
+    protected theInitialConversation: ChatItem<AiMsg>[] | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
@@ -269,7 +269,7 @@ export class AiChat<AiMsg> implements IAiChat<AiMsg> {
         return this;
     }
 
-    public withInitialConversation(initialConversation: ChatItem[]) {
+    public withInitialConversation(initialConversation: ChatItem<AiMsg>[]) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,

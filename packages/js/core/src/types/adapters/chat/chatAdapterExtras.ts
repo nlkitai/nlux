@@ -14,7 +14,7 @@ export type ChatAdapterExtras<AiMsg> = {
      * This attribute contains the conversation history.
      * It's only included if the `conversationOptions.historyPayloadSize` is set to a positive number or 'all'.
      */
-    conversationHistory?: Readonly<ChatItem[]>;
+    conversationHistory?: Readonly<ChatItem<AiMsg>[]>;
 
     /**
      * This attribute contains the unique identifier of the context instance.

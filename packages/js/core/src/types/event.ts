@@ -13,7 +13,7 @@ export type ReadyEventDetails<AiMsg> = {
 
 export type PreDestroyEventDetails<AiMsg> = {
     aiChatProps: AiChatProps<AiMsg>;
-    conversationHistory: Readonly<ChatItem[]>;
+    conversationHistory: Readonly<ChatItem<AiMsg>[]>;
 }
 
 /**
@@ -29,7 +29,7 @@ export type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
  *
  * @param message The message that was received.
  */
-export type MessageReceivedCallback = (message: string) => void;
+export type MessageReceivedCallback<AiMsg = string> = (message: AiMsg) => void;
 
 /**
  * The callback for when a message is sent.
@@ -60,7 +60,7 @@ export type EventsMap<AiMsg> = {
     ready: ReadyCallback<AiMsg>;
     preDestroy: PreDestroyCallback<AiMsg>;
     messageSent: MessageSentCallback;
-    messageReceived: MessageReceivedCallback;
+    messageReceived: MessageReceivedCallback<AiMsg>;
     error: ErrorCallback;
 };
 

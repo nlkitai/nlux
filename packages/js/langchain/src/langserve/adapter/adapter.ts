@@ -78,7 +78,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         };
     }
 
-    get inputPreProcessor(): LangServeInputPreProcessor | undefined {
+    get inputPreProcessor(): LangServeInputPreProcessor<AiMsg> | undefined {
         return this.__options.inputPreProcessor;
     }
 
@@ -138,7 +138,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         return aiMessage as AiMsg;
     }
 
-    protected getRequestBody(message: string, conversationHistory?: readonly ChatItem[]): string {
+    protected getRequestBody(message: string, conversationHistory?: readonly ChatItem<AiMsg>[]): string {
         if (this.inputPreProcessor) {
             const preProcessedInput = this.inputPreProcessor(message, conversationHistory);
             return JSON.stringify({

@@ -14,7 +14,7 @@ const html = () => `` +
     ``;
 
 export const renderChatRoom: CompRenderer<
-    CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+    CompChatRoomProps<unknown>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > = ({
     appendToRoot,
     compEvent,

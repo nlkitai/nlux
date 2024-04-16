@@ -23,7 +23,7 @@ import {ChatItem} from '@nlux/core';
  *  }
  *  ```
  */
-export type LangServeInputPreProcessor = (
+export type LangServeInputPreProcessor<AiMsg> = (
     input: string,
-    conversationHistory?: readonly ChatItem[],
+    conversationHistory?: readonly ChatItem<AiMsg>[],
 ) => any;

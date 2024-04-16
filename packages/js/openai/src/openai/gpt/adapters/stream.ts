@@ -46,9 +46,24 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
         ] : [];
 
         if (extras.conversationHistory) {
-            messagesToSend.push(
-                ...conversationHistoryToMessagesList(extras.conversationHistory),
+            const newItems: (
+                OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
+                OpenAI.Chat.Completions.ChatCompletionAssistantMessageParam |
+                OpenAI.Chat.Completions.ChatCompletionSystemMessageParam
+                )[] = conversationHistoryToMessagesList(
+                extras.conversationHistory).map(
+                (item) => {
+                    const content: string = typeof item.content === 'string'
+                        ? item.content : JSON.stringify(item.content);
+
+                    return {
+                        content,
+                        role: item.role,
+                    };
+                },
             );
+
+            messagesToSend.push(...newItems);
         }
 
         messagesToSend.push({

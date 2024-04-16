@@ -1,9 +1,9 @@
 import {ChatItem} from '@nlux/core';
 import {warn} from '../../../../../shared/src/utils/warn';
 
-export const transformInputBasedOnSchema = (
+export const transformInputBasedOnSchema = <AiMsg>(
     message: string,
-    conversationHistory: readonly ChatItem[] | undefined,
+    conversationHistory: readonly ChatItem<AiMsg>[] | undefined,
     schema: any,
     runnableName: string,
 ): any | undefined => {
