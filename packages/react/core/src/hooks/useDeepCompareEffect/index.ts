@@ -6,7 +6,7 @@
 //
 
 import {useEffect, useMemo, useRef} from 'react';
-import {dequal as deepEqual} from '../dequal';
+import {dequal as deepEqual} from '../../../../../shared/src/utils/dequal';
 
 type UseEffectParams = Parameters<typeof useEffect>
 type EffectCallback = UseEffectParams[0]
