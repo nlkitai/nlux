@@ -13,7 +13,7 @@ import {ChatAdapterBuilder} from './builder';
 export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
     private theDataTransferMode?: DataTransferMode;
     private theHeaders?: LangServeHeaders;
-    private theInputPreProcessor?: LangServeInputPreProcessor;
+    private theInputPreProcessor?: LangServeInputPreProcessor<AiMsg>;
     private theOutputPreProcessor?: LangServeOutputPreProcessor<AiMsg>;
     private theUrl?: string;
     private theUseInputSchema?: boolean;
@@ -78,7 +78,7 @@ export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<Ai
         return this;
     }
 
-    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor): ChatAdapterBuilder<AiMsg> {
+    withInputPreProcessor(inputPreProcessor: LangServeInputPreProcessor<AiMsg>): ChatAdapterBuilder<AiMsg> {
         if (this.theInputPreProcessor !== undefined) {
             throw new NluxUsageError({
                 source: this.constructor.name,

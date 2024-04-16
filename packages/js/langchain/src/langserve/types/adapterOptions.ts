@@ -42,7 +42,7 @@ export type ChatAdapterOptions<AiMsg> = {
      * no attribute can be matched to the user message), the adapter will send the user message
      * as a string.
      */
-    inputPreProcessor?: LangServeInputPreProcessor;
+    inputPreProcessor?: LangServeInputPreProcessor<AiMsg>;
 
     /**
      * When no `inputPreProcessor` is provided, the adapter will attempt to call `input_schema`

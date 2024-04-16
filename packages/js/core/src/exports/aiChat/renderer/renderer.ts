@@ -30,7 +30,7 @@ export class NluxRenderer<AiMsg> {
     private rootElementInitialClassName: string | null;
     private theClassName: string | null = null;
     private theConversationOptions: Readonly<ConversationOptions> = {};
-    private theInitialConversationContent: Readonly<ChatItem[]> | null = null;
+    private theInitialConversationContent: Readonly<ChatItem<AiMsg>[]> | null = null;
     private theLayoutOptions: Readonly<LayoutOptions> = {};
     private thePersonasOptions: Readonly<PersonaOptions> = {};
     private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
@@ -143,7 +143,7 @@ export class NluxRenderer<AiMsg> {
             //
             rootComp = comp(CompChatRoom<AiMsg>)
                 .withContext(this.context)
-                .withProps<CompChatRoomProps>({
+                .withProps<CompChatRoomProps<AiMsg>>({
                     visible: true,
                     botPersona: this.thePersonasOptions?.bot ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
@@ -375,7 +375,7 @@ export class NluxRenderer<AiMsg> {
         }
 
         if (props.hasOwnProperty('personaOptions')) {
-            const changedPersonaProps: Partial<CompChatRoomProps> = {};
+            const changedPersonaProps: Partial<CompChatRoomProps<AiMsg>> = {};
             if (
                 props.personaOptions?.hasOwnProperty('bot') &&
                 props.personaOptions.bot !== this.thePersonasOptions?.bot

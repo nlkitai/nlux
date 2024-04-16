@@ -1,4 +1,4 @@
-export type ChatItem<AiMsg = string> = {
+export type ChatItem<AiMsg> = {
     role: 'ai';
     message: AiMsg;
 } | {
@@ -8,4 +8,3 @@ export type ChatItem<AiMsg = string> = {
     role: 'system';
     message: string;
 };
-

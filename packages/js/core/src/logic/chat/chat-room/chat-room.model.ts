@@ -19,7 +19,7 @@ import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<
-    AiMsg, CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+    AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
     // Set scroll when generating default value to true, when not specified
     static defaultScrollWhenGeneratingUserOption = true;
@@ -29,14 +29,15 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
-        scrollWhenGenerating,
-        streamingAnimationSpeed,
-        visible = true,
-        promptBox,
-        botPersona,
-        userPersona,
-        initialConversationContent,
-    }: CompChatRoomProps) {
+            scrollWhenGenerating,
+            streamingAnimationSpeed,
+            visible = true,
+            promptBox,
+            botPersona,
+            userPersona,
+            initialConversationContent,
+        }: CompChatRoomProps<AiMsg>,
+    ) {
         super(context, {
             visible,
             scrollWhenGenerating,
@@ -90,7 +91,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         });
     }
 
-    public setProps(props: Partial<CompChatRoomProps>) {
+    public setProps(props: Partial<CompChatRoomProps<AiMsg>>) {
         if (props.hasOwnProperty('scrollWhenGenerating')) {
             this.conversation?.toggleAutoScrollToStreamingMessage(props.scrollWhenGenerating ?? true);
         }
@@ -131,11 +132,11 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         streamingAnimationSpeed: number,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
-        initialConversationContent?: readonly ChatItem[],
+        initialConversationContent?: readonly ChatItem<AiMsg>[],
     ) {
         this.conversation = comp(CompConversation<AiMsg>)
             .withContext(this.context)
-            .withProps<CompConversationProps>({
+            .withProps<CompConversationProps<AiMsg>>({
                 scrollWhenGenerating,
                 streamingAnimationSpeed,
                 botPersona,

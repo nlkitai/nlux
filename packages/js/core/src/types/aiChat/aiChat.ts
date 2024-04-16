@@ -114,7 +114,7 @@ export interface IAiChat<AiMsg> {
      * @param {ChatItem[]} initialConversation
      * @returns {IAiChat}
      */
-    withInitialConversation(initialConversation: ChatItem[]): IAiChat<AiMsg>;
+    withInitialConversation(initialConversation: ChatItem<AiMsg>[]): IAiChat<AiMsg>;
 
     /**
      * Enables providing layout options to the chat component. The layout options will be used to configure the

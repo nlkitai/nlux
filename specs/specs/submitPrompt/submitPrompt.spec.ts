@@ -1,5 +1,4 @@
-import {ChatAdapterExtras, submitPrompt} from '@nlux-dev/core/src';
-import {StandardAdapterInfo, StandardChatAdapter} from '@nlux/core';
+import {ChatAdapterExtras, StandardAdapterInfo, StandardChatAdapter, submitPrompt} from '@nlux-dev/core/src';
 import {describe, expect, it, vi} from 'vitest';
 import {waitForMilliseconds} from '../../utils/wait';
 

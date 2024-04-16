@@ -5,11 +5,11 @@ import {ChatItem} from '../../../types/conversation';
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'messages-container-clicked';
 
-export type CompChatRoomProps = {
+export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-    initialConversationContent?: readonly ChatItem[];
+    initialConversationContent?: readonly ChatItem<AiMsg>[];
     scrollWhenGenerating?: boolean;
     streamingAnimationSpeed?: number | null;
     promptBox: Partial<PromptBoxProps>;

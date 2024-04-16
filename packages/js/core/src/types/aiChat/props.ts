@@ -16,7 +16,7 @@ export type AiChatInternalProps<AiMsg> = {
     events?: Partial<EventsMap<AiMsg>>;
     themeId?: string;
     className?: string;
-    initialConversation?: ChatItem[];
+    initialConversation?: ChatItem<AiMsg>[];
     promptBoxOptions: PromptBoxOptions;
     conversationOptions: ConversationOptions;
     personaOptions: PersonaOptions;

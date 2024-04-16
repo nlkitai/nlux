@@ -10,8 +10,8 @@ export type CompConversationScrollParams = Readonly<{
 
 export type CompConversationScrollCallback = (params: CompConversationScrollParams) => void;
 
-export type CompConversationProps = Readonly<{
-    messages?: readonly ChatItem[];
+export type CompConversationProps<AiMsg> = Readonly<{
+    messages?: readonly ChatItem<AiMsg>[];
     scrollWhenGenerating: boolean;
     streamingAnimationSpeed: number;
     botPersona?: BotPersona;

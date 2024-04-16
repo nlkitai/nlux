@@ -22,9 +22,9 @@ import {updateConversation} from './conversation.update';
 
 @Model('conversation', renderConversation, updateConversation)
 export class CompConversation<AiMsg> extends BaseComp<
-    AiMsg, CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
+    AiMsg, CompConversationProps<AiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private readonly conversationContent: ChatItem[] = [];
+    private readonly conversationContent: ChatItem<AiMsg>[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;
@@ -32,7 +32,7 @@ export class CompConversation<AiMsg> extends BaseComp<
     private scrollWhenGeneratingUserOption: boolean;
     private scrollingStickToConversationEnd: boolean = true;
 
-    constructor(context: ControllerContext<AiMsg>, props: CompConversationProps) {
+    constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
@@ -43,7 +43,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         direction: 'in' | 'out',
         contentType: MessageContentType,
         createdAt: Date,
-        content?: string,
+        content?: AiMsg | string,
     ): string {
         if (!this.messagesList || !this.props) {
             throw new Error(`CompConversation: messagesList is not initialized! Make sure you call ` +
@@ -114,7 +114,9 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public getConversationContentForAdapter(
         historyPayloadSize: HistoryPayloadSize = 'max',
-    ): Readonly<ChatItem[]> | undefined {
+    ): Readonly<
+        ChatItem<AiMsg>[]
+    > | undefined {
         if (typeof historyPayloadSize === 'number' && historyPayloadSize <= 0) {
             warnOnce(
                 `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +
@@ -179,7 +181,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         this.scrollWhenGeneratingUserOption = autoScrollToStreamingMessage;
     }
 
-    public updateConversationContent(newItem: ChatItem) {
+    public updateConversationContent(newItem: ChatItem<AiMsg>) {
         this.conversationContent.push(newItem);
     }
 
