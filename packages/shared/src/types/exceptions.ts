@@ -1,7 +1,5 @@
 import {ExceptionType} from './exception';
 
-export const defaultAdapterExceptionId = 'NX-AD-001';
-
 const networkExceptions = {
     'NX-NT-001': {
         type: 'error',

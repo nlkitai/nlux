@@ -1,4 +1,4 @@
-import {NluxRenderingError, NluxUsageError} from '../../exports/error';
+import {NluxRenderingError, NluxUsageError} from '../../../../../shared/src/types/error';
 
 const source = 'dom/getElement';
 

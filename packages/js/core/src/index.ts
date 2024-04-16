@@ -7,10 +7,8 @@ export {AiChat} from './exports/aiChat/aiChat';
 export const createAiChat = (): AiChat => new AiChat();
 
 export {Observable} from './exports/bus/observable';
-export {NluxError, NluxUsageError, NluxValidationError, NluxRenderingError, NluxConfigError} from './exports/error';
 export {createMdStreamRenderer} from './exports/aiChat/markdown/streamParser';
 
-export type {ExceptionId} from '../../../shared/src/types/exceptions';
 export type {ConversationOptions} from './exports/aiChat/options/conversationOptions';
 export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';
 export type {LayoutOptions} from './exports/aiChat/options/layoutOptions';

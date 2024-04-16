@@ -1,3 +1,4 @@
+import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {ExceptionType} from '../../../../../../shared/src/types/exception';
 import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
@@ -7,7 +8,6 @@ import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/mod
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
-import {NluxRenderingError} from '../../error';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {ConversationOptions} from '../options/conversationOptions';

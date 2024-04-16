@@ -1,5 +1,5 @@
+import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {render} from '../../../../../../shared/src/utils/dom/render';
-import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';

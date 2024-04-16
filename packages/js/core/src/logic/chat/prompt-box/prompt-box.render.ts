@@ -1,6 +1,6 @@
+import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {createPromptBoxDom} from '../../../../../../shared/src/ui/PromptBox/create';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
-import {NluxRenderingError} from '../../../exports/error';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {source} from '../../../utils/source';

@@ -11,7 +11,6 @@ export type {
     PromptBoxOptions,
     ConversationOptions,
     HighlighterExtension,
-    ExceptionId,
 } from '@nlux/core';
 
 export type {
@@ -26,14 +25,6 @@ export type {
     PreDestroyEventDetails,
     MessageSentCallback,
     MessageReceivedCallback,
-} from '@nlux/core';
-
-export {
-    NluxError,
-    NluxUsageError,
-    NluxValidationError,
-    NluxRenderingError,
-    NluxConfigError,
 } from '@nlux/core';
 
 export type {
