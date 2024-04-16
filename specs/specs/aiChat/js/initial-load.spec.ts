@@ -2,12 +2,9 @@ import {AiChat, createAiChat} from '@nlux/core';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {queries} from '../../../utils/selectors';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-const apiKey = 'YOUR_API_KEY_HERE';
-
-describe('On AiChat initial load', () => {
+describe('createAiChat() + initial load', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement;
@@ -25,69 +22,99 @@ describe('On AiChat initial load', () => {
         aiChat = undefined;
     });
 
-    it('should not initially render anything is DOM', async () => {
+    it('Should not initially render anything is DOM', async () => {
+        // Given
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+        // When
         await waitForRenderCycle();
+
+        // Then
         expect(rootElement?.innerHTML).toBe('');
     });
 
     describe('When mount() is called', () => {
-        it('chat room container should render', async () => {
+        it('Chat component should render', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queries.chatRoom()).toBeInTheDocument();
+            // Then
+            const aiChatElement = rootElement.querySelector('.nlux-AiChat-root');
+            expect(aiChatElement).toBeInTheDocument();
         });
 
-        it('exceptions box container should render', async () => {
+        it('Exceptions box container should render', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queries.exceptionsBox()).toBeInTheDocument();
+            // Then
+            const exceptionsBoxContainer = rootElement.querySelector('.nlux-comp-exp_box');
+            expect(exceptionsBoxContainer).toBeInTheDocument();
         });
 
-        it('prompt box container should render', async () => {
+        it('Prompt-box container should render', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queries.promptBoxContainer()).toBeInTheDocument();
+            // Then
+            const promptBoxContainer = rootElement.querySelector('.nlux-comp-prmptBox');
+            expect(promptBoxContainer).toBeInTheDocument();
         });
 
-        it('conversation container should render', async () => {
+        it('Conversation container should render', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            expect(queries.conversationContainer()).toBeInTheDocument();
+            // Then
+            const conversationContainer = rootElement.querySelector('.nlux-chtRm-cnv-cntr');
+            expect(conversationContainer).toBeInTheDocument();
         });
     });
 
     describe('When mount() is called twice', () => {
-        it('should throw an error', async () => {
+        it('It should throw an error', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
+            // Then
             expect(() => aiChat?.mount(rootElement)).toThrowError();
         });
 
-        it('should not render anything new in DOM', async () => {
+        it('It should not render anything new in DOM', async () => {
+            // Given
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // When
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-
             const initialHtmlRendered = rootElement?.innerHTML;
-
             try {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -95,6 +122,7 @@ describe('On AiChat initial load', () => {
                 // ignore
             }
 
+            // Then
             expect(rootElement?.innerHTML).toBe(initialHtmlRendered);
         });
     });
