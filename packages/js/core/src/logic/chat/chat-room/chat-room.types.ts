@@ -12,7 +12,7 @@ export type CompChatRoomProps = {
     initialConversationContent?: readonly ChatItem[];
     scrollWhenGenerating?: boolean;
     streamingAnimationSpeed?: number | null;
-    promptBox?: Partial<PromptBoxProps>;
+    promptBox: Partial<PromptBoxProps>;
 };
 
 export type CompChatRoomElements = {

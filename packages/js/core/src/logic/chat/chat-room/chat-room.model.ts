@@ -43,6 +43,7 @@ export class CompChatRoom extends BaseComp<
             streamingAnimationSpeed,
             botPersona,
             userPersona,
+            promptBox,
         });
 
         const scrollWhenGeneratingUserOption = scrollWhenGenerating
@@ -180,13 +181,18 @@ export class CompChatRoom extends BaseComp<
         const adapterAsStandardAdapter: StandardChatAdapter | undefined = isStandardChatAdapter(adapter as any) ?
             adapter as any : undefined;
 
+        const promptBoxProps: Partial<PromptBoxProps> | undefined = this.props.promptBox;
+
         submitPromptFactory({
             dataTransferMode: adapterAsStandardAdapter ? adapterAsStandardAdapter.dataTransferMode : undefined,
             context: this.context,
             promptBoxInstance: this.promptBoxInstance,
             conversation: this.conversation,
             messageToSend: this.promptBoxText,
-            resetPromptBox: (resetTextInput?: boolean) => this.resetPromptBox(resetTextInput),
+            resetPromptBox: (resetTextInput?: boolean) => this.resetPromptBox(
+                resetTextInput,
+                promptBoxProps?.autoFocus,
+            ),
         })();
     }
 
@@ -194,7 +200,7 @@ export class CompChatRoom extends BaseComp<
         this.promptBoxText = newValue;
     }
 
-    private resetPromptBox(resetTextInput: boolean = false) {
+    private resetPromptBox(resetTextInput: boolean = false, focusOnReset: boolean = false) {
         if (!this.promptBoxInstance) {
             return;
         }
@@ -210,6 +216,9 @@ export class CompChatRoom extends BaseComp<
         }
 
         this.promptBoxInstance.setDomProps(newProps);
-        this.promptBoxInstance.focusTextInput();
+
+        if (focusOnReset) {
+            this.promptBoxInstance.focusTextInput();
+        }
     }
 }
