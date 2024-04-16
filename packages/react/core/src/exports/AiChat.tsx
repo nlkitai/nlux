@@ -60,14 +60,12 @@ export const AiChat: <MessageType>(
     });
 
     useEffect(() => setInitialSegment(
-        props.initialConversation
-            ? chatItemsToChatSegment(props.initialConversation)
-            : undefined,
+        props.initialConversation ? chatItemsToChatSegment(props.initialConversation) : undefined,
     ), [props.initialConversation]);
 
-    const conversationSegments = useMemo(() => {
-        return initialSegment ? [initialSegment, ...chatSegments] : chatSegments;
-    }, [initialSegment, chatSegments]);
+    const segments = useMemo(() => (
+        initialSegment ? [initialSegment, ...chatSegments] : chatSegments
+    ), [initialSegment, chatSegments]);
 
     const rootStyle = useAiChatStyle(props.layoutOptions);
     const rootClassNames = getRootClassNames({
@@ -84,7 +82,7 @@ export const AiChat: <MessageType>(
                 <div className="nlux-chtRm-cnv-cntr">
                     <ForwardConversationComp
                         ref={conversationRef}
-                        segments={conversationSegments}
+                        segments={segments}
                         conversationOptions={props.conversationOptions}
                         personaOptions={props.personaOptions}
                         customRenderer={props.aiMessageComponent}
