@@ -20,8 +20,8 @@ import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
 
 export const submitPrompt: SubmitPrompt = <MessageType>(
     prompt: string,
-    adapter: ChatAdapter,
-    extras: ChatAdapterExtras,
+    adapter: ChatAdapter<MessageType>,
+    extras: ChatAdapterExtras<MessageType>,
 ) => {
     //
     // We check if the prompt is empty and that the adapter supports at least one data transfer mode.

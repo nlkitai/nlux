@@ -18,17 +18,20 @@ import {updateMessage} from './message.update';
 export type MessageContentStatusChangeListener = (status: MessageContentLoadingStatus) => void;
 
 @Model('message', renderMessage, updateMessage)
-export class CompMessage extends BaseComp<
-    CompMessageProps, CompMessageElements, CompMessageEvents, CompMessageActions
+export class CompMessage<MessageType> extends BaseComp<
+    MessageType, CompMessageProps<MessageType>, CompMessageElements, CompMessageEvents, CompMessageActions
 > {
-    private __content?: string;
+    private __content?: MessageType | string;
     private contentStatus: MessageContentLoadingStatus;
     private contentStatusChangeListeners: Set<MessageContentStatusChangeListener> = new Set();
     private readonly contentType: MessageContentType;
     private domChangeListeners: Set<Function> = new Set();
     private resizeListeners: Set<Function> = new Set();
 
-    constructor(context: ControllerContext, props: CompMessageProps) {
+    constructor(
+        context: ControllerContext<MessageType>,
+        props: CompMessageProps<MessageType>,
+    ) {
         super(context, props);
 
         this.__content = props.content;
@@ -122,7 +125,7 @@ export class CompMessage extends BaseComp<
      * It should be called when the promise is resolved.
      * @param {string} content
      */
-    public setContent(content: string) {
+    public setContent(content: MessageType) {
         if (this.contentType !== 'promise') {
             throw new Error(`CompMessage: content can only be set when contentType is 'promise'!`);
         }
@@ -160,11 +163,14 @@ export class CompMessage extends BaseComp<
     private handleCompCopyToClipboardTriggered(event: ClipboardEvent) {
         event.preventDefault();
         if (this.__content) {
-            debug(`Copying selected message to clipboard!`);
-            navigator.clipboard.writeText(this.__content).catch(error => {
-                warn('Failed to copy selected message to clipboard!');
-                debug(error);
-            });
+            if (typeof this.__content === 'string') {
+                navigator.clipboard.writeText(this.__content).catch(error => {
+                    warn('Failed to copy selected message to clipboard!');
+                    debug(error);
+                });
+            } else {
+                warn('Cannot copy message to clipboard because the content is not a string!');
+            }
         }
     }
 

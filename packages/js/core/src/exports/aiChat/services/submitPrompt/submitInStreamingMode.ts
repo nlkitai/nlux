@@ -11,8 +11,8 @@ import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtr
 export const submitInStreamingMode = async <MessageType>(
     segmentId: string,
     prompt: string,
-    adapter: ChatAdapter,
-    extras: ChatAdapterExtras,
+    adapter: ChatAdapter<MessageType>,
+    extras: ChatAdapterExtras<MessageType>,
     aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback>,
     aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback>,
     aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback>,

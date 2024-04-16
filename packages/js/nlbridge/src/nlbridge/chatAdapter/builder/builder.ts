@@ -5,9 +5,9 @@ import {
 } from '@nlux/core';
 import {ChatAdapterUsageMode} from '../../types/chatAdapterOptions';
 
-export interface ChatAdapterBuilder extends CoreChatAdapterBuilder {
-    create(): StandardChatAdapter;
-    withContext(context: CoreAiContext): ChatAdapterBuilder;
-    withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilder;
-    withUrl(endpointUrl: string): ChatAdapterBuilder;
+export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<MessageType> {
+    create(): StandardChatAdapter<MessageType>;
+    withContext(context: CoreAiContext): ChatAdapterBuilder<MessageType>;
+    withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilder<MessageType>;
+    withUrl(endpointUrl: string): ChatAdapterBuilder<MessageType>;
 }

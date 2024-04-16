@@ -1,7 +1,7 @@
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';
 
-export const llama2InputPreProcessor: HfInputPreProcessor = (
+export const llama2InputPreProcessor: HfInputPreProcessor<string> = (
     input,
     adapterOptions,
 ) => {
@@ -14,7 +14,7 @@ export const llama2InputPreProcessor: HfInputPreProcessor = (
     );
 };
 
-export const llama2OutputPreProcessor: HfOutputPreProcessor = (
+export const llama2OutputPreProcessor: HfOutputPreProcessor<string> = (
     output,
 ) => {
     // Strip any HTML-like tags from the output

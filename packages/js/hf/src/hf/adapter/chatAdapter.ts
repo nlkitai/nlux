@@ -1,4 +1,4 @@
-import {HfInference, TextGenerationOutput, TextGenerationStreamOutput} from '@huggingface/inference';
+import {HfInference, TextGenerationStreamOutput} from '@huggingface/inference';
 import {DataTransferMode, StandardAdapterInfo, StandardChatAdapter, StreamingAdapterObserver} from '@nlux/core';
 import {NluxError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {uid} from '../../../../../shared/src/utils/uid';
@@ -6,16 +6,16 @@ import {warn} from '../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
-export class HfChatAdapterImpl implements StandardChatAdapter {
+export class HfChatAdapterImpl<MessageType> implements StandardChatAdapter<MessageType> {
     static defaultDataTransferMode: DataTransferMode = 'fetch';
     static defaultMaxNewTokens = 500;
 
     private readonly __instanceId: string;
 
     private inference: HfInference;
-    private readonly options: ChatAdapterOptions;
+    private readonly options: ChatAdapterOptions<MessageType>;
 
-    constructor(options: ChatAdapterOptions) {
+    constructor(options: ChatAdapterOptions<MessageType>) {
         if (!options.model && !options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -50,7 +50,7 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
         };
     }
 
-    async fetchText(message: string): Promise<string> {
+    async fetchText(message: string): Promise<MessageType> {
         if (!this.options.model && !this.options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -66,7 +66,7 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
             },
         };
 
-        let output: TextGenerationOutput | undefined = undefined;
+        let output: any = undefined;
 
         try {
             if (this.options.endpoint) {
@@ -89,8 +89,8 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
         return await this.decode(output);
     }
 
-    send(message: string, observer?: StreamingAdapterObserver): void | Promise<string> {
-        const promise = new Promise<string>(async (resolve, reject) => {
+    send(message: string, observer?: StreamingAdapterObserver): void | Promise<MessageType> {
+        const promise = new Promise<MessageType>(async (resolve, reject) => {
             if (!message) {
                 throw new NluxValidationError({
                     source: this.constructor.name,
@@ -167,7 +167,9 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
                         break;
                     }
 
-                    observer.next(await this.decode(value.token));
+                    observer.next(
+                        await this.decode(value.token) as any,
+                    );
                 }
 
                 observer.complete();
@@ -181,7 +183,7 @@ export class HfChatAdapterImpl implements StandardChatAdapter {
         });
     }
 
-    private async decode(payload: any): Promise<string> {
+    private async decode(payload: any): Promise<MessageType> {
         const output = (() => {
             if (typeof payload === 'string') {
                 return payload;

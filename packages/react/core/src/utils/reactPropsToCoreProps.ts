@@ -3,8 +3,8 @@ import {AiChatComponentProps} from '../exports/props';
 
 export const reactPropsToCoreProps = <MessageType>(
     props: AiChatComponentProps<MessageType>,
-    adapterToUse: ChatAdapter | StandardChatAdapter,
-): AiChatProps => {
+    adapterToUse: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>,
+): AiChatProps<MessageType> => {
     const botProp = props.personaOptions?.bot;
     const userProp = props.personaOptions?.user;
 

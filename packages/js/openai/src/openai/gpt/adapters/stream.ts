@@ -1,5 +1,6 @@
-import {ChatAdapterExtras, NluxUsageError, StreamingAdapterObserver} from '@nlux/core';
+import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import OpenAI from 'openai';
+import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
@@ -7,7 +8,7 @@ import {decodeChunk} from '../../../utils/decodeChunk';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
+export class OpenAiStreamingAdapter<MessageType> extends OpenAiAbstractAdapter<MessageType> {
     constructor({
         apiKey,
         model,
@@ -25,14 +26,14 @@ export class OpenAiStreamingAdapter extends OpenAiAbstractAdapter {
         }
     }
 
-    fetchText(message: string): Promise<string> {
+    fetchText(message: string): Promise<MessageType> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text from the streaming adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |

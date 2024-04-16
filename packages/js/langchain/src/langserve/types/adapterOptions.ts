@@ -3,7 +3,7 @@ import {LangServeInputPreProcessor} from './inputPreProcessor';
 import {LangServeHeaders} from './langServe';
 import {LangServeOutputPreProcessor} from './outputPreProcessor';
 
-export type ChatAdapterOptions = {
+export type ChatAdapterOptions<MessageType> = {
     /**
      * The URL of the LangServe runnable.
      *
@@ -62,5 +62,5 @@ export type ChatAdapterOptions = {
      * no attribute can be matched to expected output), the adapter will return the LangServe runnable
      * output as a string.
      */
-    outputPreProcessor?: LangServeOutputPreProcessor;
+    outputPreProcessor?: LangServeOutputPreProcessor<MessageType>;
 };

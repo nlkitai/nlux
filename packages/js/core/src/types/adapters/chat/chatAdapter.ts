@@ -13,7 +13,7 @@ export type DataTransferMode = 'stream' | 'fetch';
  * to be displayed to the user. It cannot return a task to be executed by the client. If you are using the `AiChat`
  * component in co-pilot mode, you should use the `AssistAdapter` interface instead.
  */
-export interface ChatAdapter {
+export interface ChatAdapter<MessageType> {
     /**
      * This method should be implemented by any adapter that wants to request data from the API in fetch mode.
      * It should return a promise that resolves to the response from the API.
@@ -25,8 +25,8 @@ export interface ChatAdapter {
      */
     fetchText?: (
         message: string,
-        extras: ChatAdapterExtras,
-    ) => Promise<string>;
+        extras: ChatAdapterExtras<MessageType>,
+    ) => Promise<MessageType>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
@@ -39,7 +39,7 @@ export interface ChatAdapter {
     streamText?: (
         message: string,
         observer: StreamingAdapterObserver,
-        extras: ChatAdapterExtras,
+        extras: ChatAdapterExtras<MessageType>,
     ) => void;
 }
 

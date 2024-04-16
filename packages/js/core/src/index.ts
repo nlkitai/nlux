@@ -4,7 +4,7 @@ import {AiChat} from './exports/aiChat/aiChat';
 
 export {AiChat} from './exports/aiChat/aiChat';
 
-export const createAiChat = (): AiChat => new AiChat();
+export const createAiChat = <MessageType = string>(): AiChat<MessageType> => new AiChat<MessageType>();
 
 export {Observable} from './exports/bus/observable';
 export {createMdStreamRenderer} from './exports/aiChat/markdown/streamParser';

@@ -13,14 +13,14 @@ type ItemToRender<CompType> = {
 }
 
 @Model('list', renderList, updateList)
-export class CompList<CompType extends BaseComp<any, any, any, any>>
-    extends BaseComp<CompListProps, CompListElements, CompListEvents, any> {
+export class CompList<CompType extends BaseComp<any, any, any, any, any>>
+    extends BaseComp<any, CompListProps, CompListElements, CompListEvents, any> {
 
     private componentsById: Map<string, CompType> = new Map();
     private componentsToRender: Array<ItemToRender<CompType>> = [];
     private renderedComponents: Array<CompType> = [];
 
-    constructor(context: ControllerContext, props: CompListProps) {
+    constructor(context: ControllerContext<any>, props: CompListProps) {
         super(context, props);
     }
 
@@ -115,7 +115,7 @@ export class CompList<CompType extends BaseComp<any, any, any, any>>
         }
     }
 
-    public removeComponent(component: BaseComp<any, any, any, any>) {
+    public removeComponent(component: BaseComp<any, any, any, any, any>) {
         for (let i = 0; i < this.renderedComponents.length; i++) {
             if (this.renderedComponents[i] === component) {
                 this.removeComponentAt(i);

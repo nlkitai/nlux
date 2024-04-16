@@ -3,9 +3,9 @@ import OpenAI from 'openai';
 
 export const decodePayload: AdapterDecodeFunction<
     OpenAI.Chat.Completions.ChatCompletion
-> = async (
+> = async <MessageType>(
     payload: OpenAI.Chat.Completions.ChatCompletion,
-): Promise<string | undefined> => {
+) => {
     if (!payload.choices || !payload.choices[0]) {
         throw Error('Invalid payload');
     }
@@ -15,5 +15,7 @@ export const decodePayload: AdapterDecodeFunction<
         return undefined;
     }
 
-    return content;
+    // TODO - Handle other types of messages
+
+    return content as unknown as MessageType;
 };

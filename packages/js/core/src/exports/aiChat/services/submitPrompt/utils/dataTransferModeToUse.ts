@@ -1,7 +1,9 @@
 import {ChatAdapter, DataTransferMode} from '../../../../../types/adapters/chat/chatAdapter';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../../../types/adapters/chat/standardChatAdapter';
 
-export const getDataTransferModeToUse = (adapter: ChatAdapter | StandardChatAdapter): DataTransferMode => {
+export const getDataTransferModeToUse = <MessageType>(
+    adapter: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>,
+): DataTransferMode => {
     const supportedDataTransferModes: DataTransferMode[] = [];
     if (adapter.streamText !== undefined) {
         supportedDataTransferModes.push('stream');
@@ -10,8 +12,9 @@ export const getDataTransferModeToUse = (adapter: ChatAdapter | StandardChatAdap
         supportedDataTransferModes.push('fetch');
     }
 
-    const adapterAsStandardAdapter: StandardChatAdapter | undefined = isStandardChatAdapter(adapter as any) ?
-        adapter as any : undefined;
+    const adapterAsStandardAdapter: StandardChatAdapter<MessageType> | undefined = isStandardChatAdapter(
+        adapter,
+    ) ? adapter as any : undefined;
 
     const adapterDataTransferMode: DataTransferMode | undefined = adapterAsStandardAdapter?.dataTransferMode
         ?? undefined;

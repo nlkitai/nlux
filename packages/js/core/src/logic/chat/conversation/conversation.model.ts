@@ -21,18 +21,18 @@ import {
 import {updateConversation} from './conversation.update';
 
 @Model('conversation', renderConversation, updateConversation)
-export class CompConversation extends BaseComp<
-    CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
+export class CompConversation<MessageType> extends BaseComp<
+    MessageType, CompConversationProps, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
     private readonly conversationContent: ChatItem[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
     private messagesContainerRendered: boolean = false;
-    private messagesList: CompList<CompMessage> | undefined;
+    private messagesList: CompList<CompMessage<MessageType>> | undefined;
     private scrollWhenGeneratingUserOption: boolean;
     private scrollingStickToConversationEnd: boolean = true;
 
-    constructor(context: ControllerContext, props: CompConversationProps) {
+    constructor(context: ControllerContext<MessageType>, props: CompConversationProps) {
         super(context, props);
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
@@ -136,7 +136,7 @@ export class CompConversation extends BaseComp<
         return this.conversationContent.slice(-historyPayloadSize);
     }
 
-    public getMessageById(messageId: string): CompMessage | undefined {
+    public getMessageById(messageId: string): CompMessage<MessageType> | undefined {
         return this.messagesList?.getComponentById(messageId);
     }
 
@@ -184,8 +184,10 @@ export class CompConversation extends BaseComp<
     }
 
     private addConversation() {
-        this.messagesList = comp(CompList<CompMessage>).withContext(this.context).create();
-        this.addSubComponent(this.messagesList.id, this.messagesList, 'messagesContainer');
+        this.messagesList = comp(CompList<CompMessage<MessageType>>).withContext(this.context).create();
+        this.addSubComponent(
+            this.messagesList.id, this.messagesList, 'messagesContainer',
+        );
 
         const initialMessages = this.props?.messages!;
         if (initialMessages) {

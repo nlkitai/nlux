@@ -5,8 +5,8 @@ import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
 type SubmitPromptHandlerProps<MessageType> = {
-    adapterToUse?: ChatAdapter | StandardChatAdapter;
-    adapterExtras?: ChatAdapterExtras;
+    adapterToUse?: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>;
+    adapterExtras?: ChatAdapterExtras<MessageType>;
     prompt: string;
     promptBoxOptions?: PromptBoxOptions;
     chatSegments: ChatSegment<MessageType>[];

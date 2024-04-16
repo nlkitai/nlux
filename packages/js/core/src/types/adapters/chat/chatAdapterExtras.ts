@@ -4,11 +4,11 @@ import {ChatItem} from '../../conversation';
 /**
  * Additional data sent to the adapter when a message is sent.
  */
-export type ChatAdapterExtras = {
+export type ChatAdapterExtras<MessageType> = {
     /**
      * This attribute contains the properties used with the AiChat component.
      */
-    aiChatProps: AiChatProps;
+    aiChatProps: AiChatProps<MessageType>;
 
     /**
      * This attribute contains the conversation history.

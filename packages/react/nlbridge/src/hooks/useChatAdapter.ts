@@ -9,10 +9,10 @@ export type ReactChatAdapterOptions = {
     context?: ReactAiContext;
 };
 
-export const useChatAdapter = (options: ReactChatAdapterOptions): ChatAdapter => {
+export const useChatAdapter = <MessageType = string>(options: ReactChatAdapterOptions): ChatAdapter<MessageType> => {
     const {context, url, mode} = options;
     const coreContext = context?.ref ? useContext(context.ref) : undefined;
-    const [adapter, setAdapter] = useState<ChatAdapter>(
+    const [adapter, setAdapter] = useState<ChatAdapter<MessageType>>(
         getChatAdapterBuilder({
             url,
             mode,
@@ -21,7 +21,7 @@ export const useChatAdapter = (options: ReactChatAdapterOptions): ChatAdapter =>
     );
 
     useEffect(() => {
-        let newAdapter = getChatAdapterBuilder({
+        let newAdapter = getChatAdapterBuilder<MessageType>({
             url,
             mode,
             context: coreContext,

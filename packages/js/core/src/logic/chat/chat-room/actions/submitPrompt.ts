@@ -8,7 +8,7 @@ import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
 import {CompPromptBox} from '../../prompt-box/prompt-box.model';
 
-export const submitPromptFactory = ({
+export const submitPromptFactory = <MessageType>({
     context,
     promptBoxInstance,
     conversation,
@@ -17,9 +17,9 @@ export const submitPromptFactory = ({
     dataTransferMode,
 }: {
     dataTransferMode?: DataTransferMode;
-    context: ControllerContext;
-    promptBoxInstance: CompPromptBox;
-    conversation: CompConversation;
+    context: ControllerContext<MessageType>;
+    promptBoxInstance: CompPromptBox<MessageType>;
+    conversation: CompConversation<MessageType>;
     messageToSend: string;
     resetPromptBox: (resetTextInput?: boolean) => void;
 }) => {
@@ -46,7 +46,7 @@ export const submitPromptFactory = ({
             //
             const adapter = context.adapter;
             let observable: Observable<string> | undefined;
-            let sentResponse: Promise<string> | undefined;
+            let sentResponse: Promise<MessageType> | undefined;
             let messageContentType: MessageContentType;
             const supportedDataTransferModes: DataTransferMode[] = [];
             if (typeof adapter.fetchText === 'function') {
@@ -77,7 +77,7 @@ export const submitPromptFactory = ({
                 supportedDataTransferModes[0] : 'stream';
 
             const dataTransferModeToUse = dataTransferMode ?? defaultDataTransferMode;
-            const extras: ChatAdapterExtras = {
+            const extras: ChatAdapterExtras<MessageType> = {
                 aiChatProps: context.aiChatProps,
                 conversationHistory: conversation.getConversationContentForAdapter(
                     context.aiChatProps?.conversationOptions?.historyPayloadSize,
@@ -131,8 +131,10 @@ export const submitPromptFactory = ({
                     // Only add user message to conversation content (used for history, and not displayed) if the
                     // message was sent successfully and a response was received.
                     conversation.updateConversationContent({role: 'user', message: messageToSend});
-                    conversation.updateConversationContent({role: 'ai', message: promiseContent});
-                    context.emit('messageReceived', promiseContent);
+                    conversation.updateConversationContent(
+                        {role: 'ai', message: promiseContent as any},
+                    );
+                    context.emit('messageReceived', promiseContent as any);
                 }).catch((error) => {
                     message.setErrored();
                     conversation.removeMessage(outMessageId);
@@ -181,8 +183,10 @@ export const submitPromptFactory = ({
                                 // Only add user message to conversation content (used for history, and not displayed)
                                 // if the message was sent successfully and a response was received.
                                 conversation.updateConversationContent({role: 'user', message: messageToSend});
-                                conversation.updateConversationContent({role: 'ai', message: message.content});
-                                context.emit('messageReceived', message.content);
+                                conversation.updateConversationContent(
+                                    {role: 'ai', message: message.content as any},
+                                );
+                                context.emit('messageReceived', message.content as any);
                             }
                         },
                     });

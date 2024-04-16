@@ -1,16 +1,16 @@
 import {EventName, EventsMap} from '../../../types/event';
 
-export class EventManager {
+export class EventManager<MessageType> {
 
     public emit = <EventToEmit extends EventName>(
         event: EventToEmit,
-        ...params: Parameters<EventsMap[EventToEmit]>
+        ...params: Parameters<EventsMap<MessageType>[EventToEmit]>
     ) => {
         if (!this.eventListeners.has(event)) {
             return;
         }
 
-        this.eventListeners.get(event)?.forEach((callback: EventsMap[EventName]) => {
+        this.eventListeners.get(event)?.forEach((callback: EventsMap<MessageType>[EventName]) => {
             if (typeof callback !== 'function') {
                 return;
             }
@@ -21,7 +21,7 @@ export class EventManager {
 
     public on = <EventToAdd extends EventName>(
         event: EventToAdd,
-        callback: EventsMap[EventToAdd],
+        callback: EventsMap<MessageType>[EventToAdd],
     ) => {
         if (!this.eventListeners.has(event)) {
             this.eventListeners.set(event, new Set());
@@ -36,7 +36,7 @@ export class EventManager {
 
     public removeEventListener = <EventToUpdate extends EventName>(
         event: EventToUpdate,
-        callback: EventsMap[EventToUpdate],
+        callback: EventsMap<MessageType>[EventToUpdate],
     ) => {
         if (!this.eventListeners.has(event)) {
             return;
@@ -49,21 +49,24 @@ export class EventManager {
     };
 
     public updateEventListeners = (
-        events: Partial<EventsMap>,
+        events: Partial<EventsMap<MessageType>>,
     ) => {
         //
         // Replace all listeners for events present in the new events object
         // This overwrites any existing listeners for these events! But it will not remove
         // listeners for events that are not present in the `events: Partial<EventsMap>` object.
         //
-        const eventKeys = Object.keys(events) as Array<keyof EventsMap>;
+        const eventKeys = Object.keys(events) as Array<keyof EventsMap<MessageType>>;
         for (const eventName of eventKeys) {
             this.eventListeners.set(
                 eventName,
-                new Set([events[eventName] as EventsMap[EventName]]),
+                new Set([events[eventName] as EventsMap<MessageType>[EventName]]),
             );
         }
     };
 
-    private readonly eventListeners: Map<EventName, Set<EventsMap[EventName]>> = new Map();
+    private readonly eventListeners: Map<
+        EventName,
+        Set<EventsMap<MessageType>[EventName]>
+    > = new Map();
 }

@@ -18,17 +18,17 @@ import {updateChatRoom} from './chat-room.update';
 import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
-export class CompChatRoom extends BaseComp<
-    CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+export class CompChatRoom<MessageType> extends BaseComp<
+    MessageType, CompChatRoomProps, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
     // Set scroll when generating default value to true, when not specified
     static defaultScrollWhenGeneratingUserOption = true;
 
-    private conversation: CompConversation;
-    private promptBoxInstance: CompPromptBox;
+    private conversation: CompConversation<MessageType>;
+    private promptBoxInstance: CompPromptBox<MessageType>;
     private promptBoxText: string = '';
 
-    constructor(context: ControllerContext, {
+    constructor(context: ControllerContext<MessageType>, {
         scrollWhenGenerating,
         streamingAnimationSpeed,
         visible = true,
@@ -133,7 +133,7 @@ export class CompChatRoom extends BaseComp<
         userPersona?: UserPersona,
         initialConversationContent?: readonly ChatItem[],
     ) {
-        this.conversation = comp(CompConversation)
+        this.conversation = comp(CompConversation<MessageType>)
             .withContext(this.context)
             .withProps<CompConversationProps>({
                 scrollWhenGenerating,
@@ -157,7 +157,7 @@ export class CompChatRoom extends BaseComp<
         disableSubmitButton?: boolean,
         submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
-        this.promptBoxInstance = comp(CompPromptBox).withContext(this.context).withProps({
+        this.promptBoxInstance = comp(CompPromptBox<MessageType>).withContext(this.context).withProps({
             props: {
                 domCompProps: {
                     status: 'typing',
@@ -178,7 +178,8 @@ export class CompChatRoom extends BaseComp<
 
     private handlePromptBoxSubmit() {
         const {adapter} = this.context;
-        const adapterAsStandardAdapter: StandardChatAdapter | undefined = isStandardChatAdapter(adapter as any) ?
+        const adapterAsStandardAdapter: StandardChatAdapter<MessageType> | undefined = isStandardChatAdapter(
+            adapter as any) ?
             adapter as any : undefined;
 
         const promptBoxProps: Partial<PromptBoxProps> | undefined = this.props.promptBox;

@@ -39,5 +39,5 @@ export interface AssistAdapter {
      * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    assist?: (message: string, extras: ChatAdapterExtras) => Promise<AssistResult>;
+    assist?: (message: string, extras: ChatAdapterExtras<string>) => Promise<AssistResult>;
 }
