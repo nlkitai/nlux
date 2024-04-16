@@ -1,6 +1,6 @@
-import {createWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/create';
-import {WelcomeMessageProps} from '@nlux-dev/core/src/ui/WelcomeMessage/props';
 import {describe, expect, it} from 'vitest';
+import {createWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/create';
+import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/WelcomeMessage/props';
 
 describe('When welcome message is rendered', () => {
     it('Should render the message with the incoming class', () => {

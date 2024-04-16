@@ -1,6 +1,9 @@
+import {
+    createExceptionsBoxController,
+    ExceptionsBoxController,
+} from '../../../../../../shared/src/ui/ExceptionsBox/control';
+import {createExceptionsBoxDom} from '../../../../../../shared/src/ui/ExceptionsBox/create';
 import {CompRenderer} from '../../../types/comp';
-import {createExceptionsBoxController, ExceptionsBoxController} from '../../../ui/ExceptionsBox/control';
-import {createExceptionsBoxDom} from '../../../ui/ExceptionsBox/create';
 import {
     CompExceptionsBoxActions,
     CompExceptionsBoxElements,

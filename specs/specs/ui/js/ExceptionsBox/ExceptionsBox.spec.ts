@@ -1,5 +1,6 @@
-import {createExceptionsBoxController, createExceptionsBoxDom} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {createExceptionsBoxController} from '../../../../../packages/shared/src/ui/ExceptionsBox/control';
+import {createExceptionsBoxDom} from '../../../../../packages/shared/src/ui/ExceptionsBox/create';
 
 describe('When an exceptions box component is rendered', () => {
     beforeEach(() => {

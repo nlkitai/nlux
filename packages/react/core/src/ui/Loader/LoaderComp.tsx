@@ -1,5 +1,5 @@
-import {compLoaderClassName} from '@nlux/core';
 import React from 'react';
+import {className as compLoaderClassName} from '../../../../../shared/src/ui/Loader/create';
 
 export const LoaderComp = () => {
     return (

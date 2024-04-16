@@ -1,6 +1,6 @@
-import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create';
-import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
+import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/create';
+import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/update';
 
 describe('When a prompt box component is rendered and is in submitting status', () => {
     it('Should render the prompt box with a submit button', () => {

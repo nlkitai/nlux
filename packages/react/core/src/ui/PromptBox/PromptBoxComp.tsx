@@ -1,5 +1,8 @@
-import {compPromptBoxClassName, compPromptBoxStatusClassName} from '@nlux/core';
 import React, {useMemo} from 'react';
+import {className as compPromptBoxClassName} from '../../../../../shared/src/ui/PromptBox/create';
+import {
+    statusClassName as compPromptBoxStatusClassName,
+} from '../../../../../shared/src/ui/PromptBox/utils/applyNewStatusClassName';
 import {LoaderComp} from '../Loader/LoaderComp';
 import {SendIconComp} from '../SendIcon/SendIconComp';
 import {PromptBoxProps} from './props';

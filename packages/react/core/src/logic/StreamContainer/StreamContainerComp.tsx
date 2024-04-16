@@ -1,5 +1,11 @@
-import {compMessageClassName, compMessageDirectionClassName, compMessageStatusClassName} from '@nlux/core';
 import {Ref, useEffect, useImperativeHandle, useRef} from 'react';
+import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
+import {
+    directionClassName as compMessageDirectionClassName,
+} from '../../../../../shared/src/ui/Message/utils/applyNewDirectionClassName';
+import {
+    statusClassName as compMessageStatusClassName,
+} from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomServive';
 

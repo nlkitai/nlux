@@ -27,6 +27,6 @@ export const createAvatarDom: DomCreator<AvatarProps> = (
 
     // Alternatively, treat the picture as a string representing a URL of the photo to
     // be loaded and render the photo accordingly.
-    element.append(createPhotoContainerFromUrl(props.picture, props.name));
+    element.append(createPhotoContainerFromUrl(props.picture as string, props.name));
     return element;
 };

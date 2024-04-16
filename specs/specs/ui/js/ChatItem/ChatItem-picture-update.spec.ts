@@ -1,8 +1,8 @@
-import {className as chatPersonaPictureClassName} from '@nlux-dev/core/src/ui/Avatar/create';
-import {createChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/create';
-import {ChatItemProps} from '@nlux-dev/core/src/ui/ChatItem/props';
-import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update';
 import {describe, expect, it} from 'vitest';
+import {className as avatarPictureClassName} from '../../../../../packages/shared/src/ui/Avatar/create';
+import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
+import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
+import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
 describe('When a chat item component is rendered in outgoing direction', () => {
     describe('When the profile picture is updated', () => {
@@ -17,7 +17,7 @@ describe('When a chat item component is rendered in outgoing direction', () => {
             };
             const chatItem = createChatItemDom(props);
             const persona = chatItem.querySelector(
-                `.${chatPersonaPictureClassName}`,
+                `.${avatarPictureClassName}`,
             ) as HTMLElement;
 
             // When
@@ -43,7 +43,7 @@ describe('When a chat item component is rendered in outgoing direction', () => {
             };
             const chatItem = createChatItemDom(props);
             const persona = chatItem.querySelector(
-                `.${chatPersonaPictureClassName}`,
+                `.${avatarPictureClassName}`,
             ) as HTMLElement;
 
             // When

@@ -1,10 +1,10 @@
-import {
-    compAvatarClassName,
-    compAvatarInitialsClassName,
-    compAvatarPhotoClassName,
-    compAvatarPhotoContainerClassName,
-} from '@nlux/core';
 import {isValidElement} from 'react';
+import {className as compAvatarClassName} from '../../../../../shared/src/ui/Avatar/create';
+import {
+    renderedInitialsClassName as compAvatarInitialsClassName,
+    renderedPhotoClassName as compAvatarPhotoClassName,
+    renderedPhotoContainerClassName as compAvatarPhotoContainerClassName,
+} from '../../../../../shared/src/ui/Avatar/utils/createPhotoContainerFromUrl';
 import {AvatarProps} from './props';
 
 export const AvatarComp = (props: AvatarProps) => {

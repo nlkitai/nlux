@@ -1,4 +1,4 @@
-import {MessageStatus} from '../ui/Message/props';
+import {MessageStatus} from '../../../../shared/src/ui/Message/props';
 import {DataTransferMode} from './adapters/chat/chatAdapter';
 
 export type AiStreamedMessageStatus = 'streaming' | 'complete' | 'error';

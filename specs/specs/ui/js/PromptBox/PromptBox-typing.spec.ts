@@ -1,7 +1,7 @@
-import {createPromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/create';
-import {PromptBoxProps} from '@nlux-dev/core/src/ui/PromptBox/props';
-import {updatePromptBoxDom} from '@nlux-dev/core/src/ui/PromptBox/update';
 import {describe, expect, it} from 'vitest';
+import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/create';
+import {PromptBoxProps} from '../../../../../packages/shared/src/ui/PromptBox/props';
+import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/update';
 
 describe('When a prompt box component is rendered and is in typing status', () => {
     it('Should render the prompt box with a textarea and button', () => {

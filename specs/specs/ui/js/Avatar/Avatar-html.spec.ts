@@ -1,7 +1,7 @@
-import {createAvatarDom} from '@nlux-dev/core/src/ui/Avatar/create';
-import {AvatarProps} from '@nlux-dev/core/src/ui/Avatar/props';
-import {updateAvatarDom} from '@nlux-dev/core/src/ui/Avatar/update';
 import {describe, expect, it} from 'vitest';
+import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/create';
+import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
+import {updateAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/update';
 
 describe('When an avatar component is rendered with HTML element as picture', () => {
     it('Should render the picture as is', () => {

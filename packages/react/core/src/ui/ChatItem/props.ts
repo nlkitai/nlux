@@ -1,5 +1,5 @@
-import {MessageDirection} from '@nlux/core';
 import {FunctionComponent, ReactElement} from 'react';
+import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 
 export type ChatItemProps<MessageType> = {
     uid: string;

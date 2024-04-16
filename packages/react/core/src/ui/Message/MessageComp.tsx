@@ -1,9 +1,15 @@
-import {compMessageClassName, compMessageDirectionClassName, compMessageStatusClassName} from '@nlux/core';
 import React from 'react';
+import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
+import {
+    directionClassName as compMessageDirectionClassName,
+} from '../../../../../shared/src/ui/Message/utils/applyNewDirectionClassName';
+import {
+    statusClassName as compMessageStatusClassName,
+} from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
 import {LoaderComp} from '../Loader/LoaderComp';
 import {MessageProps} from './props';
 
-export const MessageComp = (props: MessageProps) => {
+export const MessageComp = function <MessageType>(props: MessageProps<MessageType>) {
     const compStatusClassName = props.status
         ? compMessageStatusClassName[props.status]
         : compMessageStatusClassName['rendered'];
@@ -37,7 +43,7 @@ export const MessageComp = (props: MessageProps) => {
         );
     }
 
-    const message = typeof props.message === 'function' ? props.message({}) : props.message;
+    const message = typeof props.message === 'function' ? props.message() : props.message;
 
     // TODO - Handle markdown rendering
     return (
