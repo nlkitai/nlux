@@ -179,6 +179,7 @@ export type {
     ChatSegmentChunkCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
+    AiUnifiedMessage,
 } from './types/chatSegment';
 
 export type {

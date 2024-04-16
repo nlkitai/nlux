@@ -7,15 +7,15 @@
 
 var has = Object.prototype.hasOwnProperty;
 
-function find(iter, tar, key) {
-    for (key of iter.keys()) {
+function find(iter: Array<any>, tar: any) {
+    for (let key of iter.keys()) {
         if (dequal(key, tar)) {
             return key;
         }
     }
 }
 
-export function dequal(foo, bar) {
+export function dequal(foo: any, bar: any) {
     var ctor, len, tmp;
     if (foo === bar) {
         return true;
@@ -92,7 +92,7 @@ export function dequal(foo, bar) {
 
         if (ArrayBuffer.isView(foo)) {
             if ((len = foo.byteLength) === bar.byteLength) {
-                while (len-- && foo[len] === bar[len]) {
+                while (len-- && (foo as any)[len] === bar[len]) {
 
                 }
             }
