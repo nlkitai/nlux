@@ -139,5 +139,171 @@ describe('submitPrompt() + fetch data transfer mode', () => {
             // Assert
             expect(listenToUserMessageReceived).not.toHaveBeenCalled();
         });
+
+        it('Should not call userMessageReceived event when observable is destroyed', async () => {
+            // Arrange
+            const prompt = 'What is the weather like today?';
+            const adapter = adapterController!.adapter;
+            const listenToUserMessageReceived = vi.fn();
+
+            // Act
+            const {observable} = submitPrompt(prompt, adapter, extras!);
+            observable.on('userMessageReceived', listenToUserMessageReceived);
+            observable.destroy();
+            await waitForMilliseconds(1);
+
+            // Assert
+            expect(listenToUserMessageReceived).not.toHaveBeenCalled();
+        });
+
+        describe('When the server responds with an AI message', () => {
+            it('Should emit aiMessageReceived event when callback is registered', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToAiMessageReceived = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('aiMessageReceived', listenToAiMessageReceived);
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToAiMessageReceived).toHaveBeenCalledWith({
+                    uid: expect.any(String),
+                    time: expect.any(Date),
+                    dataTransferMode: 'fetch',
+                    content: 'Hi! The weather is sunny today.',
+                    participantRole: 'ai',
+                    status: 'complete',
+                });
+            });
+
+            it('Should not call aiMessageReceived event when callback is removed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToAiMessageReceived = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('aiMessageReceived', listenToAiMessageReceived);
+                observable.removeListener('aiMessageReceived', listenToAiMessageReceived);
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToAiMessageReceived).not.toHaveBeenCalled();
+            });
+
+            it('Should not call aiMessageReceived event when observable is destroyed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToAiMessageReceived = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('aiMessageReceived', listenToAiMessageReceived);
+                observable.destroy();
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToAiMessageReceived).not.toHaveBeenCalled();
+            });
+
+            it('Should emit chatSegmentComplete event when callback is registered', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToChatSegmentComplete = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('complete', listenToChatSegmentComplete);
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToChatSegmentComplete).toHaveBeenCalledWith({
+                    uid: expect.any(String),
+                    status: 'complete',
+                    items: expect.arrayContaining([
+                        expect.objectContaining({
+                            content: prompt,
+                            participantRole: 'user',
+                            status: 'complete',
+                            time: expect.any(Date),
+                            uid: expect.any(String),
+                        }),
+                        expect.objectContaining({
+                            content: 'Hi! The weather is sunny today.',
+                            participantRole: 'ai',
+                            status: 'complete',
+                            dataTransferMode: 'fetch',
+                            time: expect.any(Date),
+                            uid: expect.any(String),
+                        }),
+                    ]),
+                });
+            });
+
+            it('Should not call chatSegmentComplete event when callback is removed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToChatSegmentComplete = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('complete', listenToChatSegmentComplete);
+                observable.removeListener('complete', listenToChatSegmentComplete);
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToChatSegmentComplete).not.toHaveBeenCalled();
+            });
+
+            it('Should not call chatSegmentComplete event when observable is destroyed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToChatSegmentComplete = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('complete', listenToChatSegmentComplete);
+                observable.destroy();
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToChatSegmentComplete).not.toHaveBeenCalled();
+            });
+
+            it('Should emit events in the correct order', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const callsOrder: string[] = [];
+                const listenToUserMessageReceived = vi.fn(() => callsOrder.push('userMessageReceived'));
+                const listenToAiMessageReceived = vi.fn(() => callsOrder.push('aiMessageReceived'));
+                const listenToChatSegmentComplete = vi.fn(() => callsOrder.push('chatSegmentComplete'));
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('complete', listenToChatSegmentComplete);
+                observable.on('userMessageReceived', listenToUserMessageReceived);
+                observable.on('aiMessageReceived', listenToAiMessageReceived);
+                adapterController!.resolve('Hi! The weather is sunny today.');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(callsOrder).toEqual(['userMessageReceived', 'aiMessageReceived', 'chatSegmentComplete']);
+            });
+        });
     });
 });
