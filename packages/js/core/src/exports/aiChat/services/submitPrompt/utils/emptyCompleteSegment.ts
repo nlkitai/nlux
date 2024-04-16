@@ -6,17 +6,17 @@ import {
 import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {uid} from '../../../../../../../../shared/src/utils/uid';
 
-export const createEmptyCompleteSegment = <MessageType>(): {
-    segment: ChatSegment<MessageType>,
-    observable: ChatSegmentObservable<MessageType>,
+export const createEmptyCompleteSegment = <AiMsg>(): {
+    segment: ChatSegment<AiMsg>,
+    observable: ChatSegmentObservable<AiMsg>,
 } => {
     const completeListeners = new Set<
-        ChatSegmentEventsMap<MessageType>['complete']
+        ChatSegmentEventsMap<AiMsg>['complete']
     >();
 
     const segmentId = uid();
 
-    const segment: ChatSegment<MessageType> = {
+    const segment: ChatSegment<AiMsg> = {
         uid: segmentId,
         status: 'complete',
         items: [],
@@ -35,11 +35,11 @@ export const createEmptyCompleteSegment = <MessageType>(): {
         observable: {
             on: (event, callback) => {
                 if (event === 'complete') {
-                    completeListeners.add(callback as unknown as ChatSegmentCompleteCallback<MessageType>);
+                    completeListeners.add(callback as unknown as ChatSegmentCompleteCallback<AiMsg>);
                 }
             },
             removeListener: (event, callback) => {
-                completeListeners.delete(callback as unknown as ChatSegmentCompleteCallback<MessageType>);
+                completeListeners.delete(callback as unknown as ChatSegmentCompleteCallback<AiMsg>);
             },
             destroy: () => {
                 completeListeners.clear();

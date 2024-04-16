@@ -3,11 +3,11 @@ import {FunctionComponent, ReactElement} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {PersonaOptions} from '../../exports/personaOptions';
 
-export type ConversationCompProps<MessageType> = {
-    segments: ChatSegment<MessageType>[];
+export type ConversationCompProps<AiMsg> = {
+    segments: ChatSegment<AiMsg>[];
     conversationOptions?: ConversationOptions;
     personaOptions?: PersonaOptions;
-    customRenderer?: FunctionComponent<{message: MessageType}>;
+    customRenderer?: FunctionComponent<{message: AiMsg}>;
     syntaxHighlighter?: HighlighterExtension;
     loader?: ReactElement;
 };

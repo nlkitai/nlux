@@ -2,12 +2,12 @@ import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {NluxError, NluxUsageError} from '../../../../../shared/src/types/error';
 import {NLBridgeAbstractAdapter} from './adapter';
 
-export class NLBridgeFetchAdapter<MessageType = string> extends NLBridgeAbstractAdapter<MessageType> {
+export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapter<AiMsg> {
     constructor(options: any) {
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
         if (this.context && this.context.contextId) {
             await this.context.flush();
         }
@@ -62,7 +62,7 @@ export class NLBridgeFetchAdapter<MessageType = string> extends NLBridgeAbstract
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

@@ -1,6 +1,6 @@
 import {ChatAdapterOptions} from './chatAdapterOptions';
 
-export type HfInputPreProcessor<MessageType> = (
+export type HfInputPreProcessor<AiMsg> = (
     input: string,
-    adapterOptions: Readonly<ChatAdapterOptions<MessageType>>,
+    adapterOptions: Readonly<ChatAdapterOptions<AiMsg>>,
 ) => string;

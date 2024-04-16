@@ -3,10 +3,10 @@ import {useDeepCompareEffect} from '@nlux/react';
 import {useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 
-export const useChatAdapter = <MessageType>(options: ChatAdapterOptions<MessageType>) => {
+export const useChatAdapter = <AiMsg>(options: ChatAdapterOptions<AiMsg>) => {
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter, setAdapter] = useState<ChatAdapterBuilder<MessageType>>(
-        getAdapterBuilder<MessageType>(options),
+    const [adapter, setAdapter] = useState<ChatAdapterBuilder<AiMsg>>(
+        getAdapterBuilder<AiMsg>(options),
     );
 
     const {

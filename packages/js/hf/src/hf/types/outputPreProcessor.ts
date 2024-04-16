@@ -1,1 +1,1 @@
-export type HfOutputPreProcessor<MessageType> = (output: string) => MessageType;
+export type HfOutputPreProcessor<AiMsg> = (output: string) => AiMsg;

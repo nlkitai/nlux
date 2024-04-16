@@ -8,14 +8,14 @@ export type AiStreamedMessage = {
 
 export type AiStreamedMessageStatus = AiStreamedMessage['status'];
 
-export type AiUnifiedMessage<MessageType> = {
+export type AiUnifiedMessage<AiMsg> = {
     uid: string;
     time: Date;
     participantRole: 'ai';
     dataTransferMode: 'fetch';
 } & ({
     status: 'complete';
-    content: MessageType;
+    content: AiMsg;
 } | {
     status: 'error';
     error: string;
@@ -25,4 +25,4 @@ export type AiUnifiedMessage<MessageType> = {
 
 export type AiUnifiedMessageStatus = AiUnifiedMessage<unknown>['status'];
 
-export type ChatSegmentAiMessage<MessageType> = AiStreamedMessage | AiUnifiedMessage<MessageType>;
+export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage | AiUnifiedMessage<AiMsg>;

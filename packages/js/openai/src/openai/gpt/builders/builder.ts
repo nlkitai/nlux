@@ -1,6 +1,6 @@
 import {ChatAdapterBuilder as CoreChatAdapterBuilder, DataTransferMode, StandardChatAdapter} from '@nlux/core';
 
-export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<MessageType> {
+export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg> {
     /**
      * Create a new ChatGPT API adapter.
      * Adapter users don't need to call this method directly. It will be called by nlux when the adapter is expected
@@ -8,7 +8,7 @@ export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<
      *
      * @returns {StandardChatAdapter}
      */
-    create(): StandardChatAdapter<MessageType>;
+    create(): StandardChatAdapter<AiMsg>;
 
     /**
      * The API key to use to connect to ChatGPT API.
@@ -18,7 +18,7 @@ export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<
      * @param {string} apiKey
      * @returns {ChatAdapterBuilder}
      */
-    withApiKey(apiKey: string): ChatAdapterBuilder<MessageType>;
+    withApiKey(apiKey: string): ChatAdapterBuilder<AiMsg>;
 
     /**
      * Instruct the adapter to connect to API and load data either in streaming mode or in fetch mode.
@@ -30,7 +30,7 @@ export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<
      * @default 'stream'
      * @returns {ChatAdapterBuilder}
      */
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<MessageType>;
+    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<AiMsg>;
 
     /**
      * The model or the endpoint to use for ChatGPT Inference API.
@@ -41,7 +41,7 @@ export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<
      * @param {string} model
      * @returns {ChatAdapterBuilder}
      */
-    withModel(model: string): ChatAdapterBuilder<MessageType>;
+    withModel(model: string): ChatAdapterBuilder<AiMsg>;
 
     /**
      * The initial system to send to ChatGPT API.
@@ -50,5 +50,5 @@ export interface ChatAdapterBuilder<MessageType> extends CoreChatAdapterBuilder<
      * @param {string} message
      * @returns {ChatAdapterBuilder}
      */
-    withSystemMessage(message: string): ChatAdapterBuilder<MessageType>;
+    withSystemMessage(message: string): ChatAdapterBuilder<AiMsg>;
 }

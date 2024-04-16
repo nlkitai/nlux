@@ -5,23 +5,23 @@ import {StandardChatAdapter} from './adapters/chat/standardChatAdapter';
 import {AiChatProps} from './aiChat/props';
 import {EventName, EventsMap} from './event';
 
-export type ControllerContextProps<MessageType> = Readonly<{
+export type ControllerContextProps<AiMsg> = Readonly<{
     instanceId: string;
     exception: (exceptionId: ExceptionId) => void;
-    adapter: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>;
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
 }>;
 
 /**
  * Internal context specific to the controller.
  */
-export type ControllerContext<MessageType> = ControllerContextProps<MessageType> & {
+export type ControllerContext<AiMsg> = ControllerContextProps<AiMsg> & {
     update: (
-        props: Partial<ControllerContextProps<MessageType>>,
+        props: Partial<ControllerContextProps<AiMsg>>,
     ) => void;
     emit: <EventToEmit extends EventName>(
         eventName: EventToEmit,
-        ...params: Parameters<EventsMap<MessageType>[EventToEmit]>
+        ...params: Parameters<EventsMap<AiMsg>[EventToEmit]>
     ) => void;
-    get aiChatProps(): Readonly<AiChatProps<MessageType>>;
+    get aiChatProps(): Readonly<AiChatProps<AiMsg>>;
 };

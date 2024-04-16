@@ -7,7 +7,7 @@ import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiModel} from '../types/model';
 import {ChatAdapterBuilder} from './builder';
 
-export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder<MessageType> {
+export class OpenAiAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
     protected apiKey: string | null = null;
     protected dataTransferMode: DataTransferMode = defaultDataTransferMode;
     protected model: OpenAiModel | null = null;
@@ -17,7 +17,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
     protected withModelCalled: boolean = false;
     protected withSystemMessageCalled: boolean = false;
 
-    constructor(cloneFrom?: OpenAiAdapterBuilderImpl<MessageType>) {
+    constructor(cloneFrom?: OpenAiAdapterBuilderImpl<AiMsg>) {
         if (cloneFrom) {
             this.apiKey = cloneFrom.apiKey;
             this.dataTransferMode = cloneFrom.dataTransferMode;
@@ -31,7 +31,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
         }
     }
 
-    create(): OpenAiStreamingAdapter<MessageType> | OpenAiFetchAdapter<MessageType> {
+    create(): OpenAiStreamingAdapter<AiMsg> | OpenAiFetchAdapter<AiMsg> {
         if (!this.apiKey) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -54,7 +54,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
         return new OpenAiFetchAdapter(options);
     }
 
-    withApiKey(apiKey: string): OpenAiAdapterBuilderImpl<MessageType> {
+    withApiKey(apiKey: string): OpenAiAdapterBuilderImpl<AiMsg> {
         if (this.withApiKeyCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -68,7 +68,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
         return this;
     }
 
-    withDataTransferMode(mode: DataTransferMode): OpenAiAdapterBuilderImpl<MessageType> {
+    withDataTransferMode(mode: DataTransferMode): OpenAiAdapterBuilderImpl<AiMsg> {
         if (this.withDataTransferModeCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -83,7 +83,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
         return this;
     }
 
-    withModel(model: OpenAiModel): OpenAiAdapterBuilderImpl<MessageType> {
+    withModel(model: OpenAiModel): OpenAiAdapterBuilderImpl<AiMsg> {
         if (this.withModelCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,
@@ -97,7 +97,7 @@ export class OpenAiAdapterBuilderImpl<MessageType> implements ChatAdapterBuilder
         return this;
     }
 
-    withSystemMessage(message: string): OpenAiAdapterBuilderImpl<MessageType> {
+    withSystemMessage(message: string): OpenAiAdapterBuilderImpl<AiMsg> {
         if (this.withSystemMessageCalled) {
             throw new NluxUsageError({
                 source: this.constructor.name,

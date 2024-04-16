@@ -1,10 +1,10 @@
 import {AiChatProps, ChatAdapter, StandardChatAdapter} from '@nlux/core';
 import {AiChatComponentProps} from '../exports/props';
 
-export const reactPropsToCoreProps = <MessageType>(
-    props: AiChatComponentProps<MessageType>,
-    adapterToUse: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>,
-): AiChatProps<MessageType> => {
+export const reactPropsToCoreProps = <AiMsg>(
+    props: AiChatComponentProps<AiMsg>,
+    adapterToUse: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+): AiChatProps<AiMsg> => {
     const botProp = props.personaOptions?.bot;
     const userProp = props.personaOptions?.user;
 

@@ -6,19 +6,19 @@ import {
 import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {uid} from '../../../../../../../../shared/src/utils/uid';
 
-export const createEmptyErrorSegment = <MessageType>(
+export const createEmptyErrorSegment = <AiMsg>(
     errorMessage: string,
 ): {
-    segment: ChatSegment<MessageType>,
-    observable: ChatSegmentObservable<MessageType>,
+    segment: ChatSegment<AiMsg>,
+    observable: ChatSegmentObservable<AiMsg>,
 } => {
     const exceptionListeners = new Set<
-        ChatSegmentEventsMap<MessageType>['exception']
+        ChatSegmentEventsMap<AiMsg>['exception']
     >();
 
     const segmentId = uid();
 
-    const segment: ChatSegment<MessageType> = {
+    const segment: ChatSegment<AiMsg> = {
         uid: segmentId,
         status: 'error',
         items: [],

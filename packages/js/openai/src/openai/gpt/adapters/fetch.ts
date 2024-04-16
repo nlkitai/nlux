@@ -8,7 +8,7 @@ import {decodePayload} from '../../../utils/decodePayload';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiFetchAdapter<MessageType> extends OpenAiAbstractAdapter<MessageType> {
+export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     constructor({
         apiKey,
         model,
@@ -26,7 +26,7 @@ export class OpenAiFetchAdapter<MessageType> extends OpenAiAbstractAdapter<Messa
         }
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
@@ -56,7 +56,7 @@ export class OpenAiFetchAdapter<MessageType> extends OpenAiAbstractAdapter<Messa
                 messages: messagesToSend,
             });
 
-            const result = await decodePayload<MessageType>(response);
+            const result = await decodePayload<AiMsg>(response);
             if (result === undefined) {
                 warn('Undecodable message received from OpenAI');
                 throw new NluxUsageError({
@@ -77,7 +77,7 @@ export class OpenAiFetchAdapter<MessageType> extends OpenAiAbstractAdapter<Messa
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

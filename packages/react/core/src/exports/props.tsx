@@ -14,17 +14,17 @@ import {PersonaOptions} from './personaOptions';
 /**
  * Props for the AiChat component.
  */
-export type AiChatComponentProps<MessageType> = {
+export type AiChatComponentProps<AiMsg> = {
     /**
      * The chat adapter to use.
      * This can be an instance of a chat adapter, or a chat adapter builder.
      */
-    adapter: ChatAdapter<MessageType> | ChatAdapterBuilder<MessageType>;
+    adapter: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>;
 
     /**
      * A map of event handlers.
      */
-    events?: Partial<EventsMap<MessageType>>;
+    events?: Partial<EventsMap<AiMsg>>;
 
     /**
      * The class name to add to the root element of the component.
@@ -40,7 +40,7 @@ export type AiChatComponentProps<MessageType> = {
     /**
      * The initial conversation to display.
      */
-    initialConversation?: ChatItem<MessageType>[];
+    initialConversation?: ChatItem<AiMsg>[];
 
     /**
      * The syntax highlighter to use.
@@ -55,7 +55,7 @@ export type AiChatComponentProps<MessageType> = {
     /**
      * Custom AI message renderer.
      */
-    aiMessageComponent?: FunctionComponent<{message: MessageType}>;
+    aiMessageComponent?: FunctionComponent<{message: AiMsg}>;
 
     /**
      * Layout options.

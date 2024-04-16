@@ -15,13 +15,13 @@ import {LayoutOptions} from '../options/layoutOptions';
 import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
-export class NluxRenderer<MessageType> {
+export class NluxRenderer<AiMsg> {
     private static readonly defaultThemeId = 'luna';
 
     private readonly __context: ControllerContext<any>;
 
-    private chatRoom: CompChatRoom<MessageType> | null = null;
-    private exceptionsBox: CompExceptionsBox<MessageType> | null = null;
+    private chatRoom: CompChatRoom<AiMsg> | null = null;
+    private exceptionsBox: CompExceptionsBox<AiMsg> | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
     private readonly rootClassName: string = 'nlux-AiChat-root';
@@ -37,10 +37,10 @@ export class NluxRenderer<MessageType> {
     private theThemeId: string;
 
     constructor(
-        context: ControllerContext<MessageType>,
+        context: ControllerContext<AiMsg>,
         rootCompId: string,
         rootElement: HTMLElement,
-        props: AiChatInternalProps<MessageType> | null = null,
+        props: AiChatInternalProps<AiMsg> | null = null,
     ) {
         if (!rootCompId) {
             throw new NluxRenderingError({
@@ -126,8 +126,8 @@ export class NluxRenderer<MessageType> {
             });
         }
 
-        let rootComp: CompChatRoom<MessageType> | null = null;
-        let exceptionAlert: CompExceptionsBox<MessageType> | null = null;
+        let rootComp: CompChatRoom<AiMsg> | null = null;
+        let exceptionAlert: CompExceptionsBox<AiMsg> | null = null;
 
         try {
             // Root component can only be a chat room component.
@@ -141,7 +141,7 @@ export class NluxRenderer<MessageType> {
             //
             // IMPORTANT ✨ This is where the CompChatRoom is instantiated!
             //
-            rootComp = comp(CompChatRoom<MessageType>)
+            rootComp = comp(CompChatRoom<AiMsg>)
                 .withContext(this.context)
                 .withProps<CompChatRoomProps>({
                     visible: true,
@@ -162,7 +162,7 @@ export class NluxRenderer<MessageType> {
                 .retrieve('exceptions-box')?.model as any;
 
             if (CompExceptionsBoxConstructor) {
-                exceptionAlert = comp(CompExceptionsBox<MessageType>)
+                exceptionAlert = comp(CompExceptionsBox<AiMsg>)
                     .withContext(this.context)
                     .create();
             } else {
@@ -267,7 +267,7 @@ export class NluxRenderer<MessageType> {
         this.isMounted = false;
     }
 
-    public updateProps(props: Partial<AiChatProps<MessageType>>) {
+    public updateProps(props: Partial<AiChatProps<AiMsg>>) {
         if (props.hasOwnProperty('className')) {
             const newClassName = props.className || undefined;
             if (newClassName) {

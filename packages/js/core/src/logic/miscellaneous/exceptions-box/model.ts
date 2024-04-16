@@ -12,15 +12,15 @@ import {
 import {updateExceptionsBox} from './update';
 
 @Model('exceptions-box', renderExceptionsBox, updateExceptionsBox)
-export class CompExceptionsBox<MessageType> extends BaseComp<
-    MessageType,
+export class CompExceptionsBox<AiMsg> extends BaseComp<
+    AiMsg,
     CompExceptionsBoxProps,
     CompExceptionsBoxElements,
     CompExceptionsBoxEvents,
     CompExceptionsBoxActions
 > {
     constructor(
-        context: ControllerContext<MessageType>,
+        context: ControllerContext<AiMsg>,
         props: CompExceptionsBoxProps,
     ) {
         super(context, props);

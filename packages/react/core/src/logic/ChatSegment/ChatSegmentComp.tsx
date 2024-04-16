@@ -8,12 +8,12 @@ import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {nameFromMessageAndPersona} from './utils/nameFromMessageAndPersona';
 import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona';
 
-export const ChatSegmentComp: <MessageType>(
-    props: ChatSegmentProps<MessageType>,
-    ref: Ref<ChatSegmentImperativeProps<MessageType>>,
-) => ReactNode = function <MessageType>(
-    props: ChatSegmentProps<MessageType>,
-    ref: Ref<ChatSegmentImperativeProps<MessageType>>,
+export const ChatSegmentComp: <AiMsg>(
+    props: ChatSegmentProps<AiMsg>,
+    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
+) => ReactNode = function <AiMsg>(
+    props: ChatSegmentProps<AiMsg>,
+    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
 ): ReactNode {
     const {chatSegment} = props;
     const chatItemsRef = useMemo(
@@ -62,7 +62,7 @@ export const ChatSegmentComp: <MessageType>(
                 }
 
                 const ForwardRefChatItemComp = forwardRef(
-                    ChatItemComp<MessageType>,
+                    ChatItemComp<AiMsg>,
                 );
 
                 if (chatItem.participantRole === 'user') {
@@ -72,7 +72,7 @@ export const ChatSegmentComp: <MessageType>(
                     if (chatItem.status !== 'complete') {
                         warn(
                             `User chat item should be always be in complete state — ` +
-                            `Current status: ${(chatItem as AiUnifiedMessage<MessageType>).status} — ` +
+                            `Current status: ${(chatItem as AiUnifiedMessage<AiMsg>).status} — ` +
                             `Segment UID: ${chatSegment.uid}`,
                         );
                         return null;

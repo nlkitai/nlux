@@ -3,7 +3,7 @@ import {NluxUsageError} from '../../../../shared/src/types/error';
 
 const source = 'hooks/getAdapterBuilder';
 
-export const getAdapterBuilder = <MessageType>(options: ChatAdapterOptions): ChatAdapterBuilder<MessageType> => {
+export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatAdapterBuilder<AiMsg> => {
     const {
         apiKey,
         dataTransferMode,
@@ -25,7 +25,7 @@ export const getAdapterBuilder = <MessageType>(options: ChatAdapterOptions): Cha
         });
     }
 
-    let newAdapter = createUnsafeChatAdapter<MessageType>().withApiKey(apiKey);
+    let newAdapter = createUnsafeChatAdapter<AiMsg>().withApiKey(apiKey);
 
     if (model !== undefined) {
         newAdapter = newAdapter.withModel(model);

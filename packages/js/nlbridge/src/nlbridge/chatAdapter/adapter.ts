@@ -9,7 +9,7 @@ import {
 import {uid} from '../../../../../shared/src/utils/uid';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 
-export abstract class NLBridgeAbstractAdapter<MessageType> implements StandardChatAdapter<MessageType> {
+export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdapter<AiMsg> {
     static defaultDataTransferMode: DataTransferMode = 'stream';
 
     private readonly __instanceId: string;
@@ -61,12 +61,12 @@ export abstract class NLBridgeAbstractAdapter<MessageType> implements StandardCh
 
     abstract fetchText(
         message: string,
-        extras: ChatAdapterExtras<MessageType>,
-    ): Promise<MessageType>;
+        extras: ChatAdapterExtras<AiMsg>,
+    ): Promise<AiMsg>;
 
     abstract streamText(
         message: string,
         observer: StreamingAdapterObserver,
-        extras: ChatAdapterExtras<MessageType>,
+        extras: ChatAdapterExtras<AiMsg>,
     ): void;
 }

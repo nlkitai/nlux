@@ -8,7 +8,7 @@ import {ChatSegmentEventsMap} from './chatSegmentEvents';
  * It's typically created by the module responsible for submitting a prompt or the module responsible for
  * communicating with the AI.
  */
-export type ChatSegmentObservable<MessageType> = {
+export type ChatSegmentObservable<AiMsg> = {
     /**
      * The ID of the chat segment that the observable is listening to.
      */
@@ -17,21 +17,21 @@ export type ChatSegmentObservable<MessageType> = {
      * Enables listening to events related to the chat segment.
      *
      * @param {EventType} event
-     * @param {ChatSegmentEventsMap<MessageType>[EventType]} callback
+     * @param {ChatSegmentEventsMap<AiMsg>[EventType]} callback
      */
     on: <EventType extends ChatSegmentEvent>(
         event: EventType,
-        callback: ChatSegmentEventsMap<MessageType>[EventType],
+        callback: ChatSegmentEventsMap<AiMsg>[EventType],
     ) => void;
     /**
      * Removes a listener from the chat segment.
      *
      * @param {EventType} event
-     * @param {ChatSegmentEventsMap<MessageType>[EventType]} callback
+     * @param {ChatSegmentEventsMap<AiMsg>[EventType]} callback
      */
     removeListener: <EventType extends ChatSegmentEvent>(
         event: EventType,
-        callback: ChatSegmentEventsMap<MessageType>[EventType],
+        callback: ChatSegmentEventsMap<AiMsg>[EventType],
     ) => void;
     /**
      * Destroys the observer and removes all listeners.

@@ -5,13 +5,13 @@ import {StandardAdapterInfo} from './standardAdapterConfig';
 /**
  * This interface is used by standard adapters provided by nlux to communicate with the AiChat component.
  */
-export interface StandardChatAdapter<MessageType> {
+export interface StandardChatAdapter<AiMsg> {
     get dataTransferMode(): 'stream' | 'fetch';
 
     fetchText(
         message: string,
-        extras: ChatAdapterExtras<MessageType>,
-    ): Promise<MessageType>;
+        extras: ChatAdapterExtras<AiMsg>,
+    ): Promise<AiMsg>;
 
     get id(): string;
     get info(): StandardAdapterInfo;
@@ -19,7 +19,7 @@ export interface StandardChatAdapter<MessageType> {
     streamText(
         message: string,
         observer: StreamingAdapterObserver,
-        extras: ChatAdapterExtras<MessageType>,
+        extras: ChatAdapterExtras<AiMsg>,
     ): void;
 }
 

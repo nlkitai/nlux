@@ -8,7 +8,7 @@ import {CompConversation} from '../../conversation/conversation.model';
 import {MessageContentType} from '../../message/message.types';
 import {CompPromptBox} from '../../prompt-box/prompt-box.model';
 
-export const submitPromptFactory = <MessageType>({
+export const submitPromptFactory = <AiMsg>({
     context,
     promptBoxInstance,
     conversation,
@@ -17,9 +17,9 @@ export const submitPromptFactory = <MessageType>({
     dataTransferMode,
 }: {
     dataTransferMode?: DataTransferMode;
-    context: ControllerContext<MessageType>;
-    promptBoxInstance: CompPromptBox<MessageType>;
-    conversation: CompConversation<MessageType>;
+    context: ControllerContext<AiMsg>;
+    promptBoxInstance: CompPromptBox<AiMsg>;
+    conversation: CompConversation<AiMsg>;
     messageToSend: string;
     resetPromptBox: (resetTextInput?: boolean) => void;
 }) => {
@@ -46,7 +46,7 @@ export const submitPromptFactory = <MessageType>({
             //
             const adapter = context.adapter;
             let observable: Observable<string> | undefined;
-            let sentResponse: Promise<MessageType> | undefined;
+            let sentResponse: Promise<AiMsg> | undefined;
             let messageContentType: MessageContentType;
             const supportedDataTransferModes: DataTransferMode[] = [];
             if (typeof adapter.fetchText === 'function') {
@@ -77,7 +77,7 @@ export const submitPromptFactory = <MessageType>({
                 supportedDataTransferModes[0] : 'stream';
 
             const dataTransferModeToUse = dataTransferMode ?? defaultDataTransferMode;
-            const extras: ChatAdapterExtras<MessageType> = {
+            const extras: ChatAdapterExtras<AiMsg> = {
                 aiChatProps: context.aiChatProps,
                 conversationHistory: conversation.getConversationContentForAdapter(
                     context.aiChatProps?.conversationOptions?.historyPayloadSize,

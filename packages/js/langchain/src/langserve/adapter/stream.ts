@@ -5,19 +5,19 @@ import {parseChunk} from '../parser/parseChunk';
 import {adapterErrorToExceptionId} from '../utils/adapterErrorToExceptionId';
 import {LangServeAbstractAdapter} from './adapter';
 
-export class LangServeStreamAdapter<MessageType> extends LangServeAbstractAdapter<MessageType> {
+export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMsg> {
     constructor(options: any) {
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<MessageType>): Promise<MessageType> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         const body = this.getRequestBody(message, extras.conversationHistory);
         fetch(this.endpointUrl, {
             method: 'POST',

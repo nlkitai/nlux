@@ -4,19 +4,19 @@ import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegme
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
-type SubmitPromptHandlerProps<MessageType> = {
-    adapterToUse?: ChatAdapter<MessageType> | StandardChatAdapter<MessageType>;
-    adapterExtras?: ChatAdapterExtras<MessageType>;
+type SubmitPromptHandlerProps<AiMsg> = {
+    adapterToUse?: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
+    adapterExtras?: ChatAdapterExtras<AiMsg>;
     prompt: string;
     promptBoxOptions?: PromptBoxOptions;
-    chatSegments: ChatSegment<MessageType>[];
+    chatSegments: ChatSegment<AiMsg>[];
     showException: (message: string) => void;
-    setChatSegments: (segments: ChatSegment<MessageType>[]) => void;
+    setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
     setPromptBoxStatus: (status: 'typing' | 'submitting') => void;
     conversationRef: MutableRefObject<ImperativeConversationCompProps | null>
 };
 
-export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerProps<MessageType>) => {
+export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<AiMsg>) => {
     const {
         adapterToUse,
         adapterExtras,
@@ -65,7 +65,7 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
             const {
                 segment: chatSegment,
                 observable: chatSegmentObservable,
-            } = submitPrompt<MessageType>(
+            } = submitPrompt<AiMsg>(
                 prompt,
                 adapterToUse,
                 adapterExtras,
@@ -97,9 +97,9 @@ export const useSubmitPromptHandler = <MessageType>(props: SubmitPromptHandlerPr
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 
-            // chatSegmentObservable.on('', (newChatSegment: ChatSegment<MessageType>) => {
+            // chatSegmentObservable.on('', (newChatSegment: ChatSegment<AiMsg>) => {
             //     const currentChatSegments = domToReactRef.current.chatSegments;
-            //     const newChatSegments: ChatSegment<MessageType>[] = currentChatSegments.map(
+            //     const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
             //         (currentChatSegment) => {
             //             if (currentChatSegment.uid === newChatSegment.uid) {
             //                 return newChatSegment;

@@ -8,7 +8,7 @@ import {decodeChunk} from '../../../utils/decodeChunk';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiStreamingAdapter<MessageType> extends OpenAiAbstractAdapter<MessageType> {
+export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     constructor({
         apiKey,
         model,
@@ -26,14 +26,14 @@ export class OpenAiStreamingAdapter<MessageType> extends OpenAiAbstractAdapter<M
         }
     }
 
-    fetchText(message: string): Promise<MessageType> {
+    fetchText(message: string): Promise<AiMsg> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text from the streaming adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<MessageType>): void {
+    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
