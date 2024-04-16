@@ -1,12 +1,9 @@
-import {
-    ChatAdapterExtras,
-    ChatSegment,
-    compExceptionsBoxClassName,
-    createExceptionsBoxController,
-    PromptBoxStatus,
-} from '@nlux/core';
+import {ChatAdapterExtras, ChatSegment} from '@nlux/core';
 import {CSSProperties, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {getRootClassNames} from '../../../../shared/src/dom/getRootClassNames';
+import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
+import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
+import {PromptBoxStatus} from '../../../../shared/src/ui/PromptBox/props';
 import {useSubmitPromptHandler} from '../hooks/useSubmitPromptHandler/useSubmitPromptHandler';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';

@@ -1,5 +1,8 @@
-import {compChatItemClassName, compChatItemDirectionClassName} from '@nlux/core';
 import {FC, forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {className as compChatItemClassName} from '../../../../../shared/src/ui/ChatItem/create';
+import {
+    directionClassName as compChatItemDirectionClassName,
+} from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
@@ -42,7 +45,7 @@ export const ChatItemComp: <MessageType>(
         : compChatItemDirectionClassName['incoming'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
-    const TheMessage: FC<{message: MessageType}> = useMemo(() => {
+    const MessageRenderer: FC<void> = useMemo(() => {
         if (props.customRenderer) {
             if (props.message === undefined) {
                 return () => null;
@@ -75,7 +78,7 @@ export const ChatItemComp: <MessageType>(
             {!isStreaming && (
                 <MessageComp
                     uid={props.uid}
-                    message={TheMessage}
+                    message={MessageRenderer}
                     status={props.status}
                     loader={props.loader}
                     direction={props.direction}

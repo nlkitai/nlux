@@ -34,7 +34,7 @@ describe('<AiChat /> + theme', () => {
             // Then
             const exceptionBox = container.querySelector('.nlux-comp-exp_box')!;
             expect(exceptionBox).not.toBeNull();
-            expect(exceptionBox.textContent).toEqual(expect.stringContaining('Error occurred while processing prompt'));
+            expect(exceptionBox.textContent).toEqual(expect.stringContaining('Failed to load content'));
         });
     });
 });

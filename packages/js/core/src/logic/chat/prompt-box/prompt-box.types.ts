@@ -1,4 +1,4 @@
-import {PromptBoxProps} from '../../../ui/PromptBox/props';
+import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 
 export type CompPromptBoxEvents = 'text-updated'
     | 'send-message-clicked'

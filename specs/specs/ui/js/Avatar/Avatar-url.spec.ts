@@ -1,6 +1,6 @@
-import {createAvatarDom} from '@nlux-dev/core/src/ui/Avatar/create';
-import {AvatarProps} from '@nlux-dev/core/src/ui/Avatar/props';
 import {describe, expect, it} from 'vitest';
+import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/create';
+import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
 
 describe('When an avatar component is rendered with url as picture', () => {
     it('Should render the photo container with the photo in the foreground', () => {

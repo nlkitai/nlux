@@ -1,7 +1,7 @@
-import {createMessageDom} from '@nlux-dev/core/src/ui/Message/create';
-import {MessageProps} from '@nlux-dev/core/src/ui/Message/props';
-import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update';
 import {describe, expect, it} from 'vitest';
+import {createMessageDom} from '../../../../../packages/shared/src/ui/Message/create';
+import {MessageProps} from '../../../../../packages/shared/src/ui/Message/props';
+import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/update';
 
 describe('When a message component is rendered and is in rendered status', () => {
     describe('When rendered without any message or status', () => {

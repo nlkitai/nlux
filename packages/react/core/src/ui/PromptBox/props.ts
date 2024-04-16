@@ -1,4 +1,4 @@
-import {PromptBoxStatus} from '@nlux/core';
+import {PromptBoxStatus} from '../../../../../shared/src/ui/PromptBox/props';
 
 export type PromptBoxProps = {
     status: PromptBoxStatus;

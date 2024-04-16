@@ -1,4 +1,4 @@
-import {MessageDirection} from '@nlux/core';
+import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 
 export type StreamContainerProps = {
     uid: string,

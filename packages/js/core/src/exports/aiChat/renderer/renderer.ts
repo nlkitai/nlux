@@ -4,7 +4,6 @@ import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chat-room/chat-room.model';
 import {CompChatRoomProps} from '../../../logic/chat/chat-room/chat-room.types';
 import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/model';
-import {CompExceptionsBoxProps} from '../../../logic/miscellaneous/exceptions-box/types';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ChatItem} from '../../../types/conversation';
@@ -163,11 +162,7 @@ export class NluxRenderer {
             if (CompExceptionsBoxConstructor) {
                 exceptionAlert = comp(CompExceptionsBox)
                     .withContext(this.context)
-                    .withProps<CompExceptionsBoxProps>({
-                        message: undefined,
-                        visible: false,
-                        type: 'error',
-                    }).create();
+                    .create();
             } else {
                 warn('Exception alert component is not registered! No exceptions will be shown.');
             }

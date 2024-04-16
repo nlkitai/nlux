@@ -1,5 +1,5 @@
-import {compSendIconClassName} from '@nlux/core';
 import React from 'react';
+import {className as compSendIconClassName} from '../../../../../shared/src/ui/SendIcon/create';
 
 export const SendIconComp = () => {
     return (
