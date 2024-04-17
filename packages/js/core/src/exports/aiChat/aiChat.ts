@@ -15,7 +15,7 @@ import {LayoutOptions} from './options/layoutOptions';
 import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
-export class AiChat<AiMsg> implements IAiChat<AiMsg> {
+export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theAdapter: ChatAdapter<AiMsg> | null = null;
     protected theAdapterBuilder: StandardChatAdapter<AiMsg> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
