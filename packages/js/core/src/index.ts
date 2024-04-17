@@ -168,13 +168,3 @@ export type {
 export type {
     ParticipantRole,
 } from './types/participant';
-
-// SERVICES _________________
-
-export type {
-    SubmitPrompt,
-} from './exports/aiChat/services/submitPrompt/submitPrompt';
-
-export {
-    submitPrompt,
-} from './exports/aiChat/services/submitPrompt/submitPromptImpl';

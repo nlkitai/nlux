@@ -1,16 +1,16 @@
-import {ChatAdapter} from '../../../../../../../shared/src/types/adapters/chat/chatAdapter';
-import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
-import {ChatSegment} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
-import {AiStreamedMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {ChatSegment} from '../../types/chatSegment/chatSegment';
+import {AiStreamedMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiMessageChunkReceivedCallback,
     AiMessageStreamedCallback,
     AiMessageStreamStartedCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
-} from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
-import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
-import {uid} from '../../../../../../../shared/src/utils/uid';
+} from '../../types/chatSegment/chatSegmentEvents';
+import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
+import {uid} from '../../utils/uid';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
 export const submitInStreamingMode = async <AiMsg>(

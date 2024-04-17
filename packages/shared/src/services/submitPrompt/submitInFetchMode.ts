@@ -1,16 +1,16 @@
-import {ChatAdapter} from '../../../../../../../shared/src/types/adapters/chat/chatAdapter';
-import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
-import {ChatSegment} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatSegmentAiMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {ChatSegment} from '../../types/chatSegment/chatSegment';
+import {ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiMessageReceivedCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
-} from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
-import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
-import {NLErrorId} from '../../../../../../../shared/src/types/exceptions/errors';
-import {uid} from '../../../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../../../shared/src/utils/warn';
+} from '../../types/chatSegment/chatSegmentEvents';
+import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
+import {NLErrorId} from '../../types/exceptions/errors';
+import {uid} from '../../utils/uid';
+import {warn} from '../../utils/warn';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
 export const submitInFetchMode = async <AiMsg>(

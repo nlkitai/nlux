@@ -1,5 +1,5 @@
-import {ChatSegmentUserMessage} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
-import {uid} from '../../../../../../../../shared/src/utils/uid';
+import {ChatSegmentUserMessage} from '../../../types/chatSegment/chatSegmentUserMessage';
+import {uid} from '../../../utils/uid';
 
 export const getUserMessageFromPrompt = (prompt: string): ChatSegmentUserMessage => {
     return {
