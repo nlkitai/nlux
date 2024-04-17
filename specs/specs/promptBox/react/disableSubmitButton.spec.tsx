@@ -19,30 +19,30 @@ describe('<AiChat /> + promptBox + disableSubmitButton', () => {
 
     describe('When no disableSubmitButton option is initially provided', () => {
         it('The submit button should be initially disabled', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const button = container.querySelector('.nlux-comp-prmptBox > button')!;
 
-            // Then
+            // Assert
             expect(button.getAttribute('disabled')).toBe('');
         });
 
         describe('When the user types in the text area', () => {
             it('The submit button should be enabled', async () => {
-                // Given
+                // Arrange
                 const {container, rerender} = render(<AiChat adapter={adapterController!.adapter}/>);
                 await waitForRenderCycle();
                 const textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const button = container.querySelector('.nlux-comp-prmptBox > button')!;
 
-                // When
+                // Act
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(button.getAttribute('disabled')).toBeNull();
             });
         });

@@ -23,70 +23,70 @@ describe('createAiChat() + initial load', () => {
     });
 
     it('Should not initially render anything is DOM', async () => {
-        // Given
+        // Arrange
         adapterController = adapterBuilder().withFetchText().create();
         aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-        // When
+        // Act
         await waitForRenderCycle();
 
-        // Then
+        // Assert
         expect(rootElement?.innerHTML).toBe('');
     });
 
     describe('When mount() is called', () => {
         it('Chat component should render', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const aiChatElement = rootElement.querySelector('.nlux-AiChat-root');
             expect(aiChatElement).toBeInTheDocument();
         });
 
         it('Exceptions box container should render', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const exceptionsBoxContainer = rootElement.querySelector('.nlux-comp-exp_box');
             expect(exceptionsBoxContainer).toBeInTheDocument();
         });
 
         it('Prompt-box container should render', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const promptBoxContainer = rootElement.querySelector('.nlux-comp-prmptBox');
             expect(promptBoxContainer).toBeInTheDocument();
         });
 
         it('Conversation container should render', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const conversationContainer = rootElement.querySelector('.nlux-chtRm-cnv-cntr');
             expect(conversationContainer).toBeInTheDocument();
         });
@@ -94,24 +94,24 @@ describe('createAiChat() + initial load', () => {
 
     describe('When mount() is called twice', () => {
         it('It should throw an error', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(() => aiChat?.mount(rootElement)).toThrowError();
         });
 
         it('It should not render anything new in DOM', async () => {
-            // Given
+            // Arrange
             adapterController = adapterBuilder().withFetchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
             const initialHtmlRendered = rootElement?.innerHTML;
@@ -122,7 +122,7 @@ describe('createAiChat() + initial load', () => {
                 // ignore
             }
 
-            // Then
+            // Assert
             expect(rootElement?.innerHTML).toBe(initialHtmlRendered);
         });
     });

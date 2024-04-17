@@ -25,7 +25,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
     describe('When no submitShortcut option is initially provided', () => {
         it('The prompt should be submitted when the user presses the Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -34,34 +34,34 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         it('The prompt should not be submitted when the textarea is empty and the user presses the Enter key',
             async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
 
-                // When
+                // Act
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             },
         );
 
         it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -70,16 +70,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{Control>}{Enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
         });
 
         it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -88,17 +88,17 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{Meta>}{Enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
         });
 
         describe('When submitShortcut option is set to CommandEnter after initial render', () => {
             it('The prompt should not be submitted when the user presses the Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -114,16 +114,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should be submitted when the user presses the Ctrl+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -139,16 +139,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Control>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should be submitted when the user presses the Meta+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -164,11 +164,11 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Meta>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
         });
@@ -176,7 +176,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
     describe('When submitShortcut option is initially set to CommandEnter', () => {
         it('The prompt should not be submitted when the user presses the Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                 submitShortcut: 'CommandEnter',
             });
@@ -187,16 +187,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
         });
 
         it('The prompt should be submitted when the user presses the Ctrl+Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                 submitShortcut: 'CommandEnter',
             });
@@ -207,16 +207,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{Control>}{Enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         it('The prompt should be submitted when the user presses the Meta+Enter key', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                 submitShortcut: 'CommandEnter',
             });
@@ -227,17 +227,17 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
-            // When
+            // Act
             await userEvent.type(textArea, '{Meta>}{Enter}');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         describe('When submitShortcut option is set to Enter after initial render', () => {
             it('The prompt should be submitted when the user presses the Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -255,16 +255,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -282,16 +282,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Control>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -309,18 +309,18 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Meta>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             });
         });
 
         describe('When submitShortcut option is removed after the initial render', () => {
             it('The prompt should be submitted when the user presses the Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -338,16 +338,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -365,16 +365,16 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Control>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     submitShortcut: 'CommandEnter',
                 });
@@ -392,11 +392,11 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.type(textArea, '{Meta>}{Enter}');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
             });
         });

@@ -6,7 +6,7 @@ import {updateWelcomeMessageDom} from '../../../../../packages/shared/src/ui/Wel
 describe('When welcome message is rendered for update', () => {
     describe('When the message is updated', () => {
         it('Should update the message with the new message', () => {
-            // Given
+            // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
                 picture: 'https://example.com/avatar.jpg',
@@ -16,17 +16,17 @@ describe('When welcome message is rendered for update', () => {
             const welcomeMessage = createWelcomeMessageDom(props);
             const newMessage = 'Goodbye, World!';
 
-            // When
+            // Act
             updateWelcomeMessageDom(welcomeMessage, props, {...props, message: newMessage});
 
-            // Then
+            // Assert
             expect(welcomeMessage.querySelector('.nlux-comp-wlc_msg_txt')!.textContent).toBe(newMessage);
         });
     });
 
     describe('When the name is updated', () => {
         it('Should update the message with the new name', () => {
-            // Given
+            // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
                 picture: 'https://example.com/avatar.jpg',
@@ -36,18 +36,18 @@ describe('When welcome message is rendered for update', () => {
             const welcomeMessage = createWelcomeMessageDom(props);
             const newName = 'Jane Doe';
 
-            // When
+            // Act
             updateWelcomeMessageDom(welcomeMessage, props, {...props, name: newName});
             const name = welcomeMessage.querySelector('.nlux-comp-wlc_msg_prs_nm')!.textContent;
 
-            // Then
+            // Assert
             expect(name).toBe(newName);
         });
     });
 
     describe('When the picture URL is updated', () => {
         it('Should update the message with the new picture', () => {
-            // Given
+            // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
                 picture: 'https://example.com/avatar.jpg',
@@ -57,11 +57,11 @@ describe('When welcome message is rendered for update', () => {
             const welcomeMessage = createWelcomeMessageDom(props);
             const newPicture = 'https://example.com/new-avatar.jpg';
 
-            // When
+            // Act
             updateWelcomeMessageDom(welcomeMessage, props, {...props, picture: newPicture});
             const personaPicture = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
 
-            // Then
+            // Assert
             expect(personaPicture).not.toBeNull();
             expect(personaPicture.outerHTML).toEqual(
                 expect.stringContaining('url(https://example.com/new-avatar.jpg)'),

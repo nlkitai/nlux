@@ -24,30 +24,30 @@ describe('createAiChat() + promptBox + autoFocus', () => {
 
     describe('When no autoFocus option is initially provided', () => {
         it('The textarea should be rendered without autoFocus', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(promptBox.autofocus).toEqual(false);
         });
 
         describe('When autoFocus option is set to true after initial render', () => {
             it('The textarea should be rendered with autoFocus', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 aiChat.updateProps({promptBoxOptions: {autoFocus: true}});
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 expect(promptBox.autofocus).toEqual(true);
             });
@@ -56,30 +56,30 @@ describe('createAiChat() + promptBox + autoFocus', () => {
 
     describe('When autoFocus option is initially set to true', () => {
         it('The textarea should be rendered with autoFocus', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({autoFocus: true});
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(promptBox.autofocus).toEqual(true);
         });
 
         describe('When autoFocus option is set to false after initial render', () => {
             it('The textarea should be rendered without autoFocus', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({autoFocus: true});
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 aiChat.updateProps({promptBoxOptions: {autoFocus: false}});
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 const promptBox: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 expect(promptBox.autofocus).toEqual(false);
             });

@@ -25,32 +25,32 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
     describe('When no disableSubmitButton option is initially provided', () => {
         it('The submit button should be initially disabled', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
             const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-            // Then
+            // Assert
             expect(button.getAttribute('disabled')).toBe('');
         });
 
         describe('When the user types in the text area', () => {
             it('The submit button should be enabled', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
                 const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-                // When
+                // Act
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(button.getAttribute('disabled')).toBeNull();
             });
         });
@@ -58,23 +58,23 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
     describe('When disableSubmitButton option is initially set to true', () => {
         it('The submit button should be initially disabled', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                 disableSubmitButton: true,
             });
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
             const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-            // Then
+            // Assert
             expect(button.getAttribute('disabled')).toBe('');
         });
 
         describe('When the user types in the text area', () => {
             it('The submit button should remain disabled', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     disableSubmitButton: true,
                 });
@@ -84,17 +84,17 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
                 const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-                // When
+                // Act
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(button.getAttribute('disabled')).toBe('');
             });
 
             describe('When disableSubmitButton option is set to false', () => {
                 it('The submit button should be enabled', async () => {
-                    // Given
+                    // Arrange
                     aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                         disableSubmitButton: true,
                     });
@@ -107,7 +107,7 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
                     await userEvent.type(textArea, 'Hi');
                     await waitForRenderCycle();
 
-                    // When
+                    // Act
                     aiChat.updateProps({
                         promptBoxOptions: {
                             disableSubmitButton: false,
@@ -116,7 +116,7 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
                     await waitForRenderCycle();
 
-                    // Then
+                    // Assert
                     expect(button.getAttribute('disabled')).toBeNull();
                 });
             });
@@ -125,23 +125,23 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
     describe('When disableSubmitButton option is initially set to false', () => {
         it('The submit button should be initially enabled', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                 disableSubmitButton: false,
             });
 
-            // When
+            // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
             const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-            // Then
+            // Assert
             expect(button.getAttribute('disabled')).toBeNull();
         });
 
         describe('When the user types in the text area', () => {
             it('The submit button should remain enabled', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     disableSubmitButton: false,
                 });
@@ -151,17 +151,17 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
                 const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
 
-                // When
+                // Act
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(button.getAttribute('disabled')).toBeNull();
             });
 
             describe('When disableSubmitButton option is set to true', () => {
                 it('The submit button should be disabled', async () => {
-                    // Given
+                    // Arrange
                     aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                         disableSubmitButton: false,
                     });
@@ -174,7 +174,7 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
                     await userEvent.type(textArea, 'Hi');
                     await waitForRenderCycle();
 
-                    // When
+                    // Act
                     aiChat.updateProps({
                         promptBoxOptions: {
                             disableSubmitButton: true,
@@ -183,7 +183,7 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
                     await waitForRenderCycle();
 
-                    // Then
+                    // Assert
                     expect(button.getAttribute('disabled')).toBe('');
                 });
             });
@@ -191,7 +191,7 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
 
         describe('When the user submits a message', () => {
             it('The submit button should be disabled', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions({
                     disableSubmitButton: false,
                 });
@@ -203,11 +203,11 @@ describe('createAiChat() + promptBox + disableSubmitButton', () => {
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 await userEvent.click(button);
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(button.getAttribute('disabled')).toBe('');
             });
         });

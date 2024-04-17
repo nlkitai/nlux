@@ -4,16 +4,16 @@ import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
 
 describe('When an avatar component is rendered with url as picture', () => {
     it('Should render the photo container with the photo in the foreground', () => {
-        // Given
+        // Arrange
         const url = 'https://example.com/photo.jpg';
         const name = 'John Doe';
         const picture = url;
         const props: AvatarProps = {name, picture};
 
-        // When
+        // Act
         const element = createAvatarDom(props);
 
-        // Then
+        // Assert
         expect(element.outerHTML).toBe(
             `<div class="nlux-comp-avtr" title="${name}"><div class="avtr_ctn">` +
             `<span class="avtr_ltr">J</span>` +

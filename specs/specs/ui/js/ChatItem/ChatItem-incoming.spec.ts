@@ -5,22 +5,22 @@ import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 
 describe('When a chat item component is rendered in incoming direction', () => {
     it('Should render the item with the right direction class', () => {
-        // Given
+        // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
             status: 'rendered',
             message: 'Hello, World!',
         };
 
-        // When
+        // Act
         const chatItem = createChatItemDom(props);
 
-        // Then
+        // Assert
         expect(chatItem.classList.contains('nlux_cht_itm_incoming')).toBe(true);
     });
 
     it('Should render message with the right direction class', () => {
-        // Given
+        // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
             status: 'rendered',
@@ -28,15 +28,15 @@ describe('When a chat item component is rendered in incoming direction', () => {
         };
         const chatItem = createChatItemDom(props);
 
-        // When
+        // Act
         const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
-        // Then
+        // Assert
         expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
     });
 
     it('Should render profile picture', () => {
-        // Given
+        // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
             status: 'rendered',
@@ -46,10 +46,10 @@ describe('When a chat item component is rendered in incoming direction', () => {
         };
         const chatItem = createChatItemDom(props);
 
-        // When
+        // Act
         const persona = chatItem.querySelector('.nlux-comp-avtr') as HTMLElement;
 
-        // Then
+        // Assert
         expect(persona).not.toBeNull();
         expect(persona.outerHTML).toEqual(expect.stringContaining('url(https://example.com/john-doe.jpg)'));
         expect(persona.outerHTML).toEqual(expect.stringContaining('John Doe'));
@@ -57,7 +57,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
 
     describe('When the direction changes to outgoing', () => {
         it('Should render the item with the outgoing class', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
@@ -65,20 +65,20 @@ describe('When a chat item component is rendered in incoming direction', () => {
             };
             const chatItem = createChatItemDom(props);
 
-            // When
+            // Act
             const newProps: ChatItemProps = {
                 ...props,
                 direction: 'outgoing',
             };
             updateChatItemDom(chatItem, props, newProps);
 
-            // Then
+            // Assert
             expect(chatItem.classList.contains('nlux_cht_itm_incoming')).toBe(false);
             expect(chatItem.classList.contains('nlux_cht_itm_outgoing')).toBe(true);
         });
 
         it('Should render message with the outgoing class', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
@@ -86,14 +86,14 @@ describe('When a chat item component is rendered in incoming direction', () => {
             };
             const chatItem = createChatItemDom(props);
 
-            // When
+            // Act
             const newProps: ChatItemProps = {
                 ...props,
                 direction: 'outgoing',
             };
             updateChatItemDom(chatItem, props, newProps);
 
-            // Then
+            // Assert
             const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
             expect(message.classList.contains('nlux_msg_incoming')).toBe(false);
             expect(message.classList.contains('nlux_msg_outgoing')).toBe(true);

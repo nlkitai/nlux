@@ -6,7 +6,7 @@ import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 describe('When a chat item component is rendered in incoming direction', () => {
     describe('When the message is updated', () => {
         it('Should update the message', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
@@ -15,20 +15,20 @@ describe('When a chat item component is rendered in incoming direction', () => {
             const chatItem = createChatItemDom(props);
             const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
-            // When
+            // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
                 message: 'Hello, Universe!',
             });
 
-            // Then
+            // Assert
             expect(message.textContent).toBe('Hello, Universe!');
         });
     });
 
     describe('When the status is updated', () => {
         it('Should update the message status', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
                 status: 'rendered',
@@ -37,20 +37,20 @@ describe('When a chat item component is rendered in incoming direction', () => {
             const chatItem = createChatItemDom(props);
             const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
-            // When
+            // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
                 status: 'loading',
             });
 
-            // Then
+            // Assert
             expect(message.classList.contains('nlux_msg_loading')).toBe(true);
         });
     });
 
     describe('When the loader is updated', () => {
         it('Should update the message loader', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
                 status: 'loading',
@@ -60,7 +60,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             const chatItem = createChatItemDom(props);
             const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
-            // When
+            // Act
             const newLoader = document.createElement('div');
             newLoader.innerHTML = 'Loading...';
             updateChatItemDom(chatItem, props, {
@@ -68,7 +68,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
                 loader: newLoader,
             });
 
-            // Then
+            // Assert
             expect(message.innerHTML).toEqual(expect.stringContaining('Loading...'));
         });
     });

@@ -18,15 +18,15 @@ describe('<AiChat /> + className', () => {
 
     describe('When the component is created without a className', () => {
         it('The default className should be used', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.classList.length).toBe(2);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
             expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
@@ -34,16 +34,16 @@ describe('<AiChat /> + className', () => {
 
         describe('When a className is set', () => {
             it('The new className should be used', async () => {
-                // Given
+                // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter}/>;
                 const {rerender} = render(aiChat);
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
-                // When
+                // Act
                 rerender(<AiChat adapter={adapterController!.adapter} className="my-class"/>);
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
@@ -54,14 +54,14 @@ describe('<AiChat /> + className', () => {
 
     describe('When the component is created with a className', () => {
         it('The className should be used', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
             render(aiChat);
 
-            // When
+            // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.classList.length).toBe(3);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
             expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
@@ -70,16 +70,16 @@ describe('<AiChat /> + className', () => {
 
         describe('When a different className is set', () => {
             it('The new className should be used', async () => {
-                // Given
+                // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
                 const {rerender} = render(aiChat);
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
-                // When
+                // Act
                 rerender(<AiChat adapter={adapterController!.adapter} className="my-new-class"/>);
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
@@ -89,16 +89,16 @@ describe('<AiChat /> + className', () => {
 
         describe('When the className is removed', () => {
             it('The default className should be used', async () => {
-                // Given
+                // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
                 const {rerender} = render(aiChat);
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
-                // When
+                // Act
                 rerender(<AiChat adapter={adapterController!.adapter}/>);
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(aiChatDom.classList.length).toBe(2);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');

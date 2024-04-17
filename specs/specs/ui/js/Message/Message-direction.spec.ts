@@ -6,23 +6,23 @@ import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/up
 describe('When a message component is rendered', () => {
     describe('When the direction is set to incoming', () => {
         it('Should render the message with the incoming class', () => {
-            // Given
+            // Arrange
             const props: MessageProps = {
                 direction: 'incoming',
                 status: 'rendered',
                 message: 'Hello, World!',
             };
 
-            // When
+            // Act
             const message = createMessageDom(props);
 
-            // Then
+            // Assert
             expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
         });
 
         describe('When the direction changes to outgoing', () => {
             it('Should render the message with the outgoing class', () => {
-                // Given
+                // Arrange
                 const props: MessageProps = {
                     direction: 'incoming',
                     status: 'rendered',
@@ -30,7 +30,7 @@ describe('When a message component is rendered', () => {
                 };
                 const message = createMessageDom(props);
 
-                // When
+                // Act
                 const newProps: MessageProps = {
                     ...props,
                     direction: 'outgoing',
@@ -38,7 +38,7 @@ describe('When a message component is rendered', () => {
 
                 updateMessageDom(message, props, newProps);
 
-                // Then
+                // Assert
                 expect(message.classList.contains('nlux_msg_incoming')).toBe(false);
                 expect(message.classList.contains('nlux_msg_outgoing')).toBe(true);
             });
@@ -62,7 +62,7 @@ describe('When a message component is rendered', () => {
 
         describe('When the direction changes to incoming', () => {
             it('Should render the message with the incoming class', () => {
-                // Given
+                // Arrange
                 const props: MessageProps = {
                     direction: 'outgoing',
                     status: 'rendered',
@@ -70,7 +70,7 @@ describe('When a message component is rendered', () => {
                 };
                 const message = createMessageDom(props);
 
-                // When
+                // Act
                 const newProps: MessageProps = {
                     ...props,
                     direction: 'incoming',
@@ -78,7 +78,7 @@ describe('When a message component is rendered', () => {
 
                 updateMessageDom(message, props, newProps);
 
-                // Then
+                // Assert
                 expect(message.classList.contains('nlux_msg_outgoing')).toBe(false);
                 expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
             });

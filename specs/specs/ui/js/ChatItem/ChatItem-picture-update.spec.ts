@@ -7,7 +7,7 @@ import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 describe('When a chat item component is rendered in outgoing direction', () => {
     describe('When the profile picture is updated', () => {
         it('Should update the profile picture', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'outgoing',
                 status: 'rendered',
@@ -20,20 +20,20 @@ describe('When a chat item component is rendered in outgoing direction', () => {
                 `.${avatarPictureClassName}`,
             ) as HTMLElement;
 
-            // When
+            // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
                 picture: 'https://example.com/jane-doe.jpg',
             });
 
-            // Then
+            // Assert
             expect(persona.outerHTML).toEqual(expect.stringContaining('url(https://example.com/jane-doe.jpg)'));
         });
     });
 
     describe('When the profile name is updated', () => {
         it('Should update the profile name', () => {
-            // Given
+            // Arrange
             const props: ChatItemProps = {
                 direction: 'outgoing',
                 status: 'rendered',
@@ -46,13 +46,13 @@ describe('When a chat item component is rendered in outgoing direction', () => {
                 `.${avatarPictureClassName}`,
             ) as HTMLElement;
 
-            // When
+            // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
                 name: 'Jane Doe',
             });
 
-            // Then
+            // Assert
             expect(persona.outerHTML).toEqual(expect.stringContaining('Jane Doe'));
         });
     });

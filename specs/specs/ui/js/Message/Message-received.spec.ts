@@ -6,44 +6,44 @@ import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/up
 describe('When a message component is rendered and is in rendered status', () => {
     describe('When rendered without any message or status', () => {
         it('Should render an empty message in rendered status', () => {
-            // Given
+            // Arrange
             const dom = createMessageDom({} as any);
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toBe('<div class="nlux-comp-msg nlux_msg_rendered"></div>');
         });
     });
 
     describe('When rendered with a message', () => {
         it('Should render the message', () => {
-            // Given
+            // Arrange
             const dom = createMessageDom({
                 direction: 'incoming', status: 'rendered', message: 'Hello, World!',
             });
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toBe('<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
     });
 
     describe('When HTML is provided in message body', () => {
         it('Should be escaped', () => {
-            // Given
+            // Arrange
             const props: MessageProps = {
                 direction: 'incoming', status: 'rendered', message: '<strong>Hello, World!</strong>',
             };
             const dom = createMessageDom(props);
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Hello, World!&lt;/strong&gt;</div>');
         });
@@ -55,33 +55,33 @@ describe('When a message component is rendered and is in rendered status', () =>
 
     describe('When message is updated', () => {
         it('Should update the message', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Goodbye, World!'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Goodbye, World!</div>',
             );
         });
 
         it('Should escape HTML in the new message', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(
                 dom,
                 beforeProps,
                 {direction: 'incoming', status: 'rendered', message: '<strong>Goodbye, World!</strong>'},
             );
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">&lt;strong&gt;Goodbye, World!&lt;/strong&gt;</div>',
             );
@@ -90,14 +90,14 @@ describe('When a message component is rendered and is in rendered status', () =>
 
     describe('When message is updated with the same message', () => {
         it('Should not update the message', () => {
-            // Given
+            // Arrange
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
 
-            // When
+            // Act
             updateMessageDom(dom, props, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
@@ -105,14 +105,14 @@ describe('When a message component is rendered and is in rendered status', () =>
 
     describe('When message is updated with the same message and status', () => {
         it('Should not update the message', () => {
-            // Given
+            // Arrange
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
 
-            // When
+            // Act
             updateMessageDom(dom, props, {...props});
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
@@ -120,14 +120,14 @@ describe('When a message component is rendered and is in rendered status', () =>
 
     describe('When message is updated with the same status', () => {
         it('Should not update the message', () => {
-            // Given
+            // Arrange
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(props);
 
-            // When
+            // Act
             updateMessageDom(dom, props, {direction: 'incoming', status: 'rendered', message: 'Hello, World!'});
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>');
         });
@@ -135,17 +135,17 @@ describe('When a message component is rendered and is in rendered status', () =>
 
     describe('When the status changes to loading', () => {
         it('Should remove the message, update class name, and render default loader', () => {
-            // Given
+            // Arrange
             const initialProps: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const newProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const dom = createMessageDom(initialProps);
 
-            // When
+            // Act
             const beforeHtml = dom.outerHTML;
             updateMessageDom(dom, initialProps, newProps);
             const afterHtml = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(beforeHtml).toBe(
                 '<div class="nlux-comp-msg nlux_msg_rendered nlux_msg_incoming">Hello, World!</div>',
             );
@@ -157,7 +157,7 @@ describe('When a message component is rendered and is in rendered status', () =>
 
         describe('When the status changes back to rendered', () => {
             it('Should remove the loader and render the message', () => {
-                // Given
+                // Arrange
                 const initialProps: MessageProps = {
                     direction: 'incoming',
                     status: 'rendered',
@@ -167,18 +167,18 @@ describe('When a message component is rendered and is in rendered status', () =>
                 const newProps2: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
                 const dom = createMessageDom(initialProps);
 
-                // When
+                // Act
                 updateMessageDom(dom, initialProps, newProps1);
 
-                // Then
+                // Assert
                 expect(dom.outerHTML).toBe(
                     '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_loading"><div class="nlux_msg_ldr">' +
                     '<div class="spn_ldr_ctn"><span class="spn_ldr"></span></div></div></div>');
 
-                // When
+                // Act
                 updateMessageDom(dom, newProps1, newProps2);
 
-                // Then
+                // Assert
                 expect(dom.outerHTML).toBe(
                     '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
             });
