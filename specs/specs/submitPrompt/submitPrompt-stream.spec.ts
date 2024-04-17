@@ -1,6 +1,6 @@
-import {ChatAdapterExtras, submitPrompt} from '@nlux-dev/core/src';
-import {ChatAdapter} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {waitForMilliseconds} from '../../utils/wait';
@@ -226,7 +226,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                 await waitForMilliseconds(10);
 
                 // Assert
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), 'The');
+                expect(listenToChunkReceived).toHaveBeenCalledWith('The', expect.any(String));
             });
 
             it('Should not emit aiChunkReceived event when callback is removed', async () => {
@@ -304,7 +304,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                 expect(listenToStreamStarted).toHaveBeenCalledTimes(1);
                 expect(listenToChunkReceived).toHaveBeenCalledTimes(1);
 
-                const messageId = listenToChunkReceived.mock.calls[0][0];
+                const messageId = listenToChunkReceived.mock.calls[0][1];
                 expect(typeof messageId).toBe('string');
                 expect(messageId.length).toBeGreaterThan(0);
 
@@ -336,10 +336,10 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
                 // Assert
                 expect(listenToChunkReceived).toHaveBeenCalledTimes(4);
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), 'The');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), ' weather');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), ' is');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), ' sunny');
+                expect(listenToChunkReceived).toHaveBeenCalledWith('The', expect.any(String));
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' weather', expect.any(String));
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' is', expect.any(String));
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' sunny', expect.any(String));
             });
 
             it('Should emit aiChunkReceived with the same message id for each chunk', async () => {
@@ -359,13 +359,13 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
                 // Assert
                 expect(listenToChunkReceived).toHaveBeenCalledTimes(4);
-                const messageId = listenToChunkReceived.mock.calls[0][0];
+                const messageId = listenToChunkReceived.mock.calls[0][1];
                 expect(typeof messageId).toBe('string');
                 expect(messageId?.length).toBeGreaterThan(0);
-                expect(listenToChunkReceived).toHaveBeenCalledWith(messageId, 'The');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(messageId, ' weather');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(messageId, ' is');
-                expect(listenToChunkReceived).toHaveBeenCalledWith(messageId, ' sunny');
+                expect(listenToChunkReceived).toHaveBeenCalledWith('The', messageId);
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' weather', messageId);
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' is', messageId);
+                expect(listenToChunkReceived).toHaveBeenCalledWith(' sunny', messageId);
             });
         });
 
@@ -410,7 +410,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
                 // Assert
                 expect(listenToChunkReceived).toHaveBeenCalledTimes(1);
-                expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), 'The');
+                expect(listenToChunkReceived).toHaveBeenCalledWith('The', expect.any(String));
             });
 
             it('Should include user message and ai messages in the complete event', async () => {
@@ -586,7 +586,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
                     // Assert
                     expect(listenToChunkReceived).toHaveBeenCalledTimes(1);
-                    expect(listenToChunkReceived).toHaveBeenCalledWith(expect.any(String), 'The');
+                    expect(listenToChunkReceived).toHaveBeenCalledWith('The', expect.any(String));
                 });
 
                 it('Should emit events in the correct order', async () => {

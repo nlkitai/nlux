@@ -1,4 +1,4 @@
-import {StreamingAdapterObserver} from './chatAdapter';
+import {DataTransferMode, StreamingAdapterObserver} from './chatAdapter';
 import {ChatAdapterExtras} from './chatAdapterExtras';
 import {StandardAdapterInfo} from './standardAdapterConfig';
 
@@ -6,7 +6,7 @@ import {StandardAdapterInfo} from './standardAdapterConfig';
  * This interface is used by standard adapters provided by nlux to communicate with the AiChat component.
  */
 export interface StandardChatAdapter<AiMsg> {
-    get dataTransferMode(): 'stream' | 'fetch';
+    get dataTransferMode(): DataTransferMode;
 
     fetchText(
         message: string,

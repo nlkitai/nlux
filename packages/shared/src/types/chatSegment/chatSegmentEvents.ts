@@ -32,8 +32,8 @@ export type AiMessageStreamedCallback = (aiMessage: AiStreamedMessage & {
 }) => void;
 
 export type AiMessageChunkReceivedCallback = (
-    messageId: string,
     chunk: string,
+    messageId: string,
 ) => void;
 
 export type ChatSegmentCompleteCallback<AiMsg> = (

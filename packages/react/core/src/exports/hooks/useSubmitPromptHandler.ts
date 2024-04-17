@@ -85,34 +85,77 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             // to trigger a check and potentially re-render the React component, we need to change
             // the reference of the parts array by creating a new array.
 
-            chatSegmentObservable.on('complete', (newChatSegment) => {
-                const segments = domToReactRef.current.chatSegments.map((segment) => {
-                    if (segment.uid === chatSegment.uid) {
-                        return newChatSegment;
-                    }
+            chatSegmentObservable.on('userMessageReceived', (userMessage) => {
+                const currentChatSegments = domToReactRef.current.chatSegments;
+                const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
+                    (currentChatSegment) => {
+                        if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
+                            return currentChatSegment;
+                        }
 
-                    return segment;
-                });
+                        return {
+                            ...currentChatSegment,
+                            items: [
+                                ...currentChatSegment.items,
+                                userMessage,
+                            ],
+                        };
+                    },
+                );
 
-                domToReactRef.current.setChatSegments([...segments]);
+                domToReactRef.current.setChatSegments(newChatSegments);
+            });
+
+            chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
+                const currentChatSegments = domToReactRef.current.chatSegments;
+                const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
+                    (currentChatSegment) => {
+                        if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
+                            return currentChatSegment;
+                        }
+
+                        return {
+                            ...currentChatSegment,
+                            items: [
+                                ...currentChatSegment.items,
+                                {...aiStreamedMessage},
+                            ],
+                        };
+                    },
+                );
+
+                domToReactRef.current.setChatSegments(newChatSegments);
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 
-            // chatSegmentObservable.on('', (newChatSegment: ChatSegment<AiMsg>) => {
-            //     const currentChatSegments = domToReactRef.current.chatSegments;
-            //     const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
-            //         (currentChatSegment) => {
-            //             if (currentChatSegment.uid === newChatSegment.uid) {
-            //                 return newChatSegment;
-            //             }
-            //
-            //             return currentChatSegment;
-            //         },
-            //     );
-            //
-            //     domToReactRef.current.setChatSegments(newChatSegments);
-            //     domToReactRef.current.setPromptBoxStatus('typing');
-            // });
+            chatSegmentObservable.on('aiMessageReceived', (aiMessage) => {
+                const currentChatSegments = domToReactRef.current.chatSegments;
+                const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
+                    (currentChatSegment) => {
+                        if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
+                            return currentChatSegment;
+                        }
+
+                        return {
+                            ...currentChatSegment,
+                            items: [
+                                ...currentChatSegment.items,
+                                {...aiMessage},
+                            ],
+                        };
+                    },
+                );
+
+                domToReactRef.current.setChatSegments(newChatSegments);
+            });
+
+            chatSegmentObservable.on('complete', (newChatSegment) => {
+                domToReactRef.current.setPromptBoxStatus('typing');
+            });
+
+            chatSegmentObservable.on('aiChunkReceived', (chunk: string, messageId: string) => {
+                conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
+            });
 
             chatSegmentObservable.on('error', (exception) => {
                 const parts = domToReactRef.current.chatSegments;
@@ -121,10 +164,6 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 domToReactRef.current.setChatSegments(newParts);
                 domToReactRef.current.setPromptBoxStatus('typing');
                 domToReactRef.current.showException(exception);
-            });
-
-            chatSegmentObservable.on('aiChunkReceived', (messageId: string, chunk: string) => {
-                conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 
             domToReactRef.current.setChatSegments([

@@ -13,7 +13,7 @@ import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMes
 import {uid} from '../../utils/uid';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
-export const submitInStreamingMode = async <AiMsg>(
+export const submitInStreamingMode = <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
     adapter: ChatAdapter<AiMsg>,
@@ -24,110 +24,124 @@ export const submitInStreamingMode = async <AiMsg>(
     chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
     chatSegmentErrorCallbacks: Set<ChatSegmentErrorCallback>,
 ): Promise<void> => {
-    const streamedMessageId: string = uid();
-    let firstChunkReceived = false;
-    let errorOccurred = false;
-    let completeOccurred = false;
+    return new Promise<void>((resolve) => {
+        const streamedMessageId: string = uid();
+        let firstChunkReceived = false;
+        let errorOccurred = false;
+        let completeOccurred = false;
 
-    const emitAiMessageStreamStartedEvent = () => {
-        if (firstChunkReceived) {
-            return;
-        }
-
-        firstChunkReceived = true;
-        triggerAsyncCallback(() => {
-            aiMessageStreamStartedCallbacks.forEach(callback => {
-                callback({
-                    uid: streamedMessageId,
-                    status: 'streaming',
-                    time: new Date(),
-                    participantRole: 'ai',
-                    dataTransferMode: 'stream',
-                });
-            });
-        });
-    };
-
-    adapter.streamText!(userMessage.content, {
-        next: (chunk: string) => {
-            if (errorOccurred || completeOccurred) {
+        const emitAiMessageStreamStartedEvent = () => {
+            if (firstChunkReceived) {
                 return;
             }
 
-            if (!firstChunkReceived) {
-                emitAiMessageStreamStartedEvent();
-            }
-
+            firstChunkReceived = true;
             triggerAsyncCallback(() => {
-                aiMessageChunkReceivedCallbacks.forEach(callback => {
-                    callback(streamedMessageId, chunk);
+                aiMessageStreamStartedCallbacks.forEach(callback => {
+                    callback({
+                        uid: streamedMessageId,
+                        status: 'streaming',
+                        time: new Date(),
+                        participantRole: 'ai',
+                        dataTransferMode: 'stream',
+                    });
                 });
             });
-        },
-        complete: () => {
-            if (errorOccurred || completeOccurred) {
-                return;
-            }
+        };
 
-            completeOccurred = true;
+        adapter.streamText!(userMessage.content, {
+            next: (chunk: string) => {
+                if (errorOccurred || completeOccurred) {
+                    return;
+                }
 
-            //
-            // EVENT: AI MESSAGE FULLY STREAMED
-            //
-            triggerAsyncCallback(() => {
-                type StreamedAiMessage = AiStreamedMessage & {status: 'complete'};
-                const aiMessage: StreamedAiMessage = {
-                    uid: streamedMessageId,
-                    status: 'complete',
-                    time: new Date(),
-                    participantRole: 'ai',
-                    dataTransferMode: 'stream',
-                };
+                if (!firstChunkReceived) {
+                    emitAiMessageStreamStartedEvent();
+                }
 
-                aiMessageStreamedCallbacks.forEach(callback => {
-                    callback(aiMessage);
+                triggerAsyncCallback(() => {
+                    aiMessageChunkReceivedCallbacks.forEach(callback => {
+                        callback(chunk, streamedMessageId);
+                    });
                 });
-            });
+            },
+            complete: () => {
+                if (errorOccurred || completeOccurred) {
+                    return;
+                }
 
-            //
-            // EVENT: CHAT SEGMENT COMPLETE
-            //
-            triggerAsyncCallback(() => {
-                const updatedChatSegment: ChatSegment<AiMsg> = {
-                    uid: segmentId,
-                    status: 'complete',
-                    items: [
-                        userMessage,
-                        {
-                            uid: streamedMessageId,
-                            status: 'complete',
-                            time: new Date(),
-                            participantRole: 'ai',
-                            dataTransferMode: 'stream',
-                        },
-                    ],
-                };
+                completeOccurred = true;
 
-                chatSegmentCompleteCallbacks.forEach(callback => {
-                    callback(updatedChatSegment);
+                //
+                // EVENT: AI MESSAGE FULLY STREAMED
+                //
+                triggerAsyncCallback(() => {
+                    type StreamedAiMessage = AiStreamedMessage & {status: 'complete'};
+                    const aiMessage: StreamedAiMessage = {
+                        uid: streamedMessageId,
+                        status: 'complete',
+                        time: new Date(),
+                        participantRole: 'ai',
+                        dataTransferMode: 'stream',
+                    };
+
+                    aiMessageStreamedCallbacks.forEach(callback => {
+                        callback(aiMessage);
+                    });
+
+                    //
+                    // WE RESOLVE THE PROMISE HERE
+                    // Only after the AI message has been fully streamed
+                    //
+                    resolve();
                 });
-            });
-        },
-        error: () => {
-            if (errorOccurred || completeOccurred) {
-                return;
-            }
 
-            errorOccurred = true;
+                //
+                // EVENT: CHAT SEGMENT COMPLETE
+                //
+                triggerAsyncCallback(() => {
+                    const updatedChatSegment: ChatSegment<AiMsg> = {
+                        uid: segmentId,
+                        status: 'complete',
+                        items: [
+                            userMessage,
+                            {
+                                uid: streamedMessageId,
+                                status: 'complete',
+                                time: new Date(),
+                                participantRole: 'ai',
+                                dataTransferMode: 'stream',
+                            },
+                        ],
+                    };
 
-            //
-            // EVENT: CHAT SEGMENT STREAMING ERROR
-            //
-            triggerAsyncCallback(() => {
-                chatSegmentErrorCallbacks.forEach(callback => {
-                    callback('failed-to-stream-content');
+                    chatSegmentCompleteCallbacks.forEach(callback => {
+                        callback(updatedChatSegment);
+                    });
                 });
-            });
-        },
-    }, extras);
+            },
+            error: () => {
+                if (errorOccurred || completeOccurred) {
+                    return;
+                }
+
+                errorOccurred = true;
+
+                //
+                // EVENT: CHAT SEGMENT STREAMING ERROR
+                //
+                triggerAsyncCallback(() => {
+                    chatSegmentErrorCallbacks.forEach(callback => {
+                        callback('failed-to-stream-content');
+                    });
+
+                    //
+                    // WE RESOLVE THE PROMISE HERE
+                    // Only after the AI message has been fully streamed
+                    //
+                    resolve();
+                });
+            },
+        }, extras);
+    });
 };
