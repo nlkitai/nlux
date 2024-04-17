@@ -1,6 +1,6 @@
-import {ChatAdapterExtras, submitPrompt} from '@nlux-dev/core/src';
-import {ChatAdapter} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
+import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {waitForMilliseconds} from '../../utils/wait';

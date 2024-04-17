@@ -9,6 +9,7 @@ export const createEmptyErrorSegment = <AiMsg>(
     errorId: NLErrorId,
 ): {
     segment: ChatSegment<AiMsg>,
+    dataTransferMode: 'stream',
     observable: ChatSegmentObservable<AiMsg>,
 } => {
     const errorListeners = new Set<
@@ -30,6 +31,7 @@ export const createEmptyErrorSegment = <AiMsg>(
 
     return {
         segment,
+        dataTransferMode: 'stream',
         observable: {
             on: (event, callback) => {
                 if (event === 'error') {

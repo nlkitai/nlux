@@ -1,4 +1,4 @@
-import {PersonaOptions} from '@nlux-dev/react/src';
+import {DataTransferMode, PersonaOptions} from '@nlux-dev/react/src';
 import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
 import {AiChatComponentProps} from '@nlux-dev/react/src/exports/props.tsx';
 import '@nlux-dev/themes/src/luna/components/AiChat.css';
@@ -38,10 +38,10 @@ export const AiChatWelcomeMessageReactExpo = () => {
     >('default');
 
     const [dataTransferMode, setDataTransferMode] = useState<
-        'stream' | 'fetch'
+        DataTransferMode
     >('fetch');
 
-    const langServeAdapter = useChatAdapter({
+    const langServeAdapter = useChatAdapter<MessageObjectType>({
         url: 'https://pynlux.api.nlux.ai/pirate-speak',
         dataTransferMode,
     });
@@ -81,7 +81,7 @@ export const AiChatWelcomeMessageReactExpo = () => {
                     <select
                         className="dataTransferMode"
                         value={dataTransferMode}
-                        onChange={(e) => setDataTransferMode(e.target.value as 'stream' | 'fetch')}
+                        onChange={(e) => setDataTransferMode(e.target.value as DataTransferMode)}
                     >
                         <option value="stream">Stream Data</option>
                         <option value="fetch">Fetch Data</option>

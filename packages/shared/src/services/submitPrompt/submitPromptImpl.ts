@@ -155,6 +155,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             uid: segmentId,
             items: [], // Initially empty — User message will be added in callback above.
         },
+        dataTransferMode: dataTransferModeToUse,
         observable: {
             get segmentId(): string {
                 return segmentId;

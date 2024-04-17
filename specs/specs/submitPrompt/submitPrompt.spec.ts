@@ -1,5 +1,6 @@
-import {ChatAdapterExtras, StandardAdapterInfo, StandardChatAdapter, submitPrompt} from '@nlux-dev/core/src';
+import {ChatAdapterExtras, StandardAdapterInfo, StandardChatAdapter} from '@nlux-dev/core/src';
 import {describe, expect, it, vi} from 'vitest';
+import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
 import {waitForMilliseconds} from '../../utils/wait';
 
 describe('submitPrompt()', () => {
@@ -36,10 +37,11 @@ describe('submitPrompt()', () => {
             } satisfies ChatAdapterExtras<string>;
 
             // Act
-            submitPrompt(prompt, adapter, extras);
+            const {dataTransferMode} = submitPrompt(prompt, adapter, extras);
 
             // Assert
             expect(adapter.fetchText).toHaveBeenCalled();
+            expect(dataTransferMode).toBe('fetch');
         });
     });
 
@@ -56,10 +58,11 @@ describe('submitPrompt()', () => {
             } satisfies ChatAdapterExtras<string>;
 
             // Act
-            submitPrompt(prompt, adapter, extras);
+            const {dataTransferMode} = submitPrompt(prompt, adapter, extras);
 
             // Assert
             expect(adapter.streamText).toHaveBeenCalled();
+            expect(dataTransferMode).toBe('stream');
         });
     });
 
@@ -76,10 +79,11 @@ describe('submitPrompt()', () => {
             } satisfies ChatAdapterExtras<string>;
 
             // Act
-            submitPrompt(prompt, adapter, extras);
+            const {dataTransferMode} = submitPrompt(prompt, adapter, extras);
 
             // Assert
             expect(adapter.streamText).toHaveBeenCalled();
+            expect(dataTransferMode).toBe('stream');
         });
 
         it('Should use the fetch data transfer mode when the adapter specifies it', () => {
