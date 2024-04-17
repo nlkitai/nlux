@@ -1,8 +1,5 @@
-import {ChatAdapter, DataTransferMode} from '../../../../../../../../shared/src/types/adapters/chat/chatAdapter';
-import {
-    isStandardChatAdapter,
-    StandardChatAdapter,
-} from '../../../../../../../../shared/src/types/adapters/chat/standardChatAdapter';
+import {ChatAdapter, DataTransferMode} from '../../../types/adapters/chat/chatAdapter';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 
 export const getDataTransferModeToUse = <AiMsg>(
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,

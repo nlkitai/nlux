@@ -1,5 +1,6 @@
-import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter, submitPrompt} from '@nlux/core';
+import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
+import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';

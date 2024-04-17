@@ -1,11 +1,8 @@
-import {ChatSegment} from '../../../../../../../../shared/src/types/chatSegment/chatSegment';
-import {
-    ChatSegmentErrorCallback,
-    ChatSegmentEventsMap,
-} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
-import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
-import {NLErrorId} from '../../../../../../../../shared/src/types/exceptions/errors';
-import {uid} from '../../../../../../../../shared/src/utils/uid';
+import {ChatSegment} from '../../../types/chatSegment/chatSegment';
+import {ChatSegmentErrorCallback, ChatSegmentEventsMap} from '../../../types/chatSegment/chatSegmentEvents';
+import {ChatSegmentObservable} from '../../../types/chatSegment/chatSegmentObservable';
+import {NLErrorId} from '../../../types/exceptions/errors';
+import {uid} from '../../../utils/uid';
 import {triggerAsyncCallback} from './triggerAsyncCallback';
 
 export const createEmptyErrorSegment = <AiMsg>(
