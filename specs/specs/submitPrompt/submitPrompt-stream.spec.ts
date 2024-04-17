@@ -263,6 +263,22 @@ describe('submitPrompt() + stream data transfer mode', () => {
                 expect(listenToChunkReceived).not.toHaveBeenCalled();
             });
 
+            it('Should emit aiChunkReceived that is emitted after a delay', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToChunkReceived = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('aiChunkReceived', listenToChunkReceived);
+                setTimeout(() => adapterController!.next('The'), 50);
+                await waitForMilliseconds(60);
+
+                // Assert
+                expect(listenToChunkReceived).toHaveBeenCalledWith('The', expect.any(String));
+            });
+
             it('Should emit aiChunkReceived after aiMessageStreamStarted', async () => {
                 // Arrange
                 const prompt = 'What is the weather like today?';
