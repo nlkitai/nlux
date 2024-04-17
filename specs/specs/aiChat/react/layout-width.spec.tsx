@@ -18,124 +18,124 @@ describe('<AiChat /> + layoutOptions + width', () => {
 
     describe('When the component is created without a width', () => {
         it('No width should be set at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('');
         });
     });
 
     describe('When a width is set after the component is created', () => {
         it('The width should be set with as a number at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
             await waitForRenderCycle();
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
 
         it('The width should be set with as a string at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
             await waitForRenderCycle();
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
     });
 
     describe('When the component is created with a width', () => {
         it('The width should be set with as a number at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
 
         it('The width should be set with as a string at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
     });
 
     describe('When a width is updated after the component is created', () => {
         it('The width should be updated with as a number at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
             await waitForRenderCycle();
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
 
         it('The width should be updated with as a string at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
             await waitForRenderCycle();
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('500px');
         });
     });
 
     describe('When the width is removed after the component is created', () => {
         it('No width should be set at the root element', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
             const {rerender, container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             rerender(<AiChat adapter={adapterController!.adapter}/>);
             await waitForRenderCycle();
             const aiChatDom = container.querySelector('.nlux-AiChat-root')!;
 
-            // Then
+            // Assert
             expect(aiChatDom.style.width).toBe('');
         });
     });

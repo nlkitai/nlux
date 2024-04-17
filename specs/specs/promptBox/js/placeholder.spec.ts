@@ -25,31 +25,31 @@ describe('createAiChat() + promptBox + placeholder', () => {
 
     describe('When no placeholder option is initially provided', () => {
         it('The promptBox should be rendered without a placeholder', async () => {
-            // Given
+            // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(textArea.placeholder).toBe('');
         });
 
         describe('When a placeholder option is added', () => {
             it('The promptBox should be rendered with a placeholder', async () => {
-                // Given
+                // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 aiChat.updateProps({promptBoxOptions: {placeholder: 'My prompt-box'}});
                 await waitForRenderCycle();
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-                // Then
+                // Assert
                 expect(textArea.placeholder).toBe('My prompt-box');
             });
         });
@@ -57,16 +57,16 @@ describe('createAiChat() + promptBox + placeholder', () => {
 
     describe('When the component is created with placeholder option', () => {
         it('The promptBox should be rendered with a placeholder', async () => {
-            // Given
+            // Arrange
             const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions(promptBoxOptions);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(textArea.placeholder).toBe('My prompt-box');
         });
     });

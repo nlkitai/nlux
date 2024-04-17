@@ -19,7 +19,7 @@ describe('<AiChat /> + theme', () => {
 
     describe('When an exception is thrown by the adapter', () => {
         it('The exception should be displayed in the exception box', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
@@ -27,11 +27,11 @@ describe('<AiChat /> + theme', () => {
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
 
-            // When
+            // Act
             adapterController!.reject('Error message');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const exceptionBox = container.querySelector('.nlux-comp-exp_box')!;
             expect(exceptionBox).not.toBeNull();
             expect(exceptionBox.textContent).toEqual(expect.stringContaining('Failed to load content'));

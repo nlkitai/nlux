@@ -17,29 +17,29 @@ describe('<AiChat /> + promptBox + placeholder', () => {
 
     describe('When no placeholder option is initially provided', () => {
         it('The promptBox should be rendered without a placeholder', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(textArea.placeholder).toBe('');
         });
 
         describe('When a placeholder option is added', () => {
             it('The promptBox should be rendered with a placeholder', async () => {
-                // Given
+                // Arrange
                 const {container, rerender} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-                // When
+                // Act
                 rerender(<AiChat
                     adapter={adapterController!.adapter}
                     promptBoxOptions={{placeholder: 'My prompt-box'}}
                 />);
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-                // Then
+                // Assert
                 expect(textArea.placeholder).toBe('My prompt-box');
             });
         });
@@ -47,16 +47,16 @@ describe('<AiChat /> + promptBox + placeholder', () => {
 
     describe('When the component is created with placeholder option', () => {
         it('The promptBox should be rendered with a placeholder', async () => {
-            // Given
+            // Arrange
             const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
             );
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(textArea.placeholder).toBe('My prompt-box');
         });
     });

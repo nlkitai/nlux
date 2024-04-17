@@ -7,7 +7,7 @@ import {waitForRenderCycle} from '../../../utils/wait';
 describe('createAiChat() + exceptionBox', () => {
     describe('When an exception is thrown by the adapter', () => {
         it('The exception should be displayed in the exception box', async () => {
-            // Given
+            // Arrange
             const adapterController = adapterBuilder().withFetchText().create();
             const rootElement = document.createElement('div');
             document.body.append(rootElement);
@@ -19,11 +19,11 @@ describe('createAiChat() + exceptionBox', () => {
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
 
-            // When
+            // Act
             adapterController.reject('Error message');
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             const exceptionBox = rootElement.querySelector('.nlux-comp-exp_box')!;
             expect(exceptionBox).not.toBeNull();
             expect(exceptionBox.textContent).toEqual(expect.stringContaining('Failed to load content'));

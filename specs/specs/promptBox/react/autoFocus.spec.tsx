@@ -18,34 +18,34 @@ describe('<AiChat /> + promptBox + autoFocus', () => {
 
     describe('When no autoFocus option is initially provided', () => {
         it('The textarea should be rendered without autoFocus', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(textArea.autofocus).toBe(false);
         });
 
         describe('When autoFocus option is set to true after initial render', () => {
             it('The textarea should be auto-focused', async () => {
-                // Given
+                // Arrange
                 const {container, rerender} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-                // When
+                // Act
                 await waitForRenderCycle();
                 const textArea1: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-                // Then
+                // Assert
                 expect(document.activeElement).not.toBe(textArea1);
 
-                // When
+                // Act
                 rerender(<AiChat adapter={adapterController!.adapter} promptBoxOptions={{autoFocus: true}}/>);
                 const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(document.activeElement).toBe(textArea2);
             });
         });
@@ -53,30 +53,30 @@ describe('<AiChat /> + promptBox + autoFocus', () => {
 
     describe('When autoFocus option is initially set to true', () => {
         it('The textarea should be focused on render', async () => {
-            // Given
+            // Arrange
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} promptBoxOptions={{autoFocus: true}}/>,
             );
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             // React doesn't render autofocus attribute but focuses the element — On initial render!
             expect(document.activeElement).toBe(textArea);
         });
 
         describe('When autoFocus option is set to false after initial render', () => {
             it('The textarea should be rendered without autoFocus', async () => {
-                // Given
+                // Arrange
                 const {container, rerender} = render(
                     <AiChat adapter={adapterController!.adapter} promptBoxOptions={{autoFocus: true}}/>,
                 );
 
-                // When
+                // Act
                 rerender(<AiChat adapter={adapterController!.adapter} promptBoxOptions={{autoFocus: false}}/>);
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-                // Then
+                // Assert
                 expect(textArea.autofocus).toBe(false);
             });
         });

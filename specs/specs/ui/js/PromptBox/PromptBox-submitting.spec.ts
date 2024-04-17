@@ -4,13 +4,13 @@ import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBo
 
 describe('When a prompt box component is rendered and is in submitting status', () => {
     it('Should render the prompt box with a submit button', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'submitting'});
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(html).toEqual(
             expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-submitting">'),
         );
@@ -19,51 +19,51 @@ describe('When a prompt box component is rendered and is in submitting status', 
     });
 
     it('Should submit button should be disabled', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'submitting'});
         const submitButton = dom.querySelector('button')!;
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(submitButton.disabled).toBe(true);
     });
 
     it('The text input should be disabled', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'submitting'});
         const textarea = dom.querySelector('textarea')!;
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(textarea.disabled).toBe(true);
     });
 
     describe('When the status is updated to typing', () => {
         it('The textarea should be enabled', () => {
-            // Given
+            // Arrange
             const dom = createPromptBoxDom({status: 'submitting'});
             const textarea = dom.querySelector('textarea')!;
 
-            // When
+            // Act
             updatePromptBoxDom(dom, {status: 'submitting'}, {status: 'typing'});
 
-            // Then
+            // Assert
             expect(textarea.disabled).toBe(false);
         });
 
         it('The submit button should be disabled', () => {
-            // Given
+            // Arrange
             const dom = createPromptBoxDom({status: 'submitting'});
             const submitButton = dom.querySelector('button')!;
 
-            // When
+            // Act
             updatePromptBoxDom(dom, {status: 'submitting'}, {status: 'typing'});
 
-            // Then
+            // Assert
             expect(submitButton.disabled).toBe(true);
         });
     });

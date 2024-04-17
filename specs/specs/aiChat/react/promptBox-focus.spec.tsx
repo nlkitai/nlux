@@ -19,58 +19,58 @@ describe('<AiChat /> + layoutOptions + width', () => {
 
     describe('When the AiChat is created without autoFocus', () => {
         it('The prompt box should not be focused', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(document.activeElement).not.toBe(textArea);
         });
     });
 
     describe('When a message is sent then focus is lost', () => {
         it('The prompt box should not be focused when a response is received', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             const button: HTMLButtonElement = container.querySelector('.nlux-comp-prmptBox > button')!;
 
-            // When
+            // Act
             await userEvent.type(textArea, 'Hello{enter}');
             adapterController?.resolve('Response');
             textArea.blur();
             await waitForRenderCycle();
 
-            // Then
+            // Assert
             expect(document.activeElement).not.toBe(textArea);
         });
     });
 
     describe('When the AiChat is created with autoFocus', () => {
         it('The prompt box should be focused', async () => {
-            // Given
+            // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} promptBoxOptions={{
                 autoFocus: true,
             }}/>;
             const {container} = render(aiChat);
             await waitForRenderCycle();
 
-            // When
+            // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Then
+            // Assert
             expect(document.activeElement).toBe(textArea);
         });
 
         describe('When a message is sent then focus is lost', () => {
             it('The prompt box should be re-focused when a response is received', async () => {
-                // Given
+                // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter} promptBoxOptions={{
                     autoFocus: true,
                 }}/>;
@@ -78,16 +78,16 @@ describe('<AiChat /> + layoutOptions + width', () => {
                 await waitForRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-                // When
+                // Act
                 textArea.focus();
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(document.activeElement).toBe(textArea);
             });
 
             it('The prompt box should be re-focused after submission error', async () => {
-                // Given
+                // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter} promptBoxOptions={{
                     autoFocus: true,
                 }}/>;
@@ -96,12 +96,12 @@ describe('<AiChat /> + layoutOptions + width', () => {
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 textArea.blur();
 
-                // When
+                // Act
                 await userEvent.type(textArea, 'Hello{enter}');
                 adapterController?.reject('Error message');
                 await waitForRenderCycle();
 
-                // Then
+                // Assert
                 expect(document.activeElement).toBe(textArea);
             });
         });

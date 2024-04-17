@@ -4,47 +4,47 @@ import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/Welcome
 
 describe('When welcome message is rendered', () => {
     it('Should render the message with the incoming class', () => {
-        // Given
+        // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
             picture: 'https://example.com/avatar.jpg',
             message: 'Hello, World!',
         };
 
-        // When
+        // Act
         const welcomeMessage = createWelcomeMessageDom(props);
 
-        // Then
+        // Assert
         expect(welcomeMessage.classList.contains('nlux-comp-wlc_msg')).toBe(true);
     });
 
     it('Should render the welcome message with the name', () => {
-        // Given
+        // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
             picture: 'https://example.com/avatar.jpg',
         };
 
-        // When
+        // Act
         const welcomeMessage = createWelcomeMessageDom(props);
         const name = welcomeMessage.querySelector('.nlux-comp-wlc_msg_prs_nm')!.textContent;
 
-        // Then
+        // Assert
         expect(name).toBe(props.name);
     });
 
     it('Should render the welcome message with the picture', () => {
-        // Given
+        // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
             picture: 'https://example.com/avatar.jpg',
         };
 
-        // When
+        // Act
         const welcomeMessage = createWelcomeMessageDom(props);
         const personaPicture = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
 
-        // Then
+        // Assert
         expect(personaPicture).not.toBeNull();
         expect(personaPicture.outerHTML).toEqual(
             expect.stringContaining('url(https://example.com/avatar.jpg)'),
@@ -52,18 +52,18 @@ describe('When welcome message is rendered', () => {
     });
 
     it('Should render the welcome message with the message', () => {
-        // Given
+        // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
             picture: 'https://example.com/avatar.jpg',
             message: 'Hello, World!',
         };
 
-        // When
+        // Act
         const welcomeMessageElement = createWelcomeMessageDom(props);
         const welcomeMessage = welcomeMessageElement.querySelector('.nlux-comp-wlc_msg_txt')!.textContent;
 
-        // Then
+        // Assert
         expect(welcomeMessage).toBe('Hello, World!');
     });
 });

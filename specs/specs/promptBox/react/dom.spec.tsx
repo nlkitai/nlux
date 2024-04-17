@@ -19,60 +19,60 @@ describe('<AiChat /> + promptBox', () => {
 
     describe('When the component is created', () => {
         it('The promptBox should be rendered', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-            // When
+            // Act
             const promptBox = container.querySelector('.nlux-comp-prmptBox');
 
-            // Then
+            // Assert
             expect(promptBox).not.toBeFalsy();
         });
 
         it('The promptBox should contain text area', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // container
             const textArea = container.querySelector('.nlux-comp-prmptBox > textarea');
 
-            // Then
+            // Assert
             expect(textArea).not.toBeFalsy();
         });
 
         it('The promptBox should contain send button', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-            // When
+            // Act
             const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
 
-            // Then
+            // Assert
             expect(sendButton).not.toBeFalsy();
         });
 
         it('The send button should be disabled by default', async () => {
-            // Given
+            // Arrange
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
-            // When
+            // Act
             const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
 
-            // Then
+            // Assert
             expect(sendButton).toHaveAttribute('disabled');
         });
 
         describe('When the user types a message', () => {
             it('The send button should be enabled', async () => {
-                // Given
+                // Arrange
                 const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
                 await waitForRenderCycle();
 
-                // When
+                // Act
                 const textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello');
 
-                // Then
+                // Assert
                 const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
                 expect(sendButton).not.toHaveAttribute('disabled');
             });

@@ -6,13 +6,13 @@ import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/up
 describe('When a message component is rendered and is in loading status', () => {
     describe('With default loader', () => {
         it('Should render default loader', () => {
-            // Given
+            // Arrange
             const dom = createMessageDom({direction: 'incoming', status: 'loading'});
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toBe(
                 '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><div class="nlux_msg_ldr">' +
                 '<div class="spn_ldr_ctn"><span class="spn_ldr"></span></div></div></div>',
@@ -22,16 +22,16 @@ describe('When a message component is rendered and is in loading status', () => 
 
     describe('With a custom loader', () => {
         it('Should render the custom loader', () => {
-            // Given
+            // Arrange
             const customLoader = document.createElement('span');
             customLoader.classList.add('custom-loader');
             customLoader.append('Loading...');
             const dom = createMessageDom({direction: 'incoming', status: 'loading', loader: customLoader});
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toBe(
                 '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
             );
@@ -40,7 +40,7 @@ describe('When a message component is rendered and is in loading status', () => 
 
     describe('When loader is updated', () => {
         it('Should replace the loader', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const customLoader = document.createElement('span');
             customLoader.classList.add('custom-loader');
@@ -48,10 +48,10 @@ describe('When a message component is rendered and is in loading status', () => 
             const props: MessageProps = {direction: 'incoming', status: 'loading', loader: customLoader};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_loading nlux_msg_incoming"><span class="custom-loader">Loading...</span></div>',
             );
@@ -60,28 +60,28 @@ describe('When a message component is rendered and is in loading status', () => 
 
     describe('When status is updated to rendered', () => {
         it('Should remove the loader', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const props: MessageProps = {direction: 'incoming', status: 'rendered'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered"></div>');
         });
 
         it('Should render the message', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const props: MessageProps = {direction: 'incoming', status: 'rendered', message: 'Hello, World!'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe(
                 '<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_rendered">Hello, World!</div>');
         });
@@ -89,28 +89,28 @@ describe('When a message component is rendered and is in loading status', () => 
 
     describe('When status is updated to streaming', () => {
         it('Should hide the loader', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const props: MessageProps = {direction: 'incoming', status: 'streaming'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_streaming"></div>');
         });
 
         it('Should not render the message', () => {
-            // Given
+            // Arrange
             const beforeProps: MessageProps = {direction: 'incoming', status: 'loading'};
             const props: MessageProps = {direction: 'incoming', status: 'streaming', message: 'Hello, World!'};
             const dom = createMessageDom(beforeProps);
 
-            // When
+            // Act
             updateMessageDom(dom, beforeProps, props);
 
-            // Then
+            // Assert
             expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_incoming nlux_msg_streaming"></div>');
         });
     });

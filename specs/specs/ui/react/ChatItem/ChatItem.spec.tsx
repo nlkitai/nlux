@@ -5,7 +5,7 @@ import {describe, expect, it} from 'vitest';
 
 describe('When a custom chat item is rendered', () => {
     it('Should render the custom chat item', async () => {
-        // Given
+        // Arrange
         const ForwardRefChatItemComp = forwardRef(ChatItemComp);
         const component = <ForwardRefChatItemComp
             uid={'1'}
@@ -15,15 +15,15 @@ describe('When a custom chat item is rendered', () => {
             customRenderer={({message}: any) => <>{`THE AI SAID [${message}]`}</>}
         />;
 
-        // When
+        // Act
         render(component);
 
-        // Then
+        // Assert
         expect(document.body).toHaveTextContent('THE AI SAID [Hello]');
     });
 
     it('Should render the custom chat item with JSON as message', async () => {
-        // Given
+        // Arrange
         const ForwardRefChatItemComp = forwardRef(ChatItemComp);
         const component = <ForwardRefChatItemComp
             uid={'1'}
@@ -33,10 +33,10 @@ describe('When a custom chat item is rendered', () => {
             customRenderer={({message}: any) => <>{`THE AI SAID [${message.text}]`}</>}
         />;
 
-        // When
+        // Act
         render(component);
 
-        // Then
+        // Assert
         expect(document.body).toHaveTextContent('THE AI SAID [Hello Jason!]');
     });
 });

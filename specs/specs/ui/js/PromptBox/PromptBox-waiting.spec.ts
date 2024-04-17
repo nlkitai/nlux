@@ -3,13 +3,13 @@ import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBo
 
 describe('When a prompt box component is rendered and is in waiting status', () => {
     it('Should render the prompt box with a submit button', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'waiting'});
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(html).toEqual(
             expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-waiting">'),
         );
@@ -18,51 +18,51 @@ describe('When a prompt box component is rendered and is in waiting status', () 
     });
 
     it('the submit button should be disabled', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'waiting'});
         const submitButton = dom.querySelector('button')!;
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(submitButton.disabled).toBe(true);
     });
 
     it('The textarea should be enabled', () => {
-        // Given
+        // Arrange
         const dom = createPromptBoxDom({status: 'waiting'});
         const textarea = dom.querySelector('textarea')!;
 
-        // When
+        // Act
         const html = dom.outerHTML;
 
-        // Then
+        // Assert
         expect(textarea.disabled).toBe(false);
     });
 
     describe('When the status is updated to typing', () => {
         it('Should render the prompt box with a text input', () => {
-            // Given
+            // Arrange
             const dom = createPromptBoxDom({status: 'waiting'});
             const textarea = dom.querySelector('textarea')!;
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(html).toEqual(expect.stringContaining('<textarea placeholder=""></textarea>'));
         });
 
         it('The textarea should be enabled', () => {
-            // Given
+            // Arrange
             const dom = createPromptBoxDom({status: 'waiting'});
             const textarea = dom.querySelector('textarea')!;
 
-            // When
+            // Act
             const html = dom.outerHTML;
 
-            // Then
+            // Assert
             expect(textarea.disabled).toBe(false);
         });
     });

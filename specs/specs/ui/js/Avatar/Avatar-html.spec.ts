@@ -5,16 +5,16 @@ import {updateAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/upda
 
 describe('When an avatar component is rendered with HTML element as picture', () => {
     it('Should render the picture as is', () => {
-        // Given
+        // Arrange
         const name = 'John Doe';
         const picture = document.createElement('img');
         picture.src = 'https://example.com/photo.jpg';
         const props: AvatarProps = {name, picture};
 
-        // When
+        // Act
         const element = createAvatarDom(props);
 
-        // Then
+        // Assert
         expect(element.outerHTML).toBe(
             `<div class="nlux-comp-avtr" title="${name}"><img src="https://example.com/photo.jpg"></div>`,
         );
@@ -22,27 +22,27 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
     describe('When no picture or name is provided', () => {
         it('Should render an empty div', () => {
-            // Given
+            // Arrange
             const props: AvatarProps = {};
 
-            // When
+            // Act
             const element = createAvatarDom(props);
 
-            // Then
+            // Assert
             expect(element.outerHTML).toBe('<div class="nlux-comp-avtr"></div>');
         });
     });
 
     describe('When only name is provided', () => {
         it('Should render the name first letter', () => {
-            // Given
+            // Arrange
             const name = 'John Doe';
             const props: AvatarProps = {name};
 
-            // When
+            // Act
             const element = createAvatarDom(props);
 
-            // Then
+            // Assert
             expect(element.outerHTML).toBe(
                 `<div class="nlux-comp-avtr" title="John Doe"><div class="avtr_ctn"><span class="avtr_ltr">J</span></div></div>`,
             );
@@ -51,7 +51,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
     describe('When the picture element is updated', () => {
         it('Should render the new picture as is', () => {
-            // Given
+            // Arrange
             const name = 'John Doe';
             const picture1 = document.createElement('img');
             picture1.src = 'https://example.com/photo1.jpg';
@@ -60,14 +60,14 @@ describe('When an avatar component is rendered with HTML element as picture', ()
             picture2.src = 'https://example.com/photo2.jpg';
             const element = createAvatarDom(props);
 
-            // When
+            // Act
             updateAvatarDom(
                 element,
                 props,
                 {...props, picture: picture2},
             );
 
-            // Then
+            // Assert
             expect(element.outerHTML).toBe(
                 `<div class="nlux-comp-avtr" title="${name}"><img src="https://example.com/photo2.jpg"></div>`,
             );
@@ -75,7 +75,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
 
         describe('When the new picture is a string', () => {
             it('Should render the new picture as URL', () => {
-                // Given
+                // Arrange
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
@@ -90,14 +90,14 @@ describe('When an avatar component is rendered with HTML element as picture', ()
                 const picture2 = 'https://example.com/photo2.jpg';
                 const element = createAvatarDom(props);
 
-                // When
+                // Act
                 updateAvatarDom(
                     element,
                     props,
                     newProps,
                 );
 
-                // Then
+                // Assert
                 expect(element.outerHTML).toBe(
                     `<div class="nlux-comp-avtr" title="John Doe"><div class="avtr_ctn">` +
                     `<span class="avtr_ltr">J</span>` +
@@ -107,7 +107,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
             });
 
             it('Should render the new picture as URL and change name', () => {
-                // Given
+                // Arrange
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
@@ -119,14 +119,14 @@ describe('When an avatar component is rendered with HTML element as picture', ()
                 const picture2 = 'https://example.com/photo2.jpg';
                 const element = createAvatarDom(props);
 
-                // When
+                // Act
                 updateAvatarDom(
                     element,
                     props,
                     newProps,
                 );
 
-                // Then
+                // Assert
                 expect(element.outerHTML).toBe(
                     `<div class="nlux-comp-avtr" title="Alex Doe"><div class="avtr_ctn">` +
                     `<span class="avtr_ltr">A</span>` +
