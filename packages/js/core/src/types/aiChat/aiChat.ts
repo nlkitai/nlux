@@ -1,10 +1,10 @@
+import {ChatAdapterBuilder} from '../../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
+import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {HighlighterExtension} from '../../exports/aiChat/highlighter/highlighter';
 import {ConversationOptions} from '../../exports/aiChat/options/conversationOptions';
 import {LayoutOptions} from '../../exports/aiChat/options/layoutOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
-import {ChatAdapterBuilder} from '../adapters/chat/chatAdapterBuilder';
-import {ChatItem} from '../conversation';
 import {EventCallback, EventName, EventsMap} from '../event';
 import {AiChatProps} from './props';
 

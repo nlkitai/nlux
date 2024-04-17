@@ -43,7 +43,7 @@ export type {
 
 export type {
     StandardChatAdapter,
-} from './types/adapters/chat/standardChatAdapter';
+} from '../../../shared/src/types/adapters/chat/standardChatAdapter';
 
 export type {
     StandardAdapterInfo,
@@ -51,7 +51,7 @@ export type {
     AdapterDecodeFunction,
     InputFormat,
     OutputFormat,
-} from './types/adapters/chat/standardAdapterConfig';
+} from '../../../shared/src/types/adapters/chat/standardAdapterConfig';
 
 export type {
     AiChatProps,
@@ -61,24 +61,24 @@ export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-} from './types/adapters/chat/chatAdapter';
+} from '../../../shared/src/types/adapters/chat/chatAdapter';
 
 export type {
     ChatAdapterExtras,
-} from './types/adapters/chat/chatAdapterExtras';
+} from '../../../shared/src/types/adapters/chat/chatAdapterExtras';
 
 export type {
     ChatAdapterBuilder,
-} from './types/adapters/chat/chatAdapterBuilder';
+} from '../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 
 export type {
     AssistResult,
     AssistAdapter,
-} from './types/adapters/assist/assistAdapter';
+} from '../../../shared/src/types/adapters/assist/assistAdapter';
 
 export type {
     AssistAdapterBuilder,
-} from './types/adapters/assist/assistAdapterBuilder';
+} from '../../../shared/src/types/adapters/assist/assistAdapterBuilder';
 
 export type {
     StreamParser,
@@ -95,38 +95,38 @@ export type {
     ContextTasks,
     ContextItem,
     ContextTask,
-} from './types/aiContext/data';
+} from '../../../shared/src/types/aiContext/data';
 
 export type {
     ContextAdapter,
-} from './types/adapters/context/contextAdapter';
+} from '../../../shared/src/types/adapters/context/contextAdapter';
 
 export type {
     ContextAdapterExtras,
-} from './types/adapters/context/contextAdapterExtras';
+} from '../../../shared/src/types/adapters/context/contextAdapterExtras';
 
 export type {
     ContextTasksAdapter,
-} from './types/adapters/context/contextTasksAdapter';
+} from '../../../shared/src/types/adapters/context/contextTasksAdapter';
 
 export type {
     ContextDataAdapter,
-} from './types/adapters/context/contextDataAdapter';
+} from '../../../shared/src/types/adapters/context/contextDataAdapter';
 
 export type {
     ContextAdapterBuilder,
-} from './types/adapters/context/contextAdapterBuilder';
+} from '../../../shared/src/types/adapters/context/contextAdapterBuilder';
 
 export type {
     AiContext,
     AiContextStatus,
-} from './types/aiContext/aiContext';
+} from '../../../shared/src/types/aiContext/aiContext';
 
 export type {
     ContextItemHandler,
     ContextTaskHandler,
     ContextDomElementHandler,
-} from './types/aiContext/contextObservers';
+} from '../../../shared/src/types/aiContext/contextObservers';
 
 export type {
     InitializeContextResult,
@@ -135,7 +135,7 @@ export type {
     RunTaskResult,
     ContextActionResult,
     SetContextResult,
-} from './types/aiContext/contextResults';
+} from '../../../shared/src/types/aiContext/contextResults';
 
 export type {
     DataSyncOptions,
@@ -163,7 +163,7 @@ export type {
 
 export type {
     ChatItem,
-} from './types/conversation';
+} from '../../../shared/src/types/conversation';
 
 export type {
     ParticipantRole,

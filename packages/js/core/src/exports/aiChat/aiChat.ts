@@ -1,12 +1,12 @@
+import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
+import {ChatAdapterBuilder} from '../../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
+import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat/standardChatAdapter';
+import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {debug} from '../../../../../shared/src/utils/debug';
 import {registerAllComponents} from '../../logic/components';
-import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
-import {ChatAdapterBuilder} from '../../types/adapters/chat/chatAdapterBuilder';
-import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
-import {ChatItem} from '../../types/conversation';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {NluxController} from './controller/controller';
 import {HighlighterExtension} from './highlighter/highlighter';

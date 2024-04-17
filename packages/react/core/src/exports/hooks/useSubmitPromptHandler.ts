@@ -113,15 +113,13 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             //     domToReactRef.current.setPromptBoxStatus('typing');
             // });
 
-            chatSegmentObservable.on('exception', (exception) => {
+            chatSegmentObservable.on('error', (exception) => {
                 const parts = domToReactRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
 
                 domToReactRef.current.setChatSegments(newParts);
                 domToReactRef.current.setPromptBoxStatus('typing');
-                domToReactRef.current.showException(
-                    exception?.message || 'An error occurred while submitting prompt',
-                );
+                domToReactRef.current.showException(exception);
             });
 
             chatSegmentObservable.on('aiChunkReceived', (messageId: string, chunk: string) => {

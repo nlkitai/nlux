@@ -1,3 +1,4 @@
+import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
@@ -5,7 +6,6 @@ import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators'
 import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ChatItem} from '../../../types/conversation';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
 import {CompMessage} from '../message/message.model';
@@ -114,9 +114,7 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public getConversationContentForAdapter(
         historyPayloadSize: HistoryPayloadSize = 'max',
-    ): Readonly<
-        ChatItem<AiMsg>[]
-    > | undefined {
+    ): ChatItem<AiMsg>[] | undefined {
         if (typeof historyPayloadSize === 'number' && historyPayloadSize <= 0) {
             warnOnce(
                 `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +

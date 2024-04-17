@@ -23,6 +23,4 @@ export type AiUnifiedMessage<AiMsg> = {
     status: 'loading';
 });
 
-export type AiUnifiedMessageStatus = AiUnifiedMessage<unknown>['status'];
-
 export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage | AiUnifiedMessage<AiMsg>;

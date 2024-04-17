@@ -1,3 +1,4 @@
+import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {render} from '../../../../../../shared/src/utils/dom/render';
 import {CompRenderer} from '../../../types/comp';
@@ -14,7 +15,7 @@ const html = () => `` +
     ``;
 
 export const renderChatRoom: CompRenderer<
-    CompChatRoomProps<unknown>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
+    CompChatRoomProps<AnyAiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > = ({
     appendToRoot,
     compEvent,

@@ -1,6 +1,6 @@
+import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
-import {ChatItem} from '../../../types/conversation';
 
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'messages-container-clicked';

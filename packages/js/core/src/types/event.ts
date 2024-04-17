@@ -1,6 +1,7 @@
+import {AnyAiMsg} from '../../../../shared/src/types/anyAiMsg';
+import {ChatItem} from '../../../../shared/src/types/conversation';
 import {ExceptionId} from '../../../../shared/src/types/exceptions';
 import {AiChatProps} from './aiChat/props';
-import {ChatItem} from './conversation';
 
 export type ErrorEventDetails = {
     errorId: ExceptionId;
@@ -64,6 +65,6 @@ export type EventsMap<AiMsg> = {
     error: ErrorCallback;
 };
 
-export type EventName = keyof EventsMap<unknown>;
+export type EventName = keyof EventsMap<AnyAiMsg>;
 
 export type EventCallback<AiMsg> = EventsMap<AiMsg>[EventName];

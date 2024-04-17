@@ -34,8 +34,7 @@ describe('<AiChat /> + theme', () => {
             // Assert
             const exceptionBox = container.querySelector('.nlux-comp-exp_box')!;
             expect(exceptionBox).not.toBeNull();
-            expect(exceptionBox.textContent).toEqual(
-                expect.stringContaining('An error occurred while fetching the response'));
+            expect(exceptionBox.textContent).toEqual('failed-to-load-content');
         });
     });
 });

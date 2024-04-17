@@ -1,3 +1,5 @@
+import {ChatAdapter} from '../../../../../../../shared/src/types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {
     AiMessageChunkReceivedCallback,
     AiMessageReceivedCallback,
@@ -8,8 +10,6 @@ import {
     UserMessageReceivedCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {uid} from '../../../../../../../shared/src/utils/uid';
-import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
-import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
 import {submitInFetchMode} from './submitInFetchMode';
 import {submitInStreamingMode} from './submitInStreamingMode';
 import {SubmitPrompt} from './submitPrompt';
