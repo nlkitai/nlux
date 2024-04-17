@@ -34,4 +34,4 @@ class ChatAdapterBuilder<AiMsg> implements AdapterControllerBuilder<AiMsg> {
     }
 }
 
-export const adapterBuilder = <AiMsg>() => new ChatAdapterBuilder<AiMsg>();
+export const adapterBuilder = <AiMsg = string>() => new ChatAdapterBuilder<AiMsg>();

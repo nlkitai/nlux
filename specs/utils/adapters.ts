@@ -84,4 +84,4 @@ export const createAdapterController = <AiMsg = string>({
     });
 };
 
-export type AdapterController<AiMsg> = ReturnType<typeof createAdapterController<AiMsg>>;
+export type AdapterController<AiMsg = string> = ReturnType<typeof createAdapterController<AiMsg>>;

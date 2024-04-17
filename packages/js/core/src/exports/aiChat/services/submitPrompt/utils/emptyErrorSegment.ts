@@ -1,22 +1,21 @@
 import {ChatSegment} from '../../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {
+    ChatSegmentErrorCallback,
     ChatSegmentEventsMap,
-    ChatSegmentExceptionCallback,
 } from '../../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
-import {ExceptionId} from '../../../../../../../../shared/src/types/exceptions';
+import {NLErrorId} from '../../../../../../../../shared/src/types/exceptions/errors';
 import {uid} from '../../../../../../../../shared/src/utils/uid';
 import {triggerAsyncCallback} from './triggerAsyncCallback';
 
 export const createEmptyErrorSegment = <AiMsg>(
-    exceptionId: ExceptionId,
-    errorMessage: string,
+    errorId: NLErrorId,
 ): {
     segment: ChatSegment<AiMsg>,
     observable: ChatSegmentObservable<AiMsg>,
 } => {
-    const exceptionListeners = new Set<
-        ChatSegmentEventsMap<AiMsg>['exception']
+    const errorListeners = new Set<
+        ChatSegmentEventsMap<AiMsg>['error']
     >();
 
     const segmentId = uid();
@@ -28,30 +27,23 @@ export const createEmptyErrorSegment = <AiMsg>(
     };
 
     triggerAsyncCallback(() => {
-        exceptionListeners.forEach((listener) => {
-            listener({
-                type: 'error',
-                id: exceptionId,
-                message: errorMessage,
-            });
-        });
-
-        exceptionListeners.clear();
+        errorListeners.forEach((listener) => listener(errorId));
+        errorListeners.clear();
     });
 
     return {
         segment,
         observable: {
             on: (event, callback) => {
-                if (event === 'exception') {
-                    exceptionListeners.add(callback as unknown as ChatSegmentExceptionCallback);
+                if (event === 'error') {
+                    errorListeners.add(callback as unknown as ChatSegmentErrorCallback);
                 }
             },
             removeListener: (event, callback) => {
-                exceptionListeners.delete(callback as unknown as ChatSegmentExceptionCallback);
+                errorListeners.delete(callback as unknown as ChatSegmentErrorCallback);
             },
             destroy: () => {
-                exceptionListeners.clear();
+                errorListeners.clear();
             },
             get segmentId(): string {
                 return segmentId;

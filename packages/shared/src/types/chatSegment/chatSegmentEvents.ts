@@ -1,4 +1,4 @@
-import {Exception} from '../exception';
+import {NLErrorId} from '../exceptions/errors';
 import {ChatSegment, ChatSegmentEvent} from './chatSegment';
 import {AiStreamedMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
@@ -10,7 +10,7 @@ export type ChatSegmentEventsMap<AiMsg> = {
     aiChunkReceived: AiMessageChunkReceivedCallback;
     aiMessageStreamed: AiMessageStreamedCallback;
     complete: ChatSegmentCompleteCallback<AiMsg>;
-    exception: ChatSegmentExceptionCallback;
+    error: ChatSegmentErrorCallback;
 };
 
 export type UserMessageReceivedCallback = (
@@ -39,8 +39,8 @@ export type ChatSegmentCompleteCallback<AiMsg> = (
     updatedChatSegment: ChatSegment<AiMsg>,
 ) => void;
 
-export type ChatSegmentExceptionCallback = (
-    exception: Exception,
+export type ChatSegmentErrorCallback = (
+    errorId: NLErrorId,
     relatedMessageId?: string,
 ) => void;
 

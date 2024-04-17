@@ -56,9 +56,13 @@ export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUs
  * - aiMessageStreamed: A message from the AI has been fully streamed. This is only emitted for segments with data
  * transfer mode set to 'stream', and when a message has been fully streamed.
  *
- * - complete: The chat segment has successfully concluded and no more items will be added or updated.
+ * - complete: The chat segment has concluded and no more items will be added or updated. It does not imply that the
+ * segment was successful, only that it has ended. You should check the status of the segment to determine if it was
+ * successful or not.
  *
- * - error: The chat segment has ended with an error.
+ * - error: The chat segment has encountered an error and has ended. This can be due to a failure in the AI response,
+ * streaming failure, adapter failure, or any other error that occurred during the execution of the segment. You
+ * should error payloads to determine the cause of the error.
  *
  */
 export type ChatSegmentEvent =
@@ -68,4 +72,4 @@ export type ChatSegmentEvent =
     'aiChunkReceived' |
     'aiMessageStreamed' |
     'complete' |
-    'exception';
+    'error';

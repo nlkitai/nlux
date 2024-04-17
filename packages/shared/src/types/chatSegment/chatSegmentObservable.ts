@@ -13,16 +13,18 @@ export type ChatSegmentObservable<AiMsg> = {
      * The ID of the chat segment that the observable is listening to.
      */
     get segmentId(): string;
+
     /**
      * Enables listening to events related to the chat segment.
      *
-     * @param {EventType} event
+     * @param {EventType extends ChatSegmentEvent} event
      * @param {ChatSegmentEventsMap<AiMsg>[EventType]} callback
      */
     on: <EventType extends ChatSegmentEvent>(
         event: EventType,
         callback: ChatSegmentEventsMap<AiMsg>[EventType],
     ) => void;
+
     /**
      * Removes a listener from the chat segment.
      *
@@ -33,6 +35,7 @@ export type ChatSegmentObservable<AiMsg> = {
         event: EventType,
         callback: ChatSegmentEventsMap<AiMsg>[EventType],
     ) => void;
+
     /**
      * Destroys the observer and removes all listeners.
      * After calling this function, the observer should not be used anymore.

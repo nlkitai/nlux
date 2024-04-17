@@ -10,8 +10,8 @@ import {
 import {
     AiMessageChunkReceivedCallback,
     ChatSegmentCompleteCallback,
+    ChatSegmentErrorCallback,
     ChatSegmentEventsMap,
-    ChatSegmentExceptionCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentObservable} from '../../../../../../../shared/src/types/chatSegment/chatSegmentObservable';
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
@@ -134,12 +134,9 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             },
             error: (error: Error) => {
                 chatSegment.status = 'error';
-                callbacksByEvent.get('exception')?.forEach(callback => {
-                    const errorCallback = callback as ChatSegmentExceptionCallback;
-                    errorCallback({
-                        type: 'error',
-                        message: error.message,
-                    });
+                callbacksByEvent.get('error')?.forEach(callback => {
+                    const errorCallback = callback as ChatSegmentErrorCallback;
+                    errorCallback('connection-error');
                 });
 
                 callbacksByEvent.clear();
@@ -188,12 +185,9 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
         callbacksByEvent.clear();
     }).catch((error: Error) => {
         chatSegment.status = 'error';
-        callbacksByEvent.get('exception')?.forEach(callback => {
-            const errorCallback = callback as ChatSegmentExceptionCallback;
-            errorCallback({
-                type: 'error',
-                message: error.message,
-            });
+        callbacksByEvent.get('error')?.forEach(callback => {
+            const errorCallback = callback as ChatSegmentErrorCallback;
+            errorCallback('failed-to-load-content');
         });
         callbacksByEvent.clear();
     });
