@@ -3,9 +3,10 @@ import {ChatSegmentAiMessage} from '../../../../../../../shared/src/types/chatSe
 import {
     AiMessageReceivedCallback,
     ChatSegmentCompleteCallback,
-    ChatSegmentExceptionCallback,
+    ChatSegmentErrorCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {NLErrorId} from '../../../../../../../shared/src/types/exceptions/errors';
 import {uid} from '../../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
@@ -19,7 +20,7 @@ export const submitInFetchMode = async <AiMsg>(
     extras: ChatAdapterExtras<AiMsg>,
     aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>>,
     chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
-    chatSegmentExceptionCallbacks: Set<ChatSegmentExceptionCallback>,
+    chatSegmentExceptionCallbacks: Set<ChatSegmentErrorCallback>,
 ): Promise<void> => {
     try {
         const prompt = userMessage.content;
@@ -60,17 +61,12 @@ export const submitInFetchMode = async <AiMsg>(
             });
         });
     } catch (error) {
-        const errorMessage = 'An error occurred while fetching the response';
         warn(error);
 
         triggerAsyncCallback(() => {
-            chatSegmentExceptionCallbacks.forEach((callback) => {
-                callback({
-                    type: 'error',
-                    id: 'NX-AD-001',
-                    message: errorMessage,
-                });
-            });
+            const errorId: NLErrorId = 'failed-to-load-content';
+            chatSegmentExceptionCallbacks
+                .forEach((callback) => callback(errorId));
         });
     }
 };

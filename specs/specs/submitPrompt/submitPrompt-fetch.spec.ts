@@ -102,7 +102,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
     });
 
     describe('When a valid prompt is submitted', () => {
-        it('Should emit userMessageReceived event when callback is registered', async () => {
+        it('Should emit userMessageReceived event if a callback is registered', async () => {
             // Arrange
             const prompt = 'What is the weather like today?';
             const adapter = adapterController!.adapter;
@@ -303,6 +303,95 @@ describe('submitPrompt() + fetch data transfer mode', () => {
 
                 // Assert
                 expect(callsOrder).toEqual(['userMessageReceived', 'aiMessageReceived', 'chatSegmentComplete']);
+            });
+        });
+
+        describe('When the server responds with an error', () => {
+            it('Should emit error event when callback is registered', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToError = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('error', listenToError);
+                adapterController!.reject('Error message');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToError).toHaveBeenCalledWith('failed-to-load-content');
+            });
+
+            it('Should not call error event when callback is removed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToError = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('error', listenToError);
+                observable.removeListener('error', listenToError);
+                adapterController!.reject('Error message');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToError).not.toHaveBeenCalled();
+            });
+
+            it('Should not call error event when observable is destroyed', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToError = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('error', listenToError);
+                observable.destroy();
+                adapterController!.reject('Error message');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToError).not.toHaveBeenCalled();
+            });
+
+            it('Should not emit complete event when an error is thrown', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToComplete = vi.fn();
+                const listenToError = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('complete', listenToComplete);
+                observable.on('error', listenToError);
+                adapterController!.reject('Error message');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToComplete).not.toHaveBeenCalled();
+            });
+
+            it('Should emit events in the correct order', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const callsOrder: string[] = [];
+                const listenToUserMessageReceived = vi.fn(() => callsOrder.push('userMessageReceived'));
+                const listenToError = vi.fn(() => callsOrder.push('error'));
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('error', listenToError);
+                observable.on('userMessageReceived', listenToUserMessageReceived);
+                adapterController!.reject('Error message');
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(callsOrder).toEqual(['userMessageReceived', 'error']);
             });
         });
     });

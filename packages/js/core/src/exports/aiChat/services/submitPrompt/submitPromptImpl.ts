@@ -4,7 +4,7 @@ import {
     AiMessageStreamedCallback,
     AiMessageStreamStartedCallback,
     ChatSegmentCompleteCallback,
-    ChatSegmentExceptionCallback,
+    ChatSegmentErrorCallback,
     UserMessageReceivedCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {uid} from '../../../../../../../shared/src/utils/uid';
@@ -32,10 +32,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     }
 
     if (adapter.streamText === undefined && adapter.fetchText === undefined) {
-        return createEmptyErrorSegment<AiMsg>(
-            'NX-AD-002',
-            'The provided adapter does not support loading data via fetch or streaming modes.',
-        );
+        return createEmptyErrorSegment<AiMsg>('no-data-transfer-mode-supported');
     }
 
     //
@@ -48,7 +45,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     // (a.i). USER MESSAGE RECEIVED + (a.ii) CHAT SEGMENT COMPLETE + (a.iii) CHAT SEGMENT EXCEPTION
     let userMessageReceivedCallbacks: Set<UserMessageReceivedCallback> | undefined = new Set();
     let chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>> | undefined = new Set();
-    let chatSegmentExceptionCallbacks: Set<ChatSegmentExceptionCallback> | undefined = new Set();
+    let chatSegmentExceptionCallbacks: Set<ChatSegmentErrorCallback> | undefined = new Set();
 
     // (b). AI MESSAGE RECEIVED
     let aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>> | undefined = undefined;
@@ -59,7 +56,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     let aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback> | undefined = undefined;
 
     //
-    // We start by emitting a user message.
+    // We start by emitting a user message received event.
     //
     triggerAsyncCallback(() => {
         if (!userMessageReceivedCallbacks?.size) {
@@ -95,9 +92,10 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             chatSegmentCompleteCallbacks,
             chatSegmentExceptionCallbacks,
         ).finally(() => {
-            // Finally -> Final status of the segment.
-            // - No more items will be added to the segment after this point.
-            // - No more events will be emitted after this point.
+            // Finally -> Final status of the segment after complete or error has been emitted.
+            // At this point:
+            //   - No more items can be added to the segment.
+            //   - No more events will be emitted.
             // We remove all listeners in an async manner to ensure that all events have been emitted.
             triggerAsyncCallback(() => removeAllListeners());
         });
@@ -118,9 +116,10 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
             chatSegmentCompleteCallbacks,
             chatSegmentExceptionCallbacks,
         ).finally(() => {
-            // Finally -> Final status of the segment.
-            // No more items will be added to the segment after this point.
-            // No more events will be emitted after this point.
+            // Finally -> Final status of the segment after complete or error has been emitted.
+            // At this point:
+            //   - No more items can be added to the segment.
+            //   - No more events will be emitted.
             // We remove all listeners in an async manner to ensure that all events have been emitted.
             triggerAsyncCallback(() => removeAllListeners());
         });
@@ -203,9 +202,9 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
                     return;
                 }
 
-                if (event === 'exception' && chatSegmentExceptionCallbacks) {
+                if (event === 'error' && chatSegmentExceptionCallbacks) {
                     chatSegmentExceptionCallbacks.add(
-                        callback as ChatSegmentExceptionCallback,
+                        callback as ChatSegmentErrorCallback,
                     );
                     return;
                 }
@@ -253,16 +252,14 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
                     return;
                 }
 
-                if (event === 'exception') {
+                if (event === 'error') {
                     chatSegmentExceptionCallbacks?.delete(
-                        callback as ChatSegmentExceptionCallback,
+                        callback as ChatSegmentErrorCallback,
                     );
                     return;
                 }
             },
-            destroy: () => {
-                removeAllListeners();
-            },
+            destroy: () => removeAllListeners(),
         },
     };
 };

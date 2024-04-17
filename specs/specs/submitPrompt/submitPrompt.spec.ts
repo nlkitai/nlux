@@ -4,29 +4,22 @@ import {waitForMilliseconds} from '../../utils/wait';
 
 describe('submitPrompt()', () => {
     describe('When the adapter does not support any data transfer modes', () => {
-        it('Should emit an exception', async () => {
+        it('Should emit an error', async () => {
             // Arrange
             const prompt = 'What is the weather like today?';
-            const adapter = {
-                streamText: undefined,
-                fetchText: undefined,
-            };
+            const adapter = {streamText: undefined, fetchText: undefined};
             const extras = {
                 aiChatProps: {} as any,
             } satisfies ChatAdapterExtras<string>;
 
             // Act
             const {observable} = submitPrompt(prompt, adapter, extras);
-            const exceptionSpy = vi.fn();
-            observable.on('exception', exceptionSpy);
-            await waitForMilliseconds(1);
+            const errorSpy = vi.fn();
+            observable.on('error', errorSpy);
+            await waitForMilliseconds(10);
 
             // Assert
-            expect(exceptionSpy).toHaveBeenCalledWith({
-                type: 'error',
-                id: 'NX-AD-002',
-                message: 'The provided adapter does not support loading data via fetch or streaming modes.',
-            });
+            expect(errorSpy).toHaveBeenCalledWith('no-data-transfer-mode-supported');
         });
     });
 

@@ -3,7 +3,7 @@ import {
     AiMessageStreamedCallback,
     AiMessageStreamStartedCallback,
     ChatSegmentCompleteCallback,
-    ChatSegmentExceptionCallback,
+    ChatSegmentErrorCallback,
 } from '../../../../../../../shared/src/types/chatSegment/chatSegmentEvents';
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {ChatAdapter} from '../../../../types/adapters/chat/chatAdapter';
@@ -18,7 +18,7 @@ export const submitInStreamingMode = async <AiMsg>(
     aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback>,
     aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback>,
     chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
-    chatSegmentExceptionCallbacks: Set<ChatSegmentExceptionCallback>,
+    chatSegmentExceptionCallbacks: Set<ChatSegmentErrorCallback>,
 ): Promise<void> => {
     // TODO
 };
