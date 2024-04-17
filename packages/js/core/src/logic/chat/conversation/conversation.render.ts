@@ -1,3 +1,4 @@
+import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {render} from '../../../../../../shared/src/utils/dom/render';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
@@ -21,7 +22,7 @@ const html = () => `` +
     ``;
 
 export const renderConversation: CompRenderer<
-    CompConversationProps<unknown>, CompConversationElements, CompConversationEvents, CompConversationActions
+    CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
 > = ({
     appendToRoot,
     compEvent,

@@ -1,5 +1,5 @@
+import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
-import {ChatItem} from '../../../types/conversation';
 
 export type CompConversationEvents = 'user-scrolled';
 

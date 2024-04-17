@@ -1,3 +1,9 @@
+import {ChatAdapter, DataTransferMode} from '../../../../../../../shared/src/types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
+import {
+    isStandardChatAdapter,
+    StandardChatAdapter,
+} from '../../../../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {
     ChatSegment,
     ChatSegmentEvent,
@@ -17,9 +23,6 @@ import {ChatSegmentObservable} from '../../../../../../../shared/src/types/chatS
 import {ChatSegmentUserMessage} from '../../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {uid} from '../../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../../shared/src/utils/warn';
-import {ChatAdapter, DataTransferMode} from '../../../../types/adapters/chat/chatAdapter';
-import {ChatAdapterExtras} from '../../../../types/adapters/chat/chatAdapterExtras';
-import {isStandardChatAdapter, StandardChatAdapter} from '../../../../types/adapters/chat/standardChatAdapter';
 import {SubmitPrompt} from './submitPrompt';
 
 export const submitPrompt: SubmitPrompt = <AiMsg>(

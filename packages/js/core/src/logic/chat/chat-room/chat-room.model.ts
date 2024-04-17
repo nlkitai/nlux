@@ -1,12 +1,15 @@
+import {
+    isStandardChatAdapter,
+    StandardChatAdapter,
+} from '../../../../../../shared/src/types/adapters/chat/standardChatAdapter';
+import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
-import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ChatItem} from '../../../types/conversation';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../prompt-box/prompt-box.model';

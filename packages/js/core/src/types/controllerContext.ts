@@ -1,7 +1,7 @@
+import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
+import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {ExceptionId} from '../../../../shared/src/types/exceptions';
 import {HighlighterExtension} from '../exports/aiChat/highlighter/highlighter';
-import {ChatAdapter} from './adapters/chat/chatAdapter';
-import {StandardChatAdapter} from './adapters/chat/standardChatAdapter';
 import {AiChatProps} from './aiChat/props';
 import {EventName, EventsMap} from './event';
 

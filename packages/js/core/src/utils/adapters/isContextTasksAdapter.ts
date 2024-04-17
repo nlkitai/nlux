@@ -1,4 +1,4 @@
-import {ContextTasksAdapter} from '../../types/adapters/context/contextTasksAdapter';
+import {ContextTasksAdapter} from '../../../../../shared/src/types/adapters/context/contextTasksAdapter';
 
 export const isContextTasksAdapter = (adapter: any): ContextTasksAdapter | false => {
     if (

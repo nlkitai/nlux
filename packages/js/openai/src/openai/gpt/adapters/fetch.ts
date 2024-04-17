@@ -40,7 +40,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
 
         if (extras.conversationHistory) {
             messagesToSend.push(
-                ...conversationHistoryToMessagesList(extras.conversationHistory),
+                ...conversationHistoryToMessagesList<AiMsg>(extras.conversationHistory),
             );
         }
 

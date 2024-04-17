@@ -1,3 +1,4 @@
+import {AnyAiMsg} from '../anyAiMsg';
 import {NLErrorId} from '../exceptions/errors';
 import {ChatSegment, ChatSegmentEvent} from './chatSegment';
 import {AiStreamedMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
@@ -49,7 +50,7 @@ export type ChatSegmentErrorCallback = (
 //
 type AlwaysSatisfies<T, U> = T extends U ? true : false;
 assertAlwaysSatisfies<
-    ChatSegmentEventsMap<unknown>,
+    ChatSegmentEventsMap<AnyAiMsg>,
     Record<ChatSegmentEvent, Function>
 >(null as any, true);
 

@@ -1,17 +1,17 @@
-import {warn} from '../../../../../shared/src/utils/warn';
-import {ContextAdapter} from '../../types/adapters/context/contextAdapter';
-import {ContextAdapterBuilder} from '../../types/adapters/context/contextAdapterBuilder';
-import {ContextTasksAdapter} from '../../types/adapters/context/contextTasksAdapter';
-import {AiContext, AiContextItemStatus, AiContextStatus} from '../../types/aiContext/aiContext';
-import {ContextItemHandler, ContextTaskHandler} from '../../types/aiContext/contextObservers';
+import {ContextAdapter} from '../../../../../shared/src/types/adapters/context/contextAdapter';
+import {ContextAdapterBuilder} from '../../../../../shared/src/types/adapters/context/contextAdapterBuilder';
+import {ContextTasksAdapter} from '../../../../../shared/src/types/adapters/context/contextTasksAdapter';
+import {AiContext, AiContextItemStatus, AiContextStatus} from '../../../../../shared/src/types/aiContext/aiContext';
+import {ContextItemHandler, ContextTaskHandler} from '../../../../../shared/src/types/aiContext/contextObservers';
 import {
     ContextActionResult,
     DestroyContextResult,
     FlushContextResult,
     InitializeContextResult,
     RunTaskResult,
-} from '../../types/aiContext/contextResults';
-import {ContextItemDataType, ContextItems} from '../../types/aiContext/data';
+} from '../../../../../shared/src/types/aiContext/contextResults';
+import {ContextItemDataType, ContextItems} from '../../../../../shared/src/types/aiContext/data';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {isContextTasksAdapter} from '../../utils/adapters/isContextTasksAdapter';
 import {DataSyncService} from './dataSyncService';
 import {DataSyncOptions} from './options/dataSyncOptions';
