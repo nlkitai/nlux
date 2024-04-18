@@ -1,8 +1,7 @@
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
-import '@nlux-dev/themes/src/luna/components/ChatItem.css';
-import '@nlux-dev/themes/src/luna/components/animation.css';
 import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useState} from 'react';
+import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
+import '@nlux-dev/themes/src/luna/theme.css';
 
 export const ChatItemReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
@@ -71,7 +70,7 @@ export const ChatItemReactExpo = () => {
                 </div>
                 <div className="content">
                     <ForwardRefChatItemComp
-                        id={'1'}
+                        uid={'1'}
                         direction={direction}
                         status={status}
                         message={message}

@@ -1,9 +1,8 @@
 import '../style.css';
-import {createMessageDom} from '@nlux-dev/core/src/ui/Message/create.ts';
-import '@nlux-dev/themes/src/luna/components/Message.css';
-import '@nlux-dev/themes/src/luna/components/Loader.css';
-import {MessageDirection, MessageProps, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
-import {updateMessageDom} from '@nlux-dev/core/src/ui/Message/update.ts';
+import '@nlux-dev/themes/src/luna/theme.css';
+import {createMessageDom} from '../../../../../packages/shared/src/ui/Message/create.ts';
+import {MessageDirection, MessageProps, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
+import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/update.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

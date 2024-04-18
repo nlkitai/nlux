@@ -1,5 +1,4 @@
 import {submitPrompt} from '../../../../../../../shared/src/services/submitPrompt/submitPromptImpl';
-import {DataTransferMode} from '../../../../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
@@ -12,9 +11,7 @@ export const submitPromptFactory = <AiMsg>({
     conversation,
     messageToSend,
     resetPromptBox,
-    dataTransferMode,
 }: {
-    dataTransferMode?: DataTransferMode;
     context: ControllerContext<AiMsg>;
     promptBoxInstance: CompPromptBox<AiMsg>;
     conversation: CompConversation<AiMsg>;
@@ -70,7 +67,6 @@ export const submitPromptFactory = <AiMsg>({
 
             if (result.dataTransferMode === 'fetch') {
                 result.observable.on('aiMessageReceived', (aiMessage) => {
-                    console.dir(aiMessage.content);
                     message.setContent(aiMessage.content);
                     conversation.updateConversationContent({role: 'ai', message: aiMessage.content});
                     context.emit('messageReceived', aiMessage.content);

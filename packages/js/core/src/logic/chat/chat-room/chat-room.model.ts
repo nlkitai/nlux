@@ -1,7 +1,3 @@
-import {
-    isStandardChatAdapter,
-    StandardChatAdapter,
-} from '../../../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
@@ -181,15 +177,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     }
 
     private handlePromptBoxSubmit() {
-        const {adapter} = this.context;
-        const adapterAsStandardAdapter: StandardChatAdapter<AiMsg> | undefined = isStandardChatAdapter(
-            adapter as any) ?
-            adapter as any : undefined;
-
         const promptBoxProps: Partial<PromptBoxProps> | undefined = this.props.promptBox;
-
         submitPromptFactory({
-            dataTransferMode: adapterAsStandardAdapter ? adapterAsStandardAdapter.dataTransferMode : undefined,
             context: this.context,
             promptBoxInstance: this.promptBoxInstance,
             conversation: this.conversation,

@@ -1,7 +1,6 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/components/animation.css';
-import '@nlux-dev/themes/src/luna/components/Loader.css';
-import {createLoaderDom} from '@nlux-dev/core/src/ui/Loader/create.ts';
+import '@nlux-dev/themes/src/luna/theme.css';
+import {createLoaderDom} from '../../../../../packages/shared/src/ui/Loader/create.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `
