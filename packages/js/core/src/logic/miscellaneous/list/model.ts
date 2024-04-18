@@ -99,27 +99,10 @@ export class CompList<CompType extends BaseComp<any, any, any, any, any>>
         this.renderedComponents.forEach(callback);
     }
 
-    public getComponentAt(index: number): CompType | undefined {
-        if (index < 0 || index >= this.renderedComponents.length) {
-            return;
-        }
-
-        return this.renderedComponents[index];
-    }
-
     public getComponentById(id: string): CompType | undefined {
         for (const component of this.renderedComponents) {
             if (component.id === id) {
                 return component;
-            }
-        }
-    }
-
-    public removeComponent(component: BaseComp<any, any, any, any, any>) {
-        for (let i = 0; i < this.renderedComponents.length; i++) {
-            if (this.renderedComponents[i] === component) {
-                this.removeComponentAt(i);
-                return;
             }
         }
     }

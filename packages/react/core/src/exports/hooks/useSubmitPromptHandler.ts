@@ -125,21 +125,27 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                             return currentChatSegment;
                         }
 
-                        return {
-                            ...currentChatSegment,
-                            items: [
-                                ...currentChatSegment.items,
-                                {...aiMessage},
-                            ],
-                        };
+                        return {...currentChatSegment, items: [...currentChatSegment.items, {...aiMessage}]};
                     },
                 );
 
                 domToReactRef.current.setChatSegments(newChatSegments);
             });
 
-            chatSegmentObservable.on('complete', (newChatSegment) => {
+            chatSegmentObservable.on('complete', (completeChatSegment) => {
                 domToReactRef.current.setPromptBoxStatus('typing');
+                const currentChatSegments = domToReactRef.current.chatSegments;
+                const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
+                    (currentChatSegment) => {
+                        if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
+                            return currentChatSegment;
+                        }
+
+                        return {...completeChatSegment};
+                    },
+                );
+
+                domToReactRef.current.setChatSegments(newChatSegments);
             });
 
             chatSegmentObservable.on('aiChunkReceived', (chunk: string, messageId: string) => {
