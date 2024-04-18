@@ -29,6 +29,7 @@ export type AiMessageStreamStartedCallback = (aiMessage: AiStreamedMessage & {
 
 export type AiMessageStreamedCallback = (aiMessage: AiStreamedMessage & {
     status: 'complete';
+    content: string;
 }) => void;
 
 export type AiMessageChunkReceivedCallback = (

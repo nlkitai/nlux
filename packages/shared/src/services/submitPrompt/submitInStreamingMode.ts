@@ -29,6 +29,7 @@ export const submitInStreamingMode = <AiMsg>(
         let firstChunkReceived = false;
         let errorOccurred = false;
         let completeOccurred = false;
+        let streamedMessage = '';
 
         const emitAiMessageStreamStartedEvent = () => {
             if (firstChunkReceived) {
@@ -59,6 +60,7 @@ export const submitInStreamingMode = <AiMsg>(
                     emitAiMessageStreamStartedEvent();
                 }
 
+                streamedMessage += chunk;
                 triggerAsyncCallback(() => {
                     aiMessageChunkReceivedCallbacks.forEach(callback => {
                         callback(chunk, streamedMessageId);
@@ -76,10 +78,11 @@ export const submitInStreamingMode = <AiMsg>(
                 // EVENT: AI MESSAGE FULLY STREAMED
                 //
                 triggerAsyncCallback(() => {
-                    type StreamedAiMessage = AiStreamedMessage & {status: 'complete'};
+                    type StreamedAiMessage = AiStreamedMessage & {status: 'complete', content: string};
                     const aiMessage: StreamedAiMessage = {
                         uid: streamedMessageId,
                         status: 'complete',
+                        content: streamedMessage,
                         time: new Date(),
                         participantRole: 'ai',
                         dataTransferMode: 'stream',
@@ -108,6 +111,7 @@ export const submitInStreamingMode = <AiMsg>(
                             {
                                 uid: streamedMessageId,
                                 status: 'complete',
+                                content: streamedMessage,
                                 time: new Date(),
                                 participantRole: 'ai',
                                 dataTransferMode: 'stream',

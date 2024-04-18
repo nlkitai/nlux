@@ -63,11 +63,11 @@ describe('submitPrompt() + fetch data transfer mode', () => {
 
             // Assert
             expect(listenToComplete).toHaveBeenCalledWith(
-                expect.objectContaining({
+                {
                     status: 'complete',
                     uid: expect.any(String),
                     items: [],
-                }),
+                },
             );
         });
 
@@ -231,21 +231,21 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                     uid: expect.any(String),
                     status: 'complete',
                     items: expect.arrayContaining([
-                        expect.objectContaining({
+                        {
                             content: prompt,
                             participantRole: 'user',
                             status: 'complete',
                             time: expect.any(Date),
                             uid: expect.any(String),
-                        }),
-                        expect.objectContaining({
+                        },
+                        {
                             content: 'Hi! The weather is sunny today.',
                             participantRole: 'ai',
                             status: 'complete',
                             dataTransferMode: 'fetch',
                             time: expect.any(Date),
                             uid: expect.any(String),
-                        }),
+                        },
                     ]),
                 });
             });

@@ -63,11 +63,11 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
             // Assert
             expect(listenToComplete).toHaveBeenCalledWith(
-                expect.objectContaining({
+                {
                     status: 'complete',
                     uid: expect.any(String),
                     items: [],
-                }),
+                },
             );
         });
 
@@ -386,7 +386,35 @@ describe('submitPrompt() + stream data transfer mode', () => {
         });
 
         describe('When the server completes streaming', () => {
-            it('Should emit complete event when callback is registered', async () => {
+            it('Should emit aiMessageStreamed event when callback is registered', async () => {
+                // Arrange
+                const prompt = 'What is the weather like today?';
+                const adapter = adapterController!.adapter;
+                const listenToStreamed = vi.fn();
+
+                // Act
+                const {observable} = submitPrompt(prompt, adapter, extras!);
+                observable.on('aiMessageStreamed', listenToStreamed);
+                adapterController!.next('The');
+                adapterController!.next(' weather');
+                adapterController!.next(' is');
+                adapterController!.next(' sunny');
+                adapterController!.complete();
+                await waitForMilliseconds(10);
+
+                // Assert
+                expect(listenToStreamed)
+                    .toHaveBeenCalledWith({
+                        uid: expect.any(String),
+                        status: 'complete',
+                        time: expect.any(Date),
+                        participantRole: 'ai',
+                        dataTransferMode: 'stream',
+                        content: 'The weather is sunny',
+                    });
+            });
+
+            it('Should emit segment complete event when callback is registered', async () => {
                 // Arrange
                 const prompt = 'What is the weather like today?';
                 const adapter = adapterController!.adapter;
@@ -400,11 +428,11 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
                 // Assert
                 expect(listenToComplete).toHaveBeenCalledWith(
-                    expect.objectContaining({
+                    {
                         status: 'complete',
                         uid: expect.any(String),
                         items: expect.any(Array),
-                    }),
+                    },
                 );
             });
 
@@ -438,32 +466,36 @@ describe('submitPrompt() + stream data transfer mode', () => {
                 // Act
                 const {observable} = submitPrompt(prompt, adapter, extras!);
                 observable.on('complete', listenToComplete);
-                adapterController!.next('The weather is sunny.');
+                adapterController!.next('The');
+                adapterController!.next(' weather');
+                adapterController!.next(' is');
+                adapterController!.next(' sunny');
                 adapterController!.complete();
                 await waitForMilliseconds(10);
 
                 // Assert
                 expect(listenToComplete).toHaveBeenCalledWith(
-                    expect.objectContaining({
+                    {
                         status: 'complete',
                         uid: expect.any(String),
                         items: [
-                            expect.objectContaining({
+                            {
                                 uid: expect.any(String),
                                 time: expect.any(Date),
                                 status: 'complete',
                                 participantRole: 'user',
                                 content: prompt,
-                            }),
-                            expect.objectContaining({
+                            },
+                            {
                                 uid: expect.any(String),
                                 time: expect.any(Date),
                                 status: 'complete',
+                                content: 'The weather is sunny',
                                 participantRole: 'ai',
                                 dataTransferMode: 'stream',
-                            }),
+                            },
                         ],
-                    }),
+                    },
                 );
             });
 

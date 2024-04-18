@@ -124,6 +124,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'rendered'}
                                     direction={'incoming'}
+                                    message={chatItem.content}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
