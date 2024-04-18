@@ -1,6 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/components/animation.css';
-import '@nlux-dev/themes/src/luna/components/PromptBox.css';
+import '@nlux-dev/themes/src/luna/theme.css';
 import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/create.ts';
 import {PromptBoxProps, PromptBoxStatus} from '../../../../../packages/shared/src/ui/PromptBox/props.ts';
 import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/update.ts';

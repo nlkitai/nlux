@@ -1,5 +1,6 @@
 import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
 import {AiUnifiedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../../ui/ChatItem/props';
@@ -35,6 +36,8 @@ export const ChatSegmentComp: <AiMsg>(
         }
     }, [chatSegment.items]);
 
+    const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
+
     useImperativeHandle(ref, () => ({
         scrollToBottom: () => {
             // TODO - Implement scroll to bottom
@@ -53,7 +56,7 @@ export const ChatSegmentComp: <AiMsg>(
     }
 
     return (
-        <>
+        <div className={rootClassName}>
             {chatItems.map((chatItem, index) => {
                 let ref: RefObject<ChatItemImperativeProps> | undefined = chatItemsRef.get(chatItem.uid);
                 if (!ref) {
@@ -186,6 +189,6 @@ export const ChatSegmentComp: <AiMsg>(
                     return null;
                 }
             })}
-        </>
+        </div>
     );
 };

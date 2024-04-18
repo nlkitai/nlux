@@ -1,6 +1,9 @@
 .nlux-AiChat-root.nlux-theme-luna {
     --nlux-text-color: #1d1e1bff;
 
+    --nlux-foreground-color: #333333;
+    --nlux-border-color: #cccccc;
+
     --nlux-input-background-color: #ffffff;
     --nlux-input-border-color: #c5d7c9;
     --nlux-input-text-color: #18210c;

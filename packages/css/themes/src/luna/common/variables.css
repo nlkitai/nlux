@@ -1,4 +1,4 @@
-@import './colors.css';
+@import 'colors.css';
 
 .nlux-AiChat-root.nlux-theme-luna {
     --nlux-font-family: 'IBM Plex Sans', sans-serif;
@@ -18,7 +18,7 @@
     --nlux-padding-m: 0.7rem;
     --nlux-padding-l: 0.9rem;
 
-    --nlux-flex-gap: 0.8rem;
+    --nlux-gap: 0.5em;
 
     --nlux-border-radius-xs: 4px;
     --nlux-border-radius-s: 6px;

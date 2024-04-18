@@ -1,11 +1,9 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/components/animation.css';
-import '@nlux-dev/themes/src/luna/components/ChatItem.css';
-import '@nlux-dev/themes/src/luna/components/Loader.css';
-import {createChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/create.ts';
-import {ChatItemProps} from '@nlux-dev/core/src/ui/ChatItem/props.ts';
-import {updateChatItemDom} from '@nlux-dev/core/src/ui/ChatItem/update.ts';
-import {MessageDirection, MessageStatus} from '@nlux-dev/core/src/ui/Message/props.ts';
+import '@nlux-dev/themes/src/luna/theme.css';
+import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create.ts';
+import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props.ts';
+import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update.ts';
+import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

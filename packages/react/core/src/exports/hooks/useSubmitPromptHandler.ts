@@ -2,6 +2,8 @@ import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter} f
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
@@ -85,7 +87,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             // to trigger a check and potentially re-render the React component, we need to change
             // the reference of the parts array by creating a new array.
 
-            chatSegmentObservable.on('userMessageReceived', (userMessage) => {
+            const handleSegmentItemReceived = (item: ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage) => {
                 const currentChatSegments = domToReactRef.current.chatSegments;
                 const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
                     (currentChatSegment) => {
@@ -97,34 +99,21 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                             ...currentChatSegment,
                             items: [
                                 ...currentChatSegment.items,
-                                userMessage,
+                                {...item},
                             ],
                         };
                     },
                 );
 
                 domToReactRef.current.setChatSegments(newChatSegments);
+            };
+
+            chatSegmentObservable.on('userMessageReceived', (userMessage) => {
+                handleSegmentItemReceived(userMessage);
             });
 
             chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
-                const currentChatSegments = domToReactRef.current.chatSegments;
-                const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
-                    (currentChatSegment) => {
-                        if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
-                            return currentChatSegment;
-                        }
-
-                        return {
-                            ...currentChatSegment,
-                            items: [
-                                ...currentChatSegment.items,
-                                {...aiStreamedMessage},
-                            ],
-                        };
-                    },
-                );
-
-                domToReactRef.current.setChatSegments(newChatSegments);
+                handleSegmentItemReceived(aiStreamedMessage);
                 domToReactRef.current.setPromptBoxStatus('typing');
             });
 

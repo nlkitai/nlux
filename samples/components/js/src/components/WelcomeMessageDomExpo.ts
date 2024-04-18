@@ -1,9 +1,8 @@
 import '../style.css';
-import {createWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/create.ts';
-import '@nlux-dev/themes/src/luna/components/WelcomeMessage.css';
-import '@nlux-dev/themes/src/luna/components/Loader.css';
-import {WelcomeMessageProps} from '@nlux-dev/core/src/ui/WelcomeMessage/props.ts';
-import {updateWelcomeMessageDom} from '@nlux-dev/core/src/ui/WelcomeMessage/update.ts';
+import '@nlux-dev/themes/src/luna/theme.css';
+import {createWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/create.ts';
+import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/WelcomeMessage/props.ts';
+import {updateWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/update.ts';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

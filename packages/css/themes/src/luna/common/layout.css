@@ -1,4 +1,4 @@
-@import '../variables.css';
+@import 'variables.css';
 
 .nlux-AiChat-root {
     position: relative;
@@ -41,7 +41,7 @@
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
             padding: 0;
-            gap: var(--nlux-flex-gap);
+            gap: var(--nlux-gap);
         }
     }
 }
