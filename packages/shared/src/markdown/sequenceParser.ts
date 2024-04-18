@@ -1,4 +1,4 @@
-import {MarkdownElementName} from '../../../types/markdown/markdownElement';
+import {MarkdownElementName} from '../types/markdown/markdownElement';
 import {allMarkdownElementNames} from './allMarkdownElementNames';
 import {checkSequence} from './regex/baseRegexParsers';
 

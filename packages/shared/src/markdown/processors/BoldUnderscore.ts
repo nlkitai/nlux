@@ -1,8 +1,8 @@
-import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class BoldAsteriskProcessor extends ProcessorWithChildren {
+export class BoldUnderscoreProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
@@ -10,7 +10,7 @@ export class BoldAsteriskProcessor extends ProcessorWithChildren {
     ) {
         super(
             parent,
-            'BoldAsterisk',
+            'BoldUnderscore',
             openingSequence ?? null,
             initialContent ?? null,
             null,

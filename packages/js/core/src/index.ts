@@ -7,7 +7,6 @@ export {AiChat} from './exports/aiChat/aiChat';
 export const createAiChat = <AiMsg = string>(): AiChat<AiMsg> => new AiChat<AiMsg>();
 
 export {Observable} from './exports/bus/observable';
-export {createMdStreamRenderer} from './exports/aiChat/markdown/streamParser';
 
 export type {ConversationOptions} from './exports/aiChat/options/conversationOptions';
 export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';
@@ -84,7 +83,7 @@ export type {
     StreamParser,
     StandardStreamParser,
     StandardStreamParserOutput,
-} from './types/markdown/streamParser';
+} from '../../../shared/src/types/markdown/streamParser';
 
 // CONTEXT __________________
 

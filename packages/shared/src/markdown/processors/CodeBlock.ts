@@ -1,6 +1,6 @@
-import {isWhitespaceOrNewLine} from '../../../../../../../shared/src/utils/character/isWhitespaceOrNewLine';
-import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {isWhitespaceOrNewLine} from '../../utils/character/isWhitespaceOrNewLine';
 import {MarkdownProcessorOptions} from './baseProcessor';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 

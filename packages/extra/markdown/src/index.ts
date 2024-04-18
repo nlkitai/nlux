@@ -1,4 +1,5 @@
-import {createMdStreamRenderer, HighlighterExtension} from '../../../js/core/src';
+import {HighlighterExtension} from '../../../js/core/src';
+import {createMdStreamRenderer} from '../../../shared/src/markdown/streamParser';
 
 export type MarkdownStreamParser = {
     next(value: string): void;
@@ -21,7 +22,7 @@ export const createMarkdownStreamParser = (
         domElement,
         options?.syntaxHighlighter,
         {
-            openLinksInNewWindow: options?.openLinksInNewWindow || false,  
+            openLinksInNewWindow: options?.openLinksInNewWindow || false,
             skipAnimation: options?.skipAnimation,
             streamingAnimationSpeed: options?.streamingAnimationSpeed,
             skipCopyToClipboardButton: true,

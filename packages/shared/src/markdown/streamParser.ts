@@ -1,4 +1,4 @@
-import {StandardStreamParser} from '../../../types/markdown/streamParser';
+import {StandardStreamParser} from '../types/markdown/streamParser';
 import {RootProcessor} from './processors/Root';
 
 export const markdownDefaultStreamingAnimationSpeed = 10; // We render a new character every 10ms (if available)
