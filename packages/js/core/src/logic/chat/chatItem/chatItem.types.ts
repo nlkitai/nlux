@@ -11,6 +11,7 @@ export type CompChatItemElements = Readonly<{
 
 export type CompChatItemActions = Readonly<{
     focus: () => void;
+    processStreamedChunk: (chunk: string) => void;
 }>;
 
 export type CompChatItemEvents = Readonly<{}>;
