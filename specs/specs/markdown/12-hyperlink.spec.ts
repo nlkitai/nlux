@@ -1,5 +1,6 @@
-import {createMdStreamRenderer, StandardStreamParserOutput} from '@nlux/core';
 import {beforeEach, describe, expect, it} from 'vitest';
+import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/streamParser';
+import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Asterisk Italic Markdowns Parser', () => {
@@ -20,7 +21,9 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render a link to a new window', async () => {
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true, openLinksInNewWindow: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined,
+            {skipAnimation: true, openLinksInNewWindow: true},
+        );
 
         streamRenderer.next('[Hi New Window](http://world.com)');
         streamRenderer.complete!();

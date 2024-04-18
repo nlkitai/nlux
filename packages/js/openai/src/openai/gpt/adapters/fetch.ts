@@ -39,9 +39,8 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
         ] : [];
 
         if (extras.conversationHistory) {
-            messagesToSend.push(
-                ...conversationHistoryToMessagesList<AiMsg>(extras.conversationHistory),
-            );
+            const itemsInOpenAiFormat = conversationHistoryToMessagesList<AiMsg>(extras.conversationHistory);
+            messagesToSend.push(...itemsInOpenAiFormat);
         }
 
         messagesToSend.push({

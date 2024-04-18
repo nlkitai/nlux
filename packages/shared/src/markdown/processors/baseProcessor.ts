@@ -1,6 +1,6 @@
-import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
-import {HighlighterExtension} from '../../highlighter/highlighter';
+import {HighlighterExtension} from '../../../../js/core/src';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
 import {SequenceParser} from '../sequenceParser';
 
 export type MarkdownProcessorOptions = {

@@ -1,7 +1,7 @@
-import {isLineBreakSequence} from '../../../../../../../shared/src/utils/character/isLineBreakSequence';
-import {isWhitespaceOrNewLine} from '../../../../../../../shared/src/utils/character/isWhitespaceOrNewLine';
-import {isBr} from '../../../../../../../shared/src/utils/dom/isBr';
-import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {isLineBreakSequence} from '../../utils/character/isLineBreakSequence';
+import {isWhitespaceOrNewLine} from '../../utils/character/isWhitespaceOrNewLine';
+import {isBr} from '../../utils/dom/isBr';
 import {createMarkdownProcessor} from '../markdownProcessorFactory';
 import {BaseMarkdownProcessor, MarkdownProcessorOptions} from './baseProcessor';
 

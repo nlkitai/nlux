@@ -1,5 +1,5 @@
-import {MarkdownElementName} from '../../../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
 export class HeadingProcessor extends ProcessorWithChildren {
