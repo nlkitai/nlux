@@ -75,9 +75,12 @@ export const submitPromptFactory = <AiMsg>({
                     resetPromptBox(true);
                 });
             } else {
-                // In stream mode — Listen to aiChunkReceived event and complete event
-                result.observable.on('aiChunkReceived', (aiMessageChunk, messageId) => {
-                    conversation.addChunk(segmentId, messageId, aiMessageChunk);
+                result.observable.on('aiMessageStreamStarted', (aiMessageStream) => {
+                    conversation.addChatItem(segmentId, aiMessageStream);
+                });
+
+                result.observable.on('aiChunkReceived', (aiMessageChunk, chatItemId) => {
+                    conversation.addChunk(segmentId, chatItemId, aiMessageChunk);
                 });
 
                 result.observable.on('complete', () => {

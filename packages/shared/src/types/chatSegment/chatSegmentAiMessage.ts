@@ -1,10 +1,17 @@
 export type AiStreamedMessage = {
     uid: string;
     time: Date;
-    status: 'streaming' | 'complete' | 'error';
     participantRole: 'ai';
     dataTransferMode: 'stream';
-};
+} & ({
+    status: 'streaming';
+} | {
+    status: 'complete';
+    content: string;
+} | {
+    status: 'error';
+    error: string;
+});
 
 export type AiStreamedMessageStatus = AiStreamedMessage['status'];
 

@@ -54,7 +54,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             )
             .create();
 
-        this.chatItems.set(newChatItemComp.id, newChatItemComp);
+        this.chatItems.set(item.uid, newChatItemComp);
 
         if (!this.rendered) {
             // If the chat segment is not rendered, we don't need to render the chat item yet!
@@ -72,14 +72,15 @@ export class CompChatSegment<AiMsg> extends BaseComp<
     }
 
     public addChunk(chatItemId: string, chunk: string) {
-        this.throwIfDestroyed();
+        domOp(() => {
+            this.throwIfDestroyed();
+            const chatItem = this.chatItems.get(chatItemId);
+            if (!chatItem) {
+                throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
+            }
 
-        const chatItem = this.chatItems.get(chatItemId);
-        if (!chatItem) {
-            throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
-        }
-
-        chatItem.addChunk(chunk);
+            chatItem.addChunk(chunk);
+        });
     }
 
     public complete() {
