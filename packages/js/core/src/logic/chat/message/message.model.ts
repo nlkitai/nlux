@@ -71,7 +71,7 @@ export class CompMessage<AiMsg> extends BaseComp<
     }
 
     /**
-     * Called to commit the content and close the stream when the content is provided via stream.
+     * Called to complete the content and close the stream when the content is provided via stream.
      * Once this is called, the content cannot be appended anymore.
      * It should be called when the stream is closed.
      */

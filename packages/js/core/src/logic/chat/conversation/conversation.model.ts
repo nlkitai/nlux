@@ -1,4 +1,6 @@
+import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
+import {uid} from '../../../../../../shared/src/utils/uid';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
@@ -8,6 +10,7 @@ import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOp
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
+import {CompChatSegment} from '../chatSegment/chatSegment.model';
 import {CompMessage} from '../message/message.model';
 import type {MessageContentType} from '../message/message.types';
 import {renderConversation} from './conversation.render';
@@ -24,6 +27,7 @@ import {updateConversation} from './conversation.update';
 export class CompConversation<AiMsg> extends BaseComp<
     AiMsg, CompConversationProps<AiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
+    private readonly chatSegmentsById: Map<string, CompChatSegment<AiMsg>> = new Map();
     private readonly conversationContent: ChatItem<AiMsg>[] = [];
     private lastMessageId?: string;
     private lastMessageResizedListener?: Function;
@@ -37,6 +41,38 @@ export class CompConversation<AiMsg> extends BaseComp<
         this.addConversation();
         this.scrollWhenGeneratingUserOption = props.scrollWhenGenerating ?? true;
         this.conversationContent = props.messages?.map((message) => ({...message})) ?? [];
+    }
+
+    public addChatItem(segmentId: string, item: ChatSegmentItem<AiMsg>) {
+        const chatSegment = this.chatSegmentsById.get(segmentId);
+        if (!chatSegment) {
+            throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
+        }
+
+        chatSegment.addChatItem(item);
+    }
+
+    public addChatSegment() {
+        this.throwIfDestroyed();
+
+        const segmentId = uid();
+        const newChatSegmentComp = comp(CompChatSegment<AiMsg>)
+            .withContext(this.context)
+            .withProps({uid: segmentId, status: 'active'})
+            .create();
+
+        this.chatSegmentsById.set(segmentId, newChatSegmentComp);
+        this.addSubComponent(segmentId, newChatSegmentComp, 'messagesContainer');
+        return segmentId;
+    };
+
+    public addChunk(segmentId: string, chatItemId: string, chunk: string) {
+        const chatSegment = this.chatSegmentsById.get(segmentId);
+        if (!chatSegment) {
+            throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
+        }
+
+        chatSegment.addChunk(chatItemId, chunk);
     }
 
     public addMessage(
@@ -112,6 +148,15 @@ export class CompConversation<AiMsg> extends BaseComp<
         return message.id;
     }
 
+    public completeChatSegment(segmentId: string) {
+        const chatSegment = this.chatSegmentsById.get(segmentId);
+        if (!chatSegment) {
+            throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
+        }
+
+        chatSegment.complete();
+    }
+
     public getConversationContentForAdapter(
         historyPayloadSize: HistoryPayloadSize = 'max',
     ): ChatItem<AiMsg>[] | undefined {
@@ -138,6 +183,16 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public getMessageById(messageId: string): CompMessage<AiMsg> | undefined {
         return this.messagesList?.getComponentById(messageId);
+    }
+
+    public removeChatSegment(segmentId: string) {
+        const chatSegment = this.chatSegmentsById.get(segmentId);
+        if (!chatSegment) {
+            return;
+        }
+
+        chatSegment.destroy();
+        this.chatSegmentsById.delete(segmentId);
     }
 
     public removeMessage(messageId: string) {
