@@ -59,4 +59,25 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             expect(activeSegment!.classList.contains('nlux-chtSgm-actv')).not.toBe(true);
         });
     });
+
+    describe('When the fetch prompt submission fails', () => {
+        it('The active segment should be removed', async () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController?.reject('Sorry user!');
+            await waitForRenderCycle();
+
+            // Assert
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
+            const activeSegment = container.querySelector(activeSegmentSelector);
+            expect(activeSegment).not.toBeInTheDocument();
+        });
+    });
 });
