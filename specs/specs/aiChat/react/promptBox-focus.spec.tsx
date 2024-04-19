@@ -39,7 +39,6 @@ describe('<AiChat /> + layoutOptions + width', () => {
             const {container} = render(aiChat);
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            const button: HTMLButtonElement = container.querySelector('.nlux-comp-prmptBox > button')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');

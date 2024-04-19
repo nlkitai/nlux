@@ -38,7 +38,7 @@ export const renderChatRoom: CompRenderer<
 
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
         `:scope > .${__('cnv-cntr')}`,
-    ).on('click', compEvent('messages-container-clicked'))
+    ).on('click', compEvent('segments-container-clicked'))
      .get();
 
     const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prmptBox-cntr')}`);

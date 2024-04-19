@@ -15,10 +15,10 @@ import {
 import {createEmptyWelcomeMessage, createWelcomeMessage} from './utils/createWelcomeMessage';
 import {messagesScrollHandlerFactory} from './utils/messagesScrollHandler';
 
-export const __ = (styleName: string) => `nlux-conversation-${styleName}`;
+export const __ = (styleName: string) => `nlux-chtRm-cnv-${styleName}`;
 
 const html = () => `` +
-    `<div class="${__('messages-container')}"></div>` +
+    `<div class="${__('sgmts-cntr')}"></div>` +
     ``;
 
 export const renderConversation: CompRenderer<
@@ -77,7 +77,7 @@ export const renderConversation: CompRenderer<
 
     return {
         elements: {
-            messagesContainer,
+            messagesContainer: messagesContainer,
         },
         actions: {
             scrollToBottom: () => {

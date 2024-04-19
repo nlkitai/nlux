@@ -78,7 +78,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.setProp('visible', false);
     }
 
-    @CompEventListener('messages-container-clicked')
+    @CompEventListener('segments-container-clicked')
     messagesContainerClicked() {
         this.promptBoxInstance?.focusTextInput();
     }
