@@ -128,5 +128,41 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });
+
+        it('Complete segments should not be removed', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
+            const completeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-cmpl';
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            adapterController?.resolve('Hi! How can I help you?');
+            await waitForRenderCycle();
+
+            // Assert
+            const completeSegment = rootElement.querySelector(completeSegmentSelector);
+            expect(completeSegment).toBeInTheDocument();
+
+            // Act again
+            await userEvent.type(textArea, 'How are you?{enter}');
+            await waitForRenderCycle();
+
+            adapterController?.reject('Sorry user!');
+            await waitForRenderCycle();
+
+            // Assert
+            const completeSegmentAgain = rootElement.querySelector(completeSegmentSelector);
+            const activeSegment = rootElement.querySelector(activeSegmentSelector);
+
+            expect(completeSegmentAgain).toBeInTheDocument();
+            expect(activeSegment).not.toBeInTheDocument();
+        });
     });
 });
