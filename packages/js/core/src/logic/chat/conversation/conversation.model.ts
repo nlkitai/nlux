@@ -192,6 +192,15 @@ export class CompConversation<AiMsg> extends BaseComp<
         }
 
         chatSegment.destroy();
+        const subCompKeys = this.subComponents.keys();
+        const keyOfVictimComp = [...subCompKeys].find((key) => {
+            return this.subComponents.get(key)!.id === chatSegment.id;
+        });
+
+        if (keyOfVictimComp) {
+            this.subComponents.delete(keyOfVictimComp);
+        }
+
         this.chatSegmentsById.delete(segmentId);
     }
 

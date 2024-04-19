@@ -90,10 +90,14 @@ export class CompChatSegment<AiMsg> extends BaseComp<
     }
 
     destroy() {
-        this.chatItems.forEach((comp) => comp.destroy());
-        this.chatItems.clear();
         super.destroy();
     }
+
+    // destroy() {
+    //     this.chatItems.forEach((comp) => comp.destroy());
+    //     this.chatItems.clear();
+    //     super.destroy();
+    // }
 
     @CompEventListener('chat-segment-ready')
     private onChatSegmentReady() {
