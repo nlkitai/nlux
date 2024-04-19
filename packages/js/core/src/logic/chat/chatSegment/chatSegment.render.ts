@@ -1,3 +1,4 @@
+import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {getChatSegmentClassName} from '../../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {CompRenderer} from '../../../types/comp';
 import {
@@ -19,7 +20,7 @@ export const renderChatSegment: CompRenderer<
     const container = document.createElement('div');
     container.className = getChatSegmentClassName(props.status);
     appendToRoot(container);
-    compEvent('chat-segment-ready')();
+    domOp(() => compEvent('chat-segment-ready')());
 
     return {
         elements: {
