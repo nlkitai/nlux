@@ -207,8 +207,11 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * You can use destroyed property to check if the component is already destroyed before calling render().
      *
      * @param root The root element where the component should be rendered.
+     * @param insertBeforeElement The element before which the component should be inserted. If not provided, the
+     * component will be appended to the root element. If provided, the component will be inserted before the
+     * provided element if it exists in the root element.
      */
-    public render(root: HTMLElement) {
+    public render(root: HTMLElement, insertBeforeElement?: HTMLElement) {
         if (!this.def) {
             return;
         }
@@ -250,10 +253,17 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
 
         // We append the virtual root element to the actual root element
         domOp(() => {
-            if (!this.destroyed) {
-                root.append(virtualRoot);
-                this.renderingRoot = root;
+            if (this.destroyed) {
+                return;
             }
+
+            if (insertBeforeElement) {
+                root.insertBefore(virtualRoot, insertBeforeElement);
+            } else {
+                root.append(virtualRoot);
+            }
+
+            this.renderingRoot = root;
         });
     }
 
