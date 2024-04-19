@@ -13,7 +13,13 @@ export const updateChatSegment: CompUpdater<
             return;
         }
 
-        rootContainer.className = getChatSegmentClassName(newValue as ChatSegmentStatus);
+        const newStatus = newValue as ChatSegmentStatus;
+        rootContainer.className = getChatSegmentClassName(newStatus);
+        if (newStatus === 'active') {
+            dom.actions?.showLoader();
+        } else {
+            dom.actions?.hideLoader();
+        }
     }
 
     if (propName === 'uid') {

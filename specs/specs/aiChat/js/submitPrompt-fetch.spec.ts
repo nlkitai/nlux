@@ -45,6 +45,23 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
+
+        it('Should show a loader in the active segment', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Assert
+            const loaderSelector = '.nlux-chtSgm-actv > .nlux-chtSgm-ldr-cntr';
+            const loader = rootElement.querySelector(loaderSelector);
+            expect(loader).toBeInTheDocument();
+        });
     });
 
     describe('When a response is returned', () => {
@@ -68,6 +85,27 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment!.classList.contains('nlux-chtSgm-cmpl')).toBe(true);
             expect(activeSegment!.classList.contains('nlux-chtSgm-actv')).not.toBe(true);
+        });
+
+        it('The loader should be removed from the active segment', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const loaderSelector = '.nlux-chtSgm-actv > .nlux-chtSgm-ldr-cntr';
+
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController!.resolve('Yo!');
+            await waitForRenderCycle();
+
+            // Assert
+            const loader = rootElement.querySelector(loaderSelector);
+            expect(loader).not.toBeInTheDocument();
         });
     });
 

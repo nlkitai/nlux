@@ -61,14 +61,15 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             return;
         }
 
-        domOp(() => {
-            if (!this.renderedDom?.elements?.chatSegmentContainer) {
-                warnOnce('CompChatSegment: chatSegmentContainer is not available');
-                return;
-            }
+        if (!this.renderedDom?.elements?.chatSegmentContainer) {
+            warnOnce('CompChatSegment: chatSegmentContainer is not available');
+            return;
+        }
 
-            newChatItemComp.render(this.renderedDom?.elements?.chatSegmentContainer);
-        });
+        newChatItemComp.render(
+            this.renderedDom.elements.chatSegmentContainer,
+            this.renderedDom.elements.loaderContainer,
+        );
     }
 
     public addChunk(chatItemId: string, chunk: string) {
@@ -109,5 +110,19 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 }
             });
         });
+    }
+
+    @CompEventListener('loader-hidden')
+    private onLoaderHidden() {
+        if (this.renderedDom?.elements) {
+            this.renderedDom.elements.loaderContainer = undefined;
+        }
+    }
+
+    @CompEventListener('loader-shown')
+    private onLoaderShown(loader: HTMLElement) {
+        if (this.renderedDom?.elements) {
+            this.renderedDom.elements.loaderContainer = loader;
+        }
     }
 }

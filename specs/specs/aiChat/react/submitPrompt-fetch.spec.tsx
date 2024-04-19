@@ -34,6 +34,22 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
+
+        it('Should show a loader in the active segment', async () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Assert
+            const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
+            expect(loaderContainer).toBeInTheDocument();
+        });
     });
 
     describe('When a response is returned', () => {
@@ -57,6 +73,21 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment!.classList.contains('nlux-chtSgm-cmpl')).toBe(true);
             expect(activeSegment!.classList.contains('nlux-chtSgm-actv')).not.toBe(true);
+        });
+
+        it('The loader should be removed from the active segment', () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            userEvent.type(textArea, 'Hello{enter}');
+
+            // Act
+            adapterController!.resolve('Yo!');
+
+            // Assert
+            const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
+            expect(loaderContainer).not.toBeInTheDocument();
         });
     });
 

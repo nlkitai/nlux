@@ -5,12 +5,14 @@ export type CompChatSegmentProps = Readonly<{
     status: ChatSegmentStatus;
 }>;
 
-export type CompChatSegmentElements = Readonly<{
+export type CompChatSegmentElements = {
     chatSegmentContainer: HTMLElement;
-}>;
+    loaderContainer?: HTMLElement;
+};
 
 export type CompChatSegmentActions = Readonly<{
-    appendChatItem: (chatItemId: string, chatItem: HTMLElement) => void;
+    showLoader: () => void;
+    hideLoader: () => void;
 }>;
 
-export type CompChatSegmentEvents = 'chat-segment-ready';
+export type CompChatSegmentEvents = 'chat-segment-ready' | 'loader-shown' | 'loader-hidden';
