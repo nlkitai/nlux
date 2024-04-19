@@ -58,29 +58,31 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                     message={personaOptions!.bot!.tagline}
                 />
             )}
-            {segments.map((segment) => {
-                let ref: RefObject<ChatSegmentImperativeProps<any>> | undefined = chatSegmentsRef.get(segment.uid);
-                if (!ref) {
-                    ref = createRef();
-                    chatSegmentsRef.set(segment.uid, ref);
-                }
+            <div className="nlux-chtRm-cnv-sgmts-cntr">
+                {segments.map((segment) => {
+                    let ref: RefObject<ChatSegmentImperativeProps<any>> | undefined = chatSegmentsRef.get(segment.uid);
+                    if (!ref) {
+                        ref = createRef();
+                        chatSegmentsRef.set(segment.uid, ref);
+                    }
 
-                const ForwardRefChatItemComp = forwardRef(
-                    ChatSegmentComp<AiMsg>,
-                );
+                    const ForwardRefChatItemComp = forwardRef(
+                        ChatSegmentComp<AiMsg>,
+                    );
 
-                return (
-                    <ForwardRefChatItemComp
-                        ref={ref}
-                        key={segment.uid}
-                        chatSegment={segment}
-                        personaOptions={personaOptions}
-                        loader={props.loader}
-                        customRenderer={props.customRenderer}
-                        syntaxHighlighter={props.syntaxHighlighter}
-                    />
-                );
-            })}
+                    return (
+                        <ForwardRefChatItemComp
+                            ref={ref}
+                            key={segment.uid}
+                            chatSegment={segment}
+                            personaOptions={personaOptions}
+                            loader={props.loader}
+                            customRenderer={props.customRenderer}
+                            syntaxHighlighter={props.syntaxHighlighter}
+                        />
+                    );
+                })}
+            </div>
         </>
     );
 };

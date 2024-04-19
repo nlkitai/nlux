@@ -3,7 +3,7 @@ import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompChatRoomEvents = 'chat-room-ready'
-    | 'messages-container-clicked';
+    | 'segments-container-clicked';
 
 export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
