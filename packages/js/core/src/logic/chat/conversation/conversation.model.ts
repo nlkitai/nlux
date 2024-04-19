@@ -1,5 +1,6 @@
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
+import {debug} from '../../../../../../shared/src/utils/debug';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
@@ -11,6 +12,7 @@ import {ControllerContext} from '../../../types/controllerContext';
 import {CompList} from '../../miscellaneous/list/model';
 import {messageInList, textMessage} from '../chat-room/utils/textMessage';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
+import {CompChatSegmentProps} from '../chatSegment/chatSegment.types';
 import {CompMessage} from '../message/message.model';
 import type {MessageContentType} from '../message/message.types';
 import {renderConversation} from './conversation.render';
@@ -49,6 +51,12 @@ export class CompConversation<AiMsg> extends BaseComp<
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
 
+        if (chatSegment.destroyed) {
+            // This could happen when streaming messages are received after the chat segment is destroyed
+            warnOnce(`CompConversation: chat segment with id "${segmentId}" is destroyed and cannot be used`);
+            return;
+        }
+
         chatSegment.addChatItem(item);
     }
 
@@ -58,7 +66,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         const segmentId = uid();
         const newChatSegmentComp = comp(CompChatSegment<AiMsg>)
             .withContext(this.context)
-            .withProps({uid: segmentId, status: 'active'})
+            .withProps({
+                uid: segmentId,
+                status: 'active',
+            } satisfies CompChatSegmentProps)
             .create();
 
         this.chatSegmentsById.set(segmentId, newChatSegmentComp);
@@ -154,6 +165,12 @@ export class CompConversation<AiMsg> extends BaseComp<
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
 
+        if (chatSegment.destroyed) {
+            // This could happen when streaming messages are received after the chat segment is destroyed
+            debug(`CompConversation: chat segment with id "${segmentId}" is destroyed and cannot be used`);
+            return;
+        }
+
         chatSegment.complete();
     }
 
@@ -191,16 +208,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             return;
         }
 
-        chatSegment.destroy();
-        const subCompKeys = this.subComponents.keys();
-        const keyOfVictimComp = [...subCompKeys].find((key) => {
-            return this.subComponents.get(key)!.id === chatSegment.id;
-        });
-
-        if (keyOfVictimComp) {
-            this.subComponents.delete(keyOfVictimComp);
-        }
-
+        this.removeSubComponent(segmentId);
         this.chatSegmentsById.delete(segmentId);
     }
 

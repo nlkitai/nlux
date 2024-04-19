@@ -183,10 +183,14 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             promptBoxInstance: this.promptBoxInstance,
             conversation: this.conversation,
             messageToSend: this.promptBoxText,
-            resetPromptBox: (resetTextInput?: boolean) => this.resetPromptBox(
-                resetTextInput,
-                promptBoxProps?.autoFocus,
-            ),
+            resetPromptBox: (resetTextInput?: boolean) => {
+                // Check to handle edge case when reset is called after the component is destroyed!
+                // Example: When the user submits a message and the component is destroyed before the response is
+                // received.
+                if (!this.destroyed) {
+                    this.resetPromptBox(resetTextInput, promptBoxProps?.autoFocus);
+                }
+            },
         })();
     }
 

@@ -374,6 +374,20 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         return result;
     }
 
+    protected removeSubComponent(id: string) {
+        this.throwIfDestroyed();
+
+        domOp(() => {
+            const subComp = this.subComponents.get(id);
+            if (subComp) {
+                // Change sub-component root before deleting it to avoid deleting the root element
+                subComp.renderingRoot = null;
+                subComp.destroy();
+                this.subComponents.delete(id);
+            }
+        });
+    }
+
     protected runDomActionsQueue() {
         if (this.actionsOnDomReady.length > 0 && this.rendered) {
             const actionsOnDomReady = this.actionsOnDomReady;
