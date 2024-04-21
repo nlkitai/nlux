@@ -16,7 +16,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         const chatItem = createChatItemDom(props);
 
         // Assert
-        expect(chatItem.classList.contains('nlux_cht_itm_incoming')).toBe(true);
+        expect(chatItem.classList.contains('nlux_cht_itm_in')).toBe(true);
     });
 
     it('Should render message with the right direction class', () => {
@@ -73,8 +73,8 @@ describe('When a chat item component is rendered in incoming direction', () => {
             updateChatItemDom(chatItem, props, newProps);
 
             // Assert
-            expect(chatItem.classList.contains('nlux_cht_itm_incoming')).toBe(false);
-            expect(chatItem.classList.contains('nlux_cht_itm_outgoing')).toBe(true);
+            expect(chatItem.classList.contains('nlux_cht_itm_in')).toBe(false);
+            expect(chatItem.classList.contains('nlux_cht_itm_out')).toBe(true);
         });
 
         it('Should render message with the outgoing class', () => {
