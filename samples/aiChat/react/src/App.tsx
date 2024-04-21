@@ -24,6 +24,7 @@ function App() {
             }}
             layoutOptions={{
                 width: 400,
+                height: 300,
             }}
         />
     );

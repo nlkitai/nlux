@@ -35,6 +35,7 @@
             overflow-x: hidden;
             overflow-y: auto;
             flex: 1;
+            margin-bottom: 0.5em;
             padding: 0;
         }
 
