@@ -6,5 +6,12 @@
 }
 
 .nlux-chtSgm.nlux-chtSgm-actv {
-    background-color: #f6f5ee;
+}
+
+.nlux-chtSgm > .nlux-chtSgm-ldr-cntr {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    margin: 0.7rem 0.5rem 0.5rem 0.5rem;
 }

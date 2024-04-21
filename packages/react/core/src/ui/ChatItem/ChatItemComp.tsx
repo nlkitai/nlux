@@ -3,6 +3,7 @@ import {className as compChatItemClassName} from '../../../../../shared/src/ui/C
 import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
+import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
@@ -23,9 +24,7 @@ export const ChatItemComp: <AiMsg>(
         return <AvatarComp name={props.name} picture={props.picture}/>;
     }, [props.picture, props.name]);
 
-    const streamContainer = useRef<{
-        streamChunk: (chunk: string) => void;
-    } | null>(null);
+    const streamContainer = useRef<StreamContainerImperativeProps | null>(null);
 
     useImperativeHandle(ref, () => ({
         streamChunk: (chunk: string) => {
@@ -56,6 +55,7 @@ export const ChatItemComp: <AiMsg>(
             }) : null;
         }
 
+        // TODO - Markdown support
         return () => <>{props.message !== undefined ? props.message : ''}</>;
     }, [props.customRenderer, props.message]);
 
