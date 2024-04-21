@@ -1,8 +1,8 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import {createChatAdapter} from '@nlux-dev/langchain/src';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {submit, type} from '../../../utils/userInteractions';
-import {waitForRenderCycle} from '../../../utils/wait';
+import {submit, type} from '../../../../utils/userInteractions';
+import {waitForRenderCycle} from '../../../../utils/wait';
 
 describe('When LangServe input pre-processor is used with streaming adapter', () => {
     let rootElement: HTMLElement;
