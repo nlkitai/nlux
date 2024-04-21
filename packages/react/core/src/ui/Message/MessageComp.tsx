@@ -44,7 +44,6 @@ export const MessageComp = function <AiMsg>(props: MessageProps<AiMsg>) {
 
     const message = typeof props.message === 'function' ? props.message() : props.message;
 
-    // TODO - Handle markdown rendering
     return (
         <div className={className}>
             {message}

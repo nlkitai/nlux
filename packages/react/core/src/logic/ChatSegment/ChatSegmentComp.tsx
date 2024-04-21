@@ -188,7 +188,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     ref={ref}
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
-                                    status={chatItem.status as 'loading' | 'streaming'}
+                                    status={chatItem.status}
                                     direction={'incoming'}
                                     loader={props.loader}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
