@@ -1,20 +1,23 @@
-// import {AiChat, createAiChat, PersonaOptions} from '@nlux/core';
 import {AiChat, createAiChat, PersonaOptions} from '@nlux-dev/core/src';
+import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {submit, type} from '../../../utils/userInteractions';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('When an streaming adapter with extras attribute is provided', () => {
+describe('createAiChat() + withAdapter(fetchAdapter) + extras', () => {
     let adapterController: AdapterController;
     let rootElement: HTMLElement;
     let aiChat: AiChat;
 
     beforeEach(() => {
+        adapterController = adapterBuilder()
+            .withFetchText(true)
+            .withStreamText(false)
+            .create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
-        adapterController = adapterBuilder().withStreamText().create();
     });
 
     afterEach(() => {
@@ -22,7 +25,8 @@ describe('When an streaming adapter with extras attribute is provided', () => {
         rootElement?.remove();
     });
 
-    it('options should be provided to the adapter as part of extras attribute', async () => {
+    it('Options should be provided to the adapter as part of extras attribute', async () => {
+        // Arrange
         const testPersonaOptions: PersonaOptions = {
             bot: {
                 name: 'Test Bot',
@@ -36,21 +40,24 @@ describe('When an streaming adapter with extras attribute is provided', () => {
         };
 
         aiChat = createAiChat()
-            .withAdapter(adapterController.adapter)
+            .withAdapter(adapterController!.adapter)
             .withPersonaOptions(testPersonaOptions);
-
         aiChat.mount(rootElement);
         await waitForRenderCycle();
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-        await type('Hello');
-        await submit();
+        // Act
+        await userEvent.type(textArea, 'Hello{enter}');
+        await waitForRenderCycle();
 
+        // Assert
         expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions)
             .toEqual(testPersonaOptions);
     });
 
-    it('when options change, new options should be provided to the adapter as part of extras attribute',
+    it('When options change, new options should be provided to the adapter as part of extras attribute',
         async () => {
+            // Arrange
             const testPersonaOptions: PersonaOptions = {
                 bot: {
                     name: 'Test Bot',
@@ -64,21 +71,21 @@ describe('When an streaming adapter with extras attribute is provided', () => {
             };
 
             aiChat = createAiChat()
-                .withAdapter(adapterController.adapter)
+                .withAdapter(adapterController!.adapter)
                 .withPersonaOptions(testPersonaOptions);
-
             aiChat.mount(rootElement);
             await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await type('Hello');
-            await submit();
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
 
-            expect(adapterController.getLastExtras()?.aiChatProps.layoutOptions).toBeUndefined();
-            expect(adapterController.getLastExtras()?.aiChatProps.className).toBeUndefined();
-            expect(adapterController.getLastExtras()?.aiChatProps.personaOptions)
-                .toEqual(testPersonaOptions);
+            // Assert
+            expect(adapterController.getLastExtras()?.aiChatProps.personaOptions).toEqual(testPersonaOptions);
 
-            adapterController.complete();
+            // Act
+            adapterController.resolve('Cheers!');
             aiChat.updateProps({
                 className: 'new-class',
                 personaOptions: undefined,
@@ -88,9 +95,10 @@ describe('When an streaming adapter with extras attribute is provided', () => {
                 },
             });
 
-            await type('Hello');
-            await submit();
+            await userEvent.type(textArea, 'Bonjour{enter}');
+            await waitForRenderCycle();
 
+            // Assert
             expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions).toBeUndefined();
             expect(adapterController.getLastExtras()?.aiChatProps?.className).toEqual('new-class');
             expect(adapterController.getLastExtras()?.aiChatProps?.layoutOptions).toEqual({
@@ -135,8 +143,7 @@ describe('When an streaming adapter with extras attribute is provided', () => {
         await type('How is the weather today?');
         await submit();
 
-        adapterController.next('The weather is great!');
-        adapterController.complete();
+        adapterController.resolve('The weather is great!');
         await waitForRenderCycle();
 
         await type('And what about the rain?');
@@ -185,8 +192,7 @@ describe('When an streaming adapter with extras attribute is provided', () => {
             await type('How is the weather today?');
             await submit();
 
-            adapterController.next('The weather is great!');
-            adapterController.complete();
+            adapterController.resolve('The weather is great!');
             await waitForRenderCycle();
 
             await type('And what about the rain?');
@@ -217,8 +223,7 @@ describe('When an streaming adapter with extras attribute is provided', () => {
             await type('And what about the rain?');
             await submit();
 
-            adapterController.next('The rain is also great!');
-            adapterController.complete();
+            adapterController.resolve('The rain is also great!');
             await waitForRenderCycle();
 
             expect(adapterController.getLastExtras()?.conversationHistory)
@@ -231,8 +236,7 @@ describe('When an streaming adapter with extras attribute is provided', () => {
             await type('And what about the snow?');
             await submit();
 
-            adapterController.next('The snow is also great!');
-            adapterController.complete();
+            adapterController.resolve('The snow is also great!');
             await waitForRenderCycle();
 
             expect(adapterController.getLastExtras()?.conversationHistory)

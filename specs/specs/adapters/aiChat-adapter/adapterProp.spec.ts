@@ -1,11 +1,11 @@
-import {AiChat, createAiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux-dev/core/src';
+import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {submit, type} from '../../../utils/userInteractions';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('When a component is loaded', () => {
+describe('createAiChat() + withAdapter()', () => {
     let adapterController: AdapterController;
     let rootElement: HTMLElement;
     let aiChat: AiChat;
@@ -23,19 +23,23 @@ describe('When a component is loaded', () => {
     describe('When the custom adapter provided implements both fetchText and streamText methods', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText()
-                .withStreamText()
+                .withFetchText(true)
+                .withStreamText(true)
                 .create();
         });
 
         it('streamText should be used', async () => {
-            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await type('Hello');
-            await submit();
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
 
+            // Assert
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
             expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);
         });
@@ -43,16 +47,22 @@ describe('When a component is loaded', () => {
 
     describe('When the custom adapter provided implements only the fetchText method', () => {
         beforeEach(() => {
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder()
+                .withFetchText(true)
+                .withStreamText(false)
+                .create();
         });
 
         it('fetchText should be used', async () => {
-            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await type('Hello');
-            await submit();
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
 
             expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
             expect(adapterController.streamTextMock).toHaveBeenCalledTimes(0);
@@ -61,17 +71,24 @@ describe('When a component is loaded', () => {
 
     describe('When the custom adapter provided implements only the streamText method', () => {
         beforeEach(() => {
-            adapterController = adapterBuilder().withStreamText().create();
+            adapterController = adapterBuilder()
+                .withFetchText(false)
+                .withStreamText(true)
+                .create();
         });
 
         it('streamText should be used', async () => {
-            aiChat = createAiChat().withAdapter(adapterController.adapter);
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await type('Hello');
-            await submit();
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
 
+            // Assert
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
             expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);
         });
@@ -82,20 +99,20 @@ describe('When a component is loaded', () => {
             adapterController = adapterBuilder().create();
         });
 
-        it('should throw an error', () => {
+        it('An error should be thrown', () => {
             expect(() => createAiChat().withAdapter(adapterController.adapter)).toThrowError();
         });
     });
 
     describe('When no adapter is provided', () => {
-        it('should throw an error on mount', () => {
+        it('An error should be thrown', () => {
             aiChat = createAiChat();
             expect(() => aiChat.mount(rootElement)).toThrowError();
         });
     });
 
-    describe('When invalid object is provided', () => {
-        it('should throw an error as soon as the invalid adapter is set', () => {
+    describe('When an invalid object is provided as an adapter', () => {
+        it('An error should be thrown as soon as the adapter is set', () => {
             expect(() => createAiChat().withAdapter(undefined as any)).toThrowError();
             expect(() => createAiChat().withAdapter(null as any)).toThrowError();
             expect(() => createAiChat().withAdapter(123 as any)).toThrowError();
