@@ -1,11 +1,11 @@
-import {AiChat, createAiChat, PersonaOptions} from '@nlux/core';
+import {AiChat, createAiChat, PersonaOptions} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {submit, type} from '../../../utils/userInteractions';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('When a fetch adapter with extras attribute is provided', () => {
+describe('When an streaming adapter with extras attribute is provided', () => {
     let adapterController: AdapterController;
     let rootElement: HTMLElement;
     let aiChat: AiChat;
@@ -13,7 +13,7 @@ describe('When a fetch adapter with extras attribute is provided', () => {
     beforeEach(() => {
         rootElement = document.createElement('div');
         document.body.append(rootElement);
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withStreamText().create();
     });
 
     afterEach(() => {
@@ -77,7 +77,7 @@ describe('When a fetch adapter with extras attribute is provided', () => {
             expect(adapterController.getLastExtras()?.aiChatProps.personaOptions)
                 .toEqual(testPersonaOptions);
 
-            adapterController.resolve('');
+            adapterController.complete();
             aiChat.updateProps({
                 className: 'new-class',
                 personaOptions: undefined,
@@ -134,7 +134,8 @@ describe('When a fetch adapter with extras attribute is provided', () => {
         await type('How is the weather today?');
         await submit();
 
-        adapterController.resolve('The weather is great!');
+        adapterController.next('The weather is great!');
+        adapterController.complete();
         await waitForRenderCycle();
 
         await type('And what about the rain?');
@@ -183,7 +184,8 @@ describe('When a fetch adapter with extras attribute is provided', () => {
             await type('How is the weather today?');
             await submit();
 
-            adapterController.resolve('The weather is great!');
+            adapterController.next('The weather is great!');
+            adapterController.complete();
             await waitForRenderCycle();
 
             await type('And what about the rain?');
@@ -214,7 +216,8 @@ describe('When a fetch adapter with extras attribute is provided', () => {
             await type('And what about the rain?');
             await submit();
 
-            adapterController.resolve('The rain is also great!');
+            adapterController.next('The rain is also great!');
+            adapterController.complete();
             await waitForRenderCycle();
 
             expect(adapterController.getLastExtras()?.conversationHistory)
@@ -227,7 +230,8 @@ describe('When a fetch adapter with extras attribute is provided', () => {
             await type('And what about the snow?');
             await submit();
 
-            adapterController.resolve('The snow is also great!');
+            adapterController.next('The snow is also great!');
+            adapterController.complete();
             await waitForRenderCycle();
 
             expect(adapterController.getLastExtras()?.conversationHistory)
