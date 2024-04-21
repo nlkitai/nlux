@@ -1,14 +1,10 @@
 .nlux-chtSgm.nlux-chtSgm-cmpl {
-    border: 1px solid #28a745;
-    background-color: #d4edda;
 }
 
 .nlux-chtSgm.nlux-chtSgm-err {
-    border: 1px solid #dc3545;
     background-color: #f8d7da;
 }
 
 .nlux-chtSgm.nlux-chtSgm-actv {
-    border: 1px solid #007bff;
-    background-color: #cce5ff;
+    background-color: #f6f5ee;
 }

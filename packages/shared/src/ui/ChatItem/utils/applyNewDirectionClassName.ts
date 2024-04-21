@@ -1,8 +1,8 @@
 import {MessageDirection} from '../../Message/props';
 
 export const directionClassName: {[key: string]: string} = {
-    incoming: 'nlux_cht_itm_incoming',
-    outgoing: 'nlux_cht_itm_outgoing',
+    incoming: 'nlux_cht_itm_in',
+    outgoing: 'nlux_cht_itm_out',
 };
 
 export const applyNewDirectionClassName = (element: HTMLElement, direction: MessageDirection) => {

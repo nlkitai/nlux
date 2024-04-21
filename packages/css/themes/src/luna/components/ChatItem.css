@@ -1,17 +1,46 @@
 .nlux-comp-cht_itm {
     display: flex;
     flex-direction: row;
+    margin-bottom: 0.5em;
     gap: 0.5em;
 
     > .nlux-comp-msg {
+        align-items: flex-start;
         flex: 1;
+        flex-direction: column;
+        flex-shrink: initial;
+        min-width: 80px;
+        min-height: 20px;
+        padding: var(--nlux-padding) var(--nlux-padding-m);
+        text-align: left;
+        border-width: var(--nlux-border-width);
+        border-style: solid;
+        border-radius: var(--nlux-border-radius-m);
+        outline: 0;
+        gap: var(--nlux-flex-gap);
     }
 }
 
-.nlux-comp-cht_itm.nlux_cht_itm_incoming {
+.nlux-comp-cht_itm.nlux_cht_itm_out {
     flex-direction: row-reverse;
+    padding-left: 65px;
+
+    > .nlux-comp-msg {
+        margin-right: var(--nlux-padding-s);
+        color: var(--nlux-message-sent-text-color);
+        border-color: var(--nlux-message-sent-border-color);
+        background-color: var(--nlux-message-sent-background-color);
+    }
 }
 
-.nlux-comp-cht_itm.nlux_cht_itm_outgoing {
+.nlux-comp-cht_itm.nlux_cht_itm_in {
     flex-direction: row;
+    padding-right: 65px;
+
+    > .nlux-comp-msg {
+        margin-left: var(--nlux-padding-s);
+        color: var(--nlux-message-received-text-color);
+        border-color: var(--nlux-message-received-border-color);
+        background-color: var(--nlux-message-received-background-color);
+    }
 }

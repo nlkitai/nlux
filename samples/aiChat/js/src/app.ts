@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // submitShortcut: 'CommandEnter',
         })
         .withLayoutOptions({
-            width: '400px',
+            width: 400,
+            height: 300,
         });
 
     aiChat.mount(parent);
