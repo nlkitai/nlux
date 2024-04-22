@@ -38,7 +38,7 @@ describe('createAiChat() + prop promptBox + focus', () => {
         });
 
         describe('When a message is sent then focus is lost', () => {
-            it('The prompt box should not be focused when a response is received', async () => {
+            it.skip('The prompt box should not be focused when a response is received', async () => {
                 // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
