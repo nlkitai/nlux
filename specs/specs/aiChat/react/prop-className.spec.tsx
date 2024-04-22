@@ -1,36 +1,30 @@
-import {AiChat, createAiChat} from '@nlux-dev/core/src';
+import {AiChat} from '@nlux-dev/react/src';
+import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('createAiChat() + className', () => {
+describe('<AiChat /> + prop className', () => {
     let adapterController: AdapterController | undefined;
-    let rootElement: HTMLElement;
-    let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         adapterController = adapterBuilder().withFetchText().create();
-        rootElement = document.createElement('div');
-        document.body.append(rootElement);
     });
 
     afterEach(() => {
         adapterController = undefined;
-        aiChat?.unmount();
-        rootElement?.remove();
-        aiChat = undefined;
     });
 
     describe('When the component is created without a className', () => {
         it('The default className should be used', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            render(aiChat);
+            await waitForRenderCycle();
 
             // Act
-            aiChat.mount(rootElement);
-            await waitForRenderCycle();
-            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
             // Assert
             expect(aiChatDom.classList.length).toBe(2);
@@ -41,14 +35,13 @@ describe('createAiChat() + className', () => {
         describe('When a className is set', () => {
             it('The new className should be used', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter);
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
+                const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+                const {rerender} = render(aiChat);
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
                 // Act
-                aiChat.updateProps({className: 'my-class'});
+                rerender(<AiChat adapter={adapterController!.adapter} className="my-class"/>);
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
@@ -62,12 +55,11 @@ describe('createAiChat() + className', () => {
     describe('When the component is created with a className', () => {
         it('The className should be used', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter).withClassName('my-class');
+            const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
+            render(aiChat);
 
             // Act
-            aiChat.mount(rootElement);
-            await waitForRenderCycle();
-            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
             // Assert
             expect(aiChatDom.classList.length).toBe(3);
@@ -79,14 +71,13 @@ describe('createAiChat() + className', () => {
         describe('When a different className is set', () => {
             it('The new className should be used', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withClassName('my-class');
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
+                const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
+                const {rerender} = render(aiChat);
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
                 // Act
-                aiChat.updateProps({className: 'my-new-class'});
+                rerender(<AiChat adapter={adapterController!.adapter} className="my-new-class"/>);
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
@@ -99,14 +90,13 @@ describe('createAiChat() + className', () => {
         describe('When the className is removed', () => {
             it('The default className should be used', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withClassName('my-class');
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
+                const aiChat = <AiChat adapter={adapterController!.adapter} className="my-class"/>;
+                const {rerender} = render(aiChat);
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
                 // Act
-                aiChat.updateProps({className: undefined});
+                rerender(<AiChat adapter={adapterController!.adapter}/>);
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(2);

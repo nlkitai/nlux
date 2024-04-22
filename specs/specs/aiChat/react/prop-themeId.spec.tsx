@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('<AiChat /> + theme', () => {
+describe('<AiChat /> + prop themeId', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {

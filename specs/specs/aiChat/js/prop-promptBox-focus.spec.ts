@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
 
-describe('createAiChat() + promptBox focus', () => {
+describe('createAiChat() + prop promptBox + focus', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
