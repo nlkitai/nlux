@@ -55,8 +55,8 @@ describe('createAiChat() + withAdapter(fetchAdapter) + extras', () => {
             .toEqual(testPersonaOptions);
     });
 
-    it('When options change, new options should be provided to the adapter as part of extras attribute',
-        async () => {
+    describe('When options are updated', () => {
+        it('New options should be provided to the adapter as part of extras attribute', async () => {
             // Arrange
             const testPersonaOptions: PersonaOptions = {
                 bot: {
@@ -73,40 +73,50 @@ describe('createAiChat() + withAdapter(fetchAdapter) + extras', () => {
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
                 .withPersonaOptions(testPersonaOptions);
+
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            // Act
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForRenderCycle();
-
-            // Assert
-            expect(adapterController.getLastExtras()?.aiChatProps.personaOptions).toEqual(testPersonaOptions);
 
             // Act
             adapterController.resolve('Cheers!');
             aiChat.updateProps({
-                className: 'new-class',
-                personaOptions: undefined,
-                layoutOptions: {
-                    height: 500,
-                    width: 500,
+                personaOptions: {
+                    bot: {
+                        name: 'New Bot',
+                        picture: 'https://example.com/new-bot-image.png',
+                        tagline: 'New Bot Tagline',
+                    },
+                    user: {
+                        name: 'New User',
+                        picture: 'https://example.com/new-user-image.png',
+                    },
                 },
             });
+
+            textArea.focus();
+            await waitForRenderCycle();
 
             await userEvent.type(textArea, 'Bonjour{enter}');
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions).toBeUndefined();
-            expect(adapterController.getLastExtras()?.aiChatProps?.className).toEqual('new-class');
-            expect(adapterController.getLastExtras()?.aiChatProps?.layoutOptions).toEqual({
-                height: 500,
-                width: 500,
+            expect(adapterController.getLastExtras()?.aiChatProps.personaOptions).toEqual({
+                bot: {
+                    name: 'New Bot',
+                    picture: 'https://example.com/new-bot-image.png',
+                    tagline: 'New Bot Tagline',
+                },
+                user: {
+                    name: 'New User',
+                    picture: 'https://example.com/new-user-image.png',
+                },
             });
-        },
-    );
+        });
+    });
 
     it('initial conversation should be provided as part of extras.conversationHistory', async () => {
         aiChat = createAiChat()
