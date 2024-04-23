@@ -100,7 +100,9 @@ export const createScrollWhenGeneratingHandler = (
                 characterData: true,
             });
 
-            scrollToBottom();
+            if (shouldScrollWhenGenerating) {
+                scrollToBottom();
+            }
         },
         handleChatSegmentRemoved: (sectionId) => handleDoneWithSection(sectionId),
         handleChatSegmentComplete: (sectionId) => handleDoneWithSection(sectionId),
