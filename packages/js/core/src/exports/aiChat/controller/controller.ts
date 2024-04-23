@@ -65,6 +65,7 @@ export class NluxController<AiMsg> {
                 syntaxHighlighter: this.props.syntaxHighlighter,
             },
             () => {
+                // TODO - Cache and only update when needed, as it's a heavy operation that's called frequently
                 return {
                     ...this.props,
                     conversationOptions: this.props.conversationOptions && Object.keys(
