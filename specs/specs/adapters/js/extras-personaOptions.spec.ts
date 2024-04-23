@@ -5,16 +5,18 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
 
-describe.each(
-    [{mode: 'fetch'}, {mode: 'stream'}],
-)('createAiChat() + withAdapter($mode) + personaOptions extras',
-    ({mode}) => {
+describe.each([
+    {dataTransferMode: 'fetch'},
+    {dataTransferMode: 'stream'},
+] satisfies Array<{dataTransferMode: 'stream' | 'fetch'}>)(
+    'createAiChat() + withAdapter($mode) + personaOptions extras',
+    ({dataTransferMode}) => {
         let adapterController: AdapterController;
         let rootElement: HTMLElement;
         let aiChat: AiChat;
 
         // Assign fetch/stream adapters — Tests should work the same way
-        const shouldUseFetch = mode === 'fetch';
+        const shouldUseFetch = dataTransferMode === 'fetch';
 
         beforeEach(() => {
             adapterController = adapterBuilder()
