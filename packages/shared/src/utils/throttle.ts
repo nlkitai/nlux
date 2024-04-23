@@ -1,4 +1,4 @@
-import {NluxError} from '../../../../shared/src/types/error';
+import {NluxError} from '../types/error';
 
 export const throttle = <CallbackType>(callback: CallbackType, limitInMilliseconds: number) => {
     let waiting = false;

@@ -1,5 +1,7 @@
+import {GenScrollHandler} from '../../../../../../../shared/src/interactions/genScroll/type';
 import {submitPrompt} from '../../../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
+import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {CompConversation} from '../../conversation/conversation.model';
@@ -9,12 +11,14 @@ export const submitPromptFactory = <AiMsg>({
     context,
     promptBoxInstance,
     conversation,
+    genScrollHandler,
     messageToSend,
     resetPromptBox,
 }: {
     context: ControllerContext<AiMsg>;
     promptBoxInstance: CompPromptBox<AiMsg>;
     conversation: CompConversation<AiMsg>;
+    genScrollHandler?: GenScrollHandler;
     messageToSend: string;
     resetPromptBox: (resetTextInput?: boolean) => void;
 }) => {
@@ -39,6 +43,7 @@ export const submitPromptFactory = <AiMsg>({
             // Always listen to error event
             result.observable.on('error', (error) => {
                 conversation.removeChatSegment(segmentId);
+                genScrollHandler?.handleChatSegmentRemoved(segmentId);
                 resetPromptBox(false);
 
                 context.exception('NX-AD-001');
@@ -64,6 +69,14 @@ export const submitPromptFactory = <AiMsg>({
 
             result.observable.on('userMessageReceived', (userMessage) => {
                 conversation.addChatItem(segmentId, userMessage);
+                domOp(() => {
+                    if (genScrollHandler) {
+                        const chatSegmentContainer = conversation.getChatSegmentContainer(segmentId);
+                        if (chatSegmentContainer) {
+                            genScrollHandler.handleNewChatSegmentAdded(segmentId, chatSegmentContainer);
+                        }
+                    }
+                });
             });
 
             if (result.dataTransferMode === 'fetch') {
@@ -85,6 +98,7 @@ export const submitPromptFactory = <AiMsg>({
 
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
+                    genScrollHandler?.handleChatSegmentComplete(segmentId);
                     messageContentCompleteHandler();
                     resetPromptBox(true);
                 });

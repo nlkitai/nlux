@@ -1,10 +1,15 @@
-import {CompConversationScrollCallback} from '../conversation.types';
+export type ConversationScrollParams = Readonly<{
+    scrolledToBottom: boolean;
+    scrollDirection: 'up' | 'down' | undefined;
+}>;
 
-export const messagesScrollHandlerFactory = (callback: CompConversationScrollCallback) => {
+export type ConversationScrollCallback = (params: ConversationScrollParams) => void;
+
+export const createConversationScrollHandler = (callback: ConversationScrollCallback): EventListener => {
     let lastScrollTop: number | undefined = undefined;
     let lastHeight: number | undefined = undefined;
 
-    return (event: MouseEvent) => {
+    return (event: Event) => {
         const target = event.target as HTMLElement | null;
         if (!(target instanceof HTMLElement)) {
             return;
