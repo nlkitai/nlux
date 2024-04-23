@@ -48,7 +48,7 @@ const ExampleWrapper = () => {
                     className="ai-chat-emulator"
                     adapter={myCustomStreamingAdapter}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                     }}
                     layoutOptions={{
                         height,

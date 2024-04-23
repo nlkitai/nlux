@@ -1,5 +1,5 @@
-import {createScrollWhenGeneratingHandler} from '../../../../../../shared/src/interactions/genScroll/genScrollHandler';
-import {GenScrollHandler} from '../../../../../../shared/src/interactions/genScroll/type';
+import {createAutoScrollHandler} from '../../../../../../shared/src/interactions/autoScroll/autoScrollHandler';
+import {AutoScrollHandler} from '../../../../../../shared/src/interactions/autoScroll/type';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
@@ -23,13 +23,13 @@ import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 export class CompChatRoom<AiMsg> extends BaseComp<
     AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
+    private autoScrollHandler: AutoScrollHandler | undefined;
     private conversation: CompConversation<AiMsg>;
-    private genScrollHandler: GenScrollHandler | undefined;
     private promptBoxInstance: CompPromptBox<AiMsg>;
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
-            scrollWhenGenerating,
+            autoScroll,
             streamingAnimationSpeed,
             visible = true,
             promptBox,
@@ -40,7 +40,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     ) {
         super(context, {
             visible,
-            scrollWhenGenerating,
+            autoScroll,
             streamingAnimationSpeed,
             botPersona,
             userPersona,
@@ -85,9 +85,9 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         domOp(() => {
             const conversationContainer = this.renderedDom?.elements?.conversationContainer;
             if (conversationContainer instanceof HTMLElement) {
-                this.genScrollHandler = createScrollWhenGeneratingHandler(
+                this.autoScrollHandler = createAutoScrollHandler(
                     conversationContainer,
-                    this.props.scrollWhenGenerating ?? true,
+                    this.props.autoScroll ?? true,
                 );
             }
 
@@ -98,9 +98,9 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     }
 
     public setProps(props: Partial<CompChatRoomProps<AiMsg>>) {
-        if (props.hasOwnProperty('scrollWhenGenerating')) {
-            const scrollWhenGenerating = props.scrollWhenGenerating!;
-            this.genScrollHandler?.updateProps({scrollWhenGenerating});
+        if (props.hasOwnProperty('autoScroll')) {
+            const autoScroll = props.autoScroll!;
+            this.autoScrollHandler?.updateProps({autoScroll});
         }
 
         if (props.hasOwnProperty('streamingAnimationSpeed')) {
@@ -189,7 +189,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             promptBoxInstance: this.promptBoxInstance,
             conversation: this.conversation,
             messageToSend: this.promptBoxText,
-            genScrollHandler: this.genScrollHandler,
+            autoScrollHandler: this.autoScrollHandler,
             resetPromptBox: (resetTextInput?: boolean) => {
                 // Check to handle edge case when reset is called after the component is destroyed!
                 // Example: When the user submits a message and the component is destroyed before the response is

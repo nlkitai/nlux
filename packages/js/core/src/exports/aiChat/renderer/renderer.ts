@@ -148,7 +148,7 @@ export class NluxRenderer<AiMsg> {
                     botPersona: this.thePersonasOptions?.bot ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
-                    scrollWhenGenerating: this.theConversationOptions?.scrollWhenGenerating,
+                    autoScroll: this.theConversationOptions?.autoScroll,
                     streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
                     promptBox: {
                         placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
@@ -322,7 +322,7 @@ export class NluxRenderer<AiMsg> {
         if (props.hasOwnProperty('conversationOptions')) {
             this.theConversationOptions = props.conversationOptions ?? {};
             this.chatRoom?.setProps({
-                scrollWhenGenerating: props.conversationOptions?.scrollWhenGenerating ?? undefined,
+                autoScroll: props.conversationOptions?.autoScroll ?? undefined,
                 streamingAnimationSpeed: props.conversationOptions?.streamingAnimationSpeed ?? undefined,
             });
         }

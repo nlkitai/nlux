@@ -119,7 +119,7 @@ const ExampleWrapper = () => {
                     //     },
                     // ]}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                     }}
                     layoutOptions={{
                         height: 380,

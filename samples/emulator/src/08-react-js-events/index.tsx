@@ -84,7 +84,7 @@ const ExampleWrapper = () => {
                         messageReceived: enableMessageReceivedCallback ? messageReceivedCallback : undefined,
                     }}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                     }}
                     layoutOptions={{
                         height: 380,

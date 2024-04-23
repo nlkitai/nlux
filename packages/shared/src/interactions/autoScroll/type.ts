@@ -1,5 +1,5 @@
-export type GenScrollHandler = {
-    updateProps: ({scrollWhenGenerating}: {scrollWhenGenerating: boolean}) => void;
+export type AutoScrollHandler = {
+    updateProps: ({autoScroll}: {autoScroll: boolean}) => void;
     updateConversationContainer: (container: HTMLElement) => void;
     handleNewChatSegmentAdded: (sectionId: string, sectionContainer: HTMLElement) => void;
     handleChatSegmentComplete: (sectionId: string) => void;

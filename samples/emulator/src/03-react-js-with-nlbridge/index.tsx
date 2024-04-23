@@ -27,7 +27,7 @@ const ExampleWrapper = () => {
                     className="ai-chat-emulator"
                     adapter={nlBridge}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                     }}
                     layoutOptions={{
                         maxHeight,

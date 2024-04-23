@@ -46,7 +46,7 @@ const ExampleWrapper = () => {
                     className="ai-chat-emulator"
                     adapter={adapter}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                     }}
                     layoutOptions={{
                         maxHeight,

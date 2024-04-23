@@ -1,12 +1,12 @@
 import {throttle} from '../../utils/throttle';
-import {GenScrollHandler} from './type';
+import {AutoScrollHandler} from './type';
 import {createConversationScrollHandler} from './utils/conversationScrollHandler';
 
-export const createScrollWhenGeneratingHandler = (
+export const createAutoScrollHandler = (
     newConversationContainer: HTMLElement,
-    scrollWhenGenerating: boolean,
-): GenScrollHandler => {
-    let shouldScrollWhenGenerating: boolean = scrollWhenGenerating;
+    autoScroll: boolean,
+): AutoScrollHandler => {
+    let shouldScrollWhenGenerating: boolean = autoScroll;
     let conversationContainer: HTMLElement | undefined = newConversationContainer;
     let scrollingStickToConversationEnd: boolean = true;
     let activeChatSection: {uid: string; container: HTMLElement} | undefined = undefined;
@@ -79,8 +79,8 @@ export const createScrollWhenGeneratingHandler = (
             initConversationContainer(newConversationContainer);
             conversationContainer = newConversationContainer;
         },
-        updateProps: ({scrollWhenGenerating}) => {
-            shouldScrollWhenGenerating = scrollWhenGenerating;
+        updateProps: ({autoScroll}) => {
+            shouldScrollWhenGenerating = autoScroll;
         },
         handleNewChatSegmentAdded: (sectionId, sectionContainer) => {
             if (activeChatSection) {

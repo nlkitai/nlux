@@ -77,7 +77,7 @@ const ExampleWrapper = () => {
                         },
                     ]}
                     conversationOptions={{
-                        scrollWhenGenerating: true,
+                        autoScroll: true,
                         streamingAnimationSpeed,
                         // streamingAnimationSpeed: null,
                         // streamingAnimationSpeed: 300,

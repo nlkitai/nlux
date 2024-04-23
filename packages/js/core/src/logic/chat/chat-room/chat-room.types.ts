@@ -10,7 +10,7 @@ export type CompChatRoomProps<AiMsg> = {
     botPersona?: BotPersona,
     userPersona?: UserPersona,
     initialConversationContent?: readonly ChatItem<AiMsg>[];
-    scrollWhenGenerating?: boolean;
+    autoScroll?: boolean;
     streamingAnimationSpeed?: number | null;
     promptBox: Partial<PromptBoxProps>;
 };

@@ -20,6 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             autoFocus: true,
             // submitShortcut: 'CommandEnter',
         })
+        .withConversationOptions({
+            autoScroll: false,
+        })
         .withLayoutOptions({
             width: 400,
             height: 300,

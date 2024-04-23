@@ -76,12 +76,12 @@ describe('createAiChat() + autoScroll', () => {
         });
     });
 
-    describe('When scrollWhenGenerating is set to false', () => {
+    describe('When autoScroll is set to false', () => {
         it('Should not scroll to the bottom when the message starts streaming', async () => {
             // Arrange
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .withConversationOptions({scrollWhenGenerating: false});
+                .withConversationOptions({autoScroll: false});
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -103,7 +103,7 @@ describe('createAiChat() + autoScroll', () => {
                 // Arrange
                 aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
-                    .withConversationOptions({scrollWhenGenerating: false});
+                    .withConversationOptions({autoScroll: false});
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
