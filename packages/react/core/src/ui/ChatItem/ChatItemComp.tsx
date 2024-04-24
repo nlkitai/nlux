@@ -3,11 +3,11 @@ import {className as compChatItemClassName} from '../../../../../shared/src/ui/C
 import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
+import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
-import {createMessageRenderer} from '../Message/MessageRenderer';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
 
 export const ChatItemComp: <AiMsg>(
@@ -45,6 +45,7 @@ export const ChatItemComp: <AiMsg>(
     const MessageRenderer = useMemo(() => createMessageRenderer(props), [
         props.message,
         props.customRenderer,
+        props.direction,
     ]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(

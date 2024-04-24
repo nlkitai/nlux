@@ -83,6 +83,8 @@ export const StreamContainerComp = (
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
     return (
-        <div className={className} ref={rootElRef}/>
+        <div className={className}>
+            <div className={'nlux-md-strm-root'} ref={rootElRef}/>
+        </div>
     );
 };

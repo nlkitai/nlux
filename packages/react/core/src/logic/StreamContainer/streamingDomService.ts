@@ -23,7 +23,10 @@ export const streamingDomService: StreamingDomService = (() => {
     return {
         getStreamingDomElement: (messageId: string) => {
             if (streamingDomElementsByMessageId[messageId] === undefined) {
-                streamingDomElementsByMessageId[messageId] = document.createElement('div');
+                const newStreamContainer = document.createElement('div');
+                newStreamContainer.setAttribute('data-streaming-message-id', messageId);
+                newStreamContainer.className = 'nlux-md-cntr';
+                streamingDomElementsByMessageId[messageId] = newStreamContainer;
             }
 
             victimMessageIds.delete(messageId);
