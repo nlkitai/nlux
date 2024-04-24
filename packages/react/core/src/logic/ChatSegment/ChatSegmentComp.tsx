@@ -54,9 +54,12 @@ export const ChatSegmentComp: <AiMsg>(
     useImperativeHandle(ref, () => ({
         streamChunk: (messageId: string, chunk: string) => {
             const messageCompRef = chatItemsRef.get(messageId);
-            if (messageCompRef?.current) {
-                messageCompRef.current.streamChunk(chunk);
-            }
+            messageCompRef?.current?.streamChunk(chunk);
+        },
+        completeStream: (messageId: string) => {
+            const messageCompRef = chatItemsRef.get(messageId);
+            messageCompRef?.current?.completeStream();
+            chatItemsRef.delete(messageId);
         },
     }), []);
 
@@ -132,7 +135,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     ref={ref}
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
-                                    status={'rendered'}
+                                    status={'streaming'}
                                     direction={'incoming'}
                                     message={chatItem.content}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}

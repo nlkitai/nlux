@@ -18,4 +18,5 @@ export type ConversationCompProps<AiMsg> = {
 
 export type ImperativeConversationCompProps = {
     streamChunk: (segmentId: string, messageId: string, chunk: string) => void;
+    completeStream: (segmentId: string, messageId: string) => void;
 };

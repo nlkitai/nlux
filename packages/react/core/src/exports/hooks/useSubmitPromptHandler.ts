@@ -1,5 +1,5 @@
 import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
-import {MutableRefObject, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
@@ -36,11 +36,6 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     } = props;
 
     const hasValidInput = useMemo(() => promptTyped.length > 0, [promptTyped]);
-
-    // The prompt that will be submitted
-    // We store it in a separate variable because the prompt might change.
-    // Example: When the user types a new message while the previous message is being streamed.
-    const [promptSubmitted, setPromptSubmitted] = useState<string>('');
 
     // The prompt typed will be read by the submitPrompt function, but it will not be used as a
     // dependency for the submitPrompt function (only the promptToSubmit is a dependency to useCallback).
@@ -85,6 +80,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
             setPromptBoxStatus('submitting');
             const promptToSubmit = promptTyped;
+            const streamedMessageIds: Set<string> = new Set();
 
             const {
                 segment: chatSegment,
@@ -94,8 +90,6 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 adapterToUse,
                 adapterExtras,
             );
-
-            setPromptSubmitted(promptToSubmit);
 
             if (chatSegment.status === 'error') {
                 warn('Error occurred while submitting prompt');
@@ -146,6 +140,8 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 if (promptTypedRef.current === promptToSubmit) {
                     domToReactRef.current.setPrompt('');
                 }
+
+                streamedMessageIds.add(aiStreamedMessage.uid);
             });
 
             chatSegmentObservable.on('aiMessageReceived', (aiMessage) => {
@@ -179,6 +175,14 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 domToReactRef.current.setChatSegments(newChatSegments);
                 if (promptTypedRef.current === promptToSubmit) {
                     setPrompt('');
+                }
+
+                if (streamedMessageIds.size > 0) {
+                    streamedMessageIds.forEach((messageId) => {
+                        conversationRef.current?.completeStream(chatSegmentObservable.segmentId, messageId);
+                    });
+
+                    streamedMessageIds.clear();
                 }
             });
 

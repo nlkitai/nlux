@@ -36,6 +36,10 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
             const chatSegment = segmentsController.get(segmentId);
             chatSegment?.streamChunk(messageId, chunk);
         },
+        completeStream: (segmentId: string, messageId: string) => {
+            const chatSegment = segmentsController.get(segmentId);
+            chatSegment?.completeStream(messageId);
+        },
     }), []);
 
     const ForwardRefChatSegmentComp = useMemo(() => forwardRef(

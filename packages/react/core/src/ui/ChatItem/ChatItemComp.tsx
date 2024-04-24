@@ -1,4 +1,4 @@
-import {FC, forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '../../../../../shared/src/ui/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
@@ -7,6 +7,7 @@ import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props'
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
+import {createMessageRenderer} from '../Message/MessageRenderer';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
 
 export const ChatItemComp: <AiMsg>(
@@ -22,16 +23,13 @@ export const ChatItemComp: <AiMsg>(
         }
 
         return <AvatarComp name={props.name} picture={props.picture}/>;
-    }, [props.picture, props.name]);
+    }, [props?.picture, props?.name]);
 
     const streamContainer = useRef<StreamContainerImperativeProps | null>(null);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (chunk: string) => {
-            if (streamContainer?.current) {
-                streamContainer.current.streamChunk(chunk);
-            }
-        },
+        streamChunk: (chunk: string) => streamContainer?.current?.streamChunk(chunk),
+        completeStream: () => streamContainer?.current?.completeStream(),
     }), []);
 
     const isStreaming = useMemo(
@@ -44,20 +42,10 @@ export const ChatItemComp: <AiMsg>(
         : compChatItemDirectionClassName['incoming'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
-    const MessageRenderer: FC<void> = useMemo(() => {
-        if (props.customRenderer) {
-            if (props.message === undefined) {
-                return () => null;
-            }
-
-            return () => props.customRenderer ? props.customRenderer({
-                message: props.message as AiMsg,
-            }) : null;
-        }
-
-        // TODO - Markdown support
-        return () => <>{props.message !== undefined ? props.message : ''}</>;
-    }, [props.customRenderer, props.message]);
+    const MessageRenderer = useMemo(() => createMessageRenderer(props), [
+        props.message,
+        props.customRenderer,
+    ]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
         StreamContainerComp,
