@@ -1,8 +1,8 @@
 export type AutoScrollHandler = {
     updateProps: ({autoScroll}: {autoScroll: boolean}) => void;
     updateConversationContainer: (container: HTMLElement) => void;
-    handleNewChatSegmentAdded: (sectionId: string, sectionContainer: HTMLElement) => void;
-    handleChatSegmentComplete: (sectionId: string) => void;
-    handleChatSegmentRemoved: (sectionId: string) => void;
+    handleNewChatSegmentAdded: (segmentId: string, segmentContainer: HTMLElement) => void;
+    handleChatSegmentComplete: (segmentId: string) => void;
+    handleChatSegmentRemoved: (segmentId: string) => void;
     destroy: () => void;
 };

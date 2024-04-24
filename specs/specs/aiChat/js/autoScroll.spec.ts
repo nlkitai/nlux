@@ -26,7 +26,7 @@ describe('createAiChat() + autoScroll', () => {
         adapterController = undefined;
     });
 
-    describe('When the user adds a message to an AiChat', () => {
+    describe('When the user adds a message to an AiChat without autoScroll config', () => {
         it('Should scroll to the bottom when the message starts streaming', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);

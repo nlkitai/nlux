@@ -33,6 +33,8 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     } = props;
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
+
+    // React functions and state that can be accessed by non-React DOM update code
     const domToReactRef = useRef({
         chatSegments,
         setChatSegments,

@@ -59,9 +59,9 @@ export const ChatItemComp: <AiMsg>(
         return () => <>{props.message !== undefined ? props.message : ''}</>;
     }, [props.customRenderer, props.message]);
 
-    const ForwardRefStreamContainerComp = forwardRef(
+    const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
         StreamContainerComp,
-    );
+    ), []);
 
     return (
         <div className={className}>

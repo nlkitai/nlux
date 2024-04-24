@@ -9,7 +9,7 @@ export const createAutoScrollHandler = (
     let shouldScrollWhenGenerating: boolean = autoScroll;
     let conversationContainer: HTMLElement | undefined = newConversationContainer;
     let scrollingStickToConversationEnd: boolean = true;
-    let activeChatSection: {uid: string; container: HTMLElement} | undefined = undefined;
+    let activeChatSegment: {uid: string; container: HTMLElement} | undefined = undefined;
 
     const scrollHandler = throttle(createConversationScrollHandler(({
         scrolledToBottom, scrollDirection,
@@ -37,11 +37,11 @@ export const createAutoScrollHandler = (
         oldConversationContainer?.removeEventListener('scroll', scrollHandler);
     };
 
-    const handleDoneWithSection = (sectionId: string) => {
-        if (activeChatSection?.uid === sectionId) {
+    const handleDoneWithSegment = (segmentId: string) => {
+        if (activeChatSegment?.uid === segmentId) {
             resizeObserver?.disconnect();
             mutationObserver?.disconnect();
-            activeChatSection = undefined;
+            activeChatSegment = undefined;
             resizeObserver = undefined;
             mutationObserver = undefined;
         }
@@ -61,14 +61,14 @@ export const createAutoScrollHandler = (
         });
     };
 
-    const handleActiveChatSectionResized = () => {
+    const handleActiveChatSegmentResized = () => {
         if (conversationContainer && shouldScrollWhenGenerating && scrollingStickToConversationEnd) {
             scrollToBottom();
         }
     };
 
-    const handleActiveChatSectionDomChanged = () => {
-        handleActiveChatSectionResized();
+    const handleActiveChatSegmentDomChanged = () => {
+        handleActiveChatSegmentResized();
     };
 
     initConversationContainer(conversationContainer);
@@ -82,19 +82,19 @@ export const createAutoScrollHandler = (
         updateProps: ({autoScroll}) => {
             shouldScrollWhenGenerating = autoScroll;
         },
-        handleNewChatSegmentAdded: (sectionId, sectionContainer) => {
-            if (activeChatSection) {
+        handleNewChatSegmentAdded: (segmentId, segmentContainer) => {
+            if (activeChatSegment) {
                 resizeObserver?.disconnect();
                 mutationObserver?.disconnect();
             }
 
-            activeChatSection = {uid: sectionId, container: sectionContainer};
+            activeChatSegment = {uid: segmentId, container: segmentContainer};
 
-            resizeObserver = new ResizeObserver(handleActiveChatSectionResized);
-            resizeObserver.observe(sectionContainer);
+            resizeObserver = new ResizeObserver(handleActiveChatSegmentResized);
+            resizeObserver.observe(segmentContainer);
 
-            mutationObserver = new MutationObserver(handleActiveChatSectionDomChanged);
-            mutationObserver.observe(sectionContainer, {
+            mutationObserver = new MutationObserver(handleActiveChatSegmentDomChanged);
+            mutationObserver.observe(segmentContainer, {
                 childList: true,
                 subtree: true,
                 characterData: true,
@@ -104,12 +104,12 @@ export const createAutoScrollHandler = (
                 scrollToBottom();
             }
         },
-        handleChatSegmentRemoved: (sectionId) => handleDoneWithSection(sectionId),
-        handleChatSegmentComplete: (sectionId) => handleDoneWithSection(sectionId),
+        handleChatSegmentRemoved: (segmentId) => handleDoneWithSegment(segmentId),
+        handleChatSegmentComplete: (segmentId) => handleDoneWithSegment(segmentId),
         destroy: () => {
-            if (activeChatSection) {
-                handleDoneWithSection(activeChatSection.uid);
-                activeChatSection = undefined;
+            if (activeChatSegment) {
+                handleDoneWithSegment(activeChatSegment.uid);
+                activeChatSegment = undefined;
             }
 
             resetConversationContainer(conversationContainer);

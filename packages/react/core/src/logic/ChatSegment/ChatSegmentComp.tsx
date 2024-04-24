@@ -17,7 +17,7 @@ export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
     ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
 ): ReactNode {
-    const {chatSegment} = props;
+    const {chatSegment, containerRef} = props;
     const chatItemsRef = useMemo(
         () => new Map<string, RefObject<ChatItemImperativeProps>>(), [],
     );
@@ -52,9 +52,6 @@ export const ChatSegmentComp: <AiMsg>(
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
 
     useImperativeHandle(ref, () => ({
-        scrollToBottom: () => {
-            // TODO - Implement scroll to bottom
-        },
         streamChunk: (messageId: string, chunk: string) => {
             const messageCompRef = chatItemsRef.get(messageId);
             if (messageCompRef?.current) {
@@ -63,23 +60,23 @@ export const ChatSegmentComp: <AiMsg>(
         },
     }), []);
 
+    const ForwardRefChatItemComp = useMemo(() => forwardRef(
+        ChatItemComp<AiMsg>,
+    ), []);
+
     const chatItems = chatSegment.items;
     if (chatItems.length === 0) {
         return null;
     }
 
     return (
-        <div className={rootClassName}>
+        <div className={rootClassName} ref={containerRef}>
             {chatItems.map((chatItem, index) => {
                 let ref: RefObject<ChatItemImperativeProps> | undefined = chatItemsRef.get(chatItem.uid);
                 if (!ref) {
                     ref = createRef<ChatItemImperativeProps>();
                     chatItemsRef.set(chatItem.uid, ref);
                 }
-
-                const ForwardRefChatItemComp = forwardRef(
-                    ChatItemComp<AiMsg>,
-                );
 
                 if (chatItem.participantRole === 'user') {
                     //

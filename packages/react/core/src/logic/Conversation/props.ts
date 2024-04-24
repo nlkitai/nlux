@@ -10,9 +10,12 @@ export type ConversationCompProps<AiMsg> = {
     customRenderer?: FunctionComponent<{message: AiMsg}>;
     syntaxHighlighter?: HighlighterExtension;
     loader?: ReactElement;
+    onLastActiveSegmentChange?: (data: {
+        uid: string;
+        div: HTMLDivElement;
+    } | undefined) => void;
 };
 
 export type ImperativeConversationCompProps = {
-    scrollToBottom: () => void;
     streamChunk: (segmentId: string, messageId: string, chunk: string) => void;
 };
