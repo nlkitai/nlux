@@ -74,7 +74,7 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         expect(promptBox).toHaveClass('nlux-prmpt-submitting');
     });
 
-    it('Prompt box should remain in loading state until complete() is called', async () => {
+    it('Prompt box should be in waiting state until complete() is called', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -87,20 +87,20 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         await userEvent.type(textArea, 'Hello{enter}');
         await waitForRenderCycle();
 
-        // Assert
-        expect(textArea).toBeDisabled();
-        expect(sendButton).toBeDisabled();
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
-        expect(promptBox).not.toHaveClass('nlux-prmpt-typing');
-
-        // Act
-        adapterController.complete();
-        await waitForRenderCycle();
+        adapterController.next('Human!');
+        await waitForMilliseconds(100);
 
         // Assert
         expect(textArea).not.toBeDisabled();
-        expect(sendButton).not.toBeDisabled();
-        expect(promptBox).not.toHaveClass('nlux-prmpt-submitting');
+        expect(sendButton).toBeDisabled();
+        expect(promptBox).toHaveClass('nlux-prmpt-waiting');
+
+        // Act
+        adapterController.complete();
+        await waitForMilliseconds(100);
+
+        // Assert
+        expect(textArea).not.toBeDisabled();
         expect(promptBox).toHaveClass('nlux-prmpt-typing');
     });
 
@@ -134,7 +134,7 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         expect(promptBox).toHaveClass('nlux-prmpt-typing');
     });
 
-    it('Prompt box should remain in loading state when text is being streamed', async () => {
+    it('Prompt box should be reset but submit should remain disabled when text is being streamed', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -156,10 +156,15 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         await waitForMilliseconds(100);
 
         // Assert
-        expect(textArea).toBeDisabled();
+        expect(textArea).not.toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
+        expect(promptBox).toHaveClass('nlux-prmpt-waiting');
         expect(promptBox).not.toHaveClass('nlux-prmpt-typing');
+
+        // Act
+        await userEvent.type(textArea, 'So?');
+        await waitForMilliseconds(100);
+        expect(sendButton).toBeDisabled();
     });
 
     it('Text being returned by the adapter should be rendered as it is streamed', async () => {

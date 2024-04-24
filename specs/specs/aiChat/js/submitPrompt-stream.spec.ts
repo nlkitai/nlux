@@ -104,6 +104,24 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             const loader = rootElement.querySelector(loaderSelector);
             expect(loader).toBeInTheDocument();
         });
+
+        it('Should reset the prompt box', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            adapterController?.next('Hi!');
+            await waitForMilliseconds(100);
+
+            // Assert
+            expect(textArea.value).toBe('');
+        });
     });
 
     describe('When streaming is complete', () => {
@@ -155,6 +173,31 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             const loader = rootElement.querySelector(loaderSelector);
             expect(loader).not.toBeInTheDocument();
         });
+
+        it('Should not reset the prompt box', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            adapterController?.next('Hi!');
+            await waitForRenderCycle();
+
+            await userEvent.type(textArea, 'Hello again');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController!.complete();
+            await waitForRenderCycle();
+
+            // Assert
+            expect(textArea.value).toBe('Hello again');
+        });
     });
 
     describe('When a streaming error occurs', () => {
@@ -175,6 +218,23 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
+        });
+
+        it('The prompt should be restored to the prompt box', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController?.error(new Error('An error occurred'));
+            await waitForRenderCycle();
+
+            // Assert
+            expect(textArea.value).toBe('Hello');
         });
     });
 });

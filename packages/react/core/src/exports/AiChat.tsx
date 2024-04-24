@@ -83,6 +83,7 @@ export const AiChat: <AiMsg>(
         chatSegments,
         setChatSegments,
         setPromptBoxStatus,
+        setPrompt,
         conversationRef,
     });
 

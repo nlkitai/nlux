@@ -1,9 +1,10 @@
 import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
-import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
+import {MutableRefObject, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {PromptBoxStatus} from '../../../../../shared/src/ui/PromptBox/props';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 
@@ -15,7 +16,8 @@ type SubmitPromptHandlerProps<AiMsg> = {
     chatSegments: ChatSegment<AiMsg>[];
     showException: (message: string) => void;
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
-    setPromptBoxStatus: (status: 'typing' | 'submitting') => void;
+    setPromptBoxStatus: (status: PromptBoxStatus) => void;
+    setPrompt: (prompt: string) => void;
     conversationRef: MutableRefObject<ImperativeConversationCompProps | null>
 };
 
@@ -23,16 +25,29 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     const {
         adapterToUse,
         adapterExtras,
-        prompt,
+        prompt: promptTyped,
         promptBoxOptions,
         showException,
         chatSegments,
         setChatSegments,
         setPromptBoxStatus,
+        setPrompt,
         conversationRef,
     } = props;
 
-    const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
+    const hasValidInput = useMemo(() => promptTyped.length > 0, [promptTyped]);
+
+    // The prompt that will be submitted
+    // We store it in a separate variable because the prompt might change.
+    // Example: When the user types a new message while the previous message is being streamed.
+    const [promptSubmitted, setPromptSubmitted] = useState<string>('');
+
+    // The prompt typed will be read by the submitPrompt function, but it will not be used as a
+    // dependency for the submitPrompt function (only the promptToSubmit is a dependency to useCallback).
+    // Hence, the use of useRef to store the value and access it within the submitPrompt function, without
+    // causing the memoized function to be re-created.
+    const promptTypedRef = useRef(promptTyped);
+    promptTypedRef.current = promptTyped;
 
     // React functions and state that can be accessed by non-React DOM update code
     const domToReactRef = useRef({
@@ -40,6 +55,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         setChatSegments,
         setPromptBoxStatus,
         showException,
+        setPrompt,
     });
 
     useEffect(() => {
@@ -48,8 +64,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             setChatSegments,
             setPromptBoxStatus,
             showException,
+            setPrompt,
         };
-    }, [chatSegments, setChatSegments, setPromptBoxStatus, showException]);
+    }, [chatSegments, setChatSegments, setPromptBoxStatus, showException, setPrompt]);
 
     return useCallback(
         () => {
@@ -67,19 +84,28 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             }
 
             setPromptBoxStatus('submitting');
+            const promptToSubmit = promptTyped;
+
             const {
                 segment: chatSegment,
                 observable: chatSegmentObservable,
             } = submitPrompt<AiMsg>(
-                prompt,
+                promptToSubmit,
                 adapterToUse,
                 adapterExtras,
             );
+
+            setPromptSubmitted(promptToSubmit);
 
             if (chatSegment.status === 'error') {
                 warn('Error occurred while submitting prompt');
                 showException('Error occurred while submitting prompt');
                 setPromptBoxStatus('typing');
+
+                // Reset the prompt if the prompt box is empty
+                if (promptTypedRef.current === '') {
+                    setPrompt(promptToSubmit);
+                }
                 return;
             }
 
@@ -116,7 +142,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
             chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
                 handleSegmentItemReceived(aiStreamedMessage);
-                domToReactRef.current.setPromptBoxStatus('typing');
+                domToReactRef.current.setPromptBoxStatus('waiting');
+                if (promptTypedRef.current === promptToSubmit) {
+                    domToReactRef.current.setPrompt('');
+                }
             });
 
             chatSegmentObservable.on('aiMessageReceived', (aiMessage) => {
@@ -148,6 +177,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 );
 
                 domToReactRef.current.setChatSegments(newChatSegments);
+                if (promptTypedRef.current === promptToSubmit) {
+                    setPrompt('');
+                }
             });
 
             chatSegmentObservable.on('aiChunkReceived', (chunk: string, messageId: string) => {
@@ -165,6 +197,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 domToReactRef.current.setChatSegments(newParts);
                 domToReactRef.current.setPromptBoxStatus('typing');
                 domToReactRef.current.showException(exception);
+
+                if (promptTypedRef.current === '') {
+                    setPrompt(promptToSubmit);
+                }
             });
 
             domToReactRef.current.setChatSegments([
@@ -173,11 +209,11 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             ]);
         },
         [
-            showException,
-            domToReactRef,
-            prompt,
+            promptTyped,
             adapterToUse,
             adapterExtras,
+            showException,
+            domToReactRef,
             promptBoxOptions?.disableSubmitButton,
         ],
     );

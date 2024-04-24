@@ -53,6 +53,21 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
             expect(loaderContainer).toBeInTheDocument();
         });
+
+        it('The prompt should not be removed from the prompt box', async () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Assert
+            expect(textArea.value).toBe('Hello');
+        });
     });
 
     describe('When a response is returned', () => {
@@ -91,6 +106,24 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             // Assert
             const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
             expect(loaderContainer).not.toBeInTheDocument();
+        });
+
+        it('The prompt should be removed from the prompt box', async () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            await waitForRenderCycle();
+
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController!.resolve('Yo!');
+            await waitForRenderCycle();
+
+            // Assert
+            expect(textArea.value).toBe('');
         });
     });
 
@@ -148,6 +181,23 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
 
             expect(completeSegmentAgain).toBeInTheDocument();
             expect(activeSegment).not.toBeInTheDocument();
+        });
+
+        it('The prompt should be restored to the prompt box', async () => {
+            // Arrange
+            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const {container} = render(aiChat);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Act
+            adapterController?.reject('Sorry user!');
+            await waitForRenderCycle();
+
+            // Assert
+            expect(textArea.value).toBe('Hello');
         });
     });
 });

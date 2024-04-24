@@ -14,6 +14,7 @@ export const submitPromptFactory = <AiMsg>({
     autoScrollController,
     messageToSend,
     resetPromptBox,
+    setPromptBoxAsWaiting,
 }: {
     context: ControllerContext<AiMsg>;
     promptBoxInstance: CompPromptBox<AiMsg>;
@@ -21,6 +22,7 @@ export const submitPromptFactory = <AiMsg>({
     autoScrollController?: AutoScrollController;
     messageToSend: string;
     resetPromptBox: (resetTextInput?: boolean) => void;
+    setPromptBoxAsWaiting: () => void;
 }) => {
     return () => {
         const segmentId = conversation.addChatSegment();
@@ -90,6 +92,7 @@ export const submitPromptFactory = <AiMsg>({
             } else {
                 result.observable.on('aiMessageStreamStarted', (aiMessageStream) => {
                     conversation.addChatItem(segmentId, aiMessageStream);
+                    setPromptBoxAsWaiting();
                 });
 
                 result.observable.on('aiChunkReceived', (aiMessageChunk, chatItemId) => {
@@ -100,7 +103,7 @@ export const submitPromptFactory = <AiMsg>({
                     conversation.completeChatSegment(segmentId);
                     autoScrollController?.handleChatSegmentComplete(segmentId);
                     messageContentCompleteHandler();
-                    resetPromptBox(true);
+                    resetPromptBox(false);
                 });
             }
         } catch (error) {

@@ -198,6 +198,13 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                     this.resetPromptBox(resetTextInput, promptBoxProps?.autoFocus);
                 }
             },
+            setPromptBoxAsWaiting: () => {
+                if (!this.destroyed) {
+                    this.promptBoxInstance.setDomProps({
+                        status: 'waiting',
+                    });
+                }
+            },
         })();
     }
 
