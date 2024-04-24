@@ -1,11 +1,13 @@
 import {MutableRefObject, useCallback} from 'react';
 import {AutoScrollController} from '../../../../../shared/src/interactions/autoScroll/type';
 
+type LastActiveSegmentData = {uid: string; div: HTMLDivElement};
+
 export const useLastActiveSegmentChangeHandler = <AiMsg>(
     autoScrollController: AutoScrollController | undefined,
     lastActiveSegmentIdRef: MutableRefObject<string | undefined>,
 ) => {
-    return useCallback((data: {uid: string; div: HTMLDivElement} | undefined) => {
+    return useCallback((data: LastActiveSegmentData | undefined) => {
         if (!autoScrollController) {
             return;
         }
@@ -13,10 +15,6 @@ export const useLastActiveSegmentChangeHandler = <AiMsg>(
         if (data) {
             lastActiveSegmentIdRef.current = data.uid;
             autoScrollController.handleNewChatSegmentAdded(data.uid, data.div);
-        } else {
-            if (lastActiveSegmentIdRef.current) {
-                autoScrollController.handleChatSegmentRemoved(lastActiveSegmentIdRef.current);
-            }
         }
     }, [autoScrollController]);
 };
