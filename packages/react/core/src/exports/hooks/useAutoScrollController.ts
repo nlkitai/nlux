@@ -1,17 +1,17 @@
 import {MutableRefObject, useEffect, useRef, useState} from 'react';
-import {createAutoScrollHandler} from '../../../../../shared/src/interactions/autoScroll/autoScrollHandler';
-import {AutoScrollHandler} from '../../../../../shared/src/interactions/autoScroll/type';
+import {createAutoScrollController} from '../../../../../shared/src/interactions/autoScroll/autoScrollController';
+import {AutoScrollController} from '../../../../../shared/src/interactions/autoScroll/type';
 
 const defaultAutoScrollOption = true;
 
-export const useAutoScrollHandler = (
+export const useAutoScrollController = (
     conversationContainerRef: MutableRefObject<HTMLDivElement | null>,
     autoScroll?: boolean,
 ) => {
-    const [autoScrollHandler, setAutoScrollHandler] = useState<AutoScrollHandler>();
+    const [autoScrollController, setAutoScrollController] = useState<AutoScrollController>();
     const [conversationContainer, setConversationContainer] = useState<HTMLDivElement>();
 
-    const autoScrollHandlerRef = useRef(autoScrollHandler);
+    const autoScrollControllerRef = useRef(autoScrollController);
     const autoScrollPropRef = useRef(autoScroll);
 
     useEffect(() => {
@@ -23,34 +23,34 @@ export const useAutoScrollHandler = (
 
     useEffect(() => {
         if (!conversationContainer) {
-            if (autoScrollHandlerRef.current) {
-                autoScrollHandlerRef.current.destroy();
-                setAutoScrollHandler(undefined);
-                autoScrollHandlerRef.current = undefined;
+            if (autoScrollControllerRef.current) {
+                autoScrollControllerRef.current.destroy();
+                setAutoScrollController(undefined);
+                autoScrollControllerRef.current = undefined;
             }
 
             return;
         }
 
-        if (autoScrollHandlerRef.current) {
-            autoScrollHandlerRef.current.updateConversationContainer(conversationContainer);
+        if (autoScrollControllerRef.current) {
+            autoScrollControllerRef.current.updateConversationContainer(conversationContainer);
         } else {
-            autoScrollHandlerRef.current = createAutoScrollHandler(
+            autoScrollControllerRef.current = createAutoScrollController(
                 conversationContainer,
                 autoScrollPropRef.current ?? defaultAutoScrollOption,
             );
-            setAutoScrollHandler(autoScrollHandlerRef.current);
+            setAutoScrollController(autoScrollControllerRef.current);
         }
     }, [conversationContainer]);
 
     useEffect(() => {
         autoScrollPropRef.current = autoScroll;
-        if (autoScrollHandlerRef.current) {
-            autoScrollHandlerRef.current.updateProps({
+        if (autoScrollControllerRef.current) {
+            autoScrollControllerRef.current.updateProps({
                 autoScroll: autoScroll ?? defaultAutoScrollOption,
             });
         }
     }, [autoScroll]);
 
-    return autoScrollHandler;
+    return autoScrollController;
 };

@@ -1,11 +1,11 @@
 import {throttle} from '../../utils/throttle';
-import {AutoScrollHandler} from './type';
+import {AutoScrollController} from './type';
 import {createConversationScrollHandler} from './utils/conversationScrollHandler';
 
-export const createAutoScrollHandler = (
+export const createAutoScrollController = (
     newConversationContainer: HTMLElement,
     autoScroll: boolean,
-): AutoScrollHandler => {
+): AutoScrollController => {
     let shouldScrollWhenGenerating: boolean = autoScroll;
     let conversationContainer: HTMLElement | undefined = newConversationContainer;
     let scrollingStickToConversationEnd: boolean = true;

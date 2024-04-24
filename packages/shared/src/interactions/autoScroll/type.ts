@@ -1,4 +1,4 @@
-export type AutoScrollHandler = {
+export type AutoScrollController = {
     updateProps: ({autoScroll}: {autoScroll: boolean}) => void;
     updateConversationContainer: (container: HTMLElement) => void;
     handleNewChatSegmentAdded: (segmentId: string, segmentContainer: HTMLElement) => void;

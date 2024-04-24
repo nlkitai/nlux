@@ -12,25 +12,24 @@ import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter'
 import {chatItemsToChatSegment} from '../utils/chatItemsToChatSegment';
 import {reactPropsToCoreProps} from '../utils/reactPropsToCoreProps';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
-import {useAutoScrollHandler} from './hooks/useAutoScrollHandler';
+import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatComponentProps} from './props';
-
-const defaultAutoScrollOption = true;
 
 export const AiChat: <AiMsg>(
     props: AiChatComponentProps<AiMsg>,
 ) => ReactElement = function <AiMsg>(
     props: AiChatComponentProps<AiMsg>,
 ): ReactElement {
+    const {
+        conversationOptions,
+    } = props;
+
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
     const conversationContainerRef = useRef<HTMLDivElement>(null);
-    const autoScrollHandler = useAutoScrollHandler(
-        conversationContainerRef,
-        props.conversationOptions?.autoScroll,
-    );
 
+    const autoScrollController = useAutoScrollController(conversationContainerRef, conversationOptions?.autoScroll);
     const exceptionBoxController = useMemo(() => {
         return exceptionBoxRef.current ? createExceptionsBoxController(exceptionBoxRef.current) : undefined;
     }, [exceptionBoxRef.current]);
@@ -72,19 +71,19 @@ export const AiChat: <AiMsg>(
     ), [props.initialConversation]);
 
     const handleLastActiveSegmentChange = useCallback((data: {uid: string; div: HTMLDivElement} | undefined) => {
-        if (!autoScrollHandler) {
+        if (!autoScrollController) {
             return;
         }
 
         if (data) {
             lastActiveSegmentIdRef.current = data.uid;
-            autoScrollHandler.handleNewChatSegmentAdded(data.uid, data.div);
+            autoScrollController.handleNewChatSegmentAdded(data.uid, data.div);
         } else {
             if (lastActiveSegmentIdRef.current) {
-                autoScrollHandler.handleChatSegmentRemoved(lastActiveSegmentIdRef.current);
+                autoScrollController.handleChatSegmentRemoved(lastActiveSegmentIdRef.current);
             }
         }
-    }, [autoScrollHandler]);
+    }, [autoScrollController]);
 
     const segments = useMemo(() => (
         initialSegment ? [initialSegment, ...chatSegments] : chatSegments

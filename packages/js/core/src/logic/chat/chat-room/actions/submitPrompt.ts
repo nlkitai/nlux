@@ -1,4 +1,4 @@
-import {AutoScrollHandler} from '../../../../../../../shared/src/interactions/autoScroll/type';
+import {AutoScrollController} from '../../../../../../../shared/src/interactions/autoScroll/type';
 import {submitPrompt} from '../../../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
@@ -11,14 +11,14 @@ export const submitPromptFactory = <AiMsg>({
     context,
     promptBoxInstance,
     conversation,
-    autoScrollHandler,
+    autoScrollController,
     messageToSend,
     resetPromptBox,
 }: {
     context: ControllerContext<AiMsg>;
     promptBoxInstance: CompPromptBox<AiMsg>;
     conversation: CompConversation<AiMsg>;
-    autoScrollHandler?: AutoScrollHandler;
+    autoScrollController?: AutoScrollController;
     messageToSend: string;
     resetPromptBox: (resetTextInput?: boolean) => void;
 }) => {
@@ -43,7 +43,7 @@ export const submitPromptFactory = <AiMsg>({
             // Always listen to error event
             result.observable.on('error', (error) => {
                 conversation.removeChatSegment(segmentId);
-                autoScrollHandler?.handleChatSegmentRemoved(segmentId);
+                autoScrollController?.handleChatSegmentRemoved(segmentId);
                 resetPromptBox(false);
 
                 context.exception('NX-AD-001');
@@ -70,10 +70,10 @@ export const submitPromptFactory = <AiMsg>({
             result.observable.on('userMessageReceived', (userMessage) => {
                 conversation.addChatItem(segmentId, userMessage);
                 domOp(() => {
-                    if (autoScrollHandler) {
+                    if (autoScrollController) {
                         const chatSegmentContainer = conversation.getChatSegmentContainer(segmentId);
                         if (chatSegmentContainer) {
-                            autoScrollHandler.handleNewChatSegmentAdded(segmentId, chatSegmentContainer);
+                            autoScrollController.handleNewChatSegmentAdded(segmentId, chatSegmentContainer);
                         }
                     }
                 });
@@ -98,7 +98,7 @@ export const submitPromptFactory = <AiMsg>({
 
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
-                    autoScrollHandler?.handleChatSegmentComplete(segmentId);
+                    autoScrollController?.handleChatSegmentComplete(segmentId);
                     messageContentCompleteHandler();
                     resetPromptBox(true);
                 });
