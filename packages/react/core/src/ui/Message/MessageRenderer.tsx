@@ -9,24 +9,30 @@ const MarkdownRenderer = (props: {
         openLinksInNewWindow?: boolean,
     },
 }) => {
-    // TODO - Implement markdown parsing
+    // TODO - Implement markdown parsing in one go (no streaming)
+    // Use-cases : Messages loaded from history, etc.
     const {initialMarkdownMessage} = props;
-    return <div className={'markdown-NOT-parsed'}>{initialMarkdownMessage}</div>;
+    return <>{initialMarkdownMessage ? initialMarkdownMessage : ''}</>;
 };
 
 export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<void> = function <AiMsg>(props: ChatItemProps<AiMsg>) {
-    if (props.customRenderer !== undefined) {
-        if (props.message === undefined) {
+    const {
+        message,
+        customRenderer,
+    } = props;
+
+    if (customRenderer !== undefined) {
+        if (message === undefined) {
             return () => null;
         }
 
-        return () => props.customRenderer!({
-            message: props.message as AiMsg,
+        return () => customRenderer!({
+            message: message as AiMsg,
         });
     }
 
-    if (typeof props.message === 'string') {
-        const messageToRender: string = props.message;
+    if (typeof message === 'string') {
+        const messageToRender: string = message;
         return () => <MarkdownRenderer initialMarkdownMessage={messageToRender}/>;
     }
 
