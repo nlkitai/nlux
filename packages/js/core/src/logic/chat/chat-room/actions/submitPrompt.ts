@@ -1,6 +1,7 @@
 import {AutoScrollController} from '../../../../../../../shared/src/interactions/autoScroll/type';
 import {submitPrompt} from '../../../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
+import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
@@ -55,20 +56,6 @@ export const submitPromptFactory = <AiMsg>({
                 });
             });
 
-            // When streaming or fet is complete, update conversation content and trigger messageReceived event
-            const messageContentCompleteHandler = () => {
-                // if (message.content) {
-                //     // Only add user message to conversation content (used for history, and not displayed)
-                //     // if the message was sent successfully and a response was received.
-                //     conversation.updateConversationContent({role: 'user', message: messageToSend});
-                //     conversation.updateConversationContent(
-                //         {role: 'ai', message: message.content as any},
-                //     );
-                //
-                //     context.emit('messageReceived', message.content as any);
-                // }
-            };
-
             result.observable.on('userMessageReceived', (userMessage) => {
                 conversation.addChatItem(segmentId, userMessage);
                 domOp(() => {
@@ -84,9 +71,23 @@ export const submitPromptFactory = <AiMsg>({
             if (result.dataTransferMode === 'fetch') {
                 // In fetch mode — Listen to aiMessageReceived event and complete event
                 result.observable.on('aiMessageReceived', (aiMessage) => {
-                    conversation.addChatItem(segmentId, aiMessage);
+                    const isStringContent = typeof aiMessage.content === 'string';
+                    const newAiMessage = {
+                        ...aiMessage,
+                        // When content is a string, we stream is instead of adding it into the chat segment
+                        content: (isStringContent ? '' : aiMessage.content),
+                    } as ChatSegmentItem<AiMsg>;
+
+                    conversation.addChatItem(segmentId, newAiMessage);
+                    if (isStringContent) {
+                        domOp(() => conversation.addChunk(
+                            segmentId,
+                            newAiMessage.uid,
+                            aiMessage.content as string,
+                        ));
+                    }
+
                     conversation.completeChatSegment(segmentId);
-                    messageContentCompleteHandler();
                     resetPromptBox(true);
                 });
             } else {
@@ -101,8 +102,6 @@ export const submitPromptFactory = <AiMsg>({
 
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
-                    autoScrollController?.handleChatSegmentComplete(segmentId);
-                    messageContentCompleteHandler();
                     resetPromptBox(false);
                 });
             }

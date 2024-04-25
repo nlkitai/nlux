@@ -24,7 +24,7 @@ export const streamingDomService: StreamingDomService = (() => {
         getStreamingDomElement: (messageId: string) => {
             if (streamingDomElementsByMessageId[messageId] === undefined) {
                 const newStreamContainer = document.createElement('div');
-                newStreamContainer.setAttribute('data-streaming-message-id', messageId);
+                newStreamContainer.setAttribute('nlux-message-id', messageId);
                 newStreamContainer.className = 'nlux-md-cntr';
                 streamingDomElementsByMessageId[messageId] = newStreamContainer;
             }
