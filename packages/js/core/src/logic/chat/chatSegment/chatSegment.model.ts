@@ -74,7 +74,10 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
     public addChunk(chatItemId: string, chunk: string) {
         domOp(() => {
-            this.throwIfDestroyed();
+            if (this.destroyed) {
+                return;
+            }
+
             const chatItem = this.chatItems.get(chatItemId);
             if (!chatItem) {
                 throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
