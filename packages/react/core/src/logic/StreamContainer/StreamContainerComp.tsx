@@ -1,5 +1,5 @@
-import {createMarkdownStreamParser, MarkdownStreamParser} from '@nlux/markdown';
 import {Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,

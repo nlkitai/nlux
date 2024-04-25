@@ -1,6 +1,6 @@
 import {HighlighterExtension} from '@nlux/core';
-import {createMarkdownStreamParser, MarkdownStreamParser} from '@nlux/markdown';
 import {useEffect, useRef, useState} from 'react';
+import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {streamingDomService} from '../StreamContainer/streamingDomService';
 
 export const MarkdownRenderer = (props: {

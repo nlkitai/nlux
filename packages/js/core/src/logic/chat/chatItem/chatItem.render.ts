@@ -1,4 +1,4 @@
-import {createMarkdownStreamParser} from '@nlux/markdown';
+import {createMarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {createChatItemDom} from '../../../../../../shared/src/ui/ChatItem/create';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
