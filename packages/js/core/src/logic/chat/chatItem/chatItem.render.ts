@@ -1,3 +1,4 @@
+import {MarkdownStreamParser} from '@nlux/markdown';
 import {createMarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {createChatItemDom} from '../../../../../../shared/src/ui/ChatItem/create';
 import {CompRenderer} from '../../../types/comp';
@@ -9,6 +10,7 @@ export const renderChatItem: CompRenderer<
 > = ({
     props,
     appendToRoot,
+    compEvent,
 }) => {
 
     const root = createChatItemDom(props.domProps);
@@ -28,15 +30,18 @@ export const renderChatItem: CompRenderer<
     messageContainer.append(streamingRoot);
     appendToRoot(root);
 
-    const markdownStreamParser = createMarkdownStreamParser(markdownContainer, {
-        openLinksInNewWindow: true,
-        skipAnimation: false,
-        syntaxHighlighter: undefined,
-        streamingAnimationSpeed: undefined,
-        onComplete: () => {
-            // Do nothing
-        },
-    });
+    let markdownStreamParser: MarkdownStreamParser | undefined = undefined;
+
+    let markdownStreamProps: CompChatItemProps = {...props};
+    const initMarkdownStreamParser = (newProps: CompChatItemProps) => {
+        return createMarkdownStreamParser(markdownContainer, {
+            openLinksInNewWindow: newProps.openLinksInNewWindow ?? true,
+            skipAnimation: newProps.skipAnimation ?? false,
+            syntaxHighlighter: newProps.syntaxHighlighter,
+            streamingAnimationSpeed: newProps.streamingAnimationSpeed,
+            onComplete: () => compEvent('markdown-stream-complete'),
+        });
+    };
 
     return {
         elements: {
@@ -47,11 +52,24 @@ export const renderChatItem: CompRenderer<
                 root.focus();
             },
             processStreamedChunk: (chunk: string) => {
+                if (!markdownStreamParser) {
+                    markdownStreamParser = initMarkdownStreamParser(markdownStreamProps);
+                }
+
                 markdownStreamParser.next(chunk);
+            },
+            updateMarkdownStreamRenderer: (newProps: Partial<CompChatItemProps>) => {
+                markdownStreamProps = {
+                    ...markdownStreamProps,
+                    ...newProps,
+                };
+
+                initMarkdownStreamParser(markdownStreamProps);
             },
         },
         onDestroy: () => {
             root.remove();
+            markdownStreamParser = undefined;
         },
     };
 };

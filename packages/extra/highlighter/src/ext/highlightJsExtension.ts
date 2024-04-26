@@ -33,10 +33,7 @@ const createExtension = (): HighlighterExtension => {
 
     return {
         createHighlighter(options?: CreateHighlighterOptions): Highlighter {
-            const {
-                colorMode,
-            } = options ?? {};
-
+            const {colorMode} = options ?? {};
             setColorMode(colorMode ?? defaultColorMode);
             return highlighterFunction;
         },

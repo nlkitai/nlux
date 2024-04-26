@@ -1,3 +1,4 @@
+import {MarkdownStreamParserConfigOption} from '@nlux-dev/markdown/src';
 import {createAutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/autoScrollController';
 import {AutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/type';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
@@ -17,7 +18,6 @@ import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chat-room.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
 import {updateChatRoom} from './chat-room.update';
-import {getStreamingAnimationSpeed} from './utils/streamingAnimationSpeed';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<
@@ -36,6 +36,9 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             botPersona,
             userPersona,
             initialConversationContent,
+            syntaxHighlighter,
+            skipAnimation,
+            openLinksInNewWindow,
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
@@ -45,10 +48,12 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             botPersona,
             userPersona,
             promptBox,
+            syntaxHighlighter,
+            openLinksInNewWindow,
+            skipAnimation,
         });
 
         this.addConversation(
-            getStreamingAnimationSpeed(streamingAnimationSpeed),
             botPersona,
             userPersona,
             initialConversationContent,
@@ -103,10 +108,20 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.autoScrollController?.updateProps({autoScroll});
         }
 
+        if (props.hasOwnProperty('syntaxHighlighter')) {
+            this.setProp('syntaxHighlighter', props.syntaxHighlighter!);
+        }
+
+        if (props.hasOwnProperty('openLinksInNewWindow')) {
+            this.setProp('openLinksInNewWindow', props.openLinksInNewWindow!);
+        }
+
+        if (props.hasOwnProperty('skipAnimation')) {
+            this.setProp('skipAnimation', props.skipAnimation!);
+        }
+
         if (props.hasOwnProperty('streamingAnimationSpeed')) {
-            this.conversation?.setStreamingAnimationSpeed(
-                getStreamingAnimationSpeed(props.streamingAnimationSpeed),
-            );
+            this.setProp('streamingAnimationSpeed', props.streamingAnimationSpeed!);
         }
 
         if (props.hasOwnProperty('botPersona')) {
@@ -134,8 +149,20 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.setProp('visible', true);
     }
 
+    protected setProp<K extends keyof CompChatRoomProps<AiMsg>>(key: K, value: CompChatRoomProps<AiMsg>[K]) {
+        super.setProp(key, value);
+
+        if (
+            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'skipAnimation' || key === 'streamingAnimationSpeed'
+        ) {
+            const updateKey = key as MarkdownStreamParserConfigOption;
+            const updateValue = value as CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption];
+            this.conversation.updateMarkdownStreamRenderer(updateKey, updateValue);
+        }
+    }
+
     private addConversation(
-        streamingAnimationSpeed: number,
         botPersona?: BotPersona,
         userPersona?: UserPersona,
         initialConversationContent?: readonly ChatItem<AiMsg>[],
@@ -143,10 +170,13 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.conversation = comp(CompConversation<AiMsg>)
             .withContext(this.context)
             .withProps<CompConversationProps<AiMsg>>({
-                streamingAnimationSpeed,
                 botPersona,
                 userPersona,
                 messages: initialConversationContent,
+                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                skipAnimation: this.props.skipAnimation,
+                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
+                syntaxHighlighter: this.props.syntaxHighlighter,
             })
             .create();
 

@@ -149,7 +149,10 @@ export class NluxRenderer<AiMsg> {
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
-                    streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed,
+                    streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed ?? undefined,
+                    syntaxHighlighter: this.context.syntaxHighlighter,
+                    openLinksInNewWindow: this.theConversationOptions?.openLinksInNewWindow ?? undefined,
+                    skipAnimation: false,
                     promptBox: {
                         placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
                         autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
@@ -324,6 +327,19 @@ export class NluxRenderer<AiMsg> {
             this.chatRoom?.setProps({
                 autoScroll: props.conversationOptions?.autoScroll ?? undefined,
                 streamingAnimationSpeed: props.conversationOptions?.streamingAnimationSpeed ?? undefined,
+                syntaxHighlighter: this.context.syntaxHighlighter ?? undefined,
+                openLinksInNewWindow: props.conversationOptions?.openLinksInNewWindow ?? undefined,
+                skipAnimation: false,
+            });
+        }
+
+        if (props.hasOwnProperty('syntaxHighlighter')) {
+            this.context.update({
+                syntaxHighlighter: props.syntaxHighlighter,
+            });
+
+            this.chatRoom?.setProps({
+                syntaxHighlighter: props.syntaxHighlighter,
             });
         }
 
@@ -371,7 +387,17 @@ export class NluxRenderer<AiMsg> {
         }
 
         if (props.hasOwnProperty('syntaxHighlighter')) {
-            // TODO - Handle syntax highlighter change
+            this.context.update({
+                syntaxHighlighter: props.syntaxHighlighter,
+            });
+
+            this.chatRoom?.setProps({
+                syntaxHighlighter: props.syntaxHighlighter,
+            });
+        }
+
+        if (props.hasOwnProperty('')) {
+
         }
 
         if (props.hasOwnProperty('personaOptions')) {

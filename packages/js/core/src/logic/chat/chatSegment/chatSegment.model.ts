@@ -1,3 +1,4 @@
+import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
@@ -48,10 +49,13 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         const newChatItemComp = comp(CompChatItem<AiMsg>)
             .withContext(this.context)
             .withProps({
-                    uid: item.uid,
-                    domProps: compChatItemProps,
-                } satisfies CompChatItemProps,
-            )
+                uid: item.uid,
+                domProps: compChatItemProps,
+                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                skipAnimation: this.props.skipAnimation,
+                syntaxHighlighter: this.props.syntaxHighlighter,
+                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
+            } satisfies CompChatItemProps)
             .create();
 
         this.chatItems.set(item.uid, newChatItemComp);
@@ -97,6 +101,26 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         this.chatItems.forEach((comp) => comp.destroy());
         this.chatItems.clear();
         super.destroy();
+    }
+
+    public updateMarkdownStreamRenderer(
+        newProp: MarkdownStreamParserConfigOption,
+        newValue: CompChatSegmentProps[MarkdownStreamParserConfigOption],
+    ) {
+        this.setProp(newProp, newValue);
+    }
+
+    protected setProp<K extends keyof CompChatSegmentProps>(key: K, value: CompChatSegmentProps[K]) {
+        super.setProp(key, value);
+
+        if (
+            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'skipAnimation' || key === 'streamingAnimationSpeed'
+        ) {
+            this.chatItems.forEach((comp) => {
+                comp.updateMarkdownStreamRenderer(key, value);
+            });
+        }
     }
 
     @CompEventListener('chat-segment-ready')

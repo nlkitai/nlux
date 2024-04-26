@@ -3,5 +3,19 @@ import {CompChatItemActions, CompChatItemElements, CompChatItemProps} from './ch
 
 export const updateChatItem: CompUpdater<
     CompChatItemProps, CompChatItemElements, CompChatItemActions
-> = () => {
+> = ({
+    propName,
+    newValue,
+    dom,
+}) => {
+    switch (propName) {
+        case 'openLinksInNewWindow':
+        case 'skipAnimation':
+        case 'syntaxHighlighter':
+        case 'streamingAnimationSpeed':
+            dom.actions?.updateMarkdownStreamRenderer({
+                [propName]: newValue,
+            });
+            break;
+    }
 };

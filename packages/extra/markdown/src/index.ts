@@ -14,6 +14,8 @@ export type MarkdownStreamParserOptions = {
     onComplete?: Function;
 };
 
+export type MarkdownStreamParserConfigOption = keyof Omit<MarkdownStreamParserOptions, 'onComplete'>;
+
 export const createMarkdownStreamParser = (
     domElement: HTMLElement,
     options?: MarkdownStreamParserOptions,

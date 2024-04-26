@@ -1,8 +1,13 @@
 import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;
     status: ChatSegmentStatus;
+    openLinksInNewWindow?: boolean;
+    skipAnimation?: boolean;
+    syntaxHighlighter?: HighlighterExtension;
+    streamingAnimationSpeed?: number;
 }>;
 
 export type CompChatSegmentElements = {

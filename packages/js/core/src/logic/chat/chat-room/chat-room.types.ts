@@ -1,5 +1,6 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompChatRoomEvents = 'chat-room-ready'
@@ -11,8 +12,11 @@ export type CompChatRoomProps<AiMsg> = {
     userPersona?: UserPersona,
     initialConversationContent?: readonly ChatItem<AiMsg>[];
     autoScroll?: boolean;
-    streamingAnimationSpeed?: number | null;
     promptBox: Partial<PromptBoxProps>;
+    openLinksInNewWindow?: boolean;
+    skipAnimation?: boolean;
+    streamingAnimationSpeed?: number;
+    syntaxHighlighter?: HighlighterExtension;
 };
 
 export type CompChatRoomElements = {

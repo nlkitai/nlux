@@ -4,7 +4,6 @@ import {CompChatRoom} from './chat/chat-room/chat-room.model';
 import {CompChatItem} from './chat/chatItem/chatItem.model';
 import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
 import {CompConversation} from './chat/conversation/conversation.model';
-import {CompMessage} from './chat/message/message.model';
 import {CompPromptBox} from './chat/prompt-box/prompt-box.model';
 import {CompExceptionsBox} from './miscellaneous/exceptions-box/model';
 import {CompList} from './miscellaneous/list/model';
@@ -15,7 +14,6 @@ const componentsById = () => ({
     'exceptions-box': CompExceptionsBox,
     'conversation': CompConversation,
     'prompt-box': CompPromptBox,
-    'message': CompMessage,
     'chatSegment': CompChatSegment,
     'chatItem': CompChatItem,
 });

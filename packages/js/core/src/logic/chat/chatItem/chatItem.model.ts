@@ -1,5 +1,7 @@
+import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {Model} from '../../../exports/aiChat/comp/decorators';
+import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderChatItem} from './chatItem.render';
 import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatItemProps} from './chatItem.types';
@@ -24,5 +26,26 @@ export class CompChatItem<AiMsg> extends BaseComp<
     public commitChunks() {
         this.throwIfDestroyed();
         // TODO - implement chunking
+    }
+
+    public updateMarkdownStreamRenderer(
+        newProp: MarkdownStreamParserConfigOption,
+        newValue: CompChatItemProps[keyof CompChatItemProps],
+    ) {
+        this.setProp(newProp, newValue);
+
+        if (newProp === 'syntaxHighlighter') {
+            const typedNewValue = newValue as HighlighterExtension | undefined;
+            this.executeDomAction('updateMarkdownStreamRenderer', {
+                syntaxHighlighter: typedNewValue,
+            } satisfies Partial<CompChatItemProps>);
+        }
+    }
+
+    @CompEventListener('markdown-stream-complete')
+    private onMarkdownStreamComplete(messageRendered: AiMsg) {
+        this.context.emit('messageRendered', {
+            uid: this.props.uid,
+        });
     }
 }

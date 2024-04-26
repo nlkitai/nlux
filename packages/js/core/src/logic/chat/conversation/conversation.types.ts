@@ -1,13 +1,17 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompConversationEvents = void;
 
 export type CompConversationProps<AiMsg> = Readonly<{
     messages?: readonly ChatItem<AiMsg>[];
-    streamingAnimationSpeed: number;
     botPersona?: BotPersona;
     userPersona?: UserPersona;
+    openLinksInNewWindow?: boolean;
+    skipAnimation?: boolean;
+    streamingAnimationSpeed?: number;
+    syntaxHighlighter?: HighlighterExtension;
 }>;
 
 export type CompConversationElements = Readonly<{

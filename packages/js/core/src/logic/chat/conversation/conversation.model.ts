@@ -1,3 +1,4 @@
+import {MarkdownStreamParserConfigOption} from '@nlux-dev/markdown/src';
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {debug} from '../../../../../../shared/src/utils/debug';
@@ -9,10 +10,8 @@ import {Model} from '../../../exports/aiChat/comp/decorators';
 import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
-import {CompList} from '../../miscellaneous/list/model';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
 import {CompChatSegmentProps} from '../chatSegment/chatSegment.types';
-import {CompMessage} from '../message/message.model';
 import {renderConversation} from './conversation.render';
 import {
     CompConversationActions,
@@ -28,7 +27,6 @@ export class CompConversation<AiMsg> extends BaseComp<
 > {
     private readonly chatSegmentsById: Map<string, CompChatSegment<AiMsg>> = new Map();
     private readonly conversationContent: ChatItem<AiMsg>[] = [];
-    private messagesList: CompList<CompMessage<AiMsg>> | undefined;
 
     constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
@@ -59,6 +57,10 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withProps({
                 uid: segmentId,
                 status: 'active',
+                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                skipAnimation: this.props.skipAnimation,
+                syntaxHighlighter: this.props.syntaxHighlighter,
+                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
             } satisfies CompChatSegmentProps)
             .create();
 
@@ -122,10 +124,6 @@ export class CompConversation<AiMsg> extends BaseComp<
         return this.conversationContent.slice(-historyPayloadSize);
     }
 
-    public getMessageById(messageId: string): CompMessage<AiMsg> | undefined {
-        return this.messagesList?.getComponentById(messageId);
-    }
-
     public removeChatSegment(segmentId: string) {
         const chatSegment = this.chatSegmentsById.get(segmentId);
         if (!chatSegment) {
@@ -141,28 +139,31 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public setBotPersona(botPersona: BotPersona | undefined) {
         this.setProp('botPersona', botPersona);
-
-        this.messagesList?.forEachComponent((message) => {
-            if (message.direction === 'in') {
-                message.setPersona(botPersona);
-            }
-        });
-    }
-
-    public setStreamingAnimationSpeed(speed: number) {
-        this.setProp('streamingAnimationSpeed', speed);
-        this.messagesList?.forEachComponent((message) => {
-            message.setStreamingAnimationSpeed(speed);
-        });
     }
 
     public setUserPersona(userPersona: UserPersona | undefined) {
         this.setProp('userPersona', userPersona);
+    }
 
-        this.messagesList?.forEachComponent((message) => {
-            if (message.direction === 'out') {
-                message.setPersona(userPersona);
-            }
-        });
+    public updateMarkdownStreamRenderer(
+        newProp: MarkdownStreamParserConfigOption,
+        newValue: CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption],
+    ) {
+        this.setProp(newProp, newValue);
+    }
+
+    protected setProp<K extends keyof CompConversationProps<AiMsg>>(key: K, value: CompConversationProps<AiMsg>[K]) {
+        super.setProp(key, value);
+
+        if (
+            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'skipAnimation' || key === 'streamingAnimationSpeed'
+        ) {
+            const updateKey = key as MarkdownStreamParserConfigOption;
+            const updateValue = value as CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption];
+            this.chatSegmentsById.forEach((comp) => {
+                comp.updateMarkdownStreamRenderer(updateKey, updateValue);
+            });
+        }
     }
 }

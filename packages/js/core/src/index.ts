@@ -30,6 +30,8 @@ export type {
     EventName,
     EventCallback,
     EventsMap,
+    MessageReceivedEventDetails,
+    MessageRenderedEventDetails,
     ErrorCallback,
     ErrorEventDetails,
     ReadyCallback,
@@ -38,6 +40,7 @@ export type {
     PreDestroyEventDetails,
     MessageSentCallback,
     MessageReceivedCallback,
+    MessageRenderedCallback,
 } from './types/event';
 
 export type {

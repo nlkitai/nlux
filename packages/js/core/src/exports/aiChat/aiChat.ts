@@ -181,6 +181,18 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             });
         }
 
+        if (props.hasOwnProperty('adapter')) {
+            this.theAdapter = props.adapter ?? null;
+        }
+
+        if (props.hasOwnProperty('syntaxHighlighter')) {
+            this.theSyntaxHighlighter = props.syntaxHighlighter ?? null;
+        }
+
+        if (props.hasOwnProperty('conversationOptions')) {
+            this.theConversationOptions = props.conversationOptions ?? null;
+        }
+
         this.controller.updateProps(props);
     }
 
