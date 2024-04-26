@@ -132,7 +132,10 @@ export class CompConversation<AiMsg> extends BaseComp<
             return;
         }
 
-        this.removeSubComponent(segmentId);
+        if (this.subComponents.has(segmentId)) {
+            this.removeSubComponent(segmentId);
+        }
+
         this.chatSegmentsById.delete(segmentId);
     }
 
