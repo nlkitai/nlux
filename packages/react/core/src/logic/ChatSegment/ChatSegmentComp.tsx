@@ -52,14 +52,14 @@ export const ChatSegmentComp: <AiMsg>(
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (messageId: string, chunk: string) => {
-            const messageCompRef = chatItemsRef.get(messageId);
-            messageCompRef?.current?.streamChunk(chunk);
+        streamChunk: (chatItemId: string, chunk: string) => {
+            const chatItemCompRef = chatItemsRef.get(chatItemId);
+            chatItemCompRef?.current?.streamChunk(chunk);
         },
-        completeStream: (messageId: string) => {
-            const messageCompRef = chatItemsRef.get(messageId);
-            messageCompRef?.current?.completeStream();
-            chatItemsRef.delete(messageId);
+        completeStream: (chatItemId: string) => {
+            const chatItemCompRef = chatItemsRef.get(chatItemId);
+            chatItemCompRef?.current?.completeStream();
+            chatItemsRef.delete(chatItemId);
         },
     }), []);
 
@@ -114,6 +114,8 @@ export const ChatSegmentComp: <AiMsg>(
                             message={chatItem.content}
                             name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                            syntaxHighlighter={props.syntaxHighlighter}
+                            openLinksInNewWindow={props.openLinksInNewWindow}
                         />
                     );
                 } else {
@@ -142,6 +144,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}
+                                    syntaxHighlighter={props.syntaxHighlighter}
+                                    openLinksInNewWindow={props.openLinksInNewWindow}
                                 />
                             );
                         } else {
@@ -174,6 +178,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}
+                                    syntaxHighlighter={props.syntaxHighlighter}
+                                    openLinksInNewWindow={props.openLinksInNewWindow}
                                 />
                             );
                         }
@@ -195,6 +201,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}
+                                    syntaxHighlighter={props.syntaxHighlighter}
+                                    openLinksInNewWindow={props.openLinksInNewWindow}
                                 />
                             );
                         }

@@ -1,3 +1,4 @@
+import {HighlighterExtension} from '@nlux/core';
 import {FunctionComponent, ReactElement} from 'react';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 
@@ -10,6 +11,8 @@ export type ChatItemProps<AiMsg> = {
     customRenderer?: FunctionComponent<{message: AiMsg}>;
     name?: string;
     picture?: string | ReactElement;
+    syntaxHighlighter?: HighlighterExtension;
+    openLinksInNewWindow?: boolean;
 };
 
 export type ChatItemImperativeProps = {

@@ -46,6 +46,8 @@ export const ChatItemComp: <AiMsg>(
         props.message,
         props.customRenderer,
         props.direction,
+        props.syntaxHighlighter,
+        props.openLinksInNewWindow,
     ]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
@@ -62,6 +64,10 @@ export const ChatItemComp: <AiMsg>(
                     status={'streaming'}
                     direction={props.direction}
                     ref={streamContainer}
+                    markdownOptions={{
+                        syntaxHighlighter: props.syntaxHighlighter,
+                        openLinksInNewWindow: props.openLinksInNewWindow,
+                    }}
                 />
             )}
             {!isStreaming && (

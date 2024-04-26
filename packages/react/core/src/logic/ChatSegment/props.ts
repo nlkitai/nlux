@@ -9,6 +9,7 @@ export type ChatSegmentProps<AiMsg> = {
     loader?: ReactElement;
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;
+    openLinksInNewWindow?: boolean;
     containerRef?: RefObject<HTMLDivElement>;
 };
 

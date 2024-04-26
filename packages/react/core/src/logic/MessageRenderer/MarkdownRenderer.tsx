@@ -11,9 +11,7 @@ export const MarkdownRenderer = (props: {
         openLinksInNewWindow?: boolean,
     },
 }) => {
-    const {
-        markdownOptions,
-    } = props;
+    const {markdownOptions} = props;
 
     // We use references in this component to avoid re-renders — as streaming happens outside of React
     // rendering cycle, we don't want to trigger re-renders on every chunk of data received.
@@ -55,7 +53,7 @@ export const MarkdownRenderer = (props: {
             // in the chat segment. This is handled by the streamingDomService.
             streamingDomService.deleteStreamingDomElement(props.messageUid);
         };
-    }, []); // No dependencies, this effect should run only once.
+    }, [markdownOptions?.syntaxHighlighter, markdownOptions?.openLinksInNewWindow]);
 
     return <div className={'nlux-md-strm-root'} ref={rootElRef}/>;
 };

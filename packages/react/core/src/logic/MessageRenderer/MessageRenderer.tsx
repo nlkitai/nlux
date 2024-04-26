@@ -30,7 +30,16 @@ export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<v
 
     if (typeof message === 'string') {
         const messageToRender: string = message;
-        return () => <MarkdownRenderer messageUid={props.uid} content={messageToRender}/>;
+        return () => (
+            <MarkdownRenderer
+                messageUid={props.uid}
+                content={messageToRender}
+                markdownOptions={{
+                    syntaxHighlighter: props.syntaxHighlighter,
+                    openLinksInNewWindow: props.openLinksInNewWindow,
+                }}
+            />
+        );
     }
 
     // No custom renderer and message is not a string!
