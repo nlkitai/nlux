@@ -60,7 +60,9 @@ export const AiChatWelcomeMessageReactExpo = () => {
     const defaultProps: AiChatProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
-        aiMessageComponent: CustomMessageComponent,
+        messageOptions: {
+            responseComponent: rendererType === 'custom' ? CustomMessageComponent : undefined,
+        },
     };
 
     return (

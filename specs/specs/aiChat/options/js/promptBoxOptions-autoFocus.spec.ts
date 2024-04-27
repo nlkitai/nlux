@@ -1,11 +1,11 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {adapterBuilder} from '../../../utils/adapterBuilder';
-import {AdapterController} from '../../../utils/adapters';
-import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
+import {adapterBuilder} from '../../../../utils/adapterBuilder';
+import {AdapterController} from '../../../../utils/adapters';
+import {waitForMilliseconds, waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + prop promptBox + focus', () => {
+describe('createAiChat() + promptBoxOptions + autoFocus', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -38,7 +38,7 @@ describe('createAiChat() + prop promptBox + focus', () => {
         });
 
         describe('When a message is sent then focus is lost', () => {
-            it.skip('The prompt box should not be focused when a response is received', async () => {
+            it('The prompt box should not be focused when a response is received', async () => {
                 // Arrange
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);

@@ -1,10 +1,10 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {adapterBuilder} from '../../../utils/adapterBuilder';
-import {AdapterController} from '../../../utils/adapters';
-import {waitForRenderCycle} from '../../../utils/wait';
+import {adapterBuilder} from '../../../../utils/adapterBuilder';
+import {AdapterController} from '../../../../utils/adapters';
+import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + prop layoutOptions + width', () => {
+describe('createAiChat() + layoutOptions + width', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;

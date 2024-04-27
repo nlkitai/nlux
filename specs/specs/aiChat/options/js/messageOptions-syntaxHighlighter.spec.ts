@@ -2,11 +2,11 @@ import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {adapterBuilder} from '../../../utils/adapterBuilder';
-import {AdapterController} from '../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
+import {adapterBuilder} from '../../../../utils/adapterBuilder';
+import {AdapterController} from '../../../../utils/adapters';
+import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + withMessageOptions({syntaxHighlighter})', () => {
+describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;

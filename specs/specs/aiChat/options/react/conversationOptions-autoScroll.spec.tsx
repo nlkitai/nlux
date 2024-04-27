@@ -2,11 +2,11 @@ import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import {adapterBuilder} from '../../../utils/adapterBuilder';
-import {AdapterController} from '../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
+import {adapterBuilder} from '../../../../utils/adapterBuilder';
+import {AdapterController} from '../../../../utils/adapters';
+import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + autoScroll', () => {
+describe('<AiChat /> + conversationOptions + autoScroll', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {

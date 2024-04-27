@@ -2,9 +2,9 @@ import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {adapterBuilder} from '../../../utils/adapterBuilder';
-import {AdapterController} from '../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
+import {adapterBuilder} from '../../../../utils/adapterBuilder';
+import {AdapterController} from '../../../../utils/adapters';
+import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + fetch adapter + markdown', () => {
     let adapterController: AdapterController | undefined;
