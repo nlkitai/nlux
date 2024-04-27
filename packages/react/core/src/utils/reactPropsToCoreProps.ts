@@ -1,10 +1,10 @@
-import {AiChatProps, ChatAdapter, StandardChatAdapter} from '@nlux/core';
-import {AiChatComponentProps} from '../exports/props';
+import {AiChatProps as AiChatCoreProps, ChatAdapter, StandardChatAdapter} from '@nlux/core';
+import {AiChatProps} from '../exports/props';
 
 export const reactPropsToCoreProps = <AiMsg>(
-    props: AiChatComponentProps<AiMsg>,
+    props: AiChatProps<AiMsg>,
     adapterToUse: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
-): AiChatProps<AiMsg> => {
+): AiChatCoreProps<AiMsg> => {
     const botProp = props.personaOptions?.bot;
     const userProp = props.personaOptions?.user;
 
@@ -12,8 +12,11 @@ export const reactPropsToCoreProps = <AiMsg>(
         adapter: adapterToUse,
         events: props.events,
         className: props.className,
-        promptBoxOptions: props.promptBoxOptions,
+        themeId: props.themeId,
+        layoutOptions: props.layoutOptions,
         conversationOptions: props.conversationOptions,
+        messageOptions: props.messageOptions,
+        promptBoxOptions: props.promptBoxOptions,
         personaOptions: {
             bot: botProp ? {
                 name: botProp.name,
@@ -25,7 +28,5 @@ export const reactPropsToCoreProps = <AiMsg>(
                 picture: typeof userProp.picture === 'string' ? userProp.picture : '<REACT ELEMENT />',
             } : undefined,
         },
-        layoutOptions: props.layoutOptions,
-        syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
     };
 };

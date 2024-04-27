@@ -15,12 +15,12 @@ import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
-import {AiChatComponentProps} from './props';
+import {AiChatProps} from './props';
 
 export const AiChat: <AiMsg>(
-    props: AiChatComponentProps<AiMsg>,
+    props: AiChatProps<AiMsg>,
 ) => ReactElement = function <AiMsg>(
-    props: AiChatComponentProps<AiMsg>,
+    props: AiChatProps<AiMsg>,
 ): ReactElement {
     const {
         adapter,

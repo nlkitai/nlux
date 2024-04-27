@@ -1,6 +1,6 @@
 import {DataTransferMode, PersonaOptions} from '@nlux-dev/react/src';
 import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
-import {AiChatComponentProps} from '@nlux-dev/react/src/exports/props.tsx';
+import {AiChatProps} from '@nlux-dev/react/src/exports/props.tsx';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {useMemo, useState} from 'react';
@@ -88,14 +88,14 @@ export const AiChatReactExpo = () => {
         },
     };
 
-    const customProps: AiChatComponentProps<MessageObjectType> = {
+    const customProps: AiChatProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation: initialConversationCustomMessages,
         aiMessageComponent: CustomMessageComponent,
     };
 
-    const defaultProps: AiChatComponentProps<MessageObjectType> = {
+    const defaultProps: AiChatProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation,

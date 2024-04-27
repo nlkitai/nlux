@@ -1,7 +1,9 @@
+import {highlighter} from '@nlux-dev/highlighter/src';
+import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
 import {AiChat} from '@nlux-dev/react/src';
-import '@nlux-dev/themes/src/luna/theme.css';
 import './App.css';
 
 function App() {
@@ -12,6 +14,8 @@ function App() {
     const openAiAdapter = createUnsafeChatAdapter()
         .withApiKey('sk_1234567890')
         .withDataTransferMode('fetch');
+
+    highlighter;
 
     return (
         <AiChat
@@ -28,7 +32,7 @@ function App() {
                 height: 300,
             }}
             conversationOptions={{
-                // autoScroll: true,
+                autoScroll: true,
             }}
         />
     );

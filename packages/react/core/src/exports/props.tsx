@@ -11,12 +11,13 @@ import {
 import {PersonaOptions} from './personaOptions';
 
 /**
- * Props for the AiChat component.
+ * Props for the AiChat React component.
  */
-export type AiChatComponentProps<AiMsg> = {
+export type AiChatProps<AiMsg> = {
     /**
-     * The chat adapter to use.
-     * This can be an instance of a chat adapter, or a chat adapter builder.
+     * The chat adapter to use. This is required and essential for the component to work.
+     * You can either provide a standard adapter from @nlux or create a custom adapter.
+     * For more information, please visit — https://nlux.dev/learn/adapters
      */
     adapter: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>;
 
@@ -37,19 +38,19 @@ export type AiChatComponentProps<AiMsg> = {
     themeId?: string;
 
     /**
-     * The initial conversation to display.
+     * The initial conversation history to display.
      */
     initialConversation?: ChatItem<AiMsg>[];
-
-    /**
-     * Options for the conversation.
-     */
-    conversationOptions?: ConversationOptions;
 
     /**
      * Layout options.
      */
     layoutOptions?: LayoutOptions;
+
+    /**
+     * Options for the conversation.
+     */
+    conversationOptions?: ConversationOptions;
 
     /**
      * Options related to a single message in the conversation.

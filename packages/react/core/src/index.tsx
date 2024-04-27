@@ -34,7 +34,7 @@ export type {
 } from './exports/personaOptions';
 
 export type {
-    AiChatComponentProps,
+    AiChatProps,
 } from './exports/props';
 
 export {

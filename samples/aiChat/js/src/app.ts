@@ -1,6 +1,8 @@
 import './style.css';
 import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {createAiChat} from '@nlux-dev/core/src';
+import {highlighter} from '@nlux-dev/highlighter/src';
 import {createChatAdapter} from '@nlux-dev/nlbridge/src';
 import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
 
@@ -9,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const adapter = createChatAdapter()
         .withUrl('http://localhost:8899/');
+
     const openAiAdapter = createUnsafeChatAdapter()
         .withApiKey('sk_1234567890')
         .withDataTransferMode('fetch');
@@ -21,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // submitShortcut: 'CommandEnter',
         })
         .withConversationOptions({
-            autoScroll: false,
+            autoScroll: true,
         })
         .withLayoutOptions({
             width: 400,
