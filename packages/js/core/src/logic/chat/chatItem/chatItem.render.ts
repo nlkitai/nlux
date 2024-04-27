@@ -35,7 +35,7 @@ export const renderChatItem: CompRenderer<
     let markdownStreamProps: CompChatItemProps = {...props};
     const initMarkdownStreamParser = (newProps: CompChatItemProps) => {
         return createMarkdownStreamParser(markdownContainer, {
-            openLinksInNewWindow: newProps.openLinksInNewWindow ?? true,
+            openLinksInNewWindow: newProps.openMdLinksInNewWindow ?? true,
             skipAnimation: newProps.skipAnimation ?? false,
             syntaxHighlighter: newProps.syntaxHighlighter,
             streamingAnimationSpeed: newProps.streamingAnimationSpeed,

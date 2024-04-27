@@ -4,7 +4,7 @@ import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highligh
 export type CompChatSegmentProps = Readonly<{
     uid: string;
     status: ChatSegmentStatus;
-    openLinksInNewWindow?: boolean;
+    openMdLinksInNewWindow?: boolean;
     skipAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     streamingAnimationSpeed?: number;

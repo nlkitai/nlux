@@ -7,6 +7,7 @@ export interface ConversationOptions {
      * @default true
      */
     autoScroll?: boolean;
+
     /**
      * Indicates the number of messages from conversation history that should be sent to the backend with each message.
      * For custom adapters, the history will be available as part of `extras.conversationHistory` attribute.
@@ -19,18 +20,4 @@ export interface ConversationOptions {
      * @default 'max'
      */
     historyPayloadSize?: HistoryPayloadSize;
-    /**
-     * Indicates whether rendered links should open in a new window.
-     *
-     * @default false
-     */
-    openLinksInNewWindow?: boolean;
-    /**
-     * The interval in milliseconds at which new characters are added to the conversation when a message
-     * is being generated and rendering in the UI.
-     * Set to `null` to disable the streaming animation.
-     *
-     * @default 10
-     */
-    streamingAnimationSpeed?: number | null;
 }

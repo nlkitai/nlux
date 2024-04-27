@@ -44,7 +44,7 @@ export type MarkdownStreamParser = {
 };
 
 export type MarkdownStreamParserOptions = {
-    openLinksInNewWindow?: boolean;
+    openMdLinksInNewWindow?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     skipAnimation?: boolean;
     onComplete?(completeCallback: Function): void;

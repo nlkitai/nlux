@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
 
-describe('createAiChat() + withSyntaxHighlighter(highlighter)', () => {
+describe('createAiChat() + withMessageOptions({syntaxHighlighter})', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -33,7 +33,9 @@ describe('createAiChat() + withSyntaxHighlighter(highlighter)', () => {
             // Arrange
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .withSyntaxHighlighter(highlighter);
+                .withMessageOptions({
+                    syntaxHighlighter: highlighter,
+                });
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -84,14 +86,16 @@ describe('createAiChat() + withSyntaxHighlighter(highlighter)', () => {
             // Arrange
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .withSyntaxHighlighter(highlighter);
+                .withMessageOptions({syntaxHighlighter: highlighter});
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Act
-            aiChat.updateProps({syntaxHighlighter: undefined});
+            aiChat.updateProps({
+                messageOptions: {syntaxHighlighter: undefined},
+            });
             await waitForRenderCycle();
 
             await userEvent.type(textArea, 'Write some JS code{enter}');

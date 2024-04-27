@@ -17,15 +17,15 @@ export const reactPropsToCoreProps = <AiMsg>(
         personaOptions: {
             bot: botProp ? {
                 name: botProp.name,
-                picture: typeof botProp.picture === 'string' ? botProp.picture : '<REACT ELEMENT>',
+                picture: typeof botProp.picture === 'string' ? botProp.picture : '<REACT ELEMENT />',
                 tagline: botProp.tagline,
             } : undefined,
             user: userProp ? {
                 name: userProp.name,
-                picture: typeof userProp.picture === 'string' ? userProp.picture : '<REACT ELEMENT>',
+                picture: typeof userProp.picture === 'string' ? userProp.picture : '<REACT ELEMENT />',
             } : undefined,
         },
         layoutOptions: props.layoutOptions,
-        syntaxHighlighter: props.syntaxHighlighter,
+        syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
     };
 };

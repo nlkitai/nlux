@@ -1,4 +1,4 @@
-import {MarkdownStreamParserConfigOption} from '@nlux-dev/markdown/src';
+import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {debug} from '../../../../../../shared/src/utils/debug';
@@ -57,7 +57,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withProps({
                 uid: segmentId,
                 status: 'active',
-                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
                 skipAnimation: this.props.skipAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
@@ -146,8 +146,8 @@ export class CompConversation<AiMsg> extends BaseComp<
     }
 
     public updateMarkdownStreamRenderer(
-        newProp: MarkdownStreamParserConfigOption,
-        newValue: CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption],
+        newProp: keyof CompConversationProps<AiMsg>,
+        newValue: CompConversationProps<AiMsg>[typeof newProp],
     ) {
         this.setProp(newProp, newValue);
     }
@@ -156,13 +156,13 @@ export class CompConversation<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
             key === 'skipAnimation' || key === 'streamingAnimationSpeed'
         ) {
-            const updateKey = key as MarkdownStreamParserConfigOption;
-            const updateValue = value as CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption];
+            const updateKey = (key === 'openMdLinksInNewWindow' ?
+                'openLinksInNewWindow' : key) satisfies MarkdownStreamParserConfigOption;
             this.chatSegmentsById.forEach((comp) => {
-                comp.updateMarkdownStreamRenderer(updateKey, updateValue);
+                comp.updateMarkdownStreamRenderer(updateKey, value);
             });
         }
     }

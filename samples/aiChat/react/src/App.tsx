@@ -17,6 +17,7 @@ function App() {
         <AiChat
             // adapter={nlBridge}
             adapter={openAiAdapter}
+            syntaxHighlighter={highlighter}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
                 autoFocus: true,

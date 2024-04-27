@@ -8,7 +8,7 @@ export type CompConversationProps<AiMsg> = Readonly<{
     messages?: readonly ChatItem<AiMsg>[];
     botPersona?: BotPersona;
     userPersona?: UserPersona;
-    openLinksInNewWindow?: boolean;
+    openMdLinksInNewWindow?: boolean;
     skipAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;

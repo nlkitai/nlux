@@ -27,7 +27,7 @@ describe('<AiChat /> + syntaxHighlighter', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    syntaxHighlighter={highlighter}
+                    messageOptions={{syntaxHighlighter: highlighter}}
                 />
             );
             const {container} = render(aiChat);
@@ -78,7 +78,7 @@ describe('<AiChat /> + syntaxHighlighter', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    syntaxHighlighter={highlighter}
+                    messageOptions={{syntaxHighlighter: highlighter}}
                 />
             );
             const {container, rerender} = render(aiChat);
@@ -88,7 +88,7 @@ describe('<AiChat /> + syntaxHighlighter', () => {
             rerender(
                 <AiChat
                     adapter={adapterController!.adapter}
-                    syntaxHighlighter={undefined}
+                    messageOptions={{syntaxHighlighter: undefined}}
                 />,
             );
             await waitForRenderCycle();

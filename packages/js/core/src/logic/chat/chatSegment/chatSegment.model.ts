@@ -1,4 +1,3 @@
-import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
@@ -51,7 +50,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             .withProps({
                 uid: item.uid,
                 domProps: compChatItemProps,
-                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
                 skipAnimation: this.props.skipAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
@@ -104,8 +103,8 @@ export class CompChatSegment<AiMsg> extends BaseComp<
     }
 
     public updateMarkdownStreamRenderer(
-        newProp: MarkdownStreamParserConfigOption,
-        newValue: CompChatSegmentProps[MarkdownStreamParserConfigOption],
+        newProp: keyof CompChatSegmentProps,
+        newValue: CompChatSegmentProps[keyof CompChatSegmentProps],
     ) {
         this.setProp(newProp, newValue);
     }
@@ -114,7 +113,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
             key === 'skipAnimation' || key === 'streamingAnimationSpeed'
         ) {
             this.chatItems.forEach((comp) => {

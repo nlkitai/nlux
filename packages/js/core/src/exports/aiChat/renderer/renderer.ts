@@ -12,6 +12,7 @@ import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {ConversationOptions} from '../options/conversationOptions';
 import {LayoutOptions} from '../options/layoutOptions';
+import {MessageOptions} from '../options/messageOptions';
 import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
@@ -29,11 +30,12 @@ export class NluxRenderer<AiMsg> {
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
     private theClassName: string | null = null;
-    private theConversationOptions: Readonly<ConversationOptions> = {};
-    private theInitialConversationContent: Readonly<ChatItem<AiMsg>[]> | null = null;
-    private theLayoutOptions: Readonly<LayoutOptions> = {};
-    private thePersonasOptions: Readonly<PersonaOptions> = {};
-    private thePromptBoxOptions: Readonly<PromptBoxOptions> = {};
+    private theConversationOptions: ConversationOptions = {};
+    private theInitialConversationContent: ChatItem<AiMsg>[] | null = null;
+    private theLayoutOptions: LayoutOptions = {};
+    private theMessageOptions: MessageOptions<AiMsg> = {};
+    private thePersonasOptions: PersonaOptions = {};
+    private thePromptBoxOptions: PromptBoxOptions = {};
     private theThemeId: string;
 
     constructor(
@@ -61,6 +63,7 @@ export class NluxRenderer<AiMsg> {
 
         this.theLayoutOptions = props?.layoutOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
+        this.theMessageOptions = props?.messageOptions ?? {};
         this.theInitialConversationContent = props?.initialConversation ?? null;
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
         this.thePersonasOptions = props?.personaOptions ?? {};
@@ -149,9 +152,9 @@ export class NluxRenderer<AiMsg> {
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
-                    streamingAnimationSpeed: this.theConversationOptions?.streamingAnimationSpeed ?? undefined,
+                    streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed ?? undefined,
                     syntaxHighlighter: this.context.syntaxHighlighter,
-                    openLinksInNewWindow: this.theConversationOptions?.openLinksInNewWindow ?? undefined,
+                    openMdLinksInNewWindow: this.theMessageOptions?.openMdLinksInNewWindow ?? undefined,
                     skipAnimation: false,
                     promptBox: {
                         placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
@@ -326,20 +329,21 @@ export class NluxRenderer<AiMsg> {
             this.theConversationOptions = props.conversationOptions ?? {};
             this.chatRoom?.setProps({
                 autoScroll: props.conversationOptions?.autoScroll ?? undefined,
-                streamingAnimationSpeed: props.conversationOptions?.streamingAnimationSpeed ?? undefined,
                 syntaxHighlighter: this.context.syntaxHighlighter ?? undefined,
-                openLinksInNewWindow: props.conversationOptions?.openLinksInNewWindow ?? undefined,
                 skipAnimation: false,
             });
         }
 
-        if (props.hasOwnProperty('syntaxHighlighter')) {
-            this.context.update({
-                syntaxHighlighter: props.syntaxHighlighter,
+        if (props.hasOwnProperty('messageOptions')) {
+            this.theMessageOptions = props.messageOptions ?? {};
+            this.chatRoom?.setProps({
+                streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed ?? undefined,
+                openMdLinksInNewWindow: props.messageOptions?.openMdLinksInNewWindow ?? undefined,
+                syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
             });
 
-            this.chatRoom?.setProps({
-                syntaxHighlighter: props.syntaxHighlighter,
+            this.context.update({
+                syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
             });
         }
 
@@ -384,20 +388,6 @@ export class NluxRenderer<AiMsg> {
                     promptBox: this.thePromptBoxOptions,
                 });
             }
-        }
-
-        if (props.hasOwnProperty('syntaxHighlighter')) {
-            this.context.update({
-                syntaxHighlighter: props.syntaxHighlighter,
-            });
-
-            this.chatRoom?.setProps({
-                syntaxHighlighter: props.syntaxHighlighter,
-            });
-        }
-
-        if (props.hasOwnProperty('')) {
-
         }
 
         if (props.hasOwnProperty('personaOptions')) {

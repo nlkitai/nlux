@@ -6,7 +6,7 @@ export type CompChatItemEvents = 'markdown-stream-complete';
 export type CompChatItemProps = {
     uid: string;
     domProps: ChatItemProps;
-    openLinksInNewWindow?: boolean;
+    openMdLinksInNewWindow?: boolean;
     skipAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     streamingAnimationSpeed?: number;

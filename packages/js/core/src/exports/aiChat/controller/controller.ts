@@ -62,7 +62,7 @@ export class NluxController<AiMsg> {
                 instanceId: this.nluxInstanceId,
                 exception: this.renderException,
                 adapter: this.props.adapter,
-                syntaxHighlighter: this.props.syntaxHighlighter,
+                syntaxHighlighter: this.props.messageOptions.syntaxHighlighter,
             },
             () => {
                 // TODO - Cache and only update when needed, as it's a heavy operation that's called frequently
@@ -71,6 +71,10 @@ export class NluxController<AiMsg> {
                     conversationOptions: this.props.conversationOptions && Object.keys(
                         this.props.conversationOptions).length > 0
                         ? this.props.conversationOptions
+                        : undefined,
+                    messageOptions: this.props.messageOptions && Object.keys(
+                        this.props.messageOptions).length > 0
+                        ? this.props.messageOptions
                         : undefined,
                     promptBoxOptions: this.props.promptBoxOptions && Object.keys(
                         this.props.promptBoxOptions).length > 0

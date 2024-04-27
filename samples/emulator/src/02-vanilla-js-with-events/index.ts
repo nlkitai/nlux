@@ -24,10 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     aiChat = createAiChat()
         .withAdapter(streamAdapter)
-        .withSyntaxHighlighter(highlighter)
+        .withMessageOptions({
+            syntaxHighlighter: highlighter,
+        })
         .withLayoutOptions({
-            maxWidth: 500,
-            maxHeight: 500,
+            width: 500,
+            height: 500,
         })
         .withPromptBoxOptions({
             placeholder: 'How can I help you today?',

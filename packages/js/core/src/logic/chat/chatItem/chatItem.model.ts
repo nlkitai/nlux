@@ -1,4 +1,3 @@
-import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
@@ -29,8 +28,8 @@ export class CompChatItem<AiMsg> extends BaseComp<
     }
 
     public updateMarkdownStreamRenderer(
-        newProp: MarkdownStreamParserConfigOption,
-        newValue: CompChatItemProps[keyof CompChatItemProps],
+        newProp: keyof CompChatItemProps,
+        newValue: CompChatItemProps[typeof newProp],
     ) {
         this.setProp(newProp, newValue);
 

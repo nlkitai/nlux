@@ -13,7 +13,7 @@ export type CompChatRoomProps<AiMsg> = {
     initialConversationContent?: readonly ChatItem<AiMsg>[];
     autoScroll?: boolean;
     promptBox: Partial<PromptBoxProps>;
-    openLinksInNewWindow?: boolean;
+    openMdLinksInNewWindow?: boolean;
     skipAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;

@@ -9,9 +9,9 @@ import {IAiChat} from '../../types/aiChat/aiChat';
 import {AiChatProps} from '../../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {NluxController} from './controller/controller';
-import {HighlighterExtension} from './highlighter/highlighter';
 import {ConversationOptions} from './options/conversationOptions';
 import {LayoutOptions} from './options/layoutOptions';
+import {MessageOptions} from './options/messageOptions';
 import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
@@ -23,9 +23,9 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theConversationOptions: ConversationOptions | null = null;
     protected theInitialConversation: ChatItem<AiMsg>[] | null = null;
     protected theLayoutOptions: LayoutOptions | null = null;
+    protected theMessageOptions: MessageOptions<AiMsg> | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
-    protected theSyntaxHighlighter: HighlighterExtension | null = null;
     protected theThemeId: string | null = null;
     private controller: NluxController<AiMsg> | null = null;
     private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
@@ -80,7 +80,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
                 adapter: adapterToUser,
                 className: this.theClassName ?? undefined,
                 initialConversation: this.theInitialConversation ?? undefined,
-                syntaxHighlighter: this.theSyntaxHighlighter ?? undefined,
+                messageOptions: this.theMessageOptions ?? {},
                 layoutOptions: this.theLayoutOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
                 promptBoxOptions: this.thePromptBoxOptions ?? {},
@@ -185,12 +185,40 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             this.theAdapter = props.adapter ?? null;
         }
 
-        if (props.hasOwnProperty('syntaxHighlighter')) {
-            this.theSyntaxHighlighter = props.syntaxHighlighter ?? null;
+        if (props.hasOwnProperty('events')) {
+            // Re-register all event listeners
+            this.removeAllEventListeners();
+            for (const [eventName, eventCallback] of Object.entries(props.events ?? {})) {
+                this.on(eventName as EventName, eventCallback as EventCallback<AiMsg>);
+            }
+        }
+
+        if (props.hasOwnProperty('themeId')) {
+            this.theThemeId = props.themeId ?? null;
+        }
+
+        if (props.hasOwnProperty('className')) {
+            this.theClassName = props.className ?? null;
+        }
+
+        if (props.hasOwnProperty('layoutOptions')) {
+            this.theLayoutOptions = props.layoutOptions ?? null;
+        }
+
+        if (props.hasOwnProperty('promptBoxOptions')) {
+            this.thePromptBoxOptions = props.promptBoxOptions ?? null;
+        }
+
+        if (props.hasOwnProperty('personaOptions')) {
+            this.thePersonasOptions = props.personaOptions ?? null;
         }
 
         if (props.hasOwnProperty('conversationOptions')) {
             this.theConversationOptions = props.conversationOptions ?? null;
+        }
+
+        if (props.hasOwnProperty('messageOptions')) {
+            this.theMessageOptions = props.messageOptions ?? null;
         }
 
         this.controller.updateProps(props);
@@ -319,6 +347,25 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
+    public withMessageOptions(messageOptions: MessageOptions<AiMsg>) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set message options. nlux is already mounted.',
+            });
+        }
+
+        if (this.theMessageOptions) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Message options were already set.',
+            });
+        }
+
+        this.theMessageOptions = {...messageOptions};
+        return this;
+    }
+
     public withPersonaOptions(personaOptions: PersonaOptions) {
         if (this.mounted) {
             throw new NluxUsageError({
@@ -354,25 +401,6 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         }
 
         this.thePromptBoxOptions = {...promptBoxOptions};
-        return this;
-    }
-
-    public withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension) {
-        if (this.mounted) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set code highlighter. nlux is already mounted.',
-            });
-        }
-
-        if (this.theSyntaxHighlighter) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to change config. Code highlighter was already set.',
-            });
-        }
-
-        this.theSyntaxHighlighter = syntaxHighlighter;
         return this;
     }
 

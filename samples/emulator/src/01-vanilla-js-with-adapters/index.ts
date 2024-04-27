@@ -61,13 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
         // .withAdapter(myCustomStreamingAdapter)
         // .withAdapter(myCustomPromiseAdapter)
         // .withAdapter(nlBridgeCustomPromiseAdapter)
-        .withSyntaxHighlighter(highlighter)
+        .withMessageOptions({
+            syntaxHighlighter: highlighter,
+        })
         .withConversationOptions({
             historyPayloadSize: 3,
         })
         .withLayoutOptions({
-            maxWidth: 500,
-            maxHeight: 500,
+            width: 500,
+            height: 500,
         })
         .withPromptBoxOptions({
             placeholder: 'How can I help you today?',

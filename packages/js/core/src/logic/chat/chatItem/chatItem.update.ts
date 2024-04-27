@@ -9,7 +9,7 @@ export const updateChatItem: CompUpdater<
     dom,
 }) => {
     switch (propName) {
-        case 'openLinksInNewWindow':
+        case 'openMdLinksInNewWindow':
         case 'skipAnimation':
         case 'syntaxHighlighter':
         case 'streamingAnimationSpeed':

@@ -4,11 +4,10 @@ import {
     ChatItem,
     ConversationOptions,
     EventsMap,
-    HighlighterExtension,
     LayoutOptions,
+    MessageOptions,
     PromptBoxOptions,
 } from '@nlux/core';
-import {FunctionComponent} from 'react';
 import {PersonaOptions} from './personaOptions';
 
 /**
@@ -43,24 +42,19 @@ export type AiChatComponentProps<AiMsg> = {
     initialConversation?: ChatItem<AiMsg>[];
 
     /**
-     * The syntax highlighter to use.
-     */
-    syntaxHighlighter?: HighlighterExtension;
-
-    /**
      * Options for the conversation.
      */
     conversationOptions?: ConversationOptions;
 
     /**
-     * Custom AI message renderer.
-     */
-    aiMessageComponent?: FunctionComponent<{message: AiMsg}>;
-
-    /**
      * Layout options.
      */
     layoutOptions?: LayoutOptions;
+
+    /**
+     * Options related to a single message in the conversation.
+     */
+    messageOptions?: MessageOptions<AiMsg>;
 
     /**
      * Options for the prompt box.

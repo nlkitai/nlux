@@ -29,5 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     aiChat.mount(parent);
-});
 
+    aiChat.updateProps({
+        syntaxHighlighter: highlighter,
+    });
+});

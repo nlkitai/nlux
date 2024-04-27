@@ -1,4 +1,3 @@
-import {MarkdownStreamParserConfigOption} from '@nlux-dev/markdown/src';
 import {createAutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/autoScrollController';
 import {AutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/type';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
@@ -38,7 +37,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             initialConversationContent,
             syntaxHighlighter,
             skipAnimation,
-            openLinksInNewWindow,
+            openMdLinksInNewWindow,
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
@@ -49,7 +48,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             userPersona,
             promptBox,
             syntaxHighlighter,
-            openLinksInNewWindow,
+            openMdLinksInNewWindow,
             skipAnimation,
         });
 
@@ -113,7 +112,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }
 
         if (props.hasOwnProperty('openLinksInNewWindow')) {
-            this.setProp('openLinksInNewWindow', props.openLinksInNewWindow!);
+            this.setProp('openMdLinksInNewWindow', props.openMdLinksInNewWindow!);
         }
 
         if (props.hasOwnProperty('skipAnimation')) {
@@ -153,11 +152,11 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'openLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
             key === 'skipAnimation' || key === 'streamingAnimationSpeed'
         ) {
-            const updateKey = key as MarkdownStreamParserConfigOption;
-            const updateValue = value as CompConversationProps<AiMsg>[MarkdownStreamParserConfigOption];
+            const updateKey = key satisfies keyof CompConversationProps<AiMsg>;
+            const updateValue = value as CompConversationProps<AiMsg>[typeof updateKey];
             this.conversation.updateMarkdownStreamRenderer(updateKey, updateValue);
         }
     }
@@ -173,7 +172,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 botPersona,
                 userPersona,
                 messages: initialConversationContent,
-                openLinksInNewWindow: this.props.openLinksInNewWindow,
+                openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
                 skipAnimation: this.props.skipAnimation,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
                 syntaxHighlighter: this.props.syntaxHighlighter,

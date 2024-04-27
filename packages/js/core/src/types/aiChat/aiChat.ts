@@ -1,8 +1,8 @@
 import {ChatAdapterBuilder} from '../../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../../shared/src/types/conversation';
-import {HighlighterExtension} from '../../exports/aiChat/highlighter/highlighter';
 import {ConversationOptions} from '../../exports/aiChat/options/conversationOptions';
 import {LayoutOptions} from '../../exports/aiChat/options/layoutOptions';
+import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
 import {EventCallback, EventName, EventsMap} from '../event';
@@ -126,6 +126,16 @@ export interface IAiChat<AiMsg> {
     withLayoutOptions(layoutOptions: LayoutOptions): IAiChat<AiMsg>;
 
     /**
+     * Enables providing message options to the chat component.
+     * The message options will be used to configure the behavior and the
+     * display of the messages inside the chat component.
+     *
+     * @param {MessageOptions<AiMsg>} messageOptions
+     * @returns {IAiChat<AiMsg>}
+     */
+    withMessageOptions(messageOptions: MessageOptions<AiMsg>): IAiChat<AiMsg>;
+
+    /**
      * Enables providing persona options to the chat component. The persona options will be used to configure
      * the bot and user personas in the chat component.
      * This method can be called before mounting the chat component, and it can be called only once.
@@ -141,14 +151,6 @@ export interface IAiChat<AiMsg> {
      * @param {PromptBoxOptions} promptBoxOptions The prompt box options to be used.
      */
     withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat<AiMsg>;
-
-    /**
-     * Enables providing a syntax highlighter to the chat component.
-     * This method can be called before mounting the chat component, and it can be called only once.
-     *
-     * @param {HighlighterExtension} syntaxHighlighter The syntax highlighter to be used.
-     */
-    withSyntaxHighlighter(syntaxHighlighter: HighlighterExtension): IAiChat<AiMsg>;
 
     /**
      * Enables providing a theme to the chat component.
