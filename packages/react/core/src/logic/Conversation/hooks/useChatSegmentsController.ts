@@ -6,7 +6,7 @@ export const useChatSegmentsController = function <AiMsg>(
     segments: ChatSegment<AiMsg>[],
 ) {
     const chatSegmentsRef = useMemo(
-        () => new Map<string, RefObject<ChatSegmentImperativeProps<any>>>(), [],
+        () => new Map<string, RefObject<ChatSegmentImperativeProps>>(), [],
     );
 
     useEffect(() => {
@@ -17,17 +17,17 @@ export const useChatSegmentsController = function <AiMsg>(
 
         const itemsInRefsMap = new Set<string>(chatSegmentsRef.keys());
         const itemsInSegments = new Set<string>(segments.map((segment) => segment.uid));
-        for (const itemInRefsMap of itemsInRefsMap) {
+        itemsInRefsMap.forEach((itemInRefsMap) => {
             if (!itemsInSegments.has(itemInRefsMap)) {
                 chatSegmentsRef.delete(itemInRefsMap);
             }
-        }
+        });
     }, [segments]);
 
     return {
         get: (uid: string) => chatSegmentsRef.get(uid)?.current,
         getRef: (uid: string) => chatSegmentsRef.get(uid),
-        set: (uid: string, ref: RefObject<ChatSegmentImperativeProps<any>>) => {
+        set: (uid: string, ref: RefObject<ChatSegmentImperativeProps>) => {
             chatSegmentsRef.set(uid, ref);
         },
         remove: (uid: string) => {

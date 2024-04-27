@@ -44,7 +44,7 @@ export const ChatItemComp: <AiMsg>(
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
     const MessageRenderer = useMemo(() => createMessageRenderer(props), [
         props.message,
-        props.customRenderer,
+        props.responseRenderer,
         props.direction,
         props.syntaxHighlighter,
         props.openLinksInNewWindow,

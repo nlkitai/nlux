@@ -1,16 +1,20 @@
 import {MessageOptions as JavascriptMessageOptions} from '@nlux/core';
 import {FunctionComponent} from 'react';
 
+export type ResponseComponent<AiMsg> = FunctionComponent<{response: AiMsg}>;
+
+export type PromptComponent = FunctionComponent<{prompt: string}>;
+
 export type ReactSpecificMessageOptions<AiMsg> = {
     /**
      * Custom React component to render the message received from the AI.
      */
-    responseComponent?: FunctionComponent<{response: AiMsg}>;
+    responseComponent?: ResponseComponent<AiMsg>;
 
     /**
      * Custom React component to render the message sent by the user.
      */
-    promptComponent?: FunctionComponent<{prompt: string}>;
+    promptComponent?: PromptComponent;
 };
 
 /**
@@ -19,5 +23,5 @@ export type ReactSpecificMessageOptions<AiMsg> = {
  * defined in ReactSpecificMessageOptions.
  */
 export type MessageOptions<AiMsg> =
-    Omit<JavascriptMessageOptions<AiMsg>, keyof ReactSpecificMessageOptions<AiMsg>>
+    Omit<JavascriptMessageOptions<AiMsg>, 'responseRenderer' | 'promptRenderer'>
     & ReactSpecificMessageOptions<AiMsg>;

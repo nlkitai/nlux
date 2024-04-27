@@ -37,6 +37,13 @@ export type {
     AiChatProps,
 } from './exports/props';
 
+
+export type {
+    ResponseComponent,
+    PromptComponent,
+    MessageOptions,
+} from './exports/messageOptions';
+
 export {
     AiChat,
 } from './exports/AiChat';

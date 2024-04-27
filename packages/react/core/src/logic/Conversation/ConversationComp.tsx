@@ -71,7 +71,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             chatSegment={segment}
                             personaOptions={personaOptions}
                             loader={props.loader}
-                            customRenderer={props.customRenderer}
+                            responseRenderer={props.responseRenderer}
                             syntaxHighlighter={props.syntaxHighlighter}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
                         />

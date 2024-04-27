@@ -8,7 +8,7 @@ export type ChatItemProps<AiMsg> = {
     status: 'rendered' | 'streaming' | 'loading' | 'error';
     loader?: ReactElement;
     message?: AiMsg | string;
-    customRenderer?: FunctionComponent<{message: AiMsg}>;
+    responseRenderer?: FunctionComponent<{response: AiMsg}>;
     name?: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;

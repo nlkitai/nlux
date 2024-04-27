@@ -12,10 +12,10 @@ import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
-    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
+    ref: Ref<ChatSegmentImperativeProps>,
 ) => ReactNode = function <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
-    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
+    ref: Ref<ChatSegmentImperativeProps>,
 ): ReactNode {
     const {chatSegment, containerRef} = props;
     const chatItemsRef = useMemo(
@@ -30,11 +30,11 @@ export const ChatSegmentComp: <AiMsg>(
 
         const itemsInRefsMap = new Set<string>(chatItemsRef.keys());
         const itemsInSegments = new Set<string>(chatSegment.items.map((item) => item.uid));
-        for (const itemInRefsMap of itemsInRefsMap) {
+        itemsInRefsMap.forEach((itemInRefsMap) => {
             if (!itemsInSegments.has(itemInRefsMap)) {
                 chatItemsRef.delete(itemInRefsMap);
             }
-        }
+        });
     }, [chatSegment.items]);
 
     const loader = useMemo(() => {
@@ -154,7 +154,7 @@ export const ChatSegmentComp: <AiMsg>(
                             // we render the message content. We also check if the content is primitive and if a custom
                             // renderer is provided.
                             //
-                            if (!isPrimitiveReactNodeType(chatItem.content) && !props.customRenderer) {
+                            if (!isPrimitiveReactNodeType(chatItem.content) && !props.responseRenderer) {
                                 warn(
                                     `When the type of the AI chat content is not primitive (object or array), ` +
                                     `a custom renderer must be provided — ` +
@@ -173,7 +173,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     status={'rendered'}
                                     direction={'incoming'}
                                     message={chatItem.content}
-                                    customRenderer={props.customRenderer}
+                                    responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,

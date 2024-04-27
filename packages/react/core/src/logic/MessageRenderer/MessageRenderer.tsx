@@ -5,17 +5,17 @@ import {MarkdownRenderer} from './MarkdownRenderer';
 export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<void> = function <AiMsg>(props: ChatItemProps<AiMsg>) {
     const {
         message,
-        customRenderer,
+        responseRenderer,
         direction,
     } = props;
 
-    if (customRenderer !== undefined) {
+    if (responseRenderer !== undefined) {
         if (message === undefined) {
             return () => null;
         }
 
-        return () => customRenderer!({
-            message: message as AiMsg,
+        return () => responseRenderer!({
+            response: message as AiMsg,
         });
     }
 

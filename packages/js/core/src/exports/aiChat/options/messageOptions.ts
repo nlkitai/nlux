@@ -23,9 +23,14 @@ export type MessageOptions<AiMsg> = {
     streamingAnimationSpeed?: number;
 
     /**
-     * Custom React component to render the message received from the AI.
+     * Custom function to render the message received from the AI.
      */
-    responseComponent?: (content: {response: AiMsg}) => HTMLElement | null;
+    responseRenderer?: (content: {response: AiMsg}) => HTMLElement | null;
+
+    /**
+     * Custom function to render the message sent by the user.
+     */
+    promptRenderer?: (content: {prompt: string}) => HTMLElement | null;
 
     /**
      * Custom React component to render the message sent by the user.

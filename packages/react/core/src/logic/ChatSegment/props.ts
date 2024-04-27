@@ -5,7 +5,7 @@ import {PersonaOptions} from '../../exports/personaOptions';
 
 export type ChatSegmentProps<AiMsg> = {
     chatSegment: ChatSegment<AiMsg>
-    customRenderer?: FunctionComponent<{message: AiMsg}>;
+    responseRenderer?: FunctionComponent<{response: AiMsg}>;
     loader?: ReactElement;
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;
@@ -13,7 +13,7 @@ export type ChatSegmentProps<AiMsg> = {
     containerRef?: RefObject<HTMLDivElement>;
 };
 
-export type ChatSegmentImperativeProps<AiMsg> = {
+export type ChatSegmentImperativeProps = {
     streamChunk: (messageId: string, chunk: string) => void;
     completeStream: (messageId: string) => void;
 };

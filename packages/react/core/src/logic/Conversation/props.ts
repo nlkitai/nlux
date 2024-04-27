@@ -7,7 +7,7 @@ export type ConversationCompProps<AiMsg> = {
     segments: ChatSegment<AiMsg>[];
     conversationOptions?: ConversationOptions;
     personaOptions?: PersonaOptions;
-    customRenderer?: FunctionComponent<{message: AiMsg}>;
+    responseRenderer?: FunctionComponent<{response: AiMsg}>;
     syntaxHighlighter?: HighlighterExtension;
     loader?: ReactElement;
     onLastActiveSegmentChange?: (data: {

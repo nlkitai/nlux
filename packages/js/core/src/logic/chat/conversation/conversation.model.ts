@@ -1,4 +1,3 @@
-import {MarkdownStreamParserConfigOption} from '../../../../../../extra/markdown/src';
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {debug} from '../../../../../../shared/src/utils/debug';
@@ -159,10 +158,10 @@ export class CompConversation<AiMsg> extends BaseComp<
             key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
             key === 'skipAnimation' || key === 'streamingAnimationSpeed'
         ) {
-            const updateKey = (key === 'openMdLinksInNewWindow' ?
-                'openLinksInNewWindow' : key) satisfies MarkdownStreamParserConfigOption;
+            const typedKey = key satisfies keyof CompChatSegmentProps;
+            const typedValue = value as CompChatSegmentProps[typeof typedKey];
             this.chatSegmentsById.forEach((comp) => {
-                comp.updateMarkdownStreamRenderer(updateKey, value);
+                comp.updateMarkdownStreamRenderer(typedKey, typedValue);
             });
         }
     }

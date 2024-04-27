@@ -12,7 +12,7 @@ describe('When a custom chat item is rendered', () => {
             direction={'incoming'}
             status={'rendered'}
             message={'Hello'}
-            customRenderer={({message}: any) => <>{`THE AI SAID [${message}]`}</>}
+            responseRenderer={({response}: any) => <>{`THE AI SAID [${response}]`}</>}
         />;
 
         // Act
@@ -30,7 +30,7 @@ describe('When a custom chat item is rendered', () => {
             direction={'incoming'}
             status={'rendered'}
             message={{text: 'Hello Jason!'}}
-            customRenderer={({message}: any) => <>{`THE AI SAID [${message.text}]`}</>}
+            responseRenderer={({response}: any) => <>{`THE AI SAID [${response.text}]`}</>}
         />;
 
         // Act
