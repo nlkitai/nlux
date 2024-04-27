@@ -109,7 +109,7 @@ export const AiChat: <AiMsg>(
                         segments={segments}
                         conversationOptions={props.conversationOptions}
                         personaOptions={props.personaOptions}
-                        customRenderer={props.messageOptions?.aiMessageComponent}
+                        customRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
                     />

@@ -1,4 +1,3 @@
-import {FunctionComponent} from 'react';
 import {HighlighterExtension} from '../highlighter/highlighter';
 
 export type MessageOptions<AiMsg> = {
@@ -24,9 +23,14 @@ export type MessageOptions<AiMsg> = {
     streamingAnimationSpeed?: number;
 
     /**
-     * Custom AI message renderer.
+     * Custom React component to render the message received from the AI.
      */
-    aiMessageComponent?: FunctionComponent<{message: AiMsg}>;
+    responseComponent?: (content: {response: AiMsg}) => HTMLElement | null;
+
+    /**
+     * Custom React component to render the message sent by the user.
+     */
+    promptComponent?: (content: {prompt: string}) => HTMLElement | null;
 
     /**
      * Highlighter extension for code blocks inside messages.

@@ -5,9 +5,9 @@ import {
     ConversationOptions,
     EventsMap,
     LayoutOptions,
-    MessageOptions,
     PromptBoxOptions,
 } from '@nlux/core';
+import {MessageOptions} from './messageOptions';
 import {PersonaOptions} from './personaOptions';
 
 /**
