@@ -1,11 +1,12 @@
 import {HighlighterExtension} from '@nlux/core';
-import {FunctionComponent, ReactElement, RefObject} from 'react';
+import {ReactElement, RefObject} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
+import {ResponseComponent} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
 
 export type ChatSegmentProps<AiMsg> = {
     chatSegment: ChatSegment<AiMsg>
-    responseRenderer?: FunctionComponent<{response: AiMsg}>;
+    responseRenderer?: ResponseComponent<AiMsg>;
     loader?: ReactElement;
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;

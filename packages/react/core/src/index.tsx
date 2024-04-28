@@ -39,7 +39,9 @@ export type {
 
 
 export type {
+    ResponseComponentProps,
     ResponseComponent,
+    PromptComponentProps,
     PromptComponent,
     MessageOptions,
 } from './exports/messageOptions';

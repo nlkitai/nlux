@@ -1,9 +1,19 @@
 import {MessageOptions as JavascriptMessageOptions} from '@nlux/core';
 import {FunctionComponent} from 'react';
 
-export type ResponseComponent<AiMsg> = FunctionComponent<{response: AiMsg}>;
+export type ResponseComponentProps<AiMsg> = {
+    uid: string;
+    response: AiMsg;
+};
 
-export type PromptComponent = FunctionComponent<{prompt: string}>;
+export type ResponseComponent<AiMsg> = FunctionComponent<ResponseComponentProps<AiMsg>>;
+
+export type PromptComponentProps = {
+    uid: string;
+    prompt: string;
+};
+
+export type PromptComponent = FunctionComponent<PromptComponentProps>;
 
 export type ReactSpecificMessageOptions<AiMsg> = {
     /**

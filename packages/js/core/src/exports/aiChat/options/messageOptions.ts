@@ -1,5 +1,19 @@
 import {HighlighterExtension} from '../highlighter/highlighter';
 
+export type ResponseRendererProps<AiMsg> = {
+    uid: string;
+    response: AiMsg;
+};
+
+export type ResponseRenderer<AiMsg> = (content: ResponseRendererProps<AiMsg>) => HTMLElement | null;
+
+export type PromptRendererProps = {
+    uid: string;
+    prompt: string;
+};
+
+export type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
+
 export type MessageOptions<AiMsg> = {
     /**
      * Indicates whether the message should be rendered as markdown.
@@ -25,17 +39,12 @@ export type MessageOptions<AiMsg> = {
     /**
      * Custom function to render the message received from the AI.
      */
-    responseRenderer?: (content: {response: AiMsg}) => HTMLElement | null;
+    responseRenderer?: ResponseRenderer<AiMsg>;
 
     /**
      * Custom function to render the message sent by the user.
      */
-    promptRenderer?: (content: {prompt: string}) => HTMLElement | null;
-
-    /**
-     * Custom React component to render the message sent by the user.
-     */
-    promptComponent?: (content: {prompt: string}) => HTMLElement | null;
+    promptRenderer?: PromptRenderer;
 
     /**
      * Highlighter extension for code blocks inside messages.

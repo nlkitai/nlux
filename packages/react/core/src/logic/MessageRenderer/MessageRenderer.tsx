@@ -15,6 +15,7 @@ export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<v
         }
 
         return () => responseRenderer!({
+            uid: props.uid,
             response: message as AiMsg,
         });
     }

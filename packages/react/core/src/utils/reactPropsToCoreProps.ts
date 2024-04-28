@@ -17,8 +17,8 @@ export const reactPropsToCoreProps = <AiMsg>(
         conversationOptions: props.conversationOptions,
         messageOptions: {
             ...props.messageOptions,
-            responseComponent: props.messageOptions?.responseComponent ? () => null : undefined,
-            promptComponent: props.messageOptions?.promptComponent ? () => null : undefined,
+            responseRenderer: props.messageOptions?.responseComponent ? () => null : undefined,
+            promptRenderer: props.messageOptions?.promptComponent ? () => null : undefined,
         },
         promptBoxOptions: props.promptBoxOptions,
         personaOptions: {

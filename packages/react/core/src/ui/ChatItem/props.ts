@@ -1,6 +1,7 @@
 import {HighlighterExtension} from '@nlux/core';
-import {FunctionComponent, ReactElement} from 'react';
+import {ReactElement} from 'react';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
+import {ResponseComponent} from '../../exports/messageOptions';
 
 export type ChatItemProps<AiMsg> = {
     uid: string;
@@ -8,7 +9,7 @@ export type ChatItemProps<AiMsg> = {
     status: 'rendered' | 'streaming' | 'loading' | 'error';
     loader?: ReactElement;
     message?: AiMsg | string;
-    responseRenderer?: FunctionComponent<{response: AiMsg}>;
+    responseRenderer?: ResponseComponent<AiMsg>;
     name?: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
