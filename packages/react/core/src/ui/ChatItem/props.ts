@@ -6,7 +6,7 @@ import {ResponseComponent} from '../../exports/messageOptions';
 export type ChatItemProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
-    status: 'rendered' | 'streaming' | 'loading' | 'error';
+    status: 'streaming' | 'complete';
     loader?: ReactElement;
     message?: AiMsg | string;
     responseRenderer?: ResponseComponent<AiMsg>;

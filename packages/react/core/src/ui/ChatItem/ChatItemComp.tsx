@@ -25,6 +25,7 @@ export const ChatItemComp: <AiMsg>(
         return <AvatarComp name={props.name} picture={props.picture}/>;
     }, [props?.picture, props?.name]);
 
+    const isStreaming = useMemo(() => props.status === 'streaming', [props.status]);
     const streamContainer = useRef<StreamContainerImperativeProps | null>(null);
 
     useImperativeHandle(ref, () => ({
@@ -32,26 +33,21 @@ export const ChatItemComp: <AiMsg>(
         completeStream: () => streamContainer?.current?.completeStream(),
     }), []);
 
-    const isStreaming = useMemo(
-        () => props.status === 'streaming',
-        [props.status],
-    );
-
     const compDirectionClassName = props.direction
         ? compChatItemDirectionClassName[props.direction]
         : compChatItemDirectionClassName['incoming'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
-    const MessageRenderer = useMemo(() => createMessageRenderer<AiMsg>(props), [
-        props.message,
-        props.responseRenderer,
-        props.direction,
-        props.syntaxHighlighter,
-        props.openLinksInNewWindow,
+    const MessageRenderer = useMemo(() => {
+        return isStreaming ? undefined : createMessageRenderer<AiMsg>(props);
+    }, [
+        isStreaming,
+        props.uid, props.status, props.message, props.direction,
+        props.responseRenderer, props.syntaxHighlighter, props.openLinksInNewWindow,
     ]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
-        StreamContainerComp,
+        StreamContainerComp<AiMsg>,
     ), []);
 
     return (
@@ -62,8 +58,9 @@ export const ChatItemComp: <AiMsg>(
                     key={'do-not-change'}
                     uid={props.uid}
                     status={'streaming'}
-                    direction={props.direction}
                     ref={streamContainer}
+                    direction={props.direction}
+                    responseRenderer={props.responseRenderer}
                     markdownOptions={{
                         syntaxHighlighter: props.syntaxHighlighter,
                         openLinksInNewWindow: props.openLinksInNewWindow,

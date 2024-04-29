@@ -125,4 +125,71 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
             });
         });
     });
+
+    describe('When a response component is used in stream mode', () => {
+        beforeEach(() => {
+            adapterController = adapterBuilder()
+                .withFetchText(false)
+                .withStreamText(true)
+                .create();
+        });
+
+        afterEach(() => {
+            adapterController = undefined;
+        });
+
+        it('Should render the markdown in the custom component as it\'s being generated', async () => {
+            // Arrange
+            const CustomResponseComponent: ResponseComponent<string> = ({containerRef, response, uid}) => (
+                <div className="some-streamed-response">
+                    <div className="content" ref={containerRef}/>
+                    <div className="footer">Some footer content</div>
+                </div>
+            );
+
+            const customResponseComponentSpy = vi.fn(CustomResponseComponent);
+            const {container} = render(
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    messageOptions={{responseComponent: customResponseComponentSpy}}
+                />,
+            );
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            await waitForRenderCycle();
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            adapterController!.next('Yo!');
+            await waitForMdStreamToComplete();
+
+            // Assert
+            const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux_cht_itm_in');
+            const mdContainer = chatItemReceived!.querySelector('.nlux-md-cntr');
+            expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');
+
+            // Act
+            adapterController!.next(' What\'s up?');
+            await waitForMdStreamToComplete();
+
+            // Assert - Streamed content should have been appended to the existing content
+            expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>');
+
+            // Asset - Custom component should have been called with the correct props
+            expect(customResponseComponentSpy).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    uid: expect.any(String),
+                    containerRef: expect.objectContaining({current: expect.any(HTMLElement)}),
+                }),
+                expect.anything(),
+            );
+
+            // Assert - Custom component should have rendered with the correct content
+            expect(chatItemReceived!.innerHTML).toEqual(
+                expect.stringContaining('<div class="some-streamed-response">'));
+            expect(chatItemReceived!.innerHTML).toEqual(
+                expect.stringContaining('<div class="footer">Some footer content</div>'));
+        });
+    });
 });

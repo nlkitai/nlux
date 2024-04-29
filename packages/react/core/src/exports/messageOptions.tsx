@@ -1,9 +1,11 @@
 import {MessageOptions as JavascriptMessageOptions} from '@nlux/core';
-import {FunctionComponent} from 'react';
+import {FunctionComponent, RefObject} from 'react';
 
 export type ResponseComponentProps<AiMsg> = {
     uid: string;
-    response: AiMsg;
+    status: 'streaming' | 'complete';
+    response?: AiMsg;
+    containerRef: RefObject<any>;
 };
 
 export type ResponseComponent<AiMsg> = FunctionComponent<ResponseComponentProps<AiMsg>>;

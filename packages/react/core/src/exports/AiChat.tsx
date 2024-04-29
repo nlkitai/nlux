@@ -1,5 +1,5 @@
-import {ChatAdapterExtras} from '@nlux/core';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {ChatAdapterExtras} from '../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';

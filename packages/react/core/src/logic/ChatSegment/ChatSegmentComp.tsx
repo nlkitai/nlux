@@ -1,7 +1,7 @@
 import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
 import {AiUnifiedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {warn, warnOnce} from '../../../../../shared/src/utils/warn';
 import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../../ui/ChatItem/props';
 import {LoaderComp} from '../../ui/Loader/LoaderComp';
@@ -86,16 +86,17 @@ export const ChatSegmentComp: <AiMsg>(
                     // User chat item — That should always be in complete state.
                     //
                     if (chatItem.status !== 'complete') {
-                        warn(
+                        warnOnce(
                             `User chat item should be always be in complete state — ` +
                             `Current status: ${(chatItem as AiUnifiedMessage<AiMsg>).status} — ` +
                             `Segment UID: ${chatSegment.uid}`,
                         );
+
                         return null;
                     }
 
                     if (!isPrimitiveReactNodeType(chatItem.content)) {
-                        warn(
+                        warnOnce(
                             `User chat item should have primitive content (string, number, boolean, null) — ` +
                             `Current content: ${JSON.stringify(chatItem.content)} — ` +
                             `Segment UID: ${chatSegment.uid}`,
@@ -109,7 +110,7 @@ export const ChatSegmentComp: <AiMsg>(
                             ref={ref}
                             key={chatItem.uid}
                             uid={chatItem.uid}
-                            status={'rendered'}
+                            status={'complete'}
                             direction={'outgoing'}
                             message={chatItem.content}
                             name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
@@ -120,7 +121,7 @@ export const ChatSegmentComp: <AiMsg>(
                     );
                 } else {
                     //
-                    // AI chat item — That can be in loading, streaming, or complete state.
+                    // AI chat item — That should be in streaming or complete state.
                     //
                     if (chatItem.status === 'complete') {
                         //
@@ -140,6 +141,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     status={'streaming'}
                                     direction={'incoming'}
                                     message={chatItem.content}
+                                    responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
@@ -170,7 +172,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     ref={ref}
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
-                                    status={'rendered'}
+                                    status={'complete'}
                                     direction={'incoming'}
                                     message={chatItem.content}
                                     responseRenderer={props.responseRenderer}
@@ -185,18 +187,19 @@ export const ChatSegmentComp: <AiMsg>(
                         }
                     } else {
                         //
-                        // AI chat item in loading or streaming state.
+                        // AI chat item in streaming state.
                         // No need for custom renderer here.
                         //
-                        if (chatItem.status === 'loading' || chatItem.status === 'streaming') {
+                        if (chatItem.status === 'streaming') {
                             return (
                                 <ForwardRefChatItemComp
                                     ref={ref}
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
-                                    status={chatItem.status}
+                                    status={'streaming'}
                                     direction={'incoming'}
                                     loader={props.loader}
+                                    responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
@@ -206,6 +209,10 @@ export const ChatSegmentComp: <AiMsg>(
                                 />
                             );
                         }
+
+                        // We do render a chat item on 'loading' or 'error' states:
+                        // - On 'loading' state — A loading spinner will be displayed.
+                        // - On 'error' state — An error message will be shown.
                     }
 
                     return null;

@@ -1,4 +1,4 @@
-import {Ref, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {Ref, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
@@ -10,12 +10,14 @@ import {
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomService';
 
-export const StreamContainerComp = (
-    props: StreamContainerProps,
+export const StreamContainerComp = function <AiChat>(
+    props: StreamContainerProps<AiChat>,
     ref: Ref<StreamContainerImperativeProps>,
-) => {
+) {
     const {
+        uid,
         status,
+        responseRenderer,
         markdownOptions,
         initialMarkdownMessage,
     } = props;
@@ -40,13 +42,14 @@ export const StreamContainerComp = (
 
     useEffect(() => {
         if (streamContainer) {
-            const element = streamingDomService.getStreamingDomElement(props.uid);
+            const element = streamingDomService.getStreamingDomElement(uid);
             streamContainer.append(element);
         }
     }, [streamContainer]);
 
+    // We update the stream parser when key options (openLinksInNewWindow, syntaxHighlighter) change.
     useEffect(() => {
-        const element = streamingDomService.getStreamingDomElement(props.uid);
+        const element = streamingDomService.getStreamingDomElement(uid);
         mdStreamParserRef.current = createMarkdownStreamParser(element, {
             openLinksInNewWindow: markdownOptions?.openLinksInNewWindow ?? true,
             syntaxHighlighter: markdownOptions?.syntaxHighlighter ?? undefined,
@@ -60,9 +63,25 @@ export const StreamContainerComp = (
         return () => {
             // Technical — The DOM element will be re-used if the same message (with the same UID) is re-rendered
             // in the chat segment. This is handled by the streamingDomService.
-            streamingDomService.deleteStreamingDomElement(props.uid);
+            streamingDomService.deleteStreamingDomElement(uid);
         };
     }, [markdownOptions?.openLinksInNewWindow, markdownOptions?.syntaxHighlighter]);
+
+    const rootElement = useMemo(() => {
+        if (responseRenderer) {
+            const ResponseRendererComp = responseRenderer;
+            return (
+                <ResponseRendererComp
+                    uid={uid}
+                    status={status}
+                    response={undefined}
+                    containerRef={rootElRef}
+                />
+            );
+        } else {
+            return <div className={'nlux-md-strm-root'} ref={rootElRef}/>;
+        }
+    }, [responseRenderer]);
 
     useEffect(() => {
         return () => {
@@ -82,9 +101,5 @@ export const StreamContainerComp = (
     const compStatusClassName = compMessageStatusClassName[status];
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
-    return (
-        <div className={className}>
-            <div className={'nlux-md-strm-root'} ref={rootElRef}/>
-        </div>
-    );
+    return <div className={className}>{rootElement}</div>;
 };

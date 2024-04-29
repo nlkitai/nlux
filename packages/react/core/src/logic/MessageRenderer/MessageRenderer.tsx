@@ -1,22 +1,40 @@
-import {FC} from 'react';
+import {FC, RefObject} from 'react';
 import {ChatItemProps} from '../../ui/ChatItem/props';
 import {MarkdownRenderer} from './MarkdownRenderer';
 
-export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<void> = function <AiMsg>(props: ChatItemProps<AiMsg>) {
+export const createMessageRenderer: <AiMsg>(
+    props: ChatItemProps<AiMsg>,
+    containerRef?: RefObject<HTMLElement>,
+) => FC<void> = function <AiMsg>(
+    props: ChatItemProps<AiMsg>,
+    containerRef?: RefObject<HTMLElement>,
+) {
     const {
+        uid,
+        status,
         message,
-        responseRenderer,
         direction,
+        responseRenderer,
+        syntaxHighlighter,
+        openLinksInNewWindow,
     } = props;
+
+    // For custom renderer — When the dataTransferMode is 'streaming', the message is undefined and a containerRef
+    // must be provided. The containerRef is used to append the streaming message to the container.
+    // When the dataTransferMode is 'fetch', the message is defined and the containerRef is not needed.
+    const containerRefToUse = containerRef ?? {current: null} satisfies RefObject<HTMLElement>;
 
     if (responseRenderer !== undefined) {
         if (message === undefined) {
             return () => null;
         }
 
-        return () => responseRenderer!({
-            uid: props.uid,
-            response: message as AiMsg,
+        return () => responseRenderer({
+            uid,
+            status,
+            // We only pass the response to custom renderer when the status is 'complete'.
+            response: status === 'complete' ? message as AiMsg : undefined,
+            containerRef: containerRefToUse,
         });
     }
 
@@ -33,11 +51,11 @@ export const createMessageRenderer: <AiMsg>(props: ChatItemProps<AiMsg>) => FC<v
         const messageToRender: string = message;
         return () => (
             <MarkdownRenderer
-                messageUid={props.uid}
+                messageUid={uid}
                 content={messageToRender}
                 markdownOptions={{
-                    syntaxHighlighter: props.syntaxHighlighter,
-                    openLinksInNewWindow: props.openLinksInNewWindow,
+                    syntaxHighlighter,
+                    openLinksInNewWindow,
                 }}
             />
         );

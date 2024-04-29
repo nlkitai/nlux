@@ -4,7 +4,7 @@ import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 export type MessageProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
-    status: 'rendered' | 'streaming' | 'loading' | 'error';
+    status: 'streaming' | 'complete';
     loader?: ReactElement;
     message?: ReactNode | FC<void>;
 };
