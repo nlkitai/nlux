@@ -17,7 +17,6 @@ export const createChatItemDom: DomCreator<ChatItemProps> = (
     const messageProps: MessageProps = {
         direction: props.direction,
         status: props.status,
-        loader: props.loader,
         message: props.message,
     };
 

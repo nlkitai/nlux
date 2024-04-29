@@ -5,7 +5,6 @@ import {
 import {
     statusClassName as compMessageStatusClassName,
 } from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
-import {LoaderComp} from '../Loader/LoaderComp';
 import {MessageProps} from './props';
 
 export const MessageComp = function <AiMsg>(props: MessageProps<AiMsg>) {
@@ -22,23 +21,6 @@ export const MessageComp = function <AiMsg>(props: MessageProps<AiMsg>) {
     if (props.status === 'streaming') {
         return (
             <div className={className}/>
-        );
-    }
-
-    if (props.status === 'loading') {
-        const loader = props.loader ?? <LoaderComp/>;
-        return (
-            <div className={className}>
-                {loader}
-            </div>
-        );
-    }
-
-    if (props.status === 'error') {
-        return (
-            <div className={className}>
-                Error
-            </div>
         );
     }
 

@@ -1,5 +1,4 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
-import {createLoaderDom} from '../Loader/create';
 import {MessageProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 import {applyNewStatusClassName} from './utils/applyNewStatusClassName';
@@ -14,8 +13,7 @@ export const updateMessageDom: DomUpdater<MessageProps> = (
     if (
         propsBefore.message === propsAfter.message &&
         propsBefore.status === propsAfter.status &&
-        propsBefore.direction === propsAfter.direction &&
-        propsBefore.loader === propsAfter.loader
+        propsBefore.direction === propsAfter.direction
     ) {
         return;
     }
@@ -23,8 +21,7 @@ export const updateMessageDom: DomUpdater<MessageProps> = (
     if (!propsAfter || (
         !propsAfter.hasOwnProperty('message') &&
         !propsAfter.hasOwnProperty('status') &&
-        !propsAfter.hasOwnProperty('direction') &&
-        !propsAfter.hasOwnProperty('loader')
+        !propsAfter.hasOwnProperty('direction')
     )) {
         return;
     }
@@ -46,20 +43,7 @@ export const updateMessageDom: DomUpdater<MessageProps> = (
         return;
     }
 
-    //
-    // No status change
-    //
-    if (currentStatus === 'loading') {
-        if (propsBefore.loader !== propsAfter.loader) {
-            element.replaceChildren();
-            element.append(propsAfter.loader ?? createLoaderDom());
-        }
-
-        // We do not need to update the message content in case of loading status
-        return;
-    }
-
-    if (currentStatus === 'rendered') {
+    if (currentStatus === 'complete') {
         if (propsBefore.message !== propsAfter.message) {
             updateContentOnMessageChange(element, propsBefore, propsAfter);
         }

@@ -10,7 +10,7 @@ describe('When a custom chat item is rendered', () => {
         const component = <ForwardRefChatItemComp
             uid={'1'}
             direction={'incoming'}
-            status={'rendered'}
+            status={'complete'}
             message={'Hello'}
             responseRenderer={({response}: any) => <>{`THE AI SAID [${response}]`}</>}
         />;
@@ -28,7 +28,7 @@ describe('When a custom chat item is rendered', () => {
         const component = <ForwardRefChatItemComp
             uid={'1'}
             direction={'incoming'}
-            status={'rendered'}
+            status={'complete'}
             message={{text: 'Hello Jason!'}}
             responseRenderer={({response}: any) => <>{`THE AI SAID [${response.text}]`}</>}
         />;

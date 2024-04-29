@@ -4,13 +4,13 @@ import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is rendered in outgoing direction', () => {
+describe('When a chat item component is complete in outgoing direction', () => {
     describe('When the profile picture is updated', () => {
         it('Should update the profile picture', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'outgoing',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
                 name: 'John Doe',
                 picture: 'https://example.com/john-doe.jpg',
@@ -36,7 +36,7 @@ describe('When a chat item component is rendered in outgoing direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'outgoing',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
                 name: 'John Doe',
                 picture: 'https://example.com/john-doe.jpg',

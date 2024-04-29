@@ -15,7 +15,6 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         propsBefore.direction === propsAfter.direction &&
         propsBefore.status === propsAfter.status &&
         propsBefore.message === propsAfter.message &&
-        propsBefore.loader === propsAfter.loader &&
         propsBefore.name === propsAfter.name &&
         propsBefore.picture === propsAfter.picture
     ) {
@@ -40,8 +39,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
     if (
         propsBefore.direction !== propsAfter.direction ||
         propsBefore.status !== propsAfter.status ||
-        propsBefore.message !== propsAfter.message ||
-        propsBefore.loader !== propsAfter.loader
+        propsBefore.message !== propsAfter.message
     ) {
         const messageDom = element.querySelector<HTMLElement>(`.${messageClassName}`);
         if (messageDom) {
@@ -49,12 +47,10 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
                 direction: propsBefore.direction,
                 status: propsBefore.status,
                 message: propsBefore.message,
-                loader: propsBefore.loader,
             }, {
                 direction: propsAfter.direction,
                 status: propsAfter.status,
                 message: propsAfter.message,
-                loader: propsAfter.loader,
             });
         }
     }

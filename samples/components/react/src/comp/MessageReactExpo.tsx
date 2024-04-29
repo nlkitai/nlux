@@ -1,13 +1,12 @@
 import {MessageComp} from '@nlux-dev/react/src/ui/Message/MessageComp.tsx';
 import '@nlux-dev/themes/src/luna/theme.css';
-import {ReactElement, useState} from 'react';
+import {useState} from 'react';
 import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
 
 export const MessageReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
-    const [status, setStatus] = useState<MessageStatus>('rendered');
+    const [status, setStatus] = useState<MessageStatus>('complete');
     const [message, setMessage] = useState<string>('Hello, World!');
-    const [loader, setLoader] = useState<ReactElement | undefined>();
 
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
@@ -27,10 +26,8 @@ export const MessageReactExpo = () => {
                         value={status}
                         onChange={(event) => setStatus(event.target.value as MessageStatus)}
                     >
-                        <option value="rendered">Rendered</option>
-                        <option value="loading">Loading</option>
+                        <option value="complete">Complete</option>
                         <option value="streaming">Streaming</option>
-                        <option value="error">Error</option>
                     </select>
                     <input
                         type="text"
@@ -38,19 +35,6 @@ export const MessageReactExpo = () => {
                         onChange={(event) => setMessage(event.target.value)}
                         placeholder="Message"
                     />
-                    <select
-                        value={loader ? 'custom' : 'default'}
-                        onChange={(event) => {
-                            if (event.target.value === 'custom') {
-                                setLoader(<div>Loading...</div>);
-                            } else {
-                                setLoader(undefined);
-                            }
-                        }}
-                    >
-                        <option value="default">Default Loader</option>
-                        <option value="custom">Custom Loader</option>
-                    </select>
                 </div>
                 <div className="content">
                     <MessageComp
@@ -58,7 +42,6 @@ export const MessageReactExpo = () => {
                         direction={direction}
                         status={status}
                         message={message}
-                        loader={loader}
                     />
                 </div>
             </div>

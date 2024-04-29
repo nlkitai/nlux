@@ -16,10 +16,8 @@ newExpo.innerHTML = `
                     <option value="outgoing">Outgoing</option>
                 </select>
                 <select class="status">
-                    <option value="rendered">Rendered</option>
-                    <option value="loading">Loading</option>
+                    <option value="complete">Complete</option>
                     <option value="streaming">Streaming</option>
-                    <option value="error">Error</option>
                 </select>
                 <input type="text" placeholder="ChatItem" />
             </div>

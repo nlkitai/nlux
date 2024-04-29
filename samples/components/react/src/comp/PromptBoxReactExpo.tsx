@@ -5,7 +5,7 @@ import {PromptBoxStatus} from '../../../../../packages/shared/src/ui/PromptBox/p
 
 export const PromptBoxReactExpo = () => {
     const [status, setStatus] = useState<PromptBoxStatus>('typing');
-    const [initialMessage] = useState<string>('Hello, World!');
+    const [prompt] = useState<string>('Hello, World!');
     const [placeholder, setPlaceholder] = useState<string>('Type your prompt!');
 
     return (
@@ -32,7 +32,7 @@ export const PromptBoxReactExpo = () => {
                 </div>
                 <div className="content">
                     <PromptBoxComp
-                        prompt={initialMessage}
+                        prompt={prompt}
                         status={status}
                         placeholder={placeholder}
                     />

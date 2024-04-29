@@ -38,8 +38,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         }
 
         let compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(item);
-        // TODO - Add additional props
-        // loader / name / picture
+        // TODO - Add additional props: Name / Picture.
 
         if (!compChatItemProps) {
             throw new Error(`CompChatSegment: chat item with id "${item.uid}" has invalid props`);

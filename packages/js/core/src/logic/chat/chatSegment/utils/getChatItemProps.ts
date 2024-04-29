@@ -4,12 +4,15 @@ import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/str
 
 export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentItem<AiMsg>): ChatItemProps | undefined => {
     if (segmentItem.participantRole === 'ai') {
-        const status = segmentItem.status === 'complete' ? 'rendered' : (
-            segmentItem.status === 'streaming' ? 'streaming' : 'error'
-        );
+        const status = segmentItem.status === 'complete' ? 'complete' : 'streaming';
 
         if (segmentItem.dataTransferMode === 'stream') {
-            return {status, direction: 'incoming'};
+            return {
+                status,
+                direction: 'incoming',
+                // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
+                // while it's being streamed.
+            };
         }
 
         if (segmentItem.status === 'complete') {
@@ -20,19 +23,14 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentI
             };
         }
 
-        if (segmentItem.status === 'loading') {
-            return {status, direction: 'incoming'};
-        }
-
-        if (segmentItem.status === 'error') {
-            return {status, direction: 'incoming'};
-        }
-
-        return;
+        return {
+            status,
+            direction: 'incoming',
+        };
     }
 
     return {
-        status: 'rendered',
+        status: 'complete',
         direction: 'outgoing',
         message: segmentItem.content,
     } satisfies ChatItemProps;

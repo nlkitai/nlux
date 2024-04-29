@@ -3,13 +3,13 @@ import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is rendered in incoming direction', () => {
+describe('When a chat item component is complete in incoming direction', () => {
     describe('When the message is updated', () => {
         it('Should update the message', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
@@ -31,7 +31,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
@@ -40,36 +40,11 @@ describe('When a chat item component is rendered in incoming direction', () => {
             // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
-                status: 'loading',
+                status: 'streaming',
             });
 
             // Assert
-            expect(message.classList.contains('nlux_msg_loading')).toBe(true);
-        });
-    });
-
-    describe('When the loader is updated', () => {
-        it('Should update the message loader', () => {
-            // Arrange
-            const props: ChatItemProps = {
-                direction: 'incoming',
-                status: 'loading',
-                message: 'Hello, World!',
-                loader: undefined,
-            };
-            const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
-
-            // Act
-            const newLoader = document.createElement('div');
-            newLoader.innerHTML = 'Loading...';
-            updateChatItemDom(chatItem, props, {
-                ...props,
-                loader: newLoader,
-            });
-
-            // Assert
-            expect(message.innerHTML).toEqual(expect.stringContaining('Loading...'));
+            expect(message.classList.contains('nlux_msg_streaming')).toBe(true);
         });
     });
 });

@@ -1,9 +1,9 @@
-import {DataTransferMode, PersonaOptions} from '@nlux-dev/react/src';
+import {DataTransferMode, PersonaOptions, ResponseComponentProps} from '@nlux-dev/react/src';
 import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
 import {AiChatProps} from '@nlux-dev/react/src/exports/props.tsx';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
-import {useMemo, useState} from 'react';
+import {FunctionComponent, useMemo, useState} from 'react';
 import '@nlux-dev/themes/src/luna/theme.css';
 
 type MessageObjectType = {txt: string, color: string, bg: string};
@@ -11,14 +11,16 @@ type MessageObjectType = {txt: string, color: string, bg: string};
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
+const CustomMessageComponent: FunctionComponent<ResponseComponentProps<MessageObjectType>> = (
+    {response},
+) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
-    if (typeof message === 'object' && message?.txt !== undefined) {
+    if (typeof response === 'object' && response?.txt !== undefined) {
         return (
-            <div style={{color: message.color, backgroundColor: message.bg}}>
-                {message.txt}
+            <div style={{color: response.color, backgroundColor: response.bg}}>
+                {response.txt}
             </div>
         );
     }
@@ -28,7 +30,7 @@ const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
             color,
             backgroundColor: bg,
         }}>
-            {`${message}`}
+            {`${response}`}
         </div>
     );
 };
@@ -57,7 +59,7 @@ export const AiChatReactExpo = () => {
             message: {
                 txt: 'Hello, World!',
                 color: 'green',
-                bg: 'white',
+                bg: 'red',
             },
         },
     ];
@@ -70,8 +72,8 @@ export const AiChatReactExpo = () => {
         {
             message: {
                 txt: 'Hello, World!',
-                color: 'green',
-                bg: 'white',
+                color: 'blue',
+                bg: 'yellow',
             },
             role: 'ai',
         },

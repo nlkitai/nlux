@@ -1,4 +1,4 @@
-import {forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {FC, forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '../../../../../shared/src/ui/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
@@ -38,8 +38,8 @@ export const ChatItemComp: <AiMsg>(
         : compChatItemDirectionClassName['incoming'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName}`;
-    const MessageRenderer = useMemo(() => {
-        return isStreaming ? undefined : createMessageRenderer<AiMsg>(props);
+    const MessageRenderer: FC<void> = useMemo(() => {
+        return isStreaming ? () => '' : createMessageRenderer<AiMsg>(props);
     }, [
         isStreaming,
         props.uid, props.status, props.message, props.direction,
@@ -72,7 +72,6 @@ export const ChatItemComp: <AiMsg>(
                     uid={props.uid}
                     message={MessageRenderer}
                     status={props.status}
-                    loader={props.loader}
                     direction={props.direction}
                 />
             )}

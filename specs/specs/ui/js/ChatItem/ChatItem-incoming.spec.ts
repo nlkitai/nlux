@@ -3,12 +3,12 @@ import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is rendered in incoming direction', () => {
+describe('When a chat item component is complete in incoming direction', () => {
     it('Should render the item with the right direction class', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            status: 'rendered',
+            status: 'complete',
             message: 'Hello, World!',
         };
 
@@ -23,7 +23,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            status: 'rendered',
+            status: 'complete',
             message: 'Hello, World!',
         };
         const chatItem = createChatItemDom(props);
@@ -39,7 +39,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            status: 'rendered',
+            status: 'complete',
             message: 'Hello, World!',
             name: 'John Doe',
             picture: 'https://example.com/john-doe.jpg',
@@ -60,7 +60,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
@@ -81,7 +81,7 @@ describe('When a chat item component is rendered in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);

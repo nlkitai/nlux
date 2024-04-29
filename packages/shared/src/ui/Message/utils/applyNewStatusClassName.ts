@@ -1,10 +1,8 @@
 import {MessageStatus} from '../props';
 
 export const statusClassName: {[key: string]: string} = {
-    loading: 'nlux_msg_loading',
     streaming: 'nlux_msg_streaming',
-    rendered: 'nlux_msg_rendered',
-    error: 'nlux_msg_error',
+    complete: 'nlux_msg_complete',
 };
 
 export const applyNewStatusClassName = (element: HTMLElement, status: MessageStatus) => {

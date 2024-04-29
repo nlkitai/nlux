@@ -7,7 +7,6 @@ export type ChatItemProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
     status: 'streaming' | 'complete';
-    loader?: ReactElement;
     message?: AiMsg | string;
     responseRenderer?: ResponseComponent<AiMsg>;
     name?: string;

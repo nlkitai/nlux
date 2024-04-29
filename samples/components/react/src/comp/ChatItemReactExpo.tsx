@@ -5,9 +5,8 @@ import '@nlux-dev/themes/src/luna/theme.css';
 
 export const ChatItemReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
-    const [status, setStatus] = useState<MessageStatus>('rendered');
+    const [status, setStatus] = useState<MessageStatus>('complete');
     const [message, setMessage] = useState<string>('Hello, World!');
-    const [loader, setLoader] = useState<ReactElement | undefined>();
 
     const [name, setName] = useState<string>('John Doe');
     const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');
@@ -34,8 +33,7 @@ export const ChatItemReactExpo = () => {
                         value={status}
                         onChange={(event) => setStatus(event.target.value as MessageStatus)}
                     >
-                        <option value="rendered">Rendered</option>
-                        <option value="loading">Loading</option>
+                        <option value="complete">Complete</option>
                         <option value="streaming">Streaming</option>
                     </select>
                     <input
@@ -44,19 +42,6 @@ export const ChatItemReactExpo = () => {
                         onChange={(event) => setMessage(event.target.value)}
                         placeholder="Message"
                     />
-                    <select
-                        value={loader ? 'custom' : 'default'}
-                        onChange={(event) => {
-                            if (event.target.value === 'custom') {
-                                setLoader(<div>Loading...</div>);
-                            } else {
-                                setLoader(undefined);
-                            }
-                        }}
-                    >
-                        <option value="default">Default Loader</option>
-                        <option value="custom">Custom Loader</option>
-                    </select>
                     <input
                         type="text"
                         value={name}
@@ -76,7 +61,6 @@ export const ChatItemReactExpo = () => {
                         direction={direction}
                         status={status}
                         message={message}
-                        loader={loader}
                         picture={picture}
                         name={name}
                     />

@@ -15,10 +15,8 @@ newExpo.innerHTML = `
                     <option value="outgoing">Outgoing</option>
                 </select>
                 <select class="status">
-                    <option value="rendered">Rendered</option>
-                    <option value="loading">Loading</option>
+                    <option value="complete">Complete</option>
                     <option value="streaming">Streaming</option>
-                    <option value="error">Error</option>
                 </select>
                 <input type="text" placeholder="Message" />
             </div>
@@ -35,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector<HTMLDivElement>('.Message-expo')!;
     let props: MessageProps = {
         direction: 'incoming',
-        status: 'rendered',
+        status: 'complete',
         message: 'Hello, World!',
     };
 

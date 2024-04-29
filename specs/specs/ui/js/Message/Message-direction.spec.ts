@@ -3,13 +3,13 @@ import {createMessageDom} from '../../../../../packages/shared/src/ui/Message/cr
 import {MessageProps} from '../../../../../packages/shared/src/ui/Message/props';
 import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/update';
 
-describe('When a message component is rendered', () => {
+describe('When a message component is complete', () => {
     describe('When the direction is set to incoming', () => {
         it('Should render the message with the incoming class', () => {
             // Arrange
             const props: MessageProps = {
                 direction: 'incoming',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
 
@@ -25,7 +25,7 @@ describe('When a message component is rendered', () => {
                 // Arrange
                 const props: MessageProps = {
                     direction: 'incoming',
-                    status: 'rendered',
+                    status: 'complete',
                     message: 'Hello, World!',
                 };
                 const message = createMessageDom(props);
@@ -50,7 +50,7 @@ describe('When a message component is rendered', () => {
             const container = document.createElement('div');
             const props: MessageProps = {
                 direction: 'outgoing',
-                status: 'rendered',
+                status: 'complete',
                 message: 'Hello, World!',
             };
 
@@ -65,7 +65,7 @@ describe('When a message component is rendered', () => {
                 // Arrange
                 const props: MessageProps = {
                     direction: 'outgoing',
-                    status: 'rendered',
+                    status: 'complete',
                     message: 'Hello, World!',
                 };
                 const message = createMessageDom(props);

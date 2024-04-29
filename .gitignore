@@ -27,3 +27,5 @@ rollup.config-*.js
 rollup.config-*.mjs
 yarn-error.log
 .DS_Store
+/samples/components/react/yarn.lock
+/samples/components/js/yarn.lock

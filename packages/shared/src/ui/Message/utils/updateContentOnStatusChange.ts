@@ -1,5 +1,5 @@
-import {createLoaderDom} from '../../Loader/create';
 import {MessageProps} from '../props';
+import {statusClassName} from './applyNewStatusClassName';
 
 export const updateContentOnStatusChange = (
     element: HTMLElement,
@@ -7,43 +7,14 @@ export const updateContentOnStatusChange = (
     propsAfter: MessageProps,
 ) => {
     const newStatus = propsAfter.status;
-    const loader = propsAfter.loader;
-
-    if (newStatus === 'loading') {
-        if (element.hasChildNodes()) {
-            element.replaceChildren();
-        }
-
-        if (loader) {
-            element.append(loader);
-        } else {
-            element.append(createLoaderDom());
-        }
-
-        return;
-    }
-
-    if (propsBefore.status === 'loading' && element.hasChildNodes()) {
-        element.replaceChildren();
-    }
-
     if (newStatus === 'streaming') {
         return;
     }
 
-    if (newStatus === 'error') {
-        const textNode = document.createTextNode('Error');
-        element.classList.add('nlux_msg_error');
-        element.replaceChildren();
-        element.append(textNode);
-
-        return;
-    }
-
-    if (newStatus === 'rendered') {
+    if (newStatus === 'complete') {
         const innerHtml = propsAfter.message ? propsAfter.message : '';
         const textNode = document.createTextNode(innerHtml);
-        element.classList.add('nlux_msg_rendered');
+        element.classList.add(statusClassName[newStatus]);
         element.replaceChildren();
         element.append(textNode);
 
