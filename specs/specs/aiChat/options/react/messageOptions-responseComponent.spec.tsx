@@ -4,23 +4,23 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + messageOptions + responseComponent', () => {
     let adapterController: AdapterController | undefined = undefined;
 
-    beforeEach(() => {
-        adapterController = adapterBuilder()
-            .withFetchText(true)
-            .withStreamText(false)
-            .create();
-    });
-
-    afterEach(() => {
-        adapterController = undefined;
-    });
-
     describe('When a response component is used in fetch mode', () => {
+        beforeEach(() => {
+            adapterController = adapterBuilder()
+                .withFetchText(true)
+                .withStreamText(false)
+                .create();
+        });
+
+        afterEach(() => {
+            adapterController = undefined;
+        });
+
         it('Should render the custom component', async () => {
             // Arrange
             const CustomResponseComponent: ResponseComponent<string> = ({response}) => (
@@ -83,6 +83,46 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
                     response: 'Yo!',
                 }),
             );
+        });
+
+        describe('When the custom response component is removed', () => {
+            it('Should render the default response component', async () => {
+                // Arrange
+                const CustomResponseComponent: ResponseComponent<string> = ({response, uid}) => (
+                    <div>The AI response is: {response} with uid: {uid}</div>
+                );
+
+                const customResponseComponentSpy = vi.fn(CustomResponseComponent);
+                const {container, rerender} = render(<AiChat
+                    adapter={adapterController!.adapter}
+                    messageOptions={{responseComponent: customResponseComponentSpy}}
+                />);
+                await waitForRenderCycle();
+
+                // Act
+                rerender(<AiChat
+                    adapter={adapterController!.adapter}
+                    messageOptions={{responseComponent: undefined}}
+                />);
+                await waitForRenderCycle();
+
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                await waitForRenderCycle();
+
+                // Act
+                await userEvent.type(textArea, 'Hello{enter}');
+                await waitForRenderCycle();
+
+                adapterController!.resolve('Yo!');
+                await waitForMdStreamToComplete();
+
+                // Assert
+                const responseElement = container.querySelector('.nlux_cht_itm_in');
+                expect(customResponseComponentSpy).not.toHaveBeenCalled();
+                expect(responseElement!.innerHTML).toEqual(
+                    expect.stringContaining('<p>Yo!</p>'),
+                );
+            });
         });
     });
 });

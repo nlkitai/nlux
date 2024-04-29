@@ -30,7 +30,7 @@ describe('createAiChat() + layoutOptions + width', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
             expect(aiChatDom.style.width).toBe('');
@@ -46,7 +46,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 // Act
                 aiChat.updateProps({layoutOptions: {width: 500}});
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.style.width).toBe('500px');
@@ -61,7 +61,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 // Act
                 aiChat.updateProps({layoutOptions: {width: '500px'}});
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.style.width).toBe('500px');
@@ -77,7 +77,7 @@ describe('createAiChat() + layoutOptions + width', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
             expect(aiChatDom.style.width).toBe('500px');
@@ -90,7 +90,7 @@ describe('createAiChat() + layoutOptions + width', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
             expect(aiChatDom.style.width).toBe('500px');
@@ -106,7 +106,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 // Act
                 aiChat.updateProps({layoutOptions: {width: 600}});
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.style.width).toBe('600px');
@@ -121,7 +121,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 // Act
                 aiChat.updateProps({layoutOptions: {width: '600px'}});
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.style.width).toBe('600px');
@@ -138,7 +138,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 // Act
                 aiChat.updateProps({layoutOptions: {width: undefined}});
                 await waitForRenderCycle();
-                const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.style.width).toBe('');

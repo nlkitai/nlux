@@ -1,4 +1,4 @@
-import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux-dev/core/src';
+import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {vi} from 'vitest';
 
 export const createAdapterController = <AiMsg = string>({
@@ -43,7 +43,7 @@ export const createAdapterController = <AiMsg = string>({
         });
     };
 
-    const adapter = {
+    const adapter: ChatAdapter<AiMsg> = {
         fetchText: includeFetchText ? createNewFetchTextMock() : undefined,
         streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
