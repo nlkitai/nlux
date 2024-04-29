@@ -48,6 +48,8 @@ describe('createAiChat() + promptBoxOptions + autoFocus', () => {
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
                 adapterController?.resolve('Response');
+                await waitForRenderCycle();
+
                 textArea.blur();
                 await waitForRenderCycle();
 
