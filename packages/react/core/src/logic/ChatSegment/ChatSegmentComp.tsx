@@ -198,7 +198,6 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'incoming'}
-                                    loader={props.loader}
                                     responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
