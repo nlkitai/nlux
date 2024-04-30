@@ -7,16 +7,24 @@ export type ReactChatAdapterOptions = {
     url: string;
     mode?: 'chat' | 'copilot';
     context?: ReactAiContext;
+    headers?: Record<string, string>;
 };
 
 export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions): ChatAdapter<AiMsg> => {
-    const {context, url, mode} = options;
+    const {
+        context,
+        url,
+        mode,
+        headers,
+    } = options;
+
     const coreContext = context?.ref ? useContext(context.ref) : undefined;
     const [adapter, setAdapter] = useState<ChatAdapter<AiMsg>>(
         getChatAdapterBuilder({
             url,
             mode,
             context: coreContext,
+            headers,
         }),
     );
 
@@ -31,6 +39,7 @@ export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions)
     }, [
         url,
         coreContext,
+        headers,
     ]);
 
     return adapter;

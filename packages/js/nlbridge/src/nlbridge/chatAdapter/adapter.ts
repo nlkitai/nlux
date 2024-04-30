@@ -17,6 +17,7 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
     private readonly theUsageMode: ChatAdapterUsageMode | undefined = undefined;
+    private readonly theHeaders: Record<string, string>;
 
     protected constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
@@ -25,10 +26,15 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         this.theEndpointUrlToUse = options.url;
         this.theAiContextToUse = options.context;
         this.theDataTransferModeToUse = options.mode === 'copilot' && options.context ? 'fetch' : 'stream';
+        this.theHeaders = options.headers ?? {};
     }
 
     get context(): CoreAiContext | undefined {
         return this.theAiContextToUse;
+    }
+
+    get headers(): Record<string, string> {
+        return this.theHeaders;
     }
 
     get dataTransferMode(): DataTransferMode {

@@ -25,4 +25,9 @@ export type ChatAdapterOptions = {
      * Optional. If not provided, the adapter will not use a context.
      */
     context?: CoreAiContext;
+
+    /**
+     * Additional headers to include in the request.
+     */
+    headers?: Record<string, string>;
 };

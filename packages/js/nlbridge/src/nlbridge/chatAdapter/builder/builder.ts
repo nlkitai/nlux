@@ -10,4 +10,5 @@ export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg>
     withContext(context: CoreAiContext): ChatAdapterBuilder<AiMsg>;
     withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilder<AiMsg>;
     withUrl(endpointUrl: string): ChatAdapterBuilder<AiMsg>;
+    withHeaders(headers: Record<string, string>): ChatAdapterBuilder<AiMsg>;
 }

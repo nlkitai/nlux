@@ -5,6 +5,7 @@ export const getChatAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatA
         url,
         mode,
         context,
+        headers,
     } = options || {};
 
     if (mode && mode !== 'copilot' && mode !== 'chat') {
@@ -23,6 +24,10 @@ export const getChatAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatA
 
     if (context) {
         newAdapter = newAdapter.withContext(context);
+    }
+
+    if (headers) {
+        newAdapter = newAdapter.withHeaders(headers);
     }
 
     return newAdapter.create();

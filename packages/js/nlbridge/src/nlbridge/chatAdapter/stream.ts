@@ -19,6 +19,7 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
         const submitPrompt = () => fetch(this.endpointUrl, {
             method: 'POST',
             headers: {
+                ...this.headers,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
