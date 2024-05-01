@@ -26,6 +26,7 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
                 action: 'chat-stream',
                 payload: {
                     message,
+                    conversationHistory: extras.conversationHistory,
                     contextId: this.context?.contextId,
                 },
             }),

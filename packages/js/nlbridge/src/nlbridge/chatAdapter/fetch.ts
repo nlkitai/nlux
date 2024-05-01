@@ -24,6 +24,7 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
                 action,
                 payload: {
                     message,
+                    conversationHistory: extras.conversationHistory,
                     contextId: this.context?.contextId,
                 },
             }),
