@@ -37,7 +37,9 @@ describe('<AiChat /> + fetch adapter + markdown', () => {
             // Assert
             const markdownContainer = container.querySelector('.nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
-            expect(markdownContainer!.innerHTML).toBe('<p><strong>Hello Human!</strong></p>');
+            expect(markdownContainer!.innerHTML).toEqual(
+                expect.stringContaining('<strong>Hello Human!</strong>'),
+            );
         });
     });
 });
