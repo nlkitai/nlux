@@ -1,7 +1,7 @@
-import {ChatItem} from '@nlux/core';
 import {ChatSegment, ChatSegmentItem} from '../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {ChatItem} from '../../../../shared/src/types/conversation';
 import {uid} from '../../../../shared/src/utils/uid';
 import {warn} from '../../../../shared/src/utils/warn';
 

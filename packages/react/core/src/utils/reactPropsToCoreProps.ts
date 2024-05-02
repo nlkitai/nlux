@@ -1,4 +1,6 @@
-import {AiChatProps as AiChatCoreProps, ChatAdapter, StandardChatAdapter} from '@nlux/core';
+import {AiChatProps as AiChatCoreProps} from '@nlux/core';
+import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
+import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {AiChatProps} from '../exports/props';
 
 export const reactPropsToCoreProps = <AiMsg>(

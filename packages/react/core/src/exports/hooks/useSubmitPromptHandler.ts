@@ -1,6 +1,9 @@
-import {ChatAdapter, ChatAdapterExtras, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
+import {PromptBoxOptions} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
+import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
+import {ChatAdapterExtras} from '../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
+import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
