@@ -1,15 +1,12 @@
 import {useEffect, useRef, useState} from 'react';
-import {
-    createMarkdownStreamParser,
-    MarkdownStreamParser,
-    MarkdownStreamParserOptions,
-} from '../../../../../extra/markdown/src';
+import {createMdSnapshotRenderer} from '../../../../../shared/src/markdown/snapshot/snapshotParser';
+import {SnapshotParserOptions} from '../../../../../shared/src/types/markdown/snapshotParser';
 import {streamingDomService} from '../StreamContainer/streamingDomService';
 
-export const MarkdownRenderer = (props: {
+export const MarkdownSnapshotRenderer = (props: {
     messageUid: string,
     content: string,
-    markdownOptions?: MarkdownStreamParserOptions,
+    markdownOptions?: SnapshotParserOptions,
 }) => {
     const {markdownOptions} = props;
 
@@ -17,9 +14,7 @@ export const MarkdownRenderer = (props: {
     // rendering cycle, we don't want to trigger re-renders on every chunk of data received.
     const rootElRef = useRef<HTMLDivElement | null>(null);
     const rootElRefPreviousValue = useRef<HTMLDivElement | null>(null);
-
     const [streamContainer, setStreamContainer] = useState<HTMLDivElement>();
-    const mdStreamParserRef = useRef<MarkdownStreamParser | null>(null);
 
     useEffect(() => {
         if (rootElRef.current !== rootElRefPreviousValue.current) {
@@ -40,12 +35,8 @@ export const MarkdownRenderer = (props: {
     useEffect(() => {
         const element = streamingDomService.getStreamingDomElement(props.messageUid);
         if (!element.innerHTML) {
-            mdStreamParserRef.current = createMarkdownStreamParser(element, {
-                ...markdownOptions,
-                skipAnimation: true,
-            });
-
-            mdStreamParserRef.current?.next(props.content);
+            const mdStreamParser = createMdSnapshotRenderer(element, markdownOptions);
+            mdStreamParser(props.content);
         }
 
         return () => {

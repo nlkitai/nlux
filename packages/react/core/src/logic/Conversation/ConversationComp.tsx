@@ -74,6 +74,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             responseRenderer={props.responseRenderer}
                             syntaxHighlighter={props.syntaxHighlighter}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
+                            openLinksInNewWindow={props.openLinksInNewWindow}
                         />
                     );
                 })}

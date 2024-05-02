@@ -1,6 +1,6 @@
 import {FC, RefObject} from 'react';
 import {ChatItemProps} from '../../ui/ChatItem/props';
-import {MarkdownRenderer} from './MarkdownRenderer';
+import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
 export const createMessageRenderer: <AiMsg>(
     props: ChatItemProps<AiMsg>,
@@ -50,7 +50,7 @@ export const createMessageRenderer: <AiMsg>(
     if (typeof message === 'string') {
         const messageToRender: string = message;
         return () => (
-            <MarkdownRenderer
+            <MarkdownSnapshotRenderer
                 messageUid={uid}
                 content={messageToRender}
                 markdownOptions={{

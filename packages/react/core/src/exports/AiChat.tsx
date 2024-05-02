@@ -111,6 +111,7 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         responseRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
+                        openLinksInNewWindow={props.messageOptions?.openMdLinksInNewWindow}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
                     />
                 </div>

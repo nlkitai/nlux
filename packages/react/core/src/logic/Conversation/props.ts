@@ -10,6 +10,7 @@ export type ConversationCompProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     responseRenderer?: ResponseComponent<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
+    openLinksInNewWindow?: boolean;
     loader?: ReactElement;
     onLastActiveSegmentChange?: (data: {
         uid: string;
