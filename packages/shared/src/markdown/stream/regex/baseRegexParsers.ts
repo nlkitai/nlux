@@ -1,4 +1,4 @@
-import {MarkdownElementName} from '../../types/markdown/markdownElement';
+import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {BoldAsterisk, BoldUnderscore, ItalicAsterisk, ItalicUnderscore} from './BoldItalic';
 import {codeParsers} from './Code';
 import {codeBlockParsers} from './CodeBlock';

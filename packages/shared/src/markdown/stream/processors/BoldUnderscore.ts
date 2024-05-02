@@ -1,8 +1,8 @@
-import {MarkdownElementName} from '../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class ItalicUnderscoreProcessor extends ProcessorWithChildren {
+export class BoldUnderscoreProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
@@ -10,7 +10,7 @@ export class ItalicUnderscoreProcessor extends ProcessorWithChildren {
     ) {
         super(
             parent,
-            'ItalicUnderscore',
+            'BoldUnderscore',
             openingSequence ?? null,
             initialContent ?? null,
             null,
@@ -36,6 +36,6 @@ export class ItalicUnderscoreProcessor extends ProcessorWithChildren {
     }
 
     createElement(): HTMLElement {
-        return document.createElement('em');
+        return document.createElement('strong');
     }
 }

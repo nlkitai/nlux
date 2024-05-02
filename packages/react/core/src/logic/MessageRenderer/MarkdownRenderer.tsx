@@ -1,15 +1,15 @@
-import {HighlighterExtension} from '@nlux/core';
 import {useEffect, useRef, useState} from 'react';
-import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
+import {
+    createMarkdownStreamParser,
+    MarkdownStreamParser,
+    MarkdownStreamParserOptions,
+} from '../../../../../extra/markdown/src';
 import {streamingDomService} from '../StreamContainer/streamingDomService';
 
 export const MarkdownRenderer = (props: {
     messageUid: string,
     content: string,
-    markdownOptions?: {
-        syntaxHighlighter?: HighlighterExtension,
-        openLinksInNewWindow?: boolean,
-    },
+    markdownOptions?: MarkdownStreamParserOptions,
 }) => {
     const {markdownOptions} = props;
 
@@ -41,8 +41,8 @@ export const MarkdownRenderer = (props: {
         const element = streamingDomService.getStreamingDomElement(props.messageUid);
         if (!element.innerHTML) {
             mdStreamParserRef.current = createMarkdownStreamParser(element, {
-                openLinksInNewWindow: markdownOptions?.openLinksInNewWindow ?? true,
-                syntaxHighlighter: markdownOptions?.syntaxHighlighter ?? undefined,
+                ...markdownOptions,
+                skipAnimation: true,
             });
 
             mdStreamParserRef.current?.next(props.content);

@@ -1,8 +1,8 @@
-import {MarkdownElementName} from '../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class BoldAsteriskProcessor extends ProcessorWithChildren {
+export class CodeProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
@@ -10,7 +10,7 @@ export class BoldAsteriskProcessor extends ProcessorWithChildren {
     ) {
         super(
             parent,
-            'BoldAsterisk',
+            'Code',
             openingSequence ?? null,
             initialContent ?? null,
             null,
@@ -23,11 +23,8 @@ export class BoldAsteriskProcessor extends ProcessorWithChildren {
 
     get nestedMarkdownElements(): MarkdownElementName[] | 'all' | 'none' {
         return [
-            'LineBreak',
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
-            'Code',
-            'Link',
         ];
     }
 
@@ -36,6 +33,6 @@ export class BoldAsteriskProcessor extends ProcessorWithChildren {
     }
 
     createElement(): HTMLElement {
-        return document.createElement('strong');
+        return document.createElement('code');
     }
 }

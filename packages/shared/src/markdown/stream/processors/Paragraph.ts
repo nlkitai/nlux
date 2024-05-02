@@ -1,8 +1,8 @@
-import {MarkdownElementName} from '../../types/markdown/markdownElement';
-import {MarkdownProcessorInterface} from '../../types/markdown/markdownProcessorInterface';
+import {MarkdownElementName} from '../../../types/markdown/markdownElement';
+import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
-export class ItalicAsteriskProcessor extends ProcessorWithChildren {
+export class ParagraphProcessor extends ProcessorWithChildren {
     constructor(
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
@@ -10,7 +10,7 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
     ) {
         super(
             parent,
-            'ItalicAsterisk',
+            'Paragraph',
             openingSequence ?? null,
             initialContent ?? null,
             null,
@@ -18,12 +18,12 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
     }
 
     get canExistAtRootLevel(): boolean {
-        return false;
+        return true;
     }
 
     get nestedMarkdownElements(): MarkdownElementName[] | 'all' | 'none' {
         return [
-            'LineBreak',
+            'LineBreak', 'Blockquote',
             'BoldAsterisk', 'ItalicAsterisk',
             'BoldUnderscore', 'ItalicUnderscore',
             'Code',
@@ -31,11 +31,19 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
         ];
     }
 
+    get removeWhenEmpty(): boolean {
+        return true;
+    }
+
     get yieldingMarkdownElements(): MarkdownElementName[] | 'none' {
-        return 'none';
+        return [
+            'Heading1', 'Heading2', 'Heading3', 'Heading4', 'Heading5', 'Heading6',
+            'CodeBlock', 'UnorderedList', 'OrderedList', 'HorizontalRule',
+            'Image',
+        ];
     }
 
     createElement(): HTMLElement {
-        return document.createElement('em');
+        return document.createElement('p');
     }
 }

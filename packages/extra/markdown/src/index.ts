@@ -1,5 +1,5 @@
 import {HighlighterExtension} from '../../../js/core/src';
-import {createMdStreamRenderer} from '../../../shared/src/markdown/streamParser';
+import {createMdStreamRenderer} from '../../../shared/src/markdown/stream/streamParser';
 
 export type MarkdownStreamParser = {
     next(value: string): void;

@@ -1,4 +1,4 @@
-import {SequenceParser} from '../../markdown/sequenceParser';
+import {SequenceParser} from '../../markdown/stream/sequenceParser';
 import {MarkdownElementName} from './markdownElement';
 
 export interface MarkdownProcessorInterface {

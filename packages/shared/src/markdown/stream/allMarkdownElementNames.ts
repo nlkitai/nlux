@@ -1,4 +1,4 @@
-import {MarkdownElementName} from '../types/markdown/markdownElement';
+import {MarkdownElementName} from '../../types/markdown/markdownElement';
 
 export const allMarkdownElementNames: MarkdownElementName[] = [
     'Root',

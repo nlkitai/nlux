@@ -5,7 +5,7 @@ import {MarkdownRenderer} from './MarkdownRenderer';
 export const createMessageRenderer: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     containerRef?: RefObject<HTMLElement>,
-) => FC<void> = function <AiMsg>(
+) => FC<{}> = function <AiMsg>(
     props: ChatItemProps<AiMsg>,
     containerRef?: RefObject<HTMLElement>,
 ) {
