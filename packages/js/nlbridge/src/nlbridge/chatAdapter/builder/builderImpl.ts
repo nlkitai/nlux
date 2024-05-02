@@ -8,9 +8,9 @@ import {ChatAdapterBuilder} from './builder';
 
 export class ChatAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
     private theContext?: CoreAiContext | undefined;
+    private theHeaders?: Record<string, string>;
     private theMode?: ChatAdapterUsageMode;
     private theUrl?: string;
-    private theHeaders?: Record<string, string>;
 
     constructor(cloneFrom?: ChatAdapterBuilderImpl<AiMsg>) {
         if (cloneFrom) {
@@ -58,6 +58,18 @@ export class ChatAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> 
         return this;
     }
 
+    withHeaders(headers: Record<string, string>): ChatAdapterBuilderImpl<AiMsg> {
+        if (this.theHeaders !== undefined) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Cannot set the headers option more than once',
+            });
+        }
+
+        this.theHeaders = headers;
+        return this;
+    }
+
     withMode(mode: ChatAdapterUsageMode): ChatAdapterBuilderImpl<AiMsg> {
         if (this.theMode !== undefined) {
             throw new NluxUsageError({
@@ -79,18 +91,6 @@ export class ChatAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> 
         }
 
         this.theUrl = endpointUrl;
-        return this;
-    }
-
-    withHeaders(headers: Record<string, string>): ChatAdapterBuilderImpl {
-        if (this.theHeaders !== undefined) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot set the headers option more than once',
-            });
-        }
-
-        this.theHeaders = headers;
         return this;
     }
 }
