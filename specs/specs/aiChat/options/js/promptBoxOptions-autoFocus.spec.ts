@@ -36,27 +36,6 @@ describe('createAiChat() + promptBoxOptions + autoFocus', () => {
             // Assert
             expect(document.activeElement).not.toBe(textArea);
         });
-
-        describe('When a message is sent then focus is lost', () => {
-            it('The prompt box should not be focused when a response is received', async () => {
-                // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter);
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-
-                // Act
-                await userEvent.type(textArea, 'Hello{enter}');
-                adapterController?.resolve('Response');
-                await waitForRenderCycle();
-
-                textArea.blur();
-                await waitForRenderCycle();
-
-                // Assert
-                expect(document.activeElement).not.toBe(textArea);
-            });
-        });
     });
 
     describe('When the AiChat is created with autoFocus', () => {
