@@ -64,6 +64,9 @@ export const ChatItemComp: <AiMsg>(
                     markdownOptions={{
                         syntaxHighlighter: props.syntaxHighlighter,
                         openLinksInNewWindow: props.openLinksInNewWindow,
+                        showCodeBlockCopyButton: props.showCodeBlockCopyButton,
+                        skipStreamingAnimation: props.skipStreamingAnimation,
+                        streamingAnimationSpeed: props.streamingAnimationSpeed,
                     }}
                 />
             )}

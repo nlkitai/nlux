@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openAiAdapter = createUnsafeChatAdapter()
         .withApiKey('sk_1234567890')
-        .withDataTransferMode('fetch');
+        .withDataTransferMode('stream');
 
     const aiChat = createAiChat()
         .withAdapter(openAiAdapter)

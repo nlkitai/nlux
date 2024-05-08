@@ -51,8 +51,11 @@ export const StreamContainerComp = function <AiChat>(
     useEffect(() => {
         const element = streamingDomService.getStreamingDomElement(uid);
         mdStreamParserRef.current = createMarkdownStreamParser(element, {
-            openLinksInNewWindow: markdownOptions?.openLinksInNewWindow ?? true,
-            syntaxHighlighter: markdownOptions?.syntaxHighlighter ?? undefined,
+            syntaxHighlighter: markdownOptions?.syntaxHighlighter,
+            openLinksInNewWindow: markdownOptions?.openLinksInNewWindow,
+            showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
+            skipStreamingAnimation: markdownOptions?.skipStreamingAnimation,
+            streamingAnimationSpeed: markdownOptions?.streamingAnimationSpeed,
         });
 
         if (!initialMarkdownMessageParsed && initialMarkdownMessage) {

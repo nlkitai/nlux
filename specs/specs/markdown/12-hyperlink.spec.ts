@@ -9,10 +9,24 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {
+            skipStreamingAnimation: true,
+            openLinksInNewWindow: false,
+        });
     });
 
-    it('should render a link', async () => {
+    it('should render a link that opens in a new window by default', async () => {
+        streamRenderer = createMdStreamRenderer(rootElement, undefined,
+            {skipStreamingAnimation: true},
+        );
+        streamRenderer.next('[Hi World](http://world.com)');
+        streamRenderer.complete!();
+        await waitForMdStreamToComplete();
+
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi World</a></p>');
+    });
+
+    it('should render a link that opens in the same window', async () => {
         streamRenderer.next('[Hi World](http://world.com)');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
@@ -20,9 +34,9 @@ describe('Asterisk Italic Markdowns Parser', () => {
         expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi World</a></p>');
     });
 
-    it('should render a link to a new window', async () => {
+    it('should render a link that opens in a new window', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, undefined,
-            {skipAnimation: true, openLinksInNewWindow: true},
+            {skipStreamingAnimation: true, openLinksInNewWindow: true},
         );
 
         streamRenderer.next('[Hi New Window](http://world.com)');
@@ -34,7 +48,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render a link to the same window', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, undefined,
-            {skipAnimation: true, openLinksInNewWindow: false},
+            {skipStreamingAnimation: true, openLinksInNewWindow: false},
         );
 
         streamRenderer.next('[Hi New Window](http://world.com)');

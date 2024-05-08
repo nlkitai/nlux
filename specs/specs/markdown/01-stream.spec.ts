@@ -9,7 +9,7 @@ describe('MD Stream Parser Streaming', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
     });
 
     describe('Default tag', () => {

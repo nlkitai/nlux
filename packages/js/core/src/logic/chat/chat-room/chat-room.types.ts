@@ -14,7 +14,7 @@ export type CompChatRoomProps<AiMsg> = {
     autoScroll?: boolean;
     promptBox: Partial<PromptBoxProps>;
     openMdLinksInNewWindow?: boolean;
-    skipAnimation?: boolean;
+    skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;
 };

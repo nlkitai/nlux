@@ -72,9 +72,12 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             personaOptions={personaOptions}
                             loader={props.loader}
                             responseRenderer={props.responseRenderer}
-                            syntaxHighlighter={props.syntaxHighlighter}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
+                            syntaxHighlighter={props.syntaxHighlighter}
                             openLinksInNewWindow={props.openLinksInNewWindow}
+                            showCodeBlockCopyButton={props.showCodeBlockCopyButton}
+                            skipStreamingAnimation={props.skipStreamingAnimation}
+                            streamingAnimationSpeed={props.streamingAnimationSpeed}
                         />
                     );
                 })}

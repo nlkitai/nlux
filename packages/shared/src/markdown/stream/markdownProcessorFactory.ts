@@ -24,6 +24,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newParagraph.init();

@@ -15,8 +15,8 @@ export type StandardStreamParser = (
     syntaxHighlighter?: HighlighterExtension,
     options?: {
         openLinksInNewWindow?: boolean;
-        skipAnimation?: boolean;
+        skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
-        skipCopyToClipboardButton?: boolean;
+        showCodeBlockCopyButton?: boolean;
     },
 ) => StandardStreamParserOutput;

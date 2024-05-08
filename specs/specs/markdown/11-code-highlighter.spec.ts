@@ -11,8 +11,8 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
     beforeEach(() => {
         rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement, highlighter, {
-            skipAnimation: true,
-            skipCopyToClipboardButton: true,
+            skipStreamingAnimation: true,
+            showCodeBlockCopyButton: false,
         });
     });
 
@@ -38,8 +38,8 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
 
     it('should not render copy to clipboard button when option is set', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, highlighter, {
-            skipAnimation: true,
-            skipCopyToClipboardButton: true,
+            skipStreamingAnimation: true,
+            showCodeBlockCopyButton: false,
         });
 
         streamRenderer.next('```js\nconst a = 1;\n```');
@@ -51,8 +51,8 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
 
     it('should render copy to clipboard button when option is set', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, highlighter, {
-            skipAnimation: true,
-            skipCopyToClipboardButton: false,
+            skipStreamingAnimation: true,
+            showCodeBlockCopyButton: true,
         });
 
         streamRenderer.next('```js\nconst a = 1;\n```');

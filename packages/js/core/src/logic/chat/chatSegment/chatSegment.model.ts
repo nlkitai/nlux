@@ -50,7 +50,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 uid: item.uid,
                 domProps: compChatItemProps,
                 openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
-                skipAnimation: this.props.skipAnimation,
+                skipStreamingAnimation: this.props.skipStreamingAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
             } satisfies CompChatItemProps)
@@ -113,7 +113,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
         if (
             key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
-            key === 'skipAnimation' || key === 'streamingAnimationSpeed'
+            key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             this.chatItems.forEach((comp) => {
                 comp.updateMarkdownStreamRenderer(key, value);

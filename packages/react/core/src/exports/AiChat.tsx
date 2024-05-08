@@ -118,6 +118,9 @@ export const AiChat: <AiMsg>(
                         responseRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
                         openLinksInNewWindow={props.messageOptions?.openMdLinksInNewWindow}
+                        showCodeBlockCopyButton={props.messageOptions?.showCodeBlockCopyButton}
+                        skipStreamingAnimation={props.messageOptions?.skipStreamingAnimation}
+                        streamingAnimationSpeed={props.messageOptions?.streamingAnimationSpeed}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
                     />
                 </div>

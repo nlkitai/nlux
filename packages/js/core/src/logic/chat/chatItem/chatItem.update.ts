@@ -10,7 +10,7 @@ export const updateChatItem: CompUpdater<
 }) => {
     switch (propName) {
         case 'openMdLinksInNewWindow':
-        case 'skipAnimation':
+        case 'skipStreamingAnimation':
         case 'syntaxHighlighter':
         case 'streamingAnimationSpeed':
             dom.actions?.updateMarkdownStreamRenderer({

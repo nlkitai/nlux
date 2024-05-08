@@ -13,6 +13,9 @@ export type ChatItemProps<AiMsg> = {
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
     openLinksInNewWindow?: boolean;
+    showCodeBlockCopyButton?: boolean;
+    skipStreamingAnimation?: boolean;
+    streamingAnimationSpeed?: number;
 };
 
 export type ChatItemImperativeProps = {

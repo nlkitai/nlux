@@ -117,6 +117,9 @@ export const ChatSegmentComp: <AiMsg>(
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
                             openLinksInNewWindow={props.openLinksInNewWindow}
+                            showCodeBlockCopyButton={props.showCodeBlockCopyButton}
+                            skipStreamingAnimation={props.skipStreamingAnimation}
+                            streamingAnimationSpeed={props.streamingAnimationSpeed}
                         />
                     );
                 } else {
@@ -148,6 +151,9 @@ export const ChatSegmentComp: <AiMsg>(
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     openLinksInNewWindow={props.openLinksInNewWindow}
+                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
+                                    skipStreamingAnimation={props.skipStreamingAnimation}
+                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         } else {
@@ -182,6 +188,9 @@ export const ChatSegmentComp: <AiMsg>(
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     openLinksInNewWindow={props.openLinksInNewWindow}
+                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
+                                    skipStreamingAnimation={props.skipStreamingAnimation}
+                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         }
@@ -205,6 +214,9 @@ export const ChatSegmentComp: <AiMsg>(
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     openLinksInNewWindow={props.openLinksInNewWindow}
+                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
+                                    skipStreamingAnimation={props.skipStreamingAnimation}
+                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         }

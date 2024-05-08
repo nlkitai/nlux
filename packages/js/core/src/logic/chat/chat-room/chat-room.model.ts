@@ -36,7 +36,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             userPersona,
             initialConversationContent,
             syntaxHighlighter,
-            skipAnimation,
+            skipStreamingAnimation,
             openMdLinksInNewWindow,
         }: CompChatRoomProps<AiMsg>,
     ) {
@@ -49,7 +49,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             promptBox,
             syntaxHighlighter,
             openMdLinksInNewWindow,
-            skipAnimation,
+            skipStreamingAnimation,
         });
 
         this.addConversation(
@@ -139,8 +139,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.setProp('openMdLinksInNewWindow', props.openMdLinksInNewWindow!);
         }
 
-        if (props.hasOwnProperty('skipAnimation')) {
-            this.setProp('skipAnimation', props.skipAnimation!);
+        if (props.hasOwnProperty('skipStreamingAnimation')) {
+            this.setProp('skipStreamingAnimation', props.skipStreamingAnimation!);
         }
 
         if (props.hasOwnProperty('streamingAnimationSpeed')) {
@@ -177,7 +177,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
 
         if (
             key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
-            key === 'skipAnimation' || key === 'streamingAnimationSpeed'
+            key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             const updateKey = key satisfies keyof CompConversationProps<AiMsg>;
             const updateValue = value as CompConversationProps<AiMsg>[typeof updateKey];
@@ -197,7 +197,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 userPersona,
                 messages: initialConversationContent,
                 openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
-                skipAnimation: this.props.skipAnimation,
+                skipStreamingAnimation: this.props.skipStreamingAnimation,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
                 syntaxHighlighter: this.props.syntaxHighlighter,
             })

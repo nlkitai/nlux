@@ -21,8 +21,8 @@ describe('Code Block Markdowns Parser', () => {
     beforeEach(() => {
         rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement, undefined, {
-            skipAnimation: true,
-            skipCopyToClipboardButton: true,
+            skipStreamingAnimation: true,
+            showCodeBlockCopyButton: false,
         });
     });
 

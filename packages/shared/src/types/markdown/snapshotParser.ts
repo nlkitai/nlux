@@ -3,7 +3,7 @@ import {HighlighterExtension} from '../../../../js/core/src/exports/aiChat/highl
 export type SnapshotParserOptions = {
     openLinksInNewWindow?: boolean;
     syntaxHighlighter?: HighlighterExtension;
-    skipCopyToClipboardButton?: boolean;
+    showCodeBlockCopyButton?: boolean;
 };
 
 export type SnapshotParser = (
@@ -11,6 +11,6 @@ export type SnapshotParser = (
     options?: {
         syntaxHighlighter?: HighlighterExtension,
         openLinksInNewWindow?: boolean;
-        skipCopyToClipboardButton?: boolean;
+        showCodeBlockCopyButton?: boolean;
     },
 ) => string;

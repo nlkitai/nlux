@@ -49,13 +49,14 @@ export const renderChatItem: CompRenderer<
     appendToRoot(root);
 
     let markdownStreamParser: MarkdownStreamParser | undefined = undefined;
-
     let markdownStreamProps: CompChatItemProps = {...props};
+
     const initMarkdownStreamParser = (newProps: CompChatItemProps) => {
         return createMarkdownStreamParser(markdownContainer, {
-            openLinksInNewWindow: newProps.openMdLinksInNewWindow ?? true,
-            skipAnimation: newProps.skipAnimation ?? false,
             syntaxHighlighter: newProps.syntaxHighlighter,
+            openLinksInNewWindow: newProps.openMdLinksInNewWindow,
+            showCodeBlockCopyButton: newProps.showCodeBlockCopyButton,
+            skipStreamingAnimation: newProps.skipStreamingAnimation,
             streamingAnimationSpeed: newProps.streamingAnimationSpeed,
             onComplete: () => compEvent('markdown-stream-complete'),
         });

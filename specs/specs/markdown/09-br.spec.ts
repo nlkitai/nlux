@@ -9,7 +9,7 @@ describe('Line Breaks Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
     });
 
     it('should render a line break with two spaces and a new line', async () => {

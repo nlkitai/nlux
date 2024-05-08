@@ -12,16 +12,16 @@ export const createMdStreamRenderer: StandardStreamParser = (
 ) => {
     const {
         streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
-        skipAnimation = false,
-        skipCopyToClipboardButton = false,
-        openLinksInNewWindow = false,
+        openLinksInNewWindow = true,
+        showCodeBlockCopyButton = true,
+        skipStreamingAnimation = false,
     } = options || {};
     const rootMarkdownProcessor = new RootProcessor(
         root,
         undefined,
         {
             syntaxHighlighter,
-            skipCopyToClipboardButton,
+            showCodeBlockCopyButton,
             openLinksInNewWindow,
         },
     );
@@ -33,9 +33,9 @@ export const createMdStreamRenderer: StandardStreamParser = (
     let isProcessing = false;
     let yielded = false;
 
-    // skipAnimation => 0 milliseconds between characters (no animation)
+    // skipStreamingAnimation => 0 milliseconds between characters (no animation)
     // streamingAnimationSpeed => speed value that cannot be lower than 0
-    const streamingAnimationSpeedToUse = skipAnimation ? 0 : Math.max(streamingAnimationSpeed, 0);
+    const streamingAnimationSpeedToUse = skipStreamingAnimation ? 0 : Math.max(streamingAnimationSpeed, 0);
 
     // If no characters are processed for 500ms, we consider the stream complete
     const numberOfEmptyChecksBeforeCompletion = Math.ceil(200 / markdownDefaultStreamingAnimationSpeed);

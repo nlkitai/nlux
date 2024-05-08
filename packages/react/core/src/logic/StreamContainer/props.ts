@@ -11,6 +11,9 @@ export type StreamContainerProps<AisMsg> = {
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
         openLinksInNewWindow?: boolean;
+        showCodeBlockCopyButton?: boolean;
+        skipStreamingAnimation?: boolean;
+        streamingAnimationSpeed?: number;
     }
 };
 

@@ -108,6 +108,9 @@ export class RootProcessor extends BaseMarkdownProcessor {
                 createMarkdownProcessor(
                     'Paragraph',
                     this,
+                    undefined,
+                    undefined,
+                    this.markdownProcessorOptions,
                 );
 
                 this.parsingChild?.setParsingChild(parsingChild);
@@ -137,6 +140,7 @@ export class RootProcessor extends BaseMarkdownProcessor {
                 this,
                 undefined,
                 this.sequenceParser.sequence,
+                this.markdownProcessorOptions,
             );
 
             this.sequenceParser.reset();

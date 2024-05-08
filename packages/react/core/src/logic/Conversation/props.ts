@@ -11,6 +11,9 @@ export type ConversationCompProps<AiMsg> = {
     responseRenderer?: ResponseComponent<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
     openLinksInNewWindow?: boolean;
+    showCodeBlockCopyButton?: boolean;
+    skipStreamingAnimation?: boolean;
+    streamingAnimationSpeed?: number;
     loader?: ReactElement;
     onLastActiveSegmentChange?: (data: {
         uid: string;

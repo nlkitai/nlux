@@ -6,9 +6,10 @@ export type CompChatItemEvents = 'markdown-stream-complete';
 export type CompChatItemProps = {
     uid: string;
     domProps: ChatItemProps;
-    openMdLinksInNewWindow?: boolean;
-    skipAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
+    openMdLinksInNewWindow?: boolean;
+    showCodeBlockCopyButton?: boolean;
+    skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
 };
 

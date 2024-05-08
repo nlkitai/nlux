@@ -16,17 +16,30 @@ export type PromptRenderer = (content: PromptRendererProps) => HTMLElement | nul
 
 export type MessageOptions<AiMsg> = {
     /**
-     * Indicates whether the message should be rendered as markdown.
-     * @default true
+     * Highlighter extension for code blocks inside messages.
      */
-    useMarkdown?: boolean;
+    syntaxHighlighter?: HighlighterExtension;
 
     /**
      * Indicates whether markdown links should open in a new window.
      *
-     * @default false
+     * @default true
      */
     openMdLinksInNewWindow?: boolean;
+
+    /**
+     * Indicates whether the copy button should be shown for code blocks.
+     *
+     * @default true
+     */
+    showCodeBlockCopyButton?: boolean;
+
+    /**
+     * Indicates whether the streaming animation should be skipped.
+     *
+     * @default false
+     */
+    skipStreamingAnimation?: boolean;
 
     /**
      * The interval in milliseconds at which new characters are added when a message is being generated and
@@ -45,9 +58,4 @@ export type MessageOptions<AiMsg> = {
      * Custom function to render the message sent by the user.
      */
     promptRenderer?: PromptRenderer;
-
-    /**
-     * Highlighter extension for code blocks inside messages.
-     */
-    syntaxHighlighter?: HighlighterExtension;
 }

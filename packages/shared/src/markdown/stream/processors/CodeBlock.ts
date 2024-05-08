@@ -95,7 +95,7 @@ export class CodeBlock extends ProcessorWithChildren {
     yield(elementToCreateAtParentLevel?: MarkdownElementName, characterToAppendToParent?: string) {
         this.highlightCurrentLine();
 
-        if (!this.markdownProcessorOptions.skipCopyToClipboardButton) {
+        if (this.markdownProcessorOptions.showCodeBlockCopyButton) {
             this.insertCopyToClipboardButton();
         }
 

@@ -9,7 +9,7 @@ export type CompConversationProps<AiMsg> = {
     botPersona?: BotPersona;
     userPersona?: UserPersona;
     openMdLinksInNewWindow?: boolean;
-    skipAnimation?: boolean;
+    skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;
 };

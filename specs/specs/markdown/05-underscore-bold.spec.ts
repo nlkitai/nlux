@@ -9,7 +9,7 @@ describe('Underscore Bold Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
     });
 
     it('should render a bold in the middle of a paragraph', async () => {

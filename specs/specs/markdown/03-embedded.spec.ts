@@ -9,7 +9,7 @@ describe('Basic Embedded Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
     });
 
     it('should render a code in the middle of a paragraph', async () => {

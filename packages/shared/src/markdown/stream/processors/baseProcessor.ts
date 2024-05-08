@@ -5,7 +5,7 @@ import {SequenceParser} from '../sequenceParser';
 
 export type MarkdownProcessorOptions = {
     syntaxHighlighter?: HighlighterExtension;
-    skipCopyToClipboardButton?: boolean;
+    showCodeBlockCopyButton?: boolean;
     openLinksInNewWindow?: boolean;
 };
 

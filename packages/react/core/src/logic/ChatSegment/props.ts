@@ -11,6 +11,9 @@ export type ChatSegmentProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;
     openLinksInNewWindow?: boolean;
+    showCodeBlockCopyButton?: boolean;
+    skipStreamingAnimation?: boolean;
+    streamingAnimationSpeed?: number;
     containerRef?: RefObject<HTMLDivElement>;
 };
 
