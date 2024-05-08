@@ -3,7 +3,7 @@ import {warn} from '../../../../../shared/src/utils/warn';
 
 export const transformInputBasedOnSchema = <AiMsg>(
     message: string,
-    conversationHistory: readonly ChatItem<AiMsg>[] | undefined,
+    conversationHistory: ChatItem<AiMsg>[] | undefined,
     schema: any,
     runnableName: string,
 ): any | undefined => {

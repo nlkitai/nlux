@@ -1,4 +1,4 @@
-import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegmentItem, ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {debug} from '../../../../../../shared/src/utils/debug';
 import {uid} from '../../../../../../shared/src/utils/uid';
@@ -29,7 +29,7 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
-        this.conversationContent = props.messages?.map((message) => ({...message})) ?? [];
+        this.addChatSegment('complete', props.messages);
     }
 
     public addChatItem(segmentId: string, item: ChatSegmentItem<AiMsg>) {
@@ -47,7 +47,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         chatSegment.addChatItem(item);
     }
 
-    public addChatSegment() {
+    public addChatSegment(
+        status: ChatSegmentStatus = 'active',
+        initialConversation?: ChatItem<AiMsg>[],
+    ) {
         this.throwIfDestroyed();
 
         const segmentId = uid();
@@ -55,7 +58,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withContext(this.context)
             .withProps({
                 uid: segmentId,
-                status: 'active',
+                status,
                 openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
                 skipAnimation: this.props.skipAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
@@ -63,8 +66,36 @@ export class CompConversation<AiMsg> extends BaseComp<
             } satisfies CompChatSegmentProps)
             .create();
 
+        if (initialConversation) {
+            for (const item of initialConversation) {
+                this.conversationContent.push(item);
+                if (item.role === 'ai') {
+                    newChatSegmentComp.addChatItem({
+                        uid: uid(),
+                        participantRole: 'ai',
+                        time: new Date(),
+                        dataTransferMode: 'fetch',
+                        status: 'complete',
+                        content: item.message,
+                    });
+                } else {
+                    if (item.role === 'user') {
+                        newChatSegmentComp.addChatItem({
+                            uid: uid(),
+                            participantRole: 'user',
+                            time: new Date(),
+                            status: 'complete',
+                            content: item.message,
+                        });
+                    } else {
+                        // System messages will not be displayed in the chat
+                    }
+                }
+            }
+        }
+
         this.chatSegmentsById.set(segmentId, newChatSegmentComp);
-        this.addSubComponent(segmentId, newChatSegmentComp, 'messagesContainer');
+        this.addSubComponent(newChatSegmentComp.id, newChatSegmentComp, 'messagesContainer');
         return segmentId;
     };
 

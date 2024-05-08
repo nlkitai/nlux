@@ -10,7 +10,7 @@ export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-    initialConversationContent?: readonly ChatItem<AiMsg>[];
+    initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;
     promptBox: Partial<PromptBoxProps>;
     openMdLinksInNewWindow?: boolean;

@@ -93,6 +93,30 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                     conversationContainer,
                     this.props.autoScroll ?? true,
                 );
+
+                // Attempt to scroll to the bottom of the conversation container on initial render.
+                // Initially do it every 10ms for 200ms, then stop.
+                let numberOfScrollToBottomAttempts = 0;
+                const maxNumberOfScrollToBottomAttempts = 20;
+                const attemptsInterval = 10;
+
+                const attemptScrollToBottom = () => {
+                    // Only scroll to the bottom if the conversation container is already rendered
+                    if (conversationContainer.scrollHeight > conversationContainer.clientHeight) {
+                        conversationContainer.scrollTo({behavior: 'smooth', top: 50000});
+                        clearInterval(intervalId);
+                    }
+                };
+
+                const intervalId = setInterval(() => {
+                    if (numberOfScrollToBottomAttempts >= maxNumberOfScrollToBottomAttempts) {
+                        clearInterval(intervalId);
+                        return;
+                    }
+
+                    attemptScrollToBottom();
+                    numberOfScrollToBottomAttempts++;
+                }, attemptsInterval);
             }
 
             this.context.emit('ready', {
@@ -164,7 +188,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     private addConversation(
         botPersona?: BotPersona,
         userPersona?: UserPersona,
-        initialConversationContent?: readonly ChatItem<AiMsg>[],
+        initialConversationContent?: ChatItem<AiMsg>[],
     ) {
         this.conversation = comp(CompConversation<AiMsg>)
             .withContext(this.context)

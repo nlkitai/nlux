@@ -4,7 +4,7 @@ import {warn} from '../../../../shared/src/utils/warn';
 import {participantRoleToOpenAiRole} from './participantRoleToOpenAiRole';
 
 export const conversationHistoryToMessagesList: <AiMsg>(
-    conversationHistory: readonly ChatItem<AiMsg>[],
+    conversationHistory: ChatItem<AiMsg>[],
 ) => Array<
     OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
     OpenAI.Chat.Completions.ChatCompletionUserMessageParam |

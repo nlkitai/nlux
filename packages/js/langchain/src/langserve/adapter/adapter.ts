@@ -138,7 +138,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         return aiMessage as AiMsg;
     }
 
-    protected getRequestBody(message: string, conversationHistory?: readonly ChatItem<AiMsg>[]): string {
+    protected getRequestBody(message: string, conversationHistory?: ChatItem<AiMsg>[]): string {
         if (this.inputPreProcessor) {
             const preProcessedInput = this.inputPreProcessor(message, conversationHistory);
             return JSON.stringify({

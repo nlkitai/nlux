@@ -4,23 +4,23 @@ import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOp
 
 export type CompConversationEvents = void;
 
-export type CompConversationProps<AiMsg> = Readonly<{
-    messages?: readonly ChatItem<AiMsg>[];
+export type CompConversationProps<AiMsg> = {
+    messages?: ChatItem<AiMsg>[];
     botPersona?: BotPersona;
     userPersona?: UserPersona;
     openMdLinksInNewWindow?: boolean;
     skipAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;
-}>;
+};
 
-export type CompConversationElements = Readonly<{
+export type CompConversationElements = {
     messagesContainer: HTMLElement;
-}>;
+};
 
-export type CompConversationActions = Readonly<{
+export type CompConversationActions = {
     removeWelcomeMessage: () => void;
     resetWelcomeMessage: () => void;
     updateBotPersona: (newBotPersona: BotPersona | undefined) => void;
     updateUserPersona: (newBotPersona: UserPersona | undefined) => void;
-}>;
+};
