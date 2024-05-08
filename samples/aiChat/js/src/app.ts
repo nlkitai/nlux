@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const initialConversation: ChatItem<string>[] = [
         {
             role: 'ai',
-            message: 'Hello, how can I help you? This is going to be a very long greeting message. '
+            message: 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
                 + 'It is so long that it will be split into multiple lines. It will also showcase that no '
                 + 'typing animation will be shown for this message when it is loaded. This is a very long '
                 + 'message. Trust me.\n'
@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .withLayoutOptions({
             width: 400,
             height: 300,
+        })
+        .withMessageOptions({
+            openMdLinksInNewWindow: true,
         });
 
     aiChat.mount(parent);

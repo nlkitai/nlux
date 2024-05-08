@@ -13,4 +13,5 @@ export type MessageProps = {
     direction: MessageDirection;
     status: MessageStatus;
     message?: string;
+    format?: 'text' | 'markdown'; // Default is 'text'
 };

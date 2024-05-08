@@ -2,7 +2,7 @@ import {createAiChat} from '@nlux-dev/core/src';
 import userEvent from '@testing-library/user-event';
 import {describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMilliseconds, waitForRenderCycle} from '../../../../utils/wait';
 
 describe('createAiChat() + exceptionBox', () => {
     describe('When an exception is thrown by the adapter', () => {
@@ -21,7 +21,7 @@ describe('createAiChat() + exceptionBox', () => {
 
             // Act
             adapterController.reject('Error message');
-            await waitForRenderCycle();
+            await waitForMilliseconds(50);
 
             // Assert
             const exceptionBox = rootElement.querySelector('.nlux-comp-exp_box')!;

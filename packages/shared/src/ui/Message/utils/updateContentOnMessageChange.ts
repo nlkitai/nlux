@@ -6,10 +6,15 @@ export const updateContentOnMessageChange = (
     propsBefore: MessageProps,
     propsAfter: MessageProps,
 ) => {
-    if (propsBefore.message === propsAfter.message) {
+    if (
+        propsBefore.message === propsAfter.message &&
+        propsBefore.format === propsAfter.format
+    ) {
         return;
     }
 
     element.replaceChildren();
-    element.append(createMessageContent(propsAfter.message ?? ''));
+    element.append(
+        createMessageContent(propsAfter.message ?? '', propsAfter.format),
+    );
 };

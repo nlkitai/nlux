@@ -137,5 +137,89 @@ describe('createAiChat() + initialConversation prop', () => {
             // Assert
             expect(aiChatRoomDom!.scrollTo).toHaveBeenCalledWith({behavior: 'smooth', top: 50000});
         });
+
+        describe('When the initial conversation contains markdown', () => {
+            it('Should be parsed and rendered', async () => {
+                // Arrange
+                const initialConversation: ChatItem<string>[] = [
+                    {role: 'ai', message: '**Hello**, how can I help you?'},
+                    {role: 'user', message: 'I need help with my account.'},
+                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                ];
+
+                aiChat = createAiChat()
+                    .withAdapter(adapterController!.adapter)
+                    .withInitialConversation(initialConversation);
+
+                // Act
+                aiChat.mount(rootElement);
+                await waitForMilliseconds(50);
+
+                // Assert
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
+                expect(incomingMessages.length).toBe(2);
+                expect(incomingMessages[0].innerHTML).toEqual(
+                    expect.stringContaining('<strong>Hello</strong>, how can I help you?'));
+                expect(incomingMessages[1].textContent).toEqual(
+                    expect.stringContaining('Sure, I can help you with that.'));
+            });
+
+            describe('When openMdLinksInNewWindow is set to false', () => {
+                it('Should not open links in a new window', async () => {
+                    // Arrange
+                    const initialConversation: ChatItem<string>[] = [
+                        {
+                            role: 'ai',
+                            message: 'Hello, [how can I help you](http://questions.com)?',
+                        },
+                        {role: 'user', message: 'I need help with my account.'},
+                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                    ];
+
+                    aiChat = createAiChat()
+                        .withAdapter(adapterController!.adapter)
+                        .withInitialConversation(initialConversation)
+                        .withMessageOptions({openMdLinksInNewWindow: false});
+
+                    // Act
+                    aiChat.mount(rootElement);
+                    await waitForMilliseconds(50);
+
+                    // Assert
+                    const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                    const link = aiChatDom.querySelector('a')!;
+                    expect(link.getAttribute('target')).toBeNull();
+                });
+            });
+
+            describe('When openMdLinksInNewWindow is set to true', () => {
+                it('Should open links in a new window', async () => {
+                    // Arrange
+                    const initialConversation: ChatItem<string>[] = [
+                        {
+                            role: 'ai',
+                            message: 'Hello, [how can I help you](http://questions.com)?',
+                        },
+                        {role: 'user', message: 'I need help with my account.'},
+                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                    ];
+
+                    aiChat = createAiChat()
+                        .withAdapter(adapterController!.adapter)
+                        .withInitialConversation(initialConversation)
+                        .withMessageOptions({openMdLinksInNewWindow: true});
+
+                    // Act
+                    aiChat.mount(rootElement);
+                    await waitForMilliseconds(50);
+
+                    // Assert
+                    const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                    const link = aiChatDom.querySelector('a')!;
+                    expect(link.getAttribute('target')).toBe('_blank');
+                });
+            });
+        });
     });
 });

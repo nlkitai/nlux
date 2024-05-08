@@ -44,7 +44,7 @@ export const updateMessageDom: DomUpdater<MessageProps> = (
     }
 
     if (currentStatus === 'complete') {
-        if (propsBefore.message !== propsAfter.message) {
+        if (propsBefore.message !== propsAfter.message || propsBefore.format !== propsAfter.format) {
             updateContentOnMessageChange(element, propsBefore, propsAfter);
         }
     }

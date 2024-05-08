@@ -21,7 +21,7 @@ describe('When a message component is rendered and is in complete status', () =>
         it('Should render the message', () => {
             // Arrange
             const dom = createMessageDom({
-                direction: 'incoming', status: 'complete', message: 'Hello, World!',
+                direction: 'incoming', status: 'complete', message: 'Hello, World!', format: 'text',
             });
 
             // Act
@@ -29,6 +29,38 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(html).toBe('<div class="nlux-comp-msg nlux_msg_complete nlux_msg_incoming">Hello, World!</div>');
+        });
+    });
+
+    describe('When rendered with a message and markdown format', () => {
+        it('Should render the message and parse the markdown', () => {
+            // Arrange
+            const dom = createMessageDom({
+                direction: 'incoming', status: 'complete', message: 'Hello, **World!**', format: 'markdown',
+            });
+
+            // Act
+            const html = dom.outerHTML;
+
+            // Assert
+            expect(html).toBe(
+                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_incoming"><p>Hello, <strong>World!</strong></p>\n</div>');
+        });
+    });
+
+    describe('When rendered with a message and text format', () => {
+        it('Should render the message and ignore the markdown', () => {
+            // Arrange
+            const dom = createMessageDom({
+                direction: 'incoming', status: 'complete', message: 'Hello, **World!**', format: 'text',
+            });
+
+            // Act
+            const html = dom.outerHTML;
+
+            // Assert
+            expect(html).toBe(
+                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_incoming">Hello, **World!**</div>');
         });
     });
 

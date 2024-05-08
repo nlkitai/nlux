@@ -189,6 +189,66 @@ describe('<AiChat /> + initialConversation prop', () => {
                     ),
                 );
             });
+
+            describe('When openMdLinksInNewWindow is set to false', () => {
+                it('Should open links in the same window', async () => {
+                    // Arrange
+                    const initialConversation: ChatItem<string>[] = [
+                        {
+                            role: 'ai',
+                            message: 'This is a [link](http://example.com)',
+                        },
+                        {role: 'user', message: 'I need help with my account.'},
+                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                    ];
+
+                    // Act
+                    const aiChat = <AiChat
+                        adapter={adapterController!.adapter}
+                        initialConversation={initialConversation}
+                        messageOptions={{
+                            openMdLinksInNewWindow: false,
+                        }}
+                    />;
+                    render(aiChat);
+                    await waitForRenderCycle();
+
+                    // Assert
+                    const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                    const link = aiChatDom.querySelector('a')!;
+                    expect(link.getAttribute('target')).toBeNull();
+                });
+            });
+
+            describe('When openMdLinksInNewWindow is set to true', () => {
+                it('Should open links in a new window', async () => {
+                    // Arrange
+                    const initialConversation: ChatItem<string>[] = [
+                        {
+                            role: 'ai',
+                            message: 'This is a [link](http://example.com)',
+                        },
+                        {role: 'user', message: 'I need help with my account.'},
+                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                    ];
+
+                    // Act
+                    const aiChat = <AiChat
+                        adapter={adapterController!.adapter}
+                        initialConversation={initialConversation}
+                        messageOptions={{
+                            openMdLinksInNewWindow: true,
+                        }}
+                    />;
+                    render(aiChat);
+                    await waitForRenderCycle();
+
+                    // Assert
+                    const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                    const link = aiChatDom.querySelector('a')!;
+                    expect(link.getAttribute('target')).toBe('_blank');
+                });
+            });
         });
     });
 });

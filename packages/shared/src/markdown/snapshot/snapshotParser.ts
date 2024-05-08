@@ -76,5 +76,5 @@ export const parseMdSnapshot: SnapshotParser = (
         });
     }
 
-    return '<div class="nlux-md-cntr">' + element.innerHTML + '</div>';
+    return element.innerHTML;
 };

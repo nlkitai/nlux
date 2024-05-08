@@ -1,5 +1,6 @@
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {createChatItemDom} from '../../../../../../shared/src/ui/ChatItem/create';
+import {createMessageContent} from '../../../../../../shared/src/ui/Message/utils/createMessageContent';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatItemProps} from './chatItem.types';
@@ -12,7 +13,11 @@ export const renderChatItem: CompRenderer<
     compEvent,
 }) => {
 
-    const root = createChatItemDom(props.domProps);
+    const root = createChatItemDom({
+        ...props.domProps,
+        message: undefined,
+    });
+
     const messageContainer = getElement(root, '.nlux-comp-msg');
     if (!messageContainer) {
         throw new Error('Message container not found');
@@ -27,6 +32,20 @@ export const renderChatItem: CompRenderer<
 
     streamingRoot.append(markdownContainer);
     messageContainer.append(streamingRoot);
+
+    if (props.domProps.message) {
+        const parsedMessage = createMessageContent(
+            props.domProps.message ?? '',
+            'markdown',
+            {
+                openLinksInNewWindow: props.openMdLinksInNewWindow ?? true,
+                syntaxHighlighter: props.syntaxHighlighter,
+            },
+        );
+
+        markdownContainer.append(parsedMessage);
+    }
+
     appendToRoot(root);
 
     let markdownStreamParser: MarkdownStreamParser | undefined = undefined;

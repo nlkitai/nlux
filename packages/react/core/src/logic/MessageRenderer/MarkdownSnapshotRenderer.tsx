@@ -16,5 +16,9 @@ export const MarkdownSnapshotRenderer = (props: {
         return parseMdSnapshot(props.content, markdownOptions);
     }, [props.content, markdownOptions?.openLinksInNewWindow, markdownOptions?.syntaxHighlighter]);
 
-    return <div className={'nlux-md-strm-root'} dangerouslySetInnerHTML={{__html: parsedContent}}/>;
+    return (
+        <div className={'nlux-md-strm-root'}>
+            <div className="nlux-md-cntr" dangerouslySetInnerHTML={{__html: parsedContent}}/>
+        </div>
+    );
 };
