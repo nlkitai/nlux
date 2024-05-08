@@ -7,10 +7,10 @@ export type SnapshotParserOptions = {
 };
 
 export type SnapshotParser = (
-    root: HTMLElement,
+    snapshot: string,
     options?: {
         syntaxHighlighter?: HighlighterExtension,
         openLinksInNewWindow?: boolean;
         skipCopyToClipboardButton?: boolean;
     },
-) => (snapshot: string) => void;
+) => string;

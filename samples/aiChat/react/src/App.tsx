@@ -1,5 +1,6 @@
 import '@nlux-dev/themes/src/luna/theme.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
 import {AiChat, ChatItem} from '@nlux-dev/react/src';
@@ -70,6 +71,7 @@ function App() {
             }}
             messageOptions={{
                 openMdLinksInNewWindow: true,
+                syntaxHighlighter: highlighter,
             }}
         />
     );
