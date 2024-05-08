@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + initialConversation prop', () => {
     let adapterController: AdapterController | undefined;
@@ -27,7 +27,7 @@ describe('<AiChat /> + initialConversation prop', () => {
 
             const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
             render(aiChat);
-            await waitForMdStreamToComplete(50);
+            await waitForRenderCycle();
 
             // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -35,8 +35,8 @@ describe('<AiChat /> + initialConversation prop', () => {
             // Assert
             const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
             expect(incomingMessages.length).toBe(2);
-            expect(incomingMessages[0].textContent).toBe('Hello, how can I help you?');
-            expect(incomingMessages[1].textContent).toBe('Sure, I can help you with that.');
+            expect(incomingMessages[0].textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
+            expect(incomingMessages[1].textContent).toEqual(expect.stringContaining('Sure, I can help you with that.'));
         });
 
         it('The initial conversation should be loaded instantly without typing animation', async () => {
@@ -79,6 +79,69 @@ describe('<AiChat /> + initialConversation prop', () => {
             const incomingMessage = aiChatDom.querySelector('.nlux_msg_incoming')!;
             expect(incomingMessage.textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
             expect(incomingMessage.textContent).toEqual(expect.stringContaining('We find connection, hand in hand'));
+        });
+
+        describe('When the initial conversation contains markdown', () => {
+            it('Should be parsed and rendered', async () => {
+                // Arrange
+                const initialConversation: ChatItem<string>[] = [
+                    {role: 'ai', message: '**Hello**, how can I help you?'},
+                    {role: 'user', message: 'I need help with my account.'},
+                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                ];
+
+                // Act
+                const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
+                render(aiChat);
+                await waitForRenderCycle();
+
+                // Assert
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
+                expect(incomingMessages.length).toBe(2);
+                expect(incomingMessages[0].innerHTML).toEqual(
+                    expect.stringContaining('<strong>Hello</strong>, how can I help you?'));
+                expect(incomingMessages[1].textContent).toEqual(
+                    expect.stringContaining('Sure, I can help you with that.'));
+            });
+        });
+
+        describe('When the initial conversation contains a code block', () => {
+            it('Should be parsed and rendered', async () => {
+                // Arrange
+                const initialConversation: ChatItem<string>[] = [
+                    {
+                        role: 'ai',
+                        message: 'This is hello worlds in JS:\n```javascript\nconsole.log("Hello World!");\n```',
+                    },
+                    {role: 'user', message: 'I need it in Python'},
+                    {role: 'ai', message: 'Sure, here it is:\n```python\nprint("Hello World!")\n```'},
+                ];
+
+                // Act
+                const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
+                render(aiChat);
+                await waitForRenderCycle();
+
+                // Assert
+                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
+                expect(incomingMessages.length).toBe(2);
+                expect(incomingMessages[0].innerHTML).toEqual(
+                    expect.stringContaining(
+                        '<p>This is hello worlds in JS:</p>\n'
+                        + '<div class="code-block"><pre data-language="javascript"><div>console.log("Hello World!");\n'
+                        + '</div></pre></div>\n',
+                    ),
+                );
+                expect(incomingMessages[1].innerHTML).toEqual(
+                    expect.stringContaining(
+                        '<p>Sure, here it is:</p>\n'
+                        + '<div class="code-block"><pre data-language="python"><div>print("Hello World!")\n'
+                        + '</div></pre></div>\n',
+                    ),
+                );
+            });
         });
     });
 });

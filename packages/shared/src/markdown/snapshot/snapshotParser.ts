@@ -1,5 +1,5 @@
 import {SnapshotParser} from '../../types/markdown/snapshotParser';
-import {parse} from './snarkdown';
+import {marked} from './marked/marked';
 
 export const createMdSnapshotRenderer: SnapshotParser = (
         root: HTMLElement,
@@ -12,16 +12,20 @@ export const createMdSnapshotRenderer: SnapshotParser = (
         } = options || {};
 
         return (snapshot: string) => {
-            const parsedMarkdown = parse(
-                snapshot,
-                {openLinksInNewWindow},
-            );
+            const parsedMarkdown = marked(snapshot, {
+                async: false,
+                breaks: true,
+            });
+
+            if (typeof parsedMarkdown !== 'string') {
+                throw new Error('Markdown parsing failed');
+            }
 
             const element = document.createElement('div');
             element.innerHTML = parsedMarkdown;
 
             // TODO — Add syntax highlighting, block styles, and copy to clipboard button.
-            element.querySelectorAll('pre.code').forEach((block) => {
+            element.querySelectorAll('pre').forEach((block) => {
                 const newBlock = document.createElement('div');
                 newBlock.className = 'code-block';
 
@@ -64,6 +68,13 @@ export const createMdSnapshotRenderer: SnapshotParser = (
 
                 block.replaceWith(newBlock);
             });
+
+            if (openLinksInNewWindow) {
+                element.querySelectorAll('a').forEach((link) => {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
+                });
+            }
 
             root.innerHTML = element.innerHTML;
         };
