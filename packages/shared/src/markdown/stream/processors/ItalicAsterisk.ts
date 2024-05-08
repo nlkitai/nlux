@@ -1,5 +1,6 @@
 import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
+import {MarkdownProcessorOptions} from './baseProcessor';
 import {ProcessorWithChildren} from './baseProcessorWithChildren';
 
 export class ItalicAsteriskProcessor extends ProcessorWithChildren {
@@ -7,13 +8,14 @@ export class ItalicAsteriskProcessor extends ProcessorWithChildren {
         parent: MarkdownProcessorInterface,
         openingSequence?: string,
         initialContent?: string,
+        options?: MarkdownProcessorOptions,
     ) {
         super(
             parent,
             'ItalicAsterisk',
             openingSequence ?? null,
             initialContent ?? null,
-            null,
+            options ?? null,
         );
     }
 

@@ -10,7 +10,7 @@ export type ConversationCompProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     responseRenderer?: ResponseComponent<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
-    openLinksInNewWindow?: boolean;
+    markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;

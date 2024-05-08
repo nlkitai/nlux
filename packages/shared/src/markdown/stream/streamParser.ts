@@ -12,7 +12,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
 ) => {
     const {
         streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
-        openLinksInNewWindow = true,
+        markdownLinkTarget,
         showCodeBlockCopyButton = true,
         skipStreamingAnimation = false,
     } = options || {};
@@ -21,8 +21,8 @@ export const createMdStreamRenderer: StandardStreamParser = (
         undefined,
         {
             syntaxHighlighter,
+            markdownLinkTarget,
             showCodeBlockCopyButton,
-            openLinksInNewWindow,
         },
     );
 

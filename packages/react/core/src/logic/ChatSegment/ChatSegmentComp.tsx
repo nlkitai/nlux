@@ -116,7 +116,7 @@ export const ChatSegmentComp: <AiMsg>(
                             name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
-                            openLinksInNewWindow={props.openLinksInNewWindow}
+                            markdownLinkTarget={props.markdownLinkTarget}
                             showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                             skipStreamingAnimation={props.skipStreamingAnimation}
                             streamingAnimationSpeed={props.streamingAnimationSpeed}
@@ -150,7 +150,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
-                                    openLinksInNewWindow={props.openLinksInNewWindow}
+                                    markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}
                                     streamingAnimationSpeed={props.streamingAnimationSpeed}
@@ -187,7 +187,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
-                                    openLinksInNewWindow={props.openLinksInNewWindow}
+                                    markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}
                                     streamingAnimationSpeed={props.streamingAnimationSpeed}
@@ -213,7 +213,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
-                                    openLinksInNewWindow={props.openLinksInNewWindow}
+                                    markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}
                                     streamingAnimationSpeed={props.streamingAnimationSpeed}

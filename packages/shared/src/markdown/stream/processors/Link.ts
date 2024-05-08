@@ -54,7 +54,7 @@ export class LinkProcessor extends ProcessorWithChildren {
             link.href = match[2];
         }
 
-        if (this.markdownProcessorOptions.openLinksInNewWindow) {
+        if (this.markdownProcessorOptions.markdownLinkTarget !== 'self') { // Default to 'blank'
             link.target = '_blank';
         }
 

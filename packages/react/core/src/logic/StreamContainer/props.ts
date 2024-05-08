@@ -10,7 +10,7 @@ export type StreamContainerProps<AisMsg> = {
     responseRenderer?: ResponseComponent<AisMsg>;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
-        openLinksInNewWindow?: boolean;
+        markdownLinkTarget?: 'blank' | 'self';
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;

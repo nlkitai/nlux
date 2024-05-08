@@ -43,7 +43,7 @@ export const ChatItemComp: <AiMsg>(
     }, [
         isStreaming,
         props.uid, props.status, props.message, props.direction,
-        props.responseRenderer, props.syntaxHighlighter, props.openLinksInNewWindow,
+        props.responseRenderer, props.syntaxHighlighter, props.markdownLinkTarget,
     ]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
@@ -63,7 +63,7 @@ export const ChatItemComp: <AiMsg>(
                     responseRenderer={props.responseRenderer}
                     markdownOptions={{
                         syntaxHighlighter: props.syntaxHighlighter,
-                        openLinksInNewWindow: props.openLinksInNewWindow,
+                        markdownLinkTarget: props.markdownLinkTarget,
                         showCodeBlockCopyButton: props.showCodeBlockCopyButton,
                         skipStreamingAnimation: props.skipStreamingAnimation,
                         streamingAnimationSpeed: props.streamingAnimationSpeed,

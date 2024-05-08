@@ -21,11 +21,13 @@ export type MessageOptions<AiMsg> = {
     syntaxHighlighter?: HighlighterExtension;
 
     /**
-     * Indicates whether markdown links should open in a new window.
+     * Indicates the target of the links in the markdown messages.
+     * - 'blank': Open links in a new tab.
+     * - 'self': Open links in the same tab.
      *
-     * @default true
+     * @default 'blank'
      */
-    openMdLinksInNewWindow?: boolean;
+    markdownLinkTarget?: 'blank' | 'self';
 
     /**
      * Indicates whether the copy button should be shown for code blocks.

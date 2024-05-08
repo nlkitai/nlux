@@ -74,6 +74,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newHeading.init();
@@ -86,6 +87,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newCode.init();
@@ -111,6 +113,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newBold.init();
@@ -123,6 +126,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newBold.init();
@@ -135,6 +139,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newItalic.init();
@@ -147,6 +152,7 @@ export const createMarkdownProcessor = (
             parent,
             sequence,
             initialContent,
+            options,
         );
 
         newItalic.init();

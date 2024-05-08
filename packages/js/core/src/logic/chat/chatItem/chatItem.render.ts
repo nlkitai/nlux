@@ -38,7 +38,7 @@ export const renderChatItem: CompRenderer<
             props.domProps.message ?? '',
             'markdown',
             {
-                openLinksInNewWindow: props.openMdLinksInNewWindow ?? true,
+                markdownLinkTarget: props.markdownLinkTarget,
                 syntaxHighlighter: props.syntaxHighlighter,
             },
         );
@@ -54,7 +54,7 @@ export const renderChatItem: CompRenderer<
     const initMarkdownStreamParser = (newProps: CompChatItemProps) => {
         return createMarkdownStreamParser(markdownContainer, {
             syntaxHighlighter: newProps.syntaxHighlighter,
-            openLinksInNewWindow: newProps.openMdLinksInNewWindow,
+            markdownLinkTarget: newProps.markdownLinkTarget,
             showCodeBlockCopyButton: newProps.showCodeBlockCopyButton,
             skipStreamingAnimation: newProps.skipStreamingAnimation,
             streamingAnimationSpeed: newProps.streamingAnimationSpeed,

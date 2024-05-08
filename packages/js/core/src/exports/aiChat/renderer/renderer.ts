@@ -154,7 +154,7 @@ export class NluxRenderer<AiMsg> {
                     autoScroll: this.theConversationOptions?.autoScroll,
                     streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed ?? undefined,
                     syntaxHighlighter: this.context.syntaxHighlighter,
-                    openMdLinksInNewWindow: this.theMessageOptions?.openMdLinksInNewWindow ?? undefined,
+                    markdownLinkTarget: this.theMessageOptions?.markdownLinkTarget ?? undefined,
                     skipStreamingAnimation: false,
                     promptBox: {
                         placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
@@ -338,7 +338,7 @@ export class NluxRenderer<AiMsg> {
             this.theMessageOptions = props.messageOptions ?? {};
             this.chatRoom?.setProps({
                 streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed ?? undefined,
-                openMdLinksInNewWindow: props.messageOptions?.openMdLinksInNewWindow ?? undefined,
+                markdownLinkTarget: props.messageOptions?.markdownLinkTarget ?? undefined,
                 syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
             });
 

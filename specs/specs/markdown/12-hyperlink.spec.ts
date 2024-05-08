@@ -11,7 +11,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement, undefined, {
             skipStreamingAnimation: true,
-            openLinksInNewWindow: false,
+            markdownLinkTarget: 'self',
         });
     });
 
@@ -36,7 +36,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render a link that opens in a new window', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, undefined,
-            {skipStreamingAnimation: true, openLinksInNewWindow: true},
+            {skipStreamingAnimation: true, markdownLinkTarget: 'blank'},
         );
 
         streamRenderer.next('[Hi New Window](http://world.com)');
@@ -48,7 +48,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     it('should render a link to the same window', async () => {
         streamRenderer = createMdStreamRenderer(rootElement, undefined,
-            {skipStreamingAnimation: true, openLinksInNewWindow: false},
+            {skipStreamingAnimation: true, markdownLinkTarget: 'self'},
         );
 
         streamRenderer.next('[Hi New Window](http://world.com)');

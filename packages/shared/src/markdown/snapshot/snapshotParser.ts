@@ -8,7 +8,7 @@ export const parseMdSnapshot: SnapshotParser = (
 
     const {
         showCodeBlockCopyButton = true,
-        openLinksInNewWindow = true,
+        markdownLinkTarget,
         syntaxHighlighter,
     } = options || {};
 
@@ -69,7 +69,7 @@ export const parseMdSnapshot: SnapshotParser = (
         block.replaceWith(newBlock);
     });
 
-    if (openLinksInNewWindow) {
+    if (markdownLinkTarget !== 'self') { // Default to 'blank'
         element.querySelectorAll('a').forEach((link) => {
             link.setAttribute('target', '_blank');
             link.setAttribute('rel', 'noopener noreferrer');

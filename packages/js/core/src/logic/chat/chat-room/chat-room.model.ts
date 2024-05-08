@@ -37,7 +37,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             initialConversationContent,
             syntaxHighlighter,
             skipStreamingAnimation,
-            openMdLinksInNewWindow,
+            markdownLinkTarget,
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
@@ -48,7 +48,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             userPersona,
             promptBox,
             syntaxHighlighter,
-            openMdLinksInNewWindow,
+            markdownLinkTarget,
             skipStreamingAnimation,
         });
 
@@ -135,8 +135,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.setProp('syntaxHighlighter', props.syntaxHighlighter!);
         }
 
-        if (props.hasOwnProperty('openLinksInNewWindow')) {
-            this.setProp('openMdLinksInNewWindow', props.openMdLinksInNewWindow!);
+        if (props.hasOwnProperty('markdownLinkTarget')) {
+            this.setProp('markdownLinkTarget', props.markdownLinkTarget!);
         }
 
         if (props.hasOwnProperty('skipStreamingAnimation')) {
@@ -176,7 +176,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'openMdLinksInNewWindow' || key === 'syntaxHighlighter' ||
+            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' ||
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             const updateKey = key satisfies keyof CompConversationProps<AiMsg>;
@@ -196,7 +196,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 botPersona,
                 userPersona,
                 messages: initialConversationContent,
-                openMdLinksInNewWindow: this.props.openMdLinksInNewWindow,
+                markdownLinkTarget: this.props.markdownLinkTarget,
                 skipStreamingAnimation: this.props.skipStreamingAnimation,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
                 syntaxHighlighter: this.props.syntaxHighlighter,

@@ -70,7 +70,7 @@ function App() {
                 autoScroll: true,
             }}
             messageOptions={{
-                openMdLinksInNewWindow: true,
+                markdownLinkTarget: 'blank',
                 syntaxHighlighter: highlighter,
             }}
         />

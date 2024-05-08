@@ -7,15 +7,13 @@ export type MarkdownStreamParser = {
 };
 
 export type MarkdownStreamParserOptions = {
-    openLinksInNewWindow?: boolean;
+    markdownLinkTarget?: 'blank' | 'self';
     syntaxHighlighter?: HighlighterExtension;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     showCodeBlockCopyButton?: boolean;
     onComplete?: Function;
 };
-
-export type MarkdownStreamParserConfigOption = keyof Omit<MarkdownStreamParserOptions, 'onComplete'>;
 
 export const createMarkdownStreamParser = (
     domElement: HTMLElement,
@@ -25,7 +23,7 @@ export const createMarkdownStreamParser = (
         domElement,
         options?.syntaxHighlighter,
         {
-            openLinksInNewWindow: options?.openLinksInNewWindow,
+            markdownLinkTarget: options?.markdownLinkTarget,
             showCodeBlockCopyButton: options?.showCodeBlockCopyButton,
             skipStreamingAnimation: options?.skipStreamingAnimation,
             streamingAnimationSpeed: options?.streamingAnimationSpeed,

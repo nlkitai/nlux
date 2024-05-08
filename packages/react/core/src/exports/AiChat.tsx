@@ -117,7 +117,7 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         responseRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
-                        openLinksInNewWindow={props.messageOptions?.openMdLinksInNewWindow}
+                        markdownLinkTarget={props.messageOptions?.markdownLinkTarget}
                         showCodeBlockCopyButton={props.messageOptions?.showCodeBlockCopyButton}
                         skipStreamingAnimation={props.messageOptions?.skipStreamingAnimation}
                         streamingAnimationSpeed={props.messageOptions?.streamingAnimationSpeed}

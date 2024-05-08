@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
+describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
         adapterController = undefined;
     });
 
-    describe('When openMdLinksInNewWindow is not set', () => {
+    describe('When markdownLinkTarget is not set', () => {
         it('Markdown links should open in a new window', async () => {
             const aiChat = (
                 <AiChat
@@ -47,7 +47,7 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When openMdLinksInNewWindow is updated to true after mounting', () => {
+        describe('When markdownLinkTarget is updated to true after mounting', () => {
             it('Markdown links should still open in a new window', async () => {
                 // Arrange
                 const aiChat = (
@@ -66,7 +66,7 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
                 rerender(
                     <AiChat
                         adapter={adapterController!.adapter}
-                        messageOptions={{openMdLinksInNewWindow: true}}
+                        messageOptions={{markdownLinkTarget: 'blank'}}
                     />,
                 );
                 await waitForRenderCycle();
@@ -85,13 +85,13 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
         });
     });
 
-    describe('When openMdLinksInNewWindow is set to true', () => {
+    describe('When markdownLinkTarget is set to true', () => {
         it('Markdown links should open in a new window', async () => {
             // Arrange
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    messageOptions={{openMdLinksInNewWindow: true}}
+                    messageOptions={{markdownLinkTarget: 'blank'}}
                 />
             );
             const {container} = render(aiChat);
@@ -114,13 +114,13 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When openMdLinksInNewWindow is updated to false after mounting', () => {
+        describe('When markdownLinkTarget is updated to false after mounting', () => {
             it('Markdown links should not open in a new window', async () => {
                 // Arrange
                 const aiChat = (
                     <AiChat
                         adapter={adapterController!.adapter}
-                        messageOptions={{openMdLinksInNewWindow: true}}
+                        messageOptions={{markdownLinkTarget: 'blank'}}
                     />
                 );
                 const {container, rerender} = render(aiChat);
@@ -134,7 +134,7 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
                 rerender(
                     <AiChat
                         adapter={adapterController!.adapter}
-                        messageOptions={{openMdLinksInNewWindow: false}}
+                        messageOptions={{markdownLinkTarget: 'self'}}
                     />,
                 );
                 await waitForRenderCycle();
@@ -153,12 +153,12 @@ describe('<AiChat /> + messageOptions + openMdLinksInNewWindow', () => {
         });
     });
 
-    describe('When openMdLinksInNewWindow is set to false', () => {
+    describe('When markdownLinkTarget is set to false', () => {
         it('Markdown links should not open in a new window', async () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    messageOptions={{openMdLinksInNewWindow: false}}
+                    messageOptions={{markdownLinkTarget: 'self'}}
                 />
             );
             const {container} = render(aiChat);

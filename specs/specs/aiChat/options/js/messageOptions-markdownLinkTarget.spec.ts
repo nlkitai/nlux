@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
+describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -27,7 +27,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
         aiChat = undefined;
     });
 
-    describe('When openMdLinksInNewWindow is not set', () => {
+    describe('When markdownLinkTarget is not set', () => {
         it('Markdown links should open in a new window', async () => {
             // Arrange
             aiChat = createAiChat()
@@ -53,7 +53,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When openMdLinksInNewWindow is updated to true after mounting', () => {
+        describe('When markdownLinkTarget is updated to true after mounting', () => {
             it('Markdown links should still open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
@@ -64,7 +64,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
-                aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: true}});
+                aiChat.updateProps({messageOptions: {markdownLinkTarget: 'blank'}});
                 await waitForRenderCycle();
 
                 await userEvent.type(textArea, 'Give me a link please{enter}');
@@ -84,11 +84,11 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
         });
     });
 
-    describe('When openMdLinksInNewWindow is set to true', () => {
+    describe('When markdownLinkTarget is set to true', () => {
         it('Markdown links should open in a new window', async () => {
             // Arrange
             aiChat = createAiChat()
-                .withMessageOptions({openMdLinksInNewWindow: true})
+                .withMessageOptions({markdownLinkTarget: 'blank'})
                 .withAdapter(adapterController!.adapter);
 
             aiChat.mount(rootElement);
@@ -111,7 +111,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When openMdLinksInNewWindow is updated to false after mounting', () => {
+        describe('When markdownLinkTarget is updated to false after mounting', () => {
             it.todo('Markdown links should not open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
@@ -122,7 +122,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
-                aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: false}});
+                aiChat.updateProps({messageOptions: {markdownLinkTarget: 'self'}});
                 await waitForRenderCycle();
 
                 await userEvent.type(textArea, 'Give me a link please{enter}');
@@ -142,11 +142,11 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
         });
     });
 
-    describe('When openMdLinksInNewWindow is set to false', () => {
+    describe('When markdownLinkTarget is set to false', () => {
         it('Markdown links should not open in a new window', async () => {
             // Arrange
             aiChat = createAiChat()
-                .withMessageOptions({openMdLinksInNewWindow: false})
+                .withMessageOptions({markdownLinkTarget: 'self'})
                 .withAdapter(adapterController!.adapter);
 
             aiChat.mount(rootElement);
@@ -169,11 +169,11 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             expect(link!.getAttribute('target')).toBeNull();
         });
 
-        describe('When openMdLinksInNewWindow is updated to true after mounting', () => {
+        describe('When markdownLinkTarget is updated to true after mounting', () => {
             it.todo('Markdown links should open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
-                    .withMessageOptions({openMdLinksInNewWindow: false})
+                    .withMessageOptions({markdownLinkTarget: 'self'})
                     .withAdapter(adapterController!.adapter);
 
                 aiChat.mount(rootElement);
@@ -181,7 +181,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
-                aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: true}});
+                aiChat.updateProps({messageOptions: {markdownLinkTarget: 'blank'}});
                 await waitForRenderCycle();
 
                 await userEvent.type(textArea, 'Give me a link please{enter}');

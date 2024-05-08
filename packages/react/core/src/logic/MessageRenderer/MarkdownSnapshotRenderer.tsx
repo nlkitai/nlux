@@ -13,8 +13,12 @@ export const MarkdownSnapshotRenderer = (props: {
             return '';
         }
 
-        return parseMdSnapshot(props.content, markdownOptions);
-    }, [props.content, markdownOptions?.openLinksInNewWindow, markdownOptions?.syntaxHighlighter]);
+        return parseMdSnapshot(props.content, {
+            syntaxHighlighter: markdownOptions?.syntaxHighlighter,
+            markdownLinkTarget: markdownOptions?.markdownLinkTarget,
+            showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
+        });
+    }, [props.content, markdownOptions?.markdownLinkTarget, markdownOptions?.syntaxHighlighter]);
 
     return (
         <div className={'nlux-md-strm-root'}>

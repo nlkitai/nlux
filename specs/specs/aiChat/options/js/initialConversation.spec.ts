@@ -165,7 +165,7 @@ describe('createAiChat() + initialConversation prop', () => {
                     expect.stringContaining('Sure, I can help you with that.'));
             });
 
-            describe('When openMdLinksInNewWindow is set to false', () => {
+            describe('When markdownLinkTarget is set to false', () => {
                 it('Should not open links in a new window', async () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
@@ -180,7 +180,7 @@ describe('createAiChat() + initialConversation prop', () => {
                     aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withInitialConversation(initialConversation)
-                        .withMessageOptions({openMdLinksInNewWindow: false});
+                        .withMessageOptions({markdownLinkTarget: 'self'});
 
                     // Act
                     aiChat.mount(rootElement);
@@ -193,7 +193,7 @@ describe('createAiChat() + initialConversation prop', () => {
                 });
             });
 
-            describe('When openMdLinksInNewWindow is set to true', () => {
+            describe('When markdownLinkTarget is set to true', () => {
                 it('Should open links in a new window', async () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
@@ -208,7 +208,7 @@ describe('createAiChat() + initialConversation prop', () => {
                     aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withInitialConversation(initialConversation)
-                        .withMessageOptions({openMdLinksInNewWindow: true});
+                        .withMessageOptions({markdownLinkTarget: 'blank'});
 
                     // Act
                     aiChat.mount(rootElement);

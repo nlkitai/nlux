@@ -10,7 +10,7 @@ export type ChatSegmentProps<AiMsg> = {
     loader?: ReactElement;
     personaOptions?: PersonaOptions;
     syntaxHighlighter?: HighlighterExtension;
-    openLinksInNewWindow?: boolean;
+    markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;

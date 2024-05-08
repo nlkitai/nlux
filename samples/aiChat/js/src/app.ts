@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             height: 300,
         })
         .withMessageOptions({
-            openMdLinksInNewWindow: true,
+            markdownLinkTarget: 'blank',
             syntaxHighlighter: highlighter,
         });
 

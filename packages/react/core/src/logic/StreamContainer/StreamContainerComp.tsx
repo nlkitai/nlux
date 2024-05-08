@@ -47,12 +47,12 @@ export const StreamContainerComp = function <AiChat>(
         }
     }, [streamContainer]);
 
-    // We update the stream parser when key options (openLinksInNewWindow, syntaxHighlighter) change.
+    // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter) change.
     useEffect(() => {
         const element = streamingDomService.getStreamingDomElement(uid);
         mdStreamParserRef.current = createMarkdownStreamParser(element, {
             syntaxHighlighter: markdownOptions?.syntaxHighlighter,
-            openLinksInNewWindow: markdownOptions?.openLinksInNewWindow,
+            markdownLinkTarget: markdownOptions?.markdownLinkTarget,
             showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
             skipStreamingAnimation: markdownOptions?.skipStreamingAnimation,
             streamingAnimationSpeed: markdownOptions?.streamingAnimationSpeed,
@@ -68,7 +68,13 @@ export const StreamContainerComp = function <AiChat>(
             // in the chat segment. This is handled by the streamingDomService.
             streamingDomService.deleteStreamingDomElement(uid);
         };
-    }, [markdownOptions?.openLinksInNewWindow, markdownOptions?.syntaxHighlighter]);
+    }, [
+        markdownOptions?.syntaxHighlighter,
+        markdownOptions?.markdownLinkTarget,
+        markdownOptions?.showCodeBlockCopyButton,
+        markdownOptions?.skipStreamingAnimation,
+        markdownOptions?.streamingAnimationSpeed,
+    ]);
 
     const rootElement = useMemo(() => {
         if (responseRenderer) {

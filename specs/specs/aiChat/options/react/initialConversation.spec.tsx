@@ -190,7 +190,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                 );
             });
 
-            describe('When openMdLinksInNewWindow is set to false', () => {
+            describe('When markdownLinkTarget is set to false', () => {
                 it('Should open links in the same window', async () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
@@ -206,9 +206,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                     const aiChat = <AiChat
                         adapter={adapterController!.adapter}
                         initialConversation={initialConversation}
-                        messageOptions={{
-                            openMdLinksInNewWindow: false,
-                        }}
+                        messageOptions={{markdownLinkTarget: 'self'}}
                     />;
                     render(aiChat);
                     await waitForRenderCycle();
@@ -220,7 +218,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                 });
             });
 
-            describe('When openMdLinksInNewWindow is set to true', () => {
+            describe('When markdownLinkTarget is set to true', () => {
                 it('Should open links in a new window', async () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
@@ -236,9 +234,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                     const aiChat = <AiChat
                         adapter={adapterController!.adapter}
                         initialConversation={initialConversation}
-                        messageOptions={{
-                            openMdLinksInNewWindow: true,
-                        }}
+                        messageOptions={{markdownLinkTarget: 'blank'}}
                     />;
                     render(aiChat);
                     await waitForRenderCycle();

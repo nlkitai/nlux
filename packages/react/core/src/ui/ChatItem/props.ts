@@ -12,7 +12,7 @@ export type ChatItemProps<AiMsg> = {
     name?: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
-    openLinksInNewWindow?: boolean;
+    markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
