@@ -18,32 +18,38 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * A reference to the component definition, as retrieved from the registry.
      */
     protected readonly def: CompDef<PropsType, ElementsType, EventsType, ActionsType> | null;
+
     /**
      * Props that are used to render the component and update the DOM tree.
      * This map is constructed from the props provided by the user, but it can be modified by
      * the component using the setProp() method.
      */
     protected elementProps: Map<keyof PropsType, PropsType[keyof PropsType]>;
+
     /**
      * Props that are provided by the component user.
      */
     protected props: Readonly<PropsType>;
+
     /**
      * A reference to the DOM tree of the current component, and a callback that is called when the
      * component is destroyed.
      */
     protected renderedDom: CompDom<ElementsType, ActionsType> | null;
+
     /**
      * Internally used event listeners that are registerer by the renderer.
      * Those events are mounted on the DOM tree of the component by the renderer.
      * This map can be used by components that extend the BaseComp to register listeners.
      */
     protected rendererEventListeners: Map<EventsType, Function>;
+
     /**
      * Props that are passed to the renderer.
      * This map is constructed from the props provided by the user.
      */
     protected rendererProps: PropsType;
+
     /**
      * A reference to the root element of the current component.
      * This could be an HTML element (for most of the cases when the component is rendered in the DOM tree)
@@ -51,33 +57,40 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * This property is set to null when the component is not rendered.
      */
     protected renderingRoot: HTMLElement | DocumentFragment | null;
+
     /**
      * Element IDs of the sub-components that are mounted in the DOM tree of the current component.
      * The key is the ID of the sub-component and the value is the ID of the element in the DOM tree.
      */
     protected subComponentElementIds: Map<string, keyof ElementsType> = new Map();
+
     /**
      * Sub-components that are mounted in the DOM tree of the current component.
      * This list should be filled by user by calling addPart() method in constructor of the component.
      */
     protected subComponents: Map<string, BaseComp<any, any, any, any, any>> = new Map();
+
     /**
      * The context of the current chat component.
      */
     private __context: Readonly<ControllerContext<AiMsg>> | null = null;
+
     /**
      * A flag that indicates if the current component is destroyed.
      * This will prevent the component from being rendered, updated, or used in any way.
      */
     private __destroyed: boolean = false;
+
     /**
      * A unique identifier of the current component instance.
      */
     private readonly __instanceId: string;
+
     /**
      * The status of the current component.
      */
     private __status: CompStatus = 'unmounted';
+
     /**
      * A queue of actions that should be executed on the DOM tree when the component is rendered.
      * This queue is used to store actions that are called before the component is rendered.
