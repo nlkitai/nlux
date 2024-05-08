@@ -17,6 +17,7 @@ export const createMessageRenderer: <AiMsg>(
         responseRenderer,
         syntaxHighlighter,
         openLinksInNewWindow,
+        showCodeBlockCopyButton,
     } = props;
 
     // For custom renderer — When the dataTransferMode is 'streaming', the message is undefined and a containerRef
@@ -56,6 +57,7 @@ export const createMessageRenderer: <AiMsg>(
                 markdownOptions={{
                     syntaxHighlighter,
                     openLinksInNewWindow,
+                    showCodeBlockCopyButton,
                 }}
             />
         );

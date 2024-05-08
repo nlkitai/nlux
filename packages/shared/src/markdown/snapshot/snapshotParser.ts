@@ -7,8 +7,8 @@ export const parseMdSnapshot: SnapshotParser = (
 ): string => {
 
     const {
-        showCodeBlockCopyButton = false,
-        openLinksInNewWindow = false,
+        showCodeBlockCopyButton = true,
+        openLinksInNewWindow = true,
         syntaxHighlighter,
     } = options || {};
 

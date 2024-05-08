@@ -37,7 +37,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+            await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
 
             // Act
@@ -54,7 +54,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
         });
 
         describe('When openMdLinksInNewWindow is updated to true after mounting', () => {
-            it('Markdown links should open in a new window', async () => {
+            it('Markdown links should still open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter);
@@ -67,7 +67,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: true}});
                 await waitForRenderCycle();
 
-                await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+                await userEvent.type(textArea, 'Give me a link please{enter}');
                 await waitForRenderCycle();
 
                 adapterController!.resolve('Click [here](https://example.com)');
@@ -95,7 +95,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+            await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
 
             // Act
@@ -125,7 +125,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: false}});
                 await waitForRenderCycle();
 
-                await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+                await userEvent.type(textArea, 'Give me a link please{enter}');
                 await waitForRenderCycle();
 
                 adapterController!.resolve('Click [here](https://example.com)');
@@ -153,7 +153,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+            await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
 
             // Act
@@ -184,7 +184,7 @@ describe('createAiChat() + messageOptions + openMdLinksInNewWindow', () => {
                 aiChat.updateProps({messageOptions: {openMdLinksInNewWindow: true}});
                 await waitForRenderCycle();
 
-                await userEvent.type(textArea, 'Click [here](https://example.com){enter}');
+                await userEvent.type(textArea, 'Give me a link please{enter}');
                 await waitForRenderCycle();
 
                 adapterController!.resolve('Click [here](https://example.com)');
