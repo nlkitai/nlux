@@ -160,11 +160,12 @@ export class CompConversation<AiMsg> extends BaseComp<
             return;
         }
 
-        if (this.subComponents.has(segmentId)) {
-            this.removeSubComponent(segmentId);
+        const segmentCompId = chatSegment.id;
+        if (this.subComponents.has(segmentCompId)) {
+            this.removeSubComponent(segmentCompId);
         }
 
-        this.chatSegmentsById.delete(segmentId);
+        this.chatSegmentsById.delete(chatSegment.id);
     }
 
     public setBotPersona(botPersona: BotPersona | undefined) {
