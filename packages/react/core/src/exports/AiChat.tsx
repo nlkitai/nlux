@@ -96,6 +96,12 @@ export const AiChat: <AiMsg>(
         initialConversation ? chatItemsToChatSegment(initialConversation) : undefined,
     ), [initialConversation]);
 
+    useEffect(() => {
+        if (initialSegment) {
+            conversationContainerRef.current?.scrollTo({behavior: 'smooth', top: 50000});
+        }
+    }, [initialSegment]);
+
     const ForwardConversationComp = useMemo(
         () => forwardRef(ConversationComp<AiMsg>), []);
 
