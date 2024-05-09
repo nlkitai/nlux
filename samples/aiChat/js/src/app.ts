@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withMessageOptions({
             markdownLinkTarget: 'blank',
             syntaxHighlighter: highlighter,
+            // showCodeBlockCopyButton: false,
         });
 
     aiChat.mount(parent);

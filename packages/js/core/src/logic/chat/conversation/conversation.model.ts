@@ -60,6 +60,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                 uid: segmentId,
                 status,
                 markdownLinkTarget: this.props.markdownLinkTarget,
+                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
                 skipStreamingAnimation: this.props.skipStreamingAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,

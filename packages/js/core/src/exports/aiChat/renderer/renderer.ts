@@ -152,15 +152,16 @@ export class NluxRenderer<AiMsg> {
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
-                    streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed ?? undefined,
                     syntaxHighlighter: this.context.syntaxHighlighter,
-                    markdownLinkTarget: this.theMessageOptions?.markdownLinkTarget ?? undefined,
+                    markdownLinkTarget: this.theMessageOptions?.markdownLinkTarget,
+                    showCodeBlockCopyButton: this.theMessageOptions?.showCodeBlockCopyButton,
+                    streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed,
                     skipStreamingAnimation: false,
                     promptBox: {
-                        placeholder: this.thePromptBoxOptions?.placeholder ?? undefined,
-                        autoFocus: this.thePromptBoxOptions?.autoFocus ?? undefined,
-                        disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton ?? undefined,
-                        submitShortcut: this.thePromptBoxOptions?.submitShortcut ?? undefined,
+                        placeholder: this.thePromptBoxOptions?.placeholder,
+                        autoFocus: this.thePromptBoxOptions?.autoFocus,
+                        disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton,
+                        submitShortcut: this.thePromptBoxOptions?.submitShortcut,
                     },
                 }).create();
 

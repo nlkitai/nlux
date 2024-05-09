@@ -36,8 +36,9 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             userPersona,
             initialConversationContent,
             syntaxHighlighter,
-            skipStreamingAnimation,
             markdownLinkTarget,
+            showCodeBlockCopyButton,
+            skipStreamingAnimation,
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
@@ -46,9 +47,11 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             streamingAnimationSpeed,
             botPersona,
             userPersona,
+            initialConversationContent,
             promptBox,
             syntaxHighlighter,
             markdownLinkTarget,
+            showCodeBlockCopyButton,
             skipStreamingAnimation,
         });
 
@@ -197,6 +200,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 userPersona,
                 messages: initialConversationContent,
                 markdownLinkTarget: this.props.markdownLinkTarget,
+                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
                 skipStreamingAnimation: this.props.skipStreamingAnimation,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,
                 syntaxHighlighter: this.props.syntaxHighlighter,

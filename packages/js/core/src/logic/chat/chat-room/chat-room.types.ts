@@ -14,6 +14,7 @@ export type CompChatRoomProps<AiMsg> = {
     autoScroll?: boolean;
     promptBox: Partial<PromptBoxProps>;
     markdownLinkTarget?: 'blank' | 'self';
+    showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     syntaxHighlighter?: HighlighterExtension;

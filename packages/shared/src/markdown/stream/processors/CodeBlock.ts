@@ -95,7 +95,7 @@ export class CodeBlock extends ProcessorWithChildren {
     yield(elementToCreateAtParentLevel?: MarkdownElementName, characterToAppendToParent?: string) {
         this.highlightCurrentLine();
 
-        if (this.markdownProcessorOptions.showCodeBlockCopyButton) {
+        if (this.markdownProcessorOptions.showCodeBlockCopyButton !== false) { // Defaults to true when undefined
             this.insertCopyToClipboardButton();
         }
 
@@ -185,7 +185,7 @@ export class CodeBlock extends ProcessorWithChildren {
 
         const title = 'Copy code to clipboard';
         const copyButton = document.createElement('button');
-        copyButton.classList.add('copy-button');
+        copyButton.classList.add('nlux-cpy-btn');
         copyButton.setAttribute('aria-label', title);
         copyButton.setAttribute('title', title);
         copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">'

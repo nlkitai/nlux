@@ -5,6 +5,7 @@ export type CompChatSegmentProps = Readonly<{
     uid: string;
     status: ChatSegmentStatus;
     markdownLinkTarget?: 'blank' | 'self';
+    showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     streamingAnimationSpeed?: number;

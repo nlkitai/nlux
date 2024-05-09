@@ -13,7 +13,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
     const {
         streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
         markdownLinkTarget,
-        showCodeBlockCopyButton = true,
+        showCodeBlockCopyButton,
         skipStreamingAnimation = false,
     } = options || {};
     const rootMarkdownProcessor = new RootProcessor(

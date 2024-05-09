@@ -50,6 +50,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 uid: item.uid,
                 domProps: compChatItemProps,
                 markdownLinkTarget: this.props.markdownLinkTarget,
+                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
                 skipStreamingAnimation: this.props.skipStreamingAnimation,
                 syntaxHighlighter: this.props.syntaxHighlighter,
                 streamingAnimationSpeed: this.props.streamingAnimationSpeed,

@@ -57,7 +57,7 @@
             background-color: var(--nlux-code-block-hover-background-color);
         }
 
-        > .nlux-text-message-content button.copy-button {
+        > .nlux-text-message-content button.nlux-cpy-btn {
             position: relative;
             z-index: 999999;
             width: 25px;
@@ -77,7 +77,7 @@
         }
 
         > .nlux-text-message-content {
-            button.copy-button {
+            button.nlux-cpy-btn {
                 &.clicked,
                 &.clicked:hover {
                     color: var(--nlux-message-received-background-color);
