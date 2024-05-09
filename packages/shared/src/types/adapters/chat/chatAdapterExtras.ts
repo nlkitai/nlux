@@ -1,4 +1,4 @@
-import {AiChatProps} from '../../../../../js/core/src/types/aiChat/props';
+import {AiChatProps as AiChatCoreProps} from '../../../../../js/core/src/types/aiChat/props';
 import {ChatItem} from '../../conversation';
 
 /**
@@ -8,7 +8,7 @@ export type ChatAdapterExtras<AiMsg> = {
     /**
      * This attribute contains the properties used with the AiChat component.
      */
-    aiChatProps: AiChatProps<AiMsg>;
+    aiChatProps: Omit<AiChatCoreProps<AiMsg>, 'adapter'>;
 
     /**
      * This attribute contains the conversation history.

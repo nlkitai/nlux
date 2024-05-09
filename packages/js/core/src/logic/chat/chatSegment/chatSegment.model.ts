@@ -22,7 +22,8 @@ import {getChatItemPropsFromSegmentItem} from './utils/getChatItemProps';
 export class CompChatSegment<AiMsg> extends BaseComp<
     AiMsg, CompChatSegmentProps, CompChatSegmentElements, CompChatSegmentEvents, CompChatSegmentActions
 > {
-    private chatItems: Map<string, CompChatItem<AiMsg>> = new Map();
+    private chatItemCompIdsByIndex: string[] = [];
+    private chatItemComponentsById: Map<string, CompChatItem<AiMsg>> = new Map();
 
     constructor(
         context: ControllerContext<AiMsg>,
@@ -33,7 +34,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
     public addChatItem(item: ChatSegmentItem<AiMsg>) {
         this.throwIfDestroyed();
-        if (this.chatItems.has(item.uid)) {
+        if (this.chatItemComponentsById.has(item.uid)) {
             throw new Error(`CompChatSegment: chat item with id "${item.uid}" already exists`);
         }
 
@@ -57,7 +58,9 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             } satisfies CompChatItemProps)
             .create();
 
-        this.chatItems.set(item.uid, newChatItemComp);
+        // Add the chat item to the list of chat items
+        this.chatItemComponentsById.set(item.uid, newChatItemComp);
+        this.chatItemCompIdsByIndex.push(item.uid);
 
         if (!this.rendered) {
             // If the chat segment is not rendered, we don't need to render the chat item yet!
@@ -81,7 +84,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 return;
             }
 
-            const chatItem = this.chatItems.get(chatItemId);
+            const chatItem = this.chatItemComponentsById.get(chatItemId);
             if (!chatItem) {
                 throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
             }
@@ -92,14 +95,25 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
     public complete() {
         this.throwIfDestroyed();
-        this.chatItems.forEach((comp) => comp.commitChunks());
+        this.chatItemComponentsById.forEach((comp) => comp.commitChunks());
         this.setProp('status', 'complete');
     }
 
     destroy() {
-        this.chatItems.forEach((comp) => comp.destroy());
-        this.chatItems.clear();
+        this.chatItemComponentsById.forEach((comp) => comp.destroy());
+        this.chatItemComponentsById.clear();
+        this.chatItemCompIdsByIndex = [];
         super.destroy();
+    }
+
+    public getChatItems() {
+        return this.chatItemCompIdsByIndex.map(
+            (id) => this.chatItemComponentsById.get(id),
+        ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
+    }
+
+    public getChatItemsById() {
+        return this.chatItemComponentsById;
     }
 
     public updateMarkdownStreamRenderer(
@@ -116,7 +130,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             key === 'markdownLinkTarget' || key === 'syntaxHighlighter' ||
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
-            this.chatItems.forEach((comp) => {
+            this.chatItemComponentsById.forEach((comp) => {
                 comp.updateMarkdownStreamRenderer(key, value);
             });
         }
@@ -130,7 +144,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             }
 
             const chatSegmentContainer = this.renderedDom?.elements?.chatSegmentContainer;
-            this.chatItems.forEach((comp) => {
+            this.chatItemComponentsById.forEach((comp) => {
                 if (!comp.rendered) {
                     comp.render(chatSegmentContainer);
                 }

@@ -1,4 +1,9 @@
-import {ChatSegmentItem, ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
+import {chatSegmentsToChatItems} from '@nlux-dev/react/src/utils/chatSegmentsToChatItems';
+import {
+    ChatSegment,
+    ChatSegmentItem,
+    ChatSegmentStatus,
+} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {debug} from '../../../../../../shared/src/utils/debug';
 import {uid} from '../../../../../../shared/src/utils/uid';
@@ -24,8 +29,8 @@ import {updateConversation} from './conversation.update';
 export class CompConversation<AiMsg> extends BaseComp<
     AiMsg, CompConversationProps<AiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
 > {
-    private readonly chatSegmentsById: Map<string, CompChatSegment<AiMsg>> = new Map();
-    private readonly conversationContent: ChatItem<AiMsg>[] = [];
+    private chatSegmentCompIdsByIndex: string[] = [];
+    private chatSegmentComponentsById: Map<string, CompChatSegment<AiMsg>> = new Map();
 
     constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
@@ -33,7 +38,7 @@ export class CompConversation<AiMsg> extends BaseComp<
     }
 
     public addChatItem(segmentId: string, item: ChatSegmentItem<AiMsg>) {
-        const chatSegment = this.chatSegmentsById.get(segmentId);
+        const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (!chatSegment) {
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
@@ -69,7 +74,6 @@ export class CompConversation<AiMsg> extends BaseComp<
 
         if (initialConversation) {
             for (const item of initialConversation) {
-                this.conversationContent.push(item);
                 if (item.role === 'ai') {
                     newChatSegmentComp.addChatItem({
                         uid: uid(),
@@ -95,13 +99,18 @@ export class CompConversation<AiMsg> extends BaseComp<
             }
         }
 
-        this.chatSegmentsById.set(segmentId, newChatSegmentComp);
-        this.addSubComponent(newChatSegmentComp.id, newChatSegmentComp, 'messagesContainer');
+        // Add the chat segment to the map and the index
+        this.chatSegmentComponentsById.set(segmentId, newChatSegmentComp);
+        this.chatSegmentCompIdsByIndex.push(segmentId);
+
+        const segmentComponentId = newChatSegmentComp.id;
+        this.addSubComponent(segmentComponentId, newChatSegmentComp, 'messagesContainer');
+
         return segmentId;
     };
 
     public addChunk(segmentId: string, chatItemId: string, chunk: string) {
-        const chatSegment = this.chatSegmentsById.get(segmentId);
+        const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (!chatSegment) {
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
@@ -110,7 +119,7 @@ export class CompConversation<AiMsg> extends BaseComp<
     }
 
     public completeChatSegment(segmentId: string) {
-        const chatSegment = this.chatSegmentsById.get(segmentId);
+        const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (!chatSegment) {
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
@@ -125,7 +134,7 @@ export class CompConversation<AiMsg> extends BaseComp<
     }
 
     public getChatSegmentContainer(segmentId: string): HTMLElement | undefined {
-        const chatSegment = this.chatSegmentsById.get(segmentId);
+        const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (chatSegment?.root instanceof HTMLElement) {
             return chatSegment.root;
         }
@@ -147,16 +156,33 @@ export class CompConversation<AiMsg> extends BaseComp<
             return undefined;
         }
 
+        const allSegmentsSorted: ChatSegment<AiMsg>[] = this.chatSegmentCompIdsByIndex.map(
+            (segmentId) => this.chatSegmentComponentsById.get(segmentId),
+        ).filter(
+            item => item !== undefined,
+        ).map(
+            (item) => {
+                return {
+                    uid: item!.id,
+                    status: 'complete',
+                    items: item!.getChatItems().map(
+                        compChatItem => compChatItem.getChatSegmentItem(),
+                    ),
+                } satisfies ChatSegment<AiMsg>;
+            },
+        ) as any; // Filter out undefined values
+
+        const allChatItems = chatSegmentsToChatItems(allSegmentsSorted);
+
         if (historyPayloadSize === 'max') {
-            // We should return a new reference
-            return [...this.conversationContent];
+            return allChatItems;
         }
 
-        return this.conversationContent.slice(-historyPayloadSize);
+        return allChatItems.slice(-historyPayloadSize);
     }
 
     public removeChatSegment(segmentId: string) {
-        const chatSegment = this.chatSegmentsById.get(segmentId);
+        const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (!chatSegment) {
             return;
         }
@@ -166,7 +192,12 @@ export class CompConversation<AiMsg> extends BaseComp<
             this.removeSubComponent(segmentCompId);
         }
 
-        this.chatSegmentsById.delete(chatSegment.id);
+        // Remove the chat segment from the map and the index
+        this.chatSegmentComponentsById.delete(chatSegment.id);
+        const index = this.chatSegmentCompIdsByIndex.indexOf(segmentId);
+        if (index >= 0) {
+            this.chatSegmentCompIdsByIndex.splice(index, 1);
+        }
     }
 
     public setBotPersona(botPersona: BotPersona | undefined) {
@@ -194,7 +225,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         ) {
             const typedKey = key satisfies keyof CompChatSegmentProps;
             const typedValue = value as CompChatSegmentProps[typeof typedKey];
-            this.chatSegmentsById.forEach((comp) => {
+            this.chatSegmentComponentsById.forEach((comp) => {
                 comp.updateMarkdownStreamRenderer(typedKey, typedValue);
             });
         }

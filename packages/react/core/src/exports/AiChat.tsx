@@ -1,5 +1,4 @@
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {ChatAdapterExtras} from '../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
@@ -10,7 +9,6 @@ import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {chatItemsToChatSegment} from '../utils/chatItemsToChatSegment';
-import {reactPropsToCoreProps} from '../utils/reactPropsToCoreProps';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
@@ -60,9 +58,6 @@ export const AiChat: <AiMsg>(
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
-    const adapterExtras: ChatAdapterExtras<AiMsg> | undefined = useMemo(() => (
-        adapterToUse ? {aiChatProps: reactPropsToCoreProps<AiMsg>(props, adapterToUse)} : undefined
-    ), [props, adapterToUse]);
 
     const rootClassNames = useMemo(() => getRootClassNames({className, themeId}).join(' '), [className, themeId]);
     const rootStyle = useAiChatStyle(layoutOptions);
@@ -74,13 +69,14 @@ export const AiChat: <AiMsg>(
     );
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
-    const handleSubmitPrompt = useSubmitPromptHandler({
+    const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
+        aiChatProps: props,
         adapterToUse,
-        adapterExtras,
+        initialSegment,
+        chatSegments,
         prompt,
         promptBoxOptions,
         showException,
-        chatSegments,
         setChatSegments,
         setPromptBoxStatus,
         setPrompt,

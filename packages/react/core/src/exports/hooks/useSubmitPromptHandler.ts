@@ -10,13 +10,16 @@ import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegmen
 import {PromptBoxStatus} from '../../../../../shared/src/ui/PromptBox/props';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
+import {AiChatProps} from '../props';
+import {useAdapterExtras} from './useAdapterExtras';
 
 type SubmitPromptHandlerProps<AiMsg> = {
+    aiChatProps: AiChatProps<AiMsg>;
     adapterToUse?: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
-    adapterExtras?: ChatAdapterExtras<AiMsg>;
     prompt: string;
     promptBoxOptions?: PromptBoxOptions;
     chatSegments: ChatSegment<AiMsg>[];
+    initialSegment?: ChatSegment<AiMsg>;
     showException: (message: string) => void;
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
     setPromptBoxStatus: (status: PromptBoxStatus) => void;
@@ -26,12 +29,13 @@ type SubmitPromptHandlerProps<AiMsg> = {
 
 export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<AiMsg>) => {
     const {
+        aiChatProps,
         adapterToUse,
-        adapterExtras,
         prompt: promptTyped,
         promptBoxOptions,
         showException,
         chatSegments,
+        initialSegment,
         setChatSegments,
         setPromptBoxStatus,
         setPrompt,
@@ -66,9 +70,14 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         };
     }, [chatSegments, setChatSegments, setPromptBoxStatus, showException, setPrompt]);
 
+    const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
+        aiChatProps,
+        initialSegment ? [initialSegment, ...chatSegments] : chatSegments,
+    );
+
     return useCallback(
         () => {
-            if (!adapterToUse || !adapterExtras) {
+            if (!adapterToUse) {
                 warn('No valid adapter was provided to AiChat component');
                 return;
             }

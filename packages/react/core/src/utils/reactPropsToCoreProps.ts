@@ -1,17 +1,13 @@
-import {AiChatProps as AiChatCoreProps} from '@nlux/core';
-import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
-import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
+import {AiChatProps as AiChatCoreProps} from '../../../../js/core/src/types/aiChat/props';
 import {AiChatProps} from '../exports/props';
 
 export const reactPropsToCoreProps = <AiMsg>(
     props: AiChatProps<AiMsg>,
-    adapterToUse: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
-): AiChatCoreProps<AiMsg> => {
+): Omit<AiChatCoreProps<AiMsg>, 'adapter'> => {
     const botProp = props.personaOptions?.bot;
     const userProp = props.personaOptions?.user;
 
     return {
-        adapter: adapterToUse,
         events: props.events,
         className: props.className,
         themeId: props.themeId,
