@@ -1,5 +1,5 @@
-import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItem} from '../../../../shared/src/types/conversation';
+import {ChatSegment} from '../../types/chatSegment/chatSegment';
+import {ChatItem} from '../../types/conversation';
 
 export const chatSegmentsToChatItems = <AiMsg>(
     chatSegments: ChatSegment<AiMsg>[],

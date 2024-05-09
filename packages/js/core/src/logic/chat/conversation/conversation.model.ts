@@ -1,10 +1,10 @@
-import {chatSegmentsToChatItems} from '@nlux-dev/react/src/utils/chatSegmentsToChatItems';
 import {
     ChatSegment,
     ChatSegmentItem,
     ChatSegmentStatus,
 } from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
+import {chatSegmentsToChatItems} from '../../../../../../shared/src/utils/chat/chatSegmentsToChatItems';
 import {debug} from '../../../../../../shared/src/utils/debug';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
@@ -143,7 +143,7 @@ export class CompConversation<AiMsg> extends BaseComp<
     public getConversationContentForAdapter(
         historyPayloadSize: HistoryPayloadSize = 'max',
     ): ChatItem<AiMsg>[] | undefined {
-        if (typeof historyPayloadSize === 'number' && historyPayloadSize <= 0) {
+        if (typeof historyPayloadSize === 'number' && historyPayloadSize < 0) {
             warnOnce(
                 `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +
                 `Value must be a positive integer or 'all'.`,
@@ -152,7 +152,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             return undefined;
         }
 
-        if (historyPayloadSize === 'none') {
+        if (historyPayloadSize === 'none' || historyPayloadSize === 0) {
             return undefined;
         }
 

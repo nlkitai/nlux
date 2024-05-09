@@ -3,12 +3,12 @@ import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment'
 import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
 import {PromptBoxStatus} from '../../../../shared/src/ui/PromptBox/props';
+import {chatItemsToChatSegment} from '../../../../shared/src/utils/chat/chatItemsToChatSegment';
 import {getRootClassNames} from '../../../../shared/src/utils/dom/getRootClassNames';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
-import {chatItemsToChatSegment} from '../utils/chatItemsToChatSegment';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';

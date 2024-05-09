@@ -1,7 +1,7 @@
 import {ChatAdapterExtras} from '@nlux/core';
 import {useMemo} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
-import {chatSegmentsToChatItems} from '../../utils/chatSegmentsToChatItems';
+import {chatSegmentsToChatItems} from '../../../../../shared/src/utils/chat/chatSegmentsToChatItems';
 import {reactPropsToCoreProps} from '../../utils/reactPropsToCoreProps';
 import {AiChatProps} from '../props';
 

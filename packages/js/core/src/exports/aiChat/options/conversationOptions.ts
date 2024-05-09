@@ -14,7 +14,7 @@ export interface ConversationOptions {
      * For standard adapters, the history will be automatically handled by the adapter.
      *
      * By default, the entire conversation history is sent with each message.
-     * Set to `null` to disable sending conversation history with each message.
+     * Set to `none` or `0` to disable sending conversation history with each message.
      * Or set to a positive integer to send a specific number of messages.
      *
      * @default 'max'
