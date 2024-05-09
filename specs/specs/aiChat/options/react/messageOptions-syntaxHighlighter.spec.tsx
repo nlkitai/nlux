@@ -27,7 +27,10 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    messageOptions={{syntaxHighlighter: highlighter}}
+                    messageOptions={{
+                        syntaxHighlighter: highlighter,
+                        showCodeBlockCopyButton: false,
+                    }}
                 />
             );
             const {container} = render(aiChat);

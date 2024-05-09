@@ -166,7 +166,11 @@ describe('<AiChat /> + initialConversation prop', () => {
                 ];
 
                 // Act
-                const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
+                const aiChat = <AiChat
+                    adapter={adapterController!.adapter}
+                    initialConversation={initialConversation}
+                    messageOptions={{showCodeBlockCopyButton: false}}
+                />;
                 render(aiChat);
                 await waitForRenderCycle();
 

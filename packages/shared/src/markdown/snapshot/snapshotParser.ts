@@ -1,4 +1,5 @@
 import {SnapshotParser} from '../../types/markdown/snapshotParser';
+import {insertCopyToClipboardButton} from '../copyToClipboard/insertCopyToClipboardButton';
 import {marked} from './marked/marked';
 
 export const parseMdSnapshot: SnapshotParser = (
@@ -7,7 +8,7 @@ export const parseMdSnapshot: SnapshotParser = (
 ): string => {
 
     const {
-        showCodeBlockCopyButton = true,
+        showCodeBlockCopyButton,
         markdownLinkTarget,
         syntaxHighlighter,
     } = options || {};
@@ -24,7 +25,6 @@ export const parseMdSnapshot: SnapshotParser = (
     const element = document.createElement('div');
     element.innerHTML = parsedMarkdown;
 
-    // TODO — Add copy to clipboard button.
     element.querySelectorAll('pre').forEach((block) => {
         const newBlock = document.createElement('div');
         newBlock.className = 'code-block';
@@ -33,41 +33,53 @@ export const parseMdSnapshot: SnapshotParser = (
         if (!codeElement) {
             // No code can be found, so just copy the innerHTML of the block.
             newBlock.innerHTML = block.innerHTML;
-        } else {
-            // Get the language of the code block
-            // Adjust the class name and HTML structure
-            // Apply syntax highlighting
-
-            let language: string | undefined;
-            for (let i = 0; i < codeElement.classList.length; i++) {
-                const className = codeElement.classList[i];
-                if (className.startsWith('language-')) {
-                    language = className.slice(9);
-                    break;
-                }
-            }
-
-            const newCodeElement = document.createElement('pre');
-            newCodeElement.innerHTML = '<div>' + codeElement.innerHTML + '</div>';
-
-            if (language) {
-                newCodeElement.setAttribute('data-language', language);
-
-                if (syntaxHighlighter) {
-                    const highlight = syntaxHighlighter.createHighlighter();
-                    newCodeElement.innerHTML = '<div>' +
-                        highlight(codeElement.textContent || '', language) +
-                        '</div>';
-                    newCodeElement.className = 'highlighter-dark';
-                }
-            }
-
-            newBlock.innerHTML = '';
-            newBlock.appendChild(newCodeElement);
+            block.replaceWith(newBlock);
+            return;
         }
 
+        //
+        // When a code block is found
+        // 1. Adjust the class name and HTML structure to style the code block
+        // 2. Apply syntax highlighting
+        // 3. Add a copy to clipboard button
+        // 4. Apply link target
+        //
+
+        let language: string | undefined;
+        for (let i = 0; i < codeElement.classList.length; i++) {
+            const className = codeElement.classList[i];
+            if (className.startsWith('language-')) {
+                language = className.slice(9);
+                break;
+            }
+        }
+
+        const newCodeElement = document.createElement('pre');
+        newCodeElement.innerHTML = '<div>' + codeElement.innerHTML + '</div>';
+
+        if (language) {
+            newCodeElement.setAttribute('data-language', language);
+
+            //
+            // Apply syntax highlighting
+            //
+            if (syntaxHighlighter) {
+                const highlight = syntaxHighlighter.createHighlighter();
+                newCodeElement.innerHTML = '<div>' +
+                    highlight(codeElement.textContent || '', language) +
+                    '</div>';
+                newCodeElement.className = 'highlighter-dark';
+            }
+        }
+
+        newBlock.innerHTML = '';
+        newBlock.appendChild(newCodeElement);
         block.replaceWith(newBlock);
     });
+
+    if (showCodeBlockCopyButton !== false) { // Default to true
+        insertCopyToClipboardButton(element);
+    }
 
     if (markdownLinkTarget !== 'self') { // Default to 'blank'
         element.querySelectorAll('a').forEach((link) => {

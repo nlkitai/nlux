@@ -22,6 +22,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
 
     describe('When markdownLinkTarget is not set', () => {
         it('Markdown links should open in a new window', async () => {
+            // Arrange
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
