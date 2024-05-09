@@ -61,6 +61,10 @@ export type {
 } from './types/aiChat/props';
 
 export type {
+    HistoryPayloadSize,
+} from './exports/aiChat/options/conversationOptions';
+
+export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,

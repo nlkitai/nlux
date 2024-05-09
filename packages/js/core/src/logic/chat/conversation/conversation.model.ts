@@ -146,13 +146,13 @@ export class CompConversation<AiMsg> extends BaseComp<
         if (typeof historyPayloadSize === 'number' && historyPayloadSize < 0) {
             warnOnce(
                 `Invalid value provided for 'historyPayloadSize' : "${historyPayloadSize}"! ` +
-                `Value must be a positive integer or 'all'.`,
+                `Value must be a positive integer or 'max'.`,
             );
 
             return undefined;
         }
 
-        if (historyPayloadSize === 'none' || historyPayloadSize === 0) {
+        if (historyPayloadSize === 0) {
             return undefined;
         }
 

@@ -1,4 +1,4 @@
-export type HistoryPayloadSize = number | 'none' | 'max';
+export type HistoryPayloadSize = number | 'max';
 
 export interface ConversationOptions {
     /**

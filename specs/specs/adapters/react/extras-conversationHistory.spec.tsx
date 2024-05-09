@@ -92,4 +92,71 @@ describe.each([
             });
         });
     });
+
+    describe('When conversation history is set to 0', () => {
+        it('Should not pass the initial conversation history to the adapter extras', async () => {
+            // Arrange
+            const initialConversation: ChatItem<string>[] = [
+                {role: 'ai', message: 'Hello, how can I help you?'},
+                {role: 'user', message: 'I need help with my account.'},
+                {role: 'ai', message: 'Sure, I can help you with that.'},
+            ];
+
+            const {container} = render(
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    initialConversation={initialConversation}
+                    conversationOptions={{
+                        historyPayloadSize: 0,
+                    }}
+                />,
+            );
+
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
+
+            // Assert
+            expect(adapterController!.getLastExtras()?.conversationHistory).toBeUndefined();
+        });
+    });
+
+    describe('When conversation history is set to a specific number', () => {
+        it('Should pass the specified number of messages from the initial conversation history to the adapter extras',
+            async () => {
+                // Arrange
+                const initialConversation: ChatItem<string>[] = [
+                    {role: 'ai', message: 'Hello, how can I help you?'},
+                    {role: 'user', message: 'I need help with my account.'},
+                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                ];
+
+                const {container} = render(
+                    <AiChat
+                        adapter={adapterController!.adapter}
+                        initialConversation={initialConversation}
+                        conversationOptions={{
+                            historyPayloadSize: 2,
+                        }}
+                    />,
+                );
+
+                await waitForRenderCycle();
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+                // Act
+                await userEvent.type(textArea, 'Hello{enter}');
+                await waitForRenderCycle();
+
+                // Assert
+                expect(adapterController!.getLastExtras()?.conversationHistory).toEqual([
+                    {role: 'user', message: 'I need help with my account.'},
+                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                ]);
+            },
+        );
+    });
 });

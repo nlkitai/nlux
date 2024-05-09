@@ -73,6 +73,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
         aiChatProps,
         initialSegment ? [initialSegment, ...chatSegments] : chatSegments,
+        aiChatProps.conversationOptions?.historyPayloadSize as any,
     );
 
     return useCallback(

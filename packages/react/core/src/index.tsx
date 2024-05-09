@@ -6,6 +6,7 @@ export type {
     LayoutOptions,
     PromptBoxOptions,
     ConversationOptions,
+    HistoryPayloadSize,
     HighlighterExtension,
 } from '@nlux/core';
 
