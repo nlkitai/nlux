@@ -6,6 +6,8 @@
 </p>
 <p align=center>
   <img alt="Free & Open Source" src="https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61" />
+  <a href="https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml"><img alt="500+ Unit Tests" src="https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg" /></a>
+<br />
   <a href="https://www.npmjs.com/package/@nlux/react"><img alt="npm @nlux/react" src="https://img.shields.io/badge/NPM-@nlux/react-1ccb61" /></a>
   <a href="https://www.npmjs.com/package/@nlux/core"><img alt="npm @nlux/core" src="https://img.shields.io/badge/NPM-@nlux/core-1ccb61" /></a>
 </p>
@@ -36,8 +38,6 @@ lines of code, you can add conversational AI capabilities and interact with your
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Highly Customizable** ― Tune almost every UI aspect through theming, layout options, and more.
 * **Zero Dependencies** ― Lightweight codebase ― Core with zero dependency and no external UI libraries.
-
-[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
 
 ## Repo Content 📦
 
