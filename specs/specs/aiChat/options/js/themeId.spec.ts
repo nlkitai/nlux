@@ -33,7 +33,7 @@ describe('createAiChat() + prop themeId', () => {
             const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.className).toContain('nlux-theme-nova');
+            expect(aiChatDom.className).toContain('nlux-theme-luna');
         });
 
         describe('When a theme is set', () => {
@@ -98,7 +98,7 @@ describe('createAiChat() + prop themeId', () => {
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
-                expect(aiChatDom.className).toContain('nlux-theme-nova');
+                expect(aiChatDom.className).toContain('nlux-theme-luna');
             });
         });
     });

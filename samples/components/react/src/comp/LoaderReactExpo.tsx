@@ -1,5 +1,5 @@
 import {LoaderComp} from '@nlux-dev/react/src/ui/Loader/LoaderComp.tsx';
-import '@nlux-dev/themes/src/nova/theme.css';
+import '@nlux-dev/themes/src/luna/theme.css';
 
 export const LoaderReactExpo = () => {
     return (

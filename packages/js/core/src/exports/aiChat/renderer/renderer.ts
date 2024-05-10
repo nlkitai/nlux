@@ -17,7 +17,7 @@ import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<AiMsg> {
-    private static readonly defaultThemeId = 'nova';
+    private static readonly defaultThemeId = 'luna';
 
     private readonly __context: ControllerContext<any>;
 

@@ -69,7 +69,7 @@ It is a monorepo that contains code for following NPM packages:
 
 **Theme & Extensions:**
 
-* [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Nova` theme and CSS styles.
+* [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Luna` theme and CSS styles.
 * [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown stream parser to render
   markdown as it's being generated.
 * [`@nlux/highlighter`](https://www.npmjs.com/package/@nlux/highlighter) ― Syntax highlighter based on

@@ -83,5 +83,5 @@ An AI chatbot, powered by LangChain, that can understand and respond to user mes
 ## Theme File and CSS 🎨
 
 You should include a **theme CSS file** into your HTML page.<br />
-You can download and host the `Nova Theme` CSS file
+You can download and host the `Luna Theme` CSS file
 from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) package.

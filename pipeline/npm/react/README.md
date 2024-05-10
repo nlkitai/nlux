@@ -94,7 +94,7 @@ npm install @nlux/themes
 Then import the theme CSS file into your app or component as follows:
 
 ```jsx
-import '@nlux/themes/nova.css';
+import '@nlux/themes/luna.css';
 ```
 
 This requires that your bundler is configured to load CSS files.

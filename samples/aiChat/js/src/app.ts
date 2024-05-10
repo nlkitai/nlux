@@ -1,5 +1,5 @@
 import './style.css';
-import '@nlux-dev/themes/src/nova/theme.css';
+import '@nlux-dev/themes/src/luna/theme.css';
 import {ChatItem, createAiChat} from '@nlux-dev/core/src';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {createChatAdapter} from '@nlux-dev/nlbridge/src';

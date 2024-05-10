@@ -27,7 +27,7 @@ describe('<AiChat /> + prop themeId', () => {
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.className).toContain('nlux-theme-nova');
+            expect(aiChatDom.className).toContain('nlux-theme-luna');
         });
     });
 
@@ -72,7 +72,7 @@ describe('<AiChat /> + prop themeId', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(aiChatDom.className).toContain('nlux-theme-nova');
+                expect(aiChatDom.className).toContain('nlux-theme-luna');
             });
         });
     });

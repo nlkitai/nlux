@@ -1,5 +1,5 @@
 import {PromptBoxComp} from '@nlux-dev/react/src/ui/PromptBox/PromptBoxComp.tsx';
-import '@nlux-dev/themes/src/nova/theme.css';
+import '@nlux-dev/themes/src/luna/theme.css';
 import {useState} from 'react';
 import {PromptBoxStatus} from '../../../../../packages/shared/src/ui/PromptBox/props.ts';
 

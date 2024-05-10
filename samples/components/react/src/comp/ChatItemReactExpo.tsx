@@ -1,7 +1,7 @@
 import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useMemo, useState} from 'react';
 import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
-import '@nlux-dev/themes/src/nova/theme.css';
+import '@nlux-dev/themes/src/luna/theme.css';
 
 export const ChatItemReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');
