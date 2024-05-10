@@ -40,7 +40,7 @@
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
             padding: 0;
-            gap: var(--nlux-gap);
+            gap: var(--nlux-flex-gap);
         }
     }
 }

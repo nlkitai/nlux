@@ -6,7 +6,7 @@
 
     border: none;
     background-color: transparent;
-    gap: var(--nlux-gap);
+    gap: var(--nlux-flex-gap);
 
     > textarea {
         font-family: var(--nlux-font-family);
