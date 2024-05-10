@@ -6,10 +6,8 @@ import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
 import {CompConversation} from './chat/conversation/conversation.model';
 import {CompPromptBox} from './chat/promptBox/promptBox.model';
 import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
-import {CompList} from './miscellaneous/list/model';
 
 const componentsById = () => ({
-    'list': CompList,
     'chat-room': CompChatRoom,
     'exceptions-box': CompExceptionsBox,
     'conversation': CompConversation,
