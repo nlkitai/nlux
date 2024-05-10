@@ -5,6 +5,11 @@ export const insertCopyToClipboardButton = (markdownContainer: HTMLElement) => {
             return;
         }
 
+        // Check the adjacent element to see if a copy button is already present
+        if (codeBlockContainer.previousElementSibling?.classList.contains('nlux-cpy-btn')) {
+            return;
+        }
+
         const title = 'Copy code block to clipboard';
         const copyButton = document.createElement('button');
 
