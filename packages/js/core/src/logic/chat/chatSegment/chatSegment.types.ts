@@ -1,9 +1,12 @@
 import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
+import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;
     status: ChatSegmentStatus;
+    userPersona?: UserPersona;
+    botPersona?: BotPersona;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

@@ -75,7 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .withPersonaOptions({
             user: {
                 name: 'Mr User',
-                picture: 'https://user-image-url',
+                picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+            },
+            bot: {
+                name: 'AI Bot',
+                picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
             },
         });
 

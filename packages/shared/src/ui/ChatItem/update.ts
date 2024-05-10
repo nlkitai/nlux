@@ -1,5 +1,6 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
-import {className as avatarClassName} from '../Avatar/create';
+import {className as avatarClassName, createAvatarDom} from '../Avatar/create';
+import {AvatarProps} from '../Avatar/props';
 import {updateAvatarDom} from '../Avatar/update';
 import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
@@ -60,16 +61,30 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         propsBefore.picture !== propsAfter.picture
     ) {
         const personaDom = element.querySelector<HTMLElement>(`.${avatarClassName}`);
-        if (personaDom) {
-            updateAvatarDom(personaDom, {
-                name: propsBefore.name,
-                picture: propsBefore.picture,
-            }, {
-                name: propsAfter.name,
-                picture: propsAfter.picture,
-            });
+        if (!propsAfter.name && !propsAfter.picture) {
+            personaDom?.remove();
+            return;
+        } else {
+            if (personaDom) {
+                updateAvatarDom(personaDom, {
+                    name: propsBefore.name,
+                    picture: propsBefore.picture,
+                }, {
+                    name: propsAfter.name,
+                    picture: propsAfter.picture,
+                });
+            } else {
+                // Add the avatar
+                if (propsAfter.name !== undefined || propsAfter.picture !== undefined) {
+                    const avatarProps: AvatarProps = {
+                        name: propsAfter.name,
+                        picture: propsAfter.picture,
+                    };
+
+                    const persona = createAvatarDom(avatarProps);
+                    element.prepend(persona);
+                }
+            }
         }
     }
-
-    // TODO - Handle prop changes
 };

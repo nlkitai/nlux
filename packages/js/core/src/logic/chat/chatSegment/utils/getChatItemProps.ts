@@ -1,8 +1,13 @@
 import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItemProps} from '../../../../../../../shared/src/ui/ChatItem/props';
 import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/stringifyRandomResponse';
+import {UserPersona} from '../../../../exports/aiChat/options/personaOptions';
 
-export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentItem<AiMsg>): ChatItemProps | undefined => {
+export const getChatItemPropsFromSegmentItem = <AiMsg>(
+    segmentItem: ChatSegmentItem<AiMsg>,
+    userPersona?: UserPersona,
+    botPersona?: UserPersona,
+): ChatItemProps | undefined => {
     if (segmentItem.participantRole === 'ai') {
         const status = segmentItem.status === 'complete' ? 'complete' : 'streaming';
 
@@ -10,6 +15,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentI
             return {
                 status,
                 direction: 'incoming',
+                name: botPersona?.name,
+                picture: botPersona?.picture,
                 // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
                 // while it's being streamed.
             };
@@ -19,6 +26,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentI
             return {
                 status,
                 direction: 'incoming',
+                name: botPersona?.name,
+                picture: botPersona?.picture,
                 message: stringifyRandomResponse(segmentItem.content),
             };
         }
@@ -26,6 +35,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentI
         return {
             status,
             direction: 'incoming',
+            name: botPersona?.name,
+            picture: botPersona?.picture,
         };
     }
 
@@ -33,5 +44,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(segmentItem: ChatSegmentI
         status: 'complete',
         direction: 'outgoing',
         message: segmentItem.content,
+        name: userPersona?.name,
+        picture: userPersona?.picture,
     } satisfies ChatItemProps;
 };

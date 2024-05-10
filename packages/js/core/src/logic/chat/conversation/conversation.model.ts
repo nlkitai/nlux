@@ -64,6 +64,8 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withProps({
                 uid: segmentId,
                 status,
+                userPersona: this.props.userPersona,
+                botPersona: this.props.botPersona,
                 markdownLinkTarget: this.props.markdownLinkTarget,
                 showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
                 skipStreamingAnimation: this.props.skipStreamingAnimation,
@@ -202,10 +204,16 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public setBotPersona(botPersona: BotPersona | undefined) {
         this.setProp('botPersona', botPersona);
+        this.chatSegmentComponentsById.forEach((comp) => {
+            comp.setBotPersona(botPersona);
+        });
     }
 
     public setUserPersona(userPersona: UserPersona | undefined) {
         this.setProp('userPersona', userPersona);
+        this.chatSegmentComponentsById.forEach((comp) => {
+            comp.setUserPersona(userPersona);
+        });
     }
 
     public updateMarkdownStreamRenderer(

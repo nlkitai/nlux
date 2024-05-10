@@ -393,17 +393,11 @@ export class NluxRenderer<AiMsg> {
 
         if (props.hasOwnProperty('personaOptions')) {
             const changedPersonaProps: Partial<CompChatRoomProps<AiMsg>> = {};
-            if (
-                props.personaOptions?.hasOwnProperty('bot') &&
-                props.personaOptions.bot !== this.thePersonasOptions?.bot
-            ) {
+            if (props.personaOptions?.bot !== this.thePersonasOptions?.bot) {
                 changedPersonaProps.botPersona = props.personaOptions?.bot ?? undefined;
             }
 
-            if (
-                props.personaOptions?.hasOwnProperty('user') &&
-                props.personaOptions?.user !== this.thePersonasOptions?.user
-            ) {
+            if (props.personaOptions?.user !== this.thePersonasOptions?.user) {
                 changedPersonaProps.userPersona = props.personaOptions?.user ?? undefined;
             }
 

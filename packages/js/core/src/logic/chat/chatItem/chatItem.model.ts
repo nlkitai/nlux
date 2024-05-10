@@ -1,6 +1,7 @@
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
@@ -71,8 +72,15 @@ export class CompChatItem<AiMsg> extends BaseComp<
         return this.aiMessageContent ?? this.stringContent;
     }
 
-    public isStreaming(): boolean {
-        return this.isItemStreaming;
+    public updateDomProps(updatedProps: Partial<ChatItemProps>) {
+        const oldProps: ChatItemProps = this.props.domProps;
+        const newProps: ChatItemProps = {
+            ...oldProps,
+            ...updatedProps,
+        };
+
+        this.setProp('domProps', newProps);
+        this.executeDomAction('updateDomProps', oldProps, newProps);
     }
 
     public updateMarkdownStreamRenderer(

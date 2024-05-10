@@ -1,5 +1,7 @@
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {createChatItemDom} from '../../../../../../shared/src/ui/ChatItem/create';
+import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
+import {updateChatItemDom} from '../../../../../../shared/src/ui/ChatItem/update';
 import {createMessageContent} from '../../../../../../shared/src/ui/Message/utils/createMessageContent';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
@@ -84,6 +86,13 @@ export const renderChatItem: CompRenderer<
                 };
 
                 initMarkdownStreamParser(markdownStreamProps);
+            },
+            updateDomProps: (oldProps: ChatItemProps, newProps: ChatItemProps) => {
+                updateChatItemDom(
+                    root,
+                    oldProps,
+                    newProps,
+                );
             },
         },
         onDestroy: () => {

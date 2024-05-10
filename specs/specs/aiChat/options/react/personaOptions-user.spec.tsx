@@ -135,7 +135,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                     personaOptions={{
                         user: {
                             name: 'X-Bot',
-                            picture: 'https://xbot-image-url',
+                            picture: 'https://xuser-image-url',
                         },
                     }}
                 />);
@@ -146,8 +146,8 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const selector = '.nlux_cht_itm_out > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImageContainer = container.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
-                expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xbot-image-url)');
-                expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://xbot-image-url)');
+                expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xuser-image-url)');
+                expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://xuser-image-url)');
 
                 const letterSelector = '.nlux_cht_itm_out > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
                 const avatarLetterContainer = container.querySelectorAll(letterSelector);

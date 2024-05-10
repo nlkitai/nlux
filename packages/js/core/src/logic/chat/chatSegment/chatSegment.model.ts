@@ -5,6 +5,7 @@ import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
+import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatItem} from '../chatItem/chatItem.model';
 import {CompChatItemProps} from '../chatItem/chatItem.types';
@@ -38,8 +39,11 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             throw new Error(`CompChatSegment: chat item with id "${item.uid}" already exists`);
         }
 
-        let compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(item);
-        // TODO - Add additional props: Name / Picture.
+        let compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
+            item,
+            this.props.userPersona,
+            this.props.botPersona,
+        );
 
         if (!compChatItemProps) {
             throw new Error(`CompChatSegment: chat item with id "${item.uid}" has invalid props`);
@@ -112,8 +116,32 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
     }
 
-    public getChatItemsById() {
-        return this.chatItemComponentsById;
+    public setBotPersona(botPersona: BotPersona) {
+        this.setProp('botPersona', botPersona);
+        const newProps: Partial<ChatItemProps> = {
+            name: botPersona?.name,
+            picture: botPersona?.picture,
+        };
+
+        this.chatItemComponentsById.forEach((comp) => {
+            if (comp.getChatSegmentItem().participantRole === 'ai') {
+                comp.updateDomProps(newProps);
+            }
+        });
+    }
+
+    public setUserPersona(userPersona: UserPersona) {
+        this.setProp('userPersona', userPersona);
+        const newProps: Partial<ChatItemProps> = {
+            name: userPersona?.name,
+            picture: userPersona?.picture,
+        };
+
+        this.chatItemComponentsById.forEach((comp) => {
+            if (comp.getChatSegmentItem().participantRole === 'user') {
+                comp.updateDomProps(newProps);
+            }
+        });
     }
 
     public updateMarkdownStreamRenderer(
@@ -131,7 +159,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             this.chatItemComponentsById.forEach((comp) => {
-                comp.updateMarkdownStreamRenderer(key, value);
+                comp.updateMarkdownStreamRenderer(key, value as any);
             });
         }
     }
