@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // submitShortcut: 'CommandEnter',
         })
         .withConversationOptions({
-            autoScroll: false,
+            // autoScroll: false,
         })
         .withLayoutOptions({
             width: 400,

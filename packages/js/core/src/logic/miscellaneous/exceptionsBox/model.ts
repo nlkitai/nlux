@@ -11,7 +11,7 @@ import {
 } from './types';
 import {updateExceptionsBox} from './update';
 
-@Model('exceptions-box', renderExceptionsBox, updateExceptionsBox)
+@Model('exceptionsBox', renderExceptionsBox, updateExceptionsBox)
 export class CompExceptionsBox<AiMsg> extends BaseComp<
     AiMsg,
     CompExceptionsBoxProps,

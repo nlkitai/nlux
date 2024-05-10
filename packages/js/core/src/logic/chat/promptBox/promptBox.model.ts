@@ -12,7 +12,7 @@ import {
 } from './promptBox.types';
 import {updateChatbox} from './promptBox.update';
 
-@Model('prompt-box', renderChatbox, updateChatbox)
+@Model('promptBox', renderChatbox, updateChatbox)
 export class CompPromptBox<AiMsg> extends BaseComp<
     AiMsg, CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions
 > {

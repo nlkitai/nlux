@@ -18,7 +18,7 @@ import {renderChatRoom} from './chatRoom.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 import {updateChatRoom} from './chatRoom.update';
 
-@Model('chat-room', renderChatRoom, updateChatRoom)
+@Model('chatRoom', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<
     AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {

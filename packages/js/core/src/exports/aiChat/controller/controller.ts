@@ -36,7 +36,7 @@ export class NluxController<AiMsg> {
         rootElement: HTMLElement,
         props: AiChatInternalProps<AiMsg>,
     ) {
-        this.rootCompId = 'chat-room';
+        this.rootCompId = 'chatRoom';
         this.rootElement = rootElement;
         this.props = props;
     }

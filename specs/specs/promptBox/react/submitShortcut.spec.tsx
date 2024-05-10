@@ -25,7 +25,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
     describe('When no submitShortcut option is initially provided', () => {
         it('The prompt should be submitted when the user presses the Enter key', async () => {
             // Arrange
-            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
             );
@@ -44,7 +44,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
         it('The prompt should not be submitted when the textarea is empty and the user presses the Enter key',
             async () => {
                 // Arrange
-                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
                 const {container} = render(
                     <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
                 );
@@ -59,7 +59,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
         it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
             // Arrange
-            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
             );
@@ -77,7 +77,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
         it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
             // Arrange
-            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
             );
@@ -96,7 +96,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
         describe('When submitShortcut option is set to CommandEnter after initial render', () => {
             it('The prompt should not be submitted when the user presses the Enter key', async () => {
                 // Arrange
-                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
                 const {container, rerender} = render(
                     <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
                 );
@@ -118,7 +118,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
             it('The prompt should be submitted when the user presses the Ctrl+Enter key', async () => {
                 // Arrange
-                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
                 const {container, rerender} = render(
                     <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
                 );
@@ -140,7 +140,7 @@ describe('createAiChat() + promptBox + submitShortcut', () => {
 
             it('The prompt should be submitted when the user presses the Meta+Enter key', async () => {
                 // Arrange
-                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+                const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
                 const {container, rerender} = render(
                     <AiChat adapter={adapterController!.adapter} promptBoxOptions={promptBoxOptions}/>,
                 );

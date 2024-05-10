@@ -44,7 +44,7 @@ export const renderChatbox: CompRenderer<
 
     if (!(textBoxElement instanceof HTMLTextAreaElement)) {
         throw new NluxRenderingError({
-            source: source('prompt-box', 'render'),
+            source: source('promptBox', 'render'),
             message: 'Expected a textarea element',
         });
     }

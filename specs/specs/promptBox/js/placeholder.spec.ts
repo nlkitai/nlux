@@ -45,12 +45,12 @@ describe('createAiChat() + promptBox + placeholder', () => {
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({promptBoxOptions: {placeholder: 'My prompt-box'}});
+                aiChat.updateProps({promptBoxOptions: {placeholder: 'My prompt box'}});
                 await waitForRenderCycle();
                 const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Assert
-                expect(textArea.placeholder).toBe('My prompt-box');
+                expect(textArea.placeholder).toBe('My prompt box');
             });
         });
     });
@@ -58,7 +58,7 @@ describe('createAiChat() + promptBox + placeholder', () => {
     describe('When the component is created with placeholder option', () => {
         it('The promptBox should be rendered with a placeholder', async () => {
             // Arrange
-            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt-box'};
+            const promptBoxOptions: PromptBoxOptions = {placeholder: 'My prompt box'};
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withPromptBoxOptions(promptBoxOptions);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -67,7 +67,7 @@ describe('createAiChat() + promptBox + placeholder', () => {
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Assert
-            expect(textArea.placeholder).toBe('My prompt-box');
+            expect(textArea.placeholder).toBe('My prompt box');
         });
     });
 });

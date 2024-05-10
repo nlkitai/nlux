@@ -134,7 +134,7 @@ export class NluxRenderer<AiMsg> {
 
         try {
             // Root component can only be a chat room component.
-            if (this.rootCompId !== 'chat-room') {
+            if (this.rootCompId !== 'chatRoom') {
                 throw new NluxRenderingError({
                     source: this.constructor.name,
                     message: 'Root component is not a chat room',
@@ -165,8 +165,9 @@ export class NluxRenderer<AiMsg> {
                     },
                 }).create();
 
-            const CompExceptionsBoxConstructor: typeof CompExceptionsBox | undefined = CompRegistry
-                .retrieve('exceptions-box')?.model as any;
+            const CompExceptionsBoxConstructor: typeof CompExceptionsBox | undefined = CompRegistry.retrieve(
+                'exceptionsBox',
+            )?.model as any;
 
             if (CompExceptionsBoxConstructor) {
                 exceptionAlert = comp(CompExceptionsBox<AiMsg>)

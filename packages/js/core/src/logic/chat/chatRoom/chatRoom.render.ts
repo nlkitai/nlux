@@ -24,7 +24,7 @@ export const renderChatRoom: CompRenderer<
     const dom = render(html());
     if (!dom) {
         throw new NluxRenderingError({
-            source: source('chat-room', 'render'),
+            source: source('chatRoom', 'render'),
             message: 'Chat room could not be rendered',
         });
     }

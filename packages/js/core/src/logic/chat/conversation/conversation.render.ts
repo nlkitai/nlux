@@ -40,7 +40,7 @@ export const renderConversation: CompRenderer<
     const segmentsContainer = render(html());
     if (!(segmentsContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
-            source: source('chat-room', 'render'),
+            source: source('chatRoom', 'render'),
             message: 'Conversation component could not be rendered',
         });
     }

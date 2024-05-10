@@ -8,10 +8,10 @@ import {CompPromptBox} from './chat/promptBox/promptBox.model';
 import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
 
 const componentsById = () => ({
-    'chat-room': CompChatRoom,
-    'exceptions-box': CompExceptionsBox,
+    'chatRoom': CompChatRoom,
+    'exceptionsBox': CompExceptionsBox,
     'conversation': CompConversation,
-    'prompt-box': CompPromptBox,
+    'promptBox': CompPromptBox,
     'chatSegment': CompChatSegment,
     'chatItem': CompChatItem,
 });
