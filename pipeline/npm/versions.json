@@ -6,8 +6,8 @@
     "react-dom": "18.2.0"
   },
   "dependencies": {
-    "openai": "4.32.1",
-    "hfInference": "2.6.6",
+    "openai": "4.44.0",
+    "hfInference": "2.6.7",
     "highlightJs": "11.9.0"
   }
 }

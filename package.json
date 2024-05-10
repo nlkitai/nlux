@@ -25,10 +25,10 @@
   "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
-    "symlink-dir": "^5.2.1",
-    "jsdom": "^22.1.0",
-    "typescript": "^5.3.3",
-    "vite": "^5.1.0"
+    "symlink-dir": "^6.0.0",
+    "jsdom": "^24.0.0",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
   },
   "bugs": "https://github.com/nluxai/nlux/issues",
   "repository": {

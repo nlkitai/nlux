@@ -13,8 +13,8 @@
     "@rollup/plugin-strip": "^3.0.4",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
-    "esbuild": "^0.20.0",
-    "rollup": "^4.9.6",
+    "esbuild": "^0.21.1",
+    "rollup": "^4.17.2",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-esbuild": "^6.1.1",
     "tslib": "^2.6.2"
