@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // submitShortcut: 'CommandEnter',
         })
         .withConversationOptions({
-            autoScroll: true,
+            autoScroll: false,
         })
         .withLayoutOptions({
             width: 400,
@@ -69,8 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .withMessageOptions({
             markdownLinkTarget: 'blank',
-            syntaxHighlighter: highlighter,
+            // syntaxHighlighter: highlighter,
             // showCodeBlockCopyButton: false,
+        })
+        .withPersonaOptions({
+            user: {
+                name: 'Mr User',
+                picture: 'https://user-image-url',
+            },
         });
 
     aiChat.mount(parent);

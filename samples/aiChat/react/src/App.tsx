@@ -67,11 +67,24 @@ function App() {
                 height: 300,
             }}
             conversationOptions={{
-                autoScroll: true,
+                // autoScroll: false,
             }}
             messageOptions={{
                 markdownLinkTarget: 'blank',
                 syntaxHighlighter: highlighter,
+                // showCodeBlockCopyButton: false,
+                // streamingAnimationSpeed: 100,
+            }}
+            personaOptions={{
+                user: {
+                    name: 'Mr User',
+                    // picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+                    picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
+                },
+                bot: {
+                    name: 'AI',
+                    picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                },
             }}
         />
     );

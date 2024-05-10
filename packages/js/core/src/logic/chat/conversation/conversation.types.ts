@@ -16,7 +16,7 @@ export type CompConversationProps<AiMsg> = {
 };
 
 export type CompConversationElements = {
-    messagesContainer: HTMLElement;
+    segmentsContainer: HTMLElement;
 };
 
 export type CompConversationActions = {

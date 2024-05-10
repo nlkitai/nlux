@@ -27,23 +27,25 @@ export const renderConversation: CompRenderer<
 }) => {
     const renderingContext: {
         botPersona: BotPersona | undefined;
+        userPersona: UserPersona | undefined;
         welcomeMessageContainer: HTMLElement | undefined;
         shouldRenderWelcomeMessage: boolean;
     } = {
         botPersona: props.botPersona,
+        userPersona: props.userPersona,
         welcomeMessageContainer: undefined,
         shouldRenderWelcomeMessage: !props.messages || props.messages.length === 0,
     };
 
-    const messagesContainer = render(html());
-    if (!(messagesContainer instanceof HTMLElement)) {
+    const segmentsContainer = render(html());
+    if (!(segmentsContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
             source: source('chat-room', 'render'),
             message: 'Conversation component could not be rendered',
         });
     }
 
-    appendToRoot(messagesContainer);
+    appendToRoot(segmentsContainer);
 
     //
     // Create welcome message container
@@ -54,7 +56,7 @@ export const renderConversation: CompRenderer<
             const bot = props.botPersona;
             renderingContext.welcomeMessageContainer = createWelcomeMessage(bot);
             if (renderingContext.welcomeMessageContainer) {
-                messagesContainer.append(renderingContext.welcomeMessageContainer);
+                segmentsContainer.append(renderingContext.welcomeMessageContainer);
             }
         } else {
             renderingContext.welcomeMessageContainer = createEmptyWelcomeMessage();
@@ -63,7 +65,7 @@ export const renderConversation: CompRenderer<
 
     return {
         elements: {
-            messagesContainer: messagesContainer,
+            segmentsContainer,
         },
         actions: {
             removeWelcomeMessage: () => {
@@ -83,7 +85,7 @@ export const renderConversation: CompRenderer<
                     : createEmptyWelcomeMessage();
 
                 if (renderingContext.welcomeMessageContainer) {
-                    messagesContainer.append(renderingContext.welcomeMessageContainer);
+                    segmentsContainer.append(renderingContext.welcomeMessageContainer);
                 }
             },
             updateBotPersona: (newValue: BotPersona | undefined) => {
@@ -102,7 +104,7 @@ export const renderConversation: CompRenderer<
                         : createEmptyWelcomeMessage();
 
                     if (renderingContext.welcomeMessageContainer) {
-                        messagesContainer.append(renderingContext.welcomeMessageContainer);
+                        segmentsContainer.append(renderingContext.welcomeMessageContainer);
                     }
                 }
             },

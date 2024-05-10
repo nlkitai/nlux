@@ -104,7 +104,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         this.chatSegmentCompIdsByIndex.push(segmentId);
 
         const segmentComponentId = newChatSegmentComp.id;
-        this.addSubComponent(segmentComponentId, newChatSegmentComp, 'messagesContainer');
+        this.addSubComponent(segmentComponentId, newChatSegmentComp, 'segmentsContainer');
 
         return segmentId;
     };

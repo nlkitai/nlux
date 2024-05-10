@@ -1,5 +1,6 @@
 .nlux-comp-cht_itm {
     display: flex;
+    align-items: flex-start;
     flex-direction: row;
     margin-bottom: 0.5em;
     gap: 0.5em;
