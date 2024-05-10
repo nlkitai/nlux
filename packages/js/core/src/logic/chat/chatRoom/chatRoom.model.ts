@@ -14,9 +14,9 @@ import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../promptBox/promptBox.model';
 import {CompPromptBoxProps} from '../promptBox/promptBox.types';
 import {submitPromptFactory} from './actions/submitPrompt';
-import {renderChatRoom} from './chat-room.render';
-import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
-import {updateChatRoom} from './chat-room.update';
+import {renderChatRoom} from './chatRoom.render';
+import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
+import {updateChatRoom} from './chatRoom.update';
 
 @Model('chat-room', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<

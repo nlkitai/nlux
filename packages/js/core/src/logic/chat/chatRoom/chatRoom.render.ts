@@ -5,7 +5,7 @@ import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {source} from '../../../utils/source';
-import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';
+import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 
 const __ = (styleName: string) => `nlux-chtRm-${styleName}`;
 
