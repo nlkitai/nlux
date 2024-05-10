@@ -158,7 +158,7 @@ describe('<AiChat /> + personaOptions + user', () => {
         });
     });
 
-    describe('When the user persona is set with JSX as picture', () => {
+    describe('When the user persona is set with JSX as element', () => {
         describe('When the user sends a message', () => {
             it('Persona details should be rendered', async () => {
                 // Arrange
@@ -186,7 +186,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 expect(avatarContainer).toBeInTheDocument();
             });
 
-            it('Persona JSX should be rendered', async () => {
+            it('User persona JSX should be rendered', async () => {
                 // Arrange
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
