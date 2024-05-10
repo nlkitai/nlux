@@ -1,11 +1,11 @@
-# [nlux REACT](https://nlux.ai) 🌲✨💬
+# [NLUX React](https://nlux.dev) 🌲✨💬
 
 ![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
-[![Docs nlux.ai](https://img.shields.io/badge/Docs_Website-nlux.dev-fa896b)](https://nlux.dev)
+[![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 
-`nlux` _(for Natural Language User Experience)_ is an open-source React and Javascript library that makes it super
+`NLUX` _(for Natural Language User Experience)_ is an open-source React and Javascript library that makes it super
 simple
 to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
@@ -34,14 +34,14 @@ of code, you can add conversational AI capabilities and interact with your favou
 * [Standard LLM adapters available](https://nlux.dev/learn/adapters)
 * [How to create your own adapter for nlux](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
 
-## Get Started With `nlux React` 🚀
+## Get Started With `NLUX React` 🚀
 
-The example below demonstrates how to create an AI chat interface using `nlux React` and `LangChain`, the open source
-framework for building LLM backends. But you can use `nlux` **with any LLM** ― either
+The example below demonstrates how to create an AI chat interface using `NLUX React` and `LangChain`, the open source
+framework for building LLM backends. But you can use `NLUX` **with any LLM** ― either
 via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
 by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
 
-To get started with `nlux React` and LangChain, install the `@nlux/react` and `@nlux/langchain-react` packages:
+To get started with `NLUX React` and LangChain, install the `@nlux/react` and `@nlux/langchain-react` packages:
 
 ```sh
 npm install @nlux/react @nlux/langchain-react
@@ -73,14 +73,14 @@ const App = () => {
 }
 ```
 
-You should also [include the nlux theme CSS file](#theme-file-and-css-) in your HTML page
+You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page
 or import it in your React app.
 
 ## And The Result Is ✨
 
 An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
-[![nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
+[![NLUX AiChat Component](https://nlux.dev/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.dev)
 
 ## Theme File and CSS 🎨
 

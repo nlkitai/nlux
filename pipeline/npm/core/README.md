@@ -1,11 +1,11 @@
-# [nlux JS](https://nlux.ai) 🌲✨💬
+# [NLUX JS](https://nlux.dev) 🌲✨💬
 
 ![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
-[![Docs nlux.ai](https://img.shields.io/badge/Docs_Website-nlux.dev-fa896b)](https://nlux.dev)
+[![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-fa896b)](https://nlux.dev)
 
 ## The Conversational AI UI Library For Any LLM
 
-`nlux` _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
+`NLUX` _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
 of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
@@ -35,14 +35,14 @@ This package `@nlux/core` is the vanilla JS version of the library.
 If you're looking for the React JS version, please check
 the [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) package.
 
-## Get Started With `nlux JS` 🚀
+## Get Started With `NLUX JS` 🚀
 
-The example below demonstrates how to create an AI chat interface using `nlux JS` and LangChain, the open source
-framework for building LLM backends. But you can use `nlux` **with any LLM** ― either
+The example below demonstrates how to create an AI chat interface using `NLUX JS` and LangChain, the open source
+framework for building LLM backends. But you can use `NLUX` **with any LLM** ― either
 via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
 by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
 
-To get started with `nlux JS` and `LangChain`, install the `@nlux/core` and `@nlux/langchain` packages:
+To get started with `NLUX JS` and `LangChain`, install the `@nlux/core` and `@nlux/langchain` packages:
 
 ```sh
 npm install @nlux/core @nlux/langchain
@@ -72,13 +72,13 @@ const aiChat = createAiChat()
 aiChat.mount(document.getElementById('root'));
 ```
 
-You should also [include the nlux theme CSS file](#theme-file-and-css-) in your HTML page.
+You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your HTML page.
 
 ## And The Result Is ✨
 
 An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
-[![nlux AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
+[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
 
 ## Theme File and CSS 🎨
 

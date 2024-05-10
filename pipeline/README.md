@@ -27,7 +27,7 @@ the dev server on port `9090`.
 
 ### Running The Specs / Unit Tests
 
-The specs / unit tests are located under `specs/nlux` folder.<br />
+The specs / unit tests are located under `specs/specs` folder.<br />
 In order to run the specs, you need to first build the project by running:
 
 ```bash

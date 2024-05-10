@@ -1,4 +1,4 @@
-# nlux
+# NLUX
 
 <p align=center>
   <img style="padding: 0; margin: 0;" height="80px" src="https://nlux.dev/nlux-logo/nlux-logo-main.png"/><br />
@@ -17,16 +17,16 @@
 <p align="center">
     Do you like this project ? Please star the repo to show your support 🌟 🧡
     <br />
-    Building with <code>nlux</code> ? <a href="https://calendar.app.google/6t54aKt6fPVHtcXC9">Get in touch</a> - we'd love to hear from you.
+    Building with <code>NLUX</code> ? <a href="https://calendar.app.google/6t54aKt6fPVHtcXC9">Get in touch</a> - we'd love to hear from you.
 </p>
 
 ------
 
-`nlux` (_for Natural Language User Experience_) is an open-source Javascript and React JS library that makes it super
+`NLUX` (_for Natural Language User Experience_) is an open-source Javascript and React JS library that makes it super
 simple to integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few
 lines of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
-[![nlux UI For Any LLM](https://nlux.ai/images/github/nlux-ui-for-llms-banner.gif)](https://nlux.dev)
+[![NLUX UI For Any LLM](https://nlux.ai/images/github/nlux-ui-for-llms-banner.gif)](https://nlux.dev)
 
 ## Key Features 🌟
 
@@ -41,12 +41,12 @@ lines of code, you can add conversational AI capabilities and interact with your
 
 ## Repo Content 📦
 
-This GitHub repository contains the source code for the `nlux` library.<br />
+This GitHub repository contains the source code for the `NLUX` library.<br />
 It is a monorepo that contains code for following NPM packages:
 
 **React JS Packages:**
 
-* [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) ― React JS components for `nlux`.
+* [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) ― React JS components for `NLUX`.
 * [`@nlux/langchain-react`](https://www.npmjs.com/package/@nlux/langchain-react) ― React hooks and adapter for APIs
   created using LangChain's LangServe library.
 * [`@nlux/openai-react`](https://www.npmjs.com/package/@nlux/openai-react) ― React hooks for the OpenAI API, for testing
@@ -54,7 +54,7 @@ It is a monorepo that contains code for following NPM packages:
 * [`@nlux/hf-react`](https://www.npmjs.com/package/@nlux/hf-react) ― React hooks and pre-processors for the Hugging Face
   Inference API
 * [`@nlux/nlbridge-react`](https://www.npmjs.com/package/@nlux/nlbridge-react) ― Integration with `nlbridge`, the
-  Express.js LLM middleware by the nlux team.
+  Express.js LLM middleware by the NLUX team.
 
 **Vanilla JS Packages:**
 
@@ -65,7 +65,7 @@ It is a monorepo that contains code for following NPM packages:
   development.
 * [`@nlux/hf`](https://www.npmjs.com/package/@nlux/hf) ― Adapter and pre-processors for the Hugging Face Inference API.
 * [`@nlux/nlbridge`](https://www.npmjs.com/package/@nlux/nlbridge) ― Integration with `nlbridge`, the Express.js LLM
-  middleware by the nlux team.
+  middleware by the NLUX team.
 
 **Theme & Extensions:**
 
@@ -84,21 +84,21 @@ Please visit each package's NPM page for information on how to use it.
 
 ## Design Principles ⚜️
 
-The following design principles guide the development of `nlux`:
+The following design principles guide the development of `NLUX`:
 
-* **Intuitive** ― Interactions enabled by `nlux` should be intuitive.
+* **Intuitive** ― Interactions enabled by `NLUX` should be intuitive.
   Usage should unfold naturally without obstacles or friction. No teaching or thinking
-  should be required to use UI built with `nlux`.
+  should be required to use UI built with `NLUX`.
 
-* **Performance** ― `nlux` should be as fast as possible. Fast to load, fast to render
+* **Performance** ― `NLUX` should be as fast as possible. Fast to load, fast to render
   and update, fast to respond to user input. To achieve that, we should avoid unnecessary
   work, optimize for performance, minimize bundle size, and not depend on external libraries.
 
-* **Accessibility** ― UI built with `nlux` should be accessible to everyone. It should be usable
+* **Accessibility** ― UI built with `NLUX` should be accessible to everyone. It should be usable
   by people with disabilities, on various devices, in various environments, and using various
   input methods (keyboard, touch, voice).
 
-* **DX** ― `nlux` recognizes developers as first-class citizens. The library should enable an
+* **DX** ― `NLUX` recognizes developers as first-class citizens. The library should enable an
   optimal DX (developer experience). It should be effortless to use, easy to understand, and
   simple to extend. Stellar documentation should be provided. The feature roadmap should evolve
   aligning to developer needs voiced.
@@ -110,7 +110,7 @@ cross platforms, with a focus on performance and usability.
 
 ## Community & Support 🙏
 
-* **Star The Repo** 🌟 ― If you like `nlux`, please star the repo to show your support.  
+* **Star The Repo** 🌟 ― If you like `NLUX`, please star the repo to show your support.  
   Your support is what keeps this open-source project going 🧡
 * [GitHub Discussions](https://github.com/nluxai/nlux/discussions) ― Ask questions, report issues, and share your
   ideas with the community.
@@ -120,7 +120,7 @@ cross platforms, with a focus on performance and usability.
 
 ## License 📃
 
-`nlux` is licensed under Mozilla Public License Version 2.0 with restriction to use as a
+`NLUX` is licensed under Mozilla Public License Version 2.0 with restriction to use as a
 training dataset to develop or improve AI models.
 
 > Paragraph (3.6) was added to the original MPL 2.0 license.  
@@ -131,15 +131,15 @@ Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
 
 **In a nutshell:**
 
-* You can use `nlux` in your personal projects.
-* You can use `nlux` in commercial projects.
-* You can modify `nlux` and publish your changes under the same license.
-* You **cannot** feed `nlux`'s source code as part of a dataset to train AI models.
+* You can use `NLUX` in your personal projects.
+* You can use `NLUX` in commercial projects.
+* You can modify `NLUX` and publish your changes under the same license.
+* You **cannot** feed `NLUX`'s source code as part of a dataset to train AI models.
 
 Please read the full license text in the [LICENSE](LICENSE) file for details.
 
 ## About The Developer 👨‍💻
 
-`nlux` is a new open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
+`NLUX` is a new open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
 engineer with over a decade of experience building user interfaces and developer
 tools at companies like Amazon and Goldman Sachs, and contributions to open-source projects.
