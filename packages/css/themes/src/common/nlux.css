@@ -4,10 +4,4 @@
 
 @import './ui/button.css';
 @import './ui/input.css';
-
-@import './components/chat-room.css';
-@import './components/exceptions-box.css';
-@import './components/prompt-box.css';
-@import './components/text-message.css';
-
-@import './components/spinning-loader.css';
+@import './components/AiChat.css';

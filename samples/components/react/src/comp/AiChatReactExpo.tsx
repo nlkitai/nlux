@@ -4,7 +4,7 @@ import {AiChatProps} from '@nlux-dev/react/src/exports/props.tsx';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {FunctionComponent, useMemo, useState} from 'react';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/nova/theme.css';
 
 type MessageObjectType = {txt: string, color: string, bg: string};
 

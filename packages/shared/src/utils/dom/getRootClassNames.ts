@@ -1,5 +1,5 @@
 const rootClassName = 'nlux-AiChat-root';
-const defaultThemeId = 'luna';
+const defaultThemeId = 'nova';
 
 export const getRootClassNames = (props: {
     themeId?: string;

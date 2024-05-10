@@ -29,7 +29,7 @@ describe('<AiChat /> + prop className', () => {
             // Assert
             expect(aiChatDom.classList.length).toBe(2);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
-            expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
+            expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
         });
 
         describe('When a className is set', () => {
@@ -46,7 +46,7 @@ describe('<AiChat /> + prop className', () => {
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
-                expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
+                expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
                 expect(aiChatDom.classList[2]).toBe('my-class');
             });
         });
@@ -64,7 +64,7 @@ describe('<AiChat /> + prop className', () => {
             // Assert
             expect(aiChatDom.classList.length).toBe(3);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
-            expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
+            expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
             expect(aiChatDom.classList[2]).toBe('my-class');
         });
 
@@ -82,7 +82,7 @@ describe('<AiChat /> + prop className', () => {
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
-                expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
+                expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
                 expect(aiChatDom.classList[2]).toBe('my-new-class');
             });
         });
@@ -101,7 +101,7 @@ describe('<AiChat /> + prop className', () => {
                 // Assert
                 expect(aiChatDom.classList.length).toBe(2);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
-                expect(aiChatDom.classList[1]).toBe('nlux-theme-luna');
+                expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
             });
         });
     });

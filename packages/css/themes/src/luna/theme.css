@@ -1,7 +1,0 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-@import './common/colors.css';
-@import './common/variables.css';
-@import './common/animation.css';
-@import './common/format.css';
-@import './common/layout.css';
-@import './components/AiChat.css';
