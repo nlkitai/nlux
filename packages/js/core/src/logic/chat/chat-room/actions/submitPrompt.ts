@@ -6,7 +6,7 @@ import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {CompConversation} from '../../conversation/conversation.model';
-import {CompPromptBox} from '../../prompt-box/prompt-box.model';
+import {CompPromptBox} from '../../promptBox/promptBox.model';
 
 export const submitPromptFactory = <AiMsg>({
     context,

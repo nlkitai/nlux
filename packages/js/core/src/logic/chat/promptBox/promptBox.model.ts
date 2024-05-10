@@ -2,15 +2,15 @@ import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
-import {renderChatbox} from './prompt-box.render';
+import {renderChatbox} from './promptBox.render';
 import {
     CompPromptBoxActions,
     CompPromptBoxElements,
     CompPromptBoxEventListeners,
     CompPromptBoxEvents,
     CompPromptBoxProps,
-} from './prompt-box.types';
-import {updateChatbox} from './prompt-box.update';
+} from './promptBox.types';
+import {updateChatbox} from './promptBox.update';
 
 @Model('prompt-box', renderChatbox, updateChatbox)
 export class CompPromptBox<AiMsg> extends BaseComp<

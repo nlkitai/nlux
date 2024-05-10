@@ -116,7 +116,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
     }
 
-    public setBotPersona(botPersona: BotPersona) {
+    public setBotPersona(botPersona: BotPersona | undefined) {
         this.setProp('botPersona', botPersona);
         const newProps: Partial<ChatItemProps> = {
             name: botPersona?.name,
@@ -130,7 +130,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         });
     }
 
-    public setUserPersona(userPersona: UserPersona) {
+    public setUserPersona(userPersona: UserPersona | undefined) {
         this.setProp('userPersona', userPersona);
         const newProps: Partial<ChatItemProps> = {
             name: userPersona?.name,

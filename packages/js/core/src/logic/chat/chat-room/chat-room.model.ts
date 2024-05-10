@@ -11,8 +11,8 @@ import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOp
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
-import {CompPromptBox} from '../prompt-box/prompt-box.model';
-import {CompPromptBoxProps} from '../prompt-box/prompt-box.types';
+import {CompPromptBox} from '../promptBox/promptBox.model';
+import {CompPromptBoxProps} from '../promptBox/promptBox.types';
 import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chat-room.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chat-room.types';

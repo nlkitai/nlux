@@ -4,7 +4,7 @@ import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {source} from '../../../utils/source';
-import {CompPromptBoxActions, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxProps} from './prompt-box.types';
+import {CompPromptBoxActions, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxProps} from './promptBox.types';
 
 export const renderChatbox: CompRenderer<
     CompPromptBoxProps, CompPromptBoxElements, CompPromptBoxEvents, CompPromptBoxActions

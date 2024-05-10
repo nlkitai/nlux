@@ -4,7 +4,7 @@ import {CompChatRoom} from './chat/chat-room/chat-room.model';
 import {CompChatItem} from './chat/chatItem/chatItem.model';
 import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
 import {CompConversation} from './chat/conversation/conversation.model';
-import {CompPromptBox} from './chat/prompt-box/prompt-box.model';
+import {CompPromptBox} from './chat/promptBox/promptBox.model';
 import {CompExceptionsBox} from './miscellaneous/exceptions-box/model';
 import {CompList} from './miscellaneous/list/model';
 
