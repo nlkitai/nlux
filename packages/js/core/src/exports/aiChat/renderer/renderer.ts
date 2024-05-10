@@ -5,7 +5,7 @@ import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootC
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chatRoom/chatRoom.model';
 import {CompChatRoomProps} from '../../../logic/chat/chatRoom/chatRoom.types';
-import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptions-box/model';
+import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptionsBox/model';
 import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {comp} from '../comp/comp';

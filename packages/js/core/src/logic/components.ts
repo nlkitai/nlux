@@ -5,7 +5,7 @@ import {CompChatRoom} from './chat/chatRoom/chatRoom.model';
 import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
 import {CompConversation} from './chat/conversation/conversation.model';
 import {CompPromptBox} from './chat/promptBox/promptBox.model';
-import {CompExceptionsBox} from './miscellaneous/exceptions-box/model';
+import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
 import {CompList} from './miscellaneous/list/model';
 
 const componentsById = () => ({
