@@ -12,7 +12,7 @@ function App() {
     });
 
     const openAiAdapter = createUnsafeChatAdapter()
-        .withApiKey('sk_1234567890')
+        .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
         .withDataTransferMode('stream');
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '

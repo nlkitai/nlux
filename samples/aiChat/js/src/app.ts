@@ -11,6 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const adapter = createChatAdapter<string>()
         .withUrl('http://localhost:8899/');
 
+    const openAiAdapter = createUnsafeChatAdapter()
+        .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
+        .withDataTransferMode('stream');
+
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
         + 'typing animation will be shown for this message when it is loaded. This is a very long '
@@ -46,10 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
         },
     ];
-
-    const openAiAdapter = createUnsafeChatAdapter()
-        .withApiKey('sk_1234567890')
-        .withDataTransferMode('stream');
 
     const aiChat = createAiChat()
         .withAdapter(openAiAdapter)
