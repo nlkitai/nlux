@@ -22,13 +22,13 @@
     "watch": "node pipeline/scripts/watch.mjs",
     "test": "node pipeline/scripts/test.mjs"
   },
-  "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
-    "symlink-dir": "^6.0.0",
     "jsdom": "^24.0.0",
+    "symlink-dir": "^6.0.0",
     "typescript": "^5.4.5",
-    "vite": "^5.2.11"
+    "vite": "^5.2.11",
+    "eslint": "^9.2.0"
   },
   "bugs": "https://github.com/nluxai/nlux/issues",
   "repository": {
