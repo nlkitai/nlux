@@ -3,8 +3,8 @@
   "version": "0.0.0-latest",
   "license": "SEE LICENSE IN ROOT LICENSE FILE",
   "scripts": {
-    "build": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --resolveJsonModule",
-    "watch": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --resolveJsonModule --watch"
+    "build": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}'",
+    "watch": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --watch"
   },
   "dependencies": {},
   "peerDependencies": {
