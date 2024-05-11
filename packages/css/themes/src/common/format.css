@@ -1,5 +1,5 @@
 .nlux-AiChat-root {
-    font-family: var(--nlux-font-family);
+    font-family: var(--nlux-font-family), sans-serif;
     font-size: var(--nlux-font-size);
     font-weight: var(--nlux-font-weight);
     line-height: var(--nlux-line-height);

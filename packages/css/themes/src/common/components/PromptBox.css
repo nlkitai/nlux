@@ -9,7 +9,7 @@
     gap: var(--nlux-flex-gap);
 
     > textarea {
-        font-family: var(--nlux-font-family);
+        font-family: var(--nlux-font-family), sans-serif;
         font-size: var(--nlux-font-size);
 
         font-weight: 400;

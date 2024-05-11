@@ -1,6 +1,6 @@
 .nlux-AiChat-root {
     :is(input, select, textarea) {
-        font-family: var(--nlux-font-family);
+        font-family: var(--nlux-font-family), sans-serif;
         font-size: var(--nlux-font-size);
         font-weight: 400;
         line-height: 1.5;

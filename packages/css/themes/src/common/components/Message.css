@@ -6,10 +6,8 @@
     margin: 0;
     padding: 0.5em;
     text-align: left;
-    color: var(--nlux-foreground-color);
-    border: 1px solid var(--nlux-border-color);
+    border: 1px solid;
     border-radius: 0.25em;
-    background-color: var(--nlux-background-color);
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.1);
 
     > .nlux-md-strm-root {
@@ -27,7 +25,7 @@
             }
 
             > .code-block {
-                font-family: var(--nlux-mono-font-family);
+                font-family: var(--nlux-mono-font-family), monospace;
 
                 font-size: var(--nlux-font-size-s);
                 position: relative;
@@ -91,7 +89,7 @@
             }
 
             code {
-                font-family: var(--nlux-mono-font-family);
+                font-family: var(--nlux-mono-font-family), monospace;
                 font-size: var(--nlux-font-size-s);
                 padding: var(--nlux-padding-xs) var(--nlux-padding-s);
 
@@ -105,10 +103,4 @@
             }
         }
     }
-}
-
-.nlux-comp-msg.nlux_msg_loading {
-    display: flex;
-    flex: 0;
-    justify-content: center;
 }
