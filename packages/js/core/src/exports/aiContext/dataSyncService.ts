@@ -153,9 +153,8 @@ export class DataSyncService {
                     op.operation === 'update' &&
                     (op.data !== undefined || op.description !== undefined)
                 ) {
-                    // @ts-ignore
                     // We know that at least one of the two arguments is not undefined.
-                    acc[itemId] = {value: op.data, description: op.description};
+                    acc[itemId] = {value: op.data!, description: op.description!};
                 }
 
                 return acc;

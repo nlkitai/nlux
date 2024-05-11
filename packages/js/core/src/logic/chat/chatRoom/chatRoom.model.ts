@@ -23,8 +23,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
     private autoScrollController: AutoScrollController | undefined;
-    private conversation: CompConversation<AiMsg>;
-    private promptBoxInstance: CompPromptBox<AiMsg>;
+    private conversation!: CompConversation<AiMsg>;
+    private promptBoxInstance!: CompPromptBox<AiMsg>;
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
@@ -68,7 +68,6 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             promptBox?.submitShortcut,
         );
 
-        // @ts-ignore
         if (!this.conversation || !this.promptBoxInstance) {
             throw new Error('Conversation is not initialized');
         }

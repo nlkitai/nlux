@@ -5,7 +5,6 @@ import strip from '@rollup/plugin-strip';
 import terser from '@rollup/plugin-terser';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
-// @ts-ignore
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 

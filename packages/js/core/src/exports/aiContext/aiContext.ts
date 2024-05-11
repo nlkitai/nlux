@@ -156,7 +156,6 @@ class AiContextImpl implements AiContext {
 
             // Status can change to 'destroyed' if the context is destroyed while adapter.set is in progress.
             // In that case, we should not set the contextId and we should immediately clear the context.
-            // @ts-ignore
             if (this.status === 'destroyed') {
                 if (result.success) {
                     await this.theDataSyncService?.resetContextData();

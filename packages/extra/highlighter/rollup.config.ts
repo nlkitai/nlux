@@ -3,7 +3,6 @@ import {nodeResolve} from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
 import terser from '@rollup/plugin-terser';
-// @ts-ignore
 import csso from 'postcss-csso';
 import postcssImport from 'postcss-import';
 import {LogLevel, RollupOptions} from 'rollup';

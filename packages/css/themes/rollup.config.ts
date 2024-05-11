@@ -1,7 +1,5 @@
-// @ts-ignore
 import csso from 'postcss-csso';
 import postcssImport from 'postcss-import';
-// @ts-ignore
 import postcssNested from 'postcss-nested';
 import {LogLevel, RollupOptions} from 'rollup';
 import postcss from 'rollup-plugin-postcss';

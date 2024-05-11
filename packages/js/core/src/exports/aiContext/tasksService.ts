@@ -399,8 +399,6 @@ export class TasksService {
                     item.operation === 'update' &&
                     (item.description !== undefined || item.paramDescriptions !== undefined)
                 ) {
-                    // @ts-ignore
-                    // We know that at least one of the two arguments is not undefined.
                     const updateData: any = {};
                     if (item.description !== undefined) {
                         updateData.description = item.description;
