@@ -9,7 +9,7 @@
     "url": "git+ssh://git@github.com/nluxai/nlux.git"
   },
   "author": "Salmen Hichri",
-  "license": "MPL-2.0",
+  "license": "MPL-2.0-With-AI-Training-Restriction",
   "private": true,
   "scripts": {
     "test": "vitest run",
