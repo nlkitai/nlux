@@ -30,27 +30,27 @@ export const AiChat: <AiMsg>(
         themeId,
     } = props;
 
-    // References to DOM elements and React components
-    // Used for advanced interactions such as scrolling, streaming, and exceptions animation
-    // that cannot be done with the usual React state and props.
+    // References to DOM elements and React components:
+    // These are use for advanced interactions such as scrolling, streaming, and
+    // exceptions animation that cannot be done with the usual React state and props.
     const conversationRef = useRef<ImperativeConversationCompProps>(null);
     const conversationContainerRef = useRef<HTMLDivElement>(null);
     const lastActiveSegmentIdRef = useRef<string | undefined>(undefined);
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
 
-    // Controllers for the references above
+    // Controllers for some of the references above
     const autoScrollController = useAutoScrollController(conversationContainerRef, conversationOptions?.autoScroll);
     const exceptionBoxController = useMemo(() => {
         return exceptionBoxRef.current ? createExceptionsBoxController(exceptionBoxRef.current) : undefined;
     }, [exceptionBoxRef.current]);
 
-    // Component state items
+    // Regular component state
     const [prompt, setPrompt] = useState('');
     const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
     const [initialSegment, setInitialSegment] = useState<ChatSegment<AiMsg>>();
     const [chatSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
 
-    // Derived state items
+    // Derived state and memoized values
     const segments = useMemo(
         () => (initialSegment ? [initialSegment, ...chatSegments] : chatSegments),
         [initialSegment, chatSegments],
@@ -58,11 +58,10 @@ export const AiChat: <AiMsg>(
 
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
-
     const rootClassNames = useMemo(() => getRootClassNames({className, themeId}).join(' '), [className, themeId]);
     const rootStyle = useAiChatStyle(layoutOptions);
 
-    // Callbacks for user interactions and handlers
+    // Callbacks and handlers for user interactions and events
     const showException = useCallback(
         (message: string) => exceptionBoxController?.displayException(message),
         [exceptionBoxController],
@@ -71,21 +70,14 @@ export const AiChat: <AiMsg>(
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
         aiChatProps: props,
-        adapterToUse,
-        initialSegment,
-        chatSegments,
-        prompt,
-        promptBoxOptions,
-        showException,
-        setChatSegments,
-        setPromptBoxStatus,
-        setPrompt,
-        conversationRef,
+        adapterToUse, conversationRef,
+        initialSegment, chatSegments,
+        prompt, promptBoxOptions, showException,
+        setChatSegments, setPromptBoxStatus, setPrompt,
     });
 
     const handleLastActiveSegmentChange = useLastActiveSegmentChangeHandler(
-        autoScrollController,
-        lastActiveSegmentIdRef,
+        autoScrollController, lastActiveSegmentIdRef,
     );
 
     useEffect(() => setInitialSegment(
