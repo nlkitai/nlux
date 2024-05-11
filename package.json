@@ -3,7 +3,7 @@
   "version": "latest",
   "description": "NLUX is a JavaScript and React JS library for building conversational AI experiences.",
   "author": "Salmen Hichri",
-  "license": "MPL-2.0-With-AI-Training-Restriction",
+  "license": "SEE LICENSE IN ROOT LICENSE FILE",
   "homepage": "https://nlux.dev",
   "private": true,
   "workspaces": [
