@@ -1,5 +1,6 @@
 import {AiChat, createAiChat} from '@nlux/core';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
+import '@testing-library/jest-dom';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
