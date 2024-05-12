@@ -1,6 +1,5 @@
 import {AiContext as CoreAiContext} from '@nlux-dev/core/src';
-import {createAiContext} from '@nlux-dev/react/src';
-import {useAiContext} from '@nlux/react';
+import {createAiContext, useAiContext} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import {useContext} from 'react';
 import {describe, expect, it, vi} from 'vitest';

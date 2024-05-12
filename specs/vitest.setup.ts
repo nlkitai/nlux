@@ -15,7 +15,7 @@ console.warn = vi.fn();
 console.log = vi.fn();
 console.info = vi.fn();
 
-global.ResizeObserver = ResizeObserver;
-global.HTMLElement.prototype.scroll = vi.fn();
-global.HTMLElement.prototype.scrollTo = vi.fn();
-global.HTMLElement.prototype.scrollIntoView = vi.fn();
+(global as any).ResizeObserver = ResizeObserver;
+(global as any).HTMLElement.prototype.scroll = vi.fn();
+(global as any).HTMLElement.prototype.scrollTo = vi.fn();
+(global as any).HTMLElement.prototype.scrollIntoView = vi.fn();

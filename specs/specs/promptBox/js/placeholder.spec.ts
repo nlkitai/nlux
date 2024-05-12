@@ -1,5 +1,4 @@
-import {AiChat, createAiChat} from '@nlux-dev/core/src';
-import {PromptBoxOptions} from '@nlux/core';
+import {AiChat, createAiChat, PromptBoxOptions} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';

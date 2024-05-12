@@ -1,5 +1,5 @@
+import {PromptBoxOptions} from '@nlux-dev/core/src';
 import {AiChat} from '@nlux-dev/react/src';
-import {PromptBoxOptions} from '@nlux/core';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';

@@ -56,7 +56,7 @@ function App() {
             // adapter={nlBridge}
             adapter={openAiAdapter}
             // syntaxHighlighter={highlighter}
-            initialConversation={initialConversation}
+            // initialConversation={initialConversation}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
                 autoFocus: true,
@@ -82,8 +82,9 @@ function App() {
                     picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
                 },
                 bot: {
-                    name: 'AI',
+                    name: 'Harry Botter',
                     picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                    tagline: 'Your friendly AI assistant',
                 },
             }}
         />

@@ -1,4 +1,4 @@
-import {AiChat, createAiChat} from '@nlux/core';
+import {AiChat, createAiChat} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import '@testing-library/jest-dom';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
