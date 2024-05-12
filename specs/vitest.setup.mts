@@ -5,7 +5,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import {afterEach, expect, vi} from 'vitest';
 import '@testing-library/jest-dom/vitest';
 
-expect.extend(matchers);
+expect.extend(matchers as any);
 
 afterEach(() => {
     cleanup();
