@@ -22,6 +22,10 @@ export const ChatSegmentComp: <AiMsg>(
         () => new Map<string, RefObject<ChatItemImperativeProps>>(), [],
     );
 
+    const chatItemsStreamingBuffer = useMemo(
+        () => new Map<string, Array<string>>(), [],
+    );
+
     useEffect(() => {
         if (chatSegment.items.length === 0) {
             chatItemsRef.clear();
@@ -54,11 +58,21 @@ export const ChatSegmentComp: <AiMsg>(
     useImperativeHandle(ref, () => ({
         streamChunk: (chatItemId: string, chunk: string) => {
             const chatItemCompRef = chatItemsRef.get(chatItemId);
-            chatItemCompRef?.current?.streamChunk(chunk);
+            if (chatItemCompRef?.current) {
+                chatItemCompRef.current.streamChunk(chunk);
+            } else {
+                // Buffer the chunk if the chat item is not rendered yet.
+                const chatItemStreamingBuffer = chatItemsStreamingBuffer.get(chatItemId) ?? [];
+                chatItemsStreamingBuffer.set(chatItemId, [...chatItemStreamingBuffer, chunk]);
+            }
         },
         completeStream: (chatItemId: string) => {
             const chatItemCompRef = chatItemsRef.get(chatItemId);
-            chatItemCompRef?.current?.completeStream();
+            if (!chatItemCompRef?.current) {
+                return;
+            }
+
+            chatItemCompRef.current.completeStream();
             chatItemsRef.delete(chatItemId);
         },
     }), []);
@@ -66,6 +80,24 @@ export const ChatSegmentComp: <AiMsg>(
     const ForwardRefChatItemComp = useMemo(() => forwardRef(
         ChatItemComp<AiMsg>,
     ), []);
+
+    // Every time the chat segment is rendered, we check if there are any streamed chunks buffered waiting for a
+    // chat item to be rendered. If buffered chunks are found, along with the chat item reference, we stream the chunks
+    // to the chat item.
+    useEffect(() => {
+        if (chatItemsStreamingBuffer.size > 0) {
+            chatItemsStreamingBuffer.forEach((bufferedChunks, chatItemId) => {
+                const chatItemCompRef = chatItemsRef.get(chatItemId);
+                if (chatItemCompRef?.current) {
+                    // A chat item with buffered chunks is found.
+                    bufferedChunks.forEach((chunk) => {
+                        chatItemCompRef?.current?.streamChunk(chunk);
+                    });
+                    chatItemsStreamingBuffer.delete(chatItemId);
+                }
+            });
+        }
+    }); // No dependencies — We always want to run this effect after every render.
 
     const chatItems = chatSegment.items;
     if (chatItems.length === 0) {
