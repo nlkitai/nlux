@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + bot persona + welcome message', () => {
     let adapterController: AdapterController | undefined;
@@ -33,7 +33,7 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                     />
                 );
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 const welcomeMessage = container.querySelector('.nlux-comp-wlc_msg')!;

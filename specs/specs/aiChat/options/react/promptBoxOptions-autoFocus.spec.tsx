@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
     let adapterController: AdapterController | undefined;
@@ -22,7 +22,7 @@ describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
@@ -37,14 +37,14 @@ describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
             adapterController?.resolve('Response');
             textArea.blur();
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             expect(document.activeElement).not.toBe(textArea);
@@ -58,7 +58,7 @@ describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
                 autoFocus: true,
             }}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
@@ -74,12 +74,12 @@ describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
                     autoFocus: true,
                 }}/>;
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
                 textArea.focus();
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(document.activeElement).toBe(textArea);
@@ -91,14 +91,14 @@ describe('<AiChat /> + promptBoxOptions + autoFocus', () => {
                     autoFocus: true,
                 }}/>;
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 textArea.blur();
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
                 adapterController?.reject('Error message');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(document.activeElement).toBe(textArea);

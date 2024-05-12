@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + prop className', () => {
     let adapterController: AdapterController | undefined;
@@ -21,7 +21,7 @@ describe('<AiChat /> + prop className', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -41,7 +41,7 @@ describe('<AiChat /> + prop className', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} className="my-class"/>);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
@@ -77,7 +77,7 @@ describe('<AiChat /> + prop className', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} className="my-new-class"/>);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(3);
@@ -96,7 +96,7 @@ describe('<AiChat /> + prop className', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter}/>);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(aiChatDom.classList.length).toBe(2);

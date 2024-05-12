@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + personaOptions + bot', () => {
     let adapterController: AdapterController | undefined;
@@ -36,14 +36,14 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
                 // Act
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController?.resolve('Hi there!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > .avtr_ctn';
@@ -65,18 +65,18 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
                 // Act
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController?.resolve('Hi there!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
-                const avatarImage = container.querySelector(selector);
+                const avatarImage = container.querySelector(selector) as HTMLElement | null;
                 expect(avatarImage).toBeInTheDocument();
                 expect(avatarImage!.style.backgroundImage).toBe('url(https://bot-image-url)');
             });
@@ -95,14 +95,14 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
                 // Act
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController?.resolve('Hi there!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
@@ -126,20 +126,20 @@ describe('<AiChat /> + personaOptions + bot', () => {
                 />;
 
                 const {container, rerender} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController!.resolve('Hi, how can I help you?');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 await userEvent.type(textArea, 'Tell me a funny joke!{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController!.resolve('Why did the chicken cross the road? To get to the other side!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 rerender(<AiChat
@@ -152,7 +152,7 @@ describe('<AiChat /> + personaOptions + bot', () => {
                     }}
                 />);
 
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
@@ -186,14 +186,14 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
                 // Act
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController?.resolve('Hi there!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > #jsx-avatar';
@@ -215,14 +215,14 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
                 // Act
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController?.resolve('Hi there!');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const selector = '.nlux_cht_itm_in > .nlux-comp-avtr > #jsx-avatar';

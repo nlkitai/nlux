@@ -1,10 +1,11 @@
 import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
     let adapterController: AdapterController | undefined = undefined;
@@ -29,15 +30,15 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me some code block please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('This is code block\n```js\nconsole.log("Hello, World!");\n```\n');
-            await waitForMdStreamToComplete(100);
+            await act(() => waitForMdStreamToComplete(100));
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -58,15 +59,15 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me some code block please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('This is code block\n```js\nconsole.log("Hello, World!");\n```\n');
-            await waitForMdStreamToComplete(100);
+            await act(() => waitForMdStreamToComplete(100));
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -87,15 +88,15 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me some code block please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('This is code block\n```js\nconsole.log("Hello, World!");\n```\n');
-            await waitForMdStreamToComplete(100);
+            await act(() => waitForMdStreamToComplete(100));
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');

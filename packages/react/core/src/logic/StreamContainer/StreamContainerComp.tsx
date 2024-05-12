@@ -1,4 +1,4 @@
-import {Ref, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {ReactElement, Ref, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
@@ -76,7 +76,7 @@ export const StreamContainerComp = function <AiChat>(
         markdownOptions?.streamingAnimationSpeed,
     ]);
 
-    const rootElement = useMemo(() => {
+    const rootElement: ReactElement = useMemo(() => {
         if (responseRenderer) {
             const ResponseRendererComp = responseRenderer;
             return (

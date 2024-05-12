@@ -1,10 +1,11 @@
 import {AiChat, ResponseComponent} from '@nlux-dev/react/src';
-import {render} from '@testing-library/react';
+import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + messageOptions + responseComponent', () => {
     let adapterController: AdapterController | undefined = undefined;
@@ -34,14 +35,14 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
                 />,
             );
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             adapterController!.resolve('Yo!');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const responseElement = container.querySelector('.nlux_cht_itm_in');
@@ -67,14 +68,14 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
                 />,
             );
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             adapterController!.resolve('Yo!');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             expect(customResponseComponentSpy).toHaveBeenCalledWith(
@@ -97,24 +98,24 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
                     adapter={adapterController!.adapter}
                     messageOptions={{responseComponent: customResponseComponentSpy}}
                 />);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 rerender(<AiChat
                     adapter={adapterController!.adapter}
                     messageOptions={{responseComponent: undefined}}
                 />);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController!.resolve('Yo!');
-                await waitForMdStreamToComplete();
+                await act(() => waitForMdStreamToComplete());
 
                 // Assert
                 const responseElement = container.querySelector('.nlux_cht_itm_in');
@@ -155,26 +156,30 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
                 />,
             );
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             adapterController!.next('Yo!');
-            await waitForMdStreamToComplete();
+            await act(() => waitForMdStreamToComplete());
 
             // Assert
             const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux_cht_itm_in');
             const mdContainer = chatItemReceived!.querySelector('.nlux-md-cntr');
-            expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');
+            await waitFor(() => {
+                expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');
+            });
 
             // Act
             adapterController!.next(' What\'s up?');
-            await waitForMdStreamToComplete();
+            await act(() => waitForMdStreamToComplete());
 
             // Assert - Streamed content should have been appended to the existing content
-            expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>');
+            await waitFor(() => {
+                expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>');
+            });
 
             // Asset - Custom component should have been called with the correct props
             expect(customResponseComponentSpy).toHaveBeenCalledWith(

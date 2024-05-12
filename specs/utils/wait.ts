@@ -1,6 +1,16 @@
-export const waitForRenderCycle = () => new Promise(resolve => {
+import {act} from 'react';
+
+export const waitForRenderCycle = async () => new Promise(resolve => {
     requestAnimationFrame(resolve);
 });
+
+export const waitForReactRenderCycle = async () => {
+    const animationFramePromise = new Promise(resolve => {
+        requestAnimationFrame(resolve);
+    });
+
+    await act(() => animationFramePromise);
+};
 
 export const waitForMilliseconds = (milliseconds: number) => new Promise(resolve => {
     setTimeout(resolve, milliseconds);

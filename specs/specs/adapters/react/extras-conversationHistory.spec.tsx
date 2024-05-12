@@ -1,10 +1,11 @@
 import {AiChat, ChatItem} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
+import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../utils/wait';
 
 describe.each([
         {dataTransferMode: 'fetch'},
@@ -34,12 +35,12 @@ describe.each([
                 <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>,
             );
 
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             expect(adapterController!.getLastExtras()?.conversationHistory).toEqual([...initialConversation]);
@@ -58,12 +59,12 @@ describe.each([
                     <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>,
                 );
 
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'So what did you do?{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 if (dataTransferMode === 'fetch') {
                     adapterController!.resolve('I helped you with your account.');
@@ -72,15 +73,16 @@ describe.each([
                     adapterController!.complete();
                 }
 
+                await act(() => waitForMdStreamToComplete(60));
+
                 // Assert
-                await waitForMdStreamToComplete(60);
                 expect(container.innerHTML).toEqual(
                     expect.stringContaining('I helped you with your account.'),
                 );
 
                 // Act
                 await userEvent.type(textArea, 'Thank you!{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const newConversationHistory = adapterController!.getLastExtras()?.conversationHistory;
@@ -112,12 +114,12 @@ describe.each([
                 />,
             );
 
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             expect(adapterController!.getLastExtras()?.conversationHistory).toBeUndefined();
@@ -144,12 +146,12 @@ describe.each([
                     />,
                 );
 
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(adapterController!.getLastExtras()?.conversationHistory).toEqual([

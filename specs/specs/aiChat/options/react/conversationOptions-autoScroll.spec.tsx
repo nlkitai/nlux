@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + conversationOptions + autoScroll', () => {
     let adapterController: AdapterController | undefined;
@@ -25,14 +25,14 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
             conversationContainer.scrollTo = vi.fn();
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             await waitForMdStreamToComplete();
 
             // Assert
@@ -44,14 +44,14 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
                 // Arrange
                 const aiChat = <AiChat adapter={adapterController!.adapter}/>;
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
                 conversationContainer.scrollTo = vi.fn();
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 await waitForMdStreamToComplete();
 
                 // Assert
@@ -68,14 +68,14 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
                 conversationOptions={{autoScroll: false}}
             />;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
             conversationContainer.scrollTo = vi.fn();
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             await waitForMdStreamToComplete();
 
             // Assert
@@ -90,14 +90,14 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
                     conversationOptions={{autoScroll: false}}
                 />;
                 const {container} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
                 const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
                 conversationContainer.scrollTo = vi.fn();
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 await waitForMdStreamToComplete();
 
                 // Assert

@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + layoutOptions + width', () => {
     let adapterController: AdapterController | undefined;
@@ -21,7 +21,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
@@ -36,11 +36,11 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
             // Assert
@@ -51,11 +51,11 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
             // Assert
@@ -68,7 +68,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
@@ -81,7 +81,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
@@ -96,11 +96,11 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
             // Assert
@@ -111,11 +111,11 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {rerender, container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
             // Assert
@@ -128,11 +128,11 @@ describe('<AiChat /> + layoutOptions + width', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
             const {rerender, container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
             // Assert

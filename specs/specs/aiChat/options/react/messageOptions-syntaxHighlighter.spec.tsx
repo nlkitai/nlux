@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
     let adapterController: AdapterController | undefined = undefined;
@@ -34,15 +34,15 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('```js\nvar someJsCode = true;\n\n```');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -57,15 +57,15 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('```\nvar someJsCode = true;\n```');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -85,7 +85,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
                 />
             );
             const {container, rerender} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             rerender(
@@ -94,14 +94,14 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
                     messageOptions={{syntaxHighlighter: undefined}}
                 />,
             );
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Write some JS code{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             adapterController!.resolve('```js\nvar someJsCode = true;\n```');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');

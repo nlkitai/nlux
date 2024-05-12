@@ -4,7 +4,7 @@ import {render} from '@testing-library/react';
 import {useContext} from 'react';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
-import {waitForRenderCycle} from '../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../utils/wait';
 
 describe('AI context item hook', () => {
     it('should send the item to AI context', async () => {
@@ -30,7 +30,7 @@ describe('AI context item hook', () => {
                 <GetCoreContextFromReactContext state={'STATE VALUE'}/>
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // First assert + Get item ID
@@ -71,7 +71,7 @@ describe('AI context item hook', () => {
                 <GetCoreContextFromReactContext state={'STATE VALUE 1'}/>
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // First assert + Get item ID
@@ -86,7 +86,7 @@ describe('AI context item hook', () => {
                 <GetCoreContextFromReactContext state={'STATE VALUE 2'}/>
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Second assert
@@ -126,7 +126,7 @@ describe('AI context item hook', () => {
                 />
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // First assert + Get item ID
@@ -144,7 +144,7 @@ describe('AI context item hook', () => {
                 />
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Second assert
@@ -182,7 +182,7 @@ describe('AI context item hook', () => {
                 <GetCoreContextFromReactContext state={'STATE VALUE 1'}/>
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // First assert + Get item ID
@@ -197,7 +197,7 @@ describe('AI context item hook', () => {
                 No more components with AI context!
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Second assert

@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + prop themeId', () => {
     let adapterController: AdapterController | undefined;
@@ -21,7 +21,7 @@ describe('<AiChat /> + prop themeId', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -53,7 +53,7 @@ describe('<AiChat /> + prop themeId', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} themeId="vienna"/>);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(aiChatDom.className).toContain('nlux-theme-vienna');
@@ -69,7 +69,7 @@ describe('<AiChat /> + prop themeId', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter}/>);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 expect(aiChatDom.className).toContain('nlux-theme-luna');

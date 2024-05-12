@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMilliseconds, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + initialConversation prop', () => {
     let adapterController: AdapterController | undefined;
@@ -27,7 +27,7 @@ describe('<AiChat /> + initialConversation prop', () => {
 
             const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
             render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -70,7 +70,7 @@ describe('<AiChat /> + initialConversation prop', () => {
 
             const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
             render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -140,7 +140,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                 // Act
                 const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
                 render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -172,7 +172,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                     messageOptions={{showCodeBlockCopyButton: false}}
                 />;
                 render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -213,7 +213,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                         messageOptions={{markdownLinkTarget: 'self'}}
                     />;
                     render(aiChat);
-                    await waitForRenderCycle();
+                    await waitForReactRenderCycle();
 
                     // Assert
                     const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
@@ -241,7 +241,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                         messageOptions={{markdownLinkTarget: 'blank'}}
                     />;
                     render(aiChat);
-                    await waitForRenderCycle();
+                    await waitForReactRenderCycle();
 
                     // Assert
                     const aiChatDom = document.querySelector('.nlux-AiChat-root')!;

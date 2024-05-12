@@ -5,7 +5,7 @@ import {render} from '@testing-library/react';
 import {useContext} from 'react';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
-import {waitForRenderCycle} from '../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../utils/wait';
 
 describe('AI context task hook', () => {
     it('should send the task information to AI context', async () => {
@@ -41,7 +41,7 @@ describe('AI context task hook', () => {
                 />
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Assert
@@ -92,7 +92,7 @@ describe('AI context task hook', () => {
                 />
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Get task ID
@@ -107,7 +107,7 @@ describe('AI context task hook', () => {
                 No more components with AI context!
             </aiContext.Provider>,
         );
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         await coreContext!.flush();
 
         // Assert

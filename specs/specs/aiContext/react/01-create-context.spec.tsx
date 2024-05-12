@@ -1,10 +1,10 @@
 import {AiContext as CoreAiContext} from '@nlux-dev/core/src';
 import {createAiContext} from '@nlux-dev/react/src';
-import {render} from '@testing-library/react';
-import {useContext} from 'react';
+import {render, waitFor} from '@testing-library/react';
+import {act, useContext} from 'react';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
-import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
+import {waitForMilliseconds, waitForReactRenderCycle} from '../../../utils/wait';
 
 describe('React context provider', () => {
     it('should initialize the AI context and get the contextId', async () => {
@@ -34,18 +34,20 @@ describe('React context provider', () => {
         // Act
         render(component);
         render(<GetCoreContextFromReactContext/>);
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
 
         // Assert
-        expect(adapter.create).toHaveBeenCalledWith({
-            appName: {
-                value: 'My App',
-                description: 'The name of the application being used',
-            },
-            appVersion: {
-                value: '0.1.0',
-                description: 'The version of the application',
-            },
+        await waitFor(() => {
+            expect(adapter.create).toHaveBeenCalledWith({
+                appName: {
+                    value: 'My App',
+                    description: 'The name of the application being used',
+                },
+                appVersion: {
+                    value: '0.1.0',
+                    description: 'The version of the application',
+                },
+            });
         });
     });
 
@@ -67,14 +69,14 @@ describe('React context provider', () => {
 
         // Act
         render(component);
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
 
         // Assert
         expect(document.body).toHaveTextContent('CTX LOADING');
 
         // Act
-        await waitForMilliseconds(delayBeforeCreateContext + 1);
-        await waitForRenderCycle();
+        await act(() => waitForMilliseconds(delayBeforeCreateContext + 1));
+        await waitForReactRenderCycle();
         expect(document.body).not.toHaveTextContent('CTX LOADING');
     });
 
@@ -97,8 +99,8 @@ describe('React context provider', () => {
 
         // Act
         render(component);
-        await waitForRenderCycle();
-        await waitForMilliseconds(delayBeforeCreateContext * 1.1);
+        await waitForReactRenderCycle();
+        await act(() => waitForMilliseconds(delayBeforeCreateContext * 1.1));
 
         // Assert
         expect(document.body).toHaveTextContent('CTX ERROR: Failed to initialize context');

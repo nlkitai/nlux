@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForRenderCycle} from '../../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
     let adapterController: AdapterController | undefined = undefined;
@@ -29,15 +29,15 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('Click [here](https://example.com)');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -57,11 +57,11 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                     />
                 );
                 const {container, rerender} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 await userEvent.type(textArea, 'Give me a link please{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 rerender(
@@ -70,10 +70,10 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                         messageOptions={{markdownLinkTarget: 'blank'}}
                     />,
                 );
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController!.resolve('Click [here](https://example.com)');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -96,15 +96,15 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('Click [here](https://example.com)');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -125,11 +125,11 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                     />
                 );
                 const {container, rerender} = render(aiChat);
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
                 await userEvent.type(textArea, 'Give me a link please{enter}');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Act
                 rerender(
@@ -138,10 +138,10 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                         messageOptions={{markdownLinkTarget: 'self'}}
                     />,
                 );
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 adapterController!.resolve('Click [here](https://example.com)');
-                await waitForRenderCycle();
+                await waitForReactRenderCycle();
 
                 // Assert
                 const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
@@ -163,15 +163,15 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                 />
             );
             const {container} = render(aiChat);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Act
             adapterController!.resolve('Click [here](https://example.com)');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             // Assert
             const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');

@@ -1,10 +1,11 @@
 import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
+import {waitForMdStreamToComplete, waitForMilliseconds, waitForReactRenderCycle} from '../../../utils/wait';
 
 describe.each([
         {dataTransferMode: 'fetch'},
@@ -39,15 +40,15 @@ describe.each([
             <AiChat adapter={adapterController!.adapter} personaOptions={testPersonaOptions}/>,
         );
 
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
         const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
-        await waitForRenderCycle();
+        await waitForReactRenderCycle();
 
         // Assert
-        expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions)
+        expect(adapterController!.getLastExtras()?.aiChatProps?.personaOptions)
             .toEqual(testPersonaOptions);
     });
 
@@ -81,35 +82,37 @@ describe.each([
             const {container, rerender} = render(
                 <AiChat adapter={adapterController!.adapter} personaOptions={testPersonaOptions}/>,
             );
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             let textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
-            adapterController.resolve('Cheers!');
-            adapterController.complete();
-            await waitForMilliseconds(100);
+            await act(async () => {
+                adapterController!.resolve('Cheers!');
+                adapterController!.complete();
+                await waitForMdStreamToComplete(20);
+            });
 
             // Assert
-            expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions)
+            expect(adapterController!.getLastExtras()?.aiChatProps?.personaOptions)
                 .toEqual(testPersonaOptions);
 
             // Act
             rerender(<AiChat adapter={adapterController!.adapter} personaOptions={newPersonaOptions}/>);
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
             textArea.focus();
-            await waitForRenderCycle();
+            await waitForReactRenderCycle();
 
             await userEvent.type(textArea, 'Bonjour{enter}');
             await waitForMilliseconds(100);
 
             // Assert
-            expect(adapterController.getLastExtras()?.aiChatProps?.personaOptions)
+            expect(adapterController!.getLastExtras()?.aiChatProps?.personaOptions)
                 .toEqual(newPersonaOptions);
         });
     });
