@@ -4,7 +4,7 @@ import {CompDef, CompRenderer, CompUpdater} from '../../../types/comp';
 import {BaseComp} from './base';
 
 export class CompRegistry {
-    public static componentDefs: Map<string, CompDef<object, object, object, object>> = new Map();
+    public static componentDefs: Map<string, CompDef<unknown, unknown, unknown, unknown>> = new Map();
 
     public static register(compClass: typeof BaseComp) {
         const compId = compClass.__compId;
@@ -26,12 +26,12 @@ export class CompRegistry {
         CompRegistry.componentDefs.set(compId, {
             id: compId,
             model: compClass,
-            render: compClass.__renderer as CompRenderer<object, object, object, object>,
-            update: compClass.__updater as CompUpdater<object, object, object>,
+            render: compClass.__renderer as CompRenderer<unknown, unknown, unknown, unknown>,
+            update: compClass.__updater as CompUpdater<unknown, unknown, unknown>,
         });
     }
 
-    public static retrieve(id: string): CompDef<object, object, object, object> | undefined {
+    public static retrieve(id: string): CompDef<unknown, unknown, unknown, unknown> | undefined {
         const def = CompRegistry.componentDefs.get(id);
         if (!def) {
             warn(`Component with id "${id}" not registered`);

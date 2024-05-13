@@ -1,11 +1,11 @@
 import {ControllerContext} from '../../../types/controllerContext';
+import {BaseComp} from './base';
 import {CompRegistry} from './registry';
 
-export const comp = <CompClass extends abstract new (...args: object[]) => unknown>(
+export const comp = <
+    CompClass extends abstract new (...args: any[]) => BaseComp<object, object, object, object>,
+>(
     compClass: CompClass,
-    // context: ControllerContext,
-    // props: any | null = null,
-    // compInstanceId: string | null = null,
 ) => {
     const compId = typeof compClass === 'function'
         ? (compClass as unknown as {__compId: string}).__compId
@@ -28,7 +28,7 @@ export const comp = <CompClass extends abstract new (...args: object[]) => unkno
     // IMPORTANT ✨ The lines below are responsible for creating all instances of all components.
 
     return {
-        withContext: (newContext: ControllerContext<object>) => {
+        withContext: (newContext: ControllerContext<any>) => {
             return {
                 create: (): InstanceType<CompClass> => {
                     return new CompClass(newContext, {});

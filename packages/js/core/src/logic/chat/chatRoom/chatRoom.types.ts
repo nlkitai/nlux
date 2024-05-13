@@ -26,4 +26,4 @@ export type CompChatRoomElements = {
     conversationContainer: HTMLElement;
 };
 
-export type CompChatRoomActions = {};
+export type CompChatRoomActions = void;

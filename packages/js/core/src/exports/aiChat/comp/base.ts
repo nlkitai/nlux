@@ -11,8 +11,8 @@ export type CompStatus = 'unmounted' | 'rendered' | 'active' | 'destroyed';
 export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, ActionsType> {
     static __compEventListeners: Map<string | number | symbol, string[]> | null = null;
     static __compId: string | null = null;
-    static __renderer: CompRenderer<object, object, object, object> | null = null;
-    static __updater: CompUpdater<object, object, object> | null = null;
+    static __renderer: CompRenderer<unknown, unknown, unknown, unknown> | null = null;
+    static __updater: CompUpdater<unknown, unknown, unknown> | null = null;
 
     /**
      * A reference to the component definition, as retrieved from the registry.

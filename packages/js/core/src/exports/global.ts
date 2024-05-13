@@ -13,12 +13,12 @@ export const getGlobalNlux = (): typeof globalNlux | undefined => {
         return undefined;
     }
 
-    const theWindow: any = window;
+    const theWindow: Window & {nlux: typeof globalNlux} = window as any;
     if (typeof theWindow.nlux === 'object' && typeof theWindow.nlux.version === 'string') {
         return theWindow.nlux;
     }
 
-    (window as any).nlux = globalNlux;
+    theWindow.nlux = globalNlux;
     debug('globalNlux', globalNlux);
 
     return globalNlux;

@@ -176,7 +176,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                     ),
                 } satisfies ChatSegment<AiMsg>;
             },
-        ) as any; // Filter out undefined values
+        ); // Filter out undefined values
 
         const allChatItems = chatSegmentsToChatItems(allSegmentsSorted);
 

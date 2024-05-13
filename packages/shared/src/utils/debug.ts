@@ -1,4 +1,4 @@
-export const debug = (...messages: any[]) => {
+export const debug = (...messages: unknown[]) => {
     if (process.env.NLUX_DEBUG_ENABLED !== 'true') {
         return;
     }

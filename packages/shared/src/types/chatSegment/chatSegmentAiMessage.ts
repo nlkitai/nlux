@@ -13,8 +13,6 @@ export type AiStreamedMessage = {
     error: string;
 });
 
-export type AiStreamedMessageStatus = AiStreamedMessage['status'];
-
 export type AiUnifiedMessage<AiMsg> = {
     uid: string;
     time: Date;

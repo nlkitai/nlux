@@ -1,7 +1,5 @@
 import {IObserver} from './observer';
 
-type ObservableOperator = (observable: Observable<any>) => Observable<any>;
-
 export class Observable<DataType> {
 
     private buffer: DataType[] = [];
@@ -31,16 +29,6 @@ export class Observable<DataType> {
         if (this.isReplayObservable) {
             this.buffer.push(value);
         }
-    }
-
-    pipe(...operators: Array<ObservableOperator>) {
-        let currentObservable = this;
-
-        for (let i = 0; i < arguments.length; i++) {
-            currentObservable = arguments[i](currentObservable);
-        }
-
-        return currentObservable;
     }
 
     reset() {
