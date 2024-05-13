@@ -10,6 +10,7 @@ import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
+import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
@@ -92,8 +93,9 @@ export const AiChat: <AiMsg>(
         }
     }, [initialSegment]);
 
-    // Trigger the ready event once the component is mounted
+    // Lifecycle event triggers
     useReadyEventTrigger<AiMsg>(props);
+    usePreDestroyEventTrigger<AiMsg>(props, segments);
 
     const ForwardConversationComp = useMemo(
         () => forwardRef(ConversationComp<AiMsg>), []);
