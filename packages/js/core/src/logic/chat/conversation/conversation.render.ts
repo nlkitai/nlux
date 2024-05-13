@@ -125,6 +125,9 @@ export const renderConversation: CompRenderer<
                     }
                 }
             },
+            updateUserPersona: (newValue: UserPersona | undefined) => {
+                renderingContext.userPersona = newValue;
+            },
         },
     };
 };

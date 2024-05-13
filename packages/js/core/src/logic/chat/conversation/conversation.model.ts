@@ -11,6 +11,7 @@ import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {Model} from '../../../exports/aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
@@ -66,13 +67,13 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withProps({
                 uid: segmentId,
                 status,
-                userPersona: this.props.userPersona,
-                botPersona: this.props.botPersona,
-                markdownLinkTarget: this.props.markdownLinkTarget,
-                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
-                skipStreamingAnimation: this.props.skipStreamingAnimation,
-                syntaxHighlighter: this.props.syntaxHighlighter,
-                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
+                userPersona: this.getProp('userPersona') as UserPersona | undefined,
+                botPersona: this.getProp('botPersona') as BotPersona | undefined,
+                markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
+                showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
+                skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
+                syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
+                streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
             } satisfies CompChatSegmentProps)
             .create();
 
@@ -240,6 +241,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         ) {
             const typedKey = key satisfies keyof CompChatSegmentProps;
             const typedValue = value as CompChatSegmentProps[typeof typedKey];
+
             this.chatSegmentComponentsById.forEach((comp) => {
                 comp.updateMarkdownStreamRenderer(typedKey, typedValue);
             });

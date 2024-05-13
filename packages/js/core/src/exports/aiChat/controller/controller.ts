@@ -11,8 +11,8 @@ import {createControllerContext} from './context';
 export class NluxController<AiMsg> {
 
     private readonly eventManager = new EventManager<AiMsg>();
+    private internalProps: AiChatInternalProps<AiMsg>;
     private readonly nluxInstanceId = uid();
-    private props: AiChatInternalProps<AiMsg>;
 
     private renderException = (exceptionId: string) => {
         if (!this.mounted || !this.renderer) {
@@ -38,7 +38,7 @@ export class NluxController<AiMsg> {
     ) {
         this.rootCompId = 'chatRoom';
         this.rootElement = rootElement;
-        this.props = props;
+        this.internalProps = props;
     }
 
     public get mounted() {
@@ -61,35 +61,10 @@ export class NluxController<AiMsg> {
         const newContext: ControllerContext<AiMsg> = createControllerContext<AiMsg>({
                 instanceId: this.nluxInstanceId,
                 exception: this.renderException,
-                adapter: this.props.adapter,
-                syntaxHighlighter: this.props.messageOptions.syntaxHighlighter,
+                adapter: this.internalProps.adapter,
+                syntaxHighlighter: this.internalProps.messageOptions.syntaxHighlighter,
             },
-            () => {
-                // TODO - Cache and only update when needed, as it's a heavy operation that's called frequently
-                return {
-                    ...this.props,
-                    conversationOptions: this.props.conversationOptions && Object.keys(
-                        this.props.conversationOptions).length > 0
-                        ? this.props.conversationOptions
-                        : undefined,
-                    messageOptions: this.props.messageOptions && Object.keys(
-                        this.props.messageOptions).length > 0
-                        ? this.props.messageOptions
-                        : undefined,
-                    promptBoxOptions: this.props.promptBoxOptions && Object.keys(
-                        this.props.promptBoxOptions).length > 0
-                        ? this.props.promptBoxOptions
-                        : undefined,
-                    layoutOptions: this.props.layoutOptions && Object.keys(
-                        this.props.layoutOptions).length > 0
-                        ? this.props.layoutOptions
-                        : undefined,
-                    personaOptions: this.props.personaOptions && Object.keys(
-                        this.props.personaOptions).length > 0
-                        ? this.props.personaOptions
-                        : undefined,
-                };
-            },
+            () => this.getUpdatedAiChatPropsFromInternalProps(this.internalProps),
             this.eventManager.emit,
         );
 
@@ -97,7 +72,7 @@ export class NluxController<AiMsg> {
             newContext,
             this.rootCompId,
             this.rootElement,
-            this.props,
+            this.internalProps,
         );
 
         this.renderer.mount();
@@ -138,14 +113,52 @@ export class NluxController<AiMsg> {
 
     public updateProps(props: Partial<AiChatProps<AiMsg>>) {
         this.renderer?.updateProps(props);
-        this.props = {
-            ...this.props,
+        this.internalProps = {
+            ...this.internalProps,
             ...props,
         };
 
         if (props.events) {
-            this.props.events = props.events;
+            this.internalProps.events = props.events;
             this.eventManager.updateEventListeners(props.events);
         }
     }
+
+    private getUpdatedAiChatPropsFromInternalProps(
+        internalProps: AiChatInternalProps<AiMsg>,
+    ): AiChatProps<AiMsg> {
+        const updatedProps: AiChatProps<AiMsg> = {
+            adapter: internalProps.adapter,
+            themeId: internalProps.themeId,
+            className: internalProps.className,
+
+            events: internalProps.events && Object.keys(internalProps.events).length > 0
+                ? internalProps.events
+                : undefined,
+
+            layoutOptions: internalProps.layoutOptions && Object.keys(internalProps.layoutOptions).length > 0
+                ? internalProps.layoutOptions
+                : undefined,
+
+            promptBoxOptions: internalProps.promptBoxOptions && Object.keys(internalProps.promptBoxOptions).length > 0
+                ? internalProps.promptBoxOptions
+                : undefined,
+
+            personaOptions: internalProps.personaOptions && Object.keys(internalProps.personaOptions).length > 0
+                ? internalProps.personaOptions
+                : undefined,
+
+            conversationOptions: internalProps.conversationOptions && Object.keys(
+                internalProps.conversationOptions,
+            ).length > 0
+                ? internalProps.conversationOptions
+                : undefined,
+
+            messageOptions: internalProps.messageOptions && Object.keys(internalProps.messageOptions).length > 0
+                ? internalProps.messageOptions
+                : undefined,
+        };
+
+        return updatedProps;
+    };
 }
