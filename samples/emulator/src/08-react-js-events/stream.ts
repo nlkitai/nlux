@@ -18,7 +18,7 @@ export const streamAdapter: ChatAdapter<string> = {
                 },
             });
         } catch (e) {
-            observer.error(e);
+            observer.error(e as Error);
             return;
         }
 

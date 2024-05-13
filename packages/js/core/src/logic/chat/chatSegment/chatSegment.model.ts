@@ -39,7 +39,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             throw new Error(`CompChatSegment: chat item with id "${item.uid}" already exists`);
         }
 
-        let compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
+        const compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
             item,
             this.props.userPersona,
             this.props.botPersona,

@@ -1,7 +1,7 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat} from '@nlux/react';
-import {useCallback, useState} from 'react';
+import {StrictMode, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {myCustomStreamingAdapter} from '../01-vanilla-js-with-adapters/customAdapter';
 import {personaOptions} from './personaOptions';
@@ -77,8 +77,8 @@ export default () => {
 
     const reactRoot = createRoot(root);
     reactRoot.render(
-        <React.StrictMode>
+        <StrictMode>
             <ExampleWrapper/>
-        </React.StrictMode>,
+        </StrictMode>,
     );
 };

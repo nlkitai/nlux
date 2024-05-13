@@ -26,9 +26,10 @@ export default tsEslint.config(
             'no-prototype-builtins': 'off',
         },
         ignores: [
-            'dist',
+            'dist/**',
+            'specs/**',
             'packages/shared/src/markdown/snapshot/marked/*.ts',
             'packages/shared/src/utils/dequal/*.ts',
         ],
-    }
+    },
 );

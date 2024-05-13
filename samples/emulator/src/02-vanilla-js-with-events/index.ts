@@ -1,4 +1,4 @@
-import {AiChat, createAiChat, ErrorCallback, ErrorEventDetails} from '@nlux/core';
+import {AiChat, createAiChat, ErrorCallback, ErrorEventDetails, MessageReceivedEventDetails} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 import {streamAdapter} from './stream';
 
@@ -36,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
             autoFocus: true,
         })
         .on('error', errorCallback)
-        .on('messageReceived', ({message}) => console.log('Message Received:', message));
+        .on('messageReceived',
+            ({message}: MessageReceivedEventDetails<string>) => console.log('Message Received:', message),
+        );
 
     aiChat.mount(rootElement);
 });

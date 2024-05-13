@@ -27,7 +27,7 @@ export const initChatAdapter = <AiMsg>(options: ChatAdapterOptions<AiMsg>) => {
         });
     }
 
-    let newAdapter: any = createChatAdapter().withModel(model);
+    let newAdapter = createChatAdapter<AiMsg>().withModel(model);
 
     if (authToken !== undefined) {
         newAdapter = newAdapter.withAuthToken(authToken);
@@ -38,7 +38,7 @@ export const initChatAdapter = <AiMsg>(options: ChatAdapterOptions<AiMsg>) => {
     }
 
     if (preProcessors?.input !== undefined) {
-        newAdapter = newAdapter.withInputPreProcessor(preProcessors?.input);
+        newAdapter = newAdapter.withInputPreProcessor(preProcessors.input);
     }
 
     if (preProcessors?.output !== undefined) {

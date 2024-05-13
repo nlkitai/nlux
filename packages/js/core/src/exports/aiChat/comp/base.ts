@@ -42,7 +42,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * Those events are mounted on the DOM tree of the component by the renderer.
      * This map can be used by components that extend the BaseComp to register listeners.
      */
-    protected rendererEventListeners: Map<EventsType, Function>;
+    protected rendererEventListeners: Map<EventsType, () => void>;
 
     /**
      * Props that are passed to the renderer.
@@ -68,7 +68,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * Sub-components that are mounted in the DOM tree of the current component.
      * This list should be filled by user by calling addPart() method in constructor of the component.
      */
-    protected subComponents: Map<string, BaseComp<object, object, object, object, object>> = new Map();
+    protected subComponents: Map<string, BaseComp<unknown, unknown, unknown, unknown, unknown>> = new Map();
 
     /**
      * The context of the current chat component.
@@ -95,10 +95,10 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * A queue of actions that should be executed on the DOM tree when the component is rendered.
      * This queue is used to store actions that are called before the component is rendered.
      */
-    private actionsOnDomReady: Function[] = [];
+    private actionsOnDomReady: (() => void)[] = [];
 
     private compEventGetter = (eventName: EventsType) => {
-        const callback = this.rendererEventListeners.get(eventName as any);
+        const callback = this.rendererEventListeners.get(eventName as EventsType);
         if (!callback) {
             throw new NluxError({
                 source: this.constructor.name,
@@ -147,9 +147,9 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         if (preDefinedEventListeners) {
             preDefinedEventListeners.forEach((methodNames, eventName) => {
                 methodNames.forEach((methodName) => {
-                    const method = (<any>Object.getPrototypeOf(this))[methodName];
+                    const method = (Object.getPrototypeOf(this))[methodName];
                     if (typeof method === 'function') {
-                        this.addRendererEventListener(eventName as any, method.bind(this));
+                        this.addRendererEventListener(eventName as EventsType, method.bind(this));
                     } else {
                         warn(`Unable to set event listener "${eventName}" because method "${methodName}" ` +
                             `cannot be found on component "${this.constructor.name} at runtime!"`);
@@ -283,7 +283,10 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
     updateSubComponent(subComponentId: string, propName: string, newValue: any) {
         this.throwIfDestroyed();
 
-        const subComp = this.subComponents.get(subComponentId);
+        const subComp = this.subComponents.get(subComponentId) as BaseComp<
+            AiMsg, PropsType, ElementsType, EventsType, ActionsType
+        > | undefined;
+
         if (subComp && !subComp.destroyed) {
             subComp.setProp(propName, newValue);
         }
@@ -344,7 +347,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         }
 
         // Execute the action
-        const action = (<any>this.renderedDom.actions)[actionName];
+        const action = (<ActionsType>this.renderedDom.actions)[actionName];
         if (!action) {
             throw new NluxError({
                 source: this.constructor.name,
@@ -450,7 +453,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         }
     }
 
-    private addRendererEventListener(eventType: EventsType, listener: Function) {
+    private addRendererEventListener(eventType: EventsType, listener: () => void) {
         this.throwIfDestroyed();
 
         if (this.rendererEventListeners.has(eventType)) {
@@ -510,7 +513,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
 
         this.__destroyed = true;
         this.__context = null;
-        this.props = undefined as any;
+        this.props = undefined as PropsType;
 
         this.elementProps.clear();
         this.rendererEventListeners.clear();
@@ -525,7 +528,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
             return null;
         }
 
-        const value = (<any>this.renderedDom?.elements)[rendererElementId];
+        const value = (<ElementsType>this.renderedDom?.elements)[rendererElementId];
         return value instanceof HTMLElement ? value : null;
     }
 

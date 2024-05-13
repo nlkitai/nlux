@@ -1,6 +1,6 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
-import {useCallback, useState} from 'react';
+import {StrictMode, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
@@ -65,8 +65,8 @@ export default () => {
 
     const reactRoot = createRoot(root);
     reactRoot.render(
-        <React.StrictMode>
+        <StrictMode>
             <ExampleWrapper/>
-        </React.StrictMode>,
+        </StrictMode>,
     );
 };

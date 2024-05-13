@@ -2,7 +2,7 @@ import {debug} from '../../../../shared/src/utils/debug';
 
 const globalNlux: {
     version: string;
-    [key: string]: any;
+    [key: string]: unknown;
 } = {
     version: '{versions.nlux}',
     [btoa('componentsRegistered')]: false,
@@ -13,7 +13,7 @@ export const getGlobalNlux = (): typeof globalNlux | undefined => {
         return undefined;
     }
 
-    const theWindow: Window & {nlux: typeof globalNlux} = window as any;
+    const theWindow = window as unknown as Window & {nlux: typeof globalNlux};
     if (typeof theWindow.nlux === 'object' && typeof theWindow.nlux.version === 'string') {
         return theWindow.nlux;
     }

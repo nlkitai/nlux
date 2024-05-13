@@ -22,7 +22,7 @@ export type FlushContextResult = {
 
 export type RunTaskResult = {
     success: true;
-    result?: any;
+    result?: unknown;
 } | {
     success: false;
     error: string;

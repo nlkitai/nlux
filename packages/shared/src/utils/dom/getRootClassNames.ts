@@ -4,7 +4,7 @@ const defaultThemeId = 'luna';
 export const getRootClassNames = (props: {
     themeId?: string;
     className?: string;
-    [key: string]: any;
+    [key: string]: unknown;
 }): string[] => {
     const result = [rootClassName];
     const themeId = props.themeId || defaultThemeId;

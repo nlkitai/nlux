@@ -31,13 +31,15 @@ export class CompRegistry {
         });
     }
 
-    public static retrieve(id: string): CompDef<unknown, unknown, unknown, unknown> | undefined {
+    public static retrieve<
+        PropsType = unknown, ElementsType = unknown, EventsType = unknown, ActionsType = unknown
+    >(id: string): CompDef<PropsType, ElementsType, EventsType, ActionsType> | undefined {
         const def = CompRegistry.componentDefs.get(id);
         if (!def) {
             warn(`Component with id "${id}" not registered`);
             return undefined;
         }
 
-        return def;
+        return def as CompDef<PropsType, ElementsType, EventsType, ActionsType>;
     }
 }

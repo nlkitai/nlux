@@ -1,7 +1,7 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat, ErrorCallback, ErrorEventDetails, MessageSentCallback} from '@nlux/react';
-import {useCallback, useState} from 'react';
+import {StrictMode, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {streamAdapter} from './stream';
 
@@ -34,11 +34,11 @@ const ExampleWrapper = () => {
         console.error('Details:', message);
     }, []);
 
-    const messageSentCallback = useCallback<MessageSentCallback>((message: string) => {
+    const messageSentCallback = useCallback<MessageSentCallback>(({message}) => {
         console.log('Message 👋 sent callback with message:', message);
     }, []);
 
-    const messageReceivedCallback = useCallback<MessageSentCallback>((message: string) => {
+    const messageReceivedCallback = useCallback<MessageSentCallback>(({message}) => {
         console.log('Message 📮 received callback with message:', message);
     }, []);
 
@@ -112,8 +112,8 @@ export default () => {
 
     const reactRoot = createRoot(root);
     reactRoot.render(
-        <React.StrictMode>
+        <StrictMode>
             <ExampleWrapper/>
-        </React.StrictMode>,
+        </StrictMode>,
     );
 };

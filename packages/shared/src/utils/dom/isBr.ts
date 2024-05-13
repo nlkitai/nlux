@@ -1,3 +1,3 @@
-export const isBr = (element: any): boolean => {
+export const isBr = (element: unknown): boolean => {
     return element instanceof HTMLElement && element.tagName === 'BR';
 };

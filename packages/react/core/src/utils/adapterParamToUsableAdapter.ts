@@ -8,7 +8,7 @@ export const adapterParamToUsableAdapter = <AiMsg>(
 ): ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | undefined => {
     let adapterType: 'instance' | 'builder' | 'unknown' = 'unknown';
 
-    const adapterAsAny = anAdapterOrAdapterBuilder as any;
+    const adapterAsAny = anAdapterOrAdapterBuilder as Record<string, unknown>;
     if (typeof adapterAsAny?.create === 'function') {
         adapterType = 'builder';
     } else {
@@ -26,7 +26,7 @@ export const adapterParamToUsableAdapter = <AiMsg>(
     }
 
     if (adapterType === 'builder') {
-        const adapterBuilder: ChatAdapterBuilder<AiMsg> = adapterAsAny;
+        const adapterBuilder = adapterAsAny as unknown as ChatAdapterBuilder<AiMsg>;
         const newAdapter = adapterBuilder.create();
         if (
             (typeof newAdapter?.fetchText === 'function') ||

@@ -1,10 +1,9 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
 import {AiChat, BotPersona, UserPersona} from '@nlux/react';
-import {useState} from 'react';
+import {StrictMode, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {myCustomPromiseAdapter} from './customAdapter';
-// import profilePic from './funny-bot.jpeg';
 
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
@@ -147,8 +146,8 @@ export default () => {
 
     const reactRoot = createRoot(root);
     reactRoot.render(
-        <React.StrictMode>
+        <StrictMode>
             <ExampleWrapper/>
-        </React.StrictMode>,
+        </StrictMode>,
     );
 };

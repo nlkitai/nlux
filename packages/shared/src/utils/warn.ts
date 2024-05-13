@@ -1,4 +1,4 @@
-export const warn = (message: any) => {
+export const warn = (message: unknown) => {
     if (typeof message === 'string') {
         console.warn(`[nlux] ${message}`);
         return;

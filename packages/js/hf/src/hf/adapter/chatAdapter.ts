@@ -66,7 +66,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
             },
         };
 
-        let output: any = undefined;
+        let output: unknown = undefined;
 
         try {
             if (this.options.endpoint) {
@@ -78,10 +78,13 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                     ...parameters,
                 });
             }
-        } catch (error: any) {
+        } catch (error) {
+            const message = (error as Error).message
+                || 'An error occurred while sending the message to the Hugging Face API';
+
             throw new NluxError({
                 source: this.constructor.name,
-                message: `An error occurred while sending the message to the Hugging Face API: ${error.message}`,
+                message,
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
             });
         }
@@ -119,7 +122,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                 // Return fetch promise when data transfer mode is 'fetch'
                 const result = await this.fetchText(readyMessage);
                 resolve(result);
-            } catch (error: any) {
+            } catch (error) {
                 reject(error);
             }
         });
@@ -168,22 +171,23 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                     }
 
                     observer.next(
-                        await this.decode(value.token) as any,
+                        await this.decode(value.token) as string, // We are forced to cast here!
                     );
                 }
 
                 observer.complete();
-            } catch (error: any) {
-                observer.error(error);
+            } catch (error) {
+                const errorTyped = error as Error;
+                observer.error(errorTyped);
                 warn(
                     'An error occurred while sending the message to the Hugging Face streaming API: \n'
-                    + error.message,
+                    + errorTyped.message,
                 );
             }
         });
     }
 
-    private async decode(payload: any): Promise<AiMsg> {
+    private async decode(payload: unknown): Promise<AiMsg> {
         const output = (() => {
             if (typeof payload === 'string') {
                 return payload;
@@ -203,12 +207,20 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                 }
             }
 
-            if (typeof payload === 'object' && payload && typeof payload.generated_text === 'string') {
-                return payload.generated_text;
+            const generated_text = payload
+                ? (payload as TextGenerationStreamOutput).generated_text
+                : undefined;
+
+            if (typeof generated_text === 'string') {
+                return generated_text;
             }
 
-            if (typeof payload === 'object' && payload && typeof payload.text === 'string') {
-                return payload.text;
+            const text = payload && typeof payload === 'object' && 'text' in payload
+                ? (payload as {text: string}).text
+                : undefined;
+
+            if (text === 'string') {
+                return text;
             }
 
             return '';
@@ -223,7 +235,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
     }
 
     private async encode(message: string): Promise<string> {
-        const messageAsAny = message as any;
+        const messageAsAny = message as unknown;
         const {preProcessors: {input: inputPreProcessor} = {}} = this.options;
         if (inputPreProcessor && messageAsAny) {
             if (typeof messageAsAny === 'string') {

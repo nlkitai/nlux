@@ -1,16 +1,16 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
-import {ChangeEvent, useCallback, useState} from 'react';
+import {ChangeEvent, StrictMode, useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
-    const [maxHeight, setMaxHeight] = useState<number>(550);
+    const [height, setHeight] = useState<number>(550);
     const [key, setKey] = useState<number>(0);
-    const [streamingAnimationSpeed, setStreamingAnimationSpeed] = useState<number | null | undefined>();
+    const [streamingAnimationSpeed, setStreamingAnimationSpeed] = useState<number | undefined>();
 
     const handleRandomContainerHeight = useCallback(() => {
         const newHeight = Math.floor(Math.random() * 1000);
-        setMaxHeight(newHeight);
+        setHeight(newHeight);
     }, []);
 
     const langServeAdapter = useChatAdapter({
@@ -21,7 +21,7 @@ const ExampleWrapper = () => {
     const handleStreamingAnimationSpeedChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         if (value.toLowerCase() === 'null') {
-            setStreamingAnimationSpeed(null);
+            setStreamingAnimationSpeed(undefined);
             return;
         }
 
@@ -31,7 +31,7 @@ const ExampleWrapper = () => {
         }
 
         try {
-            const speed = value ? parseInt(value, 10) : null;
+            const speed = value ? parseInt(value, 10) : undefined;
             if (Number.isNaN(speed) || (typeof speed === 'number' && speed < 0)) {
                 setStreamingAnimationSpeed(undefined);
             }
@@ -78,12 +78,14 @@ const ExampleWrapper = () => {
                     ]}
                     conversationOptions={{
                         autoScroll: true,
-                        streamingAnimationSpeed,
                         // streamingAnimationSpeed: null,
                         // streamingAnimationSpeed: 300,
                     }}
                     layoutOptions={{
-                        maxHeight,
+                        height,
+                    }}
+                    messageOptions={{
+                        streamingAnimationSpeed,
                     }}
                     promptBoxOptions={{
                         placeholder: 'How can I help you today?',
@@ -103,8 +105,8 @@ export default () => {
 
     const reactRoot = createRoot(root);
     reactRoot.render(
-        <React.StrictMode>
+        <StrictMode>
             <ExampleWrapper/>
-        </React.StrictMode>,
+        </StrictMode>,
     );
 };

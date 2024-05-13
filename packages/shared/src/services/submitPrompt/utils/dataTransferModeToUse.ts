@@ -14,7 +14,7 @@ export const getDataTransferModeToUse = <AiMsg>(
 
     const adapterAsStandardAdapter: StandardChatAdapter<AiMsg> | undefined = isStandardChatAdapter(
         adapter,
-    ) ? adapter as any : undefined;
+    ) ? adapter as StandardChatAdapter<AiMsg> : undefined;
 
     const adapterDataTransferMode: DataTransferMode | undefined = adapterAsStandardAdapter?.dataTransferMode
         ?? undefined;

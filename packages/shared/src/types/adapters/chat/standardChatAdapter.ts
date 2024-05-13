@@ -27,10 +27,14 @@ export interface StandardChatAdapter<AiMsg> {
  * This function is used to determine if an object is a standard chat adapter or not.
  * @param adapter
  */
-export const isStandardChatAdapter = (adapter: any): boolean => {
-    return (typeof adapter === 'object' && adapter !== null)
-        && (typeof adapter.streamText === 'function' || typeof adapter.fetchText === 'function')
-        && ['stream', 'fetch'].includes(adapter.dataTransferMode)
-        && typeof adapter.id === 'string'
-        && (typeof adapter.info === 'object' && adapter.info !== null);
+export const isStandardChatAdapter = (adapter: unknown): boolean => {
+    if (typeof adapter !== 'object' || adapter === null) {
+        return false;
+    }
+
+    const typedAdapter = adapter as Record<string, unknown>;
+    return (typeof typedAdapter.streamText === 'function' || typeof typedAdapter.fetchText === 'function')
+        && ['stream', 'fetch'].includes(typedAdapter.dataTransferMode as string)
+        && typeof typedAdapter.id === 'string'
+        && (typeof typedAdapter.info === 'object' && typedAdapter.info !== null);
 };
