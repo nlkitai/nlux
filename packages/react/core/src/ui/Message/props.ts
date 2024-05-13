@@ -5,5 +5,5 @@ export type MessageProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
     status: 'streaming' | 'complete';
-    message?: ReactNode | FC<{}>;
+    message?: ReactNode | FC<object>;
 };

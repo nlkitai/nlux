@@ -5,7 +5,7 @@ import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 export const createMessageRenderer: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     containerRef?: RefObject<HTMLElement>,
-) => FC<{}> = function <AiMsg>(
+) => FC<object> = function <AiMsg>(
     props: ChatItemProps<AiMsg>,
     containerRef?: RefObject<HTMLElement>,
 ) {

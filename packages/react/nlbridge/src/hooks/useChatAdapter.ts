@@ -29,7 +29,7 @@ export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions)
     );
 
     useEffect(() => {
-        let newAdapter = getChatAdapterBuilder<AiMsg>({
+        const newAdapter = getChatAdapterBuilder<AiMsg>({
             url,
             mode,
             context: coreContext,

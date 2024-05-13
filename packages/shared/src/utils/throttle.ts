@@ -9,7 +9,7 @@ export const throttle = <CallbackType>(callback: CallbackType, limitInMillisecon
         });
     }
 
-    const throttled: CallbackType = ((...args: any[]) => {
+    const throttled = ((...args: []) => {
         if (!waiting) {
             callback.apply(this, args);
             waiting = true;
@@ -17,7 +17,7 @@ export const throttle = <CallbackType>(callback: CallbackType, limitInMillisecon
                 waiting = false;
             }, limitInMilliseconds);
         }
-    }) as any;
+    }) as CallbackType;
 
     return throttled;
 };

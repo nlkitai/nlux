@@ -28,7 +28,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 direction: 'incoming',
                 name: botPersona?.name,
                 picture: botPersona?.picture,
-                message: stringifyRandomResponse(segmentItem.content),
+                message: stringifyRandomResponse<AiMsg>(segmentItem.content),
             };
         }
 

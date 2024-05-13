@@ -76,8 +76,7 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
             model: this.model,
             messages: messagesToSend,
         }).then(async (response) => {
-            const fullResponse: string[] = [];
-            let it = response[Symbol.asyncIterator]();
+            const it = response[Symbol.asyncIterator]();
             let result = await it.next();
 
             while (!result.done) {

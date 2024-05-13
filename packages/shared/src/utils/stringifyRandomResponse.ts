@@ -1,4 +1,4 @@
-export const stringifyRandomResponse = (randomResponse: any): string => {
+export const stringifyRandomResponse = <AiMsg>(randomResponse: AiMsg): string => {
     if (typeof randomResponse === 'string') {
         return randomResponse;
     }
