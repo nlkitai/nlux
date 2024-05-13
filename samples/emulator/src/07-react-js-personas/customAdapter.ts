@@ -1,6 +1,6 @@
 import {ChatAdapter, StreamingAdapterObserver} from '@nlux/core';
 
-export const myCustomStreamingAdapter: ChatAdapter = {
+export const myCustomStreamingAdapter: ChatAdapter<string> = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
@@ -20,7 +20,7 @@ export const myCustomStreamingAdapter: ChatAdapter = {
     },
 };
 
-export const myCustomPromiseAdapter: ChatAdapter = {
+export const myCustomPromiseAdapter: ChatAdapter<string> = {
     fetchText(message: string): Promise<string> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {

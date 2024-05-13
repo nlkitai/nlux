@@ -95,7 +95,9 @@ const ExampleWrapper = () => {
                         // placeholder: 'FinFunBot here! How can I help you today?',
                         autoFocus: true,
                     }}
-                    syntaxHighlighter={highlighter}
+                    messageOptions={{
+                        syntaxHighlighter: highlighter,
+                    }}
                 />
             </div>
         </div>

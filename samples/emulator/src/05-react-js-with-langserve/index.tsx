@@ -4,13 +4,13 @@ import {useCallback, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 
 const ExampleWrapper = () => {
-    const [maxHeight, setMaxHeight] = useState<number>(550);
+    const [height, setHeight] = useState<number>(550);
     const [key, setKey] = useState<number>(0);
     const [bearer, setBearer] = useState<string>('123456');
 
     const handleRandomContainerHeight = useCallback(() => {
         const newHeight = Math.floor(Math.random() * 1000);
-        setMaxHeight(newHeight);
+        setHeight(newHeight);
     }, []);
 
     const handleRandomBearer = useCallback(() => {
@@ -45,7 +45,7 @@ const ExampleWrapper = () => {
                         autoScroll: true,
                     }}
                     layoutOptions={{
-                        maxHeight,
+                        height,
                     }}
                     promptBoxOptions={{
                         placeholder: 'How can I help you today?',

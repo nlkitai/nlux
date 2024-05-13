@@ -1,6 +1,6 @@
 import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 
-export const nlBridgeCustomStreamingAdapter: ChatAdapter = {
+export const nlBridgeCustomStreamingAdapter: ChatAdapter<string> = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
@@ -53,7 +53,7 @@ export const nlBridgeCustomStreamingAdapter: ChatAdapter = {
     },
 };
 
-export const nlBridgeCustomPromiseAdapter: ChatAdapter = {
+export const nlBridgeCustomPromiseAdapter: ChatAdapter<string> = {
     async fetchText(message: string, extras): Promise<string> {
         const endpoint = 'http://localhost:8899/';
         const response = await fetch(endpoint, {

@@ -1,6 +1,6 @@
 import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/react';
 
-export const myCustomStreamingAdapter: ChatAdapter = {
+export const myCustomStreamingAdapter: ChatAdapter<string> = {
     streamText: (
         message: string,
         observer: StreamingAdapterObserver,
@@ -22,7 +22,7 @@ export const myCustomStreamingAdapter: ChatAdapter = {
     },
 };
 
-export const myCustomPromiseAdapter: ChatAdapter = {
+export const myCustomPromiseAdapter: ChatAdapter<string> = {
     fetchText(message: string, extras: ChatAdapterExtras): Promise<string> {
         console.dir(extras, {depth: 3});
         return new Promise((resolve) => {

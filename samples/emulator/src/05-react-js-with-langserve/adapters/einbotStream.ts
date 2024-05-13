@@ -11,7 +11,7 @@ const promptToBody = (message: string) => {
     });
 };
 
-export const streamAdapter: ChatAdapter = {
+export const streamAdapter: ChatAdapter<string> = {
     streamText: async (prompt: string, observer: StreamingAdapterObserver) => {
         const body = {prompt};
         const response = await fetch(demoProxyServerUrl, {

@@ -55,7 +55,6 @@ function App() {
         <AiChat
             // adapter={nlBridge}
             adapter={openAiAdapter}
-            // syntaxHighlighter={highlighter}
             // initialConversation={initialConversation}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',

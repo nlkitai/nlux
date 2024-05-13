@@ -59,7 +59,9 @@ const ExampleWrapper = () => {
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}
-                    syntaxHighlighter={highlighter}
+                    messageOptions={{
+                        syntaxHighlighter: highlighter,
+                    }}
                     personaOptions={personaOptions}
                 />
             </div>
