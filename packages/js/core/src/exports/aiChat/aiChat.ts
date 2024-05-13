@@ -6,7 +6,7 @@ import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../../../
 import {debug} from '../../../../../shared/src/utils/debug';
 import {registerAllComponents} from '../../logic/components';
 import {IAiChat} from '../../types/aiChat/aiChat';
-import {AiChatProps} from '../../types/aiChat/props';
+import {UpdatableAiChatProps} from '../../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {NluxController} from './controller/controller';
 import {ConversationOptions} from './options/conversationOptions';
@@ -173,7 +173,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         this.unregisteredEventListeners.clear();
     }
 
-    public updateProps(props: Partial<AiChatProps<AiMsg>>) {
+    public updateProps(props: UpdatableAiChatProps<AiMsg>) {
         if (!this.controller) {
             throw new NluxRenderingError({
                 source: this.constructor.name,

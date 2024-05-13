@@ -6,8 +6,9 @@ import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chatRoom/chatRoom.model';
 import {CompChatRoomProps} from '../../../logic/chat/chatRoom/chatRoom.types';
 import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptionsBox/model';
-import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
+import {AiChatInternalProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
+import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {ConversationOptions} from '../options/conversationOptions';
@@ -251,7 +252,7 @@ export class NluxRenderer<AiMsg> {
         // Trigger pre-destroy event
         //
         this.context.emit('preDestroy', {
-            aiChatProps: this.context.aiChatProps,
+            aiChatProps: propsToCorePropsInEvents(this.context.aiChatProps),
             conversationHistory: this.chatRoom.getConversationContentForAdapter(
                 this.context.aiChatProps.conversationOptions?.historyPayloadSize,
             ) ?? [],
@@ -275,7 +276,7 @@ export class NluxRenderer<AiMsg> {
         this.isMounted = false;
     }
 
-    public updateProps(props: Partial<AiChatProps<AiMsg>>) {
+    public updateProps(props: UpdatableAiChatProps<AiMsg>) {
         if (props.hasOwnProperty('className')) {
             const newClassName = props.className || undefined;
             if (newClassName) {

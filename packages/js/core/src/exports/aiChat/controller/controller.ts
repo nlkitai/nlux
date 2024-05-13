@@ -1,7 +1,7 @@
 import {ExceptionId, NluxExceptions} from '../../../../../../shared/src/types/exceptions';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
-import {AiChatInternalProps, AiChatProps} from '../../../types/aiChat/props';
+import {AiChatInternalProps, AiChatProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {EventCallback, EventName} from '../../../types/event';
 import {EventManager} from '../events/eventManager';
@@ -111,7 +111,7 @@ export class NluxController<AiMsg> {
         this.renderer = null;
     }
 
-    public updateProps(props: Partial<AiChatProps<AiMsg>>) {
+    public updateProps(props: UpdatableAiChatProps<AiMsg>) {
         this.renderer?.updateProps(props);
         this.internalProps = {
             ...this.internalProps,
@@ -127,39 +127,12 @@ export class NluxController<AiMsg> {
     private getUpdatedAiChatPropsFromInternalProps(
         internalProps: AiChatInternalProps<AiMsg>,
     ): AiChatProps<AiMsg> {
-        const updatedProps: AiChatProps<AiMsg> = {
-            adapter: internalProps.adapter,
-            themeId: internalProps.themeId,
-            className: internalProps.className,
+        const updatedProps: AiChatProps<AiMsg> = {...internalProps};
+        type AiChatPropsKey = keyof AiChatProps<AiMsg>;
 
-            events: internalProps.events && Object.keys(internalProps.events).length > 0
-                ? internalProps.events
-                : undefined,
-
-            layoutOptions: internalProps.layoutOptions && Object.keys(internalProps.layoutOptions).length > 0
-                ? internalProps.layoutOptions
-                : undefined,
-
-            promptBoxOptions: internalProps.promptBoxOptions && Object.keys(internalProps.promptBoxOptions).length > 0
-                ? internalProps.promptBoxOptions
-                : undefined,
-
-            personaOptions: internalProps.personaOptions && Object.keys(internalProps.personaOptions).length > 0
-                ? internalProps.personaOptions
-                : undefined,
-
-            conversationOptions: internalProps.conversationOptions && Object.keys(
-                internalProps.conversationOptions,
-            ).length > 0
-                ? internalProps.conversationOptions
-                : undefined,
-
-            messageOptions: internalProps.messageOptions && Object.keys(internalProps.messageOptions).length > 0
-                ? internalProps.messageOptions
-                : undefined,
-        };
-
-        for (const key of Object.keys(updatedProps) as (keyof AiChatProps<AiMsg>)[]) {
+        // We remove any undefined or null values from the props
+        // or any empty objects
+        for (const key of Object.keys(updatedProps) as AiChatPropsKey[]) {
             if (updatedProps[key] === undefined || updatedProps[key] === null || (
                 typeof updatedProps[key] === 'object' && Object.keys(updatedProps[key] as any).length === 0
             )) {

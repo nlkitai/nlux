@@ -1,27 +1,24 @@
-import {PersonaOptions} from '@nlux/core';
-import {AiChatProps as AiChatCoreProps} from '../../../../js/core/src/types/aiChat/props';
+import {AiChatPropsInEvents, PersonaOptions} from '@nlux/core';
 import {AiChatProps} from '../exports/props';
 
-export const reactPropsToCoreProps = <AiMsg>(
+export const reactPropsToCorePropsInEvents = <AiMsg>(
     props: AiChatProps<AiMsg>,
-): Omit<AiChatCoreProps<AiMsg>, 'adapter' | 'events'> => {
+): AiChatPropsInEvents<AiMsg> => {
 
-    // All keys except the adapter key
-    type KeyType = keyof Omit<AiChatCoreProps<AiMsg>, 'adapter' | 'events'>;
-    const keys = Object
-        .keys(props)
-        .filter((key) => key !== 'adapter' && key !== 'events') as KeyType[];
-
-    // const result with Read/write version of this: Omit<AiChatCoreProps<AiMsg>, 'adapter'>
-    const result: Record<KeyType, AiChatCoreProps<AiMsg>[KeyType]> = {} as Record<KeyType, AiChatCoreProps<AiMsg>[KeyType]>;
-
+    const result: AiChatPropsInEvents<AiMsg> = {};
+    const keys = Object.keys(props);
     for (let i = 0; i < keys.length; i++) {
-        const key: KeyType = keys[i];
-        if (key === 'personaOptions' || key === 'messageOptions') {
+        const key: keyof AiChatProps<AiMsg> = keys[i] as any;
+        if (
+            key === 'personaOptions' ||
+            key === 'messageOptions' ||
+            key === 'adapter' ||
+            key === 'events'
+        ) {
             continue;
         }
 
-        result[key] = props[key];
+        result[key] = props[key] as any;
     }
 
     if (props.personaOptions) {
@@ -54,5 +51,5 @@ export const reactPropsToCoreProps = <AiMsg>(
         };
     }
 
-    return result as Omit<AiChatCoreProps<AiMsg>, 'adapter' | 'events'>;
+    return result as AiChatPropsInEvents<AiMsg>;
 };

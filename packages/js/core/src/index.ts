@@ -58,6 +58,8 @@ export type {
 
 export type {
     AiChatProps,
+    UpdatableAiChatProps,
+    AiChatPropsInEvents,
 } from './types/aiChat/props';
 
 export type {

@@ -3,7 +3,7 @@ import {HistoryPayloadSize} from '../../../../../js/core/src';
 import {ChatAdapterExtras} from '../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {chatSegmentsToChatItems} from '../../../../../shared/src/utils/chat/chatSegmentsToChatItems';
-import {reactPropsToCoreProps} from '../../utils/reactPropsToCoreProps';
+import {reactPropsToCorePropsInEvents} from '../../utils/reactPropsToCorePropsInEvents';
 import {AiChatProps} from '../props';
 
 export const useAdapterExtras = <AiMsg>(
@@ -20,7 +20,7 @@ export const useAdapterExtras = <AiMsg>(
                 : undefined;
 
         return {
-            aiChatProps: reactPropsToCoreProps<AiMsg>(aiChatProps),
+            aiChatProps: reactPropsToCorePropsInEvents<AiMsg>(aiChatProps),
             conversationHistory,
         };
 

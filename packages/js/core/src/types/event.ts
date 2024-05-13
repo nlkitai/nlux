@@ -1,7 +1,7 @@
 import {AnyAiMsg} from '../../../../shared/src/types/anyAiMsg';
 import {ChatItem} from '../../../../shared/src/types/conversation';
 import {ExceptionId} from '../../../../shared/src/types/exceptions';
-import {AiChatProps} from './aiChat/props';
+import {AiChatPropsInEvents} from './aiChat/props';
 
 export type MessageReceivedEventDetails<AiMsg> = {
     uid: string;
@@ -18,11 +18,11 @@ export type ErrorEventDetails = {
 };
 
 export type ReadyEventDetails<AiMsg> = {
-    aiChatProps: AiChatProps<AiMsg>;
+    aiChatProps: AiChatPropsInEvents<AiMsg>
 }
 
 export type PreDestroyEventDetails<AiMsg> = {
-    aiChatProps: AiChatProps<AiMsg>;
+    aiChatProps: AiChatPropsInEvents<AiMsg>;
     conversationHistory: Readonly<ChatItem<AiMsg>[]>;
 }
 

@@ -23,5 +23,5 @@ export type ControllerContext<AiMsg> = ControllerContextProps<AiMsg> & {
         eventName: EventToEmit,
         ...params: Parameters<EventsMap<AiMsg>[EventToEmit]>
     ) => void;
-    get aiChatProps(): Readonly<AiChatProps<AiMsg>>;
+    get aiChatProps(): AiChatProps<AiMsg>;
 };

@@ -4,7 +4,7 @@ import {EventName, EventsMap} from '../../../types/event';
 
 export const createControllerContext = <AiMsg>(
     props: ControllerContextProps<AiMsg>,
-    getAiChatProps: () => Readonly<AiChatProps<AiMsg>>,
+    getAiChatProps: () => AiChatProps<AiMsg>,
     emitEvent: <EventToEmit extends EventName>(
         event: EventToEmit,
         ...params: Parameters<EventsMap<AiMsg>[EventToEmit]>

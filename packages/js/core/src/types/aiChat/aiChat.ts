@@ -6,7 +6,7 @@ import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
 import {EventCallback, EventName, EventsMap} from '../event';
-import {AiChatProps} from './props';
+import {UpdatableAiChatProps} from './props';
 
 /**
  * The main interface representing AiChat component.
@@ -75,9 +75,9 @@ export interface IAiChat<AiMsg> {
      * Updates the properties of the chat component. This method expects the chat component to be mounted.
      * The properties will be updated and the relevant parts of the chat component will be re-rendered.
      *
-     * @param {Partial<AiChatProps>} props The properties to be updated.
+     * @param {UpdatableAiChatProps} props The properties to be updated.
      */
-    updateProps(props: Partial<AiChatProps<AiMsg>>): void;
+    updateProps(props: UpdatableAiChatProps<AiMsg>): void;
 
     /**
      * Enabled providing an adapter to the chat component.

@@ -8,6 +8,8 @@ export type {
     ConversationOptions,
     HistoryPayloadSize,
     HighlighterExtension,
+    AiChatPropsInEvents,
+    UpdatableAiChatProps,
 } from '@nlux/core';
 
 export type {

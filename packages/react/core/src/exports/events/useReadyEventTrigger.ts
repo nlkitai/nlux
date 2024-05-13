@@ -1,6 +1,6 @@
-import {ChatAdapter, ReadyEventDetails, StandardChatAdapter} from '@nlux/core';
+import {ReadyEventDetails} from '@nlux/core';
 import {useEffect} from 'react';
-import {reactPropsToCoreProps} from '../../utils/reactPropsToCoreProps';
+import {reactPropsToCorePropsInEvents} from '../../utils/reactPropsToCorePropsInEvents';
 import {AiChatProps} from '../props';
 
 export const useReadyEventTrigger = <AiMsg>(
@@ -14,12 +14,9 @@ export const useReadyEventTrigger = <AiMsg>(
             return;
         }
 
-        const coreProps = reactPropsToCoreProps<AiMsg>(props);
+        const coreProps = reactPropsToCorePropsInEvents<AiMsg>(props);
         const readyEvent: ReadyEventDetails<AiMsg> = {
-            aiChatProps: {
-                ...coreProps,
-                adapter: props.adapter as ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
-            },
+            aiChatProps: coreProps,
         };
 
         readyCallback(readyEvent);

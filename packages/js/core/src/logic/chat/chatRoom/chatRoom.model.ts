@@ -9,6 +9,7 @@ import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators'
 import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
+import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
 import {CompPromptBox} from '../promptBox/promptBox.model';
@@ -122,7 +123,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             }
 
             this.context.emit('ready', {
-                aiChatProps: this.context.aiChatProps,
+                aiChatProps: propsToCorePropsInEvents(this.context.aiChatProps),
             });
         });
     }
