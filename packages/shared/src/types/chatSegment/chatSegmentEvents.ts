@@ -43,7 +43,7 @@ export type ChatSegmentCompleteCallback<AiMsg> = (
 
 export type ChatSegmentErrorCallback = (
     errorId: NLErrorId,
-    relatedMessageId?: string,
+    errorObject?: Error,
 ) => void;
 
 //

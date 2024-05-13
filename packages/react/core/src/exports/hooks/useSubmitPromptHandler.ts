@@ -7,6 +7,7 @@ import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
+import {NLErrors} from '../../../../../shared/src/types/exceptions/errors';
 import {PromptBoxStatus} from '../../../../../shared/src/ui/PromptBox/props';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
@@ -239,16 +240,25 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 }
             });
 
-            chatSegmentObservable.on('error', (exception) => {
+            chatSegmentObservable.on('error', (errorId, errorObject) => {
                 const parts = domToReactRef.current.chatSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
+                const errorMessage = NLErrors[errorId];
 
                 domToReactRef.current.setChatSegments(newParts);
                 domToReactRef.current.setPromptBoxStatus('typing');
-                domToReactRef.current.showException(exception);
+                domToReactRef.current.showException(errorMessage);
 
                 if (promptTypedRef.current === '') {
                     setPrompt(promptToSubmit);
+                }
+
+                if (callbackEvents.current?.error) {
+                    callbackEvents.current.error({
+                        errorId,
+                        message: errorMessage,
+                        errorObject,
+                    });
                 }
             });
 

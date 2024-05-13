@@ -1,14 +1,14 @@
-import {ExceptionId} from './exceptions';
+import {NLErrorId} from './exceptions/errors';
 
 export type NluxRawError = {
     readonly message?: string;
     readonly type?: string;
     readonly source?: string;
-    readonly exceptionId?: ExceptionId;
+    readonly exceptionId?: NLErrorId;
 };
 
 export class NluxError extends Error {
-    readonly exceptionId?: ExceptionId;
+    readonly exceptionId?: NLErrorId;
     readonly message: string;
     readonly source?: string;
     readonly type: string;
@@ -30,7 +30,4 @@ export class NluxValidationError extends NluxError {
 }
 
 export class NluxRenderingError extends NluxError {
-}
-
-export class NluxConfigError extends NluxError {
 }

@@ -2,6 +2,7 @@ import {AutoScrollController} from '../../../../../../../shared/src/interactions
 import {submitPrompt} from '../../../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapterExtras} from '../../../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
 import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
+import {NLErrors} from '../../../../../../../shared/src/types/exceptions/errors';
 import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
@@ -44,15 +45,16 @@ export const submitPromptFactory = <AiMsg>({
 
             // Listen to observable events
             // Always listen to error event
-            result.observable.on('error', (error) => {
+            result.observable.on('error', (errorId, errorObject) => {
                 conversation.removeChatSegment(segmentId);
                 autoScrollController?.handleChatSegmentRemoved(segmentId);
                 resetPromptBox(false);
 
-                context.exception('NX-AD-001');
+                context.exception(errorId);
                 context.emit('error', {
-                    errorId: 'NX-AD-001',
-                    message: 'An error occurred while submitting prompt',
+                    errorId,
+                    message: NLErrors[errorId],
+                    errorObject,
                 });
             });
 

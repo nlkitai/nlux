@@ -1,6 +1,6 @@
 import {AnyAiMsg} from '../../../../shared/src/types/anyAiMsg';
 import {ChatItem} from '../../../../shared/src/types/conversation';
-import {ExceptionId} from '../../../../shared/src/types/exceptions';
+import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
 import {AiChatPropsInEvents} from './aiChat/props';
 
 export type MessageSentEventDetails = {
@@ -23,8 +23,9 @@ export type MessageReceivedEventDetails<AiMsg> = {
 };
 
 export type ErrorEventDetails = {
-    errorId: ExceptionId;
+    errorId: NLErrorId;
     message: string;
+    errorObject?: Error;
 };
 
 export type ReadyEventDetails<AiMsg> = {

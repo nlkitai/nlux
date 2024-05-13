@@ -1,4 +1,4 @@
-import {ExceptionType} from '../../../../../../shared/src/types/exception';
+import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
@@ -30,7 +30,7 @@ export class CompExceptionsBox<AiMsg> extends BaseComp<
         super.destroy();
     }
 
-    public showAlert(type: ExceptionType, message: string) {
+    public showAlert(type: NLErrorId, message: string) {
         this.executeDomAction('displayException', message);
     }
 }

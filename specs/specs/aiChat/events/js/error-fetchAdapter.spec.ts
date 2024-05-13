@@ -4,9 +4,9 @@ import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import '@testing-library/jest-dom';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + fetch adapter + events + messageReceived', () => {
+describe('createAiChat() + fetch adapter + events + error', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -28,71 +28,69 @@ describe('createAiChat() + fetch adapter + events + messageReceived', () => {
         aiChat = undefined;
     });
 
-    describe('When a message is received', () => {
-        it('It should trigger the messageReceived event', async () => {
+    describe('When an error occurs', () => {
+        it('It should trigger the error event', async () => {
             // Arrange
-            const messageReceivedCallback = vi.fn();
+            const errorCallback = vi.fn();
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .on('messageReceived', messageReceivedCallback);
+                .on('error', errorCallback);
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
+            await waitForRenderCycle();
 
             // Act
-            adapterController!.resolve('Yo!');
+            adapterController!.reject('Error msg!');
             await waitForRenderCycle();
 
             // Assert
-            expect(messageReceivedCallback).toHaveBeenCalledOnce();
+            expect(errorCallback).toHaveBeenCalledWith({
+                errorId: 'failed-to-load-content',
+                message: 'Failed to load content',
+                errorObject: expect.any(Error),
+            });
+
+            const error = errorCallback.mock.calls[0][0].errorObject as Error;
+            expect(error.message).toEqual('Error msg!');
         });
     });
 
-    describe('When the callback updates between messages', () => {
-        it('It should trigger the messageReceived event with the new callback', async () => {
+    describe('When the error callback is updated', () => {
+        it('It should trigger the new error callback', async () => {
             // Arrange
-            const messageReceivedCallback1 = vi.fn();
-            const messageReceivedCallback2 = vi.fn();
+            const errorCallback1 = vi.fn();
+            const errorCallback2 = vi.fn();
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .on('messageReceived', messageReceivedCallback1);
+                .on('error', errorCallback1);
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
-
-            // Act
-            adapterController!.resolve('Yo!');
-            await waitForMdStreamToComplete();
-
-            // Assert
-            expect(messageReceivedCallback1).toHaveBeenCalledWith({
-                uid: expect.any(String),
-                message: 'Yo!',
-            });
-
-            // Arrange
-            aiChat.removeEventListener('messageReceived', messageReceivedCallback1);
-            aiChat.on('messageReceived', messageReceivedCallback2);
-
-            // Act
-            await userEvent.type(textArea, 'Bonjour{enter}');
             await waitForRenderCycle();
 
-            adapterController!.resolve('Salut!');
+            // Act
+            aiChat.removeEventListener('error', errorCallback1);
+            aiChat.on('error', errorCallback2);
+            adapterController!.reject('Error msg!');
             await waitForRenderCycle();
 
             // Assert
-            expect(messageReceivedCallback1).toHaveBeenCalledOnce();
-            expect(messageReceivedCallback2).toHaveBeenCalledWith({
-                uid: expect.any(String),
-                message: 'Salut!',
+            expect(errorCallback1).not.toHaveBeenCalled();
+            expect(errorCallback2).toHaveBeenCalledWith({
+                errorId: 'failed-to-load-content',
+                message: 'Failed to load content',
+                errorObject: expect.any(Error),
             });
+
+            const error = errorCallback2.mock.calls[0][0].errorObject as Error;
+            expect(error.message).toEqual('Error msg!');
         });
     });
 });

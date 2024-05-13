@@ -1,4 +1,4 @@
-import {ExceptionId, NluxExceptions} from '../../../../../../shared/src/types/exceptions';
+import {NLErrorId, NLErrors} from '../../../../../../shared/src/types/exceptions/errors';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {AiChatInternalProps, AiChatProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
@@ -14,18 +14,18 @@ export class NluxController<AiMsg> {
     private internalProps: AiChatInternalProps<AiMsg>;
     private readonly nluxInstanceId = uid();
 
-    private renderException = (exceptionId: string) => {
+    private renderException = (errorId: string) => {
         if (!this.mounted || !this.renderer) {
             return null;
         }
 
-        const exception = NluxExceptions[exceptionId as ExceptionId];
-        if (!exception) {
-            warn(`Exception with id '${exceptionId}' is not defined`);
+        const errorMessage = NLErrors[errorId as NLErrorId];
+        if (!errorMessage) {
+            warn(`Exception with id '${errorId}' is not defined`);
             return null;
         }
 
-        this.renderer.renderEx(exception.type, exception.message);
+        this.renderer.renderEx(errorId as NLErrorId, errorMessage);
     };
 
     private renderer: NluxRenderer<AiMsg> | null = null;
@@ -134,7 +134,7 @@ export class NluxController<AiMsg> {
         // or any empty objects
         for (const key of Object.keys(updatedProps) as AiChatPropsKey[]) {
             if (updatedProps[key] === undefined || updatedProps[key] === null || (
-                typeof updatedProps[key] === 'object' && Object.keys(updatedProps[key] as any).length === 0
+                typeof updatedProps[key] === 'object' && Object.keys(updatedProps[key] as object).length === 0
             )) {
                 delete updatedProps[key];
             }

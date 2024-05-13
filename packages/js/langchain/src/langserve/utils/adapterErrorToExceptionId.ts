@@ -1,9 +1,13 @@
-import {ExceptionId} from '../../../../../shared/src/types/exceptions';
+import {NLErrorId} from '../../../../../shared/src/types/exceptions/errors';
 
-export const adapterErrorToExceptionId = (error: any): ExceptionId | null => {
+export const adapterErrorToExceptionId = (error: unknown): NLErrorId | null => {
     if (typeof error === 'object' && error !== null) {
-        if (error.message?.toLowerCase().includes('connection error')) {
-            return 'NX-NT-001';
+        const errorAsObject = error as Record<string, unknown>;
+        if (
+            errorAsObject.message && typeof errorAsObject.message === 'string' &&
+            errorAsObject.message.toLowerCase().includes('connection error')
+        ) {
+            return 'connection-error';
         }
     }
 

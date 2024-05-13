@@ -19,6 +19,11 @@ export const NLErrors = {
     //
     'failed-to-load-content': 'Failed to load content',
     'failed-to-stream-content': 'Failed to stream content',
+
+    //
+    // Content rendering errors
+    //
+    'failed-to-render-content': 'Failed to display content',
 };
 
 export type NLErrorId = keyof typeof NLErrors;

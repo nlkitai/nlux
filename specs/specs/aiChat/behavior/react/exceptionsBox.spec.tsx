@@ -2,6 +2,7 @@ import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
+import {NLErrors} from '../../../../../packages/shared/src/types/exceptions/errors';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
@@ -34,7 +35,7 @@ describe('<AiChat /> + theme', () => {
             // Assert
             const exceptionBox = container.querySelector('.nlux-comp-exp_box')!;
             expect(exceptionBox).not.toBeNull();
-            expect(exceptionBox.textContent).toEqual('failed-to-load-content');
+            expect(exceptionBox.textContent).toEqual(NLErrors['failed-to-load-content']);
         });
     });
 });

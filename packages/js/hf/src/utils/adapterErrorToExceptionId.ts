@@ -1,13 +1,17 @@
-import {ExceptionId} from '../../../../shared/src/types/exceptions';
+import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
 
-export const adapterErrorToExceptionId = (error: any): ExceptionId | null => {
+export const adapterErrorToExceptionId = (error: unknown): NLErrorId | null => {
     if (typeof error === 'object' && error !== null) {
-        if (error.code === 'invalid_api_key') {
-            return 'NX-NT-002';
+        const errorAsObject = error as Record<string, unknown>;
+        if (errorAsObject.code === 'invalid_api_key') {
+            return 'invalid-api-key';
         }
 
-        if (error.message?.toLowerCase().includes('connection error')) {
-            return 'NX-NT-001';
+        if (
+            errorAsObject.message && typeof errorAsObject.message === 'string' &&
+            errorAsObject.message.toLowerCase().includes('connection error')
+        ) {
+            return 'connection-error';
         }
     }
 

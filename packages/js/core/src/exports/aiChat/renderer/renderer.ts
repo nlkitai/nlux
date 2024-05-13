@@ -1,6 +1,6 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
-import {ExceptionType} from '../../../../../../shared/src/types/exception';
+import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
 import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chatRoom/chatRoom.model';
@@ -20,7 +20,7 @@ import {PromptBoxOptions} from '../options/promptBoxOptions';
 export class NluxRenderer<AiMsg> {
     private static readonly defaultThemeId = 'luna';
 
-    private readonly __context: ControllerContext<any>;
+    private readonly __context: ControllerContext<AiMsg>;
 
     private chatRoom: CompChatRoom<AiMsg> | null = null;
     private exceptionsBox: CompExceptionsBox<AiMsg> | null = null;
@@ -166,9 +166,9 @@ export class NluxRenderer<AiMsg> {
                     },
                 }).create();
 
-            const CompExceptionsBoxConstructor: typeof CompExceptionsBox | undefined = CompRegistry.retrieve(
+            const CompExceptionsBoxConstructor = CompRegistry.retrieve(
                 'exceptionsBox',
-            )?.model as any;
+            )?.model as typeof CompExceptionsBox | undefined;
 
             if (CompExceptionsBoxConstructor) {
                 exceptionAlert = comp(CompExceptionsBox<AiMsg>)
@@ -208,11 +208,11 @@ export class NluxRenderer<AiMsg> {
             }
         } catch (e) {
             this.rootElement.className = this.rootElementInitialClassName || '';
-            this.renderEx('error', e?.toString() ?? 'Unknown error');
+            this.renderEx('failed-to-render-content', e?.toString() ?? 'Unknown error');
         }
     }
 
-    public renderEx(type: ExceptionType, message: string) {
+    public renderEx(type: NLErrorId, message: string) {
         if (!this.mounted) {
             warn('Renderer is not mounted and cannot render exceptions');
             throw new NluxRenderingError({

@@ -10,6 +10,7 @@ import {
     ChatSegmentErrorCallback,
 } from '../../types/chatSegment/chatSegmentEvents';
 import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
+import {NLErrorId} from '../../types/exceptions/errors';
 import {uid} from '../../utils/uid';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
@@ -124,7 +125,7 @@ export const submitInStreamingMode = <AiMsg>(
                     });
                 });
             },
-            error: () => {
+            error: (error) => {
                 if (errorOccurred || completeOccurred) {
                     return;
                 }
@@ -135,8 +136,9 @@ export const submitInStreamingMode = <AiMsg>(
                 // EVENT: CHAT SEGMENT STREAMING ERROR
                 //
                 triggerAsyncCallback(() => {
+                    const errorId: NLErrorId = 'failed-to-stream-content';
                     chatSegmentErrorCallbacks.forEach(callback => {
-                        callback('failed-to-stream-content');
+                        callback(errorId, error);
                     });
 
                     //

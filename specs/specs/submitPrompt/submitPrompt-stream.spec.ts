@@ -554,7 +554,10 @@ describe('submitPrompt() + stream data transfer mode', () => {
                 await waitForMilliseconds(10);
 
                 // Assert
-                expect(listenToError).toHaveBeenCalledWith('failed-to-stream-content');
+                expect(listenToError).toHaveBeenCalledWith(
+                    'failed-to-stream-content',
+                    expect.any(Error),
+                );
             });
 
             it('Should not emit error event when callback is removed', async () => {

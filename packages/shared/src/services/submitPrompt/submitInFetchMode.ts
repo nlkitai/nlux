@@ -63,10 +63,16 @@ export const submitInFetchMode = async <AiMsg>(
     } catch (error) {
         warn(error);
 
+        const errorObject = error instanceof Error
+            ? error
+            : (
+                typeof error === 'string' ? new Error(error) : new Error('Unknown error')
+            );
+
         triggerAsyncCallback(() => {
             const errorId: NLErrorId = 'failed-to-load-content';
             chatSegmentExceptionCallbacks
-                .forEach((callback) => callback(errorId));
+                .forEach((callback) => callback(errorId, errorObject));
         });
     }
 };

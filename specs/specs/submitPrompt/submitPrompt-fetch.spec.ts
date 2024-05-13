@@ -320,7 +320,10 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                 await waitForMilliseconds(10);
 
                 // Assert
-                expect(listenToError).toHaveBeenCalledWith('failed-to-load-content');
+                expect(listenToError).toHaveBeenCalledWith(
+                    'failed-to-load-content',
+                    expect.any(Error),
+                );
             });
 
             it('Should not call error event when callback is removed', async () => {
