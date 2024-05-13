@@ -1,8 +1,8 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/theme.css';
-import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/create.ts';
-import {PromptBoxProps, PromptBoxStatus} from '../../../../../packages/shared/src/ui/PromptBox/props.ts';
-import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/update.ts';
+import {createPromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/create';
+import {PromptBoxProps, PromptBoxStatus} from '../../../../../packages/shared/src/ui/PromptBox/props';
+import {updatePromptBoxDom} from '../../../../../packages/shared/src/ui/PromptBox/update';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

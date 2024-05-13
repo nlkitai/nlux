@@ -1,9 +1,9 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/theme.css';
-import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create.ts';
-import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props.ts';
-import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update.ts';
-import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
+import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
+import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
+import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
+import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector<HTMLDivElement>('.ChatItem-expo')!;
     let props: ChatItemProps = {
         direction: 'incoming',
-        status: 'rendered',
+        status: 'complete',
         message: 'Hello, World!',
         name: 'Alex Doe',
         picture: 'https://nlux.ai/images/demos/persona-user.jpeg',

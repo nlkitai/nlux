@@ -1,7 +1,7 @@
 import {MessageComp} from '@nlux-dev/react/src/ui/Message/MessageComp.tsx';
 import '@nlux-dev/themes/src/luna/theme.css';
 import {useState} from 'react';
-import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
+import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 
 export const MessageReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('incoming');

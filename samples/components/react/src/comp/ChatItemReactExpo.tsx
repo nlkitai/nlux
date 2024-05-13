@@ -1,6 +1,6 @@
 import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp.tsx';
 import {forwardRef, ReactElement, useMemo, useState} from 'react';
-import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props.ts';
+import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 import '@nlux-dev/themes/src/luna/theme.css';
 
 export const ChatItemReactExpo = () => {
