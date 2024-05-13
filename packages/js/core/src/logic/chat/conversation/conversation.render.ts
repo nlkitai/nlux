@@ -1,5 +1,6 @@
 import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
+import {createWelcomeMessageDom} from '../../../../../../shared/src/ui/WelcomeMessage/create';
 import {render} from '../../../../../../shared/src/utils/dom/render';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
@@ -10,7 +11,6 @@ import {
     CompConversationEvents,
     CompConversationProps,
 } from './conversation.types';
-import {createEmptyWelcomeMessage, createWelcomeMessage} from './utils/createWelcomeMessage';
 
 export const __ = (styleName: string) => `nlux-chtRm-cnv-${styleName}`;
 
@@ -54,12 +54,15 @@ export const renderConversation: CompRenderer<
     if (renderingContext.shouldRenderWelcomeMessage) {
         if (props.botPersona) {
             const bot = props.botPersona;
-            renderingContext.welcomeMessageContainer = createWelcomeMessage(bot);
+            renderingContext.welcomeMessageContainer = createWelcomeMessageDom({
+                name: bot.name,
+                picture: bot.picture,
+                message: bot.tagline,
+            });
+
             if (renderingContext.welcomeMessageContainer) {
-                segmentsContainer.append(renderingContext.welcomeMessageContainer);
+                segmentsContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
             }
-        } else {
-            renderingContext.welcomeMessageContainer = createEmptyWelcomeMessage();
         }
     }
 
@@ -81,11 +84,18 @@ export const renderConversation: CompRenderer<
                 }
 
                 renderingContext.welcomeMessageContainer = renderingContext.botPersona
-                    ? createWelcomeMessage(renderingContext.botPersona)
-                    : createEmptyWelcomeMessage();
+                    ? createWelcomeMessageDom({
+                        name: renderingContext.botPersona.name,
+                        picture: renderingContext.botPersona.picture,
+                        message: renderingContext.botPersona.tagline,
+                    })
+                    : undefined;
 
                 if (renderingContext.welcomeMessageContainer) {
-                    segmentsContainer.append(renderingContext.welcomeMessageContainer);
+                    segmentsContainer.insertAdjacentElement(
+                        'beforebegin',
+                        renderingContext.welcomeMessageContainer,
+                    );
                 }
             },
             updateBotPersona: (newValue: BotPersona | undefined) => {
@@ -100,19 +110,21 @@ export const renderConversation: CompRenderer<
                     renderingContext.welcomeMessageContainer = undefined;
 
                     renderingContext.welcomeMessageContainer = renderingContext.botPersona
-                        ? createWelcomeMessage(renderingContext.botPersona)
-                        : createEmptyWelcomeMessage();
+                        ? createWelcomeMessageDom({
+                            name: renderingContext.botPersona.name,
+                            picture: renderingContext.botPersona.picture,
+                            message: renderingContext.botPersona.tagline,
+                        })
+                        : undefined;
 
                     if (renderingContext.welcomeMessageContainer) {
-                        segmentsContainer.append(renderingContext.welcomeMessageContainer);
+                        segmentsContainer.insertAdjacentElement(
+                            'beforebegin',
+                            renderingContext.welcomeMessageContainer,
+                        );
                     }
                 }
             },
-            updateUserPersona: (_newValue: UserPersona | undefined) => {
-                // TODO - Update messages where user persona is used
-            },
-        },
-        onDestroy: () => {
         },
     };
 };

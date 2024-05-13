@@ -44,7 +44,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
     public commitChunks() {
         this.throwIfDestroyed();
         this.isItemStreaming = false;
-        // TODO - implement chunking
+        // TODO - Implement chunking
     }
 
     public getChatSegmentItem(): ChatSegmentItem<AiMsg> {

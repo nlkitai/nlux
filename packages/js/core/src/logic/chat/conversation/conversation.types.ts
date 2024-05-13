@@ -23,5 +23,4 @@ export type CompConversationActions = {
     removeWelcomeMessage: () => void;
     resetWelcomeMessage: () => void;
     updateBotPersona: (newBotPersona: BotPersona | undefined) => void;
-    updateUserPersona: (newBotPersona: UserPersona | undefined) => void;
 };

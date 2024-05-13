@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const aiChat = createAiChat()
         .withAdapter(openAiAdapter)
-        .withInitialConversation(initialConversation)
+        // .withInitialConversation(initialConversation)
         .withPromptBoxOptions({
             placeholder: 'Type your prompt here',
             autoFocus: true,
@@ -79,10 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
             bot: {
                 name: 'AI Bot',
                 picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                tagline: 'Welcome to the chat',
             },
         });
 
     aiChat.mount(parent);
+    (window as any).aiChat = aiChat;
 
     aiChat.updateProps({
         // syntaxHighlighter: highlighter,

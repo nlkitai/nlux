@@ -34,7 +34,9 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
-        this.addChatSegment('complete', props.messages);
+        if (props.messages && props.messages.length > 0) {
+            this.addChatSegment('complete', props.messages);
+        }
     }
 
     public addChatItem(segmentId: string, item: ChatSegmentItem<AiMsg>) {
@@ -107,6 +109,7 @@ export class CompConversation<AiMsg> extends BaseComp<
 
         const segmentComponentId = newChatSegmentComp.id;
         this.addSubComponent(segmentComponentId, newChatSegmentComp, 'segmentsContainer');
+        this.executeDomAction('removeWelcomeMessage');
 
         return segmentId;
     };
@@ -199,6 +202,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         const index = this.chatSegmentCompIdsByIndex.indexOf(segmentId);
         if (index >= 0) {
             this.chatSegmentCompIdsByIndex.splice(index, 1);
+        }
+
+        if (this.chatSegmentCompIdsByIndex.length === 0) {
+            this.executeDomAction('resetWelcomeMessage');
         }
     }
 
