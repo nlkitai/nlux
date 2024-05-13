@@ -1,4 +1,4 @@
-import {PromptBoxOptions} from '@nlux/core';
+import {EventsMap, PromptBoxOptions} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
@@ -60,6 +60,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         setPrompt,
     });
 
+    // Callback events can be used by the non-React DOM update code
+    const callbackEvents = useRef<Partial<EventsMap<AiMsg>>>({});
+
     useEffect(() => {
         domToReactRef.current = {
             chatSegments,
@@ -73,8 +76,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
         aiChatProps,
         initialSegment ? [initialSegment, ...chatSegments] : chatSegments,
-        aiChatProps.conversationOptions?.historyPayloadSize as any,
+        aiChatProps.conversationOptions?.historyPayloadSize,
     );
+
+    useEffect(() => {
+        callbackEvents.current = aiChatProps.events || {};
+    }, [aiChatProps.events]);
 
     return useCallback(
         () => {
@@ -145,6 +152,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
             chatSegmentObservable.on('userMessageReceived', (userMessage) => {
                 handleSegmentItemReceived(userMessage);
+                if (callbackEvents.current?.messageSent) {
+                    callbackEvents.current.messageSent({
+                        uid: userMessage.uid,
+                        message: userMessage.content,
+                    });
+                }
             });
 
             chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
@@ -155,6 +168,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 }
 
                 streamedMessageIds.add(aiStreamedMessage.uid);
+                if (callbackEvents.current?.messageStreamStarted) {
+                    callbackEvents.current.messageStreamStarted({uid: aiStreamedMessage.uid});
+                }
             });
 
             chatSegmentObservable.on('aiMessageReceived', (aiMessage) => {
@@ -170,6 +186,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 );
 
                 domToReactRef.current.setChatSegments(newChatSegments);
+                if (callbackEvents.current?.messageReceived) {
+                    callbackEvents.current.messageReceived({
+                        uid: aiMessage.uid,
+                        message: aiMessage.content,
+                    });
+                }
             });
 
             chatSegmentObservable.on('complete', (completeChatSegment) => {
@@ -205,6 +227,16 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                     // because of the React lifecycle. The chat item might not be rendered yet.
                     conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
                 });
+            });
+
+            chatSegmentObservable.on('aiMessageStreamed', (streamedMessage) => {
+                if (callbackEvents.current?.messageReceived) {
+                    callbackEvents.current?.messageReceived({
+                        uid: streamedMessage.uid,
+                        // In streamed messages, the AiMsg is always a string
+                        message: streamedMessage.content as AiMsg,
+                    });
+                }
             });
 
             chatSegmentObservable.on('error', (exception) => {

@@ -3,11 +3,21 @@ import {ChatItem} from '../../../../shared/src/types/conversation';
 import {ExceptionId} from '../../../../shared/src/types/exceptions';
 import {AiChatPropsInEvents} from './aiChat/props';
 
-export type MessageReceivedEventDetails<AiMsg> = {
+export type MessageSentEventDetails = {
+    uid: string;
+    message: string;
+};
+
+export type MessageStreamStartedEventDetails = {
     uid: string;
 };
 
 export type MessageRenderedEventDetails<AiMsg> = {
+    uid: string;
+    message: AiMsg;
+};
+
+export type MessageReceivedEventDetails<AiMsg> = {
     uid: string;
     message: AiMsg;
 };
@@ -34,6 +44,24 @@ export type PreDestroyEventDetails<AiMsg> = {
 export type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
 
 /**
+ * The callback for when a message is sent.
+ * This is called when the chat component sends the message to the adapter.
+ *
+ * @param message The message that was sent.
+ */
+export type MessageSentCallback = (event: MessageSentEventDetails) => void;
+
+/**
+ * The callback for when a response starts streaming from the adapter.
+ * This is called when the chat component receives the first part of the response from the adapter.
+ * This does not mean that the message has been rendered yet. You should use the messageRendered event
+ * if you want to know when the message has been rendered.
+ *
+ * @param event The event details such as the uid of the message.
+ */
+export type MessageStreamStartedCallback = (event: MessageStreamStartedEventDetails) => void;
+
+/**
  * The callback for when a message is received.
  * This is called when the chat component receives the full response from the adapter.
  * This does not mean that the message has been rendered yet. You should use the messageRendered
@@ -49,14 +77,6 @@ export type MessageReceivedCallback<AiMsg = string> = (event: MessageReceivedEve
  * @param message The message that was received.
  */
 export type MessageRenderedCallback<AiMsg = string> = (event: MessageRenderedEventDetails<AiMsg>) => void;
-
-/**
- * The callback for when a message is sent.
- * This is called when the chat component sends the message to the adapter.
- *
- * @param message The message that was sent.
- */
-export type MessageSentCallback = (message: string) => void;
 
 /**
  * The callback for when the chat component is ready.
@@ -79,6 +99,7 @@ export type EventsMap<AiMsg> = {
     ready: ReadyCallback<AiMsg>;
     preDestroy: PreDestroyCallback<AiMsg>;
     messageSent: MessageSentCallback;
+    messageStreamStarted: MessageStreamStartedCallback;
     messageReceived: MessageReceivedCallback<AiMsg>;
     messageRendered: MessageReceivedCallback<AiMsg>;
     error: ErrorCallback;

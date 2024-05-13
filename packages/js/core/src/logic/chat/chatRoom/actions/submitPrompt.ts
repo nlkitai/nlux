@@ -58,6 +58,8 @@ export const submitPromptFactory = <AiMsg>({
 
             result.observable.on('userMessageReceived', (userMessage) => {
                 conversation.addChatItem(segmentId, userMessage);
+                context.emit('messageSent', {uid: userMessage.uid, message: userMessage.content});
+
                 domOp(() => {
                     if (autoScrollController) {
                         const chatSegmentContainer = conversation.getChatSegmentContainer(segmentId);
@@ -88,6 +90,11 @@ export const submitPromptFactory = <AiMsg>({
                     }
 
                     conversation.completeChatSegment(segmentId);
+                    context.emit('messageReceived', {
+                        uid: aiMessage.uid,
+                        message: aiMessage.content,
+                    });
+
                     resetPromptBox(true);
                 });
             } else {
@@ -100,8 +107,19 @@ export const submitPromptFactory = <AiMsg>({
                     conversation.addChunk(segmentId, chatItemId, aiMessageChunk);
                 });
 
+                result.observable.on('aiMessageStreamed', (aiMessage) => {
+                    if (aiMessage.status === 'complete') {
+                        context.emit('messageReceived', {
+                            uid: aiMessage.uid,
+                            // We only pass the response to custom renderer when the status is 'complete'.
+                            message: aiMessage.content as AiMsg,
+                        });
+                    }
+                });
+
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
+
                     resetPromptBox(false);
                 });
             }

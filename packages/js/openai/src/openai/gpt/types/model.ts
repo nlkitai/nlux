@@ -1,4 +1,4 @@
-export type OpenAiModel = (string & {})
+export type OpenAiModel = (string & NonNullable<unknown>)
     | 'gpt-4-0125-preview'
     | 'gpt-4-turbo-preview'
     | 'gpt-4-1106-preview'

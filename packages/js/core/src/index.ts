@@ -40,6 +40,7 @@ export type {
     PreDestroyCallback,
     PreDestroyEventDetails,
     MessageSentCallback,
+    MessageStreamStartedCallback,
     MessageReceivedCallback,
     MessageRenderedCallback,
 } from './types/event';

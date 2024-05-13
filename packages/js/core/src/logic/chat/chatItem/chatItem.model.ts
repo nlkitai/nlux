@@ -102,6 +102,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
         this.isItemStreaming = false;
         this.context.emit('messageRendered', {
             uid: this.props.uid,
+            message: messageRendered,
         });
     }
 }

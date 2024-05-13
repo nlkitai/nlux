@@ -63,6 +63,7 @@ export const usePreDestroyEventTrigger = <AiMsg>(
             };
 
             preDestroyCallback(preDestroyEvent);
+            getChatHistoryRef.current = undefined;
         };
     }, []);
 };
