@@ -28,6 +28,7 @@ export default tsEslint.config(
         ignores: [
             'dist/**',
             'specs/**',
+            'samples/**',
             'packages/shared/src/markdown/snapshot/marked/*.ts',
             'packages/shared/src/utils/dequal/*.ts',
         ],

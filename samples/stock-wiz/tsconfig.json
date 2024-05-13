@@ -1,6 +1,3 @@
 {
-  "extends": "../../pipeline/config/main-tsconfig.json",
-  "compilerOptions": {
-    "allowImportingTsExtensions": true
-  }
+  "extends": "../../pipeline/config/main-tsconfig.json"
 }
