@@ -20,6 +20,7 @@ export type CompChatItemElements = Readonly<{
 export type CompChatItemActions = Readonly<{
     focus: () => void;
     processStreamedChunk: (chunk: string) => void;
+    commitStreamedChunks: () => void;
     updateMarkdownStreamRenderer: (newProps: Partial<CompChatItemProps>) => void;
     updateDomProps: (oldProps: ChatItemProps, newProps: ChatItemProps) => void;
 }>;

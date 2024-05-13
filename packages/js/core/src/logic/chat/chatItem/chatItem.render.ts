@@ -79,6 +79,11 @@ export const renderChatItem: CompRenderer<
 
                 markdownStreamParser.next(chunk);
             },
+            commitStreamedChunks: () => {
+                if (markdownStreamParser) {
+                    markdownStreamParser.complete();
+                }
+            },
             updateMarkdownStreamRenderer: (newProps: Partial<CompChatItemProps>) => {
                 markdownStreamProps = {
                     ...markdownStreamProps,
