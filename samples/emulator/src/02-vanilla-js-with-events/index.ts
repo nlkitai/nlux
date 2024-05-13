@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             autoFocus: true,
         })
         .on('error', errorCallback)
-        .on('messageReceived', (message: string) => console.log('Message Received:', message));
+        .on('messageReceived', ({message}) => console.log('Message Received:', message));
 
     aiChat.mount(rootElement);
 });

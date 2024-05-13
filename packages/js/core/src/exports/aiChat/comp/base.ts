@@ -11,8 +11,8 @@ export type CompStatus = 'unmounted' | 'rendered' | 'active' | 'destroyed';
 export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, ActionsType> {
     static __compEventListeners: Map<string | number | symbol, string[]> | null = null;
     static __compId: string | null = null;
-    static __renderer: CompRenderer<any, any, any, any> | null = null;
-    static __updater: CompUpdater<any, any, any> | null = null;
+    static __renderer: CompRenderer<object, object, object, object> | null = null;
+    static __updater: CompUpdater<object, object, object> | null = null;
 
     /**
      * A reference to the component definition, as retrieved from the registry.
@@ -68,7 +68,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * Sub-components that are mounted in the DOM tree of the current component.
      * This list should be filled by user by calling addPart() method in constructor of the component.
      */
-    protected subComponents: Map<string, BaseComp<any, any, any, any, any>> = new Map();
+    protected subComponents: Map<string, BaseComp<object, object, object, object, object>> = new Map();
 
     /**
      * The context of the current chat component.

@@ -8,7 +8,7 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
     const result: AiChatPropsInEvents<AiMsg> = {};
     const keys = Object.keys(props);
     for (let i = 0; i < keys.length; i++) {
-        const key: keyof AiChatProps<AiMsg> = keys[i] as any;
+        const key = keys[i] as keyof AiChatProps<AiMsg>;
         if (
             key === 'personaOptions' ||
             key === 'messageOptions' ||
