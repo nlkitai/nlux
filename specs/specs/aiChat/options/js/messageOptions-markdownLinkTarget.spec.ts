@@ -53,7 +53,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When markdownLinkTarget is updated to true after mounting', () => {
+        describe('When markdownLinkTarget is updated to blank after mounting', () => {
             it('Markdown links should still open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
@@ -84,7 +84,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
         });
     });
 
-    describe('When markdownLinkTarget is set to true', () => {
+    describe('When markdownLinkTarget is set to blank', () => {
         it('Markdown links should open in a new window', async () => {
             // Arrange
             aiChat = createAiChat()
@@ -111,8 +111,8 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             expect(link!.getAttribute('target')).toBe('_blank');
         });
 
-        describe('When markdownLinkTarget is updated to false after mounting', () => {
-            it.todo('Markdown links should not open in a new window', async () => {
+        describe('When markdownLinkTarget is updated to self after mounting', () => {
+            it('Markdown links should not open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter);
@@ -142,7 +142,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
         });
     });
 
-    describe('When markdownLinkTarget is set to false', () => {
+    describe('When markdownLinkTarget is set to self', () => {
         it('Markdown links should not open in a new window', async () => {
             // Arrange
             aiChat = createAiChat()
@@ -169,8 +169,8 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             expect(link!.getAttribute('target')).toBeNull();
         });
 
-        describe('When markdownLinkTarget is updated to true after mounting', () => {
-            it.todo('Markdown links should open in a new window', async () => {
+        describe('When markdownLinkTarget is updated to blank after mounting', () => {
+            it('Markdown links should open in a new window', async () => {
                 // Arrange
                 aiChat = createAiChat()
                     .withMessageOptions({markdownLinkTarget: 'self'})
