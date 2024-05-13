@@ -33,12 +33,12 @@ export type AiChatInternalProps<AiMsg> = {
  */
 export type AiChatProps<AiMsg = string> = Readonly<{
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
+    events?: Partial<EventsMap<AiMsg>>;
     themeId?: string;
     className?: string;
-    events?: Partial<EventsMap<AiMsg>>;
-    layoutOptions?: LayoutOptions;
     promptBoxOptions?: PromptBoxOptions;
-    personaOptions?: PersonaOptions;
     conversationOptions?: ConversationOptions;
     messageOptions?: MessageOptions<AiMsg>;
+    personaOptions?: PersonaOptions;
+    layoutOptions?: LayoutOptions;
 }>;

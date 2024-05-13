@@ -5,10 +5,12 @@ import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui
 import {PromptBoxStatus} from '../../../../shared/src/ui/PromptBox/props';
 import {chatItemsToChatSegment} from '../../../../shared/src/utils/chat/chatItemsToChatSegment';
 import {getRootClassNames} from '../../../../shared/src/utils/dom/getRootClassNames';
+import {warnOnce} from '../../../../shared/src/utils/warn';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
 import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
+import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
@@ -90,8 +92,16 @@ export const AiChat: <AiMsg>(
         }
     }, [initialSegment]);
 
+    // Trigger the ready event once the component is mounted
+    useReadyEventTrigger<AiMsg>(props);
+
     const ForwardConversationComp = useMemo(
         () => forwardRef(ConversationComp<AiMsg>), []);
+
+    if (!adapterToUse) {
+        warnOnce('AiChat: No valid adapter provided. The component will not render.');
+        return <></>;
+    }
 
     return (
         <div className={rootClassNames} style={rootStyle}>

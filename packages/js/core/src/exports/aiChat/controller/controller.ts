@@ -159,6 +159,14 @@ export class NluxController<AiMsg> {
                 : undefined,
         };
 
+        for (const key of Object.keys(updatedProps) as (keyof AiChatProps<AiMsg>)[]) {
+            if (updatedProps[key] === undefined || updatedProps[key] === null || (
+                typeof updatedProps[key] === 'object' && Object.keys(updatedProps[key] as any).length === 0
+            )) {
+                delete updatedProps[key];
+            }
+        }
+
         return updatedProps;
     };
 }

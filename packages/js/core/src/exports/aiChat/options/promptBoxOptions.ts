@@ -10,7 +10,7 @@ export interface PromptBoxOptions {
      * It will not have any impact in the prompt box 'submitting' and 'waiting' statuses, as the submit button
      * is always disabled in these statuses.
      *
-     * Default: Submit button is only enabled when the message is not empty.
+     * @default: Submit button is only enabled when the message is not empty.
      */
     disableSubmitButton?: boolean;
 
