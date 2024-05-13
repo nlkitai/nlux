@@ -101,6 +101,7 @@ export const submitPromptFactory = <AiMsg>({
                 result.observable.on('aiMessageStreamStarted', (aiMessageStream) => {
                     conversation.addChatItem(segmentId, aiMessageStream);
                     setPromptBoxAsWaiting();
+                    context.emit('messageStreamStarted', {uid: aiMessageStream.uid});
                 });
 
                 result.observable.on('aiChunkReceived', (aiMessageChunk, chatItemId) => {
