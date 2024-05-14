@@ -15,7 +15,7 @@ import {warn} from '../../../../../shared/src/utils/warn';
 import {isContextTasksAdapter} from '../../utils/adapters/isContextTasksAdapter';
 import {DataSyncService} from './dataSyncService';
 import {DataSyncOptions} from './options/dataSyncOptions';
-import {TasksService} from './tasksService';
+import {TaskCallback, TasksService} from './tasksService';
 
 /**
  * Default implementation of the AiContext.
@@ -267,7 +267,7 @@ class AiContextImpl implements AiContext {
     public registerTask = (
         taskId: string,
         description: string,
-        callback: Function,
+        callback: TaskCallback,
         parameters: string[],
     ): ContextTaskHandler | undefined => {
         if (this.theStatus === 'idle') {
@@ -358,7 +358,7 @@ class AiContextImpl implements AiContext {
                         }
                     });
             },
-            setCallback: (callback: Function) => {
+            setCallback: (callback: TaskCallback) => {
                 if (status === 'deleted') {
                     throw new Error('Task has been deleted');
                 }
@@ -432,7 +432,7 @@ class AiContextImpl implements AiContext {
         }
     };
 
-    public runTask = async (taskId: string, parameters?: Array<any>): Promise<RunTaskResult> => {
+    public runTask = async (taskId: string, parameters?: Array<unknown>): Promise<RunTaskResult> => {
         if (!this.theTasksService) {
             warn(
                 `${this.constructor.name}.runTask() called on a state that has not been initialized! ` +
@@ -457,7 +457,10 @@ class AiContextImpl implements AiContext {
             throw new Error('Adapter already set');
         }
 
-        const isBuilder = typeof (adapter as any)?.build === 'function';
+        const isBuilder = typeof (
+            adapter as unknown as Record<string, unknown>
+        )?.build === 'function';
+
         if (isBuilder) {
             this.theDataAdapter = (adapter as ContextAdapterBuilder).build();
         } else {

@@ -7,16 +7,18 @@ import {
 import {ContextTasks} from '../../../../../shared/src/types/aiContext/data';
 import {warn} from '../../../../../shared/src/utils/warn';
 
+export type TaskCallback = (...args: Array<unknown>) => unknown;
+
 type UpdateQueueItem = {
     operation: 'set';
     description: string;
     paramDescriptions: string[];
-    callback: Function;
+    callback: TaskCallback;
 } | {
     operation: 'update';
     description?: string;
     paramDescriptions?: string[];
-    callback?: Function;
+    callback?: TaskCallback;
 } | {
     operation: 'delete';
 };
@@ -26,7 +28,7 @@ export class TasksService {
     private adapter: ContextTasksAdapter;
     private readonly contextId: string;
     private status: 'idle' | 'updating' | 'destroyed' = 'idle';
-    private readonly taskCallbacks: Map<string, Function> = new Map();
+    private readonly taskCallbacks: Map<string, TaskCallback> = new Map();
     private readonly tasks: Set<string> = new Set();
     private readonly updateQueueByTaskId: Map<string, UpdateQueueItem> = new Map();
 
@@ -169,7 +171,7 @@ export class TasksService {
     async registerTask(
         taskId: string,
         description: string,
-        callback: Function,
+        callback: TaskCallback,
         paramDescriptions?: string[],
     ): Promise<void> {
         if (this.status === 'destroyed') {
@@ -219,7 +221,7 @@ export class TasksService {
         await this.backToIdle();
     }
 
-    async runTask(taskId: string, parameters?: Array<any>): Promise<RunTaskResult> {
+    async runTask(taskId: string, parameters?: Array<unknown>): Promise<RunTaskResult> {
         if (this.status === 'destroyed') {
             throw new Error('Context has been destroyed');
         }
@@ -292,7 +294,7 @@ export class TasksService {
         };
     }
 
-    async updateTaskCallback(taskId: string, callback: Function): Promise<void> {
+    async updateTaskCallback(taskId: string, callback: TaskCallback): Promise<void> {
         if (this.status === 'destroyed') {
             throw new Error('The context has been destroyed');
         }
