@@ -1,9 +1,10 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {NluxUsageError} from '../../../../../shared/src/types/error';
+import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeAbstractAdapter} from './adapter';
 
 export class LangServeFetchAdapter<AiMsg = string> extends LangServeAbstractAdapter<AiMsg> {
-    constructor(options: any) {
+    constructor(options: ChatAdapterOptions<AiMsg>) {
         super(options);
     }
 

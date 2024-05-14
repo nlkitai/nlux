@@ -22,6 +22,6 @@ try {
     run('cd specs && yarn test', true)
         .then(() => process.exitCode = 0)
         .catch(() => process.exitCode = 1);
-} catch (e) {
+} catch (_error) {
     process.exit(1);
 }

@@ -2,7 +2,7 @@ import {parseStreamedEvent} from './parseStreamedEvent';
 
 export const parseChunk = (chunk: string): Array<{
     event: 'data' | 'end';
-    data: any;
+    data: unknown;
 }> | Error => {
     if (!chunk) {
         return [];
@@ -28,9 +28,9 @@ export const parseChunk = (chunk: string): Array<{
             .map(parseStreamedEvent)
             .filter(event => event !== undefined)
             .map(event => event!);
-    } catch (e) {
-        if (e instanceof Error) {
-            return e;
+    } catch (_error) {
+        if (_error instanceof Error) {
+            return _error;
         }
 
         // When no error is thrown, we return empty result

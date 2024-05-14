@@ -1,9 +1,10 @@
+import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
 import {NluxRenderingError} from '../../../../../shared/src/types/error';
 
 const source = 'dom/listenTo';
 
 export type ListenToBuilder = {
-    on: (eventName: string, callback?: Function | undefined) => ListenToBuilder;
+    on: (eventName: string, callback?: CallbackFunction | undefined) => ListenToBuilder;
     get: () => [HTMLElement, () => void];
 };
 
@@ -22,7 +23,7 @@ export const listenToElement = (element: HTMLElement, query?: string): ListenToB
     }
 
     const domListeners = new Map<string, (event: Event) => void>();
-    const userCallbacks = new Map<string, Set<Function>>();
+    const userCallbacks = new Map<string, Set<CallbackFunction>>();
 
     const removeListeners = () => {
         if (!elementToReturn) {
@@ -38,7 +39,7 @@ export const listenToElement = (element: HTMLElement, query?: string): ListenToB
     };
 
     const result: ListenToBuilder = {
-        on: (eventName: string, callback?: Function | undefined): ListenToBuilder => {
+        on: (eventName: string, callback?: CallbackFunction | undefined): ListenToBuilder => {
             if (!callback || !elementToReturn) {
                 return result;
             }

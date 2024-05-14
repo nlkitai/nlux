@@ -61,6 +61,6 @@ try {
         await run(`yarn workspace ${pkg.devName} build`);
     }
 
-} catch (e) {
+} catch (_error) {
     process.exit(1);
 }

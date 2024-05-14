@@ -7,7 +7,7 @@ import {
 } from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
 import {MessageProps} from './props';
 
-export const MessageComp = function <AiMsg>(props: MessageProps<AiMsg>) {
+export const MessageComp = function (props: MessageProps) {
     const compStatusClassName = props.status
         ? compMessageStatusClassName[props.status]
         : compMessageStatusClassName['rendered'];

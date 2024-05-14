@@ -12,6 +12,6 @@ try {
     packagesList.forEach(pkg => {
         run(`yarn workspace ${pkg.devName} watch`);
     });
-} catch (e) {
+} catch (_error) {
     process.exit(1);
 }

@@ -3,7 +3,7 @@ import {AutoScrollController} from '../../../../../shared/src/interactions/autoS
 
 type LastActiveSegmentData = {uid: string; div: HTMLDivElement};
 
-export const useLastActiveSegmentChangeHandler = <AiMsg>(
+export const useLastActiveSegmentChangeHandler = (
     autoScrollController: AutoScrollController | undefined,
     lastActiveSegmentIdRef: MutableRefObject<string | undefined>,
 ) => {

@@ -28,7 +28,7 @@ export type CompRenderer<PropsType, ElementsType, EventsType, ActionsType = unde
     appendToRoot: (element: HTMLElement) => void,
     compEvent: (eventName: EventsType) => Function,
     props: Readonly<PropsType>,
-    context: ControllerContext<any>,
+    context: ControllerContext<unknown>,
 }) => CompDom<ElementsType, ActionsType>;
 
 /**

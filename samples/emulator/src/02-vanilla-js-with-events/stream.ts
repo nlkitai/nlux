@@ -15,7 +15,7 @@ export const streamAdapter: ChatAdapter<string> = {
                     'Content-Type': 'application/json',
                 },
             });
-        } catch (e) {
+        } catch (_error) {
             observer.error(new Error('Failed to connect to the server'));
             return;
         }

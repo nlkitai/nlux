@@ -56,7 +56,7 @@ class AiContextImpl implements AiContext {
     public flush = async (): Promise<FlushContextResult> => {
         try {
             await this.theDataSyncService?.flush();
-        } catch (error) {
+        } catch (_error) {
             return {
                 success: false,
                 error: 'Failed to flush context data',
@@ -65,7 +65,7 @@ class AiContextImpl implements AiContext {
 
         try {
             await this.theTasksService?.flush();
-        } catch (error) {
+        } catch (_error) {
             return {
                 success: false,
                 error: 'Failed to flush context tasks',

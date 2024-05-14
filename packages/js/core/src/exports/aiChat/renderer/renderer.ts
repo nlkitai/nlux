@@ -206,9 +206,9 @@ export class NluxRenderer<AiMsg> {
                 this.exceptionsBox = exceptionAlert ?? null;
                 this.isMounted = true;
             }
-        } catch (e) {
+        } catch (_error) {
             this.rootElement.className = this.rootElementInitialClassName || '';
-            this.renderEx('failed-to-render-content', e?.toString() ?? 'Unknown error');
+            this.renderEx('failed-to-render-content', _error?.toString() ?? 'Unknown error');
         }
     }
 

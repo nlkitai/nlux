@@ -12,6 +12,6 @@ try {
     for (const pkg of packagesList) {
         await run(`NODE_ENV=production yarn workspace ${pkg.devName} build`);
     }
-} catch (e) {
+} catch (_error) {
     process.exit(1);
 }

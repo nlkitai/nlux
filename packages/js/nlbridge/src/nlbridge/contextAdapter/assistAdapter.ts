@@ -64,7 +64,7 @@ export class NLBridgeAssistAdapter implements AssistAdapter {
                 success: true,
                 response,
             };
-        } catch (e) {
+        } catch (_error) {
             return {
                 success: false,
                 error: 'Failed to assist',

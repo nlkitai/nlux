@@ -37,7 +37,7 @@ const ExampleWrapper = () => {
             }
 
             setStreamingAnimationSpeed(speed);
-        } catch (e) {
+        } catch (_error) {
             // ignore
         }
     }, [setStreamingAnimationSpeed]);

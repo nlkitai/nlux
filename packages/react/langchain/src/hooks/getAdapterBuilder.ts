@@ -1,7 +1,5 @@
 import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/langchain';
 
-const source = 'hooks/getAdapterBuilder';
-
 export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions<AiMsg>): ChatAdapterBuilder<AiMsg> => {
     const {
         url,

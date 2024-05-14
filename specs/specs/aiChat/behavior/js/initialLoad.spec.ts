@@ -119,7 +119,7 @@ describe('createAiChat() + initial load', () => {
             try {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-            } catch (e) {
+            } catch (_error) {
                 // ignore
             }
 

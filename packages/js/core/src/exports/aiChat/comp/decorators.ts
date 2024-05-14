@@ -6,10 +6,10 @@ export const Model = <PropsType, ElementsType, EventsType, ActionsType>(
     renderer: CompRenderer<PropsType, ElementsType, EventsType, ActionsType>,
     updater: CompUpdater<PropsType, ElementsType, ActionsType>,
 ) => {
-    return (target: any) => {
-        target.__compId = compId;
-        target.__renderer = renderer;
-        target.__updater = updater;
+    return (target: unknown) => {
+        (target as {__compId: typeof compId}).__compId = compId;
+        (target as {__renderer: typeof renderer}).__renderer = renderer;
+        (target as {__updater: typeof updater}).__updater = updater;
     };
 };
 

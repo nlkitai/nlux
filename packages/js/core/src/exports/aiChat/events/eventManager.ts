@@ -1,3 +1,4 @@
+import {CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
 import {EventName, EventsMap} from '../../../types/event';
 
 export class EventManager<AiMsg> {
@@ -15,7 +16,7 @@ export class EventManager<AiMsg> {
                 return;
             }
 
-            (callback as Function)(...params);
+            (callback as CallbackFunction)(...params);
         });
     };
 

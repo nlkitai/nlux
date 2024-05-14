@@ -2,11 +2,12 @@ import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {NluxError, NluxUsageError} from '../../../../../shared/src/types/error';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {parseChunk} from '../parser/parseChunk';
+import {ChatAdapterOptions} from '../types/adapterOptions';
 import {adapterErrorToExceptionId} from '../utils/adapterErrorToExceptionId';
 import {LangServeAbstractAdapter} from './adapter';
 
 export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMsg> {
-    constructor(options: any) {
+    constructor(options: ChatAdapterOptions<AiMsg>) {
         super(options);
     }
 

@@ -112,7 +112,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
             }
 
             return result;
-        } catch (e) {
+        } catch (_error) {
             warn(`LangServe adapter is unable to fetch schema from: ${url}`);
             return undefined;
         }

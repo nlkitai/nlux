@@ -26,4 +26,4 @@ import {ChatItem} from '@nlux/core';
 export type LangServeInputPreProcessor<AiMsg> = (
     input: string,
     conversationHistory?: ChatItem<AiMsg>[],
-) => any;
+) => unknown;

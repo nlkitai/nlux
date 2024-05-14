@@ -113,6 +113,6 @@ try {
     // Start dev server
     //
     await run(`vite --port ${port} dist/public`);
-} catch (e) {
+} catch (_error) {
     process.exit(1);
 }

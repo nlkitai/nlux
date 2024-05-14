@@ -21,7 +21,7 @@ const parseEvent = (event: string): EventFromChunk | undefined => {
 const parseEventData = (eventData: string): {[key: string]: any} | undefined => {
     try {
         return JSON.parse(eventData);
-    } catch (e) {
+    } catch (_error) {
         return undefined;
     }
 };

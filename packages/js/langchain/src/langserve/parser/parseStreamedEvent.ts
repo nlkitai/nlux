@@ -3,7 +3,7 @@ import {warn} from '../../../../../shared/src/utils/warn';
 
 export const parseStreamedEvent = (event: string): {
     event: 'data' | 'end';
-    data: any;
+    data: unknown;
 } | undefined => {
     const regEx = /^event:\s+(?<event>[\w]+)((\r?)\n(\r?)data: (?<data>(.|\n)*))?/gm;
     const match = regEx.exec(event);
@@ -24,7 +24,7 @@ export const parseStreamedEvent = (event: string): {
     try {
         const data = rawData ? JSON.parse(rawData) : undefined;
         return {event: eventName, data};
-    } catch (e) {
+    } catch (_error) {
         warn(`LangServe stream adapter failed to parse data for chunk event "${eventName}" | Data: ${rawData}`);
         return {event: eventName, data: undefined};
     }

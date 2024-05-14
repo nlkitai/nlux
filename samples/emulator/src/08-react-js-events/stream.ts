@@ -17,8 +17,8 @@ export const streamAdapter: ChatAdapter<string> = {
                     'Content-Type': 'application/json',
                 },
             });
-        } catch (e) {
-            observer.error(e as Error);
+        } catch (_error) {
+            observer.error(_error as Error);
             return;
         }
 

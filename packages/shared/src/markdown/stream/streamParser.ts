@@ -4,8 +4,6 @@ import {RootProcessor} from './processors/Root';
 
 export const markdownDefaultStreamingAnimationSpeed = 10; // We render a new character every 10ms (if available)
 
-let chartersProcessed = 0;
-
 export const createMdStreamRenderer: StandardStreamParser = (
     root: HTMLElement,
     syntaxHighlighter,
@@ -76,7 +74,6 @@ export const createMdStreamRenderer: StandardStreamParser = (
             }
 
             isProcessing = true;
-            chartersProcessed += 1;
             numberOfChecksWithEmptyCharactersQueue = 0;
         }
 

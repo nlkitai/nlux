@@ -2,8 +2,6 @@ import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/openai';
 import {useEffect, useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 
-const source = 'hooks/useUnsafeChatAdapter';
-
 export const useUnsafeChatAdapter = <AiMsg>(options: ChatAdapterOptions) => {
     const [isInitialized, setIsInitialized] = useState(false);
     const [adapter, setAdapter] = useState<ChatAdapterBuilder<AiMsg>>(

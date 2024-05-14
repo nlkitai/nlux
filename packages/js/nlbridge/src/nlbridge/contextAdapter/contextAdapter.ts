@@ -61,7 +61,7 @@ export class NLBridgeContextAdapter implements ContextAdapter {
                 success: true,
                 contextId: data.result.contextId,
             };
-        } catch (e) {
+        } catch (_error) {
             return {
                 success: false,
                 error: 'Failed to set context',
@@ -162,7 +162,7 @@ export class NLBridgeContextAdapter implements ContextAdapter {
                 success: true,
                 items,
             };
-        } catch (e) {
+        } catch (_error) {
             return {
                 success: false,
                 error: 'Failed to send action',
