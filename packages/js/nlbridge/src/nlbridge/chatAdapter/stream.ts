@@ -1,10 +1,11 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import {NluxUsageError} from '../../../../../shared/src/types/error';
 import {warn} from '../../../../../shared/src/utils/warn';
+import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from './adapter';
 
 export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg> {
-    constructor(options: any) {
+    constructor(options: ChatAdapterOptions) {
         super(options);
     }
 

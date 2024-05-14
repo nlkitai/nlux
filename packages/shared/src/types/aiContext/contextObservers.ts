@@ -1,3 +1,4 @@
+import {CallbackFunction} from '../callbackFunction';
 import {ContextItemDataType} from './data';
 
 export interface ContextDomElementHandler {
@@ -47,7 +48,7 @@ export interface ContextItemHandler {
  */
 export interface ContextTaskHandler {
     discard(): void;
-    setCallback(callback: Function): void;
+    setCallback(callback: CallbackFunction): void;
     setDescription(description: string): void;
     setParamDescriptions(paramDescriptions: string[]): void;
 }

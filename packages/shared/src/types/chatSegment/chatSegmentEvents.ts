@@ -1,4 +1,5 @@
 import {AnyAiMsg} from '../anyAiMsg';
+import {CallbackFunction} from '../callbackFunction';
 import {NLErrorId} from '../exceptions/errors';
 import {ChatSegment, ChatSegmentEvent} from './chatSegment';
 import {AiStreamedMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
@@ -47,13 +48,13 @@ export type ChatSegmentErrorCallback = (
 ) => void;
 
 //
-// Check that the ChatSegmentEventsMap type always satisfies Record<ChatSegmentEvent, Function>
+// Check that the ChatSegmentEventsMap type always satisfies Record<ChatSegmentEvent, CallbackFunction>
 //
 type AlwaysSatisfies<T, U> = T extends U ? true : false;
 assertAlwaysSatisfies<
     ChatSegmentEventsMap<AnyAiMsg>,
-    Record<ChatSegmentEvent, Function>
->(null as any, true);
+    Record<ChatSegmentEvent, CallbackFunction>
+>(null, true);
 
 function assertAlwaysSatisfies<T, U>(value: T, check: AlwaysSatisfies<T, U>): void {
     // Empty function, used for type checking only

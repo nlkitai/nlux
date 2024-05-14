@@ -4,21 +4,20 @@ import {
     DestroyContextResult,
     RunTaskResult,
 } from '../../../../../shared/src/types/aiContext/contextResults';
-import {ContextTasks} from '../../../../../shared/src/types/aiContext/data';
+import {ContextTask, ContextTasks} from '../../../../../shared/src/types/aiContext/data';
+import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
 import {warn} from '../../../../../shared/src/utils/warn';
-
-export type TaskCallback = (...args: Array<unknown>) => unknown;
 
 type UpdateQueueItem = {
     operation: 'set';
     description: string;
     paramDescriptions: string[];
-    callback: TaskCallback;
+    callback: CallbackFunction;
 } | {
     operation: 'update';
     description?: string;
     paramDescriptions?: string[];
-    callback?: TaskCallback;
+    callback?: CallbackFunction;
 } | {
     operation: 'delete';
 };
@@ -28,7 +27,7 @@ export class TasksService {
     private adapter: ContextTasksAdapter;
     private readonly contextId: string;
     private status: 'idle' | 'updating' | 'destroyed' = 'idle';
-    private readonly taskCallbacks: Map<string, TaskCallback> = new Map();
+    private readonly taskCallbacks: Map<string, CallbackFunction> = new Map();
     private readonly tasks: Set<string> = new Set();
     private readonly updateQueueByTaskId: Map<string, UpdateQueueItem> = new Map();
 
@@ -171,7 +170,7 @@ export class TasksService {
     async registerTask(
         taskId: string,
         description: string,
-        callback: TaskCallback,
+        callback: CallbackFunction,
         paramDescriptions?: string[],
     ): Promise<void> {
         if (this.status === 'destroyed') {
@@ -294,7 +293,7 @@ export class TasksService {
         };
     }
 
-    async updateTaskCallback(taskId: string, callback: TaskCallback): Promise<void> {
+    async updateTaskCallback(taskId: string, callback: CallbackFunction): Promise<void> {
         if (this.status === 'destroyed') {
             throw new Error('The context has been destroyed');
         }
@@ -384,7 +383,7 @@ export class TasksService {
 
     private buildUpdateObject(itemIds: string[]): ContextTasks {
         return itemIds.reduce(
-            (acc: any, itemId) => {
+            (acc: ContextTasks, itemId) => {
                 const item = this.updateQueueByTaskId.get(itemId);
                 if (!item) {
                     return acc;
@@ -401,7 +400,7 @@ export class TasksService {
                     item.operation === 'update' &&
                     (item.description !== undefined || item.paramDescriptions !== undefined)
                 ) {
-                    const updateData: any = {};
+                    const updateData: Partial<ContextTask> = {};
                     if (item.description !== undefined) {
                         updateData.description = item.description;
                     }

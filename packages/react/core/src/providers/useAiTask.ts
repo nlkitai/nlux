@@ -1,5 +1,6 @@
 import {ContextTaskHandler} from '@nlux/core';
 import {useContext, useEffect, useRef, useState} from 'react';
+import {CallbackFunction} from '../../../../shared/src/types/callbackFunction';
 import {AiContext} from '../types/AiContext';
 
 /**
@@ -32,7 +33,7 @@ import {AiContext} from '../types/AiContext';
  * ```
  */
 export const useAiTask = (
-    aiContext: AiContext, taskDescription: string, callback: Function, parametersDescription?: string[],
+    aiContext: AiContext, taskDescription: string, callback: CallbackFunction, parametersDescription?: string[],
 ) => {
     const coreAiContext = useContext(aiContext.ref);
     const [taskId] = useState(() => {

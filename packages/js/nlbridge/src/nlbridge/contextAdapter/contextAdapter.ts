@@ -116,14 +116,15 @@ export class NLBridgeContextAdapter implements ContextAdapter {
 
     async sendAction(
         contextId: string,
-        action: BackendContextAction, payload?: any,
+        action: BackendContextAction,
+        payload?: Record<string, unknown>,
         extras?: ContextAdapterExtras,
     ): Promise<{
         success: false;
         error: string;
     } | {
         success: true;
-        items?: any;
+        items?: ContextItems;
     }> {
         if (!contextId) {
             return {

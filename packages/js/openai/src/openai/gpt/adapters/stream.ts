@@ -98,7 +98,7 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
             }
 
             observer.complete();
-        }).catch((error: any) => {
+        }).catch((error) => {
             warn(error);
             observer.error(new NluxUsageError({
                 source: this.constructor.name,

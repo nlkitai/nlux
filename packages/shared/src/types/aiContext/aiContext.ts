@@ -1,6 +1,7 @@
 import {DataSyncOptions} from '../../../../js/core/src/exports/aiContext/options/dataSyncOptions';
 import {ContextAdapter} from '../adapters/context/contextAdapter';
 import {ContextAdapterBuilder} from '../adapters/context/contextAdapterBuilder';
+import {CallbackArgType, CallbackFunction} from '../callbackFunction';
 import {ContextItemHandler, ContextTaskHandler} from './contextObservers';
 import {
     ContextActionResult,
@@ -149,7 +150,7 @@ export interface AiContext {
     registerTask(
         taskId: string,
         description: string,
-        callback: Function,
+        callback: CallbackFunction,
         paramDescriptions?: string[],
     ): ContextTaskHandler | undefined;
 
@@ -182,7 +183,7 @@ export interface AiContext {
      * @param {Array<any>} parameters The parameters to pass to the task function.
      * @returns {Promise<RunTaskResult>}
      */
-    runTask(taskId: string, parameters?: Array<any>): Promise<RunTaskResult>;
+    runTask(taskId: string, parameters?: Array<CallbackArgType>): Promise<RunTaskResult>;
 
     /**
      * Get the status of the context.

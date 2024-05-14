@@ -65,7 +65,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
             } else {
                 return result;
             }
-        } catch (error: any) {
+        } catch (error) {
             warn('Error while making API call to OpenAI');
             warn(error);
             throw new NluxUsageError({

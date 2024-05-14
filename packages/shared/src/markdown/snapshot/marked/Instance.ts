@@ -48,7 +48,7 @@ export class Marked {
 
         args.forEach((pack) => {
             // copy options to new object
-            const opts = {...pack} as MarkedOptions;
+            const opts = {...pack} as unknown as MarkedOptions;
 
             // set async to true if it was set to true before
             opts.async = this.defaults.async || opts.async || false;
@@ -147,8 +147,8 @@ export class Marked {
                     const tokenizerProp = prop as Exclude<keyof _Tokenizer, 'options' | 'rules' | 'lexer'>;
                     const tokenizerFunc = pack.tokenizer[tokenizerProp] as UnknownFunction;
                     const prevTokenizer = tokenizer[tokenizerProp] as UnknownFunction;
+
                     // Replace tokenizer with func to run extension, but fall back if false
-                    // @ts-expect-error cannot type tokenizer function dynamically
                     tokenizer[tokenizerProp] = (...args: unknown[]) => {
                         let ret = tokenizerFunc.apply(tokenizer, args);
                         if (ret === false) {
@@ -175,7 +175,6 @@ export class Marked {
                     const hooksFunc = pack.hooks[hooksProp] as UnknownFunction;
                     const prevHook = hooks[hooksProp] as UnknownFunction;
                     if (_Hooks.passThroughHooks.has(prop)) {
-                        // @ts-expect-error cannot type hook function dynamically
                         hooks[hooksProp] = (arg: unknown) => {
                             if (this.defaults.async) {
                                 return Promise.resolve(hooksFunc.call(hooks, arg)).then(ret => {
@@ -187,7 +186,6 @@ export class Marked {
                             return prevHook.call(hooks, ret);
                         };
                     } else {
-                        // @ts-expect-error cannot type hook function dynamically
                         hooks[hooksProp] = (...args: unknown[]) => {
                             let ret = hooksFunc.apply(hooks, args);
                             if (ret === false) {
@@ -263,6 +261,7 @@ export class Marked {
         return values;
     }
 
+    // @ts-ignore
     #onError(silent: boolean, async: boolean) {
         return (e: Error): string | Promise<string> => {
             e.message += '\nPlease report this to https://github.com/markedjs/marked.';
@@ -284,6 +283,7 @@ export class Marked {
         };
     }
 
+    // @ts-ignore
     #parseMarkdown(lexer: (src: string, options?: MarkedOptions) => TokensList | Token[], parser: (tokens: Token[], options?: MarkedOptions) => string) {
         return (src: string, options?: MarkedOptions | undefined | null): string | Promise<string> => {
             const origOpt = {...options};

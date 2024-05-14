@@ -11,11 +11,12 @@ import {
     RunTaskResult,
 } from '../../../../../shared/src/types/aiContext/contextResults';
 import {ContextItemDataType, ContextItems} from '../../../../../shared/src/types/aiContext/data';
+import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {isContextTasksAdapter} from '../../utils/adapters/isContextTasksAdapter';
 import {DataSyncService} from './dataSyncService';
 import {DataSyncOptions} from './options/dataSyncOptions';
-import {TaskCallback, TasksService} from './tasksService';
+import {TasksService} from './tasksService';
 
 /**
  * Default implementation of the AiContext.
@@ -267,7 +268,7 @@ class AiContextImpl implements AiContext {
     public registerTask = (
         taskId: string,
         description: string,
-        callback: TaskCallback,
+        callback: CallbackFunction,
         parameters: string[],
     ): ContextTaskHandler | undefined => {
         if (this.theStatus === 'idle') {
@@ -358,7 +359,7 @@ class AiContextImpl implements AiContext {
                         }
                     });
             },
-            setCallback: (callback: TaskCallback) => {
+            setCallback: (callback) => {
                 if (status === 'deleted') {
                     throw new Error('Task has been deleted');
                 }

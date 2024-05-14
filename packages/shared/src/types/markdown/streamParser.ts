@@ -1,5 +1,6 @@
 import {HighlighterExtension} from '../../../../js/core/src/exports/aiChat/highlighter/highlighter';
 import {IObserver} from '../../../../js/core/src/exports/bus/observer';
+import {CallbackFunction} from '../callbackFunction';
 
 export type StreamParser = (
     root: HTMLElement,
@@ -7,7 +8,7 @@ export type StreamParser = (
 ) => IObserver<string>;
 
 export type StandardStreamParserOutput = IObserver<string> & {
-    onComplete(completeCallback: Function): void;
+    onComplete(completeCallback: CallbackFunction): void;
 }
 
 export type StandardStreamParser = (

@@ -1,3 +1,4 @@
+import {CallbackFunction} from '../../types/callbackFunction';
 import {StandardStreamParser} from '../../types/markdown/streamParser';
 import {RootProcessor} from './processors/Root';
 
@@ -27,7 +28,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
     );
 
     const charactersQueue: string[] = [];
-    const onCompletionCallbacks: Set<Function> = new Set();
+    const onCompletionCallbacks: Set<CallbackFunction> = new Set();
 
     let numberOfChecksWithEmptyCharactersQueue = 0;
     let isProcessing = false;
@@ -102,7 +103,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
         complete: () => {
             yielded = true;
         },
-        onComplete: (completeCallback: Function) => {
+        onComplete: (completeCallback: CallbackFunction) => {
             if (!yielded) {
                 onCompletionCallbacks.add(completeCallback);
             }
