@@ -11,7 +11,10 @@ export class ContextAdapterBuilderImpl implements ContextAdapterBuilder {
             throw new Error('Endpoint URL is required');
         }
 
-        return new NLBridgeContextAdapter(this.endpointUrl);
+        return new NLBridgeContextAdapter(
+            this.endpointUrl,
+            this.headers,
+        );
     }
 
     withHeaders(headers: Record<string, string>): ContextAdapterBuilderImpl {
