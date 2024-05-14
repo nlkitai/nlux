@@ -118,25 +118,29 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         }
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg>;
+    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined>;
 
     init() {
-        if (!this.inputPreProcessor && this.useInputSchema) {
+        if (this.useInputSchema) {
             this.fetchSchema(this.inputSchemaUrl).then((schema) => {
                 this.theInputSchemaToUse = schema;
             });
         }
     }
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void;
-
-    protected getDisplayableMessageFromAiOutput(aiMessage: unknown): AiMsg {
-        if (this.outputPreProcessor) {
-            return this.outputPreProcessor(aiMessage);
-        }
-
-        return aiMessage as AiMsg;
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
     }
+
+    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
+    }
+
+    abstract streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void;
 
     protected getRequestBody(message: string, conversationHistory?: ChatItem<AiMsg>[]): string {
         if (this.inputPreProcessor) {

@@ -1,5 +1,6 @@
 import {ChatAdapter, DataTransferMode} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
 import {ChatSegmentObservable} from '../../types/chatSegment/chatSegmentObservable';
 
@@ -10,7 +11,7 @@ import {ChatSegmentObservable} from '../../types/chatSegment/chatSegmentObservab
  */
 export type SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<AiMsg>,
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     adapterExtras: ChatAdapterExtras<AiMsg>,
 ) => {
     segment: ChatSegment<AiMsg>,

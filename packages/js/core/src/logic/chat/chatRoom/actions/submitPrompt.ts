@@ -41,7 +41,12 @@ export const submitPromptFactory = <AiMsg>({
                     context.aiChatProps?.conversationOptions?.historyPayloadSize,
                 ),
             };
-            const result = submitPrompt(messageToSend, context.adapter, extras);
+
+            const result = submitPrompt(
+                messageToSend,
+                context.adapter,
+                extras,
+            );
 
             // Listen to observable events
             // Always listen to error event
@@ -87,7 +92,8 @@ export const submitPromptFactory = <AiMsg>({
                         domOp(() => conversation.addChunk(
                             segmentId,
                             newAiMessage.uid,
-                            aiMessage.content as string,
+                            aiMessage.content,
+                            aiMessage.serverResponse,
                         ));
                     }
 
@@ -106,8 +112,9 @@ export const submitPromptFactory = <AiMsg>({
                     context.emit('messageStreamStarted', {uid: aiMessageStream.uid});
                 });
 
-                result.observable.on('aiChunkReceived', (aiMessageChunk, chatItemId) => {
-                    conversation.addChunk(segmentId, chatItemId, aiMessageChunk);
+                result.observable.on('aiChunkReceived', (item) => {
+                    const {messageId, chunk, serverResponse} = item;
+                    conversation.addChunk(segmentId, messageId, chunk, serverResponse);
                 });
 
                 result.observable.on('aiMessageStreamed', (aiMessage) => {

@@ -1,4 +1,4 @@
-import {DataTransferMode} from '@nlux/core';
+import {DataTransferMode, StandardChatAdapter} from '@nlux/core';
 import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {defaultDataTransferMode} from '../adapters/config';
 import {OpenAiFetchAdapter} from '../adapters/fetch';
@@ -31,7 +31,7 @@ export class OpenAiAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg
         }
     }
 
-    create(): OpenAiStreamingAdapter<AiMsg> | OpenAiFetchAdapter<AiMsg> {
+    create(): StandardChatAdapter<AiMsg> {
         if (!this.apiKey) {
             throw new NluxUsageError({
                 source: this.constructor.name,

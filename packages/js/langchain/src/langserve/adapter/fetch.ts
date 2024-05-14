@@ -8,7 +8,7 @@ export class LangServeFetchAdapter<AiMsg = string> extends LangServeAbstractAdap
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         const body = this.getRequestBody(message, extras.conversationHistory);
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
@@ -31,8 +31,7 @@ export class LangServeFetchAdapter<AiMsg = string> extends LangServeAbstractAdap
             );
         }
 
-        const output = (typeof result === 'object' && result) ? result.output : undefined;
-        return this.getDisplayableMessageFromAiOutput(output);
+        return (typeof result === 'object' && result) ? result.output : undefined;
     }
 
     streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {

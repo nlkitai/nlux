@@ -1,6 +1,7 @@
 import '@nlux-dev/themes/src/luna/theme.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {highlighter} from '@nlux-dev/highlighter/src';
+import {useChatAdapter as useChatLangChainAdapter} from '@nlux-dev/langchain-react/src';
 import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
 import {AiChat, ChatItem} from '@nlux-dev/react/src';
@@ -9,6 +10,12 @@ import './App.css';
 function App() {
     const nlBridge = useChatAdapter({
         url: 'http://localhost:8899/',
+    });
+
+    const langChainAdapter = useChatLangChainAdapter({
+        url: 'https://pynlux.api.nlux.ai/einbot',
+        dataTransferMode: 'fetch',
+        useInputSchema: true,
     });
 
     const openAiAdapter = createUnsafeChatAdapter()
@@ -54,7 +61,8 @@ function App() {
     return (
         <AiChat
             // adapter={nlBridge}
-            adapter={openAiAdapter}
+            // adapter={openAiAdapter}
+            adapter={langChainAdapter}
             // initialConversation={initialConversation}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',

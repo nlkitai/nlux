@@ -4,7 +4,6 @@ import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {decodePayload} from '../../../utils/decodePayload';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
@@ -26,7 +25,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
         }
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
@@ -49,28 +48,19 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
         });
 
         try {
-            const response = await this.openai.chat.completions.create({
+            return await this.openai.chat.completions.create({
                 stream: false,
                 model: this.model,
                 messages: messagesToSend,
             });
-
-            const result = await decodePayload<AiMsg>(response);
-            if (result === undefined) {
-                warn('Undecodable message received from OpenAI');
-                throw new NluxUsageError({
-                    source: this.constructor.name,
-                    message: 'Undecodable message received from OpenAI',
-                });
-            } else {
-                return result;
-            }
         } catch (error) {
             warn('Error while making API call to OpenAI');
             warn(error);
+
+            const message = (error as Error | undefined)?.message;
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: error?.message || 'Error while making API call to OpenAI',
+                message: message ?? 'Error while making API call to OpenAI',
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
             });
         }

@@ -11,14 +11,18 @@ export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMs
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
+    streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void {
         const body = this.getRequestBody(message, extras.conversationHistory);
         fetch(this.endpointUrl, {
             method: 'POST',
@@ -61,13 +65,7 @@ export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMs
                     if (Array.isArray(chunkContent)) {
                         for (const aiEvent of chunkContent) {
                             if (aiEvent.event === 'data' && aiEvent.data !== undefined) {
-                                const message = this.getDisplayableMessageFromAiOutput(
-                                    aiEvent.data,
-                                );
-
-                                if (typeof message === 'string' && message) {
-                                    observer.next(message);
-                                }
+                                observer.next(aiEvent.data as string | object | undefined);
                             }
 
                             if (aiEvent.event === 'end') {

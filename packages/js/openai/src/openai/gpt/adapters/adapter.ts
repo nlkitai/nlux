@@ -8,6 +8,8 @@ import {
 import OpenAI from 'openai';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
+import {decodeChunk} from '../../../utils/decodeChunk';
+import {decodePayload} from '../../../utils/decodePayload';
 import {gptAdapterInfo} from '../config';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiModel} from '../types/model';
@@ -64,7 +66,36 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
         return gptAdapterInfo;
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg>;
+    abstract fetchText(
+        message: string,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): Promise<string | object | undefined>;
 
-    abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void;
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        try {
+            return decodeChunk(chunk as OpenAI.Chat.Completions.ChatCompletionChunk);
+        } catch (error) {
+            warn('Error while decoding streamed chunk');
+            warn(error);
+
+            return undefined;
+        }
+    }
+
+    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        try {
+            return decodePayload(message as OpenAI.Chat.Completions.ChatCompletion);
+        } catch (error) {
+            warn('Error while decoding unified message');
+            warn(error);
+
+            return undefined;
+        }
+    }
+
+    abstract streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void;
 }

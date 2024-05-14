@@ -4,7 +4,6 @@ import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
-import {decodeChunk} from '../../../utils/decodeChunk';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
@@ -26,14 +25,18 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
         }
     }
 
-    fetchText(message: string): Promise<AiMsg> {
+    fetchText(message: string): Promise<string | object | undefined> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text from the streaming adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
+    streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
@@ -86,14 +89,7 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
                     break;
                 }
 
-                const message = await decodeChunk(value);
-                if (message !== undefined) {
-                    observer.next(message);
-                } else {
-                    warn('Undecodable message');
-                    warn(value);
-                }
-
+                observer.next(value);
                 result = await it.next();
             }
 

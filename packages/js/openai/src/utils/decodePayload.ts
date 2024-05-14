@@ -1,9 +1,6 @@
-import {AdapterDecodeFunction} from '@nlux/core';
 import OpenAI from 'openai';
 
-export const decodePayload: AdapterDecodeFunction<
-    OpenAI.Chat.Completions.ChatCompletion
-> = async <AiMsg>(
+export const decodePayload = <AiMsg>(
     payload: OpenAI.Chat.Completions.ChatCompletion,
 ) => {
     if (!payload.choices || !payload.choices[0]) {
@@ -14,8 +11,6 @@ export const decodePayload: AdapterDecodeFunction<
     if (content === null) {
         return undefined;
     }
-
-    // TODO - Handle other types of messages
 
     return content as unknown as AiMsg;
 };

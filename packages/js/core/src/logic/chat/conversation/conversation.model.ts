@@ -87,6 +87,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                         dataTransferMode: 'fetch',
                         status: 'complete',
                         content: item.message,
+                        serverResponse: item.serverResponse,
                     });
                 } else {
                     if (item.role === 'user') {
@@ -115,13 +116,18 @@ export class CompConversation<AiMsg> extends BaseComp<
         return segmentId;
     };
 
-    public addChunk(segmentId: string, chatItemId: string, chunk: string) {
+    public addChunk(
+        segmentId: string,
+        chatItemId: string,
+        chunk: AiMsg,
+        serverResponse?: string | object | undefined,
+    ) {
         const chatSegment = this.chatSegmentComponentsById.get(segmentId);
         if (!chatSegment) {
             throw new Error(`CompConversation: chat segment with id "${segmentId}" not found`);
         }
 
-        chatSegment.addChunk(chatItemId, chunk);
+        chatSegment.addChunk(chatItemId, chunk, serverResponse);
     }
 
     public completeChatSegment(segmentId: string) {

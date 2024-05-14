@@ -1,5 +1,11 @@
-import {HfInference, TextGenerationStreamOutput} from '@huggingface/inference';
-import {DataTransferMode, StandardAdapterInfo, StandardChatAdapter, StreamingAdapterObserver} from '@nlux/core';
+import {HfInference, TextGenerationOutput, TextGenerationStreamOutput} from '@huggingface/inference';
+import {
+    ChatAdapterExtras,
+    DataTransferMode,
+    StandardAdapterInfo,
+    StandardChatAdapter,
+    StreamingAdapterObserver,
+} from '@nlux/core';
 import {NluxError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {uid} from '../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../shared/src/utils/warn';
@@ -50,7 +56,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
         };
     }
 
-    async fetchText(message: string): Promise<AiMsg> {
+    async fetchText(message: string): Promise<string | object | undefined> {
         if (!this.options.model && !this.options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,
@@ -66,9 +72,8 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
             },
         };
 
-        let output: unknown = undefined;
-
         try {
+            let output: TextGenerationOutput | undefined = undefined;
             if (this.options.endpoint) {
                 const endpoint = this.inference.endpoint(this.options.endpoint);
                 output = await endpoint.textGeneration(parameters);
@@ -78,6 +83,8 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                     ...parameters,
                 });
             }
+
+            return output;
         } catch (error) {
             const message = (error as Error).message
                 || 'An error occurred while sending the message to the Hugging Face API';
@@ -88,51 +95,20 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                 exceptionId: adapterErrorToExceptionId(error) ?? undefined,
             });
         }
-
-        return await this.decode(output);
     }
 
-    send(message: string, observer?: StreamingAdapterObserver): void | Promise<AiMsg> {
-        const promise = new Promise<AiMsg>(async (resolve, reject) => {
-            if (!message) {
-                throw new NluxValidationError({
-                    source: this.constructor.name,
-                    message: 'The first argument to the send() method must be a non-empty string',
-                });
-            }
-
-            if (this.dataTransferMode === 'stream' && !observer) {
-                throw new NluxValidationError({
-                    source: this.constructor.name,
-                    message: 'The Hugging Face adapter is set to be used in streaming mode, but no observer was ' +
-                        'provided to the send() method! You should either provide an observer as a second argument ' +
-                        'to the send() method or set the data loading mode to fetch when creating the adapter.',
-                });
-            }
-
-            try {
-                const readyMessage = await this.encode(message);
-
-                // Send message to the Hugging Face API
-                if (this.dataTransferMode === 'stream') {
-                    this.streamText(readyMessage, observer!);
-                    return;
-                }
-
-                // Return fetch promise when data transfer mode is 'fetch'
-                const result = await this.fetchText(readyMessage);
-                resolve(result);
-            } catch (error) {
-                reject(error);
-            }
-        });
-
-        if (this.dataTransferMode === 'fetch') {
-            return promise;
-        }
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver) {
+    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
+    }
+
+    streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+    ) {
         Promise.resolve().then(async () => {
             if (!this.options.model && !this.options.endpoint) {
                 throw new NluxValidationError({
@@ -164,6 +140,10 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                 }
 
                 while (true) {
+                    if (!output) {
+                        break;
+                    }
+
                     const result = await output.next();
                     const {done, value} = result;
                     if (done) {

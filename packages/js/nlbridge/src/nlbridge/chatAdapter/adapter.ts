@@ -16,8 +16,8 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
     private readonly theAiContextToUse: CoreAiContext | undefined = undefined;
     private readonly theDataTransferModeToUse: DataTransferMode;
     private readonly theEndpointUrlToUse: string;
-    private readonly theUsageMode: ChatAdapterUsageMode | undefined = undefined;
     private readonly theHeaders: Record<string, string>;
+    private readonly theUsageMode: ChatAdapterUsageMode | undefined = undefined;
 
     protected constructor(options: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
@@ -33,16 +33,16 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         return this.theAiContextToUse;
     }
 
-    get headers(): Record<string, string> {
-        return this.theHeaders;
-    }
-
     get dataTransferMode(): DataTransferMode {
         return this.theDataTransferModeToUse;
     }
 
     get endpointUrl(): string {
         return this.theEndpointUrlToUse;
+    }
+
+    get headers(): Record<string, string> {
+        return this.theHeaders;
     }
 
     get id(): string {
@@ -68,11 +68,19 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
     abstract fetchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
-    ): Promise<AiMsg>;
+    ): Promise<string | object | undefined>;
+
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
+    }
+
+    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        throw new Error('Method not implemented.');
+    }
 
     abstract streamText(
         message: string,
-        observer: StreamingAdapterObserver,
+        observer: StreamingAdapterObserver<string | object | undefined>,
         extras: ChatAdapterExtras<AiMsg>,
     ): void;
 }

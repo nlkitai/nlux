@@ -18,7 +18,7 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
             continue;
         }
 
-        result[key] = props[key] as unknown;
+        Object.assign(result, {[key]: props[key]});
     }
 
     if (props.personaOptions) {

@@ -82,7 +82,11 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         );
     }
 
-    public addChunk(chatItemId: string, chunk: string) {
+    public addChunk(
+        chatItemId: string,
+        chunk: AiMsg,
+        serverResponse?: string | object | undefined,
+    ) {
         domOp(() => {
             if (this.destroyed) {
                 return;
@@ -93,7 +97,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
             }
 
-            chatItem.addChunk(chunk);
+            chatItem.addChunk(chunk, serverResponse);
         });
     }
 

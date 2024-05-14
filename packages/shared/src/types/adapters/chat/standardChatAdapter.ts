@@ -11,14 +11,27 @@ export interface StandardChatAdapter<AiMsg> {
     fetchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
-    ): Promise<AiMsg>;
+    ): Promise<string | object | undefined>;
 
     get id(): string;
     get info(): StandardAdapterInfo;
 
+    // Receives a message from the API and returns a message that can be sent to the user.
+    // This method is called by AiChat when the API sends a message to convert that message into a format that
+    preProcessAiStreamedChunk(
+        chunk: string | object | undefined,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): AiMsg | undefined;
+
+    // can be displayed to the user (either text or input for a custom component).
+    preProcessAiUnifiedMessage(
+        message: string | object | undefined,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): AiMsg | undefined;
+
     streamText(
         message: string,
-        observer: StreamingAdapterObserver,
+        observer: StreamingAdapterObserver<string | object | undefined>,
         extras: ChatAdapterExtras<AiMsg>,
     ): void;
 }
@@ -36,5 +49,7 @@ export const isStandardChatAdapter = (adapter: unknown): boolean => {
     return (typeof typedAdapter.streamText === 'function' || typeof typedAdapter.fetchText === 'function')
         && ['stream', 'fetch'].includes(typedAdapter.dataTransferMode as string)
         && typeof typedAdapter.id === 'string'
-        && (typeof typedAdapter.info === 'object' && typedAdapter.info !== null);
+        && (typeof typedAdapter.info === 'object' && typedAdapter.info !== null)
+        && (typeof typedAdapter.preProcessAiUnifiedMessage === 'function')
+        && (typeof typedAdapter.preProcessAiStreamedChunk === 'function');
 };

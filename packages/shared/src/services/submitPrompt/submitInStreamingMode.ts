@@ -1,5 +1,6 @@
-import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
+import {ChatAdapter, StreamingAdapterObserver} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
 import {AiStreamedMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
@@ -12,25 +13,28 @@ import {
 import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
 import {NLErrorId} from '../../types/exceptions/errors';
 import {uid} from '../../utils/uid';
+import {warn} from '../../utils/warn';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
 export const submitInStreamingMode = <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
-    adapter: ChatAdapter<AiMsg>,
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
-    aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback>,
-    aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback>,
-    aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback>,
+    aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback<AiMsg>>,
+    aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback<AiMsg>>,
+    aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback<AiMsg>>,
     chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
     chatSegmentErrorCallbacks: Set<ChatSegmentErrorCallback>,
 ): Promise<void> => {
     return new Promise<void>((resolve) => {
-        const streamedMessageId: string = uid();
+        const streamedMessageId = uid();
+        const streamedContent: Array<AiMsg> = [];
+        const streamedRawContent: Array<string | object | undefined> = [];
+
         let firstChunkReceived = false;
         let errorOccurred = false;
         let completeOccurred = false;
-        let streamedMessage = '';
 
         const emitAiMessageStreamStartedEvent = () => {
             if (firstChunkReceived) {
@@ -51,9 +55,35 @@ export const submitInStreamingMode = <AiMsg>(
             });
         };
 
-        adapter.streamText!(userMessage.content, {
-            next: (chunk: string) => {
+        const isStandardAdapter = isStandardChatAdapter(adapter);
+        const observer: StreamingAdapterObserver<unknown> = {
+            next: (chunk: unknown) => {
                 if (errorOccurred || completeOccurred) {
+                    return;
+                }
+
+                let aiMsgChunk: AiMsg | undefined;
+                let rawChunk: string | object | undefined;
+                if (isStandardAdapter) {
+                    const chunkAsRaw = chunk as string | object | undefined;
+
+                    const adapterAsStandardAdapter = adapter as unknown as StandardChatAdapter<AiMsg>;
+                    const preProcessedChunk = adapterAsStandardAdapter.preProcessAiStreamedChunk(chunkAsRaw, extras);
+                    if (preProcessedChunk !== undefined && preProcessedChunk !== null) {
+                        aiMsgChunk = preProcessedChunk;
+                        rawChunk = chunkAsRaw;
+
+                        streamedContent.push(aiMsgChunk);
+                        streamedRawContent.push(rawChunk);
+                    }
+                } else {
+                    // For non-standard adapters, the check pre-processed chunk is done by the adapter.
+                    aiMsgChunk = chunk as AiMsg;
+                    streamedContent.push(aiMsgChunk);
+                }
+
+                if (aiMsgChunk === undefined || aiMsgChunk === null) {
+                    warn('Adapter returned an undefined or null value from streamText. This chunk will be ignored.');
                     return;
                 }
 
@@ -61,10 +91,13 @@ export const submitInStreamingMode = <AiMsg>(
                     emitAiMessageStreamStartedEvent();
                 }
 
-                streamedMessage += chunk;
                 triggerAsyncCallback(() => {
                     aiMessageChunkReceivedCallbacks.forEach(callback => {
-                        callback(chunk, streamedMessageId);
+                        callback({
+                            chunk: aiMsgChunk,
+                            messageId: streamedMessageId,
+                            serverResponse: rawChunk,
+                        });
                     });
                 });
             },
@@ -79,11 +112,16 @@ export const submitInStreamingMode = <AiMsg>(
                 // EVENT: AI MESSAGE FULLY STREAMED
                 //
                 triggerAsyncCallback(() => {
-                    type StreamedAiMessage = AiStreamedMessage & {status: 'complete', content: string};
-                    const aiMessage: StreamedAiMessage = {
+                    type StreamedAiMessage<AiMsg> = AiStreamedMessage<AiMsg> & {
+                        status: 'complete',
+                        content: Array<AiMsg>
+                    };
+
+                    const aiMessage: StreamedAiMessage<AiMsg> = {
                         uid: streamedMessageId,
                         status: 'complete',
-                        content: streamedMessage,
+                        content: streamedContent,
+                        serverResponse: undefined,
                         time: new Date(),
                         participantRole: 'ai',
                         dataTransferMode: 'stream',
@@ -112,7 +150,8 @@ export const submitInStreamingMode = <AiMsg>(
                             {
                                 uid: streamedMessageId,
                                 status: 'complete',
-                                content: streamedMessage,
+                                content: streamedContent,
+                                serverResponse: streamedRawContent,
                                 time: new Date(),
                                 participantRole: 'ai',
                                 dataTransferMode: 'stream',
@@ -148,6 +187,8 @@ export const submitInStreamingMode = <AiMsg>(
                     resolve();
                 });
             },
-        }, extras);
+        };
+
+        adapter.streamText!(userMessage.content, observer, extras);
     });
 };

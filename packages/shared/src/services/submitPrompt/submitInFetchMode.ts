@@ -1,7 +1,8 @@
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
-import {ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
+import {AiUnifiedMessage, ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiMessageReceivedCallback,
     ChatSegmentCompleteCallback,
@@ -16,7 +17,7 @@ import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 export const submitInFetchMode = async <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
-    adapter: ChatAdapter<AiMsg>,
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
     aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>>,
     chatSegmentCompleteCallbacks: Set<ChatSegmentCompleteCallback<AiMsg>>,
@@ -24,22 +25,53 @@ export const submitInFetchMode = async <AiMsg>(
 ): Promise<void> => {
     try {
         const prompt = userMessage.content;
-        const response: AiMsg = await adapter.fetchText!(prompt, extras);
-        const aiResponse: ChatSegmentAiMessage<AiMsg> = {
-            uid: uid(),
-            participantRole: 'ai',
-            status: 'complete',
-            time: new Date(),
-            content: response,
-            dataTransferMode: 'fetch',
-        };
+
+        const adapterAsStandardAdapter = isStandardChatAdapter(adapter)
+            ? adapter as unknown as StandardChatAdapter<AiMsg>
+            : undefined;
+
+        const isStandardAdapter = adapterAsStandardAdapter !== undefined;
+
+
+        const responseUid = uid();
+        const participantRole = 'ai';
+        const status = 'complete';
+        const time = new Date();
+        const dataTransferMode = 'fetch';
+
+        let aiResponse: AiUnifiedMessage<AiMsg> | undefined = undefined;
+        if (isStandardAdapter) {
+            const rawResponse = await adapterAsStandardAdapter.fetchText!(prompt, extras);
+            const preProcessedResponse = adapterAsStandardAdapter.preProcessAiUnifiedMessage(rawResponse, extras);
+            if (preProcessedResponse !== undefined && preProcessedResponse !== null) {
+                aiResponse = {
+                    uid: responseUid,
+                    content: preProcessedResponse,
+                    serverResponse: rawResponse,
+                    participantRole, status, time, dataTransferMode,
+                };
+            }
+        } else {
+            const response = await (adapter as ChatAdapter<AiMsg>).fetchText!(prompt, extras);
+            aiResponse = {
+                uid: responseUid,
+                content: response,
+                serverResponse: undefined,
+                participantRole, status, time, dataTransferMode,
+            };
+        }
+
+        if (!aiResponse) {
+            throw new Error('Response from adapter was undefined or cannot be processed');
+        }
 
         //
         // We emit the AI message received event.
         //
+        const validAiResponse: ChatSegmentAiMessage<AiMsg> = aiResponse;
         triggerAsyncCallback(() => {
             aiMessageReceivedCallbacks.forEach((callback) => {
-                callback(aiResponse);
+                callback(validAiResponse);
             });
         });
 

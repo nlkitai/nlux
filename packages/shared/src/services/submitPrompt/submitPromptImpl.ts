@@ -1,5 +1,6 @@
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {
     AiMessageChunkReceivedCallback,
     AiMessageReceivedCallback,
@@ -21,7 +22,7 @@ import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
 
 export const submitPrompt: SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<AiMsg>,
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
 ) => {
     //
@@ -51,9 +52,9 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     let aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>> | undefined = undefined;
 
     // (c). AI MESSAGE STREAMED ( 3 events )
-    let aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback> | undefined = undefined;
-    let aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback> | undefined = undefined;
-    let aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback> | undefined = undefined;
+    let aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback<AiMsg>> | undefined = undefined;
+    let aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback<AiMsg>> | undefined = undefined;
+    let aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback<AiMsg>> | undefined = undefined;
 
     //
     // We start by emitting a user message received event.
@@ -177,21 +178,21 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
                 if (event === 'aiMessageStreamStarted' && aiMessageStreamStartedCallbacks) {
                     aiMessageStreamStartedCallbacks.add(
-                        callback as AiMessageStreamStartedCallback,
+                        callback as AiMessageStreamStartedCallback<AiMsg>,
                     );
                     return;
                 }
 
                 if (event === 'aiMessageStreamed' && aiMessageStreamedCallbacks) {
                     aiMessageStreamedCallbacks.add(
-                        callback as AiMessageStreamedCallback,
+                        callback as AiMessageStreamedCallback<AiMsg>,
                     );
                     return;
                 }
 
                 if (event === 'aiChunkReceived' && aiMessageChunkReceivedCallbacks) {
                     aiMessageChunkReceivedCallbacks.add(
-                        callback as AiMessageChunkReceivedCallback,
+                        callback as unknown as AiMessageChunkReceivedCallback<AiMsg>,
                     );
                     return;
                 }
@@ -227,21 +228,21 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
                 if (event === 'aiMessageStreamStarted') {
                     aiMessageStreamStartedCallbacks?.delete(
-                        callback as AiMessageStreamStartedCallback,
+                        callback as AiMessageStreamStartedCallback<AiMsg>,
                     );
                     return;
                 }
 
                 if (event === 'aiMessageStreamed') {
                     aiMessageStreamedCallbacks?.delete(
-                        callback as AiMessageStreamedCallback,
+                        callback as AiMessageStreamedCallback<AiMsg>,
                     );
                     return;
                 }
 
                 if (event === 'aiChunkReceived') {
                     aiMessageChunkReceivedCallbacks?.delete(
-                        callback as AiMessageChunkReceivedCallback,
+                        callback as unknown as AiMessageChunkReceivedCallback<AiMsg>,
                     );
                     return;
                 }

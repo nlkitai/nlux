@@ -16,8 +16,8 @@ import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
 
 export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
-    protected theAdapter: ChatAdapter<AiMsg> | null = null;
-    protected theAdapterBuilder: StandardChatAdapter<AiMsg> | null = null;
+    protected theAdapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | null = null;
+    protected theAdapterBuilder: ChatAdapterBuilder<AiMsg> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
@@ -57,7 +57,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         const adapterToUser: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | null =
             this.theAdapter && this.theAdapterType === 'instance' ? this.theAdapter
                 : (this.theAdapterType === 'builder' && this.theAdapterBuilder)
-                    ? this.theAdapterBuilder
+                    ? this.theAdapterBuilder.create()
                     : null;
 
         if (!adapterToUser) {
@@ -246,10 +246,10 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             });
         }
 
-        const anAdapterOrAdapterBuilder = adapter as any;
+        const anAdapterOrAdapterBuilder = adapter as Record<string, unknown>;
         if (typeof anAdapterOrAdapterBuilder.create === 'function') {
             this.theAdapterType = 'builder';
-            this.theAdapterBuilder = anAdapterOrAdapterBuilder.create();
+            this.theAdapterBuilder = anAdapterOrAdapterBuilder as unknown as ChatAdapterBuilder<AiMsg>;
             return this;
         }
 
@@ -258,7 +258,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             (typeof anAdapterOrAdapterBuilder.streamText === 'function')
         ) {
             this.theAdapterType = 'instance';
-            this.theAdapter = anAdapterOrAdapterBuilder;
+            this.theAdapter = anAdapterOrAdapterBuilder as ChatAdapter<AiMsg>;
             return this;
         }
 

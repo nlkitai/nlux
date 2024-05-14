@@ -14,10 +14,8 @@ import {updateChatItem} from './chatItem.update';
 export class CompChatItem<AiMsg> extends BaseComp<
     AiMsg, CompChatItemProps, CompChatItemElements, CompChatItemEvents, CompChatItemActions
 > {
-    // TODO — Handle AiMsg type and custom renderers
     private aiMessageContent: AiMsg | undefined;
-
-    private isItemStreaming: boolean = false;
+    private serverResponse: Array<string | object | undefined> = [];
     private stringContent: string = '';
 
     constructor(
@@ -27,23 +25,22 @@ export class CompChatItem<AiMsg> extends BaseComp<
         super(context, props);
         if (props.domProps.message !== undefined) {
             this.stringContent = props.domProps.message;
-            this.isItemStreaming = false;
-        } else {
-            this.isItemStreaming = true;
         }
     }
 
-    public addChunk(chunk: string) {
+    public addChunk(chunk: AiMsg, serverResponse?: string | object) {
         this.throwIfDestroyed();
         this.executeDomAction('processStreamedChunk', chunk);
 
-        this.isItemStreaming = true;
-        this.stringContent += chunk;
+        if (typeof chunk === 'string') {
+            this.stringContent += chunk;
+        }
+
+        this.serverResponse.push(serverResponse);
     }
 
     public commitChunks() {
         this.throwIfDestroyed();
-        this.isItemStreaming = false;
         this.executeDomAction('commitStreamedChunks');
     }
 
@@ -53,6 +50,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
                 uid: this.props.uid,
                 participantRole: 'ai',
                 content: this.getItemContent() as AiMsg,
+                serverResponse: this.serverResponse,
                 status: 'complete',
                 dataTransferMode: 'fetch',
                 time: new Date(),
@@ -99,7 +97,6 @@ export class CompChatItem<AiMsg> extends BaseComp<
 
     @CompEventListener('markdown-stream-complete')
     private onMarkdownStreamComplete(messageRendered: AiMsg) {
-        this.isItemStreaming = false;
         this.context.emit('messageRendered', {
             uid: this.props.uid,
             message: messageRendered,
