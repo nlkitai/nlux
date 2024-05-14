@@ -25,7 +25,7 @@ type SubmitPromptHandlerProps<AiMsg> = {
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
     setPromptBoxStatus: (status: PromptBoxStatus) => void;
     setPrompt: (prompt: string) => void;
-    conversationRef: MutableRefObject<ImperativeConversationCompProps<unknown> | null>
+    conversationRef: MutableRefObject<ImperativeConversationCompProps<AiMsg> | null>
 };
 
 export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<AiMsg>) => {

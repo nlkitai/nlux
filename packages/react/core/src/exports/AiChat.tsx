@@ -36,7 +36,7 @@ export const AiChat: <AiMsg>(
     // References to DOM elements and React components:
     // These are use for advanced interactions such as scrolling, streaming, and
     // exceptions animation that cannot be done with the usual React state and props.
-    const conversationRef = useRef<ImperativeConversationCompProps>(null);
+    const conversationRef = useRef<ImperativeConversationCompProps<AiMsg>>(null);
     const conversationContainerRef = useRef<HTMLDivElement>(null);
     const lastActiveSegmentIdRef = useRef<string | undefined>(undefined);
     const exceptionBoxRef = useRef<HTMLDivElement>(null);
@@ -73,7 +73,8 @@ export const AiChat: <AiMsg>(
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
         aiChatProps: props,
-        adapterToUse, conversationRef,
+        adapterToUse,
+        conversationRef,
         initialSegment, chatSegments,
         prompt, promptBoxOptions, showException,
         setChatSegments, setPromptBoxStatus, setPrompt,

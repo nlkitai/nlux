@@ -9,7 +9,7 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
