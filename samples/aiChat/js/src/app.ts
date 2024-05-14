@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const openAiAdapter = createUnsafeChatAdapter()
         .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
-        .withDataTransferMode('fetch');
+        .withDataTransferMode('stream');
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '

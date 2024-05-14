@@ -25,7 +25,7 @@ type SubmitPromptHandlerProps<AiMsg> = {
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
     setPromptBoxStatus: (status: PromptBoxStatus) => void;
     setPrompt: (prompt: string) => void;
-    conversationRef: MutableRefObject<ImperativeConversationCompProps | null>
+    conversationRef: MutableRefObject<ImperativeConversationCompProps<unknown> | null>
 };
 
 export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<AiMsg>) => {
@@ -222,7 +222,11 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 }
             });
 
-            chatSegmentObservable.on('aiChunkReceived', (chunk: string, messageId: string) => {
+            chatSegmentObservable.on('aiChunkReceived', ({
+                messageId,
+                chunk,
+                serverResponse,
+            }) => {
                 requestAnimationFrame(() => {
                     // We need to wait a bit before streaming the chunk to the chat item
                     // because of the React lifecycle. The chat item might not be rendered yet.

@@ -20,7 +20,7 @@ function App() {
 
     const openAiAdapter = createUnsafeChatAdapter()
         .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
-        .withDataTransferMode('stream');
+        .withDataTransferMode('fetch');
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
@@ -61,8 +61,8 @@ function App() {
     return (
         <AiChat
             // adapter={nlBridge}
-            // adapter={openAiAdapter}
-            adapter={langChainAdapter}
+            adapter={openAiAdapter}
+            // adapter={langChainAdapter}
             // initialConversation={initialConversation}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
@@ -81,6 +81,22 @@ function App() {
                 syntaxHighlighter: highlighter,
                 // showCodeBlockCopyButton: false,
                 // streamingAnimationSpeed: 100,
+                responseComponent: ({response}) => {
+                    return (
+                        <div>
+                            <div>{response}</div>
+                            <div style={{
+                                backgroundColor: 'lightblue',
+                                padding: 10,
+                                borderRadius: 10,
+                                marginTop: 10,
+                                fontSize: '0.8em',
+                                textAlign: 'center',
+                            }}>Custom Response Component
+                            </div>
+                        </div>
+                    );
+                },
             }}
             personaOptions={{
                 user: {

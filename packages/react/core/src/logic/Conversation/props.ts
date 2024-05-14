@@ -21,7 +21,7 @@ export type ConversationCompProps<AiMsg> = {
     } | undefined) => void;
 };
 
-export type ImperativeConversationCompProps = {
-    streamChunk: (segmentId: string, messageId: string, chunk: string) => void;
+export type ImperativeConversationCompProps<AiChat> = {
+    streamChunk: (segmentId: string, messageId: string, chunk: AiChat) => void;
     completeStream: (segmentId: string, messageId: string) => void;
 };
