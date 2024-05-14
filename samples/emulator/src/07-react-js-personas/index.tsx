@@ -49,7 +49,7 @@ const ExampleWrapper = () => {
 
     const adapter = useUnsafeChatAdapter({
         apiKey,
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4-turbo',
         // dataTransferMode: 'stream',
         dataTransferMode: 'stream',
         // systemMessage: 'You are a funny financial advisor called FinFunBot. Give sound, tailored financial advice. '

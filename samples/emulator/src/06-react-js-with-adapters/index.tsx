@@ -19,7 +19,7 @@ const ExampleWrapper = () => {
 
     const adapter = useUnsafeChatAdapter({
         apiKey,
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4',
         // dataTransferMode: 'stream',
         dataTransferMode: 'stream',
         systemMessage: 'Give sound, tailored financial advice. Explain concepts simply. When unsure, ask questions. '

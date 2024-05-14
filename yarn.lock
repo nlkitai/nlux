@@ -490,10 +490,17 @@
   resolved "https://registry.yarnpkg.com/@eslint/js/-/js-9.2.0.tgz#b0a9123e8e91a3d9a2eed3a04a6ed44fdab639aa"
   integrity sha512-ESiIudvhoYni+MdsI8oD7skpprZ89qKocwRM2KEvhhBJ9nl5MRh7BXU5GTod7Mdygq+AUl+QzId6iWJKR/wABA==
 
-"@huggingface/inference@^2.6.7":
-  version "2.6.7"
-  resolved "https://registry.yarnpkg.com/@huggingface/inference/-/inference-2.6.7.tgz#9ae10a7c8cef90a53d8336ebb0ce98cc9576fa5b"
-  integrity sha512-vFBqvtU3LhxjufTs0jcRrDSc0nK+lah10bOgvlIn80lAH4JwMzHHPBQ4g4ECEdRD0PIt6EpTiidEZQq2sArb5Q==
+"@huggingface/inference@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@huggingface/inference/-/inference-2.7.0.tgz#7a44a3c40683b9355933e98e639998da62c58117"
+  integrity sha512-u7Fn637Q3f7nUB1tajM4CgzhvoFQkOQr5W5Fm+2wT9ETgGoLBh25BLlYPTJRjAd2WY01s71v0lqAwNvHHCc3mg==
+  dependencies:
+    "@huggingface/tasks" "^0.10.0"
+
+"@huggingface/tasks@^0.10.0":
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/@huggingface/tasks/-/tasks-0.10.2.tgz#b2258830c9439d54cd32ad52dcf6ed93fd970cd6"
+  integrity sha512-tLEsLYj+P+Ds7Nq0bh82htmQ/S77NC/wLGLhyfZyyek7cb0GVCWtVfA1jpdxH9koPwVQ+pQCKk/xJeV0qT4/PQ==
 
 "@humanwhocodes/config-array@^0.13.0":
   version "0.13.0"
@@ -2944,10 +2951,10 @@ onetime@^6.0.0:
   dependencies:
     mimic-fn "^4.0.0"
 
-openai@^4.44.0:
-  version "4.44.0"
-  resolved "https://registry.yarnpkg.com/openai/-/openai-4.44.0.tgz#7234d98eb459ea913b93e46263a932b233838219"
-  integrity sha512-jVpDIJsBAR83rVbIHPuWRr9UkFc5DaH9ev2kt2IQAhKCs73DBRoFOa5SwtqfN7/CcBdIGBdygpmpc0gsFaV+Ow==
+openai@^4.47.1:
+  version "4.47.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-4.47.1.tgz#1d23c7a8eb3d7bcdc69709cd905f4c9af0181dba"
+  integrity sha512-WWSxhC/69ZhYWxH/OBsLEirIjUcfpQ5+ihkXKp06hmeYXgBBIUCa9IptMzYx6NdkiOCsSGYCnTIsxaic3AjRCQ==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
