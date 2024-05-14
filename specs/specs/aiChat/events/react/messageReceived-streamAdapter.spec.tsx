@@ -66,13 +66,14 @@ describe('<AiChat /> + stream adapter + events + messageReceived', () => {
 
             // Act
             adapterController!.next('Yo!');
+            adapterController!.next(' How are you?');
             adapterController!.complete();
             await waitForReactRenderCycle();
 
             // Assert
             expect(messageReceivedCallback).toHaveBeenCalledWith({
                 uid: expect.any(String),
-                message: 'Yo!',
+                message: ['Yo!', ' How are you?'],
             });
         });
     });
