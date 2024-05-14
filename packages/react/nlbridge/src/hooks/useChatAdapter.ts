@@ -18,6 +18,38 @@ export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions)
         headers,
     } = options;
 
+    const [
+        headersToUse,
+        setHeadersToUse,
+    ] = useState<Record<string, string> | undefined>(headers);
+
+    useEffect(() => {
+        if (!headers && headersToUse) {
+            setHeadersToUse(undefined);
+            return;
+        }
+
+        if (headers && !headersToUse) {
+            setHeadersToUse(headers);
+            return;
+        }
+
+        // Only update if headers have changed
+        if (headers && headersToUse) {
+            if (Object.keys(headers).length !== Object.keys(headersToUse).length) {
+                setHeadersToUse(headers);
+                return;
+            }
+
+            for (const key in headers) {
+                if (headers[key] !== headersToUse[key]) {
+                    setHeadersToUse(headers);
+                    return;
+                }
+            }
+        }
+    }, [headers]);
+
     const coreContext = context?.ref ? useContext(context.ref) : undefined;
     const [adapter, setAdapter] = useState<ChatAdapter<AiMsg>>(
         getChatAdapterBuilder({
@@ -32,14 +64,16 @@ export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions)
         const newAdapter = getChatAdapterBuilder<AiMsg>({
             url,
             mode,
+            headers: headersToUse,
             context: coreContext,
         });
 
         setAdapter(newAdapter);
     }, [
         url,
+        mode,
+        headersToUse,
         coreContext,
-        headers,
     ]);
 
     return adapter;

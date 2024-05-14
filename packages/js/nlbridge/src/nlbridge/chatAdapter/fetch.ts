@@ -12,7 +12,6 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
             await this.context.flush();
         }
 
-        const headers = this.context
         const action = this.usageMode === 'copilot' ? 'assist' : 'chat';
         const response = await fetch(this.endpointUrl, {
             method: 'POST',

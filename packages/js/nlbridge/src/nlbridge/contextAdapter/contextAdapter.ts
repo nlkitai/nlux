@@ -19,10 +19,12 @@ type BackendContextAction =
 
 export class NLBridgeContextAdapter implements ContextAdapter {
 
+    private headers: Record<string, string>;
     private readonly url: string;
 
-    constructor(url: string) {
+    constructor(url: string, headers?: Record<string, string>) {
         this.url = url;
+        this.headers = headers ?? {};
     }
 
     async create(contextItems?: ContextItems, extras?: ContextAdapterExtras): Promise<SetContextResult> {
@@ -30,6 +32,7 @@ export class NLBridgeContextAdapter implements ContextAdapter {
             const result = await fetch(this.url, {
                 method: 'POST',
                 headers: {
+                    ...this.headers,
                     ...extras?.headers,
                     'Content-Type': 'application/json',
                 },

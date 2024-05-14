@@ -17,6 +17,7 @@ export class ChatAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> 
             this.theUrl = cloneFrom.theUrl;
             this.theMode = cloneFrom.theMode;
             this.theContext = cloneFrom.theContext;
+            this.theHeaders = cloneFrom.theHeaders;
         }
     }
 
