@@ -159,7 +159,10 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             this.chatItemComponentsById.forEach((comp) => {
-                comp.updateMarkdownStreamRenderer(key, value as any);
+                comp.updateMarkdownStreamRenderer(
+                    key satisfies keyof CompChatItemProps,
+                    value as CompChatItemProps[keyof CompChatItemProps],
+                );
             });
         }
     }

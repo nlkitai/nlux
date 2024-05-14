@@ -1,4 +1,3 @@
-import {AnyAiMsg} from '../../../../../shared/src/types/anyAiMsg';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {isUrlWithSupportedEndpoint} from './isUrlWithSupportedEndpoint';
 
@@ -16,7 +15,7 @@ import {isUrlWithSupportedEndpoint} from './isUrlWithSupportedEndpoint';
  * The base URL is also: https://pynlux.api.nlux.ai/einbot
  * Since it does not end with /invoke or /stream.
  */
-export const getBaseUrlFromUrlOption = (adapterOptions: ChatAdapterOptions<AnyAiMsg>): string => {
+export const getBaseUrlFromUrlOption = <AnyAiMsg>(adapterOptions: ChatAdapterOptions<AnyAiMsg>): string => {
     const urlOption = adapterOptions.url;
     if (!isUrlWithSupportedEndpoint(urlOption)) {
         return urlOption;

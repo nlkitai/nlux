@@ -61,7 +61,10 @@ export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMs
                     if (Array.isArray(chunkContent)) {
                         for (const aiEvent of chunkContent) {
                             if (aiEvent.event === 'data' && aiEvent.data !== undefined) {
-                                const message = this.getDisplayableMessageFromAiOutput(aiEvent.data);
+                                const message = this.getDisplayableMessageFromAiOutput(
+                                    aiEvent.data,
+                                );
+
                                 if (typeof message === 'string' && message) {
                                     observer.next(message);
                                 }

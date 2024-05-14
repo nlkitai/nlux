@@ -130,7 +130,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
 
     abstract streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void;
 
-    protected getDisplayableMessageFromAiOutput(aiMessage: object | string): AiMsg {
+    protected getDisplayableMessageFromAiOutput(aiMessage: unknown): AiMsg {
         if (this.outputPreProcessor) {
             return this.outputPreProcessor(aiMessage);
         }

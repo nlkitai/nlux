@@ -1,3 +1,4 @@
+import {BaseComp} from '../exports/aiChat/comp/base';
 import {CompRegistry} from '../exports/aiChat/comp/registry';
 import {getGlobalNlux} from '../exports/global';
 import {CompChatItem} from './chat/chatItem/chatItem.model';
@@ -24,7 +25,7 @@ export const registerAllComponents = () => {
     }
 
     Object.entries(componentsById()).forEach(([, comp]) => {
-        CompRegistry.register(comp as any);
+        CompRegistry.register(comp as typeof BaseComp);
     });
 
     if (typeof globalNlux === 'object') {

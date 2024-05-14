@@ -4,17 +4,18 @@ import {warn} from '../../../../../shared/src/utils/warn';
 export const transformInputBasedOnSchema = <AiMsg>(
     message: string,
     conversationHistory: ChatItem<AiMsg>[] | undefined,
-    schema: any,
+    schema: unknown,
     runnableName: string,
-): any | undefined => {
+): unknown | undefined => {
     // TODO - Attempt to include conversation history in the input
     //   if the schema allows it.
 
-    if (!schema || typeof schema.properties !== 'object') {
+    const typedSchema = schema as Record<string, unknown> | undefined;
+    if (!typedSchema || typeof typedSchema.properties !== 'object') {
         return message;
     }
 
-    if (typeof schema !== 'object' || !schema) {
+    if (typeof typedSchema !== 'object' || !typedSchema) {
         warn(
             `LangServer adapter cannot process the input schema fetched for runnable "${runnableName}". ` +
             'The user message will be sent to LangServe endpoint as is without transformations. ' +
@@ -27,15 +28,20 @@ export const transformInputBasedOnSchema = <AiMsg>(
         return message;
     }
 
-    if (schema.type === 'string') {
+    if (typedSchema.type === 'string') {
         return message;
     }
 
-    if (schema.type === 'object') {
-        const properties = (typeof schema.properties === 'object' && schema.properties) ? schema.properties : {};
+    if (typedSchema.type === 'object') {
+        const properties: Record<string, unknown> = (
+            typeof typedSchema.properties === 'object' && typedSchema.properties
+        )
+            ? typedSchema.properties as Record<string, unknown>
+            : {};
+
         const schemaStringProps = Object
             .keys(properties)
-            .filter((key) => key && typeof schema.properties[key].type === 'string')
+            .filter((key) => key && typeof (properties[key] as Record<string, unknown>).type === 'string')
             .map((key) => key);
 
         if (schemaStringProps.length !== 1) {
