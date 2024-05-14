@@ -4,7 +4,7 @@ import {ContextAdapterBuilder} from './builder';
 
 export class ContextAdapterBuilderImpl implements ContextAdapterBuilder {
     private endpointUrl: string | undefined = undefined;
-    private headers: Record<string, string> = {};
+    private headers: Record<string, string> | undefined = undefined;
 
     build(): ContextAdapter {
         if (!this.endpointUrl) {
