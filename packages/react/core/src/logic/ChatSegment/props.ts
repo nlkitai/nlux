@@ -17,7 +17,7 @@ export type ChatSegmentProps<AiMsg> = {
     containerRef?: RefObject<HTMLDivElement>;
 };
 
-export type ChatSegmentImperativeProps = {
-    streamChunk: (messageId: string, chunk: string) => void;
+export type ChatSegmentImperativeProps<AiMsg> = {
+    streamChunk: (messageId: string, chunk: AiMsg) => void;
     completeStream: (messageId: string) => void;
 };

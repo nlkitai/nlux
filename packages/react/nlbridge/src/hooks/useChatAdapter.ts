@@ -1,5 +1,4 @@
-import {ChatAdapter} from '@nlux/nlbridge';
-import {AiContext as ReactAiContext} from '@nlux/react';
+import {AiContext as ReactAiContext, StandardChatAdapter} from '@nlux/react';
 import {useContext, useEffect, useState} from 'react';
 import {getChatAdapterBuilder} from './getChatAdapterBuilder';
 
@@ -10,7 +9,7 @@ export type ReactChatAdapterOptions = {
     headers?: Record<string, string>;
 };
 
-export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions): ChatAdapter<AiMsg> => {
+export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions): StandardChatAdapter<AiMsg> => {
     const {
         context,
         url,
@@ -51,7 +50,7 @@ export const useChatAdapter = <AiMsg = string>(options: ReactChatAdapterOptions)
     }, [headers]);
 
     const coreContext = context?.ref ? useContext(context.ref) : undefined;
-    const [adapter, setAdapter] = useState<ChatAdapter<AiMsg>>(
+    const [adapter, setAdapter] = useState<StandardChatAdapter<AiMsg>>(
         getChatAdapterBuilder({
             url,
             mode,

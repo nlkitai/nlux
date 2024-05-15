@@ -1,4 +1,4 @@
-import {ReactElement, Ref, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
@@ -7,12 +7,13 @@ import {
 import {
     statusClassName as compMessageStatusClassName,
 } from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomService';
 
-export const StreamContainerComp = function <AiChat>(
-    props: StreamContainerProps<AiChat>,
-    ref: Ref<StreamContainerImperativeProps>,
+export const StreamContainerComp = function <AiMsg>(
+    props: StreamContainerProps<AiMsg>,
+    ref: Ref<StreamContainerImperativeProps<AiMsg>>,
 ) {
     const {
         uid,
@@ -83,8 +84,10 @@ export const StreamContainerComp = function <AiChat>(
                 <ResponseRendererComp
                     uid={uid}
                     status={status}
-                    response={undefined}
-                    containerRef={rootElRef}
+                    containerRef={rootElRef as RefObject<never>}
+                    content={undefined}
+                    serverResponse={undefined}
+                    dataTransferMode={'stream'}
                 />
             );
         } else {
@@ -102,7 +105,13 @@ export const StreamContainerComp = function <AiChat>(
     }, []);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (chunk: string) => mdStreamParserRef.current?.next(chunk),
+        streamChunk: (chunk: AiMsg) => {
+            if (typeof chunk === 'string') {
+                mdStreamParserRef.current?.next(chunk);
+            } else {
+                warn('When using a markdown stream renderer, the chunk must be a string.');
+            }
+        },
         completeStream: () => mdStreamParserRef.current?.complete(),
     }), []);
 

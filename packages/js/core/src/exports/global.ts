@@ -1,5 +1,3 @@
-import {debug} from '../../../../shared/src/utils/debug';
-
 const globalNlux: {
     version: string;
     [key: string]: unknown;
@@ -19,7 +17,5 @@ export const getGlobalNlux = (): typeof globalNlux | undefined => {
     }
 
     theWindow.nlux = globalNlux;
-    debug('globalNlux', globalNlux);
-
     return globalNlux;
 };

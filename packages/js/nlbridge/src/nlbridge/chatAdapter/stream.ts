@@ -9,72 +9,84 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
+    async fetchText(
+        message: string,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): Promise<string | object | undefined> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text using the stream adapter!',
         });
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
-        const submitPrompt = () => fetch(this.endpointUrl, {
-            method: 'POST',
-            headers: {
-                ...this.headers,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                action: 'chat-stream',
-                payload: {
-                    message,
-                    conversationHistory: extras.conversationHistory,
-                    contextId: this.context?.contextId,
+    streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void {
+        const submitPrompt = () => {
+            fetch(this.endpointUrl, {
+                method: 'POST',
+                headers: {
+                    ...this.headers,
+                    'Content-Type': 'application/json',
                 },
-            }),
-        }).then(async (response) => {
-            if (!response.ok) {
-                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
-            }
-
-            if (!response.body) {
-                throw new Error(`NLBridge adapter returned status code: ${response.status}`);
-            }
-
-            // Read a stream of server-sent events
-            // and feed them to the observer as they are being generated
-            const reader = response.body.getReader();
-            const textDecoder = new TextDecoder();
-            let doneReading = false;
-
-            while (!doneReading) {
-                const {value, done} = await reader.read();
-                if (done) {
-                    doneReading = true;
-                    continue;
+                body: JSON.stringify({
+                    action: 'chat-stream',
+                    payload: {
+                        message,
+                        conversationHistory: extras.conversationHistory,
+                        contextId: this.context?.contextId,
+                    },
+                }),
+            }).then(async (response) => {
+                if (!response.ok) {
+                    throw new Error(`NLBridge adapter returned status code: ${response.status}`);
                 }
 
-                try {
-                    const chunk = textDecoder.decode(value);
-                    observer.next(chunk);
-                } catch (err) {
-                    warn(`Error parsing chunk by NLBridgeStreamAdapter: ${err}`);
+                if (!response.body) {
+                    throw new Error(`NLBridge adapter returned status code: ${response.status}`);
                 }
-            }
 
-            observer.complete();
-        });
+                // Read a stream of server-sent events
+                // and feed them to the observer as they are being generated
+                const reader = response.body.getReader();
+                const textDecoder = new TextDecoder();
+                let doneReading = false;
 
-        if (this.context && this.context.contextId) {
-            this.context.flush().then(() => {
-                submitPrompt();
-            }).catch(() => {
-                // Submit prompt even when flushing fails
-                submitPrompt();
+                while (!doneReading) {
+                    const {value, done} = await reader.read();
+                    if (done) {
+                        doneReading = true;
+                        continue;
+                    }
+
+                    try {
+                        const chunk = textDecoder.decode(value);
+                        observer.next(chunk);
+                    } catch (err) {
+                        warn(`Error parsing chunk by NLBridgeStreamAdapter: ${err}`);
+                    }
+                }
+
+                observer.complete();
             });
+        };
+
+        //
+        // When a valid context is available, flush it before submitting the prompt
+        //
+        if (this.context && this.context.contextId) {
+            this.context
+                .flush()
+                .then(() => submitPrompt())
+                // Submit prompt even when flushing fails
+                .catch(() => submitPrompt());
 
             return;
         }
 
+        // Submit prompt when no context is available
         submitPrompt();
     }
 }

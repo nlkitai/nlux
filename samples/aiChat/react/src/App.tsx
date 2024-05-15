@@ -1,26 +1,33 @@
 import '@nlux-dev/themes/src/luna/theme.css';
-import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
-import {highlighter} from '@nlux-dev/highlighter/src';
-import {useChatAdapter as useChatLangChainAdapter} from '@nlux-dev/langchain-react/src';
-import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
-import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
-import {AiChat, ChatItem} from '@nlux-dev/react/src';
+// import {highlighter} from '@nlux-dev/highlighter/src';
+// import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
+import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
+import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
+// import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
+import {AiChat, ChatItem, FetchResponseComponentProps, StreamResponseComponentProps} from '@nlux-dev/react/src';
 import './App.css';
 
 function App() {
-    const nlBridge = useChatAdapter({
+    const nlBridgeAdapter = useNlbridgeChatAdapter({
         url: 'http://localhost:8899/',
     });
 
-    const langChainAdapter = useChatLangChainAdapter({
+    const langChainAdapter = useChatLangChainChatAdapter({
         url: 'https://pynlux.api.nlux.ai/einbot',
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'stream',
         useInputSchema: true,
     });
 
-    const openAiAdapter = createUnsafeChatAdapter()
-        .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
-        .withDataTransferMode('fetch');
+    const hfAdapter = useHfChatAdapter({
+        dataTransferMode: 'fetch',
+        model: 'gpt4',
+        authToken: 'N/A',
+    });
+
+    // const openAiAdapter = useOpenAiChatAdapter()
+    //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
+    //     .withDataTransferMode('fetch');
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
@@ -60,9 +67,10 @@ function App() {
 
     return (
         <AiChat
-            // adapter={nlBridge}
-            adapter={openAiAdapter}
-            // adapter={langChainAdapter}
+            // adapter={nlBridgeAdapter}
+            // adapter={openAiAdapter}
+            adapter={langChainAdapter}
+            // adapter={hfAdapter}
             // initialConversation={initialConversation}
             promptBoxOptions={{
                 placeholder: 'Type your prompt here',
@@ -78,7 +86,7 @@ function App() {
             }}
             messageOptions={{
                 markdownLinkTarget: 'blank',
-                syntaxHighlighter: highlighter,
+                // syntaxHighlighter: highlighter,
                 // showCodeBlockCopyButton: false,
                 // streamingAnimationSpeed: 100,
                 promptComponent: ({prompt}) => {
@@ -97,15 +105,18 @@ function App() {
                         </div>
                     );
                 },
-                responseComponent: ({
-                    response,
-                    status,
-                    containerRef,
-                }) => {
-                    console.log(status);
+                responseComponent: (props) => {
+                    const {dataTransferMode} = props;
+                    const propsForFetch = props as FetchResponseComponentProps<string>;
+                    const propsForStream = props as StreamResponseComponentProps<string>;
+
+                    console.log('Response Component Props');
+                    console.dir(props);
+
                     return (
-                        <div>
-                            {response ? <div>{response}</div> : <div ref={containerRef}/>}
+                        <>
+                            {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
+                            {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
                             <div style={{
                                 backgroundColor: 'lightblue',
                                 padding: 10,
@@ -115,7 +126,7 @@ function App() {
                                 textAlign: 'center',
                             }}>Custom Response Component
                             </div>
-                        </div>
+                        </>
                     );
                 },
             }}

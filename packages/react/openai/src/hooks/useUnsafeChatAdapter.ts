@@ -1,11 +1,13 @@
-import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/openai';
+import {ChatAdapterOptions, StandardChatAdapter} from '@nlux/openai';
 import {useEffect, useState} from 'react';
 import {getAdapterBuilder} from './getAdapterBuilder';
 
-export const useUnsafeChatAdapter = <AiMsg>(options: ChatAdapterOptions) => {
+export const useUnsafeChatAdapter = <AiMsg>(
+    options: ChatAdapterOptions,
+): StandardChatAdapter<AiMsg> => {
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter, setAdapter] = useState<ChatAdapterBuilder<AiMsg>>(
-        getAdapterBuilder<AiMsg>(options),
+    const [adapter, setAdapter] = useState<StandardChatAdapter<AiMsg>>(
+        getAdapterBuilder<AiMsg>(options).create(),
     );
 
     const {
@@ -21,7 +23,7 @@ export const useUnsafeChatAdapter = <AiMsg>(options: ChatAdapterOptions) => {
             return;
         }
 
-        const newAdapter = getAdapterBuilder<AiMsg>(options);
+        const newAdapter = getAdapterBuilder<AiMsg>(options).create();
         setAdapter(newAdapter);
     }, [
         apiKey,

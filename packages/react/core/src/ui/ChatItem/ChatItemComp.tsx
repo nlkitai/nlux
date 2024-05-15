@@ -12,10 +12,10 @@ import {ChatItemImperativeProps, ChatItemProps} from './props';
 
 export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
-    ref: Ref<ChatItemImperativeProps>,
+    ref: Ref<ChatItemImperativeProps<AiMsg>>,
 ) => ReactElement = function <AiMsg>(
     props: ChatItemProps<AiMsg>,
-    ref: Ref<ChatItemImperativeProps>,
+    ref: Ref<ChatItemImperativeProps<AiMsg>>,
 ): ReactElement {
     const picture = useMemo(() => {
         if (props.picture === undefined && props.name === undefined) {
@@ -26,10 +26,10 @@ export const ChatItemComp: <AiMsg>(
     }, [props?.picture, props?.name]);
 
     const isStreaming = useMemo(() => props.status === 'streaming', [props.status]);
-    const streamContainer = useRef<StreamContainerImperativeProps | null>(null);
+    const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (chunk: string) => streamContainer?.current?.streamChunk(chunk),
+        streamChunk: (chunk: AiMsg) => streamContainer?.current?.streamChunk(chunk),
         completeStream: () => streamContainer?.current?.completeStream(),
     }), []);
 
@@ -42,7 +42,7 @@ export const ChatItemComp: <AiMsg>(
         return isStreaming ? () => '' : createMessageRenderer<AiMsg>(props);
     }, [
         isStreaming,
-        props.uid, props.status, props.message, props.direction,
+        props.uid, props.status, props.fetchedContent, props.streamedContent, props.direction,
         props.responseRenderer, props.syntaxHighlighter, props.markdownLinkTarget,
     ]);
 

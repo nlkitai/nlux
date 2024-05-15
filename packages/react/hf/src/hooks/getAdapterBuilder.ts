@@ -1,9 +1,11 @@
-import {ChatAdapterOptions, createChatAdapter} from '@nlux/hf';
+import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/hf';
 import {NluxUsageError} from '../../../../shared/src/types/error';
 
-const source = 'hooks/initChatAdapter';
+const source = 'hooks/getAdapterBuilder';
 
-export const initChatAdapter = <AiMsg>(options: ChatAdapterOptions<AiMsg>) => {
+export const getAdapterBuilder = <AiMsg>(
+    options: ChatAdapterOptions<AiMsg>,
+): ChatAdapterBuilder<AiMsg> => {
     const {
         model,
         authToken,

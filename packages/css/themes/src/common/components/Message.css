@@ -12,95 +12,95 @@
 
     > .nlux-md-strm-root {
         width: 100%;
+    }
 
-        > .nlux-md-cntr {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 0.5em;
+    .nlux-md-cntr {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5em;
 
-            :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
-                margin: 0;
-                padding: 0;
-            }
+        :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
+            margin: 0;
+            padding: 0;
+        }
 
-            > .code-block {
-                font-family: var(--nlux-mono-font-family), monospace;
+        > .code-block {
+            font-family: var(--nlux-mono-font-family), monospace;
 
-                font-size: var(--nlux-font-size-s);
-                position: relative;
-                overflow: scroll;
-                padding: var(--nlux-padding) 0;
+            font-size: var(--nlux-font-size-s);
+            position: relative;
+            overflow: scroll;
+            padding: var(--nlux-padding) 0;
 
-                color: var(--nlux-code-block-text-color);
-                border: none;
-                border-radius: var(--nlux-border-radius-s);
+            color: var(--nlux-code-block-text-color);
+            border: none;
+            border-radius: var(--nlux-border-radius-s);
+            background-color: var(--nlux-code-block-background-color);
+            box-shadow: var(--nlux-box-shadow);
+        }
+
+        > .code-block > pre {
+            width: fit-content;
+            min-width: 100%;
+        }
+
+        > .code-block > pre > div {
+            padding: 0 var(--nlux-padding-m);
+        }
+
+        > .code-block > pre > div:hover {
+            background-color: var(--nlux-code-block-hover-background-color);
+        }
+
+        button.nlux-cpy-btn {
+            position: relative;
+            z-index: 999999;
+            width: 25px;
+            height: 24px;
+
+            margin-right: 10px;
+            margin-bottom: -23px;
+            margin-left: auto;
+
+            padding: 4px;
+
+            cursor: pointer;
+            color: var(--nlux-code-block-background-color);
+            border: 1px solid var(--nlux-code-block-background-color);
+            border-radius: var(--nlux-border-radius-xs);
+            background-color: var(--nlux-message-received-background-color);
+        }
+
+        button.nlux-cpy-btn {
+            &.clicked,
+            &.clicked:hover {
+                color: var(--nlux-message-received-background-color);
+                border-color: var(--nlux-code-block-background-color);
                 background-color: var(--nlux-code-block-background-color);
-                box-shadow: var(--nlux-box-shadow);
             }
 
-            > .code-block > pre {
-                width: fit-content;
-                min-width: 100%;
+            &:hover * {
+                opacity: 0.5;
             }
 
-            > .code-block > pre > div {
-                padding: 0 var(--nlux-padding-m);
+            &.clicked:hover * {
+                opacity: 1;
             }
+        }
 
-            > .code-block > pre > div:hover {
-                background-color: var(--nlux-code-block-hover-background-color);
-            }
+        code {
+            font-family: var(--nlux-mono-font-family), monospace;
+            font-size: var(--nlux-font-size-s);
+            padding: var(--nlux-padding-xs) var(--nlux-padding-s);
 
-            button.nlux-cpy-btn {
-                position: relative;
-                z-index: 999999;
-                width: 25px;
-                height: 24px;
+            color: var(--nlux-inline-code-text-color);
+            border-radius: var(--nlux-border-radius-xs);
+            background-color: var(--nlux-inline-code-background-color);
+        }
 
-                margin-right: 10px;
-                margin-bottom: -23px;
-                margin-left: auto;
-
-                padding: 4px;
-
-                cursor: pointer;
-                color: var(--nlux-code-block-background-color);
-                border: 1px solid var(--nlux-code-block-background-color);
-                border-radius: var(--nlux-border-radius-xs);
-                background-color: var(--nlux-message-received-background-color);
-            }
-
-            button.nlux-cpy-btn {
-                &.clicked,
-                &.clicked:hover {
-                    color: var(--nlux-message-received-background-color);
-                    border-color: var(--nlux-code-block-background-color);
-                    background-color: var(--nlux-code-block-background-color);
-                }
-
-                &:hover * {
-                    opacity: 0.5;
-                }
-
-                &.clicked:hover * {
-                    opacity: 1;
-                }
-            }
-
-            code {
-                font-family: var(--nlux-mono-font-family), monospace;
-                font-size: var(--nlux-font-size-s);
-                padding: var(--nlux-padding-xs) var(--nlux-padding-s);
-
-                color: var(--nlux-inline-code-text-color);
-                border-radius: var(--nlux-border-radius-xs);
-                background-color: var(--nlux-inline-code-background-color);
-            }
-
-            strong {
-                font-weight: bold;
-            }
+        strong {
+            font-weight: bold;
         }
     }
 }

@@ -7,6 +7,7 @@ import {
     StreamingAdapterObserver,
 } from '@nlux/core';
 import {uid} from '../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../shared/src/utils/warn';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 
 export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdapter<AiMsg> {
@@ -71,11 +72,21 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
     ): Promise<string | object | undefined>;
 
     preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
-        throw new Error('Method not implemented.');
+        if (typeof chunk === 'string') {
+            return chunk as AiMsg;
+        }
+
+        warn('NLBridge adapter received a non-string chunk from the server. Returning empty string.');
+        return '' as AiMsg;
     }
 
     preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
-        throw new Error('Method not implemented.');
+        if (typeof message === 'string') {
+            return message as AiMsg;
+        }
+
+        warn('NLBridge adapter received a non-string message from the server. Returning empty string.');
+        return '' as AiMsg;
     }
 
     abstract streamText(

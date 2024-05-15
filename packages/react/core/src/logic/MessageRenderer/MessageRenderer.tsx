@@ -1,4 +1,5 @@
 import {FC, RefObject} from 'react';
+import {FetchResponseComponentProps, StreamResponseComponentProps} from '../../exports/messageOptions';
 import {ChatItemProps} from '../../ui/ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
@@ -11,8 +12,10 @@ export const createMessageRenderer: <AiMsg>(
 ) {
     const {
         uid,
+        dataTransferMode,
         status,
-        message,
+        fetchedContent,
+        fetchedServerResponse,
         direction,
         responseRenderer,
         syntaxHighlighter,
@@ -25,31 +28,49 @@ export const createMessageRenderer: <AiMsg>(
     // When the dataTransferMode is 'fetch', the message is defined and the containerRef is not needed.
     const containerRefToUse = containerRef ?? {current: null} satisfies RefObject<HTMLElement>;
 
+    //
+    // A custom response renderer is provided by the user.
+    //
     if (responseRenderer !== undefined) {
-        if (message === undefined) {
-            return () => null;
-        }
+        //
+        // Streaming into a custom renderer.
+        //
+        if (dataTransferMode === 'stream') {
+            const props: StreamResponseComponentProps<AiMsg> = {
+                uid,
+                status,
+                dataTransferMode,
+                containerRef: containerRefToUse as RefObject<never>,
+            };
 
-        return () => responseRenderer({
-            uid,
-            status,
-            // We only pass the response to custom renderer when the status is 'complete'.
-            response: status === 'complete' ? message as AiMsg : undefined,
-            containerRef: containerRefToUse as RefObject<never>,
-        });
+            return () => responseRenderer(props);
+        } else {
+            //
+            // Fetching data and displaying it in a custom renderer.
+            //
+            const props: FetchResponseComponentProps<AiMsg> = {
+                uid,
+                status: 'complete',
+                content: fetchedContent as AiMsg,
+                serverResponse: fetchedServerResponse,
+                dataTransferMode,
+            };
+
+            return () => responseRenderer(props);
+        }
     }
 
     if (direction === 'outgoing') {
-        if (typeof message === 'string') {
-            const messageToRender: string = message;
+        if (typeof fetchedContent === 'string') {
+            const messageToRender: string = fetchedContent;
             return () => <>{messageToRender}</>;
         }
 
         return () => '';
     }
 
-    if (typeof message === 'string') {
-        const messageToRender: string = message;
+    if (typeof fetchedContent === 'string') {
+        const messageToRender: string = fetchedContent;
         return () => (
             <MarkdownSnapshotRenderer
                 messageUid={uid}

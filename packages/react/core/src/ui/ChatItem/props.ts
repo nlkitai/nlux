@@ -6,8 +6,12 @@ import {ResponseComponent} from '../../exports/messageOptions';
 export type ChatItemProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
+    dataTransferMode: 'fetch' | 'stream';
     status: 'streaming' | 'complete';
-    message?: AiMsg | string;
+    fetchedContent?: AiMsg;
+    fetchedServerResponse?: unknown;
+    streamedContent?: AiMsg[];
+    streamedServerResponse?: Array<unknown>;
     responseRenderer?: ResponseComponent<AiMsg>;
     name?: string;
     picture?: string | ReactElement;
@@ -18,7 +22,7 @@ export type ChatItemProps<AiMsg> = {
     streamingAnimationSpeed?: number;
 };
 
-export type ChatItemImperativeProps = {
-    streamChunk: (chunk: string) => void;
+export type ChatItemImperativeProps<AiMsg> = {
+    streamChunk: (chunk: AiMsg) => void;
     completeStream: () => void;
 };

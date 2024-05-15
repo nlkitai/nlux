@@ -1,18 +1,20 @@
-import {ChatAdapterBuilder, ChatAdapterOptions} from '@nlux/hf';
+import {ChatAdapterOptions, StandardChatAdapter} from '@nlux/hf';
 import {useEffect, useState} from 'react';
 import {debug} from '../../../../shared/src/utils/debug';
-import {initChatAdapter} from './initChatAdapter';
+import {getAdapterBuilder} from './getAdapterBuilder';
 
 const source = 'hooks/useChatAdapter';
 
-export const useChatAdapter = <AiMsg = string>(options: ChatAdapterOptions<AiMsg>) => {
+export const useChatAdapter = <AiMsg = string>(
+    options: ChatAdapterOptions<AiMsg>,
+): StandardChatAdapter<AiMsg> => {
     if (!options.model) {
         throw new Error('You must provide either a model or an endpoint to use Hugging Face Inference API.');
     }
 
     const [isInitialized, setIsInitialized] = useState(false);
-    const [adapter] = useState<ChatAdapterBuilder<AiMsg>>(
-        initChatAdapter<AiMsg>(options),
+    const [adapter] = useState<StandardChatAdapter<AiMsg>>(
+        getAdapterBuilder<AiMsg>(options).create(),
     );
 
     const {

@@ -6,7 +6,7 @@ export const useChatSegmentsController = function <AiMsg>(
     segments: ChatSegment<AiMsg>[],
 ) {
     const chatSegmentsRef = useMemo(
-        () => new Map<string, RefObject<ChatSegmentImperativeProps>>(), [],
+        () => new Map<string, RefObject<ChatSegmentImperativeProps<AiMsg>>>(), [],
     );
 
     useEffect(() => {
@@ -27,7 +27,7 @@ export const useChatSegmentsController = function <AiMsg>(
     return {
         get: (uid: string) => chatSegmentsRef.get(uid)?.current,
         getRef: (uid: string) => chatSegmentsRef.get(uid),
-        set: (uid: string, ref: RefObject<ChatSegmentImperativeProps>) => {
+        set: (uid: string, ref: RefObject<ChatSegmentImperativeProps<AiMsg>>) => {
             chatSegmentsRef.set(uid, ref);
         },
         remove: (uid: string) => {

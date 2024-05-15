@@ -1,10 +1,10 @@
 import {AiContext as CoreAiContext, ContextItems} from '@nlux/core';
-import {ComponentClass, Context, FunctionComponent, ReactNode} from 'react';
+import {ComponentClass, Context, FC, ReactNode} from 'react';
 
 export type AiContextProviderProps = {
     initialItems?: ContextItems;
-    errorComponent?: FunctionComponent<{error?: string}> | ComponentClass<{error?: string}>
-    loadingComponent?: FunctionComponent | ComponentClass;
+    errorComponent?: FC<{error?: string}> | ComponentClass<{error?: string}>
+    loadingComponent?: FC | ComponentClass;
     children: ReactNode;
 };
 

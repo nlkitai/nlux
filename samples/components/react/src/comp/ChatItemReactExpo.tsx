@@ -58,9 +58,10 @@ export const ChatItemReactExpo = () => {
                 <div className="content">
                     <ForwardRefChatItemComp
                         uid={'1'}
+                        dataTransferMode={'fetch'}
                         direction={direction}
                         status={status}
-                        message={message}
+                        fetchedContent={message}
                         picture={picture}
                         name={name}
                     />

@@ -12,18 +12,18 @@ import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
-    ref: Ref<ChatSegmentImperativeProps>,
+    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
 ) => ReactNode = function <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
-    ref: Ref<ChatSegmentImperativeProps>,
+    ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
 ): ReactNode {
     const {chatSegment, containerRef} = props;
     const chatItemsRef = useMemo(
-        () => new Map<string, RefObject<ChatItemImperativeProps>>(), [],
+        () => new Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>(), [],
     );
 
     const chatItemsStreamingBuffer = useMemo(
-        () => new Map<string, Array<string>>(), [],
+        () => new Map<string, Array<AiMsg>>(), [],
     );
 
     useEffect(() => {
@@ -56,7 +56,7 @@ export const ChatSegmentComp: <AiMsg>(
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (chatItemId: string, chunk: string) => {
+        streamChunk: (chatItemId: string, chunk: AiMsg) => {
             const chatItemCompRef = chatItemsRef.get(chatItemId);
             if (chatItemCompRef?.current) {
                 chatItemCompRef.current.streamChunk(chunk);
@@ -107,9 +107,9 @@ export const ChatSegmentComp: <AiMsg>(
     return (
         <div className={rootClassName} ref={containerRef}>
             {chatItems.map((chatItem, index) => {
-                let ref: RefObject<ChatItemImperativeProps> | undefined = chatItemsRef.get(chatItem.uid);
+                let ref: RefObject<ChatItemImperativeProps<AiMsg>> | undefined = chatItemsRef.get(chatItem.uid);
                 if (!ref) {
-                    ref = createRef<ChatItemImperativeProps>();
+                    ref = createRef<ChatItemImperativeProps<AiMsg>>();
                     chatItemsRef.set(chatItem.uid, ref);
                 }
 
@@ -144,7 +144,8 @@ export const ChatSegmentComp: <AiMsg>(
                             uid={chatItem.uid}
                             status={'complete'}
                             direction={'outgoing'}
-                            message={chatItem.content}
+                            dataTransferMode={'fetch'} // User chat items are always in fetch mode.
+                            fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
@@ -175,7 +176,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'incoming'}
-                                    message={chatItem.content}
+                                    dataTransferMode={chatItem.dataTransferMode}
+                                    streamedContent={chatItem.content}
                                     responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
@@ -212,7 +214,9 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'complete'}
                                     direction={'incoming'}
-                                    message={chatItem.content}
+                                    dataTransferMode={chatItem.dataTransferMode}
+                                    fetchedContent={chatItem.content}
+                                    fetchedServerResponse={chatItem.serverResponse}
                                     responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
@@ -239,6 +243,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'incoming'}
+                                    dataTransferMode={chatItem.dataTransferMode}
                                     responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,

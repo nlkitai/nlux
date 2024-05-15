@@ -7,12 +7,12 @@ import {ConversationCompProps, ImperativeConversationCompProps} from './props';
 
 export type ConversationCompType = <AiMsg>(
     props: ConversationCompProps<AiMsg>,
-    ref: Ref<ImperativeConversationCompProps>,
+    ref: Ref<ImperativeConversationCompProps<AiMsg>>,
 ) => ReactNode;
 
 export const ConversationComp: ConversationCompType = function <AiMsg>(
     props: ConversationCompProps<AiMsg>,
-    ref: Ref<ImperativeConversationCompProps>,
+    ref: Ref<ImperativeConversationCompProps<AiMsg>>,
 ): ReactNode {
     const {
         segments,
@@ -32,7 +32,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
     const segmentsController = useChatSegmentsController<AiMsg>(segments);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (segmentId: string, messageId: string, chunk: string) => {
+        streamChunk: (segmentId: string, messageId: string, chunk: AiMsg) => {
             const chatSegment = segmentsController.get(segmentId);
             chatSegment?.streamChunk(messageId, chunk);
         },

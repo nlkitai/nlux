@@ -1,6 +1,7 @@
-import {ChatAdapter, ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge';
+import {ChatAdapterOptions, createChatAdapter} from '@nlux/nlbridge';
+import {StandardChatAdapter} from '@nlux/react';
 
-export const getChatAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatAdapter<AiMsg> => {
+export const getChatAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): StandardChatAdapter<AiMsg> => {
     const {
         url,
         mode,

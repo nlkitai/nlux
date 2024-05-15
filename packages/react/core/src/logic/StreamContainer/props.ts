@@ -17,7 +17,7 @@ export type StreamContainerProps<AisMsg> = {
     }
 };
 
-export type StreamContainerImperativeProps = {
-    streamChunk: (chunk: string) => void;
+export type StreamContainerImperativeProps<AiMsg> = {
+    streamChunk: (chunk: AiMsg) => void;
     completeStream: () => void;
 };

@@ -1,17 +1,30 @@
-import './style.css';
 import '@nlux-dev/themes/src/luna/theme.css';
 import {ChatItem, createAiChat} from '@nlux-dev/core/src';
-import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
-import {createChatAdapter} from '@nlux-dev/nlbridge/src';
-import {createUnsafeChatAdapter} from '@nlux-dev/openai/src';
+// import {highlighter} from '@nlux-dev/highlighter/src';
+// import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import {createChatAdapter as createHuggingFaceChatAdapter} from '@nlux-dev/hf/src';
+import {createChatAdapter as createLangChainChatAdapter} from '@nlux-dev/langchain/src';
+import {createChatAdapter as createNlbridgeChatAdapter} from '@nlux-dev/nlbridge/src';
+import {createUnsafeChatAdapter as createOpenAiChatAdapter} from '@nlux-dev/openai/src';
+import './style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
 
-    const adapter = createChatAdapter<string>()
+    const nlBridgeAdapter = createNlbridgeChatAdapter<string>()
         .withUrl('http://localhost:8899/');
 
-    const openAiAdapter = createUnsafeChatAdapter()
+    const langChainAdapter = createLangChainChatAdapter()
+        .withUrl('https://pynlux.api.nlux.ai/einbot')
+        .withDataTransferMode('stream')
+        .withInputSchema(true);
+
+    const huggingFaceAdapter = createHuggingFaceChatAdapter()
+        .withModel('gpt4')
+        .withDataTransferMode('fetch')
+        .withAuthToken('N/A');
+
+    const openAiAdapter = createOpenAiChatAdapter()
         .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
         .withDataTransferMode('stream');
 
@@ -52,7 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const aiChat = createAiChat()
-        .withAdapter(openAiAdapter)
+        // .withAdapter(nlBridgeAdapter)
+        // .withAdapter(openAiAdapter)
+        .withAdapter(langChainAdapter)
         // .withInitialConversation(initialConversation)
         .withPromptBoxOptions({
             placeholder: 'Type your prompt here',

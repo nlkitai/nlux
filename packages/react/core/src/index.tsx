@@ -69,6 +69,8 @@ export type {
 } from './exports/props';
 
 export type {
+    FetchResponseComponentProps,
+    StreamResponseComponentProps,
     ResponseComponentProps,
     ResponseComponent,
     PromptComponentProps,

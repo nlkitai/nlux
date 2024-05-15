@@ -1,5 +1,6 @@
 import {HighlighterExtension} from '../../../js/core/src';
 import {createMdStreamRenderer} from '../../../shared/src/markdown/stream/streamParser';
+import {CallbackFunction} from '../../../shared/src/types/callbackFunction';
 
 export type MarkdownStreamParser = {
     next(value: string): void;
@@ -12,7 +13,7 @@ export type MarkdownStreamParserOptions = {
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     showCodeBlockCopyButton?: boolean;
-    onComplete?: Function;
+    onComplete?: CallbackFunction;
 };
 
 export const createMarkdownStreamParser = (

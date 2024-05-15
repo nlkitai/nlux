@@ -8,7 +8,7 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<AiMsg> {
+    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         if (this.context && this.context.contextId) {
             await this.context.flush();
         }
@@ -43,10 +43,7 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
             typeof body.result === 'object' && body.result !== null &&
             typeof body.result.response === 'string'
         ) {
-            const {
-                response,
-                task,
-            } = body.result;
+            const {response, task} = body.result;
 
             if (
                 this.context && task
@@ -65,7 +62,11 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
         }
     }
 
-    streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
+    streamText(
+        message: string,
+        observer: StreamingAdapterObserver<string | object | undefined>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): void {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot stream text from the fetch adapter!',

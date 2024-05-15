@@ -1,9 +1,14 @@
-import {DataTransferMode, PersonaOptions, ResponseComponentProps} from '@nlux-dev/react/src';
-import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
-import {AiChatProps} from '@nlux-dev/react/src/exports/props.tsx';
+import {
+    AiChat,
+    AiChatProps,
+    DataTransferMode,
+    FetchResponseComponentProps,
+    PersonaOptions,
+    ResponseComponentProps,
+} from '@nlux-dev/react/src';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
-import {FunctionComponent, useMemo, useState} from 'react';
+import {FC, useMemo, useState} from 'react';
 import '@nlux-dev/themes/src/luna/theme.css';
 
 type MessageObjectType = {txt: string, color: string, bg: string};
@@ -11,18 +16,23 @@ type MessageObjectType = {txt: string, color: string, bg: string};
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent: FunctionComponent<
+const CustomMessageComponent: FC<
     ResponseComponentProps<MessageObjectType>
-> = (
-    {response},
-) => {
+> = (props) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
-    if (typeof response === 'object' && response?.txt !== undefined) {
+    if (props.dataTransferMode === 'stream') {
+        // This custom component does not support streaming mode
+        return null;
+    }
+
+    const {content} = props as FetchResponseComponentProps<MessageObjectType>;
+
+    if (typeof content === 'object' && content?.txt !== undefined) {
         return (
-            <div style={{color: response.color, backgroundColor: response.bg}}>
-                {response.txt}
+            <div style={{color: content.color, backgroundColor: content.bg}}>
+                {content.txt}
             </div>
         );
     }
@@ -32,7 +42,7 @@ const CustomMessageComponent: FunctionComponent<
             color,
             backgroundColor: bg,
         }}>
-            {`${response}`}
+            {`${content}`}
         </div>
     );
 };

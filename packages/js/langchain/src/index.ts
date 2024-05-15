@@ -13,4 +13,6 @@ export type {
 
 export type {LangServeEndpointType} from './langserve/types/langServe';
 
-export {createChatAdapter} from './langserve/builder/createChatAdapter';
+export {
+    createChatAdapter,
+} from './langserve/builder/createChatAdapter';
