@@ -36,6 +36,7 @@ lines of code, you can add conversational AI capabilities and interact with your
 * A flexible interface to **Create Your Own Adapter** 🎯 for any LLM ― with support for stream or fetch modes.
 * **Bot and User Personas** ― Customize the bot and user personas with names, images, and descriptions.
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
+* **Custom Renderers** ― Render AI messages with custom components inside the chat interface.
 * **Highly Customizable** ― Tune almost every UI aspect through theming, layout options, and more.
 * **Zero Dependencies** ― Lightweight codebase ― Core with zero dependency and no external UI libraries.
 
@@ -44,7 +45,7 @@ lines of code, you can add conversational AI capabilities and interact with your
 This GitHub repository contains the source code for the `NLUX` library.<br />
 It is a monorepo that contains code for following NPM packages:
 
-**React JS Packages:**
+⚛️ **React JS Packages:**
 
 * [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) ― React JS components for `NLUX`.
 * [`@nlux/langchain-react`](https://www.npmjs.com/package/@nlux/langchain-react) ― React hooks and adapter for APIs
@@ -56,7 +57,7 @@ It is a monorepo that contains code for following NPM packages:
 * [`@nlux/nlbridge-react`](https://www.npmjs.com/package/@nlux/nlbridge-react) ― Integration with `nlbridge`, the
   Express.js LLM middleware by the NLUX team.
 
-**Vanilla JS Packages:**
+🟨 **Vanilla JS Packages:**
 
 * [`@nlux/core`](https://www.npmjs.com/package/@nlux/core) ― The core Vanilla JS library to use with any web framework.
 * [`@nlux/langchain`](https://www.npmjs.com/package/@nlux/langchain) ― Adapter for APIs created using LangChain's
@@ -67,7 +68,7 @@ It is a monorepo that contains code for following NPM packages:
 * [`@nlux/nlbridge`](https://www.npmjs.com/package/@nlux/nlbridge) ― Integration with `nlbridge`, the Express.js LLM
   middleware by the NLUX team.
 
-**Theme & Extensions:**
+🎁 **Themes & Extensions:**
 
 * [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) ― The default `Luna` theme and CSS styles.
 * [`@nlux/markdown`](https://www.npmjs.com/package/@nlux/markdown) ― Markdown stream parser to render
@@ -79,16 +80,12 @@ Please visit each package's NPM page for information on how to use it.
 
 ## Docs & Examples 🤩
 
-* For developer documentation, examples, and API reference ― please visit:  
-  [nlux.dev](https://nlux.dev/)
+For stable `v1.x` — Developer documentation, examples, and API references are available at:  
+[nlux.dev](https://nlux.dev/)
 
-Docs website `nlux.dev` only covers the stable release `v1.x`
-
-`NLUX` `v2.x-beta` has just been released **for beta testing**, with major improvements and new features — such as
-[custom renderers](https://github.com/nluxai/nlux/issues/35#issuecomment-2112413646) for AI messages.
-The docs website for `v2.x-beta` will be available soon. Meanwhile, you can refer to TS type
-definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
-you are using the latest beta.
+For `v2.x-beta` — Currently in beta. The docs website will be updated soon.  
+Please refer to TS type definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
+you are using the latest beta version.
 
 ## Design Principles ⚜️
 
@@ -135,15 +132,14 @@ translation tools.
 > Paragraphs (3.6) and (3.7) were added to the original MPL 2.0 license.  
 > The full license text can be found in the [LICENSE](LICENSE) file.
 
-Wondering what it means to use software licensed under MPL 2.0?<br />
-Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
-
 **In a nutshell:**
 
 * You can use `NLUX` in your personal or commercial projects.
 * You can modify `NLUX` and publish your changes under the same license.
-* You cannot use `NLUX`'s source code as dataset to train AI models, or with code translation tools.
+* You cannot use `NLUX`'s source code as dataset to train AI models, nor with code translation tools.
 
+Wondering what it means to use software licensed under MPL 2.0? Learn more
+on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).  
 Please read the full license text in the [LICENSE](LICENSE) file for details.
 
 ## About The Developer 👨‍💻
