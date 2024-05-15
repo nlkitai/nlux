@@ -11,7 +11,9 @@ type MessageObjectType = {txt: string, color: string, bg: string};
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent: FunctionComponent<ResponseComponentProps<MessageObjectType>> = (
+const CustomMessageComponent: FunctionComponent<
+    ResponseComponentProps<MessageObjectType>
+> = (
     {response},
 ) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);

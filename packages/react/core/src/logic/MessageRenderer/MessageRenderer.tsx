@@ -35,7 +35,7 @@ export const createMessageRenderer: <AiMsg>(
             status,
             // We only pass the response to custom renderer when the status is 'complete'.
             response: status === 'complete' ? message as AiMsg : undefined,
-            containerRef: containerRefToUse,
+            containerRef: containerRefToUse as RefObject<never>,
         });
     }
 

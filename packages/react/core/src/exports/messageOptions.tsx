@@ -5,7 +5,7 @@ export type ResponseComponentProps<AiMsg> = {
     uid: string;
     status: 'streaming' | 'complete';
     response?: AiMsg;
-    containerRef: RefObject<unknown>;
+    containerRef: RefObject<never>;
 };
 
 export type ResponseComponent<AiMsg> = FunctionComponent<ResponseComponentProps<AiMsg>>;

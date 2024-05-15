@@ -81,10 +81,31 @@ function App() {
                 syntaxHighlighter: highlighter,
                 // showCodeBlockCopyButton: false,
                 // streamingAnimationSpeed: 100,
-                responseComponent: ({response}) => {
+                promptComponent: ({prompt}) => {
                     return (
                         <div>
-                            <div>{response}</div>
+                            <div>{prompt}</div>
+                            <div style={{
+                                backgroundColor: 'lightgreen',
+                                padding: 10,
+                                borderRadius: 10,
+                                marginTop: 10,
+                                fontSize: '0.8em',
+                                textAlign: 'center',
+                            }}>Custom Prompt Component
+                            </div>
+                        </div>
+                    );
+                },
+                responseComponent: ({
+                    response,
+                    status,
+                    containerRef,
+                }) => {
+                    console.log(status);
+                    return (
+                        <div>
+                            {response ? <div>{response}</div> : <div ref={containerRef}/>}
                             <div style={{
                                 backgroundColor: 'lightblue',
                                 padding: 10,
