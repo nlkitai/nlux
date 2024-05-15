@@ -71,7 +71,6 @@ export type {
 export type {
     FetchResponseComponentProps,
     StreamResponseComponentProps,
-    ResponseComponentProps,
     ResponseComponent,
     PromptComponentProps,
     PromptComponent,

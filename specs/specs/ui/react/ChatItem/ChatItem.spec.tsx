@@ -1,9 +1,10 @@
+import {FetchResponseComponentProps} from '@nlux-dev/react/src';
 import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp';
 import {render} from '@testing-library/react';
 import {forwardRef} from 'react';
 import {describe, expect, it} from 'vitest';
 
-describe('When a custom chat item is rendered', () => {
+describe('When a custom chat item is provided', () => {
     it('Should render the custom chat item', async () => {
         // Arrange
         const ForwardRefChatItemComp = forwardRef(ChatItemComp);
@@ -11,8 +12,8 @@ describe('When a custom chat item is rendered', () => {
             uid={'1'}
             direction={'incoming'}
             status={'complete'}
-            message={'Hello'}
-            responseRenderer={({response}: any) => <>{`THE AI SAID [${response}]`}</>}
+            fetchedContent={'Hello'}
+            responseRenderer={({content}: any) => <>{`THE AI SAID [${content}]`}</>}
         />;
 
         // Act
@@ -29,8 +30,8 @@ describe('When a custom chat item is rendered', () => {
             uid={'1'}
             direction={'incoming'}
             status={'complete'}
-            message={{text: 'Hello Jason!'}}
-            responseRenderer={({response}: any) => <>{`THE AI SAID [${response.text}]`}</>}
+            fetchedContent={{text: 'Hello Jason!'}}
+            responseRenderer={({content}: FetchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}
         />;
 
         // Act

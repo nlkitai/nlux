@@ -1,11 +1,4 @@
-import {
-    AiChat,
-    AiChatProps,
-    DataTransferMode,
-    FetchResponseComponentProps,
-    PersonaOptions,
-    ResponseComponentProps,
-} from '@nlux-dev/react/src';
+import {AiChat, AiChatProps, DataTransferMode, FetchResponseComponentProps, PersonaOptions} from '@nlux-dev/react/src';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {FC, useMemo, useState} from 'react';
@@ -17,12 +10,13 @@ const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
 const CustomMessageComponent: FC<
-    ResponseComponentProps<MessageObjectType>
+    FetchResponseComponentProps<MessageObjectType>
 > = (props) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
-    if (props.dataTransferMode === 'stream') {
+    // This custom component does not support streaming mode
+    if ((props as any).dataTransferMode === 'stream') {
         // This custom component does not support streaming mode
         return null;
     }

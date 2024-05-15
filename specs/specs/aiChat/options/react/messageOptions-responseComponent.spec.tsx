@@ -1,4 +1,4 @@
-import {AiChat, ResponseComponent} from '@nlux-dev/react/src';
+import {AiChat, ResponseComponent, StreamResponseComponentProps} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {act} from 'react';
@@ -24,8 +24,8 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
 
         it('Should render the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseComponent<string> = ({response}) => (
-                <div>The AI response is: {response}</div>
+            const CustomResponseComponent: ResponseComponent<string> = ({content}) => (
+                <div>The AI response is: {content}</div>
             );
 
             const {container} = render(
@@ -53,9 +53,9 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
 
         it('Should pass uid to the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseComponent<string> = ({response, uid}) => (
+            const CustomResponseComponent: ResponseComponent<string> = ({content, uid}) => (
                 <div>
-                    The AI response is: {response} with uid: {uid}
+                    The AI response is: {content} with uid: {uid}
                 </div>
             );
 
@@ -81,7 +81,10 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
             expect(customResponseComponentSpy).toHaveBeenCalledWith(
                 expect.objectContaining({
                     uid: expect.any(String),
-                    response: 'Yo!',
+                    content: 'Yo!',
+                    dataTransferMode: 'fetch',
+                    status: 'complete',
+                    serverResponse: undefined,
                 }),
             );
         });
@@ -89,8 +92,8 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
         describe('When the custom response component is removed', () => {
             it('Should render the default response component', async () => {
                 // Arrange
-                const CustomResponseComponent: ResponseComponent<string> = ({response, uid}) => (
-                    <div>The AI response is: {response} with uid: {uid}</div>
+                const CustomResponseComponent: ResponseComponent<string> = ({content, uid}) => (
+                    <div>The AI response is: {content} with uid: {uid}</div>
                 );
 
                 const customResponseComponentSpy = vi.fn(CustomResponseComponent);
@@ -141,7 +144,10 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
 
         it('Should render the markdown in the custom component as it\'s being generated', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseComponent<string> = ({containerRef, response, uid}) => (
+            const CustomResponseComponent: ResponseComponent<string> = ({
+                containerRef,
+                uid,
+            }: StreamResponseComponentProps<string>) => (
                 <div className="some-streamed-response">
                     <div className="content" ref={containerRef}/>
                     <div className="footer">Some footer content</div>

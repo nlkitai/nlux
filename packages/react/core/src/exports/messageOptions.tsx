@@ -68,9 +68,7 @@ export type FetchResponseComponentProps<AiMsg> = {
     serverResponse: unknown;
 };
 
-export type ResponseComponentProps<AiMsg> = StreamResponseComponentProps<AiMsg> | FetchResponseComponentProps<AiMsg>;
-
-export type ResponseComponent<AiMsg> = FC<ResponseComponentProps<AiMsg>>;
+export type ResponseComponent<AiMsg> = FC<StreamResponseComponentProps<AiMsg>> | FC<FetchResponseComponentProps<AiMsg>>;
 
 export type PromptComponentProps = {
     uid: string;

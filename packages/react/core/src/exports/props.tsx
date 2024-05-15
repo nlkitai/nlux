@@ -1,4 +1,4 @@
-import {ConversationOptions, EventsMap, LayoutOptions, PromptBoxOptions} from '@nlux/core';
+import {ConversationOptions, EventsMap, LayoutOptions, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../shared/src/types/conversation';
@@ -14,7 +14,7 @@ export type AiChatProps<AiMsg> = {
      * You can either provide a standard adapter from @nlux or create a custom adapter.
      * For more information, please visit — https://nlux.dev/learn/adapters
      */
-    adapter: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>;
+    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>;
 
     /**
      * A map of event handlers.
