@@ -7,15 +7,21 @@ import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {AiChat, ChatItem, FetchResponseComponentProps, StreamResponseComponentProps} from '@nlux-dev/react/src';
 import './App.css';
+import {useCallback, useState} from 'react';
 
 function App() {
+    const [dataTransferMode, setDataTransferMode] = useState<'fetch' | 'stream'>('fetch');
+    const onDataTransferModeChange = useCallback((e) => {
+        setDataTransferMode(e.target.value as 'fetch' | 'stream');
+    }, [setDataTransferMode]);
+
     const nlBridgeAdapter = useNlbridgeChatAdapter({
         url: 'http://localhost:8899/',
     });
 
     const langChainAdapter = useChatLangChainChatAdapter({
         url: 'https://pynlux.api.nlux.ai/einbot',
-        dataTransferMode: 'stream',
+        dataTransferMode,
         useInputSchema: true,
     });
 
@@ -66,83 +72,89 @@ function App() {
     ];
 
     return (
-        <AiChat
-            // adapter={nlBridgeAdapter}
-            // adapter={openAiAdapter}
-            adapter={langChainAdapter}
-            // adapter={hfAdapter}
-            // initialConversation={initialConversation}
-            promptBoxOptions={{
-                placeholder: 'Type your prompt here',
-                autoFocus: true,
-                // submitShortcut: 'CommandEnter',
-            }}
-            layoutOptions={{
-                width: 400,
-                height: 300,
-            }}
-            conversationOptions={{
-                // autoScroll: false,
-            }}
-            messageOptions={{
-                markdownLinkTarget: 'blank',
-                // syntaxHighlighter: highlighter,
-                // showCodeBlockCopyButton: false,
-                // streamingAnimationSpeed: 100,
-                promptComponent: ({prompt}) => {
-                    return (
-                        <div>
-                            <div>{prompt}</div>
-                            <div style={{
-                                backgroundColor: 'lightgreen',
-                                padding: 10,
-                                borderRadius: 10,
-                                marginTop: 10,
-                                fontSize: '0.8em',
-                                textAlign: 'center',
-                            }}>Custom Prompt Component
+        <>
+            <select value={dataTransferMode} onChange={onDataTransferModeChange}>
+                <option value="fetch">Fetch</option>
+                <option value="stream">Stream</option>
+            </select>
+            <AiChat
+                // adapter={nlBridgeAdapter}
+                // adapter={openAiAdapter}
+                adapter={langChainAdapter}
+                // adapter={hfAdapter}
+                // initialConversation={initialConversation}
+                promptBoxOptions={{
+                    placeholder: 'Type your prompt here',
+                    autoFocus: true,
+                    // submitShortcut: 'CommandEnter',
+                }}
+                layoutOptions={{
+                    width: 400,
+                    height: 300,
+                }}
+                conversationOptions={{
+                    // autoScroll: false,
+                }}
+                messageOptions={{
+                    markdownLinkTarget: 'blank',
+                    // syntaxHighlighter: highlighter,
+                    // showCodeBlockCopyButton: false,
+                    // streamingAnimationSpeed: 100,
+                    promptComponent: ({prompt}) => {
+                        return (
+                            <div>
+                                <div>{prompt}</div>
+                                <div style={{
+                                    backgroundColor: 'lightgreen',
+                                    padding: 10,
+                                    borderRadius: 10,
+                                    marginTop: 10,
+                                    fontSize: '0.8em',
+                                    textAlign: 'center',
+                                }}>Custom Prompt Component
+                                </div>
                             </div>
-                        </div>
-                    );
-                },
-                responseComponent: (props) => {
-                    const {dataTransferMode} = props;
-                    const propsForFetch = props as FetchResponseComponentProps<string>;
-                    const propsForStream = props as StreamResponseComponentProps<string>;
+                        );
+                    },
+                    responseComponent: (props) => {
+                        const {dataTransferMode} = props;
+                        const propsForFetch = props as FetchResponseComponentProps<string>;
+                        const propsForStream = props as StreamResponseComponentProps<string>;
 
-                    console.log('Response Component Props');
-                    console.dir(props);
+                        console.log('Response Component Props');
+                        console.dir(props);
 
-                    return (
-                        <>
-                            {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
-                            {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
-                            <div style={{
-                                backgroundColor: 'lightblue',
-                                padding: 10,
-                                borderRadius: 10,
-                                marginTop: 10,
-                                fontSize: '0.8em',
-                                textAlign: 'center',
-                            }}>Custom Response Component
-                            </div>
-                        </>
-                    );
-                },
-            }}
-            personaOptions={{
-                user: {
-                    name: 'Mr User',
-                    // picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
-                    picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
-                },
-                bot: {
-                    name: 'Harry Botter',
-                    picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
-                    tagline: 'Your friendly AI assistant',
-                },
-            }}
-        />
+                        return (
+                            <>
+                                {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
+                                {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
+                                <div style={{
+                                    backgroundColor: 'lightblue',
+                                    padding: 10,
+                                    borderRadius: 10,
+                                    marginTop: 10,
+                                    fontSize: '0.8em',
+                                    textAlign: 'center',
+                                }}>Custom Response Component
+                                </div>
+                            </>
+                        );
+                    },
+                }}
+                personaOptions={{
+                    user: {
+                        name: 'Mr User',
+                        // picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+                        picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
+                    },
+                    bot: {
+                        name: 'Harry Botter',
+                        picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                        tagline: 'Your friendly AI assistant',
+                    },
+                }}
+            />
+        </>
     );
 }
 
