@@ -134,7 +134,6 @@ Learn more on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).
 * You can use `NLUX` in your personal projects.
 * You can use `NLUX` in commercial projects.
 * You can modify `NLUX` and publish your changes under the same license.
-
 * You **cannot** feed `NLUX`'s source code as part of a dataset to train AI models or as input for code
   translation tools.
 
