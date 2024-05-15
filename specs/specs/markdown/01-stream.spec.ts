@@ -1,4 +1,4 @@
-import {beforeEach, describe, expect, it} from 'vitest';
+import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/stream/streamParser';
 import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
 import {waitForMilliseconds} from '../../utils/wait';
@@ -35,6 +35,41 @@ describe('MD Stream Parser Streaming', () => {
             expect(rootElement.innerHTML).toBe('<p>Hello</p>');
 
             streamRenderer.complete!();
+        });
+    });
+
+    describe('onComplete', () => {
+        it('should call the onComplete callback when the stream is completed', async () => {
+            const onComplete = vi.fn();
+            streamRenderer = createMdStreamRenderer(rootElement, undefined, {onComplete});
+
+            streamRenderer.next('H');
+            await waitForMilliseconds(50);
+            expect(rootElement.innerHTML).toBe('<p>H</p>');
+            expect(onComplete).not.toHaveBeenCalled();
+
+            streamRenderer.next('i');
+            await waitForMilliseconds(50);
+            expect(rootElement.innerHTML).toBe('<p>Hi</p>');
+            expect(onComplete).not.toHaveBeenCalled();
+
+            streamRenderer.complete!();
+            await waitForMilliseconds(50);
+            expect(onComplete).toHaveBeenCalled();
+        });
+
+        it('Should be called automatically after 2 seconds from last character if stream is not closed', async () => {
+            const onComplete = vi.fn();
+            streamRenderer = createMdStreamRenderer(rootElement, undefined, {onComplete});
+
+            streamRenderer.next('Hi');
+            await waitForMilliseconds(50);
+
+            expect(rootElement.innerHTML).toBe('<p>Hi</p>');
+            expect(onComplete).not.toHaveBeenCalled();
+
+            await waitForMilliseconds(2200);
+            expect(onComplete).toHaveBeenCalled();
         });
     });
 

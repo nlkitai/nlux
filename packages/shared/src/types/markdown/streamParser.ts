@@ -1,15 +1,15 @@
-import {HighlighterExtension} from '../../../../js/core/src/exports/aiChat/highlighter/highlighter';
-import {IObserver} from '../../../../js/core/src/exports/bus/observer';
-import {CallbackFunction} from '../callbackFunction';
+import {HighlighterExtension, IObserver} from '../../../../js/core/src';
 
 export type StreamParser = (
     root: HTMLElement,
     syntaxHighlighter?: HighlighterExtension,
 ) => IObserver<string>;
 
-export type StandardStreamParserOutput = IObserver<string> & {
-    onComplete(completeCallback: CallbackFunction): void;
-}
+export type StandardStreamParserOutput = {
+    next(value: string): void;
+    complete(): void;
+    error(error: Error): void;
+};
 
 export type StandardStreamParser = (
     root: HTMLElement,
@@ -19,5 +19,6 @@ export type StandardStreamParser = (
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
+        onComplete?: () => void;
     },
 ) => StandardStreamParserOutput;

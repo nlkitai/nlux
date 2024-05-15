@@ -98,6 +98,12 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
     private actionsOnDomReady: (() => void)[] = [];
 
     private compEventGetter = (eventName: EventsType) => {
+        if (this.destroyed) {
+            // Ignore event calls on destroyed components
+            return () => {
+            };
+        }
+
         const callback = this.rendererEventListeners.get(eventName as EventsType);
         if (!callback) {
             throw new NluxError({

@@ -28,6 +28,7 @@ export const createMarkdownStreamParser = (
             showCodeBlockCopyButton: options?.showCodeBlockCopyButton,
             skipStreamingAnimation: options?.skipStreamingAnimation,
             streamingAnimationSpeed: options?.streamingAnimationSpeed,
+            onComplete: options?.onComplete,
         },
     );
 
@@ -36,9 +37,7 @@ export const createMarkdownStreamParser = (
             nluxMarkdownStreamRenderer.next(value);
         },
         complete() {
-            if (nluxMarkdownStreamRenderer.complete) {
-                nluxMarkdownStreamRenderer.complete();
-            }
+            nluxMarkdownStreamRenderer.complete();
         },
     };
 };

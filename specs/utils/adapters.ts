@@ -8,7 +8,7 @@ export const createAdapterController = <AiMsg = string>({
     let resolvePromise: Function | null = null;
     let rejectPromise: Function | null = null;
     let lastMessageSent: string | null = null;
-    let streamTextObserver: StreamingAdapterObserver | null = null;
+    let streamObserver: StreamingAdapterObserver<AiMsg> | null = null;
     let extrasFromLastMessage: ChatAdapterExtras<AiMsg> | undefined | null = null;
 
     let fetchTextMock = vi.fn();
@@ -29,10 +29,12 @@ export const createAdapterController = <AiMsg = string>({
     };
 
     const createNewStreamTextMock = () => (
-        message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>,
+        message: string,
+        observer: StreamingAdapterObserver<AiMsg>,
+        extras: ChatAdapterExtras<AiMsg>,
     ) => {
         lastMessageSent = message;
-        streamTextObserver = observer;
+        streamObserver = observer;
         extrasFromLastMessage = extras;
 
         streamTextMock(message, observer);
@@ -67,16 +69,16 @@ export const createAdapterController = <AiMsg = string>({
             }
         },
         next: (message: string) => {
-            streamTextObserver && streamTextObserver.next(message);
+            streamObserver && streamObserver.next(message as AiMsg);
         },
         complete: () => {
-            streamTextObserver && streamTextObserver.complete();
+            streamObserver && streamObserver.complete();
             if (adapter.streamText) {
                 adapter.streamText = createNewStreamTextMock();
             }
         },
         error: (error: Error) => {
-            streamTextObserver && streamTextObserver.error(error);
+            streamObserver && streamObserver.error(error);
             if (adapter.streamText) {
                 adapter.streamText = createNewStreamTextMock();
             }
