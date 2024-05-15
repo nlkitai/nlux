@@ -82,6 +82,14 @@ Please visit each package's NPM page for information on how to use it.
 * For developer documentation, examples, and API reference ― please visit:  
   [nlux.dev](https://nlux.dev/)
 
+Docs website `nlux.dev` only covers the stable release `v1.x`
+
+`NLUX` `v2.x-beta` has just been released **for beta testing**, with major improvements and new features — such as
+[custom renderers](https://github.com/nluxai/nlux/issues/35#issuecomment-2112413646) for AI messages.
+The docs website for `v2.x-beta` will be available soon. Meanwhile, you can refer to TS type
+definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
+you are using the latest beta.
+
 ## Design Principles ⚜️
 
 The following design principles guide the development of `NLUX`:
@@ -121,7 +129,7 @@ cross platforms, with a focus on performance and usability.
 ## License 📃
 
 `NLUX` is licensed under Mozilla Public License Version 2.0 with restriction to use as
-parts of a training dataset to develop or improve AI models, or as an input for code
+part of a training dataset to develop or improve AI models, or as an input for code
 translation tools.
 
 > Paragraphs (3.6) and (3.7) were added to the original MPL 2.0 license.  
