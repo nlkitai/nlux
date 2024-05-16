@@ -25,4 +25,9 @@
 
     --nlux-border-width: 1px;
     --nlux-box-shadow: 0 0 2px rgb(0 0 0 / 30%);
+
+    --nlux-chatItem-avatar-width: 50px;
+    --nlux-welcomeMessage-avatar-width: 50px;
+
+    --nlux-chatItem-alignItems: flex-start;
 }

@@ -11,4 +11,8 @@
         font-size: var(--nlux-font-size-l);
         font-weight: bold;
     }
+
+    > .nlux-comp-avtr {
+        width: var(--nlux-welcomeMessage-avatar-width, 60px);
+    }
 }

@@ -37,7 +37,6 @@
 
         justify-content: center;
         width: 65px;
-        padding: var(--nlux-padding) var(--nlux-padding-l);
         cursor: pointer;
         color: var(--nlux-button-text-color);
         border-width: var(--nlux-border-width);
@@ -48,6 +47,7 @@
 
         > .nlux_sndIcn {
             width: 100%;
+            max-width: 24px;
 
             > .snd_icn_ctn {
                 display: inline-block;

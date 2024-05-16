@@ -1,28 +1,33 @@
 .nlux-AiChat-root.nlux-theme-nova {
-    --nlux-font-family: 'IBM Plex Sans';
+    --nlux-font-family: 'Inter';
     --nlux-mono-font-family: monospace;
 
     --nlux-font-weight: 400;
-    --nlux-line-height: 1.2;
+    --nlux-line-height: 1.4;
 
     --nlux-font-size: 1rem;
     --nlux-font-size-s: 0.8rem;
     --nlux-font-size-l: 1.2rem;
 
-    --nlux-padding-xs: 0.1rem;
-    --nlux-padding-s: 0.3rem;
-    --nlux-padding: 0.6rem;
-    --nlux-padding-m: 0.7rem;
-    --nlux-padding-l: 0.9rem;
+    --nlux-padding-xs: 0.4rem;
+    --nlux-padding-s: 0.7rem;
+    --nlux-padding: 1rem;
+    --nlux-padding-m: 1.3em;
+    --nlux-padding-l: 1.6rem;
 
     --nlux-flex-gap: 0.8rem;
 
-    --nlux-border-radius-xs: 4px;
-    --nlux-border-radius-s: 6px;
-    --nlux-border-radius: 8px;
-    --nlux-border-radius-m: 10px;
-    --nlux-border-radius-l: 12px;
+    --nlux-border-radius-xs: 6px;
+    --nlux-border-radius-s: 8px;
+    --nlux-border-radius: 10px;
+    --nlux-border-radius-m: 12px;
+    --nlux-border-radius-l: 14px;
 
     --nlux-border-width: 1px;
     --nlux-box-shadow: none;
+
+    --nlux-chatItem-avatar-width: 32px;
+    --nlux-welcomeMessage-avatar-width: 45px;
+
+    --nlux-chatItem-alignItems: flex-end;
 }

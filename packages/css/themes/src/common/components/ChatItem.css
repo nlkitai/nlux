@@ -1,10 +1,11 @@
 .nlux-comp-cht_itm {
     display: flex;
-    align-items: flex-start;
+    align-items: var(--nlux-chatItem-alignItems);
     margin-bottom: 0.5em;
     gap: 0.5em;
 
     > .nlux-comp-msg {
+        overflow: hidden;
         align-items: flex-start;
         flex: 1;
         flex-direction: column;
@@ -26,7 +27,6 @@
     padding-left: 65px;
 
     > .nlux-comp-msg {
-        margin-right: var(--nlux-padding-s);
         color: var(--nlux-message-sent-text-color);
         border-color: var(--nlux-message-sent-border-color);
         background-color: var(--nlux-message-sent-background-color);
@@ -38,7 +38,6 @@
     padding-right: 65px;
 
     > .nlux-comp-msg {
-        margin-left: var(--nlux-padding-s);
         color: var(--nlux-message-received-text-color);
         border-color: var(--nlux-message-received-border-color);
         background-color: var(--nlux-message-received-background-color);

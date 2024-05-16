@@ -185,7 +185,7 @@ const responseComponent: ResponseComponent<string> = (props) => {
             {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
             <div style={{
                 backgroundColor: 'lightblue',
-                padding: 10,
+                padding: '10px 0',
                 borderRadius: 10,
                 marginTop: 10,
                 fontSize: '0.8em',
