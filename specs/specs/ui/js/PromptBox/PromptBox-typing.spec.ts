@@ -15,7 +15,7 @@ describe('When a prompt box component is rendered and is in typing status', () =
         expect(html).toEqual(expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-typing">'));
         expect(html).toEqual(expect.stringContaining('<textarea placeholder=""></textarea>'));
         expect(html).toEqual(
-            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn"><svg'),
+            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn">'),
         );
     });
 

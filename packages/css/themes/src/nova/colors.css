@@ -1,0 +1,91 @@
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-light {
+    --nlux-background-color: #ffffff;
+    --nlux-primaryText-color: #09090b;
+    --nlux-placeholderText-color: #5f5f5f;
+
+    --nlux-messageReceivedBackground-color: #f4f6f9;
+    --nlux-messageReceivedText-color: var(--nlux-primaryText-color);
+
+    --nlux-messageSentBackground-color: #18181b;
+    --nlux-messageSentText-color: #ffffff;
+
+    --nlux-icon-primary-color: #09090b;
+    --nlux-icon-secondary-color: #5f5f5f;
+
+    --nlux-divider-color: rgba(235, 235, 235, 0.5);
+}
+
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-dark {
+    --nlux-background-color: #151515;
+    --nlux-primaryText-color: #ffffff;
+    --nlux-placeholderText-color: #71717a;
+
+    --nlux-messageReceivedBackground-color: #494949;
+    --nlux-messageReceivedText-color: var(--nlux-primaryText-color);
+
+    --nlux-messageSentBackground-color: #323232;
+    --nlux-messageSentText-color: #ffffff;
+
+    --nlux-icon-primary-color: #ffffff;
+    --nlux-icon-secondary-color: #71717a;
+
+    --nlux-divider-color: rgba(235, 235, 235, 0.5);
+}
+
+.nlux-AiChat-root.nlux-theme-nova {
+    --nlux-text-color: var(--nlux-primaryText-color);
+
+    --nlux-input-background-color: transparent;
+    --nlux-input-border-color: transparent;
+    --nlux-input-text-color: var(--nlux-text-color);
+    --nlux-input-placeholder-color: var(--nlux-placeholderText-color);
+
+    --nlux-input-active-background-color: transparent;
+    --nlux-input-active-border-color: transparent;
+    --nlux-input-active-text-color: var(--nlux-text-color);
+    --nlux-input-active-placeholder-color: var(--nlux-placeholderText-color);
+
+    --nlux-input-disabled-background-color: transparent;
+    --nlux-input-disabled-border-color: transparent;
+    --nlux-input-disabled-text-color: var(--nlux-text-color);
+    --nlux-input-disabled-placeholder-color: var(--nlux-placeholderText-color);
+
+    --nlux-button-background-color: transparent;
+    --nlux-button-border-color: transparent;
+    --nlux-button-text-color: var(--nlux-icon-primary-color);
+
+    --nlux-button-active-background-color: transparent;
+    --nlux-button-active-border-color: transparent;
+    --nlux-button-active-text-color: var(--nlux-icon-primary-color);
+
+    --nlux-button-disabled-background-color: transparent;
+    --nlux-button-disabled-border-color: transparent;
+    --nlux-button-disabled-text-color: var(--nlux-icon-secondary-color);
+
+    --nlux-message-sent-background-color: var(--nlux-messageSentBackground-color);
+    --nlux-message-sent-border-color: var(--nlux-messageSentBackground-color);
+    --nlux-message-sent-text-color: var(--nlux-messageSentText-color);
+
+    --nlux-message-sent-active-background-color: var(--nlux-messageSentBackground-color);
+    --nlux-message-sent-active-border-color: var(--nlux-messageSentBackground-color);
+    --nlux-message-sent-active-text-color: var(--nlux-messageSentText-color);
+
+    --nlux-message-received-background-color: var(--nlux-messageReceivedBackground-color);
+    --nlux-message-received-border-color: var(--nlux-messageReceivedBackground-color);
+    --nlux-message-received-text-color: var(--nlux-messageReceivedText-color);
+
+    --nlux-message-received-active-background-color: var(--nlux-messageReceivedBackground-color);
+    --nlux-message-received-active-border-color: var(--nlux-messageReceivedBackground-color);
+    --nlux-message-received-active-text-color: var(--nlux-messageReceivedText-color);
+
+    --nlux-code-block-background-color: #303530;
+    --nlux-code-block-hover-background-color: #404240;
+    --nlux-code-block-text-color: #dde5e2ff;
+
+    --nlux-inline-code-background-color: #d5dad1;
+    --nlux-inline-code-text-color: #18210c;
+
+    --nlux-exceptions-box-error-background-color: #d05858;
+    --nlux-exceptions-box-error-border-color: #d05858;
+    --nlux-exceptions-box-error-text-color: #ffffff;
+}

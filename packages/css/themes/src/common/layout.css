@@ -33,13 +33,13 @@
             overflow-x: hidden;
             overflow-y: auto;
             flex: 1;
-            margin-bottom: 0.5em;
-            padding: 0;
+            padding: 0 0 var(--nlux-padding) 0;
         }
 
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
-            padding: 0;
+            padding: var(--nlux-padding) 0 0 0;
+            border-top: var(--nlux-border-width) solid var(--nlux-divider-color);
             gap: var(--nlux-flex-gap);
         }
     }

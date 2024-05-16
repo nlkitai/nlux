@@ -14,7 +14,7 @@ describe('When a prompt box component is rendered and is in waiting status', () 
             expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-waiting">'),
         );
         expect(html).toEqual(
-            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn"><svg'));
+            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn">'));
     });
 
     it('the submit button should be disabled', () => {

@@ -1,19 +1,48 @@
 import '@nlux-dev/themes/src/luna/theme.css';
-// import {highlighter} from '@nlux-dev/highlighter/src';
+import '@nlux-dev/themes/src/nova/theme.css';
 // import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
+import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
 import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
-import {AiChat, ChatItem, FetchResponseComponentProps, StreamResponseComponentProps} from '@nlux-dev/react/src';
+import {
+    AiChat,
+    ChatItem,
+    FetchResponseComponentProps,
+    ResponseComponent,
+    StreamResponseComponentProps,
+} from '@nlux-dev/react/src';
 import './App.css';
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 function App() {
+    const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [dataTransferMode, setDataTransferMode] = useState<'fetch' | 'stream'>('fetch');
-    const onDataTransferModeChange = useCallback((e) => {
-        setDataTransferMode(e.target.value as 'fetch' | 'stream');
-    }, [setDataTransferMode]);
+    const [theme, setTheme] = useState<'luna' | 'nova'>('nova');
+    const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('auto');
+
+    const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
+        [setUseCustomResponseComponent],
+    );
+
+    const onThemeChange = useCallback((e) => setTheme(e.target.value as 'luna' | 'nova'), [setTheme]);
+    const onColorSchemeChange = useCallback((e) => setColorScheme(e.target.value as 'light' | 'dark' | 'auto'),
+        [setColorScheme],
+    );
+    const onDataTransferModeChange = useCallback((e) => setDataTransferMode(e.target.value as 'fetch' | 'stream'),
+        [setDataTransferMode],
+    );
+
+    useEffect(() => {
+        if (colorScheme === 'auto') {
+            const osColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'white';
+        } else {
+            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
+        }
+
+    }, [colorScheme]);
 
     const nlBridgeAdapter = useNlbridgeChatAdapter({
         url: 'http://localhost:8899/',
@@ -73,10 +102,30 @@ function App() {
 
     return (
         <>
-            <select value={dataTransferMode} onChange={onDataTransferModeChange}>
-                <option value="fetch">Fetch</option>
-                <option value="stream">Stream</option>
-            </select>
+            <div style={{marginBottom: 10, backgroundColor: 'lightgray', padding: 10, borderRadius: 10}}>
+                <label>
+                    <input
+                        type="checkbox"
+                        checked={useCustomResponseComponent}
+                        onChange={onUseCustomResponseComponentChange}
+                    />
+                    Custom Response Component
+                </label>
+                <br/>
+                <select value={dataTransferMode} onChange={onDataTransferModeChange}>
+                    <option value="fetch">Fetch</option>
+                    <option value="stream">Stream</option>
+                </select>
+                <select value={theme} onChange={onThemeChange}>
+                    <option value="luna">Luna</option>
+                    <option value="nova">Nova</option>
+                </select>
+                <select value={colorScheme} onChange={onColorSchemeChange}>
+                    <option value="auto">Auto</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
@@ -89,63 +138,27 @@ function App() {
                     // submitShortcut: 'CommandEnter',
                 }}
                 displayOptions={{
-                    width: 400,
-                    height: 300,
+                    width: 500,
+                    height: 400,
+                    themeId: theme,
+                    colorScheme,
                 }}
                 conversationOptions={{
                     // autoScroll: false,
                 }}
                 messageOptions={{
                     markdownLinkTarget: 'blank',
-                    // syntaxHighlighter: highlighter,
+                    syntaxHighlighter: highlighter,
                     // showCodeBlockCopyButton: false,
                     // streamingAnimationSpeed: 100,
-                    promptComponent: ({prompt}) => {
-                        return (
-                            <div>
-                                <div>{prompt}</div>
-                                <div style={{
-                                    backgroundColor: 'lightgreen',
-                                    padding: 10,
-                                    borderRadius: 10,
-                                    marginTop: 10,
-                                    fontSize: '0.8em',
-                                    textAlign: 'center',
-                                }}>Custom Prompt Component
-                                </div>
-                            </div>
-                        );
-                    },
-                    responseComponent: (props) => {
-                        const {dataTransferMode} = props;
-                        const propsForFetch = props as FetchResponseComponentProps<string>;
-                        const propsForStream = props as StreamResponseComponentProps<string>;
-
-                        console.log('Response Component Props');
-                        console.dir(props);
-
-                        return (
-                            <>
-                                {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
-                                {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
-                                <div style={{
-                                    backgroundColor: 'lightblue',
-                                    padding: 10,
-                                    borderRadius: 10,
-                                    marginTop: 10,
-                                    fontSize: '0.8em',
-                                    textAlign: 'center',
-                                }}>Custom Response Component
-                                </div>
-                            </>
-                        );
-                    },
+                    responseComponent: useCustomResponseComponent ? responseComponent : undefined,
+                    promptComponent: undefined,
                 }}
                 personaOptions={{
                     user: {
                         name: 'Mr User',
-                        // picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
-                        picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
+                        picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+                        // picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
                     },
                     bot: {
                         name: 'Harry Botter',
@@ -157,5 +170,43 @@ function App() {
         </>
     );
 }
+
+const responseComponent: ResponseComponent<string> = (props) => {
+    const {dataTransferMode} = props;
+    const propsForFetch = props as FetchResponseComponentProps<string>;
+    const propsForStream = props as StreamResponseComponentProps<string>;
+
+    console.log('Response Component Props');
+    console.dir(props);
+
+    return (
+        <>
+            {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
+            {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
+            <div style={{
+                backgroundColor: 'lightblue',
+                padding: 10,
+                borderRadius: 10,
+                marginTop: 10,
+                fontSize: '0.8em',
+                textAlign: 'center',
+                width: '100%',
+            }}>
+                <div>What do you think of this response?</div>
+                <div style={{
+                    display: 'flex',
+                    alignItems: 'stretch',
+                    justifyContent: 'center',
+                    gap: 5,
+                    marginTop: 10,
+                }}>
+                    <button>👍</button>
+                    <button>👎</button>
+                    <button>Retry</button>
+                </div>
+            </div>
+        </>
+    );
+};
 
 export default App;

@@ -4,7 +4,6 @@
     flex-direction: row;
     justify-content: center;
 
-    border: none;
     background-color: transparent;
     gap: var(--nlux-flex-gap);
 
@@ -48,7 +47,17 @@
         background-color: var(--nlux-button-background-color);
 
         > .nlux_sndIcn {
-            width: 80%;
+            width: 100%;
+
+            > .snd_icn_ctn {
+                display: inline-block;
+                width: 100%;
+                background-color: currentColor;
+                background-repeat: no-repeat;
+                background-size: contain;
+                mask: var(--nlux-send-icon);
+                aspect-ratio: 1;
+            }
         }
 
         > .nlux_msg_ldr {
