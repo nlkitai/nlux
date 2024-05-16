@@ -294,6 +294,7 @@ export class NluxRenderer<AiMsg> {
 
         let themeIdUpdated = false;
         let colorSchemeUpdated = false;
+
         if (props.hasOwnProperty('displayOptions')) {
             const newDisplayOptions: Partial<DisplayOptions> = {};
 
@@ -316,12 +317,13 @@ export class NluxRenderer<AiMsg> {
             }
 
             if (Object.keys(newDisplayOptions).length > 0) {
-                this.theDisplayOptions = {
+                const displayOptions: DisplayOptions = {
                     ...this.theDisplayOptions,
                     ...newDisplayOptions,
                 };
 
-                this.setRoomElementDimensions(newDisplayOptions);
+                this.theDisplayOptions = displayOptions;
+                this.setRoomElementDimensions(displayOptions);
             }
         }
 
@@ -420,9 +422,6 @@ export class NluxRenderer<AiMsg> {
         if (!this.rootElement) {
             return;
         }
-
-        this.rootElement.style.minWidth = '280px';
-        this.rootElement.style.minHeight = '280px';
 
         if (newDimensions.hasOwnProperty('width')) {
             this.rootElement.style.width = (typeof newDimensions.width === 'number') ? `${newDimensions.width}px` : (

@@ -1,5 +1,6 @@
 import '@nlux-dev/themes/src/luna/theme.css';
-import {ChatItem, createAiChat} from '@nlux-dev/core/src';
+import '@nlux-dev/themes/src/nova/theme.css';
+import {ChatItem, createAiChat, DisplayOptions} from '@nlux-dev/core/src';
 // import {highlighter} from '@nlux-dev/highlighter/src';
 // import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {createChatAdapter as createHuggingFaceChatAdapter} from '@nlux-dev/hf/src';
@@ -10,6 +11,9 @@ import './style.css';
 
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
+
+    let themeId: 'nova' | 'luna' = 'nova';
+    let colorScheme: 'light' | 'dark' = 'light';
 
     const nlBridgeAdapter = createNlbridgeChatAdapter<string>()
         .withUrl('http://localhost:8899/');
@@ -27,6 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const openAiAdapter = createOpenAiChatAdapter()
         .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
         .withDataTransferMode('stream');
+
+    const themeSelector = document.querySelector('#themeSelector') as HTMLSelectElement;
+    themeSelector.addEventListener('change', () => {
+        themeId = themeSelector.value as 'nova' | 'luna';
+        displayOptions.themeId = themeId;
+        aiChat.updateProps({displayOptions});
+    });
+
+    const colorSchemeSelector = document.querySelector('#colorSchemeSelector') as HTMLSelectElement;
+    colorSchemeSelector.addEventListener('change', () => {
+        colorScheme = colorSchemeSelector.value as 'light' | 'dark';
+        displayOptions.colorScheme = colorScheme;
+        aiChat.updateProps({displayOptions});
+        document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
+    });
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
@@ -53,16 +72,20 @@ document.addEventListener('DOMContentLoaded', () => {
         + 'This is a code block.';
 
     const initialConversation: ChatItem<string>[] = [
-        {
-            role: 'ai',
-            message: longMessage,
-        },
+        {role: 'ai', message: longMessage},
         {role: 'user', message: 'I need help with my account.'},
         {
             role: 'ai',
             message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
         },
     ];
+
+    const displayOptions: DisplayOptions = {
+        width: 600,
+        height: 400,
+        themeId,
+        colorScheme,
+    };
 
     const aiChat = createAiChat()
         // .withAdapter(nlBridgeAdapter)
@@ -77,10 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withConversationOptions({
             // autoScroll: false,
         })
-        .withDisplayOptions({
-            width: 400,
-            height: 300,
-        })
+        .withDisplayOptions(displayOptions)
         .withMessageOptions({
             markdownLinkTarget: 'blank',
             // syntaxHighlighter: highlighter,

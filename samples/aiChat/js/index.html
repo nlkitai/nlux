@@ -5,7 +5,20 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>AiChat + TS</title>
 </head>
-<body>
+<body style="display: flex; flex-direction: column;">
+<div style="
+        display: flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 10px 20px; margin: 20px; background-color: beige; border-radius: 10px;
+">
+    <select id="colorSchemeSelector">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+    <select id="themeSelector">
+        <option value="nova">Nova</option>
+        <option value="luna">Luna</option>
+    </select>
+</div>
 <div id="root"></div>
 <script src="/src/app.ts" type="module"></script>
 </body>
