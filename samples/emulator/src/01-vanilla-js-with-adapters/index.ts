@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withConversationOptions({
             historyPayloadSize: 3,
         })
-        .withLayoutOptions({
+        .withDisplayOptions({
             width: 500,
             height: 500,
         })

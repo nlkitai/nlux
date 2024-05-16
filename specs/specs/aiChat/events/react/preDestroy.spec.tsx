@@ -42,10 +42,11 @@ describe('<AiChat /> + events + preDestroy', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    events={{preDestroy: preDestroyCallback}}
                     className="test-class"
-                    layoutOptions={{
-                        width: '100%', height: 800,
+                    events={{preDestroy: preDestroyCallback}}
+                    displayOptions={{
+                        width: '100%',
+                        height: 800,
                     }}
                 />
             );
@@ -61,7 +62,7 @@ describe('<AiChat /> + events + preDestroy', () => {
             expect(preDestroyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {
+                    displayOptions: {
                         width: '100%', height: 800,
                     },
                 },
@@ -75,9 +76,11 @@ describe('<AiChat /> + events + preDestroy', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    events={{preDestroy: preDestroyCallback}}
                     className="test-class"
-                    layoutOptions={{width: '100%', height: 800}}
+                    events={{preDestroy: preDestroyCallback}}
+                    displayOptions={{
+                        width: '100%', height: 800,
+                    }}
                     initialConversation={[
                         {role: 'user', message: 'Hello'},
                         {role: 'ai', message: 'Hi'},
@@ -96,7 +99,7 @@ describe('<AiChat /> + events + preDestroy', () => {
             expect(preDestroyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {width: '100%', height: 800},
+                    displayOptions: {width: '100%', height: 800},
                     initialConversation: [
                         {role: 'user', message: 'Hello'},
                         {role: 'ai', message: 'Hi'},
@@ -119,7 +122,9 @@ describe('<AiChat /> + events + preDestroy', () => {
                     adapter={adapterController!.adapter}
                     events={{preDestroy: preDestroyCallback}}
                     className="test-class"
-                    layoutOptions={{width: '100%', height: 800}}
+                    displayOptions={{
+                        width: '100%', height: 800,
+                    }}
                     initialConversation={[
                         {role: 'user', message: 'Hello'},
                         {role: 'ai', message: 'Hi! How can I help you?'},
@@ -143,7 +148,9 @@ describe('<AiChat /> + events + preDestroy', () => {
             expect(preDestroyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {width: '100%', height: 800},
+                    displayOptions: {
+                        width: '100%', height: 800,
+                    },
                     initialConversation: [
                         {role: 'user', message: 'Hello'},
                         {role: 'ai', message: 'Hi! How can I help you?'},

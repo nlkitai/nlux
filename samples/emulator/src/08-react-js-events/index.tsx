@@ -86,7 +86,7 @@ const ExampleWrapper = () => {
                     conversationOptions={{
                         autoScroll: true,
                     }}
-                    layoutOptions={{
+                    displayOptions={{
                         height: 380,
                         width: 450,
                     }}

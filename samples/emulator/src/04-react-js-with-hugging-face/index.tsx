@@ -48,7 +48,7 @@ const ExampleWrapper = () => {
                     conversationOptions={{
                         autoScroll: true,
                     }}
-                    layoutOptions={{
+                    displayOptions={{
                         height,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.

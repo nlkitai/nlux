@@ -1,4 +1,4 @@
-import {ConversationOptions, EventsMap, LayoutOptions, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
+import {ConversationOptions, DisplayOptions, EventsMap, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../shared/src/types/conversation';
@@ -27,20 +27,15 @@ export type AiChatProps<AiMsg> = {
     className?: string;
 
     /**
-     * The theme ID to use.
-     * This should be the ID of a theme that has been loaded into the page.
-     */
-    themeId?: string;
-
-    /**
      * The initial conversation history to display.
+     * This is not a reactive prop! Changing it after the component is mounted will not update the conversation.
      */
     initialConversation?: ChatItem<AiMsg>[];
 
     /**
-     * Layout options.
+     * Display options, such as color scheme, width, etc.
      */
-    layoutOptions?: LayoutOptions;
+    displayOptions?: DisplayOptions;
 
     /**
      * Options for the conversation.

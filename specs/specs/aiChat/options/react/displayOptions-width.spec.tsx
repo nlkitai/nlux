@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + layoutOptions + width', () => {
+describe('<AiChat /> + displayOptions + width', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -39,7 +39,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             await waitForReactRenderCycle();
 
             // Act
-            rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
+            rerender(<AiChat adapter={adapterController!.adapter} displayOptions={{width: 500}}/>);
             await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
@@ -54,7 +54,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             await waitForReactRenderCycle();
 
             // Act
-            rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
+            rerender(<AiChat adapter={adapterController!.adapter} displayOptions={{width: '500px'}}/>);
             await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
@@ -66,7 +66,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
     describe('When the component is created with a width', () => {
         it('The width should be set with as a number at the root element', async () => {
             // Arrange
-            const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
+            const aiChat = <AiChat adapter={adapterController!.adapter} displayOptions={{width: 500}}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
@@ -79,7 +79,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
 
         it('The width should be set with as a string at the root element', async () => {
             // Arrange
-            const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>;
+            const aiChat = <AiChat adapter={adapterController!.adapter} displayOptions={{width: '500px'}}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
@@ -99,7 +99,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             await waitForReactRenderCycle();
 
             // Act
-            rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>);
+            rerender(<AiChat adapter={adapterController!.adapter} displayOptions={{width: 500}}/>);
             await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
@@ -114,7 +114,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
             await waitForReactRenderCycle();
 
             // Act
-            rerender(<AiChat adapter={adapterController!.adapter} layoutOptions={{width: '500px'}}/>);
+            rerender(<AiChat adapter={adapterController!.adapter} displayOptions={{width: '500px'}}/>);
             await waitForReactRenderCycle();
             const aiChatDom: HTMLElement = container.querySelector('.nlux-AiChat-root')!;
 
@@ -126,7 +126,7 @@ describe('<AiChat /> + layoutOptions + width', () => {
     describe('When the width is removed after the component is created', () => {
         it('No width should be set at the root element', async () => {
             // Arrange
-            const aiChat = <AiChat adapter={adapterController!.adapter} layoutOptions={{width: 500}}/>;
+            const aiChat = <AiChat adapter={adapterController!.adapter} displayOptions={{width: 500}}/>;
             const {rerender, container} = render(aiChat);
             await waitForReactRenderCycle();
 

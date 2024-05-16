@@ -53,7 +53,6 @@ const ExampleWrapper = () => {
             <div style={{height: '550px', width: '600px'}}>
                 <AiChat
                     key={key}
-                    className="ai-chat-emulator"
                     adapter={langServeAdapter}
                     personaOptions={{
                         bot: {
@@ -81,7 +80,8 @@ const ExampleWrapper = () => {
                         // streamingAnimationSpeed: null,
                         // streamingAnimationSpeed: 300,
                     }}
-                    layoutOptions={{
+                    displayOptions={{
+                        className: 'ai-chat-emulator',
                         height,
                     }}
                     messageOptions={{

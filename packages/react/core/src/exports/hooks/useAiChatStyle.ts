@@ -1,21 +1,21 @@
-import {LayoutOptions} from '@nlux/core';
+import {DisplayOptions} from '@nlux/core';
 import {CSSProperties, useMemo} from 'react';
 
-export const useAiChatStyle = (layoutOptions: LayoutOptions | undefined): CSSProperties => {
+export const useAiChatStyle = (displayOptions: DisplayOptions | undefined): CSSProperties => {
     return useMemo(() => {
         const result: CSSProperties = {
             minWidth: '280px',
             minHeight: '280px',
         };
 
-        if (layoutOptions?.width) {
-            result.width = layoutOptions.width;
+        if (displayOptions?.width) {
+            result.width = displayOptions.width;
         }
 
-        if (layoutOptions?.height) {
-            result.height = layoutOptions.height;
+        if (displayOptions?.height) {
+            result.height = displayOptions.height;
         }
 
         return result;
-    }, [layoutOptions?.width, layoutOptions?.height]);
+    }, [displayOptions?.width, displayOptions?.height]);
 };

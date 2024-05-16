@@ -24,13 +24,13 @@ const ExampleWrapper = () => {
             <div style={{height: '550px', width: '600px'}}>
                 <AiChat
                     key={key}
-                    className="ai-chat-emulator"
                     adapter={nlBridge}
                     conversationOptions={{
                         autoScroll: true,
                     }}
-                    layoutOptions={{
+                    displayOptions={{
                         height,
+                        className: 'ai-chat-emulator',
                     }}
                     promptBoxOptions={{
                         placeholder: 'How can I help you today?',

@@ -52,9 +52,15 @@ describe('createAiChat() + events + preDestroy', () => {
             const preDestroyCallback = vi.fn();
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .on('preDestroy', preDestroyCallback)
                 .withClassName('test-class')
-                .withLayoutOptions({width: '100%', height: 800});
+                .on('preDestroy', preDestroyCallback)
+                .withMessageOptions({
+                    skipStreamingAnimation: true,
+                })
+                .withDisplayOptions({
+                    width: '100%',
+                    height: 800,
+                });
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -67,7 +73,13 @@ describe('createAiChat() + events + preDestroy', () => {
             expect(preDestroyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {width: '100%', height: 800},
+                    messageOptions: {
+                        skipStreamingAnimation: true,
+                    },
+                    displayOptions: {
+                        width: '100%',
+                        height: 800,
+                    },
                 },
                 conversationHistory: [],
             });

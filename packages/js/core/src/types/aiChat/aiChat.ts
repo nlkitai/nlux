@@ -1,7 +1,7 @@
 import {ChatAdapterBuilder} from '../../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {ConversationOptions} from '../../exports/aiChat/options/conversationOptions';
-import {LayoutOptions} from '../../exports/aiChat/options/layoutOptions';
+import {DisplayOptions} from '../../exports/aiChat/options/displayOptions';
 import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
@@ -85,7 +85,7 @@ export interface IAiChat<AiMsg> {
      * This method should be called before mounting the chat component, and it should be called only once.
      *
      * @param {ChatAdapterBuilder} adapterBuilder The builder for the chat adapter.
-     **/
+     */
     withAdapter(adapterBuilder: ChatAdapterBuilder<AiMsg>): IAiChat<AiMsg>;
 
     /**
@@ -98,13 +98,21 @@ export interface IAiChat<AiMsg> {
     withClassName(className: string): IAiChat<AiMsg>;
 
     /**
-     * Enables providing conversation options to the chat component.
-     * The conversation options will be used to configure the conversation behavior.
+     * The conversation options will be used to configure the conversation behavior and display.
      * This method can be called before mounting the chat component, and it can be called only once.
      *
      * @param {ConversationOptions} conversationOptions The conversation options to be used.
      */
     withConversationOptions(conversationOptions: ConversationOptions): IAiChat<AiMsg>;
+
+    /**
+     * Enables providing display options to the chat component. The display options will be used to configure the
+     * layout of the chat component. When no display options are provided, the default display options will be used.
+     * This method can be called before mounting the chat component, and it can be called only once.
+     *
+     * @param {DisplayOptions} displayOptions The display options to be used.
+     */
+    withDisplayOptions(displayOptions: DisplayOptions): IAiChat<AiMsg>;
 
     /**
      * Enables providing an initial conversation to the chat component.
@@ -115,15 +123,6 @@ export interface IAiChat<AiMsg> {
      * @returns {IAiChat}
      */
     withInitialConversation(initialConversation: ChatItem<AiMsg>[]): IAiChat<AiMsg>;
-
-    /**
-     * Enables providing layout options to the chat component. The layout options will be used to configure the
-     * layout of the chat component. When no layout options are provided, the default layout options will be used.
-     * This method can be called before mounting the chat component, and it can be called only once.
-     *
-     * @param {LayoutOptions} layoutOptions The layout options to be used.
-     */
-    withLayoutOptions(layoutOptions: LayoutOptions): IAiChat<AiMsg>;
 
     /**
      * Enables providing message options to the chat component.
@@ -151,12 +150,4 @@ export interface IAiChat<AiMsg> {
      * @param {PromptBoxOptions} promptBoxOptions The prompt box options to be used.
      */
     withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat<AiMsg>;
-
-    /**
-     * Enables providing a theme to the chat component.
-     * This method can be called before mounting the chat component, and it can be called only once.
-     *
-     * @param {string} themeId The id of the theme to be used.
-     */
-    withThemeId(themeId: string): IAiChat<AiMsg>;
 }

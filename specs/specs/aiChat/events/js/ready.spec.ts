@@ -54,7 +54,7 @@ describe('createAiChat() + events + ready', () => {
                     {role: 'user', message: 'Hello'},
                     {role: 'ai', message: 'Hi'},
                 ])
-                .withLayoutOptions({
+                .withDisplayOptions({
                     width: '100%',
                     height: 800,
                 });
@@ -67,7 +67,7 @@ describe('createAiChat() + events + ready', () => {
             expect(readyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {
+                    displayOptions: {
                         width: '100%',
                         height: 800,
                     },

@@ -4,7 +4,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + layoutOptions + width', () => {
+describe('createAiChat() + displayOptions + width', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -44,7 +44,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({layoutOptions: {width: 500}});
+                aiChat.updateProps({displayOptions: {width: 500}});
                 await waitForRenderCycle();
                 const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -59,7 +59,7 @@ describe('createAiChat() + layoutOptions + width', () => {
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({layoutOptions: {width: '500px'}});
+                aiChat.updateProps({displayOptions: {width: '500px'}});
                 await waitForRenderCycle();
                 const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -72,7 +72,7 @@ describe('createAiChat() + layoutOptions + width', () => {
     describe('When the component is created with a width', () => {
         it('The width should be set with as a number at the root element', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter).withLayoutOptions({width: 500});
+            aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({width: 500});
 
             // Act
             aiChat.mount(rootElement);
@@ -85,7 +85,7 @@ describe('createAiChat() + layoutOptions + width', () => {
 
         it('The width should be set with as a string at the root element', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter).withLayoutOptions({width: '500px'});
+            aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({width: '500px'});
 
             // Act
             aiChat.mount(rootElement);
@@ -99,12 +99,12 @@ describe('createAiChat() + layoutOptions + width', () => {
         describe('When a width is updated after the component is created', () => {
             it('The width should be updated with as a number at the root element', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withLayoutOptions({width: 500});
+                aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({width: 500});
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({layoutOptions: {width: 600}});
+                aiChat.updateProps({displayOptions: {width: 600}});
                 await waitForRenderCycle();
                 const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -114,12 +114,12 @@ describe('createAiChat() + layoutOptions + width', () => {
 
             it('The width should be updated with as a string at the root element', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withLayoutOptions({width: 500});
+                aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({width: 500});
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({layoutOptions: {width: '600px'}});
+                aiChat.updateProps({displayOptions: {width: '600px'}});
                 await waitForRenderCycle();
                 const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -131,12 +131,12 @@ describe('createAiChat() + layoutOptions + width', () => {
         describe('When the width is removed after the component is created', () => {
             it('No width should be set at the root element', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withLayoutOptions({width: 500});
+                aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({width: 500});
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({layoutOptions: {width: undefined}});
+                aiChat.updateProps({displayOptions: {width: undefined}});
                 await waitForRenderCycle();
                 const aiChatDom: HTMLElement = rootElement.querySelector('.nlux-AiChat-root')!;
 

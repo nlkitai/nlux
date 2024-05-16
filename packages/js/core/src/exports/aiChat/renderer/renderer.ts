@@ -12,32 +12,29 @@ import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents'
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {ConversationOptions} from '../options/conversationOptions';
-import {LayoutOptions} from '../options/layoutOptions';
+import {DisplayOptions} from '../options/displayOptions';
 import {MessageOptions} from '../options/messageOptions';
 import {PersonaOptions} from '../options/personaOptions';
 import {PromptBoxOptions} from '../options/promptBoxOptions';
 
 export class NluxRenderer<AiMsg> {
-    private static readonly defaultThemeId = 'luna';
-
     private readonly __context: ControllerContext<AiMsg>;
 
     private chatRoom: CompChatRoom<AiMsg> | null = null;
     private exceptionsBox: CompExceptionsBox<AiMsg> | null = null;
     private isDestroyed: boolean = false;
     private isMounted: boolean = false;
-    private readonly rootClassName: string = 'nlux-AiChat-root';
     private rootCompId: string | null = null;
     private rootElement: HTMLElement | null = null;
     private rootElementInitialClassName: string | null;
+
     private theClassName: string | null = null;
     private theConversationOptions: ConversationOptions = {};
+    private theDisplayOptions: DisplayOptions = {};
     private theInitialConversationContent: ChatItem<AiMsg>[] | null = null;
-    private theLayoutOptions: LayoutOptions = {};
     private theMessageOptions: MessageOptions<AiMsg> = {};
     private thePersonasOptions: PersonaOptions = {};
     private thePromptBoxOptions: PromptBoxOptions = {};
-    private theThemeId: string;
 
     constructor(
         context: ControllerContext<AiMsg>,
@@ -60,14 +57,16 @@ export class NluxRenderer<AiMsg> {
         this.chatRoom = null;
 
         this.theClassName = props?.className ?? null;
-        this.theThemeId = props?.themeId ?? NluxRenderer.defaultThemeId;
-
-        this.theLayoutOptions = props?.layoutOptions ?? {};
+        this.theDisplayOptions = props?.displayOptions ?? {};
         this.theConversationOptions = props?.conversationOptions ?? {};
         this.theMessageOptions = props?.messageOptions ?? {};
         this.theInitialConversationContent = props?.initialConversation ?? null;
         this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
         this.thePersonasOptions = props?.personaOptions ?? {};
+    }
+
+    public get className(): string | undefined {
+        return this.theClassName ?? undefined;
     }
 
     get context() {
@@ -79,7 +78,7 @@ export class NluxRenderer<AiMsg> {
     }
 
     public get themeId() {
-        return this.theThemeId;
+        return this.theDisplayOptions.themeId;
     }
 
     destroy() {
@@ -99,7 +98,7 @@ export class NluxRenderer<AiMsg> {
         this.isMounted = false;
         this.isDestroyed = true;
 
-        this.theLayoutOptions = {};
+        this.theDisplayOptions = {};
         this.theConversationOptions = {};
         this.thePromptBoxOptions = {};
     }
@@ -186,7 +185,7 @@ export class NluxRenderer<AiMsg> {
             }
 
             this.setRootElementClassNames();
-            this.setRoomElementDimensions(this.theLayoutOptions);
+            this.setRoomElementDimensions(this.theDisplayOptions);
 
             if (exceptionAlert) {
                 exceptionAlert.render(this.rootElement);
@@ -277,55 +276,47 @@ export class NluxRenderer<AiMsg> {
     }
 
     public updateProps(props: UpdatableAiChatProps<AiMsg>) {
-        if (props.hasOwnProperty('className')) {
-            const newClassName = props.className || undefined;
-            if (newClassName) {
-                if (this.theClassName) {
-                    this.rootElement?.classList.remove(this.theClassName);
-                }
-
-                this.theClassName = newClassName;
-                this.rootElement?.classList.add(newClassName);
-            } else {
-                if (this.theClassName) {
-                    this.rootElement?.classList.remove(this.theClassName);
-                    this.theClassName = null;
-                }
-            }
-        }
-
-        if (props.hasOwnProperty('themeId')) {
-            const newThemeId = props.themeId ?? NluxRenderer.defaultThemeId;
-            if (newThemeId !== this.theThemeId) {
-                this.theThemeId = newThemeId;
-                this.setRootElementClassNames();
-            }
-        }
-
         if (props.hasOwnProperty('adapter') && props.adapter) {
             this.context.update({
                 adapter: props.adapter,
             });
         }
 
-        if (props.hasOwnProperty('layoutOptions')) {
-            const newLayoutOptions: Partial<LayoutOptions> = {};
-            if (props.layoutOptions?.hasOwnProperty('height')) {
-                newLayoutOptions.height = props.layoutOptions.height;
+        let classNameUpdated = false;
+        if (props.hasOwnProperty('className') && props.className !== this.className) {
+            this.theClassName = props.className ?? null;
+            classNameUpdated = true;
+        }
+
+        let themeIdUpdated = false;
+        if (props.hasOwnProperty('displayOptions')) {
+            const newDisplayOptions: Partial<DisplayOptions> = {};
+
+            if (props.displayOptions?.hasOwnProperty('height')) {
+                newDisplayOptions.height = props.displayOptions.height;
             }
 
-            if (props.layoutOptions?.hasOwnProperty('width')) {
-                newLayoutOptions.width = props.layoutOptions.width;
+            if (props.displayOptions?.hasOwnProperty('width')) {
+                newDisplayOptions.width = props.displayOptions.width;
             }
 
-            if (Object.keys(newLayoutOptions).length > 0) {
-                this.theLayoutOptions = {
-                    ...this.theLayoutOptions,
-                    ...newLayoutOptions,
+            if (props.displayOptions?.themeId !== this.theDisplayOptions.themeId) {
+                newDisplayOptions.themeId = props.displayOptions?.themeId;
+                themeIdUpdated = true;
+            }
+
+            if (Object.keys(newDisplayOptions).length > 0) {
+                this.theDisplayOptions = {
+                    ...this.theDisplayOptions,
+                    ...newDisplayOptions,
                 };
 
-                this.setRoomElementDimensions(newLayoutOptions);
+                this.setRoomElementDimensions(newDisplayOptions);
             }
+        }
+
+        if (themeIdUpdated || classNameUpdated) {
+            this.setRootElementClassNames();
         }
 
         if (props.hasOwnProperty('conversationOptions')) {
@@ -443,12 +434,8 @@ export class NluxRenderer<AiMsg> {
 
         const rootClassNames = getRootClassNames({
             themeId: this.themeId,
-            rootClassName: this.rootClassName,
+            className: this.className,
         });
-
-        if (this.theClassName) {
-            rootClassNames.push(this.theClassName);
-        }
 
         this.rootElement.className = '';
         this.rootElement.classList.add(...rootClassNames);

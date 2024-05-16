@@ -88,7 +88,7 @@ function App() {
                     autoFocus: true,
                     // submitShortcut: 'CommandEnter',
                 }}
-                layoutOptions={{
+                displayOptions={{
                     width: 400,
                     height: 300,
                 }}

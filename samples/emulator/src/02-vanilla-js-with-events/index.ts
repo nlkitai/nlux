@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withMessageOptions({
             syntaxHighlighter: highlighter,
         })
-        .withLayoutOptions({
+        .withDisplayOptions({
             width: 500,
             height: 500,
         })

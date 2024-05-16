@@ -2,7 +2,7 @@ import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAda
 import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {ConversationOptions} from '../../exports/aiChat/options/conversationOptions';
-import {LayoutOptions} from '../../exports/aiChat/options/layoutOptions';
+import {DisplayOptions} from '../../exports/aiChat/options/displayOptions';
 import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
@@ -13,15 +13,14 @@ import {EventsMap} from '../event';
  */
 export type AiChatInternalProps<AiMsg> = {
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
-    events?: Partial<EventsMap<AiMsg>>;
-    themeId?: string;
     className?: string;
+    events?: Partial<EventsMap<AiMsg>>;
     initialConversation?: ChatItem<AiMsg>[];
+    displayOptions: DisplayOptions;
+    personaOptions: PersonaOptions;
     promptBoxOptions: PromptBoxOptions;
     conversationOptions: ConversationOptions;
     messageOptions: MessageOptions<AiMsg>;
-    personaOptions: PersonaOptions;
-    layoutOptions: LayoutOptions;
 };
 
 /**
@@ -29,15 +28,14 @@ export type AiChatInternalProps<AiMsg> = {
  */
 export type AiChatProps<AiMsg = string> = {
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
+    className?: string;
     events?: Partial<EventsMap<AiMsg>>;
     initialConversation?: ChatItem<AiMsg>[];
-    themeId?: string;
-    className?: string;
     promptBoxOptions?: PromptBoxOptions;
     conversationOptions?: ConversationOptions;
     messageOptions?: MessageOptions<AiMsg>;
     personaOptions?: PersonaOptions;
-    layoutOptions?: LayoutOptions;
+    displayOptions?: DisplayOptions;
 };
 
 /**

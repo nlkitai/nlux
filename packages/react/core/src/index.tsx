@@ -3,7 +3,7 @@ import useDeepCompareEffectHook from './hooks/useDeepCompareEffect';
 // Exporting from — @nlux/core
 
 export type {
-    LayoutOptions,
+    DisplayOptions,
     PromptBoxOptions,
     ConversationOptions,
     HistoryPayloadSize,

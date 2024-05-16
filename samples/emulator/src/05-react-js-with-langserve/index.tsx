@@ -44,7 +44,7 @@ const ExampleWrapper = () => {
                     conversationOptions={{
                         autoScroll: true,
                     }}
-                    layoutOptions={{
+                    displayOptions={{
                         height,
                     }}
                     promptBoxOptions={{

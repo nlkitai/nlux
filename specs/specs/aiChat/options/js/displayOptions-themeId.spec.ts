@@ -4,7 +4,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + prop themeId', () => {
+describe('createAiChat() + displayOptions + themeId', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -44,7 +44,11 @@ describe('createAiChat() + prop themeId', () => {
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({themeId: 'vienna'});
+                aiChat.updateProps({
+                    displayOptions: {
+                        themeId: 'vienna',
+                    },
+                });
                 await waitForRenderCycle();
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -57,7 +61,9 @@ describe('createAiChat() + prop themeId', () => {
     describe('When the component is created with a theme option', () => {
         it('The theme should be used', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter).withThemeId('aliba');
+            aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({
+                themeId: 'aliba',
+            });
 
             // Act
             aiChat.mount(rootElement);
@@ -71,12 +77,20 @@ describe('createAiChat() + prop themeId', () => {
         describe('When a different theme is set', () => {
             it('The new theme should be used', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withThemeId('aliba');
+                aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({
+                    themeId: 'aliba',
+                });
+
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({themeId: 'vienna'});
+                aiChat.updateProps({
+                    displayOptions: {
+                        themeId: 'vienna',
+                    },
+                });
+
                 await waitForRenderCycle();
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
@@ -85,21 +99,50 @@ describe('createAiChat() + prop themeId', () => {
             });
         });
 
-        describe('When the theme is removed', () => {
+        describe('When the themeId is removed', () => {
             it('The default theme should be used', async () => {
                 // Arrange
-                aiChat = createAiChat().withAdapter(adapterController!.adapter).withThemeId('aliba');
+                aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({
+                    themeId: 'aliba',
+                });
+
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
                 // Act
-                aiChat.updateProps({themeId: undefined});
+                aiChat.updateProps({
+                    displayOptions: {
+                        themeId: undefined,
+                    },
+                });
+
                 await waitForRenderCycle();
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
                 expect(aiChatDom.className).toContain('nlux-theme-luna');
             });
+        });
+
+        it('When the displayOptions are removed, the default theme should be used', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter).withDisplayOptions({
+                themeId: 'aliba',
+            });
+
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            // Act
+            aiChat.updateProps({
+                displayOptions: undefined,
+            });
+
+            await waitForRenderCycle();
+            const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
+
+            // Assert
+            expect(aiChatDom.className).toContain('nlux-theme-luna');
         });
     });
 });

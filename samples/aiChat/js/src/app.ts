@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withConversationOptions({
             // autoScroll: false,
         })
-        .withLayoutOptions({
+        .withDisplayOptions({
             width: 400,
             height: 300,
         })

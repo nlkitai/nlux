@@ -112,7 +112,7 @@ describe('<AiChat /> + initialConversation prop', () => {
             ];
 
             const aiChat = <AiChat
-                layoutOptions={{
+                displayOptions={{
                     height: 200,
                 }}
                 adapter={adapterController!.adapter}

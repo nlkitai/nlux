@@ -38,9 +38,9 @@ describe('<AiChat /> + events + ready', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    events={{ready: readyCallback}}
                     className="test-class"
-                    layoutOptions={{
+                    events={{ready: readyCallback}}
+                    displayOptions={{
                         width: '100%',
                         height: 800,
                     }}
@@ -55,7 +55,7 @@ describe('<AiChat /> + events + ready', () => {
             expect(readyCallback).toHaveBeenCalledWith({
                 aiChatProps: {
                     className: 'test-class',
-                    layoutOptions: {
+                    displayOptions: {
                         width: '100%',
                         height: 800,
                     },

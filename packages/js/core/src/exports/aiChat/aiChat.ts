@@ -10,7 +10,7 @@ import {UpdatableAiChatProps} from '../../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {NluxController} from './controller/controller';
 import {ConversationOptions} from './options/conversationOptions';
-import {LayoutOptions} from './options/layoutOptions';
+import {DisplayOptions} from './options/displayOptions';
 import {MessageOptions} from './options/messageOptions';
 import {PersonaOptions} from './options/personaOptions';
 import {PromptBoxOptions} from './options/promptBoxOptions';
@@ -21,12 +21,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
+    protected theDisplayOptions: DisplayOptions | null = null;
     protected theInitialConversation: ChatItem<AiMsg>[] | null = null;
-    protected theLayoutOptions: LayoutOptions | null = null;
     protected theMessageOptions: MessageOptions<AiMsg> | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected thePromptBoxOptions: PromptBoxOptions | null = null;
-    protected theThemeId: string | null = null;
     private controller: NluxController<AiMsg> | null = null;
     private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
 
@@ -76,12 +75,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         const controller = new NluxController(
             aiChatRoot,
             {
-                themeId: this.theThemeId ?? undefined,
                 adapter: adapterToUser,
                 className: this.theClassName ?? undefined,
                 initialConversation: this.theInitialConversation ?? undefined,
                 messageOptions: this.theMessageOptions ?? {},
-                layoutOptions: this.theLayoutOptions ?? {},
+                displayOptions: this.theDisplayOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
                 promptBoxOptions: this.thePromptBoxOptions ?? {},
                 personaOptions: this.thePersonasOptions ?? {},
@@ -193,16 +191,12 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             }
         }
 
-        if (props.hasOwnProperty('themeId')) {
-            this.theThemeId = props.themeId ?? null;
-        }
-
         if (props.hasOwnProperty('className')) {
             this.theClassName = props.className ?? null;
         }
 
-        if (props.hasOwnProperty('layoutOptions')) {
-            this.theLayoutOptions = props.layoutOptions ?? null;
+        if (props.hasOwnProperty('displayOptions')) {
+            this.theDisplayOptions = props.displayOptions ?? null;
         }
 
         if (props.hasOwnProperty('promptBoxOptions')) {
@@ -309,6 +303,25 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
+    public withDisplayOptions(displayOptions: DisplayOptions) {
+        if (this.mounted) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set display options. nlux is already mounted.',
+            });
+        }
+
+        if (this.theDisplayOptions) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Display options were already set.',
+            });
+        }
+
+        this.theDisplayOptions = {...displayOptions};
+        return this;
+    }
+
     public withInitialConversation(initialConversation: ChatItem<AiMsg>[]) {
         if (this.mounted) {
             throw new NluxUsageError({
@@ -325,25 +338,6 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         }
 
         this.theInitialConversation = [...initialConversation];
-        return this;
-    }
-
-    public withLayoutOptions(layoutOptions: LayoutOptions) {
-        if (this.mounted) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set layout options. nlux is already mounted.',
-            });
-        }
-
-        if (this.theLayoutOptions) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to change config. Layout options were already set.',
-            });
-        }
-
-        this.theLayoutOptions = {...layoutOptions};
         return this;
     }
 
@@ -401,18 +395,6 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         }
 
         this.thePromptBoxOptions = {...promptBoxOptions};
-        return this;
-    }
-
-    withThemeId(themeId: string) {
-        if (this.mounted) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set theme. nlux is already mounted.',
-            });
-        }
-
-        this.theThemeId = themeId;
         return this;
     }
 }

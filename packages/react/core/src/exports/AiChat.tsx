@@ -25,13 +25,14 @@ export const AiChat: <AiMsg>(
 ): ReactElement {
     const {
         adapter,
+        className,
         initialConversation,
         conversationOptions,
         promptBoxOptions,
-        layoutOptions,
-        className,
-        themeId,
+        displayOptions,
     } = props;
+
+    const themeId = displayOptions?.themeId;
 
     // References to DOM elements and React components:
     // These are use for advanced interactions such as scrolling, streaming, and
@@ -62,7 +63,7 @@ export const AiChat: <AiMsg>(
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootClassNames = useMemo(() => getRootClassNames({className, themeId}).join(' '), [className, themeId]);
-    const rootStyle = useAiChatStyle(layoutOptions);
+    const rootStyle = useAiChatStyle(displayOptions);
 
     // Callbacks and handlers for user interactions and events
     const showException = useCallback(

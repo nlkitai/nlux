@@ -113,6 +113,7 @@ export class NluxController<AiMsg> {
 
     public updateProps(props: UpdatableAiChatProps<AiMsg>) {
         this.renderer?.updateProps(props);
+
         this.internalProps = {
             ...this.internalProps,
             ...props,
