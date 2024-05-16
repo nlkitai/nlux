@@ -39,8 +39,8 @@
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
             padding: var(--nlux-padding) 0 0 0;
-            border-top: var(--nlux-border-width) solid var(--nlux-divider-color);
-            gap: var(--nlux-flex-gap);
+            border-top: var(--nlux-borderWidth) solid var(--nlux-divider-color);
+            gap: var(--nlux-flexGap);
         }
     }
 }

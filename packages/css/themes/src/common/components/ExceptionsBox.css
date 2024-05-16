@@ -6,7 +6,7 @@
 
         color: var(--nlux-exceptions-box-error-text-color);
         border-color: var(--nlux-exceptions-box-error-border-color);
-        border-radius: var(--nlux-border-radius);
+        border-radius: var(--nlux-borderRadius);
         background-color: var(--nlux-exceptions-box-error-background-color);
     }
 

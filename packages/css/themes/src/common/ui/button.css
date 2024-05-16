@@ -1,20 +1,20 @@
 .nlux-AiChat-root {
     .bt-primary-filled {
-        font-family: var(--nlux-font-family);
-        font-size: var(--nlux-font-size);
-        font-weight: var(--nlux-font-weight);
-        line-height: var(--nlux-line-height);
+        font-family: var(--nlux-fontFamily);
+        font-size: var(--nlux-fontSize);
+        font-weight: var(--nlux-fontWeight);
+        line-height: var(--nlux-lineHeight);
 
         padding: var(--nlux-padding) var(--nlux-padding-l);
 
         cursor: pointer;
         color: var(--nlux-button-text-color);
 
-        border-width: var(--nlux-border-width);
+        border-width: var(--nlux-borderWidth);
         border-style: solid;
 
         border-color: var(--nlux-button-border-color);
-        border-radius: var(--nlux-border-radius-m);
+        border-radius: var(--nlux-borderRadius-m);
         background-color: var(--nlux-button-background-color);
 
         > .loader,
@@ -36,7 +36,7 @@
             border-color: var(--nlux-button-active-border-color);
             outline: none;
             background-color: var(--nlux-button-active-background-color);
-            box-shadow: var(--nlux-box-shadow);
+            box-shadow: var(--nlux-boxShadow);
         }
 
         &:disabled {

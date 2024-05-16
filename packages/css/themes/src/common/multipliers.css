@@ -1,0 +1,14 @@
+.nlux-AiChat-root {
+    --nlux-fontSize-s-mult: 0.8;
+    --nlux-fontSize-l-mult: 1.2;
+
+    --nlux-padding-xs-mult: 0.5;
+    --nlux-padding-s-mult: 0.8;
+    --nlux-padding-m-mult: 1.3;
+    --nlux-padding-l-mult: 1.5;
+
+    --nlux-borderRadius-xs-mult: 0.5;
+    --nlux-borderRadius-s-mult: 0.8;
+    --nlux-borderRadius-m-mult: 1.2;
+    --nlux-borderRadius-l-mult: 1.5;
+}

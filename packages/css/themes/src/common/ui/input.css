@@ -1,7 +1,7 @@
 .nlux-AiChat-root {
     :is(input, select, textarea) {
-        font-family: var(--nlux-font-family), sans-serif;
-        font-size: var(--nlux-font-size);
+        font-family: var(--nlux-fontFamily), sans-serif;
+        font-size: var(--nlux-fontSize);
         font-weight: 400;
         line-height: 1.5;
         padding: 0.375rem 0.75rem;
@@ -10,11 +10,11 @@
 
         color: var(--nlux-input-text-color);
 
-        border-width: var(--nlux-border-width);
+        border-width: var(--nlux-borderWidth);
         border-style: solid;
         border-color: var(--nlux-input-border-color);
 
-        border-radius: var(--nlux-border-radius-m);
+        border-radius: var(--nlux-borderRadius-m);
         outline: none;
         background-color: var(--nlux-input-background-color);
 
@@ -32,7 +32,7 @@
             color: var(--nlux-input-active-text-color);
             border-color: var(--nlux-input-active-border-color);
             background-color: var(--nlux-input-active-background-color);
-            box-shadow: var(--nlux-box-shadow);
+            box-shadow: var(--nlux-boxShadow);
         }
 
         &::placeholder {

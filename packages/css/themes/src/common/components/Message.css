@@ -26,18 +26,18 @@
         }
 
         > .code-block {
-            font-family: var(--nlux-mono-font-family), monospace;
+            font-family: var(--nlux-monoFontFamily), monospace;
+            font-size: var(--nlux-fontSize-s);
 
-            font-size: var(--nlux-font-size-s);
             position: relative;
             overflow: scroll;
             padding: var(--nlux-padding) 0;
 
             color: var(--nlux-code-block-text-color);
             border: none;
-            border-radius: var(--nlux-border-radius-s);
+            border-radius: var(--nlux-borderRadius-s);
             background-color: var(--nlux-code-block-background-color);
-            box-shadow: var(--nlux-box-shadow);
+            box-shadow: var(--nlux-boxShadow);
         }
 
         > .code-block > pre {
@@ -68,7 +68,7 @@
             cursor: pointer;
             color: var(--nlux-code-block-background-color);
             border: 1px solid var(--nlux-code-block-background-color);
-            border-radius: var(--nlux-border-radius-xs);
+            border-radius: var(--nlux-borderRadius-xs);
             background-color: var(--nlux-message-received-background-color);
         }
 
@@ -90,12 +90,13 @@
         }
 
         code {
-            font-family: var(--nlux-mono-font-family), monospace;
-            font-size: var(--nlux-font-size-s);
+            font-family: var(--nlux-monoFontFamily), monospace;
+            font-size: var(--nlux-fontSize-s);
+
             padding: var(--nlux-padding-xs) var(--nlux-padding-s);
 
             color: var(--nlux-inline-code-text-color);
-            border-radius: var(--nlux-border-radius-xs);
+            border-radius: var(--nlux-borderRadius-xs);
             background-color: var(--nlux-inline-code-background-color);
         }
 

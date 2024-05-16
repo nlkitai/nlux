@@ -1,0 +1,22 @@
+.nlux-AiChat-root {
+    --nlux-fontWeight: var(--nlux-base-fontWeight);
+    --nlux-lineHeight: var(--nlux-base-lineHeight);
+    --nlux-borderWidth: var(--nlux-base-borderWidth);
+    --nlux-flexGap: var(--nlux-base-flexGap);
+
+    --nlux-fontSize: var(--nlux-base-fontSize);
+    --nlux-fontSize-s: calc(var(--nlux-base-fontSize) * var(--nlux-fontSize-s-mult));
+    --nlux-fontSize-l: calc(var(--nlux-base-fontSize) * var(--nlux-fontSize-l-mult));
+
+    --nlux-padding: var(--nlux-base-padding);
+    --nlux-padding-xs: calc(var(--nlux-base-padding) * var(--nlux-padding-xs-mult));
+    --nlux-padding-s: calc(var(--nlux-base-padding) * var(--nlux-padding-s-mult));
+    --nlux-padding-m: calc(var(--nlux-base-padding) * var(--nlux-padding-m-mult));
+    --nlux-padding-l: calc(var(--nlux-base-padding) * var(--nlux-padding-l-mult));
+
+    --nlux-borderRadius: var(--nlux-base-borderRadius);
+    --nlux-borderRadius-xs: calc(var(--nlux-base-borderRadius) * var(--nlux-borderRadius-xs-mult));
+    --nlux-borderRadius-s: calc(var(--nlux-base-borderRadius) * var(--nlux-borderRadius-s-mult));
+    --nlux-borderRadius-m: calc(var(--nlux-base-borderRadius) * var(--nlux-borderRadius-m-mult));
+    --nlux-borderRadius-l: calc(var(--nlux-base-borderRadius) * var(--nlux-borderRadius-l-mult));
+}

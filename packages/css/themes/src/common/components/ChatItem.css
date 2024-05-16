@@ -14,11 +14,11 @@
         min-height: 20px;
         padding: var(--nlux-padding) var(--nlux-padding-m);
         text-align: left;
-        border-width: var(--nlux-border-width);
+        border-width: var(--nlux-borderWidth);
         border-style: solid;
-        border-radius: var(--nlux-border-radius-m);
+        border-radius: var(--nlux-borderRadius-m);
         outline: 0;
-        gap: var(--nlux-flex-gap);
+        gap: var(--nlux-flexGap);
     }
 }
 

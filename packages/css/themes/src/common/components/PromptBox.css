@@ -5,11 +5,11 @@
     justify-content: center;
 
     background-color: transparent;
-    gap: var(--nlux-flex-gap);
+    gap: var(--nlux-flexGap);
 
     > textarea {
-        font-family: var(--nlux-font-family), sans-serif;
-        font-size: var(--nlux-font-size);
+        font-family: var(--nlux-fontFamily), sans-serif;
+        font-size: var(--nlux-fontSize);
 
         font-weight: 400;
         line-height: 1.5;
@@ -19,19 +19,15 @@
         cursor: pointer;
         transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, box-shadow .1s ease-in-out;
         color: var(--nlux-input-text-color);
-        border-width: var(--nlux-border-width);
+        border-width: var(--nlux-borderWidth);
         border-style: solid;
         border-color: var(--nlux-input-border-color);
-        border-radius: var(--nlux-border-radius-m);
+        border-radius: var(--nlux-borderRadius-m);
         outline: 0;
         background-color: var(--nlux-input-background-color);
     }
 
     > button {
-        font-family: var(--nlux-font-family);
-        font-size: var(--nlux-font-size);
-        font-weight: var(--nlux-font-weight);
-        line-height: var(--nlux-line-height);
         display: flex;
         align-items: center;
 
@@ -39,10 +35,10 @@
         width: 65px;
         cursor: pointer;
         color: var(--nlux-button-text-color);
-        border-width: var(--nlux-border-width);
+        border-width: var(--nlux-borderWidth);
         border-style: solid;
         border-color: var(--nlux-button-border-color);
-        border-radius: var(--nlux-border-radius-m);
+        border-radius: var(--nlux-borderRadius-m);
         background-color: var(--nlux-button-background-color);
 
         > .nlux_sndIcn {

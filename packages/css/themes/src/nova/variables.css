@@ -1,33 +1,20 @@
 .nlux-AiChat-root.nlux-theme-nova {
-    --nlux-font-family: 'Inter';
-    --nlux-mono-font-family: monospace;
+    /** Generic variables */
+    --nlux-fontFamily: 'Inter';
+    --nlux-monoFontFamily: monospace;
+    --nlux-boxShadow: none;
 
-    --nlux-font-weight: 400;
-    --nlux-line-height: 1.4;
+    /** Base variables used to calculate other variables */
+    --nlux-base-fontWeight: 400;
+    --nlux-base-fontSize: 1rem;
+    --nlux-base-lineHeight: 1.4;
+    --nlux-base-padding: 1rem;
+    --nlux-base-flexGap: 0.8rem;
+    --nlux-base-borderRadius: 10px;
+    --nlux-base-borderWidth: 1px;
 
-    --nlux-font-size: 1rem;
-    --nlux-font-size-s: 0.8rem;
-    --nlux-font-size-l: 1.2rem;
-
-    --nlux-padding-xs: 0.4rem;
-    --nlux-padding-s: 0.7rem;
-    --nlux-padding: 1rem;
-    --nlux-padding-m: 1.3em;
-    --nlux-padding-l: 1.6rem;
-
-    --nlux-flex-gap: 0.8rem;
-
-    --nlux-border-radius-xs: 6px;
-    --nlux-border-radius-s: 8px;
-    --nlux-border-radius: 10px;
-    --nlux-border-radius-m: 12px;
-    --nlux-border-radius-l: 14px;
-
-    --nlux-border-width: 1px;
-    --nlux-box-shadow: none;
-
+    /** Component-specific variables */
     --nlux-chatItem-avatar-width: 32px;
-    --nlux-welcomeMessage-avatar-width: 45px;
-
     --nlux-chatItem-alignItems: flex-end;
+    --nlux-welcomeMessage-avatar-width: 45px;
 }
