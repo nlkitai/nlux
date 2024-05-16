@@ -69,6 +69,10 @@ export class NluxRenderer<AiMsg> {
         return this.theClassName ?? undefined;
     }
 
+    public get colorScheme(): 'light' | 'dark' | 'auto' | undefined {
+        return this.theDisplayOptions.colorScheme;
+    }
+
     get context() {
         return this.__context;
     }
@@ -289,20 +293,26 @@ export class NluxRenderer<AiMsg> {
         }
 
         let themeIdUpdated = false;
+        let colorSchemeUpdated = false;
         if (props.hasOwnProperty('displayOptions')) {
             const newDisplayOptions: Partial<DisplayOptions> = {};
-
-            if (props.displayOptions?.hasOwnProperty('height')) {
-                newDisplayOptions.height = props.displayOptions.height;
-            }
-
-            if (props.displayOptions?.hasOwnProperty('width')) {
-                newDisplayOptions.width = props.displayOptions.width;
-            }
 
             if (props.displayOptions?.themeId !== this.theDisplayOptions.themeId) {
                 newDisplayOptions.themeId = props.displayOptions?.themeId;
                 themeIdUpdated = true;
+            }
+
+            if (props.displayOptions?.colorScheme !== this.theDisplayOptions.colorScheme) {
+                newDisplayOptions.colorScheme = props.displayOptions?.colorScheme;
+                colorSchemeUpdated = true;
+            }
+
+            if (props.displayOptions?.height !== this.theDisplayOptions.height) {
+                newDisplayOptions.height = props.displayOptions?.height;
+            }
+
+            if (props.displayOptions?.width !== this.theDisplayOptions.width) {
+                newDisplayOptions.width = props.displayOptions?.width;
             }
 
             if (Object.keys(newDisplayOptions).length > 0) {
@@ -315,7 +325,7 @@ export class NluxRenderer<AiMsg> {
             }
         }
 
-        if (themeIdUpdated || classNameUpdated) {
+        if (themeIdUpdated || colorSchemeUpdated || classNameUpdated) {
             this.setRootElementClassNames();
         }
 
@@ -435,6 +445,7 @@ export class NluxRenderer<AiMsg> {
         const rootClassNames = getRootClassNames({
             themeId: this.themeId,
             className: this.className,
+            colorScheme: this.colorScheme,
         });
 
         this.rootElement.className = '';

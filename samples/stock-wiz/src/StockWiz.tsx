@@ -25,6 +25,7 @@ export const StockWiz = () => {
                 <Portfolio state={state} actions={actions}/>
                 <AiChat
                     className="aichat"
+                    displayOptions={{colorScheme: 'dark'}}
                     adapter={nlBridgeChatAdapter}
                 />
             </div>

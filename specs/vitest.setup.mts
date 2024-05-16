@@ -16,6 +16,8 @@ console.log = vi.fn();
 console.info = vi.fn();
 
 (global as any).ResizeObserver = ResizeObserver;
+(global as any).matchMedia = vi.fn();
+
 (global as any).HTMLElement.prototype.scroll = vi.fn();
 (global as any).HTMLElement.prototype.scrollTo = vi.fn();
 (global as any).HTMLElement.prototype.scrollIntoView = vi.fn();
