@@ -1,36 +1,35 @@
+/* Light color scheme variables */
 .nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-light {
-    --nlux-backgroundColor: #ffffff;
-    --nlux-primaryTextColor: #09090b;
+    --nlux-primary-backgroundColor: #ffffff;
+    --nlux-primary-foregroundColor: #09090b;
 
-    --nlux-messageReceivedBackground-color: #f4f6f9;
-    --nlux-messageReceivedText-color: var(--nlux-primaryTextColor);
+    --nlux-secondary-backgroundColor: var(--nlux-primary-backgroundColor);
+    --nlux-secondary-foregroundColor: var(--nlux-primary-foregroundColor);
+
+    --nlux-human-backgroundColor: #18181b;
+    --nlux-human-foregroundColor: #ffffff;
+
+    --nlux-ai-backgroundColor: #f4f4f4;
+    --nlux-ai-foregroundColor: #09090b;
 }
 
+/* Dark color scheme variables */
 .nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-dark {
-    --nlux-backgroundColor: #151515;
-    --nlux-primaryTextColor: #ffffff;
+    --nlux-primary-backgroundColor: #151515;
+    --nlux-primary-foregroundColor: #ffffff;
 
-    --nlux-messageReceivedBackground-color: #494949;
-    --nlux-messageReceivedText-color: var(--nlux-primaryTextColor);
+    --nlux-secondary-backgroundColor: var(--nlux-primary-backgroundColor);
+    --nlux-secondary-foregroundColor: var(--nlux-primary-foregroundColor);
+
+    --nlux-human-backgroundColor: #323232;
+    --nlux-human-foregroundColor: #ffffff;
+
+    --nlux-ai-backgroundColor: #494949;
+    --nlux-ai-foregroundColor: #ffffff;
 }
 
+/* Common color variables */
 .nlux-AiChat-root.nlux-theme-nova {
-    --nlux-humanMessage-backgroundColor: var(--nlux-messageSentBackground-color);
-    --nlux-humanMessage-borderColor: var(--nlux-messageSentBackground-color);
-    --nlux-humanMessage-textColor: var(--nlux-messageSentText-color);
-
-    --nlux-humanMessage-active-backgroundColor: var(--nlux-messageSentBackground-color);
-    --nlux-humanMessage-active-borderColor: var(--nlux-messageSentBackground-color);
-    --nlux-humanMessage-active-textColor: var(--nlux-messageSentText-color);
-
-    --nlux-aiMessage-backgroundColor: var(--nlux-messageReceivedBackground-color);
-    --nlux-aiMessage-borderColor: var(--nlux-messageReceivedBackground-color);
-    --nlux-aiMessage-textColor: var(--nlux-messageReceivedText-color);
-
-    --nlux-aiMessage-active-backgroundColor: var(--nlux-messageReceivedBackground-color);
-    --nlux-aiMessage-active-borderColor: var(--nlux-messageReceivedBackground-color);
-    --nlux-aiMessage-active-textColor: var(--nlux-messageReceivedText-color);
-
     --nlux-codeBlock-backgroundColor: #303530;
     --nlux-codeBlock-hover-backgroundColor: #404240;
     --nlux-codeBlock-text-color: #dde5e2ff;

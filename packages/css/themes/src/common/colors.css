@@ -1,71 +1,81 @@
 .nlux-AiChat-root {
-    --nlux-text-color: var(--nlux-primaryTextColor);
+    --nlux-text-color: var(--nlux-primary-foregroundColor);
+
+    /* Human message in chat */
+    --nlux-humanMessage-textColor: var(--nlux-human-foregroundColor);
+    --nlux-humanMessage-backgroundColor: var(--nlux-human-backgroundColor);
+    --nlux-humanMessage-borderColor: color-mix(in srgb, var(--nlux-human-backgroundColor), black var(--nlux-black-xs-mult));
+
+    /** AI message in chat */
+    --nlux-aiMessage-textColor: var(--nlux-ai-foregroundColor);
+    --nlux-aiMessage-backgroundColor: var(--nlux-ai-backgroundColor);
+    --nlux-aiMessage-borderColor: color-mix(in srgb, var(--nlux-ai-backgroundColor), black var(--nlux-black-xs-mult));
 }
 
 .nlux-AiChat-root.nlux-colorScheme-light {
     /** Input colors */
-    --nlux-input-textColor: var(--nlux-primaryTextColor);
-    --nlux-input-active-textColor: color-mix(in srgb, var(--nlux-primaryTextColor), black var(--nlux-black-xs-mult));
-    --nlux-input-disabled-textColor: color-mix(in srgb, var(--nlux-primaryTextColor), white var(--nlux-white-l-mult));
+    --nlux-input-textColor: var(--nlux-primary-foregroundColor);
+    --nlux-input-active-textColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), black var(--nlux-black-xs-mult));
+    --nlux-input-disabled-textColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), white var(--nlux-white-l-mult));
 
-    --nlux-input-placeholderTextColor: color-mix(in srgb, var(--nlux-primaryTextColor), white var(--nlux-white-l-mult));
+    --nlux-input-placeholderTextColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), white var(--nlux-white-l-mult));
     --nlux-input-active-placeholderTextColor: var(--nlux-input-placeholderTextColor);
     --nlux-input-disabled-placeholderTextColor: var(--nlux-input-placeholderTextColor);
 
-    --nlux-input-backgroundColor: color-mix(in srgb, var(--nlux-primaryBackgroundColor), white var(--nlux-white-l-mult));
+    --nlux-input-backgroundColor: color-mix(in srgb, var(--nlux-primary-backgroundColor), white var(--nlux-white-l-mult));
     --nlux-input-active-backgroundColor: color-mix(in srgb, var(--nlux-input-backgroundColor), white var(--nlux-white-s-mult));
     --nlux-input-disabled-backgroundColor: color-mix(in srgb, var(--nlux-input-backgroundColor), white var(--nlux-white-xs-mult));
 
-    --nlux-input-borderColor: color-mix(in srgb, var(--nlux-primaryBackgroundColor), black var(--nlux-black-xs-mult));
+    --nlux-input-borderColor: color-mix(in srgb, var(--nlux-primary-backgroundColor), black var(--nlux-black-xs-mult));
     --nlux-input-active-borderColor: color-mix(in srgb, var(--nlux-input-borderColor), black var(--nlux-black-xs-mult));
     --nlux-input-disabled-borderColor: color-mix(in srgb, var(--nlux-input-borderColor), white var(--nlux-white-s-mult));
 
     /** Button colors */
-    --nlux-button-textColor: color-mix(in srgb, var(--nlux-secondaryTextColor), white var(--nlux-white-m-mult));
+    --nlux-button-textColor: color-mix(in srgb, var(--nlux-secondary-foregroundColor), white var(--nlux-white-m-mult));
     --nlux-button-active-textColor: var(--nlux-button-textColor);
     --nlux-button-disabled-textColor: var(--nlux-button-textColor);
 
-    --nlux-button-backgroundColor: var(--nlux-secondaryBackgroundColor);
+    --nlux-button-backgroundColor: var(--nlux-secondary-backgroundColor);
     --nlux-button-active-backgroundColor: color-mix(in srgb, var(--nlux-button-backgroundColor), white var(--nlux-white-xs-mult));
     --nlux-button-disabled-backgroundColor: color-mix(in srgb, var(--nlux-button-backgroundColor), white var(--nlux-white-m-mult));
 
-    --nlux-button-borderColor: color-mix(in srgb, var(--nlux-secondaryBackgroundColor), black var(--nlux-black-xs-mult));
+    --nlux-button-borderColor: color-mix(in srgb, var(--nlux-secondary-backgroundColor), black var(--nlux-black-xs-mult));
     --nlux-button-disabled-borderColor: color-mix(in srgb, var(--nlux-button-borderColor), white var(--nlux-white-s-mult));
 
     /** Other colors */
-    --nlux-divider-color: color-mix(in srgb, var(--nlux-primaryTextColor), white var(--nlux-white-l-mult));
+    --nlux-divider-color: color-mix(in srgb, var(--nlux-primary-foregroundColor), white var(--nlux-white-l-mult));
 }
 
 .nlux-AiChat-root.nlux-colorScheme-dark {
     /** Input colors */
-    --nlux-input-textColor: var(--nlux-primaryTextColor);
-    --nlux-input-active-textColor: color-mix(in srgb, var(--nlux-primaryTextColor), white var(--nlux-white-xs-mult));
-    --nlux-input-disabled-textColor: color-mix(in srgb, var(--nlux-primaryTextColor), black var(--nlux-black-l-mult));
+    --nlux-input-textColor: var(--nlux-primary-foregroundColor);
+    --nlux-input-active-textColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), white var(--nlux-white-xs-mult));
+    --nlux-input-disabled-textColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), black var(--nlux-black-l-mult));
 
-    --nlux-input-placeholderTextColor: color-mix(in srgb, var(--nlux-primaryTextColor), black var(--nlux-black-m-mult));
+    --nlux-input-placeholderTextColor: color-mix(in srgb, var(--nlux-primary-foregroundColor), black var(--nlux-black-m-mult));
     --nlux-input-active-placeholderTextColor: var(--nlux-input-placeholderTextColor);
     --nlux-input-disabled-placeholderTextColor: var(--nlux-input-placeholderTextColor);
 
-    --nlux-input-backgroundColor: color-mix(in srgb, var(--nlux-primaryBackgroundColor), black var(--nlux-black-m-mult));
+    --nlux-input-backgroundColor: color-mix(in srgb, var(--nlux-primary-backgroundColor), black var(--nlux-black-m-mult));
     --nlux-input-active-backgroundColor: color-mix(in srgb, var(--nlux-input-backgroundColor), black var(--nlux-black-s-mult));
     --nlux-input-disabled-backgroundColor: color-mix(in srgb, var(--nlux-input-backgroundColor), black var(--nlux-black-s-mult));
 
-    --nlux-input-borderColor: color-mix(in srgb, var(--nlux-primaryBackgroundColor), white var(--nlux-white-xs-mult));
+    --nlux-input-borderColor: color-mix(in srgb, var(--nlux-primary-backgroundColor), white var(--nlux-white-xs-mult));
     --nlux-input-active-borderColor: color-mix(in srgb, var(--nlux-input-borderColor), white var(--nlux-white-xs-mult));
     --nlux-input-disabled-borderColor: color-mix(in srgb, var(--nlux-input-borderColor), black var(--nlux-black-s-mult));
 
     /** Button colors */
-    --nlux-button-textColor: var(--nlux-secondaryTextColor);
+    --nlux-button-textColor: var(--nlux-secondary-foregroundColor);
     --nlux-button-active-textColor: var(--nlux-button-textColor);
-    --nlux-button-disabled-textColor: color-mix(in srgb, var(--nlux-secondaryBackgroundColor), black var(--nlux-black-m-mult));
+    --nlux-button-disabled-textColor: color-mix(in srgb, var(--nlux-secondary-backgroundColor), black var(--nlux-black-m-mult));
 
-    --nlux-button-backgroundColor: color-mix(in srgb, var(--nlux-secondaryBackgroundColor), black var(--nlux-black-s-mult));
+    --nlux-button-backgroundColor: color-mix(in srgb, var(--nlux-secondary-backgroundColor), black var(--nlux-black-s-mult));
     --nlux-button-active-backgroundColor: color-mix(in srgb, var(--nlux-button-backgroundColor), white var(--nlux-white-s-mult));
     --nlux-button-disabled-backgroundColor: color-mix(in srgb, var(--nlux-button-backgroundColor), black var(--nlux-black-l-mult));
 
-    --nlux-button-borderColor: color-mix(in srgb, var(--nlux-secondaryBackgroundColor), white var(--nlux-white-xs-mult));
+    --nlux-button-borderColor: color-mix(in srgb, var(--nlux-secondary-backgroundColor), white var(--nlux-white-xs-mult));
     --nlux-button-disabled-borderColor: color-mix(in srgb, var(--nlux-button-borderColor), black var(--nlux-black-s-mult));
 
     /** Other colors */
-    --nlux-divider-color: color-mix(in srgb, var(--nlux-primaryTextColor), black var(--nlux-black-l-mult));
+    --nlux-divider-color: color-mix(in srgb, var(--nlux-primary-foregroundColor), black var(--nlux-black-l-mult));
 }

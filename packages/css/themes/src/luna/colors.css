@@ -1,48 +1,41 @@
+/* Light color scheme variables */
 .nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
-    --nlux-primaryBackgroundColor: #fff8e2;
-    --nlux-primaryTextColor: #202020;
+    --nlux-primary-backgroundColor: #f8f4e7;
+    --nlux-primary-foregroundColor: #202020;
 
-    --nlux-secondaryBackgroundColor: #6fc693;
-    --nlux-secondaryTextColor: #ffffff;
+    --nlux-secondary-backgroundColor: #10c17d;
+    --nlux-secondary-foregroundColor: #ffffff;
 
-    --nlux-ai-color: #b56ec8;
-    --nlux-human-color: #4e8ebc;
+    --nlux-human-backgroundColor: #eafff3;
+    --nlux-human-foregroundColor: #09101d;
+
+    --nlux-ai-backgroundColor: #f4f6f9;
+    --nlux-ai-foregroundColor: #09101d;
 }
 
+/* Dark color scheme variables */
 .nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
-    --nlux-primaryBackgroundColor: #285c3e;
-    --nlux-primaryTextColor: #f4eed9;
+    --nlux-primary-backgroundColor: #191818;
+    --nlux-primary-foregroundColor: #f8f4e7;
 
-    --nlux-secondaryBackgroundColor: #8e8c58;
-    --nlux-secondaryTextColor: #ffffff;
+    --nlux-secondary-backgroundColor: #10c17d;
+    --nlux-secondary-foregroundColor: #ffffff;
 
-    --nlux-ai-color: #542760;
-    --nlux-human-color: #1d226a;
+    --nlux-human-backgroundColor: #161b20;
+    --nlux-human-foregroundColor: #ffffff;
+
+    --nlux-ai-backgroundColor: #10c17d;
+    --nlux-ai-foregroundColor: #ffffff;
 }
 
+/* Common color variables */
 .nlux-AiChat-root.nlux-theme-luna {
-    --nlux-humanMessage-backgroundColor: #5fe095;
-    --nlux-humanMessage-borderColor: #6fc693;
-    --nlux-humanMessage-textColor: #ffffff;
-
-    --nlux-humanMessage-active-backgroundColor: #5fe095;
-    --nlux-humanMessage-active-borderColor: #6fc693;
-    --nlux-humanMessage-active-textColor: #ffffff;
-
-    --nlux-aiMessage-backgroundColor: #f4f6f9;
-    --nlux-aiMessage-borderColor: #dde5e2ff;
-    --nlux-aiMessage-textColor: #18210c;
-
     --nlux-codeBlock-backgroundColor: #303530;
     --nlux-codeBlock-hover-backgroundColor: #404240;
     --nlux-codeBlock-text-color: #dde5e2ff;
 
     --nlux-inlineCode-backgroundColor: #d5dad1;
     --nlux-inlineCode-textColor: #18210c;
-
-    --nlux-aiMessage-active-backgroundColor: #f4f6f9;
-    --nlux-aiMessage-active-borderColor: #dde5e2ff;
-    --nlux-aiMessage-active-textColor: #18210c;
 
     --nlux-exceptionsBox-backgroundColor: #d05858;
     --nlux-exceptionsBox-borderColor: #d05858;
