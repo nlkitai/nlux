@@ -27,9 +27,9 @@
     padding-left: 65px;
 
     > .nlux-comp-msg {
-        color: var(--nlux-message-sent-text-color);
-        border-color: var(--nlux-message-sent-border-color);
-        background-color: var(--nlux-message-sent-background-color);
+        color: var(--nlux-humanMessage-textColor);
+        border-color: var(--nlux-humanMessage-borderColor);
+        background-color: var(--nlux-humanMessage-backgroundColor);
     }
 }
 
@@ -38,8 +38,8 @@
     padding-right: 65px;
 
     > .nlux-comp-msg {
-        color: var(--nlux-message-received-text-color);
-        border-color: var(--nlux-message-received-border-color);
-        background-color: var(--nlux-message-received-background-color);
+        color: var(--nlux-aiMessage-textColor);
+        border-color: var(--nlux-aiMessage-borderColor);
+        background-color: var(--nlux-aiMessage-backgroundColor);
     }
 }

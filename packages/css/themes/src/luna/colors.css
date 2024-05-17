@@ -1,59 +1,50 @@
+.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
+    --nlux-primaryBackgroundColor: #fff8e2;
+    --nlux-primaryTextColor: #202020;
+
+    --nlux-secondaryBackgroundColor: #6fc693;
+    --nlux-secondaryTextColor: #ffffff;
+
+    --nlux-ai-color: #b56ec8;
+    --nlux-human-color: #4e8ebc;
+}
+
+.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
+    --nlux-primaryBackgroundColor: #285c3e;
+    --nlux-primaryTextColor: #f4eed9;
+
+    --nlux-secondaryBackgroundColor: #8e8c58;
+    --nlux-secondaryTextColor: #ffffff;
+
+    --nlux-ai-color: #542760;
+    --nlux-human-color: #1d226a;
+}
+
 .nlux-AiChat-root.nlux-theme-luna {
-    --nlux-text-color: #1d1e1bff;
+    --nlux-humanMessage-backgroundColor: #5fe095;
+    --nlux-humanMessage-borderColor: #6fc693;
+    --nlux-humanMessage-textColor: #ffffff;
 
-    --nlux-input-background-color: #ffffff;
-    --nlux-input-border-color: #c5d7c9;
-    --nlux-input-text-color: #18210c;
-    --nlux-input-placeholder-color: #c5d7c9;
+    --nlux-humanMessage-active-backgroundColor: #5fe095;
+    --nlux-humanMessage-active-borderColor: #6fc693;
+    --nlux-humanMessage-active-textColor: #ffffff;
 
-    --nlux-input-active-background-color: #ffffff;
-    --nlux-input-active-border-color: #c5d7c9;
-    --nlux-input-active-text-color: #18210c;
-    --nlux-input-active-placeholder-color: #c5d7c9;
+    --nlux-aiMessage-backgroundColor: #f4f6f9;
+    --nlux-aiMessage-borderColor: #dde5e2ff;
+    --nlux-aiMessage-textColor: #18210c;
 
-    --nlux-input-disabled-background-color: #ffffff;
-    --nlux-input-disabled-border-color: #c5d7c9;
-    --nlux-input-disabled-text-color: #959993;
-    --nlux-input-disabled-placeholder-color: #c5d7c9;
+    --nlux-codeBlock-backgroundColor: #303530;
+    --nlux-codeBlock-hover-backgroundColor: #404240;
+    --nlux-codeBlock-text-color: #dde5e2ff;
 
-    --nlux-button-background-color: #5fe095;
-    --nlux-button-border-color: #5fe095;
-    --nlux-button-text-color: #ffffff;
+    --nlux-inlineCode-backgroundColor: #d5dad1;
+    --nlux-inlineCode-textColor: #18210c;
 
-    --nlux-button-active-background-color: #72e7a1ff;
-    --nlux-button-active-border-color: #72e7a1ff;
-    --nlux-button-active-text-color: #ffffff;
+    --nlux-aiMessage-active-backgroundColor: #f4f6f9;
+    --nlux-aiMessage-active-borderColor: #dde5e2ff;
+    --nlux-aiMessage-active-textColor: #18210c;
 
-    --nlux-button-disabled-background-color: #c5d7c9;
-    --nlux-button-disabled-border-color: #c5d7c9;
-    --nlux-button-disabled-text-color: #ffffff;
-
-    --nlux-divider-color: transparent;
-
-    --nlux-message-sent-background-color: #5fe095;
-    --nlux-message-sent-border-color: #6fc693;
-    --nlux-message-sent-text-color: #ffffff;
-
-    --nlux-message-sent-active-background-color: #5fe095;
-    --nlux-message-sent-active-border-color: #6fc693;
-    --nlux-message-sent-active-text-color: #ffffff;
-
-    --nlux-message-received-background-color: #f4f6f9;
-    --nlux-message-received-border-color: #dde5e2ff;
-    --nlux-message-received-text-color: #18210c;
-
-    --nlux-code-block-background-color: #303530;
-    --nlux-code-block-hover-background-color: #404240;
-    --nlux-code-block-text-color: #dde5e2ff;
-
-    --nlux-inline-code-background-color: #d5dad1;
-    --nlux-inline-code-text-color: #18210c;
-
-    --nlux-message-received-active-background-color: #f4f6f9;
-    --nlux-message-received-active-border-color: #dde5e2ff;
-    --nlux-message-received-active-text-color: #18210c;
-
-    --nlux-exceptions-box-error-background-color: #d05858;
-    --nlux-exceptions-box-error-border-color: #d05858;
-    --nlux-exceptions-box-error-text-color: #ffffff;
+    --nlux-exceptionsBox-backgroundColor: #d05858;
+    --nlux-exceptionsBox-borderColor: #d05858;
+    --nlux-exceptionsBox-textColor: #ffffff;
 }

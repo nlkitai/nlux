@@ -19,7 +19,7 @@ import {useCallback, useEffect, useState} from 'react';
 function App() {
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [dataTransferMode, setDataTransferMode] = useState<'fetch' | 'stream'>('fetch');
-    const [theme, setTheme] = useState<'luna' | 'nova'>('nova');
+    const [theme, setTheme] = useState<'luna' | 'nova'>('luna');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('auto');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),

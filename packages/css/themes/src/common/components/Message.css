@@ -33,10 +33,10 @@
             overflow: scroll;
             padding: var(--nlux-padding) 0;
 
-            color: var(--nlux-code-block-text-color);
+            color: var(--nlux-codeBlock-text-color);
             border: none;
             border-radius: var(--nlux-borderRadius-s);
-            background-color: var(--nlux-code-block-background-color);
+            background-color: var(--nlux-codeBlock-backgroundColor);
             box-shadow: var(--nlux-boxShadow);
         }
 
@@ -50,7 +50,7 @@
         }
 
         > .code-block > pre > div:hover {
-            background-color: var(--nlux-code-block-hover-background-color);
+            background-color: var(--nlux-codeBlock-hover-backgroundColor);
         }
 
         button.nlux-cpy-btn {
@@ -66,18 +66,18 @@
             padding: 4px;
 
             cursor: pointer;
-            color: var(--nlux-code-block-background-color);
-            border: 1px solid var(--nlux-code-block-background-color);
+            color: var(--nlux-codeBlock-backgroundColor);
+            border: 1px solid var(--nlux-codeBlock-backgroundColor);
             border-radius: var(--nlux-borderRadius-xs);
-            background-color: var(--nlux-message-received-background-color);
+            background-color: var(--nlux-aiMessage-backgroundColor);
         }
 
         button.nlux-cpy-btn {
             &.clicked,
             &.clicked:hover {
-                color: var(--nlux-message-received-background-color);
-                border-color: var(--nlux-code-block-background-color);
-                background-color: var(--nlux-code-block-background-color);
+                color: var(--nlux-aiMessage-backgroundColor);
+                border-color: var(--nlux-codeBlock-backgroundColor);
+                background-color: var(--nlux-codeBlock-backgroundColor);
             }
 
             &:hover * {
@@ -95,9 +95,9 @@
 
             padding: var(--nlux-padding-xs) var(--nlux-padding-s);
 
-            color: var(--nlux-inline-code-text-color);
+            color: var(--nlux-inlineCode-textColor);
             border-radius: var(--nlux-borderRadius-xs);
-            background-color: var(--nlux-inline-code-background-color);
+            background-color: var(--nlux-inlineCode-backgroundColor);
         }
 
         strong {

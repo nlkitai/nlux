@@ -1,0 +1,35 @@
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-light {
+    --nlux-input-backgroundColor: transparent;
+    --nlux-input-borderColor: transparent;
+
+    --nlux-button-backgroundColor: transparent;
+    --nlux-button-borderColor: transparent;
+
+    --nlux-button-textColor: var(--nlux-icon-primary-color);
+    --nlux-button-active-textColor: var(--nlux-icon-primary-color);
+    --nlux-button-disabled-textColor: var(--nlux-icon-secondary-color);
+
+    --nlux-messageSentBackground-color: #18181b;
+    --nlux-messageSentText-color: #ffffff;
+
+    --nlux-icon-primary-color: #09090b;
+    --nlux-icon-secondary-color: #5f5f5f;
+}
+
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-dark {
+    --nlux-input-backgroundColor: transparent;
+    --nlux-input-borderColor: transparent;
+
+    --nlux-button-backgroundColor: transparent;
+    --nlux-button-borderColor: transparent;
+
+    --nlux-button-textColor: var(--nlux-icon-primary-color);
+    --nlux-button-active-textColor: var(--nlux-icon-primary-color);
+    --nlux-button-disabled-textColor: var(--nlux-icon-secondary-color);
+
+    --nlux-messageSentBackground-color: #323232;
+    --nlux-messageSentText-color: #ffffff;
+
+    --nlux-icon-primary-color: #ffffff;
+    --nlux-icon-secondary-color: #71717a;
+}

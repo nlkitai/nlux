@@ -1,5 +1,6 @@
 @import './font.css';
 @import './colors.css';
+@import './overrides.css';
 @import './icons.css';
 @import './variables.css';
 @import '../common/nlux.css';

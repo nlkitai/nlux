@@ -8,44 +8,43 @@
         cursor: pointer;
         transition: color 0.1s ease-in-out, background-color 0.1s ease-in-out, border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
 
-        color: var(--nlux-input-text-color);
+        color: var(--nlux-input-textColor);
 
         border-width: var(--nlux-borderWidth);
         border-style: solid;
-        border-color: var(--nlux-input-border-color);
+        border-color: var(--nlux-input-borderColor);
 
         border-radius: var(--nlux-borderRadius-m);
         outline: none;
-        background-color: var(--nlux-input-background-color);
+        background-color: var(--nlux-input-backgroundColor);
 
         &:disabled,
         &:disabled:hover {
             cursor: auto;
-            color: var(--nlux-input-disabled-text-color);
-            border-color: var(--nlux-input-disabled-border-color);
-            background-color: var(--nlux-input-disabled-background-color);
+            color: var(--nlux-input-disabled-textColor);
+            border-color: var(--nlux-input-disabled-borderColor);
+            background-color: var(--nlux-input-disabled-backgroundColor);
         }
 
         &:focus,
-        &:active,
         &:hover {
-            color: var(--nlux-input-active-text-color);
-            border-color: var(--nlux-input-active-border-color);
-            background-color: var(--nlux-input-active-background-color);
+            color: var(--nlux-input-active-textColor);
+            border-color: var(--nlux-input-active-borderColor);
+            background-color: var(--nlux-input-active-backgroundColor);
             box-shadow: var(--nlux-boxShadow);
         }
 
         &::placeholder {
-            color: var(--nlux-input-placeholder-color);
+            color: var(--nlux-input-placeholderTextColor);
 
             &:focus,
-            &:active,
             &:hover {
-                color: var(--nlux-input-active-placeholder-color);
+                color: var(--nlux-input-active-placeholderTextColor);
             }
 
-            &:disabled {
-                color: var(--nlux-input-disabled-placeholder-color);
+            &:disabled,
+            &:disabled:hover {
+                color: var(--nlux-input-disabled-placeholderTextColor);
             }
         }
     }

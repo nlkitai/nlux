@@ -11,5 +11,4 @@ export const languageAliases = {
     rb: 'ruby',
     kt: 'kotlin',
     rs: 'rust',
-    sc: 'scala',
 };

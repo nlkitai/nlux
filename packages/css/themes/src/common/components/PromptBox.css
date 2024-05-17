@@ -18,13 +18,12 @@
         resize: none;
         cursor: pointer;
         transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, box-shadow .1s ease-in-out;
-        color: var(--nlux-input-text-color);
+        color: var(--nlux-input-textColor);
         border-width: var(--nlux-borderWidth);
         border-style: solid;
-        border-color: var(--nlux-input-border-color);
+        border-color: var(--nlux-input-borderColor);
         border-radius: var(--nlux-borderRadius-m);
         outline: 0;
-        background-color: var(--nlux-input-background-color);
     }
 
     > button {
@@ -34,12 +33,17 @@
         justify-content: center;
         width: 65px;
         cursor: pointer;
-        color: var(--nlux-button-text-color);
+        color: var(--nlux-button-textColor);
         border-width: var(--nlux-borderWidth);
         border-style: solid;
-        border-color: var(--nlux-button-border-color);
+        border-color: var(--nlux-button-borderColor);
         border-radius: var(--nlux-borderRadius-m);
-        background-color: var(--nlux-button-background-color);
+        background-color: var(--nlux-button-backgroundColor);
+
+        &:focus,
+        &:hover {
+            background-color: var(--nlux-button-active-backgroundColor);
+        }
 
         > .nlux_sndIcn {
             width: 100%;
@@ -63,9 +67,9 @@
 
     > button:disabled {
         cursor: not-allowed;
-        color: var(--nlux-button-disabled-text-color);
-        border-color: var(--nlux-button-disabled-border-color);
-        background-color: var(--nlux-button-disabled-background-color);
+        color: var(--nlux-button-disabled-textColor);
+        border-color: var(--nlux-button-disabled-borderColor);
+        background-color: var(--nlux-button-disabled-backgroundColor);
     }
 }
 

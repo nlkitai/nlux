@@ -1,0 +1,9 @@
+/** Overrides — of variables that are usually calculated */
+
+.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
+    --nlux-divider-color: transparent;
+}
+
+.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
+    --nlux-divider-color: transparent;
+}

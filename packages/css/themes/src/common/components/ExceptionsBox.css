@@ -4,10 +4,10 @@
         animation: nlux-fadeInUp 0.15s ease-out forwards;
         opacity: 0;
 
-        color: var(--nlux-exceptions-box-error-text-color);
-        border-color: var(--nlux-exceptions-box-error-border-color);
+        color: var(--nlux-exceptionsBox-textColor);
+        border-color: var(--nlux-exceptionsBox-borderColor);
         border-radius: var(--nlux-borderRadius);
-        background-color: var(--nlux-exceptions-box-error-background-color);
+        background-color: var(--nlux-exceptionsBox-backgroundColor);
     }
 
     > .nlux-comp-exp_itm.nlux-comp-exp_itm_hide {
