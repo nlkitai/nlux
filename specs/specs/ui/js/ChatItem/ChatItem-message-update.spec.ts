@@ -27,6 +27,28 @@ describe('When a chat item component is complete in incoming direction', () => {
         });
     });
 
+    describe('When the display mode is updated', () => {
+        it('Should update the display mode', () => {
+            // Arrange
+            const props: ChatItemProps = {
+                direction: 'incoming',
+                displayMode: 'bubbles',
+                status: 'complete',
+                message: 'Hello, World!',
+            };
+            const chatItem = createChatItemDom(props);
+
+            // Act
+            updateChatItemDom(chatItem, props, {
+                ...props,
+                displayMode: 'list',
+            });
+
+            // Assert
+            expect(chatItem.classList.contains('nlux_cht_itm_lst')).toBe(true);
+        });
+    });
+
     describe('When the status is updated', () => {
         it('Should update the message status', () => {
             // Arrange

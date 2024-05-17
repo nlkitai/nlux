@@ -15,6 +15,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 ) => {
     if (
         propsBefore.direction === propsAfter.direction &&
+        propsBefore.displayMode === propsAfter.displayMode &&
         propsBefore.status === propsAfter.status &&
         propsBefore.message === propsAfter.message &&
         propsBefore.name === propsAfter.name &&
@@ -25,6 +26,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 
     if (!propsAfter || (
         !propsAfter.hasOwnProperty('direction') &&
+        !propsAfter.hasOwnProperty('displayMode') &&
         !propsAfter.hasOwnProperty('status') &&
         !propsAfter.hasOwnProperty('message') &&
         !propsAfter.hasOwnProperty('loader') &&

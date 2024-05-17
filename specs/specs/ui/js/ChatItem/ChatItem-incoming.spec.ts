@@ -20,6 +20,42 @@ describe('When a chat item component is complete in incoming direction', () => {
         expect(chatItem.classList.contains('nlux_cht_itm_in')).toBe(true);
     });
 
+    describe('When the display mode is set to bubbles', () => {
+        it('Should render the item with the right display mode class', () => {
+            // Arrange
+            const props: ChatItemProps = {
+                direction: 'incoming',
+                displayMode: 'bubbles',
+                status: 'complete',
+                message: 'Hello, World!',
+            };
+
+            // Act
+            const chatItem = createChatItemDom(props);
+
+            // Assert
+            expect(chatItem.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+        });
+    });
+
+    describe('When the display mode is set to list', () => {
+        it('Should render the item with the right display mode class', () => {
+            // Arrange
+            const props: ChatItemProps = {
+                direction: 'incoming',
+                displayMode: 'list',
+                status: 'complete',
+                message: 'Hello, World!',
+            };
+
+            // Act
+            const chatItem = createChatItemDom(props);
+
+            // Assert
+            expect(chatItem.classList.contains('nlux_cht_itm_lst')).toBe(true);
+        });
+    });
+
     it('Should render message with the right direction class', () => {
         // Arrange
         const props: ChatItemProps = {
