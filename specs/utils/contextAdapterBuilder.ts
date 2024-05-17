@@ -1,5 +1,5 @@
-import {ContextAdapter} from '@nlux-dev/core/src/types/adapters/context/contextAdapter';
 import {vi} from 'vitest';
+import {ContextAdapter} from '../../packages/js/core/src';
 
 export interface ContextAdapterControllerBuilder {
     create(): ContextAdapter;

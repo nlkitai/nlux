@@ -1,5 +1,6 @@
 import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {CompRenderer, CompUpdater} from '../../../types/comp';
+import {BaseComp} from './base';
 
 export const Model = <PropsType, ElementsType, EventsType, ActionsType>(
     compId: string,
@@ -14,8 +15,11 @@ export const Model = <PropsType, ElementsType, EventsType, ActionsType>(
 };
 
 export const CompEventListener = <EventsType>(eventName: keyof EventsType) => (
-    (target: any, methodName: string) => {
-        if (typeof target.constructor !== 'function') {
+    (target: unknown, methodName: string) => {
+        const typedTarget = target as {
+            constructor: typeof BaseComp;
+        };
+        if (typeof typedTarget.constructor !== 'function') {
             throw new NluxUsageError({
                 source: 'CallbackFor',
                 message: `@CallbackFor can only be used on methods of a class!`,
@@ -23,13 +27,13 @@ export const CompEventListener = <EventsType>(eventName: keyof EventsType) => (
         }
 
         if (
-            !target.constructor.hasOwnProperty('__compEventListeners') ||
-            target.constructor.__compEventListeners === null
+            !typedTarget.constructor.hasOwnProperty('__compEventListeners') ||
+            typedTarget.constructor.__compEventListeners === null
         ) {
-            target.constructor.__compEventListeners = new Map<string | number | symbol, string[]>();
+            typedTarget.constructor.__compEventListeners = new Map<string | number | symbol, string[]>();
         }
 
-        const compEventListeners: Map<string | number | symbol, string[]> = target.constructor.__compEventListeners;
+        const compEventListeners: Map<string | number | symbol, string[]> = typedTarget.constructor.__compEventListeners;
         const methodNames = compEventListeners.get(eventName);
         if (!methodNames) {
             compEventListeners.set(eventName, [methodName]);
