@@ -11,6 +11,7 @@ describe('When a custom chat item is provided', () => {
         const component = <ForwardRefChatItemComp
             uid={'1'}
             direction={'incoming'}
+            displayMode={'bubbles'}
             status={'complete'}
             fetchedContent={'Hello'}
             responseRenderer={({content}: any) => <>{`THE AI SAID [${content}]`}</>}
@@ -29,6 +30,7 @@ describe('When a custom chat item is provided', () => {
         const component = <ForwardRefChatItemComp
             uid={'1'}
             direction={'incoming'}
+            displayMode={'bubbles'}
             status={'complete'}
             fetchedContent={{text: 'Hello Jason!'}}
             responseRenderer={({content}: FetchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}

@@ -286,7 +286,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         });
     }
 
-    updateSubComponent(subComponentId: string, propName: string, newValue: any) {
+    updateSubComponent(subComponentId: string, propName: string, newValue: unknown) {
         this.throwIfDestroyed();
 
         const subComp = this.subComponents.get(subComponentId) as BaseComp<
@@ -294,7 +294,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         > | undefined;
 
         if (subComp && !subComp.destroyed) {
-            subComp.setProp(propName, newValue);
+            subComp.setProp(propName as keyof PropsType, newValue as PropsType[keyof PropsType]);
         }
     }
 
@@ -312,7 +312,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
             });
         }
 
-        this.subComponents.set(id, subComponent);
+        this.subComponents.set(id, subComponent as BaseComp<unknown, unknown, unknown, unknown, unknown>);
 
         if (rendererElementId) {
             this.subComponentElementIds.set(id, rendererElementId);
@@ -337,7 +337,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      * @param args
      * @protected
      */
-    protected executeDomAction(actionName: keyof ActionsType, ...args: any[]) {
+    protected executeDomAction(actionName: keyof ActionsType, ...args: Array<unknown>) {
         this.throwIfDestroyed();
 
         if (!this.renderedDom) {
@@ -385,7 +385,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
             },
             compEvent: this.compEventGetter,
             props: this.rendererProps,
-            context: this.context,
+            context: this.context as ControllerContext<unknown>,
         });
 
         if (result) {

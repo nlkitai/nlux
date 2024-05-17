@@ -8,7 +8,11 @@ export const createAiChat = <AiMsg = string>(): AiChat<AiMsg> => new AiChat<AiMs
 
 export {Observable} from './exports/bus/observable';
 
-export type {ConversationOptions} from './exports/aiChat/options/conversationOptions';
+export type {
+    ConversationOptions,
+    ConversationDisplayMode,
+} from './exports/aiChat/options/conversationOptions';
+
 export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';
 export type {MessageOptions} from './exports/aiChat/options/messageOptions';
 export type {DisplayOptions} from './exports/aiChat/options/displayOptions';

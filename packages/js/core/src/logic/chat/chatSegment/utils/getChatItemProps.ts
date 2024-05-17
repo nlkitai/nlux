@@ -1,10 +1,12 @@
 import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItemProps} from '../../../../../../../shared/src/ui/ChatItem/props';
 import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/stringifyRandomResponse';
+import {ConversationDisplayMode} from '../../../../exports/aiChat/options/conversationOptions';
 import {UserPersona} from '../../../../exports/aiChat/options/personaOptions';
 
 export const getChatItemPropsFromSegmentItem = <AiMsg>(
     segmentItem: ChatSegmentItem<AiMsg>,
+    conversationDisplayMode: ConversationDisplayMode,
     userPersona?: UserPersona,
     botPersona?: UserPersona,
 ): ChatItemProps | undefined => {
@@ -15,6 +17,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
             return {
                 status,
                 direction: 'incoming',
+                displayMode: conversationDisplayMode,
                 name: botPersona?.name,
                 picture: botPersona?.picture,
                 // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
@@ -26,6 +29,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
             return {
                 status,
                 direction: 'incoming',
+                displayMode: conversationDisplayMode,
                 name: botPersona?.name,
                 picture: botPersona?.picture,
                 message: stringifyRandomResponse<AiMsg>(segmentItem.content),
@@ -35,6 +39,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
         return {
             status,
             direction: 'incoming',
+            displayMode: conversationDisplayMode,
             name: botPersona?.name,
             picture: botPersona?.picture,
         };
@@ -43,6 +48,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
     return {
         status: 'complete',
         direction: 'outgoing',
+        displayMode: conversationDisplayMode,
         message: segmentItem.content,
         name: userPersona?.name,
         picture: userPersona?.picture,

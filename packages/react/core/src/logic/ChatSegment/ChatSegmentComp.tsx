@@ -46,11 +46,7 @@ export const ChatSegmentComp: <AiMsg>(
             return null;
         }
 
-        return (
-            <div className={'nlux-chtSgm-ldr-cntr'}>
-                {props.loader ?? <LoaderComp/>}
-            </div>
-        );
+        return (<div className={'nlux-chtSgm-ldr-cntr'}>{props.loader ?? <LoaderComp/>}</div>);
     }, [chatSegment.status, props.loader]);
 
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
@@ -144,6 +140,7 @@ export const ChatSegmentComp: <AiMsg>(
                             uid={chatItem.uid}
                             status={'complete'}
                             direction={'outgoing'}
+                            displayMode={props.displayMode}
                             dataTransferMode={'fetch'} // User chat items are always in fetch mode.
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
@@ -176,6 +173,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'incoming'}
+                                    displayMode={props.displayMode}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     streamedContent={chatItem.content}
                                     responseRenderer={props.responseRenderer}
@@ -214,6 +212,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'complete'}
                                     direction={'incoming'}
+                                    displayMode={props.displayMode}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     fetchedContent={chatItem.content}
                                     fetchedServerResponse={chatItem.serverResponse}
@@ -243,6 +242,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'incoming'}
+                                    displayMode={props.displayMode}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     responseRenderer={props.responseRenderer}
                                     name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}

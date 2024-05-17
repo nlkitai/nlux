@@ -70,6 +70,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             key={segment.uid}
                             chatSegment={segment}
                             personaOptions={personaOptions}
+                            displayMode={props.displayMode}
                             loader={props.loader}
                             responseRenderer={props.responseRenderer}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}

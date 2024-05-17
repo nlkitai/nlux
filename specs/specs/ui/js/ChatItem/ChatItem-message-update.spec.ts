@@ -9,6 +9,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
+                displayMode: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -31,6 +32,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
+                displayMode: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };

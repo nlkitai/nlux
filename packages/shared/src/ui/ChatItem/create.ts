@@ -5,6 +5,7 @@ import {createMessageDom} from '../Message/create';
 import {MessageProps} from '../Message/props';
 import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
+import {applyNewDisplayModeClassName} from './utils/applyNewDisplayModeClassName';
 
 export const className = 'nlux-comp-cht_itm';
 
@@ -32,6 +33,8 @@ export const createChatItemDom: DomCreator<ChatItemProps> = (
     }
 
     applyNewDirectionClassName(element, props.direction);
+    applyNewDisplayModeClassName(element, props.displayMode);
+
     element.append(message);
     return element;
 };

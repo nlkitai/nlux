@@ -6,7 +6,8 @@ import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
-import {HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
+import {ConversationDisplayMode, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
@@ -29,6 +30,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
+            conversationDisplayMode,
             autoScroll,
             streamingAnimationSpeed,
             visible = true,
@@ -43,6 +45,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
+            conversationDisplayMode,
             visible,
             autoScroll,
             streamingAnimationSpeed,
@@ -94,7 +97,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             if (conversationContainer instanceof HTMLElement) {
                 this.autoScrollController = createAutoScrollController(
                     conversationContainer,
-                    this.props.autoScroll ?? true,
+                    (this.getProp('autoScroll') as boolean | undefined) ?? true,
                 );
 
                 // Attempt to scroll to the bottom of the conversation container on initial render.
@@ -199,11 +202,12 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 botPersona,
                 userPersona,
                 messages: initialConversationContent,
-                markdownLinkTarget: this.props.markdownLinkTarget,
-                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
-                skipStreamingAnimation: this.props.skipStreamingAnimation,
-                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
-                syntaxHighlighter: this.props.syntaxHighlighter,
+                conversationDisplayMode: this.getProp('conversationDisplayMode') as ConversationDisplayMode,
+                markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
+                showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
+                skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
+                streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
+                syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
             })
             .create();
 

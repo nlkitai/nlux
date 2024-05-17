@@ -45,7 +45,8 @@ export class CompChatItem<AiMsg> extends BaseComp<
     }
 
     public getChatSegmentItem(): ChatSegmentItem<AiMsg> {
-        if (this.props.domProps.direction === 'incoming') {
+        const domProps = this.getProp('domProps') as ChatItemProps;
+        if (domProps.direction === 'incoming') {
             return {
                 uid: this.props.uid,
                 participantRole: 'ai',
@@ -71,7 +72,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
     }
 
     public updateDomProps(updatedProps: Partial<ChatItemProps>) {
-        const oldProps: ChatItemProps = this.props.domProps;
+        const oldProps: ChatItemProps = this.getProp('domProps') as ChatItemProps;
         const newProps: ChatItemProps = {
             ...oldProps,
             ...updatedProps,

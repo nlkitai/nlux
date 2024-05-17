@@ -3,6 +3,9 @@ import {className as compChatItemClassName} from '../../../../../shared/src/ui/C
 import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
+import {
+    conversationDisplayModeClassName,
+} from '../../../../../shared/src/ui/ChatItem/utils/applyNewDisplayModeClassName';
 import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
@@ -37,7 +40,11 @@ export const ChatItemComp: <AiMsg>(
         ? compChatItemDirectionClassName[props.direction]
         : compChatItemDirectionClassName['incoming'];
 
-    const className = `${compChatItemClassName} ${compDirectionClassName}`;
+    const compConStyleClassName = props.displayMode === 'bubbles'
+        ? conversationDisplayModeClassName['bubbles']
+        : conversationDisplayModeClassName['list'];
+
+    const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
     const MessageRenderer = useMemo(() => {
         return isStreaming ? () => '' : createMessageRenderer<AiMsg>(props);
     }, [

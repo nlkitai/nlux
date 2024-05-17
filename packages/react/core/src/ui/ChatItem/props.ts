@@ -1,4 +1,4 @@
-import {HighlighterExtension} from '@nlux/core';
+import {ConversationDisplayMode, HighlighterExtension} from '@nlux/core';
 import {ReactElement} from 'react';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 import {ResponseComponent} from '../../exports/messageOptions';
@@ -6,6 +6,7 @@ import {ResponseComponent} from '../../exports/messageOptions';
 export type ChatItemProps<AiMsg> = {
     uid: string;
     direction: MessageDirection;
+    displayMode: ConversationDisplayMode;
     dataTransferMode: 'fetch' | 'stream';
     status: 'streaming' | 'complete';
     fetchedContent?: AiMsg;

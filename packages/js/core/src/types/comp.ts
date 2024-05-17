@@ -1,3 +1,4 @@
+import {CallbackFunction} from '../../../../shared/src/types/callbackFunction';
 import {BaseComp} from '../exports/aiChat/comp/base';
 import {ControllerContext} from './controllerContext';
 
@@ -26,7 +27,7 @@ export type CompDom<ElementsType, ActionsType> = {
  */
 export type CompRenderer<PropsType, ElementsType, EventsType, ActionsType = undefined> = (params: {
     appendToRoot: (element: HTMLElement) => void,
-    compEvent: (eventName: EventsType) => Function,
+    compEvent: (eventName: EventsType) => CallbackFunction,
     props: Readonly<PropsType>,
     context: ControllerContext<unknown>,
 }) => CompDom<ElementsType, ActionsType>;
@@ -46,7 +47,7 @@ export type CompUpdater<PropsType, ElementsType, ActionsType> = (params: {
         elements?: ElementsType,
         actions?: ActionsType,
     },
-    updateSubComponent?: (partId: string, propName: string, newValue: any) => void,
+    updateSubComponent?: (partId: string, propName: string, newValue: unknown) => void,
 }) => void;
 
 /**

@@ -6,6 +6,7 @@ import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
 import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
+import {applyNewDisplayModeClassName} from './utils/applyNewDisplayModeClassName';
 
 export const updateChatItemDom: DomUpdater<ChatItemProps> = (
     element,
@@ -35,6 +36,10 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 
     if (propsBefore.direction !== propsAfter.direction) {
         applyNewDirectionClassName(element, propsAfter.direction);
+    }
+
+    if (propsBefore.displayMode !== propsAfter.displayMode) {
+        applyNewDisplayModeClassName(element, propsAfter.displayMode);
     }
 
     if (

@@ -5,6 +5,8 @@ import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
+import {ConversationDisplayMode} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatItem} from '../chatItem/chatItem.model';
@@ -41,8 +43,9 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
         const compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
             item,
-            this.props.userPersona,
-            this.props.botPersona,
+            this.getProp('conversationDisplayMode') as ConversationDisplayMode,
+            this.getProp('userPersona') as UserPersona | undefined,
+            this.getProp('botPersona') as BotPersona | undefined,
         );
 
         if (!compChatItemProps) {
@@ -54,11 +57,11 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             .withProps({
                 uid: item.uid,
                 domProps: compChatItemProps,
-                markdownLinkTarget: this.props.markdownLinkTarget,
-                showCodeBlockCopyButton: this.props.showCodeBlockCopyButton,
-                skipStreamingAnimation: this.props.skipStreamingAnimation,
-                syntaxHighlighter: this.props.syntaxHighlighter,
-                streamingAnimationSpeed: this.props.streamingAnimationSpeed,
+                markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
+                showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
+                skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
+                syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
+                streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
             } satisfies CompChatItemProps)
             .create();
 

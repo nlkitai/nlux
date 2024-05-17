@@ -14,6 +14,7 @@ import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
+import {useConversationDisplayStyle} from './hooks/useConversationDisplayStyle';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
@@ -63,6 +64,7 @@ export const AiChat: <AiMsg>(
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
+    const conversationDisplayMode = useConversationDisplayStyle(conversationOptions);
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId, colorScheme}).join(' '),
         [className, themeId, colorScheme],
@@ -120,6 +122,7 @@ export const AiChat: <AiMsg>(
                         segments={segments}
                         conversationOptions={props.conversationOptions}
                         personaOptions={props.personaOptions}
+                        displayMode={conversationDisplayMode}
                         responseRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
                         markdownLinkTarget={props.messageOptions?.markdownLinkTarget}

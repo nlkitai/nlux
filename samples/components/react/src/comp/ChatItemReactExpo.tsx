@@ -60,6 +60,7 @@ export const ChatItemReactExpo = () => {
                         uid={'1'}
                         dataTransferMode={'fetch'}
                         direction={direction}
+                        displayMode={'bubbles'}
                         status={status}
                         fetchedContent={message}
                         picture={picture}

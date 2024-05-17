@@ -1,4 +1,4 @@
-import {ConversationOptions, HighlighterExtension} from '@nlux/core';
+import {ConversationDisplayMode, ConversationOptions, HighlighterExtension} from '@nlux/core';
 import {ReactElement} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {ResponseComponent} from '../../exports/messageOptions';
@@ -8,6 +8,7 @@ export type ConversationCompProps<AiMsg> = {
     segments: ChatSegment<AiMsg>[];
     conversationOptions?: ConversationOptions;
     personaOptions?: PersonaOptions;
+    displayMode: ConversationDisplayMode;
     responseRenderer?: ResponseComponent<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
     markdownLinkTarget?: 'blank' | 'self';

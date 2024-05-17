@@ -1,4 +1,4 @@
-import {ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {FC, ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
 import {
@@ -8,6 +8,7 @@ import {
     statusClassName as compMessageStatusClassName,
 } from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
 import {warn} from '../../../../../shared/src/utils/warn';
+import {StreamResponseComponentProps} from '../../exports/messageOptions';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomService';
 
@@ -79,9 +80,9 @@ export const StreamContainerComp = function <AiMsg>(
 
     const rootElement: ReactElement = useMemo(() => {
         if (responseRenderer) {
-            const ResponseRendererComp = responseRenderer;
+            const StreamResponseRendererComp = responseRenderer as FC<StreamResponseComponentProps<AiMsg>>;
             return (
-                <ResponseRendererComp
+                <StreamResponseRendererComp
                     uid={uid}
                     status={status}
                     containerRef={rootElRef as RefObject<never>}

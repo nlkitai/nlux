@@ -6,6 +6,7 @@ export type {
     DisplayOptions,
     PromptBoxOptions,
     ConversationOptions,
+    ConversationDisplayMode,
     HistoryPayloadSize,
     HighlighterExtension,
     AiChatPropsInEvents,
