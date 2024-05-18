@@ -1,3 +1,4 @@
+import {CallbackArgType, CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
 import {NluxError, NluxUsageError} from '../../../../../../shared/src/types/error';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {uid} from '../../../../../../shared/src/utils/uid';
@@ -361,7 +362,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
             });
         }
 
-        return domOp(() => action(...args));
+        return domOp(() => (action as CallbackFunction)(...args as CallbackArgType[]));
     };
 
     protected executeRenderer(root: HTMLElement | DocumentFragment) {

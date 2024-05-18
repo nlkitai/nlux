@@ -5,7 +5,7 @@ import {
     RunTaskResult,
 } from '../../../../../shared/src/types/aiContext/contextResults';
 import {ContextTask, ContextTasks} from '../../../../../shared/src/types/aiContext/data';
-import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
+import {CallbackArgType, CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
 import {warn} from '../../../../../shared/src/utils/warn';
 
 type UpdateQueueItem = {
@@ -241,7 +241,9 @@ export class TasksService {
         }
 
         try {
-            const result = callback(...(parameters ?? []));
+            const result = callback(
+                ...(parameters ?? []) as CallbackArgType[],
+            );
             return {
                 success: true,
                 result,
@@ -409,7 +411,7 @@ export class TasksService {
                         updateData.paramDescriptions = item.paramDescriptions;
                     }
 
-                    acc[itemId] = updateData;
+                    acc[itemId] = updateData as ContextTask;
                 }
 
                 return acc;
