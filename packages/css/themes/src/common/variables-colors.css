@@ -1,0 +1,77 @@
+.nlux-AiChat-root {
+    /** Exceptions box */
+    --nlux-exceptionsBox-backgroundColor: tomato;
+    --nlux-exceptionsBox-borderColor: darkred;
+    --nlux-exceptionsBox-textColor: white;
+
+    /** Conversation loader */
+    --nlux-chatRoom-loader-backgroundColor: red;
+
+    /** Conversation content color */
+    --nlux-chatRoom-textColor: black; /* Default text color */
+    --nlux-chatRoom-divider-color: red;
+    --nlux-chatRoom-loader-color: darkgoldenrod;
+    --nlux-chatRoom-backgroundColor: lavender;
+    --nlux-chatRoom-borderColor: darkgoldenrod;
+
+    /* Human message in chat */
+    --nlux-humanMessage-textColor: black;
+    --nlux-humanMessage-backgroundColor: lightyellow;
+    --nlux-humanMessage-borderColor: black;
+
+    /** AI message in chat */
+    --nlux-aiMessage-textColor: midnightblue;
+    --nlux-aiMessage-backgroundColor: lightcyan;
+    --nlux-aiMessage-borderColor: midnightblue;
+
+    /** Input colors */
+    --nlux-promptInput-textColor: black;
+    --nlux-promptInput-active-textColor: black;
+    --nlux-promptInput-disabled-textColor: gray;
+
+    --nlux-promptInput-backgroundColor: honeydew;
+    --nlux-promptInput-active-backgroundColor: white;
+    --nlux-promptInput-disabled-backgroundColor: lightgrey;
+
+    --nlux-promptInput-borderColor: mediumseagreen;
+    --nlux-promptInput-active-borderColor: limegreen;
+    --nlux-promptInput-disabled-borderColor: darkgrey;
+
+    --nlux-promptInput-placeholderTextColor: darkseagreen;
+    --nlux-promptInput-focus-outlineColor: fuchsia;
+
+    /** Button colors */
+    --nlux-submitButton-textColor: mediumseagreen;
+    --nlux-submitButton-active-textColor: limegreen;
+    --nlux-submitButton-disabled-textColor: gray;
+
+    --nlux-submitButton-backgroundColor: honeydew;
+    --nlux-submitButton-active-backgroundColor: white;
+    --nlux-submitButton-disabled-backgroundColor: lightgrey;
+
+    --nlux-submitButton-borderColor: mediumseagreen;
+    --nlux-submitButton-active-borderColor: limegreen;
+    --nlux-submitButton-disabled-borderColor: darkgrey;
+
+    --nlux-submitButton-focus-outlineColor: fuchsia;
+
+    /** Code block */
+    --nlux-codeBlock-textColor: black;
+    --nlux-codeBlock-backgroundColor: gold;
+    --nlux-codeBlock-borderColor: deeppink;
+    --nlux-codeBlock-hover-backgroundColor: lightgoldenrodyellow;
+
+    /** Code block copy button */
+    --nlux-codeBlock-copyButton-backgroundColor: darkgoldenrod;
+    --nlux-codeBlock-copyButton-borderColor: darkred;
+    --nlux-codeBlock-copyButton-textColor: white;
+
+    /** Code block copy button in clicked state */
+    --nlux-codeBlock-clickedCopyButton-backgroundColor: greenyellow;
+    --nlux-codeBlock-clickedCopyButton-borderColor: limegreen;
+    --nlux-codeBlock-clickedCopyButton-textColor: yellow;
+
+    /** Inline code in markdown */
+    --nlux-inlineCode-backgroundColor: chartreuse;
+    --nlux-inlineCode-textColor: white;
+}

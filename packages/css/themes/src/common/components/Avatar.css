@@ -2,8 +2,11 @@
     position: relative;
     overflow: hidden;
     width: var(--nlux-chatItem-avatar-width);
-    border-radius: 50%;
-    box-shadow: var(--nlux-boxShadow);
+
+    border-width: var(--nlux-chatItem-message-borderWidth);
+    border-style: solid;
+    border-radius: var(--nlux-chatItem-avatar-borderRadius);
+
     aspect-ratio: 1;
 
     > .avtr_ctn {

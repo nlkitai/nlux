@@ -12,13 +12,13 @@
         flex-shrink: initial;
         min-width: 80px;
         min-height: 20px;
-        padding: var(--nlux-padding) var(--nlux-padding-m);
+        padding: var(--nlux-chatItem-message-paddingTopBottom) var(--nlux-chatItem-message-paddingLeftRight);
         text-align: left;
-        border-width: var(--nlux-borderWidth);
+        border-width: var(--nlux-chatItem-message-borderWidth);
         border-style: solid;
-        border-radius: var(--nlux-borderRadius-m);
+        border-radius: var(--nlux-chatItem-message-borderRadius);
         outline: 0;
-        gap: var(--nlux-flexGap);
+        gap: var(--nlux-chatItem-message-flexGap);
     }
 }
 
@@ -31,6 +31,10 @@
         border-color: var(--nlux-humanMessage-borderColor);
         background-color: var(--nlux-humanMessage-backgroundColor);
     }
+
+    > .nlux-comp-avtr {
+        border-color: var(--nlux-humanMessage-borderColor);
+    }
 }
 
 .nlux-comp-cht_itm.nlux_cht_itm_in {
@@ -41,5 +45,9 @@
         color: var(--nlux-aiMessage-textColor);
         border-color: var(--nlux-aiMessage-borderColor);
         background-color: var(--nlux-aiMessage-backgroundColor);
+    }
+
+    > .nlux-comp-avtr {
+        border-color: var(--nlux-aiMessage-borderColor);
     }
 }

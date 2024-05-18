@@ -1,20 +1,2 @@
-.nlux-AiChat-root.nlux-theme-nova {
-    /** Generic variables */
-    --nlux-fontFamily: 'Inter';
-    --nlux-monoFontFamily: monospace;
-    --nlux-boxShadow: none;
-
-    /** Base variables used to calculate other variables */
-    --nlux-base-fontWeight: 400;
-    --nlux-base-fontSize: 1rem;
-    --nlux-base-lineHeight: 1.4;
-    --nlux-base-padding: 1rem;
-    --nlux-base-flexGap: 0.8rem;
-    --nlux-base-borderRadius: 10px;
-    --nlux-base-borderWidth: 1px;
-
-    /** Component-specific variables */
-    --nlux-chatItem-avatar-width: 32px;
-    --nlux-chatItem-alignItems: flex-end;
-    --nlux-welcomeMessage-avatar-width: 45px;
+.never-nlux-AiChat-root.nlux-theme-nova {
 }

@@ -1,0 +1,23 @@
+.nlux-AiChat-root {
+    --nlux-fontFamily: 'IBM Plex Sans';
+    --nlux-monoFontFamily: monospace;
+
+    --nlux-fontWeight: 400;
+    --nlux-lineHeight: 1.4;
+    --nlux-borderWidth: 5px;
+    --nlux-flexGap: 0.8rem;
+
+    --nlux-fontSize: 1rem;
+    --nlux-fontSize-s: 0.8rem;
+    --nlux-fontSize-l: 1.2rem;
+
+    --nlux-padding: 12px;
+    --nlux-padding-xs: 6px;
+    --nlux-padding-s: 9px;
+    --nlux-padding-m: 15px;
+
+    --nlux-borderRadius: 18px;
+    --nlux-borderRadius-xs: 8px;
+    --nlux-borderRadius-s: 14px;
+    --nlux-borderRadius-m: 21px;
+}

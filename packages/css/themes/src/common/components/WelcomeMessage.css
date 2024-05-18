@@ -3,12 +3,14 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
+
     width: 100%;
     height: 100%;
-    gap: var(--nlux-flexGap);
+
+    gap: var(--nlux-welcomeMessage-gap);
 
     > .nlux-comp-wlc_msg_prs_nm {
-        font-size: var(--nlux-fontSize-l);
+        font-size: var(--nlux-welcomeMessage-personaName-fontSize);
         font-weight: bold;
     }
 

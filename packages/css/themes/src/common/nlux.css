@@ -1,11 +1,9 @@
-@import './multipliers.css';
-@import './variables.css';
-@import './colors.css';
+@import './variables-generic.css';
+@import './variables-components.css';
+@import './variables-colors.css';
 
 @import './layout.css';
 @import './format.css';
 @import './animation.css';
-
-@import './ui/input.css';
 
 @import './components/AiChat.css';

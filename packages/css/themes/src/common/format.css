@@ -1,11 +1,21 @@
 .nlux-AiChat-root {
-    font-family: var(--nlux-fontFamily), sans-serif;
-    font-size: var(--nlux-fontSize);
-    font-weight: var(--nlux-fontWeight);
+    font-family: var(--nlux-chatRoom-fontFamily), sans-serif;
+    font-size: var(--nlux-chatRoom-fontSize);
+    font-weight: var(--nlux-chatRoom-fontWeight);
     font-style: normal;
 
-    line-height: var(--nlux-lineHeight);
-    color: var(--nlux-text-color);
+    line-height: var(--nlux-chatRoom-lineHeight);
+    color: var(--nlux-chatRoom-textColor);
 
     font-variation-settings: 'slnt' 0;
+
+    > .nlux-chtRm-cntr {
+        border: var(--nlux-chatRoom-borderWidth) solid var(--nlux-chatRoom-borderColor);
+        border-radius: var(--nlux-chatRoom-borderRadius);
+        background-color: var(--nlux-chatRoom-backgroundColor);
+
+        > .nlux-chtRm-prmptBox-cntr {
+            border-top: var(--nlux-chatRoom-borderWidth) solid var(--nlux-chatRoom-divider-color);
+        }
+    }
 }

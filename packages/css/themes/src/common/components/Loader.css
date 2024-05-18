@@ -11,8 +11,8 @@
             width: 15px;
             height: 15px;
 
-            transform: rotateZ(45deg);
             border-radius: 50%;
+            aspect-ratio: 1 / 1;
             perspective: 1000px;
 
             &:before,

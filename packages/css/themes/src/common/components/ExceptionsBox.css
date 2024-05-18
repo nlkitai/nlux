@@ -1,12 +1,23 @@
 .nlux-comp-exp_box {
+    position: absolute;
+    z-index: 999999;
+    top: 0;
+    right: var(--nlux-borderWidth);
+    left: var(--nlux-borderWidth);
+    width: 100%;
+    padding: var(--nlux-chatRoom-padding) 0;
+
     > .nlux-comp-exp_itm {
-        padding: var(--nlux-padding);
+        margin: 0 var(--nlux-chatRoom-padding);
+        padding: var(--nlux-exceptionsBox-padding);
         animation: nlux-fadeInUp 0.15s ease-out forwards;
         opacity: 0;
 
         color: var(--nlux-exceptionsBox-textColor);
+        border-width: var(--nlux-exceptionsBox-borderWidth);
+        border-style: solid;
         border-color: var(--nlux-exceptionsBox-borderColor);
-        border-radius: var(--nlux-borderRadius);
+        border-radius: var(--nlux-exceptionsBox-borderRadius);
         background-color: var(--nlux-exceptionsBox-backgroundColor);
     }
 

@@ -18,8 +18,9 @@
         position: absolute;
         z-index: 999999;
         top: 0;
-        right: 0;
-        left: 0;
+        right: var(--nlux-chatRoom-borderWidth);
+        left: var(--nlux-chatRoom-borderWidth);
+        width: 100%;
     }
 
     > .nlux-chtRm-cntr {
@@ -33,14 +34,12 @@
             overflow-x: hidden;
             overflow-y: auto;
             flex: 1;
-            padding: 0 0 var(--nlux-padding) 0;
+            padding: var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding) var(--nlux-divider-margiBottom) var(--nlux-chatRoom-padding);
         }
 
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
-            padding: var(--nlux-padding) 0 0 0;
-            border-top: var(--nlux-borderWidth) solid var(--nlux-divider-color);
-            gap: var(--nlux-flexGap);
+            padding: var(--nlux-divider-marginTop) var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding);
         }
     }
 }

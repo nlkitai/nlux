@@ -1,20 +1,2 @@
 .nlux-AiChat-root.nlux-theme-luna {
-    /** Generic variables */
-    --nlux-fontFamily: 'IBM Plex Sans';
-    --nlux-monoFontFamily: monospace;
-    --nlux-boxShadow: 0 0 2px rgb(0 0 0 / 30%);
-
-    /** Base variables used to calculate other variables */
-    --nlux-base-fontWeight: 400;
-    --nlux-base-fontSize: 1rem;
-    --nlux-base-lineHeight: 1.2;
-    --nlux-base-padding: 0.6rem;
-    --nlux-base-flexGap: 0.8rem;
-    --nlux-base-borderRadius: 8px;
-    --nlux-base-borderWidth: 1px;
-
-    /** Component-specific variables */
-    --nlux-chatItem-avatar-width: 50px;
-    --nlux-chatItem-alignItems: flex-start;
-    --nlux-welcomeMessage-avatar-width: 50px;
 }

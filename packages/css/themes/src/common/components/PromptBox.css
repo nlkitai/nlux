@@ -5,11 +5,11 @@
     justify-content: center;
 
     background-color: transparent;
-    gap: var(--nlux-flexGap);
+    gap: var(--nlux-promptBox-flexGap);
 
     > textarea {
-        font-family: var(--nlux-fontFamily), sans-serif;
-        font-size: var(--nlux-fontSize);
+        font-family: var(--nlux-promptInput-fontFamily), sans-serif;
+        font-size: var(--nlux-promptInput-fontSize);
 
         font-weight: 400;
         line-height: 1.5;
@@ -17,13 +17,38 @@
         padding: .375rem .75rem;
         resize: none;
         cursor: pointer;
-        transition: color .1s ease-in-out, background-color .1s ease-in-out, border-color .1s ease-in-out, box-shadow .1s ease-in-out;
-        color: var(--nlux-input-textColor);
-        border-width: var(--nlux-borderWidth);
+        color: var(--nlux-promptInput-textColor);
+
+        border-width: var(--nlux-promptInput-borderWidth);
         border-style: solid;
-        border-color: var(--nlux-input-borderColor);
-        border-radius: var(--nlux-borderRadius-m);
-        outline: 0;
+        border-color: var(--nlux-promptInput-borderColor);
+        border-radius: var(--nlux-promptInput-borderRadius);
+
+        outline: none;
+        background-color: var(--nlux-promptInput-backgroundColor);
+
+        &:focus {
+            outline: var(--nlux-promptInput-focus-outlineColor) solid var(--nlux-promptInput-focus-outlineWidth);
+        }
+
+        &:disabled,
+        &:disabled:hover {
+            cursor: auto;
+            color: var(--nlux-promptInput-disabled-textColor);
+            border-color: var(--nlux-promptInput-disabled-borderColor);
+            background-color: var(--nlux-promptInput-disabled-backgroundColor);
+        }
+
+        &:focus,
+        &:hover {
+            color: var(--nlux-promptInput-active-textColor);
+            border-color: var(--nlux-promptInput-active-borderColor);
+            background-color: var(--nlux-promptInput-active-backgroundColor);
+        }
+
+        &::placeholder {
+            color: var(--nlux-promptInput-placeholderTextColor);
+        }
     }
 
     > button {
@@ -31,18 +56,24 @@
         align-items: center;
 
         justify-content: center;
-        width: 65px;
+        width: var(--nlux-submitButton-width);
         cursor: pointer;
-        color: var(--nlux-button-textColor);
-        border-width: var(--nlux-borderWidth);
+        color: var(--nlux-submitButton-textColor);
+        border-width: var(--nlux-submitButton-borderWidth);
         border-style: solid;
-        border-color: var(--nlux-button-borderColor);
-        border-radius: var(--nlux-borderRadius-m);
-        background-color: var(--nlux-button-backgroundColor);
+        border-color: var(--nlux-submitButton-borderColor);
+        border-radius: var(--nlux-submitButton-borderRadius);
+        background-color: var(--nlux-submitButton-backgroundColor);
 
         &:focus,
         &:hover {
-            background-color: var(--nlux-button-active-backgroundColor);
+            color: var(--nlux-submitButton-active-textColor);
+            border-color: var(--nlux-submitButton-active-borderColor);
+            background-color: var(--nlux-submitButton-active-backgroundColor);
+        }
+
+        &:focus {
+            outline: var(--nlux-submitButton-focus-outlineColor) solid var(--nlux-submitButton-focus-outlineWidth);
         }
 
         > .nlux_sndIcn {
@@ -67,9 +98,9 @@
 
     > button:disabled {
         cursor: not-allowed;
-        color: var(--nlux-button-disabled-textColor);
-        border-color: var(--nlux-button-disabled-borderColor);
-        background-color: var(--nlux-button-disabled-backgroundColor);
+        color: var(--nlux-submitButton-disabled-textColor);
+        border-color: var(--nlux-submitButton-disabled-borderColor);
+        background-color: var(--nlux-submitButton-disabled-backgroundColor);
     }
 }
 

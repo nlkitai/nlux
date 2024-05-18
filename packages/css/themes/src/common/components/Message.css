@@ -8,7 +8,6 @@
     text-align: left;
     border: 1px solid;
     border-radius: 0.25em;
-    box-shadow: var(--nlux-boxShadow);
 
     > .nlux-md-strm-root {
         width: 100%;
@@ -26,18 +25,17 @@
         }
 
         > .code-block {
-            font-family: var(--nlux-monoFontFamily), monospace;
-            font-size: var(--nlux-fontSize-s);
+            font-family: var(--nlux-codeBlock-fontFamily), monospace;
+            font-size: var(--nlux-codeBlock-fontSize);
 
             position: relative;
             overflow: scroll;
-            padding: var(--nlux-padding) 0;
+            padding: 0;
 
-            color: var(--nlux-codeBlock-text-color);
-            border: none;
-            border-radius: var(--nlux-borderRadius-s);
+            color: var(--nlux-codeBlock-textColor);
+            border: var(--nlux-codeBlock-borderWidth) solid var(--nlux-codeBlock-borderColor);
+            border-radius: var(--nlux-codeBlock-borderRadius);
             background-color: var(--nlux-codeBlock-backgroundColor);
-            box-shadow: var(--nlux-boxShadow);
         }
 
         > .code-block > pre {
@@ -46,7 +44,7 @@
         }
 
         > .code-block > pre > div {
-            padding: 0 var(--nlux-padding-m);
+            padding: 0 var(--nlux-codeBlock-padding);
         }
 
         > .code-block > pre > div:hover {
@@ -56,28 +54,28 @@
         button.nlux-cpy-btn {
             position: relative;
             z-index: 999999;
-            width: 25px;
-            height: 24px;
+            width: var(--nlux-codeBlock-copyButton-width);
+            height: var(--nlux-codeBlock-copyButton-height);
 
-            margin-right: 10px;
-            margin-bottom: -23px;
+            margin-right: calc(var(--nlux-codeBlock-copyButton-width) / 2);
+            margin-bottom: calc(-1 * var(--nlux-codeBlock-copyButton-height));
             margin-left: auto;
 
-            padding: 4px;
+            padding: var(--nlux-codeBlock-copyButton-padding);
 
             cursor: pointer;
-            color: var(--nlux-codeBlock-backgroundColor);
-            border: 1px solid var(--nlux-codeBlock-backgroundColor);
-            border-radius: var(--nlux-borderRadius-xs);
-            background-color: var(--nlux-aiMessage-backgroundColor);
+            color: var(--nlux-codeBlock-copyButton-textColor);
+            border: var(--nlux-codeBlock-copyButton-borderWidth) solid var(--nlux-codeBlock-copyButton-borderColor);
+            border-radius: var(--nlux-codeBlock-copyButton-borderRadius);
+            background-color: var(--nlux-codeBlock-copyButton-backgroundColor);
         }
 
         button.nlux-cpy-btn {
             &.clicked,
             &.clicked:hover {
-                color: var(--nlux-aiMessage-backgroundColor);
-                border-color: var(--nlux-codeBlock-backgroundColor);
-                background-color: var(--nlux-codeBlock-backgroundColor);
+                color: var(--nlux-codeBlock-clickedCopyButton-textColor);
+                border-color: var(--nlux-codeBlock-clickedCopyButton-borderColor);
+                background-color: var(--nlux-codeBlock-clickedCopyButton-backgroundColor);
             }
 
             &:hover * {
@@ -90,13 +88,13 @@
         }
 
         code {
-            font-family: var(--nlux-monoFontFamily), monospace;
-            font-size: var(--nlux-fontSize-s);
+            font-family: var(--nlux-inlineCode-fontFamily), monospace;
+            font-size: var(--nlux-inlineCode-fontSize);
 
-            padding: var(--nlux-padding-xs) var(--nlux-padding-s);
+            padding: var(--nlux-inlineCode-padding);
 
             color: var(--nlux-inlineCode-textColor);
-            border-radius: var(--nlux-borderRadius-xs);
+            border-radius: var(--nlux-inlineCode-borderRadius);
             background-color: var(--nlux-inlineCode-backgroundColor);
         }
 
