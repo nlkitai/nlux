@@ -7,14 +7,14 @@
     width: 100%;
     height: 100%;
 
-    gap: var(--nlux-welcomeMessage-gap);
+    gap: var(--nlux-wlcMsg--gap);
 
     > .nlux-comp-wlc_msg_prs_nm {
-        font-size: var(--nlux-welcomeMessage-personaName-fontSize);
+        font-size: var(--nlux-wlcMsg-prsNm--ftSz);
         font-weight: bold;
     }
 
     > .nlux-comp-avtr {
-        width: var(--nlux-welcomeMessage-avatar-width);
+        width: var(--nlux-wlcMsg-avtr--wd);
     }
 }

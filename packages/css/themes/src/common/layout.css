@@ -18,8 +18,8 @@
         position: absolute;
         z-index: 999999;
         top: 0;
-        right: var(--nlux-chatRoom-borderWidth);
-        left: var(--nlux-chatRoom-borderWidth);
+        right: var(--nlux-chtr--brdrWd);
+        left: var(--nlux-chtr--brdrWd);
         width: 100%;
     }
 
@@ -34,12 +34,12 @@
             overflow-x: hidden;
             overflow-y: auto;
             flex: 1;
-            padding: var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding) var(--nlux-divider-margiBottom) var(--nlux-chatRoom-padding);
+            padding: var(--nlux-chtr--pdng) var(--nlux-chtr--pdng) var(--nlux-dvr--mrgBtm) var(--nlux-chtr--pdng);
         }
 
         > .nlux-chtRm-prmptBox-cntr {
             flex: 0 0 auto;
-            padding: var(--nlux-divider-marginTop) var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding) var(--nlux-chatRoom-padding);
+            padding: var(--nlux-dvr--mrgTp) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng);
         }
     }
 }

@@ -1,39 +1,39 @@
 /* Light color scheme variables */
 .nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
-    --nlux-primary-backgroundColor: #f8f4e7;
+    --nlux-primary-bgClr: #f8f4e7;
     --nlux-primary-foregroundColor: #202020;
 
-    --nlux-secondary-backgroundColor: #10c17d;
+    --nlux-secondary-bgClr: #10c17d;
     --nlux-secondary-foregroundColor: #ffffff;
 
-    --nlux-human-backgroundColor: #eafff3;
+    --nlux-human-bgClr: #eafff3;
     --nlux-human-foregroundColor: #09101d;
 
-    --nlux-ai-backgroundColor: #f4f6f9;
+    --nlux-ai-bgClr: #f4f6f9;
     --nlux-ai-foregroundColor: #09101d;
 }
 
 /* Dark color scheme variables */
 .nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
-    --nlux-primary-backgroundColor: #191818;
+    --nlux-primary-bgClr: #191818;
     --nlux-primary-foregroundColor: #f8f4e7;
 
-    --nlux-secondary-backgroundColor: #10c17d;
+    --nlux-secondary-bgClr: #10c17d;
     --nlux-secondary-foregroundColor: #ffffff;
 
-    --nlux-human-backgroundColor: #161b20;
+    --nlux-human-bgClr: #161b20;
     --nlux-human-foregroundColor: #ffffff;
 
-    --nlux-ai-backgroundColor: #10c17d;
+    --nlux-ai-bgClr: #10c17d;
     --nlux-ai-foregroundColor: #ffffff;
 }
 
 /* Common color variables */
 .nlux-AiChat-root.nlux-theme-luna {
-    --nlux-codeBlock-backgroundColor: #303530;
-    --nlux-codeBlock-hover-backgroundColor: #404240;
-    --nlux-codeBlock-text-color: #dde5e2ff;
+    --nlux-cdBlk--bgClr: #303530;
+    --nlux-cdBlk-hover--bgClr: #404240;
+    --nlux-cdBlk-text-color: #dde5e2ff;
 
-    --nlux-inlineCode-backgroundColor: #d5dad1;
-    --nlux-inlineCode-textColor: #18210c;
+    --nlux-inlnCd--bgClr: #d5dad1;
+    --nlux-inlnCd--txtClr: #18210c;
 }

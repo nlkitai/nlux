@@ -1,11 +1,11 @@
 .nlux-comp-avtr {
     position: relative;
     overflow: hidden;
-    width: var(--nlux-chatItem-avatar-width);
+    width: var(--nlux-chItm-avtr--wd);
 
-    border-width: var(--nlux-chatItem-message-borderWidth);
+    border-width: var(--nlux-chItm-msg--brdrWd);
     border-style: solid;
-    border-radius: var(--nlux-chatItem-avatar-borderRadius);
+    border-radius: var(--nlux-chItm-avtr--brdrRd);
 
     aspect-ratio: 1;
 

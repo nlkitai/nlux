@@ -1,6 +1,6 @@
-import '@nlux-dev/themes/src/luna/theme.css';
-import '@nlux-dev/themes/src/nova/theme.css';
-// import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+// import '@nlux-dev/themes/src/luna/main.css';
+import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';

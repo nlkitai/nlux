@@ -5,20 +5,20 @@
     right: var(--nlux-borderWidth);
     left: var(--nlux-borderWidth);
     width: 100%;
-    padding: var(--nlux-chatRoom-padding) 0;
+    padding: var(--nlux-chtr--pdng) 0;
 
     > .nlux-comp-exp_itm {
-        margin: 0 var(--nlux-chatRoom-padding);
-        padding: var(--nlux-exceptionsBox-padding);
+        margin: 0 var(--nlux-chtr--pdng);
+        padding: var(--nlux-exp--pdng);
         animation: nlux-fadeInUp 0.15s ease-out forwards;
         opacity: 0;
 
-        color: var(--nlux-exceptionsBox-textColor);
-        border-width: var(--nlux-exceptionsBox-borderWidth);
+        color: var(--nlux-exp--txtClr);
+        border-width: var(--nlux-exp--brdrWd);
         border-style: solid;
-        border-color: var(--nlux-exceptionsBox-borderColor);
-        border-radius: var(--nlux-exceptionsBox-borderRadius);
-        background-color: var(--nlux-exceptionsBox-backgroundColor);
+        border-color: var(--nlux-exp--brdClr);
+        border-radius: var(--nlux-exp--brdrRd);
+        background-color: var(--nlux-exp--bgClr);
     }
 
     > .nlux-comp-exp_itm.nlux-comp-exp_itm_hide {

@@ -34,8 +34,9 @@ const cssEntry = (input: string, output: string) => ({
 });
 
 const packageConfig: () => Promise<RollupOptions[]> = async () => ([
-    cssEntry('./src/luna/theme.css', `../../../dist/${folder}/themes/luna.css`),
-    cssEntry('./src/nova/theme.css', `../../../dist/${folder}/themes/nova.css`),
+    cssEntry('./src/luna/main.css', `../../../dist/${folder}/themes/luna.css`),
+    cssEntry('./src/nova/main.css', `../../../dist/${folder}/themes/nova.css`),
+    cssEntry('./src/fest/main.css', `../../../dist/${folder}/themes/fest.css`),
 ]);
 
 export default packageConfig;

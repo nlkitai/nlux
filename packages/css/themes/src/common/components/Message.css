@@ -25,17 +25,17 @@
         }
 
         > .code-block {
-            font-family: var(--nlux-codeBlock-fontFamily), monospace;
-            font-size: var(--nlux-codeBlock-fontSize);
+            font-family: var(--nlux-cdBlk--ftFm), monospace;
+            font-size: var(--nlux-cdBlk--ftSz);
 
             position: relative;
             overflow: scroll;
             padding: 0;
 
-            color: var(--nlux-codeBlock-textColor);
-            border: var(--nlux-codeBlock-borderWidth) solid var(--nlux-codeBlock-borderColor);
-            border-radius: var(--nlux-codeBlock-borderRadius);
-            background-color: var(--nlux-codeBlock-backgroundColor);
+            color: var(--nlux-cdBlk--txtClr);
+            border: var(--nlux-cdBlk--brdrWd) solid var(--nlux-cdBlk--brdClr);
+            border-radius: var(--nlux-cdBlk--brdrRd);
+            background-color: var(--nlux-cdBlk--bgClr);
         }
 
         > .code-block > pre {
@@ -44,38 +44,38 @@
         }
 
         > .code-block > pre > div {
-            padding: 0 var(--nlux-codeBlock-padding);
+            padding: 0 var(--nlux-cdBlk--pdng);
         }
 
         > .code-block > pre > div:hover {
-            background-color: var(--nlux-codeBlock-hover-backgroundColor);
+            background-color: var(--nlux-cdBlk-hover--bgClr);
         }
 
         button.nlux-cpy-btn {
             position: relative;
             z-index: 999999;
-            width: var(--nlux-codeBlock-copyButton-width);
-            height: var(--nlux-codeBlock-copyButton-height);
+            width: var(--nlux-cdBlk-cpBtn--wd);
+            height: var(--nlux-cdBlk-cpBtn--hg);
 
-            margin-right: calc(var(--nlux-codeBlock-copyButton-width) / 2);
-            margin-bottom: calc(-1 * var(--nlux-codeBlock-copyButton-height));
+            margin-right: calc(var(--nlux-cdBlk-cpBtn--wd) / 2);
+            margin-bottom: calc(-1 * var(--nlux-cdBlk-cpBtn--hg));
             margin-left: auto;
 
-            padding: var(--nlux-codeBlock-copyButton-padding);
+            padding: var(--nlux-cdBlk-cpBtn--pdng);
 
             cursor: pointer;
-            color: var(--nlux-codeBlock-copyButton-textColor);
-            border: var(--nlux-codeBlock-copyButton-borderWidth) solid var(--nlux-codeBlock-copyButton-borderColor);
-            border-radius: var(--nlux-codeBlock-copyButton-borderRadius);
-            background-color: var(--nlux-codeBlock-copyButton-backgroundColor);
+            color: var(--nlux-cdBlk-cpBtn--txtClr);
+            border: var(--nlux-cdBlk-cpBtn--brdrWd) solid var(--nlux-cdBlk-cpBtn--brdClr);
+            border-radius: var(--nlux-cdBlk-cpBtn--brdrRd);
+            background-color: var(--nlux-cdBlk-cpBtn--bgClr);
         }
 
         button.nlux-cpy-btn {
             &.clicked,
             &.clicked:hover {
-                color: var(--nlux-codeBlock-clickedCopyButton-textColor);
-                border-color: var(--nlux-codeBlock-clickedCopyButton-borderColor);
-                background-color: var(--nlux-codeBlock-clickedCopyButton-backgroundColor);
+                color: var(--nlux-cdBlk-cpBtn-clck--txtClr);
+                border-color: var(--nlux-cdBlk-cpBtn-clck--brdClr);
+                background-color: var(--nlux-cdBlk-cpBtn-clck--bgClr);
             }
 
             &:hover * {
@@ -88,14 +88,14 @@
         }
 
         code {
-            font-family: var(--nlux-inlineCode-fontFamily), monospace;
-            font-size: var(--nlux-inlineCode-fontSize);
+            font-family: var(--nlux-inlnCd--ftFm), monospace;
+            font-size: var(--nlux-inlnCd--ftSz);
 
-            padding: var(--nlux-inlineCode-padding);
+            padding: var(--nlux-inlnCd--pdng);
 
-            color: var(--nlux-inlineCode-textColor);
-            border-radius: var(--nlux-inlineCode-borderRadius);
-            background-color: var(--nlux-inlineCode-backgroundColor);
+            color: var(--nlux-inlnCd--txtClr);
+            border-radius: var(--nlux-inlnCd--brdrRd);
+            background-color: var(--nlux-inlnCd--bgClr);
         }
 
         strong {

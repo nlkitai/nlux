@@ -1,77 +1,77 @@
 .nlux-AiChat-root {
     /** Exceptions box */
-    --nlux-exceptionsBox-backgroundColor: tomato;
-    --nlux-exceptionsBox-borderColor: darkred;
-    --nlux-exceptionsBox-textColor: white;
+    --nlux-exp--bgClr: tomato; /* Background color */
+    --nlux-exp--brdClr: darkred; /* Border color */
+    --nlux-exp--txtClr: white; /* Text color */
 
     /** Conversation loader */
-    --nlux-chatRoom-loader-backgroundColor: red;
+    --nlux-chtr-ldr--bgClr: red; /* Background color */
 
     /** Conversation content color */
-    --nlux-chatRoom-textColor: black; /* Default text color */
-    --nlux-chatRoom-divider-color: red;
-    --nlux-chatRoom-loader-color: darkgoldenrod;
-    --nlux-chatRoom-backgroundColor: lavender;
-    --nlux-chatRoom-borderColor: darkgoldenrod;
+    --nlux-chtr--bgClr: lavender; /* Background color */
+    --nlux-chtr--brdClr: darkgoldenrod; /* Border color */
+    --nlux-chtr--txtClr: black; /* Default text color */
+    --nlux-chtr-dvr--clr: red; /* Divider color */
+    --nlux-chtr-ldr--clr: darkgoldenrod; /* Loader color */
 
     /* Human message in chat */
-    --nlux-humanMessage-textColor: black;
-    --nlux-humanMessage-backgroundColor: lightyellow;
-    --nlux-humanMessage-borderColor: black;
+    --nlux-hmMsg--bgClr: lightyellow; /* Background color */
+    --nlux-hmMsg--brdClr: black; /* Border color */
+    --nlux-hmMsg--txtClr: black; /* Text color */
 
     /** AI message in chat */
-    --nlux-aiMessage-textColor: midnightblue;
-    --nlux-aiMessage-backgroundColor: lightcyan;
-    --nlux-aiMessage-borderColor: midnightblue;
+    --nlux-aiMsg--bgClr: lightcyan; /* Background color */
+    --nlux-aiMsg--brdClr: midnightblue; /* Border color */
+    --nlux-aiMsg--txtClr: midnightblue; /* Text color */
 
     /** Input colors */
-    --nlux-promptInput-textColor: black;
-    --nlux-promptInput-active-textColor: black;
-    --nlux-promptInput-disabled-textColor: gray;
+    --nlux-prmInp--bgClr: honeydew; /* Background color */
+    --nlux-prmInp-actv--bgClr: white; /* Active background color */
+    --nlux-prmInp-dslb--bgClr: lightgrey; /* Disabled background color */
 
-    --nlux-promptInput-backgroundColor: honeydew;
-    --nlux-promptInput-active-backgroundColor: white;
-    --nlux-promptInput-disabled-backgroundColor: lightgrey;
+    --nlux-prmInp--brdClr: mediumseagreen; /* Border color */
+    --nlux-prmInp-actv--brdClr: limegreen; /* Active border color */
+    --nlux-prmInp-dslb--brdClr: darkgrey; /* Disabled border color */
 
-    --nlux-promptInput-borderColor: mediumseagreen;
-    --nlux-promptInput-active-borderColor: limegreen;
-    --nlux-promptInput-disabled-borderColor: darkgrey;
+    --nlux-prmInp--txtClr: black; /* Text color */
+    --nlux-prmInp-actv--txtClr: black; /* Active text color */
+    --nlux-prmInp-dslb--txtClr: gray; /* Disabled text color */
 
-    --nlux-promptInput-placeholderTextColor: darkseagreen;
-    --nlux-promptInput-focus-outlineColor: fuchsia;
+    --nlux-prmInp-plcHldr--txtClr: darkseagreen; /* Placeholder text color */
+    --nlux-prmInp-fcs-otln--clr: fuchsia; /* Focus outline color */
 
-    /** Button colors */
-    --nlux-submitButton-textColor: mediumseagreen;
-    --nlux-submitButton-active-textColor: limegreen;
-    --nlux-submitButton-disabled-textColor: gray;
+    /** Submit button colors */
+    --nlux-sbmBt--txtClr: mediumseagreen; /* Text color */
+    --nlux-sbmBt-actv--txtClr: limegreen; /* Active text color */
+    --nlux-sbmBt-dslb--txtClr: gray; /* Disabled text color */
 
-    --nlux-submitButton-backgroundColor: honeydew;
-    --nlux-submitButton-active-backgroundColor: white;
-    --nlux-submitButton-disabled-backgroundColor: lightgrey;
+    --nlux-sbmBt--bgClr: honeydew; /* Background color */
+    --nlux-sbmBt-actv--bgClr: white; /* Active background color */
+    --nlux-sbmBt-dslb--bgClr: lightgrey; /* Disabled background color */
 
-    --nlux-submitButton-borderColor: mediumseagreen;
-    --nlux-submitButton-active-borderColor: limegreen;
-    --nlux-submitButton-disabled-borderColor: darkgrey;
+    --nlux-sbmBt--brdClr: mediumseagreen; /* Border color */
+    --nlux-sbmBt-actv--brdClr: limegreen; /* Active border color */
+    --nlux-sbmBt-dslb--brdClr: darkgrey; /* Disabled border color */
 
-    --nlux-submitButton-focus-outlineColor: fuchsia;
+    --nlux-sbmBt-fcs-otln--clr: fuchsia; /* Focus outline color */
 
     /** Code block */
-    --nlux-codeBlock-textColor: black;
-    --nlux-codeBlock-backgroundColor: gold;
-    --nlux-codeBlock-borderColor: deeppink;
-    --nlux-codeBlock-hover-backgroundColor: lightgoldenrodyellow;
+    --nlux-cdBlk--bgClr: gold; /* Background color */
+    --nlux-cdBlk--brdClr: deeppink; /* Border color */
+    --nlux-cdBlk--txtClr: black; /* Text color */
+    --nlux-cdBlk-hover--bgClr: lightgoldenrodyellow; /* Hover background color */
 
     /** Code block copy button */
-    --nlux-codeBlock-copyButton-backgroundColor: darkgoldenrod;
-    --nlux-codeBlock-copyButton-borderColor: darkred;
-    --nlux-codeBlock-copyButton-textColor: white;
+    --nlux-cdBlk-cpBtn--bgClr: darkgoldenrod; /* Background color */
+    --nlux-cdBlk-cpBtn--brdClr: darkred; /* Border color */
+    --nlux-cdBlk-cpBtn--txtClr: white; /* Text color */
 
     /** Code block copy button in clicked state */
-    --nlux-codeBlock-clickedCopyButton-backgroundColor: greenyellow;
-    --nlux-codeBlock-clickedCopyButton-borderColor: limegreen;
-    --nlux-codeBlock-clickedCopyButton-textColor: yellow;
+    --nlux-cdBlk-cpBtn-clck--bgClr: greenyellow; /* Background color */
+    --nlux-cdBlk-cpBtn-clck--brdClr: limegreen; /* Border color */
+    --nlux-cdBlk-cpBtn-clck--txtClr: yellow; /* Text color */
 
     /** Inline code in markdown */
-    --nlux-inlineCode-backgroundColor: chartreuse;
-    --nlux-inlineCode-textColor: white;
+    --nlux-inlnCd--bgClr: chartreuse; /* Background color */
+    --nlux-inlnCd--txtClr: white; /* Text color */
 }

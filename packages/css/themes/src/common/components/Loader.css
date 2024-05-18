@@ -25,7 +25,7 @@
                 height: inherit;
                 content: '';
                 transform: rotateX(70deg);
-                animation: 1s nlux-loader-spin linear infinite;
+                animation: 1s nlux-ldr-spin linear infinite;
                 border-radius: 50%;
             }
 

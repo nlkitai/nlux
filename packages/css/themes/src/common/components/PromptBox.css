@@ -5,11 +5,11 @@
     justify-content: center;
 
     background-color: transparent;
-    gap: var(--nlux-promptBox-flexGap);
+    gap: var(--nlux-prmBx--gap);
 
     > textarea {
-        font-family: var(--nlux-promptInput-fontFamily), sans-serif;
-        font-size: var(--nlux-promptInput-fontSize);
+        font-family: var(--nlux-prmInp--ftFm), sans-serif;
+        font-size: var(--nlux-prmInp--ftSz);
 
         font-weight: 400;
         line-height: 1.5;
@@ -17,37 +17,37 @@
         padding: .375rem .75rem;
         resize: none;
         cursor: pointer;
-        color: var(--nlux-promptInput-textColor);
+        color: var(--nlux-prmInp--txtClr);
 
-        border-width: var(--nlux-promptInput-borderWidth);
+        border-width: var(--nlux-prmInp--brdrWd);
         border-style: solid;
-        border-color: var(--nlux-promptInput-borderColor);
-        border-radius: var(--nlux-promptInput-borderRadius);
+        border-color: var(--nlux-prmInp--brdClr);
+        border-radius: var(--nlux-prmInp--brdrRd);
 
         outline: none;
-        background-color: var(--nlux-promptInput-backgroundColor);
+        background-color: var(--nlux-prmInp--bgClr);
 
         &:focus {
-            outline: var(--nlux-promptInput-focus-outlineColor) solid var(--nlux-promptInput-focus-outlineWidth);
+            outline: var(--nlux-prmInp-fcs-otln--clr) solid var(--nlux-prmInp-fcs-otln--wd);
         }
 
         &:disabled,
         &:disabled:hover {
             cursor: auto;
-            color: var(--nlux-promptInput-disabled-textColor);
-            border-color: var(--nlux-promptInput-disabled-borderColor);
-            background-color: var(--nlux-promptInput-disabled-backgroundColor);
+            color: var(--nlux-prmInp-dslb--txtClr);
+            border-color: var(--nlux-prmInp-dslb--brdClr);
+            background-color: var(--nlux-prmInp-dslb--bgClr);
         }
 
         &:focus,
         &:hover {
-            color: var(--nlux-promptInput-active-textColor);
-            border-color: var(--nlux-promptInput-active-borderColor);
-            background-color: var(--nlux-promptInput-active-backgroundColor);
+            color: var(--nlux-prmInp-actv--txtClr);
+            border-color: var(--nlux-prmInp-actv--brdClr);
+            background-color: var(--nlux-prmInp-actv--bgClr);
         }
 
         &::placeholder {
-            color: var(--nlux-promptInput-placeholderTextColor);
+            color: var(--nlux-prmInp-plcHldr--txtClr);
         }
     }
 
@@ -56,24 +56,24 @@
         align-items: center;
 
         justify-content: center;
-        width: var(--nlux-submitButton-width);
+        width: var(--nlux-sbmBt--wd);
         cursor: pointer;
-        color: var(--nlux-submitButton-textColor);
-        border-width: var(--nlux-submitButton-borderWidth);
+        color: var(--nlux-sbmBt--txtClr);
+        border-width: var(--nlux-sbmBt--brdrWd);
         border-style: solid;
-        border-color: var(--nlux-submitButton-borderColor);
-        border-radius: var(--nlux-submitButton-borderRadius);
-        background-color: var(--nlux-submitButton-backgroundColor);
+        border-color: var(--nlux-sbmBt--brdClr);
+        border-radius: var(--nlux-sbmBt--brdrRd);
+        background-color: var(--nlux-sbmBt--bgClr);
 
         &:focus,
         &:hover {
-            color: var(--nlux-submitButton-active-textColor);
-            border-color: var(--nlux-submitButton-active-borderColor);
-            background-color: var(--nlux-submitButton-active-backgroundColor);
+            color: var(--nlux-sbmBt-actv--txtClr);
+            border-color: var(--nlux-sbmBt-actv--brdClr);
+            background-color: var(--nlux-sbmBt-actv--bgClr);
         }
 
         &:focus {
-            outline: var(--nlux-submitButton-focus-outlineColor) solid var(--nlux-submitButton-focus-outlineWidth);
+            outline: var(--nlux-sbmBt-fcs-otln--clr) solid var(--nlux-sbmBt-fcs-otln--wd);
         }
 
         > .nlux_sndIcn {
@@ -98,9 +98,9 @@
 
     > button:disabled {
         cursor: not-allowed;
-        color: var(--nlux-submitButton-disabled-textColor);
-        border-color: var(--nlux-submitButton-disabled-borderColor);
-        background-color: var(--nlux-submitButton-disabled-backgroundColor);
+        color: var(--nlux-sbmBt-dslb--txtClr);
+        border-color: var(--nlux-sbmBt-dslb--brdClr);
+        background-color: var(--nlux-sbmBt-dslb--bgClr);
     }
 }
 

@@ -5,17 +5,17 @@
 
     margin: 0.7rem 0.5rem 0.5rem 0.5rem;
 
-    color: var(--nlux-chatRoom-loader-backgroundColor);
+    color: var(--nlux-chtr-ldr--bgClr);
 
     > .nlux_msg_ldr {
         padding: 5px 5px 1px 5px;
 
         > .spn_ldr_ctn {
-            width: calc(var(--nlux-chatRoom-loader-width) - 10px);
+            width: calc(var(--nlux-chtr-ldr--wd) - 10px);
 
             > .spn_ldr {
-                width: calc(var(--nlux-chatRoom-loader-width) - 12px);
-                height: calc(var(--nlux-chatRoom-loader-width) - 12px);
+                width: calc(var(--nlux-chtr-ldr--wd) - 12px);
+                height: calc(var(--nlux-chtr-ldr--wd) - 12px);
             }
         }
     }
