@@ -8,7 +8,7 @@
     --nlux-WelcomeMessage-avatar--borderColor: darkgoldenrod;
 
     /** Conversation loader */
-    --nlux-ChatRoom-Loader--BackgroundColor: red;
+    --nlux-ChatRoom-Loader--Color: red;
 
     /** Conversation content color */
     --nlux-ChatRoom--BackgroundColor: lavender;
@@ -16,7 +16,6 @@
     --nlux-ChatRoom--TextColor: black;
 
     --nlux-ChatRoom-Divider--Color: red;
-    --nlux-ChatRoom-Loader--Color: darkgoldenrod;
 
     /* Human message in chat */
     --nlux-humanMessage--BackgroundColor: lemonchiffon;
@@ -78,5 +77,5 @@
     /** Inline code in markdown */
     --nlux-inlineCode--BackgroundColor: chartreuse;
     --nlux-inlineCode--BorderColor: darkgreen;
-    --nlux-inlineCode--TextColor: white;
+    --nlux-inlineCode--TextColor: black;
 }

@@ -11,7 +11,7 @@
 
     > .nlux-comp-wlc_msg_prs_nm {
         font-size: var(--nlux-wlcMsg-prsNm--ftSz);
-        font-weight: bold;
+        font-weight: var(--nlux-wlcMsg-prsNm--ftWg);
     }
 
     > .nlux-comp-avtr {

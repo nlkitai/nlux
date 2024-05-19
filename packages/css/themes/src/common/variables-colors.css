@@ -8,14 +8,13 @@
     --nlux-wlcMsg-avtr--brdrClr: var(--nlux-WelcomeMessage-avatar--borderColor, grey);
 
     /** Conversation loader */
-    --nlux-chtr-ldr--bgClr: var(--nlux-ChatRoom-Loader--BackgroundColor, grey);
+    --nlux-chtr-ldr--clr: var(--nlux-ChatRoom-Loader--Color, grey);
 
     /** Conversation content color */
     --nlux-chtr--bgClr: var(--nlux-ChatRoom--BackgroundColor, white);
     --nlux-chtr--brdClr: var(--nlux-ChatRoom--BorderColor, grey);
     --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, black);
     --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
-    --nlux-chtr-ldr--clr: var(--nlux-ChatRoom-Loader--Color, grey); /* Loader color */
 
     /* Human message in chat */
     --nlux-hmMsg--bgClr: var(--nlux-humanMessage--BackgroundColor, lightgrey);

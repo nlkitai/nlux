@@ -2,10 +2,12 @@
     /**
      * Theme-specific local variables.
      */
+    --nlux-fest--FontFamily: 'Merienda', cursive;
+    --nlux-fest--monoFontFamily: monospace;
+
     --nlux-fest--BorderWidth: 3px;
     --nlux-fest--BorderRadius: 8px;
     --nlux-fest--LineHeight: 1.4;
-    --nlux-fest--FontFamily: 'Inter', sans-serif;
     --nlux-fest--FlexGap: 12px;
 
     /**
@@ -14,7 +16,8 @@
 
     /** Welcome message */
     --nlux-WelcomeMessage-avatar--Width: 60px;
-    --nlux-WelcomeMessage-personaName--FontSize: 16px;
+    --nlux-WelcomeMessage-personaName--FontSize: 22px;
+    --nlux-WelcomeMessage-personaName--FontWeight: 700;
     --nlux-WelcomeMessage--Gap: 5px;
 
     /** Exceptions box */
@@ -48,5 +51,24 @@
     --nlux-ChatItem-Message--PaddingLeftRight: 15px;
     --nlux-ChatItem-Message--BorderRadius: var(--nlux-fest--BorderRadius);
     --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap);
-}
 
+    /** Chat item message code block */
+    --nlux-CodeBlock--FontSize: 14px;
+    --nlux-CodeBlock--FontFamily: 'Courier New', monospace;
+    --nlux-CodeBlock--Padding: 10px;
+    --nlux-CodeBlock--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-CodeBlock--BorderRadius: var(--nlux-fest--BorderRadius);
+
+    /** Code block copy button */
+    --nlux-CodeBlock-CopyButton--Width: 28px;
+    --nlux-CodeBlock-CopyButton--Height: 28px;
+    --nlux-CodeBlock-CopyButton--Padding: 2px;
+    --nlux-CodeBlock-CopyButton--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-CodeBlock-CopyButton--BorderWidth: var(--nlux-fest--BorderWidth);
+
+    /** Inline code in markdown */
+    --nlux-InlineCode--BorderRadius: 6px;
+    --nlux-InlineCode--BorderWidth: 2px;
+    --nlux-InlineCode--Padding: 2px 4px;
+    --nlux-InlineCode--FontSize: 18px;
+}

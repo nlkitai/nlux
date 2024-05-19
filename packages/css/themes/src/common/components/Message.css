@@ -55,7 +55,6 @@
             position: relative;
             z-index: 888888;
             width: var(--nlux-cdBlk-cpBtn--wd);
-            height: var(--nlux-cdBlk-cpBtn--hg);
 
             margin-right: calc(var(--nlux-cdBlk-cpBtn--wd) / 2);
             margin-bottom: calc(-1 * var(--nlux-cdBlk-cpBtn--hg));
@@ -68,6 +67,16 @@
             border: var(--nlux-cdBlk-cpBtn--brdrWd) solid var(--nlux-cdBlk-cpBtn--brdClr);
             border-radius: var(--nlux-cdBlk-cpBtn--brdrRd);
             background-color: var(--nlux-cdBlk-cpBtn--bgClr);
+
+            > .icon-copy {
+                display: inline-block;
+                width: 100%;
+                background-color: currentColor;
+                background-repeat: no-repeat;
+                background-size: contain;
+                mask: var(--nlux-copy-icon);
+                aspect-ratio: 1;
+            }
         }
 
         button.nlux-cpy-btn {
