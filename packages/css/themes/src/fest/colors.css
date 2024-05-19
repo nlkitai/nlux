@@ -7,6 +7,9 @@
     /** Welcome message */
     --nlux-WelcomeMessage-avatar--borderColor: darkgoldenrod;
 
+    /** Divider between prompt box and messages */
+    --nlux-ChatRoom-Divider--Color: red;
+
     /** Conversation loader */
     --nlux-ChatRoom-Loader--Color: red;
 
@@ -14,8 +17,6 @@
     --nlux-ChatRoom--BackgroundColor: lavender;
     --nlux-ChatRoom--BorderColor: darkgoldenrod;
     --nlux-ChatRoom--TextColor: black;
-
-    --nlux-ChatRoom-Divider--Color: red;
 
     /* Human message in chat */
     --nlux-humanMessage--BackgroundColor: lemonchiffon;
@@ -41,7 +42,7 @@
     --nlux-promptInput-Disabled--BorderColor: darkgrey;
 
     --nlux-promptInput-placeholder--TextColor: darkseagreen;
-    --nlux-promptInput-focus-outline--Color: fuchsia;
+    --nlux-promptInput-focus-outline--Color: blue;
 
     /** Submit button colors */
     --nlux-submitButton--BackgroundColor: honeydew;
@@ -56,7 +57,7 @@
     --nlux-submitButton-Disabled--BorderColor: darkgrey;
     --nlux-submitButton-Disabled--TextColor: gray;
 
-    --nlux-submitButton-focus-outline--Color: fuchsia;
+    --nlux-submitButton-focus-outline--Color: blue;
 
     /** Code block */
     --nlux-codeBlock--BackgroundColor: gold;
@@ -72,7 +73,7 @@
     /** Code block copy button in clicked state */
     --nlux-codeBlock-copyButton-clicked--BackgroundColor: greenyellow;
     --nlux-codeBlock-copyButton-clicked--BorderColor: limegreen;
-    --nlux-codeBlock-copyButton-clicked--TextColor: yellow;
+    --nlux-codeBlock-copyButton-clicked--TextColor: black;
 
     /** Inline code in markdown */
     --nlux-inlineCode--BackgroundColor: chartreuse;

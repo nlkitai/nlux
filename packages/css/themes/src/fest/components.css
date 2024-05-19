@@ -14,16 +14,20 @@
      * Definitions of required theme variables.
      */
 
+    /** Exceptions box */
+    --nlux-Exceptions--Padding: 5px;
+    --nlux-Exceptions--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
+
     /** Welcome message */
     --nlux-WelcomeMessage-avatar--Width: 60px;
     --nlux-WelcomeMessage-personaName--FontSize: 22px;
     --nlux-WelcomeMessage-personaName--FontWeight: 700;
     --nlux-WelcomeMessage--Gap: 5px;
 
-    /** Exceptions box */
-    --nlux-Exceptions--Padding: 5px;
-    --nlux-Exceptions--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
+    /** Divider between conversation and prompt box */
+    --nlux-ChatRoom-Divider--MarginTop: 10px;
+    --nlux-ChatRoom-Divider--MarginBottom: 10px;
 
     /** Chat-room container */
     --nlux-ChatRoom--LineHeight: var(--nlux-fest--LineHeight);
@@ -71,4 +75,20 @@
     --nlux-InlineCode--BorderWidth: 2px;
     --nlux-InlineCode--Padding: 2px 4px;
     --nlux-InlineCode--FontSize: 18px;
+
+    /** Prompt box */
+    --nlux-PromptBox--Gap: 5px;
+
+    /** Submit button */
+    --nlux-SubmitButton--Width: 65px;
+    --nlux-SubmitButton--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-SubmitButton--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-SubmitButton-focus-outline--Width: var(--nlux-fest--BorderWidth);
+
+    /** Prompt box input */
+    --nlux-PromptInput--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-PromptInput--FontSize: 16px;
+    --nlux-PromptInput--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-PromptInput--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-PromptInput-focus-outline--Width: var(--nlux-fest--BorderWidth);
 }

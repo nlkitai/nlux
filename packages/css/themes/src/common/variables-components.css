@@ -1,20 +1,24 @@
 .nlux-AiChat-root {
+    /** Exceptions box */
+    --nlux-exp--pdng: var(--nlux-Exceptions--Padding, 10px);
+    --nlux-exp--brdrWd: var(--nlux-Exceptions--BorderWidth, 6px);
+    --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius, 20px);
+
     /** Welcome message */
     --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-avatar--Width, 80px);
     --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-personaName--FontSize, 1.6rem);
     --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-personaName--FontWeight, 400);
     --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
-    /** Exceptions box */
-    --nlux-exp--pdng: var(--nlux-Exceptions--Padding, 10px);
-    --nlux-exp--brdrWd: var(--nlux-Exceptions--BorderWidth, 6px);
-    --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius, 20px);
+    /** Divider between conversation and prompt box */
+    --nlux-dvr--mrgTp: var(--nlux-ChatRoom-Divider--MarginTop, 20px); /* Margin top */
+    --nlux-dvr--mrgBtm: var(--nlux-ChatRoom-Divider--MarginBottom, 20px); /* Margin bottom */
 
     /** Chat-room container */
     --nlux-chtr--lnH: var(--nlux-ChatRoom--LineHeight, 1.8); /* Default l height */
     --nlux-chtr--fnWg: var(--nlux-ChatRoom--FontWeight, 400); /* Default font weight */
-    --nlux-chtr--fnFm: var(--nlux-ChatRoom--FontFamily); /* Font family */
-    --nlux-chtr--ftSz: var(--nlux-ChatRoom--FontSize); /** Default font size */
+    --nlux-chtr--fnFm: var(--nlux-ChatRoom--FontFamily, 'Arial'); /* Default font family */
+    --nlux-chtr--ftSz: var(--nlux-ChatRoom--FontSize, 22px); /** Default font size */
 
     --nlux-chtr--pdng: var(--nlux-ChatRoom--Padding, 10px);
     --nlux-chtr--brdrRd: var(--nlux-ChatRoom--BorderRadius, 20px);
@@ -39,7 +43,7 @@
 
     /** Chat item message code block */
     --nlux-cdBlk--ftSz: var(--nlux-CodeBlock--FontSize, 16px);
-    --nlux-cdBlk--ftFm: var(--nlux-CodeBlock--FontFamily, monospace);
+    --nlux-cdBlk--ftFm: var(--nlux-CodeBlock--FontFamily, 'monospace');
     --nlux-cdBlk--pdng: var(--nlux-CodeBlock--Padding, 20px);
     --nlux-cdBlk--brdrWd: var(--nlux-CodeBlock--BorderWidth, 6px);
     --nlux-cdBlk--brdrRd: var(--nlux-CodeBlock--BorderRadius, 20px);
@@ -55,26 +59,22 @@
     --nlux-inlnCd--brdrRd: var(--nlux-InlineCode--BorderRadius, 5px);
     --nlux-inlnCd--brdrWd: var(--nlux-InlineCode--BorderWidth, 1px);
     --nlux-inlnCd--pdng: var(--nlux-InlineCode--Padding, 2px 4px);
-    --nlux-inlnCd--ftFm: var(--nlux-CodeBlock--FontFamily, monospace);
+    --nlux-inlnCd--ftFm: var(--nlux-CodeBlock--FontFamily, 'monospace');
     --nlux-inlnCd--ftSz: var(--nlux-InlineCode--FontSize, 14px);
 
-    /** Divider between conversation and prompt box */
-    --nlux-dvr--mrgTp: var(--nlux-padding); /* Margin top */
-    --nlux-dvr--mrgBtm: var(--nlux-padding); /* Margin bottom */
-
     /** Prompt box */
-    --nlux-prmBx--gap: var(--nlux-flexGap); /* Flex gap */
+    --nlux-prmBx--gap: var(--nlux-PromptBox--Gap, 15px); /* Gap between prompt input and submit button */
 
     /** Submit button */
-    --nlux-sbmBt--wd: 65px; /* Width */
-    --nlux-sbmBt--brdrWd: var(--nlux-borderWidth); /* Border width */
-    --nlux-sbmBt--brdrRd: var(--nlux-borderRadius-m); /* Border radius */
-    --nlux-sbmBt-fcs-otln--wd: var(--nlux-borderWidth); /* Focus outline width */
+    --nlux-sbmBt--wd: var(--nlux-SubmitButton--Width, 80px);
+    --nlux-sbmBt--brdrWd: var(--nlux-SubmitButton--BorderWidth, 6px);
+    --nlux-sbmBt--brdrRd: var(--nlux-SubmitButton--BorderRadius, 20px);
+    --nlux-sbmBt-fcs-otln--wd: var(--nlux-SubmitButton-focus-outline--Width, 6px);
 
     /** Prompt box input */
-    --nlux-prmInp--ftFm: var(--nlux-fontFamily); /* Font family */
-    --nlux-prmInp--ftSz: var(--nlux-fontSize); /* Font size */
-    --nlux-prmInp--brdrWd: var(--nlux-borderWidth); /* Border width */
-    --nlux-prmInp--brdrRd: var(--nlux-borderRadius-s); /* Border radius */
-    --nlux-prmInp-fcs-otln--wd: var(--nlux-borderWidth); /* Focus outline width */
+    --nlux-prmInp--ftFm: var(--nlux-PromptInput--FontFamily, 'Arial');
+    --nlux-prmInp--ftSz: var(--nlux-PromptInput--FontSize, 20px);
+    --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth, 6px);
+    --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius, 20px);
+    --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-focus-outline--Width, 6px);
 }
