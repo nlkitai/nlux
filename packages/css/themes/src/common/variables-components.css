@@ -5,9 +5,9 @@
     --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius, 20px);
 
     /** Welcome message */
-    --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-avatar--Width, 80px);
-    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-personaName--FontSize, 1.6rem);
-    --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-personaName--FontWeight, 400);
+    --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-Avatar--Width, 80px);
+    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-PersonaName--FontSize, 1.6rem);
+    --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-PersonaName--FontWeight, 400);
     --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
     /** Divider between conversation and prompt box */
@@ -31,8 +31,8 @@
     --nlux-chItm--algnItms: var(--nlux-ChatItem--AlignItems, flex-start);
 
     /** Chat item avatar */
-    --nlux-chItm-avtr--wd: var(--nlux-ChatItem-avatar--Width, 50px);
-    --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-avatar--BorderRadius, 30%);
+    --nlux-chItm-avtr--wd: var(--nlux-ChatItem-Avatar--Width, 50px);
+    --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-Avatar--BorderRadius, 30%);
 
     /** Chat item message */
     --nlux-chItm-msg--brdrWd: var(--nlux-ChatItem-Message--BorderWidth, 6px);
@@ -69,12 +69,12 @@
     --nlux-sbmBt--wd: var(--nlux-SubmitButton--Width, 80px);
     --nlux-sbmBt--brdrWd: var(--nlux-SubmitButton--BorderWidth, 6px);
     --nlux-sbmBt--brdrRd: var(--nlux-SubmitButton--BorderRadius, 20px);
-    --nlux-sbmBt-fcs-otln--wd: var(--nlux-SubmitButton-focus-outline--Width, 6px);
+    --nlux-sbmBt-fcs-otln--wd: var(--nlux-SubmitButton-Focus-Outline--Width, 6px);
 
     /** Prompt box input */
     --nlux-prmInp--ftFm: var(--nlux-PromptInput--FontFamily, 'Arial');
     --nlux-prmInp--ftSz: var(--nlux-PromptInput--FontSize, 20px);
     --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth, 6px);
     --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius, 20px);
-    --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-focus-outline--Width, 6px);
+    --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-Focus-Outline--Width, 6px);
 }

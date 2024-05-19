@@ -4,7 +4,7 @@
      */
 
     --nlux-fest--FontFamily: 'Merienda', cursive;
-    --nlux-fest--monoFontFamily: monospace;
+    --nlux-fest--MonoFontFamily: monospace;
 
     --nlux-fest--BorderWidth: 3px;
     --nlux-fest--BorderRadius: 8px;
@@ -21,9 +21,9 @@
     --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
 
     /** Welcome message */
-    --nlux-WelcomeMessage-avatar--Width: 60px;
-    --nlux-WelcomeMessage-personaName--FontSize: 22px;
-    --nlux-WelcomeMessage-personaName--FontWeight: 700;
+    --nlux-WelcomeMessage-Avatar--Width: 60px;
+    --nlux-WelcomeMessage-PersonaName--FontSize: 22px;
+    --nlux-WelcomeMessage-PersonaName--FontWeight: 700;
     --nlux-WelcomeMessage--Gap: 5px;
 
     /** Divider between conversation and prompt box */
@@ -47,8 +47,8 @@
     --nlux-ChatItem--AlignItems: flex-end;
 
     /** Chat item avatar */
-    --nlux-ChatItem-avatar--Width: 30px;
-    --nlux-ChatItem-avatar--BorderRadius: 50%;
+    --nlux-ChatItem-Avatar--Width: 30px;
+    --nlux-ChatItem-Avatar--BorderRadius: 50%;
 
     /** Chat item message */
     --nlux-ChatItem-Message--BorderWidth: var(--nlux-fest--BorderWidth);
@@ -84,12 +84,12 @@
     --nlux-SubmitButton--Width: 65px;
     --nlux-SubmitButton--BorderWidth: var(--nlux-fest--BorderWidth);
     --nlux-SubmitButton--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-SubmitButton-focus-outline--Width: var(--nlux-fest--BorderWidth);
+    --nlux-SubmitButton-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
 
     /** Prompt box input */
     --nlux-PromptInput--FontFamily: var(--nlux-fest--FontFamily);
     --nlux-PromptInput--FontSize: 16px;
     --nlux-PromptInput--BorderWidth: var(--nlux-fest--BorderWidth);
     --nlux-PromptInput--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-PromptInput-focus-outline--Width: var(--nlux-fest--BorderWidth);
+    --nlux-PromptInput-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
 }

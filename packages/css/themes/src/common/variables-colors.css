@@ -5,7 +5,7 @@
     --nlux-exp--txtClr: var(--nlux-Exceptions--TextColor, red);
 
     /** Welcome message */
-    --nlux-wlcMsg-avtr--brdrClr: var(--nlux-WelcomeMessage-avatar--borderColor, grey);
+    --nlux-wlcMsg-avtr--brdrClr: var(--nlux-WelcomeMessage-Avatar--BorderColor, grey);
 
     /** Conversation loader */
     --nlux-chtr-ldr--clr: var(--nlux-ChatRoom-Loader--Color, grey);
@@ -17,64 +17,64 @@
     --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
 
     /* Human message in chat */
-    --nlux-hmMsg--bgClr: var(--nlux-humanMessage--BackgroundColor, lightgrey);
-    --nlux-hmMsg--brdClr: var(--nlux-humanMessage--BorderColor, grey);
-    --nlux-hmMsg--txtClr: var(--nlux-humanMessage--TextColor, black);
+    --nlux-hmMsg--bgClr: var(--nlux-HumanMessage--BackgroundColor, lightgrey);
+    --nlux-hmMsg--brdClr: var(--nlux-HumanMessage--BorderColor, grey);
+    --nlux-hmMsg--txtClr: var(--nlux-HumanMessage--TextColor, black);
 
     /** AI message in chat */
-    --nlux-aiMsg--bgClr: var(--nlux-aiMessage--BackgroundColor, white);
-    --nlux-aiMsg--brdClr: var(--nlux-aiMessage--BorderColor, lightgrey);
-    --nlux-aiMsg--txtClr: var(--nlux-aiMessage--TextColor, black);
+    --nlux-aiMsg--bgClr: var(--nlux-AiMessage--BackgroundColor, white);
+    --nlux-aiMsg--brdClr: var(--nlux-AiMessage--BorderColor, lightgrey);
+    --nlux-aiMsg--txtClr: var(--nlux-AiMessage--TextColor, black);
 
     /** Prompt input colors */
-    --nlux-prmInp--bgClr: var(--nlux-promptInput--BackgroundColor, white);
-    --nlux-prmInp--brdClr: var(--nlux-promptInput--BorderColor, grey);
-    --nlux-prmInp--txtClr: var(--nlux-promptInput--TextColor, black);
+    --nlux-prmInp--bgClr: var(--nlux-PromptInput--BackgroundColor, white);
+    --nlux-prmInp--brdClr: var(--nlux-PromptInput--BorderColor, grey);
+    --nlux-prmInp--txtClr: var(--nlux-PromptInput--TextColor, black);
 
-    --nlux-prmInp-actv--bgClr: var(--nlux-promptInput-Active--BackgroundColor, white);
-    --nlux-prmInp-actv--brdClr: var(--nlux-promptInput-Active--BorderColor, black);
-    --nlux-prmInp-actv--txtClr: var(--nlux-promptInput-Active--TextColor, black);
+    --nlux-prmInp-actv--bgClr: var(--nlux-PromptInput-Active--BackgroundColor, white);
+    --nlux-prmInp-actv--brdClr: var(--nlux-PromptInput-Active--BorderColor, black);
+    --nlux-prmInp-actv--txtClr: var(--nlux-PromptInput-Active--TextColor, black);
 
-    --nlux-prmInp-dslb--bgClr: var(--nlux-promptInput-Disabled--BackgroundColor, lightgrey);
-    --nlux-prmInp-dslb--brdClr: var(--nlux-promptInput-Disabled--BorderColor, darkgrey);
-    --nlux-prmInp-dslb--txtClr: var(--nlux-promptInput-Disabled--TextColor, grey);
+    --nlux-prmInp-dslb--bgClr: var(--nlux-PromptInput-Disabled--BackgroundColor, lightgrey);
+    --nlux-prmInp-dslb--brdClr: var(--nlux-PromptInput-Disabled--BorderColor, darkgrey);
+    --nlux-prmInp-dslb--txtClr: var(--nlux-PromptInput-Disabled--TextColor, grey);
 
-    --nlux-prmInp-plcHldr--txtClr: var(--nlux-promptInput-placeholder--TextColor, darkgrey);
-    --nlux-prmInp-fcs-otln--clr: var(--nlux-promptInput-focus-outline--Color, grey);
+    --nlux-prmInp-plcHldr--txtClr: var(--nlux-PromptInput-Olaceholder--TextColor, darkgrey);
+    --nlux-prmInp-fcs-otln--clr: var(--nlux-PromptInput-Focus-Outline--Color, grey);
 
     /** Submit button colors */
-    --nlux-sbmBt--bgClr: var(--nlux-submitButton--BackgroundColor, white);
-    --nlux-sbmBt--brdClr: var(--nlux-submitButton--BorderColor, grey);
-    --nlux-sbmBt--txtClr: var(--nlux-submitButton--TextColor, black);
+    --nlux-sbmBt--bgClr: var(--nlux-SubmitButton--BackgroundColor, white);
+    --nlux-sbmBt--brdClr: var(--nlux-SubmitButton--BorderColor, grey);
+    --nlux-sbmBt--txtClr: var(--nlux-SubmitButton--TextColor, black);
 
-    --nlux-sbmBt-actv--bgClr: var(--nlux-submitButton-Active--BackgroundColor, darkgrey);
-    --nlux-sbmBt-actv--brdClr: var(--nlux-submitButton-Active--BorderColor, black);
-    --nlux-sbmBt-actv--txtClr: var(--nlux-submitButton-Active--TextColor, black);
+    --nlux-sbmBt-actv--bgClr: var(--nlux-SubmitButton-Active--BackgroundColor, darkgrey);
+    --nlux-sbmBt-actv--brdClr: var(--nlux-SubmitButton-Active--BorderColor, black);
+    --nlux-sbmBt-actv--txtClr: var(--nlux-SubmitButton-Active--TextColor, black);
 
-    --nlux-sbmBt-dslb--bgClr: var(--nlux-submitButton-Disabled--BackgroundColor, lightgrey);
-    --nlux-sbmBt-dslb--brdClr: var(--nlux-submitButton-Disabled--BorderColor, darkgrey);
-    --nlux-sbmBt-dslb--txtClr: var(--nlux-submitButton-Disabled--TextColor, grey);
+    --nlux-sbmBt-dslb--bgClr: var(--nlux-SubmitButton-Disabled--BackgroundColor, lightgrey);
+    --nlux-sbmBt-dslb--brdClr: var(--nlux-SubmitButton-Disabled--BorderColor, darkgrey);
+    --nlux-sbmBt-dslb--txtClr: var(--nlux-SubmitButton-Disabled--TextColor, grey);
 
-    --nlux-sbmBt-fcs-otln--clr: var(--nlux-submitButton-focus-outline--Color, grey);
+    --nlux-sbmBt-fcs-otln--clr: var(--nlux-SubmitButton-Focus-Outline--Color, grey);
 
     /** Code block */
-    --nlux-cdBlk--bgClr: var(--nlux-codeBlock--BackgroundColor, ghostwhite);
-    --nlux-cdBlk--brdClr: var(--nlux-codeBlock--BorderColor, grey);
-    --nlux-cdBlk--txtClr: var(--nlux-codeBlock--TextColor, black);
-    --nlux-cdBlk-hover--bgClr: var(--nlux-codeBlock-hover--BackgroundColor, lightgrey);
+    --nlux-cdBlk--bgClr: var(--nlux-CodeBlock--BackgroundColor, ghostwhite);
+    --nlux-cdBlk--brdClr: var(--nlux-CodeBlock--BorderColor, grey);
+    --nlux-cdBlk--txtClr: var(--nlux-CodeBlock--TextColor, black);
+    --nlux-cdBlk-hover--bgClr: var(--nlux-CodeBlock-Hover--BackgroundColor, lightgrey);
 
     /** Code block copy button */
-    --nlux-cdBlk-cpBtn--bgClr: var(--nlux-codeBlock-copyButton--BackgroundColor, white);
-    --nlux-cdBlk-cpBtn--brdClr: var(--nlux-codeBlock-copyButton--BorderColor, grey);
-    --nlux-cdBlk-cpBtn--txtClr: var(--nlux-codeBlock-copyButton--TextColor, black);
+    --nlux-cdBlk-cpBtn--bgClr: var(--nlux-CodeBlock-CopyButton--BackgroundColor, white);
+    --nlux-cdBlk-cpBtn--brdClr: var(--nlux-CodeBlock-CopyButton--BorderColor, grey);
+    --nlux-cdBlk-cpBtn--txtClr: var(--nlux-CodeBlock-CopyButton--TextColor, black);
 
     /** Code block copy button in clicked state */
-    --nlux-cdBlk-cpBtn-clck--bgClr: var(--nlux-codeBlock-copyButton-clicked--BackgroundColor, black);
-    --nlux-cdBlk-cpBtn-clck--brdClr: var(--nlux-codeBlock-copyButton-clicked--BorderColor, grey);
-    --nlux-cdBlk-cpBtn-clck--txtClr: var(--nlux-codeBlock-copyButton-clicked--TextColor, white);
+    --nlux-cdBlk-cpBtn-clck--bgClr: var(--nlux-CodeBlock-CopyButton-Clicked--BackgroundColor, black);
+    --nlux-cdBlk-cpBtn-clck--brdClr: var(--nlux-CodeBlock-CopyButton-Clicked--BorderColor, grey);
+    --nlux-cdBlk-cpBtn-clck--txtClr: var(--nlux-CodeBlock-CopyButton-Clicked--TextColor, white);
 
     /** Inline code in markdown */
-    --nlux-inlnCd--bgClr: var(--nlux-inlineCode--BackgroundColor, ghostwhite);
-    --nlux-inlnCd--brdClr: var(--nlux-inlineCode--BorderColor, grey);
-    --nlux-inlnCd--txtClr: var(--nlux-inlineCode--TextColor, black);
+    --nlux-inlnCd--bgClr: var(--nlux-InlineCode--BackgroundColor, ghostwhite);
+    --nlux-inlnCd--brdClr: var(--nlux-InlineCode--BorderColor, grey);
+    --nlux-inlnCd--txtClr: var(--nlux-InlineCode--TextColor, black);
 }
