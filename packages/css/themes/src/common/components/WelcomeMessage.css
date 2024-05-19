@@ -16,5 +16,6 @@
 
     > .nlux-comp-avtr {
         width: var(--nlux-wlcMsg-avtr--wd);
+        border-color: var(--nlux-wlcMsg-avtr--brdrClr);
     }
 }
