@@ -1,7 +1,7 @@
 .nlux-AiChat-root.nlux-theme-luna {
     /**
- * Theme-specific local variables.
- */
+     * Theme-specific local variables.
+     */
 
     --nlux-fest--FontFamily: 'IBM Plex Sans', sans-serif;
     --nlux-fest--MonoFontFamily: monospace;
