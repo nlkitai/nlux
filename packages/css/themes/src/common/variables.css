@@ -13,6 +13,7 @@
     /** Divider between conversation and prompt box */
     --nlux-dvr--mrgTp: var(--nlux-ChatRoom-Divider--MarginTop, 20px); /* Margin top */
     --nlux-dvr--mrgBtm: var(--nlux-ChatRoom-Divider--MarginBottom, 20px); /* Margin bottom */
+    --nlux-dvr--brdrWd: var(--nlux-ChatRoom-Divider--BorderWidth, 6px); /* Border width for divider */
 
     /** Chat-room container */
     --nlux-chtr--lnH: var(--nlux-ChatRoom--LineHeight, 1.8); /* Default l height */

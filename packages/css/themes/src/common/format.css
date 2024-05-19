@@ -15,7 +15,7 @@
         background-color: var(--nlux-chtr--bgClr);
 
         > .nlux-chtRm-prmptBox-cntr {
-            border-top: var(--nlux-chtr--brdrWd) solid var(--nlux-chtr-dvr--clr);
+            border-top: var(--nlux-dvr--brdrWd) solid var(--nlux-chtr-dvr--clr);
         }
     }
 }

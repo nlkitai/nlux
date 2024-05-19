@@ -14,6 +14,8 @@
     --nlux-chtr--bgClr: var(--nlux-ChatRoom--BackgroundColor, white);
     --nlux-chtr--brdClr: var(--nlux-ChatRoom--BorderColor, grey);
     --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, black);
+
+    /** Divider between prompt box and messages */
     --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
 
     /* Human message in chat */
