@@ -53,7 +53,7 @@
 
         button.nlux-cpy-btn {
             position: relative;
-            z-index: 999999;
+            z-index: 888888;
             width: var(--nlux-cdBlk-cpBtn--wd);
             height: var(--nlux-cdBlk-cpBtn--hg);
 
@@ -94,6 +94,9 @@
             padding: var(--nlux-inlnCd--pdng);
 
             color: var(--nlux-inlnCd--txtClr);
+            border-width: var(--nlux-inlnCd--brdrWd);
+            border-style: solid;
+            border-color: var(--nlux-inlnCd--brdClr);
             border-radius: var(--nlux-inlnCd--brdrRd);
             background-color: var(--nlux-inlnCd--bgClr);
         }

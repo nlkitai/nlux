@@ -52,6 +52,7 @@
 
     /** Inline code in markdown */
     --nlux-inlnCd--brdrRd: var(--nlux-borderRadius-xs); /* Border radius */
+    --nlux-inlnCd--brdrWd: var(--nlux-borderWidth); /* Border width */
     --nlux-inlnCd--pdng: var(--nlux-padding-xs) var(--nlux-padding-s); /* Padding */
     --nlux-inlnCd--ftSz: var(--nlux-fontSize-s); /* Font size */
     --nlux-inlnCd--ftFm: var(--nlux-monoFontFamily); /* Font family */

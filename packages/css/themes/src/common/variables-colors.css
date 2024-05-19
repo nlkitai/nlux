@@ -1,77 +1,78 @@
 .nlux-AiChat-root {
     /** Exceptions box */
-    --nlux-exp--bgClr: tomato; /* Background color */
-    --nlux-exp--brdClr: darkred; /* Border color */
-    --nlux-exp--txtClr: white; /* Text color */
+    --nlux-exp--bgClr: var(--nlux-Exceptions--BackgroundColor, white);
+    --nlux-exp--brdClr: var(--nlux-Exceptions--BorderColor, red);
+    --nlux-exp--txtClr: var(--nlux-Exceptions--TextColor, red);
 
     /** Conversation loader */
-    --nlux-chtr-ldr--bgClr: red; /* Background color */
+    --nlux-chtr-ldr--bgClr: var(--nlux-ChatRoom-Loader--BackgroundColor, grey);
 
     /** Conversation content color */
-    --nlux-chtr--bgClr: lavender; /* Background color */
-    --nlux-chtr--brdClr: darkgoldenrod; /* Border color */
-    --nlux-chtr--txtClr: black; /* Default text color */
-    --nlux-chtr-dvr--clr: red; /* Divider color */
-    --nlux-chtr-ldr--clr: darkgoldenrod; /* Loader color */
+    --nlux-chtr--bgClr: var(--nlux-ChatRoom--BackgroundColor, white);
+    --nlux-chtr--brdClr: var(--nlux-ChatRoom--BorderColor, grey);
+    --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, black);
+    --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
+    --nlux-chtr-ldr--clr: var(--nlux-ChatRoom-Loader--Color, grey); /* Loader color */
 
     /* Human message in chat */
-    --nlux-hmMsg--bgClr: lightyellow; /* Background color */
-    --nlux-hmMsg--brdClr: black; /* Border color */
-    --nlux-hmMsg--txtClr: black; /* Text color */
+    --nlux-hmMsg--bgClr: var(--nlux-humanMessage--BackgroundColor, lightgrey);
+    --nlux-hmMsg--brdClr: var(--nlux-humanMessage--BorderColor, grey);
+    --nlux-hmMsg--txtClr: var(--nlux-humanMessage--TextColor, black);
 
     /** AI message in chat */
-    --nlux-aiMsg--bgClr: lightcyan; /* Background color */
-    --nlux-aiMsg--brdClr: midnightblue; /* Border color */
-    --nlux-aiMsg--txtClr: midnightblue; /* Text color */
+    --nlux-aiMsg--bgClr: var(--nlux-aiMessage--BackgroundColor, white);
+    --nlux-aiMsg--brdClr: var(--nlux-aiMessage--BorderColor, lightgrey);
+    --nlux-aiMsg--txtClr: var(--nlux-aiMessage--TextColor, black);
 
-    /** Input colors */
-    --nlux-prmInp--bgClr: honeydew; /* Background color */
-    --nlux-prmInp-actv--bgClr: white; /* Active background color */
-    --nlux-prmInp-dslb--bgClr: lightgrey; /* Disabled background color */
+    /** Prompt input colors */
+    --nlux-prmInp--bgClr: var(--nlux-promptInput--BackgroundColor, white);
+    --nlux-prmInp--brdClr: var(--nlux-promptInput--BorderColor, grey);
+    --nlux-prmInp--txtClr: var(--nlux-promptInput--TextColor, black);
 
-    --nlux-prmInp--brdClr: mediumseagreen; /* Border color */
-    --nlux-prmInp-actv--brdClr: limegreen; /* Active border color */
-    --nlux-prmInp-dslb--brdClr: darkgrey; /* Disabled border color */
+    --nlux-prmInp-actv--bgClr: var(--nlux-promptInput-Active--BackgroundColor, white);
+    --nlux-prmInp-actv--brdClr: var(--nlux-promptInput-Active--BorderColor, black);
+    --nlux-prmInp-actv--txtClr: var(--nlux-promptInput-Active--TextColor, black);
 
-    --nlux-prmInp--txtClr: black; /* Text color */
-    --nlux-prmInp-actv--txtClr: black; /* Active text color */
-    --nlux-prmInp-dslb--txtClr: gray; /* Disabled text color */
+    --nlux-prmInp-dslb--bgClr: var(--nlux-promptInput-Disabled--BackgroundColor, lightgrey);
+    --nlux-prmInp-dslb--brdClr: var(--nlux-promptInput-Disabled--BorderColor, darkgrey);
+    --nlux-prmInp-dslb--txtClr: var(--nlux-promptInput-Disabled--TextColor, grey);
 
-    --nlux-prmInp-plcHldr--txtClr: darkseagreen; /* Placeholder text color */
-    --nlux-prmInp-fcs-otln--clr: fuchsia; /* Focus outline color */
+    --nlux-prmInp-plcHldr--txtClr: var(--nlux-promptInput-placeholder--TextColor, darkgrey);
+    --nlux-prmInp-fcs-otln--clr: var(--nlux-promptInput-focus-outline--Color, grey);
 
     /** Submit button colors */
-    --nlux-sbmBt--txtClr: mediumseagreen; /* Text color */
-    --nlux-sbmBt-actv--txtClr: limegreen; /* Active text color */
-    --nlux-sbmBt-dslb--txtClr: gray; /* Disabled text color */
+    --nlux-sbmBt--bgClr: var(--nlux-submitButton--BackgroundColor, white);
+    --nlux-sbmBt--brdClr: var(--nlux-submitButton--BorderColor, grey);
+    --nlux-sbmBt--txtClr: var(--nlux-submitButton--TextColor, black);
 
-    --nlux-sbmBt--bgClr: honeydew; /* Background color */
-    --nlux-sbmBt-actv--bgClr: white; /* Active background color */
-    --nlux-sbmBt-dslb--bgClr: lightgrey; /* Disabled background color */
+    --nlux-sbmBt-actv--bgClr: var(--nlux-submitButton-Active--BackgroundColor, darkgrey);
+    --nlux-sbmBt-actv--brdClr: var(--nlux-submitButton-Active--BorderColor, black);
+    --nlux-sbmBt-actv--txtClr: var(--nlux-submitButton-Active--TextColor, black);
 
-    --nlux-sbmBt--brdClr: mediumseagreen; /* Border color */
-    --nlux-sbmBt-actv--brdClr: limegreen; /* Active border color */
-    --nlux-sbmBt-dslb--brdClr: darkgrey; /* Disabled border color */
+    --nlux-sbmBt-dslb--bgClr: var(--nlux-submitButton-Disabled--BackgroundColor, lightgrey);
+    --nlux-sbmBt-dslb--brdClr: var(--nlux-submitButton-Disabled--BorderColor, darkgrey);
+    --nlux-sbmBt-dslb--txtClr: var(--nlux-submitButton-Disabled--TextColor, grey);
 
-    --nlux-sbmBt-fcs-otln--clr: fuchsia; /* Focus outline color */
+    --nlux-sbmBt-fcs-otln--clr: var(--nlux-submitButton-focus-outline--Color, grey);
 
     /** Code block */
-    --nlux-cdBlk--bgClr: gold; /* Background color */
-    --nlux-cdBlk--brdClr: deeppink; /* Border color */
-    --nlux-cdBlk--txtClr: black; /* Text color */
-    --nlux-cdBlk-hover--bgClr: lightgoldenrodyellow; /* Hover background color */
+    --nlux-cdBlk--bgClr: var(--nlux-codeBlock--BackgroundColor, ghostwhite);
+    --nlux-cdBlk--brdClr: var(--nlux-codeBlock--BorderColor, grey);
+    --nlux-cdBlk--txtClr: var(--nlux-codeBlock--TextColor, black);
+    --nlux-cdBlk-hover--bgClr: var(--nlux-codeBlock-hover--BackgroundColor, lightgrey);
 
     /** Code block copy button */
-    --nlux-cdBlk-cpBtn--bgClr: darkgoldenrod; /* Background color */
-    --nlux-cdBlk-cpBtn--brdClr: darkred; /* Border color */
-    --nlux-cdBlk-cpBtn--txtClr: white; /* Text color */
+    --nlux-cdBlk-cpBtn--bgClr: var(--nlux-codeBlock-copyButton--BackgroundColor, white);
+    --nlux-cdBlk-cpBtn--brdClr: var(--nlux-codeBlock-copyButton--BorderColor, grey);
+    --nlux-cdBlk-cpBtn--txtClr: var(--nlux-codeBlock-copyButton--TextColor, black);
 
     /** Code block copy button in clicked state */
-    --nlux-cdBlk-cpBtn-clck--bgClr: greenyellow; /* Background color */
-    --nlux-cdBlk-cpBtn-clck--brdClr: limegreen; /* Border color */
-    --nlux-cdBlk-cpBtn-clck--txtClr: yellow; /* Text color */
+    --nlux-cdBlk-cpBtn-clck--bgClr: var(--nlux-codeBlock-copyButton-clicked--BackgroundColor, black);
+    --nlux-cdBlk-cpBtn-clck--brdClr: var(--nlux-codeBlock-copyButton-clicked--BorderColor, grey);
+    --nlux-cdBlk-cpBtn-clck--txtClr: var(--nlux-codeBlock-copyButton-clicked--TextColor, white);
 
     /** Inline code in markdown */
-    --nlux-inlnCd--bgClr: chartreuse; /* Background color */
-    --nlux-inlnCd--txtClr: white; /* Text color */
+    --nlux-inlnCd--bgClr: var(--nlux-inlineCode--BackgroundColor, ghostwhite);
+    --nlux-inlnCd--brdClr: var(--nlux-inlineCode--BorderColor, grey);
+    --nlux-inlnCd--txtClr: var(--nlux-inlineCode--TextColor, black);
 }

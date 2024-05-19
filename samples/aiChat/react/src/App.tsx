@@ -1,5 +1,7 @@
 // import '@nlux-dev/themes/src/luna/main.css';
-import '@nlux-dev/themes/src/nova/main.css';
+// import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/themes/src/fest/main.css';
+// import '@nlux-dev/themes/src/nada/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
@@ -19,7 +21,7 @@ import {useCallback, useEffect, useState} from 'react';
 function App() {
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [dataTransferMode, setDataTransferMode] = useState<'fetch' | 'stream'>('fetch');
-    const [theme, setTheme] = useState<'luna' | 'nova'>('nova');
+    const [theme, setTheme] = useState<'luna' | 'nova' | 'fest' | 'nada'>('fest');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('auto');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
@@ -117,6 +119,8 @@ function App() {
                     <option value="stream">Stream</option>
                 </select>
                 <select value={theme} onChange={onThemeChange}>
+                    <option value="fest">Fest</option>
+                    <option value="nada">Nada</option>
                     <option value="luna">Luna</option>
                     <option value="nova">Nova</option>
                 </select>

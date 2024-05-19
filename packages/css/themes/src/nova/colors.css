@@ -1,5 +1,5 @@
 /* Light color scheme variables */
-.never-nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-light {
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-light {
     --nlux-primary-bgClr: #ffffff;
     --nlux-primary-foregroundColor: #09090b;
 
@@ -14,7 +14,7 @@
 }
 
 /* Dark color scheme variables */
-.never-nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-dark {
+.nlux-AiChat-root.nlux-theme-nova.nlux-colorScheme-dark {
     --nlux-primary-bgClr: #151515;
     --nlux-primary-foregroundColor: #ffffff;
 
@@ -29,7 +29,7 @@
 }
 
 /* Common color variables */
-.never-nlux-AiChat-root.nlux-theme-nova {
+.nlux-AiChat-root.nlux-theme-nova {
     --nlux-cdBlk--bgClr: #303530;
     --nlux-cdBlk-hover--bgClr: #404240;
     --nlux-cdBlk-text-color: #dde5e2ff;

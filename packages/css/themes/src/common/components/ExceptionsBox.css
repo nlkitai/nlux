@@ -1,10 +1,4 @@
 .nlux-comp-exp_box {
-    position: absolute;
-    z-index: 999999;
-    top: 0;
-    right: var(--nlux-borderWidth);
-    left: var(--nlux-borderWidth);
-    width: 100%;
     padding: var(--nlux-chtr--pdng) 0;
 
     > .nlux-comp-exp_itm {
