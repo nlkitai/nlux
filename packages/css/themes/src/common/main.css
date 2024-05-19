@@ -1,5 +1,5 @@
-@import './variables-components.css';
-@import './variables-colors.css';
+@import './variables.css';
+@import './colors.css';
 
 @import './layout.css';
 @import './format.css';

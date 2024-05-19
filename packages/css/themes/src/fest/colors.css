@@ -1,7 +1,5 @@
 .nlux-AiChat-root.nlux-theme-fest {
-    /**
-     * Theme-specific local variables.
-     **/
+    /** 👇 Theme-specific local variables **/
 
     --nlux-fest--Outline-Color: blue;
     --nlux-fest--Input-BorderColor: mediumseagreen;
@@ -12,9 +10,7 @@
     --nlux-fest--Input-Disabled-BackgroundColor: lightgrey;
     --nlux-fest--Input-Disabled-TextColor: grey;
 
-    /**
-     * Definitions and overrides of required theme variables.
-     **/
+    /** 👇 Definitions and overrides of required theme variables **/
 
     /** Exceptions box */
     --nlux-Exceptions--BackgroundColor: tomato;
@@ -58,7 +54,7 @@
     --nlux-PromptInput-Disabled--TextColor: var(--nlux-fest--Input-Disabled-TextColor);
     --nlux-PromptInput-Disabled--BorderColor: var(--nlux-fest--Input-Disabled-BorderColor);
 
-    --nlux-PromptInput-Olaceholder--TextColor: darkseagreen;
+    --nlux-PromptInput-Placeholder--TextColor: darkseagreen;
     --nlux-PromptInput-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
 
     /** Submit button colors */

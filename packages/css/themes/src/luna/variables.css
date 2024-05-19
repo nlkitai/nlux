@@ -1,2 +1,95 @@
 .nlux-AiChat-root.nlux-theme-luna {
+    /**
+ * Theme-specific local variables.
+ */
+
+    --nlux-fest--FontFamily: 'IBM Plex Sans', sans-serif;
+    --nlux-fest--MonoFontFamily: monospace;
+
+    --nlux-fest--BorderWidth: 1px;
+    --nlux-fest--BorderRadius: 8px;
+    --nlux-fest--LineHeight: 1.4;
+    --nlux-fest--FlexGap: 12px;
+
+    /**
+     * Definitions and overrides of required theme variables.
+     */
+
+    /** Exceptions box */
+    --nlux-Exceptions--Padding: 5px;
+    --nlux-Exceptions--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
+
+    /** Welcome message */
+    --nlux-WelcomeMessage-Avatar--Width: 60px;
+    --nlux-WelcomeMessage-PersonaName--FontSize: 22px;
+    --nlux-WelcomeMessage-PersonaName--FontWeight: 700;
+    --nlux-WelcomeMessage--Gap: 5px;
+
+    /** Divider between conversation and prompt box */
+    --nlux-ChatRoom-Divider--MarginTop: 10px;
+    --nlux-ChatRoom-Divider--MarginBottom: 10px;
+
+    /** Chat-room container */
+    --nlux-ChatRoom--LineHeight: var(--nlux-fest--LineHeight);
+    --nlux-ChatRoom--FontWeight: 400;
+    --nlux-ChatRoom--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-ChatRoom--FontSize: 16px;
+
+    --nlux-ChatRoom--Padding: 10px;
+    --nlux-ChatRoom--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatRoom--BorderWidth: var(--nlux-fest--BorderWidth);
+
+    /** Chat-room loader */
+    --nlux-ChatRoom-Loader--Width: 25px;
+
+    /** Chat item */
+    --nlux-ChatItem--AlignItems: flex-start;
+
+    /** Chat item avatar */
+    --nlux-ChatItem-Avatar--Width: 30px;
+    --nlux-ChatItem-Avatar--BorderRadius: 50%;
+
+    /** Chat item message */
+    --nlux-ChatItem-Message--BorderWidth: 0;
+    --nlux-ChatItem-Message--PaddingTopBottom: 10px;
+    --nlux-ChatItem-Message--PaddingLeftRight: 15px;
+    --nlux-ChatItem-Message--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap);
+
+    /** Chat item message code block */
+    --nlux-CodeBlock--FontSize: 14px;
+    --nlux-CodeBlock--FontFamily: 'Courier New', monospace;
+    --nlux-CodeBlock--Padding: 10px;
+    --nlux-CodeBlock--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-CodeBlock--BorderRadius: var(--nlux-fest--BorderRadius);
+
+    /** Code block copy button */
+    --nlux-CodeBlock-CopyButton--Width: 22px;
+    --nlux-CodeBlock-CopyButton--Height: 22px;
+    --nlux-CodeBlock-CopyButton--Padding: 2px 2px 0 2px;
+    --nlux-CodeBlock-CopyButton--BorderRadius: 4px;
+    --nlux-CodeBlock-CopyButton--BorderWidth: var(--nlux-fest--BorderWidth);
+
+    /** Inline code in markdown */
+    --nlux-InlineCode--BorderRadius: 6px;
+    --nlux-InlineCode--BorderWidth: 2px;
+    --nlux-InlineCode--Padding: 2px 4px;
+    --nlux-InlineCode--FontSize: 14px;
+
+    /** Prompt box */
+    --nlux-PromptBox--Gap: 5px;
+
+    /** Submit button */
+    --nlux-SubmitButton--Width: 65px;
+    --nlux-SubmitButton--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-SubmitButton--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-SubmitButton-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
+
+    /** Prompt box input */
+    --nlux-PromptInput--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-PromptInput--FontSize: 16px;
+    --nlux-PromptInput--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-PromptInput--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-PromptInput-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
 }

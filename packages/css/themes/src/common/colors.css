@@ -39,7 +39,7 @@
     --nlux-prmInp-dslb--brdClr: var(--nlux-PromptInput-Disabled--BorderColor, darkgrey);
     --nlux-prmInp-dslb--txtClr: var(--nlux-PromptInput-Disabled--TextColor, grey);
 
-    --nlux-prmInp-plcHldr--txtClr: var(--nlux-PromptInput-Olaceholder--TextColor, darkgrey);
+    --nlux-prmInp-plcHldr--txtClr: var(--nlux-PromptInput-Placeholder--TextColor, darkgrey);
     --nlux-prmInp-fcs-otln--clr: var(--nlux-PromptInput-Focus-Outline--Color, grey);
 
     /** Submit button colors */

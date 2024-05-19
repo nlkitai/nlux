@@ -1,9 +1,0 @@
-/** Overrides of variables that are usually calculated */
-
-.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
-    --nlux-dvr-color: transparent;
-}
-
-.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
-    --nlux-dvr-color: transparent;
-}

@@ -1,6 +1,6 @@
 @import './font.css';
-@import './colors.css';
-@import './overrides.css';
+@import './colors-light.css';
+@import './colors-dark.css';
 @import './icons.css';
 @import './variables.css';
 @import '../common/main.css';

@@ -1,0 +1,88 @@
+.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-light {
+    /** 👇 Theme-specific local variables **/
+
+    --nlux-fest--Outline-Color: #4141ff;
+
+    /** 👇 Definitions and overrides of required theme variables **/
+
+    /** Exceptions box */
+    --nlux-Exceptions--BackgroundColor: tomato;
+    --nlux-Exceptions--BorderColor: darkred;
+    --nlux-Exceptions--TextColor: white;
+
+    /** Welcome message */
+    --nlux-WelcomeMessage-Avatar--BorderColor: transparent;
+
+    /** Divider between prompt box and messages */
+    --nlux-ChatRoom-Divider--Color: transparent;
+
+    /** Conversation loader */
+    --nlux-ChatRoom-Loader--Color: #000000;
+
+    /** Conversation content color */
+    --nlux-ChatRoom--BackgroundColor: transparent;
+    --nlux-ChatRoom--BorderColor: transparent;
+    --nlux-ChatRoom--TextColor: #000000;
+
+    /* Human message in chat */
+    --nlux-HumanMessage--BackgroundColor: #5fe095;
+    --nlux-HumanMessage--BorderColor: #6fc693;
+    --nlux-HumanMessage--TextColor: #ffffff;
+
+    /** AI message in chat */
+    --nlux-AiMessage--BackgroundColor: #f4f6f9;
+    --nlux-AiMessage--BorderColor: #dde5e2;
+    --nlux-AiMessage--TextColor: #18210c;
+
+    /** Prompt input colors */
+    --nlux-PromptInput--BackgroundColor: #ffffff;
+    --nlux-PromptInput--BorderColor: #c5d7c9;
+    --nlux-PromptInput--TextColor: black;
+
+    --nlux-PromptInput-Active--BackgroundColor: #ffffff;
+    --nlux-PromptInput-Active--BorderColor: #c5d7c9;
+    --nlux-PromptInput-Active--TextColor: black;
+
+    --nlux-PromptInput-Disabled--BackgroundColor: #ffffff;
+    --nlux-PromptInput-Disabled--TextColor: #959993;
+    --nlux-PromptInput-Disabled--BorderColor: #c5d7c9;
+
+    --nlux-PromptInput-Placeholder--TextColor: #c5d7c9;
+    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+
+    /** Submit button colors */
+    --nlux-SubmitButton--BackgroundColor: #5fe095;
+    --nlux-SubmitButton--BorderColor: #5fe095;
+    --nlux-SubmitButton--TextColor: #ffffff;
+
+    --nlux-SubmitButton-Active--BackgroundColor: #72e7a1;
+    --nlux-SubmitButton-Active--BorderColor: #72e7a1;
+    --nlux-SubmitButton-Active--TextColor: #ffffff;
+
+    --nlux-SubmitButton-Disabled--BackgroundColor: #c5d7c9;
+    --nlux-SubmitButton-Disabled--BorderColor: #c5d7c9;
+    --nlux-SubmitButton-Disabled--TextColor: #ffffff;
+
+    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+
+    /** Code block */
+    --nlux-CodeBlock--BackgroundColor: #303530;
+    --nlux-CodeBlock--BorderColor: #303530;
+    --nlux-CodeBlock--TextColor: #dde5e2;
+    --nlux-CodeBlock-Hover--BackgroundColor: #404240;
+
+    /** Code block copy button */
+    --nlux-CodeBlock-CopyButton--BackgroundColor: #ffffff;
+    --nlux-CodeBlock-CopyButton--BorderColor: #303530;
+    --nlux-CodeBlock-CopyButton--TextColor: #303530;
+
+    /** Code block copy button in clicked state */
+    --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: #303530;
+    --nlux-CodeBlock-CopyButton-Clicked--BorderColor: #303530;
+    --nlux-CodeBlock-CopyButton-Clicked--TextColor: #ffffff;
+
+    /** Inline code in markdown */
+    --nlux-InlineCode--BackgroundColor: #d5dad1;
+    --nlux-InlineCode--BorderColor: #d5dad1;
+    --nlux-InlineCode--TextColor: #18210c;
+}
