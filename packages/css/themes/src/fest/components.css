@@ -2,6 +2,7 @@
     /**
      * Theme-specific local variables.
      */
+
     --nlux-fest--FontFamily: 'Merienda', cursive;
     --nlux-fest--monoFontFamily: monospace;
 
@@ -11,7 +12,7 @@
     --nlux-fest--FlexGap: 12px;
 
     /**
-     * Definitions of required theme variables.
+     * Definitions and overrides of required theme variables.
      */
 
     /** Exceptions box */
