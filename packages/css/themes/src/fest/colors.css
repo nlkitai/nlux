@@ -4,10 +4,13 @@
      **/
 
     --nlux-fest--Outline-Color: blue;
-
     --nlux-fest--Input-BorderColor: mediumseagreen;
     --nlux-fest--Input-Active-BorderColor: limegreen;
     --nlux-fest--Input-Disabled-BorderColor: darkgrey;
+    --nlux-fest--Input-BackgroundColor: honeydew;
+    --nlux-fest--Input-Active-BackgroundColor: white;
+    --nlux-fest--Input-Disabled-BackgroundColor: lightgrey;
+    --nlux-fest--Input-Disabled-TextColor: grey;
 
     /**
      * Definitions and overrides of required theme variables.
@@ -43,33 +46,33 @@
     --nlux-AiMessage--TextColor: white;
 
     /** Prompt input colors */
-    --nlux-PromptInput--BackgroundColor: honeydew;
+    --nlux-PromptInput--BackgroundColor: var(--nlux-fest--Input-BackgroundColor);
     --nlux-PromptInput--BorderColor: var(--nlux-fest--Input-BorderColor);
     --nlux-PromptInput--TextColor: black;
 
-    --nlux-PromptInput-Active--BackgroundColor: white;
+    --nlux-PromptInput-Active--BackgroundColor: var(--nlux-fest--Input-Active-BackgroundColor);
     --nlux-PromptInput-Active--BorderColor: var(--nlux-fest--Input-Active-BorderColor);
     --nlux-PromptInput-Active--TextColor: black;
 
-    --nlux-PromptInput-Disabled--BackgroundColor: lightgrey;
-    --nlux-PromptInput-Disabled--TextColor: gray;
+    --nlux-PromptInput-Disabled--BackgroundColor: var(--nlux-fest--Input-Disabled-BackgroundColor);
+    --nlux-PromptInput-Disabled--TextColor: var(--nlux-fest--Input-Disabled-TextColor);
     --nlux-PromptInput-Disabled--BorderColor: var(--nlux-fest--Input-Disabled-BorderColor);
 
     --nlux-PromptInput-Olaceholder--TextColor: darkseagreen;
     --nlux-PromptInput-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
 
     /** Submit button colors */
-    --nlux-SubmitButton--BackgroundColor: honeydew;
+    --nlux-SubmitButton--BackgroundColor: var(--nlux-fest--Input-BackgroundColor);
     --nlux-SubmitButton--BorderColor: var(--nlux-fest--Input-BorderColor);
     --nlux-SubmitButton--TextColor: mediumseagreen;
 
-    --nlux-SubmitButton-Active--BackgroundColor: white;
+    --nlux-SubmitButton-Active--BackgroundColor: var(--nlux-fest--Input-Active-BackgroundColor);
     --nlux-SubmitButton-Active--BorderColor: var(--nlux-fest--Input-Active-BorderColor);
     --nlux-SubmitButton-Active--TextColor: limegreen;
 
-    --nlux-SubmitButton-Disabled--BackgroundColor: lightgrey;
+    --nlux-SubmitButton-Disabled--BackgroundColor: var(--nlux-fest--Input-Disabled-BackgroundColor);
     --nlux-SubmitButton-Disabled--BorderColor: var(--nlux-fest--Input-Disabled-BorderColor);
-    --nlux-SubmitButton-Disabled--TextColor: gray;
+    --nlux-SubmitButton-Disabled--TextColor: var(--nlux-fest--Input-Disabled-TextColor);
 
     --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
 
