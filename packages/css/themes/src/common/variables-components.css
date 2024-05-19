@@ -1,23 +1,23 @@
 .nlux-AiChat-root {
     /** Welcome message */
-    --nlux-wlcMsg-avtr--wd: 80px; /* Avatar width */
-    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-fontSize-l); /* Persona name font size */
-    --nlux-wlcMsg--gap: var(--nlux-flexGap); /* Flex gap */
+    --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-avatar--Width, 80px);
+    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-personaName--FontSize, 1.6rem);
+    --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
     /** Exceptions box */
-    --nlux-exp--pdng: var(--nlux-padding); /* Padding */
-    --nlux-exp--brdrWd: var(--nlux-borderWidth); /* Border width */
-    --nlux-exp--brdrRd: var(--nlux-borderRadius); /* Border radius */
+    --nlux-exp--pdng: var(--nlux-Exceptions--Padding, 10px);
+    --nlux-exp--brdrWd: var(--nlux-Exceptions--BorderWidth, 6px);
+    --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius, 20px);
 
     /** Chat-room container */
-    --nlux-chtr--lnH: var(--nlux-lineHeight); /* Default line height */
-    --nlux-chtr--fnWg: var(--nlux-fontWeight); /* Default font weight */
-    --nlux-chtr--fnFm: var(--nlux-fontFamily); /* Default font family */
-    --nlux-chtr--ftSz: var(--nlux-fontSize); /* Default font size */
+    --nlux-chtr--lnH: var(--nlux-ChatRoom--LineHeight, 1.8); /* Default l height */
+    --nlux-chtr--fnWg: var(--nlux-ChatRoom--FontWeight, 400); /* Default font weight */
+    --nlux-chtr--fnFm: var(--nlux-ChatRoom--FontFamily); /* Font family */
+    --nlux-chtr--ftSz: var(--nlux-ChatRoom--FontSize); /** Default font size */
 
-    --nlux-chtr--pdng: var(--nlux-padding); /* Padding */
-    --nlux-chtr--brdrRd: var(--nlux-borderRadius); /* Border radius */
-    --nlux-chtr--brdrWd: var(--nlux-borderWidth); /* Border width */
+    --nlux-chtr--pdng: var(--nlux-ChatRoom--Padding, 10px);
+    --nlux-chtr--brdrRd: var(--nlux-ChatRoom--BorderRadius, 20px);
+    --nlux-chtr--brdrWd: var(--nlux-ChatRoom--BorderWidth, 6px);
 
     /** Chat-room loader */
     --nlux-chtr-ldr--wd: var(--nlux-chItm-avtr--wd); /* Width */

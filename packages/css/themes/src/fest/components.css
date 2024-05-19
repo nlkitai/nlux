@@ -1,2 +1,34 @@
 .nlux-AiChat-root.nlux-theme-fest {
+    /**
+     * Theme-specific local variables.
+     */
+    --nlux-fest--BorderWidth: 3px;
+    --nlux-fest--BorderRadius: 8px;
+    --nlux-fest--LineHeight: 1.4;
+    --nlux-fest--FontFamily: 'Inter', sans-serif;
+
+    /**
+     * Definitions of required theme variables.
+     */
+
+    /** Welcome message */
+    --nlux-WelcomeMessage-avatar--Width: 60px;
+    --nlux-WelcomeMessage-personaName--FontSize: 16px;
+    --nlux-WelcomeMessage--Gap: 5px;
+
+    /** Exceptions box */
+    --nlux-Exceptions--Padding: 5px;
+    --nlux-Exceptions--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
+
+    /** Chat-room container */
+    --nlux-ChatRoom--LineHeight: var(--nlux-fest--LineHeight);
+    --nlux-ChatRoom--FontWeight: 400;
+    --nlux-ChatRoom--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-ChatRoom--FontSize: 16px;
+
+    --nlux-ChatRoom--Padding: 10px;
+    --nlux-ChatRoom--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatRoom--BorderWidth: var(--nlux-fest--BorderWidth);
 }
+

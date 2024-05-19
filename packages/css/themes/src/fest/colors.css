@@ -5,7 +5,7 @@
     --nlux-Exceptions--TextColor: white;
 
     /** Welcome message */
-    --nlux-welcomeMessage-avatar--borderColor: darkgoldenrod;
+    --nlux-WelcomeMessage-avatar--borderColor: darkgoldenrod;
 
     /** Conversation loader */
     --nlux-ChatRoom-Loader--BackgroundColor: red;

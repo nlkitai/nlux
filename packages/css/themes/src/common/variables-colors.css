@@ -5,7 +5,7 @@
     --nlux-exp--txtClr: var(--nlux-Exceptions--TextColor, red);
 
     /** Welcome message */
-    --nlux-wlcMsg-avtr--brdrClr: var(--nlux-welcomeMessage-avatar--borderColor, grey);
+    --nlux-wlcMsg-avtr--brdrClr: var(--nlux-WelcomeMessage-avatar--borderColor, grey);
 
     /** Conversation loader */
     --nlux-chtr-ldr--bgClr: var(--nlux-ChatRoom-Loader--BackgroundColor, grey);
