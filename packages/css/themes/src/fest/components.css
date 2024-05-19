@@ -6,6 +6,7 @@
     --nlux-fest--BorderRadius: 8px;
     --nlux-fest--LineHeight: 1.4;
     --nlux-fest--FontFamily: 'Inter', sans-serif;
+    --nlux-fest--FlexGap: 12px;
 
     /**
      * Definitions of required theme variables.
@@ -30,5 +31,22 @@
     --nlux-ChatRoom--Padding: 10px;
     --nlux-ChatRoom--BorderRadius: var(--nlux-fest--BorderRadius);
     --nlux-ChatRoom--BorderWidth: var(--nlux-fest--BorderWidth);
+
+    /** Chat-room loader */
+    --nlux-ChatRoom-Loader--Width: 25px;
+
+    /** Chat item */
+    --nlux-ChatItem--AlignItems: flex-end;
+
+    /** Chat item avatar */
+    --nlux-ChatItem-avatar--Width: 30px;
+    --nlux-ChatItem-avatar--BorderRadius: 50%;
+
+    /** Chat item message */
+    --nlux-ChatItem-Message--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-ChatItem-Message--PaddingTopBottom: 10px;
+    --nlux-ChatItem-Message--PaddingLeftRight: 15px;
+    --nlux-ChatItem-Message--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap);
 }
 

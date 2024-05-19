@@ -20,21 +20,21 @@
     --nlux-chtr--brdrWd: var(--nlux-ChatRoom--BorderWidth, 6px);
 
     /** Chat-room loader */
-    --nlux-chtr-ldr--wd: var(--nlux-chItm-avtr--wd); /* Width */
+    --nlux-chtr-ldr--wd: var(--nlux-ChatRoom-Loader--Width, 40px);
 
     /** Chat item */
-    --nlux-chItm--algnItms: flex-end; /* Align items */
+    --nlux-chItm--algnItms: var(--nlux-ChatItem--AlignItems, flex-start);
 
     /** Chat item avatar */
-    --nlux-chItm-avtr--wd: 40px; /* Width */
-    --nlux-chItm-avtr--brdrRd: 30%; /* Border radius */
+    --nlux-chItm-avtr--wd: var(--nlux-ChatItem-avatar--Width, 50px);
+    --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-avatar--BorderRadius, 30%);
 
     /** Chat item message */
-    --nlux-chItm-msg--brdrWd: var(--nlux-borderWidth); /* Border width */
-    --nlux-chItm-msg--pdng-tpBtm: var(--nlux-padding); /* Padding top and bottom */
-    --nlux-chItm-msg--pdng-lr: var(--nlux-padding-m); /* Padding left and right */
-    --nlux-chItm-msg--brdrRd: var(--nlux-borderRadius); /* Border radius */
-    --nlux-chItm-msg--gap: var(--nlux-flexGap); /* Flex gap */
+    --nlux-chItm-msg--brdrWd: var(--nlux-ChatItem-Message--BorderWidth, 6px);
+    --nlux-chItm-msg--pdng-tpBtm: var(--nlux-ChatItem-Message--PaddingTopBottom, 20px);
+    --nlux-chItm-msg--pdng-lr: var(--nlux-ChatItem-Message--PaddingLeftRight, 25px);
+    --nlux-chItm-msg--brdrRd: var(--nlux-ChatItem-Message--BorderRadius, 20px);
+    --nlux-chItm-msg--gap: var(--nlux-ChatItem-Message--Gap, 20px); /* Gap between elements within message */
 
     /** Chat item message code block */
     --nlux-cdBlk--ftSz: var(--nlux-fontSize-s); /* Font size */
