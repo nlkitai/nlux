@@ -8,6 +8,8 @@ It also includes `npm` preset and README files for published packages.
 The repository was designed to be used with `yarn`.<br />
 For example, we use `yarn` for mono-repo packages structure instead of lerna.
 
+**Node 18 or higher** is required to run the dev pipeline.
+
 ### Running The Dev Server
 
 In order to run the dev server, you can follow the following steps (that
