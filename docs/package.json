@@ -5,7 +5,7 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "dev": "docusaurus start",
-    "build": "docusaurus build && rm -fr dist && mkdir dist && mv build dist/nlux",
+    "build": "docusaurus build && rm -fr dist && mkdir dist && mv build dist/nlux && mv dist/nlux/root.html dist/index.html",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
