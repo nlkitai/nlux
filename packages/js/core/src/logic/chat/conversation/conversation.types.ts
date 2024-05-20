@@ -1,12 +1,12 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompConversationEvents = void;
 
 export type CompConversationProps<AiMsg> = {
-    conversationDisplayMode: ConversationDisplayMode;
+    conversationLayout: ConversationLayout;
     messages?: ChatItem<AiMsg>[];
     botPersona?: BotPersona;
     userPersona?: UserPersona;

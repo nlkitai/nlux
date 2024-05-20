@@ -64,7 +64,7 @@ export const AiChat: <AiMsg>(
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
-    const conversationDisplayMode = useConversationDisplayStyle(conversationOptions);
+    const conversationLayout = useConversationDisplayStyle(conversationOptions);
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId, colorScheme}).join(' '),
         [className, themeId, colorScheme],
@@ -122,7 +122,7 @@ export const AiChat: <AiMsg>(
                         segments={segments}
                         conversationOptions={props.conversationOptions}
                         personaOptions={props.personaOptions}
-                        displayMode={conversationDisplayMode}
+                        layout={conversationLayout}
                         responseRenderer={props.messageOptions?.responseComponent}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
                         markdownLinkTarget={props.messageOptions?.markdownLinkTarget}

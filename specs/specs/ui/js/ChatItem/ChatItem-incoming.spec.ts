@@ -8,7 +8,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            displayMode: 'bubbles',
+            layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
         };
@@ -25,7 +25,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -43,7 +43,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'list',
+                layout: 'list',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -60,7 +60,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            displayMode: 'bubbles',
+            layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
         };
@@ -77,7 +77,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             direction: 'incoming',
-            displayMode: 'bubbles',
+            layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
             name: 'John Doe',
@@ -99,7 +99,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -121,7 +121,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };

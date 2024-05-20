@@ -6,7 +6,7 @@ import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatItem} from '../chatItem/chatItem.model';
@@ -43,7 +43,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
         const compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
             item,
-            this.getProp('conversationDisplayMode') as ConversationDisplayMode,
+            this.getProp('conversationLayout') as ConversationLayout,
             this.getProp('userPersona') as UserPersona | undefined,
             this.getProp('botPersona') as BotPersona | undefined,
         );

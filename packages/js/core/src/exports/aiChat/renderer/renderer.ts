@@ -1,7 +1,7 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
-import {getConversationDisplayMode} from '../../../../../../shared/src/utils/dom/getConversationDisplayMode';
+import {getConversationLayout} from '../../../../../../shared/src/utils/dom/getConversationLayout';
 import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompChatRoom} from '../../../logic/chat/chatRoom/chatRoom.model';
@@ -153,7 +153,7 @@ export class NluxRenderer<AiMsg> {
                 .withContext(this.context)
                 .withProps<CompChatRoomProps<AiMsg>>({
                     visible: true,
-                    conversationDisplayMode: getConversationDisplayMode(this.theConversationOptions),
+                    conversationLayout: getConversationLayout(this.theConversationOptions),
                     botPersona: this.thePersonasOptions?.bot ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,

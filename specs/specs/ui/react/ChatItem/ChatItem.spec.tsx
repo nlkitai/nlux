@@ -12,7 +12,7 @@ describe('When a custom chat item is provided', () => {
             uid={'1'}
             direction={'incoming'}
             dataTransferMode={'fetch'}
-            displayMode={'bubbles'}
+            layout={'bubbles'}
             status={'complete'}
             fetchedContent={'Hello'}
             responseRenderer={({content}: any) => <>{`THE AI SAID [${content}]`}</>}
@@ -32,7 +32,7 @@ describe('When a custom chat item is provided', () => {
             uid={'1'}
             direction={'incoming'}
             dataTransferMode={'fetch'}
-            displayMode={'bubbles'}
+            layout={'bubbles'}
             status={'complete'}
             fetchedContent={{text: 'Hello Jason!'}}
             responseRenderer={({content}: FetchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}

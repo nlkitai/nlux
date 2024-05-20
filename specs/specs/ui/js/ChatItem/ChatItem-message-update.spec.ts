@@ -9,7 +9,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -32,7 +32,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };
@@ -41,7 +41,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
-                displayMode: 'list',
+                layout: 'list',
             });
 
             // Assert
@@ -54,7 +54,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'incoming',
-                displayMode: 'bubbles',
+                layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
             };

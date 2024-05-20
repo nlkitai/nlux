@@ -12,7 +12,7 @@ import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
@@ -67,7 +67,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             .withProps({
                 uid: segmentId,
                 status,
-                conversationDisplayMode: this.getProp('conversationDisplayMode') as ConversationDisplayMode,
+                conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 userPersona: this.getProp('userPersona') as UserPersona | undefined,
                 botPersona: this.getProp('botPersona') as BotPersona | undefined,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,

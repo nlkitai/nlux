@@ -1,7 +1,7 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompChatRoomEvents = 'chat-room-ready'
@@ -11,7 +11,7 @@ export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
     botPersona?: BotPersona,
     userPersona?: UserPersona,
-    conversationDisplayMode: ConversationDisplayMode;
+    conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;
     promptBox: Partial<PromptBoxProps>;

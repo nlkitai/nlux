@@ -11,6 +11,8 @@ import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react
 import {
     AiChat,
     ChatItem,
+    ConversationLayout,
+    DataTransferMode,
     FetchResponseComponentProps,
     ResponseComponent,
     StreamResponseComponentProps,
@@ -20,12 +22,17 @@ import {useCallback, useEffect, useState} from 'react';
 
 function App() {
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
-    const [dataTransferMode, setDataTransferMode] = useState<'fetch' | 'stream'>('fetch');
+    const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
+    const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('fetch');
     const [theme, setTheme] = useState<'luna' | 'nova' | 'fest' | 'nada'>('fest');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('auto');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
         [setUseCustomResponseComponent],
+    );
+
+    const onConversationsLayoutChange = useCallback((e) => setConversationLayout(e.target.value),
+        [setConversationLayout],
     );
 
     const onThemeChange = useCallback((e) => setTheme(e.target.value as 'luna' | 'nova'), [setTheme]);
@@ -104,7 +111,15 @@ function App() {
 
     return (
         <>
-            <div style={{marginBottom: 10, backgroundColor: 'lightgray', padding: 10, borderRadius: 10}}>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '10px',
+                marginBottom: 10,
+                backgroundColor: 'lightgray',
+                padding: 10,
+                borderRadius: 10,
+            }}>
                 <label>
                     <input
                         type="checkbox"
@@ -113,22 +128,47 @@ function App() {
                     />
                     Custom Response Component
                 </label>
-                <br/>
-                <select value={dataTransferMode} onChange={onDataTransferModeChange}>
-                    <option value="fetch">Fetch</option>
-                    <option value="stream">Stream</option>
-                </select>
-                <select value={theme} onChange={onThemeChange}>
-                    <option value="fest">Fest</option>
-                    <option value="nada">Nada</option>
-                    <option value="luna">Luna</option>
-                    <option value="nova">Nova</option>
-                </select>
-                <select value={colorScheme} onChange={onColorSchemeChange}>
-                    <option value="auto">Auto</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </select>
+                <label>
+                    Conversation Layout:
+                    <br/>
+                    <label>
+                        <input
+                            type="radio"
+                            name="conversationLayout"
+                            value="list"
+                            checked={conversationLayout === 'list'}
+                            onChange={onConversationsLayoutChange}
+                        />
+                        List
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="conversationMode"
+                            value="bubbles"
+                            checked={conversationLayout === 'bubbles'}
+                            onChange={onConversationsLayoutChange}
+                        />
+                        Bubbles
+                    </label>
+                </label>
+                <div>
+                    <select value={dataTransferMode} onChange={onDataTransferModeChange}>
+                        <option value="fetch">Fetch</option>
+                        <option value="stream">Stream</option>
+                    </select>
+                    <select value={theme} onChange={onThemeChange}>
+                        <option value="fest">Fest</option>
+                        <option value="nada">Nada</option>
+                        <option value="luna">Luna</option>
+                        <option value="nova">Nova</option>
+                    </select>
+                    <select value={colorScheme} onChange={onColorSchemeChange}>
+                        <option value="auto">Auto</option>
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                    </select>
+                </div>
             </div>
             <AiChat
                 // adapter={nlBridgeAdapter}
@@ -149,6 +189,7 @@ function App() {
                 }}
                 conversationOptions={{
                     // autoScroll: false,
+                    layout: conversationLayout,
                 }}
                 messageOptions={{
                     markdownLinkTarget: 'blank',

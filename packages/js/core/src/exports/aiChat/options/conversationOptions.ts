@@ -1,6 +1,6 @@
 export type HistoryPayloadSize = number | 'max';
 
-export type ConversationDisplayMode = 'bubbles' | 'list';
+export type ConversationLayout = 'bubbles' | 'list';
 
 export interface ConversationOptions {
     /**
@@ -9,16 +9,6 @@ export interface ConversationOptions {
      * @default true
      */
     autoScroll?: boolean;
-
-    /**
-     * Indicates how items in the conversation should be displayed.
-     *
-     * - `list`: Chat items are displayed as a list with the AI responses underneath each user message.
-     * - `bubbles`: Items are displayed as chat bubbles with the prompts on the right and the AI messages on the left.
-     *
-     * @default 'list'
-     */
-    displayMode?: ConversationDisplayMode;
 
     /**
      * Indicates the number of messages from conversation history that should be sent to the backend with each message.
@@ -32,4 +22,14 @@ export interface ConversationOptions {
      * @default 'max'
      */
     historyPayloadSize?: HistoryPayloadSize;
+
+    /**
+     * Indicates how items in the conversation should be displayed.
+     *
+     * - `list`: Chat items are displayed as a list with the AI responses underneath each user message.
+     * - `bubbles`: Items are displayed as chat bubbles with the prompts on the right and the AI messages on the left.
+     *
+     * @default 'list'
+     */
+    layout?: ConversationLayout;
 }

@@ -6,7 +6,7 @@ import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
 import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
-import {applyNewDisplayModeClassName} from './utils/applyNewDisplayModeClassName';
+import {applyNewLayoutClassName} from './utils/applyNewLayoutClassName';
 
 export const updateChatItemDom: DomUpdater<ChatItemProps> = (
     element,
@@ -15,7 +15,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 ) => {
     if (
         propsBefore.direction === propsAfter.direction &&
-        propsBefore.displayMode === propsAfter.displayMode &&
+        propsBefore.layout === propsAfter.layout &&
         propsBefore.status === propsAfter.status &&
         propsBefore.message === propsAfter.message &&
         propsBefore.name === propsAfter.name &&
@@ -26,7 +26,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 
     if (!propsAfter || (
         !propsAfter.hasOwnProperty('direction') &&
-        !propsAfter.hasOwnProperty('displayMode') &&
+        !propsAfter.hasOwnProperty('layout') &&
         !propsAfter.hasOwnProperty('status') &&
         !propsAfter.hasOwnProperty('message') &&
         !propsAfter.hasOwnProperty('loader') &&
@@ -40,8 +40,8 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         applyNewDirectionClassName(element, propsAfter.direction);
     }
 
-    if (propsBefore.displayMode !== propsAfter.displayMode) {
-        applyNewDisplayModeClassName(element, propsAfter.displayMode);
+    if (propsBefore.layout !== propsAfter.layout) {
+        applyNewLayoutClassName(element, propsAfter.layout);
     }
 
     if (

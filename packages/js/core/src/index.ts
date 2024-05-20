@@ -10,7 +10,7 @@ export {Observable} from './exports/bus/observable';
 
 export type {
     ConversationOptions,
-    ConversationDisplayMode,
+    ConversationLayout,
 } from './exports/aiChat/options/conversationOptions';
 
 export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';

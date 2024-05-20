@@ -1,9 +1,9 @@
-import {ConversationDisplayMode, ConversationOptions} from '@nlux/core';
+import {ConversationLayout, ConversationOptions} from '@nlux/core';
 import {useMemo} from 'react';
-import {getConversationDisplayMode} from '../../../../../shared/src/utils/dom/getConversationDisplayMode';
+import {getConversationLayout} from '../../../../../shared/src/utils/dom/getConversationLayout';
 
-export const useConversationDisplayStyle = (conversationOptions?: ConversationOptions): ConversationDisplayMode => {
-    return useMemo(() => getConversationDisplayMode(
+export const useConversationDisplayStyle = (conversationOptions?: ConversationOptions): ConversationLayout => {
+    return useMemo(() => getConversationLayout(
         conversationOptions ?? {},
-    ), [conversationOptions?.displayMode]);
+    ), [conversationOptions?.layout]);
 };

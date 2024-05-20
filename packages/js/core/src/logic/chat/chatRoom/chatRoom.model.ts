@@ -7,7 +7,7 @@ import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
@@ -30,7 +30,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     private promptBoxText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
-            conversationDisplayMode,
+            conversationLayout,
             autoScroll,
             streamingAnimationSpeed,
             visible = true,
@@ -45,7 +45,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
-            conversationDisplayMode,
+            conversationLayout,
             visible,
             autoScroll,
             streamingAnimationSpeed,
@@ -202,7 +202,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 botPersona,
                 userPersona,
                 messages: initialConversationContent,
-                conversationDisplayMode: this.getProp('conversationDisplayMode') as ConversationDisplayMode,
+                conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,

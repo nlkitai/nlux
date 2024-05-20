@@ -1,12 +1,12 @@
 import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationDisplayMode} from '../../../exports/aiChat/options/conversationOptions';
+import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;
     status: ChatSegmentStatus;
-    conversationDisplayMode: ConversationDisplayMode;
+    conversationLayout: ConversationLayout;
     userPersona?: UserPersona;
     botPersona?: BotPersona;
     markdownLinkTarget?: 'blank' | 'self';

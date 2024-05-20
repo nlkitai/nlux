@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector<HTMLDivElement>('.ChatItem-expo')!;
     let props: ChatItemProps = {
         direction: 'incoming',
-        displayMode: 'bubbles',
+        layout: 'bubbles',
         status: 'complete',
         message: 'Hello, World!',
         name: 'Alex Doe',
