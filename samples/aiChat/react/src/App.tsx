@@ -21,11 +21,12 @@ import './App.css';
 import {useCallback, useEffect, useState} from 'react';
 
 function App() {
+    type ThemeId = 'nova' | 'fest' | 'nada';
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
     const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('fetch');
-    const [theme, setTheme] = useState<'luna' | 'nova' | 'fest' | 'nada'>('fest');
-    const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('auto');
+    const [theme, setTheme] = useState<ThemeId>('fest');
+    const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
         [setUseCustomResponseComponent],
@@ -35,7 +36,7 @@ function App() {
         [setConversationLayout],
     );
 
-    const onThemeChange = useCallback((e) => setTheme(e.target.value as 'luna' | 'nova'), [setTheme]);
+    const onThemeChange = useCallback((e) => setTheme(e.target.value as ThemeId), [setTheme]);
     const onColorSchemeChange = useCallback((e) => setColorScheme(e.target.value as 'light' | 'dark' | 'auto'),
         [setColorScheme],
     );
@@ -126,8 +127,16 @@ function App() {
                         checked={useCustomResponseComponent}
                         onChange={onUseCustomResponseComponentChange}
                     />
-                    Custom Response Component
+                    Use Custom Response Component
                 </label>
+                <label>
+                    Data Transfer Mode&nbsp;
+                    <select value={dataTransferMode} onChange={onDataTransferModeChange}>
+                        <option value="fetch">Fetch</option>
+                        <option value="stream">Stream</option>
+                    </select>
+                </label>
+                <hr />
                 <label>
                     Conversation Layout:
                     <br/>
@@ -153,20 +162,17 @@ function App() {
                     </label>
                 </label>
                 <div>
-                    <select value={dataTransferMode} onChange={onDataTransferModeChange}>
-                        <option value="fetch">Fetch</option>
-                        <option value="stream">Stream</option>
-                    </select>
+                    Theme&nbsp;
                     <select value={theme} onChange={onThemeChange}>
                         <option value="fest">Fest</option>
-                        <option value="nada">Nada</option>
-                        <option value="luna">Luna</option>
                         <option value="nova">Nova</option>
+                        <option value="nada">Nada</option>
                     </select>
+                    &nbsp;| Color Scheme&nbsp;
                     <select value={colorScheme} onChange={onColorSchemeChange}>
-                        <option value="auto">Auto</option>
-                        <option value="light">Light</option>
                         <option value="dark">Dark</option>
+                        <option value="light">Light</option>
+                        <option value="auto">Auto</option>
                     </select>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import './StockWiz.css';
 import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
-import '@nlux-dev/themes/src/luna/main.css';
+import '@nlux-dev/themes/src/nova/main.css';
 import {AiChat} from '@nlux-dev/react/src';
 import {usePortfolio} from './actions/usePortfolio';
 import {MyAiContext} from './context';

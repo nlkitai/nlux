@@ -1,5 +1,5 @@
-import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/themes/src/fest/main.css';
 import {ChatItem, createAiChat, DisplayOptions} from '@nlux-dev/core/src';
 // import {highlighter} from '@nlux-dev/highlighter/src';
 // import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
@@ -12,8 +12,9 @@ import './style.css';
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
 
-    let themeId: 'nova' | 'luna' = 'nova';
-    let colorScheme: 'light' | 'dark' = 'light';
+    type ThemeId = 'nova' | 'fest' | 'nada';
+    let themeId: ThemeId = 'nova';
+    let colorScheme: 'light' | 'dark' = 'dark';
 
     const nlBridgeAdapter = createNlbridgeChatAdapter<string>()
         .withUrl('http://localhost:8899/');
@@ -34,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const themeSelector = document.querySelector('#themeSelector') as HTMLSelectElement;
     themeSelector.addEventListener('change', () => {
-        themeId = themeSelector.value as 'nova' | 'luna';
+        themeId = themeSelector.value as ThemeId;
         displayOptions.themeId = themeId;
         aiChat.updateProps({displayOptions});
     });
@@ -46,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         aiChat.updateProps({displayOptions});
         document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
     });
+
+    document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '

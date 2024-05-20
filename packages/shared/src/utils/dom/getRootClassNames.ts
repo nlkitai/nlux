@@ -1,5 +1,5 @@
 const rootClassName = 'nlux-AiChat-root';
-const defaultThemeId = 'luna';
+const defaultThemeId = 'nova';
 
 const getSystemColorScheme = () => {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)')?.matches) {

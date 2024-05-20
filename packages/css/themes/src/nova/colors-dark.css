@@ -5,7 +5,7 @@
     --nlux-Exceptions--TextColor: white;
 
     /** Welcome message */
-    --nlux-WelcomeMessage-Avatar--BorderColor: darkgoldenrod;
+    --nlux-WelcomeMessage-Avatar--BorderColor: transparent;
 
     /** Divider between prompt box and messages */
     --nlux-ChatRoom-Divider--Color: #71717a;
