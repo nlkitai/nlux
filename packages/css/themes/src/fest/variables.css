@@ -57,19 +57,23 @@
     --nlux-ChatItem-Avatar--BorderRadius: 50%;
 
     /** Chat item message */
-    --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap);
+    --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap); /** Gap between elements within message */
 
-    /** Chat item message in bubbles display mode */
-    --nlux-ChatItem-BubbleMessage--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-ChatItem-BubbleMessage--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-ChatItem-BubbleMessage--PaddingTopBottom: 10px;
-    --nlux-ChatItem-BubbleMessage--PaddingLeftRight: 15px;
+    /** Chat item message in bubbles display layout */
+    --nlux-ChatItem-Message-BubbleLayout--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-ChatItem-Message-BubbleLayout--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatItem-Message-BubbleLayout--PaddingTopBottom: 10px;
+    --nlux-ChatItem-Message-BubbleLayout--PaddingLeftRight: 15px;
 
-    /** Chat item message in list display mode */
-    --nlux-ChatItem-ListMessage--BorderWidth: 2px;
-    --nlux-ChatItem-ListMessage--BorderRadius: 2px;
-    --nlux-ChatItem-ListMessage--PaddingTopBottom: 5px;
-    --nlux-ChatItem-ListMessage--PaddingLeftRight: 10px;
+    /** Chat item message in list display layout */
+    --nlux-ChatItem-Message-ListLayout--BorderWidth: 2px;
+    --nlux-ChatItem-Message-ListLayout--BorderRadius: 2px;
+    --nlux-ChatItem-Message-ListLayout--PaddingTopBottom: 5px;
+    --nlux-ChatItem-Message-ListLayout--PaddingLeftRight: 10px;
+    --nlux-ChatItem-Message-ListLayout--MarginTop: 10px;
+    --nlux-ChatItem-Message-ListLayout--MarginBottom: 10px;
+    --nlux-ChatItem-Message-ListLayout--MarginLeft: 10px;
+    --nlux-ChatItem-Message-ListLayout--MarginRight: 10px;
 
     /** Chat item message code block */
     --nlux-CodeBlock--FontSize: 14px;

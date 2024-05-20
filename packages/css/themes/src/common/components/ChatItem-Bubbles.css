@@ -2,14 +2,14 @@
     align-items: var(--nlux-chItm--algnItms);
 
     > .nlux-comp-msg {
-        padding: var(--nlux-chItm-bblMsg--pdng-tpBtm) var(--nlux-chItm-bblMsg--pdng-lr);
-        border-width: var(--nlux-chItm-bblMsg--brdrWd);
+        padding: var(--nlux-chItm-mmsg-bblLt--pdng-tpBtm) var(--nlux-chItm-mmsg-bblLt--pdng-lr);
+        border-width: var(--nlux-chItm-mmsg-bblLt--brdrWd);
         border-style: solid;
-        border-radius: var(--nlux-chItm-bblMsg--brdrRd);
+        border-radius: var(--nlux-chItm-mmsg-bblLt--brdrRd);
     }
 
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
-        border-width: var(--nlux-chItm-bblMsg--brdrWd);
+        border-width: var(--nlux-chItm-mmsg-bblLt--brdrWd);
     }
 
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name {

@@ -3,10 +3,14 @@
     align-items: flex-start;
 
     > .nlux-comp-msg {
-        padding: var(--nlux-chItm-lstMsg--pdng-tpBtm) var(--nlux-chItm-lstMsg--pdng-lr);
+        padding: var(--nlux-chItm-msg-lstLt--pdng-tpBtm) var(--nlux-chItm-msg-lstLt--pdng-lr);
+        margin-top: var(--nlux-chItm-msg-lstLt--mrgTp);
+        margin-bottom: var(--nlux-chItm-msg-lstLt--mrgBtm);
+        margin-left: var(--nlux-chItm-msg-lstLt--mrgLft);
+        margin-right: var(--nlux-chItm-msg-lstLt--mrgRgt);
     }
 
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
-        border-width: var(--nlux-chItm-lstMsg--brdrWd);
+        border-width: var(--nlux-chItm-msg-lstLt--brdrWd);
     }
 }

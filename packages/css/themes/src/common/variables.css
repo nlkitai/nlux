@@ -45,17 +45,21 @@
     /** Chat item message */
     --nlux-chItm-msg--gap: var(--nlux-ChatItem-Message--Gap, 20px); /* Gap between elements within message */
 
-    /** Chat item message in bubbles display mode */
-    --nlux-chItm-bblMsg--brdrWd: var(--nlux-ChatItem-BubbleMessage--BorderWidth, 6px);
-    --nlux-chItm-bblMsg--brdrRd: var(--nlux-ChatItem-BubbleMessage--BorderRadius, 20px);
-    --nlux-chItm-bblMsg--pdng-tpBtm: var(--nlux-ChatItem-BubbleMessage--PaddingTopBottom, 20px);
-    --nlux-chItm-bblMsg--pdng-lr: var(--nlux-ChatItem-BubbleMessage--PaddingLeftRight, 25px);
+    /** Chat item message in bubbles display layout */
+    --nlux-chItm-mmsg-bblLt--brdrWd: var(--nlux-ChatItem-Message-BubbleLayout--BorderWidth, 6px);
+    --nlux-chItm-mmsg-bblLt--brdrRd: var(--nlux-ChatItem-Message-BubbleLayout--BorderRadius, 20px);
+    --nlux-chItm-mmsg-bblLt--pdng-tpBtm: var(--nlux-ChatItem-Message-BubbleLayout--PaddingTopBottom, 20px);
+    --nlux-chItm-mmsg-bblLt--pdng-lr: var(--nlux-ChatItem-Message-BubbleLayout--PaddingLeftRight, 25px);
 
-    /** Chat item message in list display mode */
-    --nlux-chItm-lstMsg--brdrWd: var(--nlux-ChatItem-ListMessage--BorderWidth, 6px);
-    --nlux-chItm-lstMsg--brdrRd: var(--nlux-ChatItem-ListMessage--BorderRadius, 20px);
-    --nlux-chItm-lstMsg--pdng-tpBtm: var(--nlux-ChatItem-ListMessage--PaddingTopBottom, 5px);
-    --nlux-chItm-lstMsg--pdng-lr: var(--nlux-ChatItem-ListMessage--PaddingLeftRight, 10px);
+    /** Chat item message in list display layout */
+    --nlux-chItm-msg-lstLt--brdrWd: var(--nlux-ChatItem-Message-ListLayout--BorderWidth, 6px);
+    --nlux-chItm-msg-lstLt--brdrRd: var(--nlux-ChatItem-Message-ListLayout--BorderRadius, 20px);
+    --nlux-chItm-msg-lstLt--pdng-tpBtm: var(--nlux-ChatItem-Message-ListLayout--PaddingTopBottom, 5px);
+    --nlux-chItm-msg-lstLt--pdng-lr: var(--nlux-ChatItem-Message-ListLayout--PaddingLeftRight, 10px);
+    --nlux-chItm-msg-lstLt--mrgTp: var(--nlux-ChatItem-Message-ListLayout--MarginTop, 10px);
+    --nlux-chItm-msg-lstLt--mrgBtm: var(--nlux-ChatItem-Message-ListLayout--MarginBottom, 10px);
+    --nlux-chItm-msg-lstLt--mrgLft: var(--nlux-ChatItem-Message-ListLayout--MarginLeft, 10px);
+    --nlux-chItm-msg-lstLt--mrgRgt: var(--nlux-ChatItem-Message-ListLayout--MarginRight, 10px);
 
     /** Chat item message code block */
     --nlux-cdBlk--ftSz: var(--nlux-CodeBlock--FontSize, 16px);
