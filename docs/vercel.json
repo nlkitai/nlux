@@ -1,4 +1,7 @@
 {
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/examples/intro",
