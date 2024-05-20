@@ -1,0 +1,53 @@
+{
+  "redirects": [
+    {
+      "source": "/examples/intro",
+      "destination": "https://docs.nlkit.com/nlux/examples/react-js-ai-chatbot",
+      "permanent": true
+    },
+    {
+      "source": "/examples",
+      "destination": "https://docs.nlkit.com/nlux/examples/react-js-ai-chatbot",
+      "permanent": true
+    },
+    {
+      "source": "/api/user-interface/conversation",
+      "destination": "https://docs.nlkit.com/nlux/api/ui/ai-chat",
+      "permanent": true
+    },
+    {
+      "source": "/api/adapters/custom-adapter",
+      "destination": "https://docs.nlkit.com/nlux/api/adapters/custom-adapters",
+      "permanent": true
+    },
+    {
+      "source": "/api/user-interface/ai-chatbot",
+      "destination": "https://docs.nlkit.com/nlux/api/ui/ai-chat",
+      "permanent": true
+    },    {
+      "source": "/api/user-interface/config",
+      "destination": "https://docs.nlkit.com/nlux/api/ui/ai-chat",
+      "permanent": true
+    },
+    {
+      "source": "/api/user-interface/event-listeners",
+      "destination": "https://docs.nlkit.com/nlux/api/ui/events",
+      "permanent": true
+    },
+    {
+      "source": "/api/events",
+      "destination": "https://docs.nlkit.com/nlux/api/ui/events",
+      "permanent": true
+    },
+    {
+      "source": "/api/user-interface",
+      "destination": "https://docs.nlkit.com/nlux/api/ui",
+      "permanent": true
+    },
+    {
+      "source": "/api/user-interface",
+      "destination": "https://docs.nlkit.com/nlux/api/ui",
+      "permanent": true
+    }
+  ]
+}

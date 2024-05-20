@@ -1,0 +1,136 @@
+/* Import the fonts */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #d87f40;
+  --ifm-color-primary-dark: #d87f40;
+  --ifm-color-primary-darker: #d87f40;
+  --ifm-color-primary-darkest: #d87f40;
+  --ifm-color-primary-light: #d87f40;
+  --ifm-color-primary-lighter: #d87f40;
+  --ifm-color-primary-lightest: #d87f40;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  --ifm-font-family-base: 'komet', sans-serif;
+  --ifm-font-family-monospace: 'novel-mono-pro', monospace;
+  --ifm-font-family-title: 'Manrope', sans-serif;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #c29b25;
+  --ifm-color-primary-dark: #c29b25;
+  --ifm-color-primary-darker: #c29b25;
+  --ifm-color-primary-darkest: #c29b25;
+  --ifm-color-primary-light: #c29b25;
+  --ifm-color-primary-lighter: #c29b25;
+  --ifm-color-primary-lightest: #c29b25;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Color overrides */
+.hero--primary {
+  --ifm-hero-background-color: #fbf2ef;
+  --ifm-hero-text-color: #495959;
+}
+
+[data-theme='dark'] .hero--primary {
+  --ifm-hero-background-color: #1b1b1d;
+  --ifm-hero-text-color: #f0f0f0;
+}
+
+.footer {
+  --ifm-footer-background-color: #fbf2ef;
+  --ifm-footer-title-color: #495959;
+  --ifm-footer-link-color: #495959;
+}
+
+[data-theme='dark'] .footer {
+  --ifm-footer-background-color: #1b1b1d;
+  --ifm-footer-title-color: #837650;
+  --ifm-footer-link-color: #837650;
+}
+
+.footer .footer__link-item {
+  --ifm-footer-link-color: #056a6e;
+}
+
+[data-theme='dark'] .footer .footer__link-item {
+  --ifm-footer-link-color: #c29b25;
+}
+
+/* Navbar overrides */
+.navbar {
+  min-height: 80px;
+}
+
+.navbar .navbar__items:first-of-type .navbar__title {
+    font-family: var(--ifm-font-family-title);
+    font-weight: 900;
+    font-size: 1.5rem;
+    letter-spacing: -1px;
+}
+
+.navbar .navbar__logo {
+  height: 60px;
+}
+
+.navbar .navbar__logo img {
+  width: 60px;
+  height: 60px;
+}
+
+.navbar .doc-section {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Font overrides */
+h1, h2, h3 {
+  font-family: var(--ifm-font-family-title);
+}
+
+.main-wrapper .container h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.main-wrapper .container h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.main-wrapper .container h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.main-wrapper .container h1.hero__title {
+    font-family: var(--ifm-font-family-title);
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+/* Code example page */
+.learn-more-link {
+  margin-bottom: 1rem;
+}
+
+/* Embedded code editor */
+.prism-code {
+  text-align: left;
+}
+
+.platform-selector {
+  display: flex;
+  background-color: #00000012;
+  border-radius: 10px;
+}
+
+[data-theme='dark'] {
+    .platform-selector {
+        background-color: #ffffff12;
+    }
+}

@@ -1,0 +1,34 @@
+The `initialConversation` property is used to enable loading of conversation history before
+rendering the `AiChat` component. This is useful if you want the user to resume a conversation
+from a previous session.
+
+* Types: `initialConversation: ConversationItem[]`
+
+With `ConversationItem` being defined as:
+
+```ts
+type ParticipantRole = 'user' | 'system' | 'ai';
+type ConversationItem = {
+    role: ParticipantRole;
+    message: string;
+}
+```
+
+* Optional
+* Not reactive (when changed, the component will not be re-rendered)
+* Usage:
+
+```jsx
+<AiChat
+    initialConversation={[
+        {
+            role: 'user',
+            message: 'Hello AI chatbot! What\'s the capital of Antartica?'
+        },
+        {
+            role: 'ai',
+            message: 'Antarctica, the cool place where penguins rule, doesn\'t have a capital because it\'s too chill for politics!'
+        }
+    ]}
+/>
+```

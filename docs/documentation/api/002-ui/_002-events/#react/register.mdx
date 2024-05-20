@@ -1,0 +1,14 @@
+You can listen to an event by using the `events` property when defining your `<AiChat />` component.
+
+The `events` property is an object where the key is the event name and the value is a function that will be called when the event is triggered. 
+Here is an example of how to listen to the `messageSent` and `messageReceived` events:
+
+```tsx
+<AiChat
+    adapter={myAdapter}
+    events={{
+        messageSent: (message: string) => console.log(message),
+        messageReceived: (message: string) => console.log(message),
+    }}
+/>
+```

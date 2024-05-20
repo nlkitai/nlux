@@ -1,0 +1,11 @@
+You can use the `createChatAdapter` function to create an _nlbridge_ adapter as shown below:
+
+```jsx
+const nlbridgeAdapter = createChatAdapter()
+    .withUrl('http://localhost:8080/chat-api');
+```
+
+The `createChatAdapter` function takes will return an adapter builder that you can use to configure by chaining methods.
+The `withUrl(<URL>)` method is used to specify the URL of the _nlbridge_ endpoint that the adapter should connect to.
+
+In this example, we are connecting the endpoint created in the previous section.

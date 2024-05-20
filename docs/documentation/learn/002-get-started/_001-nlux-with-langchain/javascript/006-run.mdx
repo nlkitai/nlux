@@ -1,0 +1,41 @@
+Once you have configured all of the above, your code will look like this:
+
+```js
+import {createAiChat} from '@nlux/core';
+import {createChatAdapter} from '@nlux/langchain';
+import '@nlux/themes/nova.css';
+
+const chatGptAdapter = createChatAdapter().withUrl(
+    'https://pynlux.api.nlux.ai/pirate-speak'
+);
+
+const aiChat = createAiChat().withAdapter(chatGptAdapter);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const chatContainer = document.getElementById('chat-container');
+    aiChat.mount(chatContainer);
+});
+```
+
+You can now run your app and test the chatbot.<br />
+The result is a fully functional chatbot UI:
+
+<div
+    style={{
+        display: "inline-block",
+        border: "1px solid #ddd",
+        borderRadius: "4px",
+        overflow: "hidden",
+        width: "400px",
+        height: "387px",
+        backgroundImage: 'url("/learn/get-started-guides/parrot-speak-demo.gif")',
+        backgroundSize: "cover",
+    }}
+    alt="AiChat demo"
+></div>
+
+Since the LangChain endpoint is instructing the LLM to behave like a Parrot
+([created for this example](/examples/langchain-langserve-adapter)), the chatbot will
+respond in a fun and playful manner that mimics the persona that of a parrot.
+
+And _nlux_ is handling all the UI interactions and the communication with LangChain.

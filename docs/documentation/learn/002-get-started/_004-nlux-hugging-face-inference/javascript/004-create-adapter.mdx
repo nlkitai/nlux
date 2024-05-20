@@ -1,0 +1,30 @@
+You can use the `createChatAdapter` function to create a Hugging Face Inference API adapter.
+
+```jsx
+const hfAdapter = createChatAdapter()
+    .withEndpoint('<YOUR ENDPOINT URL>');
+```
+
+If your Hugging Face endpoint is protected and requires a token, you can pass it as follows:
+
+```jsx
+const hfAdapter = createChatAdapter()
+    .withEndpoint('<YOUR ENDPOINT URL>')
+    .withAuthToken('<YOUR TOKEN>');
+```
+
+And because the user and the AI output require transformation, we will use use input and output
+pre-processors specific to the model that we are using:
+
+```jsx
+import {createChatAdapter, llama2InputPreProcessor, llama2OutputPreProcessor} from '@nlux/hf'
+
+const hfAdapter = createChatAdapter()
+    .withEndpoint('<YOUR ENDPOINT URL>')
+    .withAuthToken('<YOUR TOKEN>')
+    .withInputPreProcessor(llama2InputPreProcessor)
+    .withOutputPreProcessor(llama2OutputPreProcessor);
+```
+
+The `createChatAdapter` function returns an adapter builder that you can be configured by chaining methods.
+Please refer to the [reference documentation](/api/adapters/hugging-face) for more information on the available methods.

@@ -1,0 +1,12 @@
+```typescript
+import {createAiChat, MessageReceivedCallback} from '@nlux/core';
+
+const aiChat = createAiChat().withAdapter(myAdapter);
+const callback: MessageReceivedCallback = (message: string) => console.log(message);
+
+// Add listener
+aiChat.on('messageReceived', callback);
+
+// Remove listener
+aiChat.removeEventListener('messageReceived', callback);
+```

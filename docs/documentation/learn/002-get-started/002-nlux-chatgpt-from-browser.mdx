@@ -1,0 +1,100 @@
+---
+sidebar_label: 'nlux + ChatGPT From Browser'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import ApiKeyReactJs from './_002-nlux-chatgpt-from-browser/javascript/001-api-key.mdx';
+import ApiKeyJavascript from './_002-nlux-chatgpt-from-browser/javascript/001-api-key.mdx';
+
+import InstallReactJs from './_002-nlux-chatgpt-from-browser/react-js/002-install.mdx';
+import InstallJavascript from './_002-nlux-chatgpt-from-browser/javascript/002-install.mdx';
+
+import ImportReactJs from './_002-nlux-chatgpt-from-browser/react-js/003-import.mdx';
+import ImportJavascript from './_002-nlux-chatgpt-from-browser/javascript/003-import.mdx';
+
+import CreateAdapterReactJs from './_002-nlux-chatgpt-from-browser/react-js/004-create-adapter.mdx';
+import CreateAdapterJavascript from './_002-nlux-chatgpt-from-browser/javascript/004-create-adapter.mdx';
+
+import CreateChatCompReactJs from './_002-nlux-chatgpt-from-browser/react-js/005-create-comp.mdx';
+import CreateChatCompJavascript from './_002-nlux-chatgpt-from-browser/javascript/005-create-comp.mdx';
+
+import StyleReactJs from './_002-nlux-chatgpt-from-browser/react-js/006-style.mdx';
+import StyleJavascript from './_002-nlux-chatgpt-from-browser/javascript/006-style.mdx';
+
+import RunReactJs from './_002-nlux-chatgpt-from-browser/react-js/007-run.mdx';
+import RunJavascript from './_002-nlux-chatgpt-from-browser/javascript/007-run.mdx';
+
+import ReactJs from './_002-nlux-chatgpt-from-browser/#react.mdx';
+import Javascript from './_002-nlux-chatgpt-from-browser/#js.mdx';
+
+# Get Started ― nlux And ChatGPT API From Browser (unsafe)
+
+OpenAI provides very powerful APIs to access their GPT chat completion models.<br />
+In this guide, we will use _nlux_ and _ChatGPT_ APIs to create a simple chatbot in the browser.
+
+:::warning
+The adapters used in this getting started page are simple to use but they
+should **only be used for prototyping and testing purposes**. As they connect
+to OpenAI API directly from the browser, exposing the API key in the client-side code.
+This approach is **unsafe** and **not recommended** for production use cases.
+:::
+
+:::tip Some safe alternatives for production
+
+* [Node.js and _nlbridge_](/learn/get-started/nlux-nodejs-nlbridge-chatgpt) ― to create a Node.js server that connects to
+the OpenAI API, and easily use it with _nlux_.
+* [_nlux_'s custom adapters feature](/learn/adapters/custom-adapters) ― to create an adapter for any backend or API.
+
+:::
+
+---
+
+_nlux_ is available as a React JS component and hooks, or as a Javascript library.<br />
+The features are identical for both platforms.
+Use the version that best suits your needs.
+
+<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+
+---
+
+## 1. Get Your OpenAI API Key
+
+<PlatformSection javascript={ApiKeyJavascript} reactJs={ApiKeyReactJs}/>
+
+---
+
+## 2. Install nlux Packages
+
+<PlatformSection javascript={InstallJavascript} reactJs={InstallReactJs}/>
+
+---
+
+## 3. Import Component And Hook
+
+<PlatformSection javascript={ImportJavascript} reactJs={ImportReactJs}/>
+
+---
+
+## 4. Create ChatGPT Adapter
+
+<PlatformSection javascript={CreateAdapterJavascript} reactJs={CreateAdapterReactJs}/>
+
+---
+
+## 5. Create Chat Component
+
+<PlatformSection javascript={CreateChatCompJavascript} reactJs={CreateChatCompReactJs}/>
+
+---
+
+## 6. Add CSS Styles
+
+<PlatformSection javascript={StyleJavascript} reactJs={StyleReactJs}/>
+
+---
+
+## 7. Run Your App
+
+<PlatformSection javascript={RunJavascript} reactJs={RunReactJs}/>

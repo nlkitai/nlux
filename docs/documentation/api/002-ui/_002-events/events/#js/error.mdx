@@ -1,0 +1,15 @@
+```typescript
+import {createAiChat, ErrorCallback, ErrorEventDetails} from '@nlux/core';
+
+const aiChat = createAiChat().withAdapter(myAdapter);
+const callback: ErrorCallback = (details: ErrorEventDetails) => {
+    console.log(details.errorId);
+    console.log(details.message);
+};
+
+// Add listener
+aiChat.on('error', callback);
+
+// Remove listener
+aiChat.removeEventListener('error', callback);
+```

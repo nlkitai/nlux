@@ -1,0 +1,44 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Now we will add a new endpoint to our Express.js app that is powered by `@nlbridge/express` library.
+
+First, we start by adding the `@nlbridge/express` library to our project:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm install @nlbridge/express
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn add @nlbridge/express
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm install @nlbridge/express
+        ```
+    </TabItem>
+</Tabs>
+
+Then, modify `index.ts` file to add a new endpoint:
+
+```typescript
+import {defaultMiddleware} from '@nlbridge/express';
+
+app.post('/chat-api',
+    defaultMiddleware('openai', {
+        apiKey: '<YOUR_OPENAI_API_KEY>',
+        chatModel: 'gpt-3.5-turbo',
+    }),
+);
+```
+
+Make sure to replace `<YOUR_OPENAI_API_KEY>` with your actual OpenAI API key obtained in step 1.<br />
+Then restart your server and you will have a new endpoint at **`POST`** `http://localhost:3000/chat-api` that is
+powered by OpenAI's gpt-3.5-turbo model, and ready for _nlux_ integration.
+
+It's important to note that the new API is created with `post` method.<br />
+This is a requirement for _nlbridge_ integration.

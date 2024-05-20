@@ -1,0 +1,20 @@
+You can **remove a specific event listener** by calling the `removeEventListener`:
+
+* The first argument is the event name
+* The second argument is the callback function to remove
+
+```ts
+aiChat.removeEventListener('messageReceived', callback);
+```
+
+You can also **remove all the event listeners for a specific event** by calling the `removeAllEventListeners`:
+
+```ts
+aiChat.removeAllEventListeners('messageReceived');
+```
+
+If no event name is provided, **all the event listeners for all the events** will be removed:
+
+```ts
+aiChat.removeAllEventListeners();
+```

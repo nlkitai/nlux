@@ -1,0 +1,18 @@
+```ts
+import {createAiChat} from '@nlux/core';
+import {createChatAdapter} from '@nlux/<Your Adapter Of Choice>';
+
+// The adapter config depends on the adapter you use
+const adapter = createChatAdapter().withUrl('https://<Your Adapter Endpoint Url>');
+
+const aiChat = createAiChat().withAdapter(adapter);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const chatContainer = document.getElementById('chat-container');
+    aiChat?.mount(chatContainer);
+});
+
+document.getElementById('myCloseChatButton').addEventListener('click', () => {
+    aiChat?.unmount();
+});
+```

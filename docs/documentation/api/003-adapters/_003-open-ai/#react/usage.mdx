@@ -1,0 +1,12 @@
+```js
+import {useUnsafeChatAdapter} from '@nlux/openai-react';
+import {AiChat} from '@nlux/react';
+
+export default App = () => {
+    const adapter = useUnsafeChatAdapter({
+        // Config options
+    });
+
+    return <AiChat adapter={adapter} />;
+};
+```

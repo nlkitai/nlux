@@ -1,0 +1,11 @@
+You can use the `createUnsafeChatAdapter` function to create a OpenAI adapter as shown below:
+
+```jsx
+const openAiAdapter = createUnsafeChatAdapter()
+    .withApiKey('your-openai-api-key-here')
+    .withModel('gpt-3.5-turbo')
+    .withSystemMessage('Act as a helpful assistant and be funny and engaging.');
+```
+
+The `createUnsafeChatAdapter` function returns an adapter builder that you can be configured by chaining methods.
+Please refer to the [reference documentation](/api/adapters/open-ai) for more information on the available methods.

@@ -1,0 +1,12 @@
+```js
+import {useChatAdapter} from '@nlux/langchain-react';
+import {AiChat} from '@nlux/react';
+
+export default App = () => {
+    const adapter = useChatAdapter({
+        url: 'https://<Your LangServe Runnable URL>',
+    });
+
+    return <AiChat adapter={adapter} />;
+};
+```

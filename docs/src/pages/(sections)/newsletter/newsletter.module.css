@@ -1,0 +1,23 @@
+.newsletterContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    background-color: var(--nx-background-color-2);
+    color: var(--nx-text-color-2);
+}
+
+.newsletterIframeContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.newsletterContainer iframe {
+    width: 100%;
+}

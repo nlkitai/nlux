@@ -1,0 +1,72 @@
+.heroBanner {
+    background-color: var(--nx-background-color-1);
+    color: var(--nx-text-color-1);
+
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.heroTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    font-family: var(--ifm-font-family-title);
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.heroSubtitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.heroSubtitleContent {
+    display: inline-block;
+    max-width: 460px;
+    font-size: 1.4rem;
+}
+
+@media screen and (max-width: 996px) {
+    .heroBanner {
+        padding: 2rem;
+    }
+}
+
+.adaptersShowcase {
+    margin: 20px 10px;
+}
+
+.adaptersShowcase {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.adaptersShowcase > .platformName {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.adaptersShowcase > .platformName > h5 {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+}
+
+.adaptersShowcase > .platformName > img {
+    border-radius: 5px;
+}
+

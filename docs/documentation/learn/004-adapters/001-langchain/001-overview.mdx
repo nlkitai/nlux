@@ -1,0 +1,62 @@
+---
+sidebar_label: 'Overview'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import exampleUrlFileAiChatBot from './examples/aiChatBot-default';
+
+# LangChain Adapter
+
+`nlux` offers integration with LangChain through LangServe.
+
+## About LangChain and LangServe
+
+[LangChain](https://www.langchain.com/) is a popular framework for building backend services powered by large language
+models. It enables applications that are context-aware. It allows connecting a language model to sources of context
+such as databases, APIs, and other services. It also relies on language models to reason about the context.
+
+[LangServe](https://www.langchain.com/langserve) is a library that comes with LangChain, and that allows developers to
+build Restful APIs that can be used to interact with language models. A LangServe API provides a set of pre-defined
+endpoints and an input/out schema that can be used to interact with the language model.
+
+:::note LangServe vs Custom APIs
+The `nlux` LangChain adapter supports the **[standard LangServe endpoints](https://python.langchain.com/docs/langserve#endpoints)**.<br />
+If you have created custom APIs powered by LangChain, *that do not use LangServe*, we recommend using
+`nlux`'s [Custom Adapters](/learn/adapters/custom-adapters) feature to create adapters specific to your APIs.
+:::
+
+
+## Supported Features
+
+The `nlux` LangServe adapter can do the following:
+
+* Offers a way to **send a user prompt to a LangServe API** via `/invoke` or `/stream` endpoints.
+* **Handles the API responses** and displays them in the AI chat UI (single responses and streamed text).
+* Offers a way for developers to **customize the payload sent and received** to/from the LangServe API.
+* Reads the LangServe API **input schema** and attempts to construct a request payload that matches it.
+
+It's also important to note what `nlux` LangServe adapter does not do:
+
+* Does not handle `/batch` or `/stream_log` endpoints.
+* The generation of request payload based on input schema is limited to schemas with simple types
+(string, or object with a single string property). Of complex schemas, `inputPreProcessor` should be
+used to construct the payload.
+
+If you have specific requirements that are not covered by the adapter, please submit a feature request
+[here](https://github.com/nluxai/nlux/discussions) and we will consider adding it to the roadmap
+if enough users request it.
+
+## Example: LangServe Adapter With Default Settings
+
+The example below shows how to use the `nlux` LangServe adapter to connect to a LangServe API.
+
+* LangServe Runnable URL used: `https://pynlux.api.nlux.ai/pirate-speak`
+* Data transfor used: `stream` (default) ― Response is streamed to the UI as it's being generated.
+
+<CodeEditor
+    files={{
+        'App.tsx': exampleUrlFileAiChatBot,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'What\'s the best human food treats to feed a pirate parrot to keep him happy during long voyages at sea?'}
+/>

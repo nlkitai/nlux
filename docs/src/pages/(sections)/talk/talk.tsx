@@ -1,0 +1,22 @@
+import styles from './talk.module.css';
+
+export const Talk = () => {
+    return (
+        <div className={styles.youtubeTalkContainer}>
+            <h2 className={styles.talkTitle}>
+                Building Context-Aware AI Assistants<br />
+                With React JS and <code>nlux</code>
+            </h2>
+            <p className={styles.talkDescription}>
+                Learn more ― Watch the presentation of <code>nlux</code> founder at React Advanced London
+                where he talks about the future of conversational AI and how to build
+                context-aware AI apps with NLUX and React JS.
+            </p>
+            <iframe width="560" height="315"
+                    src="https://www.youtube-nocookie.com/embed/iI95_WTdtao?si=AGvd5Z3U7B51vWPA"
+                    title="YouTube video player" frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen></iframe>
+        </div>
+    );
+};

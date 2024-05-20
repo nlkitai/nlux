@@ -1,0 +1,13 @@
+The initial system to send to ChatGPT API. This can be used to set the initial context of the conversation, and
+instruct ChatGPT to use a specific persona.
+
+* Property: `systemMessage`
+* Type: `string`
+* Required: `false`
+* Usage:
+
+```js
+const adapter = useUnsafeChatAdapter({
+    systemMessage: 'I want you to act as a customer support agent.'
+});
+```

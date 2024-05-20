@@ -1,0 +1,93 @@
+---
+sidebar_label: 'Theme Customization'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+
+import exampleCssPersonasConfig from './_005-customize-theme/example-custom-button-color/custom-nova-theme.tsx';
+import exampleJsxFileAiChatBot from './_005-customize-theme/example-custom-button-color/aiChatBot.tsx';
+import exampleJsxFileStreamAdapter from './_005-customize-theme/example-custom-button-color/adapter.tsx';
+import exampleJsxPersonasConfig from './_005-customize-theme/example-custom-button-color/personas.tsx';
+
+# Theme Customization
+
+## Overriding Theme Variables
+
+If you like to customize `nlux`'s theme, you can override the Nove theme's variables simply by adding a new CSS
+file in your web app or site that defines new values for those variables, and that has higher specificity than the
+theme CSS.
+
+## Variables To Override
+
+You can find all **Novo theme variables** that can be overridden in the following files on GitHub:
+* [`colors.css`](https://github.com/nluxai/nlux/blob/f088801ae10d63b2b334b56dc0a2e127013700ba/packages/css/themes/src/nova/colors.css) All the colors
+that can be overridden.
+* [`variables.css`](https://github.com/nluxai/nlux/blob/f088801ae10d63b2b334b56dc0a2e127013700ba/packages/css/themes/src/nova/variables.css) All the other
+variables that can be overridden, including font size and family, border radius, etc.
+
+You don't have to re-build a new version of `nlux` to override the theme variables. As shown in the example above,
+you can simply add a new CSS file and override the variables inside a CSS selector that has higher specificity than
+the default theme selector.
+
+## Example
+
+In the example below, we are overriding 2 aspects of the `Nova` theme:
+
+* Changing the primary color to `#1f6adb` (blue)
+* Changing the border radius of inputs to `0px`
+
+The button and the sent messages will be blue, and the input will have sharp corners:
+
+<CodeEditor
+    files={{
+        'App.tsx': exampleJsxFileAiChatBot,
+        'custom-nova-theme.css': exampleCssPersonasConfig,
+        'personas.tsx': exampleJsxPersonasConfig,
+        'adapter.ts': exampleJsxFileStreamAdapter,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}
+/>
+
+<br />
+
+:::info
+You can change code in the live code editor in this example.<br />
+Try updating `custom-nova-theme.css` and see the changes in the chatbot above.
+:::
+
+### Explanation
+
+In order to change the primary button color to `#1f6adb` (blue). We created a new file called `custom-nova-theme.css`
+and add the following CSS:
+
+```css
+.custom-ai-chat-comp.nluxc-root.nluxc-theme-nova {
+    --nluxc-button-background-color: #1f6adb;
+    --nluxc-button-border-color: #1f6adb;
+
+    --nluxc-button-active-background-color: #3474d3;
+    --nluxc-button-active-border-color: #3474d3;
+}
+```
+
+The default theme variables are defined under `.nluxc-root.nluxc-theme-nova` selector, so you need to make sure that
+your CSS selector has higher specificity than that.
+
+:::tip Important
+Notice that in this example, we added a CSS selector `.custom-ai-chat-comp` **to increase the specificity** of the
+variables we are overriding. This selector was added as a `className` in `App.tsx` and as part of the CSS selector
+in `custom-nova-theme.css`.
+:::
+
+Then, you can add the following to your HTML file:
+
+```html
+<link rel="stylesheet" href="./custom-nova-theme.css" />
+```
+
+or if you are using a bundler that's configured to load CSS, you can just import the CSS file in your JSX/TSX file:
+
+```js
+import './custom-nova-theme.css';
+```

@@ -1,0 +1,17 @@
+```typescript
+import {createAiChat, PreDestroyCallback, PreDestroyEventDetails} from '@nlux/core';
+
+const callback: PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => {
+    if (preDestroyDetails.conversationHistory.length > 0) {
+        // Do something with the conversation history before it is destroyed
+    }
+};
+
+const aiChat = createAiChat().withAdapter(myAdapter);
+
+// Register the callback
+aiChat.on('preDestroy', callback);
+
+// Unregister the callback
+aiChat.removeEventListener('preDestroy', callback);
+```

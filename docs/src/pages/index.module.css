@@ -1,0 +1,84 @@
+/**
+ * CSS files with the .module.css suffix will be treated as CSS modules
+ * and scoped locally.
+ */
+
+
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.installCommand {
+  display: inline-block;
+  padding: 15px 25px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.installCommand:hover {
+  color: var(--ifm-color-primary)
+}
+
+.installCommand .copyIcon,
+.installCommand .copiedIcon {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+}
+
+.installCommand .copyIcon {
+  visibility: hidden;
+}
+
+.installCommand:hover .copyIcon {
+  visibility: visible;
+}
+
+.nluxTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  gap: 10px;
+}
+
+.nluxTitle > .nluxTitleEmojis {
+  font-size: 2rem;
+}
+
+.nluxInAction {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 10px 20px 10px;
+}
+
+.nluxInAction > h5 {
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0;
+}
+
+.nluxInAction > p {
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nluxInAction .codeEditor {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px 0;
+}

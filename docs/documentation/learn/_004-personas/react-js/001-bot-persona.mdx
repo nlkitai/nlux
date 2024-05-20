@@ -1,0 +1,26 @@
+In React JS, you can define the bot persona by passing the `personaOptions` prop to the `AiChat` component.
+The `personaOptions` prop is an object with two properties: `bot` and `user`. The `bot` property is what you use to
+define the bot persona, as shown in the example below.
+
+```jsx
+<AiChat
+    adapter={adapter}
+    personaOptions={{
+        bot: {
+            name: 'HarryBotter',
+            picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+            tagline: 'Mischievously Making Magic With Mirthful AI!',
+        },
+    }}
+/>
+```
+
+The object passed to the `bot` property should match the following interface:
+
+```typescript
+interface BotPersona {
+    name: string;
+    picture: string | JSX.Element;
+    tagline?: string;
+}
+```

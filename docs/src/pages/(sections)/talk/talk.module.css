@@ -1,0 +1,40 @@
+.youtubeTalkContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    background-color: var(--nx-background-color-1);
+    color: var(--nx-text-color-1);
+}
+
+.talkDescription {
+    display: inline-block;
+    width: 100%;
+    max-width: 650px;
+    padding: 1rem;
+}
+
+.talkTitle {
+    line-height: 1.6;
+}
+
+iframe {
+    width: 100%;
+    max-width: 600px;
+    ratio: 16/9;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+    .youtubeTalkContainer {
+        padding: 2rem;
+    }
+}

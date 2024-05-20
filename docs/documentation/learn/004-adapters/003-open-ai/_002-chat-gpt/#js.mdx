@@ -1,0 +1,35 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## How to connect `nlux` to ChatGPT
+`nlux` provides a built-in adapter for connecting to OpenAI's API, which you can use to connect to ChatGPT.
+
+### Installation
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm install @nlux/openai
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn add @nlux/openai
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm add @nlux/openai
+        ```
+    </TabItem>
+</Tabs>
+
+### Usage
+
+```jsx
+import {createUnsafeChatAdapter} from '@nlux/openai';
+
+const adapter = createUnsafeChatAdapter()
+    .withApiKey('YOUR_API_KEY')
+    .with[Option Name](<Option Value>);
+```

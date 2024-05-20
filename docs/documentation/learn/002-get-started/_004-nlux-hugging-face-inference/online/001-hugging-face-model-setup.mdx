@@ -1,0 +1,16 @@
+In this guide, we will use [Llama 2](https://huggingface.co/blog/llama2), a state-of-the-art open-access large
+language models released by Meta.<br />
+To set up Llama 2 on Hugging Face Inference, follow these steps:
+
+1. Login to Hugging Face and go to [Inference Endpoints](https://ui.endpoints.huggingface.co/) page.
+2. Click on _New Endpoint_
+3. Select `meta-llama/Llama-2-7b-chat-hf` in the `Model Repository` field.
+4. Select your desired instance configuration.
+5. For `Endpoint security level`, select _Protected_ or _Public_ based on your requirements.
+6. Click on _Create Endpoint_.
+
+Wait for the instance to initialize. Once the instance is ready, you can use the endpoint to make inference requests.
+
+* Before moving to the next step, make sure to note down the `Endpoint URL` from the instance details page.
+* And if you have set the `Endpoint security level` to `Protected`, you will need to a generate user access token to
+authenticate your requests. You can do that in the [Access Tokens](https://huggingface.co/settings/tokens) page.

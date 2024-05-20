@@ -1,0 +1,19 @@
+You can use the `useChatAdapter` hook to create a LangServe adapter.<br />
+You can optionally import `ChatAdapterOptions` from `@nlux/nlbridge-react` to define the type of the options object.
+
+```tsx
+import {useChatAdapter, ChatAdapterOptions} from '@nlux/nlbridge-react';
+
+const adapterOptions: ChatAdapterOptions = {
+    url: 'http://localhost:8080/chat-api',
+};
+
+export const App = () => {
+    const nlbridgeAdapter = useChatAdapter(adapterOptions);
+}
+```
+
+The `ChatAdapterOptions` interface has one required property: `url`.
+This is the URL of the _nlbridge_ endpoint that the adapter should connect to.
+
+In this example, we are connecting the endpoint created in the previous section.

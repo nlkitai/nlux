@@ -6,6 +6,9 @@ dist-ssr/
 publish/
 coverage/
 
+# Docusaurus output
+.docusaurus/
+
 # Cache
 .rollup.cache/
 

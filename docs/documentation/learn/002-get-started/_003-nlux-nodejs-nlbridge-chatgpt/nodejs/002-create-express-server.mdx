@@ -1,0 +1,95 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+The following example was tested on Node.js _v20.11_.<br />
+We recommend using the latest LTS version of Node.js.<br />
+If you already have Node.js + Express.js project set up, you jump to the [next section](#3-setup-nlbridge-expressjs-middleware).
+
+### Set up a new Node.js and Typescript project
+
+We will start by setting up a new Node.js and Typescript project, and install the dependencies.<br />
+Create a new directory for your project, navigate to it, and run the following commands:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm init --yes
+        npm install --dev typescript ts-node @types/node @types/express @types/cors
+        npm install express cors
+        npx tsc --init
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn init --yes
+        yarn add --dev typescript ts-node @types/node @types/express @types/cors
+        yarn add express cors
+        yarn tsc --init
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm init
+        pnpm install -D typescript ts-node @types/node @types/express @types/cors
+        pnpm install express cors
+        pnpm tsc --init
+        ```
+    </TabItem>
+</Tabs>
+
+### Create a simple Express.js endpoint
+
+Next, we will create a simple Express.js endpoint that returns a welcome message.<br />
+Create a file called `index.ts` and add the following code:
+
+```ts
+import express, { Express, Request, Response } from 'express';
+import cors from 'cors';
+
+const app: Express = express();
+const port = 8080;
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Welcome to nlux + Node.js demo server!');
+});
+
+app.listen(port, () => {
+    console.log(`[server]: Server is running at http://localhost:${port}`);
+});
+```
+
+### Run the Express.js server
+
+Run your Express.js application using the following command:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npx ts-node index.ts
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn ts-node index.ts
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm ts-node index.ts
+        ```
+    </TabItem>
+</Tabs>
+
+This will run your development server on `http://localhost:8080`.<br />
+When you navigate to this URL in your browser, you should see the following:
+
+<img
+    src="/learn/get-started-guides/localhost-expressjs-empty-server.png"
+    alt="localhost-expressjs-empty-server"
+    style={{ maxWidth: '500px', border: '1px solid #eaecef', borderRadius: '10px' }}
+/>
+
+Now that we have an Express.js server set up, let's add some LLM capabilities.

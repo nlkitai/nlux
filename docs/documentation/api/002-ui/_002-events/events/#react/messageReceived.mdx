@@ -1,0 +1,18 @@
+```tsx
+import {AiChat, MessageSentCallback} from '@nlux/react';
+
+export default () => {
+    const messageReceivedCallback = useCallback<MessageSentCallback>(
+        (message: string) => console.log(message), []
+    );
+
+    return (
+        <AiChat
+            adapter={adapter}
+            events={{
+                messageReceived: messageReceivedCallback,
+            }}
+        />
+    );
+};
+```

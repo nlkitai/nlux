@@ -1,0 +1,20 @@
+```tsx
+import {AiChat, ReadyCallback, ReadyEventDetails} from '@nlux/react';
+
+export default () => {
+    const callback = useCallback<ReadyCallback>(
+        (readyDetails: ReadyEventDetails) => {
+            // Do something
+        }, []
+    );
+
+    return (
+        <AiChat
+            adapter={adapter}
+            events={{
+                ready: callback,
+            }}
+        />
+    );
+};
+```

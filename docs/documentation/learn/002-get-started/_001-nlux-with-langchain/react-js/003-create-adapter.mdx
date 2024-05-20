@@ -1,0 +1,18 @@
+You can use the `useChatAdapter` hook to create a LangServe adapter.<br />
+You can optionally import `ChatAdapterOptions` from `@nlux/langchain-react` to define the type of the options object.
+
+```tsx
+const adapterOptions: ChatAdapterOptions = {
+    url: 'https://pynlux.api.nlux.ai/pirate-speak'
+};
+
+export const App = () => {
+    const langServeAdapter = useChatAdapter(adapterOptions);
+}
+```
+
+The `ChatAdapterOptions` interface has one required property: `url`.
+This is the URL of the LangServe Runnable. You can read more about the exact format of the URL in [the reference documentation](/api/adapters/langchain-langserve#runnable-url).
+
+In this example, we are connecting a demo API provided by _nlux_ that runs a LangServe Runnable that translates
+text to pirate speak. It's based on one the examples from the LangServe documentation.

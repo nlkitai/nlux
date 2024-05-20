@@ -1,0 +1,72 @@
+---
+sidebar_label: 'OpenAI'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import ReactJs from './_003-open-ai/#react.mdx';
+import Javascript from './_003-open-ai/#js.mdx';
+
+import InstallationJavascript from './_003-open-ai/#js/installation.mdx';
+import InstallationReactJs from './_003-open-ai/#react/installation.mdx';
+
+import UsageJavascript from './_003-open-ai/#js/usage.mdx';
+import UsageReactJs from './_003-open-ai/#react/usage.mdx';
+
+import ConfigJavascript from './_003-open-ai/#js/config.mdx';
+import ConfigReactJs from './_003-open-ai/#react/config.mdx';
+
+import ConfigApiKeyJavascript from './_003-open-ai/#js/config/apiKey.mdx';
+import ConfigApiKeyReactJs from './_003-open-ai/#react/config/apiKey.mdx';
+
+import ConfigModelJavascript from './_003-open-ai/#js/config/model.mdx';
+import ConfigModelReactJs from './_003-open-ai/#react/config/model.mdx';
+
+import ConfigDataTransferModeJavascript from './_003-open-ai/#js/config/dataTransferMode.mdx';
+import ConfigDataTransferModeReactJs from './_003-open-ai/#react/config/dataTransferMode.mdx';
+
+import ConfigSystemMessageJavascript from './_003-open-ai/#js/config/systemMessage.mdx';
+import ConfigSystemMessageReactJs from './_003-open-ai/#react/config/systemMessage.mdx';
+
+# OpenAI
+
+Connect to the OpenAI API directly from the browser, using an API key.
+
+<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+
+## Installation
+
+<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavascript}/>
+
+## Usage
+
+<PlatformSection reactJs={UsageReactJs} javascript={UsageJavascript}/>
+
+## Configuration
+
+<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavascript}/>
+
+---
+
+### API Key
+
+<PlatformSection reactJs={ConfigApiKeyReactJs} javascript={ConfigApiKeyJavascript}/>
+
+---
+
+### Model
+
+<PlatformSection reactJs={ConfigModelReactJs} javascript={ConfigModelJavascript}/>
+
+---
+
+### Data Transfer Mode
+
+<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavascript}/>
+
+---
+
+### System Message
+
+<PlatformSection reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavascript}/>

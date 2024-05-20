@@ -1,0 +1,23 @@
+* Method: `withOutputPreProcessor(preProcessorFunction)`
+* Type: `HfOutputPreProcessor`
+* Required: `false`
+* Usage:
+
+```js
+const myOutputPreProcessor: HfOutputPreProcessor = (output: string) => {
+    // Pre-process the LLM output
+    return outputReadyToDisplay;
+};
+
+const adapter = createChatAdapter()
+    .withOutputPreProcessor(myOutputPreProcessor);
+```
+
+`nlux` provides a default output pre-processor that can be used with LLAMA2 model on Hugging Face:
+
+```js
+import {llama2OutputPreProcessor} from '@nlux/hf';
+
+const adapter = createChatAdapter()
+    .withOutputPreProcessor(llama2OutputPreProcessor);
+```
