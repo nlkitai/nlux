@@ -10,7 +10,14 @@
         margin-right: var(--nlux-chItm-msg-lstLt--mrgRgt);
     }
 
-    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
-        border-width: var(--nlux-chItm-msg-lstLt--brdrWd);
+    > .nlux-comp-cht_itm-prt_info {
+        > .nlux-comp-avtr {
+            border-width: var(--nlux-chItm-msg-lstLt--brdrWd);
+        }
+
+        > .nlux-comp-cht_itm-prt_name:first-child {
+            /* When no avatar is present, alight the participant name to where it would have been with the avatar */
+            margin-left: calc(var(--nlux-chItm-msg-lstLt--mrgLft) + var(--nlux-chItm-prtInfo--gap));
+        }
     }
 }

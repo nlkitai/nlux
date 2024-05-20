@@ -24,7 +24,7 @@ function App() {
     type ThemeId = 'nova' | 'fest' | 'nada' | 'luna';
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
-    const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('fetch');
+    const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('stream');
     const [theme, setTheme] = useState<ThemeId>('fest');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
@@ -47,9 +47,9 @@ function App() {
     useEffect(() => {
         if (colorScheme === 'auto') {
             const osColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'white';
+            document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'papayawhip';
         } else {
-            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
+            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'papayawhip';
         }
 
     }, [colorScheme]);
@@ -132,8 +132,8 @@ function App() {
                 <label>
                     Data Transfer Mode&nbsp;
                     <select value={dataTransferMode} onChange={onDataTransferModeChange}>
-                        <option value="fetch">Fetch</option>
                         <option value="stream">Stream</option>
+                        <option value="fetch">Fetch</option>
                     </select>
                 </label>
                 <hr />
