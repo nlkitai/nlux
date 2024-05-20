@@ -18,6 +18,7 @@
     "set": "node pipeline/scripts/set.mjs",
     "reset": "yarn run cleanup && yarn run set",
     "build": "node pipeline/scripts/build.mjs",
+    "build-docs": "cd docs && yarn run build",
     "dev": "node pipeline/scripts/dev.mjs",
     "watch": "node pipeline/scripts/watch.mjs",
     "test": "node pipeline/scripts/test.mjs"
