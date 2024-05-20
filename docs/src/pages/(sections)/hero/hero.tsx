@@ -40,7 +40,7 @@ export const Hero = () => {
                 </Heading>
                 <div className={heroStyles.heroSubtitleContainer}>
                     <p className={clsx('hero__subtitle', heroStyles.heroSubtitleContent)}>
-                        The Open-Source React / Javascript Library
+                        The Open-Source Javascript Library
                         To Build Conversational AI Interfaces
                     </p>
                 </div>
@@ -95,7 +95,7 @@ export const Hero = () => {
                         className={styles.codeEditor}
                         direction="row"
                         files={{
-                            'App.tsx': exampleIntroFileAiChatBot,
+                            'App.tsx': exampleIntroFileAiChatBot(colorMode),
                             'adapter.ts': exampleIntroFileStreamAdapter,
                             'personas.tsx': exampleIntroFilePersonas,
                         }}

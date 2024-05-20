@@ -3,8 +3,6 @@
  * and scoped locally.
  */
 
-
-
 .buttons {
   display: flex;
   align-items: center;
@@ -76,7 +74,6 @@
 }
 
 .nluxInAction .codeEditor {
-    background-color: #fff;
     border-radius: 5px;
     width: 100%;
     max-width: 900px;

@@ -1,3 +1,4 @@
+import {useColorMode} from '@docusaurus/theme-common';
 import { useMemo } from 'react';
 import {
     SandpackProvider,
@@ -26,16 +27,20 @@ export const CodeEditor = ({
     files,
     direction = 'column',
 }: CodeEditorProps) => {
+    const { colorMode } = useColorMode();
     const setPromptIntoSimulator = useMemo(() => {
         if (!simulatedPrompt) return '';
         return `setTimeout(() => { nluxSimulator?.setPrompt("${simulatedPrompt}"); }, 1000);`;
     }, [simulatedPrompt]);
 
+    const uid = useMemo(() => Math.random().toString(36).substring(7), [colorMode]);
+
     return (
         <SandpackProvider
+            key={uid}
             className={className}
             template="react-ts"
-            theme="light"
+            theme={colorMode}
             options={{
                 recompileDelay: 250,
                 visibleFiles: Object.keys(files) as Array<any>,
@@ -44,15 +49,15 @@ export const CodeEditor = ({
                 dependencies: {
                     "react": "^18.2.0",
                     "react-dom": "^18.2.0",
-                    "@nlux/react": "latest",
-                    "@nlux/langchain-react": "latest",
-                    "@nlux/themes": "latest",
-                    "@nlux/highlighter": "latest",
+                    "@nlux/react": "beta",
+                    "@nlux/langchain-react": "beta",
+                    "@nlux/themes": "beta",
+                    "@nlux/highlighter": "beta",
                 },
             }}
             files={{
                 ...files,
-                'public/index.html': indexHtmlContent,
+                'public/index.html': indexHtmlContent(colorMode),
                 'index.tsx': indexTsxContent,
                 'Simulator.ts': `${simulatorTsContent}\n${setPromptIntoSimulator}`,
             }}

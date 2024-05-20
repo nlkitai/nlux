@@ -1,4 +1,4 @@
-export default `import {AiChat} from '@nlux/react';
+export default (colorScheme: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
 import '@nlux/themes/nova.css';
 import {streamAdapter} from './adapter';
 import {user, botPictureUrl} from './personas';
@@ -17,8 +17,9 @@ export default () => (
     promptBoxOptions={{
       placeholder: 'How can I help you?'
     }}
-    layoutOptions={{
-      height: 350, maxWidth: 430
+    displayOptions={{
+      height: 350, maxWidth: 430,
+      colorScheme: '${colorScheme}'
     }}
   />
 );`;
