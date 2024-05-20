@@ -33,7 +33,7 @@ describe('createAiChat() + displayOptions + themeId', () => {
             const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.className).toContain('nlux-theme-luna');
+            expect(aiChatDom.className).toContain('nlux-theme-nova');
         });
 
         describe('When a theme is set', () => {
@@ -120,7 +120,7 @@ describe('createAiChat() + displayOptions + themeId', () => {
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
-                expect(aiChatDom.className).toContain('nlux-theme-luna');
+                expect(aiChatDom.className).toContain('nlux-theme-nova');
             });
         });
 
@@ -142,7 +142,7 @@ describe('createAiChat() + displayOptions + themeId', () => {
             const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.className).toContain('nlux-theme-luna');
+            expect(aiChatDom.className).toContain('nlux-theme-nova');
         });
     });
 });
