@@ -43,7 +43,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
 
         const compChatItemProps: ChatItemProps | undefined = getChatItemPropsFromSegmentItem(
             item,
-            this.getProp('conversationLayout') as ConversationLayout,
+            this.getProp('conversationLayout') as ConversationLayout | undefined,
             this.getProp('userPersona') as UserPersona | undefined,
             this.getProp('botPersona') as BotPersona | undefined,
         );

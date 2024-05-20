@@ -1,4 +1,3 @@
-import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/themes/src/nova/main.css';
 import '@nlux-dev/themes/src/fest/main.css';
 import '@nlux-dev/themes/src/nada/main.css';

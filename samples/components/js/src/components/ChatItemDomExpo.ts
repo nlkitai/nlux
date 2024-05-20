@@ -1,7 +1,7 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
-import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
+import {ChatItemLayout, ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 
@@ -11,6 +11,10 @@ newExpo.innerHTML = `
         <h3>ChatItem Comp</h3>
         <div class="ChatItem-expo">
             <div class="controls">
+                <select class="layout">
+                    <option value="list">List</option>
+                    <option value="bubbles">Bubbles</option>
+                </select>
                 <select class="direction">
                     <option value="incoming">Incoming</option>
                     <option value="outgoing">Outgoing</option>
@@ -49,6 +53,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const newProps: ChatItemProps = {
             ...props,
             direction,
+        };
+
+        updateChatItemDom(chatItem, props, newProps);
+        props = newProps;
+    });
+
+    const layoutSelector = container.querySelector<HTMLSelectElement>('.controls select.layout')!;
+    layoutSelector.addEventListener('change', () => {
+        const layout = layoutSelector.value as ChatItemLayout;
+        const newProps: ChatItemProps = {
+            ...props,
+            layout,
         };
 
         updateChatItemDom(chatItem, props, newProps);

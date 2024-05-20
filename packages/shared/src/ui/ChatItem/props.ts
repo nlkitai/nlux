@@ -1,10 +1,11 @@
-import {ConversationLayout} from '../../../../js/core/src/exports/aiChat/options/conversationOptions';
 import {MessageDirection, MessageStatus} from '../Message/props';
+
+export type ChatItemLayout = 'bubbles' | 'list';
 
 export type ChatItemProps = {
     direction: MessageDirection;
     status: MessageStatus;
-    layout: ConversationLayout;
+    layout: ChatItemLayout;
     message?: string;
 
     name?: string;
