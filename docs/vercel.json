@@ -1,12 +1,5 @@
 {
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    {
-      "source": "/:path((?!nlux/).*)",
-      "permanent": false,
-      "destination": "/nlux/:path*"
-    }
-  ]
+  "trailingSlash": false
 }
