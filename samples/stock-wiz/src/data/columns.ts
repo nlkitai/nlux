@@ -1,4 +1,4 @@
-import {Column} from '../@types/Column.ts';
+import {Column} from '../@types/Column';
 
 export const columns: Column[] = [
     {field: 'symbol', name: 'Symbol', width: '100px'},

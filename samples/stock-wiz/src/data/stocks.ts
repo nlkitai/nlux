@@ -1,4 +1,4 @@
-import {StockData} from '../@types/StockData.ts';
+import {StockData} from '../@types/StockData';
 
 export const stocks: StockData[] = [
     {

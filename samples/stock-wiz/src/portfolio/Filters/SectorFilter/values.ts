@@ -1,4 +1,4 @@
-import {Sector, SectorId} from '../../../@types/Data.ts';
+import {Sector, SectorId} from '../../../@types/Data';
 
 export const filterSectors: Sector[] = [
     {id: 'technology', label: 'Technology'},

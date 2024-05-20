@@ -1,5 +1,5 @@
 import {ChangeEvent, useCallback} from 'react';
-import {MarketCapCategory} from '../../../@types/Data.ts';
+import {MarketCapCategory} from '../../../@types/Data';
 
 export type MarketCapFilterProps = {
     selectedMarketCaps: string[];

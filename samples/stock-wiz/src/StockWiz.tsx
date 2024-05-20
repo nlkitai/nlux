@@ -2,11 +2,11 @@ import './StockWiz.css';
 import {useChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import '@nlux-dev/themes/src/luna/main.css';
 import {AiChat} from '@nlux-dev/react/src';
-import {usePortfolio} from './actions/usePortfolio.ts';
-import {MyAiContext} from './context.tsx';
-import {initialState} from './data/initialState.ts';
-import {Header} from './portfolio/Header/Header.tsx';
-import {Portfolio} from './portfolio/Portfolio.tsx';
+import {usePortfolio} from './actions/usePortfolio';
+import {MyAiContext} from './context';
+import {initialState} from './data/initialState';
+import {Header} from './portfolio/Header/Header';
+import {Portfolio} from './portfolio/Portfolio';
 
 export const StockWiz = () => {
     const {state, actions} = usePortfolio(initialState);
@@ -25,7 +25,6 @@ export const StockWiz = () => {
                 <Portfolio state={state} actions={actions}/>
                 <AiChat
                     className="aichat"
-                    displayOptions={{colorScheme: 'dark'}}
                     adapter={nlBridgeChatAdapter}
                 />
             </div>

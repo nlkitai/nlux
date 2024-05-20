@@ -1,4 +1,4 @@
-import {MarketCapCategory, MarketCapCategoryId} from '../../../@types/Data.ts';
+import {MarketCapCategory, MarketCapCategoryId} from '../../../@types/Data';
 
 export const filterMarketCapCategories: MarketCapCategory[] = [
     {id: 'mega', label: 'Mega'},

@@ -1,5 +1,5 @@
 import './HeaderRow.css';
-import {Column} from '../../../@types/Column.ts';
+import {Column} from '../../../@types/Column';
 
 export type HeaderRowProps = {
     columns: Column[];

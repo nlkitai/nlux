@@ -1,5 +1,5 @@
 import {ChangeEvent, useCallback} from 'react';
-import {Sector} from '../../../@types/Data.ts';
+import {Sector} from '../../../@types/Data';
 
 export type SectorFilterProps = {
     selectedSectors: string[];

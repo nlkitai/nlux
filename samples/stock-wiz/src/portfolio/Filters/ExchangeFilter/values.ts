@@ -1,4 +1,4 @@
-import {Exchange, ExchangeId} from '../../../@types/Data.ts';
+import {Exchange, ExchangeId} from '../../../@types/Data';
 
 export const filterExchanges: Exchange[] = [
     {id: 'NYSE', label: 'NYSE'},

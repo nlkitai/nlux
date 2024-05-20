@@ -1,4 +1,4 @@
-import {Balance} from '../../@types/Balance.ts';
+import {Balance} from '../../@types/Balance';
 import './AccountOverview.css';
 
 export type AccountOverviewProps = {

@@ -1,5 +1,5 @@
 import './StatusBar.css';
-import {StockData} from '../../@types/StockData.ts';
+import {StockData} from '../../@types/StockData';
 
 export type StatusBarProps = {
     selectedStocks: StockData[];

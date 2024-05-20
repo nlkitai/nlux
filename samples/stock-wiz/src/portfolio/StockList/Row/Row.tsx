@@ -1,7 +1,7 @@
 import './Row.css';
 import {ChangeEvent, useCallback} from 'react';
-import {Column} from '../../../@types/Column.ts';
-import {StockData} from '../../../@types/StockData.ts';
+import {Column} from '../../../@types/Column';
+import {StockData} from '../../../@types/StockData';
 
 export type RowProps = {
     item: StockData;

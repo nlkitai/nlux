@@ -1,5 +1,5 @@
-import {AppliedFilters} from '../@types/AppliedFilters.ts';
-import {StockRow} from '../@types/StockData.ts';
+import {AppliedFilters} from '../@types/AppliedFilters';
+import {StockRow} from '../@types/StockData';
 
 export const applyFilter = (stockRows: StockRow[], filter: AppliedFilters): StockRow[] => {
     return stockRows.filter((stockRow) => {

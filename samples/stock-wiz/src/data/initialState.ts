@@ -1,5 +1,5 @@
-import {State} from '../@types/State.ts';
-import {stocks} from './stocks.ts';
+import {State} from '../@types/State';
+import {stocks} from './stocks';
 
 export const initialState: State = {
     appliedFilter: {

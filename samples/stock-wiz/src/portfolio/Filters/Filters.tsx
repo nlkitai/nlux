@@ -1,15 +1,15 @@
 import {useCallback} from 'react';
-import {AppliedFilters} from '../../@types/AppliedFilters.ts';
+import {AppliedFilters} from '../../@types/AppliedFilters';
 import './Filters.css';
-import {ExchangeId, MarketCapCategoryId, SectorId} from '../../@types/Data.ts';
-import {ExchangeFilter} from './ExchangeFilter/ExchangeFilter.tsx';
-import {filterExchanges, filterExchangesById} from './ExchangeFilter/values.ts';
-import {MarketCapFilter} from './MarketCapFilter/MarketCapFilter.tsx';
-import {filterMarketCapCategories, filterMarketCapCategoriesById} from './MarketCapFilter/values.ts';
-import {OneMonthChangeFilter} from './OneMonthChangeFilter/OneMonthChangeFilter.tsx';
-import {OneWeekChangeFilter} from './OneWeekChangeFilter/OneWeekChangeFilter.tsx';
-import {SectorFilter} from './SectorFilter/SectorFilter.tsx';
-import {filterSectors, filterSectorsById} from './SectorFilter/values.ts';
+import {ExchangeId, MarketCapCategoryId, SectorId} from '../../@types/Data';
+import {ExchangeFilter} from './ExchangeFilter/ExchangeFilter';
+import {filterExchanges, filterExchangesById} from './ExchangeFilter/values';
+import {MarketCapFilter} from './MarketCapFilter/MarketCapFilter';
+import {filterMarketCapCategories, filterMarketCapCategoriesById} from './MarketCapFilter/values';
+import {OneMonthChangeFilter} from './OneMonthChangeFilter/OneMonthChangeFilter';
+import {OneWeekChangeFilter} from './OneWeekChangeFilter/OneWeekChangeFilter';
+import {SectorFilter} from './SectorFilter/SectorFilter';
+import {filterSectors, filterSectorsById} from './SectorFilter/values';
 
 export type FiltersProps = {
     appliedFilters: AppliedFilters;

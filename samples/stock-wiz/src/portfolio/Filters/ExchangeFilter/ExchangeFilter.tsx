@@ -1,8 +1,8 @@
-import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask.ts';
+import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask';
 import {useAiContext} from '@nlux/react';
 import {ChangeEvent, useCallback} from 'react';
-import {Exchange} from '../../../@types/Data.ts';
-import {MyAiContext} from '../../../context.tsx';
+import {Exchange} from '../../../@types/Data';
+import {MyAiContext} from '../../../context';
 
 export type ExchangeFilterProps = {
     selectedExchanges: string[];

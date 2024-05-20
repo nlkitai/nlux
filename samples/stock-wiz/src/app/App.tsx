@@ -1,7 +1,7 @@
 import './App.css';
 import {useMemo} from 'react';
-import {MyAiContext} from '../context.tsx';
-import {StockWiz} from '../StockWiz.tsx';
+import {MyAiContext} from '../context';
+import {StockWiz} from '../StockWiz';
 
 export const App = () => {
     const initialContextItems = useMemo(() =>

@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import {AppliedFilters} from '../@types/AppliedFilters.ts';
-import {State} from '../@types/State.ts';
+import {AppliedFilters} from '../@types/AppliedFilters';
+import {State} from '../@types/State';
 
 export type PortfolioActions = {
     updateRowSelection: (id: string, selected: boolean) => void;

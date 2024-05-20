@@ -1,13 +1,13 @@
 import './Portfolio.css';
 import {useEffect, useState} from 'react';
-import {AppliedFilters} from '../@types/AppliedFilters.ts';
-import {State} from '../@types/State.ts';
-import {StockData, StockRow} from '../@types/StockData.ts';
-import {AccountOverview} from './AccountOverview/AccountOverview.tsx';
-import {applyFilter} from './applyFilter.ts';
-import {Filters} from './Filters/Filters.tsx';
-import {StatusBar} from './StatusBar/StatusBar.tsx';
-import {StockList} from './StockList/StockList.tsx';
+import {AppliedFilters} from '../@types/AppliedFilters';
+import {State} from '../@types/State';
+import {StockData, StockRow} from '../@types/StockData';
+import {AccountOverview} from './AccountOverview/AccountOverview';
+import {applyFilter} from './applyFilter';
+import {Filters} from './Filters/Filters';
+import {StatusBar} from './StatusBar/StatusBar';
+import {StockList} from './StockList/StockList';
 
 export type PortfolioProps = {
     state: State;

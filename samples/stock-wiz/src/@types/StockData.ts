@@ -1,4 +1,4 @@
-import {ExchangeId, MarketCapCategoryId, SectorId} from './Data.ts';
+import {ExchangeId, MarketCapCategoryId, SectorId} from './Data';
 
 export type StockData = {
     id: string;

@@ -1,12 +1,12 @@
 import './StockList.css';
 import {useAiContext} from '@nlux-dev/react/src';
-import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask.ts';
+import {useAiTask} from '@nlux-dev/react/src/providers/useAiTask';
 import {useMemo} from 'react';
-import {StockRow} from '../../@types/StockData.ts';
-import {MyAiContext} from '../../context.tsx';
-import {columns} from '../../data/columns.ts';
-import {HeaderRow} from './HeaderRow/HeaderRow.tsx';
-import {Row} from './Row/Row.tsx';
+import {StockRow} from '../../@types/StockData';
+import {MyAiContext} from '../../context';
+import {columns} from '../../data/columns';
+import {HeaderRow} from './HeaderRow/HeaderRow';
+import {Row} from './Row/Row';
 
 export type StockListProps = {
     stockRows: StockRow[];

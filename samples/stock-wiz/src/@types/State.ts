@@ -1,6 +1,6 @@
-import {AppliedFilters} from './AppliedFilters.ts';
-import {Balance} from './Balance.ts';
-import {StockRow} from './StockData.ts';
+import {AppliedFilters} from './AppliedFilters';
+import {Balance} from './Balance';
+import {StockRow} from './StockData';
 
 export type State = {
     appliedFilter: AppliedFilters;
