@@ -1,23 +1,30 @@
-import {DataTransferMode, PersonaOptions} from '@nlux-dev/react/src';
-import {AiChat} from '@nlux-dev/react/src/exports/AiChat.tsx';
-import {AiChatProps} from '@nlux-dev/react/src/exports/props.tsx';
+import {
+    DataTransferMode,
+    FetchResponseComponentProps,
+    PersonaOptions,
+    StreamResponseComponentProps,
+} from '@nlux-dev/react/src';
+import {AiChat} from '@nlux-dev/react/src/exports/AiChat';
+import {AiChatProps} from '@nlux-dev/react/src/exports/props';
 import {useChatAdapter} from '@nlux/langchain-react';
-import {useMemo, useState} from 'react';
-import '@nlux-dev/themes/src/luna/theme.css';
+import {FC, useMemo, useState} from 'react';
+import '@nlux-dev/themes/src/luna/main.css';
 
 type MessageObjectType = {txt: string, color: string, bg: string};
 
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
+const CustomMessageComponent: FC<FetchResponseComponentProps<MessageObjectType>> = (
+    {content}: {content: MessageObjectType}
+) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
-    if (typeof message === 'object' && message?.txt !== undefined) {
+    if (typeof content === 'object' && content?.txt !== undefined) {
         return (
-            <div style={{color: message.color, backgroundColor: message.bg}}>
-                {message.txt}
+            <div style={{color: content.color, backgroundColor: content.bg}}>
+                {content.txt}
             </div>
         );
     }
@@ -27,7 +34,7 @@ const CustomMessageComponent = ({message}: {message: MessageObjectType}) => {
             color,
             backgroundColor: bg,
         }}>
-            {`${message}`}
+            {`${content}`}
         </div>
     );
 };

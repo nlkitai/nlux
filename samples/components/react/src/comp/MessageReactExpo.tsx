@@ -1,5 +1,5 @@
-import {MessageComp} from '@nlux-dev/react/src/ui/Message/MessageComp.tsx';
-import '@nlux-dev/themes/src/luna/theme.css';
+import {MessageComp} from '@nlux-dev/react/src/ui/Message/MessageComp';
+import '@nlux-dev/themes/src/luna/main.css';
 import {useState} from 'react';
 import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 

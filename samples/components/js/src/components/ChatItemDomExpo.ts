@@ -1,5 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';

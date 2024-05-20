@@ -2,7 +2,7 @@ import {AiChat, AiChatProps, DataTransferMode, FetchResponseComponentProps, Pers
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {FC, useMemo, useState} from 'react';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 
 type MessageObjectType = {txt: string, color: string, bg: string};
 

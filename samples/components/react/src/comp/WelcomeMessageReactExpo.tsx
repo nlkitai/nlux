@@ -1,5 +1,5 @@
-import {WelcomeMessageComp} from '@nlux-dev/react/src/ui/WelcomeMessage/WelcomeMessageComp.tsx';
-import '@nlux-dev/themes/src/luna/theme.css';
+import {WelcomeMessageComp} from '@nlux-dev/react/src/ui/WelcomeMessage/WelcomeMessageComp';
+import '@nlux-dev/themes/src/luna/main.css';
 import {ReactElement, useState} from 'react';
 
 export const WelcomeMessageReactExpo = () => {

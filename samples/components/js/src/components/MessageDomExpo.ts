@@ -1,5 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 import {createMessageDom} from '../../../../../packages/shared/src/ui/Message/create';
 import {MessageDirection, MessageProps, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/update';

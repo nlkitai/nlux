@@ -1,5 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 import {createLoaderDom} from '../../../../../packages/shared/src/ui/Loader/create';
 
 const newExpo = document.createElement('div');

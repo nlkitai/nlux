@@ -1,6 +1,6 @@
-import {AvatarComp} from '@nlux-dev/react/src/ui/Avatar/AvatarComp.tsx';
+import {AvatarComp} from '@nlux-dev/react/src/ui/Avatar/AvatarComp';
 import {ReactElement, useEffect, useState} from 'react';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 
 export const AvatarReactExpo = () => {
     const [name, setName] = useState('Alex');

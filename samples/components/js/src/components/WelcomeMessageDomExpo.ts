@@ -1,5 +1,5 @@
 import '../style.css';
-import '@nlux-dev/themes/src/luna/theme.css';
+import '@nlux-dev/themes/src/luna/main.css';
 import {createWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/create';
 import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/WelcomeMessage/props';
 import {updateWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/update';
