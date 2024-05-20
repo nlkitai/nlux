@@ -135,15 +135,12 @@ h1, h2, h3 {
     }
 }
 
-.sp-wrapper {
-    .sp-preview-container {
-        border-radius: 0;
-        background-color: transparent;
-    }
-
-    .sp-preview-iframe {
-        border-radius: 0;
-        background-color: transparent;
-    }
+.sp-wrapper .sp-preview-container {
+    border-radius: 0;
+    background-color: transparent;
 }
 
+.sp-wrapper .sp-preview-iframe {
+    border-radius: 0;
+    background-color: transparent;
+}
