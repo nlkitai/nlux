@@ -2,7 +2,7 @@
 
 ## Layers
 
-The `nlux` library consists of 2 layers:
+The `NLUX` library consists of 2 layers:
 
 * **[The User Interface Layer](/api/ui)** - Which is responsible for everything that gets rendered on the
   screen, such as
@@ -13,9 +13,9 @@ The `nlux` library consists of 2 layers:
 
 ## Platforms
 
-`nlux` is available in 2 flavors:
+`NLUX` is available in 2 flavors:
 
-* **`nlux` React JS** - Which is a React JS specific implementation that includes React components and hooks.
-* **`nlux` Javascript** - Which is the pure Javascript library that can be used with any web framework.
+* **`NLUX` React JS** - Which is a React JS specific implementation that includes React components and hooks.
+* **`NLUX` Javascript** - Which is the pure Javascript library that can be used with any web framework.
 
 You'll find a toggle at the top of each documentation page that allows switching between the 2 platforms. 

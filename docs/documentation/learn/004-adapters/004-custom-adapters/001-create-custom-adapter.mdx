@@ -8,11 +8,11 @@ import CustomAdapterJavascript from './_custom-adapter-example/#js.mdx';
 
 # Create Custom Adapters
 
-If you're building your APIs and you would like to use `nlux` as the UI for your own AI chatbot,
+If you're building your APIs and you would like to use `NLUX` as the UI for your own AI chatbot,
 you can do so by creating a custom adapter.
 
-An adapter is a component that connects `nlux` an API. It receives messages from `nlux` and sends them to the API.
-It also receives responses from the API and sends them to `nlux` in a format that can be displayed in the chat UI.
+An adapter is a component that connects `NLUX` an API. It receives messages from `NLUX` and sends them to the API.
+It also receives responses from the API and sends them to `NLUX` in a format that can be displayed in the chat UI.
 
 ## Creating a Custom Adapter
 
@@ -29,7 +29,7 @@ The advantage of using a streaming adapter is that **the chat UI will be updated
 generating text**. This is particularly useful if the API takes a long time to process a request and sends responses
 in a stream. Most major LLM APIs (e.g. OpenAI, Anthropic) support streaming responses.
 
-To implement a custom streaming adapter for `nlux`, you need to implement the following interface:
+To implement a custom streaming adapter for `NLUX`, you need to implement the following interface:
 
 ```typescript
 interface ChatAdapter {
@@ -44,7 +44,7 @@ interface ChatAdapter {
 The `streamText` method takes 2 parameters:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
-* `observer` - An observer that will receive the responses from the API and pass them to `nlux`.
+* `observer` - An observer that will receive the responses from the API and pass them to `NLUX`.
 
 Below is the definition of the `StreamingAdapterObserver` interface:
 
@@ -96,7 +96,7 @@ Promise adapters can be used when the API sends responses in a single request (e
 
 The advantage of using a promise adapter is that **it's easier to implement**.
 
-To implement a custom promise adapter for `nlux`, you need to implement the following interface:
+To implement a custom promise adapter for `NLUX`, you need to implement the following interface:
 
 ```typescript
 interface ChatAdapter {
@@ -137,11 +137,11 @@ export const myCustomAdapter: ChatAdapter = {
 
 Once you have created a custom adapter, you can use it to create a chat component and render it in the DOM:
 
-The same custom adapter can be used with the React and JavaScript versions of `nlux`.
+The same custom adapter can be used with the React and JavaScript versions of `NLUX`.
 
 ### Example: Using a Custom Adapter
 
 <PlatformSelector reactJs={CustomAdapterReactJs} javascript={CustomAdapterJavascript}/>
 
 You can refer to the Getting Started guides for [React](/learn/get-started?platform=react-js) and
-[JavaScript](/learn/get-started?platform=javascript) for more details on how to use `nlux`.
+[JavaScript](/learn/get-started?platform=javascript) for more details on how to use `NLUX`.

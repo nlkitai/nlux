@@ -1,6 +1,6 @@
 export default `import {Adapter, StreamingAdapterObserver} from '@nlux/react';
 
-// A demo endpoint by nlux that connects to OpenAI
+// A demo endpoint by NLUX that connects to OpenAI
 // and returns a stream of Server-Sent events
 const demoProxyServerUrl = 'https://demo.api.nlux.ai/openai/chat/stream';
 

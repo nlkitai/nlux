@@ -101,6 +101,12 @@ const config: Config = {
       },
       items: [
         {
+          type: 'docsVersionDropdown',
+          docId: 'versionDropdown',
+          label: 'Versions',
+          position: 'left',
+        },
+        {
           type: 'docSidebar',
           sidebarId: 'learnSidebar',
           position: 'left',
@@ -120,12 +126,6 @@ const config: Config = {
           position: 'left',
           label: 'API Reference',
           className: 'doc-section',
-        },
-        {
-          type: 'docsVersionDropdown',
-          docId: 'versionDropdown',
-          label: 'Versions',
-          position: 'right',
         },
         {
           href: 'https://github.com/nluxai/nlux',
