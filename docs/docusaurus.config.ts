@@ -91,6 +91,19 @@ const config: Config = {
       respectPrefersColorScheme: false,
     },
     //
+    // Announcement bar
+    //
+    announcementBar: {
+      id: 'beta_docs',
+      backgroundColor: '#E25C20',
+      textColor: '#fff',
+      isCloseable: false,
+      content:
+        'This is the documentation for the <strong>upcoming v2 release</strong> of nlux. ' +
+        'It\'s still in draft and <strong>may contain errors.</strong> ' +
+        'Please use <strong>nlux.dev for the stable v1.x</strong> documentation.',
+    },
+    //
     // Navigation bar
     //
     navbar: {

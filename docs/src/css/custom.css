@@ -1,32 +1,33 @@
 /* Import the fonts */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #d87f40;
-  --ifm-color-primary-dark: #d87f40;
-  --ifm-color-primary-darker: #d87f40;
-  --ifm-color-primary-darkest: #d87f40;
-  --ifm-color-primary-light: #d87f40;
-  --ifm-color-primary-lighter: #d87f40;
-  --ifm-color-primary-lightest: #d87f40;
-  --ifm-code-font-size: 95%;
+  --ifm-color-primary: #E25C20;
+  --ifm-color-primary-dark: #E25C20;
+  --ifm-color-primary-darker: #E25C20;
+  --ifm-color-primary-darkest: #E25C20;
+  --ifm-color-primary-light: #E25C20;
+  --ifm-color-primary-lighter: #E25C20;
+  --ifm-color-primary-lightest: #E25C20;
+  --ifm-code-font-size: 100%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
-  --ifm-font-family-base: 'komet', sans-serif;
-  --ifm-font-family-monospace: 'novel-mono-pro', monospace;
+  --ifm-font-family-base: 'Inter', sans-serif;
+  --ifm-font-family-monospace: monospace;
   --ifm-font-family-title: 'Manrope', sans-serif;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #c29b25;
-  --ifm-color-primary-dark: #c29b25;
-  --ifm-color-primary-darker: #c29b25;
-  --ifm-color-primary-darkest: #c29b25;
-  --ifm-color-primary-light: #c29b25;
-  --ifm-color-primary-lighter: #c29b25;
-  --ifm-color-primary-lightest: #c29b25;
+  --ifm-color-primary: #F5BF60;
+  --ifm-color-primary-dark: #F5BF60;
+  --ifm-color-primary-darker: #F5BF60;
+  --ifm-color-primary-darkest: #F5BF60;
+  --ifm-color-primary-light: #F5BF60;
+  --ifm-color-primary-lighter: #F5BF60;
+  --ifm-color-primary-lightest: #F5BF60;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
