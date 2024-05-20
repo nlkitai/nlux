@@ -1,4 +1,4 @@
-export default `import {useMemo} from 'react';
+export default (colorMode: 'dark' | 'light') => `import {useMemo} from 'react';
 import {AiChat} from '@nlux/react';
 import '@nlux/themes/nova.css';
 import {streamAdapter} from './adapter';
@@ -8,10 +8,7 @@ export default () => {
   return (
     <AiChat
       adapter={adapter}
-      layoutOptions={{
-        height: 360,
-        maxWidth: 600
-      }}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

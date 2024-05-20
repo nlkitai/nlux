@@ -1,6 +1,7 @@
-export default `import {AiChat} from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
 import {useChatAdapter} from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
+import {userPersona} from './personas';
 
 export default () => {
   // LangServe adapter that connects to a demo LangChain Runnable API
@@ -15,17 +16,11 @@ export default () => {
         bot: {
           name: 'FeatherBot',
           picture: 'https://nlux.ai/images/demos/persona-feather-bot.png',
-          tagline: 'Yer AI First Mate!',
+          tagline: 'Yer AI First Mate!'
         },
-        user: {
-          name: 'Alex',
-          picture: 'https://nlux.ai/images/demos/persona-user.jpeg'
-        }
+        user: userPersona
       }}
-      layoutOptions={{
-        height: 320,
-        maxWidth: 600
-      }}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

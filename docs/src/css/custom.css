@@ -87,6 +87,11 @@
   font-weight: 800;
 }
 
+/* Version badge overrides */
+.theme-doc-version-badge {
+    margin-bottom: 0.5rem;
+}
+
 /* Font overrides */
 h1, h2, h3 {
   font-family: var(--ifm-font-family-title);
@@ -115,7 +120,7 @@ h1, h2, h3 {
 
 /* Code example page */
 .learn-more-link {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Embedded code editor */
@@ -123,14 +128,15 @@ h1, h2, h3 {
 .sp-wrapper .sp-preview-container {
     border-radius: 0;
     background-color: transparent;
+    align-items: center;
 }
 
 .prism-code {
-  text-align: left;
+    text-align: left;
 }
 
 .platform-selector {
-  display: flex;
-  background-color: #00000012;
-  border-radius: 10px;
+    display: flex;
+    background-color: #00000012;
+    border-radius: 10px;
 }

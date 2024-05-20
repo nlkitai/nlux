@@ -1,4 +1,4 @@
-export default `import {useMemo} from 'react';
+export default (colorMode: 'dark' | 'light') => `import {useMemo} from 'react';
 import {AiChat} from '@nlux/react';
 import {highlighter} from '@nlux/highlighter';
 import '@nlux/themes/nova.css';
@@ -11,10 +11,7 @@ export default () => {
     <AiChat
       adapter={adapter}
       syntaxHighlighter={highlighter}
-      layoutOptions={{
-        height: 490,
-        maxWidth: 600
-      }}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

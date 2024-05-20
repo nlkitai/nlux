@@ -1,6 +1,6 @@
-export default `import {PersonasOptions} from '@nlux/react';
+export default `import {PersonaOptions} from '@nlux/react';
 
-export const personas: PersonasOptions = {
+export const personas: PersonaOptions = {
   bot: {
     name: 'HawkingBot',
     picture: 'https://nlux.ai/images/demos/persona-hawking.jpeg',

@@ -1,4 +1,4 @@
-export default `import {AiChat} from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
 import {useChatAdapter} from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
 import {personaOptions} from './personas';
@@ -23,10 +23,7 @@ export default () => {
         }
       ]}
       personaOptions={personaOptions}
-      layoutOptions={{
-        height: 320,
-        maxWidth: 600
-      }}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

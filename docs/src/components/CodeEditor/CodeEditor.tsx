@@ -17,7 +17,7 @@ export type CodeEditorProps = {
     simulatedPrompt?: string;
     editorHeight?: number;
     direction?: 'row' | 'column';
-    files: SandpackFiles;
+    files: Record<string, string | ((colorScheme: 'light' | 'dark') => string)>;
 }
 
 export const CodeEditor = ({
@@ -34,6 +34,11 @@ export const CodeEditor = ({
     }, [simulatedPrompt]);
 
     const uid = useMemo(() => Math.random().toString(36).substring(7), [colorMode]);
+    const filesContent: SandpackFiles = {};
+
+    for (const [key, value] of Object.entries(files)) {
+        filesContent[key] = typeof value === 'function' ? value(colorMode) : value;
+    }
 
     return (
         <SandpackProvider
@@ -56,7 +61,7 @@ export const CodeEditor = ({
                 },
             }}
             files={{
-                ...files,
+                ...filesContent,
                 'public/index.html': indexHtmlContent(colorMode),
                 'index.tsx': indexTsxContent,
                 'Simulator.ts': `${simulatorTsContent}\n${setPromptIntoSimulator}`,
