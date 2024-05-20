@@ -4,9 +4,8 @@
   "trailingSlash": false,
   "redirects": [
     {
-      "source": "/",
-      "destination": "/nlux",
-      "permanent": false
+      "source": "/:path*",
+      "destination": "/nlux/:path*"
     }
   ]
 }
