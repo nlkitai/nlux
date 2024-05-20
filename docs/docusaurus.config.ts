@@ -143,8 +143,8 @@ const config: Config = {
           position: 'right',
         },
         {
-          href: 'https://nlux.ai',
-          label: 'nlux.ai',
+          href: 'https://nlkit.com',
+          label: 'nlkit.com',
           position: 'right',
         },
       ],
@@ -186,9 +186,9 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              href: 'https://nlux.ai/blog',
+              href: 'https://nlkit.com/blog',
               label: 'Blog',
-              target: '_self',
+              target: '_blank',
             },
             {
               label: 'GitHub',
