@@ -3,7 +3,6 @@
     overflow: hidden;
     width: var(--nlux-chItm-avtr--wd);
 
-    border-width: var(--nlux-chItm-msg--brdrWd);
     border-style: solid;
     border-radius: var(--nlux-chItm-avtr--brdrRd);
 

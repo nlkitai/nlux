@@ -1,10 +1,10 @@
 .nlux-comp-cht_itm {
     display: flex;
-    align-items: var(--nlux-chItm--algnItms);
     margin-bottom: 0.5em;
     gap: 0.5em;
 
     > .nlux-comp-msg {
+        display: flex;
         overflow: hidden;
         align-items: flex-start;
         flex: 1;
@@ -12,41 +12,23 @@
         flex-shrink: initial;
         min-width: 80px;
         min-height: 20px;
-        padding: var(--nlux-chItm-msg--pdng-tpBtm) var(--nlux-chItm-msg--pdng-lr);
+        margin: 0;
         text-align: left;
-        border-width: var(--nlux-chItm-msg--brdrWd);
-        border-style: solid;
-        border-radius: var(--nlux-chItm-msg--brdrRd);
+        border-radius: 0.25em;
         outline: 0;
         gap: var(--nlux-chItm-msg--gap);
     }
 }
 
+/** OUT Chat item */
 .nlux-comp-cht_itm.nlux_cht_itm_out {
-    flex-direction: row-reverse;
-    padding-left: 65px;
-
-    > .nlux-comp-msg {
-        color: var(--nlux-hmMsg--txtClr);
-        border-color: var(--nlux-hmMsg--brdClr);
-        background-color: var(--nlux-hmMsg--bgClr);
-    }
-
     > .nlux-comp-avtr {
         border-color: var(--nlux-hmMsg--brdClr);
     }
 }
 
+/** IN Chat item */
 .nlux-comp-cht_itm.nlux_cht_itm_in {
-    flex-direction: row;
-    padding-right: 65px;
-
-    > .nlux-comp-msg {
-        color: var(--nlux-aiMsg--txtClr);
-        border-color: var(--nlux-aiMsg--brdClr);
-        background-color: var(--nlux-aiMsg--bgClr);
-    }
-
     > .nlux-comp-avtr {
         border-color: var(--nlux-aiMsg--brdClr);
     }

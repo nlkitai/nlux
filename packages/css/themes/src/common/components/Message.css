@@ -1,117 +1,105 @@
-.nlux-comp-msg {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-height: 1.5em;
-    margin: 0;
-    padding: 0.5em;
-    text-align: left;
-    border: 1px solid;
-    border-radius: 0.25em;
+.nlux-comp-msg > .nlux-md-strm-root {
+    width: 100%;
+}
 
-    > .nlux-md-strm-root {
-        width: 100%;
+.nlux-comp-msg .nlux-md-cntr {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5em;
+
+    :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
+        margin: 0;
+        padding: 0;
     }
 
-    .nlux-md-cntr {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5em;
+    > .code-block {
+        font-family: var(--nlux-cdBlk--ftFm), monospace;
+        font-size: var(--nlux-cdBlk--ftSz);
 
-        :is(p, pre, h1, h2, h3, h4, h5, h6, ul, ol, dl, blockquote, table, hr) {
-            margin: 0;
-            padding: 0;
+        position: relative;
+        overflow: scroll;
+        padding: 0;
+
+        color: var(--nlux-cdBlk--txtClr);
+        border: var(--nlux-cdBlk--brdrWd) solid var(--nlux-cdBlk--brdClr);
+        border-radius: var(--nlux-cdBlk--brdrRd);
+        background-color: var(--nlux-cdBlk--bgClr);
+    }
+
+    > .code-block > pre {
+        width: fit-content;
+        min-width: 100%;
+    }
+
+    > .code-block > pre > div {
+        padding: 0 var(--nlux-cdBlk--pdng);
+    }
+
+    > .code-block > pre > div:hover {
+        background-color: var(--nlux-cdBlk-hover--bgClr);
+    }
+
+    button.nlux-cpy-btn {
+        position: relative;
+        z-index: 888888;
+        width: var(--nlux-cdBlk-cpBtn--wd);
+
+        margin-right: calc(var(--nlux-cdBlk-cpBtn--wd) / 2);
+        margin-bottom: calc(-1 * var(--nlux-cdBlk-cpBtn--hg));
+        margin-left: auto;
+
+        padding: var(--nlux-cdBlk-cpBtn--pdng);
+
+        cursor: pointer;
+        color: var(--nlux-cdBlk-cpBtn--txtClr);
+        border: var(--nlux-cdBlk-cpBtn--brdrWd) solid var(--nlux-cdBlk-cpBtn--brdClr);
+        border-radius: var(--nlux-cdBlk-cpBtn--brdrRd);
+        background-color: var(--nlux-cdBlk-cpBtn--bgClr);
+
+        > .icon-copy {
+            display: inline-block;
+            width: 100%;
+            background-color: currentColor;
+            background-repeat: no-repeat;
+            background-size: contain;
+            mask: var(--nlux-copy-icon);
+            aspect-ratio: 1;
+        }
+    }
+
+    button.nlux-cpy-btn {
+        &.clicked,
+        &.clicked:hover {
+            color: var(--nlux-cdBlk-cpBtn-clck--txtClr);
+            border-color: var(--nlux-cdBlk-cpBtn-clck--brdClr);
+            background-color: var(--nlux-cdBlk-cpBtn-clck--bgClr);
         }
 
-        > .code-block {
-            font-family: var(--nlux-cdBlk--ftFm), monospace;
-            font-size: var(--nlux-cdBlk--ftSz);
-
-            position: relative;
-            overflow: scroll;
-            padding: 0;
-
-            color: var(--nlux-cdBlk--txtClr);
-            border: var(--nlux-cdBlk--brdrWd) solid var(--nlux-cdBlk--brdClr);
-            border-radius: var(--nlux-cdBlk--brdrRd);
-            background-color: var(--nlux-cdBlk--bgClr);
+        &:hover * {
+            opacity: 0.5;
         }
 
-        > .code-block > pre {
-            width: fit-content;
-            min-width: 100%;
+        &.clicked:hover * {
+            opacity: 1;
         }
+    }
 
-        > .code-block > pre > div {
-            padding: 0 var(--nlux-cdBlk--pdng);
-        }
+    code {
+        font-family: var(--nlux-inlnCd--ftFm), monospace;
+        font-size: var(--nlux-inlnCd--ftSz);
 
-        > .code-block > pre > div:hover {
-            background-color: var(--nlux-cdBlk-hover--bgClr);
-        }
+        padding: var(--nlux-inlnCd--pdng);
 
-        button.nlux-cpy-btn {
-            position: relative;
-            z-index: 888888;
-            width: var(--nlux-cdBlk-cpBtn--wd);
+        color: var(--nlux-inlnCd--txtClr);
+        border-width: var(--nlux-inlnCd--brdrWd);
+        border-style: solid;
+        border-color: var(--nlux-inlnCd--brdClr);
+        border-radius: var(--nlux-inlnCd--brdrRd);
+        background-color: var(--nlux-inlnCd--bgClr);
+    }
 
-            margin-right: calc(var(--nlux-cdBlk-cpBtn--wd) / 2);
-            margin-bottom: calc(-1 * var(--nlux-cdBlk-cpBtn--hg));
-            margin-left: auto;
-
-            padding: var(--nlux-cdBlk-cpBtn--pdng);
-
-            cursor: pointer;
-            color: var(--nlux-cdBlk-cpBtn--txtClr);
-            border: var(--nlux-cdBlk-cpBtn--brdrWd) solid var(--nlux-cdBlk-cpBtn--brdClr);
-            border-radius: var(--nlux-cdBlk-cpBtn--brdrRd);
-            background-color: var(--nlux-cdBlk-cpBtn--bgClr);
-
-            > .icon-copy {
-                display: inline-block;
-                width: 100%;
-                background-color: currentColor;
-                background-repeat: no-repeat;
-                background-size: contain;
-                mask: var(--nlux-copy-icon);
-                aspect-ratio: 1;
-            }
-        }
-
-        button.nlux-cpy-btn {
-            &.clicked,
-            &.clicked:hover {
-                color: var(--nlux-cdBlk-cpBtn-clck--txtClr);
-                border-color: var(--nlux-cdBlk-cpBtn-clck--brdClr);
-                background-color: var(--nlux-cdBlk-cpBtn-clck--bgClr);
-            }
-
-            &:hover * {
-                opacity: 0.5;
-            }
-
-            &.clicked:hover * {
-                opacity: 1;
-            }
-        }
-
-        code {
-            font-family: var(--nlux-inlnCd--ftFm), monospace;
-            font-size: var(--nlux-inlnCd--ftSz);
-
-            padding: var(--nlux-inlnCd--pdng);
-
-            color: var(--nlux-inlnCd--txtClr);
-            border-width: var(--nlux-inlnCd--brdrWd);
-            border-style: solid;
-            border-color: var(--nlux-inlnCd--brdClr);
-            border-radius: var(--nlux-inlnCd--brdrRd);
-            background-color: var(--nlux-inlnCd--bgClr);
-        }
-
-        strong {
-            font-weight: bold;
-        }
+    strong {
+        font-weight: bold;
     }
 }

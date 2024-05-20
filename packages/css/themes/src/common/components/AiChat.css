@@ -1,5 +1,7 @@
 @import './Avatar.css';
 @import './ChatItem.css';
+@import './ChatItem-Bubbles.css';
+@import './ChatItem-List.css';
 @import './Loader.css';
 @import './Message.css';
 @import './PromptBox.css';
