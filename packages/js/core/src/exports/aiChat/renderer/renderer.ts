@@ -334,12 +334,27 @@ export class NluxRenderer<AiMsg> {
         }
 
         if (props.hasOwnProperty('conversationOptions')) {
-            this.theConversationOptions = props.conversationOptions ?? {};
-            this.chatRoom?.setProps({
-                autoScroll: props.conversationOptions?.autoScroll ?? undefined,
-                syntaxHighlighter: this.context.syntaxHighlighter ?? undefined,
-                skipStreamingAnimation: false,
-            });
+            const newConversationOptions: Partial<ConversationOptions> = {};
+            const newProps: Partial<CompChatRoomProps<AiMsg>> = {};
+
+            if (props.conversationOptions?.layout !== this.theConversationOptions.layout) {
+                newConversationOptions.layout = props.conversationOptions?.layout;
+                newProps.conversationLayout = getConversationLayout(props.conversationOptions ?? {});
+            }
+
+            if (props.conversationOptions?.autoScroll !== this.theConversationOptions.autoScroll) {
+                newConversationOptions.autoScroll = props.conversationOptions?.autoScroll;
+                newProps.autoScroll = props.conversationOptions?.autoScroll;
+            }
+
+            if (Object.keys(newConversationOptions).length > 0) {
+                this.theConversationOptions = {
+                    ...this.theConversationOptions,
+                    ...newConversationOptions,
+                };
+
+                this.chatRoom?.setProps(newProps);
+            }
         }
 
         if (props.hasOwnProperty('messageOptions')) {

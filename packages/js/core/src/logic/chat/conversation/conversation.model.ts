@@ -224,6 +224,13 @@ export class CompConversation<AiMsg> extends BaseComp<
         });
     }
 
+    public setConversationLayout(layout: ConversationLayout) {
+        this.setProp('conversationLayout', layout);
+        this.chatSegmentComponentsById.forEach((comp) => {
+            comp.setLayout(layout);
+        });
+    }
+
     public setUserPersona(userPersona: UserPersona | undefined) {
         this.setProp('userPersona', userPersona);
         this.chatSegmentComponentsById.forEach((comp) => {

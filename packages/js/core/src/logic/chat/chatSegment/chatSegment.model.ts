@@ -137,6 +137,15 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         });
     }
 
+    public setLayout(conversationLayout: ConversationLayout) {
+        this.setProp('conversationLayout', conversationLayout);
+        this.chatItemComponentsById.forEach((comp) => {
+            comp.updateDomProps({
+                layout: conversationLayout,
+            });
+        });
+    }
+
     public setUserPersona(userPersona: UserPersona | undefined) {
         this.setProp('userPersona', userPersona);
         const newProps: Partial<ChatItemProps> = {

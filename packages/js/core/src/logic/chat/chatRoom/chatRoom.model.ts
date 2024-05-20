@@ -137,6 +137,10 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.autoScrollController?.updateProps({autoScroll});
         }
 
+        if (props.hasOwnProperty('conversationLayout')) {
+            this.conversation?.setConversationLayout(props.conversationLayout!);
+        }
+
         if (props.hasOwnProperty('syntaxHighlighter')) {
             this.setProp('syntaxHighlighter', props.syntaxHighlighter!);
         }
