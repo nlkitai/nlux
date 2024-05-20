@@ -1,0 +1,117 @@
+---
+sidebar_label: 'nlux + Node.js + ChatGPT'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import ApiKey from './_003-nlux-nodejs-nlbridge-chatgpt/online/001-api-key.mdx';
+import NodeJsServer from './_003-nlux-nodejs-nlbridge-chatgpt/nodejs/002-create-express-server.mdx';
+import NlBridgeEndpoint from './_003-nlux-nodejs-nlbridge-chatgpt/nodejs/003-nlbridge-endpoint.mdx';
+
+import ReactJs from './_003-nlux-nodejs-nlbridge-chatgpt/#react.mdx';
+import Javascript from './_003-nlux-nodejs-nlbridge-chatgpt/#js.mdx';
+
+import InstallReactJs from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/004-install.mdx';
+import InstallJavascript from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/004-install.mdx';
+
+import ReactJsImport from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/005-import.mdx';
+import JavascriptImport from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/005-import.mdx';
+
+import ReactJsAdapter from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/006-create-adapter.mdx';
+import JavascriptAdapter from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/006-create-adapter.mdx';
+
+import ReactJsChatComponent from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/007-create-comp.mdx';
+import JavascriptChatComponent from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/007-create-comp.mdx';
+
+import ReactJsStyles from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/008-style.mdx';
+import JavascriptStyles from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/008-style.mdx';
+
+import ReactJsRun from './_003-nlux-nodejs-nlbridge-chatgpt/react-js/009-run.mdx';
+import JavascriptRun from './_003-nlux-nodejs-nlbridge-chatgpt/javascript/009-run.mdx';
+
+# Get Started ― nlux And ChatGPT via Node.js
+
+This getting started guide will help you to integrate the OpenAI ChatGPT model with the _nlux_ library using Node.js.<br />
+We will perform the following steps:
+
+1. Create an Express.js server that connects to the OpenAI API (steps 1-3)
+2. Create an AI chat component using _nlux_ and connect it to the Express.js server (steps 4-9)
+
+[Express.js](https://expressjs.com/) is a back end web application framework for building RESTful APIs with Node.js.<br />
+If you are not familiar with Express.js, you can learn more about it [here](https://expressjs.com/).
+
+We will also use [nlbridge](https://www.npmjs.com/package/@nlbridge/express) to create the server endpoint that
+bridges the OpenAI API with the _nlux_ library.<br />
+_nlbridge_ is a middleware library created by the _nlux_ team to
+simplify the integration of LLMs with web applications.
+
+---
+
+## 1. Get Your OpenAI API Key
+
+<PlatformSection javascript={ApiKey} reactJs={ApiKey} />
+
+## `Back-end Node.js Steps `
+
+---
+
+## 2. Create An Express.js Server
+
+<PlatformSection javascript={NodeJsServer} reactJs={NodeJsServer} />
+
+---
+
+## 3. Setup nlbridge Express.js Middleware
+
+<PlatformSection javascript={NlBridgeEndpoint} reactJs={NlBridgeEndpoint} />
+
+---
+
+## `Front-End Web App Steps`
+
+The following steps are specific to your front-end web application (either React JS or JavaScript).<br />
+You can use the toggle below to switch between the two platforms.
+
+<PlatformSelector reactJs={() => null} javascript={() => null} />
+
+---
+
+## 4. Install nlux Packages
+
+Now that we have a Node.js server running with the _nlbridge_ middleware, we can create a chat component using _nlux_
+and connect it to the server.
+
+<PlatformSection javascript={Javascript} reactJs={ReactJs} />
+
+<PlatformSection javascript={InstallJavascript} reactJs={InstallReactJs}/>
+
+---
+
+## 5. Import Component And Hook
+
+<PlatformSection javascript={JavascriptImport} reactJs={ReactJsImport} />
+
+---
+
+## 6. Create nlbridge Adapter
+
+<PlatformSection javascript={JavascriptAdapter} reactJs={ReactJsAdapter} />
+
+---
+
+## 7. Create Chat Component
+
+<PlatformSection javascript={JavascriptChatComponent} reactJs={ReactJsChatComponent} />
+
+---
+
+## 8. Add CSS Styles
+
+<PlatformSection javascript={JavascriptStyles} reactJs={ReactJsStyles} />
+
+---
+
+## 9. Run Your App
+
+<PlatformSection javascript={JavascriptRun} reactJs={ReactJsRun} />

@@ -1,0 +1,22 @@
+The `withConversationOptions` method is used to provide conversation options to the `AiChat` component.
+The conversation options are optional, and they are used to configure the conversation.
+If provided, it should be an object with properties from the table listed below.
+
+* Type: `ConversationOptions`
+* Optional
+* Usage:
+
+```javascript
+const aiChat = createAiChat()
+    .withConversationOptions({
+        historyPayloadSize: 10,
+        scrollWhenGenerating: false,
+        streamingAnimationSpeed: 20,
+    });
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `historyPayloadSize` | `number`&nbsp;\|&nbsp;`'none'`&nbsp;\|&nbsp;`'max'` | `'max'` | The number of messages from the conversation history to be sent to the server whenver a message is submitted. If set to `'none'`, no messages will be sent to the server. If set to `'max'`, all messages will be sent to the server. |
+| `scrollWhenGenerating` | `boolean` | `true` | If `true`, the conversation will scroll to the bottom when a new message is being generated. |
+| `streamingAnimationSpeed` | `number`&nbsp;\|&nbsp;`null` | `10` | The interval in milliseconds at which new characters are added to the conversation when a message is being streamed. |

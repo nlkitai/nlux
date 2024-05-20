@@ -1,0 +1,13 @@
+The OpenAI model to use.<br />
+`nlux` only supports **chat completion models** such as `gpt-3.5-turbo` and `gpt-4-0314`.<br />
+You can find a list of available models [here](https://platform.openai.com/docs/models).
+
+* Method: `withModel(model)`
+* Argument Type: `string`
+* Required: `false`
+* Usage:
+
+```js
+const adapter = createUnsafeChatAdapter()
+    .withModel('gpt-4-32k');
+```

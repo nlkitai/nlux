@@ -1,0 +1,9 @@
+{
+  "label": "LangChain LangServe Adapter",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/learn/adapters/langchain"
+  }
+}

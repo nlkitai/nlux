@@ -1,0 +1,26 @@
+* Method: `withInputPreProcessor(preProcessorFunction)`
+* Type: `HfInputPreProcessor`
+* Required: `false`
+* Usage:
+
+```js
+const myInputPreProcessor: HfInputPreProcessor = (
+    input: string,
+    adapterOptions: Readonly<HfAdapterOptions>,
+) => {
+    // Pre-process the user input
+    return inputReadyToSend;
+};
+
+const adapter = createChatAdapter()
+    .withInputPreProcessor(myInputPreProcessor);
+```
+
+`nlux` provides a default input pre-processor that can be used with LLAMA2 model on Hugging Face:
+
+```js
+import {llama2InputPreProcessor} from '@nlux/hf';
+
+const adapter = createChatAdapter()
+    .withInputPreProcessor(llama2InputPreProcessor);
+```

@@ -1,0 +1,7 @@
+```js
+import {createChatAdapter} from '@nlux/langchain';
+import {createAiChat} from '@nlux/core';
+
+const adapter = createChatAdapter().withUrl('https://<Your LangServe Runnable URL>');
+const aiChat = createAiChat().withAdapter(adapter);
+```

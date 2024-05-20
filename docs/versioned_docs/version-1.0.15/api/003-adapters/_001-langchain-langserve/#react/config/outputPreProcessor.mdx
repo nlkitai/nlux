@@ -1,0 +1,22 @@
+* Property: `outputPreProcessor`
+* Type: `LangServeOutputPreProcessor`
+* Required: `false`
+* Usage:
+
+```js
+// Example: We check for a number and we format it before returning it to the user a string
+const myOutputPreProcessor: LangServeOutputPreProcessor = (output: any) => {
+    if (output.value > 1000000000) {
+        return 'Too big!';
+    }
+
+    return output.value.toString(
+        output.base === 2 ? 2 : 10
+    );
+};
+
+const adapter = useChatAdapter({
+    url: 'https://<Your LangServe Runnable URL>',
+    outputPreProcessor: myOutputPreProcessor
+});
+```

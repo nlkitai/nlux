@@ -1,0 +1,33 @@
+---
+sidebar_label: 'Customized Theme'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import Link from '@docusaurus/Link';
+import exampleCssPersonasConfig from './0007-customize-theme/example-custom-button-color/custom-nova-theme.tsx';
+import exampleJsxFileAiChatBot from './0007-customize-theme/example-custom-button-color/aiChatBot.tsx';
+import exampleJsxFileStreamAdapter from './0007-customize-theme/example-custom-button-color/adapter.tsx';
+import exampleJsxPersonasConfig from './0007-customize-theme/example-custom-button-color/personas.tsx';
+
+# Customized Theme
+
+To customize the `nlux` theme, you can simply [override the Nova theme variables](/learn/customize-theme).<br />
+In the example below, we are overriding 2 aspects of the `Nova` theme:
+
+* Changing the primary color to `#1f6adb` (blue)
+* Changing the border radius of inputs to `0px`
+
+The button and the sent messages will be blue, and the input will have sharp corners:
+
+<Link className="learn-more-link button button--secondary" to="/learn/customize-theme">Learn More Theme Customization</Link>
+
+<CodeEditor
+    files={{
+        'App.tsx': exampleJsxFileAiChatBot,
+        'custom-nova-theme.css': exampleCssPersonasConfig,
+        'personas.tsx': exampleJsxPersonasConfig,
+        'adapter.ts': exampleJsxFileStreamAdapter,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}
+/>

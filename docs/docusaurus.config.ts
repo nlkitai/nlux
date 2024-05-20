@@ -57,6 +57,17 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
           path: './documentation',
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: 'v2.x',
+              path: '2.0.0',
+            },
+            '1.0.15': {
+              label: 'v1.x',
+              path: '1.0.15',
+            },
+          },
         },
         blog: false,
         theme: {
@@ -111,6 +122,12 @@ const config: Config = {
           position: 'left',
           label: 'API Reference',
           className: 'doc-section',
+        },
+        {
+          type: 'docsVersionDropdown',
+          docId: 'versionDropdown',
+          label: 'Versions',
+          position: 'right',
         },
         {
           href: 'https://github.com/nluxai/nlux',

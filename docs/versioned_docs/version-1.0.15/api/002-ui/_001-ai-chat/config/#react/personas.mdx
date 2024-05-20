@@ -1,0 +1,51 @@
+The `personasOptions` configuration object allows you to give the conversation participants a name and profile picture.
+And for the case of the bot, you can also specify a _tagline_ that will be displayed below the bot's name in the
+initial screen.
+
+* Type: `PersonaOptions`
+* Optional
+* Usage:
+
+```jsx
+import { BotPersona, UserPersona, PersonaOptions } from '@nlux/react';
+
+const botPersona: BotPersona = {
+  name: 'HarryBotter',
+  tagline: 'Mischievously Making Magic With Mirthful AI!',
+  profilePicture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg'
+};
+
+const userPersona: UserPersona = {
+    name: 'Marissa',
+    picture: <span>👩</span>
+};
+
+<AiChat
+    personaOptions={{
+        bot: botPersona,
+        user: userPersona
+    }}
+/>
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `personaOptions` | `PersonaOptions` | - | The personas configuration |
+
+```typescript
+interface PersonaOptions {
+    bot?: BotPersona,
+    user?: UserPersona,
+}
+
+interface BotPersona {
+    name: string;
+    picture: string | JSX.Element;
+    tagline?: string;
+}
+
+interface UserPersona {
+    name: string;
+    picture: string | JSX.Element;
+}
+```

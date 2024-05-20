@@ -1,0 +1,25 @@
+In Vanilla JS, the `on` method is used to register one or multiple event listeners.<br />
+Here is an example of how to use it to listen to the `messageReceived` event:
+
+You can either call `on` via the `AiChat` instance ***before*** mounting it to the DOM, when you create it:
+
+```ts
+const aiChat = createAiChat()
+    .withAdapter(myAdapter)
+    .on('messageReceived', callback);
+```
+
+Or anytime ***after*** mounting it to the DOM:
+
+```ts
+const aiChat = createAiChat().withAdapter(myAdapter);
+aiChat.mount(rootElement);
+aiChat.on('messageReceived', callback);
+```
+
+In Vanilla Javascript, **multiple event listeners** can be registered for the same event:
+
+```js
+aiChat.on('messageReceived', callback1);
+aiChat.on('messageReceived', callback2);
+```

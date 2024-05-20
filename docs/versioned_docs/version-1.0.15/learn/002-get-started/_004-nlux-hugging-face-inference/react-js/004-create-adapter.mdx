@@ -1,0 +1,33 @@
+You can use the `useChatAdapter` hook to create a Hugging Face Inference API adapter.<br />
+You can optionally import `ChatAdapterOptions` from `@nlux/hf-react` to define the type of the options object.
+
+```tsx
+import {
+    ChatAdapterOptions,
+    useChatAdapter,
+    llama2InputPreProcessor,
+    llama2OutputPreProcessor,
+} from '@nlux/hf-react';
+
+const adapterOptions: ChatAdapterOptions = {
+    endpoint: '<YOUR ENDPOINT URL>',
+    authToken: '<YOUR AUTH TOKEN FOR PROTECTED ENDPOINT>',
+    preProcessors: {
+        input: llama2InputPreProcessor,
+        output: llama2OutputPreProcessor,
+    }
+};
+
+export const App = () => {
+    const hfAdapter = useChatAdapter(adapterOptions);
+}
+```
+
+Please note that the `authToken` is optional and only required if the endpoint is protected.
+
+The `preProcessors` object is optional and should only be used for models that require input and output pre-processing.
+The `llama2InputPreProcessor` and `llama2OutputPreProcessor` are provided by the _nlux_ and should be used for the
+Llama2 model.
+
+The `useChatAdapter` hook takes config parameters and returns an adapter object. Please refer to
+the [reference documentation](/api/adapters/hugging-face) for more information on the available options.

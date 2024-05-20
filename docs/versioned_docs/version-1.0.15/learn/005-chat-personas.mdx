@@ -1,0 +1,87 @@
+---
+sidebar_label: 'Chat Personas'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import ReactJs from './_004-personas/#react.mdx';
+import Javascript from './_004-personas/#js.mdx';
+
+import BotPersonaJavascript from './_004-personas/javascript/001-bot-persona.mdx';
+import BotPersonaReactJs from './_004-personas/react-js/001-bot-persona.mdx';
+
+import UserPersonaJavascript from './_004-personas/javascript/002-user-persona.mdx';
+import UserPersonaReactJs from './_004-personas/react-js/002-user-persona.mdx';
+
+import JsxAndReactivityJavascript from './_004-personas/javascript/003-jsx-and-reactivity.mdx';
+import JsxAndReactivityReactJs from './_004-personas/react-js/003-jsx-and-reactivity.mdx';
+
+# Chat Personas
+
+With `nlux`, you can optionally define **a bot persona** and **a user persona** that will appear in the chat.
+
+Using personas enhances natural conversation with your intelligent assistant.<br />
+It allows you to **give your bot an identity** that persists during the interaction.
+This includes details like a name, profile picture, and a custom tagline.
+Similarly you can also **represent the user profile** with a name and a profile picture.
+
+<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+
+---
+
+## Bot Persona
+
+When defined, the bot persona will appear in 2 places:
+
+* **In the initial chat screen**, before the user has sent any message.
+* **In the conversation**, in front of each message received from the AI bot.
+
+When defining the bot persona, you can specify the following properties:
+
+* The **name** of the bot.
+* The **profile picture** of the bot.
+* A **tagline** that will appear below the bot's name.
+
+| In initial screen | In conversation |
+| --- | --- |
+| <img width="400" src="/nlux/examples/bot-persona/bot-persona-initial-screen.png" /> | <img width="400" src="/nlux/examples/bot-persona/bot-persona-in-chat.png" /> |
+
+### How To Define The Bot Persona
+
+<PlatformSection reactJs={BotPersonaReactJs} javascript={BotPersonaJavascript}/>
+
+When a string is passed to the `picture` property, it is assumed to be a URL to an image. You can also pass a JSX
+element to the `picture` property, which is useful if you want to use an SVG image or a custom component.
+
+If an invalid URL is passed to the `picture` property, the first letter of the bot's name will be used as the avatar
+image, as shown in the example below.
+
+| Initial screen with invalid picture URL | Conversation with invalid picture URL |
+| --- | --- |
+| <img width="400" src="/nlux/examples/bot-persona/bot-persona-initial-screen-invalid-url.png" /> | <img width="400" src="/nlux/examples/bot-persona/bot-persona-in-chat-invalid-url.png" /> |
+
+---
+
+## User Persona
+
+When defined, the user persona will appear in that conversation UI, in front of the user sent.
+
+When defining the user persona, you can specify the following properties:
+
+* The **name** of the user.
+* The **profile picture** of the user.
+
+| User persona in conversation |
+| --- |
+| <img width="400" src="/nlux/examples/bot-persona/bot-persona-initial-screen.png" /> |
+
+### How To Define The User Persona
+
+<PlatformSection reactJs={UserPersonaReactJs} javascript={UserPersonaJavascript}/>
+
+---
+
+## JSX/DOM and Reactivity
+
+<PlatformSection reactJs={JsxAndReactivityReactJs} javascript={JsxAndReactivityJavascript}/>

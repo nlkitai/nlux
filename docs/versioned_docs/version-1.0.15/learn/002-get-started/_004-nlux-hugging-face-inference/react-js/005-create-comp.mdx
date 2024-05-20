@@ -1,0 +1,32 @@
+Now that we have the HF Inference API adapter, we will create the chat component and pass the adapter to it.
+
+```tsx
+import {AiChat} from '@nlux/react';
+import {useChatAdapter, ChatAdapterOptions} from '@nlux/hf-react';
+
+const adapterOptions: ChatAdapterOptions = {
+    endpoint: '<YOUR ENDPOINT URL>',
+    authToken: '<YOUR AUTH TOKEN FOR PROTECTED ENDPOINT>',
+};
+
+export const App = () => {
+    const hfAdapter = useChatAdapter(adapterOptions);
+
+    return (
+        <AiChat
+            adapter={hfAdapter}
+            promptBoxOptions={{
+                placeholder: 'How can I help you today?'
+            }}
+        />
+    );
+};
+```
+
+The `AiChat` component can take several parameters:
+
+* The first parameter `adapter` is the only required parameter, and it is the adapter that we created earlier.
+* The second parameter that we provide here is an object that contains the prompt box options. In this case, we are
+passing a placeholder text `placeholder` to customize the prompt box.
+
+For full documentation on how to customize the `AiChat` component, please refer to the [AiChat documentation](/api/ui/ai-chat).

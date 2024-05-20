@@ -1,0 +1,10 @@
+```typescript
+import {createAiChat, ReadyCallback, ReadyEventDetails} from '@nlux/core';
+
+const callback: ReadyCallback = (readyDetails: ReadyEventDetails) => {
+    // Do something
+};
+
+const aiChat = createAiChat().withAdapter(myAdapter);
+aiChat.on('ready', callback);
+```

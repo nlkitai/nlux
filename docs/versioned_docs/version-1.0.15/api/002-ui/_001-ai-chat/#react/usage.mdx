@@ -1,0 +1,15 @@
+```jsx
+import {AiChat} from '@nlux/react';
+import {useChatAdapter} from '@nlux/<Your Adapter Of Choice>';
+
+export default App = () => {
+    const adapter = useChatAdapter({
+        // The adapter config depends on the adapter you use
+        url: 'https://<Your Adapter Endpoint Url>',
+    });
+
+    // The adapter is the only required prop
+    // Other props available to customize the chat but are optional
+    return <AiChat adapter={adapter} />;
+};
+```

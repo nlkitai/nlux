@@ -1,0 +1,7 @@
+```js
+import {createUnsafeChatAdapter} from '@nlux/openai';
+import {createAiChat} from '@nlux/core';
+
+const adapter = createUnsafeChatAdapter();
+const aiChat = createAiChat().withAdapter(adapter);
+```

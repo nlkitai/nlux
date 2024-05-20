@@ -1,0 +1,9 @@
+{
+  "label": "Custom Adapters (Recommended)",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/learn/adapters/custom-adapters"
+  }
+}

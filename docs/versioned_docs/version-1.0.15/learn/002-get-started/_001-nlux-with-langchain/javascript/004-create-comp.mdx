@@ -1,0 +1,17 @@
+Now that we have the LangServe adapter, we will create the chat component, pass the adapter to it, and mount it to the DOM.
+
+```tsx
+const aiChat = createAiChat().withAdapter(langServeAdapter);
+
+document.addEventListener('DOMContentLoaded', () => {
+    const chatContainer = document.getElementById('chat-container');
+    aiChat.mount(chatContainer!);
+});
+```
+
+The function `createAiChat()` returns a component builder that allows you to configure the chat component
+by chaining method calls. The `withAdapter()` method sets the adapter to be used by the chat component.
+
+Note that `aiChat.mount(<domElement>)` should only be called after the DOM has been loaded.
+
+For full documentation on how to customize the `aiChat` component, please refer to the [AiChat documentation](/api/ui/ai-chat).

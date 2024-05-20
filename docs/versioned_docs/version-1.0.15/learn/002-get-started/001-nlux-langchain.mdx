@@ -1,0 +1,80 @@
+---
+sidebar_label: 'nlux + LangChain'
+title: 'Get Started With nlux And LangChain'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import ReactJs from './_001-nlux-with-langchain/#react.mdx';
+import Javascript from './_001-nlux-with-langchain/#js.mdx';
+
+import InstallReactJs from './_001-nlux-with-langchain/react-js/001-install.mdx';
+import InstallJavascript from './_001-nlux-with-langchain/javascript/001-install.mdx';
+
+import ImportReactJs from './_001-nlux-with-langchain/react-js/002-import.mdx';
+import ImportJavascript from './_001-nlux-with-langchain/javascript/002-import.mdx';
+
+import CreateAdapterReactJs from './_001-nlux-with-langchain/react-js/003-create-adapter.mdx';
+import CreateAdapterJavascript from './_001-nlux-with-langchain/javascript/003-create-adapter.mdx';
+
+import CreateCompReactJs from './_001-nlux-with-langchain/react-js/004-create-comp.mdx';
+import CreateCompJavascript from './_001-nlux-with-langchain/javascript/004-create-comp.mdx';
+
+import StyleReactJs from './_001-nlux-with-langchain/react-js/005-style.mdx';
+import StyleJavascript from './_001-nlux-with-langchain/javascript/005-style.mdx';
+
+import RunReactJs from './_001-nlux-with-langchain/react-js/006-run.mdx';
+import RunJavascript from './_001-nlux-with-langchain/javascript/006-run.mdx';
+
+# Get Started ― nlux And LangChain
+
+[LangChain](https://www.langchain.com/) is popular framework for building services and backends powered by LLMs.
+It offers a library called [LangServe](https://www.langchain.com/langserve) that exposes a REST API for interfacing
+with LLMs.
+
+This guide shows you how to get started with _nlux_ and conversational AI APIs from LangServe.
+
+---
+
+_nlux_ is available as a React JS component and hooks, or as a Javascript library.<br />
+The features are identical for both platforms.
+Use the version that best suits your needs.
+
+<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+
+---
+
+## 1. Install nlux Packages
+
+<PlatformSection reactJs={InstallReactJs} javascript={InstallJavascript}/>
+
+---
+
+## 2. Import Component And Hook
+
+<PlatformSection reactJs={ImportReactJs} javascript={ImportJavascript}/>
+
+---
+
+## 3. Create LangServe Adapter
+
+<PlatformSection reactJs={CreateAdapterReactJs} javascript={CreateAdapterJavascript}/>
+
+---
+
+## 4. Create Chat Component
+
+<PlatformSection reactJs={CreateCompReactJs} javascript={CreateCompJavascript}/>
+
+---
+
+## 5. Add CSS Styles
+
+<PlatformSection reactJs={StyleReactJs} javascript={StyleJavascript}/>
+
+---
+
+## 6. Run Your App
+
+<PlatformSection reactJs={RunReactJs} javascript={RunJavascript}/>

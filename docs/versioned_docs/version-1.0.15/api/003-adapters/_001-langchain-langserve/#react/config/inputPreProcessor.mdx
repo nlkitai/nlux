@@ -1,0 +1,25 @@
+* Property: `inputPreProcessor`
+* Type: `LangServeInputPreProcessor`
+* Required: `false`
+* Usage:
+
+```ts
+const myInputPreProcessor: LangServeInputPreProcessor = (
+    input: string,
+    conversationHistory?: readonly ConversationItem[],
+): any => {
+    return {
+        user_prompt: input,
+        // Additional data can be added here
+        additional_data: {
+            value_1: getDataDynamically(),
+            value_2: 'some string'
+        }
+    }
+};
+
+const adapter = useChatAdapter({
+    url: 'https://<Your LangServe Runnable URL>',
+    inputPreProcessor: myInputPreProcessor
+});
+```
