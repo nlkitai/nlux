@@ -1,7 +1,12 @@
-import {AiChat, ResponseComponent, StreamResponseComponentProps} from '@nlux-dev/react/src';
+import {
+    AiChat,
+    FetchResponseComponentProps,
+    ResponseComponent,
+    StreamResponseComponentProps,
+} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {act} from 'react';
+import {act, FC} from 'react';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
@@ -24,7 +29,7 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
 
         it('Should render the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseComponent<string> = ({content}) => (
+            const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content}) => (
                 <div>The AI response is: {content}</div>
             );
 
@@ -53,7 +58,7 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
 
         it('Should pass uid to the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseComponent<string> = ({content, uid}) => (
+            const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content, uid}) => (
                 <div>
                     The AI response is: {content} with uid: {uid}
                 </div>
@@ -92,7 +97,7 @@ describe('<AiChat /> + messageOptions + responseComponent', () => {
         describe('When the custom response component is removed', () => {
             it('Should render the default response component', async () => {
                 // Arrange
-                const CustomResponseComponent: ResponseComponent<string> = ({content, uid}) => (
+                const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content, uid}) => (
                     <div>The AI response is: {content} with uid: {uid}</div>
                 );
 
