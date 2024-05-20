@@ -15,11 +15,10 @@ const config: Config = {
   url: 'https://docs.nlkit.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/nlux/',
+  baseUrl: 'nlux',
 
   // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'NL Kit', // Usually your GitHub org/user name.
+  organizationName: 'NL Kit', // Usually your GitHub org/username.
   projectName: 'nlux', // Usually your repo name.
 
   onBrokenLinks: 'throw',
@@ -61,11 +60,10 @@ const config: Config = {
           versions: {
             current: {
               label: 'v2.x',
-              path: '2.0.0',
             },
             '1.0.15': {
               label: 'v1.x',
-              path: '1.0.15',
+              path: 'v1.x',
             },
           },
         },
