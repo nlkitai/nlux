@@ -7,6 +7,7 @@ describe('When a chat item component is complete in incoming direction', () => {
     it('Should render the item with the right direction class', () => {
         // Arrange
         const props: ChatItemProps = {
+            name: 'John Doe',
             direction: 'incoming',
             layout: 'bubbles',
             status: 'complete',
@@ -24,6 +25,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should render the item with the right display mode class', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',
@@ -42,6 +44,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should render the item with the right display mode class', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'list',
                 status: 'complete',
@@ -59,6 +62,7 @@ describe('When a chat item component is complete in incoming direction', () => {
     it('Should render message with the right direction class', () => {
         // Arrange
         const props: ChatItemProps = {
+            name: 'John Doe',
             direction: 'incoming',
             layout: 'bubbles',
             status: 'complete',
@@ -76,28 +80,29 @@ describe('When a chat item component is complete in incoming direction', () => {
     it('Should render profile picture', () => {
         // Arrange
         const props: ChatItemProps = {
+            name: 'John Doe',
             direction: 'incoming',
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
-            name: 'John Doe',
             picture: 'https://example.com/john-doe.jpg',
         };
         const chatItem = createChatItemDom(props);
 
         // Act
-        const persona = chatItem.querySelector('.nlux-comp-avtr') as HTMLElement;
+        const avatar = chatItem.querySelector('.nlux-comp-avtr') as HTMLElement;
 
         // Assert
-        expect(persona).not.toBeNull();
-        expect(persona.outerHTML).toEqual(expect.stringContaining('url(https://example.com/john-doe.jpg)'));
-        expect(persona.outerHTML).toEqual(expect.stringContaining('John Doe'));
+        expect(avatar).not.toBeNull();
+        expect(avatar.outerHTML).toEqual(expect.stringContaining('url(https://example.com/john-doe.jpg)'));
+        expect(avatar.outerHTML).toEqual(expect.stringContaining('John Doe'));
     });
 
     describe('When the direction changes to outgoing', () => {
         it('Should render the item with the outgoing class', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',
@@ -120,6 +125,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should render message with the outgoing class', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',

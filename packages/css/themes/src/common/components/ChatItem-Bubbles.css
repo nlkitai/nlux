@@ -8,8 +8,12 @@
         border-radius: var(--nlux-chItm-bblMsg--brdrRd);
     }
 
-    > .nlux-comp-avtr {
+    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-width: var(--nlux-chItm-bblMsg--brdrWd);
+    }
+
+    > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name {
+        display: none;
     }
 
     &.nlux_cht_itm_out {

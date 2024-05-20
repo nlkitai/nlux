@@ -18,6 +18,9 @@
     --nlux-ChatRoom--BorderColor: transparent;
     --nlux-ChatRoom--TextColor: #ffffff;
 
+    /** Participant info in chat */
+    --nlux-ChatItem-ParticipantName--Color: #ffffff;
+
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: #323232;
     --nlux-HumanMessage--BorderColor: transparent;

@@ -46,6 +46,11 @@
     /** Chat item */
     --nlux-ChatItem--AlignItems: flex-end;
 
+    /** Chat item participant info */
+    --nlux-ChatItem-ParticipantInfo--Gap: var(--nlux-nova--FlexGap);
+    --nlux-ChatItem-ParticipantName--FontSize: 16px;
+    --nlux-ChatItem-ParticipantName--FontWeight: 700;
+
     /** Chat item avatar */
     --nlux-ChatItem-Avatar--Width: 30px;
     --nlux-ChatItem-Avatar--BorderRadius: 50%;

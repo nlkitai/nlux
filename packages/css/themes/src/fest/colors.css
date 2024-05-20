@@ -31,6 +31,9 @@
     --nlux-ChatRoom--BorderColor: darkgoldenrod;
     --nlux-ChatRoom--TextColor: black;
 
+    /** Participant info in chat */
+    --nlux-ChatItem-ParticipantName--Color: darkblue;
+
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: lemonchiffon;
     --nlux-HumanMessage--BorderColor: darkkhaki;

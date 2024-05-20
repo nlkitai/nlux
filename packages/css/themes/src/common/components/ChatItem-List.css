@@ -1,11 +1,12 @@
 .nlux-comp-cht_itm.nlux_cht_itm_lst {
+    flex-direction: column;
     align-items: flex-start;
 
     > .nlux-comp-msg {
         padding: var(--nlux-chItm-lstMsg--pdng-tpBtm) var(--nlux-chItm-lstMsg--pdng-lr);
     }
 
-    > .nlux-comp-avtr {
+    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-width: var(--nlux-chItm-lstMsg--brdrWd);
     }
 }

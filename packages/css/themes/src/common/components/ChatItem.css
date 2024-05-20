@@ -18,18 +18,32 @@
         outline: 0;
         gap: var(--nlux-chItm-msg--gap);
     }
+
+    > .nlux-comp-cht_itm-prt_info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: var(--nlux-chItm-prtInfo--gap);
+
+        > .nlux-comp-cht_itm-prt_name {
+            font-size: var(--nlux-prtInfo-prtNm--ftSz);
+            font-weight: var(--nlux-prtInfo-prtNm--ftWg);
+            color: var(--nlux-prtInfo-prtNm--clr);
+        }
+    }
 }
 
 /** OUT Chat item */
 .nlux-comp-cht_itm.nlux_cht_itm_out {
-    > .nlux-comp-avtr {
+    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-hmMsg--brdClr);
     }
 }
 
 /** IN Chat item */
 .nlux-comp-cht_itm.nlux_cht_itm_in {
-    > .nlux-comp-avtr {
+    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-aiMsg--brdClr);
     }
 }

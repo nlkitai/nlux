@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         layout: 'bubbles',
         status: 'complete',
         message: 'Hello, World!',
-        name: 'Alex Doe',
+        name: 'Alex Ivanov',
         picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
     };
 

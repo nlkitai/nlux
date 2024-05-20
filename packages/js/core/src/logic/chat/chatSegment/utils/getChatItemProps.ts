@@ -1,5 +1,8 @@
 import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatItemProps} from '../../../../../../../shared/src/ui/ChatItem/props';
+import {
+    participantNameFromRoleAndPersona
+} from '../../../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
 import {conversationDefaultLayout} from '../../../../../../../shared/src/utils/dom/getConversationLayout';
 import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/stringifyRandomResponse';
 import {ConversationLayout} from '../../../../exports/aiChat/options/conversationOptions';
@@ -20,7 +23,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 status,
                 layout,
                 direction: 'incoming',
-                name: botPersona?.name,
+                name: participantNameFromRoleAndPersona('ai', {bot: botPersona}),
                 picture: botPersona?.picture,
                 // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
                 // while it's being streamed.
@@ -32,7 +35,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 status,
                 layout,
                 direction: 'incoming',
-                name: botPersona?.name,
+                name: participantNameFromRoleAndPersona('ai', {bot: botPersona}),
                 picture: botPersona?.picture,
                 message: stringifyRandomResponse<AiMsg>(segmentItem.content),
             };
@@ -42,7 +45,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
             status,
             layout,
             direction: 'incoming',
-            name: botPersona?.name,
+            name: participantNameFromRoleAndPersona('ai', {bot: botPersona}),
             picture: botPersona?.picture,
         };
     }
@@ -52,7 +55,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
         layout,
         direction: 'outgoing',
         message: segmentItem.content,
-        name: userPersona?.name,
+        name: participantNameFromRoleAndPersona('user', {user: userPersona}),
         picture: userPersona?.picture,
     } satisfies ChatItemProps;
 };

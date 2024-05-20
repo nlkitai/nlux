@@ -31,6 +31,13 @@
     /** Chat item */
     --nlux-chItm--algnItms: var(--nlux-ChatItem--AlignItems, flex-start);
 
+    /** Chat item participant info: Avatar + Name */
+    --nlux-chItm-prtInfo--gap: var(--nlux-ChatItem-ParticipantInfo--Gap, 10px); /* Gap between avatar and name */
+
+    /** Chat item participant name */
+    --nlux-prtInfo-prtNm--ftSz: var(--nlux-ChatItem-ParticipantName--FontSize, 20px);
+    --nlux-prtInfo-prtNm--ftWg: var(--nlux-ChatItem-ParticipantName--FontWeight, 700);
+
     /** Chat item avatar */
     --nlux-chItm-avtr--wd: var(--nlux-ChatItem-Avatar--Width, 50px);
     --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-Avatar--BorderRadius, 30%);

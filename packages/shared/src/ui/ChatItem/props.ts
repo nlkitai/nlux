@@ -6,8 +6,8 @@ export type ChatItemProps = {
     direction: MessageDirection;
     status: MessageStatus;
     layout: ChatItemLayout;
-    message?: string;
+    name: string; // The name is required, as it should be displayed in list layout. Default can be AI or User.
 
-    name?: string;
+    message?: string;
     picture?: string | HTMLElement;
 };

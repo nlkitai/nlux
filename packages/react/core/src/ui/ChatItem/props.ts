@@ -14,7 +14,7 @@ export type ChatItemProps<AiMsg> = {
     streamedContent?: AiMsg[];
     streamedServerResponse?: Array<unknown>;
     responseRenderer?: ResponseComponent<AiMsg>;
-    name?: string;
+    name: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
     markdownLinkTarget?: 'blank' | 'self';

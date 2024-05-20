@@ -1,6 +1,9 @@
 import {describe, expect, it} from 'vitest';
 import {className as avatarPictureClassName} from '../../../../../packages/shared/src/ui/Avatar/create';
-import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
+import {
+    createChatItemDom,
+    participantInfoContainerClassName,
+} from '../../../../../packages/shared/src/ui/ChatItem/create';
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
@@ -44,9 +47,9 @@ describe('When a chat item component is complete in outgoing direction', () => {
                 picture: 'https://example.com/john-doe.jpg',
             };
             const chatItem = createChatItemDom(props);
-            const persona = chatItem.querySelector(
-                `.${avatarPictureClassName}`,
-            ) as HTMLElement;
+            const avatar = chatItem.querySelector(
+                `.${participantInfoContainerClassName} > .${avatarPictureClassName}`,
+            )!;
 
             // Act
             updateChatItemDom(chatItem, props, {
@@ -55,7 +58,7 @@ describe('When a chat item component is complete in outgoing direction', () => {
             });
 
             // Assert
-            expect(persona.outerHTML).toEqual(expect.stringContaining('Jane Doe'));
+            expect(avatar.outerHTML).toEqual(expect.stringContaining('Jane Doe'));
         });
     });
 });

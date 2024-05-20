@@ -18,6 +18,9 @@
     /** Divider between prompt box and messages */
     --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
 
+    /** Participant info in chat */
+    --nlux-prtInfo-prtNm--clr: var(--nlux-ChatItem-ParticipantName--Color, cyan);
+
     /* Human message in chat */
     --nlux-hmMsg--bgClr: var(--nlux-HumanMessage--BackgroundColor, lightgrey);
     --nlux-hmMsg--brdClr: var(--nlux-HumanMessage--BorderColor, grey);

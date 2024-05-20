@@ -18,13 +18,17 @@ export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     ref: Ref<ChatItemImperativeProps<AiMsg>>,
 ): ReactElement {
-    const picture = useMemo(() => {
-        if (props.picture === undefined && props.name === undefined) {
-            return null;
-        }
+    const participantInfo = useMemo(() => {
+        return (
+            <div className="nlux-comp-cht_itm-prt_info">
+                {(props.picture !== undefined) && (
+                    <AvatarComp name={props.name} picture={props.picture}/>
+                )}
+                <span className="nlux-comp-cht_itm-prt_name">{props.name}</span>
+            </div>
+        );
 
-        return <AvatarComp name={props.name} picture={props.picture}/>;
-    }, [props?.picture, props?.name]);
+    }, [props.picture, props.name]);
 
     const isStreaming = useMemo(() => props.status === 'streaming', [props.status]);
     const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
@@ -57,7 +61,7 @@ export const ChatItemComp: <AiMsg>(
 
     return (
         <div className={className}>
-            {picture}
+            {participantInfo}
             {isStreaming && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}

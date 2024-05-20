@@ -7,7 +7,7 @@ import {ChatItemImperativeProps} from '../../ui/ChatItem/props';
 import {LoaderComp} from '../../ui/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
-import {nameFromMessageAndPersona} from './utils/nameFromMessageAndPersona';
+import {participantNameFromRoleAndPersona} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
 import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona';
 
 export const ChatSegmentComp: <AiMsg>(
@@ -143,7 +143,7 @@ export const ChatSegmentComp: <AiMsg>(
                             layout={props.layout}
                             dataTransferMode={'fetch'} // User chat items are always in fetch mode.
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
-                            name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                            name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
                             markdownLinkTarget={props.markdownLinkTarget}
@@ -177,7 +177,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     dataTransferMode={chatItem.dataTransferMode}
                                     streamedContent={chatItem.content}
                                     responseRenderer={props.responseRenderer}
-                                    name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}
@@ -217,7 +217,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     fetchedContent={chatItem.content}
                                     fetchedServerResponse={chatItem.serverResponse}
                                     responseRenderer={props.responseRenderer}
-                                    name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}
@@ -245,7 +245,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     layout={props.layout}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     responseRenderer={props.responseRenderer}
-                                    name={nameFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     picture={pictureFromMessageAndPersona(chatItem.participantRole,
                                         props.personaOptions,
                                     )}

@@ -8,6 +8,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should update the message', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',
@@ -31,6 +32,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should update the display mode', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',
@@ -53,6 +55,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         it('Should update the message status', () => {
             // Arrange
             const props: ChatItemProps = {
+                name: 'John Doe',
                 direction: 'incoming',
                 layout: 'bubbles',
                 status: 'complete',

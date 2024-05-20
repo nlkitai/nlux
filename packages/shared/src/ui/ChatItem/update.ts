@@ -4,6 +4,7 @@ import {AvatarProps} from '../Avatar/props';
 import {updateAvatarDom} from '../Avatar/update';
 import {className as messageClassName} from '../Message/create';
 import {updateMessageDom} from '../Message/update';
+import {participantInfoContainerClassName, participantNameClassName} from './create';
 import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 import {applyNewLayoutClassName} from './utils/applyNewLayoutClassName';
@@ -67,13 +68,13 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         propsBefore.name !== propsAfter.name ||
         propsBefore.picture !== propsAfter.picture
     ) {
-        const personaDom = element.querySelector<HTMLElement>(`.${avatarClassName}`);
+        const avatarDom = element.querySelector<HTMLElement>(`.${avatarClassName}`);
         if (!propsAfter.name && !propsAfter.picture) {
-            personaDom?.remove();
+            avatarDom?.remove();
             return;
         } else {
-            if (personaDom) {
-                updateAvatarDom(personaDom, {
+            if (avatarDom) {
+                updateAvatarDom(avatarDom, {
                     name: propsBefore.name,
                     picture: propsBefore.picture,
                 }, {
@@ -89,9 +90,19 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
                     };
 
                     const persona = createAvatarDom(avatarProps);
-                    element.prepend(persona);
+                    const participantInfoDom = element.querySelector<HTMLElement>(`.${participantInfoContainerClassName}`);
+                    if (participantInfoDom) {
+                        participantInfoDom.prepend(persona);
+                    }
                 }
             }
+        }
+    }
+
+    if (propsBefore.name !== propsAfter.name) {
+        const participantNameContainer = element.querySelector<HTMLElement>(`.${participantNameClassName}`);
+        if (participantNameContainer) {
+            participantNameContainer.textContent = propsAfter.name || '';
         }
     }
 };

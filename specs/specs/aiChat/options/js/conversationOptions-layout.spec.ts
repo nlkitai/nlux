@@ -175,4 +175,28 @@ describe('createAiChat() + conversationOptions + layout', () => {
             });
         });
     });
+
+    describe('When the user adds a message with list layout and without persona config', () => {
+        it('The bot name should be "AI"', async () => {
+            // Arrange
+            aiChat = createAiChat().withAdapter(adapterController!.adapter).withConversationOptions({
+                layout: 'list',
+            });
+
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello AI!{enter}');
+            await waitForRenderCycle();
+
+            adapterController!.resolve('Hi there!');
+            await waitForRenderCycle();
+
+            // Assert
+            const botName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
+            expect(botName.textContent).toBe('AI');
+        });
+    });
 });
