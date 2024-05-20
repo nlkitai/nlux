@@ -55,7 +55,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: '/',
-          path: './documentation',
+          path: './docs',
           lastVersion: 'current',
           versions: {
             current: {
