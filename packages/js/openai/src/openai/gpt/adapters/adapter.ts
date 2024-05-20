@@ -73,7 +73,7 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
 
     preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         try {
-            return decodeChunk(chunk as OpenAI.Chat.Completions.ChatCompletionChunk);
+            return decodeChunk(chunk as OpenAI.Chat.Completions.ChatCompletionChunk) as AiMsg;
         } catch (error) {
             warn('Error while decoding streamed chunk');
             warn(error);
