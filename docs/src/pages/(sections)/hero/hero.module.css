@@ -38,8 +38,8 @@
 
 .heroSubtitleContent {
     display: inline-block;
-    max-width: 480px;
-    font-size: 1.4rem;
+    font-size: 2.4rem;
+    line-height: 1.3;
 }
 
 @media screen and (max-width: 996px) {

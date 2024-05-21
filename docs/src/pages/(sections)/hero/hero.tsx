@@ -41,7 +41,8 @@ export const Hero = ({className}: {className?: string}) => {
                     </Heading>
                     <div className={heroStyles.heroSubtitleContainer}>
                         <p className={clsx('hero__subtitle', heroStyles.heroSubtitleContent)}>
-                            The Conversational AI UI Library
+                            The <strong>Powerful</strong> Conversational AI<br />
+                            JavaScript Library
                         </p>
                     </div>
                 </div>
