@@ -1,5 +1,5 @@
 export default `
-// JavaScript code to simulate typing in the prompt box of the chatbot
+// JavaScript code to simulate typing in the composer of the chatbot
 const nluxSimulator = (() => {
   let _prompt: string | null = null;
   let _simulatorEnabled: boolean = false;

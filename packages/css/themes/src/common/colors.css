@@ -15,7 +15,7 @@
     --nlux-chtr--brdClr: var(--nlux-ChatRoom--BorderColor, grey);
     --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, black);
 
-    /** Divider between prompt box and messages */
+    /** Divider between composer and messages */
     --nlux-chtr-dvr--clr: var(--nlux-ChatRoom-Divider--Color, darkgrey);
 
     /** Participant info in chat */

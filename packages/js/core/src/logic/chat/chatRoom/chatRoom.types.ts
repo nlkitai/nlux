@@ -1,5 +1,5 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
+import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
@@ -14,7 +14,7 @@ export type CompChatRoomProps<AiMsg> = {
     conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;
-    promptBox: Partial<PromptBoxProps>;
+    composer: Partial<ComposerProps>;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
@@ -24,7 +24,7 @@ export type CompChatRoomProps<AiMsg> = {
 
 export type CompChatRoomElements = {
     chatRoomContainer: HTMLElement;
-    promptBoxContainer: HTMLElement;
+    composerContainer: HTMLElement;
     conversationContainer: HTMLElement;
 };
 

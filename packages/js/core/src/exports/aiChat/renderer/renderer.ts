@@ -16,7 +16,7 @@ import {ConversationOptions} from '../options/conversationOptions';
 import {DisplayOptions} from '../options/displayOptions';
 import {MessageOptions} from '../options/messageOptions';
 import {PersonaOptions} from '../options/personaOptions';
-import {PromptBoxOptions} from '../options/promptBoxOptions';
+import {ComposerOptions} from '../options/composerOptions';
 
 export class NluxRenderer<AiMsg> {
     private readonly __context: ControllerContext<AiMsg>;
@@ -35,7 +35,7 @@ export class NluxRenderer<AiMsg> {
     private theInitialConversationContent: ChatItem<AiMsg>[] | null = null;
     private theMessageOptions: MessageOptions<AiMsg> = {};
     private thePersonasOptions: PersonaOptions = {};
-    private thePromptBoxOptions: PromptBoxOptions = {};
+    private theComposerOptions: ComposerOptions = {};
 
     constructor(
         context: ControllerContext<AiMsg>,
@@ -62,7 +62,7 @@ export class NluxRenderer<AiMsg> {
         this.theConversationOptions = props?.conversationOptions ?? {};
         this.theMessageOptions = props?.messageOptions ?? {};
         this.theInitialConversationContent = props?.initialConversation ?? null;
-        this.thePromptBoxOptions = props?.promptBoxOptions ?? {};
+        this.theComposerOptions = props?.composerOptions ?? {};
         this.thePersonasOptions = props?.personaOptions ?? {};
     }
 
@@ -105,7 +105,7 @@ export class NluxRenderer<AiMsg> {
 
         this.theDisplayOptions = {};
         this.theConversationOptions = {};
-        this.thePromptBoxOptions = {};
+        this.theComposerOptions = {};
     }
 
     hide() {
@@ -163,11 +163,11 @@ export class NluxRenderer<AiMsg> {
                     showCodeBlockCopyButton: this.theMessageOptions?.showCodeBlockCopyButton,
                     streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed,
                     skipStreamingAnimation: false,
-                    promptBox: {
-                        placeholder: this.thePromptBoxOptions?.placeholder,
-                        autoFocus: this.thePromptBoxOptions?.autoFocus,
-                        disableSubmitButton: this.thePromptBoxOptions?.disableSubmitButton,
-                        submitShortcut: this.thePromptBoxOptions?.submitShortcut,
+                    composer: {
+                        placeholder: this.theComposerOptions?.placeholder,
+                        autoFocus: this.theComposerOptions?.autoFocus,
+                        disableSubmitButton: this.theComposerOptions?.disableSubmitButton,
+                        submitShortcut: this.theComposerOptions?.submitShortcut,
                     },
                 }).create();
 
@@ -370,45 +370,45 @@ export class NluxRenderer<AiMsg> {
             });
         }
 
-        if (props.hasOwnProperty('promptBoxOptions')) {
-            const changedPromptBoxOptions: Partial<PromptBoxOptions> = {};
+        if (props.hasOwnProperty('composerOptions')) {
+            const changedComposerOptions: Partial<ComposerOptions> = {};
 
             if (
-                props.promptBoxOptions?.hasOwnProperty('placeholder')
-                && props.promptBoxOptions.placeholder !== this.thePromptBoxOptions.placeholder
+                props.composerOptions?.hasOwnProperty('placeholder')
+                && props.composerOptions.placeholder !== this.theComposerOptions.placeholder
             ) {
-                changedPromptBoxOptions.placeholder = props.promptBoxOptions.placeholder;
+                changedComposerOptions.placeholder = props.composerOptions.placeholder;
             }
 
             if (
-                props.promptBoxOptions?.hasOwnProperty('autoFocus')
-                && props.promptBoxOptions.autoFocus !== this.thePromptBoxOptions.autoFocus
+                props.composerOptions?.hasOwnProperty('autoFocus')
+                && props.composerOptions.autoFocus !== this.theComposerOptions.autoFocus
             ) {
-                changedPromptBoxOptions.autoFocus = props.promptBoxOptions.autoFocus;
+                changedComposerOptions.autoFocus = props.composerOptions.autoFocus;
             }
 
             if (
-                props.promptBoxOptions?.hasOwnProperty('disableSubmitButton')
-                && props.promptBoxOptions.disableSubmitButton !== this.thePromptBoxOptions.disableSubmitButton
+                props.composerOptions?.hasOwnProperty('disableSubmitButton')
+                && props.composerOptions.disableSubmitButton !== this.theComposerOptions.disableSubmitButton
             ) {
-                changedPromptBoxOptions.disableSubmitButton = props.promptBoxOptions.disableSubmitButton;
+                changedComposerOptions.disableSubmitButton = props.composerOptions.disableSubmitButton;
             }
 
             if (
-                props.promptBoxOptions?.hasOwnProperty('submitShortcut')
-                && props.promptBoxOptions.submitShortcut !== this.thePromptBoxOptions.submitShortcut
+                props.composerOptions?.hasOwnProperty('submitShortcut')
+                && props.composerOptions.submitShortcut !== this.theComposerOptions.submitShortcut
             ) {
-                changedPromptBoxOptions.submitShortcut = props.promptBoxOptions.submitShortcut;
+                changedComposerOptions.submitShortcut = props.composerOptions.submitShortcut;
             }
 
-            if (Object.keys(changedPromptBoxOptions).length > 0) {
-                this.thePromptBoxOptions = {
-                    ...this.thePromptBoxOptions,
-                    ...changedPromptBoxOptions,
+            if (Object.keys(changedComposerOptions).length > 0) {
+                this.theComposerOptions = {
+                    ...this.theComposerOptions,
+                    ...changedComposerOptions,
                 };
 
                 this.chatRoom?.setProps({
-                    promptBox: this.thePromptBoxOptions,
+                    composer: this.theComposerOptions,
                 });
             }
         }

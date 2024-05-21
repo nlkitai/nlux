@@ -41,14 +41,14 @@ export const renderChatRoom: CompRenderer<
     ).on('click', compEvent('segments-container-clicked'))
      .get();
 
-    const promptBoxElement = getElement(chatRoomElement, `:scope > .${__('prmptBox-cntr')}`);
+    const composerElement = getElement(chatRoomElement, `:scope > .${__('prmptBox-cntr')}`);
     appendToRoot(chatRoomElement);
     compEvent('chat-room-ready')();
 
     return {
         elements: {
             chatRoomContainer: chatRoomElement,
-            promptBoxContainer: promptBoxElement,
+            composerContainer: composerElement,
             conversationContainer: conversationElement,
         },
         onDestroy: () => {

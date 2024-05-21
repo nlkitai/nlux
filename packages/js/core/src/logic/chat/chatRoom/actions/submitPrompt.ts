@@ -7,32 +7,32 @@ import {domOp} from '../../../../../../../shared/src/utils/dom/domOp';
 import {warn} from '../../../../../../../shared/src/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
 import {CompConversation} from '../../conversation/conversation.model';
-import {CompPromptBox} from '../../promptBox/promptBox.model';
+import {CompComposer} from '../../composer/composer.model';
 
 export const submitPromptFactory = <AiMsg>({
     context,
-    promptBoxInstance,
+    composerInstance,
     conversation,
     autoScrollController,
     messageToSend,
-    resetPromptBox,
-    setPromptBoxAsWaiting,
+    resetComposer,
+    setComposerAsWaiting,
 }: {
     context: ControllerContext<AiMsg>;
-    promptBoxInstance: CompPromptBox<AiMsg>;
+    composerInstance: CompComposer<AiMsg>;
     conversation: CompConversation<AiMsg>;
     autoScrollController?: AutoScrollController;
     messageToSend: string;
-    resetPromptBox: (resetTextInput?: boolean) => void;
-    setPromptBoxAsWaiting: () => void;
+    resetComposer: (resetTextInput?: boolean) => void;
+    setComposerAsWaiting: () => void;
 }) => {
     return () => {
         const segmentId = conversation.addChatSegment();
 
         try {
             // Disable prompt while sending message
-            const currentPromptBoxProps = promptBoxInstance.getProp('domCompProps');
-            promptBoxInstance.setDomProps({...currentPromptBoxProps, status: 'submitting'});
+            const currentComposerProps = composerInstance.getProp('domCompProps');
+            composerInstance.setDomProps({...currentComposerProps, status: 'submitting'});
 
             // Build request and submit prompt
             const extras: ChatAdapterExtras<AiMsg> = {
@@ -53,7 +53,7 @@ export const submitPromptFactory = <AiMsg>({
             result.observable.on('error', (errorId, errorObject) => {
                 conversation.removeChatSegment(segmentId);
                 autoScrollController?.handleChatSegmentRemoved(segmentId);
-                resetPromptBox(false);
+                resetComposer(false);
 
                 context.exception(errorId);
                 context.emit('error', {
@@ -103,12 +103,12 @@ export const submitPromptFactory = <AiMsg>({
                         message: aiMessage.content,
                     });
 
-                    resetPromptBox(true);
+                    resetComposer(true);
                 });
             } else {
                 result.observable.on('aiMessageStreamStarted', (aiMessageStream) => {
                     conversation.addChatItem(segmentId, aiMessageStream);
-                    setPromptBoxAsWaiting();
+                    setComposerAsWaiting();
                     context.emit('messageStreamStarted', {uid: aiMessageStream.uid});
                 });
 
@@ -130,12 +130,12 @@ export const submitPromptFactory = <AiMsg>({
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
 
-                    resetPromptBox(false);
+                    resetComposer(false);
                 });
             }
         } catch (error) {
             warn(error);
-            resetPromptBox(false);
+            resetComposer(false);
         }
     };
 };

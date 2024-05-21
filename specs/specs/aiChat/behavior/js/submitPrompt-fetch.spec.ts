@@ -63,7 +63,7 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             expect(loader).toBeInTheDocument();
         });
 
-        it('The prompt should not be removed from the prompt box while loading', async () => {
+        it('The prompt should not be removed from the composer while loading', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
@@ -123,7 +123,7 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             expect(loader).not.toBeInTheDocument();
         });
 
-        it('The prompt should be removed from the prompt box', async () => {
+        it('The prompt should be removed from the composer', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
@@ -198,7 +198,7 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
             expect(activeSegment).not.toBeInTheDocument();
         });
 
-        it('The prompt should be restored to the prompt box', async () => {
+        it('The prompt should be restored to the composer', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);

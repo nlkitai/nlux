@@ -13,7 +13,7 @@ export type {
     ConversationLayout,
 } from './exports/aiChat/options/conversationOptions';
 
-export type {PromptBoxOptions} from './exports/aiChat/options/promptBoxOptions';
+export type {ComposerOptions} from './exports/aiChat/options/composerOptions';
 export type {MessageOptions} from './exports/aiChat/options/messageOptions';
 export type {DisplayOptions} from './exports/aiChat/options/displayOptions';
 

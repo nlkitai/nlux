@@ -13,7 +13,7 @@ import {ConversationOptions} from './options/conversationOptions';
 import {DisplayOptions} from './options/displayOptions';
 import {MessageOptions} from './options/messageOptions';
 import {PersonaOptions} from './options/personaOptions';
-import {PromptBoxOptions} from './options/promptBoxOptions';
+import {ComposerOptions} from './options/composerOptions';
 
 export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theAdapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | null = null;
@@ -25,7 +25,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theInitialConversation: ChatItem<AiMsg>[] | null = null;
     protected theMessageOptions: MessageOptions<AiMsg> | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
-    protected thePromptBoxOptions: PromptBoxOptions | null = null;
+    protected theComposerOptions: ComposerOptions | null = null;
     private controller: NluxController<AiMsg> | null = null;
     private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
 
@@ -81,7 +81,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
                 messageOptions: this.theMessageOptions ?? {},
                 displayOptions: this.theDisplayOptions ?? {},
                 conversationOptions: this.theConversationOptions ?? {},
-                promptBoxOptions: this.thePromptBoxOptions ?? {},
+                composerOptions: this.theComposerOptions ?? {},
                 personaOptions: this.thePersonasOptions ?? {},
             },
         );
@@ -199,8 +199,8 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             this.theDisplayOptions = props.displayOptions ?? null;
         }
 
-        if (props.hasOwnProperty('promptBoxOptions')) {
-            this.thePromptBoxOptions = props.promptBoxOptions ?? null;
+        if (props.hasOwnProperty('composerOptions')) {
+            this.theComposerOptions = props.composerOptions ?? null;
         }
 
         if (props.hasOwnProperty('personaOptions')) {
@@ -379,22 +379,22 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
-    public withPromptBoxOptions(promptBoxOptions: PromptBoxOptions) {
+    public withComposerOptions(composerOptions: ComposerOptions) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set prompt box options. nlux is already mounted.',
+                message: 'Unable to set composer options. nlux is already mounted.',
             });
         }
 
-        if (this.thePromptBoxOptions) {
+        if (this.theComposerOptions) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to change config. Prompt box options were already set.',
+                message: 'Unable to change config. Composer options were already set.',
             });
         }
 
-        this.thePromptBoxOptions = {...promptBoxOptions};
+        this.theComposerOptions = {...composerOptions};
         return this;
     }
 }

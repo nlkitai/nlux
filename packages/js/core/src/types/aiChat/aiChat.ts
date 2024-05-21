@@ -4,7 +4,7 @@ import {ConversationOptions} from '../../exports/aiChat/options/conversationOpti
 import {DisplayOptions} from '../../exports/aiChat/options/displayOptions';
 import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
-import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
+import {ComposerOptions} from '../../exports/aiChat/options/composerOptions';
 import {EventCallback, EventName, EventsMap} from '../event';
 import {UpdatableAiChatProps} from './props';
 
@@ -144,10 +144,10 @@ export interface IAiChat<AiMsg> {
     withPersonaOptions(personaOptions: PersonaOptions): IAiChat<AiMsg>;
 
     /**
-     * Enables providing prompt box options to the chat component.
+     * Enables providing composer options to the chat component.
      * This method can be called before mounting the chat component, and it can be called only once.
      *
-     * @param {PromptBoxOptions} promptBoxOptions The prompt box options to be used.
+     * @param {ComposerOptions} composerOptions The composer options to be used.
      */
-    withPromptBoxOptions(promptBoxOptions: PromptBoxOptions): IAiChat<AiMsg>;
+    withComposerOptions(composerOptions: ComposerOptions): IAiChat<AiMsg>;
 }

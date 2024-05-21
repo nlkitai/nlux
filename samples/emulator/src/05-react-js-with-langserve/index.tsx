@@ -47,7 +47,7 @@ const ExampleWrapper = () => {
                     displayOptions={{
                         height,
                     }}
-                    promptBoxOptions={{
+                    composerOptions={{
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}

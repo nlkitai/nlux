@@ -32,7 +32,7 @@ const ExampleWrapper = () => {
                         height,
                         className: 'ai-chat-emulator',
                     }}
-                    promptBoxOptions={{
+                    composerOptions={{
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}

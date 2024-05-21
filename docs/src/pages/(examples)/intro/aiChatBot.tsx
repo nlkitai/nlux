@@ -14,7 +14,7 @@ export default () => (
       },
       user
     }}
-    promptBoxOptions={{
+    composerOptions={{
       placeholder: 'How can I help you?'
     }}
     displayOptions={{

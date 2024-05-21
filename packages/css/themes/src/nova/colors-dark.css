@@ -7,7 +7,7 @@
     /** Welcome message */
     --nlux-WelcomeMessage-Avatar--BorderColor: transparent;
 
-    /** Divider between prompt box and messages */
+    /** Divider between composer and messages */
     --nlux-ChatRoom-Divider--Color: #71717a;
 
     /** Conversation loader */

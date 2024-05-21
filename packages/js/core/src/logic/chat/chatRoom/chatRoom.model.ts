@@ -1,7 +1,7 @@
 import {createAutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/autoScrollController';
 import {AutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/type';
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {PromptBoxProps} from '../../../../../../shared/src/ui/PromptBox/props';
+import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {comp} from '../../../exports/aiChat/comp/comp';
@@ -13,8 +13,8 @@ import {ControllerContext} from '../../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
-import {CompPromptBox} from '../promptBox/promptBox.model';
-import {CompPromptBoxProps} from '../promptBox/promptBox.types';
+import {CompComposer} from '../composer/composer.model';
+import {CompComposerProps} from '../composer/composer.types';
 import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chatRoom.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
@@ -26,15 +26,15 @@ export class CompChatRoom<AiMsg> extends BaseComp<
 > {
     private autoScrollController: AutoScrollController | undefined;
     private conversation!: CompConversation<AiMsg>;
-    private promptBoxInstance!: CompPromptBox<AiMsg>;
-    private promptBoxText: string = '';
+    private composerInstance!: CompComposer<AiMsg>;
+    private composerText: string = '';
 
     constructor(context: ControllerContext<AiMsg>, {
             conversationLayout,
             autoScroll,
             streamingAnimationSpeed,
             visible = true,
-            promptBox,
+            composer,
             botPersona,
             userPersona,
             initialConversationContent,
@@ -52,7 +52,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             botPersona,
             userPersona,
             initialConversationContent,
-            promptBox,
+            composer,
             syntaxHighlighter,
             markdownLinkTarget,
             showCodeBlockCopyButton,
@@ -65,14 +65,14 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             initialConversationContent,
         );
 
-        this.addPromptBox(
-            promptBox?.placeholder,
-            promptBox?.autoFocus,
-            promptBox?.disableSubmitButton,
-            promptBox?.submitShortcut,
+        this.addComposer(
+            composer?.placeholder,
+            composer?.autoFocus,
+            composer?.disableSubmitButton,
+            composer?.submitShortcut,
         );
 
-        if (!this.conversation || !this.promptBoxInstance) {
+        if (!this.conversation || !this.composerInstance) {
             throw new Error('Conversation is not initialized');
         }
     }
@@ -87,7 +87,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
 
     @CompEventListener('segments-container-clicked')
     messagesContainerClicked() {
-        this.promptBoxInstance?.focusTextInput();
+        this.composerInstance?.focusTextInput();
     }
 
     @CompEventListener('chat-room-ready')
@@ -165,15 +165,15 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.conversation?.setUserPersona(props.userPersona ?? undefined);
         }
 
-        if (props.hasOwnProperty('promptBox')) {
-            if (this.promptBoxInstance) {
-                const currentDomProps = this.promptBoxInstance.getProp('domCompProps')!;
-                const newProps: PromptBoxProps = {
+        if (props.hasOwnProperty('composer')) {
+            if (this.composerInstance) {
+                const currentDomProps = this.composerInstance.getProp('domCompProps')!;
+                const newProps: ComposerProps = {
                     ...currentDomProps,
-                    ...props.promptBox,
+                    ...props.composer,
                 };
 
-                this.promptBoxInstance.setDomProps(newProps);
+                this.composerInstance.setDomProps(newProps);
             }
         }
     }
@@ -222,13 +222,13 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         );
     }
 
-    private addPromptBox(
+    private addComposer(
         placeholder?: string,
         autoFocus?: boolean,
         disableSubmitButton?: boolean,
         submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
-        this.promptBoxInstance = comp(CompPromptBox<AiMsg>).withContext(this.context).withProps({
+        this.composerInstance = comp(CompComposer<AiMsg>).withContext(this.context).withProps({
             props: {
                 domCompProps: {
                     status: 'typing',
@@ -237,35 +237,35 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                     disableSubmitButton,
                     submitShortcut,
                 },
-            } satisfies CompPromptBoxProps,
+            } satisfies CompComposerProps,
             eventListeners: {
-                onTextUpdated: (newValue: string) => this.handlePromptBoxTextChange(newValue),
-                onSubmit: () => this.handlePromptBoxSubmit(),
+                onTextUpdated: (newValue: string) => this.handleComposerTextChange(newValue),
+                onSubmit: () => this.handleComposerSubmit(),
             },
         }).create();
 
-        this.addSubComponent(this.promptBoxInstance.id, this.promptBoxInstance, 'promptBoxContainer');
+        this.addSubComponent(this.composerInstance.id, this.composerInstance, 'composerContainer');
     }
 
-    private handlePromptBoxSubmit() {
-        const promptBoxProps: Partial<PromptBoxProps> | undefined = this.props.promptBox;
+    private handleComposerSubmit() {
+        const composerProps: Partial<ComposerProps> | undefined = this.props.composer;
         submitPromptFactory({
             context: this.context,
-            promptBoxInstance: this.promptBoxInstance,
+            composerInstance: this.composerInstance,
             conversation: this.conversation,
-            messageToSend: this.promptBoxText,
+            messageToSend: this.composerText,
             autoScrollController: this.autoScrollController,
-            resetPromptBox: (resetTextInput?: boolean) => {
+            resetComposer: (resetTextInput?: boolean) => {
                 // Check to handle edge case when reset is called after the component is destroyed!
                 // Example: When the user submits a message and the component is destroyed before the response is
                 // received.
                 if (!this.destroyed) {
-                    this.resetPromptBox(resetTextInput, promptBoxProps?.autoFocus);
+                    this.resetComposer(resetTextInput, composerProps?.autoFocus);
                 }
             },
-            setPromptBoxAsWaiting: () => {
+            setComposerAsWaiting: () => {
                 if (!this.destroyed) {
-                    this.promptBoxInstance.setDomProps({
+                    this.composerInstance.setDomProps({
                         status: 'waiting',
                     });
                 }
@@ -273,17 +273,17 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         })();
     }
 
-    private handlePromptBoxTextChange(newValue: string) {
-        this.promptBoxText = newValue;
+    private handleComposerTextChange(newValue: string) {
+        this.composerText = newValue;
     }
 
-    private resetPromptBox(resetTextInput: boolean = false, focusOnReset: boolean = false) {
-        if (!this.promptBoxInstance) {
+    private resetComposer(resetTextInput: boolean = false, focusOnReset: boolean = false) {
+        if (!this.composerInstance) {
             return;
         }
 
-        const currentCompProps = this.promptBoxInstance.getProp('domCompProps') as PromptBoxProps;
-        const newProps: PromptBoxProps = {
+        const currentCompProps = this.composerInstance.getProp('domCompProps') as ComposerProps;
+        const newProps: ComposerProps = {
             ...currentCompProps,
             status: 'typing',
         };
@@ -292,10 +292,10 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             newProps.message = '';
         }
 
-        this.promptBoxInstance.setDomProps(newProps);
+        this.composerInstance.setDomProps(newProps);
 
         if (focusOnReset) {
-            this.promptBoxInstance.focusTextInput();
+            this.composerInstance.focusTextInput();
         }
     }
 }

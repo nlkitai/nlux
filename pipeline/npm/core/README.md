@@ -65,7 +65,7 @@ const aiChat = createAiChat()
     .withConversationOptions({
         historyPayloadSize: 'max'
     })
-    .withPromptBoxOptions({
+    .withComposerOptions({
         placeholder: 'How can I help you today?'
     })
 

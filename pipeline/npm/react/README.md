@@ -62,7 +62,7 @@ const App = () => {
     return (
         <AiChat
             adapter={gptAdapter}
-            promptBoxOptions={{
+            composerOptions={{
                 placeholder: 'How can I help you today?'
             }}
             conversationOptions={{

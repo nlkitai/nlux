@@ -10,7 +10,7 @@
     --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-PersonaName--FontWeight, 400);
     --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
-    /** Divider between conversation and prompt box */
+    /** Divider between conversation and composer */
     --nlux-dvr--mrgTp: var(--nlux-ChatRoom-Divider--MarginTop, 20px); /* Margin top */
     --nlux-dvr--mrgBtm: var(--nlux-ChatRoom-Divider--MarginBottom, 20px); /* Margin bottom */
     --nlux-dvr--brdrWd: var(--nlux-ChatRoom-Divider--BorderWidth, 6px); /* Border width for divider */
@@ -82,8 +82,8 @@
     --nlux-inlnCd--ftFm: var(--nlux-CodeBlock--FontFamily, 'monospace');
     --nlux-inlnCd--ftSz: var(--nlux-InlineCode--FontSize, 14px);
 
-    /** Prompt box */
-    --nlux-prmBx--gap: var(--nlux-PromptBox--Gap, 15px); /* Gap between prompt input and submit button */
+    /** Composer */
+    --nlux-prmBx--gap: var(--nlux-Composer--Gap, 15px); /* Gap between prompt input and submit button */
 
     /** Submit button */
     --nlux-sbmBt--wd: var(--nlux-SubmitButton--Width, 80px);
@@ -91,7 +91,7 @@
     --nlux-sbmBt--brdrRd: var(--nlux-SubmitButton--BorderRadius, 20px);
     --nlux-sbmBt-fcs-otln--wd: var(--nlux-SubmitButton-Focus-Outline--Width, 6px);
 
-    /** Prompt box input */
+    /** Composer input */
     --nlux-prmInp--ftFm: var(--nlux-PromptInput--FontFamily, 'Arial');
     --nlux-prmInp--ftSz: var(--nlux-PromptInput--FontSize, 20px);
     --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth, 6px);

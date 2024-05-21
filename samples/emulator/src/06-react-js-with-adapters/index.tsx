@@ -55,7 +55,7 @@ const ExampleWrapper = () => {
                         width: 420,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
-                    promptBoxOptions={{
+                    composerOptions={{
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}

@@ -54,7 +54,7 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             expect(loaderContainer).toBeInTheDocument();
         });
 
-        it('The prompt should not be removed from the prompt box', async () => {
+        it('The prompt should not be removed from the composer', async () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
@@ -108,7 +108,7 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             expect(loaderContainer).not.toBeInTheDocument();
         });
 
-        it('The prompt should be removed from the prompt box', async () => {
+        it('The prompt should be removed from the composer', async () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
@@ -184,7 +184,7 @@ describe('<AiChat /> + submit prompt + fetch adapter', () => {
             expect(activeSegment).not.toBeInTheDocument();
         });
 
-        it('The prompt should be restored to the prompt box', async () => {
+        it('The prompt should be restored to the composer', async () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);

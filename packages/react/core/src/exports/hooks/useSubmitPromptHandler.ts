@@ -1,4 +1,4 @@
-import {EventsMap, PromptBoxOptions} from '@nlux/core';
+import {EventsMap, ComposerOptions} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
@@ -8,7 +8,7 @@ import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegme
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {NLErrors} from '../../../../../shared/src/types/exceptions/errors';
-import {PromptBoxStatus} from '../../../../../shared/src/ui/PromptBox/props';
+import {ComposerStatus} from '../../../../../shared/src/ui/Composer/props';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 import {AiChatProps} from '../props';
@@ -18,12 +18,12 @@ type SubmitPromptHandlerProps<AiMsg> = {
     aiChatProps: AiChatProps<AiMsg>;
     adapterToUse?: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     prompt: string;
-    promptBoxOptions?: PromptBoxOptions;
+    composerOptions?: ComposerOptions;
     chatSegments: ChatSegment<AiMsg>[];
     initialSegment?: ChatSegment<AiMsg>;
     showException: (message: string) => void;
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
-    setPromptBoxStatus: (status: PromptBoxStatus) => void;
+    setComposerStatus: (status: ComposerStatus) => void;
     setPrompt: (prompt: string) => void;
     conversationRef: MutableRefObject<ImperativeConversationCompProps<AiMsg> | null>
 };
@@ -33,12 +33,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         aiChatProps,
         adapterToUse,
         prompt: promptTyped,
-        promptBoxOptions,
+        composerOptions,
         showException,
         chatSegments,
         initialSegment,
         setChatSegments,
-        setPromptBoxStatus,
+        setComposerStatus,
         setPrompt,
         conversationRef,
     } = props;
@@ -56,7 +56,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     const domToReactRef = useRef({
         chatSegments,
         setChatSegments,
-        setPromptBoxStatus,
+        setComposerStatus,
         showException,
         setPrompt,
     });
@@ -68,11 +68,11 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         domToReactRef.current = {
             chatSegments,
             setChatSegments,
-            setPromptBoxStatus,
+            setComposerStatus,
             showException,
             setPrompt,
         };
-    }, [chatSegments, setChatSegments, setPromptBoxStatus, showException, setPrompt]);
+    }, [chatSegments, setChatSegments, setComposerStatus, showException, setPrompt]);
 
     const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
         aiChatProps,
@@ -95,11 +95,11 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 return;
             }
 
-            if (promptBoxOptions?.disableSubmitButton) {
+            if (composerOptions?.disableSubmitButton) {
                 return;
             }
 
-            setPromptBoxStatus('submitting');
+            setComposerStatus('submitting');
             const promptToSubmit = promptTyped;
             const streamedMessageIds: Set<string> = new Set();
 
@@ -115,9 +115,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             if (chatSegment.status === 'error') {
                 warn('Error occurred while submitting prompt');
                 showException('Error occurred while submitting prompt');
-                setPromptBoxStatus('typing');
+                setComposerStatus('typing');
 
-                // Reset the prompt if the prompt box is empty
+                // Reset the prompt if the composer is empty
                 if (promptTypedRef.current === '') {
                     setPrompt(promptToSubmit);
                 }
@@ -163,7 +163,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
             chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
                 handleSegmentItemReceived(aiStreamedMessage);
-                domToReactRef.current.setPromptBoxStatus('waiting');
+                domToReactRef.current.setComposerStatus('waiting');
                 if (promptTypedRef.current === promptToSubmit) {
                     domToReactRef.current.setPrompt('');
                 }
@@ -196,7 +196,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('complete', (completeChatSegment) => {
-                domToReactRef.current.setPromptBoxStatus('typing');
+                domToReactRef.current.setComposerStatus('typing');
                 const currentChatSegments = domToReactRef.current.chatSegments;
                 const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
                     (currentChatSegment) => {
@@ -250,7 +250,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 const errorMessage = NLErrors[errorId];
 
                 domToReactRef.current.setChatSegments(newParts);
-                domToReactRef.current.setPromptBoxStatus('typing');
+                domToReactRef.current.setComposerStatus('typing');
                 domToReactRef.current.showException(errorMessage);
 
                 if (promptTypedRef.current === '') {
@@ -277,7 +277,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             adapterExtras,
             showException,
             domToReactRef,
-            promptBoxOptions?.disableSubmitButton,
+            composerOptions?.disableSubmitButton,
         ],
     );
 };

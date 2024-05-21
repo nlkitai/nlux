@@ -4,7 +4,7 @@
 @import './ChatItem-List.css';
 @import './Loader.css';
 @import './Message.css';
-@import './PromptBox.css';
+@import './Composer.css';
 @import './WelcomeMessage.css';
 @import './ExceptionsBox.css';
 @import './ChatSegment.css';

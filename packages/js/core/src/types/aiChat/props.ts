@@ -5,7 +5,7 @@ import {ConversationOptions} from '../../exports/aiChat/options/conversationOpti
 import {DisplayOptions} from '../../exports/aiChat/options/displayOptions';
 import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
-import {PromptBoxOptions} from '../../exports/aiChat/options/promptBoxOptions';
+import {ComposerOptions} from '../../exports/aiChat/options/composerOptions';
 import {EventsMap} from '../event';
 
 /**
@@ -18,7 +18,7 @@ export type AiChatInternalProps<AiMsg> = {
     initialConversation?: ChatItem<AiMsg>[];
     displayOptions: DisplayOptions;
     personaOptions: PersonaOptions;
-    promptBoxOptions: PromptBoxOptions;
+    composerOptions: ComposerOptions;
     conversationOptions: ConversationOptions;
     messageOptions: MessageOptions<AiMsg>;
 };
@@ -31,7 +31,7 @@ export type AiChatProps<AiMsg = string> = {
     className?: string;
     events?: Partial<EventsMap<AiMsg>>;
     initialConversation?: ChatItem<AiMsg>[];
-    promptBoxOptions?: PromptBoxOptions;
+    composerOptions?: ComposerOptions;
     conversationOptions?: ConversationOptions;
     messageOptions?: MessageOptions<AiMsg>;
     personaOptions?: PersonaOptions;

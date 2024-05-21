@@ -183,7 +183,7 @@ function App() {
                 adapter={langChainAdapter}
                 // adapter={hfAdapter}
                 // initialConversation={initialConversation}
-                promptBoxOptions={{
+                composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
                     // submitShortcut: 'CommandEnter',

@@ -24,7 +24,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         rootElement?.remove();
     });
 
-    it('fetchText should be called with the text from the prompt box', async () => {
+    it('fetchText should be called with the text from the composer', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -39,14 +39,14 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
     });
 
-    it('Prompt box should switch to loading state on submit', async () => {
+    it('Composer should switch to loading state on submit', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
         await waitForRenderCycle();
         const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
         const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const promptBox: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
 
         // Act
         await userEvent.type(textArea, 'Hello');
@@ -55,7 +55,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(promptBox).not.toHaveClass('nlux-prmpt-submitting');
+        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
 
         // Act
         await userEvent.click(sendButton);
@@ -64,17 +64,17 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         // Assert
         expect(textArea).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-prmpt-submitting');
     });
 
-    it('Prompt box should remain in loading state until text is returned', async () => {
+    it('Composer should remain in loading state until text is returned', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
         await waitForRenderCycle();
         const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
         const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const promptBox: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -87,10 +87,10 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         // Assert
         expect(textArea).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-prmpt-submitting');
     });
 
-    it('Prompt box should switch back to normal state when text is returned', async () => {
+    it('Composer should switch back to normal state when text is returned', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -98,7 +98,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
 
         const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
         const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const promptBox: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -108,7 +108,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         await waitForMilliseconds(100);
 
         // Assert
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-prmpt-submitting');
 
         // Act
         adapterController.resolve('Hi Human!');
@@ -117,7 +117,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(promptBox).not.toHaveClass('nlux-prmpt-submitting');
+        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
     });
 
     it('Text returned from fetchText should be displayed in the conversation', async () => {
@@ -140,7 +140,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         expect(messages).toHaveTextContent('Hi Human!');
     });
 
-    it('Prompt box should switch back to normal state when promise is rejected', async () => {
+    it('Composer should switch back to normal state when promise is rejected', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -148,7 +148,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
 
         const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
         const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const promptBox: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -158,7 +158,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         await waitForMilliseconds(100);
 
         // Assert
-        expect(promptBox).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-prmpt-submitting');
 
         // Act
         adapterController.reject('Error');
@@ -167,7 +167,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(promptBox).not.toHaveClass('nlux-prmpt-submitting');
-        expect(promptBox).toHaveClass('nlux-prmpt-typing');
+        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-prmpt-typing');
     });
 });

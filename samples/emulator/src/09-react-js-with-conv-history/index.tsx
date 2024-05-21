@@ -87,7 +87,7 @@ const ExampleWrapper = () => {
                     messageOptions={{
                         streamingAnimationSpeed,
                     }}
-                    promptBoxOptions={{
+                    composerOptions={{
                         placeholder: 'How can I help you today?',
                         autoFocus: true,
                     }}

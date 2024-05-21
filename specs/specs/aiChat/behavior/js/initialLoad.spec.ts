@@ -74,8 +74,8 @@ describe('createAiChat() + initial load', () => {
             await waitForRenderCycle();
 
             // Assert
-            const promptBoxContainer = rootElement.querySelector('.nlux-comp-prmptBox');
-            expect(promptBoxContainer).toBeInTheDocument();
+            const composerContainer = rootElement.querySelector('.nlux-comp-prmptBox');
+            expect(composerContainer).toBeInTheDocument();
         });
 
         it('Conversation container should render', async () => {

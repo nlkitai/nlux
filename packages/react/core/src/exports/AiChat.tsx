@@ -2,13 +2,13 @@ import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useSt
 import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
-import {PromptBoxStatus} from '../../../../shared/src/ui/PromptBox/props';
+import {ComposerStatus} from '../../../../shared/src/ui/Composer/props';
 import {chatItemsToChatSegment} from '../../../../shared/src/utils/chat/chatItemsToChatSegment';
 import {getRootClassNames} from '../../../../shared/src/utils/dom/getRootClassNames';
 import {warnOnce} from '../../../../shared/src/utils/warn';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
-import {PromptBoxComp} from '../ui/PromptBox/PromptBoxComp';
+import {ComposerComp} from '../ui/Composer/ComposerComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
@@ -29,7 +29,7 @@ export const AiChat: <AiMsg>(
         className,
         initialConversation,
         conversationOptions,
-        promptBoxOptions,
+        composerOptions,
         displayOptions,
     } = props;
 
@@ -51,7 +51,7 @@ export const AiChat: <AiMsg>(
 
     // Regular component state
     const [prompt, setPrompt] = useState('');
-    const [promptBoxStatus, setPromptBoxStatus] = useState<PromptBoxStatus>('typing');
+    const [composerStatus, setComposerStatus] = useState<ComposerStatus>('typing');
     const [initialSegment, setInitialSegment] = useState<ChatSegment<AiMsg>>();
     const [chatSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
 
@@ -82,8 +82,8 @@ export const AiChat: <AiMsg>(
         adapterToUse,
         conversationRef,
         initialSegment, chatSegments,
-        prompt, promptBoxOptions, showException,
-        setChatSegments, setPromptBoxStatus, setPrompt,
+        prompt, composerOptions, showException,
+        setChatSegments, setComposerStatus, setPrompt,
     });
 
     const handleLastActiveSegmentChange = useLastActiveSegmentChangeHandler(
@@ -133,13 +133,13 @@ export const AiChat: <AiMsg>(
                     />
                 </div>
                 <div className="nlux-chtRm-prmptBox-cntr">
-                    <PromptBoxComp
-                        status={promptBoxStatus}
+                    <ComposerComp
+                        status={composerStatus}
                         prompt={prompt}
                         hasValidInput={hasValidInput}
-                        placeholder={props.promptBoxOptions?.placeholder}
-                        autoFocus={props.promptBoxOptions?.autoFocus}
-                        submitShortcut={props.promptBoxOptions?.submitShortcut}
+                        placeholder={props.composerOptions?.placeholder}
+                        autoFocus={props.composerOptions?.autoFocus}
+                        submitShortcut={props.composerOptions?.submitShortcut}
                         onChange={handlePromptChange}
                         onSubmit={handleSubmitPrompt}
                     />

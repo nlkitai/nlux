@@ -1,0 +1,22 @@
+The composerOptions is an optional property. It is used to configure the composer.
+If provided, it should be an object properties from the table listed below.
+
+* Type: `ComposerOptions`
+* Optional
+* Usage
+
+```jsx
+<AiChat
+    composerOptions={{
+        autoFocus: true,
+        placeholder: "Type your message here..."
+    }}
+/>
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `autoFocus` | `boolean` | `true` | If `true`, the composer will be focused when the component is mounted. |
+| `placeholder` | `string` | - | The placeholder text of the composer. |
+
+---

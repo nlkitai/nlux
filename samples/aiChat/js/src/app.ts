@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // .withAdapter(openAiAdapter)
         .withAdapter(langChainAdapter)
         // .withInitialConversation(initialConversation)
-        .withPromptBoxOptions({
+        .withComposerOptions({
             placeholder: 'Type your prompt here',
             autoFocus: true,
             // submitShortcut: 'CommandEnter',

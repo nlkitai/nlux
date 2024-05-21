@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             width: 500,
             height: 500,
         })
-        .withPromptBoxOptions({
+        .withComposerOptions({
             placeholder: 'How can I help you today?',
             autoFocus: true,
         })

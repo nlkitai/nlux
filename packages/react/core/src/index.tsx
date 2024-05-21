@@ -4,7 +4,7 @@ import useDeepCompareEffectHook from './hooks/useDeepCompareEffect';
 
 export type {
     DisplayOptions,
-    PromptBoxOptions,
+    ComposerOptions,
     ConversationOptions,
     ConversationLayout,
     HistoryPayloadSize,

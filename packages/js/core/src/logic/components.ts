@@ -5,14 +5,14 @@ import {CompChatItem} from './chat/chatItem/chatItem.model';
 import {CompChatRoom} from './chat/chatRoom/chatRoom.model';
 import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
 import {CompConversation} from './chat/conversation/conversation.model';
-import {CompPromptBox} from './chat/promptBox/promptBox.model';
+import {CompComposer} from './chat/composer/composer.model';
 import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
 
 const componentsById = () => ({
     'chatRoom': CompChatRoom,
     'exceptionsBox': CompExceptionsBox,
     'conversation': CompConversation,
-    'promptBox': CompPromptBox,
+    'composer': CompComposer,
     'chatSegment': CompChatSegment,
     'chatItem': CompChatItem,
 });

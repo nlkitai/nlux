@@ -25,7 +25,7 @@
     --nlux-WelcomeMessage-PersonaName--FontWeight: 700;
     --nlux-WelcomeMessage--Gap: 5px;
 
-    /** Divider between conversation and prompt box */
+    /** Divider between conversation and composer */
     --nlux-ChatRoom-Divider--MarginTop: 10px;
     --nlux-ChatRoom-Divider--MarginBottom: 10px;
     --nlux-ChatRoom-Divider--BorderWidth: 1px;
@@ -94,8 +94,8 @@
     --nlux-InlineCode--Padding: 2px 4px;
     --nlux-InlineCode--FontSize: 18px;
 
-    /** Prompt box */
-    --nlux-PromptBox--Gap: 5px;
+    /** Composer */
+    --nlux-Composer--Gap: 5px;
 
     /** Submit button */
     --nlux-SubmitButton--Width: 65px;
@@ -103,7 +103,7 @@
     --nlux-SubmitButton--BorderRadius: 12px;
     --nlux-SubmitButton-Focus-Outline--Width: 2px;
 
-    /** Prompt box input */
+    /** Composer input */
     --nlux-PromptInput--FontFamily: var(--nlux-nova--FontFamily);
     --nlux-PromptInput--FontSize: 16px;
     --nlux-PromptInput--BorderWidth: 0;

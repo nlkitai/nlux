@@ -1,4 +1,4 @@
-import {ConversationOptions, DisplayOptions, EventsMap, PromptBoxOptions, StandardChatAdapter} from '@nlux/core';
+import {ConversationOptions, DisplayOptions, EventsMap, ComposerOptions, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../shared/src/types/conversation';
@@ -48,9 +48,9 @@ export type AiChatProps<AiMsg> = {
     messageOptions?: MessageOptions<AiMsg>;
 
     /**
-     * Options for the prompt box.
+     * Options for the composer.
      */
-    promptBoxOptions?: PromptBoxOptions;
+    composerOptions?: ComposerOptions;
 
     /**
      * Options for the persona.

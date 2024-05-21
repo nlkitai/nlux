@@ -5,7 +5,7 @@ import {AvatarReactExpo} from './comp/AvatarReactExpo';
 import {ChatItemReactExpo} from './comp/ChatItemReactExpo';
 import {LoaderReactExpo} from './comp/LoaderReactExpo';
 import {MessageReactExpo} from './comp/MessageReactExpo';
-import {PromptBoxReactExpo} from './comp/PromptBoxReactExpo';
+import {ComposerReactExpo} from './comp/ComposerReactExpo';
 import {WelcomeMessageReactExpo} from './comp/WelcomeMessageReactExpo';
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
             <MessageReactExpo/>
             <AvatarReactExpo/>
             <ChatItemReactExpo/>
-            <PromptBoxReactExpo/>
+            <ComposerReactExpo/>
             <WelcomeMessageReactExpo/>
             <AiChatReactExpo/>
             <AiChatWelcomeMessageReactExpo/>

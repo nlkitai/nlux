@@ -14,7 +14,7 @@ export const App = () => {
     return (
         <AiChat
             adapter={langServeAdapter}
-            promptBoxOptions={{
+            composerOptions={{
                 placeholder: 'How can I help you today?'
             }}
         />
@@ -25,7 +25,7 @@ export const App = () => {
 The `AiChat` component can take several parameters:
 
 * The first parameter `adapter` is the only required parameter, and it is the adapter that we created earlier.
-* The second parameter that we provide here is an object that contains the prompt box options. In this case, we are
-passing a placeholder text `placeholder` to customize the prompt box.
+* The second parameter that we provide here is an object that contains the composer options. In this case, we are
+passing a placeholder text `placeholder` to customize the composer.
 
 For full documentation on how to customize the `AiChat` component, please refer to the [AiChat documentation](/api/ui/ai-chat).

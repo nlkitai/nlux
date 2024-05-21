@@ -105,7 +105,7 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             expect(loader).toBeInTheDocument();
         });
 
-        it('Should reset the prompt box', async () => {
+        it('Should reset the composer', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
@@ -174,7 +174,7 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             expect(loader).not.toBeInTheDocument();
         });
 
-        it('Should not reset the prompt box', async () => {
+        it('Should not reset the composer', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
@@ -220,7 +220,7 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
             expect(activeSegment).not.toBeInTheDocument();
         });
 
-        it('The prompt should be restored to the prompt box', async () => {
+        it('The prompt should be restored to the composer', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);

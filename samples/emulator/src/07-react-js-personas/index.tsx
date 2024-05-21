@@ -125,7 +125,7 @@ const ExampleWrapper = () => {
                         width: 450,
                     }}
                     // Optional: Instruct ChatGPT how to behave during the conversation.
-                    promptBoxOptions={{
+                    composerOptions={{
                         // placeholder: 'FinFunBot here! How can I help you today?',
                         autoFocus: true,
                     }}
