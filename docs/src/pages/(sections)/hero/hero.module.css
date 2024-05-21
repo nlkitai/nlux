@@ -15,6 +15,13 @@
     gap: 2rem;
 }
 
+.heroTitleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .heroTitle {
     display: flex;
     align-items: center;
@@ -31,7 +38,7 @@
 
 .heroSubtitleContent {
     display: inline-block;
-    max-width: 390px;
+    max-width: 480px;
     font-size: 1.4rem;
 }
 

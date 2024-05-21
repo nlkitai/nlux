@@ -5,10 +5,9 @@
 `NLUX` is a highly customizable and fully featured conversational AI UI library with 2 main layers:
 
 * **[The User Interface Layer](/api/ui)** 🎨 — Which is responsible for `everything that gets rendered` on the
-  screen, such as
-  the conversation component, the prompt input, the streaming of AI responses back to the user, and so on.
-* **[The Adapters Layer](/learn/adapters)** 🔌 — Which enables the `integration with several AI backends`, by handling API calls,
-  and response streaming. Iy allows for `custom adapters` to be built for any backend.
+  screen, such as the user and the AI messages, the prompt composer, and the markdown received from AI.
+* **[The Adapters Layer](/learn/adapters)** 🔌 — Which enables the `integration with AI backends` by handling API calls,
+  response streaming, and more. It also allows for `custom adapters` to be built for any backend.
 
 ## Platforms
 

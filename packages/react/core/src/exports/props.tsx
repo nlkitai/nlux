@@ -8,7 +8,7 @@ import {PersonaOptions} from './personaOptions';
 /**
  * Props for the AiChat React component.
  */
-export type AiChatProps<AiMsg> = {
+export type AiChatProps<AiMsg = string> = {
     /**
      * The chat adapter to use. This is required and essential for the component to work.
      * You can either provide a standard adapter from @nlux or create a custom adapter.

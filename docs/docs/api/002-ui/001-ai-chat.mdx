@@ -17,6 +17,9 @@ import UsageReactJs from './_001-ai-chat/#react/usage.mdx';
 import ConfigJavascript from './_001-ai-chat/config/#js.mdx';
 import ConfigReactJs from './_001-ai-chat/config/#react.mdx';
 
+import AiResponseTypeJavascript from './_001-ai-chat/config/#js/aiResponseType.mdx';
+import AiResponseTypeReactJs from './_001-ai-chat/config/#react/aiResponseType.mdx';
+
 import AdapterDocJavascript from './_001-ai-chat/config/#js/adapter.mdx';
 import AdapterDocReactJs from './_001-ai-chat/config/#react/adapter.mdx';
 
@@ -43,8 +46,8 @@ import SyntaxHighlighterReactJs from './_001-ai-chat/config/#react/syntaxHighlig
 
 # AI Chat Component
 
-The `AiChat` component is the main UI component of the `NLUX` chatbot. It is responsible for rendering the messages and
-the prompt input field, and all the user interactions.
+The `AiChat` component is the main UI component of the `NLUX` chatbot. It is responsible for rendering the user and
+the AI messages, the prompt composer, error message, and the markdown received from the AI.
 
 <PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
 
@@ -65,6 +68,12 @@ the prompt input field, and all the user interactions.
 ## Configuration
 
 <PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavascript}/>
+
+---
+
+### AI Response Type
+
+<PlatformSection reactJs={AiResponseTypeReactJs} javascript={AiResponseTypeJavascript}/>
 
 ---
 

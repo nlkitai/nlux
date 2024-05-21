@@ -31,18 +31,19 @@ export const Hero = ({className}: {className?: string}) => {
     return (
         <header className={clsx(heroStyles.heroBanner, className)}>
             <div className={clsx('container', heroStyles.heroContent)}>
-                <Heading as="h1" className={heroStyles.heroTitle}>
-                    <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={120}/>
-                    <a
-                        style={{marginTop: '50px'}}
-                        href="https://github.com/nluxai/nlux"
-                        target="_blank"><img src={'https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342'}/></a>
-                </Heading>
-                <div className={heroStyles.heroSubtitleContainer}>
-                    <p className={clsx('hero__subtitle', heroStyles.heroSubtitleContent)}>
-                        The Open-Source Javascript Library
-                        To Build Conversational AI Interfaces
-                    </p>
+                <div className={heroStyles.heroTitleContainer}>
+                    <Heading as="h1" className={heroStyles.heroTitle}>
+                        <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={120}/>
+                        <a
+                            style={{marginTop: '50px'}}
+                            href="https://github.com/nluxai/nlux"
+                            target="_blank"><img src={'https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342'}/></a>
+                    </Heading>
+                    <div className={heroStyles.heroSubtitleContainer}>
+                        <p className={clsx('hero__subtitle', heroStyles.heroSubtitleContent)}>
+                            The Conversational AI UI Library
+                        </p>
+                    </div>
                 </div>
                 <div className={heroStyles.adaptersShowcase}>
                     <div className={heroStyles.platformName}>

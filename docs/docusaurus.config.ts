@@ -8,7 +8,7 @@ under a modified MPL-2.0 license.<br />The full license can be found in the <a h
 
 const config: Config = {
   title: 'NLUX',
-  tagline: 'The Open-Source Javascript Library To Build Conversational AI Interfaces',
+  tagline: 'Conversational AI Javascript Library',
   favicon: 'favicon.ico',
 
   // Set the production url of your site here
