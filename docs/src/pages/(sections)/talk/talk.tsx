@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import styles from './talk.module.css';
 
-export const Talk = () => {
+export const Talk = ({className}: {className?: string}) => {
     return (
-        <div className={styles.youtubeTalkContainer}>
+        <div className={clsx(styles.youtubeTalkContainer, className)}>
             <h2 className={styles.talkTitle}>
                 Building Context-Aware AI Assistants<br />
                 With React JS and <code>NLUX</code>

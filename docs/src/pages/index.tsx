@@ -4,6 +4,7 @@ import {Newsletter} from '@site/src/pages/(sections)/newsletter/newsletter';
 import {Roadmap} from '@site/src/pages/(sections)/roadmap/roadmap';
 import {Talk} from '@site/src/pages/(sections)/talk/talk';
 import Layout from '@theme/Layout';
+import styles from './index.module.css';
 
 const headerDescription = 'NLUX is an open-source, zero dependency JavaScript '
     + 'and React library for rapidly building conversational AI interfaces. Integrate with ChatGPT and other LLMs. '
@@ -17,10 +18,10 @@ export default function Home(): JSX.Element {
             title={`${siteConfig.title} | ${siteConfig.tagline}`}
             description={headerDescription}
         >
-            <Hero/>
-            <Roadmap />
-            <Talk/>
-            <Newsletter/>
+            <Hero className={styles.nluxHomeSection}/>
+            <Roadmap className={styles.nluxHomeSection}/>
+            <Talk className={styles.nluxHomeSection}/>
+            <Newsletter className={styles.nluxHomeSection}/>
         </Layout>
     );
 }

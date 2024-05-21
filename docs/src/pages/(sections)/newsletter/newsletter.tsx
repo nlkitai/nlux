@@ -1,8 +1,9 @@
+import clsx from 'clsx';
 import styles from './newsletter.module.css';
 
-export const Newsletter = () => {
+export const Newsletter = ({className}: {className?: string}) => {
     return (
-        <div className={styles.newsletterContainer}>
+        <div className={clsx(styles.newsletterContainer, className)}>
             <h3>Don’t Miss Out ― Get NLUX Updates 💌</h3>
             <p>
                 Must-know news on major releases, key features and relevant updates.<br />

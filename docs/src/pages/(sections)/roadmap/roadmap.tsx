@@ -1,10 +1,11 @@
+import clsx from 'clsx';
 import styles from './roadmap.module.css';
 import {FeatureImplemented} from '@site/src/pages/(sections)/roadmap/featureImplemented';
 import {FeatureToImplement} from '@site/src/pages/(sections)/roadmap/featureToImplement';
 
-export const Roadmap = () => {
+export const Roadmap = ({className}: {className?: string}) => {
     return (
-        <div className={styles.roadmapContainer}>
+        <div className={clsx(styles.roadmapContainer, className)}>
             <h2 className={styles.roadmapTitle}>
                 Feature Roadmap
             </h2>

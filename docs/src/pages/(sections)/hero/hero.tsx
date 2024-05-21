@@ -18,7 +18,7 @@ const LangChainLogo = '/nlux/images/platform-logos/langchain-logo-60pxh.png';
 const OpenAiLogo = '/nlux/images/platform-logos/openai-logo-60pxh.png';
 const HuggingFaceLogo = '/nlux/images/platform-logos/hugging-face-logo-60pxh.png'
 
-export const Hero = () => {
+export const Hero = ({className}: {className?: string}) => {
     const { colorMode } = useColorMode();
     const [nluxLogoForHeroBanner, setLogo] = useState(
         colorMode === 'dark' ? NluxLogoDark : NluxLogoLight
@@ -29,8 +29,8 @@ export const Hero = () => {
     }, [colorMode]);
 
     return (
-        <header className={clsx(heroStyles.heroBanner)}>
-            <div className="container">
+        <header className={clsx(heroStyles.heroBanner, className)}>
+            <div className={clsx('container', heroStyles.heroContent)}>
                 <Heading as="h1" className={heroStyles.heroTitle}>
                     <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={120}/>
                     <a

@@ -45,6 +45,12 @@ const config: Config = {
       as: 'style',
       type: 'text/css',
       crossorigin: 'anonymous',
+    }, {
+        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@200..800&display=swap',
+        rel: 'preload stylesheet',
+        as: 'style',
+        type: 'text/css',
+        crossorigin: 'anonymous',
     }
   ],
 

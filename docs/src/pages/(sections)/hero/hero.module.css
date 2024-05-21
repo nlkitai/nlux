@@ -2,10 +2,17 @@
     background-color: var(--nx-background-color-1);
     color: var(--nx-text-color-1);
 
-    padding: 4rem 0;
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .heroTitle {
@@ -13,10 +20,6 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-
-    font-family: var(--ifm-font-family-title);
-    font-size: 2.5rem;
-    font-weight: 600;
 }
 
 .heroSubtitleContainer {
@@ -28,7 +31,7 @@
 
 .heroSubtitleContent {
     display: inline-block;
-    max-width: 380px;
+    max-width: 390px;
     font-size: 1.4rem;
 }
 
@@ -39,7 +42,6 @@
 }
 
 .adaptersShowcase {
-    margin: 20px 10px;
 }
 
 .adaptersShowcase {
