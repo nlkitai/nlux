@@ -9,7 +9,7 @@ export const Roadmap = () => {
                 Feature Roadmap
             </h2>
             <p className={styles.roadmapDescription}>
-                Over the past months since launching <code>nlux</code>, we&apos;ve been heads-down delivering rapid value.
+                Over the past months since launching <code>NLUX</code>, we&apos;ve been heads-down delivering rapid value.
                 Here&apos;s a quick overview of some key features that we&apos;ve already built, and a glimpse of what&apos;s to come:
             </p>
             <div>

@@ -42,7 +42,7 @@ such as databases, APIs, and other services. It also relies on language models t
 build Restful APIs that can be used to interact with language models. A LangServe API provides a set of pre-defined
 endpoints and an input/out schema that can be used to interact with the language model.
 
-This documentation page is about the standard adapter provided by `nlux` for APIs built using LangServe.
+This documentation page is about the standard adapter provided by `NLUX` for APIs built using LangServe.
 
 <PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
 
@@ -75,7 +75,7 @@ The adapter will automatically append the endpoint to the URL based on other con
 ### Data Transfer Mode
 
 The data transfer mode to use when communicating with the LangServe runnable.
-`nlux` LangServe adapter supports `stream` and `fetch` modes.
+`NLUX` LangServe adapter supports `stream` and `fetch` modes.
 
 When the adapter is configured to use `stream` mode, the `/stream` endpoint of the LangServe API will be used to
 communicate with the runnable. When the adapter is configured to use `fetch` mode, the `/invoke` endpoint will be used.
@@ -104,7 +104,7 @@ The output pre-processor is a function that is called after receiving the output
 The `output` parameter of this function will get the part of the response from the runnable returned
 under the `output` property.
 
-This function returns a string that will be used displayed in the `nlux` conversational UI.
+This function returns a string that will be used displayed in the `NLUX` conversational UI.
 
 Example: If your runnable returns an object with `value` and `base` properties, you can use the out in the
 example below to transform the output to a string.

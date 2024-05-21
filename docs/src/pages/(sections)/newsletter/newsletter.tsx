@@ -3,7 +3,7 @@ import styles from './newsletter.module.css';
 export const Newsletter = () => {
     return (
         <div className={styles.newsletterContainer}>
-            <h3>Don’t Miss Out ― Get nlux Updates 💌</h3>
+            <h3>Don’t Miss Out ― Get NLUX Updates 💌</h3>
             <p>
                 Must-know news on major releases, key features and relevant updates.<br />
                 Only big and vital announcements. No spam, ever.

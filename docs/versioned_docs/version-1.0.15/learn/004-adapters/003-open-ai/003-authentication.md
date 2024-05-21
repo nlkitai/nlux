@@ -4,7 +4,7 @@ sidebar_label: 'Authentication'
 
 # Authentication & Security
 
-To integrate `nlux` with OpenAI's services, you first need to obtain an API key from OpenAI. This key acts as your unique
+To integrate `NLUX` with OpenAI's services, you first need to obtain an API key from OpenAI. This key acts as your unique
 identifier and access token for using OpenAI's APIs, including ChatGPT.
 
 ## Do I need to pay to use OpenAI's APIs?
@@ -27,16 +27,16 @@ Here's how you can get your API key:
 3. Click **Create new secret key** to create a new API key.
 4. **Copy the API key:** Once the key is created, copy it to your clipboard. You will need it in the next step.
 
-## How do I use my API key with `nlux`?
+## How do I use my API key with `NLUX`?
 
-If you're using `nlux` with React, you can use the `useUnsafeChatAdapter` hook to create an OpenAI adapter and pass your API key to
+If you're using `NLUX` with React, you can use the `useUnsafeChatAdapter` hook to create an OpenAI adapter and pass your API key to
 it:
 
 ```jsx
 const chatGptAdapter = useUnsafeChatAdapter({apiKey: 'YOUR_OPEN_AI_API_KEY'});
 ```
 
-With the Vanilla JS version of `nlux`, you can create an OpenAI adapter like this:
+With the Vanilla JS version of `NLUX`, you can create an OpenAI adapter like this:
 
 ```js
 const chatGptAdapter = createUnsafeChatAdapter().withApiKey('YOUR_OPEN_AI_API_KEY');
@@ -48,11 +48,11 @@ Your API key is a secret token that allows you to access OpenAI's APIs. You shou
 else. If you suspect that your API key has been compromised, you can revoke it and create a new one in your dashboard.
 
 :::warning
-If you intend to use `nlux`'s OpenAI adapter on a public website, **you should never store your API key in your
+If you intend to use `NLUX`'s OpenAI adapter on a public website, **you should never store your API key in your
 frontend code**. Instead, you should store it in your backend code and make the API calls from there. This is because
 storing your API key in your frontend code exposes it to the public, which is a security risk.
 :::
 
 If you're building a custom backend that uses OpenAI's APIs, you can build a custom adapter for your backend and use it
-with `nlux`. You can find more information about building custom adapters in
+with `NLUX`. You can find more information about building custom adapters in
 the [Adapters section](/learn/adapters/custom-adapters).

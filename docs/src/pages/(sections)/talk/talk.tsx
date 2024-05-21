@@ -5,10 +5,10 @@ export const Talk = () => {
         <div className={styles.youtubeTalkContainer}>
             <h2 className={styles.talkTitle}>
                 Building Context-Aware AI Assistants<br />
-                With React JS and <code>nlux</code>
+                With React JS and <code>NLUX</code>
             </h2>
             <p className={styles.talkDescription}>
-                Learn more ― Watch the presentation of <code>nlux</code> founder at React Advanced London
+                Learn more ― Watch the presentation of <code>NLUX</code> founder at React Advanced London
                 where he talks about the future of conversational AI and how to build
                 context-aware AI apps with NLUX and React JS.
             </p>

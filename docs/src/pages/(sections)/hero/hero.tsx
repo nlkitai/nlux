@@ -32,7 +32,7 @@ export const Hero = () => {
         <header className={clsx(heroStyles.heroBanner)}>
             <div className="container">
                 <Heading as="h1" className={heroStyles.heroTitle}>
-                    <img src={nluxLogoForHeroBanner} alt="nlux logo" width={120}/>
+                    <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={120}/>
                     <a
                         style={{marginTop: '50px'}}
                         href="https://github.com/nluxai/nlux"

@@ -2,12 +2,12 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-const footerNote = `<code>nlux</code> is built and maintained by <a href="https://github.com/salmenus" 
-target="_blank">Salmen Hichri</a> - Copyright © 2024 All rights reserved.<br />The source code of nlux is licensed 
-under <a href="https://www.mozilla.org/en-US/MPL/2.0/" target="_blank">MPL-2.0</a>.`
+const footerNote = `<code>NLUX</code> is built and maintained by <a href="https://github.com/salmenus" 
+target="_blank">Salmen Hichri</a> — Copyright © 2024 All rights reserved.<br />The source code of NLUX is licensed 
+under a modified MPL-2.0 license.<br />The full license can be found in the <a href="https://github.com/nluxai/nlux/blob/latest/LICENSE">LICENSE file on GitHub</a>.`;
 
 const config: Config = {
-  title: 'nlux',
+  title: 'NLUX',
   tagline: 'The Open-Source Javascript Library To Build Conversational AI Interfaces',
   favicon: 'favicon.ico',
 
@@ -99,7 +99,7 @@ const config: Config = {
       textColor: '#fff',
       isCloseable: false,
       content:
-        'This is the documentation for the <strong>upcoming v2 release</strong> of nlux. ' +
+        'This is the documentation for the <strong>upcoming v2 release</strong> of NLUX. ' +
         'It\'s still in draft and <strong>may contain errors.</strong> ' +
         'Please use <strong>nlux.dev for the stable v1.x</strong> documentation.',
     },
