@@ -101,7 +101,7 @@ const config: Config = {
     //
     announcementBar: {
       id: 'beta_docs',
-      backgroundColor: '#E25C20',
+      backgroundColor: '#e25c20',
       textColor: '#fff',
       isCloseable: false,
       content:

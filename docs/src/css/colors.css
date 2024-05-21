@@ -6,10 +6,12 @@
   --nx-text-color-2: #495959;
 }
 
-[data-theme='dark'] {
-  --nx-background-color-1: #1b1b1d;
+html[data-theme='dark'] {
+  --ifm-background-surface-color: #000000;
+
+  --nx-background-color-1: #000000;
   --nx-text-color-1: #f0f0f0;
 
-  --nx-background-color-2: #242526;
+  --nx-background-color-2: #151515;
   --nx-text-color-2: #ffffff;
 }
