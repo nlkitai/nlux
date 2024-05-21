@@ -1,8 +1,16 @@
 export default `
+// JavaScript code to simulate typing in the prompt box of the chatbot
 const nluxSimulator = (() => {
-  let _prompt = null;
-  let _simulatorEnabled = true;
-  let _promptBoxInput = null;
+  let _prompt: string | null = null;
+  let _simulatorEnabled: boolean = false;
+
+  let _promptInput: HTMLTextAreaElement | null = null;
+  let _setInputValue: ((value: string) => void) | null = null;
+
+  var _nativeTextAreaValueSetter = Object.getOwnPropertyDescriptor(
+    window.HTMLTextAreaElement.prototype,
+    "value"
+  ).set;
 
   return {
     get simulatorEnabled() {
@@ -13,20 +21,29 @@ const nluxSimulator = (() => {
     },
     disableSimulator: () => {
       _simulatorEnabled = false;
+      _setInputValue = null;
     },
     get prompt() {
       return _prompt;
     },
-    setPrompt(prompt) {
+    setPrompt(prompt: string) {
       _prompt = prompt;
       nluxSimulator.checkForPromptSimulation();
     },
-    onPromptBoxDetected: (promptBoxInput) => {
-      _promptBoxInput = promptBoxInput;
+    onPromptInputDetected: (promptInput: HTMLTextAreaElement) => {
+      _promptInput = promptInput;
+      _setInputValue = (value /* string */) => {
+        if (_nativeTextAreaValueSetter) {
+          _nativeTextAreaValueSetter.call(_promptInput, value);
+        }
+
+        _promptInput.dispatchEvent(new Event("input", { bubbles: true }));
+      };
+
       nluxSimulator.checkForPromptSimulation();
     },
     checkForPromptSimulation: () => {
-      if (!_prompt || !_promptBoxInput || !_simulatorEnabled) {
+      if (!_prompt || !_promptInput || !_simulatorEnabled) {
         return;
       }
 
@@ -35,11 +52,11 @@ const nluxSimulator = (() => {
         return;
       }
 
-      _promptBoxInput.addEventListener("click", () => {
+      _promptInput.addEventListener("focus", () => {
         nluxSimulator.disableSimulator();
       });
 
-      _promptBoxInput.addEventListener("keydown", () => {
+      _promptInput.addEventListener("keydown", () => {
         nluxSimulator.disableSimulator();
       });
 
@@ -49,32 +66,29 @@ const nluxSimulator = (() => {
             ".nlux-AiChat-root .nlux-comp-prmptBox > button"
           );
 
-          console.dir(submitButton);
-          window.btt = submitButton;
           if (submitButton) {
-            submitButton.click();
+            submitButton.dispatchEvent(new Event("click", { bubbles: true }));
           }
 
           nluxSimulator.disableSimulator();
         }
       };
 
-      let userClicked = false;
       const typeNextChar = () => {
         if (!nluxSimulator.simulatorEnabled) {
           return;
         }
 
-        _promptBoxInput.focus();
         if (promptToType.length === 0) {
           submitOnDoneTyping();
           return;
         }
 
-        _promptBoxInput.value += promptToType[0];
-        _promptBoxInput.dispatchEvent(new Event("input"));
-        promptToType = promptToType.slice(1);
+        if (_setInputValue) {
+          _setInputValue(_promptInput.value + promptToType[0]);
+        }
 
+        promptToType = promptToType.slice(1);
         const interval = Math.floor(Math.random() * 60) + 20;
         setTimeout(typeNextChar, interval);
       };
@@ -85,27 +99,18 @@ const nluxSimulator = (() => {
 })();
 
 const checkInputInterval = setInterval(() => {
-  const promptBoxInput = document.querySelector(
+  const nluxAiChatPromptInput = document.querySelector(
     ".nlux-AiChat-root .nlux-comp-prmptBox > textarea"
-  );
-  if (promptBoxInput) {
+  ) as HTMLTextAreaElement | null;
+
+  if (nluxAiChatPromptInput) {
     clearInterval(checkInputInterval);
-    if (typeof nluxSimulator.onPromptBoxDetected === "function") {
+    if (typeof nluxSimulator.onPromptInputDetected === "function") {
       setTimeout(() => {
-        nluxSimulator.onPromptBoxDetected(promptBoxInput);
+        nluxSimulator.onPromptInputDetected(nluxAiChatPromptInput);
       }, 1000);
     }
   }
 }, 200);
-
-setTimeout(() => {
-  nluxSimulator?.setPrompt(
-    "How can AI chatbots improve the user experience on my website?"
-  );
-}, 1000);
-
-setTimeout(() => {
-  nluxSimulator?.setPrompt("Hi");
-}, 1000);
 
 `;
