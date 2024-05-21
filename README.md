@@ -17,7 +17,7 @@
 <p align="center">
     Do you like this project ? Please star the repo to show your support 🌟 🧡
     <br />
-    Building with <code>NLUX</code> ? <a href="https://calendar.app.google/6t54aKt6fPVHtcXC9">Get in touch</a> - we'd love to hear from you.
+    Building with <code>NLUX</code> ? <a href="https://calendly.com/nlkit/intro">Get in touch</a> — We'd love to hear from you.
 </p>
 
 ------
@@ -83,7 +83,7 @@ Please visit each package's NPM page for information on how to use it.
 For stable `v1.x` — Developer documentation, examples, and API references are available at:  
 [nlux.dev](https://nlux.dev/)
 
-For `v2.x-beta` — Currently in beta. The docs website will be updated soon.  
+For `v2.x-beta` — The docs website is being built [here](https://docs.nlkit.com/nlux).  
 Please refer to TS type definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
 you are using the latest beta version.
 
@@ -134,7 +134,8 @@ translation tools.
 
 **In a nutshell:**
 
-* You can use `NLUX` in your personal or commercial projects.
+* You can use `NLUX` in your personal projects.
+* You can use `NLUX` in your commercial projects.
 * You can modify `NLUX` and publish your changes under the same license.
 * You cannot use `NLUX`'s source code as dataset to train AI models, nor with code translation tools.
 
