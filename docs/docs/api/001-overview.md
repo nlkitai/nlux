@@ -14,6 +14,6 @@
 `NLUX` is available in 2 flavors:
 
 * **`NLUX` React JS** ⚛️ — Which is a React JS implementation that includes React components and hooks.
-* **`NLUX` Javascript** 🟨 — A pure Javascript library that can be used with any web framework such as Angular or Vue.
+* **`NLUX` JavaScript** 🟨 — A pure JavaScript library that can be used with any web framework such as Angular or Vue.
 
 You'll find a toggle at the top of each documentation page that allows switching between the 2 platforms. 
