@@ -1,5 +1,5 @@
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
-import {PlatformSection} from "../../../src/components/PlatformSection/PlatformSection";
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
 import EventListenersReactJs from './_002-events/#react.mdx';
 import EventListenersJavaScript from './_002-events/#js.mdx';
@@ -27,27 +27,24 @@ import EventErrorReactJs from './_002-events/events/#react/error.mdx';
 
 # Events
 
-`NLUX` emits events when the user interacts with the UI, when server sends a message, or
-when errors occur. You can register event listeners to listen to these events.
+`NLUX` emits events when the user interacts with the UI, when server sends messages, or
+when errors occur. You can register event callbacks to listen to these events.
 
 <PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavaScript}/>
 
-## Event Listeners
+## Listening to Events
 
-You can register event listeners to listen to events emitted by the AI chat UI component.
-
-Events are emitted when the user interacts with the UI, when server sends a message, or
-when errors occur.
+You can register event callbacks to listen to events emitted by `NLUX`.
 
 ---
 
-### Listen To An Event
+### Adding Event Callbacks
 
 <PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavaScript}/>
 
 ---
 
-### Remove An Event Listener
+### Removing Event Callbacks
 
 <PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavaScript}/>
 
@@ -55,7 +52,7 @@ when errors occur.
 
 ## Events
 
-Below is a list of events emitted by the AI chat UI component.
+Below is a list of events emitted by `NLUX`.
 
 ---
 

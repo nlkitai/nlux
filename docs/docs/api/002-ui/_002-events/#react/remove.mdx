@@ -1,14 +1,22 @@
-In order to remove an event listener, you can simply update the object passed to `events` property of `<AiChat />`
-component. For example, if you want to remove the `messageReceived` event listener, you can pass a new object that
-does not contain the `messageReceived` key:
+In order to remove an event callback, you can simply update the object passed to `events` property of `<AiChat />`
+component. For example, if you want to remove the `messageSent` event listener, you can pass a new object that
+does not contain the `messageSent` key:
 
 ```jsx
-<AiChat
-    adapter={myAdapter}
-    events={{
-        messageSent: (message: string) => console.log(message),
-    }}
-/>
+import {useCallback} from 'react';
+import {AiChat, EventsMap, MessageReceivedCallback} from '@nlux/react';
+
+// We define an event callback using the `useCallback` hook
+const messageReceivedCallback: MessageReceivedCallback = useCallback((event) => {
+    console.log('Message received:', event.message);
+}, [/* Your callback code dependencies */]);
+
+const eventCallbacks: EventsMap<string> = {
+    messageReceived: messageReceivedCallback,
+    // We remove the messageSent event listener by not including it in the object
+};
+
+<AiChat adapter={adapter} events={eventCallbacks} />
 ```
 
 Whenever the `events` property is updated, `<AiChat />` component will automatically remove the previous event listeners
@@ -17,5 +25,5 @@ and add the new ones.
 If you want to **remove all event listeners**, you can simply remove the `events` property:
 
 ```jsx
-<AiChat adapter={myAdapter} />
+<AiChat adapter={adapter} />
 ```

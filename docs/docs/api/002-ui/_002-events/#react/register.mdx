@@ -1,14 +1,28 @@
 You can listen to an event by using the `events` property when defining your `<AiChat />` component.
 
-The `events` property is an object where the key is the event name and the value is a function that will be called when the event is triggered. 
-Here is an example of how to listen to the `messageSent` and `messageReceived` events:
+The `events` property is an object where the key is the event name and the value is a callback function that
+will be called when the event is triggered. Here is an example of how to listen to the `messageSent`
+and `messageReceived` events:
 
 ```tsx
-<AiChat
-    adapter={myAdapter}
-    events={{
-        messageSent: (message: string) => console.log(message),
-        messageReceived: (message: string) => console.log(message),
-    }}
-/>
+import {useCallback} from 'react';
+import {AiChat, EventsMap, MessageReceivedCallback} from '@nlux/react';
+
+// We define an event callback using the `useCallback` hook
+const messageReceivedCallback: MessageReceivedCallback = useCallback((event) => {
+    console.log('Message received:', event.message);
+}, [/* Your callback code dependencies */]);
+
+const messageSentCallback: MessageSentCallback = useCallback((event) => {
+    console.log('Message sent:', event.message);
+}, [/* Your callback code dependencies */]);
+
+const eventCallbacks: EventsMap<string> = {
+    messageReceived: messageReceivedCallback,
+    messageSent: messageSentCallback
+};
+
+<AiChat adapter={adapter} events={eventCallbacks} />
 ```
+
+You can only register **one event callback** for each event.

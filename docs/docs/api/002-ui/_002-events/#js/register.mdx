@@ -1,25 +1,37 @@
-In Vanilla JS, the `on` method is used to register one or multiple event listeners.<br />
-Here is an example of how to use it to listen to the `messageReceived` event:
+In Vanilla JavaScript, the `on` method is used to register event callbacks.<br />
+Here is an example of how to use it to listen to the `messageReceived`:
 
-You can either call `on` via the `AiChat` instance ***before*** mounting it to the DOM, when you create it:
+You can either call `on` via the `AiChat` instance **before** mounting, when it's being created:
 
 ```ts
+import {createAiChat, MessageReceivedCallback} from '@nlux/core';
+
+const messageReceivedCallback: MessageReceivedCallback = (ev) => {
+    console.log('Message received:', ev.message);
+};
+
 const aiChat = createAiChat()
-    .withAdapter(myAdapter)
-    .on('messageReceived', callback);
+    .withAdapter(adapter)
+    .on('messageReceived', messageReceivedCallback);
 ```
 
-Or anytime ***after*** mounting it to the DOM:
+You can also add event callbacks anytime **after** it's mounted:
 
 ```ts
-const aiChat = createAiChat().withAdapter(myAdapter);
+const aiChat = createAiChat().withAdapter(adapter);
 aiChat.mount(rootElement);
+
+// ...
+
 aiChat.on('messageReceived', callback);
 ```
 
-In Vanilla JavaScript, **multiple event listeners** can be registered for the same event:
+In Vanilla JavaScript, **multiple event callbacks** can be registered for the same event:
 
 ```js
 aiChat.on('messageReceived', callback1);
 aiChat.on('messageReceived', callback2);
 ```
+
+You cannot call `on`  **after unmouting** the `AiChat` component. You can use the `status` property to ensure that the
+component has not been unmounted.
