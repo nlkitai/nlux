@@ -3,7 +3,25 @@ and a profile picture. And for the case of the bot, you can also specify a _tagl
 bot's name in the initial screen.
 
 > * Type: `PersonaOptions`
-> * Optional
+
+```typescript
+interface PersonaOptions {
+    bot?: BotPersona,
+    user?: UserPersona,
+}
+
+interface BotPersona {
+    name: string;
+    picture: string | Readonly<HTMLElement>;
+    tagline?: string;
+}
+
+interface UserPersona {
+    name: string;
+    picture: string | Readonly<HTMLElement>;
+}
+```
+
 > * Usage:
 
 ```jsx
@@ -29,26 +47,4 @@ const personaOptions: PersonaOptions = {
 };
 
 const aiChat = createAiChat().withPersonaOptions(personaOptions);
-```
-
-| Property | Type |  Default |Description |
-| --- | --- | --- | --- |
-| `personaOptions` | `PersonaOptions` | - | The personas configuration |
-
-```typescript
-interface PersonaOptions {
-    bot?: BotPersona,
-    user?: UserPersona,
-}
-
-interface BotPersona {
-    name: string;
-    picture: string | Readonly<HTMLElement>;
-    tagline?: string;
-}
-
-interface UserPersona {
-    name: string;
-    picture: string | Readonly<HTMLElement>;
-}
 ```

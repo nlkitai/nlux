@@ -1,32 +1,35 @@
-The `withInitialConversation` method is used to enable loading of conversation history before
+The `withInitialConversation(chatItems)` method is used to enable loading of conversation history before
 rendering the `AiChat` component. This is useful if you want the user to resume a conversation
 from a previous session.
 
-* Types: `initialConversation: ConversationItem[]`
-
-With `ConversationItem` being defined as:
+> Type: `initialConversation: ChatItem[]`
 
 ```ts
-type ParticipantRole = 'user' | 'system' | 'ai';
-type ConversationItem = {
+type ChatItem<AiMsg = string> = {
     role: ParticipantRole;
-    message: string;
-}
+    message: AiMsg;
+};
+
+type ParticipantRole = 'user' | 'system' | 'ai';
 ```
 
-* Optional
-* Usage:
+> * Usage:
 
 ```javascript
-const aiChat = createAiChat()
-    .withInitialConversation([
-        {
-            role: 'user',
-            message: 'Hello AI chatbot! What\'s the capital of Antartica?'
-        },
-        {
-            role: 'ai',
-            message: 'Antarctica, the cool place where penguins rule, doesn\'t have a capital because it\'s too chill for politics!'
-        }
-    ]);
+import {ChatItem} from from '@nlux/core';
+
+const initialConversation: ChatItem[] = [
+    {
+        role: 'user',
+        message: 'I need help with my order'
+    },
+    {
+        role: 'ai',
+        message: 'Sure! What is your order number?'
+    }
+];
+
+const aiChat = createAiChat().withInitialConversation(initialConversation);
 ```
+
+> * Reactivity: This property is not reactive. When it changes after the component is mounted, it will be ignored.

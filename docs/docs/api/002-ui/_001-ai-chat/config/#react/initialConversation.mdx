@@ -1,34 +1,35 @@
-The `initialConversation` property is used to enable loading of conversation history before
+The `initialConversation(chatItems)` property is used to enable loading of conversation history before
 rendering the `AiChat` component. This is useful if you want the user to resume a conversation
 from a previous session.
 
-* Types: `initialConversation: ConversationItem[]`
-
-With `ConversationItem` being defined as:
+> Type: `initialConversation: ChatItem[]`
 
 ```ts
-type ParticipantRole = 'user' | 'system' | 'ai';
-type ConversationItem = {
+type ChatItem<AiMsg = string> = {
     role: ParticipantRole;
-    message: string;
-}
+    message: AiMsg;
+};
+
+type ParticipantRole = 'user' | 'system' | 'ai';
 ```
 
-* Optional
-* Not reactive (when changed, the component will not be re-rendered)
-* Usage:
+> * Usage:
 
-```jsx
-<AiChat
-    initialConversation={[
-        {
-            role: 'user',
-            message: 'Hello AI chatbot! What\'s the capital of Antartica?'
-        },
-        {
-            role: 'ai',
-            message: 'Antarctica, the cool place where penguins rule, doesn\'t have a capital because it\'s too chill for politics!'
-        }
-    ]}
-/>
+```tsx
+import {ChatItem} from from '@nlux/react';
+
+const initialConversation: ChatItem[] = [
+    {
+        role: 'user',
+        message: 'I need help with my order'
+    },
+    {
+        role: 'ai',
+        message: 'Sure! What is your order number?'
+    }
+];
+
+<AiChat initialConversation={initialConversation} />
 ```
+
+> * Reactivity: This property is not reactive. When it changes after the component is mounted, it will be ignored.
