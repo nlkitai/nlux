@@ -80,11 +80,10 @@ type ReadyEventDetails<AiMsg> = {
 
 ### Pre-Destroy
 
-> * Event Name: `preDestroy`
-
 This event is emitted when the `AiChat` component is about to be destroyed.
 It allows access to the component's state, conversation history, and props before it is destroyed.
 
+> * Event Name: `preDestroy`
 > * Callback Type:
 
 ```ts
@@ -102,30 +101,27 @@ type PreDestroyEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Sent
-
-* Event Name: `messageSent`
+### Message Sent (TO UPDATE!)
 
 This event is emitted when the user sends a message. The event only gets triggered when the
 adapter method responsible for sending the message to the backend executes successfully.
 For [standard adapters](/api/adapters), this means that the message was successfully sent to
 the backend.
 
-* Callback Type:
+> * Event Name: `messageSent`
+> * Callback Type:
 
 ```ts
 type MessageSentCallback = (message: string) => void;
 ```
 
-* Example:
+> * Usage:
 
 <PlatformSelector reactJs={EventMessageSentReactJs} javascript={EventMessageSentJavaScript}/>
 
 ---
 
-### Message Received
-
-* Event Name: `messageReceived`
+### Message Received (TO UPDATE!)
 
 This event is emitted when a message is received from the server. The event listener receives the
 message as a parameter.
@@ -137,38 +133,52 @@ when the streaming is complete and the message is fully received.
 
 Please note that `messageReceived` does not mean that the message has fully rendered on the screen.
 `NLUX` renders the messages in a character-by-character animation, so the message may still being
-rendered when this event is emitted.
+rendered when this event is emitted. You can use the `messageRendered` event to listen to when the
+message has fully rendered on the screen.
 
-* Callback Type:
+> * Event Name: `messageReceived`
+> * Callback Type:
 
 ```ts
 type MessageReceivedCallback = (message: string) => void;
 ```
 
-* Example:
+> * Usage:
 
 <PlatformSelector reactJs={EventMessageReceivedReactJs} javascript={EventMessageReceivedJavaScript}/>
 
 ---
 
-### Error
+### Message Rendered (TO DO!)
 
-* Event Name: `error`
+> * Event Name: `messageRendered`
+
+---
+
+### Message Stream Started (TO DO!)
+
+> * Event Name: `messageStreamStarted`
+
+---
+
+### Error
 
 This event is emitted when an exception occurs. The event listener receives the `ErrorEventDetails` object
 as a parameter.
 
-* Callback Type:
+> * Event Name: `error`
+> * Callback Type:
 
 ```typescript
+type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
+
 type ErrorEventDetails = {
     errorId: string;
     message: string;
+    errorObject?: Error;
 };
-
-type ErrorCallback = (error: ErrorEventDetails) => void;
 ```
 
-* Example:
+> * Usage:
 
 <PlatformSelector reactJs={EventErrorReactJs} javascript={EventErrorJavaScript}/>

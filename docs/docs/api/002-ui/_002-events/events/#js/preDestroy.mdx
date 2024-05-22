@@ -9,11 +9,17 @@ const preDestroyCallback: PreDestroyCallback = (preDestroyDetails: PreDestroyEve
 ```
 
 ```ts
-// Register the callback
+// Registering the preDestroyCallback when creating the AiChat instance
 const aiChat = createAiChat().withAdapter(adapter).on('preDestroy', preDestroyCallback);
 ```
 
 ```ts
-// Unregister the callback
+// Registering the preDestroyCallback after creating the AiChat instance
+// and before calling aiChat.unmount()
+aiChat.on('preDestroy', preDestroyCallback);
+```
+
+```ts
+// Unregistering the preDestroyCallback
 aiChat.removeEventListener('preDestroy', preDestroyCallback);
 ```

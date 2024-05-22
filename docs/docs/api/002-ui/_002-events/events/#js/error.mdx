@@ -1,15 +1,24 @@
-```typescript
+```ts
 import {createAiChat, ErrorCallback, ErrorEventDetails} from '@nlux/core';
 
-const aiChat = createAiChat().withAdapter(myAdapter);
-const callback: ErrorCallback = (details: ErrorEventDetails) => {
-    console.log(details.errorId);
-    console.log(details.message);
+const aiChat = createAiChat().withAdapter(adapter);
+const errorCallback: ErrorCallback = (errorDetails: ErrorEventDetails) => {
+    console.log(errorDetails.errorId);
+    console.log(errorDetails.message);
 };
+```
 
-// Add listener
-aiChat.on('error', callback);
+```ts
+// Registering the errorCallback when creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('error', errorCallback);
+```
 
-// Remove listener
-aiChat.removeEventListener('error', callback);
+```ts
+// Registering the errorCallback after creating the AiChat instance
+aiChat.on('error', errorCallback);
+```
+
+```ts
+// Unregistering the errorCallback
+aiChat.removeEventListener('error', errorCallback);
 ```

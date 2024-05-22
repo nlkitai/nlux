@@ -8,5 +8,6 @@ const readyCallback = useCallback<ReadyCallback>((readyDetails: ReadyEventDetail
 ```
 
 ```tsx
+// Provide the readyCallback callback as part of the events prop
 <AiChat  adapter={adapter} events={{ready: readyCallback}} />
 ```

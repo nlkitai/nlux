@@ -1,21 +1,14 @@
 ```tsx
 import {AiChat, ErrorCallback, ErrorEventDetails} from '@nlux/react';
+import {useCallback} from 'react';
 
-export default () => {
-    const errorCallback = useCallback<ErrorCallback>(
-        (details: ErrorEventDetails) => {
-            console.log(details.errorId);
-            console.log(details.message);
-        }, []
-    );
+const errorCallback = useCallback<ErrorCallback>((errorDetails: ErrorEventDetails) => {
+    console.log('An error occurred:', errorDetails.message);
+    console.log('Error ID:', errorDetails.errorId);
+}, []);
+```
 
-    return (
-        <AiChat
-            adapter={adapter}
-            events={{
-                error: errorCallback,
-            }}
-        />
-    );
-};
+```tsx
+// Provide the errorCallback callback as part of the events prop
+<AiChat adapter={adapter} events={{error: errorCallback}} />
 ```
