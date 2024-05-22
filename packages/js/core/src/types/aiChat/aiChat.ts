@@ -1,3 +1,5 @@
+import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
+import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {ChatAdapterBuilder} from '../../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {ConversationOptions} from '../../exports/aiChat/options/conversationOptions';
@@ -84,9 +86,9 @@ export interface IAiChat<AiMsg> {
      * The adapter will be used to send and receive messages from the chat backend.
      * This method should be called before mounting the chat component, and it should be called only once.
      *
-     * @param {ChatAdapterBuilder} adapterBuilder The builder for the chat adapter.
+     * @param {adapter: ChatAdapter | StandardChatAdapter | ChatAdapterBuilder} adapter The builder for the chat adapter.
      */
-    withAdapter(adapterBuilder: ChatAdapterBuilder<AiMsg>): IAiChat<AiMsg>;
+    withAdapter(adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>): IAiChat<AiMsg>;
 
     /**
      * Enables providing a class name to the chat component.

@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         colorScheme,
     };
 
-    const aiChat = createAiChat()
+    const aiChat = createAiChat<string>()
         // .withAdapter(nlBridgeAdapter)
         // .withAdapter(openAiAdapter)
         .withAdapter(langChainAdapter)

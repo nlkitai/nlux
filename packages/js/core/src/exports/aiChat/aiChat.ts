@@ -218,7 +218,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         this.controller.updateProps(props);
     }
 
-    public withAdapter(adapter: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>) {
+    public withAdapter(adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>) {
         if (this.mounted) {
             throw new NluxUsageError({
                 source: this.constructor.name,

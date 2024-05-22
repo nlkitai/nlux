@@ -1,3 +1,4 @@
+import {CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {createComposerDom} from '../../../../../../shared/src/ui/Composer/create';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
@@ -19,7 +20,7 @@ export const renderChatbox: CompRenderer<
 
     const [textBoxElement, removeTextBoxListeners] = listenToElement(composerRoot, ':scope > textarea')
         .on('input', compEvent('text-updated'))
-        .on('keydown', (event: KeyboardEvent) => {
+        .on('keydown', ((event: KeyboardEvent) => {
             const isEnter = event.key === 'Enter';
             const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
@@ -33,7 +34,7 @@ export const renderChatbox: CompRenderer<
                 compEvent('command-enter-key-pressed')(event);
                 return;
             }
-        }).get();
+        }) as CallbackFunction).get();
 
     const [sendButtonElement, removeSendButtonListeners] = listenToElement(composerRoot, ':scope > button')
         .on('click', compEvent('send-message-clicked')).get();
