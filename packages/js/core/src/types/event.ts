@@ -12,12 +12,12 @@ export type MessageStreamStartedEventDetails = {
     uid: string;
 };
 
-export type MessageRenderedEventDetails<AiMsg> = {
+export type MessageRenderedEventDetails<AiMsg = string> = {
     uid: string;
     message: AiMsg;
 };
 
-export type MessageReceivedEventDetails<AiMsg> = {
+export type MessageReceivedEventDetails<AiMsg = string> = {
     uid: string;
     message: AiMsg;
 };
@@ -28,11 +28,11 @@ export type ErrorEventDetails = {
     errorObject?: Error;
 };
 
-export type ReadyEventDetails<AiMsg> = {
+export type ReadyEventDetails<AiMsg = string> = {
     aiChatProps: AiChatPropsInEvents<AiMsg>
 }
 
-export type PreDestroyEventDetails<AiMsg> = {
+export type PreDestroyEventDetails<AiMsg = string> = {
     aiChatProps: AiChatPropsInEvents<AiMsg>;
     conversationHistory: Readonly<ChatItem<AiMsg>[]>;
 }
@@ -108,4 +108,4 @@ export type EventsMap<AiMsg = string> = {
 
 export type EventName = keyof EventsMap<AnyAiMsg>;
 
-export type EventCallback<AiMsg> = EventsMap<AiMsg>[EventName];
+export type EventCallback<AiMsg = string> = EventsMap<AiMsg>[EventName];
