@@ -64,9 +64,9 @@ This event is emitted when the `AiChat` component is mounted and ready to use.
 > * Callback Type:
 
 ```ts
-export type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
+type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
 
-export type ReadyEventDetails<AiMsg> = {
+type ReadyEventDetails<AiMsg> = {
     // Props used to initialize the AiChat component (excluding event listeners and adapter)
     aiChatProps: AiChatPropsInEvents<AiMsg>
 }
@@ -80,23 +80,23 @@ export type ReadyEventDetails<AiMsg> = {
 
 ### Pre-Destroy
 
-* Event Name: `preDestroy`
+> * Event Name: `preDestroy`
 
 This event is emitted when the `AiChat` component is about to be destroyed.
-It allows access to the component's state and props before it is destroyed.
+It allows access to the component's state, conversation history, and props before it is destroyed.
 
-* Callback Type:
+> * Callback Type:
 
 ```ts
-type PreDestroyEventDetails = {
-    aiChatProps: AiChatProps;
-    conversationHistory: Readonly<ConversationItem[]>;
-};
+type PreDestroyCallback<AiMsg = string> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
 
-type PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => void;
+type PreDestroyEventDetails<AiMsg = string> = {
+    aiChatProps: AiChatPropsInEvents<AiMsg>;
+    conversationHistory: Readonly<ChatItem<AiMsg>[]>;
+}
 ```
 
-* Example:
+> * Usage:
 
 <PlatformSelector reactJs={EventPreDestroyReactJs} javascript={EventPreDestroyJavaScript}/>
 

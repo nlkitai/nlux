@@ -1,22 +1,14 @@
 ```tsx
 import {AiChat, PreDestroyCallback, PreDestroyEventDetails} from '@nlux/react';
+import {useCallback} from 'react';
 
-export default () => {
-    const callback = useCallback<ReadyCallback>(
-        (preDestroyDetails: PreDestroyEventDetails) => {
-            if (preDestroyDetails.conversationHistory > 0) {
-                // Do something with the conversation history before it is destroyed
-            }
-        }, []
-    );
+const preDestroyCallback = useCallback<PreDestroyCallback>((preDestroyDetails: PreDestroyEventDetails) => {
+    if (preDestroyDetails.conversationHistory > 0) {
+        // Do something with the conversation history before it is destroyed
+    }
+}, [/* Callback dependencies */]);
+```
 
-    return (
-        <AiChat
-            adapter={adapter}
-            events={{
-                ready: callback,
-            }}
-        />
-    );
-};
+```tsx
+<AiChat adapter={adapter} events={{preDestroy: preDestroyCallback}} />
 ```
