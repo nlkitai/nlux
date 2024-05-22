@@ -85,7 +85,7 @@ export type MessageRenderedCallback<AiMsg = string> = (event: MessageRenderedEve
  *
  * @param readyDetails The details of the ready event such as the AiChatProps used to initialize the chat component.
  */
-export type ReadyCallback<AiMsg> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
+export type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
 
 /**
  * The callback for when the chat component is about to be destroyed.
@@ -94,9 +94,9 @@ export type ReadyCallback<AiMsg> = (readyDetails: ReadyEventDetails<AiMsg>) => v
  * @param preDestroyDetails The details of the pre-destroy event such as the AiChatProps used to initialize the chat
  * component and the conversation history.
  */
-export type PreDestroyCallback<AiMsg> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
+export type PreDestroyCallback<AiMsg = string> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
 
-export type EventsMap<AiMsg> = {
+export type EventsMap<AiMsg = string> = {
     ready: ReadyCallback<AiMsg>;
     preDestroy: PreDestroyCallback<AiMsg>;
     messageSent: MessageSentCallback;
