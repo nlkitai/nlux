@@ -8,6 +8,7 @@
         margin-bottom: var(--nlux-chItm-msg-lstLt--mrgBtm);
         margin-left: var(--nlux-chItm-msg-lstLt--mrgLft);
         margin-right: var(--nlux-chItm-msg-lstLt--mrgRgt);
+        width: 100%;
     }
 
     > .nlux-comp-cht_itm-prt_info {
