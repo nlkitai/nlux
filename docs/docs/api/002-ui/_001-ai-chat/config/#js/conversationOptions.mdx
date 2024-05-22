@@ -1,9 +1,28 @@
-The `withConversationOptions` method is used to provide conversation options to the `AiChat` component.
+The `withConversationOptions(options)` method is used to provide conversation options to the `AiChat` component.
 The conversation options are optional, and they are used to configure the conversation.
 If provided, it should be an object with properties from the table listed below.
 
-* Type: `ConversationOptions`
-* Optional
+> * Type: `ConversationOptions`
+
+```ts
+type ConversationOptions = {
+    layout?: ConversationLayout;
+    autoScroll?: boolean;
+    historyPayloadSize?: HistoryPayloadSize;
+};
+
+type HistoryPayloadSize = number | 'max';
+
+type ConversationLayout = 'bubbles' | 'list';
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `layout` | `'bubbles'`&nbsp;\|&nbsp;`'list'` | `'list'` | The layout of the messages when displayed in the conversation. Use `bubbles` for a chat app layout and `list` for simple layout with messages stacked on top of each other. |
+| `autoScroll` | `boolean` | `true` | If `true`, the conversation will scroll to the bottom when a new message is being added. |
+| `historyPayloadSize` | `number`&nbsp;\|&nbsp;`'max'` | `'max'` | The number of messages from the conversation history to be sent to the backend whenver a message is submitted. If set to `0`, no messages will be sent to the server. If set to `'max'`, all the conversation messages will be sent to the server everytime time a prompt is submitted. |
+
+
 * Usage:
 
 ```javascript
