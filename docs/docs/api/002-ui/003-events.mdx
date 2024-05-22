@@ -58,22 +58,21 @@ Below is a list of events emitted by `NLUX`.
 
 ### Ready
 
-* Event Name: `ready`
+This event is emitted when the `AiChat` component is mounted and ready to use.
 
-This event is emitted when the AI chat UI component is mounted and ready to use.
-
-* Callback Type:
+> * Event Name: `ready`
+> * Callback Type:
 
 ```ts
-type ReadyEventDetails = {
-    // Props used to initialize the AiChat component
-    aiChatProps: AiChatProps;
-};
+export type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
 
-type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
+export type ReadyEventDetails<AiMsg> = {
+    // Props used to initialize the AiChat component (excluding event listeners and adapter)
+    aiChatProps: AiChatPropsInEvents<AiMsg>
+}
 ```
 
-* Example:
+> * Usage:
 
 <PlatformSelector reactJs={EventReadyReactJs} javascript={EventReadyJavaScript}/>
 
@@ -83,7 +82,7 @@ type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
 
 * Event Name: `preDestroy`
 
-This event is emitted when the AI chat UI component is about to be destroyed.
+This event is emitted when the `AiChat` component is about to be destroyed.
 It allows access to the component's state and props before it is destroyed.
 
 * Callback Type:

@@ -1,20 +1,12 @@
 ```tsx
+import {useCallback} from 'react';
 import {AiChat, ReadyCallback, ReadyEventDetails} from '@nlux/react';
 
-export default () => {
-    const callback = useCallback<ReadyCallback>(
-        (readyDetails: ReadyEventDetails) => {
-            // Do something
-        }, []
-    );
+const onReady = useCallback<ReadyCallback>((readyDetails: ReadyEventDetails) => {
+    console.log('Chat is ready. Props used to initialize the chat:', readyDetails.aiChatProps);
+}, []);
+```
 
-    return (
-        <AiChat
-            adapter={adapter}
-            events={{
-                ready: callback,
-            }}
-        />
-    );
-};
+```tsx
+<AiChat  adapter={adapter} events={{ready: onReady}} />
 ```

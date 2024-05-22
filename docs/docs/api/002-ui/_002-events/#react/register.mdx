@@ -6,15 +6,15 @@ and `messageReceived` events:
 
 ```tsx
 import {useCallback} from 'react';
-import {AiChat, EventsMap, MessageReceivedCallback} from '@nlux/react';
+import {AiChat, EventsMap, MessageReceivedCallback, MessageSentCallback} from '@nlux/react';
 
 // We define an event callback using the `useCallback` hook
-const messageReceivedCallback: MessageReceivedCallback = useCallback((event) => {
-    console.log('Message received:', event.message);
+const messageReceivedCallback = useCallback<MessageReceivedCallback>((eventDetails) => {
+    console.log('Message received:', eventDetails.message);
 }, [/* Your callback code dependencies */]);
 
-const messageSentCallback: MessageSentCallback = useCallback((event) => {
-    console.log('Message sent:', event.message);
+const messageSentCallback = useCallback<MessageSentCallback>((eventDetails) => {
+    console.log('Message sent:', eventDetails.message);
 }, [/* Your callback code dependencies */]);
 
 const eventCallbacks: EventsMap<string> = {

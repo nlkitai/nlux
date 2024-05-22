@@ -7,17 +7,17 @@ const adapter = createChatAdapter()
     .withUrl('https://<Your Adapter Endpoint Url>') // Depends on the adapter
     .withApiKey('<Your Adapter API Key>'); // Depends on the adapter
 
-// Create the AI chat UI without rendering it
+// Create the chat UI without rendering it
 const aiChat = createAiChat().withAdapter(adapter);
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Rendering the AI chat UI
+    // Rendering the chat UI
     const chatContainer = document.getElementById('chat-container');
     aiChat.mount(chatContainer);
 });
 
 document.getElementById('myCloseChatButton').addEventListener('click', () => {
-    // Unmounting the AI chat UI when it's no longer needed
+    // Unmounting the chat UI when it's no longer needed
     aiChat.unmount();
 });
 ```

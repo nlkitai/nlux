@@ -1,10 +1,14 @@
 ```typescript
 import {createAiChat, ReadyCallback, ReadyEventDetails} from '@nlux/core';
 
-const callback: ReadyCallback = (readyDetails: ReadyEventDetails) => {
-    // Do something
+const onReadyCallback: ReadyCallback = (readyEvent: ReadyEventDetails) => {
+    console.log('Chat is ready. Props used to initialize the chat:', readyEvent.aiChatProps);
 };
+```
+```typescript
+// When creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('ready', onReadyCallback);
 
-const aiChat = createAiChat().withAdapter(myAdapter);
-aiChat.on('ready', callback);
+// After creating the AiChat instance
+aiChat.on('ready', onReadyCallback);
 ```
