@@ -73,6 +73,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             layout={props.layout}
                             loader={props.loader}
                             responseRenderer={props.responseRenderer}
+                            promptRenderer={props.promptRenderer}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
                             syntaxHighlighter={props.syntaxHighlighter}
                             markdownLinkTarget={props.markdownLinkTarget}

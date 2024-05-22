@@ -1,9 +1,11 @@
-import {forwardRef, ReactElement, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {forwardRef, ReactElement, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '../../../../../shared/src/ui/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '../../../../../shared/src/ui/ChatItem/utils/applyNewLayoutClassName';
+import {PromptRenderer, PromptRendererProps} from '../../exports/messageOptions';
+import {MarkdownSnapshotRenderer} from '../../logic/MessageRenderer/MarkdownSnapshotRenderer';
 import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
 import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
@@ -47,13 +49,23 @@ export const ChatItemComp: <AiMsg>(
         : conversationLayoutClassName['list'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
-    const MessageRenderer = useMemo(() => {
+    const AiMessageRenderer = useMemo(() => {
         return isStreaming ? () => '' : createMessageRenderer<AiMsg>(props);
     }, [
         isStreaming,
         props.uid, props.status, props.fetchedContent, props.streamedContent, props.direction,
         props.responseRenderer, props.syntaxHighlighter, props.markdownLinkTarget,
     ]);
+
+    const UserMessageRenderer: PromptRenderer = useCallback(() => {
+        if (props.promptRenderer === undefined) {
+            return (
+                <MarkdownSnapshotRenderer messageUid={props.uid} content={props.fetchedContent as string} />
+            );
+        }
+
+        return props.promptRenderer({uid: props.uid, prompt: props.fetchedContent as string});
+    }, [props.promptRenderer, props.fetchedContent, props.uid,]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
         StreamContainerComp<AiMsg>,
@@ -79,10 +91,18 @@ export const ChatItemComp: <AiMsg>(
                     }}
                 />
             )}
-            {!isStreaming && (
+            {!isStreaming && props.direction === 'incoming' && (
+                 <MessageComp
+                    uid={props.uid}
+                    message={AiMessageRenderer}
+                    status={props.status}
+                    direction={props.direction}
+                />
+            )}
+            {!isStreaming && props.direction === 'outgoing' && (
                 <MessageComp
                     uid={props.uid}
-                    message={MessageRenderer}
+                    message={UserMessageRenderer}
                     status={props.status}
                     direction={props.direction}
                 />

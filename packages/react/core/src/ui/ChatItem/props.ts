@@ -1,7 +1,7 @@
 import {ConversationLayout, DataTransferMode, HighlighterExtension} from '@nlux/core';
 import {ReactElement} from 'react';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
-import {ResponseRenderer} from '../../exports/messageOptions';
+import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 
 export type ChatItemProps<AiMsg> = {
     uid: string;
@@ -14,6 +14,7 @@ export type ChatItemProps<AiMsg> = {
     streamedContent?: AiMsg[];
     streamedServerResponse?: Array<unknown>;
     responseRenderer?: ResponseRenderer<AiMsg>;
+    promptRenderer?: PromptRenderer;
     name: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;

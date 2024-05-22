@@ -124,6 +124,7 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         layout={conversationLayout}
                         responseRenderer={props.messageOptions?.responseRenderer}
+                        promptRenderer={props.messageOptions?.promptRenderer}
                         syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
                         markdownLinkTarget={props.messageOptions?.markdownLinkTarget}
                         showCodeBlockCopyButton={props.messageOptions?.showCodeBlockCopyButton}

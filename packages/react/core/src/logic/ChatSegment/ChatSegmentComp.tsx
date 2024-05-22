@@ -141,6 +141,7 @@ export const ChatSegmentComp: <AiMsg>(
                             status={'complete'}
                             direction={'outgoing'}
                             layout={props.layout}
+                            promptRenderer={props.promptRenderer}
                             dataTransferMode={'fetch'} // User chat items are always in fetch mode.
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}

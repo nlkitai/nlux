@@ -8,6 +8,7 @@ export type StreamContainerProps<AisMsg> = {
     status: 'streaming' | 'complete';
     initialMarkdownMessage?: string;
     responseRenderer?: ResponseRenderer<AisMsg>;
+    promptRenderer?: ResponseRenderer<AisMsg>;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
         markdownLinkTarget?: 'blank' | 'self';
