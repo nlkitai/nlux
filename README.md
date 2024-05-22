@@ -83,9 +83,11 @@ Please visit each package's NPM page for information on how to use it.
 For stable `v1.x` — Developer documentation, examples, and API references are available at:  
 [nlux.dev](https://nlux.dev/)
 
-For `v2.x-beta` — The docs website is being built [here](https://docs.nlkit.com/nlux).  
-Please refer to TS type definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
-you are using the latest beta version.
+For `v2.x-beta` — The docs website is being built and will be available at:  
+[docs.nlkit.com](https://docs.nlkit.com/)  
+
+For `v2.x-beta`, please refer to TS type definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
+as the documentation is incomplete and still being written.
 
 ## Design Principles ⚜️
 
