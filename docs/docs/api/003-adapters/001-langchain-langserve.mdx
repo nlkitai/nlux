@@ -6,30 +6,30 @@ import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSe
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
 import ReactJs from './_001-langchain-langserve/#react.mdx';
-import Javascript from './_001-langchain-langserve/#js.mdx';
+import JavaScript from './_001-langchain-langserve/#js.mdx';
 
-import InstallationJavascript from './_001-langchain-langserve/#js/installation.mdx';
+import InstallationJavaScript from './_001-langchain-langserve/#js/installation.mdx';
 import InstallationReactJs from './_001-langchain-langserve/#react/installation.mdx';
 
-import UsageJavascript from './_001-langchain-langserve/#js/usage.mdx';
+import UsageJavaScript from './_001-langchain-langserve/#js/usage.mdx';
 import UsageReactJs from './_001-langchain-langserve/#react/usage.mdx';
 
-import ConfigJavascript from './_001-langchain-langserve/#js/config.mdx';
+import ConfigJavaScript from './_001-langchain-langserve/#js/config.mdx';
 import ConfigReactJs from './_001-langchain-langserve/#react/config.mdx';
 
-import ConfigUrlJavascript from './_001-langchain-langserve/#js/config/url.mdx';
+import ConfigUrlJavaScript from './_001-langchain-langserve/#js/config/url.mdx';
 import ConfigUrlReactJs from './_001-langchain-langserve/#react/config/url.mdx';
 
-import ConfigUseInputSchemaJavascript from './_001-langchain-langserve/#js/config/useInputSchema.mdx';
+import ConfigUseInputSchemaJavaScript from './_001-langchain-langserve/#js/config/useInputSchema.mdx';
 import ConfigUseInputSchemaReactJs from './_001-langchain-langserve/#react/config/useInputSchema.mdx';
 
-import ConfigDataTransferModeJavascript from './_001-langchain-langserve/#js/config/dataTransferMode.mdx';
+import ConfigDataTransferModeJavaScript from './_001-langchain-langserve/#js/config/dataTransferMode.mdx';
 import ConfigDataTransferModeReactJs from './_001-langchain-langserve/#react/config/dataTransferMode.mdx';
 
-import ConfigInputPreProcessorJavascript from './_001-langchain-langserve/#js/config/inputPreProcessor.mdx';
+import ConfigInputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/inputPreProcessor.mdx';
 import ConfigInputPreProcessorReactJs from './_001-langchain-langserve/#react/config/inputPreProcessor.mdx';
 
-import ConfigOutputPreProcessorJavascript from './_001-langchain-langserve/#js/config/outputPreProcessor.mdx';
+import ConfigOutputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/outputPreProcessor.mdx';
 import ConfigOutputPreProcessorReactJs from './_001-langchain-langserve/#react/config/outputPreProcessor.mdx';
 
 # LangChain LangServe
@@ -44,19 +44,19 @@ endpoints and an input/out schema that can be used to interact with the language
 
 This documentation page is about the standard adapter provided by `NLUX` for APIs built using LangServe.
 
-<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
 
 ## Installation
 
-<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavascript}/>
+<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
 
 ## Usage
 
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavascript}/>
+<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
 
 ## Configuration
 
-<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavascript}/>
+<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
 
 ---
 
@@ -68,7 +68,7 @@ Example: `https://my-langserver-api.example.com/parrot-speaks`
 Do **NOT** append the specific LangServe endpoint (such as `/invoke` `/stream` or `/input_schema`) to the URL.
 The adapter will automatically append the endpoint to the URL based on other configuration.
 
-<PlatformSection reactJs={ConfigUrlReactJs} javascript={ConfigUrlJavascript}/>
+<PlatformSection reactJs={ConfigUrlReactJs} javascript={ConfigUrlJavaScript}/>
 
 ---
 
@@ -80,7 +80,7 @@ The data transfer mode to use when communicating with the LangServe runnable.
 When the adapter is configured to use `stream` mode, the `/stream` endpoint of the LangServe API will be used to
 communicate with the runnable. When the adapter is configured to use `fetch` mode, the `/invoke` endpoint will be used.
 
-<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavascript}/>
+<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
 
 ---
 
@@ -94,7 +94,7 @@ Whatever this function returns will be sent to the runnable under the `input` pr
 Example: If your runnable expects an object with `user_prompt` and `additional_data` properties, you can use the
 following input pre-processor in the example below to transform the input.
 
-<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavascript}/>
+<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
 
 ---
 
@@ -109,7 +109,7 @@ This function returns a string that will be used displayed in the `NLUX` convers
 Example: If your runnable returns an object with `value` and `base` properties, you can use the out in the
 example below to transform the output to a string.
 
-<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavascript}/>
+<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
 
 ---
 
@@ -121,4 +121,4 @@ Set this option to `false` to disable this behavior.
 
 If disabled, the input will be sent to the runnable as a string without any transformation.
 
-<PlatformSection reactJs={ConfigUseInputSchemaReactJs} javascript={ConfigUseInputSchemaJavascript}/>
+<PlatformSection reactJs={ConfigUseInputSchemaReactJs} javascript={ConfigUseInputSchemaJavaScript}/>

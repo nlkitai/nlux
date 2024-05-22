@@ -12,7 +12,7 @@ import Heading from '@theme/Heading';
 
 const NluxLogoLight = '/nlux/logo/nlux-hero-logo-light.png';
 const NluxLogoDark = '/nlux/logo/nlux-hero-logo-dark.png';
-const JavascriptLogo = '/nlux/images/platform-logos/javascript-logo-60pxh.png';
+const JavaScriptLogo = '/nlux/images/platform-logos/javascript-logo-60pxh.png';
 const ReactJsLogo = '/nlux/images/platform-logos/react-js-logo-60pxh.png'
 const LangChainLogo = '/nlux/images/platform-logos/langchain-logo-60pxh.png';
 const OpenAiLogo = '/nlux/images/platform-logos/openai-logo-60pxh.png';
@@ -60,8 +60,8 @@ export const Hero = ({className}: {className?: string}) => {
                         <h5 style={{textAlign: 'left'}}>OpenAI<br/>Adapters</h5>
                     </div>
                     <div className={heroStyles.platformName}>
-                        <img src={JavascriptLogo} alt="Vanilla JS Logo" width={40}/>
-                        <h5 style={{textAlign: 'left'}}>Javascript<br/>API</h5>
+                        <img src={JavaScriptLogo} alt="Vanilla JS Logo" width={40}/>
+                        <h5 style={{textAlign: 'left'}}>JavaScript<br/>API</h5>
                     </div>
                     <div className={heroStyles.platformName}>
                         <img src={ReactJsLogo} alt="React JS Logo" width={40}/>

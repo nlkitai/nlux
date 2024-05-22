@@ -5,7 +5,7 @@
 
 ## The Conversational AI UI Library For Any LLM
 
-`NLUX` _(for Natural Language User Experience)_ is an open-source Javascript library that makes it super simple to
+`NLUX` _(for Natural Language User Experience)_ is an open-source JavaScript library that makes it super simple to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
 of code, you can add conversational AI capabilities and interact with your favourite LLM.
 

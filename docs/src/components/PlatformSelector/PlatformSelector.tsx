@@ -12,7 +12,7 @@ export const PlatformSelector = (props: PlatformComponents) => {
             <TabItem value="react-js" label="React JS ⚛️">
                 {<props.reactJs />}
             </TabItem>
-            <TabItem value="javascript" label="Javascript 🟨">
+            <TabItem value="javascript" label="JavaScript 🟨">
                 {<props.javascript />}
             </TabItem>
         </Tabs>

@@ -2,7 +2,7 @@
 
 <p align=center>
   <img style="padding: 0; margin: 0;" height="80px" src="https://nlux.dev/nlux-logo/nlux-logo-main.png"/><br />
-  The React JS and Javascript Library For Building Conversational AI Interfaces ✨💬
+  The React JS and JavaScript Library For Building Conversational AI Interfaces ✨💬
 </p>
 <p align=center>
   <img alt="Free & Open Source" src="https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61" />
@@ -22,7 +22,7 @@
 
 ------
 
-`NLUX` (_for Natural Language User Experience_) is an open-source Javascript and React JS library that makes it super
+`NLUX` (_for Natural Language User Experience_) is an open-source JavaScript and React JS library that makes it super
 simple to integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few
 lines of code, you can add conversational AI capabilities and interact with your favourite LLM.
 

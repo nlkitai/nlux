@@ -6,39 +6,39 @@ import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSe
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
 import ReactJs from './_002-hugging-face/#react.mdx';
-import Javascript from './_002-hugging-face/#js.mdx';
+import JavaScript from './_002-hugging-face/#js.mdx';
 
-import InstallationJavascript from './_002-hugging-face/#js/installation.mdx';
+import InstallationJavaScript from './_002-hugging-face/#js/installation.mdx';
 import InstallationReactJs from './_002-hugging-face/#react/installation.mdx';
 
-import UsageJavascript from './_002-hugging-face/#js/usage.mdx';
+import UsageJavaScript from './_002-hugging-face/#js/usage.mdx';
 import UsageReactJs from './_002-hugging-face/#react/usage.mdx';
 
-import ConfigJavascript from './_002-hugging-face/#js/config.mdx';
+import ConfigJavaScript from './_002-hugging-face/#js/config.mdx';
 import ConfigReactJs from './_002-hugging-face/#react/config.mdx';
 
-import ConfigModelJavascript from './_002-hugging-face/#js/config/model.mdx';
+import ConfigModelJavaScript from './_002-hugging-face/#js/config/model.mdx';
 import ConfigModelReactJs from './_002-hugging-face/#react/config/model.mdx';
 
-import ConfigEndpointJavascript from './_002-hugging-face/#js/config/endpoint.mdx';
+import ConfigEndpointJavaScript from './_002-hugging-face/#js/config/endpoint.mdx';
 import ConfigEndpointReactJs from './_002-hugging-face/#react/config/endpoint.mdx';
 
-import ConfigAuthTokenJavascript from './_002-hugging-face/#js/config/authToken.mdx';
+import ConfigAuthTokenJavaScript from './_002-hugging-face/#js/config/authToken.mdx';
 import ConfigAuthTokenReactJs from './_002-hugging-face/#react/config/authToken.mdx';
 
-import ConfigDataTransferModeJavascript from './_002-hugging-face/#js/config/dataTransferMode.mdx';
+import ConfigDataTransferModeJavaScript from './_002-hugging-face/#js/config/dataTransferMode.mdx';
 import ConfigDataTransferModeReactJs from './_002-hugging-face/#react/config/dataTransferMode.mdx';
 
-import ConfigSystemMessageJavascript from './_002-hugging-face/#js/config/systemMessage.mdx';
+import ConfigSystemMessageJavaScript from './_002-hugging-face/#js/config/systemMessage.mdx';
 import ConfigSystemMessageReactJs from './_002-hugging-face/#react/config/systemMessage.mdx';
 
-import ConfigInputPreProcessorJavascript from './_002-hugging-face/#js/config/inputPreProcessor.mdx';
+import ConfigInputPreProcessorJavaScript from './_002-hugging-face/#js/config/inputPreProcessor.mdx';
 import ConfigInputPreProcessorReactJs from './_002-hugging-face/#react/config/inputPreProcessor.mdx';
 
-import ConfigOutputPreProcessorJavascript from './_002-hugging-face/#js/config/outputPreProcessor.mdx';
+import ConfigOutputPreProcessorJavaScript from './_002-hugging-face/#js/config/outputPreProcessor.mdx';
 import ConfigOutputPreProcessorReactJs from './_002-hugging-face/#react/config/outputPreProcessor.mdx';
 
-import ConfigMaxNewTokensJavascript from './_002-hugging-face/#js/config/maxNewTokens.mdx';
+import ConfigMaxNewTokensJavaScript from './_002-hugging-face/#js/config/maxNewTokens.mdx';
 import ConfigMaxNewTokensReactJs from './_002-hugging-face/#react/config/maxNewTokens.mdx';
 
 # Hugging Face
@@ -49,31 +49,31 @@ and more.
 
 This documentation page is about the standard adapter provided by `NLUX` for [Hugging Face Inference API](https://huggingface.co/inference-endpoints/serverless).
 
-<PlatformSelector reactJs={ReactJs} javascript={Javascript}/>
+<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
 
 ## Installation
 
-<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavascript}/>
+<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
 
 ## Usage
 
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavascript}/>
+<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
 
 ## Configuration
 
-<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavascript}/>
+<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
 
 ---
 
 ### Model
 
-<PlatformSection reactJs={ConfigModelReactJs} javascript={ConfigModelJavascript}/>
+<PlatformSection reactJs={ConfigModelReactJs} javascript={ConfigModelJavaScript}/>
 
 ---
 
 ### Endpoint
 
-<PlatformSection reactJs={ConfigEndpointReactJs} javascript={ConfigEndpointJavascript}/>
+<PlatformSection reactJs={ConfigEndpointReactJs} javascript={ConfigEndpointJavaScript}/>
 
 ---
 
@@ -90,13 +90,13 @@ If no token is provided, the request will be sent without an `Authorization` hea
 Public models on Hugging face do not require an authorization token, but if your model is private, you will
 need to provide one.
 
-<PlatformSection reactJs={ConfigAuthTokenReactJs} javascript={ConfigAuthTokenJavascript}/>
+<PlatformSection reactJs={ConfigAuthTokenReactJs} javascript={ConfigAuthTokenJavaScript}/>
 
 ---
 
 ### Data Transfer Mode
 
-<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavascript}/>
+<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
 
 ---
 
@@ -105,7 +105,7 @@ need to provide one.
 The initial system to send to the Hugging Face Inference API.
 This will be used during the pre-processing step to construct the payload that will be sent to the API.
 
-<PlatformSection reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavascript}/>
+<PlatformSection reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavaScript}/>
 
 ---
 
@@ -115,7 +115,7 @@ The `inputPreProcessor` is a function that takes the user input and some additio
 the string that will be sent to the Hugging Face Inference API. It is used to transform the user input
 to the format expected by the model.
 
-<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavascript}/>
+<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
 
 ---
 
@@ -124,7 +124,7 @@ to the format expected by the model.
 The `outputPreProcessor` is a function that takes the response from the model and returns a string that
 will be displayed to the user.
 
-<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavascript}/>
+<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
 
 ---
 
@@ -133,4 +133,4 @@ will be displayed to the user.
 The maximum number of new tokens that can be generated by the Hugging Face Inference API.<br />
 This is useful if you want to limit the number of tokens that can be generated by the API.
 
-<PlatformSection reactJs={ConfigMaxNewTokensReactJs} javascript={ConfigMaxNewTokensJavascript}/>
+<PlatformSection reactJs={ConfigMaxNewTokensReactJs} javascript={ConfigMaxNewTokensJavaScript}/>

@@ -2,27 +2,27 @@ import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSe
 import {PlatformSection} from "../../../src/components/PlatformSection/PlatformSection";
 
 import EventListenersReactJs from './_002-events/#react.mdx';
-import EventListenersJavascript from './_002-events/#js.mdx';
+import EventListenersJavaScript from './_002-events/#js.mdx';
 
 import RegisterEventReactJs from './_002-events/#react/register.mdx';
-import RegisterEventJavascript from './_002-events/#js/register.mdx';
+import RegisterEventJavaScript from './_002-events/#js/register.mdx';
 
 import RemoveEventReactJs from './_002-events/#react/remove.mdx';
-import RemoveEventJavascript from './_002-events/#js/remove.mdx';
+import RemoveEventJavaScript from './_002-events/#js/remove.mdx';
 
-import EventReadyJavascript from './_002-events/events/#js/ready.mdx';
+import EventReadyJavaScript from './_002-events/events/#js/ready.mdx';
 import EventReadyReactJs from './_002-events/events/#react/ready.mdx';
 
-import EventPreDestroyJavascript from './_002-events/events/#js/preDestroy.mdx';
+import EventPreDestroyJavaScript from './_002-events/events/#js/preDestroy.mdx';
 import EventPreDestroyReactJs from './_002-events/events/#react/preDestroy.mdx';
 
-import EventMessageSentJavascript from './_002-events/events/#js/messageSent.mdx';
+import EventMessageSentJavaScript from './_002-events/events/#js/messageSent.mdx';
 import EventMessageSentReactJs from './_002-events/events/#react/messageSent.mdx';
 
-import EventMessageReceivedJavascript from './_002-events/events/#js/messageReceived.mdx';
+import EventMessageReceivedJavaScript from './_002-events/events/#js/messageReceived.mdx';
 import EventMessageReceivedReactJs from './_002-events/events/#react/messageReceived.mdx';
 
-import EventErrorJavascript from './_002-events/events/#js/error.mdx';
+import EventErrorJavaScript from './_002-events/events/#js/error.mdx';
 import EventErrorReactJs from './_002-events/events/#react/error.mdx';
 
 # Events
@@ -30,7 +30,7 @@ import EventErrorReactJs from './_002-events/events/#react/error.mdx';
 `NLUX` emits events when the user interacts with the UI, when server sends a message, or
 when errors occur. You can register event listeners to listen to these events.
 
-<PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavascript}/>
+<PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavaScript}/>
 
 ## Event Listeners
 
@@ -43,13 +43,13 @@ when errors occur.
 
 ### Listen To An Event
 
-<PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavascript}/>
+<PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavaScript}/>
 
 ---
 
 ### Remove An Event Listener
 
-<PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavascript}/>
+<PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavaScript}/>
 
 ---
 
@@ -78,7 +78,7 @@ type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
 
 * Example:
 
-<PlatformSelector reactJs={EventReadyReactJs} javascript={EventReadyJavascript}/>
+<PlatformSelector reactJs={EventReadyReactJs} javascript={EventReadyJavaScript}/>
 
 ---
 
@@ -102,7 +102,7 @@ type PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => void;
 
 * Example:
 
-<PlatformSelector reactJs={EventPreDestroyReactJs} javascript={EventPreDestroyJavascript}/>
+<PlatformSelector reactJs={EventPreDestroyReactJs} javascript={EventPreDestroyJavaScript}/>
 
 ---
 
@@ -123,7 +123,7 @@ type MessageSentCallback = (message: string) => void;
 
 * Example:
 
-<PlatformSelector reactJs={EventMessageSentReactJs} javascript={EventMessageSentJavascript}/>
+<PlatformSelector reactJs={EventMessageSentReactJs} javascript={EventMessageSentJavaScript}/>
 
 ---
 
@@ -151,7 +151,7 @@ type MessageReceivedCallback = (message: string) => void;
 
 * Example:
 
-<PlatformSelector reactJs={EventMessageReceivedReactJs} javascript={EventMessageReceivedJavascript}/>
+<PlatformSelector reactJs={EventMessageReceivedReactJs} javascript={EventMessageReceivedJavaScript}/>
 
 ---
 
@@ -175,4 +175,4 @@ type ErrorCallback = (error: ErrorEventDetails) => void;
 
 * Example:
 
-<PlatformSelector reactJs={EventErrorReactJs} javascript={EventErrorJavascript}/>
+<PlatformSelector reactJs={EventErrorReactJs} javascript={EventErrorJavaScript}/>

@@ -1,4 +1,4 @@
-import {MessageOptions as JavascriptMessageOptions} from '@nlux/core';
+import {MessageOptions as JavaScriptMessageOptions} from '@nlux/core';
 import {FC, RefObject} from 'react';
 
 /**
@@ -74,5 +74,5 @@ export type ReactSpecificMessageOptions<AiMsg> = {
  * defined in ReactSpecificMessageOptions.
  */
 export type MessageOptions<AiMsg = string> =
-    Omit<JavascriptMessageOptions<AiMsg>, 'responseRenderer' | 'promptRenderer'>
+    Omit<JavaScriptMessageOptions<AiMsg>, 'responseRenderer' | 'promptRenderer'>
     & ReactSpecificMessageOptions<AiMsg>;
