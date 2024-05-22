@@ -38,7 +38,7 @@ export type {
 export type {
     EventName,
     EventCallback,
-    EventsMap,
+    EventsConfig,
     MessageReceivedEventDetails,
     MessageRenderedEventDetails,
     ErrorCallback,

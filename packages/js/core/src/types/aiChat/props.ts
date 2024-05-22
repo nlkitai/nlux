@@ -6,7 +6,7 @@ import {DisplayOptions} from '../../exports/aiChat/options/displayOptions';
 import {MessageOptions} from '../../exports/aiChat/options/messageOptions';
 import {PersonaOptions} from '../../exports/aiChat/options/personaOptions';
 import {ComposerOptions} from '../../exports/aiChat/options/composerOptions';
-import {EventsMap} from '../event';
+import {EventsConfig} from '../event';
 
 /**
  * These are the props that are used internally by the AiChat component.
@@ -14,7 +14,7 @@ import {EventsMap} from '../event';
 export type AiChatInternalProps<AiMsg> = {
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     className?: string;
-    events?: Partial<EventsMap<AiMsg>>;
+    events?: EventsConfig<AiMsg>;
     initialConversation?: ChatItem<AiMsg>[];
     displayOptions: DisplayOptions;
     personaOptions: PersonaOptions;
@@ -29,7 +29,7 @@ export type AiChatInternalProps<AiMsg> = {
 export type AiChatProps<AiMsg = string> = {
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     className?: string;
-    events?: Partial<EventsMap<AiMsg>>;
+    events?: EventsConfig<AiMsg>;
     initialConversation?: ChatItem<AiMsg>[];
     composerOptions?: ComposerOptions;
     conversationOptions?: ConversationOptions;

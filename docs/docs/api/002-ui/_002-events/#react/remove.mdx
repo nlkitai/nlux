@@ -4,14 +4,14 @@ does not contain the `messageSent` key:
 
 ```jsx
 import {useCallback} from 'react';
-import {AiChat, EventsMap, MessageReceivedCallback} from '@nlux/react';
+import {AiChat, EventsConfig, MessageReceivedCallback} from '@nlux/react';
 
 // We define an event callback using the `useCallback` hook
 const messageReceivedCallback: MessageReceivedCallback = useCallback((event) => {
     console.log('Message received:', event.message);
 }, [/* Your callback code dependencies */]);
 
-const eventCallbacks: EventsMap<string> = {
+const eventCallbacks: EventsConfig = {
     messageReceived: messageReceivedCallback,
     // We remove the messageSent event listener by not including it in the object
 };

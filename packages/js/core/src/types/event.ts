@@ -1,4 +1,3 @@
-import {AnyAiMsg} from '../../../../shared/src/types/anyAiMsg';
 import {ChatItem} from '../../../../shared/src/types/conversation';
 import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
 import {AiChatPropsInEvents} from './aiChat/props';
@@ -96,7 +95,7 @@ export type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiM
  */
 export type PreDestroyCallback<AiMsg = string> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
 
-export type EventsMap<AiMsg = string> = {
+export type EventsMap<AiMsg> = {
     ready: ReadyCallback<AiMsg>;
     preDestroy: PreDestroyCallback<AiMsg>;
     messageSent: MessageSentCallback;
@@ -106,6 +105,8 @@ export type EventsMap<AiMsg = string> = {
     error: ErrorCallback;
 };
 
-export type EventName = keyof EventsMap<AnyAiMsg>;
+export type EventName = keyof EventsMap<unknown>;
 
 export type EventCallback<AiMsg = string> = EventsMap<AiMsg>[EventName];
+
+export type EventsConfig<AiMsg = string> = Partial<EventsMap<AiMsg>>

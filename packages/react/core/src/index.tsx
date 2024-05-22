@@ -16,7 +16,7 @@ export type {
 export type {
     EventName,
     EventCallback,
-    EventsMap,
+    EventsConfig,
     ErrorCallback,
     ErrorEventDetails,
     ReadyCallback,

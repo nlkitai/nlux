@@ -1,4 +1,4 @@
-import {ConversationOptions, DisplayOptions, EventsMap, ComposerOptions, StandardChatAdapter} from '@nlux/core';
+import {ConversationOptions, DisplayOptions, EventsConfig, ComposerOptions, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../shared/src/types/conversation';
@@ -19,7 +19,7 @@ export type AiChatProps<AiMsg = string> = {
     /**
      * A map of event handlers.
      */
-    events?: Partial<EventsMap<AiMsg>>;
+    events?: EventsConfig<AiMsg>;
 
     /**
      * The class name to add to the root element of the component.

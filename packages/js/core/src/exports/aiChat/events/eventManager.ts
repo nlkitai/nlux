@@ -50,12 +50,12 @@ export class EventManager<AiMsg> {
     };
 
     public updateEventListeners = (
-        events: Partial<EventsMap<AiMsg>>,
+        events: EventsMap<AiMsg>,
     ) => {
         //
         // Replace all listeners for events present in the new events object
         // This overwrites any existing listeners for these events! But it will not remove
-        // listeners for events that are not present in the `events: Partial<EventsMap>` object.
+        // listeners for events that are not present in the `events: EventsMap` object.
         //
         const eventKeys = Object.keys(events) as Array<keyof EventsMap<AiMsg>>;
         for (const eventName of eventKeys) {
