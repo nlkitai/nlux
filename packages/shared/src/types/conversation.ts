@@ -1,4 +1,4 @@
-export type ChatItem<AiMsg> = {
+export type ChatItem<AiMsg = string> = {
     role: 'ai';
     message: AiMsg;
     serverResponse?: string | object | undefined;
