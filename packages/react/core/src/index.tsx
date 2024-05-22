@@ -72,9 +72,9 @@ export type {
 export type {
     FetchResponseComponentProps,
     StreamResponseComponentProps,
-    ResponseComponent,
-    PromptComponentProps,
-    PromptComponent,
+    ResponseRenderer,
+    PromptRendererProps,
+    PromptRenderer,
     MessageOptions,
 } from './exports/messageOptions';
 

@@ -2,27 +2,6 @@ import {MessageOptions as JavascriptMessageOptions} from '@nlux/core';
 import {FC, RefObject} from 'react';
 
 /**
- * Props for the custom React component that renders a message received from the AI.
- * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
- *
- * @property {string} uid The unique identifier of the message.
- * @property {'stream' | 'fetch'} dataTransferMode The data transfer mode used by the adapter.
- *
- * @property {'streaming' | 'complete'} status The status of the message. When the data transfer mode is 'fetch',
- * the status is always 'complete'. When the data transfer mode is 'stream', the status is 'streaming' until the
- * message is complete. The status is 'complete' when the message is fully received.
- *
- * @property {AiMsg | AiMsg[]} [content] The content of the message. When the data transfer mode is 'fetch',
- * the content is always a single message. When the data transfer mode is 'stream', the content is an array of
- * messages. The content is undefined when the status is 'streaming'.
- *
- * @property {unknown | unknown[]} [serverResponse] The raw server response. When the data transfer mode is 'fetch',
- * the server response is always a single object or string representing the response received from the server.
- * When the data transfer mode is 'stream', the server response is an array of objects or strings representing each
- * chunk of the response received from the server. The server response is undefined when the status is 'streaming'.
- */
-
-/**
  * Props for the custom React component that renders a message sent by the server in streaming mode.
  * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
  *
@@ -68,25 +47,25 @@ export type FetchResponseComponentProps<AiMsg> = {
     serverResponse: unknown;
 };
 
-export type ResponseComponent<AiMsg> = FC<StreamResponseComponentProps<AiMsg>> | FC<FetchResponseComponentProps<AiMsg>>;
+export type ResponseRenderer<AiMsg> = FC<StreamResponseComponentProps<AiMsg>> | FC<FetchResponseComponentProps<AiMsg>>;
 
-export type PromptComponentProps = {
+export type PromptRendererProps = {
     uid: string;
     prompt: string;
 };
 
-export type PromptComponent = FC<PromptComponentProps>;
+export type PromptRenderer = FC<PromptRendererProps>;
 
 export type ReactSpecificMessageOptions<AiMsg> = {
     /**
      * Custom React component to render the message received from the AI.
      */
-    responseComponent?: ResponseComponent<AiMsg>;
+    responseRenderer?: ResponseRenderer<AiMsg>;
 
     /**
      * Custom React component to render the message sent by the user.
      */
-    promptComponent?: PromptComponent;
+    promptRenderer?: PromptRenderer;
 };
 
 /**

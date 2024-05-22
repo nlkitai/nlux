@@ -100,14 +100,14 @@ export const AiChatReactExpo = () => {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation: initialConversationCustomMessages,
-        messageOptions: {responseComponent: CustomMessageComponent},
+        messageOptions: {responseRenderer: CustomMessageComponent},
     };
 
     const defaultProps: AiChatProps<MessageObjectType> = {
         adapter: langServeAdapter,
         personaOptions,
         initialConversation,
-        messageOptions: {responseComponent: CustomMessageComponent},
+        messageOptions: {responseRenderer: CustomMessageComponent},
     };
 
     return (

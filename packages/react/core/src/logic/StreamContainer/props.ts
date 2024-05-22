@@ -1,13 +1,13 @@
 import {HighlighterExtension} from '@nlux/core';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
-import {ResponseComponent} from '../../exports/messageOptions';
+import {ResponseRenderer} from '../../exports/messageOptions';
 
 export type StreamContainerProps<AisMsg> = {
     uid: string,
     direction: MessageDirection,
     status: 'streaming' | 'complete';
     initialMarkdownMessage?: string;
-    responseRenderer?: ResponseComponent<AisMsg>;
+    responseRenderer?: ResponseRenderer<AisMsg>;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
         markdownLinkTarget?: 'blank' | 'self';

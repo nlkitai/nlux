@@ -46,8 +46,8 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
     if (props.messageOptions) {
         result.messageOptions = {
             ...props.messageOptions,
-            responseRenderer: props.messageOptions.responseComponent ? () => null : undefined,
-            promptRenderer: props.messageOptions.promptComponent ? () => null : undefined,
+            responseRenderer: props.messageOptions.responseRenderer ? () => null : undefined,
+            promptRenderer: props.messageOptions.promptRenderer ? () => null : undefined,
         };
     }
 

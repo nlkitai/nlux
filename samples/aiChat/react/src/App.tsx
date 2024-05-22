@@ -14,7 +14,7 @@ import {
     ConversationLayout,
     DataTransferMode,
     FetchResponseComponentProps,
-    ResponseComponent,
+    ResponseRenderer,
     StreamResponseComponentProps,
 } from '@nlux-dev/react/src';
 import './App.css';
@@ -127,7 +127,7 @@ function App() {
                         checked={useCustomResponseComponent}
                         onChange={onUseCustomResponseComponentChange}
                     />
-                    Use Custom Response Component
+                    Use Custom Response Renderer
                 </label>
                 <label>
                     Data Transfer Mode&nbsp;
@@ -203,8 +203,8 @@ function App() {
                     syntaxHighlighter: highlighter,
                     // showCodeBlockCopyButton: false,
                     // streamingAnimationSpeed: 100,
-                    responseComponent: useCustomResponseComponent ? responseComponent : undefined,
-                    promptComponent: undefined,
+                    responseRenderer: useCustomResponseComponent ? responseRenderer : undefined,
+                    promptRenderer: undefined,
                 }}
                 personaOptions={{
                     user: {
@@ -223,12 +223,12 @@ function App() {
     );
 }
 
-const responseComponent: ResponseComponent<string> = (props) => {
+const responseRenderer: ResponseRenderer<string> = (props) => {
     const {dataTransferMode} = props;
     const propsForFetch = props as FetchResponseComponentProps<string>;
     const propsForStream = props as StreamResponseComponentProps<string>;
 
-    console.log('Response Component Props');
+    console.log('Response Renderer Props');
     console.dir(props);
 
     return (
