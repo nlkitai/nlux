@@ -57,7 +57,7 @@ export const ChatItemComp: <AiMsg>(
         props.responseRenderer, props.syntaxHighlighter, props.markdownLinkTarget,
     ]);
 
-    const UserMessageRenderer: PromptRenderer = useCallback(() => {
+    const UserMessageRenderer = useCallback(() => {
         if (props.promptRenderer === undefined) {
             return (
                 <MarkdownSnapshotRenderer messageUid={props.uid} content={props.fetchedContent as string} />

@@ -29,22 +29,25 @@ describe('<AiChat /> + stream adapter + markdown', () => {
             await waitForReactRenderCycle();
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            await userEvent.type(textArea, 'Hello{enter}');
+            await userEvent.type(textArea, 'Hi AI{enter}');
             await waitForReactRenderCycle();
 
             // Act
             await act(async () => {
                 adapterController!.next('**Hello');
                 adapterController!.next(' Human!**');
-                await waitForMdStreamToComplete();
+                adapterController!.complete();
+                await waitForMdStreamToComplete(50);
             });
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux-md-cntr');
+            const markdownContainer: HTMLElement = container.querySelector('.nlux_msg_incoming .nlux-md-cntr')!;
             expect(markdownContainer).toBeInTheDocument();
 
             await waitFor(() => {
-                expect(markdownContainer!.innerHTML).toBe('<p><strong>Hello Human!</strong></p>');
+                expect(markdownContainer!.innerHTML).toEqual(
+                    '<p><strong>Hello Human!</strong></p>'
+                );
             });
         });
     });

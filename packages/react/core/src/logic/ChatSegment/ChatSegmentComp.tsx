@@ -1,4 +1,14 @@
-import {createRef, forwardRef, ReactNode, Ref, RefObject, useEffect, useImperativeHandle, useMemo} from 'react';
+import {
+    createRef,
+    forwardRef,
+    ReactNode,
+    Ref,
+    RefObject,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useState,
+} from 'react';
 import {AiUnifiedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {warn, warnOnce} from '../../../../../shared/src/utils/warn';
@@ -18,6 +28,7 @@ export const ChatSegmentComp: <AiMsg>(
     ref: Ref<ChatSegmentImperativeProps<AiMsg>>,
 ): ReactNode {
     const {chatSegment, containerRef} = props;
+    const [completeOnInitialRender, setCompleteOnInitialRender] = useState<boolean>(false);
     const chatItemsRef = useMemo(
         () => new Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>(), [],
     );
@@ -65,13 +76,16 @@ export const ChatSegmentComp: <AiMsg>(
         completeStream: (chatItemId: string) => {
             const chatItemCompRef = chatItemsRef.get(chatItemId);
             if (!chatItemCompRef?.current) {
+                setCompleteOnInitialRender(true);
                 return;
             }
 
             chatItemCompRef.current.completeStream();
             chatItemsRef.delete(chatItemId);
         },
-    }), []);
+    }), [
+        // setCompleteOnInitialRender is not needed as a dependency here, even though it is used inside.
+    ]);
 
     const ForwardRefChatItemComp = useMemo(() => forwardRef(
         ChatItemComp<AiMsg>,
@@ -90,6 +104,11 @@ export const ChatSegmentComp: <AiMsg>(
                         chatItemCompRef?.current?.streamChunk(chunk);
                     });
                     chatItemsStreamingBuffer.delete(chatItemId);
+
+                    if (completeOnInitialRender) {
+                        chatItemCompRef.current.completeStream();
+                        setCompleteOnInitialRender(false);
+                    }
                 }
             });
         }

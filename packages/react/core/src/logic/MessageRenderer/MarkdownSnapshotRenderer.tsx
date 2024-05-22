@@ -23,10 +23,10 @@ export const MarkdownSnapshotRenderer = (props: {
     }, [props.content, markdownOptions?.markdownLinkTarget, markdownOptions?.syntaxHighlighter]);
 
     useEffect(() => {
-        if (markdownContainerRef.current) {
+        if (markdownContainerRef.current && markdownOptions?.showCodeBlockCopyButton) {
             attachCopyClickListener(markdownContainerRef.current);
         }
-    }, [parsedContent, markdownContainerRef.current]);
+    }, [parsedContent, markdownContainerRef.current, markdownOptions?.showCodeBlockCopyButton]);
 
     return (
         <div className={'nlux-md-strm-root'}>

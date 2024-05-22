@@ -37,7 +37,7 @@ describe('<AiChat /> + fetch adapter + markdown', () => {
             await act(() => waitForMdStreamToComplete());
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_msg_incoming .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
             expect(markdownContainer!.innerHTML).toEqual(
                 expect.stringContaining('<strong>Hello Human!</strong>'),
