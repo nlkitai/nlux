@@ -60,12 +60,12 @@ export const Hero = ({className}: {className?: string}) => {
                         <h5 style={{textAlign: 'left'}}>OpenAI<br/>Adapters</h5>
                     </div>
                     <div className={heroStyles.platformName}>
-                        <img src={JavaScriptLogo} alt="Vanilla JS Logo" width={40}/>
-                        <h5 style={{textAlign: 'left'}}>JavaScript<br/>API</h5>
-                    </div>
-                    <div className={heroStyles.platformName}>
                         <img src={ReactJsLogo} alt="React JS Logo" width={40}/>
                         <h5 style={{textAlign: 'left'}}>React JS<br/>Components</h5>
+                    </div>
+                    <div className={heroStyles.platformName}>
+                        <img src={JavaScriptLogo} alt="Vanilla JS Logo" width={40}/>
+                        <h5 style={{textAlign: 'left'}}>JavaScript<br/>API</h5>
                     </div>
                 </div>
                 <div className={styles.buttons}>
