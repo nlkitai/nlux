@@ -1,0 +1,36 @@
+The `displayOptions` property is used to configure the display, theme, and layout of the component.
+If provided, it should be an object properties from the table listed below.
+
+> * Type: `DisplayOptions`
+
+```ts
+type DisplayOptions = {
+    themeId?: string;
+    colorScheme?: 'light' | 'dark' | 'auto';
+    width?: number | string;
+    height?: number | string;
+};
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `themeId` | `'nova'`&nbsp;\|&nbsp;`'luna'`&nbsp;\|&nbsp;`string` | `'nova'` | The theme ID of the component. |
+| `colorScheme` | `'light'`&nbsp;\|&nbsp;`'dark'`&nbsp;\|&nbsp;`'auto'` | `'auto'` | The color scheme of the component. |
+| `width` | `number`&nbsp;\|&nbsp;`string` | `'100%'` | The CSS width of the component. |
+| `height` | `number`&nbsp;\|&nbsp;`string` | `'100%'` | The CSS height of the component. |
+
+> * Usage
+
+```jsx
+import {DisplayOptions} from '@nlux/react';
+import '@themes/luna.css';
+
+const displayOptions: DisplayOptions = {
+    themeId: 'luna',
+    colorScheme: 'dark',
+    width: 920,
+    height: 400
+};
+
+<AiChat displayOptions={displayOptions} />
+```
