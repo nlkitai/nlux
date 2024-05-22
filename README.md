@@ -2,7 +2,7 @@
 
 <p align=center>
   <img style="padding: 0; margin: 0;" height="80px" src="https://nlux.dev/nlux-logo/nlux-logo-main.png"/><br />
-  The React JS and JavaScript Library For Building Conversational AI Interfaces ✨💬
+  The <strong>Powerful</strong> Conversational AI JavaScript Library ✨💬
 </p>
 <p align=center>
   <img alt="Free & Open Source" src="https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61" />
