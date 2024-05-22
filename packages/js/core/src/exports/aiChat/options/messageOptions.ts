@@ -1,18 +1,60 @@
 import {HighlighterExtension} from '../highlighter/highlighter';
 
-export type ResponseRendererProps<AiMsg> = {
+/**
+ * Props for the custom function that renders a message sent by the server in streaming mode.
+ * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
+ *
+ * @property {string} uid The unique identifier of the message.
+ * @property {'stream'} dataTransferMode The data transfer mode used by the adapter.
+ * @property {'streaming' | 'complete'} status The status of the message.
+ *
+ * @property {AiMsg[]} content The content of the message. The content is an array of messages. The content is undefined
+ * when the status is 'streaming'. The content is an array of messages when the status is 'complete'.
+ *
+ * @property {unknown[]} serverResponse The raw server response. The server response is an array of objects or strings
+ * representing each raw chunk of the response received from the server. The server response is undefined when the
+ * status is 'streaming'. The server response is an array of objects or strings when the status is 'complete'.
+ */
+export type StreamResponseComponentProps<AiMsg> = {
     uid: string;
-    response: AiMsg;
+    dataTransferMode: 'stream';
+    status: 'streaming' | 'complete';
+    content?: AiMsg[];
+    serverResponse?: unknown[];
 };
 
-export type ResponseRenderer<AiMsg> = (content: ResponseRendererProps<AiMsg>) => HTMLElement | null;
+/**
+ * Props for the custom function that renders a message sent by the server in fetch mode.
+ * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
+ *
+ * @property {string} uid The unique identifier of the message.
+ * @property {'fetch'} dataTransferMode The data transfer mode used by the adapter.
+ * @property {'complete'} status The status of the message.
+ *
+ * @property {AiMsg} content The content of the message. The content is a single message.
+ * @property {unknown} serverResponse The raw server response. The server response is a single object or string
+ * representing the raw response received from the server.
+ */
+export type FetchResponseComponentProps<AiMsg> = {
+    uid: string;
+    dataTransferMode: 'fetch';
+    status: 'complete';
+    content: AiMsg;
+    serverResponse: unknown;
+};
+
+export type ResponseRenderer<AiMsg> = (
+    (props: StreamResponseComponentProps<AiMsg>) => HTMLElement | null
+) | (
+    (props: FetchResponseComponentProps<AiMsg>) => HTMLElement | null
+);
 
 export type PromptRendererProps = {
     uid: string;
-    prompt: string;
+    content: string;
 };
 
-export type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
+export type PromptRenderer = (props: PromptRendererProps) => HTMLElement | null;
 
 export type MessageOptions<AiMsg = string> = {
     /**
