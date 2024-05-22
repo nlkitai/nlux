@@ -1,19 +1,35 @@
-The `withPropmptBoxOptions(options)` method is used to provide composer options to the `AiChat` component.
-The composerOptions is an optional property. It is used to configure the composer.
+The `withComposerOptions(options)` method is responsible for configuring the prompt input area and submit button.
 If provided, it should be an object properties from the table listed below.
 
 * Type: `ComposerOptions`
-* Usage:
 
-```javascript
-const aiChat = createAiChat()
-    .withComposerOptions({
-        autoFocus: false,
-        placeholder: 'Type your message here...'
-    });
+```ts
+type ComposerOptions = {
+    placeholder?: string;
+    autoFocus?: boolean;
+    disableSubmitButton?: boolean;
+    submitShortcut?: 'Enter' | 'CommandEnter';
+}
 ```
 
 | Property | Type |  Default |Description |
 | --- | --- | --- | --- |
-| `autoFocus` | `boolean` | `true` | If `true`, the composer will be focused when the component is mounted. |
-| `placeholder` | `string` | - | The placeholder text of the composer. |
+| `placeholder` | `string` | - | The placeholder message to be displayed in the prompt input field when empty. |
+| `autoFocus` | `boolean` | `false` | If `true`, the composer input will be focused when `AiChat` is mounted. |
+| `disableSubmitButton` | `boolean` | `false` | This will override the disabled state of the submit button when the composer is in `typing` status. It will not have any impact in the composer `submitting` and `waiting` statuses, as the submit button is always disabled in these statuses. |
+| `submitShortcut` | `'Enter'`&nbsp;\|&nbsp;`'CommandEnter'` | `'Enter'` | The keyboard shortcut to submit the prompt message.<br />— `Enter`: The user can submit the prompt message by pressing the `Enter` key. In order to add a new line, the user can press `Shift + Enter`.<br />— `CommandEnter`: When this is used, the user can submit the prompt message by pressing `Ctrl + Enter` on Windows/Linux or `Cmd + Enter` on macOS. In order to add a new line, the user can press `Enter`. |
+
+* Usage:
+
+```javascript
+import {createAiChat, ComposerOptions} from '@nlux/core';
+
+const composerOptions: ComposerOptions = {
+    autoFocus: true,
+    disableSubmitButton: false,
+    placeholder: 'Type your message here',
+    submitShortcut: 'CommandEnter'
+};
+
+const aiChat = createAiChat().withComposerOptions(composerOptions);
+```
