@@ -1,5 +1,6 @@
-The `messageOptions` property is used to configure what goes into the messages in the conversation, whether
-it is the user's message or the AI's response.
+The `messageOptions` property is used to configure what goes into the messages in the conversation, which
+could be prompts from the user or responses from the AI. The options object should have properties from the table
+listed below.
 
 > * Type: `MessageOptions`
 
@@ -21,4 +22,27 @@ type ResponseRenderer<AiMsg> = (
     FC<FetchResponseComponentProps<AiMsg>>    // React component to render a response in fetch mode
 );
 type PromptRenderer = FC<PromptRendererProps>;
+```
+
+* Usage:
+
+```tsx
+import {AiChat, MessageOptions} from '@nlux/react';
+import {highlighter} from '@nlux/highlighter';
+
+const messageOptions: MessageOptions = {
+    markdownLinkTarget: 'self',
+    showCodeBlockCopyButton: false,
+    skipStreamingAnimation: true,
+    streamingAnimationSpeed: 100,
+
+    // Renfer to Custom Renderers API doc for futher details and usage examples
+    responseRenderer: ({content}) => <p>The AI said: {content.message}</p>,
+    promptRenderer: ({content}) => <p>The user said: {content.message}</p>,
+
+    // Refer to sytax Syntax Highlighter API doc for details
+    syntaxHighlighter: highlighter,
+};
+
+<AiChat conversationOptions={messageOptions} />
 ```

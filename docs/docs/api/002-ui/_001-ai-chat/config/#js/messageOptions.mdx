@@ -1,5 +1,6 @@
-The `withMessageOptions(options)` method is used to configure what goes into the messages in the conversation, whether
-it is the user's message or the AI's response.
+The `withMessageOptions(options)` method is used to configure what goes into the messages in the conversation, which
+could be prompts from the user or responses from the AI. The options object should have properties from the table
+listed below.
 
 > * Type: `MessageOptions`
 
@@ -18,4 +19,37 @@ type MessageOptions<AiMsg = string> = {
 // Refer to custom renderers API documentation for more information
 type ResponseRenderer<AiMsg> = (content: ResponseRendererProps<AiMsg>) => HTMLElement | null;
 type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
+```
+
+| Property | Type |  Default |Description |
+| --- | --- | --- | --- |
+| `responseRenderer` | `ResponseRenderer<AiMsg>` | - | A custom renderer for AI responses. API documentation  for custom renderers can be found [here](/api/ui/custom-renderers). |
+| `promptRenderer` | `PromptRenderer` | - | A custom renderer for user prompts. API documentation for custom renderers can be found [here](/api/ui/custom-renderers). |
+| `syntaxHighlighter` | `HighlighterExtension` | - | A custom syntax highlighter for code blocks within messages. |
+| `markdownLinkTarget` | `'blank'`&nbsp;\|&nbsp;`'self'` | `'blank'` | The target attribute for markdown links. Use `self` to open links in the same tab and `blank` to open links in a new tab. |
+| `showCodeBlockCopyButton` | `boolean` | `true` | If `true`, a copy button will be displayed on code blocks created withing messages. |
+| `streamingAnimationSpeed` | `number` | `10` | The interval in milliseconds between streamed AI responses. |
+| `skipStreamingAnimation` | `boolean` | `false` | If `true`, streamed AI responses will be displayed instantly without any animation. |
+
+* Usage:
+
+```typescript
+import {createAiChat, MessageOptions} from '@nlux/core';
+import {highlighter} from '@nlux/highlighter';
+
+const messageOptions: MessageOptions = {
+    markdownLinkTarget: 'self',
+    showCodeBlockCopyButton: false,
+    skipStreamingAnimation: true,
+    streamingAnimationSpeed: 100,
+
+    // Render to custom renderers API doc for usage examples
+    responseRenderer: undefined,
+    promptRenderer: undefined,
+
+    // Refer to sytax highlighter API doc for details
+    syntaxHighlighter: highlighter,
+};
+
+const aiChat = createAiChat().withConversationOptions(messageOptions);
 ```
