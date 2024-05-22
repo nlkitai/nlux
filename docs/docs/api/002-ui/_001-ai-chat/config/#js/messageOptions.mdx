@@ -1,0 +1,21 @@
+The `withMessageOptions(options)` method is used to configure what goes into the messages in the conversation, whether
+it is the user's message or the AI's response.
+
+> * Type: `MessageOptions`
+
+```ts
+type MessageOptions<AiMsg = string> = {
+    responseRenderer?: ResponseRenderer<AiMsg>;
+    promptRenderer?: PromptRenderer;
+    syntaxHighlighter?: HighlighterExtension;
+
+    markdownLinkTarget?: 'blank' | 'self';
+    showCodeBlockCopyButton?: boolean;
+    streamingAnimationSpeed?: number;
+    skipStreamingAnimation?: boolean;
+};
+
+// Refer to custom renderers API documentation for more information
+type ResponseRenderer<AiMsg> = (content: ResponseRendererProps<AiMsg>) => HTMLElement | null;
+type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
+```

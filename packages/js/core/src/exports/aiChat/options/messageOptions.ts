@@ -14,7 +14,7 @@ export type PromptRendererProps = {
 
 export type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
 
-export type MessageOptions<AiMsg> = {
+export type MessageOptions<AiMsg = string> = {
     /**
      * Highlighter extension for code blocks inside messages.
      */

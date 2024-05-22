@@ -94,6 +94,6 @@ export type ReactSpecificMessageOptions<AiMsg> = {
  * We use all options from @nlux/core except the React-specific options
  * defined in ReactSpecificMessageOptions.
  */
-export type MessageOptions<AiMsg> =
+export type MessageOptions<AiMsg = string> =
     Omit<JavascriptMessageOptions<AiMsg>, 'responseRenderer' | 'promptRenderer'>
     & ReactSpecificMessageOptions<AiMsg>;
