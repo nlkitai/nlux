@@ -16,5 +16,5 @@ You can also use your own syntax highlighter by implementing the `HighlighterExt
 import {createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 
-const aiChat = createAiChat().withSyntaxHighlighter(highlighter)
+const aiChat = createAiChat().withMessageOptions({syntaxHighlighter: highlighter});
 ```
