@@ -14,8 +14,8 @@ You can also use your own syntax highlighter by implementing the `HighlighterExt
 * Usage
 
 ```javascript
+import {createAiChat} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 
-const aiChat = createAiChat()
-    .withSyntaxHighlighter(highlighter)
+const aiChat = createAiChat().withSyntaxHighlighter(highlighter)
 ```

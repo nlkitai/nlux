@@ -26,16 +26,13 @@ type ConversationLayout = 'bubbles' | 'list';
 * Usage:
 
 ```javascript
-const aiChat = createAiChat()
-    .withConversationOptions({
-        historyPayloadSize: 10,
-        scrollWhenGenerating: false,
-        streamingAnimationSpeed: 20,
-    });
-```
+import {ConversationOptions} from '@nlux/core';
 
-| Property | Type |  Default |Description |
-| --- | --- | --- | --- |
-| `historyPayloadSize` | `number`&nbsp;\|&nbsp;`'none'`&nbsp;\|&nbsp;`'max'` | `'max'` | The number of messages from the conversation history to be sent to the server whenver a message is submitted. If set to `'none'`, no messages will be sent to the server. If set to `'max'`, all messages will be sent to the server. |
-| `scrollWhenGenerating` | `boolean` | `true` | If `true`, the conversation will scroll to the bottom when a new message is being generated. |
-| `streamingAnimationSpeed` | `number`&nbsp;\|&nbsp;`null` | `10` | The interval in milliseconds at which new characters are added to the conversation when a message is being streamed. |
+const conversationOptions: ConversationOptions = {
+    layout: 'bubbles',
+    autoScroll: false,
+    historyPayloadSize: 10
+};
+
+const aiChat = createAiChat().withConversationOptions(conversationOptions);
+```

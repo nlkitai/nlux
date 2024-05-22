@@ -2,7 +2,7 @@ The `initialConversation(chatItems)` property is used to enable loading of conve
 rendering the `AiChat` component. This is useful if you want the user to resume a conversation
 from a previous session.
 
-> Type: `initialConversation: ChatItem[]`
+> * Type: `initialConversation: ChatItem[]`
 
 ```ts
 type ChatItem<AiMsg = string> = {
@@ -16,7 +16,7 @@ type ParticipantRole = 'user' | 'system' | 'ai';
 > * Usage:
 
 ```tsx
-import {ChatItem} from from '@nlux/react';
+import {AiChat, ChatItem} from '@nlux/react';
 
 const initialConversation: ChatItem[] = [
     {
