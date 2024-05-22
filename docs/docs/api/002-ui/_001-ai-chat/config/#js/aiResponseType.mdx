@@ -1,1 +1,13 @@
-GENERIC JS
+By default, `NLUX` expects a `string` message to be received as response from the AI system.<br />
+However, for advanced use cases where an object is expected, a generic type can be provided to the `AiChat` component.<br />
+
+| | Default<br />(Without&nbsp;Generic&nbsp;Type) | Advanced<br />(With&nbsp;Generic&nbsp;Type) |
+| --- | --- | --- |
+| **JS Syntax** | `createAiChat()` | `createAiChat<AiResponseType>()`<br />where `AiResponseType` is a custom type defined by the user |
+| **AI Reponse Expected** | `string` | Object matching the `AiResponseType` type |
+| **Use Case** | When the LLM only generates plain text or markdown | For AI systems that generate an object or a stream of objects |
+| **Rendering** | The string response will parsed as markdown | For **standard adapters** provided by `NLUX`, the library handles converting objects to markdown, or offers adapter config for that purpose. For **custom adapters**, `custom renderers` is required. |
+
+> For most of the use cases, the default behavior is sufficient.<br />
+> The advanced use case is for custom components with complex AI responses.<br />
+> Visit the [custom renders](/learn/custom-renderers) guide to learn more about rendering custom AI responses.

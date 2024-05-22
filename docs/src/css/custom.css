@@ -101,12 +101,20 @@ h1, h2, h3 {
 
 .main-wrapper .container h2 {
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
+  background-color: var(--nx-background-color-1);;
+  display: inline-block;
+  padding: 0 0 0 14px;
+  margin: 0;
 }
 
 .main-wrapper .container h3 {
   font-size: 1.2rem;
   font-weight: 600;
+  background-color: var(--nx-background-color-1);;
+  display: inline-block;
+  padding: 0 0 0 14px;
+  margin: 0;
 }
 
 .main-wrapper .container h1.hero__title {

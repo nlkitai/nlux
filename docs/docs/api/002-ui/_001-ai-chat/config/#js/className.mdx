@@ -1,11 +1,11 @@
-The `withClassName` method is used to provide a class name to the `AiChat` component.
-The class name is optional, and it is used to add a class to the root element of the `AiChat` component.
+The `withClassName(className)` method is optional.<br />
+It can be used to provide a CSS class name to the `AiChat` component to apply custom styles.<br />
+The new CSS class will be added to the root element of the `AiChat` component.
 
-* Type: `string`
-* Optional
-* Usage:
+> * Type: `string`
+> * Optional
+> * Usage:
 
 ```javascript
-const aiChat = createAiChat()
-    .withClassName('my-class');
+const aiChat = createAiChat().withClassName('my-class');
 ```

@@ -1,15 +1,12 @@
-The adapter is a required property. It's responsible for providing the adapter used to connect `NLUX` to the AI backend
-of your choice.
+The adapter is a required property.<br />
+It's responsible for connecting `NLUX` to the AI backend of your choice.
 
 The value can be:<br />
-* A `StandardChatAdapter` — one of `NLUX`'s standard adapters, imported from `@nlux/<adapter>-react` packages.<br />
-* A custom adapter — that implements the `Adapter` interface.<br />
-* An `AdapterBuilder` — the result of calling a hook like `useChatAdapter()`.
+* A `StandardChatAdapter` — one of `NLUX`'s [standard adapters](/api/adapters), imported from `@nlux/<adapter>-react` packages.<br />
+* A [custom adapter](/learn/adapters/custom-adapters) — that implements the `Adapter` interface.<br />
+* An `AdapterBuilder` — the result of calling an adaptor creator function like `createChatAdapter()`.
 
-Adapters are generic types. **The default type for `AiMsg` is `string`**, but when the expected AI message type returned
-is an object, you can provide the exact type of that object as a generic argument.
-
-> * Type: `ChatAdapter<AiMsg>` | `StandardChatAdapter<AiMsg>` | `ChatAdapterBuilder<AiMsg>`
+> * Type: `ChatAdapter` | `StandardChatAdapter` | `ChatAdapterBuilder`
 > * Required
 > * Usage
 
