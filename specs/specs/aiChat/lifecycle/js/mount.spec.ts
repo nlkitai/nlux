@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + initial load', () => {
+describe('createAiChat() + mount', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement;
@@ -33,6 +33,18 @@ describe('createAiChat() + initial load', () => {
 
         // Assert
         expect(rootElement?.innerHTML).toBe('');
+    });
+
+    it('Initial status should be "idle"', async () => {
+        // Arrange
+        adapterController = adapterBuilder().withFetchText().create();
+        aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+        // Act
+        await waitForRenderCycle();
+
+        // Assert
+        expect(aiChat.status).toBe('idle');
     });
 
     describe('When mount() is called', () => {
@@ -91,6 +103,19 @@ describe('createAiChat() + initial load', () => {
             const conversationContainer = rootElement.querySelector('.nlux-chtRm-cnv-cntr');
             expect(conversationContainer).toBeInTheDocument();
         });
+
+        it('Status should be "mounted"', async () => {
+            // Arrange
+            adapterController = adapterBuilder().withFetchText().create();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // Act
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            // Assert
+            expect(aiChat.status).toBe('mounted');
+        });
     });
 
     describe('When mount() is called twice', () => {
@@ -125,6 +150,26 @@ describe('createAiChat() + initial load', () => {
 
             // Assert
             expect(rootElement?.innerHTML).toBe(initialHtmlRendered);
+        });
+
+        it('It should not change the status', async () => {
+            // Arrange
+            adapterController = adapterBuilder().withFetchText().create();
+            aiChat = createAiChat().withAdapter(adapterController.adapter);
+
+            // Act
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+            const initialStatus = aiChat.status;
+            try {
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+            } catch (_error) {
+                // ignore
+            }
+
+            // Assert
+            expect(aiChat.status).toBe(initialStatus);
         });
     });
 });

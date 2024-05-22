@@ -32,6 +32,10 @@ export type {
 } from './types/aiChat/props';
 
 export type {
+    AiChatStatus
+} from './types/aiChat/aiChat';
+
+export type {
     EventName,
     EventCallback,
     EventsMap,

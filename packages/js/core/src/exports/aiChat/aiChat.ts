@@ -5,7 +5,7 @@ import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {debug} from '../../../../../shared/src/utils/debug';
 import {registerAllComponents} from '../../logic/components';
-import {IAiChat} from '../../types/aiChat/aiChat';
+import {AiChatStatus, IAiChat} from '../../types/aiChat/aiChat';
 import {UpdatableAiChatProps} from '../../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
 import {NluxController} from './controller/controller';
@@ -26,11 +26,22 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theMessageOptions: MessageOptions<AiMsg> | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
     protected theComposerOptions: ComposerOptions | null = null;
+
+    // Controller instance
     private controller: NluxController<AiMsg> | null = null;
+
+    // Event listeners provided before the controller is mounted, when the aiChat instance is being built.
     private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
 
-    public get mounted(): boolean {
-        return this.controller?.mounted ?? false;
+    // Variable to track if the chat component was unmounted (and thus cannot be used anymore).
+    private aiChatStatus: AiChatStatus = 'idle';
+
+    public get status(): AiChatStatus {
+        return this.aiChatStatus;
+    }
+
+    private get isIdle() {
+        return this.status === 'idle';
     }
 
     hide() {
@@ -45,11 +56,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public mount(rootElement: HTMLElement) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to create nlux instance. nlux is already mounted. '
-                    + 'Make sure to call `unmount()` before mounting again.',
+                message: 'Unable to create nlux instance. nlux is already or was previously mounted. '
+                    + 'You can only mount a nlux instance once, when the status is `idle`.',
             });
         }
 
@@ -96,6 +107,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         controller.mount();
 
         if (controller.mounted) {
+            this.aiChatStatus = 'mounted';
             this.controller = controller;
             this.unregisteredEventListeners.clear();
         } else {
@@ -107,6 +119,13 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     };
 
     on(event: EventName, callback: EventsMap<AiMsg>[EventName]) {
+        if (this.status === 'unmounted') {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to add event listener. nlux was previously unmounted.',
+            });
+        }
+
         if (this.controller) {
             this.controller.on(event, callback);
 
@@ -122,14 +141,13 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
-    removeAllEventListeners(event?: EventName) {
-        // When no event is provided, remove all event listeners for all events.
-        if (!event) {
-            this.controller?.removeAllEventListenersForAllEvent();
-            this.unregisteredEventListeners.clear();
-            return;
-        }
+    private clearEventListeners() {
+        this.controller?.removeAllEventListenersForAllEvent();
+        this.unregisteredEventListeners.clear();
+        return;
+    }
 
+    removeAllEventListeners(event: EventName) {
         // When an event is provided, remove all event listeners for that specific event.
         this.controller?.removeAllEventListeners(event);
         this.unregisteredEventListeners.get(event)?.clear();
@@ -169,6 +187,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
 
         this.controller = null;
         this.unregisteredEventListeners.clear();
+        this.aiChatStatus = 'unmounted';
     }
 
     public updateProps(props: UpdatableAiChatProps<AiMsg>) {
@@ -185,7 +204,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
 
         if (props.hasOwnProperty('events')) {
             // Re-register all event listeners
-            this.removeAllEventListeners();
+            this.clearEventListeners();
             for (const [eventName, eventCallback] of Object.entries(props.events ?? {})) {
                 this.on(eventName as EventName, eventCallback as EventCallback<AiMsg>);
             }
@@ -219,10 +238,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withAdapter(adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set adapter. nlux is already mounted.',
+                message: 'Unable to set adapter. nlux is already or was previously mounted. ' +
+                    'You can only set the adapter once, when the status is `idle`.',
             });
         }
 
@@ -266,10 +286,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     };
 
     public withClassName(className: string) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set class name. nlux is already mounted.',
+                message: 'Unable to set class name. nlux is already or was previously mounted. ' +
+                    'You can only set the class name once, when the status is `idle`.',
             });
         }
 
@@ -285,10 +306,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withConversationOptions(conversationOptions: ConversationOptions) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set conversation options. nlux is already mounted.',
+                message: 'Unable to set conversation options. nlux is already or was previously mounted. ' +
+                    'You can only set the conversation options once, when the status is `idle`.',
             });
         }
 
@@ -304,10 +326,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withDisplayOptions(displayOptions: DisplayOptions) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set display options. nlux is already mounted.',
+                message: 'Unable to set display options. nlux is already or was previously mounted. ' +
+                    'You can only set the display options once, when the status is `idle`.',
             });
         }
 
@@ -323,10 +346,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withInitialConversation(initialConversation: ChatItem<AiMsg>[]) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set conversation history. nlux is already mounted.',
+                message: 'Unable to set initial conversation. nlux is already or was previously mounted. ' +
+                    'You can only set the initial conversation once, when the status is `idle`.',
             });
         }
 
@@ -342,10 +366,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withMessageOptions(messageOptions: MessageOptions<AiMsg>) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set message options. nlux is already mounted.',
+                message: 'Unable to set message options. nlux is already or was previously mounted. ' +
+                    'You can only set the message options once, when the status is `idle`.',
             });
         }
 
@@ -361,10 +386,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withPersonaOptions(personaOptions: PersonaOptions) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set personaOptions. nlux is already mounted.',
+                message: 'Unable to set persona options. nlux is already or was previously mounted. ' +
+                    'You can only set the persona options once, when the status is `idle`.',
             });
         }
 
@@ -380,10 +406,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     }
 
     public withComposerOptions(composerOptions: ComposerOptions) {
-        if (this.mounted) {
+        if (!this.isIdle) {
             throw new NluxUsageError({
                 source: this.constructor.name,
-                message: 'Unable to set composer options. nlux is already mounted.',
+                message: 'Unable to set composer options. nlux is already or was previously mounted. ' +
+                    'You can only set the composer options once, when the status is `idle`.',
             });
         }
 

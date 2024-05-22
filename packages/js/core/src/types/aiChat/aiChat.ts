@@ -11,6 +11,14 @@ import {EventCallback, EventName, EventsMap} from '../event';
 import {UpdatableAiChatProps} from './props';
 
 /**
+ * The status of the AiChat component.
+ * - `idle`: The component has not been mounted yet.
+ * - `mounted`: The component is currently mounted and active. It can be visible or hidden.
+ * - `unmounted`: The component has been unmounted and destroyed and cannot be used anymore.
+ */
+export type AiChatStatus = 'idle' | 'mounted' | 'unmounted';
+
+/**
  * The main interface representing AiChat component.
  * It provides methods to instantiate, mount, and unmount the component, and listen to its events.
  */
@@ -31,7 +39,7 @@ export interface IAiChat<AiMsg> {
     /**
      * Returns true if the chat component is mounted.
      */
-    get mounted(): boolean;
+    get status(): AiChatStatus;
 
     /**
      * Adds an event listener to the chat component.
@@ -44,13 +52,11 @@ export interface IAiChat<AiMsg> {
     on(event: EventName, callback: EventsMap<AiMsg>[EventName]): IAiChat<AiMsg>;
 
     /**
-     * Removes all event listeners from the chat component.
-     * When a valid event name is provided, it will remove all listeners for that event.
-     * Otherwise, it will remove all listeners for all events.
+     * Removes all event listeners from the chat component for a specific event.
      *
      * @param {EventName} event
      */
-    removeAllEventListeners(event?: EventName): void;
+    removeAllEventListeners(event: EventName): void;
 
     /**
      * Removes the given event listener for the specified event.
@@ -69,7 +75,8 @@ export interface IAiChat<AiMsg> {
     /**
      * Unmounts the chat component.
      * This will remove the chat component from the view and clean up its resources.
-     * After unmounting, the chat component can be mounted again.
+     * After unmounting, the chat component cannot be mounted again as all its resources, options, event listeners, and
+     * adapters will be removed. You should create a new chat component if you want to use it again.
      */
     unmount(): void;
 
