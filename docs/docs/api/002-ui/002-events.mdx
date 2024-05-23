@@ -22,6 +22,9 @@ import EventMessageSentReactJs from './_002-events/events/#react/messageSent.mdx
 import EventMessageReceivedJavaScript from './_002-events/events/#js/messageReceived.mdx';
 import EventMessageReceivedReactJs from './_002-events/events/#react/messageReceived.mdx';
 
+import EventMessageStreamStartedJavaScript from './_002-events/events/#js/messageStreamStarted.mdx';
+import EventMessageStreamStartedReactJs from './_002-events/events/#react/messageStreamStarted.mdx';
+
 import EventErrorJavaScript from './_002-events/events/#js/error.mdx';
 import EventErrorReactJs from './_002-events/events/#react/error.mdx';
 
@@ -160,9 +163,26 @@ type MessageReceivedEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Stream Started (TO DO!)
+### Message Stream Started
+
+This event is emitted when the server starts sending streaming a response back to the client, for when the adapter
+is configured to use `stream` data transfer mode. The event will be emitted when the first chunk of the message is
+received, and will only be emitted once per message.
 
 > * Event Name: `messageStreamStarted`
+> * Callback Type:
+
+```tsx
+type MessageStreamStartedCallback = (event: MessageStreamStartedEventDetails) => void;
+
+type MessageStreamStartedEventDetails = {
+    uid: string;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageStreamStartedReactJs} javascript={EventMessageStreamStartedJavaScript}/>
 
 ---
 

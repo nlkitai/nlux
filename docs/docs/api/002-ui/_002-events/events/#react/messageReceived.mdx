@@ -6,6 +6,7 @@ const messageReceivedCallback = useCallback<MessageReceivedCallback>((eventDetai
     console.log(eventDetails.message);
 }, [/* Callback dependencies */]);
 ```
+
 ```tsx
 // Provide the messageReceived callback as part of the events prop
 <AiChat events={{messageReceived: messageReceivedCallback}} adapter={adapter} />

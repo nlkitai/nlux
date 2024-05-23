@@ -1,0 +1,22 @@
+```tsx
+import {createAiChat, MessageStreamStartedCallback, MessageStreamStartedEventDetails} from '@nlux/core';
+
+const messageStreamStartedCallback: MessageStreamStartedCallback = (event: MessageStreamStartedEventDetails) => {
+    console.log('Message stream started:', event.uid);
+};
+```
+
+```tsx
+// Registering the messageStreamStartedCallback when creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('messageStreamStarted', messageStreamStartedCallback);
+```
+
+```tsx
+// Registering the messageStreamStartedCallback after creating the AiChat instance
+aiChat.on('messageStreamStarted', callback);
+```
+
+```tsx
+// Removing messageStreamStartedCallback
+aiChat.removeEventListener('messageStreamStarted', callback);
+```

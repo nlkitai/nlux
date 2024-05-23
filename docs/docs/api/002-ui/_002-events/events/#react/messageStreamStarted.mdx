@@ -1,0 +1,13 @@
+```tsx
+import {AiChat, MessageStreamStartedCallback, MessageStreamStartedEventDetails, } from '@nlux/react';
+import {useCallback} from 'react';
+
+const messageStreamStartedCallback = useCallback<MessageStreamStartedCallback>((eventDetails: MessageStreamStartedEventDetails) => {
+    console.log(eventDetails.message);
+}, [/* Callback dependencies */]);
+```
+
+```tsx
+// Provide the streamStarted callback as part of the events prop
+<AiChat events={{streamStarted: messageStreamStartedCallback}} adapter={adapter} />
+```
