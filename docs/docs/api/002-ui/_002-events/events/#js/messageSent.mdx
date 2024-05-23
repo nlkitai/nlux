@@ -1,12 +1,23 @@
-```typescript
+```ts
 import {createAiChat, MessageSentCallback} from '@nlux/core';
 
-const aiChat = createAiChat().withAdapter(myAdapter);
-const callback: MessageSentCallback = (message: string) => console.log(message);
+const messageSentCallback: MessageSentCallback = (event: MessageSentEventDetails) => {
+    console.log('Message sent:', event.message);
+};
+```
 
+```ts
+// Registering the messageSentCallback when creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('messageSent', messageSentCallback);
+```
+
+```ts
 // Add listener
+// Registering the messageSentCallback after creating the AiChat instance
 aiChat.on('messageSent', callback);
+```
 
-// Remove listener
+```ts
+// Removing messageSentCallback
 aiChat.removeEventListener('messageSent', callback);
 ```

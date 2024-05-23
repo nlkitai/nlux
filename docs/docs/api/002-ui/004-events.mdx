@@ -101,10 +101,10 @@ type PreDestroyEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Sent (TO UPDATE!)
+### Message Sent
 
 This event is emitted when the user sends a message. The event only gets triggered when the
-adapter method responsible for sending the message to the backend executes successfully.
+adapter method responsible for sending the message to the backend runs successfully.
 For [standard adapters](/api/adapters), this means that the message was successfully sent to
 the backend.
 
@@ -112,7 +112,12 @@ the backend.
 > * Callback Type:
 
 ```ts
-type MessageSentCallback = (message: string) => void;
+type MessageSentCallback = (event: MessageSentEventDetails) => void;
+
+type MessageSentEventDetails = {
+    uid: string;
+    message: string;
+};
 ```
 
 > * Usage:
