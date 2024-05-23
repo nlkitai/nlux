@@ -4,10 +4,10 @@ import {useCallback} from 'react';
 
 const messageSentCallback = useCallback<MessageSentCallback>((event: MessageSentEventDetails) => {
     console.log('Message sent:', event.message);
-}, [/* Your callback code dependencies */]);
+}, [/* Callback dependencies */]);
 ```
 
 ```tsx
 // Provide the messageSentCallback callback as part of the events prop
-<AiChat  adapter={adapter} events={{messageSent: messageSentCallback}} />
+<AiChat events={{messageSent: messageSentCallback}} adapter={adapter} />
 ```

@@ -5,10 +5,10 @@ import {useCallback} from 'react';
 const errorCallback = useCallback<ErrorCallback>((errorDetails: ErrorEventDetails) => {
     console.log('An error occurred:', errorDetails.message);
     console.log('Error ID:', errorDetails.errorId);
-}, []);
+}, [/* Callback dependencies */]);
 ```
 
 ```tsx
 // Provide the errorCallback callback as part of the events prop
-<AiChat adapter={adapter} events={{error: errorCallback}} />
+<AiChat events={{error: errorCallback}} adapter={adapter} />
 ```

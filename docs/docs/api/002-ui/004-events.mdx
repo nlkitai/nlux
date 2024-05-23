@@ -126,26 +126,26 @@ type MessageSentEventDetails = {
 
 ---
 
-### Message Received (TO UPDATE!)
+### Message Received
 
-This event is emitted when a message is received from the server. The event listener receives the
-message as a parameter.
+This event is emitted when a message is received from the server. For the case of **streamed messages**, this message
+is emitted when the streaming is complete and the message is fully received.
 
-| For [Promise Adapters](/api/adapters/custom-adapters#promise-adapters) ― The event listener receives when the promise
-is resolved.<br />
-| For [Streaming Adapters](/api/adapters/custom-adapters#streaming-adapters) ― The event listener receives the message
-when the streaming is complete and the message is fully received.
-
-Please note that `messageReceived` does not mean that the message has fully rendered on the screen.
-`NLUX` renders the messages in a character-by-character animation, so the message may still being
-rendered when this event is emitted. You can use the `messageRendered` event to listen to when the
-message has fully rendered on the screen.
+Please note that `messageReceived` does not mean that the message has fully rendered on the screen. Depending on your
+configuration, `NLUX` may render messages in a character-by-character animation, so the message may still being rendered
+when this event is emitted. You can use the `messageRendered` event to listen to when the message has fully rendered
+on the screen.
 
 > * Event Name: `messageReceived`
 > * Callback Type:
 
 ```tsx
-type MessageReceivedCallback = (message: string) => void;
+type MessageReceivedCallback<AiMsg = string> = (event: MessageReceivedEventDetails<AiMsg>) => void;
+
+type MessageReceivedEventDetails<AiMsg = string> = {
+    uid: string;
+    message: AiMsg;
+};
 ```
 
 > * Usage:

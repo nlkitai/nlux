@@ -11,5 +11,5 @@ const preDestroyCallback = useCallback<PreDestroyCallback>((preDestroyDetails: P
 
 ```tsx
 // Provide the preDestroy callback as part of the events prop
-<AiChat adapter={adapter} events={{preDestroy: preDestroyCallback}} />
+<AiChat events={{preDestroy: preDestroyCallback}} adapter={adapter} />
 ```

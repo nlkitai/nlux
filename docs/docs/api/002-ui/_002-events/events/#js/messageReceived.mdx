@@ -1,12 +1,22 @@
 ```tsx
-import {createAiChat, MessageReceivedCallback} from '@nlux/core';
+import {createAiChat, MessageReceivedCallback, MessageReceivedEventDetails} from '@nlux/core';
 
-const aiChat = createAiChat().withAdapter(myAdapter);
-const callback: MessageReceivedCallback = (message: string) => console.log(message);
+const messageReceivedCallback: MessageReceivedCallback = (event: MessageReceivedEventDetails) => {
+    console.log('Message received:', event.message);
+};
+```
 
-// Add listener
+```tsx
+// Registering the messageReceivedCallback when creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('messageReceived', messageReceivedCallback);
+```
+
+```tsx
+// Registering the messageReceivedCallback after creating the AiChat instance
 aiChat.on('messageReceived', callback);
+```
 
-// Remove listener
+```tsx
+// Removing messageReceivedCallback
 aiChat.removeEventListener('messageReceived', callback);
 ```

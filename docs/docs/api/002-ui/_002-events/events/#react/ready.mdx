@@ -4,10 +4,10 @@ import {useCallback} from 'react';
 
 const readyCallback = useCallback<ReadyCallback>((readyDetails: ReadyEventDetails) => {
     console.log('Chat is ready. Props used to initialize the chat:', readyDetails.aiChatProps);
-}, []);
+}, [/* Callback dependencies */]);
 ```
 
 ```tsx
 // Provide the readyCallback callback as part of the events prop
-<AiChat  adapter={adapter} events={{ready: readyCallback}} />
+<AiChat events={{ready: readyCallback}} adapter={adapter} />
 ```

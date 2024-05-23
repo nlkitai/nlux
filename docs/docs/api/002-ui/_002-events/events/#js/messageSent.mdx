@@ -1,5 +1,5 @@
 ```tsx
-import {createAiChat, MessageSentCallback} from '@nlux/core';
+import {createAiChat, MessageSentCallback, MessageSentEventDetails} from '@nlux/core';
 
 const messageSentCallback: MessageSentCallback = (event: MessageSentEventDetails) => {
     console.log('Message sent:', event.message);
