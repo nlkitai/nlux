@@ -1,0 +1,22 @@
+```tsx
+import {createAiChat, MessageRenderedCallback, MessageRenderedEventDetails} from '@nlux/core';
+
+const messageRenderedCallback: MessageRenderedCallback = (event: MessageRenderedEventDetails) => {
+    console.log('Message rendered:', event.message);
+};
+```
+
+```tsx
+// Registering the messageRenderedCallback when creating the AiChat instance
+const aiChat = createAiChat().withAdapter(adapter).on('messageRendered', messageRenderedCallback);
+```
+
+```tsx
+// Registering the messageRenderedCallback after creating the AiChat instance
+aiChat.on('messageRendered', callback);
+```
+
+```tsx
+// Removing messageRenderedCallback
+aiChat.removeEventListener('messageRendered', callback);
+```

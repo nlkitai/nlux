@@ -1,0 +1,13 @@
+```tsx
+import {AiChat, MessageRenderedCallback, MessageRenderedEventDetails, } from '@nlux/react';
+import {useCallback} from 'react';
+
+const messageRenderedCallback = useCallback<MessageRenderedCallback>((eventDetails: MessageRenderedEventDetails) => {
+    console.log(eventDetails.message);
+}, [/* Callback dependencies */]);
+```
+
+```tsx
+// Provide the messageRendered callback as part of the events prop
+<AiChat events={{messageRendered: messageRenderedCallback}} adapter={adapter} />
+```

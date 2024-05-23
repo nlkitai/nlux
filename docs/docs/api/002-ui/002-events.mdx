@@ -22,6 +22,9 @@ import EventMessageSentReactJs from './_002-events/events/#react/messageSent.mdx
 import EventMessageReceivedJavaScript from './_002-events/events/#js/messageReceived.mdx';
 import EventMessageReceivedReactJs from './_002-events/events/#react/messageReceived.mdx';
 
+import EventMessageRenderedJavaScript from './_002-events/events/#js/messageRendered.mdx';
+import EventMessageRenderedReactJs from './_002-events/events/#react/messageRendered.mdx';
+
 import EventMessageStreamStartedJavaScript from './_002-events/events/#js/messageStreamStarted.mdx';
 import EventMessageStreamStartedReactJs from './_002-events/events/#react/messageStreamStarted.mdx';
 
@@ -157,9 +160,27 @@ type MessageReceivedEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Rendered (TO DO!)
+### Message Rendered
 
 > * Event Name: `messageRendered`
+
+This event is emitted when the message has been fully rendered, including any animations that may be applied to the
+message. This event is emitted after the `messageReceived` event, and will only be emitted once per message.
+
+> * Callback Type:
+
+```tsx
+type MessageRenderedCallback<AiMsg = string> = (event: MessageRenderedEventDetails<AiMsg>) => void;
+
+type MessageRenderedEventDetails<AiMsg = string> = {
+    uid: string;
+    message: AiMsg;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageRenderedReactJs} javascript={EventMessageRenderedJavaScript}/>
 
 ---
 
