@@ -12,7 +12,7 @@ describe('createAiChat() + personaOptions + user', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
 

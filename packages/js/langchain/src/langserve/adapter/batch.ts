@@ -3,12 +3,12 @@ import {NluxUsageError} from '../../../../../shared/src/types/error';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeAbstractAdapter} from './adapter';
 
-export class LangServeFetchAdapter<AiMsg = string> extends LangServeAbstractAdapter<AiMsg> {
+export class LangServeBatchAdapter<AiMsg = string> extends LangServeAbstractAdapter<AiMsg> {
     constructor(options: ChatAdapterOptions<AiMsg>) {
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
+    async batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         const body = this.getRequestBody(message, extras.conversationHistory);
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
@@ -37,7 +37,7 @@ export class LangServeFetchAdapter<AiMsg = string> extends LangServeAbstractAdap
     streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         throw new NluxUsageError({
             source: this.constructor.name,
-            message: 'Cannot stream text from the fetch adapter!',
+            message: 'Cannot stream text from the batch adapter!',
         });
     }
 }

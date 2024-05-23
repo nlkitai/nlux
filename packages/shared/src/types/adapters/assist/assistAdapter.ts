@@ -27,11 +27,11 @@ export type AssistResult = {
  * The difference between this and the `ChatAdapter` interface is that this adapter can return a task to be executed
  * by the client in addition to the text response to be displayed.
  *
- * Assist adapters can only be used in fetch mode, and the response cannot be streamed.
+ * Assist adapters can only be used in batch mode, and the response cannot be streamed.
  */
 export interface AssistAdapter {
     /**
-     * This method should be implemented by any adapter that wants to request data from the API in fetch mode.
+     * This method should be implemented by any adapter that wants to request data from the API in batch mode.
      * It should return a promise that resolves to the response from the API.
      * Either this method or `streamText` (or both) should be implemented by any adapter.
      *

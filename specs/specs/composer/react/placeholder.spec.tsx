@@ -8,7 +8,7 @@ describe('<AiChat /> + composer + placeholder', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
     });
 
     afterEach(() => {

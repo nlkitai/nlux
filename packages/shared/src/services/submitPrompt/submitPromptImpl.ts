@@ -11,7 +11,7 @@ import {
     UserMessageReceivedCallback,
 } from '../../types/chatSegment/chatSegmentEvents';
 import {uid} from '../../utils/uid';
-import {submitInFetchMode} from './submitInFetchMode';
+import {submitInBatchMode} from './submitInBatchMode';
 import {submitInStreamingMode} from './submitInStreamingMode';
 import {SubmitPrompt} from './submitPrompt';
 import {getDataTransferModeToUse} from './utils/dataTransferModeToUse';
@@ -32,7 +32,7 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
         return createEmptyCompleteSegment<AiMsg>();
     }
 
-    if (adapter.streamText === undefined && adapter.fetchText === undefined) {
+    if (adapter.streamText === undefined && adapter.batchText === undefined) {
         return createEmptyErrorSegment<AiMsg>('no-data-transfer-mode-supported');
     }
 
@@ -80,11 +80,11 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
     const dataTransferModeToUse = getDataTransferModeToUse(adapter);
 
-    if (dataTransferModeToUse === 'fetch') {
-        // (b). AI MESSAGE RECEIVED — Only needed in fetch mode.
+    if (dataTransferModeToUse === 'batch') {
+        // (b). AI MESSAGE RECEIVED — Only needed in batch mode.
         aiMessageReceivedCallbacks = new Set();
 
-        submitInFetchMode(
+        submitInBatchMode(
             segmentId,
             userMessage,
             adapter,

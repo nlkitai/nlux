@@ -25,7 +25,7 @@ export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> 
         }
     }
 
-    fetchText(message: string): Promise<string | object | undefined> {
+    batchText(message: string): Promise<string | object | undefined> {
         throw new NluxUsageError({
             source: this.constructor.name,
             message: 'Cannot fetch text from the streaming adapter!',

@@ -9,7 +9,7 @@ describe('<AiChat /> + events + ready', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
     });
 
     afterEach(() => {

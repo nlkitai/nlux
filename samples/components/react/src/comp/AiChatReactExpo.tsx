@@ -1,4 +1,4 @@
-import {AiChat, AiChatProps, DataTransferMode, FetchResponseComponentProps, PersonaOptions} from '@nlux-dev/react/src';
+import {AiChat, AiChatProps, DataTransferMode, BatchResponseComponentProps, PersonaOptions} from '@nlux-dev/react/src';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
 import {FC, useMemo, useState} from 'react';
@@ -10,7 +10,7 @@ const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
 const CustomMessageComponent: FC<
-    FetchResponseComponentProps<MessageObjectType>
+    BatchResponseComponentProps<MessageObjectType>
 > = (props) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
@@ -21,7 +21,7 @@ const CustomMessageComponent: FC<
         return null;
     }
 
-    const {content} = props as FetchResponseComponentProps<MessageObjectType>;
+    const {content} = props as BatchResponseComponentProps<MessageObjectType>;
 
     if (typeof content === 'object' && content?.txt !== undefined) {
         return (
@@ -48,7 +48,7 @@ export const AiChatReactExpo = () => {
 
     const [dataTransferMode, setDataTransferMode] = useState<
         DataTransferMode
-    >('fetch');
+    >('batch');
 
     const langServeAdapter = useChatAdapter<MessageObjectType>({
         url: 'https://pynlux.api.nlux.ai/pirate-speak',
@@ -131,7 +131,7 @@ export const AiChatReactExpo = () => {
                         onChange={(e) => setDataTransferMode(e.target.value as DataTransferMode)}
                     >
                         <option value="stream">Stream Data</option>
-                        <option value="fetch">Fetch Data</option>
+                        <option value="batch">Batch Data</option>
                     </select>
                 </div>
                 <div className="content">

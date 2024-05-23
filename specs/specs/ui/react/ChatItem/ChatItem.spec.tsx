@@ -1,4 +1,4 @@
-import {FetchResponseComponentProps} from '@nlux-dev/react/src';
+import {BatchResponseComponentProps} from '@nlux-dev/react/src';
 import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp';
 import {render} from '@testing-library/react';
 import {forwardRef} from 'react';
@@ -10,8 +10,9 @@ describe('When a custom chat item is provided', () => {
         const ForwardRefChatItemComp = forwardRef(ChatItemComp);
         const component = <ForwardRefChatItemComp
             uid={'1'}
+            name={'Alice'}
             direction={'incoming'}
-            dataTransferMode={'fetch'}
+            dataTransferMode={'batch'}
             layout={'bubbles'}
             status={'complete'}
             fetchedContent={'Hello'}
@@ -30,12 +31,13 @@ describe('When a custom chat item is provided', () => {
         const ForwardRefChatItemComp = forwardRef(ChatItemComp);
         const component = <ForwardRefChatItemComp
             uid={'1'}
+            name={'Alice'}
             direction={'incoming'}
-            dataTransferMode={'fetch'}
+            dataTransferMode={'batch'}
             layout={'bubbles'}
             status={'complete'}
             fetchedContent={{text: 'Hello Jason!'}}
-            responseRenderer={({content}: FetchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}
+            responseRenderer={({content}: BatchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}
         />;
 
         // Act

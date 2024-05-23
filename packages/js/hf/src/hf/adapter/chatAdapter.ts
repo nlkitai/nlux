@@ -13,7 +13,7 @@ import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 
 export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
-    static defaultDataTransferMode: DataTransferMode = 'fetch';
+    static defaultDataTransferMode: DataTransferMode = 'batch';
     static defaultMaxNewTokens = 500;
 
     private readonly __instanceId: string;
@@ -56,7 +56,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
         };
     }
 
-    async fetchText(message: string): Promise<string | object | undefined> {
+    async batchText(message: string): Promise<string | object | undefined> {
         if (!this.options.model && !this.options.endpoint) {
             throw new NluxValidationError({
                 source: this.constructor.name,

@@ -11,7 +11,7 @@ export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatAdapt
         model,
     } = options || {};
 
-    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
+    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'batch') {
         throw new NluxUsageError({
             source,
             message: 'Data transfer mode not supported',

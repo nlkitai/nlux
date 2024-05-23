@@ -13,7 +13,7 @@ import {
     ChatItem,
     ConversationLayout,
     DataTransferMode,
-    FetchResponseComponentProps,
+    BatchResponseComponentProps,
     ResponseRenderer,
     StreamResponseComponentProps,
 } from '@nlux-dev/react/src';
@@ -40,7 +40,7 @@ function App() {
     const onColorSchemeChange = useCallback((e) => setColorScheme(e.target.value as 'light' | 'dark' | 'auto'),
         [setColorScheme],
     );
-    const onDataTransferModeChange = useCallback((e) => setDataTransferMode(e.target.value as 'fetch' | 'stream'),
+    const onDataTransferModeChange = useCallback((e) => setDataTransferMode(e.target.value as 'batch' | 'stream'),
         [setDataTransferMode],
     );
 
@@ -65,14 +65,14 @@ function App() {
     });
 
     const hfAdapter = useHfChatAdapter({
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'batch',
         model: 'gpt4',
         authToken: 'N/A',
     });
 
     // const openAiAdapter = useOpenAiChatAdapter()
     //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
-    //     .withDataTransferMode('fetch');
+    //     .withDataTransferMode('batch');
 
     const longMessage = 'Hello, [how can I help you](http://questions.com)? This is going to be a very long greeting '
         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
@@ -133,7 +133,7 @@ function App() {
                     Data Transfer Mode&nbsp;
                     <select value={dataTransferMode} onChange={onDataTransferModeChange}>
                         <option value="stream">Stream</option>
-                        <option value="fetch">Fetch</option>
+                        <option value="batch">Batch</option>
                     </select>
                 </label>
                 <hr />
@@ -225,7 +225,7 @@ function App() {
 
 const responseRenderer: ResponseRenderer<string> = (props) => {
     const {dataTransferMode} = props;
-    const propsForFetch = props as FetchResponseComponentProps<string>;
+    const propsForBatch = props as BatchResponseComponentProps<string>;
     const propsForStream = props as StreamResponseComponentProps<string>;
 
     console.log('Response Renderer Props');
@@ -233,7 +233,7 @@ const responseRenderer: ResponseRenderer<string> = (props) => {
 
     return (
         <>
-            {(dataTransferMode === 'fetch') && <div>{propsForFetch.content}</div>}
+            {(dataTransferMode === 'batch') && <div>{propsForBatch.content}</div>}
             {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
             <div style={{
                 backgroundColor: 'lightblue',

@@ -19,7 +19,7 @@ type MessageOptions<AiMsg = string> = {
 // Refer to custom renderers API documentation for more information
 type ResponseRenderer<AiMsg> = (
     FC<StreamResponseComponentProps<AiMsg>> | // React component to render a streamed AI response
-    FC<FetchResponseComponentProps<AiMsg>>    // React component to render a response in fetch mode
+    FC<BatchResponseComponentProps<AiMsg>>    // React component to render a response in batch mode
 );
 type PromptRenderer = FC<PromptRendererProps>;
 ```

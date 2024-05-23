@@ -6,21 +6,21 @@ import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait';
 
 describe.each([
-        {dataTransferMode: 'fetch'},
+        {dataTransferMode: 'batch'},
         {dataTransferMode: 'stream'},
-    ] satisfies Array<{dataTransferMode: 'stream' | 'fetch'}>,
+    ] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>,
 )('createAiChat() + withAdapter($mode) + conversationHistory extras', ({dataTransferMode}) => {
     let adapterController: AdapterController;
     let rootElement: HTMLElement;
     let aiChat: AiChat;
 
     // Assign fetch/stream adapters — Tests should work the same way
-    const shouldUseFetch = dataTransferMode === 'fetch';
+    const shouldUseBatch = dataTransferMode === 'batch';
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(shouldUseFetch)
-            .withStreamText(!shouldUseFetch)
+            .withBatchText(shouldUseBatch)
+            .withStreamText(!shouldUseBatch)
             .create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
@@ -77,7 +77,7 @@ describe.each([
                 await userEvent.type(textArea, 'So what did you do?{enter}');
                 await waitForRenderCycle();
 
-                if (dataTransferMode === 'fetch') {
+                if (dataTransferMode === 'batch') {
                     adapterController.resolve('I helped you with your account.');
                 } else {
                     adapterController.next('I helped you with your account.');

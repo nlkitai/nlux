@@ -11,7 +11,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
     });

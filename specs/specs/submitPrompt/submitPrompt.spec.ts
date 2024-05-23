@@ -8,7 +8,7 @@ describe('submitPrompt()', () => {
         it('Should emit an error', async () => {
             // Arrange
             const prompt = 'What is the weather like today?';
-            const adapter = {streamText: undefined, fetchText: undefined};
+            const adapter = {streamText: undefined, batchText: undefined};
             const extras = {
                 aiChatProps: {} as any,
             } satisfies ChatAdapterExtras<string>;
@@ -30,7 +30,7 @@ describe('submitPrompt()', () => {
             const prompt = 'What is the weather like today?';
             const adapter = {
                 streamText: undefined,
-                fetchText: vi.fn().mockReturnValue(Promise.resolve('')),
+                batchText: vi.fn().mockReturnValue(Promise.resolve('')),
             };
             const extras = {
                 aiChatProps: {} as any,
@@ -40,8 +40,8 @@ describe('submitPrompt()', () => {
             const {dataTransferMode} = submitPrompt(prompt, adapter, extras);
 
             // Assert
-            expect(adapter.fetchText).toHaveBeenCalled();
-            expect(dataTransferMode).toBe('fetch');
+            expect(adapter.batchText).toHaveBeenCalled();
+            expect(dataTransferMode).toBe('batch');
         });
     });
 
@@ -51,7 +51,7 @@ describe('submitPrompt()', () => {
             const prompt = 'What is the weather like today?';
             const adapter = {
                 streamText: vi.fn().mockReturnValue(Promise.resolve('')),
-                fetchText: undefined,
+                batchText: undefined,
             };
             const extras = {
                 aiChatProps: {} as any,
@@ -72,7 +72,7 @@ describe('submitPrompt()', () => {
             const prompt = 'What is the weather like today?';
             const adapter = {
                 streamText: vi.fn().mockReturnValue(Promise.resolve('')),
-                fetchText: vi.fn().mockReturnValue(Promise.resolve('')),
+                batchText: vi.fn().mockReturnValue(Promise.resolve('')),
             };
             const extras = {
                 aiChatProps: {} as any,
@@ -91,8 +91,8 @@ describe('submitPrompt()', () => {
             const prompt = 'What is the weather like today?';
             const adapter = {
                 streamText: vi.fn().mockReturnValue(Promise.resolve('')),
-                fetchText: vi.fn().mockReturnValue(Promise.resolve('')),
-                dataTransferMode: 'fetch',
+                batchText: vi.fn().mockReturnValue(Promise.resolve('')),
+                dataTransferMode: 'batch',
                 id: '123',
                 info: {} as StandardAdapterInfo,
                 preProcessAiStreamedChunk: vi.fn(),
@@ -107,7 +107,7 @@ describe('submitPrompt()', () => {
             submitPrompt(prompt, adapter, extras);
 
             // Assert
-            expect(adapter.fetchText).toHaveBeenCalled();
+            expect(adapter.batchText).toHaveBeenCalled();
         });
     });
 });

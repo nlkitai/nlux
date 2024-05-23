@@ -8,7 +8,7 @@ describe('createAiChat() + exceptionBox', () => {
     describe('When an exception is thrown by the adapter', () => {
         it('The exception should be displayed in the exception box', async () => {
             // Arrange
-            const adapterController = adapterBuilder().withFetchText().create();
+            const adapterController = adapterBuilder().withBatchText().create();
             const rootElement = document.createElement('div');
             document.body.append(rootElement);
 

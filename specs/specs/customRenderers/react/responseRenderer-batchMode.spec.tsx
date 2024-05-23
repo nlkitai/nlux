@@ -1,6 +1,6 @@
 import {
     AiChat,
-    FetchResponseComponentProps,
+    BatchResponseComponentProps,
 } from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -10,13 +10,13 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../utils/wait';
 
-describe('<AiChat /> + responseRenderer in fetch mode', () => {
+describe('<AiChat /> + responseRenderer in batch mode', () => {
     let adapterController: AdapterController | undefined = undefined;
 
-    describe('When a response renderer is used in fetch mode', () => {
+    describe('When a response renderer is used in batch mode', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(true)
+                .withBatchText(true)
                 .withStreamText(false)
                 .create();
         });
@@ -27,7 +27,7 @@ describe('<AiChat /> + responseRenderer in fetch mode', () => {
 
         it('Should render the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content}) => (
+            const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content}) => (
                 <div>The AI response is: {content}</div>
             );
 
@@ -56,7 +56,7 @@ describe('<AiChat /> + responseRenderer in fetch mode', () => {
 
         it('Should pass uid to the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content, uid}) => (
+            const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content, uid}) => (
                 <div>
                     The AI response is: {content} with uid: {uid}
                 </div>
@@ -85,7 +85,7 @@ describe('<AiChat /> + responseRenderer in fetch mode', () => {
                 expect.objectContaining({
                     uid: expect.any(String),
                     content: 'Yo!',
-                    dataTransferMode: 'fetch',
+                    dataTransferMode: 'batch',
                     status: 'complete',
                     serverResponse: undefined,
                 }),
@@ -95,7 +95,7 @@ describe('<AiChat /> + responseRenderer in fetch mode', () => {
         describe('When the custom response renderer is removed', () => {
             it('Should render the default response renderer', async () => {
                 // Arrange
-                const CustomResponseComponent: FC<FetchResponseComponentProps<string>> = ({content, uid}) => (
+                const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content, uid}) => (
                     <div>The AI response is: {content} with uid: {uid}</div>
                 );
 

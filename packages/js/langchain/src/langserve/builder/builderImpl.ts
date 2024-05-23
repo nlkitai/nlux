@@ -1,7 +1,7 @@
 import {DataTransferMode} from '@nlux/core';
 import {NluxUsageError} from '../../../../../shared/src/types/error';
 import {LangServeAbstractAdapter} from '../adapter/adapter';
-import {LangServeFetchAdapter} from '../adapter/fetch';
+import {LangServeBatchAdapter} from '../adapter/batch';
 import {LangServeStreamAdapter} from '../adapter/stream';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
@@ -51,7 +51,7 @@ export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<Ai
             return new LangServeStreamAdapter<AiMsg>(options);
         }
 
-        return new LangServeFetchAdapter(options);
+        return new LangServeBatchAdapter(options);
     }
 
     withDataTransferMode(mode: DataTransferMode): LangServeAdapterBuilderImpl<AiMsg> {

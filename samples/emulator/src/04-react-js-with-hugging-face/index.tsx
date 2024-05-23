@@ -13,7 +13,7 @@ const ExampleWrapper = () => {
 
     // const adapter = useMemo(() => {
     //     return createChatAdapter()
-    //         .withDataTransferMode('fetch')
+    //         .withDataTransferMode('batch')
     //         .withEndpoint('https://<LLAMA2 MODEL ENDPOINT>.endpoints.huggingface.cloud')
     //         .withSystemMessage('Your are a funny assistant. You only response in short sharp daring humour')
     //         .withInputPreProcessor(llama2InputPreProcessor)

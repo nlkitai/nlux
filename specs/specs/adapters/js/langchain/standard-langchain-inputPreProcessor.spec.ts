@@ -72,7 +72,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
         });
     });
 
-    describe('With fetch adapter', () => {
+    describe('With batch adapter', () => {
         it('Should receive the entire conversation history', async () => {
             // Arrange
             let conversationHistoryInPreProcessor: any;
@@ -80,7 +80,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
 
             const adapter = createChatAdapter()
                 .withUrl('http://localhost:8080')
-                .withDataTransferMode('fetch')
+                .withDataTransferMode('batch')
                 .withInputPreProcessor((
                     input,
                     conversationHistory,

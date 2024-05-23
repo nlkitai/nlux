@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const huggingFaceAdapter = createHuggingFaceChatAdapter()
         .withModel('gpt4')
-        .withDataTransferMode('fetch')
+        .withDataTransferMode('batch')
         .withAuthToken('N/A');
 
     const openAiAdapter = createOpenAiChatAdapter()

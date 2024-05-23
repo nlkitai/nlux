@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + submit prompt + fetch adapter', () => {
+describe('createAiChat() + submit prompt + batch adapter', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement;
@@ -13,7 +13,7 @@ describe('createAiChat() + submit prompt + fetch adapter', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
 

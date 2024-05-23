@@ -14,7 +14,7 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         rootElement = document.createElement('div');
         document.body.append(rootElement);
         adapterController = adapterController = adapterBuilder()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
     });

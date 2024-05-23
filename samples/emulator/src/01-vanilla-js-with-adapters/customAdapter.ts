@@ -23,7 +23,7 @@ export const myCustomStreamingAdapter: ChatAdapter<string> = {
 };
 
 export const myCustomPromiseAdapter: ChatAdapter<string> = {
-    fetchText(message: string, extras): Promise<string> {
+    batchText(message: string, extras): Promise<string> {
         console.dir(extras, {depth: 3});
         return new Promise((resolve) => {
             setTimeout(() => {

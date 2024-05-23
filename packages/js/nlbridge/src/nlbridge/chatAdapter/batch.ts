@@ -3,12 +3,12 @@ import {NluxError, NluxUsageError} from '../../../../../shared/src/types/error';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from './adapter';
 
-export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapter<AiMsg> {
+export class NLBridgeBatchAdapter<AiMsg = string> extends NLBridgeAbstractAdapter<AiMsg> {
     constructor(options: ChatAdapterOptions) {
         super(options);
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
+    async batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         if (this.context && this.context.contextId) {
             await this.context.flush();
         }
@@ -69,7 +69,7 @@ export class NLBridgeFetchAdapter<AiMsg = string> extends NLBridgeAbstractAdapte
     ): void {
         throw new NluxUsageError({
             source: this.constructor.name,
-            message: 'Cannot stream text from the fetch adapter!',
+            message: 'Cannot stream text from the batch adapter!',
         });
     }
 }

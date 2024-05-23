@@ -14,7 +14,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
         rootElement = document.createElement('div');
         document.body.append(rootElement);
         adapterController = adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
     });

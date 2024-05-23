@@ -2,7 +2,7 @@ import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/co
 import {vi} from 'vitest';
 
 export const createAdapterController = <AiMsg = string>({
-    includeFetchText = false,
+    includeBatchText = false,
     includeStreamText = false,
 } = {}) => {
     let resolvePromise: Function | null = null;
@@ -11,16 +11,16 @@ export const createAdapterController = <AiMsg = string>({
     let streamObserver: StreamingAdapterObserver<AiMsg> | null = null;
     let extrasFromLastMessage: ChatAdapterExtras<AiMsg> | undefined | null = null;
 
-    let fetchTextMock = vi.fn();
+    let batchTextMock = vi.fn();
     let streamTextMock = vi.fn();
 
-    const createNewFetchTextMock = () => (
+    const createNewBatchTextMock = () => (
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ) => {
         lastMessageSent = message;
         extrasFromLastMessage = extras;
-        fetchTextMock(message);
+        batchTextMock(message);
 
         return new Promise<AiMsg>((resolve, reject) => {
             resolvePromise = resolve;
@@ -46,7 +46,7 @@ export const createAdapterController = <AiMsg = string>({
     };
 
     const adapter: ChatAdapter<AiMsg> = {
-        fetchText: includeFetchText ? createNewFetchTextMock() : undefined,
+        batchText: includeBatchText ? createNewBatchTextMock() : undefined,
         streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
 
@@ -54,18 +54,18 @@ export const createAdapterController = <AiMsg = string>({
         getLastMessage: () => lastMessageSent,
         getLastExtras: () => extrasFromLastMessage,
         adapter: adapter,
-        fetchTextMock,
+        batchTextMock,
         streamTextMock,
         resolve: (message: string) => {
             resolvePromise && resolvePromise(message);
-            if (adapter.fetchText) {
-                adapter.fetchText = createNewFetchTextMock();
+            if (adapter.batchText) {
+                adapter.batchText = createNewBatchTextMock();
             }
         },
         reject: (message: string) => {
             rejectPromise && rejectPromise(message);
-            if (adapter.fetchText) {
-                adapter.fetchText = createNewFetchTextMock();
+            if (adapter.batchText) {
+                adapter.batchText = createNewBatchTextMock();
             }
         },
         next: (message: string) => {

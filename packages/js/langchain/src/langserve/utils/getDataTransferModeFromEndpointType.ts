@@ -8,5 +8,5 @@ export const getDataTransferModeFromEndpointType = (
         return 'stream';
     }
 
-    return 'fetch';
+    return 'batch';
 };

@@ -12,7 +12,7 @@ describe('<AiChat /> + stream adapter + markdown', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
     });

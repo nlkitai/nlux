@@ -268,7 +268,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         }
 
         if (
-            (typeof anAdapterOrAdapterBuilder.fetchText === 'function') ||
+            (typeof anAdapterOrAdapterBuilder.batchText === 'function') ||
             (typeof anAdapterOrAdapterBuilder.streamText === 'function')
         ) {
             this.theAdapterType = 'instance';
@@ -280,7 +280,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             source: this.constructor.name,
             message: 'Unable to set adapter. Invalid adapter or adapter-builder implementation! '
                 + 'When an `ChatAdapterBuilder` is provided, it must implement either `create()` method that returns an '
-                + 'ChatAdapter instance. When an ChatAdapter instance is provided, must implement `fetchText()` and/or '
+                + 'ChatAdapter instance. When an ChatAdapter instance is provided, must implement `batchText()` and/or '
                 + '`streamText()` methods. None of the above were found.',
         });
     };

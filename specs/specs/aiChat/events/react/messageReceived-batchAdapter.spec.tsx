@@ -6,11 +6,11 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + fetch adapter + events + messageReceived', () => {
+describe('<AiChat /> + batch adapter + events + messageReceived', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
     });
 
     afterEach(() => {

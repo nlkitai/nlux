@@ -14,7 +14,7 @@ import {uid} from '../../utils/uid';
 import {warn} from '../../utils/warn';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
-export const submitInFetchMode = async <AiMsg>(
+export const submitInBatchMode = async <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
@@ -37,11 +37,11 @@ export const submitInFetchMode = async <AiMsg>(
         const participantRole = 'ai';
         const status = 'complete';
         const time = new Date();
-        const dataTransferMode = 'fetch';
+        const dataTransferMode = 'batch';
 
         let aiResponse: AiBatchedMessage<AiMsg> | undefined = undefined;
         if (isStandardAdapter) {
-            const rawResponse = await adapterAsStandardAdapter.fetchText!(prompt, extras);
+            const rawResponse = await adapterAsStandardAdapter.batchText!(prompt, extras);
             const preProcessedResponse = adapterAsStandardAdapter.preProcessAiBatchedMessage(rawResponse, extras);
             if (preProcessedResponse !== undefined && preProcessedResponse !== null) {
                 aiResponse = {
@@ -52,7 +52,7 @@ export const submitInFetchMode = async <AiMsg>(
                 };
             }
         } else {
-            const response = await (adapter as ChatAdapter<AiMsg>).fetchText!(prompt, extras);
+            const response = await (adapter as ChatAdapter<AiMsg>).batchText!(prompt, extras);
             aiResponse = {
                 uid: responseUid,
                 content: response,

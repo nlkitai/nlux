@@ -54,7 +54,7 @@ export const nlBridgeCustomStreamingAdapter: ChatAdapter<string> = {
 };
 
 export const nlBridgeCustomPromiseAdapter: ChatAdapter<string> = {
-    async fetchText(message: string, extras): Promise<string> {
+    async batchText(message: string, extras): Promise<string> {
         const endpoint = 'http://localhost:8899/';
         const response = await fetch(endpoint, {
             method: 'POST',

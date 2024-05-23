@@ -24,20 +24,20 @@ export type StreamResponseComponentProps<AiMsg> = {
 };
 
 /**
- * Props for the custom function that renders a message sent by the server in fetch mode.
+ * Props for the custom function that renders a message sent by the server in batch mode.
  * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
  *
  * @property {string} uid The unique identifier of the message.
- * @property {'fetch'} dataTransferMode The data transfer mode used by the adapter.
+ * @property {'batch'} dataTransferMode The data transfer mode used by the adapter.
  * @property {'complete'} status The status of the message.
  *
  * @property {AiMsg} content The content of the message. The content is a single message.
  * @property {unknown} serverResponse The raw server response. The server response is a single object or string
  * representing the raw response received from the server.
  */
-export type FetchResponseComponentProps<AiMsg> = {
+export type BatchResponseComponentProps<AiMsg> = {
     uid: string;
-    dataTransferMode: 'fetch';
+    dataTransferMode: 'batch';
     status: 'complete';
     content: AiMsg;
     serverResponse: unknown;
@@ -46,7 +46,7 @@ export type FetchResponseComponentProps<AiMsg> = {
 export type ResponseRenderer<AiMsg> = (
     (props: StreamResponseComponentProps<AiMsg>) => HTMLElement | null
 ) | (
-    (props: FetchResponseComponentProps<AiMsg>) => HTMLElement | null
+    (props: BatchResponseComponentProps<AiMsg>) => HTMLElement | null
 );
 
 export type PromptRendererProps = {

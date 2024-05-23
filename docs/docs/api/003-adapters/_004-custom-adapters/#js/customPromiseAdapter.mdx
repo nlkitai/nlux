@@ -2,7 +2,7 @@
 import {Adapter} from '@nlux/core';
 
 export const myCustomAdapter: Adapter = {
-    fetchText: (message: string, extras: AdapterExtras): Promise<string> => {
+    batchText: (message: string, extras: AdapterExtras): Promise<string> => {
         return fetch('http://localhost:8080', {
             method: 'POST',
             body: JSON.stringify({message})

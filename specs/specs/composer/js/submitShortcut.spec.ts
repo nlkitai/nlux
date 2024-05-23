@@ -11,7 +11,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
     });
@@ -39,7 +39,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+            expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         it('The prompt should not be submitted when the textarea is empty and the user presses the Enter key',
@@ -56,7 +56,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             },
         );
 
@@ -75,7 +75,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+            expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
         });
 
         it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
@@ -93,7 +93,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+            expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
         });
 
         describe('When submitShortcut option is set to CommandEnter after initial render', () => {
@@ -119,7 +119,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should be submitted when the user presses the Ctrl+Enter key', async () => {
@@ -144,7 +144,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should be submitted when the user presses the Meta+Enter key', async () => {
@@ -169,7 +169,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
         });
     });
@@ -192,7 +192,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+            expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
         });
 
         it('The prompt should be submitted when the user presses the Ctrl+Enter key', async () => {
@@ -212,7 +212,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+            expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         it('The prompt should be submitted when the user presses the Meta+Enter key', async () => {
@@ -232,7 +232,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+            expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
         });
 
         describe('When submitShortcut option is set to Enter after initial render', () => {
@@ -260,7 +260,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
@@ -287,7 +287,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
@@ -314,7 +314,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             });
         });
 
@@ -343,7 +343,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).toHaveBeenCalledWith('Hello, World!');
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello, World!');
             });
 
             it('The prompt should not be submitted when the user presses the Ctrl+Enter key', async () => {
@@ -370,7 +370,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             });
 
             it('The prompt should not be submitted when the user presses the Meta+Enter key', async () => {
@@ -397,7 +397,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                expect(adapterController!.fetchTextMock).not.toHaveBeenCalled();
+                expect(adapterController!.batchTextMock).not.toHaveBeenCalled();
             });
         });
     });

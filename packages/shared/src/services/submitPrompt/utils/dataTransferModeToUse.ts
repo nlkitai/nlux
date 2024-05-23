@@ -8,8 +8,8 @@ export const getDataTransferModeToUse = <AiMsg>(
     if (adapter.streamText !== undefined) {
         supportedDataTransferModes.push('stream');
     }
-    if (adapter.fetchText !== undefined) {
-        supportedDataTransferModes.push('fetch');
+    if (adapter.batchText !== undefined) {
+        supportedDataTransferModes.push('batch');
     }
 
     const adapterAsStandardAdapter: StandardChatAdapter<AiMsg> | undefined = isStandardChatAdapter(

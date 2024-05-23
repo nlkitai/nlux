@@ -1,6 +1,6 @@
 import {
     DataTransferMode,
-    FetchResponseComponentProps,
+    BatchResponseComponentProps,
     PersonaOptions,
     StreamResponseComponentProps,
 } from '@nlux-dev/react/src';
@@ -15,7 +15,7 @@ type MessageObjectType = {txt: string, color: string, bg: string};
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent: FC<FetchResponseComponentProps<MessageObjectType>> = (
+const CustomMessageComponent: FC<BatchResponseComponentProps<MessageObjectType>> = (
     {content}: {content: MessageObjectType}
 ) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
@@ -46,7 +46,7 @@ export const AiChatWelcomeMessageReactExpo = () => {
 
     const [dataTransferMode, setDataTransferMode] = useState<
         DataTransferMode
-    >('fetch');
+    >('batch');
 
     const langServeAdapter = useChatAdapter<MessageObjectType>({
         url: 'https://pynlux.api.nlux.ai/pirate-speak',
@@ -93,7 +93,7 @@ export const AiChatWelcomeMessageReactExpo = () => {
                         onChange={(e) => setDataTransferMode(e.target.value as DataTransferMode)}
                     >
                         <option value="stream">Stream Data</option>
-                        <option value="fetch">Fetch Data</option>
+                        <option value="batch">Batch Data</option>
                     </select>
                 </div>
                 <div className="content">

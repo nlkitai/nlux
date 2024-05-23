@@ -74,7 +74,7 @@ export type {
 } from './exports/props';
 
 export type {
-    FetchResponseComponentProps,
+    BatchResponseComponentProps,
     StreamResponseComponentProps,
     ResponseRenderer,
     PromptRendererProps,

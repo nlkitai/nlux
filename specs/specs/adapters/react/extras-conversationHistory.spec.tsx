@@ -8,14 +8,14 @@ import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../utils/wait';
 
 describe.each([
-        {dataTransferMode: 'fetch'},
+        {dataTransferMode: 'batch'},
         // {dataTransferMode: 'stream'},
-    ] satisfies Array<{dataTransferMode: 'stream' | 'fetch'}>,
+    ] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>,
 )('<AiChat /> + withAdapter($mode) + conversationHistory extras', ({dataTransferMode}) => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
     });
 
     afterEach(() => {
@@ -66,7 +66,7 @@ describe.each([
                 await userEvent.type(textArea, 'So what did you do?{enter}');
                 await waitForReactRenderCycle();
 
-                if (dataTransferMode === 'fetch') {
+                if (dataTransferMode === 'batch') {
                     adapterController!.resolve('I helped you with your account.');
                 } else {
                     adapterController!.next('I helped you with your account.');

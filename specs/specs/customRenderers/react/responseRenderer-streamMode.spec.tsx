@@ -11,13 +11,13 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../utils/wait';
 
-describe('<AiChat /> + responseRenderer in fetch mode', () => {
+describe('<AiChat /> + responseRenderer in batch mode', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     describe('When a response renderer is used in stream mode', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(false)
+                .withBatchText(false)
                 .withStreamText(true)
                 .create();
         });

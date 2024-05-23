@@ -5,14 +5,14 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + fetch adapter + markdown', () => {
+describe('createAiChat() + batch adapter + markdown', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
 

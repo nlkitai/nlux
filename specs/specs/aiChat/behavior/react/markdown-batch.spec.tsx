@@ -7,12 +7,12 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + fetch adapter + markdown', () => {
+describe('<AiChat /> + batch adapter + markdown', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
     });

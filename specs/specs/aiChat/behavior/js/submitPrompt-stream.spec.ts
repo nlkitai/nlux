@@ -13,7 +13,7 @@ describe('createAiChat() + submit prompt + stream adapter', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
 

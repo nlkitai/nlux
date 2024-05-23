@@ -75,10 +75,10 @@ The adapter will automatically append the endpoint to the URL based on other con
 ### Data Transfer Mode
 
 The data transfer mode to use when communicating with the LangServe runnable.
-`NLUX` LangServe adapter supports `stream` and `fetch` modes.
+`NLUX` LangServe adapter supports `stream` and `batch` modes.
 
 When the adapter is configured to use `stream` mode, the `/stream` endpoint of the LangServe API will be used to
-communicate with the runnable. When the adapter is configured to use `fetch` mode, the `/invoke` endpoint will be used.
+communicate with the runnable. When the adapter is configured to use `batch` mode, the `/invoke` endpoint will be used.
 
 <PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
 

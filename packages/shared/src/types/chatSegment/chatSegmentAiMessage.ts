@@ -24,7 +24,7 @@ export type AiBatchedMessage<AiMsg> = {
     uid: string;
     time: Date;
     participantRole: 'ai';
-    dataTransferMode: 'fetch';
+    dataTransferMode: 'batch';
 } & ({
     status: 'complete';
     content: AiMsg;

@@ -10,7 +10,7 @@ describe('createAiChat() + prop className', () => {
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
     });

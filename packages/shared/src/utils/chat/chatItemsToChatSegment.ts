@@ -44,7 +44,7 @@ export const chatItemsToChatSegment = <AiMsg>(
             participantRole: 'ai',
             content: message.message,
             serverResponse: message.serverResponse,
-            dataTransferMode: 'fetch',
+            dataTransferMode: 'batch',
         } satisfies ChatSegmentAiMessage<AiMsg>;
     }).filter(
         (segmentItem: ChatSegmentItem<AiMsg> | undefined): segmentItem is ChatSegmentItem<AiMsg> => {

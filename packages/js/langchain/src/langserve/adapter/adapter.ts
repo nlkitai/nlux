@@ -118,7 +118,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         }
     }
 
-    abstract fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined>;
+    abstract batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined>;
 
     init() {
         if (this.useInputSchema) {

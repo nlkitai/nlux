@@ -11,7 +11,7 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
     let matchMediaNative: typeof window.matchMedia;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         matchMedia = vi.fn(() => ({matches: true}));
         matchMediaNative = window.matchMedia;
         (window as unknown as Record<string, unknown>).matchMedia = matchMedia;

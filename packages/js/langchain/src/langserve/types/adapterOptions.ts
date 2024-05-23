@@ -24,7 +24,7 @@ export type ChatAdapterOptions<AiMsg> = {
      * If not provided, the `url` will be checked to see if it contains the action
      * to perform (either `/invoke` or `/stream`). If the action is not provided, the default
      * data transfer mode will be `stream`. If the action is provided, the data transfer mode
-     * should match the action (either `fetch` mode for `/invoke` or `stream` mode for `/stream`).
+     * should match the action (either `batch` mode for `/invoke` or `stream` mode for `/stream`).
      */
     dataTransferMode?: DataTransferMode;
 

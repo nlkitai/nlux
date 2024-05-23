@@ -11,7 +11,7 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
     });

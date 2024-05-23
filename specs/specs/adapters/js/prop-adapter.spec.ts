@@ -20,10 +20,10 @@ describe('createAiChat() + withAdapter()', () => {
         rootElement?.remove();
     });
 
-    describe('When the custom adapter provided implements both fetchText and streamText methods', () => {
+    describe('When the custom adapter provided implements both batchText and streamText methods', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(true)
+                .withBatchText(true)
                 .withStreamText(true)
                 .create();
         });
@@ -41,19 +41,19 @@ describe('createAiChat() + withAdapter()', () => {
 
             // Assert
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
-            expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);
+            expect(adapterController.batchTextMock).toHaveBeenCalledTimes(0);
         });
     });
 
-    describe('When the custom adapter provided implements only the fetchText method', () => {
+    describe('When the custom adapter provided implements only the batchText method', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(true)
+                .withBatchText(true)
                 .withStreamText(false)
                 .create();
         });
 
-        it('fetchText should be used', async () => {
+        it('batchText should be used', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
@@ -64,7 +64,7 @@ describe('createAiChat() + withAdapter()', () => {
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForRenderCycle();
 
-            expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
+            expect(adapterController.batchTextMock).toHaveBeenCalledWith('Hello');
             expect(adapterController.streamTextMock).toHaveBeenCalledTimes(0);
         });
     });
@@ -72,7 +72,7 @@ describe('createAiChat() + withAdapter()', () => {
     describe('When the custom adapter provided implements only the streamText method', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(false)
+                .withBatchText(false)
                 .withStreamText(true)
                 .create();
         });
@@ -90,7 +90,7 @@ describe('createAiChat() + withAdapter()', () => {
 
             // Assert
             expect(adapterController.streamTextMock).toHaveBeenCalledWith('Hello', expect.anything());
-            expect(adapterController.fetchTextMock).toHaveBeenCalledTimes(0);
+            expect(adapterController.batchTextMock).toHaveBeenCalledTimes(0);
         });
     });
 

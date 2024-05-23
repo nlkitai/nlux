@@ -3,11 +3,11 @@ import {ChatAdapterExtras} from './chatAdapterExtras';
 /**
  * This type is used to indicate the mode in which the adapter should request data from the API.
  */
-export type DataTransferMode = 'stream' | 'fetch';
+export type DataTransferMode = 'stream' | 'batch';
 
 /**
  * This interface exposes methods that should be implemented by any chat adapter to connect the AiChat component
- * to any API or AI backend. Chat adapters can be used to request data from the API in fetch mode or stream mode.
+ * to any API or AI backend. Chat adapters can be used to request data from the API in batch mode or stream mode.
  *
  * The difference between this and the `AssistAdapter` interface is that this adapter can only return a text response
  * to be displayed to the user. It cannot return a task to be executed by the client. If you are using the `AiChat`
@@ -15,7 +15,7 @@ export type DataTransferMode = 'stream' | 'fetch';
  */
 export interface ChatAdapter<AiMsg = string> {
     /**
-     * This method should be implemented by any adapter that wants to request data from the API in fetch mode.
+     * This method should be implemented by any adapter that wants to request data from the API in batch mode.
      * It should return a promise that resolves to the response from the API.
      * Either this method or `streamText` (or both) should be implemented by any adapter.
      *
@@ -23,14 +23,14 @@ export interface ChatAdapter<AiMsg = string> {
      * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    fetchText?: (
+    batchText?: (
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ) => Promise<AiMsg>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
-     * Either this method or `fetchText` (or both) should be implemented by any adapter.
+     * Either this method or `batchText` (or both) should be implemented by any adapter.
      *
      * @param {string} message
      * @param {StreamingAdapterObserver} observer

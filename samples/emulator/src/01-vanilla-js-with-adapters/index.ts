@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //
         //     return 'Sorry, I did not understand that.';
         // })
-        // .withDataTransferMode('fetch')
+        // .withDataTransferMode('batch')
         .withDataTransferMode('stream');
 
     aiChat = createAiChat()

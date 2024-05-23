@@ -66,7 +66,7 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
         return gptAdapterInfo;
     }
 
-    abstract fetchText(
+    abstract batchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;

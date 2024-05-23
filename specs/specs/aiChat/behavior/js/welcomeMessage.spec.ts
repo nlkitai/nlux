@@ -28,7 +28,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
         describe('When no initial conversation is provided', () => {
             it('The welcome message should be displayed', async () => {
                 // Arrange
-                adapterController = adapterBuilder().withFetchText().create();
+                adapterController = adapterBuilder().withBatchText().create();
                 aiChat = createAiChat()
                     .withAdapter(adapterController.adapter)
                     .withPersonaOptions({
@@ -52,7 +52,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
             describe('When the user submits a message', () => {
                 it('The welcome message should be removed', async () => {
                     // Arrange
-                    adapterController = adapterBuilder().withFetchText().create();
+                    adapterController = adapterBuilder().withBatchText().create();
                     aiChat = createAiChat()
                         .withAdapter(adapterController.adapter)
                         .withPersonaOptions({
@@ -80,7 +80,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
             describe('When the initial message submission fails', () => {
                 it('The welcome message should be displayed again', async () => {
                     // Arrange
-                    adapterController = adapterBuilder().withFetchText().create();
+                    adapterController = adapterBuilder().withBatchText().create();
                     aiChat = createAiChat()
                         .withAdapter(adapterController.adapter)
                         .withPersonaOptions({
@@ -113,7 +113,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
         describe('When an initial conversation is provided', () => {
             it('The welcome message should not be displayed', async () => {
                 // Arrange
-                adapterController = adapterBuilder().withFetchText().create();
+                adapterController = adapterBuilder().withBatchText().create();
                 aiChat = createAiChat()
                     .withAdapter(adapterController.adapter)
                     .withPersonaOptions({

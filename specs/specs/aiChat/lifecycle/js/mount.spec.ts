@@ -25,7 +25,7 @@ describe('createAiChat() + mount', () => {
 
     it('Should not initially render anything is DOM', async () => {
         // Arrange
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         aiChat = createAiChat().withAdapter(adapterController.adapter);
 
         // Act
@@ -37,7 +37,7 @@ describe('createAiChat() + mount', () => {
 
     it('Initial status should be "idle"', async () => {
         // Arrange
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         aiChat = createAiChat().withAdapter(adapterController.adapter);
 
         // Act
@@ -50,7 +50,7 @@ describe('createAiChat() + mount', () => {
     describe('When mount() is called', () => {
         it('Chat component should render', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -64,7 +64,7 @@ describe('createAiChat() + mount', () => {
 
         it('Exceptions box container should render', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -78,7 +78,7 @@ describe('createAiChat() + mount', () => {
 
         it('Prompt-box container should render', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -92,7 +92,7 @@ describe('createAiChat() + mount', () => {
 
         it('Conversation container should render', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -106,7 +106,7 @@ describe('createAiChat() + mount', () => {
 
         it('Status should be "mounted"', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -121,7 +121,7 @@ describe('createAiChat() + mount', () => {
     describe('When mount() is called twice', () => {
         it('It should throw an error', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -134,7 +134,7 @@ describe('createAiChat() + mount', () => {
 
         it('It should not render anything new in DOM', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -154,7 +154,7 @@ describe('createAiChat() + mount', () => {
 
         it('It should not change the status', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act

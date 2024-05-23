@@ -7,7 +7,7 @@ import {triggerAsyncCallback} from './triggerAsyncCallback';
 export const createEmptyCompleteSegment = <AiMsg>(): {
     segment: ChatSegment<AiMsg>,
     observable: ChatSegmentObservable<AiMsg>,
-    dataTransferMode: 'fetch',
+    dataTransferMode: 'batch',
 } => {
     const completeListeners = new Set<
         ChatSegmentEventsMap<AiMsg>['complete']
@@ -47,6 +47,6 @@ export const createEmptyCompleteSegment = <AiMsg>(): {
                 return segmentId;
             },
         },
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'batch',
     };
 };

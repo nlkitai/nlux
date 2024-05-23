@@ -11,7 +11,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder<string>()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
         extras = {
@@ -33,7 +33,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
         submitPrompt(prompt, adapter, extras!);
 
         // Assert
-        expect(adapterController?.fetchTextMock).toHaveBeenCalled();
+        expect(adapterController?.batchTextMock).toHaveBeenCalled();
     });
 
     it('Should return segment and observable', () => {
@@ -88,7 +88,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
             expect(listenToUserMessageReceived).not.toHaveBeenCalled();
         });
 
-        it('Should complete without calling fetchText', () => {
+        it('Should complete without calling batchText', () => {
             // Arrange
             const prompt = '';
             const adapter = adapterController!.adapter;
@@ -97,7 +97,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
             submitPrompt(prompt, adapter, extras!);
 
             // Assert
-            expect(adapterController?.fetchTextMock).not.toHaveBeenCalled();
+            expect(adapterController?.batchTextMock).not.toHaveBeenCalled();
         });
     });
 
@@ -173,7 +173,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                 expect(listenToAiMessageReceived).toHaveBeenCalledWith({
                     uid: expect.any(String),
                     time: expect.any(Date),
-                    dataTransferMode: 'fetch',
+                    dataTransferMode: 'batch',
                     content: 'Hi! The weather is sunny today.',
                     participantRole: 'ai',
                     status: 'complete',
@@ -242,7 +242,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                             content: 'Hi! The weather is sunny today.',
                             participantRole: 'ai',
                             status: 'complete',
-                            dataTransferMode: 'fetch',
+                            dataTransferMode: 'batch',
                             time: expect.any(Date),
                             uid: expect.any(String),
                         },

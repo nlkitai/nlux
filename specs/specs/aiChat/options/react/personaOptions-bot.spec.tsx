@@ -11,7 +11,7 @@ describe('<AiChat /> + personaOptions + bot', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
     });

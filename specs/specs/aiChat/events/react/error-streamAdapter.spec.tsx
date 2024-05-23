@@ -11,7 +11,7 @@ describe('<AiChat /> + stream adapter + events + error', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
     });

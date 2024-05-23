@@ -9,7 +9,7 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
         super(options);
     }
 
-    async fetchText(
+    async batchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined> {

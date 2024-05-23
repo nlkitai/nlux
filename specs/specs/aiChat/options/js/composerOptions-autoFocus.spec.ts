@@ -11,7 +11,7 @@ describe('createAiChat() + composerOptions + autoFocus', () => {
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().withStreamText(false).create();
+        adapterController = adapterBuilder().withBatchText().withStreamText(false).create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
     });

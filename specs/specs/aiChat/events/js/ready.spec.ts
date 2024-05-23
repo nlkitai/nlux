@@ -12,7 +12,7 @@ describe('createAiChat() + events + ready', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
 

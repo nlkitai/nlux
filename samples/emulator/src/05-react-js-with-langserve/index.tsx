@@ -21,7 +21,7 @@ const ExampleWrapper = () => {
 
     const langServeAdapter = useChatAdapter({
         url: 'http://127.0.0.1:8000/einbot',
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'batch',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',

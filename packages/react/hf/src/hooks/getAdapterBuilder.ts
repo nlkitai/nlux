@@ -15,10 +15,10 @@ export const getAdapterBuilder = <AiMsg>(
         systemMessage,
     } = options || {};
 
-    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
+    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'batch') {
         throw new NluxUsageError({
             source,
-            message: 'Data transfer mode for Hugging Face Inference API must be either "stream" or "fetch"',
+            message: 'Data transfer mode for Hugging Face Inference API must be either "stream" or "batch"',
         });
     }
 

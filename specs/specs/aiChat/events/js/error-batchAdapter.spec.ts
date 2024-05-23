@@ -6,14 +6,14 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + fetch adapter + events + error', () => {
+describe('createAiChat() + batch adapter + events + error', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
 

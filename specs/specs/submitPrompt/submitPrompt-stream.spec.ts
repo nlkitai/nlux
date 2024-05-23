@@ -11,7 +11,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
 
     beforeEach(() => {
         adapterController = adapterBuilder<string>()
-            .withFetchText(false)
+            .withBatchText(false)
             .withStreamText(true)
             .create();
         extras = {
@@ -88,7 +88,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
             expect(listenToUserMessageReceived).not.toHaveBeenCalled();
         });
 
-        it('Should complete without calling fetchText', () => {
+        it('Should complete without calling batchText', () => {
             // Arrange
             const prompt = '';
             const adapter = adapterController!.adapter;
@@ -97,7 +97,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
             submitPrompt(prompt, adapter, extras!);
 
             // Assert
-            expect(adapterController?.fetchTextMock).not.toHaveBeenCalled();
+            expect(adapterController?.batchTextMock).not.toHaveBeenCalled();
         });
     });
 

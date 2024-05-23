@@ -10,7 +10,7 @@ export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions<AiMsg>): Ch
         useInputSchema,
     } = options || {};
 
-    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'fetch') {
+    if (dataTransferMode && dataTransferMode !== 'stream' && dataTransferMode !== 'batch') {
         throw new Error(`Data transfer mode not supported`);
     }
 

@@ -11,8 +11,8 @@ const promptToBody = (message: string) => {
     });
 };
 
-export const fetchAdapter: ChatAdapter<string> = {
-    fetchText: async (prompt: string): Promise<string> => {
+export const batchAdapter: ChatAdapter<string> = {
+    batchText: async (prompt: string): Promise<string> => {
         const response = await fetch(demoLangServerEndpoint, {
             method: 'POST',
             body: promptToBody(prompt),

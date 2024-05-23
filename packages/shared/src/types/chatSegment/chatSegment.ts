@@ -43,7 +43,7 @@ export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUs
  * this event will be emitted first and will contain the user message.
  *
  * - aiMessageReceived: A message from the AI has been fully received. This is only emitted for segments with data
- * transfer mode set to 'fetch', which means the AI sends the entire message at once and not in chunks.
+ * transfer mode set to 'batch', which means the AI sends the entire message at once and not in chunks.
  *
  * - aiMessageStreamStarted: A message from the AI has started streaming. This is only emitted for segments with data
  * transfer mode set to 'stream', and when a message is about to start streaming. This event will be followed by

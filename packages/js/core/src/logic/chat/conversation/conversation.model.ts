@@ -85,7 +85,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                         uid: uid(),
                         participantRole: 'ai',
                         time: new Date(),
-                        dataTransferMode: 'fetch',
+                        dataTransferMode: 'batch',
                         status: 'complete',
                         content: item.message,
                         serverResponse: item.serverResponse,

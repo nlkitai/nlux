@@ -15,7 +15,7 @@ const ExampleWrapper = () => {
 
     const langServeAdapter = useChatAdapter({
         url: 'https://pynlux.api.nlux.ai/einbot',
-        dataTransferMode: 'fetch',
+        dataTransferMode: 'batch',
     });
 
     const handleStreamingAnimationSpeedChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {

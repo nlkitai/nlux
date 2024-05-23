@@ -21,7 +21,7 @@ export const myCustomStreamingAdapter: ChatAdapter<string> = {
 };
 
 export const myCustomPromiseAdapter: ChatAdapter<string> = {
-    fetchText(message: string): Promise<string> {
+    batchText(message: string): Promise<string> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
                 const messageToStream = 'Lorem promise ipsum **dolor** sit amet, consectetur adipiscing elit. ' +

@@ -26,7 +26,7 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         this.theUsageMode = options.mode;
         this.theEndpointUrlToUse = options.url;
         this.theAiContextToUse = options.context;
-        this.theDataTransferModeToUse = options.mode === 'copilot' && options.context ? 'fetch' : 'stream';
+        this.theDataTransferModeToUse = options.mode === 'copilot' && options.context ? 'batch' : 'stream';
         this.theHeaders = options.headers ?? {};
     }
 
@@ -66,7 +66,7 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         return this.theUsageMode;
     }
 
-    abstract fetchText(
+    abstract batchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;

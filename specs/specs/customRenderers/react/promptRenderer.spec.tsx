@@ -12,7 +12,7 @@ describe('<AiChat /> + promptRenderer', () => {
     describe('When a prompt renderer is used', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(true)
+                .withBatchText(true)
                 .withStreamText(false)
                 .create();
         });
@@ -59,7 +59,7 @@ describe('<AiChat /> + promptRenderer', () => {
     describe('When a prompt renderer is not used', () => {
         beforeEach(() => {
             adapterController = adapterBuilder()
-                .withFetchText(true)
+                .withBatchText(true)
                 .withStreamText(false)
                 .create();
         });

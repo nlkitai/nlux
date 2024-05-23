@@ -13,5 +13,5 @@ export const getEndpointTypeToUse = <AiMsg>(
     }
 
     const dataTransferMode = getDataTransferModeToUse(adapterOptions);
-    return dataTransferMode === 'fetch' ? 'invoke' : 'stream';
+    return dataTransferMode === 'batch' ? 'invoke' : 'stream';
 };

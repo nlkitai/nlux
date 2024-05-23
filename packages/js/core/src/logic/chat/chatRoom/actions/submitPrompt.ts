@@ -77,8 +77,8 @@ export const submitPromptFactory = <AiMsg>({
                 });
             });
 
-            if (result.dataTransferMode === 'fetch') {
-                // In fetch mode — Listen to aiMessageReceived event and complete event
+            if (result.dataTransferMode === 'batch') {
+                // In batch mode — Listen to aiMessageReceived event and complete event
                 result.observable.on('aiMessageReceived', (aiMessage) => {
                     const isStringContent = typeof aiMessage.content === 'string';
                     const newAiMessage = {

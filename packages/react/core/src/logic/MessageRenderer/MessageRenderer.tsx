@@ -1,5 +1,5 @@
 import {FC, RefObject} from 'react';
-import {FetchResponseComponentProps, StreamResponseComponentProps} from '../../exports/messageOptions';
+import {BatchResponseComponentProps, StreamResponseComponentProps} from '../../exports/messageOptions';
 import {ChatItemProps} from '../../ui/ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
@@ -25,7 +25,7 @@ export const createMessageRenderer: <AiMsg>(
 
     // For custom renderer — When the dataTransferMode is 'streaming', the message is undefined and a containerRef
     // must be provided. The containerRef is used to append the streaming message to the container.
-    // When the dataTransferMode is 'fetch', the message is defined and the containerRef is not needed.
+    // When the dataTransferMode is 'batch', the message is defined and the containerRef is not needed.
     const containerRefToUse = containerRef ?? {current: null} satisfies RefObject<HTMLElement>;
 
     //
@@ -46,9 +46,9 @@ export const createMessageRenderer: <AiMsg>(
             return () => responseRenderer(props);
         } else {
             //
-            // Fetching data and displaying it in a custom renderer.
+            // Batching data and displaying it in a custom renderer.
             //
-            const props: FetchResponseComponentProps<AiMsg> = {
+            const props: BatchResponseComponentProps<AiMsg> = {
                 uid,
                 status: 'complete',
                 content: fetchedContent as AiMsg,

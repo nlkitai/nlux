@@ -8,14 +8,14 @@ import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForReactRenderCycle} from '../../../utils/wait';
 
 describe.each([
-        {dataTransferMode: 'fetch'},
+        {dataTransferMode: 'batch'},
         // {dataTransferMode: 'stream'},
-    ] satisfies Array<{dataTransferMode: 'stream' | 'fetch'}>,
+    ] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>,
 )('<AiChat /> + adapter($mode) + personaOptions extras', ({dataTransferMode}) => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
     });
 
     afterEach(() => {

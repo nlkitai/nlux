@@ -13,7 +13,7 @@ describe('createAiChat() + displayOptions + colorScheme', () => {
     let matchMediaNative: typeof window.matchMedia;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withFetchText().create();
+        adapterController = adapterBuilder().withBatchText().create();
         rootElement = document.createElement('div');
         document.body.append(rootElement);
         matchMedia = vi.fn(() => ({matches: true}));

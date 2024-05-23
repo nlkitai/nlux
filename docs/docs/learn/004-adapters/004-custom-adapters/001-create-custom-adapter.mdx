@@ -100,15 +100,15 @@ To implement a custom promise adapter for `NLUX`, you need to implement the foll
 
 ```typescript
 interface ChatAdapter {
-    fetchText(message: string, extras: AdapterExtras): Promise<string>;
+    batchText(message: string, extras: AdapterExtras): Promise<string>;
 }
 ```
 
-The `fetchText` method takes 1 parameter:
+The `batchText` method takes 1 parameter:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
 
-The `fetchText` method should return a promise that resolves to the response from the API.
+The `batchText` method should return a promise that resolves to the response from the API.
 
 ### Example: Promise Adapter
 
@@ -122,7 +122,7 @@ We can create a promise adapter for this API by implementing the `PromiseAdapter
 import {ChatAdapter} from '@nlux/core';
 
 export const myCustomAdapter: ChatAdapter = {
-    fetchText: (message: string, extras: AdapterExtras): Promise<string> => {
+    batchText: (message: string, extras: AdapterExtras): Promise<string> => {
         return fetch('http://localhost:8080', {
             method: 'POST',
             body: JSON.stringify({message})

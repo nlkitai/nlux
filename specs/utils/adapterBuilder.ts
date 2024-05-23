@@ -1,14 +1,14 @@
 import {AdapterController, createAdapterController} from './adapters';
 
 export interface AdapterControllerBuilder<AiMsg> {
-    withFetchText: (includeFetchText?: boolean) => AdapterControllerBuilder<AiMsg>;
+    withBatchText: (includeBatchText?: boolean) => AdapterControllerBuilder<AiMsg>;
     withStreamText: (includeStreamText?: boolean) => AdapterControllerBuilder<AiMsg>;
     create(): AdapterController<AiMsg>;
 }
 
 class ChatAdapterBuilder<AiMsg> implements AdapterControllerBuilder<AiMsg> {
     private created = false;
-    private shouldIncludeFetchText = false;
+    private shouldIncludeBatchText = false;
     private shouldIncludeStreamText = false;
 
     create() {
@@ -18,18 +18,18 @@ class ChatAdapterBuilder<AiMsg> implements AdapterControllerBuilder<AiMsg> {
 
         this.created = true;
         return createAdapterController<AiMsg>({
-            includeFetchText: this.shouldIncludeFetchText,
+            includeBatchText: this.shouldIncludeBatchText,
             includeStreamText: this.shouldIncludeStreamText,
         });
     }
 
-    withFetchText(includeFetchText: boolean = true): AdapterControllerBuilder<AiMsg> {
-        this.shouldIncludeFetchText = includeFetchText;
+    withBatchText(includeBatchText: boolean = true): AdapterControllerBuilder<AiMsg> {
+        this.shouldIncludeBatchText = includeBatchText;
         return this;
     }
 
-    withStreamText(includeFetchText: boolean = true): AdapterControllerBuilder<AiMsg> {
-        this.shouldIncludeStreamText = includeFetchText;
+    withStreamText(includeBatchText: boolean = true): AdapterControllerBuilder<AiMsg> {
+        this.shouldIncludeStreamText = includeBatchText;
         return this;
     }
 }

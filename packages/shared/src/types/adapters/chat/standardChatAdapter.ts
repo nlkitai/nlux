@@ -8,7 +8,7 @@ import {StandardAdapterInfo} from './standardAdapterConfig';
 export interface StandardChatAdapter<AiMsg = string> {
     get dataTransferMode(): DataTransferMode;
 
-    fetchText(
+    batchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;
@@ -46,8 +46,8 @@ export const isStandardChatAdapter = (adapter: unknown): boolean => {
     }
 
     const typedAdapter = adapter as Record<string, unknown>;
-    return (typeof typedAdapter.streamText === 'function' || typeof typedAdapter.fetchText === 'function')
-        && ['stream', 'fetch'].includes(typedAdapter.dataTransferMode as string)
+    return (typeof typedAdapter.streamText === 'function' || typeof typedAdapter.batchText === 'function')
+        && ['stream', 'batch'].includes(typedAdapter.dataTransferMode as string)
         && typeof typedAdapter.id === 'string'
         && (typeof typedAdapter.info === 'object' && typedAdapter.info !== null)
         && (typeof typedAdapter.preProcessAiBatchedMessage === 'function')

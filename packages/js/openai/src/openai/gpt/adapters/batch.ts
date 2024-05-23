@@ -7,7 +7,7 @@ import {conversationHistoryToMessagesList} from '../../../utils/conversationHist
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiAbstractAdapter} from './adapter';
 
-export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
+export class OpenAiBatchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     constructor({
         apiKey,
         model,
@@ -17,7 +17,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
             apiKey,
             model,
             systemMessage,
-            dataTransferMode: 'fetch',
+            dataTransferMode: 'batch',
         });
 
         if (systemMessage !== undefined && systemMessage.length > 0) {
@@ -25,7 +25,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
         }
     }
 
-    async fetchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
+    async batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
         const messagesToSend: Array<
             OpenAI.Chat.Completions.ChatCompletionSystemMessageParam |
             OpenAI.Chat.Completions.ChatCompletionUserMessageParam |
@@ -69,7 +69,7 @@ export class OpenAiFetchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     streamText(message: string, observer: StreamingAdapterObserver, extras: ChatAdapterExtras<AiMsg>): void {
         throw new NluxUsageError({
             source: this.constructor.name,
-            message: 'Cannot stream text from the fetch adapter!',
+            message: 'Cannot stream text from the batch adapter!',
         });
     }
 }

@@ -2,7 +2,7 @@ import {AiContext as CoreAiContext, StandardChatAdapter} from '@nlux/core';
 import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from '../adapter';
-import {NLBridgeFetchAdapter} from '../fetch';
+import {NLBridgeBatchAdapter} from '../batch';
 import {NLBridgeStreamAdapter} from '../stream';
 import {ChatAdapterBuilder} from './builder';
 
@@ -44,7 +44,7 @@ export class ChatAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> 
             return new NLBridgeStreamAdapter<AiMsg>(options);
         }
 
-        return new NLBridgeFetchAdapter<AiMsg>(options);
+        return new NLBridgeBatchAdapter<AiMsg>(options);
     }
 
     withContext(context: CoreAiContext): ChatAdapterBuilderImpl<AiMsg> {

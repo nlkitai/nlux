@@ -5,14 +5,14 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForMdStreamToComplete, waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
 
-describe('createAiChat() + withAdapter(fetchAdapter)', () => {
+describe('createAiChat() + withAdapter(batchAdapter)', () => {
     let adapterController: AdapterController;
     let rootElement: HTMLElement;
     let aiChat: AiChat;
 
     beforeEach(() => {
         adapterController = adapterBuilder()
-            .withFetchText(true)
+            .withBatchText(true)
             .withStreamText(false)
             .create();
         rootElement = document.createElement('div');
@@ -24,7 +24,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         rootElement?.remove();
     });
 
-    it('fetchText should be called with the text from the composer', async () => {
+    it('batchText should be called with the text from the composer', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
@@ -36,7 +36,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         await waitForRenderCycle();
 
         // Assert
-        expect(adapterController.fetchTextMock).toHaveBeenCalledWith('Hello');
+        expect(adapterController.batchTextMock).toHaveBeenCalledWith('Hello');
     });
 
     it('Composer should switch to loading state on submit', async () => {
@@ -120,7 +120,7 @@ describe('createAiChat() + withAdapter(fetchAdapter)', () => {
         expect(composer).not.toHaveClass('nlux-prmpt-submitting');
     });
 
-    it('Text returned from fetchText should be displayed in the conversation', async () => {
+    it('Text returned from batchText should be displayed in the conversation', async () => {
         // Arrange
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);

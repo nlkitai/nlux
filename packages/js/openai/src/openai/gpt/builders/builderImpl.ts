@@ -1,7 +1,7 @@
 import {DataTransferMode, StandardChatAdapter} from '@nlux/core';
 import {NluxUsageError} from '../../../../../../shared/src/types/error';
 import {defaultDataTransferMode} from '../adapters/config';
-import {OpenAiFetchAdapter} from '../adapters/fetch';
+import {OpenAiBatchAdapter} from '../adapters/batch';
 import {OpenAiStreamingAdapter} from '../adapters/stream';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 import {OpenAiModel} from '../types/model';
@@ -51,7 +51,7 @@ export class OpenAiAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg
             return new OpenAiStreamingAdapter(options);
         }
 
-        return new OpenAiFetchAdapter(options);
+        return new OpenAiBatchAdapter(options);
     }
 
     withApiKey(apiKey: string): OpenAiAdapterBuilderImpl<AiMsg> {

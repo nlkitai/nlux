@@ -25,7 +25,7 @@ describe('createAiChat() + event lifecycle', () => {
     describe('When the component is unmounted', async () => {
         it('Should remove the chat component from the DOM', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -42,7 +42,7 @@ describe('createAiChat() + event lifecycle', () => {
 
         it('Should change the status to "unmounted"', async () => {
             // Arrange
-            adapterController = adapterBuilder().withFetchText().create();
+            adapterController = adapterBuilder().withBatchText().create();
             aiChat = createAiChat().withAdapter(adapterController.adapter);
 
             // Act
@@ -59,7 +59,7 @@ describe('createAiChat() + event lifecycle', () => {
         describe('When mount is called after unmount', () => {
             it('Should throw an error', async () => {
                 // Arrange
-                adapterController = adapterBuilder().withFetchText().create();
+                adapterController = adapterBuilder().withBatchText().create();
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
 
                 // Act
@@ -75,7 +75,7 @@ describe('createAiChat() + event lifecycle', () => {
 
             it('Should not change the status', async () => {
                 // Arrange
-                adapterController = adapterBuilder().withFetchText().create();
+                adapterController = adapterBuilder().withBatchText().create();
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
 
                 // Act
@@ -91,7 +91,7 @@ describe('createAiChat() + event lifecycle', () => {
 
             it('No more event listeners can be added', async () => {
                 // Arrange
-                adapterController = adapterBuilder().withFetchText().create();
+                adapterController = adapterBuilder().withBatchText().create();
                 aiChat = createAiChat().withAdapter(adapterController.adapter);
 
                 // Act

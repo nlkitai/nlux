@@ -12,10 +12,10 @@ export const adapterParamToUsableAdapter = <AiMsg>(
         return adapterBuilder.create();
     }
 
-    if (typeof adapterAsAny?.fetchText === 'function' || typeof adapterAsAny?.streamText === 'function') {
+    if (typeof adapterAsAny?.batchText === 'function' || typeof adapterAsAny?.streamText === 'function') {
         return anAdapterOrAdapterBuilder as ChatAdapter<AiMsg>;
     }
 
-    warn('Unable to determine the type of the adapter! Missing fetchText or streamText method.');
+    warn('Unable to determine the type of the adapter! Missing batchText or streamText method.');
     return undefined;
 };

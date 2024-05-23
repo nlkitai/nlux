@@ -53,7 +53,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
                 content: this.getItemContent() as AiMsg,
                 serverResponse: this.serverResponse,
                 status: 'complete',
-                dataTransferMode: 'fetch',
+                dataTransferMode: 'batch',
                 time: new Date(),
             } satisfies ChatSegmentAiMessage<AiMsg>;
         }
