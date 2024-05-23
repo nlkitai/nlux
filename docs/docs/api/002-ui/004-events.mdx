@@ -63,7 +63,7 @@ This event is emitted when the `AiChat` component is mounted and ready to use.
 > * Event Name: `ready`
 > * Callback Type:
 
-```ts
+```tsx
 type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
 
 type ReadyEventDetails<AiMsg> = {
@@ -86,7 +86,7 @@ It allows access to the component's state, conversation history, and props befor
 > * Event Name: `preDestroy`
 > * Callback Type:
 
-```ts
+```tsx
 type PreDestroyCallback<AiMsg = string> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
 
 type PreDestroyEventDetails<AiMsg = string> = {
@@ -111,7 +111,7 @@ the backend.
 > * Event Name: `messageSent`
 > * Callback Type:
 
-```ts
+```tsx
 type MessageSentCallback = (event: MessageSentEventDetails) => void;
 
 type MessageSentEventDetails = {
@@ -144,7 +144,7 @@ message has fully rendered on the screen.
 > * Event Name: `messageReceived`
 > * Callback Type:
 
-```ts
+```tsx
 type MessageReceivedCallback = (message: string) => void;
 ```
 
@@ -174,7 +174,7 @@ as a parameter.
 > * Event Name: `error`
 > * Callback Type:
 
-```typescript
+```tsx
 type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
 
 type ErrorEventDetails = {

@@ -3,7 +3,7 @@ Here is an example of how to use it to listen to the `messageReceived`:
 
 You can either call `on` via the `AiChat` instance **before** mounting, when it's being created:
 
-```ts
+```tsx
 import {createAiChat, MessageReceivedCallback} from '@nlux/core';
 
 const messageReceivedCallback: MessageReceivedCallback = (ev) => {
@@ -17,7 +17,7 @@ const aiChat = createAiChat()
 
 You can also add event callbacks anytime **after** it's mounted:
 
-```ts
+```tsx
 const aiChat = createAiChat().withAdapter(adapter);
 aiChat.mount(rootElement);
 

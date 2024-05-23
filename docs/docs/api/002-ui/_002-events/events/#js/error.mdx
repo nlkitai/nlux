@@ -1,4 +1,4 @@
-```ts
+```tsx
 import {createAiChat, ErrorCallback, ErrorEventDetails} from '@nlux/core';
 
 const aiChat = createAiChat().withAdapter(adapter);
@@ -8,17 +8,17 @@ const errorCallback: ErrorCallback = (errorDetails: ErrorEventDetails) => {
 };
 ```
 
-```ts
+```tsx
 // Registering the errorCallback when creating the AiChat instance
 const aiChat = createAiChat().withAdapter(adapter).on('error', errorCallback);
 ```
 
-```ts
+```tsx
 // Registering the errorCallback after creating the AiChat instance
 aiChat.on('error', errorCallback);
 ```
 
-```ts
+```tsx
 // Unregistering the errorCallback
 aiChat.removeEventListener('error', errorCallback);
 ```

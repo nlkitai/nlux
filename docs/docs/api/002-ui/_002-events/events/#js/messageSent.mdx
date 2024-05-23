@@ -1,4 +1,4 @@
-```ts
+```tsx
 import {createAiChat, MessageSentCallback} from '@nlux/core';
 
 const messageSentCallback: MessageSentCallback = (event: MessageSentEventDetails) => {
@@ -6,18 +6,18 @@ const messageSentCallback: MessageSentCallback = (event: MessageSentEventDetails
 };
 ```
 
-```ts
+```tsx
 // Registering the messageSentCallback when creating the AiChat instance
 const aiChat = createAiChat().withAdapter(adapter).on('messageSent', messageSentCallback);
 ```
 
-```ts
+```tsx
 // Add listener
 // Registering the messageSentCallback after creating the AiChat instance
 aiChat.on('messageSent', callback);
 ```
 
-```ts
+```tsx
 // Removing messageSentCallback
 aiChat.removeEventListener('messageSent', callback);
 ```

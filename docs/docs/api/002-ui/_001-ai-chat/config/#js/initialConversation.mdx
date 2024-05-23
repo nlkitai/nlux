@@ -4,7 +4,7 @@ from a previous session.
 
 > * Type: `initialConversation: ChatItem[]`
 
-```ts
+```tsx
 type ChatItem<AiMsg = string> = {
     role: ParticipantRole;
     message: AiMsg;
@@ -15,7 +15,7 @@ type ParticipantRole = 'user' | 'system' | 'ai';
 
 > * Usage:
 
-```ts
+```tsx
 import {createAiChat, ChatItem} from '@nlux/core';
 
 const initialConversation: ChatItem[] = [

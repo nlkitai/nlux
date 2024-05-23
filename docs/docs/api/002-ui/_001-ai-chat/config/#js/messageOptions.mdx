@@ -4,7 +4,7 @@ listed below.
 
 > * Type: `MessageOptions`
 
-```ts
+```tsx
 type MessageOptions<AiMsg = string> = {
     responseRenderer?: ResponseRenderer<AiMsg>;
     promptRenderer?: PromptRenderer;
@@ -33,7 +33,7 @@ type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
 
 * Usage:
 
-```typescript
+```tsx
 import {createAiChat, MessageOptions} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 

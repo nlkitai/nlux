@@ -1,4 +1,4 @@
-```ts
+```tsx
 import {createAiChat, PreDestroyCallback, PreDestroyEventDetails} from '@nlux/core';
 
 const preDestroyCallback: PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => {
@@ -8,18 +8,18 @@ const preDestroyCallback: PreDestroyCallback = (preDestroyDetails: PreDestroyEve
 };
 ```
 
-```ts
+```tsx
 // Registering the preDestroyCallback when creating the AiChat instance
 const aiChat = createAiChat().withAdapter(adapter).on('preDestroy', preDestroyCallback);
 ```
 
-```ts
+```tsx
 // Registering the preDestroyCallback after creating the AiChat instance
 // and before calling aiChat.unmount()
 aiChat.on('preDestroy', preDestroyCallback);
 ```
 
-```ts
+```tsx
 // Unregistering the preDestroyCallback
 aiChat.removeEventListener('preDestroy', preDestroyCallback);
 ```
