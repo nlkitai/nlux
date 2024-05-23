@@ -2,7 +2,7 @@ In order to remove an event callback, you can simply update the object passed to
 component. For example, if you want to remove the `messageSent` event listener, you can pass a new object that
 does not contain the `messageSent` key:
 
-```jsx
+```tsx
 import {useCallback} from 'react';
 import {AiChat, EventsConfig, MessageReceivedCallback} from '@nlux/react';
 
@@ -24,6 +24,6 @@ and add the new ones.
 
 If you want to **remove all event listeners**, you can simply remove the `events` property:
 
-```jsx
+```tsx
 <AiChat adapter={adapter} />
 ```

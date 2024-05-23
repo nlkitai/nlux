@@ -23,28 +23,3 @@ interface UserPersona {
 ```
 
 > * Usage:
-
-```jsx
-import {createAiChat, BotPersona, PersonaOptions, UserPersona} from '@nlux/core';
-
-const botPersona: BotPersona = {
-    name: 'HarryBotter',
-    picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
-    tagline: 'Mischievously Making Magic With Mirthful AI!',
-};
-
-const pictureElement = document.createElement('span');
-pictureElement.innerHTML = '👩';
-
-const userPersona: UserPersona = {
-    name: 'Alice',
-    picture: pictureElement
-}
-
-const personaOptions: PersonaOptions = {
-    bot: botPersona,
-    user: userPersona
-};
-
-const aiChat = createAiChat().withPersonaOptions(personaOptions);
-```

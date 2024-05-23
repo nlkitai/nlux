@@ -10,10 +10,10 @@ export const PlatformSelector = (props: PlatformComponents) => {
     return (
         <Tabs className="platform-selector" groupId="platform" queryString>
             <TabItem value="react-js" label="React JS ⚛️">
-                {<props.reactJs />}
+                {props.reactJs ? <props.reactJs /> : null}
             </TabItem>
             <TabItem value="javascript" label="JavaScript 🟨">
-                {<props.javascript />}
+                {props.javascript ? <props.javascript /> : null}
             </TabItem>
         </Tabs>
     );

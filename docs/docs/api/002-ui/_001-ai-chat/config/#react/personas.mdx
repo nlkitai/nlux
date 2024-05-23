@@ -23,26 +23,3 @@ interface UserPersona {
 ```
 
 > * Usage:
-
-```jsx
-import {AiChat, BotPersona, UserPersona, PersonaOptions} from '@nlux/react';
-
-const botPersona: BotPersona = {
-    name: 'HarryBotter',
-    picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
-    tagline: 'Mischievously Making Magic With Mirthful AI!',
-};
-
-const userPersona: UserPersona = {
-    name: 'Marissa',
-    picture: <span>👩</span>
-};
-
-const personaOptions: PersonaOptions = {
-    bot: botPersona,
-    user: userPersona
-};
-
-<AiChat personaOptions={personaOptions} />
-```
-

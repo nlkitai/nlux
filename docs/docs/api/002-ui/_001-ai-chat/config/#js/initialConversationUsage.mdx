@@ -1,0 +1,20 @@
+```tsx
+import {createAiChat, ChatItem} from '@nlux/core';
+
+const initialConversation: ChatItem[] = [
+    {
+        role: 'user',
+        message: 'I need help with my order'
+    },
+    {
+        role: 'ai',
+        message: 'Sure! What is your order number?'
+    }
+];
+```
+
+```tsx
+const aiChat = createAiChat().withInitialConversation(initialConversation);
+```
+
+> * Reactivity: This property is not reactive. When it changes after the component is mounted, it will be ignored.

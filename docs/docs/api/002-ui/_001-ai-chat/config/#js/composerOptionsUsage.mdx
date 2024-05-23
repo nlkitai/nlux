@@ -1,0 +1,12 @@
+```tsx
+import {createAiChat, ComposerOptions} from '@nlux/core';
+
+const composerOptions: ComposerOptions = {
+    autoFocus: true,
+    disableSubmitButton: false,
+    placeholder: 'Type your message here',
+    submitShortcut: 'CommandEnter'
+};
+
+const aiChat = createAiChat().withComposerOptions(composerOptions);
+```

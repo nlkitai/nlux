@@ -1,0 +1,13 @@
+```tsx
+import {createAiChat, DisplayOptions} from '@nlux/core';
+import '@themes/luna.css'; // Or any other theme
+
+const displayOptions: DisplayOptions = {
+    themeId: 'luna',
+    colorScheme: 'dark',
+    width: 920,
+    height: 400
+};
+
+const aiChat = createAiChat().withDisplayOptions(displayOptions);
+```

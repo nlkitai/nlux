@@ -20,16 +20,3 @@ type ComposerOptions = {
 | `submitShortcut` | `'Enter'`&nbsp;\|&nbsp;`'CommandEnter'` | `'Enter'` | The keyboard shortcut to submit the prompt message.<br />— `Enter`: The user can submit the prompt message by pressing the `Enter` key. In order to add a new line, the user can press `Shift + Enter`.<br />— `CommandEnter`: When this is used, the user can submit the prompt message by pressing `Ctrl + Enter` on Windows/Linux or `Cmd + Enter` on macOS. In order to add a new line, the user can press `Enter`. |
 
 * Usage:
-
-```tsx
-import {createAiChat, ComposerOptions} from '@nlux/core';
-
-const composerOptions: ComposerOptions = {
-    autoFocus: true,
-    disableSubmitButton: false,
-    placeholder: 'Type your message here',
-    submitShortcut: 'CommandEnter'
-};
-
-const aiChat = createAiChat().withComposerOptions(composerOptions);
-```

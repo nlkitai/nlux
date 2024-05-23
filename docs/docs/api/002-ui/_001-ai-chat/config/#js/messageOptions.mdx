@@ -32,24 +32,3 @@ type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
 | `skipStreamingAnimation` | `boolean` | `false` | If `true`, streamed AI responses will be displayed instantly without any animation. |
 
 * Usage:
-
-```tsx
-import {createAiChat, MessageOptions} from '@nlux/core';
-import {highlighter} from '@nlux/highlighter';
-
-const messageOptions: MessageOptions = {
-    markdownLinkTarget: 'self',
-    showCodeBlockCopyButton: false,
-    skipStreamingAnimation: true,
-    streamingAnimationSpeed: 100,
-
-    // Render to custom renderers API doc for usage examples
-    responseRenderer: undefined,
-    promptRenderer: undefined,
-
-    // Refer to sytax highlighter API doc for details
-    syntaxHighlighter: highlighter,
-};
-
-const aiChat = createAiChat().withConversationOptions(messageOptions);
-```

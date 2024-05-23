@@ -1,0 +1,13 @@
+```tsx
+import {AiChat, ConversationOptions} from '@nlux/react';
+
+const conversationOptions: ConversationOptions = {
+    layout: 'bubbles',
+    autoScroll: false,
+    historyPayloadSize: 10
+};
+```
+
+```tsx
+<AiChat conversationOptions={conversationOptions} />
+```

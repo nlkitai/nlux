@@ -23,29 +23,56 @@ import AiResponseTypeReactJs from './_001-ai-chat/config/#react/aiResponseType.m
 import AdapterDocJavaScript from './_001-ai-chat/config/#js/adapter.mdx';
 import AdapterDocReactJs from './_001-ai-chat/config/#react/adapter.mdx';
 
+import AdapterUsageJavaScript from './_001-ai-chat/config/#js/adapterUsage.mdx';
+import AdapterUsageReactJs from './_001-ai-chat/config/#react/adapterUsage.mdx';
+
 import PersonasDocJavaScript from './_001-ai-chat/config/#js/personas.mdx';
 import PersonasDocReactJs from './_001-ai-chat/config/#react/personas.mdx';
+
+import PersonasUsageJavaScript from './_001-ai-chat/config/#js/personasUsage.mdx';
+import PersonasUsageReactJs from './_001-ai-chat/config/#react/personasUsage.mdx';
 
 import ClassNameDocJavaScript from './_001-ai-chat/config/#js/className.mdx';
 import ClassNameDocReactJs from './_001-ai-chat/config/#react/className.mdx';
 
-import initialConversationJavaScript from './_001-ai-chat/config/#js/initialConversation.mdx';
-import initialConversationReactJs from './_001-ai-chat/config/#react/initialConversation.mdx';
+import ClassNameUsageDocJavaScript from './_001-ai-chat/config/#js/classNameUsage.mdx';
+import ClassNameUsageDocReactJs from './_001-ai-chat/config/#react/classNameUsage.mdx';
 
-import conversationOptionsDocJavaScript from './_001-ai-chat/config/#js/conversationOptions.mdx';
-import conversationOptionsDocReactJs from './_001-ai-chat/config/#react/conversationOptions.mdx';
+import InitialConversationJavaScript from './_001-ai-chat/config/#js/initialConversation.mdx';
+import InitialConversationReactJs from './_001-ai-chat/config/#react/initialConversation.mdx';
 
-import messageOptionsDocJavaScript from './_001-ai-chat/config/#js/messageOptions.mdx';
-import messageOptionsDocReactJs from './_001-ai-chat/config/#react/messageOptions.mdx';
+import InitialConversationUsageJavaScript from './_001-ai-chat/config/#js/initialConversationUsage.mdx';
+import InitialConversationUsageReactJs from './_001-ai-chat/config/#react/initialConversationUsage.mdx';
 
-import displayOptionsDocJavaScript from './_001-ai-chat/config/#js/displayOptions.mdx';
-import displayOptionsDocReactJs from './_001-ai-chat/config/#react/displayOptions.mdx';
+import ConversationOptionsDocJavaScript from './_001-ai-chat/config/#js/conversationOptions.mdx';
+import ConversationOptionsDocReactJs from './_001-ai-chat/config/#react/conversationOptions.mdx';
 
-import composerOptionsDocJavaScript from './_001-ai-chat/config/#js/composerOptions.mdx';
-import composerOptionsDocReactJs from './_001-ai-chat/config/#react/composerOptions.mdx';
+import ConversationOptionsUsageJavaScript from './_001-ai-chat/config/#js/conversationOptionsUsage.mdx';
+import ConversationOptionsUsageReactJs from './_001-ai-chat/config/#react/conversationOptionsUsage.mdx';
+
+import MessageOptionsDocJavaScript from './_001-ai-chat/config/#js/messageOptions.mdx';
+import MessageOptionsDocReactJs from './_001-ai-chat/config/#react/messageOptions.mdx';
+
+import MessageOptionsUsageJavaScript from './_001-ai-chat/config/#js/messageOptionsUsage.mdx';
+import MessageOptionsUsageReactJs from './_001-ai-chat/config/#react/messageOptionsUsage.mdx';
+
+import DisplayOptionsDocJavaScript from './_001-ai-chat/config/#js/displayOptions.mdx';
+import DisplayOptionsDocReactJs from './_001-ai-chat/config/#react/displayOptions.mdx';
+
+import DisplayOptionsUsageJavaScript from './_001-ai-chat/config/#js/displayOptionsUsage.mdx';
+import DisplayOptionsUsageReactJs from './_001-ai-chat/config/#react/displayOptionsUsage.mdx';
+
+import ComposerOptionsDocJavaScript from './_001-ai-chat/config/#js/composerOptions.mdx';
+import ComposerOptionsDocReactJs from './_001-ai-chat/config/#react/composerOptions.mdx';
+
+import ComposerOptionsUsageJavaScript from './_001-ai-chat/config/#js/composerOptionsUsage.mdx';
+import ComposerOptionsUsageReactJs from './_001-ai-chat/config/#react/composerOptionsUsage.mdx';
 
 import SyntaxHighlighterJavaScript from './_001-ai-chat/config/#js/syntaxHighlighter.mdx';
 import SyntaxHighlighterReactJs from './_001-ai-chat/config/#react/syntaxHighlighter.mdx';
+
+import SyntaxHighlighterUsageJavaScript from './_001-ai-chat/config/#js/syntaxHighlighterUsage.mdx';
+import SyntaxHighlighterUsageReactJs from './_001-ai-chat/config/#react/syntaxHighlighterUsage.mdx';
 
 # AI Chat Component
 
@@ -64,7 +91,7 @@ the AI messages, the prompt composer, error message, and the markdown received f
 
 ## Usage
 
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+<PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
 
 ---
 
@@ -84,11 +111,15 @@ the AI messages, the prompt composer, error message, and the markdown received f
 
 <PlatformSection reactJs={AdapterDocReactJs} javascript={AdapterDocJavaScript}/>
 
+<PlatformSelector reactJs={AdapterUsageReactJs} javascript={AdapterUsageJavaScript}/>
+
 ---
 
 ### Class Name
 
 <PlatformSection reactJs={ClassNameDocReactJs} javascript={ClassNameDocJavaScript}/>
+
+<PlatformSelector reactJs={ClassNameUsageDocReactJs} javascript={ClassNameUsageDocJavaScript}/>
 
 ---
 
@@ -96,38 +127,52 @@ the AI messages, the prompt composer, error message, and the markdown received f
 
 <PlatformSection reactJs={PersonasDocReactJs} javascript={PersonasDocJavaScript}/>
 
+<PlatformSelector reactJs={PersonasUsageReactJs} javascript={PersonasUsageJavaScript}/>
+
 ---
 
 ### Initial Conversation
 
-<PlatformSection reactJs={initialConversationReactJs} javascript={initialConversationJavaScript}/>
+<PlatformSection reactJs={InitialConversationReactJs} javascript={InitialConversationJavaScript}/>
+
+<PlatformSelector reactJs={InitialConversationUsageReactJs} javascript={InitialConversationUsageJavaScript}/>
 
 ---
 
 ### Conversation Options
 
-<PlatformSection reactJs={conversationOptionsDocReactJs} javascript={conversationOptionsDocJavaScript}/>
+<PlatformSection reactJs={ConversationOptionsDocReactJs} javascript={ConversationOptionsDocJavaScript}/>
+
+<PlatformSelector reactJs={ConversationOptionsUsageReactJs} javascript={ConversationOptionsUsageJavaScript}/>
 
 ---
 
 ### Message Options
 
-<PlatformSection reactJs={messageOptionsDocReactJs} javascript={messageOptionsDocJavaScript}/>
+<PlatformSection reactJs={MessageOptionsDocReactJs} javascript={MessageOptionsDocJavaScript}/>
+
+<PlatformSelector reactJs={MessageOptionsUsageReactJs} javascript={MessageOptionsUsageJavaScript}/>
 
 ---
 
 ### Display Options
 
-<PlatformSection reactJs={displayOptionsDocReactJs} javascript={displayOptionsDocJavaScript}/>
+<PlatformSection reactJs={DisplayOptionsDocReactJs} javascript={DisplayOptionsDocJavaScript}/>
+
+<PlatformSelector reactJs={DisplayOptionsUsageReactJs} javascript={DisplayOptionsUsageJavaScript}/>
 
 ---
 
 ### Composer Options
 
-<PlatformSection reactJs={composerOptionsDocReactJs} javascript={composerOptionsDocJavaScript}/>
+<PlatformSection reactJs={ComposerOptionsDocReactJs} javascript={ComposerOptionsDocJavaScript}/>
+
+<PlatformSelector reactJs={ComposerOptionsUsageReactJs} javascript={ComposerOptionsUsageJavaScript}/>
 
 ---
 
 ### Syntax Highlighter
 
 <PlatformSection reactJs={SyntaxHighlighterReactJs} javascript={SyntaxHighlighterJavaScript}/>
+
+<PlatformSelector reactJs={SyntaxHighlighterUsageReactJs} javascript={SyntaxHighlighterUsageJavaScript}/>

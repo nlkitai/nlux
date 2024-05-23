@@ -1,0 +1,16 @@
+```tsx
+import {AiChat, ChatAdapter} from '@nlux/react';
+import {useChatAdapter} from '@nlux/[Your Preferred Standard Adapter]-react';
+
+// Usage with standard adapters
+const standardAdapter = useChatAdapter();
+<AiChat adapter={standardAdapter} />
+```
+
+```tsx
+// Usage with custom adapters
+const customAdapter: ChatAdapter<AiMsg> = {
+    // Implement the required methods
+};
+<AiChat adapter={customAdapter} />
+```

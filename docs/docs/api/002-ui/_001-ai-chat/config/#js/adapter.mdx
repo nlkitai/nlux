@@ -10,20 +10,4 @@ The value can be:<br />
 
 > * Required
 > * Type: `ChatAdapter` | `StandardChatAdapter` | `ChatAdapterBuilder`
-> * Usage
-
-```tsx
-import {createAiChat, ChatAdapter} from '@nlux/core';
-import {createChatAdapter} from '@nlux/[Your Preferred Standard Adapter]';
-
-// Use with standard adapters
-const standardAdapter = createChatAdapter().with[ConfigOptionName]({ /* options */ });
-const aiChat = createAiChat().withAdapter(standardAdapter);
-
-// Use with custom adapters
-const customAdapter: ChatAdapter<AiMsg> = {
-    // Implement the required methods
-};
-const aiChat = createAiChat().withAdapter(customAdapter);
-
-```
+> * Usage:

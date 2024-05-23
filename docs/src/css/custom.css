@@ -144,4 +144,8 @@ h1, h2, h3 {
     display: flex;
     background-color: #00000012;
     border-radius: 10px;
+    margin-top: 1rem;
+
+    --ifm-tabs-padding-vertical: 0.5rem;
+    --ifm-tabs-padding-horizontal: 1rem;
 }

@@ -1,0 +1,21 @@
+```tsx
+import {AiChat, MessageOptions} from '@nlux/react';
+import {highlighter} from '@nlux/highlighter';
+
+const messageOptions: MessageOptions = {
+    markdownLinkTarget: 'self',
+    showCodeBlockCopyButton: false,
+    skipStreamingAnimation: true,
+    streamingAnimationSpeed: 100,
+
+    // Renfer to Custom Renderers API doc for futher details and usage examples
+    responseRenderer: ({content}) => <p>The AI said: {content.message}</p>,
+    promptRenderer: ({content}) => <p>The user said: {content.message}</p>,
+
+    // Refer to sytax Syntax Highlighter API doc for details
+    syntaxHighlighter: highlighter,
+};
+```
+```tsx
+<AiChat conversationOptions={messageOptions} />
+```

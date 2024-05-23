@@ -23,16 +23,4 @@ type ConversationLayout = 'bubbles' | 'list';
 | `historyPayloadSize` | `number`&nbsp;\|&nbsp;`'max'` | `'max'` | The number of messages from the conversation history to be sent to the backend whenver a message is submitted. If set to `0`, no messages will be sent to the server. If set to `'max'`, all the conversation messages will be sent to the server everytime time a prompt is submitted. |
 
 
-* Usage:
-
-```tsx
-import {createAiChat, ConversationOptions} from '@nlux/core';
-
-const conversationOptions: ConversationOptions = {
-    layout: 'bubbles',
-    autoScroll: false,
-    historyPayloadSize: 10
-};
-
-const aiChat = createAiChat().withConversationOptions(conversationOptions);
-```
+> * Usage:

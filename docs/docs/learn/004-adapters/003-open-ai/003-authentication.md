@@ -32,7 +32,7 @@ Here's how you can get your API key:
 If you're using `NLUX` with React, you can use the `useUnsafeChatAdapter` hook to create an OpenAI adapter and pass your API key to
 it:
 
-```jsx
+```tsx
 const chatGptAdapter = useUnsafeChatAdapter({apiKey: 'YOUR_OPEN_AI_API_KEY'});
 ```
 
