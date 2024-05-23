@@ -24,9 +24,13 @@ export type {
     PreDestroyCallback,
     PreDestroyEventDetails,
     MessageSentCallback,
+    MessageSentEventDetails,
     MessageStreamStartedCallback,
+    MessageStreamStartedEventDetails,
     MessageReceivedCallback,
+    MessageReceivedEventDetails,
     MessageRenderedCallback,
+    MessageRenderedEventDetails,
 } from '@nlux/core';
 
 // Exporting from — shared

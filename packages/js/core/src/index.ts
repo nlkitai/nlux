@@ -39,8 +39,6 @@ export type {
     EventName,
     EventCallback,
     EventsConfig,
-    MessageReceivedEventDetails,
-    MessageRenderedEventDetails,
     ErrorCallback,
     ErrorEventDetails,
     ReadyCallback,
@@ -48,9 +46,13 @@ export type {
     PreDestroyCallback,
     PreDestroyEventDetails,
     MessageSentCallback,
+    MessageSentEventDetails,
     MessageStreamStartedCallback,
+    MessageStreamStartedEventDetails,
     MessageReceivedCallback,
+    MessageReceivedEventDetails,
     MessageRenderedCallback,
+    MessageRenderedEventDetails,
 } from './types/event';
 
 export type {
