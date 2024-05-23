@@ -101,7 +101,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
         throw new Error('Method not implemented.');
     }
 
-    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         throw new Error('Method not implemented.');
     }
 

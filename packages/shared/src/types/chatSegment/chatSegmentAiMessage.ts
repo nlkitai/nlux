@@ -20,7 +20,7 @@ export type AiStreamedMessage<AiMsg> = {
     error: string;
 });
 
-export type AiUnifiedMessage<AiMsg> = {
+export type AiBatchedMessage<AiMsg> = {
     uid: string;
     time: Date;
     participantRole: 'ai';
@@ -38,4 +38,4 @@ export type AiUnifiedMessage<AiMsg> = {
     status: 'loading';
 });
 
-export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage<AiMsg> | AiUnifiedMessage<AiMsg>;
+export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage<AiMsg> | AiBatchedMessage<AiMsg>;

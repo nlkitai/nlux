@@ -9,7 +9,7 @@ import {
     useMemo,
     useState,
 } from 'react';
-import {AiUnifiedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
+import {AiBatchedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {warn, warnOnce} from '../../../../../shared/src/utils/warn';
 import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
@@ -135,7 +135,7 @@ export const ChatSegmentComp: <AiMsg>(
                     if (chatItem.status !== 'complete') {
                         warnOnce(
                             `User chat item should be always be in complete state — ` +
-                            `Current status: ${(chatItem as AiUnifiedMessage<AiMsg>).status} — ` +
+                            `Current status: ${(chatItem as AiBatchedMessage<AiMsg>).status} — ` +
                             `Segment UID: ${chatSegment.uid}`,
                         );
 

@@ -80,7 +80,7 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         return '' as AiMsg;
     }
 
-    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         if (typeof message === 'string') {
             return message as AiMsg;
         }

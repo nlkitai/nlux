@@ -96,7 +96,7 @@ describe('submitPrompt()', () => {
                 id: '123',
                 info: {} as StandardAdapterInfo,
                 preProcessAiStreamedChunk: vi.fn(),
-                preProcessAiUnifiedMessage: vi.fn(),
+                preProcessAiBatchedMessage: vi.fn(),
             } satisfies StandardChatAdapter<string>;
 
             const extras = {

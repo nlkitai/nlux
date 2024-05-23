@@ -153,7 +153,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         return undefined;
     }
 
-    preProcessAiUnifiedMessage(
+    preProcessAiBatchedMessage(
         message: string | object | undefined,
         extras: ChatAdapterExtras<AiMsg>,
     ): AiMsg | undefined {

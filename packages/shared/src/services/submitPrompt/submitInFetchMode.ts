@@ -2,7 +2,7 @@ import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
-import {AiUnifiedMessage, ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
+import {AiBatchedMessage, ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiMessageReceivedCallback,
     ChatSegmentCompleteCallback,
@@ -39,10 +39,10 @@ export const submitInFetchMode = async <AiMsg>(
         const time = new Date();
         const dataTransferMode = 'fetch';
 
-        let aiResponse: AiUnifiedMessage<AiMsg> | undefined = undefined;
+        let aiResponse: AiBatchedMessage<AiMsg> | undefined = undefined;
         if (isStandardAdapter) {
             const rawResponse = await adapterAsStandardAdapter.fetchText!(prompt, extras);
-            const preProcessedResponse = adapterAsStandardAdapter.preProcessAiUnifiedMessage(rawResponse, extras);
+            const preProcessedResponse = adapterAsStandardAdapter.preProcessAiBatchedMessage(rawResponse, extras);
             if (preProcessedResponse !== undefined && preProcessedResponse !== null) {
                 aiResponse = {
                     uid: responseUid,

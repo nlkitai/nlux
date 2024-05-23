@@ -24,7 +24,7 @@ export interface StandardChatAdapter<AiMsg = string> {
     ): AiMsg | undefined;
 
     // can be displayed to the user (either text or input for a custom component).
-    preProcessAiUnifiedMessage(
+    preProcessAiBatchedMessage(
         message: string | object | undefined,
         extras: ChatAdapterExtras<AiMsg>,
     ): AiMsg | undefined;
@@ -50,6 +50,6 @@ export const isStandardChatAdapter = (adapter: unknown): boolean => {
         && ['stream', 'fetch'].includes(typedAdapter.dataTransferMode as string)
         && typeof typedAdapter.id === 'string'
         && (typeof typedAdapter.info === 'object' && typedAdapter.info !== null)
-        && (typeof typedAdapter.preProcessAiUnifiedMessage === 'function')
+        && (typeof typedAdapter.preProcessAiBatchedMessage === 'function')
         && (typeof typedAdapter.preProcessAiStreamedChunk === 'function');
 };

@@ -82,11 +82,11 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
         }
     }
 
-    preProcessAiUnifiedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         try {
             return decodePayload(message as OpenAI.Chat.Completions.ChatCompletion);
         } catch (error) {
-            warn('Error while decoding unified message');
+            warn('Error while decoding batched message');
             warn(error);
 
             return undefined;
