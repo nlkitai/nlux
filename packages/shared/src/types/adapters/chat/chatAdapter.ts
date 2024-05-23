@@ -13,7 +13,7 @@ export type DataTransferMode = 'stream' | 'fetch';
  * to be displayed to the user. It cannot return a task to be executed by the client. If you are using the `AiChat`
  * component in co-pilot mode, you should use the `AssistAdapter` interface instead.
  */
-export interface ChatAdapter<AiMsg> {
+export interface ChatAdapter<AiMsg = string> {
     /**
      * This method should be implemented by any adapter that wants to request data from the API in fetch mode.
      * It should return a promise that resolves to the response from the API.

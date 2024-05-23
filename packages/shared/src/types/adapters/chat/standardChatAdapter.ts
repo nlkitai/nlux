@@ -5,7 +5,7 @@ import {StandardAdapterInfo} from './standardAdapterConfig';
 /**
  * This interface is used by standard adapters provided by nlux to communicate with the AiChat component.
  */
-export interface StandardChatAdapter<AiMsg> {
+export interface StandardChatAdapter<AiMsg = string> {
     get dataTransferMode(): DataTransferMode;
 
     fetchText(

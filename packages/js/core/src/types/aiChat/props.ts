@@ -42,7 +42,7 @@ export type AiChatProps<AiMsg = string> = {
  * When sending props to event callbacks, we exclude the adapter and events properties.
  * This is because they are not serializable and because the events are already being called.
  */
-export type AiChatPropsInEvents<AiMsg> = Omit<AiChatProps<AiMsg>, 'adapter' | 'events'>;
+export type AiChatPropsInEvents<AiMsg = string> = Omit<AiChatProps<AiMsg>, 'adapter' | 'events'>;
 
 /**
  * This type represents the props that can be updated on the AiChat component, after it has been initialized.

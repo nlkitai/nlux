@@ -4,7 +4,7 @@ import {ChatItem} from '../../conversation';
 /**
  * Additional data sent to the adapter when a message is sent.
  */
-export type ChatAdapterExtras<AiMsg> = {
+export type ChatAdapterExtras<AiMsg = string> = {
     /**
      * This attribute contains the properties used with the AiChat component.
      */
