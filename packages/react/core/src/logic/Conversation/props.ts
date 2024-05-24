@@ -12,6 +12,7 @@ export type ConversationCompProps<AiMsg> = {
     responseRenderer?: ResponseRenderer<AiMsg>;
     promptRenderer?: PromptRenderer;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

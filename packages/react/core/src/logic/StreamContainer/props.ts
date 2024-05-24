@@ -11,6 +11,7 @@ export type StreamContainerProps<AisMsg> = {
     promptRenderer?: ResponseRenderer<AisMsg>;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
+        htmlSanitizer?: (html: string) => string;
         markdownLinkTarget?: 'blank' | 'self';
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;

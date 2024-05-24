@@ -19,6 +19,7 @@ export const createMessageRenderer: <AiMsg>(
         direction,
         responseRenderer,
         syntaxHighlighter,
+        htmlSanitizer,
         markdownLinkTarget,
         showCodeBlockCopyButton,
     } = props;
@@ -77,6 +78,7 @@ export const createMessageRenderer: <AiMsg>(
                 content={messageToRender}
                 markdownOptions={{
                     syntaxHighlighter,
+                    htmlSanitizer,
                     markdownLinkTarget,
                     showCodeBlockCopyButton,
                 }}

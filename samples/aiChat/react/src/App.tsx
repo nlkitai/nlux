@@ -3,6 +3,7 @@ import '@nlux-dev/themes/src/fest/main.css';
 import '@nlux-dev/themes/src/nada/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import DOMPurify from 'dompurify';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
@@ -201,6 +202,7 @@ function App() {
                 messageOptions={{
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
+                    htmlSanitizer: DOMPurify.sanitize,
                     // showCodeBlockCopyButton: false,
                     // streamingAnimationSpeed: 100,
                     responseRenderer: useCustomResponseComponent ? responseRenderer : undefined,

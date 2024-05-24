@@ -17,10 +17,14 @@ export const MarkdownSnapshotRenderer = (props: {
 
         return parseMdSnapshot(props.content, {
             syntaxHighlighter: markdownOptions?.syntaxHighlighter,
+            htmlSanitizer: markdownOptions?.htmlSanitizer,
             markdownLinkTarget: markdownOptions?.markdownLinkTarget,
             showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
         });
-    }, [props.content, markdownOptions?.markdownLinkTarget, markdownOptions?.syntaxHighlighter]);
+    }, [
+        props.content, markdownOptions?.markdownLinkTarget, markdownOptions?.syntaxHighlighter,
+        markdownOptions?.htmlSanitizer, markdownOptions?.showCodeBlockCopyButton
+    ]);
 
     useEffect(() => {
         if (markdownContainerRef.current && markdownOptions?.showCodeBlockCopyButton) {

@@ -166,6 +166,7 @@ export const ChatSegmentComp: <AiMsg>(
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
+                            htmlSanitizer={props.htmlSanitizer}
                             markdownLinkTarget={props.markdownLinkTarget}
                             showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                             skipStreamingAnimation={props.skipStreamingAnimation}
@@ -202,6 +203,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
+                                    htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}
@@ -242,6 +244,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
+                                    htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}
@@ -270,6 +273,7 @@ export const ChatSegmentComp: <AiMsg>(
                                         props.personaOptions,
                                     )}
                                     syntaxHighlighter={props.syntaxHighlighter}
+                                    htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}
                                     showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                                     skipStreamingAnimation={props.skipStreamingAnimation}

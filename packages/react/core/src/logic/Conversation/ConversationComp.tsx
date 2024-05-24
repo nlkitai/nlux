@@ -76,6 +76,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                             promptRenderer={props.promptRenderer}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
                             syntaxHighlighter={props.syntaxHighlighter}
+                            htmlSanitizer={props.htmlSanitizer}
                             markdownLinkTarget={props.markdownLinkTarget}
                             showCodeBlockCopyButton={props.showCodeBlockCopyButton}
                             skipStreamingAnimation={props.skipStreamingAnimation}

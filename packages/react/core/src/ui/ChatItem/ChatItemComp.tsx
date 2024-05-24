@@ -4,7 +4,6 @@ import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '../../../../../shared/src/ui/ChatItem/utils/applyNewLayoutClassName';
-import {PromptRenderer, PromptRendererProps} from '../../exports/messageOptions';
 import {MarkdownSnapshotRenderer} from '../../logic/MessageRenderer/MarkdownSnapshotRenderer';
 import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
@@ -54,13 +53,19 @@ export const ChatItemComp: <AiMsg>(
     }, [
         isStreaming,
         props.uid, props.status, props.fetchedContent, props.streamedContent, props.direction,
-        props.responseRenderer, props.syntaxHighlighter, props.markdownLinkTarget,
+        props.responseRenderer, props.syntaxHighlighter, props.htmlSanitizer, props.markdownLinkTarget,
     ]);
 
     const UserMessageRenderer = useCallback(() => {
         if (props.promptRenderer === undefined) {
             return (
-                <MarkdownSnapshotRenderer messageUid={props.uid} content={props.fetchedContent as string} />
+                <MarkdownSnapshotRenderer
+                    messageUid={props.uid}
+                    content={props.fetchedContent as string}
+                    markdownOptions={{
+                        htmlSanitizer: props.htmlSanitizer,
+                    }}
+                />
             );
         }
 
@@ -84,6 +89,7 @@ export const ChatItemComp: <AiMsg>(
                     responseRenderer={props.responseRenderer}
                     markdownOptions={{
                         syntaxHighlighter: props.syntaxHighlighter,
+                        htmlSanitizer: props.htmlSanitizer,
                         markdownLinkTarget: props.markdownLinkTarget,
                         showCodeBlockCopyButton: props.showCodeBlockCopyButton,
                         skipStreamingAnimation: props.skipStreamingAnimation,

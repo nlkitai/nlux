@@ -3,6 +3,7 @@ import '@nlux-dev/themes/src/fest/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/themes/src/nada/main.css';
 import {ChatItem, createAiChat, DisplayOptions} from '@nlux-dev/core/src';
+import DOMPurify from 'dompurify';
 // import {highlighter} from '@nlux-dev/highlighter/src';
 // import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {createChatAdapter as createHuggingFaceChatAdapter} from '@nlux-dev/hf/src';
@@ -108,7 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
         .withDisplayOptions(displayOptions)
         .withMessageOptions({
             markdownLinkTarget: 'blank',
-            htmlSanitizer: (html: string) => html.replace('h', 'x'),
+            htmlSanitizer: (html: string) => DOMPurify.sanitize(html),
+            // htmlSanitizer: (html: string) => html.replace('h', 'x'),
             // syntaxHighlighter: highlighter,
             // showCodeBlockCopyButton: false,
         })

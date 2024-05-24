@@ -49,11 +49,12 @@ export const StreamContainerComp = function <AiMsg>(
         }
     }, [streamContainer]);
 
-    // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter) change.
+    // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter, etc.) change.
     useEffect(() => {
         const element = streamingDomService.getStreamingDomElement(uid);
         mdStreamParserRef.current = createMarkdownStreamParser(element, {
             syntaxHighlighter: markdownOptions?.syntaxHighlighter,
+            htmlSanitizer: markdownOptions?.htmlSanitizer,
             markdownLinkTarget: markdownOptions?.markdownLinkTarget,
             showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
             skipStreamingAnimation: markdownOptions?.skipStreamingAnimation,
@@ -72,6 +73,7 @@ export const StreamContainerComp = function <AiMsg>(
         };
     }, [
         markdownOptions?.syntaxHighlighter,
+        markdownOptions?.htmlSanitizer,
         markdownOptions?.markdownLinkTarget,
         markdownOptions?.showCodeBlockCopyButton,
         markdownOptions?.skipStreamingAnimation,

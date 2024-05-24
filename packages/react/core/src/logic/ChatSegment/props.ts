@@ -12,6 +12,7 @@ export type ChatSegmentProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     layout: ConversationLayout;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

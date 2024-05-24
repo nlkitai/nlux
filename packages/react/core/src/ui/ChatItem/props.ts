@@ -18,6 +18,7 @@ export type ChatItemProps<AiMsg> = {
     name: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

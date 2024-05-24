@@ -58,9 +58,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withMessageOptions({
                 // A dummy sanitizer that replaces all 'x' with '.'
-                htmlSanitizer: (html: string) => html
-                    .toLowerCase()
-                    .replaceAll('h', 'x')
+                htmlSanitizer: (html: string) => html.toLowerCase().replaceAll('h', 'x')
             });
 
             aiChat.mount(rootElement);
