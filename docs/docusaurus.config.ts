@@ -127,6 +127,13 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'referenceSidebar',
+          position: 'left',
+          label: 'Reference',
+          className: 'doc-section',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'learnSidebar',
           position: 'left',
           label: 'Learn',
@@ -137,13 +144,6 @@ const config: Config = {
           sidebarId: 'examplesSidebar',
           position: 'left',
           label: 'Examples',
-          className: 'doc-section',
-        },
-        {
-          type: 'docSidebar',
-          sidebarId: 'apiSidebar',
-          position: 'left',
-          label: 'API Reference',
           className: 'doc-section',
         },
         {
@@ -184,7 +184,7 @@ const config: Config = {
             },
             {
               label: 'API',
-              to: '/api/overview',
+              to: '/reference/overview',
             },
           ],
         },

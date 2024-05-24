@@ -1,9 +1,0 @@
-{
-  "label": "User Interface",
-  "collapsible": true,
-  "collapsed": false,
-  "link": {
-    "type": "generated-index",
-    "slug": "/api/ui"
-  }
-}

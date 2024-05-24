@@ -1,0 +1,9 @@
+:::warning
+This adapter connects to the OpenAI API directly from the browser, using an API key.<br />
+The OpenAI API is built for server-side usage, and **the API key should not be exposed to the client**.
+
+You can use this adapter for testing purposes, but in a production setup you should build your own server
+that connects to the OpenAI API, and use that server with `NLUX`.
+
+We recommend using [`NLUX`'s custom adapters feature](/reference/adapters/custom-adapters) to create an adapter for your server.
+:::

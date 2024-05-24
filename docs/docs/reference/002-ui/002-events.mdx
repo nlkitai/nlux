@@ -1,0 +1,230 @@
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import EventListenersReactJs from './_002-events/#react.mdx';
+import EventListenersJavaScript from './_002-events/#js.mdx';
+
+import RegisterEventReactJs from './_002-events/#react/register.mdx';
+import RegisterEventJavaScript from './_002-events/#js/register.mdx';
+
+import RemoveEventReactJs from './_002-events/#react/remove.mdx';
+import RemoveEventJavaScript from './_002-events/#js/remove.mdx';
+
+import EventReadyJavaScript from './_002-events/events/#js/ready.mdx';
+import EventReadyReactJs from './_002-events/events/#react/ready.mdx';
+
+import EventPreDestroyJavaScript from './_002-events/events/#js/preDestroy.mdx';
+import EventPreDestroyReactJs from './_002-events/events/#react/preDestroy.mdx';
+
+import EventMessageSentJavaScript from './_002-events/events/#js/messageSent.mdx';
+import EventMessageSentReactJs from './_002-events/events/#react/messageSent.mdx';
+
+import EventMessageReceivedJavaScript from './_002-events/events/#js/messageReceived.mdx';
+import EventMessageReceivedReactJs from './_002-events/events/#react/messageReceived.mdx';
+
+import EventMessageRenderedJavaScript from './_002-events/events/#js/messageRendered.mdx';
+import EventMessageRenderedReactJs from './_002-events/events/#react/messageRendered.mdx';
+
+import EventMessageStreamStartedJavaScript from './_002-events/events/#js/messageStreamStarted.mdx';
+import EventMessageStreamStartedReactJs from './_002-events/events/#react/messageStreamStarted.mdx';
+
+import EventErrorJavaScript from './_002-events/events/#js/error.mdx';
+import EventErrorReactJs from './_002-events/events/#react/error.mdx';
+
+# Events
+
+`NLUX` emits events when the user interacts with the UI, when server sends messages, or
+when errors occur. You can register event callbacks to listen to these events.
+
+<PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavaScript}/>
+
+## Listening to Events
+
+You can register event callbacks to listen to events emitted by `NLUX`.
+
+---
+
+### Adding Event Callbacks
+
+<PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavaScript}/>
+
+---
+
+### Removing Event Callbacks
+
+<PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavaScript}/>
+
+---
+
+## Events
+
+Below is a list of events emitted by `NLUX`.
+
+---
+
+### Ready
+
+This event is emitted when the `AiChat` component is mounted and ready to use.
+
+> * Event Name: `ready`
+> * Callback Type:
+
+```tsx
+type ReadyCallback<AiMsg = string> = (readyDetails: ReadyEventDetails<AiMsg>) => void;
+
+type ReadyEventDetails<AiMsg> = {
+    // Props used to initialize the AiChat component (excluding event listeners and adapter)
+    aiChatProps: AiChatPropsInEvents<AiMsg>
+}
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventReadyReactJs} javascript={EventReadyJavaScript}/>
+
+---
+
+### Pre-Destroy
+
+This event is emitted when the `AiChat` component is about to be destroyed.
+It allows access to the component's state, conversation history, and props before it is destroyed.
+
+> * Event Name: `preDestroy`
+> * Callback Type:
+
+```tsx
+type PreDestroyCallback<AiMsg = string> = (preDestroyDetails: PreDestroyEventDetails<AiMsg>) => void;
+
+type PreDestroyEventDetails<AiMsg = string> = {
+    aiChatProps: AiChatPropsInEvents<AiMsg>;
+    conversationHistory: Readonly<ChatItem<AiMsg>[]>;
+}
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventPreDestroyReactJs} javascript={EventPreDestroyJavaScript}/>
+
+---
+
+### Message Sent
+
+This event is emitted when the user sends a message. The event only gets triggered when the
+adapter method responsible for sending the message to the backend runs successfully.
+For [standard adapters](/reference/adapters), this means that the message was successfully sent to
+the backend.
+
+> * Event Name: `messageSent`
+> * Callback Type:
+
+```tsx
+type MessageSentCallback = (event: MessageSentEventDetails) => void;
+
+type MessageSentEventDetails = {
+    uid: string;
+    message: string;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageSentReactJs} javascript={EventMessageSentJavaScript}/>
+
+---
+
+### Message Received
+
+This event is emitted when a message is received from the server. For the case of **streamed messages**, this message
+is emitted when the streaming is complete and the message is fully received.
+
+Please note that `messageReceived` does not mean that the message has fully rendered on the screen. Depending on your
+configuration, `NLUX` may render messages in a character-by-character animation, so the message may still being rendered
+when this event is emitted. You can use the `messageRendered` event to listen to when the message has fully rendered
+on the screen.
+
+> * Event Name: `messageReceived`
+> * Callback Type:
+
+```tsx
+type MessageReceivedCallback<AiMsg = string> = (event: MessageReceivedEventDetails<AiMsg>) => void;
+
+type MessageReceivedEventDetails<AiMsg = string> = {
+    uid: string;
+    message: AiMsg;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageReceivedReactJs} javascript={EventMessageReceivedJavaScript}/>
+
+---
+
+### Message Rendered
+
+> * Event Name: `messageRendered`
+
+This event is emitted when the message has been fully rendered, including any animations that may be applied to the
+message. This event is emitted after the `messageReceived` event, and will only be emitted once per message.
+
+> * Callback Type:
+
+```tsx
+type MessageRenderedCallback<AiMsg = string> = (event: MessageRenderedEventDetails<AiMsg>) => void;
+
+type MessageRenderedEventDetails<AiMsg = string> = {
+    uid: string;
+    message: AiMsg;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageRenderedReactJs} javascript={EventMessageRenderedJavaScript}/>
+
+---
+
+### Message Stream Started
+
+This event is emitted when the server starts sending streaming a response back to the client, for when the adapter
+is configured to use `stream` data transfer mode. The event will be emitted when the first chunk of the message is
+received, and will only be emitted once per message.
+
+> * Event Name: `messageStreamStarted`
+> * Callback Type:
+
+```tsx
+type MessageStreamStartedCallback = (event: MessageStreamStartedEventDetails) => void;
+
+type MessageStreamStartedEventDetails = {
+    uid: string;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventMessageStreamStartedReactJs} javascript={EventMessageStreamStartedJavaScript}/>
+
+---
+
+### Error
+
+This event is emitted when an exception occurs. The event listener receives the `ErrorEventDetails` object
+as a parameter.
+
+> * Event Name: `error`
+> * Callback Type:
+
+```tsx
+type ErrorCallback = (errorDetails: ErrorEventDetails) => void;
+
+type ErrorEventDetails = {
+    errorId: string;
+    message: string;
+    errorObject?: Error;
+};
+```
+
+> * Usage:
+
+<PlatformSelector reactJs={EventErrorReactJs} javascript={EventErrorJavaScript}/>

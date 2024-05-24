@@ -15,7 +15,7 @@ export const Roadmap = ({className}: {className?: string}) => {
             </p>
             <div>
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/api/ui/ai-chat"
+                    href="https://docs.nlkit.com/nlux/reference/ui/ai-chat"
                     text="AI Chat Component"
                 />
                 <FeatureImplemented
@@ -51,7 +51,7 @@ export const Roadmap = ({className}: {className?: string}) => {
                     text="Theme Customization"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/api/ui/events"
+                    href="https://docs.nlkit.com/nlux/reference/ui/events"
                     text="Event Listeners"
                 />
                 <FeatureImplemented

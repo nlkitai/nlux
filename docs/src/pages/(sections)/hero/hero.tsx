@@ -83,7 +83,7 @@ export const Hero = ({className}: {className?: string}) => {
                     </Link>
                     <Link
                         className="button button--primary button--lg"
-                        to="/api/overview"
+                        to="/reference/overview"
                     >
                         API Reference
                     </Link>

@@ -1,0 +1,178 @@
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from "@site/src/components/PlatformSection/PlatformSection";
+
+import EventListenersReactJs from './_002-events/#react.mdx';
+import EventListenersJavascript from './_002-events/#js.mdx';
+
+import RegisterEventReactJs from './_002-events/#react/register.mdx';
+import RegisterEventJavascript from './_002-events/#js/register.mdx';
+
+import RemoveEventReactJs from './_002-events/#react/remove.mdx';
+import RemoveEventJavascript from './_002-events/#js/remove.mdx';
+
+import EventReadyJavascript from './_002-events/events/#js/ready.mdx';
+import EventReadyReactJs from './_002-events/events/#react/ready.mdx';
+
+import EventPreDestroyJavascript from './_002-events/events/#js/preDestroy.mdx';
+import EventPreDestroyReactJs from './_002-events/events/#react/preDestroy.mdx';
+
+import EventMessageSentJavascript from './_002-events/events/#js/messageSent.mdx';
+import EventMessageSentReactJs from './_002-events/events/#react/messageSent.mdx';
+
+import EventMessageReceivedJavascript from './_002-events/events/#js/messageReceived.mdx';
+import EventMessageReceivedReactJs from './_002-events/events/#react/messageReceived.mdx';
+
+import EventErrorJavascript from './_002-events/events/#js/error.mdx';
+import EventErrorReactJs from './_002-events/events/#react/error.mdx';
+
+# Events
+
+`NLUX` emits events when the user interacts with the UI, when server sends a message, or
+when errors occur. You can register event listeners to listen to these events.
+
+<PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavascript}/>
+
+## Event Listeners
+
+You can register event listeners to listen to events emitted by the AI chat UI component.
+
+Events are emitted when the user interacts with the UI, when server sends a message, or
+when errors occur.
+
+---
+
+### Listen To An Event
+
+<PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavascript}/>
+
+---
+
+### Remove An Event Listener
+
+<PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavascript}/>
+
+---
+
+## Events
+
+Below is a list of events emitted by the AI chat UI component.
+
+---
+
+### Ready
+
+* Event Name: `ready`
+
+This event is emitted when the AI chat UI component is mounted and ready to use.
+
+* Callback Type:
+
+```ts
+type ReadyEventDetails = {
+    // Props used to initialize the AiChat component
+    aiChatProps: AiChatProps;
+};
+
+type ReadyCallback = (readyDetails: ReadyEventDetails) => void;
+```
+
+* Example:
+
+<PlatformSelector reactJs={EventReadyReactJs} javascript={EventReadyJavascript}/>
+
+---
+
+### Pre-Destroy
+
+* Event Name: `preDestroy`
+
+This event is emitted when the AI chat UI component is about to be destroyed.
+It allows access to the component's state and props before it is destroyed.
+
+* Callback Type:
+
+```ts
+type PreDestroyEventDetails = {
+    aiChatProps: AiChatProps;
+    conversationHistory: Readonly<ConversationItem[]>;
+};
+
+type PreDestroyCallback = (preDestroyDetails: PreDestroyEventDetails) => void;
+```
+
+* Example:
+
+<PlatformSelector reactJs={EventPreDestroyReactJs} javascript={EventPreDestroyJavascript}/>
+
+---
+
+### Message Sent
+
+* Event Name: `messageSent`
+
+This event is emitted when the user sends a message. The event only gets triggered when the
+adapter method responsible for sending the message to the backend executes successfully.
+For [standard adapters](/reference/adapters), this means that the message was successfully sent to
+the backend.
+
+* Callback Type:
+
+```ts
+type MessageSentCallback = (message: string) => void;
+```
+
+* Example:
+
+<PlatformSelector reactJs={EventMessageSentReactJs} javascript={EventMessageSentJavascript}/>
+
+---
+
+### Message Received
+
+* Event Name: `messageReceived`
+
+This event is emitted when a message is received from the server. The event listener receives the
+message as a parameter.
+
+| For [Promise Adapters](/reference/adapters/custom-adapters#promise-adapters) ― The event listener receives when the promise
+is resolved.<br />
+| For [Streaming Adapters](/reference/adapters/custom-adapters#streaming-adapters) ― The event listener receives the message
+when the streaming is complete and the message is fully received.
+
+Please note that `messageReceived` does not mean that the message has fully rendered on the screen.
+`NLUX` renders the messages in a character-by-character animation, so the message may still being
+rendered when this event is emitted.
+
+* Callback Type:
+
+```ts
+type MessageReceivedCallback = (message: string) => void;
+```
+
+* Example:
+
+<PlatformSelector reactJs={EventMessageReceivedReactJs} javascript={EventMessageReceivedJavascript}/>
+
+---
+
+### Error
+
+* Event Name: `error`
+
+This event is emitted when an exception occurs. The event listener receives the `ErrorEventDetails` object
+as a parameter.
+
+* Callback Type:
+
+```typescript
+type ErrorEventDetails = {
+    errorId: string;
+    message: string;
+};
+
+type ErrorCallback = (error: ErrorEventDetails) => void;
+```
+
+* Example:
+
+<PlatformSelector reactJs={EventErrorReactJs} javascript={EventErrorJavascript}/>
