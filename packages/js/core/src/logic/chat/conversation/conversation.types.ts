@@ -2,6 +2,7 @@ import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompConversationEvents = void;
 
@@ -11,7 +12,7 @@ export type CompConversationProps<AiMsg> = {
     botPersona?: BotPersona;
     userPersona?: UserPersona;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

@@ -179,6 +179,12 @@ export type {
     CreateHighlighterOptions,
 } from './exports/aiChat/highlighter/highlighter';
 
+// HTML SANITIZER ___________
+
+export type {
+    SanitizerExtension
+} from './exports/aiChat/sanitizer/sanitizer';
+
 // CONVERSATION _____________
 
 export type {

@@ -1,4 +1,4 @@
-import {HighlighterExtension, IObserver} from '../../../../js/core/src';
+import {HighlighterExtension, IObserver, SanitizerExtension} from '../../../../js/core/src';
 
 export type StreamParser = (
     root: HTMLElement,
@@ -15,7 +15,7 @@ export type StandardStreamParser = (
     root: HTMLElement,
     options?: {
         syntaxHighlighter?: HighlighterExtension,
-        htmlSanitizer?: (html: string) => string,
+        htmlSanitizer?: SanitizerExtension,
         markdownLinkTarget?: 'blank' | 'self';
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;

@@ -1,5 +1,6 @@
 import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
+import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompChatItemEvents = 'markdown-stream-complete';
 
@@ -7,7 +8,7 @@ export type CompChatItemProps = {
     uid: string;
     domProps: ChatItemProps;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

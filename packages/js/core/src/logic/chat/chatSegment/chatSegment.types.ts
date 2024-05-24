@@ -2,6 +2,7 @@ import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;
@@ -13,7 +14,7 @@ export type CompChatSegmentProps = Readonly<{
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     streamingAnimationSpeed?: number;
 }>;
 

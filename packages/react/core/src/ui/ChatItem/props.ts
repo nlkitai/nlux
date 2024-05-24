@@ -1,4 +1,4 @@
-import {ConversationLayout, DataTransferMode, HighlighterExtension} from '@nlux/core';
+import {ConversationLayout, DataTransferMode, HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {ReactElement} from 'react';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
@@ -18,7 +18,7 @@ export type ChatItemProps<AiMsg> = {
     name: string;
     picture?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

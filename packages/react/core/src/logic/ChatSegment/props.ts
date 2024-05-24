@@ -1,4 +1,4 @@
-import {ConversationLayout, HighlighterExtension} from '@nlux/core';
+import {ConversationLayout, HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {ReactElement, RefObject} from 'react';
 import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
 import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
@@ -12,7 +12,7 @@ export type ChatSegmentProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     layout: ConversationLayout;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

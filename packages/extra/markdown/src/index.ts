@@ -1,4 +1,4 @@
-import {HighlighterExtension} from '../../../js/core/src';
+import {HighlighterExtension, SanitizerExtension} from '../../../js/core/src';
 import {createMdStreamRenderer} from '../../../shared/src/markdown/stream/streamParser';
 import {CallbackFunction} from '../../../shared/src/types/callbackFunction';
 
@@ -10,7 +10,7 @@ export type MarkdownStreamParser = {
 export type MarkdownStreamParserOptions = {
     markdownLinkTarget?: 'blank' | 'self';
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     showCodeBlockCopyButton?: boolean;

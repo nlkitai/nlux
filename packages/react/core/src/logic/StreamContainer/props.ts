@@ -1,4 +1,4 @@
-import {HighlighterExtension} from '@nlux/core';
+import {HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
 import {ResponseRenderer} from '../../exports/messageOptions';
 
@@ -11,7 +11,7 @@ export type StreamContainerProps<AisMsg> = {
     promptRenderer?: ResponseRenderer<AisMsg>;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
-        htmlSanitizer?: (html: string) => string;
+        htmlSanitizer?: SanitizerExtension;
         markdownLinkTarget?: 'blank' | 'self';
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;

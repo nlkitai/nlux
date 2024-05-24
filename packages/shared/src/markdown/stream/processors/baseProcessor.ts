@@ -1,11 +1,11 @@
-import {HighlighterExtension} from '../../../../../js/core/src';
+import {HighlighterExtension, SanitizerExtension} from '../../../../../js/core/src';
 import {MarkdownElementName} from '../../../types/markdown/markdownElement';
 import {MarkdownProcessorInterface} from '../../../types/markdown/markdownProcessorInterface';
 import {SequenceParser} from '../sequenceParser';
 
 export type MarkdownProcessorOptions = {
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     showCodeBlockCopyButton?: boolean;
     markdownLinkTarget?: 'blank' | 'self';
 };
@@ -106,7 +106,7 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         return this.__options.syntaxHighlighter;
     }
 
-    protected get htmlSanitizer(): (html: string) => string {
+    protected get htmlSanitizer(): SanitizerExtension {
         return this.__options.htmlSanitizer ?? ((html: string) => html);
     }
 

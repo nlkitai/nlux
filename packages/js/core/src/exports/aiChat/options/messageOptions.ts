@@ -1,4 +1,5 @@
 import {HighlighterExtension} from '../highlighter/highlighter';
+import {SanitizerExtension} from '../sanitizer/sanitizer';
 
 /**
  * Props for the custom function that renders a message sent by the server in streaming mode.
@@ -69,7 +70,7 @@ export type MessageOptions<AiMsg = string> = {
      * @param {string} html
      * @returns {string}
      */
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
 
     /**
      * Indicates the target of the links in the markdown messages.

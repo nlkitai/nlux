@@ -9,6 +9,7 @@ export type {
     ConversationLayout,
     HistoryPayloadSize,
     HighlighterExtension,
+    SanitizerExtension,
     AiChatPropsInEvents,
     UpdatableAiChatProps,
 } from '@nlux/core';

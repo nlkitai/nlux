@@ -3,6 +3,7 @@ import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'segments-container-clicked';
@@ -16,7 +17,7 @@ export type CompChatRoomProps<AiMsg> = {
     autoScroll?: boolean;
     composer: Partial<ComposerProps>;
     syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: (html: string) => string;
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
