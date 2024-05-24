@@ -7,6 +7,7 @@ export type CompChatItemProps = {
     uid: string;
     domProps: ChatItemProps;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

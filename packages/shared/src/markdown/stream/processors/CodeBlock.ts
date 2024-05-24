@@ -120,11 +120,12 @@ export class CodeBlock extends ProcessorWithChildren {
         // which means we are done with the current line
         if (character === '\n') {
             // We highlight the current line and reset its content
+            const htmlSanitizer = this.markdownProcessorOptions.htmlSanitizer;
             if (this.currentLineContainer) {
                 if (this.currentLineContainer.innerHTML) {
                     this.highlightCurrentLine();
                 } else {
-                    this.currentLineContainer.innerHTML = ' ';
+                    this.currentLineContainer.innerHTML =  htmlSanitizer ? htmlSanitizer(' ') : ' ';
                 }
 
                 this.currentLineContainer = null;
@@ -133,7 +134,7 @@ export class CodeBlock extends ProcessorWithChildren {
                 // We add an empty line (for spacing purposes)
                 if (this.codeContainer.innerHTML) {
                     const newEmptyLine = document.createElement('div');
-                    newEmptyLine.innerHTML = ' ';
+                    newEmptyLine.innerHTML = htmlSanitizer ? htmlSanitizer(' ') : ' ';
                     this.codeContainer.append(newEmptyLine);
                 }
             }
@@ -179,7 +180,10 @@ export class CodeBlock extends ProcessorWithChildren {
                     this.codeContainer.classList.add(languageClass);
                 }
 
-                this.currentLineContainer.innerHTML = highlight(innerContent, language);
+                const highlightedContent = highlight(innerContent, language);
+                this.currentLineContainer.innerHTML = this.htmlSanitizer
+                    ? this.htmlSanitizer(highlightedContent)
+                    : highlightedContent;
             }
         }
     }

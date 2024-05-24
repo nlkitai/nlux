@@ -39,6 +39,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             userPersona,
             initialConversationContent,
             syntaxHighlighter,
+            htmlSanitizer,
             markdownLinkTarget,
             showCodeBlockCopyButton,
             skipStreamingAnimation,
@@ -54,6 +55,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             initialConversationContent,
             composer,
             syntaxHighlighter,
+            htmlSanitizer,
             markdownLinkTarget,
             showCodeBlockCopyButton,
             skipStreamingAnimation,
@@ -145,6 +147,10 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.setProp('syntaxHighlighter', props.syntaxHighlighter!);
         }
 
+        if (props.hasOwnProperty('htmlSanitizer')) {
+            this.setProp('htmlSanitizer', props.htmlSanitizer!);
+        }
+
         if (props.hasOwnProperty('markdownLinkTarget')) {
             this.setProp('markdownLinkTarget', props.markdownLinkTarget!);
         }
@@ -186,7 +192,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' ||
+            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' || key === 'htmlSanitizer' ||
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             const updateKey = key satisfies keyof CompConversationProps<AiMsg>;
@@ -212,6 +218,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
                 streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
                 syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
+                htmlSanitizer: this.getProp('htmlSanitizer') as ((html: string) => string) | undefined,
             })
             .create();
 

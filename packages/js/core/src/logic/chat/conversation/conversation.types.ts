@@ -10,11 +10,12 @@ export type CompConversationProps<AiMsg> = {
     messages?: ChatItem<AiMsg>[];
     botPersona?: BotPersona;
     userPersona?: UserPersona;
+    syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
-    syntaxHighlighter?: HighlighterExtension;
 };
 
 export type CompConversationElements = {

@@ -61,6 +61,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
                 syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
+                htmlSanitizer: this.getProp('htmlSanitizer') as ((html: string) => string) | undefined,
                 streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
             } satisfies CompChatItemProps)
             .create();
@@ -90,18 +91,16 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         chunk: AiMsg,
         serverResponse?: string | object | undefined,
     ) {
-        domOp(() => {
-            if (this.destroyed) {
-                return;
-            }
+        if (this.destroyed) {
+            return;
+        }
 
-            const chatItem = this.chatItemComponentsById.get(chatItemId);
-            if (!chatItem) {
-                throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
-            }
+        const chatItem = this.chatItemComponentsById.get(chatItemId);
+        if (!chatItem) {
+            throw new Error(`CompChatSegment: chat item with id "${chatItemId}" not found`);
+        }
 
-            chatItem.addChunk(chunk, serverResponse);
-        });
+        chatItem.addChunk(chunk, serverResponse);
     }
 
     public complete() {
@@ -171,7 +170,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' ||
+            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' || key === 'htmlSanitizer' ||
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed'
         ) {
             this.chatItemComponentsById.forEach((comp) => {

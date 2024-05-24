@@ -1,3 +1,4 @@
+import {emptyInnerHtml} from '../../../utils/dom/emptyInnerHtml';
 import {MessageProps} from '../props';
 import {statusClassName} from './applyNewStatusClassName';
 
@@ -15,7 +16,7 @@ export const updateContentOnStatusChange = (
         const innerHtml = propsAfter.message ? propsAfter.message : '';
         const textNode = document.createTextNode(innerHtml);
         element.classList.add(statusClassName[newStatus]);
-        element.replaceChildren();
+        emptyInnerHtml(element);
         element.append(textNode);
 
         return;

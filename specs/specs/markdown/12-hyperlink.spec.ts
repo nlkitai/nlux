@@ -9,14 +9,14 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {
+        streamRenderer = createMdStreamRenderer(rootElement, {
             skipStreamingAnimation: true,
             markdownLinkTarget: 'self',
         });
     });
 
     it('should render a link that opens in a new window by default', async () => {
-        streamRenderer = createMdStreamRenderer(rootElement, undefined,
+        streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true},
         );
         streamRenderer.next('[Hi World](http://world.com)');
@@ -35,7 +35,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render a link that opens in a new window', async () => {
-        streamRenderer = createMdStreamRenderer(rootElement, undefined,
+        streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true, markdownLinkTarget: 'blank'},
         );
 
@@ -47,7 +47,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render a link to the same window', async () => {
-        streamRenderer = createMdStreamRenderer(rootElement, undefined,
+        streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true, markdownLinkTarget: 'self'},
         );
 

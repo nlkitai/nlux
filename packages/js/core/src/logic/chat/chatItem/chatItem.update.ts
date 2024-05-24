@@ -12,6 +12,8 @@ export const updateChatItem: CompUpdater<
         case 'markdownLinkTarget':
         case 'skipStreamingAnimation':
         case 'syntaxHighlighter':
+        case 'htmlSanitizer':
+        case 'showCodeBlockCopyButton':
         case 'streamingAnimationSpeed':
             dom.actions?.updateMarkdownStreamRenderer({
                 [propName]: newValue,

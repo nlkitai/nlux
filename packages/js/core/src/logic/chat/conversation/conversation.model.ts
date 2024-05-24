@@ -74,6 +74,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
                 syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
+                htmlSanitizer: this.getProp('htmlSanitizer') as ((html: string) => string) | undefined,
                 streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
             } satisfies CompChatSegmentProps)
             .create();
@@ -249,7 +250,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         super.setProp(key, value);
 
         if (
-            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' ||
+            key === 'markdownLinkTarget' || key === 'syntaxHighlighter' || key === 'htmlSanitizer' ||
             key === 'skipStreamingAnimation' || key === 'streamingAnimationSpeed' ||
             key === 'showCodeBlockCopyButton'
         ) {

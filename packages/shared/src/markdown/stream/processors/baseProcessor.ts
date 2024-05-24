@@ -5,6 +5,7 @@ import {SequenceParser} from '../sequenceParser';
 
 export type MarkdownProcessorOptions = {
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     showCodeBlockCopyButton?: boolean;
     markdownLinkTarget?: 'blank' | 'self';
 };
@@ -103,6 +104,10 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
 
     protected get syntaxHighlighter(): HighlighterExtension | undefined {
         return this.__options.syntaxHighlighter;
+    }
+
+    protected get htmlSanitizer(): (html: string) => string {
+        return this.__options.htmlSanitizer ?? ((html: string) => html);
     }
 
     /**
@@ -270,7 +275,9 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
         }
 
         if (this.__element) {
-            this.__element.innerHTML = this.__element.innerHTML.trim();
+            const htmlSanitizer = this.htmlSanitizer;
+            const html = this.__element.innerHTML;
+            this.__element.innerHTML = htmlSanitizer ? htmlSanitizer(html) : html;
             if (this.removeWhenEmpty && this.__element.innerHTML === '') {
                 this.__element.remove();
             }

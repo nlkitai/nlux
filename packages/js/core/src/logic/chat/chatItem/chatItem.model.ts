@@ -94,6 +94,13 @@ export class CompChatItem<AiMsg> extends BaseComp<
                 syntaxHighlighter: typedNewValue,
             } satisfies Partial<CompChatItemProps>);
         }
+
+        if (newProp === 'htmlSanitizer') {
+            const typedNewValue = newValue as ((html: string) => string) | undefined;
+            this.executeDomAction('updateMarkdownStreamRenderer', {
+                htmlSanitizer: typedNewValue,
+            } satisfies Partial<CompChatItemProps>);
+        }
     }
 
     @CompEventListener('markdown-stream-complete')

@@ -69,7 +69,8 @@ export abstract class ProcessorWithChildren extends BaseMarkdownProcessor {
         ) {
             // Trim spaces inside before creating line break
             if (this.domElement?.innerHTML) {
-                this.domElement.innerHTML = this.domElement?.innerHTML.trim();
+                const htmlSanitizer = this.markdownProcessorOptions?.htmlSanitizer;
+                this.domElement.innerHTML = htmlSanitizer ? htmlSanitizer(this.domElement.innerHTML) : this.domElement.innerHTML;
             }
 
             this.createAndAppendMarkdown('LineBreak');

@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withDisplayOptions(displayOptions)
         .withMessageOptions({
             markdownLinkTarget: 'blank',
+            htmlSanitizer: (html: string) => html.replace('h', 'x'),
             // syntaxHighlighter: highlighter,
             // showCodeBlockCopyButton: false,
         })

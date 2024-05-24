@@ -10,6 +10,7 @@ export type MarkdownStreamParser = {
 export type MarkdownStreamParserOptions = {
     markdownLinkTarget?: 'blank' | 'self';
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
     showCodeBlockCopyButton?: boolean;
@@ -22,8 +23,9 @@ export const createMarkdownStreamParser = (
 ): MarkdownStreamParser => {
     const nluxMarkdownStreamRenderer = createMdStreamRenderer(
         domElement,
-        options?.syntaxHighlighter,
         {
+            syntaxHighlighter: options?.syntaxHighlighter,
+            htmlSanitizer: options?.htmlSanitizer,
             markdownLinkTarget: options?.markdownLinkTarget,
             showCodeBlockCopyButton: options?.showCodeBlockCopyButton,
             skipStreamingAnimation: options?.skipStreamingAnimation,

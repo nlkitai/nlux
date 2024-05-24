@@ -160,6 +160,7 @@ export class NluxRenderer<AiMsg> {
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
                     syntaxHighlighter: this.context.syntaxHighlighter,
+                    htmlSanitizer: this.context.htmlSanitizer,
                     markdownLinkTarget: this.theMessageOptions?.markdownLinkTarget,
                     showCodeBlockCopyButton: this.theMessageOptions?.showCodeBlockCopyButton,
                     streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed,
@@ -364,10 +365,12 @@ export class NluxRenderer<AiMsg> {
                 streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed ?? undefined,
                 markdownLinkTarget: props.messageOptions?.markdownLinkTarget ?? undefined,
                 syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
+                htmlSanitizer: props.messageOptions?.htmlSanitizer,
             });
 
             this.context.update({
                 syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
+                htmlSanitizer: props.messageOptions?.htmlSanitizer,
             });
         }
 

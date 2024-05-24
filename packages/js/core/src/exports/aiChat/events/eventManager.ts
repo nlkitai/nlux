@@ -1,5 +1,5 @@
 import {CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
-import {EventName, EventsMap} from '../../../types/event';
+import {EventName, EventsConfig, EventsMap} from '../../../types/event';
 
 export class EventManager<AiMsg> {
 
@@ -50,7 +50,7 @@ export class EventManager<AiMsg> {
     };
 
     public updateEventListeners = (
-        events: EventsMap<AiMsg>,
+        events: EventsConfig<AiMsg>,
     ) => {
         //
         // Replace all listeners for events present in the new events object

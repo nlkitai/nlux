@@ -89,12 +89,12 @@ export const submitPromptFactory = <AiMsg>({
 
                     conversation.addChatItem(segmentId, newAiMessage);
                     if (isStringContent) {
-                        domOp(() => conversation.addChunk(
+                        conversation.addChunk(
                             segmentId,
                             newAiMessage.uid,
                             aiMessage.content,
                             aiMessage.serverResponse,
-                        ));
+                        );
                     }
 
                     conversation.completeChatSegment(segmentId);

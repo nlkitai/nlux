@@ -1,3 +1,4 @@
+import {emptyInnerHtml} from '../../../utils/dom/emptyInnerHtml';
 import {MessageProps} from '../props';
 import {createMessageContent} from './createMessageContent';
 
@@ -13,7 +14,7 @@ export const updateContentOnMessageChange = (
         return;
     }
 
-    element.replaceChildren();
+    emptyInnerHtml(element);
     element.append(
         createMessageContent(propsAfter.message ?? '', propsAfter.format),
     );

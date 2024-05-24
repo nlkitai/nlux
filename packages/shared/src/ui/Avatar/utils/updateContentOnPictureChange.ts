@@ -1,3 +1,4 @@
+import {emptyInnerHtml} from '../../../utils/dom/emptyInnerHtml';
 import {AvatarProps} from '../props';
 import {createPhotoContainerFromUrl} from './createPhotoContainerFromUrl';
 
@@ -34,7 +35,7 @@ export const updateContentOnPictureChange = (
                 element.replaceChildren(propsAfter.picture.cloneNode(true));
             } else {
                 // If the new picture is null, we remove the old one
-                element.replaceChildren();
+                emptyInnerHtml(element);
             }
         }
     }

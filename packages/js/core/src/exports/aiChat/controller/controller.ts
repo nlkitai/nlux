@@ -63,6 +63,7 @@ export class NluxController<AiMsg> {
                 exception: this.renderException,
                 adapter: this.internalProps.adapter,
                 syntaxHighlighter: this.internalProps.messageOptions.syntaxHighlighter,
+                htmlSanitizer: this.internalProps.messageOptions.htmlSanitizer,
             },
             () => this.getUpdatedAiChatPropsFromInternalProps(this.internalProps),
             this.eventManager.emit,

@@ -9,7 +9,7 @@ describe('Underscore Italic Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
     });
 
     it('should render an italic in the middle of a paragraph', async () => {

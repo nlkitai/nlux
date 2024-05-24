@@ -9,7 +9,7 @@ describe('MD Stream Parser Streaming', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
     });
 
     it('should render text in a single paragraph', async () => {

@@ -12,6 +12,7 @@ export const parseMdSnapshot: SnapshotParser = (
         showCodeBlockCopyButton,
         markdownLinkTarget,
         syntaxHighlighter,
+        htmlSanitizer,
     } = options || {};
 
     const parsedMarkdown = marked(snapshot, {
@@ -24,7 +25,7 @@ export const parseMdSnapshot: SnapshotParser = (
     }
 
     const element = document.createElement('div');
-    element.innerHTML = parsedMarkdown;
+    element.innerHTML = htmlSanitizer ? htmlSanitizer(parsedMarkdown) : parsedMarkdown;
 
     element.querySelectorAll('pre').forEach((block) => {
         const newBlock = document.createElement('div');
@@ -33,7 +34,7 @@ export const parseMdSnapshot: SnapshotParser = (
         const codeElement = block.querySelector('code');
         if (!codeElement) {
             // No code can be found, so just copy the innerHTML of the block.
-            newBlock.innerHTML = block.innerHTML;
+            newBlock.innerHTML = htmlSanitizer ? htmlSanitizer(block.innerHTML) : block.innerHTML;
             block.replaceWith(newBlock);
             return;
         }
@@ -56,7 +57,7 @@ export const parseMdSnapshot: SnapshotParser = (
         }
 
         const newCodeElement = document.createElement('pre');
-        newCodeElement.innerHTML = '<div>' + codeElement.innerHTML + '</div>';
+        newCodeElement.innerHTML = htmlSanitizer ? htmlSanitizer(codeElement.innerHTML) : codeElement.innerHTML;
 
         if (language) {
             newCodeElement.setAttribute('data-language', language);
@@ -66,9 +67,9 @@ export const parseMdSnapshot: SnapshotParser = (
             //
             if (syntaxHighlighter) {
                 const highlight = syntaxHighlighter.createHighlighter();
-                newCodeElement.innerHTML = '<div>' +
-                    highlight(codeElement.textContent || '', language) +
-                    '</div>';
+                const newHtml = '<div>' + highlight(codeElement.textContent || '', language) + '</div>';
+
+                newCodeElement.innerHTML =  htmlSanitizer ? htmlSanitizer(newHtml) : newHtml;
                 newCodeElement.className = 'highlighter-dark';
             }
         }

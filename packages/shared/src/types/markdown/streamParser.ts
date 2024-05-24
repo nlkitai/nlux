@@ -13,8 +13,9 @@ export type StandardStreamParserOutput = {
 
 export type StandardStreamParser = (
     root: HTMLElement,
-    syntaxHighlighter?: HighlighterExtension,
     options?: {
+        syntaxHighlighter?: HighlighterExtension,
+        htmlSanitizer?: (html: string) => string,
         markdownLinkTarget?: 'blank' | 'self';
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;

@@ -13,6 +13,7 @@ export type CompChatSegmentProps = Readonly<{
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     streamingAnimationSpeed?: number;
 }>;
 

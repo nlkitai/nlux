@@ -10,6 +10,7 @@ export type ControllerContextProps<AiMsg> = Readonly<{
     exception: (exceptionId: NLErrorId) => void;
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
 }>;
 
 /**

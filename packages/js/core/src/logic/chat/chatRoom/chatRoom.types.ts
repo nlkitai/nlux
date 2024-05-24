@@ -15,11 +15,12 @@ export type CompChatRoomProps<AiMsg> = {
     initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;
     composer: Partial<ComposerProps>;
+    syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
-    syntaxHighlighter?: HighlighterExtension;
 };
 
 export type CompChatRoomElements = {

@@ -9,7 +9,7 @@ describe('MD Stream Parser Streaming', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, undefined, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
     });
 
     describe('Default tag', () => {
@@ -41,7 +41,7 @@ describe('MD Stream Parser Streaming', () => {
     describe('onComplete', () => {
         it('should call the onComplete callback when the stream is completed', async () => {
             const onComplete = vi.fn();
-            streamRenderer = createMdStreamRenderer(rootElement, undefined, {onComplete});
+            streamRenderer = createMdStreamRenderer(rootElement, {onComplete});
 
             streamRenderer.next('H');
             await waitForMilliseconds(50);
@@ -60,7 +60,7 @@ describe('MD Stream Parser Streaming', () => {
 
         it('Should be called automatically after 2 seconds from last character if stream is not closed', async () => {
             const onComplete = vi.fn();
-            streamRenderer = createMdStreamRenderer(rootElement, undefined, {onComplete});
+            streamRenderer = createMdStreamRenderer(rootElement, {onComplete});
 
             streamRenderer.next('Hi');
             await waitForMilliseconds(50);

@@ -5,10 +5,11 @@ export const markdownDefaultStreamingAnimationSpeed = 10; // We render a new cha
 
 export const createMdStreamRenderer: StandardStreamParser = (
     root: HTMLElement,
-    syntaxHighlighter,
     options,
 ) => {
     const {
+        syntaxHighlighter,
+        htmlSanitizer,
         streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
         markdownLinkTarget,
         showCodeBlockCopyButton,
@@ -20,6 +21,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
         undefined,
         {
             syntaxHighlighter,
+            htmlSanitizer,
             markdownLinkTarget,
             showCodeBlockCopyButton,
         },
@@ -85,6 +87,10 @@ export const createMdStreamRenderer: StandardStreamParser = (
                 rootMarkdownProcessor.processCharacter('\n');
                 rootMarkdownProcessor.complete();
                 rootMarkdownProcessor.yield();
+
+                if (options?.htmlSanitizer) {
+                    root.innerHTML = options.htmlSanitizer(root.innerHTML);
+                }
 
                 status = 'closed';
                 onComplete?.();

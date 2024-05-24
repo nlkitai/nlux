@@ -42,6 +42,7 @@ export const renderChatItem: CompRenderer<
             {
                 markdownLinkTarget: props.markdownLinkTarget,
                 syntaxHighlighter: props.syntaxHighlighter,
+                htmlSanitizer: props.htmlSanitizer,
             },
         );
 
@@ -56,6 +57,7 @@ export const renderChatItem: CompRenderer<
     const initMarkdownStreamParser = (newProps: CompChatItemProps) => {
         return createMarkdownStreamParser(markdownContainer, {
             syntaxHighlighter: newProps.syntaxHighlighter,
+            htmlSanitizer: newProps.htmlSanitizer,
             markdownLinkTarget: newProps.markdownLinkTarget,
             showCodeBlockCopyButton: newProps.showCodeBlockCopyButton,
             skipStreamingAnimation: newProps.skipStreamingAnimation,

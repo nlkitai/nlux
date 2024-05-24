@@ -2,6 +2,7 @@ import {HighlighterExtension} from '../../../../js/core/src/exports/aiChat/highl
 
 export type SnapshotParserOptions = {
     syntaxHighlighter?: HighlighterExtension;
+    htmlSanitizer?: (html: string) => string;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
 };
@@ -10,6 +11,7 @@ export type SnapshotParser = (
     snapshot: string,
     options?: {
         syntaxHighlighter?: HighlighterExtension,
+        htmlSanitizer?: (html: string) => string;
         markdownLinkTarget?: 'blank' | 'self',
         showCodeBlockCopyButton?: boolean;
     },
