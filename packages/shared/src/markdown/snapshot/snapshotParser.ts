@@ -1,4 +1,5 @@
 import {SnapshotParser} from '../../types/markdown/snapshotParser';
+import {emptyInnerHtml} from '../../utils/dom/emptyInnerHtml';
 import {insertCopyToClipboardButton} from '../copyToClipboard/insertCopyToClipboardButton';
 import {marked} from './marked/marked';
 
@@ -72,7 +73,7 @@ export const parseMdSnapshot: SnapshotParser = (
             }
         }
 
-        newBlock.innerHTML = '';
+        emptyInnerHtml(newBlock);
         newBlock.appendChild(newCodeElement);
         block.replaceWith(newBlock);
     });

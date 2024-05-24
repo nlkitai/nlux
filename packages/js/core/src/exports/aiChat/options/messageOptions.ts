@@ -63,6 +63,15 @@ export type MessageOptions<AiMsg = string> = {
     syntaxHighlighter?: HighlighterExtension;
 
     /**
+     * Custom function to sanitize the HTML content of the messages. This function is called before any HTML content
+     * is rendered in the chat.
+     *
+     * @param {string} html
+     * @returns {string}
+     */
+    htmlSanitizer?: (html: string) => string;
+
+    /**
      * Indicates the target of the links in the markdown messages.
      * - 'blank': Open links in a new tab.
      * - 'self': Open links in the same tab.

@@ -1,6 +1,7 @@
 import {CallbackArgType, CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
 import {NluxError, NluxUsageError} from '../../../../../../shared/src/types/error';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
+import {emptyInnerHtml} from '../../../../../../shared/src/utils/dom/emptyInnerHtml';
 import {uid} from '../../../../../../shared/src/utils/uid';
 import {warn} from '../../../../../../shared/src/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../../types/comp';
@@ -509,7 +510,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
                     if (isListItem) {
                         renderingRoot.parentElement?.removeChild(renderingRoot);
                     } else {
-                        renderingRoot.innerHTML = '';
+                        emptyInnerHtml(renderingRoot);
                     }
                 }
             });

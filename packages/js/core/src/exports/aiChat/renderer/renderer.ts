@@ -1,6 +1,7 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
+import {emptyInnerHtml} from '../../../../../../shared/src/utils/dom/emptyInnerHtml';
 import {getConversationLayout} from '../../../../../../shared/src/utils/dom/getConversationLayout';
 import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
@@ -272,7 +273,7 @@ export class NluxRenderer<AiMsg> {
 
         this.chatRoom.destroy();
         if (this.rootElement) {
-            this.rootElement.innerHTML = '';
+            emptyInnerHtml(this.rootElement);
             this.rootElement.className = this.rootElementInitialClassName || '';
         }
 
