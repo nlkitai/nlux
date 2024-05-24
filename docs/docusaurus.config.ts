@@ -134,16 +134,16 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'learnSidebar',
+          sidebarId: 'examplesSidebar',
           position: 'left',
-          label: 'Learn',
+          label: 'Examples',
           className: 'doc-section',
         },
         {
           type: 'docSidebar',
-          sidebarId: 'examplesSidebar',
+          sidebarId: 'learnSidebar',
           position: 'left',
-          label: 'Examples',
+          label: 'Learn',
           className: 'doc-section',
         },
         {
