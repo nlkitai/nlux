@@ -2,8 +2,9 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "rewrites": [
+  "redirects": [
     { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*" },
-    { "source": "/:path((?!nlux/).*)", "destination": "/nlux/:path*" }
+    { "source": "/:path((?!nlux/).*)", "destination": "/nlux/:path*" },
+    { "source": "/:path*", "destination": "/nlux" }
   ]
 }
