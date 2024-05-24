@@ -4,7 +4,6 @@
   "trailingSlash": false,
   "rewrites": [
     { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*" },
-    { "source": "/nlux/:path*", "destination": "/nlux/:path*" },
-    { "source": "/:path*", "destination": "/nlux" }
+    { "source": "/:path((?!nlux/).*)", "destination": "/nlux/:path*" }
   ]
 }
