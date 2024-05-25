@@ -26,7 +26,7 @@ type PromptRenderer = (content: PromptRendererProps) => HTMLElement | null;
 | `responseRenderer` | `ResponseRenderer<AiMsg>` | - | A custom renderer for AI responses. API documentation  for custom renderers can be found [here](/reference/ui/custom-renderers). |
 | `promptRenderer` | `PromptRenderer` | - | A custom renderer for user prompts. API documentation for custom renderers can be found [here](/reference/ui/custom-renderers). |
 | `syntaxHighlighter` | `HighlighterExtension` | - | A custom syntax highlighter for code blocks within messages. |
-| `htmlSanitizer` | `SanitizerExtension` | - | A custom HTML sanitizer for messages. |
+| `htmlSanitizer` | `SanitizerExtension` | - | A custom HTML sanitizer for HTML and parsed markdown. It does not apply to preformatted code blocks. Use a syntax highlighter for code blocks. |
 | `markdownLinkTarget` | `'blank'`&nbsp;\|&nbsp;`'self'` | `'blank'` | The target attribute for markdown links. Use `self` to open links in the same tab and `blank` to open links in a new tab. |
 | `showCodeBlockCopyButton` | `boolean` | `true` | If `true`, a copy button will be displayed on code blocks created withing messages. |
 | `streamingAnimationSpeed` | `number` | `10` | The interval in milliseconds between streamed AI responses. |
