@@ -38,19 +38,21 @@ when errors occur. You can register event callbacks to listen to these events.
 
 <PlatformSelector reactJs={EventListenersReactJs} javascript={EventListenersJavaScript}/>
 
+---
+
 ## Listening to Events
 
 You can register event callbacks to listen to events emitted by `NLUX`.
 
 ---
 
-### Adding Event Callbacks
+> ### Adding Event Callbacks
 
 <PlatformSection reactJs={RegisterEventReactJs} javascript={RegisterEventJavaScript}/>
 
 ---
 
-### Removing Event Callbacks
+> ### Removing Event Callbacks
 
 <PlatformSection reactJs={RemoveEventReactJs} javascript={RemoveEventJavaScript}/>
 
@@ -62,7 +64,7 @@ Below is a list of events emitted by `NLUX`.
 
 ---
 
-### Ready
+> ### Ready
 
 This event is emitted when the `AiChat` component is mounted and ready to use.
 
@@ -84,7 +86,7 @@ type ReadyEventDetails<AiMsg> = {
 
 ---
 
-### Pre-Destroy
+> ### Pre-Destroy
 
 This event is emitted when the `AiChat` component is about to be destroyed.
 It allows access to the component's state, conversation history, and props before it is destroyed.
@@ -107,7 +109,7 @@ type PreDestroyEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Sent
+> ### Message Sent
 
 This event is emitted when the user sends a message. The event only gets triggered when the
 adapter method responsible for sending the message to the backend runs successfully.
@@ -132,7 +134,7 @@ type MessageSentEventDetails = {
 
 ---
 
-### Message Received
+> ### Message Received
 
 This event is emitted when a message is received from the server. For the case of **streamed messages**, this message
 is emitted when the streaming is complete and the message is fully received.
@@ -160,7 +162,7 @@ type MessageReceivedEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Rendered
+> ### Message Rendered
 
 > * Event Name: `messageRendered`
 
@@ -184,7 +186,7 @@ type MessageRenderedEventDetails<AiMsg = string> = {
 
 ---
 
-### Message Stream Started
+> ### Message Stream Started
 
 This event is emitted when the server starts sending streaming a response back to the client, for when the adapter
 is configured to use `stream` data transfer mode. The event will be emitted when the first chunk of the message is
@@ -207,7 +209,7 @@ type MessageStreamStartedEventDetails = {
 
 ---
 
-### Error
+> ### Error
 
 This event is emitted when an exception occurs. The event listener receives the `ErrorEventDetails` object
 as a parameter.

@@ -26,16 +26,16 @@ Custom renderers can either be provided for responses from the AI assistant, as 
 For AI response, the behaviour of custom renders is different depending on whether the data is being streamed from
 the server or received in a single batch.
 
-### User Prompts
+> ### Rendering User Prompts
 
 For user prompts, the custom renderer will be **called once the message is sent**. The custom renderer will receive
 the message content and the user prompt.
 
-### Batched AI Responses
+> ### Rendering Batched AI Responses
 
 For batched data, the custom renderer will only be **called once the message has been fully received**.
 
-### Streamed AI Responses
+> ### Rendering Streamed AI Responses
 
 For streamed data, the custom renderer will be **called when the streaming starts**, and will receive a `RefObject`
 that should be pointed to the DOM container element where streamed markdown messages will be appended. The properties
@@ -47,8 +47,8 @@ of the custom renderer will be **updated when the streaming is complete** and th
 
 Below are the interfaces that custom renderers should implement.
 
-### Custom Renderer for AI Responses
+> ### Custom Renderer for AI Responses
 
 <PlatformSelector reactJs={InterfaceReactJs} javascript={InterfaceJavaScript}/>
 
-### Custom Renderer for User Messages
+> ### Custom Renderer for User Messages
