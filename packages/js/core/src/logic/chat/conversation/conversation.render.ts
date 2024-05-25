@@ -21,12 +21,12 @@ export const renderConversation: CompRenderer<
     props,
 }) => {
     const renderingContext: {
-        botPersona: AssistantPersona | undefined;
+        assistantPersona: AssistantPersona | undefined;
         userPersona: UserPersona | undefined;
         welcomeMessageContainer: HTMLElement | undefined;
         shouldRenderWelcomeMessage: boolean;
     } = {
-        botPersona: props.botPersona,
+        assistantPersona: props.assistantPersona,
         userPersona: props.userPersona,
         welcomeMessageContainer: undefined,
         shouldRenderWelcomeMessage: !props.messages || props.messages.length === 0,
@@ -49,8 +49,8 @@ export const renderConversation: CompRenderer<
     // and append it to the root if personaOptions are provided
     //
     if (renderingContext.shouldRenderWelcomeMessage) {
-        if (props.botPersona) {
-            const assistant = props.botPersona;
+        if (props.assistantPersona) {
+            const assistant = props.assistantPersona;
             renderingContext.welcomeMessageContainer = createWelcomeMessageDom({
                 name: assistant.name,
                 picture: assistant.picture,
@@ -80,11 +80,11 @@ export const renderConversation: CompRenderer<
                     renderingContext.welcomeMessageContainer = undefined;
                 }
 
-                renderingContext.welcomeMessageContainer = renderingContext.botPersona
+                renderingContext.welcomeMessageContainer = renderingContext.assistantPersona
                     ? createWelcomeMessageDom({
-                        name: renderingContext.botPersona.name,
-                        picture: renderingContext.botPersona.picture,
-                        message: renderingContext.botPersona.tagline,
+                        name: renderingContext.assistantPersona.name,
+                        picture: renderingContext.assistantPersona.picture,
+                        message: renderingContext.assistantPersona.tagline,
                     })
                     : undefined;
 
@@ -96,7 +96,7 @@ export const renderConversation: CompRenderer<
                 }
             },
             updateAssistantPersona: (newValue: AssistantPersona | undefined) => {
-                renderingContext.botPersona = newValue;
+                renderingContext.assistantPersona = newValue;
 
                 // If the welcome personas container is rendered, remove it and re-render it
                 // This is different from resetWelcomeMessage, which removes the welcome message container
@@ -106,11 +106,11 @@ export const renderConversation: CompRenderer<
                     renderingContext.welcomeMessageContainer.remove();
                     renderingContext.welcomeMessageContainer = undefined;
 
-                    renderingContext.welcomeMessageContainer = renderingContext.botPersona
+                    renderingContext.welcomeMessageContainer = renderingContext.assistantPersona
                         ? createWelcomeMessageDom({
-                            name: renderingContext.botPersona.name,
-                            picture: renderingContext.botPersona.picture,
-                            message: renderingContext.botPersona.tagline,
+                            name: renderingContext.assistantPersona.name,
+                            picture: renderingContext.assistantPersona.picture,
+                            message: renderingContext.assistantPersona.tagline,
                         })
                         : undefined;
 

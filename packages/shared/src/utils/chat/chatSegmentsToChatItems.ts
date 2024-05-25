@@ -11,9 +11,9 @@ export const chatSegmentsToChatItems = <AiMsg>(
                 return;
             }
 
-            if (item.participantRole === 'ai') {
+            if (item.participantRole === 'assistant') {
                 chatItems.push({
-                    role: 'ai',
+                    role: 'assistant',
                     message: item.content as AiMsg,
                 });
             } else {

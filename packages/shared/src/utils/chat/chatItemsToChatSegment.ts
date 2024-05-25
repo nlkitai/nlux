@@ -9,7 +9,7 @@ export const chatItemsToChatSegment = <AiMsg>(
     chatItems: ChatItem<AiMsg>[],
 ): ChatSegment<AiMsg> => {
     const segmentItems: ChatSegmentItem<AiMsg>[] = chatItems.map((message, index) => {
-        if (message.role !== 'ai' && message.role !== 'user') {
+        if (message.role !== 'assistant' && message.role !== 'user') {
             warn(
                 `Invalid role for item at index ${index} in initial conversation: ` +
                 `Role must be "ai" or "user"`,
@@ -41,7 +41,7 @@ export const chatItemsToChatSegment = <AiMsg>(
             uid: uid(),
             time: new Date(),
             status: 'complete',
-            participantRole: 'ai',
+            participantRole: 'assistant',
             content: message.message,
             serverResponse: message.serverResponse,
             dataTransferMode: 'batch',

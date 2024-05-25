@@ -92,7 +92,7 @@ describe('createAiChat() + events + preDestroy', () => {
                 .withAdapter(adapterController!.adapter)
                 .withInitialConversation([
                     {role: 'user', message: 'Hello'},
-                    {role: 'ai', message: 'Hi'},
+                    {role: 'assistant', message: 'Hi'},
                 ])
                 .on('preDestroy', preDestroyCallback);
 
@@ -108,12 +108,12 @@ describe('createAiChat() + events + preDestroy', () => {
                 aiChatProps: {
                     initialConversation: [
                         {role: 'user', message: 'Hello'},
-                        {role: 'ai', message: 'Hi'},
+                        {role: 'assistant', message: 'Hi'},
                     ],
                 },
                 conversationHistory: [
                     {role: 'user', message: 'Hello'},
-                    {role: 'ai', message: 'Hi'},
+                    {role: 'assistant', message: 'Hi'},
                 ],
             });
         });
@@ -127,7 +127,7 @@ describe('createAiChat() + events + preDestroy', () => {
                 .withAdapter(adapterController!.adapter)
                 .withInitialConversation([
                     {role: 'user', message: 'Hello'},
-                    {role: 'ai', message: 'Hi! How can I help you?'},
+                    {role: 'assistant', message: 'Hi! How can I help you?'},
                 ])
                 .on('preDestroy', preDestroyCallback);
 
@@ -150,14 +150,14 @@ describe('createAiChat() + events + preDestroy', () => {
                 aiChatProps: {
                     initialConversation: [
                         {role: 'user', message: 'Hello'},
-                        {role: 'ai', message: 'Hi! How can I help you?'},
+                        {role: 'assistant', message: 'Hi! How can I help you?'},
                     ],
                 },
                 conversationHistory: [
                     {role: 'user', message: 'Hello'},
-                    {role: 'ai', message: 'Hi! How can I help you?'},
+                    {role: 'assistant', message: 'Hi! How can I help you?'},
                     {role: 'user', message: 'Tell me a joke'},
-                    {role: 'ai', message: 'Why did the chicken cross the road? To get to the other side.'},
+                    {role: 'assistant', message: 'Why did the chicken cross the road? To get to the other side.'},
                 ],
             });
         });

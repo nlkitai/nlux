@@ -48,7 +48,7 @@ export const submitInStreamingMode = <AiMsg>(
                         uid: streamedMessageId,
                         status: 'streaming',
                         time: new Date(),
-                        participantRole: 'ai',
+                        participantRole: 'assistant',
                         dataTransferMode: 'stream',
                     });
                 });
@@ -123,7 +123,7 @@ export const submitInStreamingMode = <AiMsg>(
                         content: streamedContent,
                         serverResponse: undefined,
                         time: new Date(),
-                        participantRole: 'ai',
+                        participantRole: 'assistant',
                         dataTransferMode: 'stream',
                     };
 
@@ -153,7 +153,7 @@ export const submitInStreamingMode = <AiMsg>(
                                 content: streamedContent,
                                 serverResponse: streamedRawContent,
                                 time: new Date(),
-                                participantRole: 'ai',
+                                participantRole: 'assistant',
                                 dataTransferMode: 'stream',
                             },
                         ],

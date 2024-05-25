@@ -12,10 +12,10 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
     segmentItem: ChatSegmentItem<AiMsg>,
     conversationLayout?: ConversationLayout,
     userPersona?: UserPersona,
-    botPersona?: UserPersona,
+    assistantPersona?: UserPersona,
 ): ChatItemProps | undefined => {
     const layout = conversationLayout ?? conversationDefaultLayout;
-    if (segmentItem.participantRole === 'ai') {
+    if (segmentItem.participantRole === 'assistant') {
         const status = segmentItem.status === 'complete' ? 'complete' : 'streaming';
 
         if (segmentItem.dataTransferMode === 'stream') {
@@ -23,8 +23,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 status,
                 layout,
                 direction: 'incoming',
-                name: participantNameFromRoleAndPersona('ai', {assistant: botPersona}),
-                picture: botPersona?.picture,
+                name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
+                picture: assistantPersona?.picture,
                 // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
                 // while it's being streamed.
             };
@@ -35,8 +35,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 status,
                 layout,
                 direction: 'incoming',
-                name: participantNameFromRoleAndPersona('ai', {assistant: botPersona}),
-                picture: botPersona?.picture,
+                name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
+                picture: assistantPersona?.picture,
                 message: stringifyRandomResponse<AiMsg>(segmentItem.content),
             };
         }
@@ -45,8 +45,8 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
             status,
             layout,
             direction: 'incoming',
-            name: participantNameFromRoleAndPersona('ai', {assistant: botPersona}),
-            picture: botPersona?.picture,
+            name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
+            picture: assistantPersona?.picture,
         };
     }
 

@@ -26,8 +26,8 @@ export const usePreDestroyEventTrigger = <AiMsg>(
                         return;
                     }
 
-                    if (item.participantRole === 'ai') {
-                        result.push({role: 'ai', message: item.content as AiMsg});
+                    if (item.participantRole === 'assistant') {
+                        result.push({role: 'assistant', message: item.content as AiMsg});
                         return;
                     }
 

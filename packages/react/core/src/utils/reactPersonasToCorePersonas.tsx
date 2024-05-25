@@ -23,14 +23,14 @@ export const reactPersonasToCorePersonas = async (reactPersonas: ReactPersonasOp
                 return;
             }
 
-            const botPicture = typeof reactPersonas.assistant.picture === 'string' ?
+            const assistantAvatar = typeof reactPersonas.assistant.picture === 'string' ?
                 reactPersonas.assistant.picture :
                 await jsxToHtmlElement(reactPersonas.assistant.picture);
 
             return {
                 name: reactPersonas.assistant.name,
                 tagline: reactPersonas.assistant.tagline,
-                picture: botPicture,
+                picture: assistantAvatar,
             };
         })(),
         (async () => {

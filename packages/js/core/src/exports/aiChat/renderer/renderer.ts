@@ -155,7 +155,7 @@ export class NluxRenderer<AiMsg> {
                 .withProps<CompChatRoomProps<AiMsg>>({
                     visible: true,
                     conversationLayout: getConversationLayout(this.theConversationOptions),
-                    botPersona: this.thePersonasOptions?.assistant ?? undefined,
+                    assistantPersona: this.thePersonasOptions?.assistant ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
@@ -420,7 +420,7 @@ export class NluxRenderer<AiMsg> {
         if (props.hasOwnProperty('personaOptions')) {
             const changedPersonaProps: Partial<CompChatRoomProps<AiMsg>> = {};
             if (props.personaOptions?.assistant !== this.thePersonasOptions?.assistant) {
-                changedPersonaProps.botPersona = props.personaOptions?.assistant ?? undefined;
+                changedPersonaProps.assistantPersona = props.personaOptions?.assistant ?? undefined;
             }
 
             if (props.personaOptions?.user !== this.thePersonasOptions?.user) {

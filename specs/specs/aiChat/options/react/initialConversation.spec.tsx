@@ -20,9 +20,9 @@ describe('<AiChat /> + initialConversation prop', () => {
         it('The initial conversation should be loaded in the chat', async () => {
             // Arrange
             const initialConversation: ChatItem<string>[] = [
-                {role: 'ai', message: 'Hello, how can I help you?'},
+                {role: 'assistant', message: 'Hello, how can I help you?'},
                 {role: 'user', message: 'I need help with my account.'},
-                {role: 'ai', message: 'Sure, I can help you with that.'},
+                {role: 'assistant', message: 'Sure, I can help you with that.'},
             ];
 
             const aiChat = <AiChat adapter={adapterController!.adapter} initialConversation={initialConversation}/>;
@@ -43,7 +43,7 @@ describe('<AiChat /> + initialConversation prop', () => {
             // Arrange
             const initialConversation: ChatItem<string>[] = [
                 {
-                    role: 'ai',
+                    role: 'assistant',
                     message: 'Hello, how can I help you? This is going to be a very long greeting message. '
                         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
                         + 'typing animation will be shown for this message when it is loaded. This is a very long '
@@ -85,7 +85,7 @@ describe('<AiChat /> + initialConversation prop', () => {
             // Arrange
             const initialConversation: ChatItem<string>[] = [
                 {
-                    role: 'ai',
+                    role: 'assistant',
                     message: 'Hello, how can I help you? This is going to be a very long greeting message. '
                         + 'It is so long that it will be split into multiple lines. It will also showcase that no '
                         + 'typing animation will be shown for this message when it is loaded. This is a very long '
@@ -108,7 +108,7 @@ describe('<AiChat /> + initialConversation prop', () => {
                         + 'We find connection, hand in hand.',
                 },
                 {role: 'user', message: 'I need help with my account.'},
-                {role: 'ai', message: 'Sure, I can help you with that.'},
+                {role: 'assistant', message: 'Sure, I can help you with that.'},
             ];
 
             const aiChat = <AiChat
@@ -132,9 +132,9 @@ describe('<AiChat /> + initialConversation prop', () => {
             it('Should be parsed and rendered', async () => {
                 // Arrange
                 const initialConversation: ChatItem<string>[] = [
-                    {role: 'ai', message: '**Hello**, how can I help you?'},
+                    {role: 'assistant', message: '**Hello**, how can I help you?'},
                     {role: 'user', message: 'I need help with my account.'},
-                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                    {role: 'assistant', message: 'Sure, I can help you with that.'},
                 ];
 
                 // Act
@@ -158,11 +158,11 @@ describe('<AiChat /> + initialConversation prop', () => {
                 // Arrange
                 const initialConversation: ChatItem<string>[] = [
                     {
-                        role: 'ai',
+                        role: 'assistant',
                         message: 'This is hello worlds in JS:\n```javascript\nconsole.log("Hello World!");\n```',
                     },
                     {role: 'user', message: 'I need it in Python'},
-                    {role: 'ai', message: 'Sure, here it is:\n```python\nprint("Hello World!")\n```'},
+                    {role: 'assistant', message: 'Sure, here it is:\n```python\nprint("Hello World!")\n```'},
                 ];
 
                 // Act
@@ -203,11 +203,11 @@ describe('<AiChat /> + initialConversation prop', () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
                         {
-                            role: 'ai',
+                            role: 'assistant',
                             message: 'This is a [link](http://example.com)',
                         },
                         {role: 'user', message: 'I need help with my account.'},
-                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                        {role: 'assistant', message: 'Sure, I can help you with that.'},
                     ];
 
                     // Act
@@ -231,11 +231,11 @@ describe('<AiChat /> + initialConversation prop', () => {
                     // Arrange
                     const initialConversation: ChatItem<string>[] = [
                         {
-                            role: 'ai',
+                            role: 'assistant',
                             message: 'This is a [link](http://example.com)',
                         },
                         {role: 'user', message: 'I need help with my account.'},
-                        {role: 'ai', message: 'Sure, I can help you with that.'},
+                        {role: 'assistant', message: 'Sure, I can help you with that.'},
                     ];
 
                     // Act

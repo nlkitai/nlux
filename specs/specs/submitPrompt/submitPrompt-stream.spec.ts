@@ -174,7 +174,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                     uid: expect.any(String),
                     time: expect.any(Date),
                     dataTransferMode: 'stream',
-                    participantRole: 'ai',
+                    participantRole: 'assistant',
                     status: 'streaming',
                 });
             });
@@ -336,7 +336,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                     uid: messageId,
                     time: expect.any(Date),
                     dataTransferMode: 'stream',
-                    participantRole: 'ai',
+                    participantRole: 'assistant',
                     status: 'streaming',
                 });
             });
@@ -456,7 +456,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                         uid: expect.any(String),
                         status: 'complete',
                         time: expect.any(Date),
-                        participantRole: 'ai',
+                        participantRole: 'assistant',
                         dataTransferMode: 'stream',
                         content: ['The', ' weather', ' is', ' sunny'],
                         serverResponse: undefined,
@@ -544,7 +544,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                                 time: expect.any(Date),
                                 status: 'complete',
                                 content: ['The', ' weather', ' is', ' sunny'],
-                                participantRole: 'ai',
+                                participantRole: 'assistant',
                                 dataTransferMode: 'stream',
                                 serverResponse: [],
                             },

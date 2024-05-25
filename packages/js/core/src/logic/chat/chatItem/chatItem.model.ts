@@ -49,7 +49,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
         if (domProps.direction === 'incoming') {
             return {
                 uid: this.props.uid,
-                participantRole: 'ai',
+                participantRole: 'assistant',
                 content: this.getItemContent() as AiMsg,
                 serverResponse: this.serverResponse,
                 status: 'complete',

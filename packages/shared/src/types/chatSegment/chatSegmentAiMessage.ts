@@ -1,7 +1,7 @@
 export type AiStreamedMessage<AiMsg> = {
     uid: string;
     time: Date;
-    participantRole: 'ai';
+    participantRole: 'assistant';
     dataTransferMode: 'stream';
 } & ({
     status: 'streaming';
@@ -23,7 +23,7 @@ export type AiStreamedMessage<AiMsg> = {
 export type AiBatchedMessage<AiMsg> = {
     uid: string;
     time: Date;
-    participantRole: 'ai';
+    participantRole: 'assistant';
     dataTransferMode: 'batch';
 } & ({
     status: 'complete';

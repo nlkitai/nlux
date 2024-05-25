@@ -9,7 +9,7 @@ export type CompChatSegmentProps = Readonly<{
     status: ChatSegmentStatus;
     conversationLayout: ConversationLayout;
     userPersona?: UserPersona;
-    botPersona?: AssistantPersona;
+    assistantPersona?: AssistantPersona;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

@@ -34,7 +34,7 @@ export const submitInBatchMode = async <AiMsg>(
 
 
         const responseUid = uid();
-        const participantRole = 'ai';
+        const participantRole = 'assistant';
         const status = 'complete';
         const time = new Date();
         const dataTransferMode = 'batch';

@@ -93,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
         + 'This is a code block.';
 
     const initialConversation: ChatItem<string>[] = [
-        {role: 'ai', message: longMessage},
+        {role: 'assistant', message: longMessage},
         {role: 'user', message: 'I need help with my account.'},
         {
-            role: 'ai',
+            role: 'assistant',
             message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
         },
     ];

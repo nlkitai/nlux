@@ -35,9 +35,9 @@ describe.each([
         it('Should pass the initial conversation history to the adapter extras', async () => {
             // Arrange
             const initialConversation: ChatItem<string>[] = [
-                {role: 'ai', message: 'Hello, how can I help you?'},
+                {role: 'assistant', message: 'Hello, how can I help you?'},
                 {role: 'user', message: 'I need help with my account.'},
-                {role: 'ai', message: 'Sure, I can help you with that.'},
+                {role: 'assistant', message: 'Sure, I can help you with that.'},
             ];
 
             aiChat = createAiChat()
@@ -60,9 +60,9 @@ describe.each([
             it('The new conversation history should include the user message and the AI response', async () => {
                 // Arrange
                 const initialConversation: ChatItem<string>[] = [
-                    {role: 'ai', message: 'Hello, how can I help you?'},
+                    {role: 'assistant', message: 'Hello, how can I help you?'},
                     {role: 'user', message: 'I need help with my account.'},
-                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                    {role: 'assistant', message: 'Sure, I can help you with that.'},
                 ];
 
                 aiChat = createAiChat()
@@ -99,7 +99,7 @@ describe.each([
                 expect(newConversationHistory).toEqual([
                     ...initialConversation,
                     {role: 'user', message: 'So what did you do?'},
-                    {role: 'ai', message: 'I helped you with your account.'},
+                    {role: 'assistant', message: 'I helped you with your account.'},
                 ]);
             });
         });
@@ -109,9 +109,9 @@ describe.each([
         it('Should not pass the initial conversation history to the adapter extras', async () => {
             // Arrange
             const initialConversation: ChatItem<string>[] = [
-                {role: 'ai', message: 'Hello, how can I help you?'},
+                {role: 'assistant', message: 'Hello, how can I help you?'},
                 {role: 'user', message: 'I need help with my account.'},
-                {role: 'ai', message: 'Sure, I can help you with that.'},
+                {role: 'assistant', message: 'Sure, I can help you with that.'},
             ];
 
             aiChat = createAiChat()
@@ -139,9 +139,9 @@ describe.each([
             async () => {
                 // Arrange
                 const initialConversation: ChatItem<string>[] = [
-                    {role: 'ai', message: 'Hello, how can I help you?'},
+                    {role: 'assistant', message: 'Hello, how can I help you?'},
                     {role: 'user', message: 'I need help with my account.'},
-                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                    {role: 'assistant', message: 'Sure, I can help you with that.'},
                 ];
 
                 aiChat = createAiChat()
@@ -163,7 +163,7 @@ describe.each([
                 const newConversationHistory = adapterController.getLastExtras()?.conversationHistory;
                 expect(newConversationHistory).toEqual([
                     {role: 'user', message: 'I need help with my account.'},
-                    {role: 'ai', message: 'Sure, I can help you with that.'},
+                    {role: 'assistant', message: 'Sure, I can help you with that.'},
                 ]);
             },
         );

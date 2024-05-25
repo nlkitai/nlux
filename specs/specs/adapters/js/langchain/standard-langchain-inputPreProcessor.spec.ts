@@ -43,7 +43,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
                         message: 'Hello AI',
                     },
                     {
-                        role: 'ai',
+                        role: 'assistant',
                         message: 'Hi user',
                     },
                 ]);
@@ -65,7 +65,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
                     message: 'Hello AI',
                 },
                 {
-                    role: 'ai',
+                    role: 'assistant',
                     message: 'Hi user',
                 },
             ]);
@@ -97,7 +97,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
                         message: 'Hello AI',
                     },
                     {
-                        role: 'ai',
+                        role: 'assistant',
                         message: 'Hi user',
                     },
                 ]);
@@ -119,7 +119,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
                     message: 'Hello AI',
                 },
                 {
-                    role: 'ai',
+                    role: 'assistant',
                     message: 'Hi user',
                 },
             ]);

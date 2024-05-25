@@ -10,7 +10,7 @@ export type CompChatRoomEvents = 'chat-room-ready'
 
 export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
-    botPersona?: AssistantPersona,
+    assistantPersona?: AssistantPersona,
     userPersona?: UserPersona,
     conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];

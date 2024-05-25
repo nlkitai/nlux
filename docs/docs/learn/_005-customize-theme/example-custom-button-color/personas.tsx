@@ -1,4 +1,4 @@
-export default `export const botStyle = {
+export default `export const assistantCssStyle = {
   background: 'linear-gradient(yellow, orange)',
   fontSize: '1.5rem',
   display: 'flex',

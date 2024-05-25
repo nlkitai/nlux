@@ -1,7 +1,6 @@
 import {ChatItem} from '@nlux/core';
 import OpenAI from 'openai';
 import {warn} from '../../../../shared/src/utils/warn';
-import {participantRoleToOpenAiRole} from './participantRoleToOpenAiRole';
 
 export const conversationHistoryToMessagesList: <AiMsg>(
     conversationHistory: ChatItem<AiMsg>[],
@@ -35,7 +34,7 @@ export const conversationHistoryToMessagesList: <AiMsg>(
         }
 
         return {
-            role: participantRoleToOpenAiRole(item.role),
+            role: item.role,
             content,
         };
     }).filter((item) => item !== undefined) as Array<

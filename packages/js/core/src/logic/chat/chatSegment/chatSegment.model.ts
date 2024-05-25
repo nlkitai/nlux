@@ -45,7 +45,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             item,
             this.getProp('conversationLayout') as ConversationLayout | undefined,
             this.getProp('userPersona') as UserPersona | undefined,
-            this.getProp('botPersona') as AssistantPersona | undefined,
+            this.getProp('assistantPersona') as AssistantPersona | undefined,
         );
 
         if (!compChatItemProps) {
@@ -122,15 +122,15 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
     }
 
-    public setAssistantPersona(botPersona: AssistantPersona | undefined) {
-        this.setProp('botPersona', botPersona);
+    public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
+        this.setProp('assistantPersona', assistantPersona);
         const newProps: Partial<ChatItemProps> = {
-            name: botPersona?.name,
-            picture: botPersona?.picture,
+            name: assistantPersona?.name,
+            picture: assistantPersona?.picture,
         };
 
         this.chatItemComponentsById.forEach((comp) => {
-            if (comp.getChatSegmentItem().participantRole === 'ai') {
+            if (comp.getChatSegmentItem().participantRole === 'assistant') {
                 comp.updateDomProps(newProps);
             }
         });

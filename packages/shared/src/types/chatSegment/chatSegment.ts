@@ -30,7 +30,7 @@ export type ChatSegmentStatus = 'active' | 'complete' | 'error';
 /**
  * An item in a chat segment can either be:
  * - A message from the user (Type: ChatSegmentUserMessage) — with 'participantRole' set to 'user'.
- * - A message from the AI (Type: ChatSegmentAiMessage<AiMsg>) — with 'participantRole' set to 'ai'.
+ * - A message from the AI (Type: ChatSegmentAiMessage<AiMsg>) — with 'participantRole' set to 'assistant'.
  *
  * System messages are not included in the chat segment items.
  */

@@ -35,7 +35,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             streamingAnimationSpeed,
             visible = true,
             composer,
-            botPersona,
+            assistantPersona,
             userPersona,
             initialConversationContent,
             syntaxHighlighter,
@@ -50,7 +50,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             visible,
             autoScroll,
             streamingAnimationSpeed,
-            botPersona,
+            assistantPersona,
             userPersona,
             initialConversationContent,
             composer,
@@ -62,7 +62,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         });
 
         this.addConversation(
-            botPersona,
+            assistantPersona,
             userPersona,
             initialConversationContent,
         );
@@ -163,8 +163,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.setProp('streamingAnimationSpeed', props.streamingAnimationSpeed!);
         }
 
-        if (props.hasOwnProperty('botPersona')) {
-            this.conversation?.setAssistantPersona(props.botPersona ?? undefined);
+        if (props.hasOwnProperty('assistantPersona')) {
+            this.conversation?.setAssistantPersona(props.assistantPersona ?? undefined);
         }
 
         if (props.hasOwnProperty('userPersona')) {
@@ -202,14 +202,14 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     }
 
     private addConversation(
-        botPersona?: AssistantPersona,
+        assistantPersona?: AssistantPersona,
         userPersona?: UserPersona,
         initialConversationContent?: ChatItem<AiMsg>[],
     ) {
         this.conversation = comp(CompConversation<AiMsg>)
             .withContext(this.context)
             .withProps<CompConversationProps<AiMsg>>({
-                botPersona,
+                assistantPersona,
                 userPersona,
                 messages: initialConversationContent,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,

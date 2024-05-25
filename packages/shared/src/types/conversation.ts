@@ -1,5 +1,5 @@
 export type ChatItem<AiMsg = string> = {
-    role: 'ai';
+    role: 'assistant';
     message: AiMsg;
     serverResponse?: string | object | undefined;
 } | {

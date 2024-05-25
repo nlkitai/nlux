@@ -195,8 +195,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const botName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
-            expect(botName.textContent).toBe('AI');
+            const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
+            expect(assistantName.textContent).toBe('AI');
         });
     });
 });

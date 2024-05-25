@@ -71,7 +71,7 @@ const ExampleWrapper = () => {
                             message: 'Hello',
                         },
                         {
-                            role: 'ai',
+                            role: 'assistant',
                             message: 'Hi There!',
                         },
                     ]}

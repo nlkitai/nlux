@@ -18,7 +18,7 @@ export default () => {
           message: 'What\\'s the capital of Antartica?'
         },
         {
-          role: 'ai',
+          role: 'assistant',
           message: 'Arrr, matey! The capital of Antarctica be none other than "Arrrctica," where ye can find a jolly crew of penguins swashbuckling on icy seas!'
         }
       ]}

@@ -52,7 +52,7 @@ describe('createAiChat() + events + ready', () => {
                 .withClassName('test-class')
                 .withInitialConversation([
                     {role: 'user', message: 'Hello'},
-                    {role: 'ai', message: 'Hi'},
+                    {role: 'assistant', message: 'Hi'},
                 ])
                 .withDisplayOptions({
                     width: '100%',
@@ -73,7 +73,7 @@ describe('createAiChat() + events + ready', () => {
                     },
                     initialConversation: [
                         {role: 'user', message: 'Hello'},
-                        {role: 'ai', message: 'Hi'},
+                        {role: 'assistant', message: 'Hi'},
                     ],
                 },
             });

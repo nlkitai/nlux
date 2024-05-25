@@ -61,7 +61,7 @@ export const AiChatReactExpo = () => {
             message: 'Hi, there!',
         },
         {
-            role: 'ai',
+            role: 'assistant',
             message: {
                 txt: 'Hello, World!',
                 color: 'green',
@@ -81,7 +81,7 @@ export const AiChatReactExpo = () => {
                 color: 'blue',
                 bg: 'yellow',
             },
-            role: 'ai',
+            role: 'assistant',
         },
     ];
 

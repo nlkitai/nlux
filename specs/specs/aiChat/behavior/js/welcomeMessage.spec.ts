@@ -125,7 +125,7 @@ describe('createAiChat() + assistant persona + welcome message', () => {
                     })
                     .withInitialConversation([
                         {
-                            role: 'ai',
+                            role: 'assistant',
                             message: 'Hello, world!',
                         },
                         {

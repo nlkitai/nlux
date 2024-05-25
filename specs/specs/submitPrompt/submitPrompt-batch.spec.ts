@@ -175,7 +175,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                     time: expect.any(Date),
                     dataTransferMode: 'batch',
                     content: 'Hi! The weather is sunny today.',
-                    participantRole: 'ai',
+                    participantRole: 'assistant',
                     status: 'complete',
                 });
             });
@@ -240,7 +240,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                         },
                         {
                             content: 'Hi! The weather is sunny today.',
-                            participantRole: 'ai',
+                            participantRole: 'assistant',
                             status: 'complete',
                             dataTransferMode: 'batch',
                             time: expect.any(Date),

@@ -11,7 +11,7 @@ export const participantNameFromRoleAndPersona = (
         user?: { name?: string }
     } | undefined
 ): string => {
-    if (role === 'ai') {
+    if (role === 'assistant') {
         return personaOptions?.assistant?.name ?? defaultAiName;
     }
 

@@ -8,7 +8,7 @@ import {myCustomPromiseAdapter} from './customAdapter';
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
-const botPersonas: (AssistantPersona | undefined)[] = [
+const assistantPersonas: (AssistantPersona | undefined)[] = [
     {
         name: 'FinFunAssistant',
         tagline: 'Your AI financial advisor',
@@ -36,11 +36,11 @@ const userPersonas: (UserPersona | undefined)[] = [
 
 const ExampleWrapper = () => {
     const [key, setKey] = useState<number>(0);
-    const [botPersonaIndex, setAssistantPersonaIndex] = useState<number>(0);
+    const [assistantPersonaIndex, setAssistantPersonaIndex] = useState<number>(0);
     const [userPersonaIndex, setUserPersonaIndex] = useState<number>(0);
 
     const handleNextAssistantPersona = () => {
-        setAssistantPersonaIndex((botPersonaIndex + 1) % botPersonas.length);
+        setAssistantPersonaIndex((assistantPersonaIndex + 1) % assistantPersonas.length);
     };
 
     const handleNextUserPersona = () => {
@@ -77,7 +77,7 @@ const ExampleWrapper = () => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div style={{marginTop: '50px'}}>
-                <span>Current Assistant Persona: {botPersonaIndex}</span>
+                <span>Current Assistant Persona: {assistantPersonaIndex}</span>
                 <button onClick={handleNextAssistantPersona}>Next Assistant Persona</button>
                 <hr/>
                 <span>Current User Persona: {userPersonaIndex}</span>
@@ -88,7 +88,7 @@ const ExampleWrapper = () => {
                     adapter={myCustomPromiseAdapter}
                     // adapter={adapter}
                     personaOptions={{
-                        assistant: botPersonas[botPersonaIndex],
+                        assistant: assistantPersonas[assistantPersonaIndex],
                         user: userPersonas[userPersonaIndex],
                         // assistant: {
                         //     name: 'FinFunAssistant',
@@ -113,7 +113,7 @@ const ExampleWrapper = () => {
                     //         message: 'Hello',
                     //     },
                     //     {
-                    //         role: 'ai',
+                    //         role: 'assistant',
                     //         message: 'Hi There!',
                     //     },
                     // ]}

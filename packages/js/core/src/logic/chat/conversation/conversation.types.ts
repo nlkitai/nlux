@@ -9,7 +9,7 @@ export type CompConversationEvents = void;
 export type CompConversationProps<AiMsg> = {
     conversationLayout: ConversationLayout;
     messages?: ChatItem<AiMsg>[];
-    botPersona?: AssistantPersona;
+    assistantPersona?: AssistantPersona;
     userPersona?: UserPersona;
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;

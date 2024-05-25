@@ -69,7 +69,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                 status,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 userPersona: this.getProp('userPersona') as UserPersona | undefined,
-                botPersona: this.getProp('botPersona') as AssistantPersona | undefined,
+                assistantPersona: this.getProp('assistantPersona') as AssistantPersona | undefined,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
@@ -81,10 +81,10 @@ export class CompConversation<AiMsg> extends BaseComp<
 
         if (initialConversation) {
             for (const item of initialConversation) {
-                if (item.role === 'ai') {
+                if (item.role === 'assistant') {
                     newChatSegmentComp.addChatItem({
                         uid: uid(),
-                        participantRole: 'ai',
+                        participantRole: 'assistant',
                         time: new Date(),
                         dataTransferMode: 'batch',
                         status: 'complete',
@@ -218,10 +218,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         }
     }
 
-    public setAssistantPersona(botPersona: AssistantPersona | undefined) {
-        this.setProp('botPersona', botPersona);
+    public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
+        this.setProp('assistantPersona', assistantPersona);
         this.chatSegmentComponentsById.forEach((comp) => {
-            comp.setAssistantPersona(botPersona);
+            comp.setAssistantPersona(assistantPersona);
         });
     }
 

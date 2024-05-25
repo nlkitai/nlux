@@ -3,7 +3,7 @@ import {AiChat} from '@nlux/react';
 import '@nlux/themes/nova.css';
 import './custom-nova-theme.css';
 import {streamAdapter} from './adapter';
-import {user, botStyle} from './personas';
+import {user, assistantCssStyle} from './personas';
 
 export default () => {
   const adapter = useMemo(() => streamAdapter, []);
@@ -14,7 +14,7 @@ export default () => {
       personaOptions={{
         assistant: {
           name: 'iAssistant',
-          picture: <span style={botStyle}>🤖</span>,
+          picture: <span style={assistantCssStyle}>🤖</span>,
           tagline: 'Your Genius AI Assistant'
         },
         user
