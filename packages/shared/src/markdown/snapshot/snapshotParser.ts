@@ -34,7 +34,8 @@ export const parseMdSnapshot: SnapshotParser = (
         const codeElement = block.querySelector('code');
         if (!codeElement) {
             // No code can be found, so just copy the innerHTML of the block.
-            newBlock.innerHTML = htmlSanitizer ? htmlSanitizer(block.innerHTML) : block.innerHTML;
+            const html = block.innerHTML;
+            newBlock.innerHTML = htmlSanitizer ? htmlSanitizer(html) : html;
             block.replaceWith(newBlock);
             return;
         }
@@ -56,8 +57,11 @@ export const parseMdSnapshot: SnapshotParser = (
             }
         }
 
+        // NO HTML SANITIZER — We do not apply HTML sanitization to HTML that goes into the code block as it is
+        // expected to be code and not arbitrary HTML and we want to preserve the code formatting.
         const newCodeElement = document.createElement('pre');
-        newCodeElement.innerHTML = htmlSanitizer ? htmlSanitizer(codeElement.innerHTML) : codeElement.innerHTML;
+        const newHtml = '<div>' + codeElement.innerHTML + '</div>';
+        newCodeElement.innerHTML = newHtml;
 
         if (language) {
             newCodeElement.setAttribute('data-language', language);

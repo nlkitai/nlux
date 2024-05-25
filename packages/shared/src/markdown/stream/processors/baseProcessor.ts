@@ -276,7 +276,7 @@ export abstract class BaseMarkdownProcessor implements MarkdownProcessorInterfac
 
         if (this.__element) {
             const htmlSanitizer = this.htmlSanitizer;
-            const html = this.__element.innerHTML;
+            const html = this.__element.innerHTML.trim();
             this.__element.innerHTML = htmlSanitizer ? htmlSanitizer(html) : html;
             if (this.removeWhenEmpty && this.__element.innerHTML === '') {
                 this.__element.remove();

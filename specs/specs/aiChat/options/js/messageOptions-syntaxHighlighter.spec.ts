@@ -35,6 +35,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
                 .withAdapter(adapterController!.adapter)
                 .withMessageOptions({
                     syntaxHighlighter: highlighter,
+                    showCodeBlockCopyButton: false,
                 });
 
             aiChat.mount(rootElement);
@@ -60,7 +61,8 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
         it('Code should not be highlighted', async () => {
             // Arrange
             aiChat = createAiChat()
-                .withAdapter(adapterController!.adapter);
+                .withAdapter(adapterController!.adapter)
+                .withMessageOptions({showCodeBlockCopyButton: false});
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -86,7 +88,10 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             // Arrange
             aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
-                .withMessageOptions({syntaxHighlighter: highlighter});
+                .withMessageOptions({
+                    syntaxHighlighter: highlighter,
+                    showCodeBlockCopyButton: false,
+                });
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();

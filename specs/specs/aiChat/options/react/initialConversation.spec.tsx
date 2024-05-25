@@ -166,17 +166,21 @@ describe('<AiChat /> + initialConversation prop', () => {
                 ];
 
                 // Act
-                const aiChat = <AiChat
-                    adapter={adapterController!.adapter}
-                    initialConversation={initialConversation}
-                    messageOptions={{showCodeBlockCopyButton: false}}
-                />;
+                const aiChat = (
+                    <AiChat
+                        adapter={adapterController!.adapter}
+                        initialConversation={initialConversation}
+                        messageOptions={{
+                            showCodeBlockCopyButton: false
+                        }}
+                    />
+                );
                 render(aiChat);
                 await waitForReactRenderCycle();
 
                 // Assert
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
+                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming .nlux-md-cntr');
                 expect(incomingMessages.length).toBe(2);
                 expect(incomingMessages[0].innerHTML).toEqual(
                     expect.stringContaining(

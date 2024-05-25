@@ -55,7 +55,12 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
     describe('When no syntax highlighter is used', () => {
         it('Code should not be highlighted', async () => {
             // Arrange
-            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const aiChat = <AiChat
+                adapter={adapterController!.adapter}
+                messageOptions={{
+                    showCodeBlockCopyButton: false,
+                }}
+            />;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
@@ -81,7 +86,10 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             const aiChat = (
                 <AiChat
                     adapter={adapterController!.adapter}
-                    messageOptions={{syntaxHighlighter: highlighter}}
+                    messageOptions={{
+                        syntaxHighlighter: highlighter,
+                        showCodeBlockCopyButton: false,
+                }}
                 />
             );
             const {container, rerender} = render(aiChat);
@@ -91,7 +99,10 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             rerender(
                 <AiChat
                     adapter={adapterController!.adapter}
-                    messageOptions={{syntaxHighlighter: undefined}}
+                    messageOptions={{
+                        syntaxHighlighter: undefined,
+                        showCodeBlockCopyButton: false,
+                }}
                 />,
             );
             await waitForReactRenderCycle();
