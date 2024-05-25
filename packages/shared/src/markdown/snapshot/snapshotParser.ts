@@ -57,11 +57,9 @@ export const parseMdSnapshot: SnapshotParser = (
             }
         }
 
-        // NO HTML SANITIZER — We do not apply HTML sanitization to HTML that goes into the code block as it is
-        // expected to be code and not arbitrary HTML and we want to preserve the code formatting.
         const newCodeElement = document.createElement('pre');
         const newHtml = '<div>' + codeElement.innerHTML + '</div>';
-        newCodeElement.innerHTML = newHtml;
+        newCodeElement.innerHTML = options?.htmlSanitizer ? options.htmlSanitizer(newHtml) : newHtml;
 
         if (language) {
             newCodeElement.setAttribute('data-language', language);

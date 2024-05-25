@@ -10,6 +10,7 @@ export const MarkdownSnapshotRenderer = (props: {
 }) => {
     const {markdownOptions} = props;
     const markdownContainerRef = useRef<HTMLDivElement>(null);
+
     const parsedContent = useMemo(() => {
         if (!props.content) {
             return '';
@@ -32,9 +33,17 @@ export const MarkdownSnapshotRenderer = (props: {
         }
     }, [parsedContent, markdownContainerRef.current, markdownOptions?.showCodeBlockCopyButton]);
 
+    const trustedHtml = useMemo(() => {
+        return markdownOptions?.htmlSanitizer ? markdownOptions.htmlSanitizer(parsedContent) : parsedContent;
+    }, [parsedContent, markdownOptions?.htmlSanitizer]);
+
     return (
         <div className={'nlux-md-strm-root'}>
-            <div className="nlux-md-cntr" ref={markdownContainerRef} dangerouslySetInnerHTML={{__html: parsedContent}}/>
+            <div
+                className="nlux-md-cntr"
+                ref={markdownContainerRef}
+                dangerouslySetInnerHTML={{__html: trustedHtml}}
+            />
         </div>
     );
 };

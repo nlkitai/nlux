@@ -19,7 +19,7 @@ import {
     StreamResponseComponentProps,
 } from '@nlux-dev/react/src';
 import './App.css';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 function App() {
     type ThemeId = 'nova' | 'fest' | 'nada' | 'luna';
@@ -110,6 +110,21 @@ function App() {
             message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
         },
     ];
+
+    const htmlSanitizer = useMemo(() => (html: string) => {
+        const trustedTypes = window.trustedTypes as unknown as {
+            createPolicy: (name: string, policy: Record<string, unknown>) => unknown;
+        };
+
+        if (typeof trustedTypes.createPolicy === 'function') {
+            const policy = trustedTypes.createPolicy('htmlSanitizer', {
+                createHTML: (input: string) => DOMPurify.sanitize(input),
+            });
+
+            return policy.createHTML(html);
+        }
+        return DOMPurify.sanitize(html);
+    }, []);
 
     return (
         <>
@@ -202,7 +217,7 @@ function App() {
                 messageOptions={{
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
-                    htmlSanitizer: DOMPurify.sanitize,
+                    htmlSanitizer: htmlSanitizer,
                     // showCodeBlockCopyButton: false,
                     // streamingAnimationSpeed: 100,
                     responseRenderer: useCustomResponseComponent ? responseRenderer : undefined,
