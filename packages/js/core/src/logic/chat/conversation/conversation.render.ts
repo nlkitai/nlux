@@ -1,7 +1,6 @@
 import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {createWelcomeMessageDom} from '../../../../../../shared/src/ui/WelcomeMessage/create';
-import {render} from '../../../../../../shared/src/utils/dom/render';
 import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {source} from '../../../utils/source';
@@ -13,10 +12,6 @@ import {
 } from './conversation.types';
 
 export const __ = (styleName: string) => `nlux-chtRm-cnv-${styleName}`;
-
-const html = () => `` +
-    `<div class="${__('sgmts-cntr')}"></div>` +
-    ``;
 
 export const renderConversation: CompRenderer<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
@@ -37,7 +32,9 @@ export const renderConversation: CompRenderer<
         shouldRenderWelcomeMessage: !props.messages || props.messages.length === 0,
     };
 
-    const segmentsContainer = render(html());
+    const segmentsContainer = document.createElement('div');
+    segmentsContainer.classList.add(__('sgmts-cntr'));
+
     if (!(segmentsContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
             source: source('chatRoom', 'render'),

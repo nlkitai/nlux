@@ -1,18 +1,10 @@
 import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
-import {NluxRenderingError} from '../../../../../../shared/src/types/error';
-import {render} from '../../../../../../shared/src/utils/dom/render';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';
-import {source} from '../../../utils/source';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 
 const __ = (styleName: string) => `nlux-chtRm-${styleName}`;
-
-const html = () => `` +
-    `<div class="${__('cnv-cntr')}"></div>` +
-    `<div class="${__('prmptBox-cntr')}"></div>` +
-    ``;
 
 export const renderChatRoom: CompRenderer<
     CompChatRoomProps<AnyAiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
@@ -21,13 +13,15 @@ export const renderChatRoom: CompRenderer<
     compEvent,
     props,
 }) => {
-    const dom = render(html());
-    if (!dom) {
-        throw new NluxRenderingError({
-            source: source('chatRoom', 'render'),
-            message: 'Chat room could not be rendered',
-        });
-    }
+    const conversationContainer = document.createElement('div');
+    conversationContainer.classList.add(__('cnv-cntr'));
+
+    const composerContainer = document.createElement('div');
+    composerContainer.classList.add(__('prmptBox-cntr'));
+
+    const dom = document.createDocumentFragment();
+    dom.appendChild(conversationContainer);
+    dom.appendChild(composerContainer);
 
     const visibleProp = props.visible ?? true;
     const chatRoomElement = document.createElement('div');
