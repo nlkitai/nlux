@@ -35,8 +35,8 @@ export const Roadmap = ({className}: {className?: string}) => {
                     text="Custom LLM Adapters"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/examples/bot-persona"
-                    text="Bot and User Personas"
+                    href="https://docs.nlkit.com/nlux/examples/assistant-persona"
+                    text="Assistant and User Personas"
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/examples/markdown-streaming"

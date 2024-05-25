@@ -1,0 +1,26 @@
+In React JS, you can define the assistant persona by passing the `personaOptions` prop to the `AiChat` component.
+The `personaOptions` prop is an object with two properties: `assistant` and `user`. The `assistant` property is what you use to
+define the assistant persona, as shown in the example below.
+
+```tsx
+<AiChat
+    adapter={adapter}
+    personaOptions={{
+        assistant: {
+            name: 'HarryBotter',
+            picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+            tagline: 'Mischievously Making Magic With Mirthful AI!',
+        },
+    }}
+/>
+```
+
+The object passed to the `assistant` property should match the following interface:
+
+```typescript
+interface AssistantPersona {
+    name: string;
+    picture: string | JSX.Element;
+    tagline?: string;
+}
+```

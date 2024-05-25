@@ -2,7 +2,7 @@ export default (colorMode: 'dark' | 'light') => `import {useMemo} from 'react';
 import {AiChat} from '@nlux/react';
 import '@nlux/themes/nova.css';
 import {streamAdapter} from './adapter';
-import {user} from './personas';
+import {user, botStyle} from './personas';
 
 export default () => {
   const adapter = useMemo(() => streamAdapter, []);
@@ -10,14 +10,14 @@ export default () => {
     <AiChat
       adapter={adapter}
       personaOptions={{
-        bot: {
-          name: 'HarryBotter',
-          picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
-          tagline: 'Mischievously Making Magic With Mirthful AI!',
+        assistant: {
+          name: 'iAssistant',
+          picture: <span style={botStyle}>🤖</span>,
+          tagline: 'Your Genius AI Assistant',
         },
         user
       }}
-        displayOptions={{colorScheme: '${colorMode}'}}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

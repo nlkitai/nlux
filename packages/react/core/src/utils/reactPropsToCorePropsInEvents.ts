@@ -23,13 +23,13 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
 
     if (props.personaOptions) {
         result.personaOptions = {} as PersonaOptions;
-        if (props.personaOptions.bot) {
-            result.personaOptions.bot = {
-                name: props.personaOptions.bot.name,
-                picture: typeof props.personaOptions.bot.picture === 'string'
-                    ? props.personaOptions.bot.picture
+        if (props.personaOptions.assistant) {
+            result.personaOptions.assistant = {
+                name: props.personaOptions.assistant.name,
+                picture: typeof props.personaOptions.assistant.picture === 'string'
+                    ? props.personaOptions.assistant.picture
                     : '<REACT ELEMENT />',
-                tagline: props.personaOptions.bot.tagline,
+                tagline: props.personaOptions.assistant.tagline,
             };
         }
 

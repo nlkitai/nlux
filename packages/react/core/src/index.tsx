@@ -66,7 +66,7 @@ export type {
 
 export type {
     PersonaOptions,
-    BotPersona,
+    AssistantPersona,
     UserPersona,
 } from './exports/personaOptions';
 

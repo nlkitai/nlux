@@ -1,7 +1,7 @@
 ```tsx
-import {AiChat, BotPersona, UserPersona, PersonaOptions} from '@nlux/react';
+import {AiChat, AssistantPersona, UserPersona, PersonaOptions} from '@nlux/react';
 
-const botPersona: BotPersona = {
+const botPersona: AssistantPersona = {
     name: 'HarryBotter',
     picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
     tagline: 'Mischievously Making Magic With Mirthful AI!',
@@ -13,7 +13,7 @@ const userPersona: UserPersona = {
 };
 
 const personaOptions: PersonaOptions = {
-    bot: botPersona,
+    assistant: botPersona,
     user: userPersona
 };
 

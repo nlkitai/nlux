@@ -12,8 +12,8 @@ export default () => {
       className="custom-ai-chat-comp"
       adapter={adapter}
       personaOptions={{
-        bot: {
-          name: 'iBot',
+        assistant: {
+          name: 'iAssistant',
           picture: <span style={botStyle}>🤖</span>,
           tagline: 'Your Genius AI Assistant'
         },

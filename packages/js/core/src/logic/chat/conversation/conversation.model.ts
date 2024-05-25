@@ -13,7 +13,7 @@ import {comp} from '../../../exports/aiChat/comp/comp';
 import {Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
 import {CompChatSegmentProps} from '../chatSegment/chatSegment.types';
@@ -69,7 +69,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                 status,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 userPersona: this.getProp('userPersona') as UserPersona | undefined,
-                botPersona: this.getProp('botPersona') as BotPersona | undefined,
+                botPersona: this.getProp('botPersona') as AssistantPersona | undefined,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
                 skipStreamingAnimation: this.getProp('skipStreamingAnimation') as boolean | undefined,
@@ -218,10 +218,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         }
     }
 
-    public setBotPersona(botPersona: BotPersona | undefined) {
+    public setAssistantPersona(botPersona: AssistantPersona | undefined) {
         this.setProp('botPersona', botPersona);
         this.chatSegmentComponentsById.forEach((comp) => {
-            comp.setBotPersona(botPersona);
+            comp.setAssistantPersona(botPersona);
         });
     }
 

@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + bot persona + welcome message', () => {
+describe('<AiChat /> + assistant persona + welcome message', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -17,7 +17,7 @@ describe('<AiChat /> + bot persona + welcome message', () => {
         adapterController = undefined;
     });
 
-    describe('When bot persona is configured and a tagline is provided', () => {
+    describe('When assistant persona is configured and a tagline is provided', () => {
         describe('When no initial conversation is provided', () => {
             it('The welcome message should be displayed', async () => {
                 // Arrange
@@ -25,9 +25,9 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                     <AiChat
                         adapter={adapterController!.adapter}
                         personaOptions={{
-                            bot: {
-                                name: 'Bot',
-                                picture: 'https://example.com/bot.png',
+                            assistant: {
+                                name: 'Assistant',
+                                picture: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         }}
@@ -49,9 +49,9 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                         <AiChat
                             adapter={adapterController!.adapter}
                             personaOptions={{
-                                bot: {
-                                    name: 'Bot',
-                                    picture: 'https://example.com/bot.png',
+                                assistant: {
+                                    name: 'Assistant',
+                                    picture: 'https://example.com/assistant.png',
                                     tagline: 'Welcome to the chat',
                                 },
                             }}
@@ -80,9 +80,9 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                         <AiChat
                             adapter={adapterController!.adapter}
                             personaOptions={{
-                                bot: {
-                                    name: 'Bot',
-                                    picture: 'https://example.com/bot.png',
+                                assistant: {
+                                    name: 'Assistant',
+                                    picture: 'https://example.com/assistant.png',
                                     tagline: 'Welcome to the chat',
                                 },
                             }}
@@ -116,9 +116,9 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                     <AiChat
                         adapter={adapterController!.adapter}
                         personaOptions={{
-                            bot: {
-                                name: 'Bot',
-                                picture: 'https://example.com/bot.png',
+                            assistant: {
+                                name: 'Assistant',
+                                picture: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         }}
@@ -129,7 +129,7 @@ describe('<AiChat /> + bot persona + welcome message', () => {
                             },
                             {
                                 role: 'user',
-                                message: 'Hi, bot!',
+                                message: 'Hi, assistant!',
                             },
                         ]}
                     />

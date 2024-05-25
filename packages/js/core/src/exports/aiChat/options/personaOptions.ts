@@ -1,4 +1,4 @@
-export interface BotPersona {
+export interface AssistantPersona {
     name: string;
     picture: string | Readonly<HTMLElement>;
     tagline?: string;
@@ -10,6 +10,6 @@ export interface UserPersona {
 }
 
 export interface PersonaOptions {
-    bot?: BotPersona,
+    assistant?: AssistantPersona,
     user?: UserPersona,
 }

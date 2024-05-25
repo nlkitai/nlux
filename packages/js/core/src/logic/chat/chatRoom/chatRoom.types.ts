@@ -2,7 +2,7 @@ import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompChatRoomEvents = 'chat-room-ready'
@@ -10,7 +10,7 @@ export type CompChatRoomEvents = 'chat-room-ready'
 
 export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
-    botPersona?: BotPersona,
+    botPersona?: AssistantPersona,
     userPersona?: UserPersona,
     conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];

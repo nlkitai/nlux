@@ -1,9 +1,9 @@
 export default `import {PersonaOptions} from '@nlux/react';
 
-export const user = {
+export const userPersona = {
   name: 'Alex',
   picture: 'https://nlux.ai/images/demos/persona-user.jpeg'
 };
 
-export const botPictureUrl = 'https://nlux.ai/images/demos/persona-albert.jpeg';
+export const assistantAvatar = 'https://nlux.ai/images/demos/persona-albert.jpeg';
 `;

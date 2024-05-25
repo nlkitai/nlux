@@ -230,7 +230,7 @@ function App() {
                         picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
                         // picture: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
                     },
-                    bot: {
+                    assistant: {
                         name: 'Harry Botter',
                         picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
                         tagline: 'Your friendly AI assistant',

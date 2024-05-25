@@ -8,7 +8,7 @@ import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
 import {CompConversation} from '../conversation/conversation.model';
@@ -164,7 +164,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }
 
         if (props.hasOwnProperty('botPersona')) {
-            this.conversation?.setBotPersona(props.botPersona ?? undefined);
+            this.conversation?.setAssistantPersona(props.botPersona ?? undefined);
         }
 
         if (props.hasOwnProperty('userPersona')) {
@@ -202,7 +202,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     }
 
     private addConversation(
-        botPersona?: BotPersona,
+        botPersona?: AssistantPersona,
         userPersona?: UserPersona,
         initialConversationContent?: ChatItem<AiMsg>[],
     ) {

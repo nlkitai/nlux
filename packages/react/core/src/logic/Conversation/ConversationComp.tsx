@@ -22,7 +22,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
 
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
     const showWelcomeMessage = useMemo(
-        () => !hasMessages && personaOptions?.bot !== undefined,
+        () => !hasMessages && personaOptions?.assistant !== undefined,
         [hasMessages, personaOptions],
     );
 
@@ -50,9 +50,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
         <>
             {showWelcomeMessage && (
                 <WelcomeMessageComp
-                    name={personaOptions!.bot!.name}
-                    picture={personaOptions!.bot!.picture}
-                    message={personaOptions!.bot!.tagline}
+                    name={personaOptions!.assistant!.name}
+                    picture={personaOptions!.assistant!.picture}
+                    message={personaOptions!.assistant!.tagline}
                 />
             )}
             <div className="nlux-chtRm-cnv-sgmts-cntr">

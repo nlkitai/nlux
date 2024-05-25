@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + personaOptions + bot', () => {
+describe('<AiChat /> + personaOptions + assistant', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -20,14 +20,14 @@ describe('<AiChat /> + personaOptions + bot', () => {
         adapterController = undefined;
     });
 
-    describe('When the bot persona is set with image URL and name', () => {
+    describe('When the assistant persona is set with image URL and name', () => {
         describe('When the user sends a message', () => {
             it('Persona details should be rendered', async () => {
                 // Arrange
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
+                        assistant: {
                             name: 'Mr User',
                             picture: 'https://user-image-url',
                         },
@@ -56,9 +56,9 @@ describe('<AiChat /> + personaOptions + bot', () => {
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
-                            name: 'AI Bot',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'AI Assistant',
+                            picture: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -78,17 +78,17 @@ describe('<AiChat /> + personaOptions + bot', () => {
                 const selector = '.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImage = container.querySelector(selector) as HTMLElement | null;
                 expect(avatarImage).toBeInTheDocument();
-                expect(avatarImage!.style.backgroundImage).toBe('url(https://bot-image-url)');
+                expect(avatarImage!.style.backgroundImage).toBe('url(https://assistant-image-url)');
             });
 
-            it('Bot initial letter should be rendered', async () => {
+            it('Assistant initial letter should be rendered', async () => {
                 // Arrange
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
-                            name: 'AI Bot',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'AI Assistant',
+                            picture: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -119,8 +119,8 @@ describe('<AiChat /> + personaOptions + bot', () => {
                     adapter={adapterController!.adapter}
                     personaOptions={{
                         user: {
-                            name: 'Mr Bot',
-                            picture: 'https://bot-image-url',
+                            name: 'Mr Assistant',
+                            picture: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -145,8 +145,8 @@ describe('<AiChat /> + personaOptions + bot', () => {
                 rerender(<AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
-                            name: 'X-Bot',
+                        assistant: {
+                            name: 'X-Assistant',
                             picture: 'https://xbot-image-url',
                         },
                     }}
@@ -170,15 +170,15 @@ describe('<AiChat /> + personaOptions + bot', () => {
         });
     });
 
-    describe('When the bot persona is set with JSX as element', () => {
-        describe('When the bot sends a response', () => {
+    describe('When the assistant persona is set with JSX as element', () => {
+        describe('When the assistant sends a response', () => {
             it('Persona details should be rendered', async () => {
                 // Arrange
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
-                            name: 'Mr Bot',
+                        assistant: {
+                            name: 'Mr Assistant',
                             picture: <div id="jsx-avatar">JSX Avatar</div>,
                         },
                     }}
@@ -201,13 +201,13 @@ describe('<AiChat /> + personaOptions + bot', () => {
                 expect(avatarContainer).toBeInTheDocument();
             });
 
-            it('Bot persona JSX should be rendered', async () => {
+            it('Assistant persona JSX should be rendered', async () => {
                 // Arrange
                 const aiChat = <AiChat
                     adapter={adapterController!.adapter}
                     personaOptions={{
-                        bot: {
-                            name: 'Mr Bot',
+                        assistant: {
+                            name: 'Mr Assistant',
                             picture: <div id="jsx-avatar">JSX Avatar</div>,
                         },
                     }}

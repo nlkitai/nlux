@@ -5,7 +5,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + personaOptions + bot', () => {
+describe('createAiChat() + personaOptions + assistant', () => {
     let adapterController: AdapterController | undefined = undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
@@ -27,16 +27,16 @@ describe('createAiChat() + personaOptions + bot', () => {
         aiChat = undefined;
     });
 
-    describe('When the bot persona is set with image URL and name', () => {
-        describe('When the bot sends a response', () => {
-            it('Bot persona details should be rendered', async () => {
+    describe('When the assistant persona is set with image URL and name', () => {
+        describe('When the assistant sends a response', () => {
+            it('Assistant persona details should be rendered', async () => {
                 // Arrange
                 const aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot Name',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'Assistant Name',
+                            picture: 'https://assistant-image-url',
                         },
                     });
 
@@ -56,14 +56,14 @@ describe('createAiChat() + personaOptions + bot', () => {
                 expect(avatarContainer).toBeInTheDocument();
             });
 
-            it('Bot persona photo should be rendered', async () => {
+            it('Assistant persona photo should be rendered', async () => {
                 // Arrange
                 const aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot Name',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'Assistant Name',
+                            picture: 'https://assistant-image-url',
                         },
                     });
 
@@ -80,17 +80,17 @@ describe('createAiChat() + personaOptions + bot', () => {
                 const selector = '.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImageContainer = rootElement.querySelector(selector) as HTMLDivElement | null;
                 expect(avatarImageContainer).toBeInTheDocument();
-                expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://bot-image-url)');
+                expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://assistant-image-url)');
             });
 
-            it('Bot persona initial letter should be rendered', async () => {
+            it('Assistant persona initial letter should be rendered', async () => {
                 // Arrange
                 const aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot Name',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'Assistant Name',
+                            picture: 'https://assistant-image-url',
                         },
                     });
 
@@ -108,19 +108,19 @@ describe('createAiChat() + personaOptions + bot', () => {
                 const selector = '.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
                 const avatarLetterContainer = rootElement.querySelector(selector);
                 expect(avatarLetterContainer).toBeInTheDocument();
-                expect(avatarLetterContainer).toHaveTextContent('B');
+                expect(avatarLetterContainer).toHaveTextContent('A');
             });
         });
 
-        describe('When the bot picture is updated', () => {
-            it('Should update the bot persona photo', async () => {
+        describe('When the assistant picture is updated', () => {
+            it('Should update the assistant persona photo', async () => {
                 // Arrange
                 const aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot Name',
-                            picture: 'https://bot-image-url',
+                        assistant: {
+                            name: 'Assistant Name',
+                            picture: 'https://assistant-image-url',
                         },
                     });
 
@@ -143,9 +143,9 @@ describe('createAiChat() + personaOptions + bot', () => {
                 // Act
                 aiChat.updateProps({
                     personaOptions: {
-                        bot: {
-                            name: 'X Bot',
-                            picture: 'https://x-bot-image-url',
+                        assistant: {
+                            name: 'X Assistant',
+                            picture: 'https://x-assistant-image-url',
                         },
                     },
                 });
@@ -156,8 +156,8 @@ describe('createAiChat() + personaOptions + bot', () => {
                 const selector = '.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImageContainer = rootElement.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
-                expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://x-bot-image-url)');
-                expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://x-bot-image-url)');
+                expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://x-assistant-image-url)');
+                expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://x-assistant-image-url)');
 
                 const letterSelector = '.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
                 const avatarLetterContainer = rootElement.querySelectorAll(letterSelector);
@@ -167,9 +167,9 @@ describe('createAiChat() + personaOptions + bot', () => {
             });
         });
 
-        describe('When the bot persona is set with DOM element as picture', () => {
-            describe('When the bot sends a response', () => {
-                it('Bot persona details should be rendered', async () => {
+        describe('When the assistant persona is set with DOM element as picture', () => {
+            describe('When the assistant sends a response', () => {
+                it('Assistant persona details should be rendered', async () => {
                     // Arrange
                     const picture = document.createElement('div');
                     picture.id = 'jsx-avatar';
@@ -181,8 +181,8 @@ describe('createAiChat() + personaOptions + bot', () => {
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
-                            bot: {
-                                name: 'Bot Name',
+                            assistant: {
+                                name: 'Assistant Name',
                                 picture,
                             },
                         });
@@ -203,7 +203,7 @@ describe('createAiChat() + personaOptions + bot', () => {
                     expect(avatarContainer).toBeInTheDocument();
                 });
 
-                it('Bot persona DOM element should be rendered', async () => {
+                it('Assistant persona DOM element should be rendered', async () => {
                     // Arrange
                     const picture = document.createElement('div');
                     picture.id = 'jsx-avatar';
@@ -215,8 +215,8 @@ describe('createAiChat() + personaOptions + bot', () => {
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
-                            bot: {
-                                name: 'Bot Name',
+                            assistant: {
+                                name: 'Assistant Name',
                                 picture,
                             },
                         });
@@ -241,15 +241,15 @@ describe('createAiChat() + personaOptions + bot', () => {
         });
     });
 
-    describe('When the bot persona is unset after being set', () => {
-        it('All bot persona details should be removed', async () => {
+    describe('When the assistant persona is unset after being set', () => {
+        it('All assistant persona details should be removed', async () => {
             // Arrange
             const aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
                 .withPersonaOptions({
-                    bot: {
-                        name: 'Bot Name',
-                        picture: 'https://bot-image-url',
+                    assistant: {
+                        name: 'Assistant Name',
+                        picture: 'https://assistant-image-url',
                     },
                 });
 
@@ -279,7 +279,7 @@ describe('createAiChat() + personaOptions + bot', () => {
             // Act
             aiChat.updateProps({
                 personaOptions: {
-                    bot: undefined,
+                    assistant: undefined,
                 },
             });
 
@@ -291,15 +291,15 @@ describe('createAiChat() + personaOptions + bot', () => {
         });
     });
 
-    describe('When the personaOptions with bot persona is unset after being set', () => {
+    describe('When the personaOptions with assistant persona is unset after being set', () => {
         it('All persona details should be removed', async () => {
             // Arrange
             const aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
                 .withPersonaOptions({
-                    bot: {
-                        name: 'Bot Name',
-                        picture: 'https://bot-image-url',
+                    assistant: {
+                        name: 'Assistant Name',
+                        picture: 'https://assistant-image-url',
                     },
                 });
 
@@ -339,7 +339,7 @@ describe('createAiChat() + personaOptions + bot', () => {
         });
     });
 
-    describe('When the bot persona is set after initial render', () => {
+    describe('When the assistant persona is set after initial render', () => {
         it('Persona details should be rendered for every chat item', async () => {
             // Arrange
             const aiChat = createAiChat()
@@ -371,9 +371,9 @@ describe('createAiChat() + personaOptions + bot', () => {
             // Act
             aiChat.updateProps({
                 personaOptions: {
-                    bot: {
-                        name: 'Bot Name',
-                        picture: 'https://bot-image-url',
+                    assistant: {
+                        name: 'Assistant Name',
+                        picture: 'https://assistant-image-url',
                     },
                 },
             });
@@ -384,15 +384,15 @@ describe('createAiChat() + personaOptions + bot', () => {
             avatarContainer = rootElement.querySelectorAll(selector);
             expect(avatarContainer).toHaveLength(2);
 
-            expect(avatarContainer[0].querySelector('.avtr_ltr')).toHaveTextContent('B');
-            expect(avatarContainer[1].querySelector('.avtr_ltr')).toHaveTextContent('B');
+            expect(avatarContainer[0].querySelector('.avtr_ltr')).toHaveTextContent('A');
+            expect(avatarContainer[1].querySelector('.avtr_ltr')).toHaveTextContent('A');
 
             expect(avatarContainer[0].querySelector('.avtr_img')).toHaveStyle(
-                'background-image: url(https://bot-image-url)',
+                'background-image: url(https://assistant-image-url)',
             );
 
             expect(avatarContainer[1].querySelector('.avtr_img')).toHaveStyle(
-                'background-image: url(https://bot-image-url)',
+                'background-image: url(https://assistant-image-url)',
             );
         });
     });

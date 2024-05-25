@@ -1,0 +1,25 @@
+In JavaScript, you can define the assistant persona by calling `withPersonaOptions` when creating the `AiChat` component.
+The `withPersonaOptions` function takes an object with two properties: `assistant` and `user`. The `assistant` property is
+what you use to define the assistant persona, as shown in the example below.
+
+```javascript
+const aiChat = createAiChat()
+    .withAdapter(adapter)
+    .withPersonaOptions({
+        assistant: {
+            name: 'HarryBotter',
+            picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+            tagline: 'Mischievously Making Magic With Mirthful AI!'
+        }
+    });
+```
+
+The object passed to the `assistant` property should match the following interface:
+
+```typescript
+interface AssistantPersona {
+    name: string;
+    picture: string | HTMLElement;
+    tagline?: string;
+}
+```

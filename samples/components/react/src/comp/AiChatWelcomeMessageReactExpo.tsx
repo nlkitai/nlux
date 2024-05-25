@@ -54,8 +54,8 @@ export const AiChatWelcomeMessageReactExpo = () => {
     });
 
     const personaOptions: PersonaOptions = {
-        bot: {
-            name: 'Bot',
+        assistant: {
+            name: 'Assistant',
             picture: 'https://i.pravatar.cc/300',
         },
         user: {

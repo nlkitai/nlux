@@ -1,7 +1,7 @@
 import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompChatSegmentProps = Readonly<{
@@ -9,7 +9,7 @@ export type CompChatSegmentProps = Readonly<{
     status: ChatSegmentStatus;
     conversationLayout: ConversationLayout;
     userPersona?: UserPersona;
-    botPersona?: BotPersona;
+    botPersona?: AssistantPersona;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;

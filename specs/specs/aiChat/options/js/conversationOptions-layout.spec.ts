@@ -177,7 +177,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
     });
 
     describe('When the user adds a message with list layout and without persona config', () => {
-        it('The bot name should be "AI"', async () => {
+        it('The assistant name should be "AI"', async () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withConversationOptions({
                 layout: 'list',

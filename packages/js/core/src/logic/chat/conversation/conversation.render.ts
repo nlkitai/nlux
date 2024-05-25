@@ -1,7 +1,7 @@
 import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
 import {createWelcomeMessageDom} from '../../../../../../shared/src/ui/WelcomeMessage/create';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {source} from '../../../utils/source';
 import {
@@ -21,7 +21,7 @@ export const renderConversation: CompRenderer<
     props,
 }) => {
     const renderingContext: {
-        botPersona: BotPersona | undefined;
+        botPersona: AssistantPersona | undefined;
         userPersona: UserPersona | undefined;
         welcomeMessageContainer: HTMLElement | undefined;
         shouldRenderWelcomeMessage: boolean;
@@ -50,11 +50,11 @@ export const renderConversation: CompRenderer<
     //
     if (renderingContext.shouldRenderWelcomeMessage) {
         if (props.botPersona) {
-            const bot = props.botPersona;
+            const assistant = props.botPersona;
             renderingContext.welcomeMessageContainer = createWelcomeMessageDom({
-                name: bot.name,
-                picture: bot.picture,
-                message: bot.tagline,
+                name: assistant.name,
+                picture: assistant.picture,
+                message: assistant.tagline,
             });
 
             if (renderingContext.welcomeMessageContainer) {
@@ -95,7 +95,7 @@ export const renderConversation: CompRenderer<
                     );
                 }
             },
-            updateBotPersona: (newValue: BotPersona | undefined) => {
+            updateAssistantPersona: (newValue: AssistantPersona | undefined) => {
                 renderingContext.botPersona = newValue;
 
                 // If the welcome personas container is rendered, remove it and re-render it

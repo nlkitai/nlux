@@ -13,9 +13,9 @@ export default () => {
     <AiChat
       adapter={adapter}
       personaOptions={{
-        bot: {
-          name: 'FeatherBot',
-          picture: 'https://nlux.ai/images/demos/persona-feather-bot.png',
+        assistant: {
+          name: 'FeatherAssistant',
+          picture: 'https://nlux.ai/images/demos/persona-feather-assistant.png',
           tagline: 'Yer AI First Mate!'
         },
         user: userPersona

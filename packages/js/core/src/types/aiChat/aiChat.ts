@@ -145,7 +145,7 @@ export interface IAiChat<AiMsg> {
 
     /**
      * Enables providing persona options to the chat component. The persona options will be used to configure
-     * the bot and user personas in the chat component.
+     * the assistant and user personas in the chat component.
      * This method can be called before mounting the chat component, and it can be called only once.
      *
      * @param {PersonaOptions} personaOptions The persona options to be used.

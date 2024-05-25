@@ -55,8 +55,8 @@ const ExampleWrapper = () => {
                     key={key}
                     adapter={langServeAdapter}
                     personaOptions={{
-                        bot: {
-                            name: 'FinFunBot',
+                        assistant: {
+                            name: 'FinFunAssistant',
                             tagline: 'Your AI financial advisor',
                             picture: 'https://nlux.ai/images/demos/persona-finbot.png',
                         },

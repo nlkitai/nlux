@@ -7,7 +7,7 @@ import {comp} from '../../../exports/aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatItem} from '../chatItem/chatItem.model';
 import {CompChatItemProps} from '../chatItem/chatItem.types';
@@ -45,7 +45,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
             item,
             this.getProp('conversationLayout') as ConversationLayout | undefined,
             this.getProp('userPersona') as UserPersona | undefined,
-            this.getProp('botPersona') as BotPersona | undefined,
+            this.getProp('botPersona') as AssistantPersona | undefined,
         );
 
         if (!compChatItemProps) {
@@ -122,7 +122,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
     }
 
-    public setBotPersona(botPersona: BotPersona | undefined) {
+    public setAssistantPersona(botPersona: AssistantPersona | undefined) {
         this.setProp('botPersona', botPersona);
         const newProps: Partial<ChatItemProps> = {
             name: botPersona?.name,

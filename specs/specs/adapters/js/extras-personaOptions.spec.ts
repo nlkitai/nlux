@@ -35,10 +35,10 @@ describe.each([
         it('Persona Options should be provided to the adapter as part of extras attribute', async () => {
             // Arrange
             const testPersonaOptions: PersonaOptions = {
-                bot: {
-                    name: 'Test Bot',
-                    picture: 'https://example.com/test-bot-image.png',
-                    tagline: 'Test Bot Tagline',
+                assistant: {
+                    name: 'Test Assistant',
+                    picture: 'https://example.com/test-assistant-image.png',
+                    tagline: 'Test Assistant Tagline',
                 },
                 user: {
                     name: 'Test User',
@@ -67,10 +67,10 @@ describe.each([
             it('New options should be provided to the adapter as part of extras attribute', async () => {
                 // Arrange
                 const testPersonaOptions: PersonaOptions = {
-                    bot: {
-                        name: 'Test Bot',
-                        picture: 'https://example.com/test-bot-image.png',
-                        tagline: 'Test Bot Tagline',
+                    assistant: {
+                        name: 'Test Assistant',
+                        picture: 'https://example.com/test-assistant-image.png',
+                        tagline: 'Test Assistant Tagline',
                     },
                     user: {
                         name: 'Test User',
@@ -79,10 +79,10 @@ describe.each([
                 };
 
                 const newPersonaOptions: PersonaOptions = {
-                    bot: {
-                        name: 'New Bot',
-                        picture: 'https://example.com/new-bot-image.png',
-                        tagline: 'New Bot Tagline',
+                    assistant: {
+                        name: 'New Assistant',
+                        picture: 'https://example.com/new-assistant-image.png',
+                        tagline: 'New Assistant Tagline',
                     },
                     user: {
                         name: 'New User',

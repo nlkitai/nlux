@@ -1,6 +1,6 @@
 import {JSX} from 'react';
 
-export interface BotPersona {
+export interface AssistantPersona {
     name: string;
     picture: string | JSX.Element;
     tagline?: string;
@@ -12,6 +12,6 @@ export interface UserPersona {
 }
 
 export interface PersonaOptions {
-    bot?: BotPersona,
+    assistant?: AssistantPersona,
     user?: UserPersona,
 }

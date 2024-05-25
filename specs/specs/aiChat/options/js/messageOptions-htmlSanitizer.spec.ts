@@ -65,7 +65,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await userEvent.type(textArea, 'Hi! Henry Bot. Help! Give me a hyperlink!{enter}');
+            await userEvent.type(textArea, 'Hi! Henry The Assistant. Help! Give me a hyperlink!{enter}');
             await waitForRenderCycle();
 
             // Act
@@ -74,7 +74,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
 
             // Assert
             const userMessageContainer = rootElement.querySelector('.nlux_cht_itm_out .nlux-md-cntr') as HTMLElement | null;
-            expect(userMessageContainer!.innerHTML).toBe('<p>xi! xenry bot. xelp! give me a xyperlink!</p>\n');
+            expect(userMessageContainer!.innerHTML).toBe('<p>xi! xenry txe assistant. xelp! give me a xyperlink!</p>\n');
         });
 
         it('Renderer ai message content should be sanitized using the custom function', async () => {
@@ -92,7 +92,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             await waitForRenderCycle();
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
 
-            await userEvent.type(textArea, 'Hi! Henry Bot. Help! Give me a hyperlink!{enter}');
+            await userEvent.type(textArea, 'Hi! Henry The Assistant. Help! Give me a hyperlink!{enter}');
             await waitForRenderCycle();
 
             // Act

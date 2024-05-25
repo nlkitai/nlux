@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForRenderCycle} from '../../../../utils/wait';
 
-describe('createAiChat() + bot persona + welcome message', () => {
+describe('createAiChat() + assistant persona + welcome message', () => {
     let adapterController: AdapterController | undefined = undefined;
 
     let rootElement: HTMLElement;
@@ -24,7 +24,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
         aiChat = undefined;
     });
 
-    describe('When bot persona is configured and a tagline is provided', () => {
+    describe('When assistant persona is configured and a tagline is provided', () => {
         describe('When no initial conversation is provided', () => {
             it('The welcome message should be displayed', async () => {
                 // Arrange
@@ -32,9 +32,9 @@ describe('createAiChat() + bot persona + welcome message', () => {
                 aiChat = createAiChat()
                     .withAdapter(adapterController.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot',
-                            picture: 'https://example.com/bot.png',
+                        assistant: {
+                            name: 'Assistant',
+                            picture: 'https://example.com/assistant.png',
                             tagline: 'Welcome to the chat',
                         },
                     });
@@ -56,9 +56,9 @@ describe('createAiChat() + bot persona + welcome message', () => {
                     aiChat = createAiChat()
                         .withAdapter(adapterController.adapter)
                         .withPersonaOptions({
-                            bot: {
-                                name: 'Bot',
-                                picture: 'https://example.com/bot.png',
+                            assistant: {
+                                name: 'Assistant',
+                                picture: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         });
@@ -84,9 +84,9 @@ describe('createAiChat() + bot persona + welcome message', () => {
                     aiChat = createAiChat()
                         .withAdapter(adapterController.adapter)
                         .withPersonaOptions({
-                            bot: {
-                                name: 'Bot',
-                                picture: 'https://example.com/bot.png',
+                            assistant: {
+                                name: 'Assistant',
+                                picture: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         });
@@ -117,9 +117,9 @@ describe('createAiChat() + bot persona + welcome message', () => {
                 aiChat = createAiChat()
                     .withAdapter(adapterController.adapter)
                     .withPersonaOptions({
-                        bot: {
-                            name: 'Bot',
-                            picture: 'https://example.com/bot.png',
+                        assistant: {
+                            name: 'Assistant',
+                            picture: 'https://example.com/assistant.png',
                             tagline: 'Welcome to the chat',
                         },
                     })
@@ -130,7 +130,7 @@ describe('createAiChat() + bot persona + welcome message', () => {
                         },
                         {
                             role: 'user',
-                            message: 'Hi, bot!',
+                            message: 'Hi, assistant!',
                         },
                     ]);
 

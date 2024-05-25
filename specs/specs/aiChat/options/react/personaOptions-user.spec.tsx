@@ -134,7 +134,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                     adapter={adapterController!.adapter}
                     personaOptions={{
                         user: {
-                            name: 'X-Bot',
+                            name: 'X-Assistant',
                             picture: 'https://xuser-image-url',
                         },
                     }}

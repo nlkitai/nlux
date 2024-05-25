@@ -1,7 +1,7 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {BotPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 
 export type CompConversationEvents = void;
@@ -9,7 +9,7 @@ export type CompConversationEvents = void;
 export type CompConversationProps<AiMsg> = {
     conversationLayout: ConversationLayout;
     messages?: ChatItem<AiMsg>[];
-    botPersona?: BotPersona;
+    botPersona?: AssistantPersona;
     userPersona?: UserPersona;
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
@@ -26,6 +26,6 @@ export type CompConversationElements = {
 export type CompConversationActions = {
     removeWelcomeMessage: () => void;
     resetWelcomeMessage: () => void;
-    updateBotPersona: (newBotPersona: BotPersona | undefined) => void;
+    updateAssistantPersona: (newAssistantPersona: AssistantPersona | undefined) => void;
     updateUserPersona: (newUserPersona: UserPersona | undefined) => void;
 };

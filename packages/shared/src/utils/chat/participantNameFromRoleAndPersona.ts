@@ -7,12 +7,12 @@ export const participantNameFromRoleAndPersona = (
     role: ParticipantRole,
     personaOptions: {
         // Only using names as PersonaOptions differs between React and Vanilla JS
-        bot?: { name?: string };
+        assistant?: { name?: string };
         user?: { name?: string }
     } | undefined
 ): string => {
     if (role === 'ai') {
-        return personaOptions?.bot?.name ?? defaultAiName;
+        return personaOptions?.assistant?.name ?? defaultAiName;
     }
 
     if (role === 'user') {

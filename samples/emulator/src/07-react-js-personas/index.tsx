@@ -1,6 +1,6 @@
 import {highlighter} from '@nlux/highlighter';
 import {useUnsafeChatAdapter} from '@nlux/openai-react';
-import {AiChat, BotPersona, UserPersona} from '@nlux/react';
+import {AiChat, AssistantPersona, UserPersona} from '@nlux/react';
 import {StrictMode, useState} from 'react';
 import {createRoot} from 'react-dom/client';
 import {myCustomPromiseAdapter} from './customAdapter';
@@ -8,9 +8,9 @@ import {myCustomPromiseAdapter} from './customAdapter';
 debugger;
 const apiKey = localStorage.getItem('apiKey') || 'YOUR_API_KEY_HERE';
 
-const botPersonas: (BotPersona | undefined)[] = [
+const botPersonas: (AssistantPersona | undefined)[] = [
     {
-        name: 'FinFunBot',
+        name: 'FinFunAssistant',
         tagline: 'Your AI financial advisor',
         picture: 'https://nlux.ai/images/demos/persona-finbot.png',
     },
@@ -36,11 +36,11 @@ const userPersonas: (UserPersona | undefined)[] = [
 
 const ExampleWrapper = () => {
     const [key, setKey] = useState<number>(0);
-    const [botPersonaIndex, setBotPersonaIndex] = useState<number>(0);
+    const [botPersonaIndex, setAssistantPersonaIndex] = useState<number>(0);
     const [userPersonaIndex, setUserPersonaIndex] = useState<number>(0);
 
-    const handleNextBotPersona = () => {
-        setBotPersonaIndex((botPersonaIndex + 1) % botPersonas.length);
+    const handleNextAssistantPersona = () => {
+        setAssistantPersonaIndex((botPersonaIndex + 1) % botPersonas.length);
     };
 
     const handleNextUserPersona = () => {
@@ -77,8 +77,8 @@ const ExampleWrapper = () => {
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <div style={{marginTop: '50px'}}>
-                <span>Current Bot Persona: {botPersonaIndex}</span>
-                <button onClick={handleNextBotPersona}>Next Bot Persona</button>
+                <span>Current Assistant Persona: {botPersonaIndex}</span>
+                <button onClick={handleNextAssistantPersona}>Next Assistant Persona</button>
                 <hr/>
                 <span>Current User Persona: {userPersonaIndex}</span>
                 <button onClick={handleNextUserPersona}>Next User Persona</button>
@@ -88,10 +88,10 @@ const ExampleWrapper = () => {
                     adapter={myCustomPromiseAdapter}
                     // adapter={adapter}
                     personaOptions={{
-                        bot: botPersonas[botPersonaIndex],
+                        assistant: botPersonas[botPersonaIndex],
                         user: userPersonas[userPersonaIndex],
-                        // bot: {
-                        //     name: 'FinFunBot',
+                        // assistant: {
+                        //     name: 'FinFunAssistant',
                         //     tagline: 'Your AI financial advisor',
                         //     // picture: 'https://1000logos.net/wp-content/uploads/2023/02/ChatGPT-Logo.png',
                         //     picture:
@@ -101,7 +101,7 @@ const ExampleWrapper = () => {
                         // 'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=200',
                         // },
 
-                        // bot: {
+                        // assistant: {
                         //     name: 'HarryBotter',
                         //     picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',

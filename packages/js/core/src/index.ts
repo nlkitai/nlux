@@ -19,7 +19,7 @@ export type {DisplayOptions} from './exports/aiChat/options/displayOptions';
 
 export type {
     PersonaOptions,
-    BotPersona,
+    AssistantPersona,
     UserPersona,
 } from './exports/aiChat/options/personaOptions';
 

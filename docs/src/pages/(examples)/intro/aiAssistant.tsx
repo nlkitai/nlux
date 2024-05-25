@@ -1,18 +1,20 @@
 export default (colorScheme: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
 import '@nlux/themes/nova.css';
 import {streamAdapter} from './adapter';
-import {user, botPictureUrl} from './personas';
+import {
+    userPersona, assistantAvatar
+} from './personas';
 
 export default () => (
   <AiChat
     adapter={streamAdapter}
     personaOptions={{
-      bot: {
-        name: 'EinBot',
+      assistant: {
+        name: 'EinAssistant',
         tagline: 'Your Genius AI Assistant',
-        picture: botPictureUrl,
+        picture: assistantAvatar
       },
-      user
+      user: userPersona
     }}
     composerOptions={{
       placeholder: 'How can I help you?'

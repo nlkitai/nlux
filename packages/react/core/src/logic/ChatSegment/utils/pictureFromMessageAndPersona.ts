@@ -4,7 +4,7 @@ import {ConversationCompProps} from '../../Conversation/props';
 
 export const pictureFromMessageAndPersona = (role: ParticipantRole, personaOptions: ConversationCompProps<AnyAiMsg>['personaOptions']) => {
     if (role === 'ai') {
-        return personaOptions?.bot?.picture;
+        return personaOptions?.assistant?.picture;
     }
 
     if (role === 'user') {

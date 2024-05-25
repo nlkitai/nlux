@@ -134,8 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 name: 'Mr User',
                 picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
             },
-            bot: {
-                name: 'AI Bot',
+            assistant: {
+                name: 'AI Assistant',
                 picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
                 tagline: 'Welcome to the chat',
             },

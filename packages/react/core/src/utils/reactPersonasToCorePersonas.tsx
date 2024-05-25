@@ -17,19 +17,19 @@ const jsxToHtmlElement = (jsx: JSX.Element): Promise<HTMLElement> => {
 };
 
 export const reactPersonasToCorePersonas = async (reactPersonas: ReactPersonasOptions): Promise<PersonaOptions> => {
-    const [bot, user] = await Promise.all([
+    const [assistant, user] = await Promise.all([
         (async () => {
-            if (!reactPersonas.bot) {
+            if (!reactPersonas.assistant) {
                 return;
             }
 
-            const botPicture = typeof reactPersonas.bot.picture === 'string' ?
-                reactPersonas.bot.picture :
-                await jsxToHtmlElement(reactPersonas.bot.picture);
+            const botPicture = typeof reactPersonas.assistant.picture === 'string' ?
+                reactPersonas.assistant.picture :
+                await jsxToHtmlElement(reactPersonas.assistant.picture);
 
             return {
-                name: reactPersonas.bot.name,
-                tagline: reactPersonas.bot.tagline,
+                name: reactPersonas.assistant.name,
+                tagline: reactPersonas.assistant.tagline,
                 picture: botPicture,
             };
         })(),
@@ -50,7 +50,7 @@ export const reactPersonasToCorePersonas = async (reactPersonas: ReactPersonasOp
     ]);
 
     return {
-        bot,
+        assistant,
         user,
     };
 };
