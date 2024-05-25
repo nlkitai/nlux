@@ -9,7 +9,7 @@ export const ChatItemReactExpo = () => {
     const [message, setMessage] = useState<string>('Hello, World!');
 
     const [name, setName] = useState<string>('John Doe');
-    const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');
+    const [avatar, setAvatar] = useState<string | ReactElement>('https://i.pravatar.cc/150');
 
     const ForwardRefChatItemComp = useMemo(() => forwardRef(
         ChatItemComp,
@@ -50,9 +50,9 @@ export const ChatItemReactExpo = () => {
                     />
                     <input
                         type="text"
-                        value={typeof picture === 'string' ? picture : ''}
-                        onChange={(event) => setPicture(event.target.value)}
-                        placeholder="Picture"
+                        value={typeof avatar === 'string' ? avatar : ''}
+                        onChange={(event) => setAvatar(event.target.value)}
+                        placeholder="Avatar"
                     />
                 </div>
                 <div className="content">
@@ -63,7 +63,7 @@ export const ChatItemReactExpo = () => {
                         layout={'bubbles'}
                         status={status}
                         fetchedContent={message}
-                        picture={picture}
+                        avatar={avatar}
                         name={name}
                     />
                 </div>

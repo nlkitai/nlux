@@ -58,11 +58,11 @@ const ExampleWrapper = () => {
                         assistant: {
                             name: 'FinFunAssistant',
                             tagline: 'Your AI financial advisor',
-                            picture: 'https://nlux.ai/images/demos/persona-finbot.png',
+                            avatar: 'https://nlux.ai/images/demos/persona-finbot.png',
                         },
                         user: {
                             name: 'Melanie',
-                            picture: 'https://nlux.ai/images/demos/persona-woman.jpeg',
+                            avatar: 'https://nlux.ai/images/demos/persona-woman.jpeg',
                         },
                     }}
                     initialConversation={[

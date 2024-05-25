@@ -36,7 +36,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant Name',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     });
 
@@ -63,7 +63,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant Name',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     });
 
@@ -90,7 +90,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant Name',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     });
 
@@ -112,7 +112,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
             });
         });
 
-        describe('When the assistant picture is updated', () => {
+        describe('When the assistant avatar is updated', () => {
             it('Should update the assistant persona photo', async () => {
                 // Arrange
                 const aiChat = createAiChat()
@@ -120,7 +120,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant Name',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     });
 
@@ -145,7 +145,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     personaOptions: {
                         assistant: {
                             name: 'X Assistant',
-                            picture: 'https://x-assistant-image-url',
+                            avatar: 'https://x-assistant-image-url',
                         },
                     },
                 });
@@ -167,23 +167,23 @@ describe('createAiChat() + personaOptions + assistant', () => {
             });
         });
 
-        describe('When the assistant persona is set with DOM element as picture', () => {
+        describe('When the assistant persona is set with DOM element as avatar', () => {
             describe('When the assistant sends a response', () => {
                 it('Assistant persona details should be rendered', async () => {
                     // Arrange
-                    const picture = document.createElement('div');
-                    picture.id = 'jsx-avatar';
-                    picture.style.backgroundColor = 'red';
-                    picture.style.width = '50px';
-                    picture.style.height = '50px';
-                    picture.textContent = 'DOM HTML Avatar';
+                    const avatar = document.createElement('div');
+                    avatar.id = 'jsx-avatar';
+                    avatar.style.backgroundColor = 'red';
+                    avatar.style.width = '50px';
+                    avatar.style.height = '50px';
+                    avatar.textContent = 'DOM HTML Avatar';
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant Name',
-                                picture,
+                                avatar,
                             },
                         });
 
@@ -205,19 +205,19 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                 it('Assistant persona DOM element should be rendered', async () => {
                     // Arrange
-                    const picture = document.createElement('div');
-                    picture.id = 'jsx-avatar';
-                    picture.style.backgroundColor = 'red';
-                    picture.style.width = '50px';
-                    picture.style.height = '50px';
-                    picture.textContent = 'DOM HTML Avatar';
+                    const avatar = document.createElement('div');
+                    avatar.id = 'jsx-avatar';
+                    avatar.style.backgroundColor = 'red';
+                    avatar.style.width = '50px';
+                    avatar.style.height = '50px';
+                    avatar.textContent = 'DOM HTML Avatar';
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant Name',
-                                picture,
+                                avatar,
                             },
                         });
 
@@ -249,7 +249,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 .withPersonaOptions({
                     assistant: {
                         name: 'Assistant Name',
-                        picture: 'https://assistant-image-url',
+                        avatar: 'https://assistant-image-url',
                     },
                 });
 
@@ -299,7 +299,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 .withPersonaOptions({
                     assistant: {
                         name: 'Assistant Name',
-                        picture: 'https://assistant-image-url',
+                        avatar: 'https://assistant-image-url',
                     },
                 });
 
@@ -373,7 +373,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 personaOptions: {
                     assistant: {
                         name: 'Assistant Name',
-                        picture: 'https://assistant-image-url',
+                        avatar: 'https://assistant-image-url',
                     },
                 },
             });

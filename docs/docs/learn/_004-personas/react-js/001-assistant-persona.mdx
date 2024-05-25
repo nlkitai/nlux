@@ -8,7 +8,7 @@ define the assistant persona, as shown in the example below.
     personaOptions={{
         assistant: {
             name: 'HarryBotter',
-            picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+            avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
             tagline: 'Mischievously Making Magic With Mirthful AI!',
         },
     }}
@@ -20,7 +20,7 @@ The object passed to the `assistant` property should match the following interfa
 ```typescript
 interface AssistantPersona {
     name: string;
-    picture: string | JSX.Element;
+    avatar: string | JSX.Element;
     tagline?: string;
 }
 ```

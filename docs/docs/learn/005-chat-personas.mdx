@@ -23,8 +23,8 @@ With `NLUX`, you can optionally define **a assistant persona** and **a user pers
 
 Using personas enhances natural conversation with your intelligent assistant.<br />
 It allows you to **give your assistant an identity** that persists during the interaction.
-This includes details like a name, profile picture, and a custom tagline.
-Similarly you can also **represent the user profile** with a name and a profile picture.
+This includes details like a name, an avatar, and a custom tagline.
+Similarly you can also **represent the user profile** with a name and an avatar.
 
 <PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
 
@@ -40,7 +40,7 @@ When defined, the assistant persona will appear in 2 places:
 When defining the assistant persona, you can specify the following properties:
 
 * The **name** of the assistant.
-* The **profile picture** of the assistant.
+* The **avatar** of the assistant.
 * A **tagline** that will appear below the assistant's name.
 
 | In initial screen | In conversation |
@@ -51,13 +51,13 @@ When defining the assistant persona, you can specify the following properties:
 
 <PlatformSection reactJs={AssistantPersonaReactJs} javascript={AssistantPersonaJavaScript}/>
 
-When a string is passed to the `picture` property, it is assumed to be a URL to an image. You can also pass a JSX
-element to the `picture` property, which is useful if you want to use an SVG image or a custom component.
+When a string is passed to the `avatar` property, it is assumed to be a URL to an image. You can also pass a JSX
+element to the `avatar` property, which is useful if you want to use an SVG image or a custom component.
 
-If an invalid URL is passed to the `picture` property, the first letter of the assistant's name will be used as the avatar
+If an invalid URL is passed to the `avatar` property, the first letter of the assistant's name will be used as the avatar
 image, as shown in the example below.
 
-| Initial screen with invalid picture URL | Conversation with invalid picture URL |
+| Initial screen with invalid avatar URL | Conversation with invalid avatar URL |
 | --- | --- |
 | <img width="400" src="/nlux/examples/assistant-persona/assistant-persona-initial-screen-invalid-url.png" /> | <img width="400" src="/nlux/examples/assistant-persona/assistant-persona-in-chat-invalid-url.png" /> |
 
@@ -70,7 +70,7 @@ When defined, the user persona will appear in that conversation UI, in front of 
 When defining the user persona, you can specify the following properties:
 
 * The **name** of the user.
-* The **profile picture** of the user.
+* The **avatar** of the user.
 
 | User persona in conversation |
 | --- |

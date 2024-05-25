@@ -9,7 +9,7 @@ describe('When welcome message is rendered for update', () => {
             // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
-                picture: 'https://example.com/avatar.jpg',
+                avatar: 'https://example.com/avatar.jpg',
                 message: 'Hello, World!',
             };
 
@@ -29,7 +29,7 @@ describe('When welcome message is rendered for update', () => {
             // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
-                picture: 'https://example.com/avatar.jpg',
+                avatar: 'https://example.com/avatar.jpg',
                 message: 'Hello, World!',
             };
 
@@ -45,25 +45,25 @@ describe('When welcome message is rendered for update', () => {
         });
     });
 
-    describe('When the picture URL is updated', () => {
-        it('Should update the message with the new picture', () => {
+    describe('When the avatar URL is updated', () => {
+        it('Should update the message with the new avatar', () => {
             // Arrange
             const props: WelcomeMessageProps = {
                 name: 'John Doe',
-                picture: 'https://example.com/avatar.jpg',
+                avatar: 'https://example.com/avatar.jpg',
                 message: 'Hello, World!',
             };
 
             const welcomeMessage = createWelcomeMessageDom(props);
-            const newPicture = 'https://example.com/new-avatar.jpg';
+            const newAvatar = 'https://example.com/new-avatar.jpg';
 
             // Act
-            updateWelcomeMessageDom(welcomeMessage, props, {...props, picture: newPicture});
-            const personaPicture = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
+            updateWelcomeMessageDom(welcomeMessage, props, {...props, avatar: newAvatar});
+            const personaAvatar = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
 
             // Assert
-            expect(personaPicture).not.toBeNull();
-            expect(personaPicture.outerHTML).toEqual(
+            expect(personaAvatar).not.toBeNull();
+            expect(personaAvatar.outerHTML).toEqual(
                 expect.stringContaining('url(https://example.com/new-avatar.jpg)'),
             );
         });

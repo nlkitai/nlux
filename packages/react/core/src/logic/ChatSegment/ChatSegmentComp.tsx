@@ -18,7 +18,7 @@ import {LoaderComp} from '../../ui/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {participantNameFromRoleAndPersona} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
-import {pictureFromMessageAndPersona} from './utils/pictureFromMessageAndPersona';
+import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
@@ -164,7 +164,7 @@ export const ChatSegmentComp: <AiMsg>(
                             dataTransferMode={'batch'} // User chat items are always in batch mode.
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
-                            picture={pictureFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                            avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             syntaxHighlighter={props.syntaxHighlighter}
                             htmlSanitizer={props.htmlSanitizer}
                             markdownLinkTarget={props.markdownLinkTarget}
@@ -199,9 +199,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     streamedContent={chatItem.content}
                                     responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    picture={pictureFromMessageAndPersona(chatItem.participantRole,
-                                        props.personaOptions,
-                                    )}
+                                    avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}
@@ -240,9 +238,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     fetchedServerResponse={chatItem.serverResponse}
                                     responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    picture={pictureFromMessageAndPersona(chatItem.participantRole,
-                                        props.personaOptions,
-                                    )}
+                                    avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}
@@ -269,9 +265,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     dataTransferMode={chatItem.dataTransferMode}
                                     responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    picture={pictureFromMessageAndPersona(chatItem.participantRole,
-                                        props.personaOptions,
-                                    )}
+                                    avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     syntaxHighlighter={props.syntaxHighlighter}
                                     htmlSanitizer={props.htmlSanitizer}
                                     markdownLinkTarget={props.markdownLinkTarget}

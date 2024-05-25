@@ -7,7 +7,7 @@ describe('When welcome message is rendered', () => {
         // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
-            picture: 'https://example.com/avatar.jpg',
+            avatar: 'https://example.com/avatar.jpg',
             message: 'Hello, World!',
         };
 
@@ -22,7 +22,7 @@ describe('When welcome message is rendered', () => {
         // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
-            picture: 'https://example.com/avatar.jpg',
+            avatar: 'https://example.com/avatar.jpg',
         };
 
         // Act
@@ -33,20 +33,20 @@ describe('When welcome message is rendered', () => {
         expect(name).toBe(props.name);
     });
 
-    it('Should render the welcome message with the picture', () => {
+    it('Should render the welcome message with the avatar', () => {
         // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
-            picture: 'https://example.com/avatar.jpg',
+            avatar: 'https://example.com/avatar.jpg',
         };
 
         // Act
         const welcomeMessage = createWelcomeMessageDom(props);
-        const personaPicture = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
+        const personaAvatar = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
 
         // Assert
-        expect(personaPicture).not.toBeNull();
-        expect(personaPicture.outerHTML).toEqual(
+        expect(personaAvatar).not.toBeNull();
+        expect(personaAvatar.outerHTML).toEqual(
             expect.stringContaining('url(https://example.com/avatar.jpg)'),
         );
     });
@@ -55,7 +55,7 @@ describe('When welcome message is rendered', () => {
         // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',
-            picture: 'https://example.com/avatar.jpg',
+            avatar: 'https://example.com/avatar.jpg',
             message: 'Hello, World!',
         };
 

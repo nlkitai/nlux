@@ -27,7 +27,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                         personaOptions={{
                             assistant: {
                                 name: 'Assistant',
-                                picture: 'https://example.com/assistant.png',
+                                avatar: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         }}
@@ -51,7 +51,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                             personaOptions={{
                                 assistant: {
                                     name: 'Assistant',
-                                    picture: 'https://example.com/assistant.png',
+                                    avatar: 'https://example.com/assistant.png',
                                     tagline: 'Welcome to the chat',
                                 },
                             }}
@@ -82,7 +82,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                             personaOptions={{
                                 assistant: {
                                     name: 'Assistant',
-                                    picture: 'https://example.com/assistant.png',
+                                    avatar: 'https://example.com/assistant.png',
                                     tagline: 'Welcome to the chat',
                                 },
                             }}
@@ -118,7 +118,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                         personaOptions={{
                             assistant: {
                                 name: 'Assistant',
-                                picture: 'https://example.com/assistant.png',
+                                avatar: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         }}

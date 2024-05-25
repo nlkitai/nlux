@@ -9,5 +9,5 @@ export type ChatItemProps = {
     name: string; // The name is required, as it should be displayed in list layout. Default can be AI or User.
 
     message?: string;
-    picture?: string | HTMLElement;
+    avatar?: string | HTMLElement;
 };

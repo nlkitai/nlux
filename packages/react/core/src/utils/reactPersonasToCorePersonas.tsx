@@ -23,14 +23,14 @@ export const reactPersonasToCorePersonas = async (reactPersonas: ReactPersonasOp
                 return;
             }
 
-            const assistantAvatar = typeof reactPersonas.assistant.picture === 'string' ?
-                reactPersonas.assistant.picture :
-                await jsxToHtmlElement(reactPersonas.assistant.picture);
+            const assistantAvatar = typeof reactPersonas.assistant.avatar === 'string' ?
+                reactPersonas.assistant.avatar :
+                await jsxToHtmlElement(reactPersonas.assistant.avatar);
 
             return {
                 name: reactPersonas.assistant.name,
                 tagline: reactPersonas.assistant.tagline,
-                picture: assistantAvatar,
+                avatar: assistantAvatar,
             };
         })(),
         (async () => {
@@ -38,13 +38,13 @@ export const reactPersonasToCorePersonas = async (reactPersonas: ReactPersonasOp
                 return;
             }
 
-            const userPicture = typeof reactPersonas.user.picture === 'string' ?
-                reactPersonas.user.picture :
-                await jsxToHtmlElement(reactPersonas.user.picture);
+            const userAvatar = typeof reactPersonas.user.avatar === 'string' ?
+                reactPersonas.user.avatar :
+                await jsxToHtmlElement(reactPersonas.user.avatar);
 
             return {
                 name: reactPersonas.user.name,
-                picture: userPicture,
+                avatar: userAvatar,
             };
         })(),
     ]);

@@ -12,7 +12,7 @@ export default () => (
       assistant: {
         name: 'EinAssistant',
         tagline: 'Your Genius AI Assistant',
-        picture: assistantAvatar
+        avatar: assistantAvatar
       },
       user: userPersona
     }}

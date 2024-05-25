@@ -27,12 +27,12 @@ newExpo.innerHTML = `
 document.querySelector<HTMLDivElement>('#app')!.append(newExpo);
 
 const imgFromProps = (props: AvatarProps): HTMLElement => {
-    if (typeof props.picture !== 'string') {
-        return props.picture as HTMLImageElement;
+    if (typeof props.avatar !== 'string') {
+        return props.avatar as HTMLImageElement;
     }
 
     const newImg = document.createElement('img');
-    newImg.src = props.picture as string;
+    newImg.src = props.avatar as string;
     newImg.alt = props.name ?? '';
     newImg.style.width = '100px';
     newImg.style.aspectRatio = '1 / 1';
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let insertAs: 'url' | 'img' = 'url';
     let props: AvatarProps = {
         name: 'Alex Doe',
-        picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
     };
 
     const message = createAvatarDom(props);
@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const select = container.querySelector<HTMLSelectElement>('.controls select')!;
 
     nameInput.value = props.name ?? '';
-    urlInput.value = typeof props.picture === 'string' ? props.picture : '';
+    urlInput.value = typeof props.avatar === 'string' ? props.avatar : '';
     select.value = 'url';
 
     nameInput.addEventListener('input', () => {
         const newProps: AvatarProps = {
             name: nameInput.value,
-            picture: insertAs === 'url' ? urlInput.value : imgFromProps({
+            avatar: insertAs === 'url' ? urlInput.value : imgFromProps({
                 name: nameInput.value,
-                picture: urlInput.value,
+                avatar: urlInput.value,
             }),
         };
 
@@ -73,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     urlInput.addEventListener('input', () => {
         const newProps: AvatarProps = {
             name: nameInput.value,
-            picture: insertAs === 'url' ? urlInput.value : imgFromProps({
+            avatar: insertAs === 'url' ? urlInput.value : imgFromProps({
                 name: nameInput.value,
-                picture: urlInput.value,
+                avatar: urlInput.value,
             }),
         };
 
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
             insertAs = 'url';
             const newProps: AvatarProps = {
                 name: nameInput.value,
-                picture: urlInput.value,
+                avatar: urlInput.value,
             };
 
             updateAvatarDom(message, props, newProps);
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             insertAs = 'img';
             const newProps: AvatarProps = {
                 name: nameInput.value,
-                picture: imgFromProps(props),
+                avatar: imgFromProps(props),
             };
 
             updateAvatarDom(message, props, newProps);

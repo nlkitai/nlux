@@ -6,13 +6,13 @@ export const AvatarReactExpo = () => {
     const [name, setName] = useState('Alex');
     const [url, setUrl] = useState('https://nlux.ai/images/demos/persona-user.jpeg');
     const [type, setType] = useState<'url' | 'img'>('url');
-    const [picture, setPicture] = useState<string | ReactElement>('');
+    const [avatar, setAvatar] = useState<string | ReactElement>('');
 
     useEffect(() => {
         if (type === 'url') {
-            setPicture(url);
+            setAvatar(url);
         } else {
-            setPicture(<img src={url} alt={name}/>);
+            setAvatar(<img src={url} alt={name}/>);
         }
     }, [name, url, type]);
 
@@ -44,7 +44,7 @@ export const AvatarReactExpo = () => {
                     </select>
                 </div>
                 <div className="content">
-                    <AvatarComp name={name} picture={picture}/>
+                    <AvatarComp name={name} avatar={avatar}/>
                 </div>
             </div>
         </div>

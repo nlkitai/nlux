@@ -12,7 +12,7 @@ newExpo.innerHTML = `
             <div class="controls">
                 <input type="text" placeholder="WelcomeMessage" class="message" />
                 <input type="text" placeholder="Name" class="name" />
-                <input type="text" placeholder="Picture" class="picture" />
+                <input type="text" placeholder="Avatar" class="avatar" />
             </div>
             <div class="content">
                 <!-- WelcomeMessage component will be rendered here -->
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let props: WelcomeMessageProps = {
         message: 'Hello, World!',
         name: 'Alex Doe',
-        picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
     };
 
     const welcomeMessage = createWelcomeMessageDom(props);
@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
         props = newProps;
     });
 
-    const pictureInput = container.querySelector<HTMLInputElement>('.controls input.picture')!;
-    pictureInput.value = typeof props.picture === 'string' ? props.picture : '';
-    pictureInput.addEventListener('input', () => {
+    const avatarInput = container.querySelector<HTMLInputElement>('.controls input.avatar')!;
+    avatarInput.value = typeof props.avatar === 'string' ? props.avatar : '';
+    avatarInput.addEventListener('input', () => {
         const newProps: WelcomeMessageProps = {
             ...props,
-            picture: pictureInput.value,
+            avatar: avatarInput.value,
         };
 
         updateWelcomeMessageDom(welcomeMessage, props, newProps);

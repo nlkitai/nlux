@@ -5,7 +5,7 @@ import {ReactElement, useState} from 'react';
 export const WelcomeMessageReactExpo = () => {
     const [message, setMessage] = useState<string>('Hello, World!');
     const [name, setName] = useState<string>('John Doe');
-    const [picture, setPicture] = useState<string | ReactElement>('https://i.pravatar.cc/150');
+    const [avatar, setAvatar] = useState<string | ReactElement>('https://i.pravatar.cc/150');
 
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
@@ -28,15 +28,15 @@ export const WelcomeMessageReactExpo = () => {
                     />
                     <input
                         type="text"
-                        value={typeof picture === 'string' ? picture : ''}
-                        onChange={(event) => setPicture(event.target.value)}
-                        placeholder="Picture"
+                        value={typeof avatar === 'string' ? avatar : ''}
+                        onChange={(event) => setAvatar(event.target.value)}
+                        placeholder="Avatar"
                     />
                 </div>
                 <div className="content">
                     <WelcomeMessageComp
-                        picture={picture}
                         name={name}
+                        avatar={avatar}
                         message={message}
                     />
                 </div>

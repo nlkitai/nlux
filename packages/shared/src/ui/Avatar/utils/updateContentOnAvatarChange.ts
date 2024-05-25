@@ -2,39 +2,39 @@ import {emptyInnerHtml} from '../../../utils/dom/emptyInnerHtml';
 import {AvatarProps} from '../props';
 import {createPhotoContainerFromUrl} from './createPhotoContainerFromUrl';
 
-export const updateContentOnPictureChange = (
+export const updateContentOnAvatarChange = (
     element: HTMLElement,
     propsBefore: AvatarProps,
     propsAfter: AvatarProps,
 ): void => {
-    if (propsBefore.picture === propsAfter.picture) {
+    if (propsBefore.avatar === propsAfter.avatar) {
         return;
     }
 
-    if (typeof propsAfter.picture === 'string' && typeof propsBefore.picture === 'string') {
-        // When the picture is a string, we update the photo container with the new URL
+    if (typeof propsAfter.avatar === 'string' && typeof propsBefore.avatar === 'string') {
+        // When the avatar is a string, we update the photo container with the new URL
         const photoDomElement: HTMLElement | null = element.querySelector(
             '* > .avtr_ctn > .avtr_img',
         );
 
         if (photoDomElement !== null) {
-            photoDomElement.style.backgroundImage = `url("${encodeURI(propsAfter.picture)}")`;
+            photoDomElement.style.backgroundImage = `url("${encodeURI(propsAfter.avatar)}")`;
         }
     } else {
-        if (typeof propsAfter.picture === 'string') {
-            // When the new picture is a string and the old one is not —
+        if (typeof propsAfter.avatar === 'string') {
+            // When the new avatar is a string and the old one is not —
             // we create a new photo container from the URL
             const newPhotoDomElement = createPhotoContainerFromUrl(
-                propsAfter.picture,
+                propsAfter.avatar,
                 propsAfter.name,
             );
             element.replaceChildren(newPhotoDomElement);
         } else {
-            // When the picture is an HTMLElement, we clone it and append it to the persona dom
-            if (propsAfter.picture) {
-                element.replaceChildren(propsAfter.picture.cloneNode(true));
+            // When the avatar is an HTMLElement, we clone it and append it to the persona dom
+            if (propsAfter.avatar) {
+                element.replaceChildren(propsAfter.avatar.cloneNode(true));
             } else {
-                // If the new picture is null, we remove the old one
+                // If the new avatar is null, we remove the old one
                 emptyInnerHtml(element);
             }
         }

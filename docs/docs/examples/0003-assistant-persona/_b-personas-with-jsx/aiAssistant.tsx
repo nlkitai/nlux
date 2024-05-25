@@ -12,7 +12,7 @@ export default () => {
       personaOptions={{
         assistant: {
           name: 'iAssistant',
-          picture: <span style={assistantCssStyle}>🤖</span>,
+          avatar: <span style={assistantCssStyle}>🤖</span>,
           tagline: 'Your Genius AI Assistant',
         },
         user

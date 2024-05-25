@@ -53,7 +53,7 @@ export const renderConversation: CompRenderer<
             const assistant = props.assistantPersona;
             renderingContext.welcomeMessageContainer = createWelcomeMessageDom({
                 name: assistant.name,
-                picture: assistant.picture,
+                avatar: assistant.avatar,
                 message: assistant.tagline,
             });
 
@@ -83,7 +83,7 @@ export const renderConversation: CompRenderer<
                 renderingContext.welcomeMessageContainer = renderingContext.assistantPersona
                     ? createWelcomeMessageDom({
                         name: renderingContext.assistantPersona.name,
-                        picture: renderingContext.assistantPersona.picture,
+                        avatar: renderingContext.assistantPersona.avatar,
                         message: renderingContext.assistantPersona.tagline,
                     })
                     : undefined;
@@ -109,7 +109,7 @@ export const renderConversation: CompRenderer<
                     renderingContext.welcomeMessageContainer = renderingContext.assistantPersona
                         ? createWelcomeMessageDom({
                             name: renderingContext.assistantPersona.name,
-                            picture: renderingContext.assistantPersona.picture,
+                            avatar: renderingContext.assistantPersona.avatar,
                             message: renderingContext.assistantPersona.tagline,
                         })
                         : undefined;

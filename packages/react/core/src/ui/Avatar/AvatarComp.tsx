@@ -8,22 +8,22 @@ import {
 import {AvatarProps} from './props';
 
 export const AvatarComp = (props: AvatarProps) => {
-    const isPictureUrl = typeof props.picture === 'string';
-    const isPictureElement = !isPictureUrl && isValidElement(props.picture);
+    const isAvatarUrl = typeof props.avatar === 'string';
+    const isAvatarElement = !isAvatarUrl && isValidElement(props.avatar);
 
     return (
         <div className={compAvatarClassName}>
-            {isPictureElement && props.picture}
-            {!isPictureElement && isPictureUrl && (
+            {isAvatarElement && props.avatar}
+            {!isAvatarElement && isAvatarUrl && (
                 <div className={compAvatarPhotoContainerClassName}>
                     <span className={compAvatarInitialsClassName}>
                         {props.name && props.name.length > 0 ? props.name[0].toUpperCase() : ''}
                     </span>
-                    {props.picture && (
+                    {props.avatar && (
                         <div
                             className={compAvatarPhotoClassName}
                             style={{
-                                backgroundImage: `url("${encodeURI(props.picture as string)}")`,
+                                backgroundImage: `url("${encodeURI(props.avatar as string)}")`,
                             }}
                         />
                     )}

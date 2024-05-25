@@ -2,7 +2,7 @@ export default `import {PersonaOptions} from '@nlux/react';
 
 export const userPersona = {
   name: 'Alex',
-  picture: 'https://nlux.ai/images/demos/persona-user.jpeg'
+  avatar: 'https://nlux.ai/images/demos/persona-user.jpeg'
 };
 
 export const assistantAvatar = 'https://nlux.ai/images/demos/persona-albert.jpeg';

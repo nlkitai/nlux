@@ -3,16 +3,16 @@ import {createAiChat, AssistantPersona, PersonaOptions, UserPersona} from '@nlux
 
 const assistantPersona: AssistantPersona = {
     name: 'HarryBotter',
-    picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+    avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
     tagline: 'Mischievously Making Magic With Mirthful AI!',
 };
 
-const pictureElement = document.createElement('span');
-pictureElement.innerHTML = '👩';
+const avatarElement = document.createElement('span');
+avatarElement.innerHTML = '👩';
 
 const userPersona: UserPersona = {
     name: 'Alice',
-    picture: pictureElement
+    avatar: avatarElement
 }
 
 const personaOptions: PersonaOptions = {

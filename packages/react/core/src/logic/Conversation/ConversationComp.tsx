@@ -51,7 +51,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
             {showWelcomeMessage && (
                 <WelcomeMessageComp
                     name={personaOptions!.assistant!.name}
-                    picture={personaOptions!.assistant!.picture}
+                    avatar={personaOptions!.assistant!.avatar}
                     message={personaOptions!.assistant!.tagline}
                 />
             )}

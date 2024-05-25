@@ -26,8 +26,8 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
         if (props.personaOptions.assistant) {
             result.personaOptions.assistant = {
                 name: props.personaOptions.assistant.name,
-                picture: typeof props.personaOptions.assistant.picture === 'string'
-                    ? props.personaOptions.assistant.picture
+                avatar: typeof props.personaOptions.assistant.avatar === 'string'
+                    ? props.personaOptions.assistant.avatar
                     : '<REACT ELEMENT />',
                 tagline: props.personaOptions.assistant.tagline,
             };
@@ -36,8 +36,8 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
         if (props.personaOptions.user) {
             result.personaOptions.user = {
                 name: props.personaOptions.user.name,
-                picture: typeof props.personaOptions.user.picture === 'string'
-                    ? props.personaOptions.user.picture
+                avatar: typeof props.personaOptions.user.avatar === 'string'
+                    ? props.personaOptions.user.avatar
                     : '<REACT ELEMENT />',
             };
         }

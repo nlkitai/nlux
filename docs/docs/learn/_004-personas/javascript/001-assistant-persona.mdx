@@ -8,7 +8,7 @@ const aiChat = createAiChat()
     .withPersonaOptions({
         assistant: {
             name: 'HarryBotter',
-            picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+            avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
             tagline: 'Mischievously Making Magic With Mirthful AI!'
         }
     });
@@ -19,7 +19,7 @@ The object passed to the `assistant` property should match the following interfa
 ```typescript
 interface AssistantPersona {
     name: string;
-    picture: string | HTMLElement;
+    avatar: string | HTMLElement;
     tagline?: string;
 }
 ```

@@ -2,13 +2,13 @@ import {describe, expect, it} from 'vitest';
 import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/create';
 import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
 
-describe('When an avatar component is rendered with url as picture', () => {
+describe('When an avatar component is rendered with url as avatar', () => {
     it('Should render the photo container with the photo in the foreground', () => {
         // Arrange
         const url = 'https://example.com/photo.jpg';
         const name = 'John Doe';
-        const picture = url;
-        const props: AvatarProps = {name, picture};
+        const avatar = url;
+        const props: AvatarProps = {name, avatar};
 
         // Act
         const element = createAvatarDom(props);

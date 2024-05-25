@@ -3,13 +3,13 @@ import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/crea
 import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
 import {updateAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/update';
 
-describe('When an avatar component is rendered with HTML element as picture', () => {
-    it('Should render the picture as is', () => {
+describe('When an avatar component is rendered with HTML element the avatar', () => {
+    it('Should render the avatar as is', () => {
         // Arrange
         const name = 'John Doe';
-        const picture = document.createElement('img');
-        picture.src = 'https://example.com/photo.jpg';
-        const props: AvatarProps = {name, picture};
+        const avatar = document.createElement('img');
+        avatar.src = 'https://example.com/photo.jpg';
+        const props: AvatarProps = {name, avatar};
 
         // Act
         const element = createAvatarDom(props);
@@ -20,7 +20,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
         );
     });
 
-    describe('When no picture or name is provided', () => {
+    describe('When no avatar or name is provided', () => {
         it('Should render an empty div', () => {
             // Arrange
             const props: AvatarProps = {};
@@ -49,13 +49,13 @@ describe('When an avatar component is rendered with HTML element as picture', ()
         });
     });
 
-    describe('When the picture element is updated', () => {
-        it('Should render the new picture as is', () => {
+    describe('When the avatar element is updated', () => {
+        it('Should render the new avatar as is', () => {
             // Arrange
             const name = 'John Doe';
             const picture1 = document.createElement('img');
             picture1.src = 'https://example.com/photo1.jpg';
-            const props: AvatarProps = {name, picture: picture1};
+            const props: AvatarProps = {name, avatar: picture1};
             const picture2 = document.createElement('img');
             picture2.src = 'https://example.com/photo2.jpg';
             const element = createAvatarDom(props);
@@ -64,7 +64,7 @@ describe('When an avatar component is rendered with HTML element as picture', ()
             updateAvatarDom(
                 element,
                 props,
-                {...props, picture: picture2},
+                {...props, avatar: picture2},
             );
 
             // Assert
@@ -73,19 +73,19 @@ describe('When an avatar component is rendered with HTML element as picture', ()
             );
         });
 
-        describe('When the new picture is a string', () => {
-            it('Should render the new picture as URL', () => {
+        describe('When the new avatar is a string', () => {
+            it('Should render the new avatar as URL', () => {
                 // Arrange
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
                 const props: AvatarProps = {
                     name,
-                    picture: picture1,
+                    avatar: picture1,
                 };
                 const newProps: AvatarProps = {
                     name,
-                    picture: 'https://example.com/photo2.jpg',
+                    avatar: 'https://example.com/photo2.jpg',
                 };
                 const picture2 = 'https://example.com/photo2.jpg';
                 const element = createAvatarDom(props);
@@ -106,15 +106,15 @@ describe('When an avatar component is rendered with HTML element as picture', ()
                 );
             });
 
-            it('Should render the new picture as URL and change name', () => {
+            it('Should render the new avatar as URL and change name', () => {
                 // Arrange
                 const name = 'John Doe';
                 const picture1 = document.createElement('img');
                 picture1.src = 'https://example.com/photo1.jpg';
-                const props: AvatarProps = {name, picture: picture1};
+                const props: AvatarProps = {name, avatar: picture1};
                 const newProps: AvatarProps = {
                     name: 'Alex Doe',
-                    picture: 'https://example.com/photo2.jpg',
+                    avatar: 'https://example.com/photo2.jpg',
                 };
                 const picture2 = 'https://example.com/photo2.jpg';
                 const element = createAvatarDom(props);

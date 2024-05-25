@@ -12,11 +12,11 @@ export const createWelcomeMessageDom: DomCreator<WelcomeMessageProps> = (
     const element = document.createElement('div');
     element.classList.add(className);
 
-    const personaPicture = createAvatarDom({
+    const personaAvatar = createAvatarDom({
         name: props.name,
-        picture: props.picture,
+        avatar: props.avatar,
     });
-    element.append(personaPicture);
+    element.append(personaAvatar);
 
     const personaName = document.createElement('div');
     const nameTextNode = document.createTextNode(props.name);

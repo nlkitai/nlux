@@ -2,6 +2,6 @@ import {ReactElement} from 'react';
 
 export type WelcomeMessageProps = {
     name: string;
-    picture: string | ReactElement;
+    avatar: string | ReactElement;
     message?: string;
 };

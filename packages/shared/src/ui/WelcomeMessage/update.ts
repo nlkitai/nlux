@@ -13,7 +13,7 @@ export const updateWelcomeMessageDom: DomUpdater<WelcomeMessageProps> = (
     if (
         propsBefore.message === propsAfter.message &&
         propsBefore.name === propsAfter.name &&
-        propsBefore.picture === propsAfter.picture
+        propsBefore.avatar === propsAfter.avatar
     ) {
         return;
     }
@@ -31,20 +31,20 @@ export const updateWelcomeMessageDom: DomUpdater<WelcomeMessageProps> = (
     }
 
     if (
-        propsBefore.picture !== propsAfter.picture ||
+        propsBefore.avatar !== propsAfter.avatar ||
         propsBefore.name !== propsAfter.name
     ) {
-        const pictureElement = element.querySelector<HTMLElement>(`.${avatarClassName}`);
-        if (pictureElement) {
+        const avatarElement = element.querySelector<HTMLElement>(`.${avatarClassName}`);
+        if (avatarElement) {
             updateAvatarDom(
-                pictureElement,
+                avatarElement,
                 {
                     name: propsBefore.name,
-                    picture: propsBefore.picture,
+                    avatar: propsBefore.avatar,
                 },
                 {
                     name: propsAfter.name,
-                    picture: propsAfter.picture,
+                    avatar: propsAfter.avatar,
                 },
             );
         }

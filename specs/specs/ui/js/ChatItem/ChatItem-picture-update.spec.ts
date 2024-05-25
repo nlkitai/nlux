@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {className as avatarPictureClassName} from '../../../../../packages/shared/src/ui/Avatar/create';
+import {className as avatarClassName} from '../../../../../packages/shared/src/ui/Avatar/create';
 import {
     createChatItemDom,
     participantInfoContainerClassName,
@@ -8,8 +8,8 @@ import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/prop
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
 describe('When a chat item component is complete in outgoing direction', () => {
-    describe('When the profile picture is updated', () => {
-        it('Should update the profile picture', () => {
+    describe('When the avatar is updated', () => {
+        it('Should update the avatar', () => {
             // Arrange
             const props: ChatItemProps = {
                 direction: 'outgoing',
@@ -17,17 +17,17 @@ describe('When a chat item component is complete in outgoing direction', () => {
                 status: 'complete',
                 message: 'Hello, World!',
                 name: 'John Doe',
-                picture: 'https://example.com/john-doe.jpg',
+                avatar: 'https://example.com/john-doe.jpg',
             };
             const chatItem = createChatItemDom(props);
             const persona = chatItem.querySelector(
-                `.${avatarPictureClassName}`,
+                `.${avatarClassName}`,
             ) as HTMLElement;
 
             // Act
             updateChatItemDom(chatItem, props, {
                 ...props,
-                picture: 'https://example.com/jane-doe.jpg',
+                avatar: 'https://example.com/jane-doe.jpg',
             });
 
             // Assert
@@ -44,11 +44,11 @@ describe('When a chat item component is complete in outgoing direction', () => {
                 status: 'complete',
                 message: 'Hello, World!',
                 name: 'John Doe',
-                picture: 'https://example.com/john-doe.jpg',
+                avatar: 'https://example.com/john-doe.jpg',
             };
             const chatItem = createChatItemDom(props);
             const avatar = chatItem.querySelector(
-                `.${participantInfoContainerClassName} > .${avatarPictureClassName}`,
+                `.${participantInfoContainerClassName} > .${avatarClassName}`,
             )!;
 
             // Act

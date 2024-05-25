@@ -36,7 +36,7 @@ describe('createAiChat() + personaOptions + user', () => {
                     .withPersonaOptions({
                         user: {
                             name: 'Mr User',
-                            picture: 'https://user-image-url',
+                            avatar: 'https://user-image-url',
                         },
                     });
 
@@ -60,7 +60,7 @@ describe('createAiChat() + personaOptions + user', () => {
                     .withPersonaOptions({
                         user: {
                             name: 'Mr User',
-                            picture: 'https://user-image-url',
+                            avatar: 'https://user-image-url',
                         },
                     });
 
@@ -84,7 +84,7 @@ describe('createAiChat() + personaOptions + user', () => {
                     .withPersonaOptions({
                         user: {
                             name: 'Mr User',
-                            picture: 'https://user-image-url',
+                            avatar: 'https://user-image-url',
                         },
                     });
 
@@ -103,7 +103,7 @@ describe('createAiChat() + personaOptions + user', () => {
             });
         });
 
-        describe('When the picture is updated', () => {
+        describe('When the avatar is updated', () => {
             it('Should update the user persona photo', async () => {
                 // Arrange
                 const aiChat = createAiChat()
@@ -111,7 +111,7 @@ describe('createAiChat() + personaOptions + user', () => {
                     .withPersonaOptions({
                         user: {
                             name: 'Mr User',
-                            picture: 'https://user-image-url',
+                            avatar: 'https://user-image-url',
                         },
                     });
 
@@ -133,7 +133,7 @@ describe('createAiChat() + personaOptions + user', () => {
                     personaOptions: {
                         user: {
                             name: 'X-User',
-                            picture: 'https://xuser-image-url',
+                            avatar: 'https://xuser-image-url',
                         },
                     },
                 });
@@ -155,24 +155,21 @@ describe('createAiChat() + personaOptions + user', () => {
             });
         });
 
-        describe('When the user persona is set with DOM element as picture', () => {
+        describe('When the user persona is set with DOM element as avatar', () => {
             describe('When the user sends a message', () => {
                 it('Persona details should be rendered', async () => {
                     // Arrange
-                    const picture = document.createElement('div');
-                    picture.id = 'jsx-avatar';
-                    picture.style.backgroundColor = 'red';
-                    picture.style.width = '50px';
-                    picture.style.height = '50px';
-                    picture.textContent = 'DOM HTML Avatar';
+                    const avatar = document.createElement('div');
+                    avatar.id = 'jsx-avatar';
+                    avatar.style.backgroundColor = 'red';
+                    avatar.style.width = '50px';
+                    avatar.style.height = '50px';
+                    avatar.textContent = 'DOM HTML Avatar';
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
-                            user: {
-                                name: 'Mr User',
-                                picture,
-                            },
+                            user: {name: 'Mr User', avatar},
                         });
 
                     aiChat.mount(rootElement);
@@ -190,19 +187,19 @@ describe('createAiChat() + personaOptions + user', () => {
 
                 it('Persona DOM element should be rendered', async () => {
                     // Arrange
-                    const picture = document.createElement('div');
-                    picture.id = 'jsx-avatar';
-                    picture.style.backgroundColor = 'red';
-                    picture.style.width = '50px';
-                    picture.style.height = '50px';
-                    picture.textContent = 'DOM HTML Avatar';
+                    const avatar = document.createElement('div');
+                    avatar.id = 'jsx-avatar';
+                    avatar.style.backgroundColor = 'red';
+                    avatar.style.width = '50px';
+                    avatar.style.height = '50px';
+                    avatar.textContent = 'DOM HTML Avatar';
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
                         .withPersonaOptions({
                             user: {
                                 name: 'Mr User',
-                                picture,
+                                avatar,
                             },
                         });
 
@@ -231,7 +228,7 @@ describe('createAiChat() + personaOptions + user', () => {
                 .withPersonaOptions({
                     user: {
                         name: 'Mr User',
-                        picture: 'https://user-image-url',
+                        avatar: 'https://user-image-url',
                     },
                 });
 
@@ -278,7 +275,7 @@ describe('createAiChat() + personaOptions + user', () => {
                 .withPersonaOptions({
                     user: {
                         name: 'Mr User',
-                        picture: 'https://user-image-url',
+                        avatar: 'https://user-image-url',
                     },
                 });
 
@@ -346,7 +343,7 @@ describe('createAiChat() + personaOptions + user', () => {
                 personaOptions: {
                     user: {
                         name: 'Mr User',
-                        picture: 'https://user-image-url',
+                        avatar: 'https://user-image-url',
                     },
                 },
             });

@@ -126,7 +126,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         this.setProp('assistantPersona', assistantPersona);
         const newProps: Partial<ChatItemProps> = {
             name: assistantPersona?.name,
-            picture: assistantPersona?.picture,
+            avatar: assistantPersona?.avatar,
         };
 
         this.chatItemComponentsById.forEach((comp) => {
@@ -149,7 +149,7 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         this.setProp('userPersona', userPersona);
         const newProps: Partial<ChatItemProps> = {
             name: userPersona?.name,
-            picture: userPersona?.picture,
+            avatar: userPersona?.avatar,
         };
 
         this.chatItemComponentsById.forEach((comp) => {

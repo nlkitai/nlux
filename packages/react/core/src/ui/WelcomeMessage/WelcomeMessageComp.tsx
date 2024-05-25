@@ -12,7 +12,7 @@ export const WelcomeMessageComp = (props: WelcomeMessageProps) => {
     return (
         <div className={compWelcomeMessageClassName}>
             <AvatarComp
-                picture={props.picture}
+                avatar={props.avatar}
                 name={props.name}
             />
             <div className={compWelcomeMessagePersonaNameClassName}>

@@ -29,7 +29,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'Mr User',
-                            picture: 'https://user-image-url',
+                            avatar: 'https://user-image-url',
                         },
                     }}
                 />;
@@ -58,7 +58,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'AI Assistant',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -88,7 +88,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'AI Assistant',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -112,7 +112,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
             });
         });
 
-        describe('When the picture is updated', () => {
+        describe('When the avatar is updated', () => {
             it('Should update the user persona photo', async () => {
                 // Arrange
                 const aiChat = <AiChat
@@ -120,7 +120,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         user: {
                             name: 'Mr Assistant',
-                            picture: 'https://assistant-image-url',
+                            avatar: 'https://assistant-image-url',
                         },
                     }}
                 />;
@@ -147,7 +147,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'X-Assistant',
-                            picture: 'https://xbot-image-url',
+                            avatar: 'https://xbot-image-url',
                         },
                     }}
                 />);
@@ -179,7 +179,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'Mr Assistant',
-                            picture: <div id="jsx-avatar">JSX Avatar</div>,
+                            avatar: <div id="jsx-avatar">JSX Avatar</div>,
                         },
                     }}
                 />;
@@ -208,7 +208,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                     personaOptions={{
                         assistant: {
                             name: 'Mr Assistant',
-                            picture: <div id="jsx-avatar">JSX Avatar</div>,
+                            avatar: <div id="jsx-avatar">JSX Avatar</div>,
                         },
                     }}
                 />;

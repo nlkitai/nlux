@@ -37,12 +37,12 @@ describe.each([
             const testPersonaOptions: PersonaOptions = {
                 assistant: {
                     name: 'Test Assistant',
-                    picture: 'https://example.com/test-assistant-image.png',
+                    avatar: 'https://example.com/test-assistant-image.png',
                     tagline: 'Test Assistant Tagline',
                 },
                 user: {
                     name: 'Test User',
-                    picture: 'https://example.com/test-user-image.png',
+                    avatar: 'https://example.com/test-user-image.png',
                 },
             };
 
@@ -69,24 +69,24 @@ describe.each([
                 const testPersonaOptions: PersonaOptions = {
                     assistant: {
                         name: 'Test Assistant',
-                        picture: 'https://example.com/test-assistant-image.png',
+                        avatar: 'https://example.com/test-assistant-image.png',
                         tagline: 'Test Assistant Tagline',
                     },
                     user: {
                         name: 'Test User',
-                        picture: 'https://example.com/test-user-image.png',
+                        avatar: 'https://example.com/test-user-image.png',
                     },
                 };
 
                 const newPersonaOptions: PersonaOptions = {
                     assistant: {
                         name: 'New Assistant',
-                        picture: 'https://example.com/new-assistant-image.png',
+                        avatar: 'https://example.com/new-assistant-image.png',
                         tagline: 'New Assistant Tagline',
                     },
                     user: {
                         name: 'New User',
-                        picture: 'https://example.com/new-user-image.png',
+                        avatar: 'https://example.com/new-user-image.png',
                     },
                 };
 

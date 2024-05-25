@@ -1,28 +1,28 @@
 import {DomUpdater} from '../../types/dom/DomUpdater';
 import {AvatarProps} from './props';
-import {updateContentOnPictureChange} from './utils/updateContentOnPictureChange';
-import {updateNameOnPicture} from './utils/updateNameOnPicture';
+import {updateContentOnAvatarChange} from './utils/updateContentOnAvatarChange';
+import {updateNameOnAvatar} from './utils/updateNameOnAvatar';
 
 export const updateAvatarDom: DomUpdater<AvatarProps> = (
     element,
     propsBefore,
     propsAfter,
 ): void => {
-    if (propsBefore.picture === propsAfter.picture && propsBefore.name === propsAfter.name) {
+    if (propsBefore.avatar === propsAfter.avatar && propsBefore.name === propsAfter.name) {
         return;
     }
 
-    if (propsBefore.picture !== propsAfter.picture) {
-        updateContentOnPictureChange(element, propsBefore, propsAfter);
+    if (propsBefore.avatar !== propsAfter.avatar) {
+        updateContentOnAvatarChange(element, propsBefore, propsAfter);
     }
 
     if (propsAfter.name) {
         if (propsBefore.name !== propsAfter.name) {
             element.title = propsAfter.name;
-            updateNameOnPicture(element, propsBefore, propsAfter);
+            updateNameOnAvatar(element, propsBefore, propsAfter);
         }
     } else {
         element.title = '';
-        updateNameOnPicture(element, propsBefore, propsAfter);
+        updateNameOnAvatar(element, propsBefore, propsAfter);
     }
 };

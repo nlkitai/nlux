@@ -16,7 +16,7 @@ export type ChatItemProps<AiMsg> = {
     responseRenderer?: ResponseRenderer<AiMsg>;
     promptRenderer?: PromptRenderer;
     name: string;
-    picture?: string | ReactElement;
+    avatar?: string | ReactElement;
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';

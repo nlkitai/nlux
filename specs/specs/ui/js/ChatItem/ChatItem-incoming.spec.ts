@@ -77,7 +77,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
     });
 
-    it('Should render profile picture', () => {
+    it('Should render avatar', () => {
         // Arrange
         const props: ChatItemProps = {
             name: 'John Doe',
@@ -85,7 +85,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
-            picture: 'https://example.com/john-doe.jpg',
+            avatar: 'https://example.com/john-doe.jpg',
         };
         const chatItem = createChatItemDom(props);
 

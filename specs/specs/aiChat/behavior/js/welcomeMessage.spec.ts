@@ -34,7 +34,7 @@ describe('createAiChat() + assistant persona + welcome message', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant',
-                            picture: 'https://example.com/assistant.png',
+                            avatar: 'https://example.com/assistant.png',
                             tagline: 'Welcome to the chat',
                         },
                     });
@@ -58,7 +58,7 @@ describe('createAiChat() + assistant persona + welcome message', () => {
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant',
-                                picture: 'https://example.com/assistant.png',
+                                avatar: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         });
@@ -86,7 +86,7 @@ describe('createAiChat() + assistant persona + welcome message', () => {
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant',
-                                picture: 'https://example.com/assistant.png',
+                                avatar: 'https://example.com/assistant.png',
                                 tagline: 'Welcome to the chat',
                             },
                         });
@@ -119,7 +119,7 @@ describe('createAiChat() + assistant persona + welcome message', () => {
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant',
-                            picture: 'https://example.com/assistant.png',
+                            avatar: 'https://example.com/assistant.png',
                             tagline: 'Welcome to the chat',
                         },
                     })

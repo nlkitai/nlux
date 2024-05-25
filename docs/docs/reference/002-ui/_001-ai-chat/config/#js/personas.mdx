@@ -1,5 +1,5 @@
 The `withPersonaOptions(personaOptions)` configuration method allows you to give the conversation participants a name
-and a profile picture. And for the case of the assistant, you can also specify a _tagline_ that will be displayed below the
+and an avatar. And for the case of the assistant, you can also specify a _tagline_ that will be displayed below the
 assistant's name in the initial screen.
 
 > * Type: `PersonaOptions`
@@ -12,13 +12,13 @@ interface PersonaOptions {
 
 interface AssistantPersona {
     name: string;
-    picture: string | Readonly<HTMLElement>;
+    avatar: string | Readonly<HTMLElement>;
     tagline?: string;
 }
 
 interface UserPersona {
     name: string;
-    picture: string | Readonly<HTMLElement>;
+    avatar: string | Readonly<HTMLElement>;
 }
 ```
 

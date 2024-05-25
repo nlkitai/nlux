@@ -24,7 +24,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 layout,
                 direction: 'incoming',
                 name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
-                picture: assistantPersona?.picture,
+                avatar: assistantPersona?.avatar,
                 // We do not provide am incoming message for streaming segments - As it's rendered by the chat item
                 // while it's being streamed.
             };
@@ -36,7 +36,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
                 layout,
                 direction: 'incoming',
                 name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
-                picture: assistantPersona?.picture,
+                avatar: assistantPersona?.avatar,
                 message: stringifyRandomResponse<AiMsg>(segmentItem.content),
             };
         }
@@ -46,7 +46,7 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
             layout,
             direction: 'incoming',
             name: participantNameFromRoleAndPersona('assistant', {assistant: assistantPersona}),
-            picture: assistantPersona?.picture,
+            avatar: assistantPersona?.avatar,
         };
     }
 
@@ -56,6 +56,6 @@ export const getChatItemPropsFromSegmentItem = <AiMsg>(
         direction: 'outgoing',
         message: segmentItem.content,
         name: participantNameFromRoleAndPersona('user', {user: userPersona}),
-        picture: userPersona?.picture,
+        avatar: userPersona?.avatar,
     } satisfies ChatItemProps;
 };

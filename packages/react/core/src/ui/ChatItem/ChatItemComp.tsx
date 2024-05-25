@@ -22,14 +22,14 @@ export const ChatItemComp: <AiMsg>(
     const participantInfo = useMemo(() => {
         return (
             <div className="nlux-comp-cht_itm-prt_info">
-                {(props.picture !== undefined) && (
-                    <AvatarComp name={props.name} picture={props.picture}/>
+                {(props.avatar !== undefined) && (
+                    <AvatarComp name={props.name} avatar={props.avatar}/>
                 )}
                 <span className="nlux-comp-cht_itm-prt_name">{props.name}</span>
             </div>
         );
 
-    }, [props.picture, props.name]);
+    }, [props.avatar, props.name]);
 
     const isStreaming = useMemo(() => props.status === 'streaming', [props.status]);
     const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);

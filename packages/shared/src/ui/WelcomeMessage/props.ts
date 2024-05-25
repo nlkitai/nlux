@@ -1,5 +1,5 @@
 export type WelcomeMessageProps = {
     name: string;
-    picture: string | HTMLElement;
+    avatar: string | HTMLElement;
     message?: string;
 };

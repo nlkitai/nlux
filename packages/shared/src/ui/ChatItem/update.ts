@@ -20,7 +20,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         propsBefore.status === propsAfter.status &&
         propsBefore.message === propsAfter.message &&
         propsBefore.name === propsAfter.name &&
-        propsBefore.picture === propsAfter.picture
+        propsBefore.avatar === propsAfter.avatar
     ) {
         return;
     }
@@ -32,7 +32,7 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
         !propsAfter.hasOwnProperty('message') &&
         !propsAfter.hasOwnProperty('loader') &&
         !propsAfter.hasOwnProperty('name') &&
-        !propsAfter.hasOwnProperty('picture')
+        !propsAfter.hasOwnProperty('avatar')
     )) {
         return;
     }
@@ -66,27 +66,27 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
 
     if (
         propsBefore.name !== propsAfter.name ||
-        propsBefore.picture !== propsAfter.picture
+        propsBefore.avatar !== propsAfter.avatar
     ) {
         const avatarDom = element.querySelector<HTMLElement>(`.${avatarClassName}`);
-        if (!propsAfter.name && !propsAfter.picture) {
+        if (!propsAfter.name && !propsAfter.avatar) {
             avatarDom?.remove();
             return;
         } else {
             if (avatarDom) {
                 updateAvatarDom(avatarDom, {
                     name: propsBefore.name,
-                    picture: propsBefore.picture,
+                    avatar: propsBefore.avatar,
                 }, {
                     name: propsAfter.name,
-                    picture: propsAfter.picture,
+                    avatar: propsAfter.avatar,
                 });
             } else {
                 // Add the avatar
-                if (propsAfter.name !== undefined || propsAfter.picture !== undefined) {
+                if (propsAfter.name !== undefined || propsAfter.avatar !== undefined) {
                     const avatarProps: AvatarProps = {
                         name: propsAfter.name,
-                        picture: propsAfter.picture,
+                        avatar: propsAfter.avatar,
                     };
 
                     const persona = createAvatarDom(avatarProps);

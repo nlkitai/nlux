@@ -24,12 +24,12 @@ export const createChatItemDom: DomCreator<ChatItemProps> = (
         message: props.message,
     };
 
-    // Create an avatar if picture is provided
+    // Create an avatar if avatar is provided
     let avatarDom: HTMLElement | undefined;
-    if (props.picture !== undefined) {
+    if (props.avatar !== undefined) {
         const avatarProps: AvatarProps = {
             name: props.name,
-            picture: props.picture,
+            avatar: props.avatar,
         };
 
         avatarDom = createAvatarDom(avatarProps);

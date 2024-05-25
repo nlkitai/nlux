@@ -12,12 +12,12 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
     {
         name: 'FinFunAssistant',
         tagline: 'Your AI financial advisor',
-        picture: 'https://nlux.ai/images/demos/persona-finbot.png',
+        avatar: 'https://nlux.ai/images/demos/persona-finbot.png',
     },
     {
         name: 'HarryBotter',
         tagline: 'Your Magical AI assistant',
-        picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+        avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
     },
     undefined,
 ];
@@ -25,11 +25,11 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
 const userPersonas: (UserPersona | undefined)[] = [
     {
         name: 'Melanie',
-        picture: 'https://nlux.ai/images/demos/persona-woman.jpeg',
+        avatar: 'https://nlux.ai/images/demos/persona-woman.jpeg',
     },
     {
         name: 'Alex',
-        picture: 'https://nlux.ai/images/demos/persona-user.jpeg',
+        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
     },
     undefined,
 ];
@@ -93,17 +93,17 @@ const ExampleWrapper = () => {
                         // assistant: {
                         //     name: 'FinFunAssistant',
                         //     tagline: 'Your AI financial advisor',
-                        //     // picture: 'https://1000logos.net/wp-content/uploads/2023/02/ChatGPT-Logo.png',
-                        //     picture:
+                        //     // avatar: 'https://1000logos.net/wp-content/uploads/2023/02/ChatGPT-Logo.png',
+                        //     avatar:
                         // 'https://static.vecteezy.com/system/resources/previews/021/608/790/non_2x/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg',
-                        // // picture: profilePic, // picture: <img src={profilePic} style={{width: '100%', height:
-                        // '100%'}}/>, // picture: coloredJsxDiv, }, user: { name: 'Melanie', picture:
+                        // // avatar: profilePic, // avatar: <img src={profilePic} style={{width: '100%', height:
+                        // '100%'}}/>, // avatar: coloredJsxDiv, }, user: { name: 'Melanie', avatar:
                         // 'https://images.pexels.com/photos/1674752/pexels-photo-1674752.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=200',
                         // },
 
                         // assistant: {
                         //     name: 'HarryBotter',
-                        //     picture: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                        //     avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',
                         // },
                     }}

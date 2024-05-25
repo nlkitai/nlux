@@ -1,6 +1,6 @@
 import {AvatarProps} from '../props';
 
-export const updateNameOnPicture = (
+export const updateNameOnAvatar = (
     element: HTMLElement,
     propsBefore: AvatarProps,
     propsAfter: AvatarProps,
@@ -9,7 +9,7 @@ export const updateNameOnPicture = (
         return;
     }
 
-    if (typeof propsAfter.picture === 'string') {
+    if (typeof propsAfter.avatar === 'string') {
         const letter = propsAfter.name && propsAfter.name.length > 0 ?
             propsAfter.name[0].toUpperCase() : '';
 
