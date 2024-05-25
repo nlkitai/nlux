@@ -1,13 +1,54 @@
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import InterfaceReactJs from './_003-custom-renderers/#react/interface.mdx';
+import InterfaceJavaScript from './_003-custom-renderers/#js/interface.mdx';
+
+import CustomRenderersReactJs from './_002-events/#react.mdx';
+import CustomRenderersJavaScript from './_002-events/#js.mdx';
+
 # Custom Renderers
 
-## Configuration
+The custom renderers feature allows developers to define customised display logic for messages in the chat area.
 
--
+This feature is particularly useful when the data is not a simple string, but a complex object that needs to be rendered
+in a specific way. It can also be used to render additional information or HTML that is not part of the message itself
+but is related to it.
 
-## Custom Renderers for Batched Data
+<PlatformSelector reactJs={CustomRenderersReactJs} javascript={CustomRenderersJavaScript}/>
 
--
+---
 
-## Custom Renderers for Streamed Data
+## Behaviour
 
--
+Custom renderers can either be provided for responses from the AI assistant, as well as for user messages.
+
+For AI response, the behaviour of custom renders is different depending on whether the data is being streamed from
+the server or received in a single batch.
+
+### User Prompts
+
+For user prompts, the custom renderer will be **called once the message is sent**. The custom renderer will receive
+the message content and the user prompt.
+
+### Batched AI Responses
+
+For batched data, the custom renderer will only be **called once the message has been fully received**.
+
+### Streamed AI Responses
+
+For streamed data, the custom renderer will be **called when the streaming starts**, and will receive a `RefObject`
+that should be pointed to the DOM container element where streamed markdown messages will be appended. The properties
+of the custom renderer will be **updated when the streaming is complete** and the message that has been fully received.
+
+---
+
+## Interfaces
+
+Below are the interfaces that custom renderers should implement.
+
+### Custom Renderer for AI Responses
+
+<PlatformSelector reactJs={InterfaceReactJs} javascript={InterfaceJavaScript}/>
+
+### Custom Renderer for User Messages
