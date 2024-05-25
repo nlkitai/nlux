@@ -19,6 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let themeId: ThemeId = 'nova';
     let colorScheme: 'light' | 'dark' = 'dark';
 
+    const htmlSanitizer = (html: string) => {
+        const trustedTypes = window.trustedTypes as unknown as {
+            createPolicy: (name: string, policy: Record<string, unknown>) => unknown;
+        };
+
+        if (typeof trustedTypes.createPolicy === 'function') {
+            const policy = trustedTypes.createPolicy('htmlSanitizer', {
+                createHTML: (input: string) => DOMPurify.sanitize(input),
+            });
+
+            return policy.createHTML(html);
+        }
+        return DOMPurify.sanitize(html);
+    };
+
     const nlBridgeAdapter = createNlbridgeChatAdapter<string>()
         .withUrl('http://localhost:8899/');
 
@@ -109,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withDisplayOptions(displayOptions)
         .withMessageOptions({
             markdownLinkTarget: 'blank',
-            htmlSanitizer: (html: string) => DOMPurify.sanitize(html),
+            htmlSanitizer: htmlSanitizer,
             // htmlSanitizer: (html: string) => html.replace('h', 'x'),
             // syntaxHighlighter: highlighter,
             // showCodeBlockCopyButton: false,
