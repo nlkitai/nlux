@@ -9,7 +9,7 @@ type MessageOptions<AiMsg = string> = {
     responseRenderer?: ResponseRenderer<AiMsg>;
     promptRenderer?: PromptRenderer;
     syntaxHighlighter?: HighlighterExtension;
-
+    htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     streamingAnimationSpeed?: number;
