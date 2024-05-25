@@ -3,6 +3,7 @@ import '@nlux-dev/themes/src/fest/main.css';
 import '@nlux-dev/themes/src/nada/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import {SanitizerExtension} from '@nlux-dev/react/src';
 import DOMPurify from 'dompurify';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
@@ -111,7 +112,7 @@ function App() {
         },
     ];
 
-    const htmlSanitizer = useMemo(() => (html: string) => {
+    const htmlSanitizer: SanitizerExtension = useMemo(() => (html: string) => {
         const trustedTypes = window.trustedTypes as unknown as {
             createPolicy: (name: string, policy: Record<string, unknown>) => unknown;
         };
