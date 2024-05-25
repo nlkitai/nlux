@@ -5,8 +5,5 @@
   "redirects": [
     { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*" },
     { "source": "/:path((?!nlux)(?!/).*)", "destination": "/nlux/:path*" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "status": 404, "dest": "/nlux" }
   ]
 }
