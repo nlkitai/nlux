@@ -11,4 +11,10 @@ export default defineConfig({
             },
         },
     },
+    server: {
+        // Add header
+        headers: {
+            'Content-Security-Policy': 'require-trusted-types-for \'script\';',
+        }
+    }
 });
