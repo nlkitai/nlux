@@ -8,7 +8,8 @@
         margin-bottom: var(--nlux-chItm-msg-lstLt--mrgBtm);
         margin-left: var(--nlux-chItm-msg-lstLt--mrgLft);
         margin-right: var(--nlux-chItm-msg-lstLt--mrgRgt);
-        width: calc(100% - var(--nlux-chItm-msg-lstLt--mrgLft) - var(--nlux-chItm-msg-lstLt--mrgRgt) - var(--nlux-chItm-msg-lstLt--brdrWd));
+        width: -webkit-fill-available;
+        width: fill-available;
     }
 
     > .nlux-comp-cht_itm-prt_info {

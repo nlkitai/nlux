@@ -45,7 +45,7 @@
     --nlux-PromptInput-Disabled--BorderColor: transprent;
 
     --nlux-PromptInput-Placeholder--TextColor: #71717a;
-    --nlux-PromptInput-Focus-Outline--Color: blue;
+    --nlux-PromptInput-Focus-Outline--Color: transparent;
 
     /** Submit button colors */
     --nlux-SubmitButton--BackgroundColor: transparent;
@@ -60,26 +60,26 @@
     --nlux-SubmitButton-Disabled--BorderColor: transparent;
     --nlux-SubmitButton-Disabled--TextColor: #71717a;
 
-    --nlux-SubmitButton-Focus-Outline--Color: blue;
+    --nlux-SubmitButton-Focus-Outline--Color: transparent;
 
     /** Code block */
-    --nlux-CodeBlock--BackgroundColor: gold;
-    --nlux-CodeBlock--BorderColor: deeppink;
+    --nlux-CodeBlock--BackgroundColor: #ffefd5;
+    --nlux-CodeBlock--BorderColor: transparent;
     --nlux-CodeBlock--TextColor: black;
-    --nlux-CodeBlock-Hover--BackgroundColor: lightgoldenrodyellow;
+    --nlux-CodeBlock-Hover--BackgroundColor: #ffffff;
 
     /** Code block copy button */
-    --nlux-CodeBlock-CopyButton--BackgroundColor: darkgoldenrod;
-    --nlux-CodeBlock-CopyButton--BorderColor: darkred;
-    --nlux-CodeBlock-CopyButton--TextColor: white;
+    --nlux-CodeBlock-CopyButton--BackgroundColor: #aeaea3;
+    --nlux-CodeBlock-CopyButton--BorderColor: #c5c5c3;
+    --nlux-CodeBlock-CopyButton--TextColor: #ffffff;
 
     /** Code block copy button in clicked state */
-    --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: greenyellow;
-    --nlux-CodeBlock-CopyButton-Clicked--BorderColor: limegreen;
-    --nlux-CodeBlock-CopyButton-Clicked--TextColor: black;
+    --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: #393930;
+    --nlux-CodeBlock-CopyButton-Clicked--BorderColor: #393930;
+    --nlux-CodeBlock-CopyButton-Clicked--TextColor: #ffffff;
 
     /** Inline code in markdown */
-    --nlux-InlineCode--BackgroundColor: chartreuse;
-    --nlux-InlineCode--BorderColor: darkgreen;
+    --nlux-InlineCode--BackgroundColor: #fff9d8;
+    --nlux-InlineCode--BorderColor: transparent;
     --nlux-InlineCode--TextColor: black;
 }

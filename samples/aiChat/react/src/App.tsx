@@ -48,9 +48,9 @@ function App() {
     useEffect(() => {
         if (colorScheme === 'auto') {
             const osColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'papayawhip';
+            document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'white';
         } else {
-            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'papayawhip';
+            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white'
         }
 
     }, [colorScheme]);
