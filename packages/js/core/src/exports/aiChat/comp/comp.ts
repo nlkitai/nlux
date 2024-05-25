@@ -3,7 +3,7 @@ import {BaseComp} from './base';
 import {CompRegistry} from './registry';
 
 export const comp = <
-    CompClass extends abstract new (...args: any[]) => BaseComp<object, object, object, object>,
+    CompClass extends abstract new (...args: unknown[]) => unknown,
 >(
     compClass: CompClass,
 ) => {
@@ -28,7 +28,7 @@ export const comp = <
     // IMPORTANT ✨ The lines below are responsible for creating all instances of all components.
 
     return {
-        withContext: (newContext: ControllerContext<any>) => {
+        withContext: (newContext: ControllerContext<object>) => {
             return {
                 create: (): InstanceType<CompClass> => {
                     return new CompClass(newContext, {});

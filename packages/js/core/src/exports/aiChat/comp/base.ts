@@ -148,10 +148,14 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         this.renderingRoot = null;
 
         this.props = props;
-        this.elementProps = new Map(props ? Object.entries(props) as any : []);
+        const entries = (props ? Object.entries(props) as unknown : []) as Iterable<unknown>;
+        this.elementProps = new Map(entries as ([keyof PropsType, PropsType[keyof PropsType]])[]);
         this.rendererEventListeners = new Map();
 
-        const preDefinedEventListeners: Map<string, string[]> | null = (<any>this.constructor).__compEventListeners;
+        const preDefinedEventListeners: Map<string, string[]> | null = (
+            this.constructor as unknown as Record<string, unknown>
+        ).__compEventListeners as Map<string, string[]> | null;
+
         if (preDefinedEventListeners) {
             preDefinedEventListeners.forEach((methodNames, eventName) => {
                 methodNames.forEach((methodName) => {
