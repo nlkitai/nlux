@@ -182,7 +182,7 @@ describe('createAiChat() + withAdapter(streamingAdapter)', () => {
         await waitForMdStreamToComplete();
 
         // Assert
-        const messages = rootElement.querySelector('.nlux_msg_incoming')!;
+        const messages = rootElement.querySelector('.nlux_msg_received')!;
         expect(messages).toHaveTextContent('Yo');
 
         // Act

@@ -35,7 +35,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -65,7 +65,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const userMessageContainer = container.querySelector('.nlux_cht_itm_out .nlux-md-cntr') as HTMLElement | null;
+            const userMessageContainer = container.querySelector('.nlux_cht_itm_snt .nlux-md-cntr') as HTMLElement | null;
             expect(userMessageContainer!.innerHTML).toBe('<p>xi! xenry txe assistant. xelp! give me a xyperlink!</p>\n');
         });
 
@@ -93,7 +93,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr') as HTMLElement | null;
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr') as HTMLElement | null;
             expect(markdownContainer).toBeInTheDocument();
             expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank" rel="noopener noreferrer">xere</a> i xand over a link! xaxa :) !</div>\n');
         });

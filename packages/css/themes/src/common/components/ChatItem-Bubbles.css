@@ -16,7 +16,7 @@
         display: none;
     }
 
-    &.nlux_cht_itm_out {
+    &.nlux_cht_itm_snt {
         flex-direction: row-reverse;
         padding-left: 65px;
 
@@ -27,7 +27,7 @@
         }
     }
 
-    &.nlux_cht_itm_in {
+    &.nlux_cht_itm_rcvd {
         flex-direction: row;
         padding-right: 65px;
 

@@ -35,14 +35,14 @@
 }
 
 /** OUT Chat item */
-.nlux-comp-cht_itm.nlux_cht_itm_out {
+.nlux-comp-cht_itm.nlux_cht_itm_snt {
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-hmMsg--brdClr);
     }
 }
 
 /** IN Chat item */
-.nlux-comp-cht_itm.nlux_cht_itm_in {
+.nlux-comp-cht_itm.nlux_cht_itm_rcvd {
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-aiMsg--brdClr);
     }

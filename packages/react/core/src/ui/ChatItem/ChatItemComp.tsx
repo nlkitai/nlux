@@ -41,7 +41,7 @@ export const ChatItemComp: <AiMsg>(
 
     const compDirectionClassName = props.direction
         ? compChatItemDirectionClassName[props.direction]
-        : compChatItemDirectionClassName['incoming'];
+        : compChatItemDirectionClassName['received'];
 
     const compConStyleClassName = props.layout === 'bubbles'
         ? conversationLayoutClassName['bubbles']
@@ -97,7 +97,7 @@ export const ChatItemComp: <AiMsg>(
                     }}
                 />
             )}
-            {!isStreaming && props.direction === 'incoming' && (
+            {!isStreaming && props.direction === 'received' && (
                  <MessageComp
                     uid={props.uid}
                     message={AiMessageRenderer}
@@ -105,7 +105,7 @@ export const ChatItemComp: <AiMsg>(
                     direction={props.direction}
                 />
             )}
-            {!isStreaming && props.direction === 'outgoing' && (
+            {!isStreaming && props.direction === 'sent' && (
                 <MessageComp
                     uid={props.uid}
                     message={UserMessageRenderer}

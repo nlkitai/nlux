@@ -16,8 +16,8 @@ newExpo.innerHTML = `
                     <option value="bubbles">Bubbles</option>
                 </select>
                 <select class="direction">
-                    <option value="incoming">Incoming</option>
-                    <option value="outgoing">Outgoing</option>
+                    <option value="received">Received</option>
+                    <option value="sent">Sent</option>
                 </select>
                 <select class="status">
                     <option value="complete">Complete</option>
@@ -37,7 +37,7 @@ document.querySelector<HTMLDivElement>('#app')!.append(newExpo);
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector<HTMLDivElement>('.ChatItem-expo')!;
     let props: ChatItemProps = {
-        direction: 'incoming',
+        direction: 'received',
         layout: 'bubbles',
         status: 'complete',
         message: 'Hello, World!',

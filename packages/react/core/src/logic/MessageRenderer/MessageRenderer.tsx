@@ -61,7 +61,7 @@ export const createMessageRenderer: <AiMsg>(
         }
     }
 
-    if (direction === 'outgoing') {
+    if (direction === 'sent') {
         if (typeof fetchedContent === 'string') {
             const messageToRender: string = fetchedContent;
             return () => <>{messageToRender}</>;

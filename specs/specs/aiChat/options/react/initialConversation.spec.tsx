@@ -33,10 +33,10 @@ describe('<AiChat /> + initialConversation prop', () => {
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
-            expect(incomingMessages.length).toBe(2);
-            expect(incomingMessages[0].textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
-            expect(incomingMessages[1].textContent).toEqual(expect.stringContaining('Sure, I can help you with that.'));
+            const receivedMessages = aiChatDom.querySelectorAll('.nlux_msg_received');
+            expect(receivedMessages.length).toBe(2);
+            expect(receivedMessages[0].textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
+            expect(receivedMessages[1].textContent).toEqual(expect.stringContaining('Sure, I can help you with that.'));
         });
 
         it('The initial conversation should be loaded instantly without typing animation', async () => {
@@ -76,9 +76,9 @@ describe('<AiChat /> + initialConversation prop', () => {
             const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            const incomingMessage = aiChatDom.querySelector('.nlux_msg_incoming')!;
-            expect(incomingMessage.textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
-            expect(incomingMessage.textContent).toEqual(expect.stringContaining('We find connection, hand in hand'));
+            const receivedMessage = aiChatDom.querySelector('.nlux_msg_received')!;
+            expect(receivedMessage.textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
+            expect(receivedMessage.textContent).toEqual(expect.stringContaining('We find connection, hand in hand'));
         });
 
         it('The scroll should be at the bottom of the chat', async () => {
@@ -144,11 +144,11 @@ describe('<AiChat /> + initialConversation prop', () => {
 
                 // Assert
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming');
-                expect(incomingMessages.length).toBe(2);
-                expect(incomingMessages[0].innerHTML).toEqual(
+                const receivedMessages = aiChatDom.querySelectorAll('.nlux_msg_received');
+                expect(receivedMessages.length).toBe(2);
+                expect(receivedMessages[0].innerHTML).toEqual(
                     expect.stringContaining('<strong>Hello</strong>, how can I help you?'));
-                expect(incomingMessages[1].textContent).toEqual(
+                expect(receivedMessages[1].textContent).toEqual(
                     expect.stringContaining('Sure, I can help you with that.'));
             });
         });
@@ -180,16 +180,16 @@ describe('<AiChat /> + initialConversation prop', () => {
 
                 // Assert
                 const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-                const incomingMessages = aiChatDom.querySelectorAll('.nlux_msg_incoming .nlux-md-cntr');
-                expect(incomingMessages.length).toBe(2);
-                expect(incomingMessages[0].innerHTML).toEqual(
+                const receivedMessages = aiChatDom.querySelectorAll('.nlux_msg_received .nlux-md-cntr');
+                expect(receivedMessages.length).toBe(2);
+                expect(receivedMessages[0].innerHTML).toEqual(
                     expect.stringContaining(
                         '<p>This is hello worlds in JS:</p>\n'
                         + '<div class="code-block"><pre data-language="javascript"><div>console.log("Hello World!");\n'
                         + '</div></pre></div>\n',
                     ),
                 );
-                expect(incomingMessages[1].innerHTML).toEqual(
+                expect(receivedMessages[1].innerHTML).toEqual(
                     expect.stringContaining(
                         '<p>Sure, here it is:</p>\n'
                         + '<div class="code-block"><pre data-language="python"><div>print("Hello World!")\n'

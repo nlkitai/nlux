@@ -3,12 +3,12 @@ import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is complete in incoming direction', () => {
+describe('When a chat item component is complete in received direction', () => {
     it('Should render the item with the right direction class', () => {
         // Arrange
         const props: ChatItemProps = {
             name: 'John Doe',
-            direction: 'incoming',
+            direction: 'received',
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
@@ -18,7 +18,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         const chatItem = createChatItemDom(props);
 
         // Assert
-        expect(chatItem.classList.contains('nlux_cht_itm_in')).toBe(true);
+        expect(chatItem.classList.contains('nlux_cht_itm_rcvd')).toBe(true);
     });
 
     describe('When the display mode is set to bubbles', () => {
@@ -26,7 +26,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -45,7 +45,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'list',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -63,7 +63,7 @@ describe('When a chat item component is complete in incoming direction', () => {
         // Arrange
         const props: ChatItemProps = {
             name: 'John Doe',
-            direction: 'incoming',
+            direction: 'received',
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
@@ -74,14 +74,14 @@ describe('When a chat item component is complete in incoming direction', () => {
         const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
 
         // Assert
-        expect(message.classList.contains('nlux_msg_incoming')).toBe(true);
+        expect(message.classList.contains('nlux_msg_received')).toBe(true);
     });
 
     it('Should render avatar', () => {
         // Arrange
         const props: ChatItemProps = {
             name: 'John Doe',
-            direction: 'incoming',
+            direction: 'received',
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
@@ -98,12 +98,12 @@ describe('When a chat item component is complete in incoming direction', () => {
         expect(avatar.outerHTML).toEqual(expect.stringContaining('John Doe'));
     });
 
-    describe('When the direction changes to outgoing', () => {
-        it('Should render the item with the outgoing class', () => {
+    describe('When the direction changes to sent', () => {
+        it('Should render the item with the sent class', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -113,20 +113,20 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Act
             const newProps: ChatItemProps = {
                 ...props,
-                direction: 'outgoing',
+                direction: 'sent',
             };
             updateChatItemDom(chatItem, props, newProps);
 
             // Assert
-            expect(chatItem.classList.contains('nlux_cht_itm_in')).toBe(false);
-            expect(chatItem.classList.contains('nlux_cht_itm_out')).toBe(true);
+            expect(chatItem.classList.contains('nlux_cht_itm_rcvd')).toBe(false);
+            expect(chatItem.classList.contains('nlux_cht_itm_snt')).toBe(true);
         });
 
-        it('Should render message with the outgoing class', () => {
+        it('Should render message with the sent class', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -136,14 +136,14 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Act
             const newProps: ChatItemProps = {
                 ...props,
-                direction: 'outgoing',
+                direction: 'sent',
             };
             updateChatItemDom(chatItem, props, newProps);
 
             // Assert
             const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
-            expect(message.classList.contains('nlux_msg_incoming')).toBe(false);
-            expect(message.classList.contains('nlux_msg_outgoing')).toBe(true);
+            expect(message.classList.contains('nlux_msg_received')).toBe(false);
+            expect(message.classList.contains('nlux_msg_sent')).toBe(true);
         });
     });
 });

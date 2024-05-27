@@ -43,7 +43,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn';
                 const avatarContainer = container.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
             });
@@ -69,7 +69,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImageContainer = container.querySelector(selector) as HTMLDivElement | null;
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://user-image-url)');
@@ -96,7 +96,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
                 const avatarLetterContainer = container.querySelector(selector);
                 expect(avatarLetterContainer).toBeInTheDocument();
                 expect(avatarLetterContainer).toHaveTextContent('M');
@@ -143,13 +143,13 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
                 const avatarImageContainer = container.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xuser-image-url)');
                 expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://xuser-image-url)');
 
-                const letterSelector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
+                const letterSelector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
                 const avatarLetterContainer = container.querySelectorAll(letterSelector);
                 expect(avatarLetterContainer).toHaveLength(2);
                 expect(avatarLetterContainer[0]).toHaveTextContent('X');
@@ -181,7 +181,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
                 const avatarContainer = container.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
             });
@@ -207,7 +207,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_out > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
                 const avatarJsxContainer = container.querySelector(selector);
                 expect(avatarJsxContainer).toBeInTheDocument();
                 expect(avatarJsxContainer).toHaveTextContent('JSX Avatar');

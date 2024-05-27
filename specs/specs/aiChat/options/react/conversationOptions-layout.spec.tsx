@@ -36,8 +36,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -60,8 +60,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
@@ -84,8 +84,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
                 expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
@@ -96,9 +96,9 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
                 const aiMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessageAfterRerender.classList.contains('nlux_cht_itm_lst')).toBe(true);
                 expect(aiMessageAfterRerender.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -122,8 +122,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -146,8 +146,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
                 expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -158,9 +158,9 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
                 const aiMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessageAfterRerender.classList.contains('nlux_cht_itm_bbl')).toBe(true);
                 expect(aiMessageAfterRerender.classList.contains('nlux_cht_itm_bbl')).toBe(true);

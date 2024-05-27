@@ -45,7 +45,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement!.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;\n</div></pre></div>\n',
             );
@@ -73,7 +73,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement?.innerHTML).toEqual(
                 expect.stringContaining('<div class="code-block"><pre><div>var someJsCode = true;\n</div></pre></div>'),
             );
@@ -115,7 +115,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement?.innerHTML).toEqual(
                 expect.stringContaining(
                     '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;\n</div></pre></div>',

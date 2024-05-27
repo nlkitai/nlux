@@ -50,7 +50,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement!.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;</div></pre></div>',
             );
@@ -76,7 +76,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(200);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement?.innerHTML).toBe(
                 '<div class="code-block"><pre><div>var someJsCode = true;</div></pre></div>',
             );
@@ -110,7 +110,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(200);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(responseElement?.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;</div></pre></div>',
             );

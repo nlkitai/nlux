@@ -11,8 +11,8 @@ newExpo.innerHTML = `
         <div class="Message-expo">
             <div class="controls">
                 <select class="direction">
-                    <option value="incoming">Incoming</option>
-                    <option value="outgoing">Outgoing</option>
+                    <option value="received">Received</option>
+                    <option value="sent">Sent</option>
                 </select>
                 <select class="status">
                     <option value="complete">Complete</option>
@@ -32,7 +32,7 @@ document.querySelector<HTMLDivElement>('#app')!.append(newExpo);
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector<HTMLDivElement>('.Message-expo')!;
     let props: MessageProps = {
-        direction: 'incoming',
+        direction: 'received',
         status: 'complete',
         message: 'Hello, World!',
     };

@@ -12,7 +12,7 @@ describe('When a chat item component is created', () => {
         // Arrange
         const props: ChatItemProps = {
             name: 'John Doe',
-            direction: 'incoming',
+            direction: 'received',
             layout: 'bubbles',
             status: 'complete',
             message: 'Hello, World!',
@@ -35,7 +35,7 @@ describe('When a chat item component is created', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',

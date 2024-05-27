@@ -136,7 +136,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         await waitForMdStreamToComplete();
 
         // Assert
-        const messages = rootElement.querySelector('.nlux_msg_incoming')!;
+        const messages = rootElement.querySelector('.nlux_msg_received')!;
         expect(messages).toHaveTextContent('Hi Human!');
     });
 

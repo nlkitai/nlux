@@ -7,7 +7,7 @@
  */
 export type MessageStatus = 'streaming' | 'complete';
 
-export type MessageDirection = 'incoming' | 'outgoing';
+export type MessageDirection = 'received' | 'sent';
 
 export type MessageProps = {
     direction: MessageDirection;

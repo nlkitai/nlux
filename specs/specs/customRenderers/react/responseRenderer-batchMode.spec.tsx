@@ -48,7 +48,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_in');
+            const responseElement = container.querySelector('.nlux_cht_itm_rcvd');
             expect(responseElement!.innerHTML).toEqual(
                 expect.stringContaining('<div>The AI response is: Yo!</div>'),
             );
@@ -124,7 +124,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                 await act(() => waitForMdStreamToComplete());
 
                 // Assert
-                const responseElement = container.querySelector('.nlux_cht_itm_in');
+                const responseElement = container.querySelector('.nlux_cht_itm_rcvd');
                 expect(customResponseComponentSpy).not.toHaveBeenCalled();
                 expect(responseElement!.innerHTML).toEqual(
                     expect.stringContaining('Yo!'),

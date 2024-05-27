@@ -118,7 +118,7 @@ export const StreamContainerComp = function <AiMsg>(
         completeStream: () => mdStreamParserRef.current?.complete(),
     }), []);
 
-    const compDirectionClassName = compMessageDirectionClassName['incoming'];
+    const compDirectionClassName = compMessageDirectionClassName['received'];
     const compStatusClassName = compMessageStatusClassName[status];
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 

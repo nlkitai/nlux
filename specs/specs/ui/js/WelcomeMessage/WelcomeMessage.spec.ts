@@ -3,7 +3,7 @@ import {createWelcomeMessageDom} from '../../../../../packages/shared/src/ui/Wel
 import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/WelcomeMessage/props';
 
 describe('When welcome message is rendered', () => {
-    it('Should render the message with the incoming class', () => {
+    it('Should render the message with the received class', () => {
         // Arrange
         const props: WelcomeMessageProps = {
             name: 'John Doe',

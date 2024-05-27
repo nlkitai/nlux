@@ -14,7 +14,7 @@ export const MessageComp = function (props: MessageProps) {
 
     const compDirectionClassName = props.direction
         ? compMessageDirectionClassName[props.direction]
-        : compMessageDirectionClassName['incoming'];
+        : compMessageDirectionClassName['received'];
 
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 

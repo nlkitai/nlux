@@ -56,7 +56,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             await act(() => waitForMdStreamToComplete());
 
             // Assert
-            const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux_cht_itm_in');
+            const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux_cht_itm_rcvd');
             const mdContainer = chatItemReceived!.querySelector('.nlux-md-cntr');
             await waitFor(() => {
                 expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');

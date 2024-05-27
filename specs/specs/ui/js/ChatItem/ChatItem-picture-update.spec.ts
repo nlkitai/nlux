@@ -7,12 +7,12 @@ import {
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is complete in outgoing direction', () => {
+describe('When a chat item component is complete in sent direction', () => {
     describe('When the avatar is updated', () => {
         it('Should update the avatar', () => {
             // Arrange
             const props: ChatItemProps = {
-                direction: 'outgoing',
+                direction: 'sent',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -39,7 +39,7 @@ describe('When a chat item component is complete in outgoing direction', () => {
         it('Should update the profile name', () => {
             // Arrange
             const props: ChatItemProps = {
-                direction: 'outgoing',
+                direction: 'sent',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',

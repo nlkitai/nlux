@@ -4,7 +4,7 @@ import {MessageDirection, MessageStatus} from '../../../../../packages/shared/sr
 import '@nlux-dev/themes/src/luna/main.css';
 
 export const ChatItemReactExpo = () => {
-    const [direction, setDirection] = useState<MessageDirection>('incoming');
+    const [direction, setDirection] = useState<MessageDirection>('received');
     const [status, setStatus] = useState<MessageStatus>('complete');
     const [message, setMessage] = useState<string>('Hello, World!');
 
@@ -26,8 +26,8 @@ export const ChatItemReactExpo = () => {
                         value={direction}
                         onChange={(event) => setDirection(event.target.value as MessageDirection)}
                     >
-                        <option value="incoming">Incoming</option>
-                        <option value="outgoing">Outgoing</option>
+                        <option value="received">Received</option>
+                        <option value="sent">Sent</option>
                     </select>
                     <select
                         value={status}

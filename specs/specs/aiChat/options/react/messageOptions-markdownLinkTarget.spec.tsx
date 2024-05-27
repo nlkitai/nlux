@@ -40,7 +40,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -76,7 +76,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+                const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
                 expect(markdownContainer).toBeInTheDocument();
 
                 const link = markdownContainer!.querySelector('a');
@@ -107,7 +107,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -144,7 +144,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+                const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
                 expect(markdownContainer).toBeInTheDocument();
 
                 const link = markdownContainer!.querySelector('a');
@@ -174,7 +174,7 @@ describe('<AiChat /> + messageOptions + markdownLinkTarget', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');

@@ -46,7 +46,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
 
     public getChatSegmentItem(): ChatSegmentItem<AiMsg> {
         const domProps = this.getProp('domProps') as ChatItemProps;
-        if (domProps.direction === 'incoming') {
+        if (domProps.direction === 'received') {
             return {
                 uid: this.props.uid,
                 participantRole: 'assistant',

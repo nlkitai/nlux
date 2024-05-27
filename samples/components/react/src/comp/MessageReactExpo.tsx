@@ -4,7 +4,7 @@ import {useState} from 'react';
 import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/ui/Message/props';
 
 export const MessageReactExpo = () => {
-    const [direction, setDirection] = useState<MessageDirection>('incoming');
+    const [direction, setDirection] = useState<MessageDirection>('received');
     const [status, setStatus] = useState<MessageStatus>('complete');
     const [message, setMessage] = useState<string>('Hello, World!');
 
@@ -19,8 +19,8 @@ export const MessageReactExpo = () => {
                         value={direction}
                         onChange={(event) => setDirection(event.target.value as MessageDirection)}
                     >
-                        <option value="incoming">Incoming</option>
-                        <option value="outgoing">Outgoing</option>
+                        <option value="received">Received</option>
+                        <option value="sent">Sent</option>
                     </select>
                     <select
                         value={status}

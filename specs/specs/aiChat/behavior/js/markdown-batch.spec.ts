@@ -43,7 +43,7 @@ describe('createAiChat() + batch adapter + markdown', () => {
             await waitForMdStreamToComplete();
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
             expect(markdownContainer!.innerHTML).toBe('<p><strong>Hello Human!</strong></p>');
         });

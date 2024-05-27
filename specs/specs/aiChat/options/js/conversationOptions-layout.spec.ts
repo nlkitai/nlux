@@ -42,8 +42,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -69,8 +69,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
@@ -96,8 +96,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = rootElement.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
                 expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
@@ -132,8 +132,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
             expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
             expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -159,8 +159,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = rootElement.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_out')!;
-                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_in')!;
+                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
 
                 expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
                 expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
@@ -195,7 +195,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_in > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
+            const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
             expect(assistantName.textContent).toBe('AI');
         });
     });

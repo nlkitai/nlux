@@ -41,7 +41,7 @@ describe('<AiChat /> + stream adapter + markdown', () => {
             });
 
             // Assert
-            const markdownContainer: HTMLElement = container.querySelector('.nlux_msg_incoming .nlux-md-cntr')!;
+            const markdownContainer: HTMLElement = container.querySelector('.nlux_msg_received .nlux-md-cntr')!;
             expect(markdownContainer).toBeInTheDocument();
 
             await waitFor(() => {

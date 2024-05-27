@@ -158,7 +158,7 @@ export const ChatSegmentComp: <AiMsg>(
                             key={chatItem.uid}
                             uid={chatItem.uid}
                             status={'complete'}
-                            direction={'outgoing'}
+                            direction={'sent'}
                             layout={props.layout}
                             promptRenderer={props.promptRenderer}
                             dataTransferMode={'batch'} // User chat items are always in batch mode.
@@ -193,7 +193,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
                                     status={'streaming'}
-                                    direction={'incoming'}
+                                    direction={'received'}
                                     layout={props.layout}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     streamedContent={chatItem.content}
@@ -231,7 +231,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
                                     status={'complete'}
-                                    direction={'incoming'}
+                                    direction={'received'}
                                     layout={props.layout}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     fetchedContent={chatItem.content}
@@ -260,7 +260,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
                                     status={'streaming'}
-                                    direction={'incoming'}
+                                    direction={'received'}
                                     layout={props.layout}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     responseRenderer={props.responseRenderer}

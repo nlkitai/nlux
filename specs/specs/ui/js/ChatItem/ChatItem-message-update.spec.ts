@@ -3,13 +3,13 @@ import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/
 import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
 import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
 
-describe('When a chat item component is complete in incoming direction', () => {
+describe('When a chat item component is complete in received direction', () => {
     describe('When the message is updated', () => {
         it('Should update the message', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -33,7 +33,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',
@@ -56,7 +56,7 @@ describe('When a chat item component is complete in incoming direction', () => {
             // Arrange
             const props: ChatItemProps = {
                 name: 'John Doe',
-                direction: 'incoming',
+                direction: 'received',
                 layout: 'bubbles',
                 status: 'complete',
                 message: 'Hello, World!',

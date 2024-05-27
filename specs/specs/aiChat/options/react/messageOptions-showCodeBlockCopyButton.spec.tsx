@@ -41,7 +41,7 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const button = markdownContainer!.querySelector('.nlux-cpy-btn');
@@ -70,7 +70,7 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const button = markdownContainer!.querySelector('.nlux-cpy-btn');
@@ -99,7 +99,7 @@ describe('<AiChat /> + messageOptions + showCodeBlockCopyButton', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_in .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
             expect(markdownContainer).toBeInTheDocument();
 
             const button = markdownContainer!.querySelector('.nlux-cpy-btn');
