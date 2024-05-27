@@ -14,7 +14,14 @@ export type {
 } from './exports/aiChat/options/conversationOptions';
 
 export type {ComposerOptions} from './exports/aiChat/options/composerOptions';
-export type {MessageOptions} from './exports/aiChat/options/messageOptions';
+export type {
+    BatchResponseComponentProps,
+    StreamResponseComponentProps,
+    ResponseRenderer,
+    PromptRendererProps,
+    PromptRenderer,
+    MessageOptions
+} from './exports/aiChat/options/messageOptions';
 export type {DisplayOptions} from './exports/aiChat/options/displayOptions';
 
 export type {
