@@ -28,15 +28,19 @@ Custom renderers can be provided to the `AiChat` component as part of the `messa
 
 ---
 
-## Interface
+## Interfaces
 
 Below are the interfaces that custom renderers should implement.
 
-> ### Response Custom Renderers
+---
+
+> ### Response Renderer
 
 <PlatformSelector reactJs={ResponseInterfaceReactJs} javascript={ResponseInterfaceJavaScript}/>
 
-> ### User Prompt Custom Renderers
+---
+
+> ### Prompt Renderer
 
 <PlatformSelector reactJs={PromptInterfaceReactJs} javascript={PromptInterfaceJavaScript}/>
 
@@ -50,17 +54,38 @@ in the chat area.
 For AI responses, the behaviour of custom renders depends on whether the data is streamed from the server or received
 in a single batch.
 
-> ### Rendering User Prompts
-
-For user prompts, the custom renderer will be **called once the message is sent**.<br />
-The custom renderer will receive the message content and the user prompt.
-
-> ### Rendering Batched AI Responses
-
-For batched data, the custom renderer will only be **called once the message has been fully received**.
+---
 
 > ### Rendering Streamed AI Responses
 
-For streamed data, the custom renderer will be **called when the streaming starts**, and will receive a `RefObject`
-that should be pointed to the DOM container element where streamed markdown messages will be appended. The properties
-of the custom renderer will be **updated when the streaming is complete** and the message that has been fully received.
+For streamed data, a loading spinner will be briefly displayed when the prompt is submitted.<br />
+The custom renderer will be **displayed when the streaming starts**, and will receive a `RefObject<HTMLElement>`.<br />
+That `containerRef` should be pointed to the HTML element where streamed markdown messages will be appended:
+
+```tsx
+const MyCustomRenderer: FC<StreamResponseComponentProps<MyMessage>> = (props) => {
+    return (
+        <div>
+            {/* The container where streamed markdown messages should be appended */}
+            <div ref={props.containerRef} />
+        </div>
+    );
+};
+```
+
+The properties of the custom renderer will be **updated when the streaming is complete** and the message that has been
+fully received.
+
+---
+
+> ### Rendering Batched AI Responses
+
+For batched data, the custom renderer will only be **displayed once the message has been fully received**.<br />
+Until then, the message a loading spinner will be displayed.
+
+---
+
+> ### Rendering User Prompts
+
+For user prompts, the custom renderer will be **displayed once the message is sent**.<br />
+The custom renderer will receive the message content and the user prompt.

@@ -1,3 +1,89 @@
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+
+import ThemeIdReactJs from './_004-themes/#react/themeId.mdx';
+import ThemeIdJavaScript from './_004-themes/#js/themeId.mdx';
+
+import LunaReactJs from './_004-themes/#react/luna.mdx';
+import LunaJavaScript from './_004-themes/#js/luna.mdx';
+
+import ColorSchemeReactJs from './_004-themes/#react/colorScheme.mdx';
+import ColorSchemeJavaScript from './_004-themes/#js/colorScheme.mdx';
+
 # Themes
 
-Coming soon.
+## Configuration
+
+<p>
+    A default theme is provided with NLUX, as well as a sophisticated theming system that allows you to create your own themes.
+</p>
+
+---
+
+> ### Theme Id
+
+A theme ID can be provided to `AiChat` as part of `displayOptions` to define the theme to use.<br />
+If not present, the default `nova` theme will be used.
+
+<PlatformSelector reactJs={ThemeIdReactJs} javascript={ThemeIdJavaScript}/>
+
+> ### Color Scheme
+
+The color scheme of the theme can be set to `light`, `dark`, or `auto` using the `colorScheme` property in `displayOptions`.<br />
+If not present, `auto` will be used and the theme will switch between light and dark modes based on the user's system preferences.
+
+You can override the color scheme by setting `colorScheme` as follows:
+
+<PlatformSelector reactJs={ColorSchemeReactJs} javascript={ColorSchemeJavaScript}/>
+
+---
+
+> ### CSS
+
+The CSS for the theme being used should also be imported into the project, or included as part of the build process.
+For NLUX standard themes, the CSS can be imported from the `@nlux/themes` package.
+
+Here is an example of how to import the CSS for the `nova` theme, in a project that supports CSS imports:
+
+```tsx
+import '@nlux/themes/nova.css';
+```
+
+## Themes Available
+
+---
+
+> ### Default Theme
+
+The default theme that comes with NLUX `v2` is called `nova`. It's available in both light and dark modes and supports
+all the features of NLUX, such as bubble vs list layout, custom renderers, and more.
+
+![Nova Theme Overview](/images/nova-theme-overview.png)
+
+In order to use the `nova` theme, you can import the CSS file from the `@nlux/themes` package:
+
+```tsx
+import '@nlux/themes/nova.css';
+```
+
+And you don't have to provide a theme ID to `AiChat`.
+
+---
+
+> ### Legacy Theme
+
+The legacy theme that comes with NLUX `v1` is called `luna`. It's a simple theme that only supports light mode.<br />
+It's provided for backwards compatibility with projects that were using NLUX `v1`, and it will be deprecated in the future.
+
+![Nova Theme Overview](/images/luna-theme-overview.png)
+
+In order to use the `luna` theme, you can import the CSS file from the `@nlux/themes` package:
+
+```tsx
+import '@nlux/themes/luna.css';
+```
+
+And you have to provide the theme ID `luna` to `AiChat`:
+
+<PlatformSelector reactJs={LunaReactJs} javascript={LunaJavaScript}/>
+
+
