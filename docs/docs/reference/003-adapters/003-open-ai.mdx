@@ -33,40 +33,46 @@ import ConfigSystemMessageReactJs from './_003-open-ai/#react/config/systemMessa
 
 Connect to the OpenAI API directly from the browser, using an API key.
 
-<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
+<PlatformSection reactJs={ReactJs} javascript={JavaScript}/>
+
+---
 
 ## Installation
 
-<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
+<PlatformSelector reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
+
+---
 
 ## Usage
 
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+<PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+
+---
 
 ## Configuration
 
-<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
+<PlatformSelector reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
 
 ---
 
-### API Key
+> ### API Key
 
-<PlatformSection reactJs={ConfigApiKeyReactJs} javascript={ConfigApiKeyJavaScript}/>
-
----
-
-### Model
-
-<PlatformSection reactJs={ConfigModelReactJs} javascript={ConfigModelJavaScript}/>
+<PlatformSelector reactJs={ConfigApiKeyReactJs} javascript={ConfigApiKeyJavaScript}/>
 
 ---
 
-### Data Transfer Mode
+> ### Model
 
-<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
+<PlatformSelector reactJs={ConfigModelReactJs} javascript={ConfigModelJavaScript}/>
 
 ---
 
-### System Message
+> ### Data Transfer Mode
 
-<PlatformSection reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavaScript}/>
+<PlatformSelector reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
+
+---
+
+> ### System Message
+
+<PlatformSelector reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavaScript}/>
