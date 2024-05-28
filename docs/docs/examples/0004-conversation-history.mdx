@@ -2,23 +2,24 @@
 sidebar_label: 'Conversation History'
 ---
 
-import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import exampleUrlFileAiChatBot from './0004-conversation-history/aiAssistant.tsx';
-import exampleUrlFileStreamAdapter from './0004-conversation-history/adapter.tsx';
-import exampleUrlPersonasConfig from './0004-conversation-history/personas.tsx';
+import app from './0004-conversation-history/aiAssistant.tsx';
+import adapter from './0004-conversation-history/adapter.tsx';
+import personas from './0004-conversation-history/personas.tsx';
 
 # Conversation History
+
+---
 
 This example shows how the chat history is loaded and fed to the AI chat component for rendering
 upon initialization.
 
 <CodeEditor
     files={{
-        'App.tsx': exampleUrlFileAiChatBot,
-        'adapter.ts': exampleUrlFileStreamAdapter,
-        'personas.tsx': exampleUrlPersonasConfig,
+        'App.tsx': app,
+        'adapter.ts': adapter,
+        'personas.tsx': personas,
     }}
     editorHeight={380}
     simulatedPrompt={'If a pirate loses his ship\'s wheel in a storm, does he become disoriented or reoriented?'}

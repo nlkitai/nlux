@@ -5,13 +5,13 @@ sidebar_label: 'Assistant And User Personas'
 import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import exampleUrlFileAiChatBot from './0003-assistant-persona/_a-personas-with-url/aiAssistant.tsx';
-import exampleUrlFileStreamAdapter from './0003-assistant-persona/_a-personas-with-url/adapter.tsx';
-import exampleUrlPersonasConfig from './0003-assistant-persona/_a-personas-with-url/personas.tsx';
+import app1 from './0003-assistant-persona/_a-personas-with-url/aiAssistant.tsx';
+import adapter1 from './0003-assistant-persona/_a-personas-with-url/adapter.tsx';
+import personas1 from './0003-assistant-persona/_a-personas-with-url/personas.tsx';
 
-import exampleJsxFileAiChatBot from './0003-assistant-persona/_b-personas-with-jsx/aiAssistant.tsx';
-import exampleJsxFileStreamAdapter from './0003-assistant-persona/_b-personas-with-jsx/adapter.tsx';
-import exampleJsxPersonasConfig from './0003-assistant-persona/_b-personas-with-jsx/personas.tsx';
+import app2 from './0003-assistant-persona/_b-personas-with-jsx/aiAssistant.tsx';
+import adapter2 from './0003-assistant-persona/_b-personas-with-jsx/adapter.tsx';
+import personas2 from './0003-assistant-persona/_b-personas-with-jsx/personas.tsx';
 
 # Assistant And User Personas
 
@@ -24,9 +24,9 @@ Here are some examples of how you can configure the assistant persona.
 
 <CodeEditor
     files={{
-        'App.tsx': exampleUrlFileAiChatBot,
-        'adapter.ts': exampleUrlFileStreamAdapter,
-        'personas.tsx': exampleUrlPersonasConfig,
+        'App.tsx': app1,
+        'adapter.ts': adapter1,
+        'personas.tsx': personas1,
     }}
     editorHeight={380}
     simulatedPrompt={'What\'s the funniest magic spell that Harry Potter learned at Hog-Warts School of Witchcraft and Wizardry?'}
@@ -38,9 +38,9 @@ Here are some examples of how you can configure the assistant persona.
 
 <CodeEditor
     files={{
-        'App.tsx': exampleJsxFileAiChatBot,
-        'adapter.ts': exampleJsxFileStreamAdapter,
-        'personas.tsx': exampleJsxPersonasConfig,
+        'App.tsx': app2,
+        'adapter.ts': adapter2,
+        'personas.tsx': personas2,
     }}
     editorHeight={380}
     simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}

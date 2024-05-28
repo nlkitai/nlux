@@ -6,7 +6,7 @@ export const personasOptions: PersonaOptions = {
         avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png'
     },
     assistant: {
-        name: 'FeatherAssistant',
+        name: 'Feather-AI',
         avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/feather.png',
         tagline: 'Yer AI First Mate!'
     }

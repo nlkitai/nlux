@@ -61,8 +61,8 @@ const ExampleWrapper = () => {
                             avatar: 'https://nlux.ai/images/demos/persona-finbot.png',
                         },
                         user: {
-                            name: 'Melanie',
-                            avatar: 'https://nlux.ai/images/demos/persona-woman.jpeg',
+                            name: 'Marissa',
+                            avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/marissa.png'
                         },
                     }}
                     initialConversation={[
@@ -80,8 +80,8 @@ const ExampleWrapper = () => {
                         // streamingAnimationSpeed: null,
                         // streamingAnimationSpeed: 300,
                     }}
+                    className={'ai-chat-emulator'}
                     displayOptions={{
-                        className: 'ai-chat-emulator',
                         height,
                     }}
                     messageOptions={{

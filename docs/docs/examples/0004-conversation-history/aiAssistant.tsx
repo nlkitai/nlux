@@ -11,7 +11,6 @@ export default () => {
 
   return (
     <AiChat
-      adapter={adapter}
       initialConversation={[
         {
           role: 'user',
@@ -22,6 +21,7 @@ export default () => {
           message: 'Arrr, matey! The capital of Antarctica be none other than "Arrrctica," where ye can find a jolly crew of penguins swashbuckling on icy seas!'
         }
       ]}
+      adapter={adapter}
       personaOptions={personaOptions}
       displayOptions={{colorScheme: '${colorMode}'}}
     />

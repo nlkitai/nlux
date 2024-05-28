@@ -1,4 +1,11 @@
-export default `export const assistantCssStyle = {
+export default `import {UserPersona} from '@nlux/react';
+
+export const user: UserPersona = {
+    name: 'Alex',
+    avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png'
+};
+
+export const assistantCssStyle = {
     background: 'linear-gradient(yellow, orange)',
     fontSize: '1.5rem',
     display: 'flex',
@@ -6,10 +13,5 @@ export default `export const assistantCssStyle = {
     justifyContent: 'center',
     width: '100%',
     height: '100%'
-};
-
-export const user = {
-    name: 'Alex',
-    avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png'
 };
 `;

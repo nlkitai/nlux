@@ -1,16 +1,18 @@
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import exampleIntroFileAiChatBot from './0006-syntax-highlighter/aiAssistant.tsx';
-import exampleIntroFileStreamAdapter from './0006-syntax-highlighter/adapter.tsx';
+import app from './0006-syntax-highlighter/aiAssistant.tsx';
+import adapter from './0006-syntax-highlighter/adapter.tsx';
 
 # Syntax Highlighter
+
+---
 
 In this example, we will use the `@nlux/highlighter` package to add syntax highlighting to code generated
 by OpenAI and rendered in the conversational UI.
 
 <CodeEditor
     files={{
-        'App.tsx': exampleIntroFileAiChatBot,
-        'adapter.ts': exampleIntroFileStreamAdapter,
+        'App.tsx': app,
+        'adapter.ts': adapter,
     }}
     editorHeight={550}
     simulatedPrompt={'Write a \'Hello World\' program in TypeScript, Python, and 2 other languages of your choice'}
