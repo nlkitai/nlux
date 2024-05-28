@@ -12,7 +12,7 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
     {
         name: 'FinFunAssistant',
         tagline: 'Your AI financial advisor',
-        avatar: 'https://nlux.ai/images/demos/persona-finbot.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/examples/albert.png',
     },
     {
         name: 'HarryBotter',

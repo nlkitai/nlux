@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .withPersonaOptions({
             user: {
-                name: 'Mr User',
-                avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
+                name: 'Alex',
+                avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
             },
             assistant: {
                 name: 'AI Assistant',

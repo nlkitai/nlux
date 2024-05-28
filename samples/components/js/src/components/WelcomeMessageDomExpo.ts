@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let props: WelcomeMessageProps = {
         message: 'Hello, World!',
         name: 'Alex Doe',
-        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
+        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
     };
 
     const welcomeMessage = createWelcomeMessageDom(props);

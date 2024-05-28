@@ -226,8 +226,8 @@ function App() {
                 }}
                 personaOptions={{
                     user: {
-                        name: 'Mr User',
-                        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg',
+                        name: 'Alex',
+                        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
                         // avatar: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
                     },
                     assistant: {

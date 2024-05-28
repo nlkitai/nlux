@@ -58,7 +58,7 @@ const ExampleWrapper = () => {
                         assistant: {
                             name: 'FinFunAssistant',
                             tagline: 'Your AI financial advisor',
-                            avatar: 'https://nlux.ai/images/demos/persona-finbot.png',
+                            avatar: 'https://docs.nlkit.com/nlux/images/examples/albert.png',
                         },
                         user: {
                             name: 'Marissa',
