@@ -44,23 +44,25 @@ endpoints and an input/out schema that can be used to interact with the language
 
 This documentation page is about the standard adapter provided by `NLUX` for APIs built using LangServe.
 
-<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
+---
 
 ## Installation
 
-<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
-
-## Usage
-
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
-
-## Configuration
-
-<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
+<PlatformSelector reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
 
 ---
 
-### Runnable URL
+## Usage
+
+<PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+
+---
+
+## Configuration
+
+---
+
+> ### Runnable URL
 
 This is the URL of the LangServe API.<br />
 Example: `https://my-langserver-api.example.com/parrot-speaks`
@@ -68,11 +70,11 @@ Example: `https://my-langserver-api.example.com/parrot-speaks`
 Do **NOT** append the specific LangServe endpoint (such as `/invoke` `/stream` or `/input_schema`) to the URL.
 The adapter will automatically append the endpoint to the URL based on other configuration.
 
-<PlatformSection reactJs={ConfigUrlReactJs} javascript={ConfigUrlJavaScript}/>
+<PlatformSelector reactJs={ConfigUrlReactJs} javascript={ConfigUrlJavaScript}/>
 
 ---
 
-### Data Transfer Mode
+> ### Data Transfer Mode
 
 The data transfer mode to use when communicating with the LangServe runnable.
 `NLUX` LangServe adapter supports `stream` and `batch` modes.
@@ -80,11 +82,11 @@ The data transfer mode to use when communicating with the LangServe runnable.
 When the adapter is configured to use `stream` mode, the `/stream` endpoint of the LangServe API will be used to
 communicate with the runnable. When the adapter is configured to use `batch` mode, the `/invoke` endpoint will be used.
 
-<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
+<PlatformSelector reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
 
 ---
 
-### Input Pre-Processor
+> ### Input Pre-Processor
 
 The input pre-processor is a function that is called before sending the input to the LangServe API.
 It can be used to transform the input before sending it to the runnable.
@@ -94,11 +96,11 @@ Whatever this function returns will be sent to the runnable under the `input` pr
 Example: If your runnable expects an object with `user_prompt` and `additional_data` properties, you can use the
 following input pre-processor in the example below to transform the input.
 
-<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
+<PlatformSelector reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
 
 ---
 
-### Output Pre-Processor
+> ### Output Pre-Processor
 
 The output pre-processor is a function that is called after receiving the output from the LangServe API.
 The `output` parameter of this function will get the part of the response from the runnable returned
@@ -109,11 +111,11 @@ This function returns a string that will be used displayed in the `NLUX` convers
 Example: If your runnable returns an object with `value` and `base` properties, you can use the out in the
 example below to transform the output to a string.
 
-<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
+<PlatformSelector reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
 
 ---
 
-### Use Input Schema
+> ### Use Input Schema
 
 When no `inputPreProcessor` is provided, the LangServe adapter will attempt to call `/input_schema`
 endpoint on the LangServe runnable and build the input according to the schema retrieved.
@@ -121,4 +123,4 @@ Set this option to `false` to disable this behavior.
 
 If disabled, the input will be sent to the runnable as a string without any transformation.
 
-<PlatformSection reactJs={ConfigUseInputSchemaReactJs} javascript={ConfigUseInputSchemaJavaScript}/>
+<PlatformSelector reactJs={ConfigUseInputSchemaReactJs} javascript={ConfigUseInputSchemaJavaScript}/>

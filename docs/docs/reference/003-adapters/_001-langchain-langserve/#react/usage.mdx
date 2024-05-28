@@ -5,6 +5,8 @@ import {AiChat} from '@nlux/react';
 export default App = () => {
     const adapter = useChatAdapter({
         url: 'https://<Your LangServe Runnable URL>',
+        useInputSchema: true,
+        dataTransferMode: 'stream'
     });
 
     return <AiChat adapter={adapter} />;
