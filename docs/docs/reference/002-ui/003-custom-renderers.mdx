@@ -1,11 +1,14 @@
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
-import InterfaceReactJs from './_003-custom-renderers/#react/interface.mdx';
-import InterfaceJavaScript from './_003-custom-renderers/#js/interface.mdx';
+import ConfigReactJs from './_003-custom-renderers/#react/config.mdx';
+import ConfigJavaScript from './_003-custom-renderers/#js/config.mdx';
 
-import CustomRenderersReactJs from './_002-events/#react.mdx';
-import CustomRenderersJavaScript from './_002-events/#js.mdx';
+import ResponseInterfaceReactJs from './_003-custom-renderers/#react/response-interfaces.mdx';
+import ResponseInterfaceJavaScript from './_003-custom-renderers/#js/response-interfaces.mdx';
+
+import PromptInterfaceReactJs from './_003-custom-renderers/#react/prompt-interface.mdx';
+import PromptInterfaceJavaScript from './_003-custom-renderers/#js/prompt-interface.mdx';
 
 # Custom Renderers
 
@@ -15,21 +18,42 @@ This feature is particularly useful when the data is not a simple string, but a 
 in a specific way, or when the developer needs to render additional elements that are not part of the response itself
 but is related to it.
 
-<PlatformSelector reactJs={CustomRenderersReactJs} javascript={CustomRenderersJavaScript}/>
+---
+
+### Usage
+
+Custom renderers can be provided to the `AiChat` component as part of the `messageOptions` prop.
+
+<PlatformSelector reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
+
+---
+
+## Interface
+
+Below are the interfaces that custom renderers should implement.
+
+> ### Response Custom Renderers
+
+<PlatformSelector reactJs={ResponseInterfaceReactJs} javascript={ResponseInterfaceJavaScript}/>
+
+> ### User Prompt Custom Renderers
+
+<PlatformSelector reactJs={PromptInterfaceReactJs} javascript={PromptInterfaceJavaScript}/>
 
 ---
 
 ## Behaviour
 
-Custom renderers can either be provided for responses from the AI assistant, as well as for user messages.
+Custom renderers can either be provided for responses from the AI assistant, or for user prompts that are displayed
+in the chat area.
 
-For AI response, the behaviour of custom renders is different depending on whether the data is being streamed from
-the server or received in a single batch.
+For AI responses, the behaviour of custom renders depends on whether the data is streamed from the server or received
+in a single batch.
 
 > ### Rendering User Prompts
 
-For user prompts, the custom renderer will be **called once the message is sent**. The custom renderer will receive
-the message content and the user prompt.
+For user prompts, the custom renderer will be **called once the message is sent**.<br />
+The custom renderer will receive the message content and the user prompt.
 
 > ### Rendering Batched AI Responses
 
@@ -40,15 +64,3 @@ For batched data, the custom renderer will only be **called once the message has
 For streamed data, the custom renderer will be **called when the streaming starts**, and will receive a `RefObject`
 that should be pointed to the DOM container element where streamed markdown messages will be appended. The properties
 of the custom renderer will be **updated when the streaming is complete** and the message that has been fully received.
-
----
-
-## Interfaces
-
-Below are the interfaces that custom renderers should implement.
-
-> ### Custom Renderer for AI Responses
-
-<PlatformSelector reactJs={InterfaceReactJs} javascript={InterfaceJavaScript}/>
-
-> ### Custom Renderer for User Messages

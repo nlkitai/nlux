@@ -1,3 +1,10 @@
+The type of the `responseRenderer` config property is as follows:
+```tsx
+// A React functional component (FC) that receives the props for streamed or batched data.
+// The AiMsg type is the type of the message content.
+type ResponseRenderer<AiMsg> =  FC<StreamResponseComponentProps<AiMsg>> | FC<BatchResponseComponentProps<AiMsg>>;
+```
+
 **For streamed data**, the custom renderer is a React functional component that receives the following props, where
 `AiMsg` is the type of the message content.
 
@@ -34,11 +41,4 @@ type BatchResponseComponentProps<AiMsg> = {
     content: AiMsg; // The content of the message
     serverResponse: unknown; // The raw server response without any processing
 };
-```
-
-The type of the `responseRenderer` config property is as follows:
-```tsx
-// A React functional component (FC) that receives the props for streamed or batched data.
-// The AiMsg type is the type of the message content.
-type ResponseRenderer<AiMsg> =  FC<StreamResponseComponentProps<AiMsg>> | FC<BatchResponseComponentProps<AiMsg>>;
 ```

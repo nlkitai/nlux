@@ -127,9 +127,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'referenceSidebar',
+          sidebarId: 'learnSidebar',
           position: 'left',
-          label: 'Reference',
+          label: 'Learn',
           className: 'doc-section',
         },
         {
@@ -141,9 +141,9 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
-          sidebarId: 'learnSidebar',
+          sidebarId: 'referenceSidebar',
           position: 'left',
-          label: 'Learn',
+          label: 'Reference',
           className: 'doc-section',
         },
         {
@@ -183,7 +183,7 @@ const config: Config = {
               to: '/examples/react-js-ai-chatbot',
             },
             {
-              label: 'API',
+              label: 'Reference',
               to: '/reference/overview',
             },
           ],
@@ -196,6 +196,10 @@ const config: Config = {
               href: 'https://github.com/nluxai/nlux/discussions',
             },
             {
+              label: 'Discord',
+              href: 'https://discord.com/invite/SRwDmZghNB',
+            },
+            {
               label: 'Twitter - X',
               href: 'https://x.com/nluxai',
             },
@@ -204,6 +208,11 @@ const config: Config = {
         {
           title: 'More',
           items: [
+            {
+              href: 'https://nlkit.com',
+              label: 'nlkit.com',
+              target: '_blank',
+            },
             {
               href: 'https://nlkit.com/blog',
               label: 'Blog',
