@@ -1,7 +1,7 @@
 .nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
     /** 👇 Theme-specific local variables **/
 
-    --nlux-fest--Outline-Color: #4141ff;
+    --nlux-dev--Outline-Color: #4141ff;
 
     /** 👇 Definitions and overrides of required theme variables **/
 
@@ -51,7 +51,7 @@
     --nlux-PromptInput-Disabled--BorderColor: #c5d7c9;
 
     --nlux-PromptInput-Placeholder--TextColor: #c5d7c9;
-    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
 
     /** Submit button colors */
     --nlux-SubmitButton--BackgroundColor: #5fe095;
@@ -66,7 +66,7 @@
     --nlux-SubmitButton-Disabled--BorderColor: #c5d7c9;
     --nlux-SubmitButton-Disabled--TextColor: #ffffff;
 
-    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
 
     /** Code block */
     --nlux-CodeBlock--BackgroundColor: #303530;

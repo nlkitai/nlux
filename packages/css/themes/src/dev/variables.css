@@ -1,15 +1,15 @@
-.nlux-AiChat-root.nlux-theme-fest {
+.nlux-AiChat-root.nlux-theme-dev {
     /**
      * Theme-specific local variables.
      */
 
-    --nlux-fest--FontFamily: 'Merienda', cursive;
-    --nlux-fest--MonoFontFamily: monospace;
+    --nlux-dev--FontFamily: 'Merienda', cursive;
+    --nlux-dev--MonoFontFamily: monospace;
 
-    --nlux-fest--BorderWidth: 5px;
-    --nlux-fest--BorderRadius: 8px;
-    --nlux-fest--LineHeight: 1.4;
-    --nlux-fest--FlexGap: 12px;
+    --nlux-dev--BorderWidth: 5px;
+    --nlux-dev--BorderRadius: 8px;
+    --nlux-dev--LineHeight: 1.4;
+    --nlux-dev--FlexGap: 12px;
 
     /**
      * Definitions and overrides of required theme variables.
@@ -17,8 +17,8 @@
 
     /** Exceptions box */
     --nlux-Exceptions--Padding: 5px;
-    --nlux-Exceptions--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-Exceptions--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-Exceptions--BorderWidth: var(--nlux-dev--BorderWidth);
+    --nlux-Exceptions--BorderRadius: var(--nlux-dev--BorderRadius);
 
     /** Welcome message */
     --nlux-WelcomeMessage-Avatar--Width: 60px;
@@ -32,14 +32,14 @@
     --nlux-ChatRoom-Divider--BorderWidth: 8px;
 
     /** Chat-room container */
-    --nlux-ChatRoom--LineHeight: var(--nlux-fest--LineHeight);
+    --nlux-ChatRoom--LineHeight: var(--nlux-dev--LineHeight);
     --nlux-ChatRoom--FontWeight: 400;
-    --nlux-ChatRoom--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-ChatRoom--FontFamily: var(--nlux-dev--FontFamily);
     --nlux-ChatRoom--FontSize: 16px;
 
     --nlux-ChatRoom--Padding: 10px;
-    --nlux-ChatRoom--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-ChatRoom--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-ChatRoom--BorderRadius: var(--nlux-dev--BorderRadius);
+    --nlux-ChatRoom--BorderWidth: var(--nlux-dev--BorderWidth);
 
     /** Chat-room loader */
     --nlux-ChatRoom-Loader--Width: 25px;
@@ -48,7 +48,7 @@
     --nlux-ChatItem--AlignItems: flex-end;
 
     /** Chat item participant info */
-    --nlux-ChatItem-ParticipantInfo--Gap: var(--nlux-fest--FlexGap);
+    --nlux-ChatItem-ParticipantInfo--Gap: var(--nlux-dev--FlexGap);
     --nlux-ChatItem-ParticipantName--FontSize: 20px;
     --nlux-ChatItem-ParticipantName--FontWeight: 700;
 
@@ -57,11 +57,11 @@
     --nlux-ChatItem-Avatar--BorderRadius: 50%;
 
     /** Chat item message */
-    --nlux-ChatItem-Message--Gap: var(--nlux-fest--FlexGap); /** Gap between elements within message */
+    --nlux-ChatItem-Message--Gap: var(--nlux-dev--FlexGap); /** Gap between elements within message */
 
     /** Chat item message in bubbles display layout */
-    --nlux-ChatItem-Message-BubbleLayout--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-ChatItem-Message-BubbleLayout--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-ChatItem-Message-BubbleLayout--BorderWidth: var(--nlux-dev--BorderWidth);
+    --nlux-ChatItem-Message-BubbleLayout--BorderRadius: var(--nlux-dev--BorderRadius);
     --nlux-ChatItem-Message-BubbleLayout--PaddingTopBottom: 10px;
     --nlux-ChatItem-Message-BubbleLayout--PaddingLeftRight: 15px;
 
@@ -79,15 +79,15 @@
     --nlux-CodeBlock--FontSize: 14px;
     --nlux-CodeBlock--FontFamily: 'Courier New', monospace;
     --nlux-CodeBlock--Padding: 10px;
-    --nlux-CodeBlock--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-CodeBlock--BorderRadius: var(--nlux-fest--BorderRadius);
+    --nlux-CodeBlock--BorderWidth: var(--nlux-dev--BorderWidth);
+    --nlux-CodeBlock--BorderRadius: var(--nlux-dev--BorderRadius);
 
     /** Code block copy button */
     --nlux-CodeBlock-CopyButton--Width: 28px;
     --nlux-CodeBlock-CopyButton--Height: 28px;
     --nlux-CodeBlock-CopyButton--Padding: 2px;
-    --nlux-CodeBlock-CopyButton--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-CodeBlock-CopyButton--BorderWidth: var(--nlux-fest--BorderWidth);
+    --nlux-CodeBlock-CopyButton--BorderRadius: var(--nlux-dev--BorderRadius);
+    --nlux-CodeBlock-CopyButton--BorderWidth: var(--nlux-dev--BorderWidth);
 
     /** Inline code in markdown */
     --nlux-InlineCode--BorderRadius: 6px;
@@ -100,14 +100,14 @@
 
     /** Submit button */
     --nlux-SubmitButton--Width: 65px;
-    --nlux-SubmitButton--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-SubmitButton--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-SubmitButton-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
+    --nlux-SubmitButton--BorderWidth: var(--nlux-dev--BorderWidth);
+    --nlux-SubmitButton--BorderRadius: var(--nlux-dev--BorderRadius);
+    --nlux-SubmitButton-Focus-Outline--Width: var(--nlux-dev--BorderWidth);
 
     /** Composer input */
-    --nlux-PromptInput--FontFamily: var(--nlux-fest--FontFamily);
+    --nlux-PromptInput--FontFamily: var(--nlux-dev--FontFamily);
     --nlux-PromptInput--FontSize: 16px;
-    --nlux-PromptInput--BorderWidth: var(--nlux-fest--BorderWidth);
-    --nlux-PromptInput--BorderRadius: var(--nlux-fest--BorderRadius);
-    --nlux-PromptInput-Focus-Outline--Width: var(--nlux-fest--BorderWidth);
+    --nlux-PromptInput--BorderWidth: var(--nlux-dev--BorderWidth);
+    --nlux-PromptInput--BorderRadius: var(--nlux-dev--BorderRadius);
+    --nlux-PromptInput-Focus-Outline--Width: var(--nlux-dev--BorderWidth);
 }

@@ -1,7 +1,7 @@
 import '@nlux-dev/themes/src/nova/main.css';
-import '@nlux-dev/themes/src/fest/main.css';
+import '@nlux-dev/themes/src/dev/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
-import '@nlux-dev/themes/src/nada/main.css';
+import '@nlux-dev/themes/src/blank/main.css';
 import {ChatItem, createAiChat, DisplayOptions} from '@nlux-dev/core/src';
 import DOMPurify from 'dompurify';
 // import {highlighter} from '@nlux-dev/highlighter/src';
@@ -15,7 +15,7 @@ import './style.css';
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
 
-    type ThemeId = 'nova' | 'fest' | 'nada' | 'luna';
+    type ThemeId = 'nova' | 'luna' | 'dev' | 'blank';
     let themeId: ThemeId = 'nova';
     let colorScheme: 'light' | 'dark' = 'dark';
 

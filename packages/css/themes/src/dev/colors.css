@@ -1,14 +1,14 @@
-.nlux-AiChat-root.nlux-theme-fest {
+.nlux-AiChat-root.nlux-theme-dev {
     /** 👇 Theme-specific local variables **/
 
-    --nlux-fest--Outline-Color: blue;
-    --nlux-fest--Input-BorderColor: mediumseagreen;
-    --nlux-fest--Input-Active-BorderColor: limegreen;
-    --nlux-fest--Input-Disabled-BorderColor: darkgrey;
-    --nlux-fest--Input-BackgroundColor: honeydew;
-    --nlux-fest--Input-Active-BackgroundColor: white;
-    --nlux-fest--Input-Disabled-BackgroundColor: lightgrey;
-    --nlux-fest--Input-Disabled-TextColor: grey;
+    --nlux-dev--Outline-Color: blue;
+    --nlux-dev--Input-BorderColor: mediumseagreen;
+    --nlux-dev--Input-Active-BorderColor: limegreen;
+    --nlux-dev--Input-Disabled-BorderColor: darkgrey;
+    --nlux-dev--Input-BackgroundColor: honeydew;
+    --nlux-dev--Input-Active-BackgroundColor: white;
+    --nlux-dev--Input-Disabled-BackgroundColor: lightgrey;
+    --nlux-dev--Input-Disabled-TextColor: grey;
 
     /** 👇 Definitions and overrides of required theme variables **/
 
@@ -45,35 +45,35 @@
     --nlux-AiMessage--TextColor: white;
 
     /** Prompt input colors */
-    --nlux-PromptInput--BackgroundColor: var(--nlux-fest--Input-BackgroundColor);
-    --nlux-PromptInput--BorderColor: var(--nlux-fest--Input-BorderColor);
+    --nlux-PromptInput--BackgroundColor: var(--nlux-dev--Input-BackgroundColor);
+    --nlux-PromptInput--BorderColor: var(--nlux-dev--Input-BorderColor);
     --nlux-PromptInput--TextColor: black;
 
-    --nlux-PromptInput-Active--BackgroundColor: var(--nlux-fest--Input-Active-BackgroundColor);
-    --nlux-PromptInput-Active--BorderColor: var(--nlux-fest--Input-Active-BorderColor);
+    --nlux-PromptInput-Active--BackgroundColor: var(--nlux-dev--Input-Active-BackgroundColor);
+    --nlux-PromptInput-Active--BorderColor: var(--nlux-dev--Input-Active-BorderColor);
     --nlux-PromptInput-Active--TextColor: black;
 
-    --nlux-PromptInput-Disabled--BackgroundColor: var(--nlux-fest--Input-Disabled-BackgroundColor);
-    --nlux-PromptInput-Disabled--TextColor: var(--nlux-fest--Input-Disabled-TextColor);
-    --nlux-PromptInput-Disabled--BorderColor: var(--nlux-fest--Input-Disabled-BorderColor);
+    --nlux-PromptInput-Disabled--BackgroundColor: var(--nlux-dev--Input-Disabled-BackgroundColor);
+    --nlux-PromptInput-Disabled--TextColor: var(--nlux-dev--Input-Disabled-TextColor);
+    --nlux-PromptInput-Disabled--BorderColor: var(--nlux-dev--Input-Disabled-BorderColor);
 
     --nlux-PromptInput-Placeholder--TextColor: darkseagreen;
-    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
 
     /** Submit button colors */
-    --nlux-SubmitButton--BackgroundColor: var(--nlux-fest--Input-BackgroundColor);
-    --nlux-SubmitButton--BorderColor: var(--nlux-fest--Input-BorderColor);
+    --nlux-SubmitButton--BackgroundColor: var(--nlux-dev--Input-BackgroundColor);
+    --nlux-SubmitButton--BorderColor: var(--nlux-dev--Input-BorderColor);
     --nlux-SubmitButton--TextColor: mediumseagreen;
 
-    --nlux-SubmitButton-Active--BackgroundColor: var(--nlux-fest--Input-Active-BackgroundColor);
-    --nlux-SubmitButton-Active--BorderColor: var(--nlux-fest--Input-Active-BorderColor);
+    --nlux-SubmitButton-Active--BackgroundColor: var(--nlux-dev--Input-Active-BackgroundColor);
+    --nlux-SubmitButton-Active--BorderColor: var(--nlux-dev--Input-Active-BorderColor);
     --nlux-SubmitButton-Active--TextColor: limegreen;
 
-    --nlux-SubmitButton-Disabled--BackgroundColor: var(--nlux-fest--Input-Disabled-BackgroundColor);
-    --nlux-SubmitButton-Disabled--BorderColor: var(--nlux-fest--Input-Disabled-BorderColor);
-    --nlux-SubmitButton-Disabled--TextColor: var(--nlux-fest--Input-Disabled-TextColor);
+    --nlux-SubmitButton-Disabled--BackgroundColor: var(--nlux-dev--Input-Disabled-BackgroundColor);
+    --nlux-SubmitButton-Disabled--BorderColor: var(--nlux-dev--Input-Disabled-BorderColor);
+    --nlux-SubmitButton-Disabled--TextColor: var(--nlux-dev--Input-Disabled-TextColor);
 
-    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-fest--Outline-Color);
+    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
 
     /** Code block */
     --nlux-CodeBlock--BackgroundColor: gold;

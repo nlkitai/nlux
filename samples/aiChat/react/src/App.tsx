@@ -1,6 +1,6 @@
 import '@nlux-dev/themes/src/nova/main.css';
-import '@nlux-dev/themes/src/fest/main.css';
-import '@nlux-dev/themes/src/nada/main.css';
+import '@nlux-dev/themes/src/dev/main.css';
+import '@nlux-dev/themes/src/blank/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {SanitizerExtension} from '@nlux-dev/react/src';
@@ -23,11 +23,11 @@ import './App.css';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
 function App() {
-    type ThemeId = 'nova' | 'fest' | 'nada' | 'luna';
+    type ThemeId = 'nova' | 'luna' | 'dev' | 'blank';
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
     const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('stream');
-    const [theme, setTheme] = useState<ThemeId>('fest');
+    const [theme, setTheme] = useState<ThemeId>('dev');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
@@ -181,9 +181,9 @@ function App() {
                 <div>
                     Theme&nbsp;
                     <select value={theme} onChange={onThemeChange}>
-                        <option value="fest">Fest</option>
+                        <option value="dev">Dev</option>
+                        <option value="blank">Blank</option>
                         <option value="nova">Nova</option>
-                        <option value="nada">Nada</option>
                         <option value="luna">Luna</option>
                     </select>
                     &nbsp;| Color Scheme&nbsp;
