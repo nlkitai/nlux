@@ -47,18 +47,18 @@ export const CodeEditor = ({
             template="react-ts"
             theme={colorMode}
             options={{
-                recompileDelay: 250,
+                recompileDelay: 500,
                 visibleFiles: Object.keys(files) as Array<any>,
                 initMode: 'lazy',
             }}
             customSetup={{
                 dependencies: {
-                    "react": "^18.3.1",
-                    "react-dom": "^18.3.1",
-                    "@nlux/react": "beta",
-                    "@nlux/langchain-react": "beta",
-                    "@nlux/themes": "beta",
-                    "@nlux/highlighter": "beta",
+                    "react": "18",
+                    "react-dom": "18",
+                    "@nlux/react": "2",
+                    "@nlux/langchain-react": "2",
+                    "@nlux/themes": "2",
+                    "@nlux/highlighter": "2",
                 },
             }}
             files={{

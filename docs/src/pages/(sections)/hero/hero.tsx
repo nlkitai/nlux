@@ -77,7 +77,7 @@ export const Hero = ({className}: {className?: string}) => {
                     </Link>
                     <Link
                         className="button button--primary button--lg"
-                        to="/examples/react-js-ai-chatbot"
+                        to="/examples/react-js-ai-assistant"
                     >
                         Examples
                     </Link>

@@ -167,7 +167,7 @@ const config: Config = {
             },
             {
               label: 'Examples',
-              to: '/examples/react-js-ai-chatbot',
+              to: '/examples/react-js-ai-assistant',
             },
             {
               label: 'Reference',

@@ -5,12 +5,12 @@ import {streamAdapter} from './adapter';
 import {personas} from './personas';
 
 export default () => {
-  const adapter = useMemo(() => streamAdapter, []);
-  return (
-    <AiChat
-      adapter={adapter}
-      personaOptions={personas}
-      displayOptions={{colorScheme: '${colorMode}'}}
-    />
-  );
+    const adapter = useMemo(() => streamAdapter, []);
+    return (
+        <AiChat
+            adapter={adapter}
+            personaOptions={personas}
+            displayOptions={{colorScheme: '${colorMode}'}}
+        />
+    );
 };`;

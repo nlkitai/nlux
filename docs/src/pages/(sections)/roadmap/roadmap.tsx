@@ -19,7 +19,7 @@ export const Roadmap = ({className}: {className?: string}) => {
                     text="AI Chat Component"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/examples/react-js-ai-chatbot"
+                    href="https://docs.nlkit.com/nlux/examples/react-js-ai-assistant"
                     text="React JS Support"
                 />
                 <FeatureImplemented
