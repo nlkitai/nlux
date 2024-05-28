@@ -1,8 +1,8 @@
 # NLUX
 
-<p align=center>
+<p align=center style="font-size: 1.5em">
   <img style="padding: 0; margin: 0;" height="80px" src="https://content.nlkit.com/logos/nlux.png"/><br />
-  The <strong>Powerful</strong> Conversational AI JavaScript Library ✨💬
+  The <strong>Powerful</strong> Conversational AI<br />JavaScript Library ✨💬
 </p>
 <p align=center>
   <img alt="Free & Open Source" src="https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61" />
