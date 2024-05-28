@@ -1,11 +1,12 @@
-# Markdown Stream Parser by [NLUX](https://nlux.dev) 🌲✨💬
+# Markdown Stream Parser by [NLUX](https://docs.nlkit.com/nlux) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
+[![Docs https://docs.nlkit.com/nlux](https://img.shields.io/badge/Docs_Website-docs.nlkit.com/nlux-fa896b)](https://docs.nlkit.com/nlux)
 
 A lightweight JS/TS library that can be used to parse markdown streams as they are being read or generated.  
 It can be useful for LLM-powered applications that need to parse markdown streams in real-time.
 
-This package is part of the [NLUX](https://nlux.dev) **UI toolkit for AI** ecosystem.
+This package is part of the [NLUX](https://docs.nlkit.com/nlux) **UI toolkit for AI** ecosystem.
 
 ## Usage
 

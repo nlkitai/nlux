@@ -1,7 +1,7 @@
 # NLUX
 
 <p align=center>
-  <img style="padding: 0; margin: 0;" height="80px" src="https://nlux.dev/nlux-logo/nlux-logo-main.png"/><br />
+  <img style="padding: 0; margin: 0;" height="80px" src="https://content.nlkit.com/logos/nlux.png"/><br />
   The <strong>Powerful</strong> Conversational AI JavaScript Library ✨💬
 </p>
 <p align=center>
@@ -12,7 +12,7 @@
   <a href="https://www.npmjs.com/package/@nlux/core"><img alt="npm @nlux/core" src="https://img.shields.io/badge/NPM-@nlux/core-dbda6a" /></a>
 </p>
 <p align="center">
-    <a href="https://nlux.dev">Docs Website</a> | <a href="https://discord.gg/SRwDmZghNB">Discord Community</a> | <a href="https://twitter.com/nluxai">X</a>
+    <a href="https://docs.nlkit.com/nlux">Docs Website</a> | <a href="https://discord.gg/SRwDmZghNB">Discord Community</a> | <a href="https://twitter.com/nluxai">X</a>
 </p>
 <p align="center">
     Do you like this project ? Please star the repo to show your support 🌟 🧡
@@ -26,7 +26,7 @@
 simple to integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few
 lines of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
-[![NLUX UI For Any LLM](https://nlux.ai/images/github/nlux-ui-for-llms-banner.gif)](https://nlux.dev)
+[![NLUX UI For Any LLM](https://nlux.ai/images/github/nlux-ui-for-llms-banner.gif)](https://docs.nlkit.com/nlux)
 
 ## Key Features 🌟
 
@@ -80,14 +80,10 @@ Please visit each package's NPM page for information on how to use it.
 
 ## Docs & Examples 🤩
 
-For stable `v1.x` — Developer documentation, examples, and API references are available at:  
-[nlux.dev](https://nlux.dev/)
+* The docs website is available at:  
+[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux).  
 
-For `v2.x-beta` — The docs website is being built and will be available at:  
-[docs.nlkit.com](https://docs.nlkit.com/)  
-
-For `v2.x-beta`, please refer to TS type definitions, [specs](https://github.com/nluxai/nlux/tree/latest/specs), and source code if
-as the documentation is incomplete and still being written.
+You can toggle between `React JS` and `Vanilla JS`, and you can choose the `version` of the library you are using.
 
 ## Design Principles ⚜️
 
@@ -123,7 +119,7 @@ cross platforms, with a focus on performance and usability.
   ideas with the community.
 * [Discord Community](https://discord.gg/SRwDmZghNB) ― Join our Discord server to chat with the community and get
   support.
-* [nlux.dev](https://nlux.dev/) Developer Website ― Examples, learning resources, and API reference.
+* [docs.nlkit.com/nlux](https://docs.nlkit.com/nlux) Developer Website ― Examples, learning resources, and API reference.
 
 ## License 📃
 

@@ -12,7 +12,6 @@ export type AiChatProps<AiMsg = string> = {
     /**
      * The chat adapter to use. This is required and essential for the component to work.
      * You can either provide a standard adapter from @nlux or create a custom adapter.
-     * For more information, please visit — https://nlux.dev/learn/adapters
      */
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg>;
 

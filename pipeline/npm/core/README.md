@@ -1,7 +1,7 @@
-# [NLUX JS](https://nlux.dev) 🌲✨💬
+# [NLUX JS](https://docs.nlkit.com/nlux) 🌲✨💬
 
 ![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
-[![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-fa896b)](https://nlux.dev)
+[![Docs https://docs.nlkit.com/nlux](https://img.shields.io/badge/Docs_Website-docs.nlkit.com/nlux-fa896b)](https://docs.nlkit.com/nlux)
 
 ## The Conversational AI UI Library For Any LLM
 
@@ -24,10 +24,10 @@ of code, you can add conversational AI capabilities and interact with your favou
 
 ## Docs & Examples 📖
 
-* Developer portal ― [nlux.dev](https://nlux.dev/)
-* Examples and live code playgrounds ― [nlux.dev/examples](https://nlux.dev/examples)
-* [Standard LLM adapters available](https://nlux.dev/learn/adapters)
-* [How to create your own adapter for nlux](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter)
+* Developer portal ― [docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)
+* Examples and live code playgrounds ― [docs.nlkit.com/nlux/examples](https://docs.nlkit.com/nlux/examples/react-js-ai-assistant)
+* [Standard LLM adapters available](https://docs.nlkit.com/nlux/learn/adapters)
+* [How to create your own adapter for nlux](https://docs.nlkit.com/nlux/learn/adapters/custom-adapters/create-custom-adapter)
 
 ## Vanilla JS 🟨 vs React JS ⚛️
 
@@ -39,8 +39,8 @@ the [`@nlux/react`](https://www.npmjs.com/package/@nlux/react) package.
 
 The example below demonstrates how to create an AI chat interface using `NLUX JS` and LangChain, the open source
 framework for building LLM backends. But you can use `NLUX` **with any LLM** ― either
-via the [standard adapters](https://nlux.dev/learn/adapters) provided, or
-by creating [your own adapter](https://nlux.dev/learn/adapters/custom-adapters/create-custom-adapter).
+via the [standard adapters](https://docs.nlkit.com/nlux/learn/adapters) provided, or
+by creating [your own adapter](https://docs.nlkit.com/nlux/learn/adapters/custom-adapters/create-custom-adapter).
 
 To get started with `NLUX JS` and `LangChain`, install the `@nlux/core` and `@nlux/langchain` packages:
 
@@ -78,10 +78,10 @@ You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your 
 
 An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
-[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://nlux.ai)
+[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://docs.nlkit.com/nlux)
 
 ## Theme File and CSS 🎨
 
 You should include a **theme CSS file** into your HTML page.<br />
-You can download and host the `Luna Theme` CSS file
+You can download and host the `Nova Theme` CSS file
 from [`@nlux/themes`](https://www.npmjs.com/package/@nlux/themes) package.

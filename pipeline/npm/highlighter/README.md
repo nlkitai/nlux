@@ -1,6 +1,7 @@
-# Syntax Highlighter Extension for [NLUX](https://nlux.dev) 🌲✨💬
+# Syntax Highlighter Extension for [NLUX](https://docs.nlkit.com/nlux) 🌲✨💬
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
+[![Docs https://docs.nlkit.com/nlux](https://img.shields.io/badge/Docs_Website-docs.nlkit.com/nlux-fa896b)](https://docs.nlkit.com/nlux)
 
 This extension adds syntax highlighting for code displayed in
 the NLUX Conversational AI interface.
@@ -28,4 +29,4 @@ can add conversational AI capabilities and interact with your favourite LLM.
 
 ### Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: **[nlux.dev](https://nlux.dev/)**
+For developer documentation, examples, and API reference ― you can visit: **[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)**

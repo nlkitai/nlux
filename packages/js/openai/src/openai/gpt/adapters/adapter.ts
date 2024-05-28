@@ -50,7 +50,7 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
             + 'The useUnsafeChatAdapter/createUnsafeChatAdapter are only intended for development and testing purposes.\n\n'
             + 'For production use, we recommend that you implement a server-side proxy and configure a customized '
             + 'adapter for it. To learn more about how to create custom adapters for nlux, visit:\n'
-            + 'https://nlux.dev/learn/adapters/custom-adapters',
+            + 'https://docs.nlkit.com/nlux/learn/adapters/custom-adapters',
         );
     }
 

@@ -1,6 +1,7 @@
 # `nlbridge` adapter for `NLUX React`
 
-[![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342)](https://github.com/nluxai/nlux) [![Docs nlux.dev](https://img.shields.io/badge/Docs_Website-nlux.dev-%23fa896b)](https://nlux.dev)
+![Free And Open Source](https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61)
+[![Docs https://docs.nlkit.com/nlux](https://img.shields.io/badge/Docs_Website-docs.nlkit.com/nlux-fa896b)](https://docs.nlkit.com/nlux)
 
 This package enables the integration between `NLUX React` and `nlbridge` ― the middleware library
 for building conversational AI interfaces.
@@ -21,4 +22,4 @@ the [`@nlux/nlbridge`](https://www.npmjs.com/package/@nlux/nlbridge) package.
 
 ### Docs & Examples 📖
 
-For developer documentation, examples, and API reference ― you can visit: [nlux.dev](https://nlux.dev/)
+For developer documentation, examples, and API reference ― you can visit: [docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)
