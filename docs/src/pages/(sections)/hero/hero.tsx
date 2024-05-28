@@ -33,9 +33,8 @@ export const Hero = ({className}: {className?: string}) => {
             <div className={clsx('container', heroStyles.heroContent)}>
                 <div className={heroStyles.heroTitleContainer}>
                     <Heading as="h1" className={heroStyles.heroTitle}>
-                        <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={120}/>
+                        <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={200}/>
                         <a
-                            style={{marginTop: '50px'}}
                             href="https://github.com/nluxai/nlux"
                             target="_blank"><img src={'https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342'}/></a>
                     </Heading>
