@@ -4,7 +4,7 @@ sidebar_label: 'Theme Customization'
 
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 import Link from '@docusaurus/Link';
-import customCss from './0007-customize-theme/example-custom-button-color/custom-nova-theme.tsx';
+import customCss from './0007-customize-theme/example-custom-button-color/theme-overrides.tsx';
 import app from './0007-customize-theme/example-custom-button-color/aiAssistant.tsx';
 import adapter from './0007-customize-theme/example-custom-button-color/adapter.tsx';
 import personas from './0007-customize-theme/example-custom-button-color/personas.tsx';
@@ -16,7 +16,7 @@ import personas from './0007-customize-theme/example-custom-button-color/persona
 To customize the `NLUX` theme, you can [override the Nova theme variables](/learn/customize-theme).<br />
 In the example below, we changed the following details in thee `Nova` theme:
 
-* Component background color set `#483D8B` (Dark slate blue)
+* Component background color set `#060524` (Dark blue)
 * Assistant message background color set to `#5F9EA0` (Cadet blue)
 * User message background color set to `#DC143C` (Crimson)
 * Border radius set to `5px`
@@ -27,7 +27,7 @@ We also set the `conversationOptions`'s layout to `bubbles` to display the messa
 <CodeEditor
     files={{
         'App.tsx': app,
-        'custom-nova-theme.css': customCss,
+        'theme-overrides.css': customCss,
         'personas.tsx': personas,
         'adapter.ts': adapter,
     }}
