@@ -18,7 +18,7 @@ export const personas: PersonaOptions = {
   },
   user: {
     name: 'Alex',
-    avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png'
+    avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png'
   }
 };
 `;

@@ -4,7 +4,7 @@ import '@nlux-dev/themes/src/luna/main.css';
 
 export const AvatarReactExpo = () => {
     const [name, setName] = useState('Alex');
-    const [url, setUrl] = useState('https://docs.nlkit.com/nlux/images/examples/alex.png');
+    const [url, setUrl] = useState('https://docs.nlkit.com/nlux/images/personas/alex.png');
     const [type, setType] = useState<'url' | 'img'>('url');
     const [avatar, setAvatar] = useState<string | ReactElement>('');
 

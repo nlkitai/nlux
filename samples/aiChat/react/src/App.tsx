@@ -227,12 +227,12 @@ function App() {
                 personaOptions={{
                     user: {
                         name: 'Alex',
-                        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
+                        avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
                         // avatar: <div style={{backgroundColor: 'red', width: 50, height: 50}}>JsX</div>,
                     },
                     assistant: {
                         name: 'Harry Botter',
-                        avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
+                        avatar: 'https://docs.nlkit.com/nlux/images/personas/harry-botter.png',
                         tagline: 'Your friendly AI assistant',
                     },
                 }}

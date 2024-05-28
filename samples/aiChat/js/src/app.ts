@@ -132,11 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .withPersonaOptions({
             user: {
                 name: 'Alex',
-                avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
+                avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
             },
             assistant: {
                 name: 'AI Assistant',
-                avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
+                avatar: 'https://docs.nlkit.com/nlux/images/personas/harry-botter.png',
                 tagline: 'Welcome to the chat',
             },
         });

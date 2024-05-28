@@ -2,7 +2,7 @@ export default `import {UserPersona} from '@nlux/react';
 
 export const user: UserPersona = {
   name: 'Alex',
-  avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png'
+  avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png'
 };
 
 export const assistantCssStyle = {

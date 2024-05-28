@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         status: 'complete',
         message: 'Hello, World!',
         name: 'Alex Ivanov',
-        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
     };
 
     const chatItem = createChatItemDom(props);

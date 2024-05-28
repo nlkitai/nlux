@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let insertAs: 'url' | 'img' = 'url';
     let props: AvatarProps = {
         name: 'Alex Doe',
-        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
     };
 
     const message = createAvatarDom(props);

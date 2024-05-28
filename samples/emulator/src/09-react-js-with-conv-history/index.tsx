@@ -58,11 +58,11 @@ const ExampleWrapper = () => {
                         assistant: {
                             name: 'FinFunAssistant',
                             tagline: 'Your AI financial advisor',
-                            avatar: 'https://docs.nlkit.com/nlux/images/examples/albert.png',
+                            avatar: 'https://docs.nlkit.com/nlux/images/personas/albert.png',
                         },
                         user: {
                             name: 'Marissa',
-                            avatar: 'https://docs.nlkit.com/nlux/images/examples/marissa.png'
+                            avatar: 'https://docs.nlkit.com/nlux/images/personas/marissa.png'
                         },
                     }}
                     initialConversation={[
