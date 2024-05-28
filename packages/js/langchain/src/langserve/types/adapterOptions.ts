@@ -13,9 +13,6 @@ export type ChatAdapterOptions<AiMsg> = {
      * Or you can provide the URL to the specific endpoint, with either `invoke` or `stream`
      * at the end of the URL. Example: https://api.example.com/v1/my_runnable/stream
      *
-     * For more information about the LangServe runnable endpoints and how to use them
-     * with nlux, please visit https://docs.nlux.ai/learn/adapters/langserve
-     *
      */
     url: string;
 

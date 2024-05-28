@@ -41,8 +41,6 @@ export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg>
     /**
      * The endpoint to use for Hugging Face Inference API.
      * You should provide either a model or an endpoint, but not both.
-     * For more information, please refer to the
-     * [nlux Hugging Face documentation](https://docs.nlux.ai/category/nlux-with-hugging-face).
      *
      * @optional
      * @param {string} endpoint
@@ -75,8 +73,6 @@ export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg>
     /**
      * The model or the endpoint to use for Hugging Face Inference API.
      * You should provide either a model or an endpoint, but not both.
-     * For more information, please refer to the
-     * [nlux Hugging Face documentation](https://docs.nlux.ai/category/nlux-with-hugging-face).
      *
      * @param {string} model
      * @returns {ChatAdapterBuilder}

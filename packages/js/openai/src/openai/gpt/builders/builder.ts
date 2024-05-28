@@ -35,8 +35,6 @@ export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg>
     /**
      * The model or the endpoint to use for ChatGPT Inference API.
      * You should provide either a model or an endpoint, but not both.
-     * For more information, please refer to the
-     * [nlux ChatGPT documentation](https://docs.nlux.ai/category/nlux-with-openai-face).
      *
      * @param {string} model
      * @returns {ChatAdapterBuilder}
