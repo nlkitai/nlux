@@ -2,7 +2,7 @@
 > * Type: `HfOutputPreProcessor`
 > * Usage:
 
-```js
+```tsx
 const outputPreProcessor: HfOutputPreProcessor = (output: string) => {
     // Pre-process the LLM output
     return outputReadyToSend;
@@ -17,7 +17,7 @@ const adapter = useChatAdapter({
 
 `NLUX` provides a default output pre-processor that can be used with LLAMA2 model on Hugging Face:
 
-```js
+```tsx
 import {llama2OutputPreProcessor} from '@nlux/hf-react';
 
 const adapter = useChatAdapter({

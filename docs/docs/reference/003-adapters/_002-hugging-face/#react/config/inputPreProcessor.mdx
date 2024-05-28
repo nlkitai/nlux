@@ -2,7 +2,7 @@
 > * Type: `HfInputPreProcessor`
 > * Usage:
 
-```js
+```tsx
 const inputPreProcessor: HfInputPreProcessor = (
     input: string,
     adapterOptions: Readonly<HfAdapterOptions>,
@@ -20,7 +20,7 @@ const adapter = useChatAdapter({
 
 `NLUX` provides a default input pre-processor that can be used with LLAMA2 model on Hugging Face:
 
-```js
+```tsx
 import {llama2InputPreProcessor} from '@nlux/hf-react';
 
 const adapter = useChatAdapter({
