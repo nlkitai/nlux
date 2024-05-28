@@ -8,16 +8,16 @@ export default () => {
   const adapter = useMemo(() => streamAdapter, []);
   return (
     <AiChat
-      adapter={adapter}
       personaOptions={{
         assistant: {
           name: 'HarryBotter',
-          avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
-          tagline: 'Mischievously Making Magic With Mirthful AI!',
+          avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+          tagline: 'Mischievously Making Magic With Mirthful AI!'
         },
         user
       }}
-        displayOptions={{colorScheme: '${colorMode}'}}
+      adapter={adapter}
+      displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
 };`;

@@ -1,25 +1,20 @@
 export default (colorMode: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
 import {useChatAdapter} from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
-import {userPersona} from './personas';
+import {personasOptions} from './personas';
 
 export default () => {
   // LangServe adapter that connects to a demo LangChain Runnable API
+  // It fetches data in streaming mode
   const adapter = useChatAdapter({
-    url: 'https://pynlux.api.nlkit.com/pirate-speak'
+    url: 'https://pynlux.api.nlkit.com/pirate-speak',
+    dataTransferMode: 'stream'
   });
 
   return (
     <AiChat
       adapter={adapter}
-      personaOptions={{
-        assistant: {
-          name: 'FeatherAssistant',
-          avatar: 'https://nlux.ai/images/demos/persona-feather-assistant.png',
-          tagline: 'Yer AI First Mate!'
-        },
-        user: userPersona
-      }}
+      personaOptions={personasOptions}
       displayOptions={{colorScheme: '${colorMode}'}}
     />
   );

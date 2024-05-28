@@ -17,7 +17,7 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
     {
         name: 'HarryBotter',
         tagline: 'Your Magical AI assistant',
-        avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
     },
     undefined,
 ];
@@ -103,7 +103,7 @@ const ExampleWrapper = () => {
 
                         // assistant: {
                         //     name: 'HarryBotter',
-                        //     avatar: 'https://nlux.ai/images/demos/persona-harry-botter.jpg',
+                        //     avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',
                         // },
                     }}

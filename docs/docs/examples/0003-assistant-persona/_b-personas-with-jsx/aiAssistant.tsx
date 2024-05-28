@@ -8,16 +8,17 @@ export default () => {
   const adapter = useMemo(() => streamAdapter, []);
   return (
     <AiChat
-      adapter={adapter}
       personaOptions={{
         assistant: {
-          name: 'iAssistant',
+          name: 'Emo\\'jsx',
           avatar: <span style={assistantCssStyle}>🤖</span>,
-          tagline: 'Your Genius AI Assistant',
+          tagline: 'Your Robotic AI Assistant'
         },
         user
       }}
+      adapter={adapter}
       displayOptions={{colorScheme: '${colorMode}'}}
     />
   );
-};`;
+};
+`;
