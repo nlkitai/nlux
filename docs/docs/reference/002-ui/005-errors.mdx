@@ -1,3 +1,46 @@
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Errors
 
-Coming soon.
+When errors occur while using `AiChat`, a message will be displayed to the user at the top of the chat area for a few seconds,
+and the error will be logged to the console.
+
+---
+
+## Error Message Example
+
+<br />
+<br />
+
+<center>
+    <video controls={false} autoPlay={true} loop style={{ width: '550px', height: '450px', borderRadius: '20px', backgroundColor: 'black' }}>
+        <source src={useBaseUrl('/images/docs/reference/errors/error-message.mov')} type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+</center>
+
+---
+
+## Listening to Errors
+
+You can listen to errors by providing an `error` event handler to the `events` prop of `AiChat`.<br />
+Refer to [`error` event documentation](/reference/ui/events#error) for more details.
+
+---
+
+## Errors List
+
+Below is a list of errors that can occur while using `AiChat`.
+
+| Identifier | Error Message | Description |
+|----|---------------|-------------|
+| `failed-to-load-content` | Failed to load content | An error occurred while trying to load content. |
+| `failed-to-stream-content` | Failed to stream content | An error occurred while trying to send a message. |
+| `failed-to-render-content` | Failed to render content | An error occurred while trying to render a received message. |
+| `connection-error` | Connection error | An error occurred while trying to connect to the server. |
+| `invalid-credentials` | Invalid credentials | The credentials provided to the adapter are invalid. |
+| `invalid-api-key` | Invalid API key | The API key provided to the adapter is invalid. |
+| `http-server-side-error` | HTTP server side error | An error occurred on the server side while processing the request. |
+| `http-client-side-error` | HTTP client side error | An error occurred on the client side while processing the request. |
+| <code>data&#8209;transfer&#8209;mode&#8209;not&#8209;supported</code> | Requested data transfer mode is not supported | The data transfer mode set in the `dataTransferMode` prop is not supported by the adapter. |
+| <code>no&#8209;data&#8209;transfer&#8209;mode&#8209;supported</code> | Adapter does not support any valid data transfer modes | The custom adapter provided by the user does not implement any valid data transfer modes. |
