@@ -3,11 +3,11 @@ export default `import {PersonaOptions} from '@nlux/react';
 export const personasOptions: PersonaOptions = {
     user: {
         name: 'Alex',
-        avatar: 'https://nlux.ai/images/demos/persona-user.jpeg'
+        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png'
     },
     assistant: {
         name: 'FeatherAssistant',
-        avatar: 'https://nlux.ai/images/demos/persona-feather-assistant.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/feather.png',
         tagline: 'Yer AI First Mate!'
     }
 };`;
