@@ -62,7 +62,7 @@ const ExampleWrapper = () => {
                         },
                         user: {
                             name: 'Marissa',
-                            avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/marissa.png'
+                            avatar: 'https://docs.nlkit.com/nlux/images/examples/marissa.png'
                         },
                     }}
                     initialConversation={[

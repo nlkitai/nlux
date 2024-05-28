@@ -10,13 +10,13 @@ import styles from '@site/src/pages/index.module.css';
 import heroStyles from '@site/src/pages/(sections)/hero/hero.module.css';
 import Heading from '@theme/Heading';
 
-const NluxLogoLight = '/nlux/logo/nlux-hero-logo-light.png';
-const NluxLogoDark = '/nlux/logo/nlux-hero-logo-dark.png';
-const JavaScriptLogo = '/nlux/images/platform-logos/javascript-logo-60pxh.png';
-const ReactJsLogo = '/nlux/images/platform-logos/react-js-logo-60pxh.png'
-const LangChainLogo = '/nlux/images/platform-logos/langchain-logo-60pxh.png';
-const OpenAiLogo = '/nlux/images/platform-logos/openai-logo-60pxh.png';
-const HuggingFaceLogo = '/nlux/images/platform-logos/hugging-face-logo-60pxh.png'
+const NluxLogoLight = '/nlux/images/logos/nlux/black.png';
+const NluxLogoDark = '/nlux/images/logos/nlux/white.png';
+const JavaScriptLogo = '/nlux/images/logos/platforms/javascript-logo-60pxh.png';
+const ReactJsLogo = '/nlux/images/logos/platforms/react-js-logo-60pxh.png'
+const LangChainLogo = '/nlux/images/logos/platforms/langchain-logo-60pxh.png';
+const OpenAiLogo = '/nlux/images/logos/platforms/openai-logo-60pxh.png';
+const HuggingFaceLogo = '/nlux/images/logos/platforms/hugging-face-logo-60pxh.png'
 
 export const Hero = ({className}: {className?: string}) => {
     const { colorMode } = useColorMode();

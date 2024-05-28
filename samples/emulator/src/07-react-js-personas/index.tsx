@@ -17,7 +17,7 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
     {
         name: 'HarryBotter',
         tagline: 'Your Magical AI assistant',
-        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
     },
     undefined,
 ];
@@ -25,11 +25,11 @@ const assistantPersonas: (AssistantPersona | undefined)[] = [
 const userPersonas: (UserPersona | undefined)[] = [
     {
         name: 'Marissa',
-        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/marissa.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/examples/marissa.png',
     },
     {
         name: 'Alex',
-        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png',
+        avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png',
     },
     undefined,
 ];
@@ -103,7 +103,7 @@ const ExampleWrapper = () => {
 
                         // assistant: {
                         //     name: 'HarryBotter',
-                        //     avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+                        //     avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
                         //     tagline: 'Mischievously Making Magic With Mirthful AI!',
                         // },
                     }}

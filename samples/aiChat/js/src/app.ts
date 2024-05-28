@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             assistant: {
                 name: 'AI Assistant',
-                avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+                avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
                 tagline: 'Welcome to the chat',
             },
         });

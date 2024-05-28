@@ -232,7 +232,7 @@ function App() {
                     },
                     assistant: {
                         name: 'Harry Botter',
-                        avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+                        avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
                         tagline: 'Your friendly AI assistant',
                     },
                 }}

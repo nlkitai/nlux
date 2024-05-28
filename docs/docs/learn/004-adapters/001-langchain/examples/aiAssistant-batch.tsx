@@ -15,12 +15,12 @@ export default () => {
       personaOptions={{
         assistant: {
           name: 'Feather-AI',
-          avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/feather.png',
+          avatar: 'https://docs.nlkit.com/nlux/images/examples/feather.png',
           tagline: 'Yer AI First Mate!'
         },
         user: {
           name: 'Alex',
-          avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/alex.png'
+          avatar: 'https://docs.nlkit.com/nlux/images/examples/alex.png'
         }
       }}
       layoutOptions={{

@@ -103,7 +103,7 @@ const config: Config = {
       title: 'NLUX',
       logo: {
         alt: 'NLUX Logo',
-        src: 'logo/nlux-logo-main.png',
+        src: 'images/logos/nlux/main.png',
       },
       items: [
         {

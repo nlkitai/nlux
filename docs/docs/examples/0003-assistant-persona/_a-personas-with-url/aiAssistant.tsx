@@ -11,7 +11,7 @@ export default () => {
       personaOptions={{
         assistant: {
           name: 'HarryBotter',
-          avatar: 'https://docs.nlkit.com/nlux/images/docs/examples/harry-botter.png',
+          avatar: 'https://docs.nlkit.com/nlux/images/examples/harry-botter.png',
           tagline: 'Mischievously Making Magic With Mirthful AI!'
         },
         user
