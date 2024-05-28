@@ -5,32 +5,29 @@ sidebar_label: 'LangChain LangServe'
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
-import ReactJs from './_001-langchain-langserve/#react.mdx';
-import JavaScript from './_001-langchain-langserve/#js.mdx';
-
-import InstallationJavaScript from './_001-langchain-langserve/#js/installation.mdx';
 import InstallationReactJs from './_001-langchain-langserve/#react/installation.mdx';
+import InstallationJavaScript from './_001-langchain-langserve/#js/installation.mdx';
 
-import UsageJavaScript from './_001-langchain-langserve/#js/usage.mdx';
 import UsageReactJs from './_001-langchain-langserve/#react/usage.mdx';
+import UsageJavaScript from './_001-langchain-langserve/#js/usage.mdx';
 
-import ConfigJavaScript from './_001-langchain-langserve/#js/config.mdx';
-import ConfigReactJs from './_001-langchain-langserve/#react/config.mdx';
+import UsageWithGenericsReactJs from './_001-langchain-langserve/#react/usage-generics.mdx';
+import UsageWithGenericsJavaScript from './_001-langchain-langserve/#js/usage-generics.mdx';
 
-import ConfigUrlJavaScript from './_001-langchain-langserve/#js/config/url.mdx';
 import ConfigUrlReactJs from './_001-langchain-langserve/#react/config/url.mdx';
+import ConfigUrlJavaScript from './_001-langchain-langserve/#js/config/url.mdx';
 
-import ConfigUseInputSchemaJavaScript from './_001-langchain-langserve/#js/config/useInputSchema.mdx';
 import ConfigUseInputSchemaReactJs from './_001-langchain-langserve/#react/config/useInputSchema.mdx';
+import ConfigUseInputSchemaJavaScript from './_001-langchain-langserve/#js/config/useInputSchema.mdx';
 
-import ConfigDataTransferModeJavaScript from './_001-langchain-langserve/#js/config/dataTransferMode.mdx';
 import ConfigDataTransferModeReactJs from './_001-langchain-langserve/#react/config/dataTransferMode.mdx';
+import ConfigDataTransferModeJavaScript from './_001-langchain-langserve/#js/config/dataTransferMode.mdx';
 
-import ConfigInputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/inputPreProcessor.mdx';
 import ConfigInputPreProcessorReactJs from './_001-langchain-langserve/#react/config/inputPreProcessor.mdx';
+import ConfigInputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/inputPreProcessor.mdx';
 
-import ConfigOutputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/outputPreProcessor.mdx';
 import ConfigOutputPreProcessorReactJs from './_001-langchain-langserve/#react/config/outputPreProcessor.mdx';
+import ConfigOutputPreProcessorJavaScript from './_001-langchain-langserve/#js/config/outputPreProcessor.mdx';
 
 # LangChain LangServe
 
@@ -55,6 +52,14 @@ This documentation page is about the standard adapter provided by `NLUX` for API
 ## Usage
 
 <PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+
+> ### Response Type and Generics
+
+By default, the `LangServe` adapter assumes that the response from the LangServe API is going to be a string.<br />
+If you provide an output pre-processor that returns a different type, you can specify the type of the response using
+generics.
+
+<PlatformSelector reactJs={UsageWithGenericsReactJs} javascript={UsageWithGenericsJavaScript}/>
 
 ---
 

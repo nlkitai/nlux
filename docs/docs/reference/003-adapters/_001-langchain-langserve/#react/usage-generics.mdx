@@ -2,11 +2,14 @@
 import {useChatAdapter} from '@nlux/langchain-react';
 import {AiChat} from '@nlux/react';
 
+export type CustomDataType = {
+    response: string;
+    accuracy: number;
+};
+
 export default App = () => {
-    const adapter = useChatAdapter({
+    const adapter = useChatAdapter<CustomDataType>({
         url: 'https://<Your LangServe Runnable URL>',
-        useInputSchema: true,
-        dataTransferMode: 'stream'
     });
 
     return <AiChat adapter={adapter} />;

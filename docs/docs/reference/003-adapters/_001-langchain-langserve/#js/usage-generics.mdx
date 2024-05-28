@@ -1,0 +1,14 @@
+```ts
+import {createChatAdapter} from '@nlux/langchain';
+import {createAiChat} from '@nlux/core';
+
+export type CustomDataType = {
+    response: string;
+    accuracy: number;
+};
+
+const adapter = createChatAdapter<CustomDataType>()
+    .withUrl('https://<Your LangServe Runnable URL>');
+
+const aiChat = createAiChat().withAdapter(adapter);
+```
