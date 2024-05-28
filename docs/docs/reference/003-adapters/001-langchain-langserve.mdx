@@ -55,9 +55,9 @@ This documentation page is about the standard adapter provided by `NLUX` for API
 
 > ### Response Type and Generics
 
-By default, the `LangServe` adapter assumes that the response from the LangServe API is going to be a string.<br />
+By default, the `LangServe` adapter assumes that the parsed response from the LangServe API is a `string`.<br />
 If you provide an output pre-processor that returns a different type, you can specify the type of the response using
-generics.
+generics, so it can be used in custom renderers, and other parts of the `NLUX` library.
 
 <PlatformSelector reactJs={UsageWithGenericsReactJs} javascript={UsageWithGenericsJavaScript}/>
 

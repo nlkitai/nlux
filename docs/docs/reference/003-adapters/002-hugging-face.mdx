@@ -5,14 +5,14 @@ sidebar_label: 'Hugging Face'
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
-import ReactJs from './_002-hugging-face/#react.mdx';
-import JavaScript from './_002-hugging-face/#js.mdx';
-
 import InstallationJavaScript from './_002-hugging-face/#js/installation.mdx';
 import InstallationReactJs from './_002-hugging-face/#react/installation.mdx';
 
 import UsageJavaScript from './_002-hugging-face/#js/usage.mdx';
 import UsageReactJs from './_002-hugging-face/#react/usage.mdx';
+
+import UsageWithGenericsJavaScript from './_002-hugging-face/#js/usage-generics.mdx';
+import UsageWithGenericsReactJs from './_002-hugging-face/#react/usage-generics.mdx';
 
 import ConfigJavaScript from './_002-hugging-face/#js/config.mdx';
 import ConfigReactJs from './_002-hugging-face/#react/config.mdx';
@@ -44,20 +44,32 @@ import ConfigMaxNewTokensReactJs from './_002-hugging-face/#react/config/maxNewT
 # Hugging Face
 
 Hugging Face is a popular platform for hosting and accessing machine learning models. It provides a unified
-interface and inference API to interact with many state-of-the-art open-source models such as LLAMA2, DeciLM,
+interface and inference API to interact with many state-of-the-art open-source models such as LLAMA3, DeciLM,
 and more.
 
 This documentation page is about the standard adapter provided by `NLUX` for [Hugging Face Inference API](https://huggingface.co/inference-endpoints/serverless).
 
-<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
+---
 
 ## Installation
 
-<PlatformSection reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
+<PlatformSelector reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
+
+---
 
 ## Usage
 
-<PlatformSection reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+<PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+
+> ### Response Type and Generics
+
+By default, the `Hugging Face` adapter assumes that the parsed response returned from the model is a `string`.<br />
+If you provide an output pre-processor that returns a different type, you can specify the type of the response using
+generics, so it can be used in custom renderers, and other parts of the `NLUX` library.
+
+<PlatformSelector reactJs={UsageWithGenericsReactJs} javascript={UsageWithGenericsJavaScript}/>
+
+---
 
 ## Configuration
 
@@ -65,19 +77,19 @@ This documentation page is about the standard adapter provided by `NLUX` for [Hu
 
 ---
 
-### Model
+> ### Model
 
-<PlatformSection reactJs={ConfigModelReactJs} javascript={ConfigModelJavaScript}/>
-
----
-
-### Endpoint
-
-<PlatformSection reactJs={ConfigEndpointReactJs} javascript={ConfigEndpointJavaScript}/>
+<PlatformSelector reactJs={ConfigModelReactJs} javascript={ConfigModelJavaScript}/>
 
 ---
 
-### Auth Token
+> ### Endpoint
+
+<PlatformSelector reactJs={ConfigEndpointReactJs} javascript={ConfigEndpointJavaScript}/>
+
+---
+
+> ### Auth Token
 
 This is the authorization token to use for Hugging Face Inference API.
 This will be passed to the `Authorization` header of the HTTP request.
@@ -90,47 +102,47 @@ If no token is provided, the request will be sent without an `Authorization` hea
 Public models on Hugging face do not require an authorization token, but if your model is private, you will
 need to provide one.
 
-<PlatformSection reactJs={ConfigAuthTokenReactJs} javascript={ConfigAuthTokenJavaScript}/>
+<PlatformSelector reactJs={ConfigAuthTokenReactJs} javascript={ConfigAuthTokenJavaScript}/>
 
 ---
 
-### Data Transfer Mode
+> ### Data Transfer Mode
 
-<PlatformSection reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
+<PlatformSelector reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
 
 ---
 
-### System Message
+> ### System Message
 
 The initial system to send to the Hugging Face Inference API.
 This will be used during the pre-processing step to construct the payload that will be sent to the API.
 
-<PlatformSection reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavaScript}/>
+<PlatformSelector reactJs={ConfigSystemMessageReactJs} javascript={ConfigSystemMessageJavaScript}/>
 
 ---
 
-### Input Pre-Processor
+> ### Input Pre-Processor
 
 The `inputPreProcessor` is a function that takes the user input and some additional options, and returns
 the string that will be sent to the Hugging Face Inference API. It is used to transform the user input
 to the format expected by the model.
 
-<PlatformSection reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
+<PlatformSelector reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
 
 ---
 
-### Output Pre-Processor
+> ### Output Pre-Processor
 
 The `outputPreProcessor` is a function that takes the response from the model and returns a string that
 will be displayed to the user.
 
-<PlatformSection reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
+<PlatformSelector reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
 
 ---
 
-### Max New Tokens
+> ### Max New Tokens
 
 The maximum number of new tokens that can be generated by the Hugging Face Inference API.<br />
 This is useful if you want to limit the number of tokens that can be generated by the API.
 
-<PlatformSection reactJs={ConfigMaxNewTokensReactJs} javascript={ConfigMaxNewTokensJavaScript}/>
+<PlatformSelector reactJs={ConfigMaxNewTokensReactJs} javascript={ConfigMaxNewTokensJavaScript}/>

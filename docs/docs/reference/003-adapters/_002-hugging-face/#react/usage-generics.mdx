@@ -1,5 +1,5 @@
 ```tsx
-import {useChatAdapter} from '@nlux/langchain-react';
+import {useChatAdapter} from '@nlux/hf-react';
 import {AiChat} from '@nlux/react';
 
 export type CustomDataType = {
@@ -9,7 +9,8 @@ export type CustomDataType = {
 
 export default App = () => {
     const adapter = useChatAdapter<CustomDataType>({
-        url: 'https://<Your LangServe Runnable URL>',
+        model: '<Your Hugging Face Model ID>',
+        // Other config options
     });
 
     return <AiChat<CustomDataType> adapter={adapter} />;

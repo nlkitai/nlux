@@ -1,5 +1,5 @@
 ```ts
-import {createChatAdapter} from '@nlux/langchain';
+import {createChatAdapter} from '@nlux/hf';
 import {createAiChat} from '@nlux/core';
 
 export type CustomDataType = {
@@ -8,7 +8,7 @@ export type CustomDataType = {
 };
 
 const adapter = createChatAdapter<CustomDataType>()
-    .withUrl('https://<Your LangServe Runnable URL>');
+    .withModel('<Your Hugging Face Model ID>');
 
 const aiChat = createAiChat<CustomDataType>().withAdapter(adapter);
 ```
