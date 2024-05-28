@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/nlux/examples", "destination": "/nlux/examples/react-js-ai-assistant" },
     { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*" },
     { "source": "/:path((?!nlux)(?!/).*)", "destination": "/nlux/:path*" }
   ]
