@@ -19,12 +19,12 @@ import CustomPromiseAdapterReactJs from './_004-custom-adapters/#react/customPro
 If you're building your own APIs and you would like to use `NLUX` as the UI for your own AI chatbot,
 you can do so by creating a custom adapter.
 
-<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
-
 There are 2 types of custom adapters that you can create:
 
 * Streaming Adapters
-* Promise Adapters
+* Batch Adapters
+
+---
 
 ## Streaming Adapters
 
@@ -36,12 +36,12 @@ in a stream. Most major LLM APIs (e.g. OpenAI, Anthropic) support streaming resp
 
 In order to implement a custom streaming adapter for `NLUX`, you need to implement the following interface:
 
-```typescript
-interface Adapter {
+```tsx
+interface ChatAdapter<AiMsg = string> {
     streamText: (
         message: string,
-        observer: StreamingAdapterObserver,
-        extras: AdapterExtras,
+        observer: StreamingAdapterObserver<AiMsg>,
+        extras: ChatAdapterExtras<AiMsg>,
     ) => void;
 }
 ```
@@ -54,9 +54,9 @@ The `streamText` method takes 2 parameters:
 
 Below is the definition of the `StreamingAdapterObserver` interface:
 
-```typescript
-interface StreamingAdapterObserver {
-    next: (partialResponse: string) => void;
+```tsx
+interface StreamingAdapterObserver<ChunkType = string> {
+    next: (chunk: ChunkType) => void;
     error: (error: Error) => void;
     complete: () => void;
 }
@@ -71,16 +71,21 @@ You can check the [Create Custom Adapters](/learn/adapters/custom-adapters/creat
 implement a custom streaming adapter.
 :::
 
-## Promise Adapters
+---
 
-Promise adapters can be used when the API sends responses in a single request (e.g. REST APIs).<br />
-The advantage of using a promise adapter is that **it's easier to implement**.
+## Batch Adapters
 
-In order to implement a custom promise adapter for `NLUX`, you need to implement the following interface:
+Batch adapters can be used when the API sends responses in a single request without streaming.<br />
+Batch adapters are ** easier to implement**.
 
-```typescript
-interface Adapter {
-    batchText(message: string, extras: AdapterExtras): Promise<string>;
+In order to implement a batch promise adapter for `NLUX`, you need to implement the following interface:
+
+```tsx
+interface ChatAdapter<AiMsg = string> {
+    batchText: (
+        message: string,
+        extras: ChatAdapterExtras<AiMsg>,
+    ) => Promise<AiMsg>;
 }
 ```
 
@@ -96,19 +101,40 @@ You can check the [Create Custom Adapters](/learn/adapters/custom-adapters/creat
 implement a custom promise adapter.
 :::
 
+---
+
 ## Adapter Extras
 
-The `AdapterExtras` object passed as last parameter to the `batchText` and `streamText` methods contains
+The `ChatAdapterExtras` object passed as last parameter to the `batchText` and `streamText` methods contains
 information that the adapter might need. It has the following properties. It has the following properties:
 
-```typescript
-interface AdapterExtras {
+```tsx
+interface ChatAdapterExtras<AiMsg = string> {
     // The props that were passed to the AiChat component
-    aiChatProps: AiChatProps;
+    aiChatProps: AiChatPropsInEvents<AiMsg>;
 
     // The conversation history
     // Available when `conversationOptions.historyPayloadSize`
     // is set to a value greater than 0 or to `'max'`
-    conversationHistory?: Readonly<ConversationItem[]>;
+    conversationHistory?: ChatItem<AiMsg>[];
+
+    // This contains the headers that implementers can use to send additional data such as authentication headers.
+    headers?: Record<string, string>;
 }
+```
+
+The `ChatItem` type is defined as follows:
+
+```tsx
+export type ChatItem<AiMsg = string> = {
+    role: 'assistant';
+    message: AiMsg;
+    serverResponse?: string | object | undefined;
+} | {
+    role: 'user';
+    message: string;
+} | {
+    role: 'system';
+    message: string;
+};
 ```
