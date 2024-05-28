@@ -1,0 +1,60 @@
+---
+sidebar_label: 'Custom Response Renderers'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+
+import app1 from './0004-custom-response-renderers/_a-streamed-data/App.tsx';
+import waves1 from './0004-custom-response-renderers/_a-streamed-data/Waves.ts';
+import personas1 from './0004-custom-response-renderers/_a-streamed-data/personas.ts';
+import style1 from './0004-custom-response-renderers/_a-streamed-data/style.ts';
+
+import app2 from './0004-custom-response-renderers/_b-batched-data/App.tsx';
+import waves2 from './0004-custom-response-renderers/_b-batched-data/Waves.ts';
+import personas2 from './0004-custom-response-renderers/_b-batched-data/personas.ts';
+import style2 from './0004-custom-response-renderers/_b-batched-data/style.ts';
+
+# Custom Response Renderers
+
+The examples in this page show how to create custom message renderer for streamed and batched data.
+
+---
+
+## Custom Message Renderers For Streamed Data
+
+<br />
+<br />
+
+Data is streamed to the custom component as it's being generated.<br />
+The renderer uses `<div ref={props.containerRef}/>` to let `NLUX` know where to append the streamed data.
+
+<CodeEditor
+    files={{
+        'App.tsx': app1,
+        'Waves.tsx': waves1,
+        'style.css': style1,
+        'personas.ts': personas1,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'Write a poem about the ocean.'}
+/>
+
+---
+
+## Custom Message Renderers For Batched Data
+<br />
+<br />
+
+The data is batched and sent to the custom component all at once.<br />
+The renderer displays the data that's present in the `content` prop.
+
+<CodeEditor
+    files={{
+        'App.tsx': app2,
+        'Waves.tsx': waves2,
+        'style.css': style2,
+        'personas.ts': personas2,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'When is the next full moon?'}
+/>
