@@ -4,8 +4,8 @@ sidebar_label: 'NLUX LangChain Adapter'
 
 import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import exampleUrlFileAiChatBot from './0002-langchain-langserve-adapter/aiAssistant';
-import userPersona from './0002-langchain-langserve-adapter/personas';
+import app from './0002-langchain-langserve-adapter/App';
+import personas from './0002-langchain-langserve-adapter/personas';
 
 # LangChain LangServe Adapter
 
@@ -20,8 +20,8 @@ This example illustrates how to use `NLUX` to connect to a LangChain runnable ma
 
 <CodeEditor
     files={{
-        'App.tsx': exampleUrlFileAiChatBot,
-        'personas.tsx': userPersona,
+        'App.tsx': app,
+        'personas.tsx': personas,
     }}
     editorHeight={380}
     simulatedPrompt={'What\'s the best human food treats to feed a pirate parrot to keep him happy during long voyages at sea?'}

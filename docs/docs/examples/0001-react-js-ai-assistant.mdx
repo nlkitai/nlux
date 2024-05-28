@@ -1,10 +1,14 @@
+---
+sidebar_label: 'NLUX React JS Component'
+---
+
 import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import exampleIntroFileAiChatBot from './0001-react-js-ai-assistant/aiAssistant.tsx';
-import exampleIntroFileStreamAdapter from './0001-react-js-ai-assistant/adapter.tsx';
-import exampleIntroFilePersonas from './0001-react-js-ai-assistant/personas.tsx';
+import app from './0001-react-js-ai-assistant/App';
+import adapter from './0001-react-js-ai-assistant/adapter';
+import personas from './0001-react-js-ai-assistant/personas';
 
-# `NLUX` React JS
+# `NLUX` React JS `<AiChat />` Component
 
 The following example shows how to use **`NLUX` with React JS** to build a simple AI assistant.<br />
 It uses `NLUX`'s demo API, which connects to **the OpenAI GPT-4o** model.<br />
@@ -14,9 +18,9 @@ You can check the file `adapter.ts` to see we connect to the API and stream cont
 
 <CodeEditor
     files={{
-        'App.tsx': exampleIntroFileAiChatBot,
-        'adapter.ts': exampleIntroFileStreamAdapter,
-        'personas.tsx': exampleIntroFilePersonas,
+        'App.tsx': app,
+        'adapter.ts': adapter,
+        'personas.tsx': personas,
     }}
     editorHeight={380}
     simulatedPrompt='Explain how quantum computing works.'

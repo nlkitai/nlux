@@ -8,11 +8,11 @@ import {isUrlWithSupportedEndpoint} from './isUrlWithSupportedEndpoint';
  *
  * Examples:
  *
- * For the URL: https://pynlux.api.nlux.ai/einbot/stream
- * The base URL is: https://pynlux.api.nlux.ai/einbot
+ * For the URL: https://pynlux.api.nlkit.com/einbot/stream
+ * The base URL is: https://pynlux.api.nlkit.com/einbot
  *
- * For the URL: https://pynlux.api.nlux.ai/einbot
- * The base URL is also: https://pynlux.api.nlux.ai/einbot
+ * For the URL: https://pynlux.api.nlkit.com/einbot
+ * The base URL is also: https://pynlux.api.nlkit.com/einbot
  * Since it does not end with /invoke or /stream.
  */
 export const getBaseUrlFromUrlOption = <AnyAiMsg>(adapterOptions: ChatAdapterOptions<AnyAiMsg>): string => {

@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .withUrl('http://localhost:8899/');
 
     const langChainAdapter = createLangChainChatAdapter()
-        .withUrl('https://pynlux.api.nlux.ai/einbot')
+        .withUrl('https://pynlux.api.nlkit.com/einbot')
         .withDataTransferMode('stream')
         .withInputSchema(true);
 

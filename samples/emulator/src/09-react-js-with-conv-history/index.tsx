@@ -14,7 +14,7 @@ const ExampleWrapper = () => {
     }, []);
 
     const langServeAdapter = useChatAdapter({
-        url: 'https://pynlux.api.nlux.ai/einbot',
+        url: 'https://pynlux.api.nlkit.com/einbot',
         dataTransferMode: 'batch',
     });
 

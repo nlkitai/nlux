@@ -6,7 +6,7 @@ import {createChatAdapter} from '@nlux/langchain';
 import '@nlux/themes/nova.css';
 
 const chatGptAdapter = createChatAdapter().withUrl(
-    'https://pynlux.api.nlux.ai/pirate-speak'
+    'https://pynlux.api.nlkit.com/pirate-speak'
 );
 
 const aiChat = createAiChat().withAdapter(chatGptAdapter);

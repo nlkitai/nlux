@@ -61,7 +61,7 @@ function App() {
     });
 
     const langChainAdapter = useChatLangChainChatAdapter({
-        url: 'https://pynlux.api.nlux.ai/einbot',
+        url: 'https://pynlux.api.nlkit.com/einbot',
         dataTransferMode,
         useInputSchema: true,
     });

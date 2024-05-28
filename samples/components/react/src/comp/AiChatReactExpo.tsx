@@ -51,7 +51,7 @@ export const AiChatReactExpo = () => {
     >('batch');
 
     const langServeAdapter = useChatAdapter<MessageObjectType>({
-        url: 'https://pynlux.api.nlux.ai/pirate-speak',
+        url: 'https://pynlux.api.nlkit.com/pirate-speak',
         dataTransferMode,
     });
 

@@ -5,7 +5,7 @@ import '@nlux/themes/nova.css';
 export default () => {
   // LangServe adapter that connects to a demo LangChain Runnable API
   const adapter = useChatAdapter({
-    url: 'https://pynlux.api.nlux.ai/pirate-speak',
+    url: 'https://pynlux.api.nlkit.com/pirate-speak',
     dataTransferMode: 'batch'
   });
 
