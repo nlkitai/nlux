@@ -1,6 +1,9 @@
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
 import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
+import ReactJs from './_003-custom-renderers/#react.mdx';
+import JavaScript from './_003-custom-renderers/#js.mdx';
+
 import ConfigReactJs from './_003-custom-renderers/#react/config.mdx';
 import ConfigJavaScript from './_003-custom-renderers/#js/config.mdx';
 
@@ -18,13 +21,15 @@ This feature is particularly useful when the data is not a simple string, but a 
 in a specific way, or when the developer needs to render additional elements that are not part of the response itself
 but is related to it.
 
+<PlatformSelector reactJs={ReactJs} javascript={JavaScript}/>
+
 ---
 
-### Usage
+## Usage
 
 Custom renderers can be provided to the `AiChat` component as part of the `messageOptions` prop.
 
-<PlatformSelector reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
+<PlatformSection reactJs={ConfigReactJs} javascript={ConfigJavaScript}/>
 
 ---
 
