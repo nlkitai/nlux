@@ -15,7 +15,9 @@ try {
             `rm -fr dist && ` +
             `mkdir dist && ` +
             `mv build dist/nlux &&` +
-            `mv dist/nlux/root.html dist/index.html`
+            `mv dist/nlux/root.html dist/index.html &&` +
+            `mv dist/nlux/404.html dist/404.html &&` +
+            `cp dist/nlux/favicon.ico dist/favicon.ico`
         );
     }
 } catch (_error) {
