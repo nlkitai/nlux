@@ -3,8 +3,17 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/nlux/examples", "destination": "/nlux/examples/react-js-ai-assistant" },
-    { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*" },
+    { "source": "/nlux/examples/react-js-ai-chatbot", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
+    { "source": "/nlux/examples/bot-persona", "destination": "/nlux/examples/assistant-persona", "permanent": true },
+    { "source": "/nlux/examples/intro", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
+    { "source": "/nlux/examples", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
+    { "source": "/nlux/api/user-interface/conversation", "destination": "/nlux/reference/ui/ai-chat", "permanent": true },
+    { "source": "/nlux/api/adapters/custom-adapter", "destination": "/nlux/reference/adapters/custom-adapters", "permanent": true },
+    { "source": "/nlux/api/user-interface/ai-chatbot", "destination": "/nlux/reference/ui/ai-chat", "permanent": true },
+    { "source": "/nlux/api/user-interface/config", "destination": "/nlux/reference/ui/ai-chat", "permanent": true },
+    { "source": "/nlux/api/user-interface/event-listeners", "destination": "/nlux/reference/ui/events", "permanent": true },
+    { "source": "/nlux/api/user-interface", "destination": "/nlux/reference/ui", "permanent": true },
+    { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*", "permanent": true },
     { "source": "/:path((?!nlux)(?!/).*)", "destination": "/nlux/:path*" }
   ]
 }
