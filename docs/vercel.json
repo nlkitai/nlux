@@ -14,7 +14,7 @@
     { "source": "/nlux/api/user-interface/event-listeners", "destination": "/nlux/reference/ui/events", "permanent": true },
     { "source": "/nlux/api/user-interface", "destination": "/nlux/reference/ui", "permanent": true },
     { "source": "/nlux/api/:path*", "destination": "/nlux/reference/:path*", "permanent": true },
-    { "source": "/nlux((?!/)):query((\\?.*)?)", "destination": "/nlux/:query*" },
+    { "source": "/nlux((?!/)):path((\\?.*)?)", "destination": "/nlux/:path*" },
     { "source": "/nlux:path((?!)(?!/).*)", "destination": "/nlux/:path*" }
   ]
 }
