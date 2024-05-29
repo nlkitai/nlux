@@ -8,7 +8,7 @@ More specifically ― the package include the adapter to connect to chat models 
 via [Hugging Face Inference Endpoints](https://huggingface.co/inference-endpoints/dedicated).
 
 For more information on how to use this package, please visit:  
-[docs.nlux.ai/api/adapters/hugging-face](https://docs.nlux.ai/api/adapters/hugging-face)
+[docs.nlkit.com/nlux/reference/adapters/hugging-face](https://docs.nlkit.com/nlux/reference/adapters/hugging-face)
 
 ### Vanilla JS 🟨 vs React JS ⚛️
 

@@ -78,7 +78,7 @@ or import it in your React app.
 
 An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
-[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://docs.nlkit.com/nlux)
+[![NLUX AiChat Component](https://content.nlkit.com/images/demos/chat-convo-demo-fin-advisor.gif)](https://docs.nlkit.com/nlux)
 
 ## Theme File and CSS 🎨
 

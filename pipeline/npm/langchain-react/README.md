@@ -14,7 +14,7 @@ using [LangServe](https://python.langchain.com/docs/langserve).
 * Ability to customize the payloads, both sent and received.
 
 For more information on how to use this package, please visit:
-[docs.nlux.ai/api/adapters/langchain-langserve](https://docs.nlux.ai/api/adapters/langchain-langserve)
+[docs.nlkit.com/nlux/reference/adapters/langchain-langserve](https://docs.nlkit.com/nlux/reference/adapters/langchain-langserve)
 
 ### Vanilla JS 🟨 vs React JS ⚛️
 

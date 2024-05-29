@@ -78,7 +78,7 @@ You should also [include the NLUX theme CSS file](#theme-file-and-css-) in your 
 
 An AI chatbot, powered by LangChain, that can understand and respond to user messages:
 
-[![NLUX AiChat Component](https://nlux.ai/images/demos/chat-convo-demo-fin-advisor.gif)](https://docs.nlkit.com/nlux)
+[![NLUX AiChat Component](https://content.nlkit.com/images/demos/chat-convo-demo-fin-advisor.gif)](https://docs.nlkit.com/nlux)
 
 ## Theme File and CSS 🎨
 

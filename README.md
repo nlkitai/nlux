@@ -26,7 +26,7 @@
 simple to integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few
 lines of code, you can add conversational AI capabilities and interact with your favourite LLM.
 
-[![NLUX UI For Any LLM](https://nlux.ai/images/github/nlux-ui-for-llms-banner.gif)](https://docs.nlkit.com/nlux)
+[![NLUX UI For Any LLM](https://content.nlkit.com/images/github/nlux-ui-for-llms-banner.gif)](https://docs.nlkit.com/nlux)
 
 ## Key Features 🌟
 

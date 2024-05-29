@@ -16,10 +16,10 @@ If you would like to use OpenAI's API in a production environment, you should us
 NLUX with any API or LLM by **creating a custom adapter for it**.
 
 For more information on how to use this package, please visit:  
-[https://docs.nlux.ai/api/adapters/open-ai](https://docs.nlux.ai/api/adapters/open-ai)
+[https://docs.nlkit.com/nlux/reference/adapters/open-ai](https://docs.nlkit.com/nlux/reference/adapters/open-ai)
 
 For more information on how to create custom adapters for your own LLM or API, please visit:  
-[https://docs.nlux.ai/learn/adapters/custom-adapters/create-custom-adapter](https://docs.nlux.ai/learn/adapters/custom-adapters/create-custom-adapter)
+[https://docs.nlkit.com/nlux/learn/adapters/custom-adapters/create-custom-adapter](https://docs.nlkit.com/nlux/learn/adapters/custom-adapters/create-custom-adapter)
 
 ## Vanilla JS 🟨 vs React JS ⚛️
 

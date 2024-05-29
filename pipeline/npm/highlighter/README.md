@@ -7,7 +7,7 @@ This extension adds syntax highlighting for code displayed in
 the NLUX Conversational AI interface.
 
 To learn more about how to use this package, please visit the
-[documentation](https://docs.nlux.ai/examples/syntax-highlighter) page.
+[documentation](https://docs.nlkit.com/nlux/examples/syntax-highlighter) page.
 
 ## About NLUX
 
