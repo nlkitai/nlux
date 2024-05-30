@@ -24,6 +24,8 @@
     --nlux-WelcomeMessage-Avatar--Width: 60px;
     --nlux-WelcomeMessage-PersonaName--FontSize: 22px;
     --nlux-WelcomeMessage-PersonaName--FontWeight: 700;
+    --nlux-WelcomeMessage-Text--FontSize: 18px;
+    --nlux-WelcomeMessage-Text--FontWeight: 400;
     --nlux-WelcomeMessage--Gap: 5px;
 
     /** Divider between conversation and composer */

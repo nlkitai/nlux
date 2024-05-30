@@ -14,6 +14,11 @@
         font-weight: var(--nlux-wlcMsg-prsNm--ftWg);
     }
 
+    > .nlux-comp-wlc_msg_txt {
+        font-size: var(--nlux-wlcMsg-txt--ftSz);
+        font-weight: var(--nlux-wlcMsg-txt--ftWg);
+    }
+
     > .nlux-comp-avtr {
         width: var(--nlux-wlcMsg-avtr--wd);
         border-color: var(--nlux-wlcMsg-avtr--brdrClr);

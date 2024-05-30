@@ -27,6 +27,55 @@ describe('createAiChat() + personaOptions + assistant', () => {
         aiChat = undefined;
     });
 
+    describe('When no assistant persona is set', () => {
+        it('The NLUX logo should be rendered as welcome message', async () => {
+            // Arrange
+            const aiChat = createAiChat()
+                .withAdapter(adapterController!.adapter);
+
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            // Assert
+            const logoContainer = rootElement.querySelector('.nlux-comp-wlc_msg > .nlux-comp-avtr > .avtr_ctn');
+            expect(logoContainer).toBeInTheDocument();
+            expect(logoContainer!.innerHTML).toEqual(
+                expect.stringContaining('<div class="avtr_img" style="background-image: url(data:image/png;base64,'),
+            );
+        });
+
+        describe('When the assistant persona is set after initial render', () => {
+            it('Assistant persona details should be rendered instead of the NLUX logo', async () => {
+                // Arrange
+                const aiChat = createAiChat()
+                    .withAdapter(adapterController!.adapter);
+
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                // Act
+                aiChat.updateProps({
+                    personaOptions: {
+                        assistant: {
+                            name: 'Assistant Name',
+                            avatar: 'https://assistant-image-url',
+                        },
+                    },
+                });
+
+                await waitForRenderCycle();
+
+                // Assert
+                const selector = '.nlux-comp-wlc_msg > .nlux-comp-avtr > .avtr_ctn';
+                const avatarContainer = rootElement.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
+                expect(avatarContainer!.querySelector('.avtr_img')).toHaveStyle(
+                    'background-image: url(https://assistant-image-url)',
+                );
+            });
+        });
+    });
+
     describe('When the assistant persona is set with image URL and name', () => {
         describe('When the assistant sends a response', () => {
             it('Assistant persona details should be rendered', async () => {

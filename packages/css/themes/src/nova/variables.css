@@ -20,10 +20,12 @@
     --nlux-Exceptions--BorderRadius: 12px;
 
     /** Welcome message */
-    --nlux-WelcomeMessage-Avatar--Width: 60px;
-    --nlux-WelcomeMessage-PersonaName--FontSize: 22px;
-    --nlux-WelcomeMessage-PersonaName--FontWeight: 700;
-    --nlux-WelcomeMessage--Gap: 5px;
+    --nlux-WelcomeMessage-Avatar--Width: 48px;
+    --nlux-WelcomeMessage-PersonaName--FontSize: 18px;
+    --nlux-WelcomeMessage-PersonaName--FontWeight: 600;
+    --nlux-WelcomeMessage-Text--FontSize: 15px;
+    --nlux-WelcomeMessage-Text--FontWeight: 400;
+    --nlux-WelcomeMessage--Gap: 4px;
 
     /** Divider between conversation and composer */
     --nlux-ChatRoom-Divider--MarginTop: 10px;

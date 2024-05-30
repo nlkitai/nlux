@@ -1,5 +1,6 @@
 import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
+import {createDefaultWelcomeMessageDom} from '../../../../../../shared/src/ui/DefaultWelcomeMessage/create';
 import {createWelcomeMessageDom} from '../../../../../../shared/src/ui/WelcomeMessage/create';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
@@ -10,8 +11,6 @@ import {
     CompConversationEvents,
     CompConversationProps,
 } from './conversation.types';
-
-export const __ = (styleName: string) => `nlux-chtRm-cnv-${styleName}`;
 
 export const renderConversation: CompRenderer<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
@@ -33,7 +32,7 @@ export const renderConversation: CompRenderer<
     };
 
     const segmentsContainer = document.createElement('div');
-    segmentsContainer.classList.add(__('sgmts-cntr'));
+    segmentsContainer.classList.add('nlux-chtRm-cnv-sgmts-cntr');
 
     if (!(segmentsContainer instanceof HTMLElement)) {
         throw new NluxRenderingError({
@@ -56,10 +55,14 @@ export const renderConversation: CompRenderer<
                 avatar: assistant.avatar,
                 message: assistant.tagline,
             });
+        } else {
+            // No assistant persona provided, render default welcome message
+            // which is the NLUX logo
+            renderingContext.welcomeMessageContainer = createDefaultWelcomeMessageDom();
+        }
 
-            if (renderingContext.welcomeMessageContainer) {
-                segmentsContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
-            }
+        if (renderingContext.welcomeMessageContainer) {
+            segmentsContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
         }
     }
 
@@ -86,7 +89,7 @@ export const renderConversation: CompRenderer<
                         avatar: renderingContext.assistantPersona.avatar,
                         message: renderingContext.assistantPersona.tagline,
                     })
-                    : undefined;
+                    : createDefaultWelcomeMessageDom();
 
                 if (renderingContext.welcomeMessageContainer) {
                     segmentsContainer.insertAdjacentElement(
@@ -112,7 +115,7 @@ export const renderConversation: CompRenderer<
                             avatar: renderingContext.assistantPersona.avatar,
                             message: renderingContext.assistantPersona.tagline,
                         })
-                        : undefined;
+                        : createDefaultWelcomeMessageDom();
 
                     if (renderingContext.welcomeMessageContainer) {
                         segmentsContainer.insertAdjacentElement(

@@ -1,4 +1,5 @@
 import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
+import {WelcomeDefaultMessageComp} from '../../ui/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
 import {WelcomeMessageComp} from '../../ui/WelcomeMessage/WelcomeMessageComp';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
@@ -21,6 +22,11 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
     } = props;
 
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
+    const showWelcomeDefaultMessage = useMemo(
+        () => !hasMessages && personaOptions?.assistant === undefined,
+        [hasMessages, personaOptions],
+    );
+
     const showWelcomeMessage = useMemo(
         () => !hasMessages && personaOptions?.assistant !== undefined,
         [hasMessages, personaOptions],
@@ -48,6 +54,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
 
     return (
         <>
+            {showWelcomeDefaultMessage && (
+                <WelcomeDefaultMessageComp />
+            )}
             {showWelcomeMessage && (
                 <WelcomeMessageComp
                     name={personaOptions!.assistant!.name}

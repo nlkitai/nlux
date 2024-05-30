@@ -8,6 +8,8 @@
     --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-Avatar--Width, 80px);
     --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-PersonaName--FontSize, 1.6rem);
     --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-PersonaName--FontWeight, 400);
+    --nlux-wlcMsg-txt--ftSz: var(--nlux-WelcomeMessage-Text--FontSize, 1.2rem);
+    --nlux-wlcMsg-txt--ftWg: var(--nlux-WelcomeMessage-Text--FontWeight, 400);
     --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
     /** Divider between conversation and composer */
