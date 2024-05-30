@@ -101,7 +101,7 @@ export const Hero = ({className}: {className?: string}) => {
                             'personas.tsx': exampleIntroFilePersonas,
                         }}
                         editorHeight={420}
-                        simulatedPrompt="How can AI chatbots improve the user experience on my website?"
+                        simulatedPrompt="How an AI assistant can enhance my website's user experience?"
                     />
                 </div>
             </div>

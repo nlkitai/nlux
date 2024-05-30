@@ -14,6 +14,7 @@ import simulatorTsContent from './simulatorJs';
 
 export type CodeEditorProps = {
     className?: string;
+    previewOnly?: boolean;
     simulatedPrompt?: string;
     editorHeight?: number;
     direction?: 'row' | 'column';
@@ -23,6 +24,7 @@ export type CodeEditorProps = {
 export const CodeEditor = ({
     className,
     simulatedPrompt,
+    previewOnly = false,
     editorHeight = 420,
     files,
     direction = 'column',
@@ -70,7 +72,7 @@ export const CodeEditor = ({
         >
             <SandpackLayout style={{
                 flexDirection: direction,
-                height: direction === 'row' ? 'auto' : editorHeight * 2,
+                height: direction === 'row' ? 'auto' : (previewOnly ? editorHeight : editorHeight * 2),
             }}>
                 <SandpackPreview
                     style={{ height: editorHeight }}
@@ -79,14 +81,16 @@ export const CodeEditor = ({
                     showRefreshButton={true}
                     showRestartButton={true}
                 />
-                <SandpackCodeEditor
-                    style={{ height: editorHeight }}
-                    showTabs
-                    showLineNumbers={true}
-                    showInlineErrors
-                    wrapContent
-                    closableTabs={false}
-                />
+                {!previewOnly && (
+                    <SandpackCodeEditor
+                        style={{ height: editorHeight }}
+                        showTabs
+                        showLineNumbers={true}
+                        showInlineErrors
+                        wrapContent
+                        closableTabs={false}
+                    />
+                )}
             </SandpackLayout>
         </SandpackProvider>
     )

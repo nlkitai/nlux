@@ -2,13 +2,17 @@
 sidebar_label: 'Overview'
 ---
 
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import app from './_001-overview/App.tsx';
+import adapter from './_001-overview/adapter.tsx';
+
 Welcome to the `NLUX` learning resources.
 This section provides detailed guides and examples to help you master building
 conversational AI interfaces powered by `NLUX`.
 
 # Overview
 
-_NLUX_ is an open-source JavaScript library for **creating elegant and performant conversational user interfaces**.
+`NLUX` is an open-source JavaScript library for **creating elegant and performant conversational user interfaces**.
 It provides a vanilla JavaScript API as well as React JS components and hooks to integrate chatbot capabilities
 into your web apps and websites with minimal effort.
 
@@ -24,12 +28,19 @@ const adapter = useChatAdapter({url: '<YOUR AI ENDPOINT URL>'});
 return <AiChat adapter={adapter} />;
 ```
 
-And the result is 👇
+And the result is:
 
-![`NLUX` Chatbot](./chat-convo-demo-ts.gif)
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'adapter.ts': adapter,
+    }}
+    previewOnly={true}
+    editorHeight={450}
+    simulatedPrompt={'How an AI assistant can enhance my website\'s user experience?'}
+/>
 
-Of course, this is just a simple example.
-
+<br />
 **You can customize the chatbot in many ways:** Connect to any AI backend / Customize the UI / Add chat personas for
 a better chat experience / Load conversation history / and more.
 
