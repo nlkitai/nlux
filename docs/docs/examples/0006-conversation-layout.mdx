@@ -1,0 +1,28 @@
+---
+sidebar_label: 'Conversation Layout'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+
+import app from './0006-conversation-layout/App.tsx';
+import adapter from './0006-conversation-layout/adapter.tsx';
+import setup from './0006-conversation-layout/setup.tsx';
+import layout from './0006-conversation-layout/layout.tsx';
+
+# Conversation Layout
+
+---
+
+This example shows how the messages in the conversation can either be displayed in bubbles (WhatsApp style) or in a
+list (slack style). The configuration is done via the `conversationOptions.layout` property.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'adapter.ts': adapter,
+        'layout.tsx': layout,
+        'setup.tsx': setup,
+    }}
+    editorHeight={420}
+    simulatedPrompt={'If a pirate loses his ship\'s wheel in a storm, does he become disoriented or reoriented?'}
+/>
