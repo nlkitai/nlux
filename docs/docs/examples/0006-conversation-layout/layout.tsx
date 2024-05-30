@@ -1,8 +1,8 @@
 export default `import { useState, useCallback } from 'react';
-import { ConversationLayout } from '@nlux/react';
+import {ConversationLayout} from '@nlux/react';
 
-export const useLayoutOptions = () => {
-  const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('bubbles');
+export const useLayoutOptions = (defaultLayout: ConversationLayout) => {
+  const [conversationLayout, setConversationLayout] = useState<ConversationLayout>(defaultLayout);
   const onConversationsLayoutChange = useCallback(
     (e) => setConversationLayout(e.target.value),
     [setConversationLayout],

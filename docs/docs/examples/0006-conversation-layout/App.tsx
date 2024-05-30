@@ -1,16 +1,17 @@
 export default (colorMode: 'dark' | 'light') => `import {useState, useCallback} from 'react';
-import {AiChat} from '@nlux/react';
+import {AiChat, ConversationLayout} from '@nlux/react';
 import {useChatAdapter} from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
 import {personaOptions, conversationHistory} from './setup';
 import {useLayoutOptions, LayoutSelector} from './layout';
 
 export default () => {
-  // LangServe adapter that connects to a demo LangChain Runnable API
   const adapter = useChatAdapter({url: 'https://pynlux.api.nlkit.com/pirate-speak'});
 
   // Utility hook to manage conversation layout options
-  const {conversationLayout, onConversationsLayoutChange} = useLayoutOptions();
+  // Possible config values: 'bubbles' or 'list'
+  const defaultLayout: ConversationLayout = 'bubbles';
+  const {conversationLayout, onConversationsLayoutChange} = useLayoutOptions(defaultLayout);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '90vh' }}>
@@ -20,7 +21,6 @@ export default () => {
       />
       <AiChat
         conversationOptions={{
-            // Possible values: 'list' or 'bubbles'
             layout: conversationLayout
         }}
         adapter={adapter}
