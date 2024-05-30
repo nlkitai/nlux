@@ -65,7 +65,6 @@ export const Roadmap = ({className}: {className?: string}) => {
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/context-aware-conversations"
                     text="Context-Aware Conversations"
-                    suffix="⭐️"
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/context-aware-conversations"
