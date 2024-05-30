@@ -1,0 +1,144 @@
+---
+sidebar_label: 'Migrating from v1 to v2'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+
+import LunaThemeJavaScript from './_001-luna-theme/#js.mdx';
+import LunaThemeReactJs from './_001-luna-theme/#react.mdx';
+
+# Migrating from NLUX v1 to v2
+
+---
+
+## Overview
+
+<br />
+<br />
+`NLUX` `v1` was released in January 2024.<br />
+`NLUX` `v2` was released in May 2024, with several breaking changes.<br />
+If you're a user of `NLUX` `v1` looking to migrate to `v2`, this guide is for you.
+
+Scope of the breaking changes:
+
+* `Theming system` and default theme
+* Several TypeScript `type changes`
+* `AiChat` UI component config options
+* `Custom adapters` implementation
+
+---
+
+## Theming System
+
+<br />
+<br />
+NLUX v2 comes with a new default theme called `Nova`.<br />
+When you set up `NLUX` as per documentation and guides, you are expected to load the `Nova` theme's CSS into your 
+web page, as following:
+
+```tsx
+import '@nlux/themes/nova.css';
+```
+
+We recommend migrating to the `Nova` theme, as it's a more user-friendly accessible theme, that supports both
+dark and light modes. But if you would like to keep the old theme, you have that option.
+
+### Keeping the v1 theme
+
+<br />
+<br />
+The `NLUX` `v1`'s default theme is called `Luna` and it's still included as part of the `v2` release, but not as a
+default theme. If you're interested in keeping the `Luna` theme while using `NLUX` `v2`, you can that by providing
+`themeId` prop to the `AiChat` component's `displayOptions`, as following:
+
+<PlatformSelector reactJs={LunaThemeReactJs} javascript={LunaThemeJavaScript} />
+
+In addition to that, you will also need to import the `Luna` theme's CSS into your web page.<br />
+If your project bundler supports CSS imports, you can do that as following:
+
+```tsx
+import '@nlux/themes/luna.css';
+```
+
+Otherwise, you can download the `Luna` theme's CSS file
+[from `@nlux/themes` `NPM`](https://www.npmjs.com/package/@nlux/themes?activeTab=code) and include it in your HTML file.
+
+---
+
+## Type Changes
+
+<br />
+<br />
+
+`NLUX` `v2` has updated the name and value of certain types. Here's a list of the updated types:
+
+---
+
+### Participant Role
+
+<br />
+<br />
+
+This value is used in the `ChatItem` type to define the role of the participant in the conversation.<br />
+
+**Old value:**
+
+```tsx
+type ParticipantRole = 'user' | 'system' | 'ai';
+```
+
+**New value:**
+
+```tsx
+type ParticipantRole = 'user' | 'system' | 'assistant';
+```
+
+The `ai` role has been renamed to `assistant` to better reflect the role of the AI in the conversation,
+and to match the naming convention of `OpenAI APIs` that are considered as an industry standard.
+
+---
+
+## AiChat Config Options
+
+<br />
+<br />
+`AiChat` UI component's config options have been updated in `NLUX` `v2`.<br />
+If you're using `AiChat` component in your project, you will need to update the config options as per the new API.
+
+Here's a list of the updated config options:
+
+| Old Config Option | New Config Option | Change Description |
+| --- | --- | --- |
+| `themeId` | `displayOptions.themeId` | `themeId` prop has been moved to `displayOptions` object. |
+| `personaOptions.bot` | `personaOptions.assistant` | `personaOptions.bot` has been renamed to `personaOptions.assistant`. |
+| `personaOptions.bot.picture` | `personaOptions.assistant.avatar` | `personaOptions.bot.picture` has been renamed to `personaOptions.assistant.avatar`. |
+| `personaOptions.user.picture` | `personaOptions.user.avatar` | `personaOptions.user.picture` has been renamed to `personaOptions.user.avatar`. |
+| `conversationOptions.scrollWhenGenerating` | `conversationOptions.autoScroll` | `conversationOptions.scrollWhenGenerating` has been renamed to `conversationOptions.autoScroll`. |
+| `conversationOptions.streamingAnimationSpeed` | `messageOptions.streamingAnimationSpeed` | `conversationOptions.streamingAnimationSpeed` has been moved to `messageOptions`. |
+| `conversationOptions.historyPayloadSize` | - | The type of `conversationOptions.historyPayloadSize` has been changed from `number \| 'none' \| 'max'` to `number \| 'max'`. |
+| `layoutOptions.width` | `displayOptions.width` | `layoutOptions.width` has been moved to `displayOptions`. |
+| `layoutOptions.height` | `displayOptions.height` | `layoutOptions.height` has been moved to `displayOptions`. |
+| `layoutOptions.maxWidth` | - | `layoutOptions.maxWidth` has been removed. The default width is now `100%`. |
+| `layoutOptions.maxHeight` | - | `layoutOptions.maxHeight` has been removed. The default height is now `100%`. |
+| `promptOptions.autoFocus` | `componentOptions.autoFocus` | `promptOptions.autoFocus` has been moved to `componentOptions`. |
+| `promptOptions.placeholder` | `componentOptions.placeholder` | `promptOptions.placeholder` has been moved to `componentOptions`. |
+| `syntaxHighlightingOptions` | `messageOptions.syntaxHighlighting` | `syntaxHighlightingOptions` has been moved to `messageOptions`. |
+
+Please note that this is not an exhaustive list of changes, and you should refer to the
+[`NLUX` `v2` AI Chat component documentation](/reference/ui/ai-chat) for a complete list of changes.
+
+---
+
+## Custom Adapters
+
+<br />
+<br />
+
+If you have implemented custom adapters in your project, you will need to update them to work with `NLUX` `v2`.<br />
+The new version of `NLUX` has updated the adapter API to provide better flexibility and more control over the
+conversation flow.
+
+The most important change in the adapter API is the introduction of generic types for the `Adapter` interface.
+
+Please refer to the [`NLUX` `v2` custom adapters documentation](/reference/adapters) for more information on how to
+update your custom adapters.

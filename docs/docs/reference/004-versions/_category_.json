@@ -1,0 +1,9 @@
+{
+  "label": "Versions And Migration",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "slug": "/reference/versions"
+  }
+}
