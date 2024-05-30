@@ -34,7 +34,7 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
     });
 
     describe('When only name is provided', () => {
-        it('Should render the name first letter', () => {
+        it('Should render an empty div with the name as title', () => {
             // Arrange
             const name = 'John Doe';
             const props: AvatarProps = {name};
@@ -44,7 +44,7 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
 
             // Assert
             expect(element.outerHTML).toBe(
-                `<div class="nlux-comp-avtr" title="John Doe"><div class="avtr_ctn"><span class="avtr_ltr">J</span></div></div>`,
+                `<div class="nlux-comp-avtr" title="John Doe"><div class="avtr_ctn"></div></div>`,
             );
         });
     });
@@ -100,7 +100,6 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
                 // Assert
                 expect(element.outerHTML).toBe(
                     `<div class="nlux-comp-avtr" title="John Doe"><div class="avtr_ctn">` +
-                    `<span class="avtr_ltr">J</span>` +
                     `<div class="avtr_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
                 );
@@ -129,7 +128,6 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
                 // Assert
                 expect(element.outerHTML).toBe(
                     `<div class="nlux-comp-avtr" title="Alex Doe"><div class="avtr_ctn">` +
-                    `<span class="avtr_ltr">A</span>` +
                     `<div class="avtr_img" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
                 );

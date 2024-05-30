@@ -1,7 +1,6 @@
 import {isValidElement} from 'react';
 import {className as compAvatarClassName} from '../../../../../shared/src/ui/Avatar/create';
 import {
-    renderedInitialsClassName as compAvatarInitialsClassName,
     renderedPhotoClassName as compAvatarPhotoClassName,
     renderedPhotoContainerClassName as compAvatarPhotoContainerClassName,
 } from '../../../../../shared/src/ui/Avatar/utils/createPhotoContainerFromUrl';
@@ -16,9 +15,6 @@ export const AvatarComp = (props: AvatarProps) => {
             {isAvatarElement && props.avatar}
             {!isAvatarElement && isAvatarUrl && (
                 <div className={compAvatarPhotoContainerClassName}>
-                    <span className={compAvatarInitialsClassName}>
-                        {props.name && props.name.length > 0 ? props.name[0].toUpperCase() : ''}
-                    </span>
                     {props.avatar && (
                         <div
                             className={compAvatarPhotoClassName}

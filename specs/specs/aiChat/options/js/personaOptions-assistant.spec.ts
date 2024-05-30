@@ -82,34 +82,6 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://assistant-image-url)');
             });
-
-            it('Assistant persona initial letter should be rendered', async () => {
-                // Arrange
-                const aiChat = createAiChat()
-                    .withAdapter(adapterController!.adapter)
-                    .withPersonaOptions({
-                        assistant: {
-                            name: 'Assistant Name',
-                            avatar: 'https://assistant-image-url',
-                        },
-                    });
-
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
-
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
-
-                adapterController!.resolve('Hi, how can I help you?');
-                await waitForRenderCycle();
-
-                // Assert
-                const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
-                const avatarLetterContainer = rootElement.querySelector(selector);
-                expect(avatarLetterContainer).toBeInTheDocument();
-                expect(avatarLetterContainer).toHaveTextContent('A');
-            });
         });
 
         describe('When the assistant avatar is updated', () => {
@@ -158,12 +130,6 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://x-assistant-image-url)');
                 expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://x-assistant-image-url)');
-
-                const letterSelector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
-                const avatarLetterContainer = rootElement.querySelectorAll(letterSelector);
-                expect(avatarLetterContainer).toHaveLength(2);
-                expect(avatarLetterContainer[0]).toHaveTextContent('X');
-                expect(avatarLetterContainer[1]).toHaveTextContent('X');
             });
         });
 
@@ -383,9 +349,6 @@ describe('createAiChat() + personaOptions + assistant', () => {
             // Assert
             avatarContainer = rootElement.querySelectorAll(selector);
             expect(avatarContainer).toHaveLength(2);
-
-            expect(avatarContainer[0].querySelector('.avtr_ltr')).toHaveTextContent('A');
-            expect(avatarContainer[1].querySelector('.avtr_ltr')).toHaveTextContent('A');
 
             expect(avatarContainer[0].querySelector('.avtr_img')).toHaveStyle(
                 'background-image: url(https://assistant-image-url)',

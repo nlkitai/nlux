@@ -76,31 +76,6 @@ describe('createAiChat() + personaOptions + user', () => {
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://user-image-url)');
             });
-
-            it('Persona initial letter should be rendered', async () => {
-                // Arrange
-                const aiChat = createAiChat()
-                    .withAdapter(adapterController!.adapter)
-                    .withPersonaOptions({
-                        user: {
-                            name: 'Mr User',
-                            avatar: 'https://user-image-url',
-                        },
-                    });
-
-                aiChat.mount(rootElement);
-                await waitForRenderCycle();
-
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                await userEvent.type(textArea, 'Hello{enter}');
-                await waitForRenderCycle();
-
-                // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
-                const avatarLetterContainer = rootElement.querySelector(selector);
-                expect(avatarLetterContainer).toBeInTheDocument();
-                expect(avatarLetterContainer).toHaveTextContent('M');
-            });
         });
 
         describe('When the avatar is updated', () => {
@@ -146,12 +121,6 @@ describe('createAiChat() + personaOptions + user', () => {
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xuser-image-url)');
                 expect(avatarImageContainer[1]).toHaveStyle('background-image: url(https://xuser-image-url)');
-
-                const letterSelector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_ltr';
-                const avatarLetterContainer = rootElement.querySelectorAll(letterSelector);
-                expect(avatarLetterContainer).toHaveLength(2);
-                expect(avatarLetterContainer[0]).toHaveTextContent('X');
-                expect(avatarLetterContainer[1]).toHaveTextContent('X');
             });
         });
 

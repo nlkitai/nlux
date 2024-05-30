@@ -38,6 +38,10 @@
 .nlux-comp-cht_itm.nlux_cht_itm_snt {
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-hmMsg--brdClr);
+
+        > .avtr_ctn > .avtr_img {
+            background-color: var(--nlux-hmMsg--bgClr);
+        }
     }
 }
 
@@ -45,5 +49,9 @@
 .nlux-comp-cht_itm.nlux_cht_itm_rcvd {
     > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
         border-color: var(--nlux-aiMsg--brdClr);
+
+        > .avtr_ctn > .avtr_img {
+            background-color: var(--nlux-aiMsg--bgClr);
+        }
     }
 }
