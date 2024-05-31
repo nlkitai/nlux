@@ -1,3 +1,5 @@
+import {ConversationStarter} from '../../../types/conversationStarter';
+
 export type HistoryPayloadSize = number | 'max';
 
 export type ConversationLayout = 'bubbles' | 'list';
@@ -42,4 +44,11 @@ export interface ConversationOptions {
      * When no assistant persona is provided, the welcome message will be the NLUX logo.
      */
     showWelcomeMessage?: boolean;
+
+
+    /**
+     * Suggested prompts to display in the UI to help the user start a conversation.
+     * Conversation starters are only displayed when the conversation is empty, and no conversation history is present.
+     */
+    conversationStarters?: ConversationStarter[];
 }

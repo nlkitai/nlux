@@ -5,7 +5,6 @@ import useDeepCompareEffectHook from './hooks/useDeepCompareEffect';
 export type {
     DisplayOptions,
     ComposerOptions,
-    ConversationOptions,
     ConversationLayout,
     HistoryPayloadSize,
     HighlighterExtension,
@@ -73,6 +72,10 @@ export type {
 export type {
     AiChatProps,
 } from './exports/props';
+
+export type {
+    ConversationOptions,
+} from './types/conversationOptions';
 
 export type {
     BatchResponseComponentProps,

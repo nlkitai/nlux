@@ -1,7 +1,8 @@
-import {ConversationOptions, DisplayOptions, EventsConfig, ComposerOptions, StandardChatAdapter} from '@nlux/core';
+import {DisplayOptions, EventsConfig, ComposerOptions, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '../../../../shared/src/types/conversation';
+import {ConversationOptions} from '../types/conversationOptions';
 import {MessageOptions} from './messageOptions';
 import {PersonaOptions} from './personaOptions';
 

@@ -1,7 +1,7 @@
-import {ConversationLayout, ConversationOptions} from '../../../../js/core/src';
+import {ConversationLayout} from '../../../../js/core/src';
 
 export const conversationDefaultLayout: ConversationLayout = 'list';
 
-export const getConversationLayout = (conversationOptions: ConversationOptions): ConversationLayout => {
-    return conversationOptions?.layout ?? conversationDefaultLayout;
+export const getConversationLayout = (layout?: ConversationLayout): ConversationLayout => {
+    return layout ?? conversationDefaultLayout;
 };
