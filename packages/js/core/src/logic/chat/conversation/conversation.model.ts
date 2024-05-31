@@ -225,6 +225,10 @@ export class CompConversation<AiMsg> extends BaseComp<
         });
     }
 
+    public setShowWelcomeMessage(showWelcomeMessage: boolean) {
+        this.setProp('showWelcomeMessage', showWelcomeMessage);
+    }
+
     public setConversationLayout(layout: ConversationLayout) {
         this.setProp('conversationLayout', layout);
         this.chatSegmentComponentsById.forEach((comp) => {

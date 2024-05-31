@@ -255,6 +255,7 @@ function App() {
                 conversationOptions={{
                     // autoScroll: false,
                     layout: conversationLayout,
+                    // showWelcomeMessage: true,
                 }}
                 messageOptions={{
                     markdownLinkTarget: 'blank',

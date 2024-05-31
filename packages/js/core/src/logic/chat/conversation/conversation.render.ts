@@ -28,7 +28,7 @@ export const renderConversation: CompRenderer<
         assistantPersona: props.assistantPersona,
         userPersona: props.userPersona,
         welcomeMessageContainer: undefined,
-        shouldRenderWelcomeMessage: !props.messages || props.messages.length === 0,
+        shouldRenderWelcomeMessage: (!props.messages || props.messages.length === 0) && props.showWelcomeMessage !== false,
     };
 
     const segmentsContainer = document.createElement('div');

@@ -12,6 +12,7 @@ export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
     assistantPersona?: AssistantPersona,
     userPersona?: UserPersona,
+    showWelcomeMessage?: boolean;
     conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;

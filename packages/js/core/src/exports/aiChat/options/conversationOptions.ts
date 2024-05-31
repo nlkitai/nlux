@@ -32,4 +32,14 @@ export interface ConversationOptions {
      * @default 'list'
      */
     layout?: ConversationLayout;
+
+    /**
+     * Indicates whether the welcome message should be displayed when no conversation history is provided.
+     * The welcome message consists of:
+     * - The assistant's name and avatar
+     * - The assistant's tagline as configured in the `personaOptions`
+     *
+     * When no assistant persona is provided, the welcome message will be the NLUX logo.
+     */
+    showWelcomeMessage?: boolean;
 }

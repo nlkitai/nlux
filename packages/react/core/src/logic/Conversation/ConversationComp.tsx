@@ -18,18 +18,19 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
     const {
         segments,
         personaOptions,
+        conversationOptions,
         onLastActiveSegmentChange,
     } = props;
 
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
     const showWelcomeDefaultMessage = useMemo(
-        () => !hasMessages && personaOptions?.assistant === undefined,
-        [hasMessages, personaOptions],
+        () => !hasMessages && personaOptions?.assistant === undefined && conversationOptions?.showWelcomeMessage !== false,
+        [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
     );
 
     const showWelcomeMessage = useMemo(
-        () => !hasMessages && personaOptions?.assistant !== undefined,
-        [hasMessages, personaOptions],
+        () => !hasMessages && personaOptions?.assistant !== undefined && conversationOptions?.showWelcomeMessage !== false,
+        [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
     );
 
     const lastSegmentContainerRef = createRef<HTMLDivElement>();

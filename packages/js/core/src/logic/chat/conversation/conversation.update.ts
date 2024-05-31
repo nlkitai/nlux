@@ -27,4 +27,16 @@ export const updateConversation: CompUpdater<
         actions.updateUserPersona(newValue as UserPersona | undefined);
         return;
     }
+
+    if (propName === 'showWelcomeMessage') {
+        if (!actions) {
+            return;
+        }
+
+        if (newValue === false) {
+            actions.removeWelcomeMessage();
+        } else {
+            actions.resetWelcomeMessage();
+        }
+    }
 };

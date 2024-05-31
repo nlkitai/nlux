@@ -37,6 +37,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             composer,
             assistantPersona,
             userPersona,
+            showWelcomeMessage,
             initialConversationContent,
             syntaxHighlighter,
             htmlSanitizer,
@@ -52,6 +53,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             streamingAnimationSpeed,
             assistantPersona,
             userPersona,
+            showWelcomeMessage,
             initialConversationContent,
             composer,
             syntaxHighlighter,
@@ -171,6 +173,10 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.conversation?.setUserPersona(props.userPersona ?? undefined);
         }
 
+        if (props.hasOwnProperty('showWelcomeMessage')) {
+            this.conversation?.setShowWelcomeMessage(props.showWelcomeMessage ?? true);
+        }
+
         if (props.hasOwnProperty('composer')) {
             if (this.composerInstance) {
                 const currentDomProps = this.composerInstance.getProp('domCompProps')!;
@@ -211,6 +217,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             .withProps<CompConversationProps<AiMsg>>({
                 assistantPersona,
                 userPersona,
+                showWelcomeMessage: this.getProp('showWelcomeMessage') as boolean | undefined,
                 messages: initialConversationContent,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,

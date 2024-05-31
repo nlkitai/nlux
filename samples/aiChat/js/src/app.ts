@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .withConversationOptions({
             // autoScroll: false,
+            // showWelcomeMessage: false,
         })
         .withDisplayOptions(displayOptions)
         .withMessageOptions({

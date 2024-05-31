@@ -11,6 +11,7 @@ export type CompConversationProps<AiMsg> = {
     messages?: ChatItem<AiMsg>[];
     assistantPersona?: AssistantPersona;
     userPersona?: UserPersona;
+    showWelcomeMessage?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
