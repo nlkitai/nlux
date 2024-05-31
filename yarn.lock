@@ -8574,7 +8574,7 @@ open@^8.0.9, open@^8.4.0:
     is-docker "^2.1.1"
     is-wsl "^2.2.0"
 
-openai@^4.47.1:
+openai@^4.47.2:
   version "4.47.2"
   resolved "https://registry.yarnpkg.com/openai/-/openai-4.47.2.tgz#075a0f9fa8e96422804ddd017428ce0a3862e1d0"
   integrity sha512-E3Wq9mYdDSLajmcJm9RO/lCegTKrQ7ilAkMbhob4UgGhTjHwIHI+mXNDNPl5+sGIUp2iVUkpoi772FjYa7JlqA==
