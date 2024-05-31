@@ -15,7 +15,7 @@ import simulatorTsContent from './simulatorJs';
 export type CodeEditorProps = {
     className?: string;
     previewOnly?: boolean;
-    simulatedPrompt?: string;
+    simulatedPrompt?: string | false;
     editorHeight?: number;
     direction?: 'row' | 'column';
     files: Record<string, string | ((colorScheme: 'light' | 'dark') => string)>;
@@ -31,6 +31,10 @@ export const CodeEditor = ({
 }: CodeEditorProps) => {
     const { colorMode } = useColorMode();
     const setPromptIntoSimulator = useMemo(() => {
+        if (simulatedPrompt === false) {
+            return '';
+        }
+
         const promptToType = simulatedPrompt || 'How can AI chatbots improve the user experience on my website?';
         return `setTimeout(() => { nluxSimulator?.enableSimulator();\n nluxSimulator?.setPrompt("${promptToType}"); }, 1000);\n`;
     }, [simulatedPrompt]);
