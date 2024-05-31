@@ -1,5 +1,4 @@
 import {ControllerContext} from '../../../types/controllerContext';
-import {BaseComp} from './base';
 import {CompRegistry} from './registry';
 
 export const comp = <
