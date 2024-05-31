@@ -15,16 +15,18 @@ import LunaThemeReactJs from './_001-luna-theme/#react.mdx';
 
 <br />
 <br />
-`NLUX` `v1` was released in January 2024.<br />
-`NLUX v2.x` was released in May 2024, with several breaking changes.<br />
-If you're a user of `NLUX` `v1` looking to migrate to `v2.x`, this guide is for you.
+`NLUX v1.x` was released in January 2024, and `NLUX v2.x` was released in May 2024, with several major improvements and
+new features. The new version of `NLUX` introduces breaking changes to the theming system, TypeScript types, and the
+`AiChat` UI component's config options.
+
+If you're a user of `NLUX v1.x` looking to migrate to `v2.x`, this guide is for you.
 
 Scope of the breaking changes:
 
-* `Theming system` and default theme
-* Several TypeScript `type changes`
-* `AiChat` UI component config options
-* `Custom adapters` implementation
+* Theming system and default theme
+* TypeScript types
+* Config options
+* Custom adapters API
 
 ---
 
@@ -32,7 +34,7 @@ Scope of the breaking changes:
 
 <br />
 <br />
-NLUX v2 comes with a new default theme called `Nova`.<br />
+`NLUX v2.x` comes with a new default theme called `Nova`.<br />
 When you set up `NLUX` as per documentation and guides, you are expected to load the `Nova` theme's CSS into your 
 web page, as following:
 
@@ -40,14 +42,14 @@ web page, as following:
 import '@nlux/themes/nova.css';
 ```
 
-We recommend migrating to the `Nova` theme, as it's a more user-friendly accessible theme, that supports both
-dark and light modes. But if you would like to keep the old theme, you have that option.
+We recommend using the default `Nova` theme, as it's a more user-friendly and accessible theme, that supports both
+dark and light modes. But if you would like to keep the old legacy theme, you have that option.
 
-### Keeping the v1 theme
+### Keeping the v1.x theme
 
 <br />
 <br />
-The `NLUX` `v1`'s default theme is called `Luna` and it's still included as part of the `v2.x` release, but not as a
+The `NLUX v1.x`'s default theme is called `Luna` and it's still included as part of the `v2.x` release, but not as a
 default theme. If you're interested in keeping the `Luna` theme while using `NLUX v2.x`, you can that by providing
 `themeId` prop to the `AiChat` component's `displayOptions`, as following:
 
