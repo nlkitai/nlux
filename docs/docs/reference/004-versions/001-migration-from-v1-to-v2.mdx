@@ -16,8 +16,8 @@ import LunaThemeReactJs from './_001-luna-theme/#react.mdx';
 <br />
 <br />
 `NLUX` `v1` was released in January 2024.<br />
-`NLUX` `v2` was released in May 2024, with several breaking changes.<br />
-If you're a user of `NLUX` `v1` looking to migrate to `v2`, this guide is for you.
+`NLUX v2.x` was released in May 2024, with several breaking changes.<br />
+If you're a user of `NLUX` `v1` looking to migrate to `v2.x`, this guide is for you.
 
 Scope of the breaking changes:
 
@@ -47,8 +47,8 @@ dark and light modes. But if you would like to keep the old theme, you have that
 
 <br />
 <br />
-The `NLUX` `v1`'s default theme is called `Luna` and it's still included as part of the `v2` release, but not as a
-default theme. If you're interested in keeping the `Luna` theme while using `NLUX` `v2`, you can that by providing
+The `NLUX` `v1`'s default theme is called `Luna` and it's still included as part of the `v2.x` release, but not as a
+default theme. If you're interested in keeping the `Luna` theme while using `NLUX v2.x`, you can that by providing
 `themeId` prop to the `AiChat` component's `displayOptions`, as following:
 
 <PlatformSelector reactJs={LunaThemeReactJs} javascript={LunaThemeJavaScript} />
@@ -70,7 +70,7 @@ Otherwise, you can download the `Luna` theme's CSS file
 <br />
 <br />
 
-`NLUX` `v2` has updated the name and value of certain types. Here's a list of the updated types:
+`NLUX v2.x` has updated the name and value of certain types. Here's a list of the updated types:
 
 ---
 
@@ -102,7 +102,7 @@ and to match the naming convention of `OpenAI APIs` that are considered as an in
 
 <br />
 <br />
-`AiChat` UI component's config options have been updated in `NLUX` `v2`.<br />
+`AiChat` UI component's config options have been updated in `NLUX v2.x`.<br />
 If you're using `AiChat` component in your project, you will need to update the config options as per the new API.
 
 Here's a list of the updated config options:
@@ -120,12 +120,12 @@ Here's a list of the updated config options:
 | `layoutOptions.height` | `displayOptions.height` | `layoutOptions.height` has been moved to `displayOptions`. |
 | `layoutOptions.maxWidth` | - | `layoutOptions.maxWidth` has been removed. The default width is now `100%`. |
 | `layoutOptions.maxHeight` | - | `layoutOptions.maxHeight` has been removed. The default height is now `100%`. |
-| `promptOptions.autoFocus` | `componentOptions.autoFocus` | `promptOptions.autoFocus` has been moved to `componentOptions`. |
-| `promptOptions.placeholder` | `componentOptions.placeholder` | `promptOptions.placeholder` has been moved to `componentOptions`. |
+| `promptBoxOptions.autoFocus` | `componentOptions.autoFocus` | `promptOptions.autoFocus` has been moved to `componentOptions`. |
+| `promptBoxOptions.placeholder` | `componentOptions.placeholder` | `promptOptions.placeholder` has been moved to `componentOptions`. |
 | `syntaxHighlightingOptions` | `messageOptions.syntaxHighlighting` | `syntaxHighlightingOptions` has been moved to `messageOptions`. |
 
 Please note that this is not an exhaustive list of changes, and you should refer to the
-[`NLUX` `v2` AI Chat component documentation](/reference/ui/ai-chat) for a complete list of changes.
+[`NLUX v2.x` AI Chat component documentation](/reference/ui/ai-chat) for a complete list of changes.
 
 ---
 
@@ -134,11 +134,11 @@ Please note that this is not an exhaustive list of changes, and you should refer
 <br />
 <br />
 
-If you have implemented custom adapters in your project, you will need to update them to work with `NLUX` `v2`.<br />
+If you have implemented custom adapters in your project, you will need to update them to work with `NLUX v2.x`.<br />
 The new version of `NLUX` has updated the adapter API to provide better flexibility and more control over the
 conversation flow.
 
-The most important change in the adapter API is the introduction of generic types for the `Adapter` interface.
+The most important change in the adapter API is the introduction of **generic types** for the `Adapter` interface.
 
-Please refer to the [`NLUX` `v2` custom adapters documentation](/reference/adapters) for more information on how to
+Please refer to the [`NLUX v2.x` custom adapters documentation](/reference/adapters/custom-adapters) for more information on how to
 update your custom adapters.
