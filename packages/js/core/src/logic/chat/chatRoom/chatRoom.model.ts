@@ -10,6 +10,7 @@ import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highligh
 import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
+import {ConversationStarter} from '../../../types/conversationStarter';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
 import {CompConversation} from '../conversation/conversation.model';
 import {CompConversationProps} from '../conversation/conversation.types';
@@ -38,6 +39,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             assistantPersona,
             userPersona,
             showWelcomeMessage,
+            conversationStarters,
             initialConversationContent,
             syntaxHighlighter,
             htmlSanitizer,
@@ -53,6 +55,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             streamingAnimationSpeed,
             assistantPersona,
             userPersona,
+            conversationStarters,
             showWelcomeMessage,
             initialConversationContent,
             composer,
@@ -219,6 +222,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 userPersona,
                 showWelcomeMessage: this.getProp('showWelcomeMessage') as boolean | undefined,
                 messages: initialConversationContent,
+                conversationStarters: this.getProp('conversationStarters') as ConversationStarter[] | undefined,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,

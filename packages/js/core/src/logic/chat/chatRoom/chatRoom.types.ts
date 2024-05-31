@@ -4,6 +4,7 @@ import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highligh
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
+import {ConversationStarter} from '../../../types/conversationStarter';
 
 export type CompChatRoomEvents = 'chat-room-ready'
     | 'segments-container-clicked';
@@ -13,6 +14,7 @@ export type CompChatRoomProps<AiMsg> = {
     assistantPersona?: AssistantPersona,
     userPersona?: UserPersona,
     showWelcomeMessage?: boolean;
+    conversationStarters?: ConversationStarter[];
     conversationLayout: ConversationLayout;
     initialConversationContent?: ChatItem<AiMsg>[];
     autoScroll?: boolean;

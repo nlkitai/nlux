@@ -4,6 +4,7 @@ import {createDefaultWelcomeMessageDom} from '../../../../../../shared/src/ui/De
 import {createWelcomeMessageDom} from '../../../../../../shared/src/ui/WelcomeMessage/create';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
+import {ConversationStarter} from '../../../types/conversationStarter';
 import {source} from '../../../utils/source';
 import {
     CompConversationActions,
@@ -19,16 +20,23 @@ export const renderConversation: CompRenderer<
     compEvent,
     props,
 }) => {
+    const hasNoMessages = !props.messages || props.messages.length === 0;
     const renderingContext: {
         assistantPersona: AssistantPersona | undefined;
         userPersona: UserPersona | undefined;
+        conversationStarters: ConversationStarter[] | undefined;
         welcomeMessageContainer: HTMLElement | undefined;
+        conversationStartersContainer: HTMLElement | undefined;
         shouldRenderWelcomeMessage: boolean;
+        shouldRenderConversationStarters: boolean;
     } = {
         assistantPersona: props.assistantPersona,
         userPersona: props.userPersona,
+        conversationStarters: props.conversationStarters,
         welcomeMessageContainer: undefined,
-        shouldRenderWelcomeMessage: (!props.messages || props.messages.length === 0) && props.showWelcomeMessage !== false,
+        conversationStartersContainer: undefined,
+        shouldRenderWelcomeMessage: hasNoMessages && props.showWelcomeMessage !== false,
+        shouldRenderConversationStarters: hasNoMessages && Array.isArray(props.conversationStarters) && props.conversationStarters.length > 0,
     };
 
     const segmentsContainer = document.createElement('div');
@@ -64,6 +72,25 @@ export const renderConversation: CompRenderer<
         if (renderingContext.welcomeMessageContainer) {
             segmentsContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
         }
+    }
+
+    //
+    // Create conversation starters container
+    // and append it to the root if conversation starters are provided
+    //
+    if (renderingContext.shouldRenderConversationStarters) {
+        const conversationStartersContainer = document.createElement('div');
+        conversationStartersContainer.classList.add('nlux-comp-convStrts');
+
+        props.conversationStarters?.forEach((item, index) => {
+            const conversationStarter = document.createElement('div');
+            conversationStarter.classList.add('nlux-comp-convStrt');
+            conversationStarter.textContent = item.prompt;
+            conversationStartersContainer.appendChild(conversationStarter);
+        });
+
+        renderingContext.conversationStartersContainer = conversationStartersContainer;
+        segmentsContainer.insertAdjacentElement('beforebegin', conversationStartersContainer);
     }
 
     return {

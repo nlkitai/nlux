@@ -4,6 +4,7 @@ import '@nlux-dev/themes/src/blank/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 import {PersonaOptions, SanitizerExtension} from '@nlux-dev/react/src';
+import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
@@ -146,6 +147,11 @@ function App() {
         return DOMPurify.sanitize(html);
     }, []);
 
+    const conversationStarters: ConversationStarter[] = [
+        {prompt: 'Hello, World!'},
+        {prompt: 'How are you?'},
+    ];
+
     return (
         <>
             <div style={{
@@ -256,6 +262,7 @@ function App() {
                     // autoScroll: false,
                     layout: conversationLayout,
                     // showWelcomeMessage: true,
+                    conversationStarters,
                 }}
                 messageOptions={{
                     markdownLinkTarget: 'blank',

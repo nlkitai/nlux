@@ -1,11 +1,12 @@
 import {ComposerOptions} from '@nlux-dev/core/src';
 import {AiChat} from '@nlux-dev/react/src';
+import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {waitForRenderCycle} from '../../../utils/wait';
+import {waitForReactRenderCycle, waitForRenderCycle} from '../../../utils/wait';
 
 describe('<AiChat /> + conversationOptions + conversationStarters', () => {
     let adapterController: AdapterController | undefined;
@@ -23,7 +24,28 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
     });
 
     describe('When conversationStarters are provided', () => {
-        it.todo('They should be displayed when the conversation is empty', async () => {
+        it('They should be displayed when the conversation is empty', async () => {
+            // Arrange
+            const conversationStarters: ConversationStarter[] = [
+                {prompt: 'Hello, World!'},
+                {prompt: 'How are you?'},
+            ];
+
+            // Act
+            const {container} = render(
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    conversationOptions={{conversationStarters}}
+                />,
+            );
+            await waitForReactRenderCycle();
+
+            // Assert
+            const conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+            expect(conversationStarterElements).toHaveLength(conversationStarters.length);
+            conversationStarterElements.forEach((conversationStarterElement, index) => {
+                expect(conversationStarterElement).toHaveTextContent(conversationStarters[index].prompt);
+            });
         });
 
         describe('When the user submits a prompt', () => {

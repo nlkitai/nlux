@@ -154,9 +154,10 @@ export class NluxRenderer<AiMsg> {
                 .withContext(this.context)
                 .withProps<CompChatRoomProps<AiMsg>>({
                     visible: true,
-                    conversationLayout: getConversationLayout(this.theConversationOptions),
+                    conversationLayout: getConversationLayout(this.theConversationOptions.layout),
                     assistantPersona: this.thePersonasOptions?.assistant ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
+                    conversationStarters: this.theConversationOptions?.conversationStarters ?? undefined,
                     showWelcomeMessage: this.theConversationOptions?.showWelcomeMessage,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
@@ -342,7 +343,7 @@ export class NluxRenderer<AiMsg> {
 
             if (props.conversationOptions?.layout !== this.theConversationOptions.layout) {
                 newConversationOptions.layout = props.conversationOptions?.layout;
-                newProps.conversationLayout = getConversationLayout(props.conversationOptions ?? {});
+                newProps.conversationLayout = getConversationLayout(props.conversationOptions?.layout);
             }
 
             if (props.conversationOptions?.autoScroll !== this.theConversationOptions.autoScroll) {

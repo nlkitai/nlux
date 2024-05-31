@@ -2,6 +2,7 @@ import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} fro
 import {WelcomeDefaultMessageComp} from '../../ui/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
 import {WelcomeMessageComp} from '../../ui/WelcomeMessage/WelcomeMessageComp';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
+import {ConversationStarters} from '../ConversationStarters/ConversationStarters';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
@@ -31,6 +32,11 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
     const showWelcomeMessage = useMemo(
         () => !hasMessages && personaOptions?.assistant !== undefined && conversationOptions?.showWelcomeMessage !== false,
         [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
+    );
+
+    const showConversationStarters = useMemo(
+        () => !hasMessages && conversationOptions?.conversationStarters && conversationOptions?.conversationStarters.length > 0,
+        [hasMessages, conversationOptions?.conversationStarters],
     );
 
     const lastSegmentContainerRef = createRef<HTMLDivElement>();
@@ -64,6 +70,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                     avatar={personaOptions!.assistant!.avatar}
                     message={personaOptions!.assistant!.tagline}
                 />
+            )}
+            {showConversationStarters && (
+                <ConversationStarters items={conversationOptions!.conversationStarters ?? []} />
             )}
             <div className="nlux-chtRm-cnv-sgmts-cntr">
                 {segments.map((segment, index) => {

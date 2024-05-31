@@ -1,4 +1,5 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
+import {ConversationStarter} from '@nlux-dev/core/src/types/conversationStarter';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -23,7 +24,26 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
     });
 
     describe('When conversationStarters are provided', () => {
-        it.todo('They should be displayed when the conversation is empty', async () => {
+        it('They should be displayed when the conversation is empty', async () => {
+            // Arrange
+            const conversationStarters: ConversationStarter[] = [
+                {prompt: 'Hello, World!'},
+                {prompt: 'How are you?'},
+            ];
+
+            // Act
+            aiChat = createAiChat()
+                .withConversationOptions({conversationStarters})
+                .withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            // Assert
+            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+            expect(conversationStarterElements).toHaveLength(conversationStarters.length);
+            conversationStarterElements.forEach((conversationStarterElement, index) => {
+                expect(conversationStarterElement).toHaveTextContent(conversationStarters[index].prompt);
+            });
         });
 
         describe('When the user submits a prompt', () => {

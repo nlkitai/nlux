@@ -3,6 +3,7 @@ import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highligh
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
+import {ConversationStarter} from '../../../types/conversationStarter';
 
 export type CompConversationEvents = void;
 
@@ -12,6 +13,7 @@ export type CompConversationProps<AiMsg> = {
     assistantPersona?: AssistantPersona;
     userPersona?: UserPersona;
     showWelcomeMessage?: boolean;
+    conversationStarters?: ConversationStarter[];
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
