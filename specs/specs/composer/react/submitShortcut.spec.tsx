@@ -7,7 +7,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe('createAiChat() + composer + submitShortcut', () => {
+describe('<AiChat /> + composer + submitShortcut', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
 
