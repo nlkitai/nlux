@@ -1,5 +1,5 @@
-import {createLoaderDom} from '../../../../../../shared/src/components/Loader/create';
-import {getChatSegmentClassName} from '../../../../../../shared/src/utils/dom/getChatSegmentClassName';
+import {createLoaderDom} from '@shared/components/Loader/create';
+import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
 import {CompRenderer} from '../../../types/comp';
 import {
     CompChatSegmentActions,

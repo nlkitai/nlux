@@ -1,4 +1,4 @@
-import {NluxUsageError} from '../../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 import {CompRenderer, CompUpdater} from '../../types/comp';
 import {BaseComp} from './base';
 

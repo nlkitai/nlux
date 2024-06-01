@@ -1,5 +1,5 @@
 import {DataTransferMode} from '@nlux/core';
-import {NluxUsageError} from '../../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 import {LangServeAbstractAdapter} from '../adapter/adapter';
 import {LangServeBatchAdapter} from '../adapter/batch';
 import {LangServeStreamAdapter} from '../adapter/stream';

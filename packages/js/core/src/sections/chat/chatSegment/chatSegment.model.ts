@@ -1,7 +1,7 @@
-import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
-import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
-import {warnOnce} from '../../../../../../shared/src/utils/warn';
+import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
+import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {domOp} from '@shared/utils/dom/domOp';
+import {warnOnce} from '@shared/utils/warn';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {comp} from '../../../aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../aiChat/comp/decorators';

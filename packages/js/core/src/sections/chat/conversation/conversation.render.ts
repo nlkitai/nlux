@@ -1,7 +1,7 @@
-import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
-import {NluxRenderingError} from '../../../../../../shared/src/types/error';
-import {createDefaultWelcomeMessageDom} from '../../../../../../shared/src/components/DefaultWelcomeMessage/create';
-import {createWelcomeMessageDom} from '../../../../../../shared/src/components/WelcomeMessage/create';
+import {AnyAiMsg} from '@shared/types/anyAiMsg';
+import {NluxRenderingError} from '@shared/types/error';
+import {createDefaultWelcomeMessageDom} from '@shared/components/DefaultWelcomeMessage/create';
+import {createWelcomeMessageDom} from '@shared/components/WelcomeMessage/create';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {ConversationStarter} from '../../../types/conversationStarter';
@@ -170,7 +170,7 @@ export const renderConversation: CompRenderer<
 
                 renderingContext.conversationStartersContainer = conversationStartersContainer;
                 renderingContext.shouldRenderConversationStarters = true;
-            }
+            },
         },
     };
 };

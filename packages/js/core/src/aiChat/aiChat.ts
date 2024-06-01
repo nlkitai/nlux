@@ -1,9 +1,9 @@
-import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
-import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
-import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
-import {ChatItem} from '../../../../shared/src/types/conversation';
-import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../../../../shared/src/types/error';
-import {debug} from '../../../../shared/src/utils/debug';
+import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapterBuilder} from '@shared/types/adapters/chat/chatAdapterBuilder';
+import {StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
+import {ChatItem} from '@shared/types/conversation';
+import {NluxRenderingError, NluxUsageError, NluxValidationError} from '@shared/types/error';
+import {debug} from '@shared/utils/debug';
 import {registerAllSections} from '../sections/sections';
 import {AiChatStatus, IAiChat} from '../types/aiChat/aiChat';
 import {UpdatableAiChatProps} from '../types/aiChat/props';

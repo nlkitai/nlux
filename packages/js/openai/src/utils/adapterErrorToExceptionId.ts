@@ -1,4 +1,4 @@
-import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
+import {NLErrorId} from '@shared/types/exceptions/errors';
 
 export const adapterErrorToExceptionId = (error: unknown): NLErrorId | null => {
     if (typeof error === 'object' && error !== null) {

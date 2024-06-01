@@ -1,4 +1,4 @@
-import {warnOnce} from '../../../shared/src/utils/warn';
+import {warnOnce} from '@shared/utils/warn';
 import {ChatAdapterBuilder} from './openai/gpt/builders/builder';
 import {OpenAiAdapterBuilderImpl} from './openai/gpt/builders/builderImpl';
 

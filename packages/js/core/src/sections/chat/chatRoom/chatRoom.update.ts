@@ -1,4 +1,4 @@
-import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
+import {AnyAiMsg} from '@shared/types/anyAiMsg';
 import {CompUpdater} from '../../../types/comp';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomProps} from './chatRoom.types';
 

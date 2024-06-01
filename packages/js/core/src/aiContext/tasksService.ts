@@ -1,12 +1,8 @@
-import {ContextTasksAdapter} from '../../../../shared/src/types/adapters/context/contextTasksAdapter';
-import {
-    ContextActionResult,
-    DestroyContextResult,
-    RunTaskResult,
-} from '../../../../shared/src/types/aiContext/contextResults';
-import {ContextTask, ContextTasks} from '../../../../shared/src/types/aiContext/data';
-import {CallbackArgType, CallbackFunction} from '../../../../shared/src/types/callbackFunction';
-import {warn} from '../../../../shared/src/utils/warn';
+import {ContextTasksAdapter} from '@shared/types/adapters/context/contextTasksAdapter';
+import {ContextActionResult, DestroyContextResult, RunTaskResult} from '@shared/types/aiContext/contextResults';
+import {ContextTask, ContextTasks} from '@shared/types/aiContext/data';
+import {CallbackArgType, CallbackFunction} from '@shared/types/callbackFunction';
+import {warn} from '@shared/utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';

@@ -20,7 +20,7 @@ export type {
     ResponseRenderer,
     PromptRendererProps,
     PromptRenderer,
-    MessageOptions
+    MessageOptions,
 } from './aiChat/options/messageOptions';
 export type {DisplayOptions} from './aiChat/options/displayOptions';
 
@@ -39,7 +39,7 @@ export type {
 } from './types/aiChat/props';
 
 export type {
-    AiChatStatus
+    AiChatStatus,
 } from './types/aiChat/aiChat';
 
 export type {
@@ -65,7 +65,7 @@ export type {
 
 export type {
     StandardChatAdapter,
-} from '../../../shared/src/types/adapters/chat/standardChatAdapter';
+} from '@shared/types/adapters/chat/standardChatAdapter';
 
 export type {
     StandardAdapterInfo,
@@ -73,7 +73,7 @@ export type {
     AdapterDecodeFunction,
     InputFormat,
     OutputFormat,
-} from '../../../shared/src/types/adapters/chat/standardAdapterConfig';
+} from '@shared/types/adapters/chat/standardAdapterConfig';
 
 export type {
     AiChatProps,
@@ -89,30 +89,30 @@ export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-} from '../../../shared/src/types/adapters/chat/chatAdapter';
+} from '@shared/types/adapters/chat/chatAdapter';
 
 export type {
     ChatAdapterExtras,
-} from '../../../shared/src/types/adapters/chat/chatAdapterExtras';
+} from '@shared/types/adapters/chat/chatAdapterExtras';
 
 export type {
     ChatAdapterBuilder,
-} from '../../../shared/src/types/adapters/chat/chatAdapterBuilder';
+} from '@shared/types/adapters/chat/chatAdapterBuilder';
 
 export type {
     AssistResult,
     AssistAdapter,
-} from '../../../shared/src/types/adapters/assist/assistAdapter';
+} from '@shared/types/adapters/assist/assistAdapter';
 
 export type {
     AssistAdapterBuilder,
-} from '../../../shared/src/types/adapters/assist/assistAdapterBuilder';
+} from '@shared/types/adapters/assist/assistAdapterBuilder';
 
 export type {
     StreamParser,
     StandardStreamParser,
     StandardStreamParserOutput,
-} from '../../../shared/src/types/markdown/streamParser';
+} from '@shared/types/markdown/streamParser';
 
 // CONTEXT __________________
 
@@ -123,38 +123,38 @@ export type {
     ContextTasks,
     ContextItem,
     ContextTask,
-} from '../../../shared/src/types/aiContext/data';
+} from '@shared/types/aiContext/data';
 
 export type {
     ContextAdapter,
-} from '../../../shared/src/types/adapters/context/contextAdapter';
+} from '@shared/types/adapters/context/contextAdapter';
 
 export type {
     ContextAdapterExtras,
-} from '../../../shared/src/types/adapters/context/contextAdapterExtras';
+} from '@shared/types/adapters/context/contextAdapterExtras';
 
 export type {
     ContextTasksAdapter,
-} from '../../../shared/src/types/adapters/context/contextTasksAdapter';
+} from '@shared/types/adapters/context/contextTasksAdapter';
 
 export type {
     ContextDataAdapter,
-} from '../../../shared/src/types/adapters/context/contextDataAdapter';
+} from '@shared/types/adapters/context/contextDataAdapter';
 
 export type {
     ContextAdapterBuilder,
-} from '../../../shared/src/types/adapters/context/contextAdapterBuilder';
+} from '@shared/types/adapters/context/contextAdapterBuilder';
 
 export type {
     AiContext,
     AiContextStatus,
-} from '../../../shared/src/types/aiContext/aiContext';
+} from '@shared/types/aiContext/aiContext';
 
 export type {
     ContextItemHandler,
     ContextTaskHandler,
     ContextDomElementHandler,
-} from '../../../shared/src/types/aiContext/contextObservers';
+} from '@shared/types/aiContext/contextObservers';
 
 export type {
     InitializeContextResult,
@@ -163,7 +163,7 @@ export type {
     RunTaskResult,
     ContextActionResult,
     SetContextResult,
-} from '../../../shared/src/types/aiContext/contextResults';
+} from '@shared/types/aiContext/contextResults';
 
 export type {
     DataSyncOptions,
@@ -190,14 +190,14 @@ export type {
 // HTML SANITIZER ___________
 
 export type {
-    SanitizerExtension
+    SanitizerExtension,
 } from './aiChat/sanitizer/sanitizer';
 
 // CONVERSATION _____________
 
 export type {
     ChatItem,
-} from '../../../shared/src/types/conversation';
+} from '@shared/types/conversation';
 
 export type {
     ParticipantRole,

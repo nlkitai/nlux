@@ -1,10 +1,8 @@
-import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItemProps} from '../../../../../../../shared/src/components/ChatItem/props';
-import {
-    participantNameFromRoleAndPersona
-} from '../../../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
-import {conversationDefaultLayout} from '../../../../../../../shared/src/utils/dom/getConversationLayout';
-import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/stringifyRandomResponse';
+import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
+import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
+import {conversationDefaultLayout} from '@shared/utils/dom/getConversationLayout';
+import {stringifyRandomResponse} from '@shared/utils/stringifyRandomResponse';
 import {ConversationLayout} from '../../../../aiChat/options/conversationOptions';
 import {UserPersona} from '../../../../aiChat/options/personaOptions';
 

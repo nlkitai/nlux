@@ -6,9 +6,9 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
-import {NluxError, NluxValidationError} from '../../../../../shared/src/types/error';
-import {uid} from '../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {NluxError, NluxValidationError} from '@shared/types/error';
+import {uid} from '@shared/utils/uid';
+import {warn} from '@shared/utils/warn';
 import {adapterErrorToExceptionId} from '../../utils/adapterErrorToExceptionId';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
 

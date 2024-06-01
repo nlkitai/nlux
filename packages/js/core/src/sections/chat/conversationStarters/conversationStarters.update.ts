@@ -1,4 +1,4 @@
-import {emptyInnerHtml} from '../../../../../../shared/src/utils/dom/emptyInnerHtml';
+import {emptyInnerHtml} from '@shared/utils/dom/emptyInnerHtml';
 import {CompUpdater} from '../../../types/comp';
 import {
     CompConversationStartersActions,
@@ -13,7 +13,7 @@ export const updateConversationStarters: CompUpdater<
 > = ({
          propName,
          newValue,
-         dom: {elements}
+         dom: {elements},
      }) => {
     if (!elements) {
         return;

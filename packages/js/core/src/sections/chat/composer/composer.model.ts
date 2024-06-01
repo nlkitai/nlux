@@ -1,4 +1,4 @@
-import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
+import {ComposerProps} from '@shared/components/Composer/props';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';

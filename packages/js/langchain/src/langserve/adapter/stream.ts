@@ -1,6 +1,6 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
-import {NluxError, NluxUsageError} from '../../../../../shared/src/types/error';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {NluxError, NluxUsageError} from '@shared/types/error';
+import {warn} from '@shared/utils/warn';
 import {parseChunk} from '../parser/parseChunk';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {adapterErrorToExceptionId} from '../utils/adapterErrorToExceptionId';

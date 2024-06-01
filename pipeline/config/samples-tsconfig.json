@@ -27,5 +27,10 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "paths": {
+    "@shared/*": [
+      "../../packages/shared/src/*"
+    ]
+  }
 }

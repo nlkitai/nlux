@@ -1,6 +1,6 @@
 import {ChatItem} from '@nlux/core';
 import OpenAI from 'openai';
-import {warn} from '../../../../shared/src/utils/warn';
+import {warn} from '@shared/utils/warn';
 
 export const conversationHistoryToMessagesList: <AiMsg>(
     conversationHistory: ChatItem<AiMsg>[],

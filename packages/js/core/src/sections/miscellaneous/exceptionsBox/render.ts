@@ -1,8 +1,8 @@
 import {
     createExceptionsBoxController,
     ExceptionsBoxController,
-} from '../../../../../../shared/src/components/ExceptionsBox/control';
-import {createExceptionsBoxDom} from '../../../../../../shared/src/components/ExceptionsBox/create';
+} from '@shared/components/ExceptionsBox/control';
+import {createExceptionsBoxDom} from '@shared/components/ExceptionsBox/create';
 import {CompRenderer} from '../../../types/comp';
 import {
     CompExceptionsBoxActions,

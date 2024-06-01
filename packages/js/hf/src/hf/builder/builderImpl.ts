@@ -1,5 +1,5 @@
 import {DataTransferMode} from '@nlux/core';
-import {NluxUsageError, NluxValidationError} from '../../../../../shared/src/types/error';
+import {NluxUsageError, NluxValidationError} from '@shared/types/error';
 import {HfChatAdapterImpl} from '../adapter/chatAdapter';
 import {HfInputPreProcessor} from '../types/inputPreProcessor';
 import {HfOutputPreProcessor} from '../types/outputPreProcessor';

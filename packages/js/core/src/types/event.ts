@@ -1,5 +1,5 @@
-import {ChatItem} from '../../../../shared/src/types/conversation';
-import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
+import {ChatItem} from '@shared/types/conversation';
+import {NLErrorId} from '@shared/types/exceptions/errors';
 import {AiChatPropsInEvents} from './aiChat/props';
 
 export type MessageSentEventDetails = {

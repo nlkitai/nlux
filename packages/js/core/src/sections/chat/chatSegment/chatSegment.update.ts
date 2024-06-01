@@ -1,6 +1,6 @@
-import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
-import {debug} from '../../../../../../shared/src/utils/debug';
-import {getChatSegmentClassName} from '../../../../../../shared/src/utils/dom/getChatSegmentClassName';
+import {ChatSegmentStatus} from '@shared/types/chatSegment/chatSegment';
+import {debug} from '@shared/utils/debug';
+import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
 import {CompUpdater} from '../../../types/comp';
 import {CompChatSegmentActions, CompChatSegmentElements, CompChatSegmentProps} from './chatSegment.types';
 

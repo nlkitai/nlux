@@ -1,4 +1,4 @@
-import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
+import {NLErrorId} from '@shared/types/exceptions/errors';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';

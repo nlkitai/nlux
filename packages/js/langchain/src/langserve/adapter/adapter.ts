@@ -6,8 +6,8 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
-import {uid} from '../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {uid} from '@shared/utils/uid';
+import {warn} from '@shared/utils/warn';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
 import {LangServeHeaders} from '../types/langServe';

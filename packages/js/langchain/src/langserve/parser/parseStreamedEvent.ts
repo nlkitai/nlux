@@ -1,5 +1,5 @@
-import {debug} from '../../../../../shared/src/utils/debug';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {debug} from '@shared/utils/debug';
+import {warn} from '@shared/utils/warn';
 
 export const parseStreamedEvent = (event: string): {
     event: 'data' | 'end';

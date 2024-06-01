@@ -1,8 +1,8 @@
-import {createAutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/autoScrollController';
-import {AutoScrollController} from '../../../../../../shared/src/interactions/autoScroll/type';
-import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
-import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
+import {createAutoScrollController} from '@shared/interactions/autoScroll/autoScrollController';
+import {AutoScrollController} from '@shared/interactions/autoScroll/type';
+import {ChatItem} from '@shared/types/conversation';
+import {ComposerProps} from '@shared/components/Composer/props';
+import {domOp} from '@shared/utils/dom/domOp';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {comp} from '../../../aiChat/comp/comp';
 import {CompEventListener, Model} from '../../../aiChat/comp/decorators';

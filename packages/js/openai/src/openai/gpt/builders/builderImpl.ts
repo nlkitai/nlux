@@ -1,5 +1,5 @@
 import {DataTransferMode, StandardChatAdapter} from '@nlux/core';
-import {NluxUsageError} from '../../../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 import {defaultDataTransferMode} from '../adapters/config';
 import {OpenAiBatchAdapter} from '../adapters/batch';
 import {OpenAiStreamingAdapter} from '../adapters/stream';

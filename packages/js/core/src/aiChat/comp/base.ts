@@ -1,9 +1,9 @@
-import {CallbackArgType, CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
-import {NluxError, NluxUsageError} from '../../../../../shared/src/types/error';
-import {domOp} from '../../../../../shared/src/utils/dom/domOp';
-import {emptyInnerHtml} from '../../../../../shared/src/utils/dom/emptyInnerHtml';
-import {uid} from '../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {CallbackArgType, CallbackFunction} from '@shared/types/callbackFunction';
+import {NluxError, NluxUsageError} from '@shared/types/error';
+import {domOp} from '@shared/utils/dom/domOp';
+import {emptyInnerHtml} from '@shared/utils/dom/emptyInnerHtml';
+import {uid} from '@shared/utils/uid';
+import {warn} from '@shared/utils/warn';
 import {CompDef, CompDom, CompRenderer, CompUpdater} from '../../types/comp';
 import {ControllerContext} from '../../types/controllerContext';
 import {CompRegistry} from './registry';

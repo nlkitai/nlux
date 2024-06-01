@@ -1,4 +1,4 @@
-import {ContextTasksAdapter} from '../../../../../shared/src/types/adapters/context/contextTasksAdapter';
+import {ContextTasksAdapter} from '@shared/types/adapters/context/contextTasksAdapter';
 
 export const isContextTasksAdapter = (adapter: unknown): ContextTasksAdapter | false => {
     const typedAdapter = adapter as Partial<ContextTasksAdapter> | undefined;

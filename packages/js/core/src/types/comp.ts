@@ -1,4 +1,4 @@
-import {CallbackFunction} from '../../../../shared/src/types/callbackFunction';
+import {CallbackFunction} from '@shared/types/callbackFunction';
 import {BaseComp} from '../aiChat/comp/base';
 import {ControllerContext} from './controllerContext';
 

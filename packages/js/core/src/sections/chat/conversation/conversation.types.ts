@@ -1,4 +1,4 @@
-import {ChatItem} from '../../../../../../shared/src/types/conversation';
+import {ChatItem} from '@shared/types/conversation';
 import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';

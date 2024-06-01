@@ -23,6 +23,7 @@
     "@rollup/plugin-strip": "3",
     "@rollup/plugin-terser": "0",
     "@rollup/plugin-typescript": "11",
+    "@rollup/plugin-alias": "5",
     "@testing-library/dom": "9",
     "@testing-library/jest-dom": "6",
     "@testing-library/react": "14",

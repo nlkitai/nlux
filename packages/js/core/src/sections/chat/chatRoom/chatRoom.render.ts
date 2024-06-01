@@ -1,4 +1,4 @@
-import {AnyAiMsg} from '../../../../../../shared/src/types/anyAiMsg';
+import {AnyAiMsg} from '@shared/types/anyAiMsg';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';

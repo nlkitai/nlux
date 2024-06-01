@@ -1,5 +1,5 @@
 import {AiContext as CoreAiContext, StandardChatAdapter} from '@nlux/core';
-import {NluxUsageError} from '../../../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../../types/chatAdapterOptions';
 import {NLBridgeAbstractAdapter} from '../adapter';
 import {NLBridgeBatchAdapter} from '../batch';

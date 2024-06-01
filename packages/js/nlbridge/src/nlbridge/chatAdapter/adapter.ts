@@ -6,8 +6,8 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
-import {uid} from '../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {uid} from '@shared/utils/uid';
+import {warn} from '@shared/utils/warn';
 import {ChatAdapterOptions, ChatAdapterUsageMode} from '../types/chatAdapterOptions';
 
 export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdapter<AiMsg> {

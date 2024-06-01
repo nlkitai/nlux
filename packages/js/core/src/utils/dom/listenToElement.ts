@@ -1,5 +1,5 @@
-import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
-import {NluxRenderingError} from '../../../../../shared/src/types/error';
+import {CallbackFunction} from '@shared/types/callbackFunction';
+import {NluxRenderingError} from '@shared/types/error';
 
 const source = 'dom/listenTo';
 

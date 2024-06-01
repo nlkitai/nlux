@@ -18,6 +18,11 @@
     "lib": [
       "dom",
       "es2021"
-    ]
+    ],
+    "paths": {
+      "@shared/*": [
+        "../../packages/shared/src/*"
+      ]
+    }
   }
 }

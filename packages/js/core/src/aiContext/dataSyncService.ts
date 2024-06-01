@@ -1,8 +1,8 @@
-import {ContextAdapter} from '../../../../shared/src/types/adapters/context/contextAdapter';
-import {ContextDataAdapter} from '../../../../shared/src/types/adapters/context/contextDataAdapter';
-import {DestroyContextResult, InitializeContextResult} from '../../../../shared/src/types/aiContext/contextResults';
-import {ContextItemDataType, ContextItems} from '../../../../shared/src/types/aiContext/data';
-import {warn} from '../../../../shared/src/utils/warn';
+import {ContextAdapter} from '@shared/types/adapters/context/contextAdapter';
+import {ContextDataAdapter} from '@shared/types/adapters/context/contextDataAdapter';
+import {DestroyContextResult, InitializeContextResult} from '@shared/types/aiContext/contextResults';
+import {ContextItemDataType, ContextItems} from '@shared/types/aiContext/data';
+import {warn} from '@shared/utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';

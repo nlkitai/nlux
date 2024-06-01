@@ -1,7 +1,7 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
 import OpenAI from 'openai';
-import {NluxUsageError} from '../../../../../../shared/src/types/error';
-import {warn} from '../../../../../../shared/src/utils/warn';
+import {NluxUsageError} from '@shared/types/error';
+import {warn} from '@shared/utils/warn';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';

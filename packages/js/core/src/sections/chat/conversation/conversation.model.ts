@@ -2,12 +2,12 @@ import {
     ChatSegment,
     ChatSegmentItem,
     ChatSegmentStatus,
-} from '../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {chatSegmentsToChatItems} from '../../../../../../shared/src/utils/chat/chatSegmentsToChatItems';
-import {debug} from '../../../../../../shared/src/utils/debug';
-import {uid} from '../../../../../../shared/src/utils/uid';
-import {warnOnce} from '../../../../../../shared/src/utils/warn';
+} from '@shared/types/chatSegment/chatSegment';
+import {ChatItem} from '@shared/types/conversation';
+import {chatSegmentsToChatItems} from '@shared/utils/chat/chatSegmentsToChatItems';
+import {debug} from '@shared/utils/debug';
+import {uid} from '@shared/utils/uid';
+import {warnOnce} from '@shared/utils/warn';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {comp} from '../../../aiChat/comp/comp';
 import {Model} from '../../../aiChat/comp/decorators';

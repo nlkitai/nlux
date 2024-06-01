@@ -1,5 +1,5 @@
 import {ChatItem} from '@nlux/core';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {warn} from '@shared/utils/warn';
 
 export const transformInputBasedOnSchema = <AiMsg>(
     message: string,

@@ -1,8 +1,8 @@
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../../extra/markdown/src';
-import {createChatItemDom} from '../../../../../../shared/src/components/ChatItem/create';
-import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
-import {updateChatItemDom} from '../../../../../../shared/src/components/ChatItem/update';
-import {createMessageContent} from '../../../../../../shared/src/components/Message/utils/createMessageContent';
+import {createChatItemDom} from '@shared/components/ChatItem/create';
+import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {updateChatItemDom} from '@shared/components/ChatItem/update';
+import {createMessageContent} from '@shared/components/Message/utils/createMessageContent';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatItemProps} from './chatItem.types';

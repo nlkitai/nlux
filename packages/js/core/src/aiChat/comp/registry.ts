@@ -1,5 +1,5 @@
-import {debug} from '../../../../../shared/src/utils/debug';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {debug} from '@shared/utils/debug';
+import {warn} from '@shared/utils/warn';
 import {CompDef, CompRenderer, CompUpdater} from '../../types/comp';
 import {BaseComp} from './base';
 

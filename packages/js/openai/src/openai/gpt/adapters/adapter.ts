@@ -6,8 +6,8 @@ import {
     StreamingAdapterObserver,
 } from '@nlux/core';
 import OpenAI from 'openai';
-import {uid} from '../../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../../shared/src/utils/warn';
+import {uid} from '@shared/utils/uid';
+import {warn} from '@shared/utils/warn';
 import {decodeChunk} from '../../../utils/decodeChunk';
 import {decodePayload} from '../../../utils/decodePayload';
 import {gptAdapterInfo} from '../config';

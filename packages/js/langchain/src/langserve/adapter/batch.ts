@@ -1,5 +1,5 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
-import {NluxUsageError} from '../../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeAbstractAdapter} from './adapter';
 
