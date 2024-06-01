@@ -1,0 +1,22 @@
+.nlux-comp-convStrts-cntr {
+    overflow-y: scroll;
+
+    > .nlux-comp-convStrts {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: max-content;
+        min-width: 100%;
+
+        > .nlux-comp-convStrt {
+            display: inline-block;
+            width: 120px;
+            height: 80px;
+
+            border-radius: 8px;
+            background-color: palevioletred;
+        }
+    }
+}

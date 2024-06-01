@@ -3,23 +3,24 @@ import '@nlux-dev/themes/src/dev/main.css';
 import '@nlux-dev/themes/src/blank/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
-import {PersonaOptions, SanitizerExtension} from '@nlux-dev/react/src';
+// import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
+import {
+    AiChat,
+    BatchResponseComponentProps,
+    ChatItem,
+    ConversationLayout,
+    DataTransferMode,
+    PersonaOptions,
+    ResponseRenderer,
+    SanitizerExtension,
+    StreamResponseComponentProps,
+} from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
 import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
 import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
-// import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
-import {
-    AiChat,
-    ChatItem,
-    ConversationLayout,
-    DataTransferMode,
-    BatchResponseComponentProps,
-    ResponseRenderer,
-    StreamResponseComponentProps,
-} from '@nlux-dev/react/src';
 import './App.css';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
@@ -58,7 +59,7 @@ function App() {
             const osColorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'white';
         } else {
-            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white'
+            document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
         }
 
     }, [colorScheme]);
@@ -150,6 +151,8 @@ function App() {
     const conversationStarters: ConversationStarter[] = [
         {prompt: 'Hello, World!'},
         {prompt: 'How are you?'},
+        {prompt: 'What is your name?'},
+        {prompt: 'What is your favorite color?'},
     ];
 
     return (
@@ -178,7 +181,7 @@ function App() {
                         <option value="batch">Batch</option>
                     </select>
                 </label>
-                <hr />
+                <hr/>
                 <label>
                     Use persona options:
                     <br/>

@@ -16,13 +16,17 @@ export const renderConversationStarters: CompRenderer<
          props,
      }) => {
     const conversationStartersContainer = document.createElement('div');
-    conversationStartersContainer.classList.add('nlux-comp-convStrts');
+    conversationStartersContainer.classList.add('nlux-comp-convStrts-cntr');
+
+    const conversationStarters = document.createElement('div');
+    conversationStarters.classList.add('nlux-comp-convStrts');
+    conversationStartersContainer.appendChild(conversationStarters);
 
     props.items.forEach((item, index) => {
         const conversationStarter = document.createElement('div');
         conversationStarter.classList.add('nlux-comp-convStrt');
         conversationStarter.textContent = item.prompt;
-        conversationStartersContainer.appendChild(conversationStarter);
+        conversationStarters.appendChild(conversationStarter);
     });
 
     appendToRoot(conversationStartersContainer);
