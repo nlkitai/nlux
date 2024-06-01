@@ -46,6 +46,31 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
             });
         });
 
+        describe('When conversationStarters are removed after initial render', () => {
+            it('They should not be displayed', async () => {
+                // Arrange
+                const conversationStarters: ConversationStarter[] = [
+                    {prompt: 'Hello, World!'},
+                    {prompt: 'How are you?'},
+                ];
+
+                // Act
+                aiChat = createAiChat()
+                    .withConversationOptions({conversationStarters})
+                    .withAdapter(adapterController!.adapter);
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                // Act
+                aiChat.updateProps({conversationOptions: {}});
+                await waitForRenderCycle();
+
+                // Assert
+                const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+                expect(conversationStarterElements).toHaveLength(0);
+            });
+        });
+
         describe('When the user submits a prompt', () => {
             it.todo('The conversationStarters should not be displayed', async () => {
             });
@@ -58,7 +83,15 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
     });
 
     describe('When conversationStarters are not provided', () => {
-        it.todo('They should not be displayed when the conversation is empty', async () => {
+        it('They should not be displayed when the conversation is empty', async () => {
+            // Act
+            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat.mount(rootElement);
+            await waitForRenderCycle();
+
+            // Assert
+            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+            expect(conversationStarterElements).toHaveLength(0);
         });
     });
 

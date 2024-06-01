@@ -31,4 +31,5 @@ export type CompConversationActions = {
     resetWelcomeMessage: () => void;
     updateAssistantPersona: (newAssistantPersona: AssistantPersona | undefined) => void;
     updateUserPersona: (newUserPersona: UserPersona | undefined) => void;
+    updateConversationStarters: (conversationStarters?: ConversationStarter[]) => void;
 };

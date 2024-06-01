@@ -199,7 +199,7 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
         return this.__status;
     }
 
-    protected get context(): Readonly<ControllerContext<AiMsg>> {
+    protected get context(): ControllerContext<AiMsg> {
         if (!this.__context) {
             throw new NluxUsageError({
                 source: this.constructor.name,

@@ -2,7 +2,8 @@ import {ControllerContext} from '../../../types/controllerContext';
 import {CompRegistry} from './registry';
 
 export const comp = <
-    CompClass extends abstract new (...args: unknown[]) => unknown,
+    AiMsg,
+    CompClass extends new (context: ControllerContext<any>, props: any) => InstanceType<CompClass>,
 >(
     compClass: CompClass,
 ) => {
@@ -27,15 +28,15 @@ export const comp = <
     // IMPORTANT ✨ The lines below are responsible for creating all instances of all components.
 
     return {
-        withContext: (newContext: ControllerContext<object>) => {
+        withContext: (newContext: ControllerContext<any>) => {
             return {
                 create: (): InstanceType<CompClass> => {
-                    return new CompClass(newContext, {});
+                    return new CompClass(newContext as unknown as ControllerContext<object>, {});
                 },
                 withProps: <PropsType = unknown>(newProps: PropsType) => {
                     return {
                         create: (): InstanceType<CompClass> => {
-                            return new CompClass(newContext, newProps as object);
+                            return new CompClass(newContext as unknown as ControllerContext<object>, newProps as object);
                         },
                     };
                 },

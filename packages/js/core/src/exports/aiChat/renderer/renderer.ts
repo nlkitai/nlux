@@ -356,6 +356,11 @@ export class NluxRenderer<AiMsg> {
                 newProps.showWelcomeMessage = props.conversationOptions?.showWelcomeMessage;
             }
 
+            if (props.conversationOptions?.conversationStarters !== this.theConversationOptions.conversationStarters) {
+                newConversationOptions.conversationStarters = props.conversationOptions?.conversationStarters;
+                newProps.conversationStarters = props.conversationOptions?.conversationStarters;
+            }
+
             if (Object.keys(newConversationOptions).length > 0) {
                 this.theConversationOptions = {
                     ...this.theConversationOptions,

@@ -48,6 +48,41 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
             });
         });
 
+        describe('When conversationStarters are removed after initial render', () => {
+            it('They should not be displayed', async () => {
+                // Arrange
+                const conversationStarters: ConversationStarter[] = [
+                    {prompt: 'Hello, World!'},
+                    {prompt: 'How are you?'},
+                ];
+
+                // Act
+                const {container, rerender} = render(
+                    <AiChat
+                        adapter={adapterController!.adapter}
+                        conversationOptions={{conversationStarters}}
+                    />,
+                );
+                await waitForReactRenderCycle();
+
+                // Assert
+                let conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+                expect(conversationStarterElements).toHaveLength(conversationStarters.length);
+
+                // Act
+                rerender(
+                    <AiChat
+                        adapter={adapterController!.adapter}
+                    />,
+                );
+                await waitForReactRenderCycle();
+
+                // Assert
+                conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+                expect(conversationStarterElements).toHaveLength(0);
+            });
+        });
+
         describe('When the user submits a prompt', () => {
             it.todo('The conversationStarters should not be displayed', async () => {
             });
@@ -60,7 +95,18 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
     });
 
     describe('When conversationStarters are not provided', () => {
-        it.todo('They should not be displayed when the conversation is empty', async () => {
+        it('They should not be displayed when the conversation is empty', async () => {
+            // Act
+            const {container} = render(
+                <AiChat
+                    adapter={adapterController!.adapter}
+                />,
+            );
+            await waitForReactRenderCycle();
+
+            // Assert
+            const conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+            expect(conversationStarterElements).toHaveLength(0);
         });
     });
 

@@ -12,6 +12,7 @@ import {
     CompConversationEvents,
     CompConversationProps,
 } from './conversation.types';
+import {createConversationStartersDom} from './utils/createConversationStartersDom';
 
 export const renderConversation: CompRenderer<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
@@ -79,19 +80,18 @@ export const renderConversation: CompRenderer<
     // and append it to the root if conversation starters are provided
     //
     if (renderingContext.shouldRenderConversationStarters) {
-        const conversationStartersContainer = document.createElement('div');
-        conversationStartersContainer.classList.add('nlux-comp-convStrts');
-
-        props.conversationStarters?.forEach((item, index) => {
-            const conversationStarter = document.createElement('div');
-            conversationStarter.classList.add('nlux-comp-convStrt');
-            conversationStarter.textContent = item.prompt;
-            conversationStartersContainer.appendChild(conversationStarter);
-        });
-
+        const conversationStartersContainer = createConversationStartersDom(props.conversationStarters!);
         renderingContext.conversationStartersContainer = conversationStartersContainer;
         segmentsContainer.insertAdjacentElement('beforebegin', conversationStartersContainer);
     }
+
+    // Function to remove conversation starters
+    const removeConversationStarters = () => {
+        if (renderingContext.conversationStartersContainer) {
+            renderingContext.conversationStartersContainer.remove();
+            renderingContext.conversationStartersContainer = undefined;
+        }
+    };
 
     return {
         elements: {
@@ -155,6 +155,22 @@ export const renderConversation: CompRenderer<
             updateUserPersona: (newValue: UserPersona | undefined) => {
                 renderingContext.userPersona = newValue;
             },
+            updateConversationStarters: (conversationStarters: ConversationStarter[] | undefined) => {
+                // Reset conversation starters
+                renderingContext.conversationStarters = conversationStarters;
+                removeConversationStarters();
+
+                if (!conversationStarters || conversationStarters.length === 0) {
+                    renderingContext.shouldRenderConversationStarters = false;
+                    return;
+                }
+
+                const conversationStartersContainer = createConversationStartersDom(conversationStarters);
+                segmentsContainer.insertAdjacentElement('beforebegin', conversationStartersContainer);
+
+                renderingContext.conversationStartersContainer = conversationStartersContainer;
+                renderingContext.shouldRenderConversationStarters = true;
+            }
         },
     };
 };

@@ -180,6 +180,10 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.conversation?.setShowWelcomeMessage(props.showWelcomeMessage ?? true);
         }
 
+        if (props.hasOwnProperty('conversationStarters')) {
+            this.conversation?.setConversationStarters(props.conversationStarters);
+        }
+
         if (props.hasOwnProperty('composer')) {
             if (this.composerInstance) {
                 const currentDomProps = this.composerInstance.getProp('domCompProps')!;

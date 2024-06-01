@@ -15,6 +15,7 @@ import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highligh
 import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
+import {ConversationStarter} from '../../../types/conversationStarter';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
 import {CompChatSegmentProps} from '../chatSegment/chatSegment.types';
 import {renderConversation} from './conversation.render';
@@ -62,7 +63,7 @@ export class CompConversation<AiMsg> extends BaseComp<
         this.throwIfDestroyed();
 
         const segmentId = uid();
-        const newChatSegmentComp = comp(CompChatSegment<AiMsg>)
+        const newChatSegmentComp: CompChatSegment<AiMsg> = comp(CompChatSegment<AiMsg>)
             .withContext(this.context)
             .withProps({
                 uid: segmentId,
@@ -227,6 +228,16 @@ export class CompConversation<AiMsg> extends BaseComp<
 
     public setShowWelcomeMessage(showWelcomeMessage: boolean) {
         this.setProp('showWelcomeMessage', showWelcomeMessage);
+        if (!showWelcomeMessage) {
+            this.executeDomAction('removeWelcomeMessage');
+        } else {
+            this.executeDomAction('resetWelcomeMessage');
+        }
+    }
+
+    public setConversationStarters(conversationStarters: ConversationStarter[] | undefined) {
+        this.setProp('conversationStarters', conversationStarters);
+        this.executeDomAction('updateConversationStarters', conversationStarters);
     }
 
     public setConversationLayout(layout: ConversationLayout) {
