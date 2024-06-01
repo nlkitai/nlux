@@ -4,6 +4,9 @@ export type {
     DataTransferMode,
     ChatAdapterOptions,
     ChatAdapterBuilder,
+    LangServeConfig,
+    LangServeHeaders,
+    LangServeConfigItem,
     LangServeEndpointType,
     StreamingAdapterObserver,
 } from '@nlux/langchain';

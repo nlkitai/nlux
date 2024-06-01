@@ -2,8 +2,8 @@
 sidebar_label: 'LangChain LangServe'
 ---
 
+
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
-import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
 
 import InstallationReactJs from './_001-langchain-langserve/#react/installation.mdx';
 import InstallationJavaScript from './_001-langchain-langserve/#js/installation.mdx';
@@ -19,6 +19,9 @@ import ConfigUrlJavaScript from './_001-langchain-langserve/#js/config/url.mdx';
 
 import ConfigUseInputSchemaReactJs from './_001-langchain-langserve/#react/config/useInputSchema.mdx';
 import ConfigUseInputSchemaJavaScript from './_001-langchain-langserve/#js/config/useInputSchema.mdx';
+
+import ConfigLangServeConfigReactJs from './_001-langchain-langserve/#react/config/langServeConfig.mdx';
+import ConfigLangServeConfigJavaScript from './_001-langchain-langserve/#js/config/langServeConfig.mdx';
 
 import ConfigDataTransferModeReactJs from './_001-langchain-langserve/#react/config/dataTransferMode.mdx';
 import ConfigDataTransferModeJavaScript from './_001-langchain-langserve/#js/config/dataTransferMode.mdx';
@@ -117,6 +120,18 @@ Example: If your runnable returns an object with `value` and `base` properties, 
 example below to transform the output to a string.
 
 <PlatformSelector reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
+
+---
+
+> ### LangServe Config
+
+The LangServe config object is a set of key-value pairs that will be sent to the LangServe runnable as part of the
+request body.
+
+Example: If your runnable expects a `session_id` and `requester_info` properties, you can use the config in the
+example below to send these properties to the runnable.
+
+<PlatformSelector reactJs={ConfigLangServeConfigReactJs} javascript={ConfigLangServeConfigJavaScript}/>
 
 ---
 
