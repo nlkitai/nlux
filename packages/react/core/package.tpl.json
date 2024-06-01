@@ -19,6 +19,7 @@
     "@rollup/plugin-strip": "3",
     "@rollup/plugin-terser": "0",
     "@rollup/plugin-typescript": "11",
+    "@rollup/plugin-alias": "5",
     "@types/react": "18",
     "esbuild": "0",
     "rollup": "4",

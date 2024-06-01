@@ -1,5 +1,5 @@
 import {RefObject, useEffect, useMemo, useRef} from 'react';
-import {ChatSegment} from '../../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 
 export const useLastActiveSegment = function <AiMsg>(
     segments: ChatSegment<AiMsg>[],

@@ -1,9 +1,9 @@
 import {forwardRef, ReactElement, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {className as compChatItemClassName} from '../../../../../shared/src/components/ChatItem/create';
+import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
-} from '../../../../../shared/src/components/ChatItem/utils/applyNewDirectionClassName';
-import {conversationLayoutClassName} from '../../../../../shared/src/components/ChatItem/utils/applyNewLayoutClassName';
+} from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
+import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
 import {MarkdownSnapshotRenderer} from '../../sections/MessageRenderer/MarkdownSnapshotRenderer';
 import {createMessageRenderer} from '../../sections/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../sections/StreamContainer/props';
@@ -70,7 +70,7 @@ export const ChatItemComp: <AiMsg>(
         }
 
         return props.promptRenderer({uid: props.uid, prompt: props.fetchedContent as string});
-    }, [props.promptRenderer, props.fetchedContent, props.uid,]);
+    }, [props.promptRenderer, props.fetchedContent, props.uid]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
         StreamContainerComp<AiMsg>,

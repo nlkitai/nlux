@@ -9,17 +9,15 @@ import {
     useMemo,
     useState,
 } from 'react';
-import {AiBatchedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
-import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
-import {warn, warnOnce} from '../../../../../shared/src/utils/warn';
+import {AiBatchedMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
+import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
+import {warn, warnOnce} from '@shared/utils/warn';
 import {ChatItemComp} from '../../components/ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../../components/ChatItem/props';
 import {LoaderComp} from '../../components/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
-import {
-    participantNameFromRoleAndPersona
-} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
+import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
 import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
 
 export const ChatSegmentComp: <AiMsg>(

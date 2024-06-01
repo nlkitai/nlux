@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {getNluxSmallPngLogo} from '../../../../../shared/src/components/Logo/getNluxSmallPngLogo';
+import {getNluxSmallPngLogo} from '@shared/components/Logo/getNluxSmallPngLogo';
 import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 
 // Default message to show when no messages are present in the chat room

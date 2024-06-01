@@ -1,5 +1,5 @@
 import {RefObject, useEffect, useMemo} from 'react';
-import {ChatSegment} from '../../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {ChatSegmentImperativeProps} from '../../ChatSegment/props';
 
 export const useChatSegmentsController = function <AiMsg>(

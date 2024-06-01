@@ -1,6 +1,6 @@
 import {ConversationLayout, DataTransferMode, HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {ReactElement} from 'react';
-import {MessageDirection} from '../../../../../shared/src/components/Message/props';
+import {MessageDirection} from '@shared/components/Message/props';
 import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 
 export type ChatItemProps<AiMsg> = {

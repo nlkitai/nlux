@@ -1,6 +1,6 @@
 import {ContextTaskHandler} from '@nlux/core';
 import {useContext, useEffect, useRef, useState} from 'react';
-import {CallbackFunction} from '../../../../shared/src/types/callbackFunction';
+import {CallbackFunction} from '@shared/types/callbackFunction';
 import {AiContext} from '../types/AiContext';
 
 /**

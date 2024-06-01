@@ -1,5 +1,5 @@
 import {HighlighterExtension, SanitizerExtension} from '@nlux/core';
-import {MessageDirection} from '../../../../../shared/src/components/Message/props';
+import {MessageDirection} from '@shared/components/Message/props';
 import {ResponseRenderer} from '../../exports/messageOptions';
 
 export type StreamContainerProps<AisMsg> = {

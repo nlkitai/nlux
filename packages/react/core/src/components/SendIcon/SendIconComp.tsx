@@ -1,4 +1,4 @@
-import {className as compSendIconClassName} from '../../../../../shared/src/components/SendIcon/create';
+import {className as compSendIconClassName} from '@shared/components/SendIcon/create';
 
 export const SendIconComp = () => {
     return (

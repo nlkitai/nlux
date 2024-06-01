@@ -1,6 +1,6 @@
 import {ConversationLayout, HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {ReactElement, RefObject} from 'react';
-import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
 

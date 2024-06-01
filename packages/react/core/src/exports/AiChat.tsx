@@ -1,11 +1,11 @@
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
-import {createExceptionsBoxController} from '../../../../shared/src/components/ExceptionsBox/control';
-import {className as compExceptionsBoxClassName} from '../../../../shared/src/components/ExceptionsBox/create';
-import {ComposerStatus} from '../../../../shared/src/components/Composer/props';
-import {chatItemsToChatSegment} from '../../../../shared/src/utils/chat/chatItemsToChatSegment';
-import {getRootClassNames} from '../../../../shared/src/utils/dom/getRootClassNames';
-import {warnOnce} from '../../../../shared/src/utils/warn';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
+import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
+import {className as compExceptionsBoxClassName} from '@shared/components/ExceptionsBox/create';
+import {ComposerStatus} from '@shared/components/Composer/props';
+import {chatItemsToChatSegment} from '@shared/utils/chat/chatItemsToChatSegment';
+import {getRootClassNames} from '@shared/utils/dom/getRootClassNames';
+import {warnOnce} from '@shared/utils/warn';
 import {ConversationComp} from '../sections/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../sections/Conversation/props';
 import {ComposerComp} from '../components/Composer/ComposerComp';

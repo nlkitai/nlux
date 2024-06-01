@@ -1,7 +1,7 @@
 import {useEffect, useMemo, useRef} from 'react';
-import {attachCopyClickListener} from '../../../../../shared/src/markdown/copyToClipboard/attachCopyClickListener';
-import {parseMdSnapshot} from '../../../../../shared/src/markdown/snapshot/snapshotParser';
-import {SnapshotParserOptions} from '../../../../../shared/src/types/markdown/snapshotParser';
+import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
+import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
+import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';
 
 export const MarkdownSnapshotRenderer = (props: {
     messageUid: string,
@@ -24,7 +24,7 @@ export const MarkdownSnapshotRenderer = (props: {
         });
     }, [
         props.content, markdownOptions?.markdownLinkTarget, markdownOptions?.syntaxHighlighter,
-        markdownOptions?.htmlSanitizer, markdownOptions?.showCodeBlockCopyButton
+        markdownOptions?.htmlSanitizer, markdownOptions?.showCodeBlockCopyButton,
     ]);
 
     useEffect(() => {

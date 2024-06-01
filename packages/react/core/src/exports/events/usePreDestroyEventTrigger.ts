@@ -1,6 +1,6 @@
 import {ChatItem, PreDestroyCallback, PreDestroyEventDetails} from '@nlux/core';
 import {useEffect, useRef} from 'react';
-import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {reactPropsToCorePropsInEvents} from '../../utils/reactPropsToCorePropsInEvents';
 import {AiChatProps} from '../props';
 

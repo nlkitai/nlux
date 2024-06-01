@@ -1,10 +1,8 @@
-import {className as compMessageClassName} from '../../../../../shared/src/components/Message/create';
+import {className as compMessageClassName} from '@shared/components/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,
-} from '../../../../../shared/src/components/Message/utils/applyNewDirectionClassName';
-import {
-    statusClassName as compMessageStatusClassName,
-} from '../../../../../shared/src/components/Message/utils/applyNewStatusClassName';
+} from '@shared/components/Message/utils/applyNewDirectionClassName';
+import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
 import {MessageProps} from './props';
 
 export const MessageComp = function (props: MessageProps) {

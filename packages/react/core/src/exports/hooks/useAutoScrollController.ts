@@ -1,6 +1,6 @@
 import {MutableRefObject, useEffect, useRef, useState} from 'react';
-import {createAutoScrollController} from '../../../../../shared/src/interactions/autoScroll/autoScrollController';
-import {AutoScrollController} from '../../../../../shared/src/interactions/autoScroll/type';
+import {createAutoScrollController} from '@shared/interactions/autoScroll/autoScrollController';
+import {AutoScrollController} from '@shared/interactions/autoScroll/type';
 
 const defaultAutoScrollOption = true;
 

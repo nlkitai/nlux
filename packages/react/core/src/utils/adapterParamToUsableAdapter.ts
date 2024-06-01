@@ -1,7 +1,7 @@
-import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
-import {ChatAdapterBuilder} from '../../../../shared/src/types/adapters/chat/chatAdapterBuilder';
-import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
-import {warn} from '../../../../shared/src/utils/warn';
+import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapterBuilder} from '@shared/types/adapters/chat/chatAdapterBuilder';
+import {StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
+import {warn} from '@shared/utils/warn';
 
 export const adapterParamToUsableAdapter = <AiMsg>(
     anAdapterOrAdapterBuilder: ChatAdapter<AiMsg> | ChatAdapterBuilder<AiMsg> | unknown,

@@ -1,5 +1,5 @@
 import {ChatAdapterBuilder, ChatAdapterOptions, createChatAdapter} from '@nlux/hf';
-import {NluxUsageError} from '../../../../shared/src/types/error';
+import {NluxUsageError} from '@shared/types/error';
 
 const source = 'hooks/getAdapterBuilder';
 

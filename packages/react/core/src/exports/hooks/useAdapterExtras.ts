@@ -1,8 +1,8 @@
 import {useMemo} from 'react';
 import {HistoryPayloadSize} from '../../../../../js/core/src';
-import {ChatAdapterExtras} from '../../../../../shared/src/types/adapters/chat/chatAdapterExtras';
-import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegment';
-import {chatSegmentsToChatItems} from '../../../../../shared/src/utils/chat/chatSegmentsToChatItems';
+import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
+import {chatSegmentsToChatItems} from '@shared/utils/chat/chatSegmentsToChatItems';
 import {reactPropsToCorePropsInEvents} from '../../utils/reactPropsToCorePropsInEvents';
 import {AiChatProps} from '../props';
 

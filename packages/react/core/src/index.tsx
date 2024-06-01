@@ -37,29 +37,29 @@ export type {
 
 export type {
     ChatItem,
-} from '../../../shared/src/types/conversation';
+} from '@shared/types/conversation';
 
 export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-} from '../../../shared/src/types/adapters/chat/chatAdapter';
+} from '@shared/types/adapters/chat/chatAdapter';
 
 export type {
     ChatAdapterBuilder,
-} from '../../../shared/src/types/adapters/chat/chatAdapterBuilder';
+} from '@shared/types/adapters/chat/chatAdapterBuilder';
 
 export type {
     ChatAdapterExtras,
-} from '../../../shared/src/types/adapters/chat/chatAdapterExtras';
+} from '@shared/types/adapters/chat/chatAdapterExtras';
 
 export type {
     StandardChatAdapter,
-} from '../../../shared/src/types/adapters/chat/standardChatAdapter';
+} from '@shared/types/adapters/chat/standardChatAdapter';
 
 export type {
     StandardAdapterInfo,
-} from '../../../shared/src/types/adapters/chat/standardAdapterConfig';
+} from '@shared/types/adapters/chat/standardAdapterConfig';
 
 // Exporting from — @nlux/react
 

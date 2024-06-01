@@ -1,5 +1,5 @@
 import {MutableRefObject, useCallback} from 'react';
-import {AutoScrollController} from '../../../../../shared/src/interactions/autoScroll/type';
+import {AutoScrollController} from '@shared/interactions/autoScroll/type';
 
 type LastActiveSegmentData = { uid: string; div: HTMLDivElement };
 

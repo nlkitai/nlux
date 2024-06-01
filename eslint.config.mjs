@@ -6,7 +6,7 @@ export default tsEslint.config(
     {
         files: [
             'packages/**/*.ts',
-            'packages/**/*.tsx'
+            'packages/**/*.tsx',
         ],
         extends: [
             ...tsEslint.configs.recommended,
@@ -20,8 +20,8 @@ export default tsEslint.config(
                     'caughtErrorsIgnorePattern': '^_',
                     'destructuredArrayIgnorePattern': '^_',
                     'varsIgnorePattern': '^_',
-                    'ignoreRestSiblings': true
-                }
+                    'ignoreRestSiblings': true,
+                },
             ],
             'no-prototype-builtins': 'off',
         },
@@ -30,7 +30,7 @@ export default tsEslint.config(
             'specs/**',
             'samples/**',
             'packages/shared/src/markdown/snapshot/marked/*.ts',
-            'packages/shared/src/utils/dequal/*.ts',
+            'packages/shared/src/utils/dequal.ts',
         ],
     },
 );

@@ -1,9 +1,9 @@
 import {isValidElement} from 'react';
-import {className as compAvatarClassName} from '../../../../../shared/src/components/Avatar/create';
+import {className as compAvatarClassName} from '@shared/components/Avatar/create';
 import {
     renderedPhotoClassName as compAvatarPhotoClassName,
     renderedPhotoContainerClassName as compAvatarPhotoContainerClassName,
-} from '../../../../../shared/src/components/Avatar/utils/createPhotoContainerFromUrl';
+} from '@shared/components/Avatar/utils/createPhotoContainerFromUrl';
 import {AvatarProps} from './props';
 
 export const AvatarComp = (props: AvatarProps) => {
