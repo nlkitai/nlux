@@ -1,7 +1,9 @@
 import react from '@vitejs/plugin-react';
 import {defineConfig} from 'vite';
+import {resolve} from 'path';
 
-// https://vitejs.dev/config/
+const absolutePath = (path: string) => resolve('..', '..', '..', path);
+
 export default defineConfig({
     plugins: [react()],
     define: {
@@ -15,6 +17,11 @@ export default defineConfig({
         // Add header
         headers: {
             'Content-Security-Policy': 'require-trusted-types-for \'script\';',
-        }
-    }
+        },
+    },
+    resolve: {
+        alias: {
+            '@shared': absolutePath('packages/shared/src'),
+        },
+    },
 });
