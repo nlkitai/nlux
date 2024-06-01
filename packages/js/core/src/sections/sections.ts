@@ -9,7 +9,11 @@ import {CompConversationStarters} from './chat/conversationStarters/conversation
 import {CompComposer} from './chat/composer/composer.model';
 import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
 
-const componentsById = () => ({
+// Sections, in the Vanilla JavaScript version of NLUX, are a part of the library that combine user interface components,
+// as well as the logic that drives them. They are not called `components` because the term `component` is reserved for
+//` pure `UI components that do not contain any business logic.
+
+const sectionsById = () => ({
     'chatRoom': CompChatRoom,
     'exceptionsBox': CompExceptionsBox,
     'conversation': CompConversation,
@@ -19,14 +23,14 @@ const componentsById = () => ({
     'chatItem': CompChatItem,
 });
 
-export const registerAllComponents = () => {
+export const registerAllSections = () => {
     const globalNlux = getGlobalNlux();
     const componentsRegistered = btoa('componentsRegistered');
     if (globalNlux && globalNlux[componentsRegistered] === true) {
         return;
     }
 
-    Object.entries(componentsById()).forEach(([, comp]) => {
+    Object.entries(sectionsById()).forEach(([, comp]) => {
         CompRegistry.register(comp as typeof BaseComp);
     });
 

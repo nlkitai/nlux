@@ -4,10 +4,10 @@ import {
     directionClassName as compChatItemDirectionClassName,
 } from '../../../../../shared/src/components/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '../../../../../shared/src/components/ChatItem/utils/applyNewLayoutClassName';
-import {MarkdownSnapshotRenderer} from '../../logic/MessageRenderer/MarkdownSnapshotRenderer';
-import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
-import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';
-import {StreamContainerComp} from '../../logic/StreamContainer/StreamContainerComp';
+import {MarkdownSnapshotRenderer} from '../../sections/MessageRenderer/MarkdownSnapshotRenderer';
+import {createMessageRenderer} from '../../sections/MessageRenderer/MessageRenderer';
+import {StreamContainerImperativeProps} from '../../sections/StreamContainer/props';
+import {StreamContainerComp} from '../../sections/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {MessageComp} from '../Message/MessageComp';
 import {ChatItemImperativeProps, ChatItemProps} from './props';

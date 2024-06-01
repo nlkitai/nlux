@@ -4,7 +4,7 @@ import {StandardChatAdapter} from '../../../../../shared/src/types/adapters/chat
 import {ChatItem} from '../../../../../shared/src/types/conversation';
 import {NluxRenderingError, NluxUsageError, NluxValidationError} from '../../../../../shared/src/types/error';
 import {debug} from '../../../../../shared/src/utils/debug';
-import {registerAllComponents} from '../../logic/components';
+import {registerAllSections} from '../../sections/sections';
 import {AiChatStatus, IAiChat} from '../../types/aiChat/aiChat';
 import {UpdatableAiChatProps} from '../../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../../types/event';
@@ -78,7 +78,7 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
             });
         }
 
-        registerAllComponents();
+        registerAllSections();
 
         const aiChatRoot = document.createElement('div');
         rootElement.appendChild(aiChatRoot);

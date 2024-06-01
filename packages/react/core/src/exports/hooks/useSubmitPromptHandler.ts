@@ -10,7 +10,7 @@ import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegmen
 import {NLErrors} from '../../../../../shared/src/types/exceptions/errors';
 import {ComposerStatus} from '../../../../../shared/src/components/Composer/props';
 import {warn} from '../../../../../shared/src/utils/warn';
-import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
+import {ImperativeConversationCompProps} from '../../sections/Conversation/props';
 import {AiChatProps} from '../props';
 import {useAdapterExtras} from './useAdapterExtras';
 

@@ -121,6 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
         .withConversationOptions({
             // autoScroll: false,
             // showWelcomeMessage: false,
+            conversationStarters: [
+                {
+                    prompt: 'What can I help you with today?',
+                },
+                {
+                    prompt: 'How can I assist you today?',
+                },
+            ],
         })
         .withDisplayOptions(displayOptions)
         .withMessageOptions({

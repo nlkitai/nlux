@@ -5,9 +5,9 @@ import {emptyInnerHtml} from '../../../../../../shared/src/utils/dom/emptyInnerH
 import {getConversationLayout} from '../../../../../../shared/src/utils/dom/getConversationLayout';
 import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
 import {warn} from '../../../../../../shared/src/utils/warn';
-import {CompChatRoom} from '../../../logic/chat/chatRoom/chatRoom.model';
-import {CompChatRoomProps} from '../../../logic/chat/chatRoom/chatRoom.types';
-import {CompExceptionsBox} from '../../../logic/miscellaneous/exceptionsBox/model';
+import {CompChatRoom} from '../../../sections/chat/chatRoom/chatRoom.model';
+import {CompChatRoomProps} from '../../../sections/chat/chatRoom/chatRoom.types';
+import {CompExceptionsBox} from '../../../sections/miscellaneous/exceptionsBox/model';
 import {AiChatInternalProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
 import {ControllerContext} from '../../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
