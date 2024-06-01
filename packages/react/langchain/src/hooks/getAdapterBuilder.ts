@@ -5,6 +5,7 @@ export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions<AiMsg>): Ch
         url,
         dataTransferMode,
         headers,
+        config,
         inputPreProcessor,
         outputPreProcessor,
         useInputSchema,
@@ -26,6 +27,10 @@ export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions<AiMsg>): Ch
 
     if (headers) {
         newAdapter = newAdapter.withHeaders(headers);
+    }
+
+    if (config) {
+        newAdapter = newAdapter.withConfig(config);
     }
 
     if (inputPreProcessor) {

@@ -72,6 +72,10 @@ function App() {
         url: 'https://pynlux.api.nlkit.com/einbot',
         dataTransferMode,
         useInputSchema: true,
+        config: {
+            'param1': 'value2',
+            'param2': true,
+        },
     });
 
     const hfAdapter = useHfChatAdapter({
