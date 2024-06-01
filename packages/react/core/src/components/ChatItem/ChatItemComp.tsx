@@ -98,7 +98,7 @@ export const ChatItemComp: <AiMsg>(
                 />
             )}
             {!isStreaming && props.direction === 'received' && (
-                 <MessageComp
+                <MessageComp
                     uid={props.uid}
                     message={AiMessageRenderer}
                     status={props.status}

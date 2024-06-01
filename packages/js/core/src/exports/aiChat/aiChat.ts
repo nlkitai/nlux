@@ -141,12 +141,6 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
-    private clearEventListeners() {
-        this.controller?.removeAllEventListenersForAllEvent();
-        this.unregisteredEventListeners.clear();
-        return;
-    }
-
     removeAllEventListeners(event: EventName) {
         // When an event is provided, remove all event listeners for that specific event.
         this.controller?.removeAllEventListeners(event);
@@ -423,5 +417,11 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
 
         this.theComposerOptions = {...composerOptions};
         return this;
+    }
+
+    private clearEventListeners() {
+        this.controller?.removeAllEventListenersForAllEvent();
+        this.unregisteredEventListeners.clear();
+        return;
     }
 }

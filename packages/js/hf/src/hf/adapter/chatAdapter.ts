@@ -196,7 +196,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
             }
 
             const text = payload && typeof payload === 'object' && 'text' in payload
-                ? (payload as {text: string}).text
+                ? (payload as { text: string }).text
                 : undefined;
 
             if (text === 'string') {

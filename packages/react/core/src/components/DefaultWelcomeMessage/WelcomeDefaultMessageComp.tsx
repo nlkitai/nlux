@@ -7,6 +7,6 @@ import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
 export const WelcomeDefaultMessageComp = () => {
     const urlEncodedLogo = useMemo(() => getNluxSmallPngLogo(), []);
     return (
-        <WelcomeMessageComp avatar={urlEncodedLogo} name={''} />
+        <WelcomeMessageComp avatar={urlEncodedLogo} name={''}/>
     );
 };

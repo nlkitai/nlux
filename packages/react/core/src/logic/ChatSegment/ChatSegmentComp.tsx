@@ -17,7 +17,9 @@ import {ChatItemImperativeProps} from '../../components/ChatItem/props';
 import {LoaderComp} from '../../components/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
-import {participantNameFromRoleAndPersona} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
+import {
+    participantNameFromRoleAndPersona
+} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
 import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
 
 export const ChatSegmentComp: <AiMsg>(

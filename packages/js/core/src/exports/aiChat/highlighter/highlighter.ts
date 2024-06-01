@@ -9,5 +9,6 @@ export type CreateHighlighterOptions = {
 
 export interface HighlighterExtension {
     createHighlighter(options?: CreateHighlighterOptions): Highlighter;
+
     highlightingClass(language?: string): string;
 }

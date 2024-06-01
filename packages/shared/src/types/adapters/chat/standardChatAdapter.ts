@@ -14,6 +14,7 @@ export interface StandardChatAdapter<AiMsg = string> {
     ): Promise<string | object | undefined>;
 
     get id(): string;
+
     get info(): StandardAdapterInfo;
 
     // Receives a message from the API and returns a message that can be sent to the user.

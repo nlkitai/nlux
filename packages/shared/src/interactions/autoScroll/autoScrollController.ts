@@ -9,11 +9,12 @@ export const createAutoScrollController = (
     let shouldScrollWhenGenerating: boolean = autoScroll;
     let conversationContainer: HTMLElement | undefined = newConversationContainer;
     let scrollingStickToConversationEnd: boolean = true;
-    let activeChatSegment: {uid: string; container: HTMLElement} | undefined = undefined;
+    let activeChatSegment: { uid: string; container: HTMLElement } | undefined = undefined;
 
-    const scrollHandler = throttle(createConversationScrollHandler(({
-        scrolledToBottom, scrollDirection,
-    }) => {
+    const scrollHandler = throttle(createConversationScrollHandler((
+        {
+            scrolledToBottom, scrollDirection,
+        }) => {
         if (scrollingStickToConversationEnd) {
             // When the user is already at the bottom of the conversation, we stick to the bottom
             // and only unstick when the user scrolls up.

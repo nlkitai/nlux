@@ -6,10 +6,10 @@ import {CompConversationActions, CompConversationElements, CompConversationProps
 export const updateConversation: CompUpdater<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationActions
 > = ({
-    propName,
-    newValue,
-    dom: {actions},
-}) => {
+         propName,
+         newValue,
+         dom: {actions},
+     }) => {
     if (propName === 'assistantPersona') {
         if (!actions) {
             return;

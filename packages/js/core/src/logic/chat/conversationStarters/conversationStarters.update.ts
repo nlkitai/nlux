@@ -11,10 +11,10 @@ export const updateConversationStarters: CompUpdater<
     CompConversationStartersElements,
     CompConversationStartersActions
 > = ({
-    propName,
-    newValue,
-    dom: {elements}
-}) => {
+         propName,
+         newValue,
+         dom: {elements}
+     }) => {
     if (!elements) {
         return;
     }

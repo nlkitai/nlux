@@ -8,9 +8,9 @@ export const Model = <PropsType, ElementsType, EventsType, ActionsType>(
     updater: CompUpdater<PropsType, ElementsType, ActionsType>,
 ) => {
     return (target: unknown) => {
-        (target as {__compId: typeof compId}).__compId = compId;
-        (target as {__renderer: typeof renderer}).__renderer = renderer;
-        (target as {__updater: typeof updater}).__updater = updater;
+        (target as { __compId: typeof compId }).__compId = compId;
+        (target as { __renderer: typeof renderer }).__renderer = renderer;
+        (target as { __updater: typeof updater }).__updater = updater;
     };
 };
 

@@ -10,10 +10,10 @@ import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatI
 export const renderChatItem: CompRenderer<
     CompChatItemProps, CompChatItemElements, CompChatItemEvents, CompChatItemActions
 > = ({
-    props,
-    appendToRoot,
-    compEvent,
-}) => {
+         props,
+         appendToRoot,
+         compEvent,
+     }) => {
 
     const root = createChatItemDom({
         ...props.domProps,

@@ -9,10 +9,10 @@ const className = (styleName: string) => `nlux-chtRm-${styleName}`;
 export const renderChatRoom: CompRenderer<
     CompChatRoomProps<AnyAiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > = ({
-    appendToRoot,
-    compEvent,
-    props,
-}) => {
+         appendToRoot,
+         compEvent,
+         props,
+     }) => {
     const conversationContainer = document.createElement('div');
     conversationContainer.classList.add(className('cnv-cntr'));
 
@@ -33,7 +33,7 @@ export const renderChatRoom: CompRenderer<
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
         `:scope > .${className('cnv-cntr')}`,
     ).on('click', compEvent('segments-container-clicked'))
-     .get();
+        .get();
 
     const composerElement = getElement(chatRoomElement, `:scope > .${className('prmptBox-cntr')}`);
     appendToRoot(chatRoomElement);

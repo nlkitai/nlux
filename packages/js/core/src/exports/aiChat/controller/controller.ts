@@ -13,21 +13,6 @@ export class NluxController<AiMsg> {
     private readonly eventManager = new EventManager<AiMsg>();
     private internalProps: AiChatInternalProps<AiMsg>;
     private readonly nluxInstanceId = uid();
-
-    private renderException = (errorId: string) => {
-        if (!this.mounted || !this.renderer) {
-            return null;
-        }
-
-        const errorMessage = NLErrors[errorId as NLErrorId];
-        if (!errorMessage) {
-            warn(`Exception with id '${errorId}' is not defined`);
-            return null;
-        }
-
-        this.renderer.renderEx(errorId as NLErrorId, errorMessage);
-    };
-
     private renderer: NluxRenderer<AiMsg> | null = null;
     private readonly rootCompId: string;
     private readonly rootElement: HTMLElement;
@@ -125,6 +110,20 @@ export class NluxController<AiMsg> {
             this.eventManager.updateEventListeners(props.events);
         }
     }
+
+    private renderException = (errorId: string) => {
+        if (!this.mounted || !this.renderer) {
+            return null;
+        }
+
+        const errorMessage = NLErrors[errorId as NLErrorId];
+        if (!errorMessage) {
+            warn(`Exception with id '${errorId}' is not defined`);
+            return null;
+        }
+
+        this.renderer.renderEx(errorId as NLErrorId, errorMessage);
+    };
 
     private getUpdatedAiChatPropsFromInternalProps(
         internalProps: AiChatInternalProps<AiMsg>,

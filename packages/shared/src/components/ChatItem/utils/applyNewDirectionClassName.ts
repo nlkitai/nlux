@@ -1,6 +1,6 @@
 import {MessageDirection} from '../../Message/props';
 
-export const directionClassName: {[key: string]: string} = {
+export const directionClassName: { [key: string]: string } = {
     received: 'nlux_cht_itm_rcvd',
     sent: 'nlux_cht_itm_snt',
 };

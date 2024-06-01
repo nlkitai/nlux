@@ -25,11 +25,11 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
     private readonly __instanceId: string;
 
     protected constructor({
-        systemMessage,
-        apiKey,
-        dataTransferMode,
-        model,
-    }: ChatAdapterOptions) {
+                              systemMessage,
+                              apiKey,
+                              dataTransferMode,
+                              model,
+                          }: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
         this.theDataTransferMode = dataTransferMode ?? defaultDataTransferMode;

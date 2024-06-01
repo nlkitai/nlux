@@ -12,9 +12,9 @@ export const renderConversationStarters: CompRenderer<
     CompConversationStartersEvents,
     CompConversationStartersActions
 > = ({
-    appendToRoot,
-    props,
-}) => {
+         appendToRoot,
+         props,
+     }) => {
     const conversationStartersContainer = document.createElement('div');
     conversationStartersContainer.classList.add('nlux-comp-convStrts');
 

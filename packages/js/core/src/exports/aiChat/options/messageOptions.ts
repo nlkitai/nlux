@@ -46,9 +46,9 @@ export type BatchResponseComponentProps<AiMsg> = {
 
 export type ResponseRenderer<AiMsg> = (
     (props: StreamResponseComponentProps<AiMsg>) => HTMLElement | null
-) | (
+    ) | (
     (props: BatchResponseComponentProps<AiMsg>) => HTMLElement | null
-);
+    );
 
 export type PromptRendererProps = {
     uid: string;

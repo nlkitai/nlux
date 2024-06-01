@@ -8,7 +8,7 @@ export const comp = <
     compClass: CompClass,
 ) => {
     const compId = typeof compClass === 'function'
-        ? (compClass as unknown as {__compId: string}).__compId
+        ? (compClass as unknown as { __compId: string }).__compId
         : undefined;
 
     if (!compId) {

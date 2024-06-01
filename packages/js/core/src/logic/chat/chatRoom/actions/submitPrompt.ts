@@ -9,15 +9,17 @@ import {ControllerContext} from '../../../../types/controllerContext';
 import {CompConversation} from '../../conversation/conversation.model';
 import {CompComposer} from '../../composer/composer.model';
 
-export const submitPromptFactory = <AiMsg>({
-    context,
-    composerInstance,
-    conversation,
-    autoScrollController,
-    messageToSend,
-    resetComposer,
-    setComposerAsWaiting,
-}: {
+export const submitPromptFactory = <
+    AiMsg
+>({
+      context,
+      composerInstance,
+      conversation,
+      autoScrollController,
+      messageToSend,
+      resetComposer,
+      setComposerAsWaiting,
+  }: {
     context: ControllerContext<AiMsg>;
     composerInstance: CompComposer<AiMsg>;
     conversation: CompConversation<AiMsg>;

@@ -99,26 +99,6 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
      */
     private actionsOnDomReady: (() => void)[] = [];
 
-    private compEventGetter = (eventName: EventsType) => {
-        if (this.destroyed) {
-            // Ignore event calls on destroyed components
-            return () => {
-            };
-        }
-
-        const callback = this.rendererEventListeners.get(eventName as EventsType);
-        if (!callback) {
-            throw new NluxError({
-                source: this.constructor.name,
-                message: `Unable to call renderer event "${eventName}" because no matching event listener was found. ` +
-                    `Make sure that the event listener is registered using @CompEventListener() decorator ` +
-                    `in the component model class, and use class methods instead of arrow function attributes.`,
-            });
-        }
-
-        return callback;
-    };
-
     protected constructor(context: ControllerContext<AiMsg>, props: PropsType) {
         const compId = Object.getPrototypeOf(this).constructor.__compId;
         if (!compId) {
@@ -464,6 +444,26 @@ export abstract class BaseComp<AiMsg, PropsType, ElementsType, EventsType, Actio
             });
         }
     }
+
+    private compEventGetter = (eventName: EventsType) => {
+        if (this.destroyed) {
+            // Ignore event calls on destroyed components
+            return () => {
+            };
+        }
+
+        const callback = this.rendererEventListeners.get(eventName as EventsType);
+        if (!callback) {
+            throw new NluxError({
+                source: this.constructor.name,
+                message: `Unable to call renderer event "${eventName}" because no matching event listener was found. ` +
+                    `Make sure that the event listener is registered using @CompEventListener() decorator ` +
+                    `in the component model class, and use class methods instead of arrow function attributes.`,
+            });
+        }
+
+        return callback;
+    };
 
     private addRendererEventListener(eventType: EventsType, listener: () => void) {
         this.throwIfDestroyed();

@@ -17,10 +17,10 @@ import {createConversationStartersDom} from './utils/createConversationStartersD
 export const renderConversation: CompRenderer<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
 > = ({
-    appendToRoot,
-    compEvent,
-    props,
-}) => {
+         appendToRoot,
+         compEvent,
+         props,
+     }) => {
     const hasNoMessages = !props.messages || props.messages.length === 0;
     const renderingContext: {
         assistantPersona: AssistantPersona | undefined;

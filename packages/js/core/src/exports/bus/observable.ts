@@ -8,7 +8,7 @@ export class Observable<DataType> {
     private readonly isReplayObservable: boolean = false;
     private subscribers: Set<IObserver<DataType>> = new Set();
 
-    constructor({replay}: {replay?: boolean} = {}) {
+    constructor({replay}: { replay?: boolean } = {}) {
         this.isReplayObservable = replay ?? false;
     }
 

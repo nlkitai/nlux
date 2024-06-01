@@ -24,6 +24,21 @@ import {TasksService} from './tasksService';
  */
 class AiContextImpl implements AiContext {
 
+    private theDataAdapter: ContextAdapter | null = null;
+    private theDataSyncOptions: DataSyncOptions | null = null;
+    private theDataSyncService: DataSyncService | null = null;
+    private theStatus: AiContextStatus = 'idle';
+    private theTasksAdapter: ContextTasksAdapter | null = null;
+    private theTasksService: TasksService | null = null;
+
+    get contextId(): string | null {
+        return this.theDataSyncService?.contextId ?? null;
+    }
+
+    get status(): AiContextStatus {
+        return this.theStatus;
+    }
+
     public destroy = async (): Promise<DestroyContextResult> => {
         if (this.theStatus === 'destroyed') {
             return {
@@ -451,6 +466,7 @@ class AiContextImpl implements AiContext {
 
         return this.theTasksService.runTask(taskId, parameters);
     };
+
     public withAdapter = (
         adapter: ContextAdapterBuilder | ContextAdapter,
     ): AiContext => {
@@ -487,12 +503,17 @@ class AiContextImpl implements AiContext {
         return this;
     };
 
-    private theDataAdapter: ContextAdapter | null = null;
-    private theDataSyncOptions: DataSyncOptions | null = null;
-    private theDataSyncService: DataSyncService | null = null;
-    private theStatus: AiContextStatus = 'idle';
-    private theTasksAdapter: ContextTasksAdapter | null = null;
-    private theTasksService: TasksService | null = null;
+    hasItem(itemId: string): boolean {
+        return this.theDataSyncService?.hasItemWithId(itemId) ?? false;
+    }
+
+    hasRunnableTask(taskId: string): boolean {
+        return this.theTasksService?.canRunTask(taskId) ?? false;
+    }
+
+    hasTask(taskId: string): boolean {
+        return this.theTasksService?.hasTask(taskId) ?? false;
+    }
 
     private unregisterTask = (taskId: string): Promise<ContextActionResult> => {
         if (!this.theTasksService) {
@@ -510,26 +531,6 @@ class AiContextImpl implements AiContext {
 
         return this.theTasksService.unregisterTask(taskId);
     };
-
-    get contextId(): string | null {
-        return this.theDataSyncService?.contextId ?? null;
-    }
-
-    get status(): AiContextStatus {
-        return this.theStatus;
-    }
-
-    hasItem(itemId: string): boolean {
-        return this.theDataSyncService?.hasItemWithId(itemId) ?? false;
-    }
-
-    hasRunnableTask(taskId: string): boolean {
-        return this.theTasksService?.canRunTask(taskId) ?? false;
-    }
-
-    hasTask(taskId: string): boolean {
-        return this.theTasksService?.hasTask(taskId) ?? false;
-    }
 }
 
 export const createAiContext = (): AiContext => {

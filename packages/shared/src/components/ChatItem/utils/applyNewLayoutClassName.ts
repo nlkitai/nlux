@@ -1,6 +1,6 @@
 import {ConversationLayout} from '@nlux/core';
 
-export const conversationLayoutClassName: {[key: string]: string} = {
+export const conversationLayoutClassName: { [key: string]: string } = {
     bubbles: 'nlux_cht_itm_bbl',
     list: 'nlux_cht_itm_lst',
 };

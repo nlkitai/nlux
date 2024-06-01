@@ -4,14 +4,14 @@ import {ChatSegment} from '../../../../../../shared/src/types/chatSegment/chatSe
 export const useLastActiveSegment = function <AiMsg>(
     segments: ChatSegment<AiMsg>[],
     lastSegmentContainerRef: RefObject<HTMLDivElement>,
-    onLastActiveSegmentChange?: (data: {uid: string; div: HTMLDivElement} | undefined) => void,
+    onLastActiveSegmentChange?: (data: { uid: string; div: HTMLDivElement } | undefined) => void,
 ) {
     const lastActiveSegmentId = useMemo(() => {
         const lastSegment = segments.length > 0 ? segments[segments.length - 1] : undefined;
         return lastSegment?.status === 'active' ? lastSegment.uid : undefined;
     }, [segments]);
 
-    const lastCallbackData = useRef<{uid: string; div: HTMLDivElement} | undefined>(undefined);
+    const lastCallbackData = useRef<{ uid: string; div: HTMLDivElement } | undefined>(undefined);
 
     //
     // Whenever the last active segment div+id changes, call the onLastActiveSegmentChange callback

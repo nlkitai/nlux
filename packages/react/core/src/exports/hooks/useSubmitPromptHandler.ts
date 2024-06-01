@@ -1,4 +1,4 @@
-import {EventsMap, ComposerOptions} from '@nlux/core';
+import {ComposerOptions, EventsMap} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '../../../../../shared/src/services/submitPrompt/submitPromptImpl';
 import {ChatAdapter} from '../../../../../shared/src/types/adapters/chat/chatAdapter';
@@ -222,11 +222,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 }
             });
 
-            chatSegmentObservable.on('aiChunkReceived', ({
-                messageId,
-                chunk,
-                serverResponse,
-            }) => {
+            chatSegmentObservable.on('aiChunkReceived', (
+                {
+                    messageId,
+                    chunk,
+                    serverResponse,
+                }) => {
                 requestAnimationFrame(() => {
                     // We need to wait a bit before streaming the chunk to the chat item
                     // because of the React lifecycle. The chat item might not be rendered yet.

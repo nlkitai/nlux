@@ -11,7 +11,7 @@ export const getGlobalNlux = (): typeof globalNlux | undefined => {
         return undefined;
     }
 
-    const theWindow = window as unknown as Window & {nlux: typeof globalNlux};
+    const theWindow = window as unknown as Window & { nlux: typeof globalNlux };
     if (typeof theWindow.nlux === 'object' && typeof theWindow.nlux.version === 'string') {
         return theWindow.nlux;
     }

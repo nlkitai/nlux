@@ -9,10 +9,10 @@ import {OpenAiAbstractAdapter} from './adapter';
 
 export class OpenAiStreamingAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     constructor({
-        apiKey,
-        model,
-        systemMessage,
-    }: ChatAdapterOptions) {
+                    apiKey,
+                    model,
+                    systemMessage,
+                }: ChatAdapterOptions) {
         super({
             apiKey,
             model,

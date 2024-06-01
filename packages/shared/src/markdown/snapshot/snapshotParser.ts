@@ -71,7 +71,7 @@ export const parseMdSnapshot: SnapshotParser = (
                 const highlight = syntaxHighlighter.createHighlighter();
                 const newHtml = '<div>' + highlight(codeElement.textContent || '', language) + '</div>';
 
-                newCodeElement.innerHTML =  htmlSanitizer ? htmlSanitizer(newHtml) : newHtml;
+                newCodeElement.innerHTML = htmlSanitizer ? htmlSanitizer(newHtml) : newHtml;
                 newCodeElement.className = 'highlighter-dark';
             }
         }

@@ -3,7 +3,7 @@ import {ComponentClass, Context, FC, ReactNode} from 'react';
 
 export type AiContextProviderProps = {
     initialItems?: ContextItems;
-    errorComponent?: FC<{error?: string}> | ComponentClass<{error?: string}>
+    errorComponent?: FC<{ error?: string }> | ComponentClass<{ error?: string }>
     loadingComponent?: FC | ComponentClass;
     children: ReactNode;
 };

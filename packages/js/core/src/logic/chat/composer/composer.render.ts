@@ -10,10 +10,10 @@ import {CompComposerActions, CompComposerElements, CompComposerEvents, CompCompo
 export const renderChatbox: CompRenderer<
     CompComposerProps, CompComposerElements, CompComposerEvents, CompComposerActions
 > = ({
-    appendToRoot,
-    props,
-    compEvent,
-}) => {
+         appendToRoot,
+         props,
+         compEvent,
+     }) => {
     const composerRoot = createComposerDom(props.domCompProps);
 
     appendToRoot(composerRoot);

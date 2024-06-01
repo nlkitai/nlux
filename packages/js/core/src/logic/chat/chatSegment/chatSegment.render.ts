@@ -11,10 +11,10 @@ import {
 export const renderChatSegment: CompRenderer<
     CompChatSegmentProps, CompChatSegmentElements, CompChatSegmentEvents, CompChatSegmentActions
 > = ({
-    props,
-    compEvent,
-    appendToRoot,
-}) => {
+         props,
+         compEvent,
+         appendToRoot,
+     }) => {
 
     // Create container
     let loaderContainer: HTMLElement | undefined;

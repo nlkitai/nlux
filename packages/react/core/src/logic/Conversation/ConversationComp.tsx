@@ -62,7 +62,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
     return (
         <>
             {showWelcomeDefaultMessage && (
-                <WelcomeDefaultMessageComp />
+                <WelcomeDefaultMessageComp/>
             )}
             {showWelcomeMessage && (
                 <WelcomeMessageComp
@@ -72,7 +72,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                 />
             )}
             {showConversationStarters && (
-                <ConversationStarters items={conversationOptions!.conversationStarters ?? []} />
+                <ConversationStarters items={conversationOptions!.conversationStarters ?? []}/>
             )}
             <div className="nlux-chtRm-cnv-sgmts-cntr">
                 {segments.map((segment, index) => {

@@ -3,6 +3,11 @@ import {EventName, EventsConfig, EventsMap} from '../../../types/event';
 
 export class EventManager<AiMsg> {
 
+    private readonly eventListeners: Map<
+        EventName,
+        Set<EventsMap<AiMsg>[EventName]>
+    > = new Map();
+
     public emit = <EventToEmit extends EventName>(
         event: EventToEmit,
         ...params: Parameters<EventsMap<AiMsg>[EventToEmit]>
@@ -65,9 +70,4 @@ export class EventManager<AiMsg> {
             );
         }
     };
-
-    private readonly eventListeners: Map<
-        EventName,
-        Set<EventsMap<AiMsg>[EventName]>
-    > = new Map();
 }

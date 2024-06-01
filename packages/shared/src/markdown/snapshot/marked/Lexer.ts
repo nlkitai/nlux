@@ -15,7 +15,7 @@ export class _Lexer {
         top: boolean;
     };
     tokens: TokensList;
-    private inlineQueue: {src: string, tokens: Token[]}[];
+    private inlineQueue: { src: string, tokens: Token[] }[];
     private tokenizer: _Tokenizer;
 
     constructor(options?: MarkedOptions) {
