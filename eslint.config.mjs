@@ -29,6 +29,7 @@ export default tsEslint.config(
             'dist/**',
             'specs/**',
             'samples/**',
+            'packages/js/core/src/aiChat/comp/comp.ts',
             'packages/shared/src/markdown/snapshot/marked/*.ts',
             'packages/shared/src/utils/dequal.ts',
         ],

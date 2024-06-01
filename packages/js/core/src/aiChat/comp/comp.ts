@@ -2,7 +2,6 @@ import {ControllerContext} from '../../types/controllerContext';
 import {CompRegistry} from './registry';
 
 export const comp = <
-    AiMsg,
     CompClass extends new (context: ControllerContext<any>, props: any) => InstanceType<CompClass>,
 >(
     compClass: CompClass,
