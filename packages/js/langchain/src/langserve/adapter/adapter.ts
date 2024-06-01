@@ -10,7 +10,7 @@ import {uid} from '@shared/utils/uid';
 import {warn} from '@shared/utils/warn';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
-import {LangServeHeaders} from '../types/langServe';
+import {LangServeConfig, LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {getEndpointUrlToUse} from '../utils/getEndpointUrlToUse';
@@ -96,6 +96,10 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
 
     get useInputSchema(): boolean {
         return this.theUseInputSchemaOptionToUse;
+    }
+
+    protected get config(): LangServeConfig | undefined {
+        return this.__options.config;
     }
 
     private get inputSchemaUrl(): string {
@@ -184,11 +188,16 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         extras: ChatAdapterExtras<AiMsg>,
     ): void;
 
-    protected getRequestBody(message: string, conversationHistory?: ChatItem<AiMsg>[]): string {
+    protected getRequestBody(
+        message: string,
+        config?: Record<string, unknown>,
+        conversationHistory?: ChatItem<AiMsg>[],
+    ): string {
         if (this.inputPreProcessor) {
             const preProcessedInput = this.inputPreProcessor(message, conversationHistory);
             return JSON.stringify({
                 input: preProcessedInput,
+                config,
             });
         }
 
@@ -197,6 +206,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
             if (typeof body !== 'undefined') {
                 return JSON.stringify({
                     input: body,
+                    config,
                 });
             }
         }
@@ -204,6 +214,7 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         // By default, we send the message as is
         return JSON.stringify({
             input: message,
+            config,
         });
     }
 }

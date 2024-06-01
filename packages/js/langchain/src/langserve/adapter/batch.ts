@@ -9,7 +9,12 @@ export class LangServeBatchAdapter<AiMsg = string> extends LangServeAbstractAdap
     }
 
     async batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined> {
-        const body = this.getRequestBody(message, extras.conversationHistory);
+        const body = this.getRequestBody(
+            message,
+            this.config,
+            extras.conversationHistory,
+        );
+
         const response = await fetch(this.endpointUrl, {
             method: 'POST',
             headers: {

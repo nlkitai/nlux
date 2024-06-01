@@ -5,7 +5,7 @@ import {LangServeBatchAdapter} from '../adapter/batch';
 import {LangServeStreamAdapter} from '../adapter/stream';
 import {ChatAdapterOptions} from '../types/adapterOptions';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
-import {LangServeHeaders} from '../types/langServe';
+import {LangServeConfig, LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {ChatAdapterBuilder} from './builder';
@@ -13,6 +13,7 @@ import {ChatAdapterBuilder} from './builder';
 export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
     private theDataTransferMode?: DataTransferMode;
     private theHeaders?: LangServeHeaders;
+    private theConfig?: LangServeConfig;
     private theInputPreProcessor?: LangServeInputPreProcessor<AiMsg>;
     private theOutputPreProcessor?: LangServeOutputPreProcessor<AiMsg>;
     private theUrl?: string;
@@ -22,6 +23,7 @@ export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<Ai
         if (cloneFrom) {
             this.theDataTransferMode = cloneFrom.theDataTransferMode;
             this.theHeaders = cloneFrom.theHeaders;
+            this.theConfig = cloneFrom.theConfig;
             this.theInputPreProcessor = cloneFrom.theInputPreProcessor;
             this.theOutputPreProcessor = cloneFrom.theOutputPreProcessor;
             this.theUrl = cloneFrom.theUrl;
@@ -41,6 +43,7 @@ export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<Ai
             url: this.theUrl,
             dataTransferMode: this.theDataTransferMode,
             headers: this.theHeaders,
+            config: this.theConfig,
             inputPreProcessor: this.theInputPreProcessor,
             outputPreProcessor: this.theOutputPreProcessor,
             useInputSchema: this.theUseInputSchema,
@@ -52,6 +55,18 @@ export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<Ai
         }
 
         return new LangServeBatchAdapter(options);
+    }
+
+    withConfig(langServeConfig: LangServeConfig): ChatAdapterBuilder<AiMsg> {
+        if (this.theConfig !== undefined) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Cannot set the config option more than once',
+            });
+        }
+
+        this.theConfig = langServeConfig;
+        return this;
     }
 
     withDataTransferMode(mode: DataTransferMode): LangServeAdapterBuilderImpl<AiMsg> {

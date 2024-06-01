@@ -23,7 +23,12 @@ export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMs
         observer: StreamingAdapterObserver<string | object | undefined>,
         extras: ChatAdapterExtras<AiMsg>,
     ): void {
-        const body = this.getRequestBody(message, extras.conversationHistory);
+        const body = this.getRequestBody(
+            message,
+            this.config,
+            extras.conversationHistory,
+        );
+
         fetch(this.endpointUrl, {
             method: 'POST',
             headers: {

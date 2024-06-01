@@ -1,10 +1,12 @@
 import {ChatAdapterBuilder as CoreChatAdapterBuilder, DataTransferMode, StandardChatAdapter} from '@nlux/core';
 import {LangServeInputPreProcessor} from '../types/inputPreProcessor';
-import {LangServeHeaders} from '../types/langServe';
+import {LangServeConfig, LangServeHeaders} from '../types/langServe';
 import {LangServeOutputPreProcessor} from '../types/outputPreProcessor';
 
 export interface ChatAdapterBuilder<AiMsg> extends CoreChatAdapterBuilder<AiMsg> {
     create(): StandardChatAdapter<AiMsg>;
+
+    withConfig(langServeConfig: LangServeConfig): ChatAdapterBuilder<AiMsg>;
 
     withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<AiMsg>;
 

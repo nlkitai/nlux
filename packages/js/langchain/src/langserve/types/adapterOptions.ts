@@ -1,6 +1,6 @@
 import {DataTransferMode} from '@nlux/core';
 import {LangServeInputPreProcessor} from './inputPreProcessor';
-import {LangServeHeaders} from './langServe';
+import {LangServeConfig, LangServeHeaders} from './langServe';
 import {LangServeOutputPreProcessor} from './outputPreProcessor';
 
 export type ChatAdapterOptions<AiMsg> = {
@@ -29,6 +29,11 @@ export type ChatAdapterOptions<AiMsg> = {
      * This contains the headers that implementers can use to send additional data such as authentication headers.
      */
     headers?: LangServeHeaders;
+
+    /**
+     * The configuration object that will be sent to the LangServe runnable.
+     */
+    config?: LangServeConfig;
 
     /**
      * A function to preprocess the user input before sending it to the LangServe runnable.
