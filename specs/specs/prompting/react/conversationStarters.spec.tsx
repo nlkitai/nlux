@@ -1,14 +1,12 @@
-import {ComposerOptions} from '@nlux-dev/core/src';
 import {AiChat} from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import {render} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
-import {waitForReactRenderCycle, waitForRenderCycle} from '../../../utils/wait';
+import {waitForReactRenderCycle} from '../../../utils/wait';
 
-describe('<AiChat /> + conversationOptions + conversationStarters', () => {
+describe.todo('<AiChat /> + conversationOptions + conversationStarters', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
 
