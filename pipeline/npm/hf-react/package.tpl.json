@@ -7,11 +7,11 @@
     "directory": "packages/react/hf"
   },
   "dependencies": {
-    "@nlux/hf": "^{versions.nlux}"
+    "@nlux/hf": "{versions.nlux}"
   },
   "peerDependencies": {
     "@nlux/react": "{versions.nlux}",
-    "react": "^{versions.peerDependencies.react}"
+    "react": "{versions.peerDependencies.react}"
   },
   "main": "index.js",
   "types": "hf-react.d.ts",

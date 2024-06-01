@@ -7,8 +7,8 @@
     "directory": "packages/js/openai"
   },
   "dependencies": {
-    "openai": "^{versions.dependencies.openai}",
-    "@nlux/core": "^{versions.nlux}"
+    "openai": "{versions.dependencies.openai}",
+    "@nlux/core": "{versions.nlux}"
   },
   "peerDependencies": {
   },

@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@nlux/core": "{versions.nlux}",
-    "highlight.js": "^{versions.dependencies.highlightJs}"
+    "highlight.js": "{versions.dependencies.highlightJs}"
   },
   "peerDependencies": {
   },

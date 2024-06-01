@@ -15,27 +15,27 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@codesandbox/sandpack-react": "^2.10.0",
-    "@docusaurus/core": "^3.3.2",
-    "@docusaurus/plugin-google-tag-manager": "^3.2.2",
-    "@docusaurus/preset-classic": "^3.2.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mdx-js/react": "^3.0.1",
-    "add": "^2.0.6",
-    "clsx": "^2.1.1",
-    "prism-react-renderer": "^2.3.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-live": "^4.1.5",
-    "react-syntax-highlighter": "^15.5.0"
+    "@codesandbox/sandpack-react": "2",
+    "@docusaurus/core": "3",
+    "@docusaurus/plugin-google-tag-manager": "3",
+    "@docusaurus/preset-classic": "3",
+    "@emotion/react": "11",
+    "@emotion/styled": "11",
+    "@mdx-js/react": "3",
+    "add": "2",
+    "clsx": "2",
+    "prism-react-renderer": "2",
+    "react": "18",
+    "react-dom": "18",
+    "react-live": "4",
+    "react-syntax-highlighter": "15"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "^3.2.2",
-    "@docusaurus/tsconfig": "^3.3.2",
-    "@docusaurus/types": "^3.3.2",
-    "typescript": "~5.4.5",
-    "yarn": "^1.22.22"
+    "@docusaurus/module-type-aliases": "3",
+    "@docusaurus/tsconfig": "3",
+    "@docusaurus/types": "3",
+    "typescript": "5",
+    "yarn": "1"
   },
   "browserslist": {
     "production": [
