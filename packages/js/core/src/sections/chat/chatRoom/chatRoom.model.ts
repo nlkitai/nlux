@@ -3,12 +3,12 @@ import {AutoScrollController} from '../../../../../../shared/src/interactions/au
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {comp} from '../../../exports/aiChat/comp/comp';
-import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationLayout, HistoryPayloadSize} from '../../../exports/aiChat/options/conversationOptions';
-import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {comp} from '../../../aiChat/comp/comp';
+import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
+import {ConversationLayout, HistoryPayloadSize} from '../../../aiChat/options/conversationOptions';
+import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationStarter} from '../../../types/conversationStarter';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';

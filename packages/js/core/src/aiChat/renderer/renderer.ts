@@ -1,16 +1,15 @@
-import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {NluxRenderingError} from '../../../../../../shared/src/types/error';
-import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
-import {emptyInnerHtml} from '../../../../../../shared/src/utils/dom/emptyInnerHtml';
-import {getConversationLayout} from '../../../../../../shared/src/utils/dom/getConversationLayout';
-import {getRootClassNames} from '../../../../../../shared/src/utils/dom/getRootClassNames';
-import {warn} from '../../../../../../shared/src/utils/warn';
-import {CompChatRoom} from '../../../sections/chat/chatRoom/chatRoom.model';
-import {CompChatRoomProps} from '../../../sections/chat/chatRoom/chatRoom.types';
-import {CompExceptionsBox} from '../../../sections/miscellaneous/exceptionsBox/model';
-import {AiChatInternalProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
-import {ControllerContext} from '../../../types/controllerContext';
-import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
+import {ChatItem} from '../../../../../shared/src/types/conversation';
+import {NluxRenderingError} from '../../../../../shared/src/types/error';
+import {NLErrorId} from '../../../../../shared/src/types/exceptions/errors';
+import {emptyInnerHtml} from '../../../../../shared/src/utils/dom/emptyInnerHtml';
+import {getConversationLayout} from '../../../../../shared/src/utils/dom/getConversationLayout';
+import {getRootClassNames} from '../../../../../shared/src/utils/dom/getRootClassNames';
+import {warn} from '../../../../../shared/src/utils/warn';
+import {CompChatRoom} from '../../sections/chat/chatRoom/chatRoom.model';
+import {CompChatRoomProps} from '../../sections/chat/chatRoom/chatRoom.types';
+import {CompExceptionsBox} from '../../sections/miscellaneous/exceptionsBox/model';
+import {AiChatInternalProps, UpdatableAiChatProps} from '../../types/aiChat/props';
+import {propsToCorePropsInEvents} from '../../utils/propsToCorePropsInEvents';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
 import {ConversationOptions} from '../options/conversationOptions';
@@ -18,6 +17,7 @@ import {DisplayOptions} from '../options/displayOptions';
 import {MessageOptions} from '../options/messageOptions';
 import {PersonaOptions} from '../options/personaOptions';
 import {ComposerOptions} from '../options/composerOptions';
+import {ControllerContext} from '../../types/controllerContext';
 
 export class NluxRenderer<AiMsg> {
     private readonly __context: ControllerContext<AiMsg>;

@@ -1,8 +1,8 @@
 import {ChatSegmentStatus} from '../../../../../../shared/src/types/chatSegment/chatSegment';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
-import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
+import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
+import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
+import {SanitizerExtension} from '../../../aiChat/sanitizer/sanitizer';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;

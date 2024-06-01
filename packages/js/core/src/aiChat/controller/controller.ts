@@ -1,9 +1,9 @@
-import {NLErrorId, NLErrors} from '../../../../../../shared/src/types/exceptions/errors';
-import {uid} from '../../../../../../shared/src/utils/uid';
-import {warn} from '../../../../../../shared/src/utils/warn';
-import {AiChatInternalProps, AiChatProps, UpdatableAiChatProps} from '../../../types/aiChat/props';
-import {ControllerContext} from '../../../types/controllerContext';
-import {EventCallback, EventName} from '../../../types/event';
+import {NLErrorId, NLErrors} from '../../../../../shared/src/types/exceptions/errors';
+import {uid} from '../../../../../shared/src/utils/uid';
+import {warn} from '../../../../../shared/src/utils/warn';
+import {AiChatInternalProps, AiChatProps, UpdatableAiChatProps} from '../../types/aiChat/props';
+import {ControllerContext} from '../../types/controllerContext';
+import {EventCallback, EventName} from '../../types/event';
 import {EventManager} from '../events/eventManager';
 import {NluxRenderer} from '../renderer/renderer';
 import {createControllerContext} from './context';

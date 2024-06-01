@@ -1,6 +1,6 @@
-import {BaseComp} from '../exports/aiChat/comp/base';
-import {CompRegistry} from '../exports/aiChat/comp/registry';
-import {getGlobalNlux} from '../exports/global';
+import {BaseComp} from '../aiChat/comp/base';
+import {CompRegistry} from '../aiChat/comp/registry';
+import {getGlobalMetaData} from '../global';
 import {CompChatItem} from './chat/chatItem/chatItem.model';
 import {CompChatRoom} from './chat/chatRoom/chatRoom.model';
 import {CompChatSegment} from './chat/chatSegment/chatSegment.model';
@@ -24,9 +24,9 @@ const sectionsById = () => ({
 });
 
 export const registerAllSections = () => {
-    const globalNlux = getGlobalNlux();
-    const componentsRegistered = btoa('componentsRegistered');
-    if (globalNlux && globalNlux[componentsRegistered] === true) {
+    const globalNlux = getGlobalMetaData();
+    const sectionsRegistered = btoa('sectionsRegistered');
+    if (globalNlux && globalNlux[sectionsRegistered] === true) {
         return;
     }
 
@@ -35,6 +35,6 @@ export const registerAllSections = () => {
     });
 
     if (typeof globalNlux === 'object') {
-        globalNlux[componentsRegistered] = true;
+        globalNlux[sectionsRegistered] = true;
     }
 };

@@ -1,6 +1,6 @@
 import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderChatbox} from './composer.render';
 import {

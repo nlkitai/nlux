@@ -1,8 +1,8 @@
-import {ContextAdapter} from '../../../../../shared/src/types/adapters/context/contextAdapter';
-import {ContextDataAdapter} from '../../../../../shared/src/types/adapters/context/contextDataAdapter';
-import {DestroyContextResult, InitializeContextResult} from '../../../../../shared/src/types/aiContext/contextResults';
-import {ContextItemDataType, ContextItems} from '../../../../../shared/src/types/aiContext/data';
-import {warn} from '../../../../../shared/src/utils/warn';
+import {ContextAdapter} from '../../../../shared/src/types/adapters/context/contextAdapter';
+import {ContextDataAdapter} from '../../../../shared/src/types/adapters/context/contextDataAdapter';
+import {DestroyContextResult, InitializeContextResult} from '../../../../shared/src/types/aiContext/contextResults';
+import {ContextItemDataType, ContextItems} from '../../../../shared/src/types/aiContext/data';
+import {warn} from '../../../../shared/src/utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';
@@ -131,7 +131,7 @@ export class DataSyncService {
 
             if (['set', 'update'].includes(item.operation)) {
                 itemsToUpdate.push(itemId);
-                continue;
+
             }
         }
 

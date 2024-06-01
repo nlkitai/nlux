@@ -2,12 +2,12 @@ import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/ch
 import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {comp} from '../../../exports/aiChat/comp/comp';
-import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {comp} from '../../../aiChat/comp/comp';
+import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
+import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
+import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
 import {CompChatItem} from '../chatItem/chatItem.model';
 import {CompChatItemProps} from '../chatItem/chatItem.types';

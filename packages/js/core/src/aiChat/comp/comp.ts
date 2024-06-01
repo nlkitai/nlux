@@ -1,4 +1,4 @@
-import {ControllerContext} from '../../../types/controllerContext';
+import {ControllerContext} from '../../types/controllerContext';
 import {CompRegistry} from './registry';
 
 export const comp = <

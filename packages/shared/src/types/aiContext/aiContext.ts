@@ -1,4 +1,4 @@
-import {DataSyncOptions} from '../../../../js/core/src/exports/aiContext/options/dataSyncOptions';
+import {DataSyncOptions} from '../../../../js/core/src/aiContext/options/dataSyncOptions';
 import {ContextAdapter} from '../adapters/context/contextAdapter';
 import {ContextAdapterBuilder} from '../adapters/context/contextAdapterBuilder';
 import {CallbackArgType, CallbackFunction} from '../callbackFunction';

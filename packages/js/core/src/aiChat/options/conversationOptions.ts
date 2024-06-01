@@ -1,4 +1,4 @@
-import {ConversationStarter} from '../../../types/conversationStarter';
+import {ConversationStarter} from '../../types/conversationStarter';
 
 export type HistoryPayloadSize = number | 'max';
 

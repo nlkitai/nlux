@@ -5,8 +5,8 @@ import {
 } from '../../../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';
 import {conversationDefaultLayout} from '../../../../../../../shared/src/utils/dom/getConversationLayout';
 import {stringifyRandomResponse} from '../../../../../../../shared/src/utils/stringifyRandomResponse';
-import {ConversationLayout} from '../../../../exports/aiChat/options/conversationOptions';
-import {UserPersona} from '../../../../exports/aiChat/options/personaOptions';
+import {ConversationLayout} from '../../../../aiChat/options/conversationOptions';
+import {UserPersona} from '../../../../aiChat/options/personaOptions';
 
 export const getChatItemPropsFromSegmentItem = <AiMsg>(
     segmentItem: ChatSegmentItem<AiMsg>,

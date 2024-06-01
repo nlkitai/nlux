@@ -1,5 +1,5 @@
-import {CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
-import {EventName, EventsConfig, EventsMap} from '../../../types/event';
+import {CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
+import {EventName, EventsConfig, EventsMap} from '../../types/event';
 
 export class EventManager<AiMsg> {
 

@@ -1,8 +1,8 @@
 import {ChatAdapter} from '../../../../shared/src/types/adapters/chat/chatAdapter';
 import {StandardChatAdapter} from '../../../../shared/src/types/adapters/chat/standardChatAdapter';
 import {NLErrorId} from '../../../../shared/src/types/exceptions/errors';
-import {HighlighterExtension} from '../exports/aiChat/highlighter/highlighter';
-import {SanitizerExtension} from '../exports/aiChat/sanitizer/sanitizer';
+import {HighlighterExtension} from '../aiChat/highlighter/highlighter';
+import {SanitizerExtension} from '../aiChat/sanitizer/sanitizer';
 import {AiChatProps} from './aiChat/props';
 import {EventName, EventsMap} from './event';
 

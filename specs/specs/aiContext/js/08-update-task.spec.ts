@@ -1,4 +1,4 @@
-import {createAiContext} from '@nlux-dev/core/src/exports/aiContext/aiContext';
+import {createAiContext} from '@nlux-dev/core/src/aiContext/aiContext';
 import {describe, expect, it, vi} from 'vitest';
 import {createContextAdapterController} from '../../../utils/contextAdapterBuilder';
 

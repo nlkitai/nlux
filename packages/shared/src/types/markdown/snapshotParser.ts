@@ -1,5 +1,5 @@
-import {HighlighterExtension} from '../../../../js/core/src/exports/aiChat/highlighter/highlighter';
-import {SanitizerExtension} from '../../../../js/core/src/exports/aiChat/sanitizer/sanitizer';
+import {HighlighterExtension} from '../../../../js/core/src/aiChat/highlighter/highlighter';
+import {SanitizerExtension} from '../../../../js/core/src/aiChat/sanitizer/sanitizer';
 
 export type SnapshotParserOptions = {
     syntaxHighlighter?: HighlighterExtension;

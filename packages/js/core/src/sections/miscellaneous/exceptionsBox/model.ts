@@ -1,6 +1,6 @@
 import {NLErrorId} from '../../../../../../shared/src/types/exceptions/errors';
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {Model} from '../../../exports/aiChat/comp/decorators';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderExceptionsBox} from './render';
 import {

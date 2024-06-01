@@ -1,19 +1,19 @@
 // CHAT _____________________
 
-import {AiChat} from './exports/aiChat/aiChat';
+import {AiChat} from './aiChat/aiChat';
 
-export {AiChat} from './exports/aiChat/aiChat';
+export {AiChat} from './aiChat/aiChat';
 
 export const createAiChat = <AiMsg = string>(): AiChat<AiMsg> => new AiChat<AiMsg>();
 
-export {Observable} from './exports/bus/observable';
+export {Observable} from './bus/observable';
 
 export type {
     ConversationOptions,
     ConversationLayout,
-} from './exports/aiChat/options/conversationOptions';
+} from './aiChat/options/conversationOptions';
 
-export type {ComposerOptions} from './exports/aiChat/options/composerOptions';
+export type {ComposerOptions} from './aiChat/options/composerOptions';
 export type {
     BatchResponseComponentProps,
     StreamResponseComponentProps,
@@ -21,18 +21,18 @@ export type {
     PromptRendererProps,
     PromptRenderer,
     MessageOptions
-} from './exports/aiChat/options/messageOptions';
-export type {DisplayOptions} from './exports/aiChat/options/displayOptions';
+} from './aiChat/options/messageOptions';
+export type {DisplayOptions} from './aiChat/options/displayOptions';
 
 export type {
     PersonaOptions,
     AssistantPersona,
     UserPersona,
-} from './exports/aiChat/options/personaOptions';
+} from './aiChat/options/personaOptions';
 
 export type {
     IObserver,
-} from './exports/bus/observer';
+} from './bus/observer';
 
 export type {
     AiChatInternalProps,
@@ -83,7 +83,7 @@ export type {
 
 export type {
     HistoryPayloadSize,
-} from './exports/aiChat/options/conversationOptions';
+} from './aiChat/options/conversationOptions';
 
 export type {
     ChatAdapter,
@@ -167,15 +167,15 @@ export type {
 
 export type {
     DataSyncOptions,
-} from './exports/aiContext/options/dataSyncOptions';
+} from './aiContext/options/dataSyncOptions';
 
 export {
     createAiContext,
-} from './exports/aiContext/aiContext';
+} from './aiContext/aiContext';
 
 export {
     predefinedContextSize,
-} from './exports/aiContext/options/dataSyncOptions';
+} from './aiContext/options/dataSyncOptions';
 
 
 // HIGHLIGHTER ______________
@@ -185,13 +185,13 @@ export type {
     HighlighterExtension,
     HighlighterColorMode,
     CreateHighlighterOptions,
-} from './exports/aiChat/highlighter/highlighter';
+} from './aiChat/highlighter/highlighter';
 
 // HTML SANITIZER ___________
 
 export type {
     SanitizerExtension
-} from './exports/aiChat/sanitizer/sanitizer';
+} from './aiChat/sanitizer/sanitizer';
 
 // CONVERSATION _____________
 

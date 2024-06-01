@@ -1,5 +1,5 @@
-import {NluxUsageError} from '../../../../../../shared/src/types/error';
-import {CompRenderer, CompUpdater} from '../../../types/comp';
+import {NluxUsageError} from '../../../../../shared/src/types/error';
+import {CompRenderer, CompUpdater} from '../../types/comp';
 import {BaseComp} from './base';
 
 export const Model = <PropsType, ElementsType, EventsType, ActionsType>(

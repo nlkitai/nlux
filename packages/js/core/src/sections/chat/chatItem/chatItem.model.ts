@@ -2,9 +2,9 @@ import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/ch
 import {ChatSegmentAiMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderChatItem} from './chatItem.render';
 import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatItemProps} from './chatItem.types';

@@ -1,6 +1,6 @@
 import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
+import {SanitizerExtension} from '../../../aiChat/sanitizer/sanitizer';
 
 export type CompChatItemEvents = 'markdown-stream-complete';
 

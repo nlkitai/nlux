@@ -1,12 +1,12 @@
-import {ContextTasksAdapter} from '../../../../../shared/src/types/adapters/context/contextTasksAdapter';
+import {ContextTasksAdapter} from '../../../../shared/src/types/adapters/context/contextTasksAdapter';
 import {
     ContextActionResult,
     DestroyContextResult,
     RunTaskResult,
-} from '../../../../../shared/src/types/aiContext/contextResults';
-import {ContextTask, ContextTasks} from '../../../../../shared/src/types/aiContext/data';
-import {CallbackArgType, CallbackFunction} from '../../../../../shared/src/types/callbackFunction';
-import {warn} from '../../../../../shared/src/utils/warn';
+} from '../../../../shared/src/types/aiContext/contextResults';
+import {ContextTask, ContextTasks} from '../../../../shared/src/types/aiContext/data';
+import {CallbackArgType, CallbackFunction} from '../../../../shared/src/types/callbackFunction';
+import {warn} from '../../../../shared/src/utils/warn';
 
 type UpdateQueueItem = {
     operation: 'set';
@@ -89,7 +89,7 @@ export class TasksService {
 
             if (item.operation === 'update') {
                 tasksToUpdate.push(itemId);
-                continue;
+
             }
         }
 

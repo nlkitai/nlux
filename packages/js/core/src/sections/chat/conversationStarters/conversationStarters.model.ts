@@ -1,5 +1,5 @@
-import {BaseComp} from '../../../exports/aiChat/comp/base';
-import {Model} from '../../../exports/aiChat/comp/decorators';
+import {BaseComp} from '../../../aiChat/comp/base';
+import {Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderConversationStarters} from './conversationStarters.renderer';
 import {

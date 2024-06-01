@@ -1,6 +1,6 @@
-import {AiChatProps} from '../../../types/aiChat/props';
-import {ControllerContext, ControllerContextProps} from '../../../types/controllerContext';
-import {EventName, EventsMap} from '../../../types/event';
+import {AiChatProps} from '../../types/aiChat/props';
+import {ControllerContext, ControllerContextProps} from '../../types/controllerContext';
+import {EventName, EventsMap} from '../../types/event';
 
 export const createControllerContext = <AiMsg>(
     props: ControllerContextProps<AiMsg>,

@@ -1,9 +1,9 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
 import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
-import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
-import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
-import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';
-import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
+import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
+import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
+import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
+import {SanitizerExtension} from '../../../aiChat/sanitizer/sanitizer';
 import {ConversationStarter} from '../../../types/conversationStarter';
 
 export type CompChatRoomEvents = 'chat-room-ready'
