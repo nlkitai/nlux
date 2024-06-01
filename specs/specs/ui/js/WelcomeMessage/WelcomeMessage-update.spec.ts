@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/create';
-import {WelcomeMessageProps} from '../../../../../packages/shared/src/ui/WelcomeMessage/props';
-import {updateWelcomeMessageDom} from '../../../../../packages/shared/src/ui/WelcomeMessage/update';
+import {createWelcomeMessageDom} from '../../../../../packages/shared/src/components/WelcomeMessage/create';
+import {WelcomeMessageProps} from '../../../../../packages/shared/src/components/WelcomeMessage/props';
+import {updateWelcomeMessageDom} from '../../../../../packages/shared/src/components/WelcomeMessage/update';
 
 describe('When welcome message is rendered for update', () => {
     describe('When the message is updated', () => {

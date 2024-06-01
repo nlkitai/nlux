@@ -1,8 +1,8 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/main.css';
-import {createComposerDom} from '../../../../../packages/shared/src/ui/Composer/create';
-import {ComposerProps, ComposerStatus} from '../../../../../packages/shared/src/ui/Composer/props';
-import {updateComposerDom} from '../../../../../packages/shared/src/ui/Composer/update';
+import {createComposerDom} from '../../../../../packages/shared/src/components/Composer/create';
+import {ComposerProps, ComposerStatus} from '../../../../../packages/shared/src/components/Composer/props';
+import {updateComposerDom} from '../../../../../packages/shared/src/components/Composer/update';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

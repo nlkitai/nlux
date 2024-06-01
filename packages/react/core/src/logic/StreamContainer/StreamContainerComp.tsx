@@ -1,12 +1,12 @@
 import {FC, ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
-import {className as compMessageClassName} from '../../../../../shared/src/ui/Message/create';
+import {className as compMessageClassName} from '../../../../../shared/src/components/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,
-} from '../../../../../shared/src/ui/Message/utils/applyNewDirectionClassName';
+} from '../../../../../shared/src/components/Message/utils/applyNewDirectionClassName';
 import {
     statusClassName as compMessageStatusClassName,
-} from '../../../../../shared/src/ui/Message/utils/applyNewStatusClassName';
+} from '../../../../../shared/src/components/Message/utils/applyNewStatusClassName';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {StreamResponseComponentProps} from '../../exports/messageOptions';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';

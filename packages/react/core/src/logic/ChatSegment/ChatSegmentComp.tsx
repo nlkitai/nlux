@@ -12,9 +12,9 @@ import {
 import {AiBatchedMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {warn, warnOnce} from '../../../../../shared/src/utils/warn';
-import {ChatItemComp} from '../../ui/ChatItem/ChatItemComp';
-import {ChatItemImperativeProps} from '../../ui/ChatItem/props';
-import {LoaderComp} from '../../ui/Loader/LoaderComp';
+import {ChatItemComp} from '../../components/ChatItem/ChatItemComp';
+import {ChatItemImperativeProps} from '../../components/ChatItem/props';
+import {LoaderComp} from '../../components/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {participantNameFromRoleAndPersona} from '../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';

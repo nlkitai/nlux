@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createMessageDom} from '../../../../../packages/shared/src/ui/Message/create';
-import {MessageProps} from '../../../../../packages/shared/src/ui/Message/props';
-import {updateMessageDom} from '../../../../../packages/shared/src/ui/Message/update';
+import {createMessageDom} from '../../../../../packages/shared/src/components/Message/create';
+import {MessageProps} from '../../../../../packages/shared/src/components/Message/props';
+import {updateMessageDom} from '../../../../../packages/shared/src/components/Message/update';
 
 describe('When a message component is rendered and is in complete status', () => {
     describe('When rendered without any message or status', () => {

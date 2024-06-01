@@ -1,5 +1,5 @@
 import {FC, ReactNode} from 'react';
-import {MessageDirection} from '../../../../../shared/src/ui/Message/props';
+import {MessageDirection} from '../../../../../shared/src/components/Message/props';
 
 export type MessageProps = {
     uid: string;

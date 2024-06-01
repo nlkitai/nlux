@@ -1,5 +1,5 @@
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
+import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {warnOnce} from '../../../../../../shared/src/utils/warn';
 import {BaseComp} from '../../../exports/aiChat/comp/base';

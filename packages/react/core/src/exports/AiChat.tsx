@@ -1,14 +1,14 @@
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '../../../../shared/src/types/chatSegment/chatSegment';
-import {createExceptionsBoxController} from '../../../../shared/src/ui/ExceptionsBox/control';
-import {className as compExceptionsBoxClassName} from '../../../../shared/src/ui/ExceptionsBox/create';
-import {ComposerStatus} from '../../../../shared/src/ui/Composer/props';
+import {createExceptionsBoxController} from '../../../../shared/src/components/ExceptionsBox/control';
+import {className as compExceptionsBoxClassName} from '../../../../shared/src/components/ExceptionsBox/create';
+import {ComposerStatus} from '../../../../shared/src/components/Composer/props';
 import {chatItemsToChatSegment} from '../../../../shared/src/utils/chat/chatItemsToChatSegment';
 import {getRootClassNames} from '../../../../shared/src/utils/dom/getRootClassNames';
 import {warnOnce} from '../../../../shared/src/utils/warn';
 import {ConversationComp} from '../logic/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../logic/Conversation/props';
-import {ComposerComp} from '../ui/Composer/ComposerComp';
+import {ComposerComp} from '../components/Composer/ComposerComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';

@@ -1,6 +1,6 @@
 import {FC, RefObject} from 'react';
 import {BatchResponseComponentProps, StreamResponseComponentProps} from '../../exports/messageOptions';
-import {ChatItemProps} from '../../ui/ChatItem/props';
+import {ChatItemProps} from '../../components/ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
 export const createMessageRenderer: <AiMsg>(
@@ -44,7 +44,7 @@ export const createMessageRenderer: <AiMsg>(
                 containerRef: containerRefToUse as RefObject<never>,
             };
 
-            return () => responseRenderer(props);
+            return () => (responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
         } else {
             //
             // Batching data and displaying it in a custom renderer.
@@ -57,7 +57,7 @@ export const createMessageRenderer: <AiMsg>(
                 dataTransferMode,
             };
 
-            return () => responseRenderer(props);
+            return () => (responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
         }
     }
 

@@ -1,4 +1,4 @@
-import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
+import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
 
 export type CompComposerEvents = 'text-updated'
     | 'send-message-clicked'

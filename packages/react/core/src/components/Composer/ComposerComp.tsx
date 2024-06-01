@@ -1,8 +1,8 @@
 import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
-import {className as compComposerClassName} from '../../../../../shared/src/ui/Composer/create';
+import {className as compComposerClassName} from '../../../../../shared/src/components/Composer/create';
 import {
     statusClassName as compComposerStatusClassName,
-} from '../../../../../shared/src/ui/Composer/utils/applyNewStatusClassName';
+} from '../../../../../shared/src/components/Composer/utils/applyNewStatusClassName';
 import {LoaderComp} from '../Loader/LoaderComp';
 import {SendIconComp} from '../SendIcon/SendIconComp';
 import {ComposerProps} from './props';

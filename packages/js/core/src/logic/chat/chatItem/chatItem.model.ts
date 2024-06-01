@@ -1,7 +1,7 @@
 import {ChatSegmentItem} from '../../../../../../shared/src/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
-import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
+import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
 import {BaseComp} from '../../../exports/aiChat/comp/base';
 import {CompEventListener, Model} from '../../../exports/aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';

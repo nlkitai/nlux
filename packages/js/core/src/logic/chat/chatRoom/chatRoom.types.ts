@@ -1,5 +1,5 @@
 import {ChatItem} from '../../../../../../shared/src/types/conversation';
-import {ComposerProps} from '../../../../../../shared/src/ui/Composer/props';
+import {ComposerProps} from '../../../../../../shared/src/components/Composer/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../exports/aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../exports/aiChat/options/personaOptions';

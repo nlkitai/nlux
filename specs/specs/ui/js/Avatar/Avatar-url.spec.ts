@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/create';
-import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
+import {createAvatarDom} from '../../../../../packages/shared/src/components/Avatar/create';
+import {AvatarProps} from '../../../../../packages/shared/src/components/Avatar/props';
 
 describe('When an avatar component is rendered with url as avatar', () => {
     it('Should render the photo container with the photo in the foreground', () => {

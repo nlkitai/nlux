@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/create';
-import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
-import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
+import {createChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/create';
+import {ChatItemProps} from '../../../../../packages/shared/src/components/ChatItem/props';
+import {updateChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/update';
 
 describe('When a chat item component is complete in received direction', () => {
     describe('When the message is updated', () => {

@@ -1,4 +1,4 @@
-import {WelcomeMessageComp} from '@nlux-dev/react/src/ui/WelcomeMessage/WelcomeMessageComp';
+import {WelcomeMessageComp} from '@nlux-dev/react/src/components/WelcomeMessage/WelcomeMessageComp';
 import '@nlux-dev/themes/src/luna/main.css';
 import {ReactElement, useState} from 'react';
 

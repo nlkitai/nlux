@@ -1,7 +1,7 @@
-import {ComposerComp} from '@nlux-dev/react/src/ui/Composer/ComposerComp';
+import {ComposerComp} from '@nlux-dev/react/src/components/Composer/ComposerComp';
 import '@nlux-dev/themes/src/luna/main.css';
 import {useState} from 'react';
-import {ComposerStatus} from '../../../../../packages/shared/src/ui/Composer/props';
+import {ComposerStatus} from '../../../../../packages/shared/src/components/Composer/props';
 
 export const ComposerReactExpo = () => {
     const [status, setStatus] = useState<ComposerStatus>('typing');

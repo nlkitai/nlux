@@ -1,6 +1,6 @@
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import {createExceptionsBoxController} from '../../../../../packages/shared/src/ui/ExceptionsBox/control';
-import {createExceptionsBoxDom} from '../../../../../packages/shared/src/ui/ExceptionsBox/create';
+import {createExceptionsBoxController} from '../../../../../packages/shared/src/components/ExceptionsBox/control';
+import {createExceptionsBoxDom} from '../../../../../packages/shared/src/components/ExceptionsBox/create';
 
 describe('When an exceptions box component is rendered', () => {
     beforeEach(() => {

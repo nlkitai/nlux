@@ -1,6 +1,6 @@
 import {CallbackFunction} from '../../../../../../shared/src/types/callbackFunction';
 import {NluxRenderingError} from '../../../../../../shared/src/types/error';
-import {createComposerDom} from '../../../../../../shared/src/ui/Composer/create';
+import {createComposerDom} from '../../../../../../shared/src/components/Composer/create';
 import {domOp} from '../../../../../../shared/src/utils/dom/domOp';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';

@@ -1,4 +1,4 @@
-import {createLoaderDom} from '../../../../../../shared/src/ui/Loader/create';
+import {createLoaderDom} from '../../../../../../shared/src/components/Loader/create';
 import {getChatSegmentClassName} from '../../../../../../shared/src/utils/dom/getChatSegmentClassName';
 import {CompRenderer} from '../../../types/comp';
 import {

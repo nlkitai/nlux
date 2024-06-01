@@ -1,4 +1,4 @@
-import {updateComposerDom} from '../../../../../../shared/src/ui/Composer/update';
+import {updateComposerDom} from '../../../../../../shared/src/components/Composer/update';
 import {CompUpdater} from '../../../types/comp';
 import {CompComposerActions, CompComposerElements, CompComposerProps} from './composer.types';
 

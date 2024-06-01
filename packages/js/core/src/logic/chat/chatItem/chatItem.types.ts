@@ -1,4 +1,4 @@
-import {ChatItemProps} from '../../../../../../shared/src/ui/ChatItem/props';
+import {ChatItemProps} from '../../../../../../shared/src/components/ChatItem/props';
 import {HighlighterExtension} from '../../../exports/aiChat/highlighter/highlighter';
 import {SanitizerExtension} from '../../../exports/aiChat/sanitizer/sanitizer';
 

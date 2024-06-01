@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/create';
-import {AvatarProps} from '../../../../../packages/shared/src/ui/Avatar/props';
-import {updateAvatarDom} from '../../../../../packages/shared/src/ui/Avatar/update';
+import {createAvatarDom} from '../../../../../packages/shared/src/components/Avatar/create';
+import {AvatarProps} from '../../../../../packages/shared/src/components/Avatar/props';
+import {updateAvatarDom} from '../../../../../packages/shared/src/components/Avatar/update';
 
 describe('When an avatar component is rendered with HTML element the avatar', () => {
     it('Should render the avatar as is', () => {

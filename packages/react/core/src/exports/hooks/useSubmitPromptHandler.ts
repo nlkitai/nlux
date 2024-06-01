@@ -8,7 +8,7 @@ import {ChatSegment} from '../../../../../shared/src/types/chatSegment/chatSegme
 import {ChatSegmentAiMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '../../../../../shared/src/types/chatSegment/chatSegmentUserMessage';
 import {NLErrors} from '../../../../../shared/src/types/exceptions/errors';
-import {ComposerStatus} from '../../../../../shared/src/ui/Composer/props';
+import {ComposerStatus} from '../../../../../shared/src/components/Composer/props';
 import {warn} from '../../../../../shared/src/utils/warn';
 import {ImperativeConversationCompProps} from '../../logic/Conversation/props';
 import {AiChatProps} from '../props';

@@ -1,6 +1,6 @@
 import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
-import {WelcomeDefaultMessageComp} from '../../ui/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
-import {WelcomeMessageComp} from '../../ui/WelcomeMessage/WelcomeMessageComp';
+import {WelcomeDefaultMessageComp} from '../../components/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
+import {WelcomeMessageComp} from '../../components/WelcomeMessage/WelcomeMessageComp';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {ConversationStarters} from '../ConversationStarters/ConversationStarters';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';

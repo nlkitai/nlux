@@ -1,4 +1,4 @@
-import {className as compLoaderClassName} from '../../../../../shared/src/ui/Loader/create';
+import {className as compLoaderClassName} from '../../../../../shared/src/components/Loader/create';
 
 export const LoaderComp = () => {
     return (

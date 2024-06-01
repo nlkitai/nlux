@@ -1,4 +1,4 @@
-import {MessageStatus} from '../../ui/Message/props';
+import {MessageStatus} from '../../components/Message/props';
 import {DataTransferMode} from '../adapters/chat/chatAdapter';
 
 /**

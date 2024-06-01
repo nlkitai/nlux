@@ -1,4 +1,4 @@
-import {ComposerStatus} from '../../../../../shared/src/ui/Composer/props';
+import {ComposerStatus} from '../../../../../shared/src/components/Composer/props';
 
 export type ComposerProps = {
     status: ComposerStatus;

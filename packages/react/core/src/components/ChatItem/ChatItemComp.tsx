@@ -1,9 +1,9 @@
 import {forwardRef, ReactElement, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
-import {className as compChatItemClassName} from '../../../../../shared/src/ui/ChatItem/create';
+import {className as compChatItemClassName} from '../../../../../shared/src/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
-} from '../../../../../shared/src/ui/ChatItem/utils/applyNewDirectionClassName';
-import {conversationLayoutClassName} from '../../../../../shared/src/ui/ChatItem/utils/applyNewLayoutClassName';
+} from '../../../../../shared/src/components/ChatItem/utils/applyNewDirectionClassName';
+import {conversationLayoutClassName} from '../../../../../shared/src/components/ChatItem/utils/applyNewLayoutClassName';
 import {MarkdownSnapshotRenderer} from '../../logic/MessageRenderer/MarkdownSnapshotRenderer';
 import {createMessageRenderer} from '../../logic/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../logic/StreamContainer/props';

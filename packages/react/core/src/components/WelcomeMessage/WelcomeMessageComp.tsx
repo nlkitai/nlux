@@ -1,10 +1,10 @@
 import {
     className as compWelcomeMessageClassName,
     personaNameClassName as compWelcomeMessagePersonaNameClassName,
-} from '../../../../../shared/src/ui/WelcomeMessage/create';
+} from '../../../../../shared/src/components/WelcomeMessage/create';
 import {
     welcomeMessageTextClassName as compWelcomeMessageTextClassName,
-} from '../../../../../shared/src/ui/WelcomeMessage/utils/updateWelcomeMessageText';
+} from '../../../../../shared/src/components/WelcomeMessage/utils/updateWelcomeMessageText';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {WelcomeMessageProps} from './props';
 

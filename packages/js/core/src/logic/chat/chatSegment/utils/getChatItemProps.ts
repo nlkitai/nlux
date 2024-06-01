@@ -1,5 +1,5 @@
 import {ChatSegmentItem} from '../../../../../../../shared/src/types/chatSegment/chatSegment';
-import {ChatItemProps} from '../../../../../../../shared/src/ui/ChatItem/props';
+import {ChatItemProps} from '../../../../../../../shared/src/components/ChatItem/props';
 import {
     participantNameFromRoleAndPersona
 } from '../../../../../../../shared/src/utils/chat/participantNameFromRoleAndPersona';

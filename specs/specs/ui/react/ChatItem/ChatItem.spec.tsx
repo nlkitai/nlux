@@ -1,5 +1,5 @@
 import {BatchResponseComponentProps} from '@nlux-dev/react/src';
-import {ChatItemComp} from '@nlux-dev/react/src/ui/ChatItem/ChatItemComp';
+import {ChatItemComp} from '@nlux-dev/react/src/components/ChatItem/ChatItemComp';
 import {render} from '@testing-library/react';
 import {forwardRef} from 'react';
 import {describe, expect, it} from 'vitest';

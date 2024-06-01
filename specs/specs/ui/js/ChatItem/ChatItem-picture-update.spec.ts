@@ -1,11 +1,11 @@
 import {describe, expect, it} from 'vitest';
-import {className as avatarClassName} from '../../../../../packages/shared/src/ui/Avatar/create';
+import {className as avatarClassName} from '../../../../../packages/shared/src/components/Avatar/create';
 import {
     createChatItemDom,
     participantInfoContainerClassName,
-} from '../../../../../packages/shared/src/ui/ChatItem/create';
-import {ChatItemProps} from '../../../../../packages/shared/src/ui/ChatItem/props';
-import {updateChatItemDom} from '../../../../../packages/shared/src/ui/ChatItem/update';
+} from '../../../../../packages/shared/src/components/ChatItem/create';
+import {ChatItemProps} from '../../../../../packages/shared/src/components/ChatItem/props';
+import {updateChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/update';
 
 describe('When a chat item component is complete in sent direction', () => {
     describe('When the avatar is updated', () => {
