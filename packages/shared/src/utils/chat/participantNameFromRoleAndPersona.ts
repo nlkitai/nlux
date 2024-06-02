@@ -9,7 +9,7 @@ export const participantNameFromRoleAndPersona = (
         // Only using names as PersonaOptions differs between React and Vanilla JS
         assistant?: { name?: string };
         user?: { name?: string }
-    } | undefined
+    } | undefined,
 ): string => {
     if (role === 'assistant') {
         return personaOptions?.assistant?.name ?? defaultAiName;
