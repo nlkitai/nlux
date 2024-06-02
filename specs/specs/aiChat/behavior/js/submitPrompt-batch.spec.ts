@@ -41,7 +41,7 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
             await waitForRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
@@ -58,7 +58,7 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
             await waitForRenderCycle();
 
             // Assert
-            const loaderSelector = '.nlux-chatSegment-actv > .nlux-chatSegment-loader-container';
+            const loaderSelector = '.nlux-chatSegment--active > .nlux-chatSegment-loader-container';
             const loader = rootElement.querySelector(loaderSelector);
             expect(loader).toBeInTheDocument();
         });
@@ -98,8 +98,8 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
 
             // Assert
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-cmpl')).toBe(true);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-actv')).not.toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--complete')).toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--active')).not.toBe(true);
         });
 
         it('The loader should be removed from the active segment', async () => {
@@ -109,7 +109,7 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
             await waitForRenderCycle();
 
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
-            const loaderSelector = '.nlux-chatSegment-actv > .nlux-chatSegment-loader-container';
+            const loaderSelector = '.nlux-chatSegment--active > .nlux-chatSegment-loader-container';
 
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForRenderCycle();
@@ -157,7 +157,7 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
             await waitForRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = rootElement.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });
@@ -169,8 +169,8 @@ describe('createAiChat() + submit prompt + batch adapter', () => {
             await waitForRenderCycle();
 
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
-            const completeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-cmpl';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
+            const completeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--complete';
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');

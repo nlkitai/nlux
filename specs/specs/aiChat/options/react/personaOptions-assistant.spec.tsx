@@ -30,10 +30,10 @@ describe('<AiChat /> + personaOptions + assistant', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
             expect(logoContainer).toBeInTheDocument();
             expect(logoContainer!.innerHTML).toEqual(
-                expect.stringContaining('<div class="avatarPicture" style="background-image: url(data:image/png;base64,'),
+                expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(data:image/png;base64,'),
             );
         });
 
@@ -58,9 +58,10 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const avatarContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
-                expect(avatarContainer).toBeInTheDocument();
-                expect(avatarContainer!.querySelector('.avatarPicture')).toHaveStyle(
+                const nlux;
+                -avatarContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
+                expect(nlux - avatarContainer).toBeInTheDocument();
+                expect(nlux - avatarContainer!.querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
                     'background-image: url(https://assistant-image-url)',
                 );
             });
@@ -93,9 +94,10 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
-                const avatarContainer = container.querySelector(selector);
-                expect(avatarContainer).toBeInTheDocument();
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
+                const nlux;
+                -avatarContainer = container.querySelector(selector);
+                expect(nlux - avatarContainer).toBeInTheDocument();
             });
 
             it('Persona photo should be rendered', async () => {
@@ -122,7 +124,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture';
                 const avatarImage = container.querySelector(selector) as HTMLElement | null;
                 expect(avatarImage).toBeInTheDocument();
                 expect(avatarImage!.style.backgroundImage).toBe('url(https://assistant-image-url)');
@@ -172,7 +174,7 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture';
                 const avatarImageContainer = container.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xbot-image-url)');
@@ -208,8 +210,9 @@ describe('<AiChat /> + personaOptions + assistant', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                const avatarContainer = container.querySelector(selector);
-                expect(avatarContainer).toBeInTheDocument();
+                const nlux;
+                -avatarContainer = container.querySelector(selector);
+                expect(nlux - avatarContainer).toBeInTheDocument();
             });
 
             it('Assistant persona JSX should be rendered', async () => {

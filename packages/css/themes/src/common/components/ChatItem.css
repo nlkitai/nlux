@@ -39,7 +39,7 @@
     > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar {
         border-color: var(--nlux-hmMsg--brdClr);
 
-        > .avatarContainer > .avatarPicture {
+        > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture {
             background-color: var(--nlux-hmMsg--bgClr);
         }
     }
@@ -50,7 +50,7 @@
     > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar {
         border-color: var(--nlux-aiMsg--brdClr);
 
-        > .avatarContainer > .avatarPicture {
+        > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture {
             background-color: var(--nlux-aiMsg--bgClr);
         }
     }

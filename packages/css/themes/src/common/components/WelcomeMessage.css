@@ -23,8 +23,8 @@
         width: var(--nlux-wlcMsg-avtr--wd);
         border-color: var(--nlux-wlcMsg-avtr--brdrClr);
 
-        > .avatarContainer {
-            > .avatarPicture {
+        > .nlux-comp-avatarContainer {
+            > .nlux-comp-avatarPicture {
                 background-color: var(--nlux-wlcMsg-avtr--bgClr);
             }
         }

@@ -1,5 +1,5 @@
-export const renderedPhotoContainerClassName = 'avatarContainer';
-export const renderedPhotoClassName = 'avatarPicture';
+export const renderedPhotoContainerClassName = 'nlux-comp-avatarContainer';
+export const renderedPhotoClassName = 'nlux-comp-avatarPicture';
 
 export const createPhotoContainerFromUrl = (url: string | undefined, name: string | undefined): HTMLElement => {
     const photoContainer = document.createElement('div');

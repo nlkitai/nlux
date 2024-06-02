@@ -48,9 +48,10 @@ describe('createAiChat() + personaOptions + user', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
-                const avatarContainer = rootElement.querySelector(selector);
-                expect(avatarContainer).toBeInTheDocument();
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
+                const nlux;
+                -avatarContainer = rootElement.querySelector(selector);
+                expect(nlux - avatarContainer).toBeInTheDocument();
             });
 
             it('Persona photo should be rendered', async () => {
@@ -71,7 +72,7 @@ describe('createAiChat() + personaOptions + user', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture';
                 const avatarImageContainer = rootElement.querySelector(selector) as HTMLElement | null;
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://user-image-url)');
@@ -116,7 +117,7 @@ describe('createAiChat() + personaOptions + user', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer > .nlux-comp-avatarPicture';
                 const avatarImageContainer = rootElement.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xuser-image-url)');
@@ -150,8 +151,9 @@ describe('createAiChat() + personaOptions + user', () => {
 
                     // Assert
                     const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                    const avatarContainer = rootElement.querySelector(selector);
-                    expect(avatarContainer).toBeInTheDocument();
+                    const nlux;
+                    -avatarContainer = rootElement.querySelector(selector);
+                    expect(nlux - avatarContainer).toBeInTheDocument();
                 });
 
                 it('Persona DOM element should be rendered', async () => {
@@ -291,7 +293,7 @@ describe('createAiChat() + personaOptions + user', () => {
             await waitForRenderCycle();
 
             const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
-            const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
+            const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -304,8 +306,9 @@ describe('createAiChat() + personaOptions + user', () => {
             await waitForRenderCycle();
 
             // Assert
-            let avatarContainer = rootElement.querySelectorAll(selector);
-            expect(avatarContainer).toHaveLength(0);
+            let nlux;
+            -avatarContainer = rootElement.querySelectorAll(selector);
+            expect(nlux - avatarContainer).toHaveLength(0);
 
             // Act
             aiChat.updateProps({
@@ -320,8 +323,8 @@ describe('createAiChat() + personaOptions + user', () => {
             await waitForRenderCycle();
 
             // Assert
-            avatarContainer = rootElement.querySelectorAll(selector);
-            expect(avatarContainer).toHaveLength(2);
+            nlux - avatarContainer = rootElement.querySelectorAll(selector);
+            expect(nlux - avatarContainer).toHaveLength(2);
         });
     });
 });

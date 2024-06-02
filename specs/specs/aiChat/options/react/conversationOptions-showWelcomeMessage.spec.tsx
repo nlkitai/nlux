@@ -30,10 +30,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                 expect(logoContainer).toBeInTheDocument();
                 expect(logoContainer!.innerHTML).toEqual(
-                    expect.stringContaining('<div class="avatarPicture" style="background-image: url(data:image/png;base64,'),
+                    expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(data:image/png;base64,'),
                 );
             });
 
@@ -56,10 +56,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
 
                     // Assert
                     // Assert
-                    const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                    const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                     expect(assistantPersonaContainer).toBeInTheDocument();
                     expect(assistantPersonaContainer!.innerHTML).toEqual(
-                        expect.stringContaining('<div class="avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
+                        expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
                     );
                 });
             });
@@ -80,7 +80,7 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                 expect(logoContainer).not.toBeInTheDocument();
             });
 
@@ -108,7 +108,7 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                 expect(assistantPersonaContainer).not.toBeInTheDocument();
             });
         });
@@ -126,7 +126,7 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
             expect(logoContainer).not.toBeInTheDocument();
         });
 
@@ -146,7 +146,7 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+            const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
             expect(assistantPersonaContainer).not.toBeInTheDocument();
         });
 
@@ -172,10 +172,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                 expect(assistantPersonaContainer).toBeInTheDocument();
                 expect(assistantPersonaContainer!.innerHTML).toEqual(
-                    expect.stringContaining('<div class="avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
+                    expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
                 );
             });
 
@@ -195,10 +195,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+                const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
                 expect(logoContainer).toBeInTheDocument();
                 expect(logoContainer!.innerHTML).toEqual(
-                    expect.stringContaining('<div class="avatarPicture" style="background-image: url(data:image/png;base64,'),
+                    expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(data:image/png;base64,'),
                 );
             });
         });
@@ -221,10 +221,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+            const assistantPersonaContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
             expect(assistantPersonaContainer).toBeInTheDocument();
             expect(assistantPersonaContainer!.innerHTML).toEqual(
-                expect.stringContaining('<div class="avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
+                expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(https://example.com/avatar.png)'),
             );
         });
 
@@ -239,10 +239,10 @@ describe('<AiChat /> + conversationOptions + showWelcomeMessage', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
+            const logoContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
             expect(logoContainer).toBeInTheDocument();
             expect(logoContainer!.innerHTML).toEqual(
-                expect.stringContaining('<div class="avatarPicture" style="background-image: url(data:image/png;base64,'),
+                expect.stringContaining('<div class="nlux-comp-avatarPicture" style="background-image: url(data:image/png;base64,'),
             );
         });
     });

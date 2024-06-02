@@ -8,14 +8,14 @@
 
     aspect-ratio: 1;
 
-    > .avatarContainer {
+    > .nlux-comp-avatarContainer {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         aspect-ratio: 1;
 
-        > .avatarPicture {
+        > .nlux-comp-avatarPicture {
             position: absolute;
             top: 0;
             right: 0;

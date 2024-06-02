@@ -33,7 +33,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
@@ -89,8 +89,8 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
 
             // Assert
             const activeSegment = container.querySelector(activeSegmentSelector);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-cmpl')).toBe(true);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-actv')).not.toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--complete')).toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--active')).not.toBe(true);
         });
 
         it('The loader should be removed from the active segment', () => {
@@ -143,7 +143,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });
@@ -155,8 +155,8 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             await waitForReactRenderCycle();
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
-            const completeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-cmpl';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
+            const completeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--complete';
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');

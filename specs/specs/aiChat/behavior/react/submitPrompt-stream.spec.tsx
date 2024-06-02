@@ -34,7 +34,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
@@ -70,7 +70,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             adapterController?.next('Hi!');
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
             await waitFor(() => expect(activeSegment!.textContent).toContain('Hi!'));
         });
@@ -90,7 +90,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await act(() => waitForMilliseconds(100));
 
             // Assert
-            const loaderSelector = '.nlux-chatSegment-actv > .nlux-chatSegment-loader-container';
+            const loaderSelector = '.nlux-chatSegment--active > .nlux-chatSegment-loader-container';
             const loader = container.querySelector(loaderSelector);
             expect(loader).toBeInTheDocument();
         });
@@ -160,8 +160,8 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
 
             // Assert
             const activeSegment = container.querySelector(activeSegmentSelector);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-cmpl')).toBe(true);
-            expect(activeSegment!.classList.contains('nlux-chatSegment-actv')).not.toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--complete')).toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment--active')).not.toBe(true);
         });
 
         it('The loader should be removed from the active segment', async () => {
@@ -171,7 +171,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await waitForReactRenderCycle();
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-            const loaderSelector = '.nlux-chatSegment-actv > .nlux-chatSegment-loader-container';
+            const loaderSelector = '.nlux-chatSegment--active > .nlux-chatSegment-loader-container';
 
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
@@ -205,7 +205,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await act(() => waitForReactRenderCycle());
 
             // Assert
-            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });

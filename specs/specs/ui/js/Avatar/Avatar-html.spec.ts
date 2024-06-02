@@ -44,7 +44,7 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
 
             // Assert
             expect(element.outerHTML).toBe(
-                `<div class="nlux-comp-avatar" title="John Doe"><div class="avatarContainer"></div></div>`,
+                `<div class="nlux-comp-avatar" title="John Doe"><div class="nlux-comp-avatarContainer"></div></div>`,
             );
         });
     });
@@ -99,8 +99,8 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
 
                 // Assert
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux-comp-avatar" title="John Doe"><div class="avatarContainer">` +
-                    `<div class="avatarPicture" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
+                    `<div class="nlux-comp-avatar" title="John Doe"><div class="nlux-comp-avatarContainer">` +
+                    `<div class="nlux-comp-avatarPicture" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
                 );
             });
@@ -127,8 +127,8 @@ describe('When an avatar component is rendered with HTML element the avatar', ()
 
                 // Assert
                 expect(element.outerHTML).toBe(
-                    `<div class="nlux-comp-avatar" title="Alex Doe"><div class="avatarContainer">` +
-                    `<div class="avatarPicture" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
+                    `<div class="nlux-comp-avatar" title="Alex Doe"><div class="nlux-comp-avatarContainer">` +
+                    `<div class="nlux-comp-avatarPicture" style="background-image: url(https://example.com/photo2.jpg);"></div>` +
                     `</div></div>`,
                 );
             });
