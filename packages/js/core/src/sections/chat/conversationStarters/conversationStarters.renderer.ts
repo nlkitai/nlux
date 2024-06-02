@@ -5,6 +5,8 @@ import {
     CompConversationStartersEvents,
     CompConversationStartersProps,
 } from './conversationStarters.types';
+import {createConversationStartersDom} from '../conversation/utils/createConversationStartersDom';
+import {listenToElement} from '../../../utils/dom/listenToElement';
 
 export const renderConversationStarters: CompRenderer<
     CompConversationStartersProps,
@@ -14,27 +16,34 @@ export const renderConversationStarters: CompRenderer<
 > = ({
          appendToRoot,
          props,
+         compEvent,
      }) => {
-    const conversationStartersContainer = document.createElement('div');
-    conversationStartersContainer.classList.add('nlux-comp-convStrts-cntr');
-
-    const conversationStarters = document.createElement('div');
-    conversationStarters.classList.add('nlux-comp-convStrts');
-    conversationStartersContainer.appendChild(conversationStarters);
-
-    props.items.forEach((item, index) => {
-        const conversationStarter = document.createElement('div');
-        conversationStarter.classList.add('nlux-comp-convStrt');
-        conversationStarter.textContent = item.prompt;
-        conversationStarters.appendChild(conversationStarter);
-    });
+    const conversationStartersContainer = createConversationStartersDom(
+        props.conversationStarters,
+    );
 
     appendToRoot(conversationStartersContainer);
 
+    // Register click event listeners for each conversation starter
+    let conversationStarterEventListenersCleanupFns: (() => void)[] = [];
+    props.conversationStarters.forEach((conversationStarter, index) => {
+        const [_element, removeListener] = listenToElement(
+            conversationStartersContainer,
+            `:scope > :nth-child(${index + 1})`,
+        ).on('click', () => {
+            compEvent('conversation-starter-clicked')(conversationStarter);
+        }).get();
+
+        conversationStarterEventListenersCleanupFns.push(removeListener);
+    });
+
     return {
-        elements: {
-            conversationStarters: conversationStartersContainer,
-        },
+        elements: {},
         actions: {},
+        onDestroy: () => {
+            conversationStarterEventListenersCleanupFns.forEach((fn) => fn());
+            conversationStarterEventListenersCleanupFns = [];
+            conversationStartersContainer.remove();
+        },
     };
 };

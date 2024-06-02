@@ -1,5 +1,5 @@
 import {BaseComp} from '../../../aiChat/comp/base';
-import {Model} from '../../../aiChat/comp/decorators';
+import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
 import {renderConversationStarters} from './conversationStarters.renderer';
 import {
@@ -9,6 +9,7 @@ import {
     CompConversationStartersProps,
 } from './conversationStarters.types';
 import {updateConversationStarters} from './conversationStarters.update';
+import {ConversationStarter} from '../../../types/conversationStarter';
 
 @Model('conversationStarters', renderConversationStarters, updateConversationStarters)
 export class CompConversationStarters<AiMsg> extends BaseComp<
@@ -21,4 +22,14 @@ export class CompConversationStarters<AiMsg> extends BaseComp<
     constructor(context: ControllerContext<AiMsg>, props: CompConversationStartersProps) {
         super(context, props);
     }
-};
+
+    public updateConversationStarters = (items: ConversationStarter[] | undefined): void => {
+        // TODO
+    };
+
+    @CompEventListener('conversation-starter-clicked')
+    conversationStarterClicked(conversationStarter: ConversationStarter) {
+        const handler = this.getProp('onConversationStarterClick') as CompConversationStartersProps['onConversationStarterClick'];
+        handler(conversationStarter);
+    };
+}

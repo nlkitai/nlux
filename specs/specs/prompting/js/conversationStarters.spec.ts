@@ -5,13 +5,17 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForRenderCycle} from '../../../utils/wait';
 
-describe.todo('createAiChat() + conversationOptions + conversationStarters', () => {
+describe('createAiChat() + conversationOptions + conversationStarters', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
     let aiChat: AiChat | undefined;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withBatchText().create();
+        adapterController = adapterBuilder()
+            .withBatchText(true)
+            .withStreamText(false)
+            .create();
+
         rootElement = document.createElement('div');
         document.body.append(rootElement);
     });
@@ -35,6 +39,7 @@ describe.todo('createAiChat() + conversationOptions + conversationStarters', () 
             aiChat = createAiChat()
                 .withConversationOptions({conversationStarters})
                 .withAdapter(adapterController!.adapter);
+
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
@@ -78,6 +83,32 @@ describe.todo('createAiChat() + conversationOptions + conversationStarters', () 
             describe('When the prompt submission fails', () => {
                 it.todo('The conversationStarters should be displayed again', async () => {
                 });
+            });
+        });
+
+        describe('When the user selects a conversation starter', () => {
+            it('A matching prompt should be submitted', async () => {
+                // Arrange
+                const conversationStarters: ConversationStarter[] = [
+                    {prompt: 'Hello, World!'},
+                    {prompt: 'How are you?'},
+                ];
+                const conversationStarterIndex = 1;
+
+                // Act
+                aiChat = createAiChat()
+                    .withConversationOptions({conversationStarters})
+                    .withAdapter(adapterController!.adapter);
+
+                aiChat.mount(rootElement);
+                await waitForRenderCycle();
+
+                const conversationStarterElements = rootElement.querySelector('.nlux-comp-convStrt') as HTMLElement;
+                conversationStarterElements.click();
+                await waitForRenderCycle();
+
+                // Assert
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith(conversationStarters[0].prompt);
             });
         });
     });

@@ -26,7 +26,7 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     element.append(submitButton);
     applyNewStatusClassName(element, props.status);
 
-    if (props.status === 'submitting') {
+    if (props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt') {
         textarea.disabled = true;
         submitButton.disabled = true;
     }

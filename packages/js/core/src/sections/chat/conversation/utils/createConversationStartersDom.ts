@@ -5,7 +5,7 @@ export const createConversationStartersDom = (conversationStarters: Conversation
     conversationStartersContainer.classList.add('nlux-comp-convStrts');
 
     conversationStarters.forEach((item, index) => {
-        const conversationStarter = document.createElement('div');
+        const conversationStarter = document.createElement('button');
         conversationStarter.classList.add('nlux-comp-convStrt');
         conversationStarter.textContent = item.prompt;
         conversationStartersContainer.appendChild(conversationStarter);

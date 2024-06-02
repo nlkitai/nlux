@@ -5,13 +5,18 @@ import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../utils/wait';
+import {act} from 'react';
 
-describe.todo('<AiChat /> + conversationOptions + conversationStarters', () => {
+describe('<AiChat /> + conversationOptions + conversationStarters', () => {
     let adapterController: AdapterController | undefined;
     let rootElement: HTMLElement;
 
     beforeEach(() => {
-        adapterController = adapterBuilder().withBatchText().create();
+        adapterController = adapterBuilder()
+            .withBatchText(true)
+            .withStreamText(false)
+            .create();
+
         rootElement = document.createElement('div');
         document.body.append(rootElement);
     });
@@ -88,6 +93,34 @@ describe.todo('<AiChat /> + conversationOptions + conversationStarters', () => {
             describe('When the prompt submission fails', () => {
                 it.todo('The conversationStarters should be displayed again', async () => {
                 });
+            });
+        });
+
+        describe('When the user selects a conversation starter', () => {
+            it('A matching prompt should be submitted', async () => {
+                // Arrange
+                const conversationStarters: ConversationStarter[] = [
+                    {prompt: 'Hello, World!'},
+                    {prompt: 'How are you?'},
+                ];
+
+                const {container} = render(
+                    <AiChat
+                        adapter={adapterController!.adapter}
+                        conversationOptions={{conversationStarters}}
+                    />,
+                );
+                await waitForReactRenderCycle();
+
+                // Act
+                await act(async () => {
+                    const conversationStarterElement = container.querySelector('.nlux-comp-convStrt') as HTMLElement;
+                    conversationStarterElement.click();
+                    await waitForReactRenderCycle();
+                });
+
+                // Assert
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith(conversationStarters[0].prompt);
             });
         });
     });

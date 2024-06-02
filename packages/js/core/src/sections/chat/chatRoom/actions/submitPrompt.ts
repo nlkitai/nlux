@@ -34,7 +34,7 @@ export const submitPromptFactory = <
         try {
             // Disable prompt while sending message
             const currentComposerProps = composerInstance.getProp('domCompProps');
-            composerInstance.setDomProps({...currentComposerProps, status: 'submitting'});
+            composerInstance.setDomProps({...currentComposerProps, status: 'submitting-prompt'});
 
             // Build request and submit prompt
             const extras: ChatAdapterExtras<AiMsg> = {

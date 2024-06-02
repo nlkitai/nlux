@@ -99,7 +99,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 return;
             }
 
-            setComposerStatus('submitting');
+            setComposerStatus('submitting-prompt');
             const promptToSubmit = promptTyped;
             const streamedMessageIds: Set<string> = new Set();
 

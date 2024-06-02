@@ -1,4 +1,4 @@
-export type ComposerStatus = 'typing' | 'submitting' | 'waiting';
+export type ComposerStatus = 'typing' | 'submitting-prompt' | 'submitting-conversation-starter' | 'waiting';
 
 /**
  * Options for the Composer DOM component.
@@ -11,8 +11,8 @@ export type ComposerProps = {
 
     /**
      * This will override the disabled state of the submit button when the composer is in 'typing' status.
-     * It will not have any impact in the composer 'submitting' and 'waiting' statuses, as the submit button
-     * is always disabled in these statuses.
+     * It will not have any impact in the composer 'submitting-prompt', 'submitting-conversation-starter', and 'waiting'
+     * statuses, as the submit button is always disabled in these statuses.
      *
      * Default: Submit button is only enabled when the message is not empty.
      */

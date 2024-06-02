@@ -17,6 +17,7 @@ import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
+import {ConversationStarter} from '../types/conversationStarter';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -84,9 +85,24 @@ export const AiChat: <AiMsg>(
         setChatSegments, setComposerStatus, setPrompt,
     });
 
+    const handleConversationStarterSelected = useCallback(
+        (conversationStarter: ConversationStarter) => {
+            setPrompt(conversationStarter.prompt);
+            setComposerStatus('submitting-conversation-starter');
+        },
+        [setPrompt, setComposerStatus],
+    );
+
     const handleLastActiveSegmentChange = useLastActiveSegmentChangeHandler(
         autoScrollController, lastActiveSegmentIdRef,
     );
+
+    useEffect(() => {
+        // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
+        if (composerStatus === 'submitting-conversation-starter') {
+            handleSubmitPrompt();
+        }
+    }, [composerStatus, handleSubmitPrompt]);
 
     useEffect(() => setInitialSegment(
         initialConversation ? chatItemsToChatSegment(initialConversation) : undefined,
@@ -122,6 +138,7 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         messageOptions={props.messageOptions}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
+                        onConversationStarterSelected={handleConversationStarterSelected}
                     />
                 </div>
                 <div className="nlux-chtRm-prmptBox-cntr">

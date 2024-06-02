@@ -1,18 +1,15 @@
 import {AnyAiMsg} from '@shared/types/anyAiMsg';
-import {NluxRenderingError} from '@shared/types/error';
 import {createDefaultWelcomeMessageDom} from '@shared/components/DefaultWelcomeMessage/create';
 import {createWelcomeMessageDom} from '@shared/components/WelcomeMessage/create';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
 import {CompRenderer} from '../../../types/comp';
 import {ConversationStarter} from '../../../types/conversationStarter';
-import {source} from '../../../utils/source';
 import {
     CompConversationActions,
     CompConversationElements,
     CompConversationEvents,
     CompConversationProps,
 } from './conversation.types';
-import {createConversationStartersDom} from './utils/createConversationStartersDom';
 
 export const renderConversation: CompRenderer<
     CompConversationProps<AnyAiMsg>, CompConversationElements, CompConversationEvents, CompConversationActions
@@ -29,7 +26,6 @@ export const renderConversation: CompRenderer<
         welcomeMessageContainer: HTMLElement | undefined;
         conversationStartersContainer: HTMLElement | undefined;
         shouldRenderWelcomeMessage: boolean;
-        shouldRenderConversationStarters: boolean;
     } = {
         assistantPersona: props.assistantPersona,
         userPersona: props.userPersona,
@@ -37,20 +33,16 @@ export const renderConversation: CompRenderer<
         welcomeMessageContainer: undefined,
         conversationStartersContainer: undefined,
         shouldRenderWelcomeMessage: hasNoMessages && props.showWelcomeMessage !== false,
-        shouldRenderConversationStarters: hasNoMessages && Array.isArray(props.conversationStarters) && props.conversationStarters.length > 0,
     };
 
-    const segmentsContainer = document.createElement('div');
+    const segmentsContainer = document.createElement('div') as HTMLElement;
     segmentsContainer.classList.add('nlux-chtRm-cnv-sgmts-cntr');
 
-    if (!(segmentsContainer instanceof HTMLElement)) {
-        throw new NluxRenderingError({
-            source: source('chatRoom', 'render'),
-            message: 'Conversation component could not be rendered',
-        });
-    }
+    const conversationStartersContainer = document.createElement('div') as HTMLElement;
+    conversationStartersContainer.classList.add('nlux-comp-convStrts-cntr');
 
     appendToRoot(segmentsContainer);
+    appendToRoot(conversationStartersContainer);
 
     //
     // Create welcome message container
@@ -71,31 +63,14 @@ export const renderConversation: CompRenderer<
         }
 
         if (renderingContext.welcomeMessageContainer) {
-            segmentsContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
+            segmentsContainer.insertAdjacentElement('afterend', renderingContext.welcomeMessageContainer);
         }
     }
-
-    //
-    // Create conversation starters container
-    // and append it to the root if conversation starters are provided
-    //
-    if (renderingContext.shouldRenderConversationStarters) {
-        const conversationStartersContainer = createConversationStartersDom(props.conversationStarters!);
-        renderingContext.conversationStartersContainer = conversationStartersContainer;
-        segmentsContainer.insertAdjacentElement('beforebegin', conversationStartersContainer);
-    }
-
-    // Function to remove conversation starters
-    const removeConversationStarters = () => {
-        if (renderingContext.conversationStartersContainer) {
-            renderingContext.conversationStartersContainer.remove();
-            renderingContext.conversationStartersContainer = undefined;
-        }
-    };
 
     return {
         elements: {
             segmentsContainer,
+            conversationStartersContainer,
         },
         actions: {
             removeWelcomeMessage: () => {
@@ -120,7 +95,7 @@ export const renderConversation: CompRenderer<
 
                 if (renderingContext.welcomeMessageContainer) {
                     segmentsContainer.insertAdjacentElement(
-                        'beforebegin',
+                        'afterend',
                         renderingContext.welcomeMessageContainer,
                     );
                 }
@@ -146,7 +121,7 @@ export const renderConversation: CompRenderer<
 
                     if (renderingContext.welcomeMessageContainer) {
                         segmentsContainer.insertAdjacentElement(
-                            'beforebegin',
+                            'afterend',
                             renderingContext.welcomeMessageContainer,
                         );
                     }
@@ -154,22 +129,6 @@ export const renderConversation: CompRenderer<
             },
             updateUserPersona: (newValue: UserPersona | undefined) => {
                 renderingContext.userPersona = newValue;
-            },
-            updateConversationStarters: (conversationStarters: ConversationStarter[] | undefined) => {
-                // Reset conversation starters
-                renderingContext.conversationStarters = conversationStarters;
-                removeConversationStarters();
-
-                if (!conversationStarters || conversationStarters.length === 0) {
-                    renderingContext.shouldRenderConversationStarters = false;
-                    return;
-                }
-
-                const conversationStartersContainer = createConversationStartersDom(conversationStarters);
-                segmentsContainer.insertAdjacentElement('beforebegin', conversationStartersContainer);
-
-                renderingContext.conversationStartersContainer = conversationStartersContainer;
-                renderingContext.shouldRenderConversationStarters = true;
             },
         },
     };

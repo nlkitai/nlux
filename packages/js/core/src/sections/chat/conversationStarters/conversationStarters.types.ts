@@ -1,14 +1,15 @@
 import {ConversationStarter} from '../../../types/conversationStarter';
 
-export type CompConversationStartersEvents = void;
+export type CompConversationStartersEvents = 'conversation-starter-clicked';
 
 export type CompConversationStartersProps = {
-    items: ConversationStarter[];
+    conversationStarters: ConversationStarter[];
+    onConversationStarterClick: (conversationStarter: ConversationStarter) => void;
 };
 
 export type CompConversationStartersElements = {
-    conversationStarters: HTMLDivElement;
-};
+    // No elements
+}
 
 export type CompConversationStartersActions = {
     // No actions

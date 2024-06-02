@@ -3,9 +3,9 @@ import {
     createChatItemDom,
     participantInfoContainerClassName,
     participantNameClassName,
-} from '../../../../../packages/shared/src/components/ChatItem/create';
-import {ChatItemProps} from '../../../../../packages/shared/src/components/ChatItem/props';
-import {updateChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/update';
+} from '@shared/components/ChatItem/create';
+import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {updateChatItemDom} from '@shared/components/ChatItem/update';
 
 describe('When a chat item component is created', () => {
     it('The participant name should be displayed', () => {

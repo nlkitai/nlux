@@ -166,6 +166,13 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         this.setProp(newProp, newValue);
     }
 
+    @CompEventListener('loader-shown')
+    onLoaderShown(loader: HTMLElement) {
+        if (this.renderedDom?.elements) {
+            this.renderedDom.elements.loaderContainer = loader;
+        }
+    }
+
     protected setProp<K extends keyof CompChatSegmentProps>(key: K, value: CompChatSegmentProps[K]) {
         super.setProp(key, value);
 
@@ -202,13 +209,6 @@ export class CompChatSegment<AiMsg> extends BaseComp<
     private onLoaderHidden() {
         if (this.renderedDom?.elements) {
             this.renderedDom.elements.loaderContainer = undefined;
-        }
-    }
-
-    @CompEventListener('loader-shown')
-    private onLoaderShown(loader: HTMLElement) {
-        if (this.renderedDom?.elements) {
-            this.renderedDom.elements.loaderContainer = loader;
         }
     }
 }

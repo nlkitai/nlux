@@ -7,7 +7,7 @@ export interface ComposerOptions {
 
     /**
      * This will override the disabled state of the submit button when the composer is in 'typing' status.
-     * It will not have any impact in the composer 'submitting' and 'waiting' statuses, as the submit button
+     * It will not have any impact in the composer 'submitting-prompt' and 'waiting' statuses, as the submit button
      * is always disabled in these statuses.
      *
      * @default: Submit button is only enabled when the message is not empty.

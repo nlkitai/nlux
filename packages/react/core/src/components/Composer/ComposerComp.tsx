@@ -11,8 +11,8 @@ export const ComposerComp = (props: ComposerProps) => {
     const compClassNameFromStats = compComposerStatusClassName[props.status] || '';
     const className = `${compComposerClassName} ${compClassNameFromStats}`;
 
-    const disableTextarea = props.status === 'submitting';
-    const disableButton = !props.hasValidInput || props.status === 'submitting' || props.status === 'waiting';
+    const disableTextarea = props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt';
+    const disableButton = !props.hasValidInput || props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt' || props.status === 'waiting';
     const showSendIcon = props.status === 'typing';
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);

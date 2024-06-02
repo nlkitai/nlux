@@ -5,7 +5,7 @@ import {updateComposerDom} from '@shared/components/Composer/update';
 describe('When a composer component is rendered and is in submitting status', () => {
     it('Should render the composer with a submit button', () => {
         // Arrange
-        const dom = createComposerDom({status: 'submitting'});
+        const dom = createComposerDom({status: 'submitting-prompt'});
 
         // Act
         const html = dom.outerHTML;
@@ -20,7 +20,7 @@ describe('When a composer component is rendered and is in submitting status', ()
 
     it('Should submit button should be disabled', () => {
         // Arrange
-        const dom = createComposerDom({status: 'submitting'});
+        const dom = createComposerDom({status: 'submitting-prompt'});
         const submitButton = dom.querySelector('button')!;
 
         // Act
@@ -32,7 +32,7 @@ describe('When a composer component is rendered and is in submitting status', ()
 
     it('The text input should be disabled', () => {
         // Arrange
-        const dom = createComposerDom({status: 'submitting'});
+        const dom = createComposerDom({status: 'submitting-prompt'});
         const textarea = dom.querySelector('textarea')!;
 
         // Act
@@ -45,11 +45,11 @@ describe('When a composer component is rendered and is in submitting status', ()
     describe('When the status is updated to typing', () => {
         it('The textarea should be enabled', () => {
             // Arrange
-            const dom = createComposerDom({status: 'submitting'});
+            const dom = createComposerDom({status: 'submitting-prompt'});
             const textarea = dom.querySelector('textarea')!;
 
             // Act
-            updateComposerDom(dom, {status: 'submitting'}, {status: 'typing'});
+            updateComposerDom(dom, {status: 'submitting-prompt'}, {status: 'typing'});
 
             // Assert
             expect(textarea.disabled).toBe(false);
@@ -57,11 +57,11 @@ describe('When a composer component is rendered and is in submitting status', ()
 
         it('The submit button should be disabled', () => {
             // Arrange
-            const dom = createComposerDom({status: 'submitting'});
+            const dom = createComposerDom({status: 'submitting-prompt'});
             const submitButton = dom.querySelector('button')!;
 
             // Act
-            updateComposerDom(dom, {status: 'submitting'}, {status: 'typing'});
+            updateComposerDom(dom, {status: 'submitting-prompt'}, {status: 'typing'});
 
             // Assert
             expect(submitButton.disabled).toBe(true);

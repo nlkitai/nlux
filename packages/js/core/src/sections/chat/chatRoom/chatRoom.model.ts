@@ -39,6 +39,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                     assistantPersona,
                     userPersona,
                     showWelcomeMessage,
+                    conversationStarters,
                     initialConversationContent,
                     syntaxHighlighter,
                     htmlSanitizer,
@@ -54,6 +55,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             streamingAnimationSpeed,
             assistantPersona,
             userPersona,
+            conversationStarters,
             showWelcomeMessage,
             initialConversationContent,
             composer,
@@ -232,6 +234,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
                 syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
                 htmlSanitizer: this.getProp('htmlSanitizer') as ((html: string) => string) | undefined,
+                onConversationStarterClick: this.handleConversationStarterClick,
             })
             .create();
 
@@ -266,6 +269,20 @@ export class CompChatRoom<AiMsg> extends BaseComp<
 
         this.addSubComponent(this.composerInstance.id, this.composerInstance, 'composerContainer');
     }
+
+    private handleConversationStarterClick = (conversationStarter: ConversationStarter) => {
+        // Set the prompt
+        // Disable the composer and submit button
+        // Set the composer as waiting
+        // Submit the prompt
+
+        this.composerInstance.setDomProps({
+            status: 'submitting-conversation-starter',
+        });
+
+        this.composerInstance.handleTextChange(conversationStarter.prompt);
+        this.composerInstance.handleSendButtonClick();
+    };
 
     private handleComposerSubmit() {
         const composerProps: Partial<ComposerProps> | undefined = this.props.composer;

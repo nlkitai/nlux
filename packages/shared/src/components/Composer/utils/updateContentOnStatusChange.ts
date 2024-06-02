@@ -13,7 +13,7 @@ export const updateContentOnStatusChange = (
     if ((propsAfter.status === 'typing' || propsAfter.status === 'waiting') && textArea.disabled) {
         textArea.disabled = false;
     } else {
-        if (propsAfter.status === 'submitting' && !textArea.disabled) {
+        if ((propsAfter.status === 'submitting-prompt' || propsAfter.status === 'submitting-conversation-starter') && !textArea.disabled) {
             textArea.disabled = true;
         }
     }
@@ -29,7 +29,13 @@ export const updateContentOnStatusChange = (
             submitButton.disabled = shouldDisableSubmit;
         }
     } else {
-        if ((propsAfter.status === 'waiting' || propsAfter.status === 'submitting') && !submitButton.disabled) {
+        if (
+            (
+                propsAfter.status === 'waiting' || propsAfter.status === 'submitting-prompt'
+                || propsAfter.status === 'submitting-conversation-starter'
+            )
+            && !submitButton.disabled
+        ) {
             submitButton.disabled = true;
         }
     }

@@ -3,6 +3,7 @@ import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {MessageOptions} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
 import {ConversationOptions} from '../../types/conversationOptions';
+import {ConversationStarter} from '../../types/conversationStarter';
 
 export type ConversationCompProps<AiMsg> = {
     segments: ChatSegment<AiMsg>[];
@@ -10,6 +11,9 @@ export type ConversationCompProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     loader?: ReactElement;
+    onConversationStarterSelected: (
+        conversationStarter: ConversationStarter,
+    ) => void;
     onLastActiveSegmentChange?: (data: {
         uid: string;
         div: HTMLDivElement;

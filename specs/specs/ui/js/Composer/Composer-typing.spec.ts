@@ -108,7 +108,7 @@ describe('When a composer component is rendered and is in typing status', () => 
         it('Should disable the textarea and submit button', () => {
             // Arrange
             const beforeProps: ComposerProps = {status: 'typing'};
-            const props: ComposerProps = {status: 'submitting'};
+            const props: ComposerProps = {status: 'submitting-prompt'};
             const dom = createComposerDom(beforeProps);
             const textarea = dom.querySelector('textarea')!;
             const submitButton = dom.querySelector('button')!;

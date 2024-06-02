@@ -20,10 +20,12 @@ export type CompConversationProps<AiMsg> = {
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    onConversationStarterClick: (conversationStarter: ConversationStarter) => void;
 };
 
 export type CompConversationElements = {
     segmentsContainer: HTMLElement;
+    conversationStartersContainer: HTMLElement;
 };
 
 export type CompConversationActions = {
@@ -31,5 +33,4 @@ export type CompConversationActions = {
     resetWelcomeMessage: () => void;
     updateAssistantPersona: (newAssistantPersona: AssistantPersona | undefined) => void;
     updateUserPersona: (newUserPersona: UserPersona | undefined) => void;
-    updateConversationStarters: (conversationStarters?: ConversationStarter[]) => void;
 };

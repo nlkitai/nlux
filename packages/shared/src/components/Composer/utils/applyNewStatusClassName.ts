@@ -2,7 +2,8 @@ import {ComposerStatus} from '../props';
 
 export const statusClassName: { [key: string]: string } = {
     typing: 'nlux-prmpt-typing',
-    submitting: 'nlux-prmpt-submitting',
+    'submitting-prompt': 'nlux-prmpt-submitting',
+    'submitting-conversation-starter': 'nlux-prmpt-submitting',
     waiting: 'nlux-prmpt-waiting',
 };
 
