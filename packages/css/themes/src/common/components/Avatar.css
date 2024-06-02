@@ -1,4 +1,4 @@
-.nlux-comp-avtr {
+.nlux-comp-avatar {
     position: relative;
     overflow: hidden;
     width: var(--nlux-chItm-avtr--wd);
@@ -8,20 +8,14 @@
 
     aspect-ratio: 1;
 
-    > .avtr_ctn {
+    > .avatarContainer {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         aspect-ratio: 1;
 
-        > .avtr_ltr {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        > .avtr_img {
+        > .avatarPicture {
             position: absolute;
             top: 0;
             right: 0;

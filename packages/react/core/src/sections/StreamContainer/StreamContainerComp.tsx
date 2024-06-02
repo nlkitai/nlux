@@ -92,7 +92,7 @@ export const StreamContainerComp = function <AiMsg>(
                 />
             );
         } else {
-            return <div className={'nlux-md-strm-root'} ref={rootElRef}/>;
+            return <div className={'nlux-markdownStream-root'} ref={rootElRef}/>;
         }
     }, [responseRenderer]);
 

@@ -1,10 +1,10 @@
 import {ComposerStatus} from '../props';
 
 export const statusClassName: { [key: string]: string } = {
-    typing: 'nlux-prmpt-typing',
-    'submitting-prompt': 'nlux-prmpt-submitting',
-    'submitting-conversation-starter': 'nlux-prmpt-submitting',
-    waiting: 'nlux-prmpt-waiting',
+    typing: 'nlux-composer--typing',
+    'submitting-prompt': 'nlux-composer--submitting',
+    'submitting-conversation-starter': 'nlux-composer--submitting',
+    waiting: 'nlux-composer--waiting',
 };
 
 export const applyNewStatusClassName = (element: HTMLElement, status: ComposerStatus) => {

@@ -4,7 +4,7 @@ import {createSendIconDom} from '../SendIcon/create';
 import {ComposerProps} from './props';
 import {applyNewStatusClassName} from './utils/applyNewStatusClassName';
 
-export const className = 'nlux-comp-prmptBox';
+export const className = 'nlux-comp-composer';
 
 export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     const element = document.createElement('div');

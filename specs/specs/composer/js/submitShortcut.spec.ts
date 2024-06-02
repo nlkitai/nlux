@@ -30,7 +30,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -51,7 +51,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
 
 
                 // Act
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
@@ -66,7 +66,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -84,7 +84,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -103,7 +103,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -128,7 +128,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -153,7 +153,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -183,7 +183,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -203,7 +203,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -223,7 +223,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -244,7 +244,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -271,7 +271,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -298,7 +298,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -327,7 +327,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -354,7 +354,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({
@@ -381,7 +381,7 @@ describe('createAiChat() + composer + submitShortcut', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
                 aiChat.updateProps({

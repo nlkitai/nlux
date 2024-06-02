@@ -34,7 +34,7 @@
     --nlux-chItm--algnItms: var(--nlux-ChatItem--AlignItems, flex-start);
 
     /** Chat item participant info: Avatar + Name */
-    --nlux-chItm-prtInfo--gap: var(--nlux-ChatItem-ParticipantInfo--Gap, 10px); /* Gap between avatar and name */
+    --nlux-comp-chatItem-participantInfo--gap: var(--nlux-ChatItem-ParticipantInfo--Gap, 10px); /* Gap between avatar and name */
 
     /** Chat item participant name */
     --nlux-prtInfo-prtNm--ftSz: var(--nlux-ChatItem-ParticipantName--FontSize, 20px);

@@ -1,8 +1,8 @@
 import {ConversationLayout} from '@nlux/core';
 
 export const conversationLayoutClassName: { [key: string]: string } = {
-    bubbles: 'nlux_cht_itm_bbl',
-    list: 'nlux_cht_itm_lst',
+    bubbles: 'nlux-comp-chatItem--bubblesLayout',
+    list: 'nlux-comp-chatItem--listLayout',
 };
 
 export const applyNewLayoutClassName = (element: HTMLElement, layout: ConversationLayout) => {

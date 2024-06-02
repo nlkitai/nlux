@@ -32,7 +32,7 @@ describe('createAiChat() + conversationOptions + autoScroll', () => {
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             const conversationContainer: any = rootElement.querySelector('.nlux-chtRm-cnv-cntr')!;
             conversationContainer.scrollTo = vi.fn();
 
@@ -51,7 +51,7 @@ describe('createAiChat() + conversationOptions + autoScroll', () => {
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 const conversationContainer: any = rootElement.querySelector('.nlux-chtRm-cnv-cntr')!;
                 conversationContainer.scrollTo = vi.fn();
 
@@ -85,7 +85,7 @@ describe('createAiChat() + conversationOptions + autoScroll', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             const conversationContainer: any = rootElement.querySelector('.nlux-chtRm-cnv-cntr')!;
             conversationContainer.scrollTo = vi.fn();
 
@@ -107,7 +107,7 @@ describe('createAiChat() + conversationOptions + autoScroll', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 const conversationContainer: any = rootElement.querySelector('.nlux-chtRm-cnv-cntr')!;
                 conversationContainer.scrollTo = vi.fn();
 

@@ -31,7 +31,7 @@ describe('createAiChat() + composerOptions + autoFocus', () => {
             await waitForRenderCycle();
 
             // Act
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(document.activeElement).not.toBe(textArea);
@@ -51,7 +51,7 @@ describe('createAiChat() + composerOptions + autoFocus', () => {
             await waitForRenderCycle();
 
             // Act
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(textArea.autofocus).toBe(true);
@@ -71,7 +71,7 @@ describe('createAiChat() + composerOptions + autoFocus', () => {
                     });
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 textArea.blur();
 
                 // Act
@@ -92,7 +92,7 @@ describe('createAiChat() + composerOptions + autoFocus', () => {
                     });
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');

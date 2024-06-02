@@ -3,12 +3,12 @@ import {ConversationStartersProps} from './props';
 export const ConversationStarters = (props: ConversationStartersProps) => {
     const {onConversationStarterSelected} = props;
     return (
-        <div className="nlux-comp-convStrts-cntr">
-            <div className="nlux-comp-convStrts">
+        <div className="nlux-comp-conversationStarters-container">
+            <div className="nlux-comp-conversationStarters">
                 {props.items.map((conversationStarter, index) => (
                     <button
                         key={index}
-                        className="nlux-comp-convStrt"
+                        className="nlux-comp-conversationStarter"
                         onClick={() => onConversationStarterSelected(conversationStarter)}
                     >
                         {conversationStarter.prompt}

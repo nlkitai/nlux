@@ -12,7 +12,7 @@ describe('When a message component is rendered and is in streaming status', () =
         const html = dom.outerHTML;
 
         // Assert
-        expect(html).toBe('<div class="nlux-comp-msg nlux_msg_streaming nlux_msg_received"></div>');
+        expect(html).toBe('<div class="nlux-comp-message nlux_msg_streaming nlux_msg_received"></div>');
     });
 
     describe('When message is updated', () => {
@@ -26,7 +26,7 @@ describe('When a message component is rendered and is in streaming status', () =
             updateMessageDom(dom, beforeProps, props);
 
             // Assert
-            expect(dom.outerHTML).toBe('<div class="nlux-comp-msg nlux_msg_streaming nlux_msg_received"></div>');
+            expect(dom.outerHTML).toBe('<div class="nlux-comp-message nlux_msg_streaming nlux_msg_received"></div>');
         });
     });
 });

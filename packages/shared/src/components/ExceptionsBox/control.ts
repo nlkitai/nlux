@@ -36,7 +36,7 @@ export const createExceptionsBoxController = (root: HTMLElement): ExceptionsBoxC
     };
 
     const hideException = () => {
-        exceptionItem?.classList.add('nlux-comp-exp_itm_hide');
+        exceptionItem?.classList.add('nlux-comp-exceptionItem--hiding');
 
         // Wait for animation to finish
         timeout = setTimeout(() => {

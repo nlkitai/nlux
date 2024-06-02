@@ -1,6 +1,6 @@
 import {DomCreator} from '../../types/dom/DomCreator';
 
-export const className = 'nlux-comp-exp_box';
+export const className = 'nlux-comp-exceptionBox';
 
 export const createExceptionsBoxDom: DomCreator<void> = () => {
     const exceptionsBox = document.createElement('div');
@@ -13,7 +13,7 @@ export const createExceptionItemDom: DomCreator<{
     message: string;
 }> = ({message}) => {
     const exception = document.createElement('div');
-    exception.classList.add('nlux-comp-exp_itm');
+    exception.classList.add('nlux-comp-exceptionItem');
 
     const messageElement = document.createElement('span');
     messageElement.classList.add('nlux-comp-exp_itm_msg');

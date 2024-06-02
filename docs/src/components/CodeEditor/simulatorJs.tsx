@@ -63,7 +63,7 @@ const nluxSimulator = (() => {
       const submitOnDoneTyping = () => {
         if (nluxSimulator.simulatorEnabled) {
           const submitButton = document.querySelector(
-            ".nlux-AiChat-root .nlux-comp-prmptBox > button"
+            ".nlux-AiChat-root .nlux-comp-composer > button"
           );
 
           if (submitButton) {
@@ -100,7 +100,7 @@ const nluxSimulator = (() => {
 
 const checkInputInterval = setInterval(() => {
   const nluxAiChatPromptInput = document.querySelector(
-    ".nlux-AiChat-root .nlux-comp-prmptBox > textarea"
+    ".nlux-AiChat-root .nlux-comp-composer > textarea"
   ) as HTMLTextAreaElement | null;
 
   if (nluxAiChatPromptInput) {

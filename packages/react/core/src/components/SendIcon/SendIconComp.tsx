@@ -3,7 +3,7 @@ import {className as compSendIconClassName} from '@shared/components/SendIcon/cr
 export const SendIconComp = () => {
     return (
         <div className={compSendIconClassName}>
-            <div className="snd_icn_ctn"/>
+            <div className="nlux-comp-sendIcon-ctn"/>
         </div>
     );
 };

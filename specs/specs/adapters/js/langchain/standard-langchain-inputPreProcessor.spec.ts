@@ -51,7 +51,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'How is the weather today?{enter}');
@@ -105,7 +105,7 @@ describe('createAiChat() + withAdapter(langchainAdapter) + with input pre-proces
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'How is the weather today?{enter}');

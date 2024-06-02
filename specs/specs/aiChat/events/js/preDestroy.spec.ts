@@ -133,7 +133,7 @@ describe('createAiChat() + events + preDestroy', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Tell me a joke{enter}');

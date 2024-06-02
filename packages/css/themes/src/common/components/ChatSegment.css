@@ -1,4 +1,4 @@
-.nlux-chtSgm > .nlux-chtSgm-ldr-cntr {
+.nlux-chatSegment > .nlux-chatSegment-loader-container {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -7,13 +7,13 @@
 
     color: var(--nlux-chtr-ldr--clr);
 
-    > .nlux_msg_ldr {
+    > .nlux-comp-messageLoader {
         padding: 5px 5px 1px 5px;
 
-        > .spn_ldr_ctn {
+        > .nlux-comp-loaderContainer {
             width: calc(var(--nlux-chtr-ldr--wd) - 10px);
 
-            > .spn_ldr {
+            > .spinning-loader {
                 width: calc(var(--nlux-chtr-ldr--wd) - 12px);
                 height: calc(var(--nlux-chtr-ldr--wd) - 12px);
             }

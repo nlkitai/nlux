@@ -13,7 +13,7 @@ describe('When a message component is rendered and is in complete status', () =>
             const html = dom.outerHTML;
 
             // Assert
-            expect(html).toBe('<div class="nlux-comp-msg nlux_msg_complete"></div>');
+            expect(html).toBe('<div class="nlux-comp-message nlux_msg_complete"></div>');
         });
     });
 
@@ -28,7 +28,7 @@ describe('When a message component is rendered and is in complete status', () =>
             const html = dom.outerHTML;
 
             // Assert
-            expect(html).toBe('<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Hello, World!</div>');
+            expect(html).toBe('<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Hello, World!</div>');
         });
     });
 
@@ -44,7 +44,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(html).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received"><p>Hello, <strong>World!</strong></p>\n</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received"><p>Hello, <strong>World!</strong></p>\n</div>');
         });
     });
 
@@ -60,7 +60,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(html).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Hello, **World!**</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Hello, **World!**</div>');
         });
     });
 
@@ -77,7 +77,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(html).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">&lt;strong&gt;Hello, World!&lt;/strong&gt;</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">&lt;strong&gt;Hello, World!&lt;/strong&gt;</div>');
         });
     });
 
@@ -93,7 +93,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Goodbye, World!</div>',
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Goodbye, World!</div>',
             );
         });
 
@@ -111,7 +111,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">&lt;strong&gt;Goodbye, World!&lt;/strong&gt;</div>',
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">&lt;strong&gt;Goodbye, World!&lt;/strong&gt;</div>',
             );
         });
     });
@@ -127,7 +127,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Hello, World!</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Hello, World!</div>');
         });
     });
 
@@ -142,7 +142,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Hello, World!</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Hello, World!</div>');
         });
     });
 
@@ -157,7 +157,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_complete nlux_msg_received">Hello, World!</div>');
+                '<div class="nlux-comp-message nlux_msg_complete nlux_msg_received">Hello, World!</div>');
         });
     });
 
@@ -172,7 +172,7 @@ describe('When a message component is rendered and is in complete status', () =>
 
             // Assert
             expect(dom.outerHTML).toBe(
-                '<div class="nlux-comp-msg nlux_msg_received nlux_msg_streaming">Hello, World!</div>');
+                '<div class="nlux-comp-message nlux_msg_received nlux_msg_streaming">Hello, World!</div>');
         });
     });
 });

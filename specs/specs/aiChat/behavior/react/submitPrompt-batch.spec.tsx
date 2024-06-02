@@ -26,14 +26,14 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-actv';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
@@ -43,14 +43,14 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
             // Assert
-            const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
+            const loaderContainer = container.querySelector('.nlux-chatSegment-loader-container');
             expect(loaderContainer).toBeInTheDocument();
         });
 
@@ -59,7 +59,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -77,8 +77,8 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm';
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment';
 
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
@@ -89,22 +89,22 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
 
             // Assert
             const activeSegment = container.querySelector(activeSegmentSelector);
-            expect(activeSegment!.classList.contains('nlux-chtSgm-cmpl')).toBe(true);
-            expect(activeSegment!.classList.contains('nlux-chtSgm-actv')).not.toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment-cmpl')).toBe(true);
+            expect(activeSegment!.classList.contains('nlux-chatSegment-actv')).not.toBe(true);
         });
 
         it('The loader should be removed from the active segment', () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             userEvent.type(textArea, 'Hello{enter}');
 
             // Act
             adapterController!.resolve('Yo!');
 
             // Assert
-            const loaderContainer = container.querySelector('.nlux-chtSgm-ldr-cntr');
+            const loaderContainer = container.querySelector('.nlux-chatSegment-loader-container');
             expect(loaderContainer).not.toBeInTheDocument();
         });
 
@@ -114,7 +114,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -134,7 +134,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -143,7 +143,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-actv';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });
@@ -154,9 +154,9 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-actv';
-            const completeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chtSgm-cmpl';
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-actv';
+            const completeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-cmpl';
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -189,7 +189,7 @@ describe('<AiChat /> + submit prompt + batch adapter', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 

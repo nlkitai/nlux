@@ -26,7 +26,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -36,11 +36,11 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
         });
     });
 
@@ -50,7 +50,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'bubbles'}}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -60,11 +60,11 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
         });
 
         describe('When the layout message changes to list layout', () => {
@@ -73,7 +73,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
                 const aiChat = <AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'bubbles'}}/>;
                 const {container, rerender} = render(aiChat);
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -84,11 +84,11 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'list'}}/>);
@@ -96,12 +96,12 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
                 const aiMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessageAfterRerender.classList.contains('nlux_cht_itm_lst')).toBe(true);
-                expect(aiMessageAfterRerender.classList.contains('nlux_cht_itm_lst')).toBe(true);
+                expect(humanMessageAfterRerender.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+                expect(aiMessageAfterRerender.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
             });
         });
     });
@@ -112,7 +112,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'list'}}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -122,11 +122,11 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
         });
 
         describe('When the layout message changes to bubbles layout', () => {
@@ -135,7 +135,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
                 const aiChat = <AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'list'}}/>;
                 const {container, rerender} = render(aiChat);
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -146,11 +146,11 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+                const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} conversationOptions={{layout: 'bubbles'}}/>);
@@ -158,12 +158,12 @@ describe('<AiChat /> + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
                 const aiMessageAfterRerender: HTMLTextAreaElement = container.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessageAfterRerender.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-                expect(aiMessageAfterRerender.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+                expect(humanMessageAfterRerender.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+                expect(aiMessageAfterRerender.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
             });
         });
     });

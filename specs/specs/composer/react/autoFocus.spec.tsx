@@ -22,7 +22,7 @@ describe('<AiChat /> + composer + autoFocus', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // Act
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(textArea.autofocus).toBe(false);
@@ -35,14 +35,14 @@ describe('<AiChat /> + composer + autoFocus', () => {
 
                 // Act
                 await waitForRenderCycle();
-                const textArea1: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea1: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Assert
                 expect(document.activeElement).not.toBe(textArea1);
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} composerOptions={{autoFocus: true}}/>);
-                const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await waitForRenderCycle();
 
                 // Assert
@@ -58,7 +58,7 @@ describe('<AiChat /> + composer + autoFocus', () => {
                 <AiChat adapter={adapterController!.adapter} composerOptions={{autoFocus: true}}/>,
             );
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             // React doesn't render autofocus attribute but focuses the element — On initial render!
@@ -74,7 +74,7 @@ describe('<AiChat /> + composer + autoFocus', () => {
 
                 // Act
                 rerender(<AiChat adapter={adapterController!.adapter} composerOptions={{autoFocus: false}}/>);
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Assert
                 expect(textArea.autofocus).toBe(false);

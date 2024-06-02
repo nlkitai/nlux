@@ -34,7 +34,7 @@ describe('<AiChat /> + batch adapter + events + error', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -69,7 +69,7 @@ describe('<AiChat /> + batch adapter + events + error', () => {
             const {container, rerender} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea1: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea1: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea1, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -92,7 +92,7 @@ describe('<AiChat /> + batch adapter + events + error', () => {
             );
             await waitForReactRenderCycle();
 
-            const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea2, 'Hello{enter}');
             await waitForReactRenderCycle();
 

@@ -39,7 +39,7 @@ describe('createAiChat() + batch adapter + events + error', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForRenderCycle();
 
@@ -71,7 +71,7 @@ describe('createAiChat() + batch adapter + events + error', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForRenderCycle();
 

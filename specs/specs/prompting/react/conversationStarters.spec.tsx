@@ -44,7 +44,7 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+            const conversationStarterElements = container.querySelectorAll('.nlux-comp-conversationStarter');
             expect(conversationStarterElements).toHaveLength(conversationStarters.length);
             conversationStarterElements.forEach((conversationStarterElement, index) => {
                 expect(conversationStarterElement).toHaveTextContent(conversationStarters[index].prompt);
@@ -69,7 +69,7 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                let conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+                let conversationStarterElements = container.querySelectorAll('.nlux-comp-conversationStarter');
                 expect(conversationStarterElements).toHaveLength(conversationStarters.length);
 
                 // Act
@@ -81,7 +81,7 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+                conversationStarterElements = container.querySelectorAll('.nlux-comp-conversationStarter');
                 expect(conversationStarterElements).toHaveLength(0);
             });
         });
@@ -114,7 +114,7 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
 
                 // Act
                 await act(async () => {
-                    const conversationStarterElement = container.querySelector('.nlux-comp-convStrt') as HTMLElement;
+                    const conversationStarterElement = container.querySelector('.nlux-comp-conversationStarter') as HTMLElement;
                     conversationStarterElement.click();
                     await waitForReactRenderCycle();
                 });
@@ -136,7 +136,7 @@ describe('<AiChat /> + conversationOptions + conversationStarters', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const conversationStarterElements = container.querySelectorAll('.nlux-comp-convStrt');
+            const conversationStarterElements = container.querySelectorAll('.nlux-comp-conversationStarter');
             expect(conversationStarterElements).toHaveLength(0);
         });
     });

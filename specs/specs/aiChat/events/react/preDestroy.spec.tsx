@@ -133,7 +133,7 @@ describe('<AiChat /> + events + preDestroy', () => {
             );
 
             const {container, unmount} = render(aiChat);
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Tell me a joke{enter}');
             await waitForReactRenderCycle();
 

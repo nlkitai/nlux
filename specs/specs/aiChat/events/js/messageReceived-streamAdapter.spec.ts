@@ -39,7 +39,7 @@ describe('createAiChat() + stream adapter + events + messageReceived', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
 
             // Act

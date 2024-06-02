@@ -24,7 +24,7 @@ export const renderChatSegment: CompRenderer<
     const showLoader = () => {
         if (!loaderContainer) {
             loaderContainer = document.createElement('div');
-            loaderContainer.className = 'nlux-chtSgm-ldr-cntr';
+            loaderContainer.className = 'nlux-chatSegment-loader-container';
 
             const loaderDom = createLoaderDom();
             loaderContainer.appendChild(loaderDom);

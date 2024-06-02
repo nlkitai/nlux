@@ -35,7 +35,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -45,7 +45,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -61,7 +61,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 aiChat.updateProps({messageOptions: {markdownLinkTarget: 'blank'}});
@@ -74,7 +74,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
                 await waitForMdStreamToComplete(100);
 
                 // Assert
-                const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+                const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
                 expect(markdownContainer).toBeInTheDocument();
 
                 const link = markdownContainer!.querySelector('a');
@@ -93,7 +93,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -103,7 +103,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -119,7 +119,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 aiChat.updateProps({messageOptions: {markdownLinkTarget: 'self'}});
@@ -132,7 +132,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
                 await waitForMdStreamToComplete(100);
 
                 // Assert
-                const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+                const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
                 expect(markdownContainer).toBeInTheDocument();
 
                 const link = markdownContainer!.querySelector('a');
@@ -151,7 +151,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -161,7 +161,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -178,7 +178,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 aiChat.updateProps({messageOptions: {markdownLinkTarget: 'blank'}});
@@ -191,7 +191,7 @@ describe('createAiChat() + messageOptions + markdownLinkTarget', () => {
                 await waitForMdStreamToComplete(100);
 
                 // Assert
-                const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+                const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
                 expect(markdownContainer).toBeInTheDocument();
 
                 const link = markdownContainer!.querySelector('a');

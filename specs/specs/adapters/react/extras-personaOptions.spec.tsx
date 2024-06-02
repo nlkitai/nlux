@@ -10,7 +10,7 @@ import {waitForMdStreamToComplete, waitForMilliseconds, waitForReactRenderCycle}
 describe.each([
         {dataTransferMode: 'batch'},
         // {dataTransferMode: 'stream'},
-    ] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>,
+    ] satisfies Array<{ dataTransferMode: 'stream' | 'batch' }>,
 )('<AiChat /> + adapter($mode) + personaOptions extras', ({dataTransferMode}) => {
     let adapterController: AdapterController | undefined;
 
@@ -41,7 +41,7 @@ describe.each([
         );
 
         await waitForReactRenderCycle();
-        const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+        const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -84,7 +84,7 @@ describe.each([
             );
             await waitForReactRenderCycle();
 
-            let textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            let textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -104,7 +104,7 @@ describe.each([
             rerender(<AiChat adapter={adapterController!.adapter} personaOptions={newPersonaOptions}/>);
             await waitForReactRenderCycle();
 
-            textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            textArea = container.querySelector('.nlux-comp-composer > textarea')!;
             textArea.focus();
             await waitForReactRenderCycle();
 

@@ -1,11 +1,11 @@
-export const className = 'nlux_sndIcn';
+export const className = 'nlux-comp-sendIcon';
 
 export const createSendIconDom = () => {
     const sendIcon = document.createElement('div');
     sendIcon.classList.add(className);
 
     const sndIcnCtn = document.createElement('div');
-    sndIcnCtn.classList.add('snd_icn_ctn');
+    sndIcnCtn.classList.add('nlux-comp-sendIcon-ctn');
     sendIcon.appendChild(sndIcnCtn);
 
     return sendIcon;

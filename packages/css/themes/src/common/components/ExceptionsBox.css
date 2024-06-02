@@ -1,7 +1,7 @@
-.nlux-comp-exp_box {
+.nlux-comp-exceptionBox {
     padding: var(--nlux-chtr--pdng) 0;
 
-    > .nlux-comp-exp_itm {
+    > .nlux-comp-exceptionItem {
         margin: 0 var(--nlux-chtr--pdng);
         padding: var(--nlux-exp--pdng);
         animation: nlux-fadeInUp 0.15s ease-out forwards;
@@ -15,7 +15,7 @@
         background-color: var(--nlux-exp--bgClr);
     }
 
-    > .nlux-comp-exp_itm.nlux-comp-exp_itm_hide {
+    > .nlux-comp-exceptionItem.nlux-comp-exceptionItem--hiding {
         animation: nlux-fadeOutUp 0.1s ease-in forwards;
     }
 }

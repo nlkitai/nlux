@@ -1,16 +1,16 @@
 import {DomCreator} from '../../types/dom/DomCreator';
 
-export const className = 'nlux_msg_ldr';
+export const className = 'nlux-comp-messageLoader';
 
 export const createLoaderDom: DomCreator<void> = () => {
     const loader = document.createElement('div');
     loader.classList.add(className);
 
     const spinnerLoader = document.createElement('span');
-    spinnerLoader.classList.add('spn_ldr');
+    spinnerLoader.classList.add('spinning-loader');
 
     const spinnerLoaderContainer = document.createElement('div');
-    spinnerLoaderContainer.classList.add('spn_ldr_ctn');
+    spinnerLoaderContainer.classList.add('nlux-comp-loaderContainer');
     spinnerLoaderContainer.appendChild(spinnerLoader);
 
     loader.appendChild(spinnerLoaderContainer);

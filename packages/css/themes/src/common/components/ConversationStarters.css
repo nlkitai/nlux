@@ -1,7 +1,7 @@
-.nlux-comp-convStrts-cntr {
+.nlux-comp-conversationStarters-container {
     overflow-y: scroll;
 
-    > .nlux-comp-convStrts {
+    > .nlux-comp-conversationStarters {
         display: flex;
         flex-wrap: nowrap;
         justify-content: center;
@@ -10,7 +10,7 @@
         width: max-content;
         min-width: 100%;
 
-        > .nlux-comp-convStrt {
+        > .nlux-comp-conversationStarter {
             display: inline-block;
             width: 120px;
             height: 80px;

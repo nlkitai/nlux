@@ -37,7 +37,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                 await waitForReactRenderCycle();
 
                 // Act
-                const welcomeMessage = container.querySelector('.nlux-comp-wlc_msg')!;
+                const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage')!;
                 expect(welcomeMessage).not.toBeNull();
                 expect(welcomeMessage.textContent).toContain('Welcome to the chat');
             });
@@ -61,14 +61,14 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                     await waitForReactRenderCycle();
 
                     await waitForReactRenderCycle();
-                    const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                    const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                     // Act
                     await userEvent.type(textArea, 'Hello{enter}');
                     await waitForReactRenderCycle();
 
                     // Assert
-                    const welcomeMessage = container.querySelector('.nlux-comp-wlc_msg');
+                    const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage');
                     expect(welcomeMessage).toBeNull();
                 });
             });
@@ -92,7 +92,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                     await waitForReactRenderCycle();
 
                     await waitForReactRenderCycle();
-                    const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                    const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                     // Act
                     await userEvent.type(textArea, 'Hello{enter}');
@@ -102,7 +102,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                     await waitForReactRenderCycle();
 
                     // Assert
-                    const welcomeMessage = container.querySelector('.nlux-comp-wlc_msg')!;
+                    const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage')!;
                     expect(welcomeMessage).not.toBeNull();
                     expect(welcomeMessage.textContent).toContain('Welcome to the chat');
                 });
@@ -140,7 +140,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const welcomeMessage = container.querySelector('.nlux-comp-wlc_msg');
+                const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage');
                 expect(welcomeMessage).toBeNull();
             });
         });

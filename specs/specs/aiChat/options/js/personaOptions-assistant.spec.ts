@@ -37,10 +37,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
             await waitForRenderCycle();
 
             // Assert
-            const logoContainer = rootElement.querySelector('.nlux-comp-wlc_msg > .nlux-comp-avtr > .avtr_ctn');
+            const logoContainer = rootElement.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer');
             expect(logoContainer).toBeInTheDocument();
             expect(logoContainer!.innerHTML).toEqual(
-                expect.stringContaining('<div class="avtr_img" style="background-image: url(data:image/png;base64,'),
+                expect.stringContaining('<div class="avatarPicture" style="background-image: url(data:image/png;base64,'),
             );
         });
 
@@ -66,10 +66,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux-comp-wlc_msg > .nlux-comp-avtr > .avtr_ctn';
+                const selector = '.nlux-comp-welcomeMessage > .nlux-comp-avatar > .avatarContainer';
                 const avatarContainer = rootElement.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
-                expect(avatarContainer!.querySelector('.avtr_img')).toHaveStyle(
+                expect(avatarContainer!.querySelector('.avatarPicture')).toHaveStyle(
                     'background-image: url(https://assistant-image-url)',
                 );
             });
@@ -91,7 +91,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 await userEvent.type(textArea, 'Write some JS code{enter}');
                 await waitForRenderCycle();
@@ -100,7 +100,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn';
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
                 const avatarContainer = rootElement.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
             });
@@ -118,7 +118,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForRenderCycle();
 
@@ -126,7 +126,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
                 const avatarImageContainer = rootElement.querySelector(selector) as HTMLDivElement | null;
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://assistant-image-url)');
@@ -148,7 +148,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForRenderCycle();
 
@@ -174,7 +174,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
                 const avatarImageContainer = rootElement.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://x-assistant-image-url)');
@@ -205,7 +205,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     aiChat.mount(rootElement);
                     await waitForRenderCycle();
 
-                    const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                    const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                     await userEvent.type(textArea, 'Hello{enter}');
                     await waitForRenderCycle();
 
@@ -213,7 +213,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     await waitForRenderCycle();
 
                     // Assert
-                    const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                    const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
                     const avatarContainer = rootElement.querySelector(selector);
                     expect(avatarContainer).toBeInTheDocument();
                 });
@@ -239,7 +239,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     aiChat.mount(rootElement);
                     await waitForRenderCycle();
 
-                    const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                    const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                     await userEvent.type(textArea, 'Hello{enter}');
                     await waitForRenderCycle();
 
@@ -247,7 +247,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
                     await waitForRenderCycle();
 
                     // Assert
-                    const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                    const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
                     const avatarJsxContainer = rootElement.querySelector(selector);
                     expect(avatarJsxContainer).toBeInTheDocument();
                     expect(avatarJsxContainer).toHaveTextContent('DOM HTML Avatar');
@@ -271,7 +271,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -287,7 +287,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
             await waitForRenderCycle();
 
             // Assert
-            const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr';
+            const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar';
             let avatarImageContainer = rootElement.querySelector(selector);
             expect(avatarImageContainer).toBeInTheDocument();
 
@@ -321,7 +321,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -337,7 +337,7 @@ describe('createAiChat() + personaOptions + assistant', () => {
             await waitForRenderCycle();
 
             // Assert
-            const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr';
+            const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar';
             let avatarImageContainer = rootElement.querySelector(selector);
             expect(avatarImageContainer).toBeInTheDocument();
 
@@ -363,8 +363,8 @@ describe('createAiChat() + personaOptions + assistant', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-            const selector = '.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn';
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+            const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -399,11 +399,11 @@ describe('createAiChat() + personaOptions + assistant', () => {
             avatarContainer = rootElement.querySelectorAll(selector);
             expect(avatarContainer).toHaveLength(2);
 
-            expect(avatarContainer[0].querySelector('.avtr_img')).toHaveStyle(
+            expect(avatarContainer[0].querySelector('.avatarPicture')).toHaveStyle(
                 'background-image: url(https://assistant-image-url)',
             );
 
-            expect(avatarContainer[1].querySelector('.avtr_img')).toHaveStyle(
+            expect(avatarContainer[1].querySelector('.avatarPicture')).toHaveStyle(
                 'background-image: url(https://assistant-image-url)',
             );
         });

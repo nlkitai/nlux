@@ -29,7 +29,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
         await waitForRenderCycle();
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -44,9 +44,9 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
         await waitForRenderCycle();
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-composer > button')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-composer')!;
 
         // Act
         await userEvent.type(textArea, 'Hello');
@@ -55,7 +55,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
+        expect(composer).not.toHaveClass('nlux-composer--submitting');
 
         // Act
         await userEvent.click(sendButton);
@@ -64,7 +64,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         // Assert
         expect(textArea).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(composer).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-composer--submitting');
     });
 
     it('Composer should remain in loading state until text is returned', async () => {
@@ -72,9 +72,9 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat = createAiChat().withAdapter(adapterController!.adapter);
         aiChat.mount(rootElement);
         await waitForRenderCycle();
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-composer > button')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-composer')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -87,7 +87,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         // Assert
         expect(textArea).toBeDisabled();
         expect(sendButton).toBeDisabled();
-        expect(composer).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-composer--submitting');
     });
 
     it('Composer should switch back to normal state when text is returned', async () => {
@@ -96,9 +96,9 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-composer > button')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-composer')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -108,7 +108,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         await waitForMilliseconds(100);
 
         // Assert
-        expect(composer).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-composer--submitting');
 
         // Act
         adapterController.resolve('Hi Human!');
@@ -117,7 +117,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
+        expect(composer).not.toHaveClass('nlux-composer--submitting');
     });
 
     it('Text returned from batchText should be displayed in the conversation', async () => {
@@ -126,7 +126,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
         await userEvent.type(textArea, 'Hello{enter}');
         await waitForRenderCycle();
 
@@ -146,9 +146,9 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 
-        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
-        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-prmptBox')!;
+        const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+        const sendButton: HTMLButtonElement = rootElement.querySelector('.nlux-comp-composer > button')!;
+        const composer: HTMLDivElement = rootElement.querySelector('.nlux-comp-composer')!;
 
         // Act
         await userEvent.type(textArea, 'Hello{enter}');
@@ -158,7 +158,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         await waitForMilliseconds(100);
 
         // Assert
-        expect(composer).toHaveClass('nlux-prmpt-submitting');
+        expect(composer).toHaveClass('nlux-composer--submitting');
 
         // Act
         adapterController.reject('Error');
@@ -167,7 +167,7 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
         // Assert
         expect(textArea).not.toBeDisabled();
         expect(sendButton).not.toBeDisabled();
-        expect(composer).not.toHaveClass('nlux-prmpt-submitting');
-        expect(composer).toHaveClass('nlux-prmpt-typing');
+        expect(composer).not.toHaveClass('nlux-composer--submitting');
+        expect(composer).toHaveClass('nlux-composer--typing');
     });
 });

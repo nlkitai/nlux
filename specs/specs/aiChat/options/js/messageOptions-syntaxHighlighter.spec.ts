@@ -40,7 +40,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
             await waitForRenderCycle();
@@ -50,7 +50,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement!.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;</div></pre></div>',
             );
@@ -66,7 +66,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
             await waitForRenderCycle();
@@ -76,7 +76,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(200);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toBe(
                 '<div class="code-block"><pre><div>var someJsCode = true;</div></pre></div>',
             );
@@ -95,7 +95,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             aiChat.updateProps({
@@ -110,7 +110,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             await waitForMdStreamToComplete(200);
 
             // Assert
-            const responseElement = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;</div></pre></div>',
             );

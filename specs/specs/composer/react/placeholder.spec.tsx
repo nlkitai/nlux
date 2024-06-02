@@ -21,7 +21,7 @@ describe('<AiChat /> + composer + placeholder', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // Act
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(textArea.placeholder).toBe('');
@@ -37,7 +37,7 @@ describe('<AiChat /> + composer + placeholder', () => {
                     adapter={adapterController!.adapter}
                     composerOptions={{placeholder: 'My composer'}}
                 />);
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Assert
                 expect(textArea.placeholder).toBe('My composer');
@@ -54,7 +54,7 @@ describe('<AiChat /> + composer + placeholder', () => {
             );
 
             // Act
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(textArea.placeholder).toBe('My composer');

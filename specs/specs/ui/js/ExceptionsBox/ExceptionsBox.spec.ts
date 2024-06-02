@@ -16,7 +16,7 @@ describe('When an exceptions box component is rendered', () => {
         const exceptionsBox = createExceptionsBoxDom();
 
         // Assert
-        expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exp_box"></div>'));
+        expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exceptionBox"></div>'));
     });
 
     describe('When an exception occurs', () => {
@@ -32,7 +32,7 @@ describe('When an exceptions box component is rendered', () => {
             // Assert
             expect(exceptionsBox.outerHTML).toEqual(
                 expect.stringContaining(
-                    '<div class="nlux-comp-exp_box"><div class="nlux-comp-exp_itm"><span class="nlux-comp-exp_itm_msg">An error occurred</span></div></div>',
+                    '<div class="nlux-comp-exceptionBox"><div class="nlux-comp-exceptionItem"><span class="nlux-comp-exp_itm_msg">An error occurred</span></div></div>',
                 ),
             );
         });
@@ -47,7 +47,7 @@ describe('When an exceptions box component is rendered', () => {
             vi.advanceTimersByTime(4500 + 1);
 
             // Assert
-            expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exp_box"></div>'));
+            expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exceptionBox"></div>'));
         });
     });
 
@@ -64,7 +64,7 @@ describe('When an exceptions box component is rendered', () => {
             // Assert
             expect(exceptionsBox.outerHTML).toEqual(
                 expect.stringContaining(
-                    '<div class="nlux-comp-exp_box"><div class="nlux-comp-exp_itm"><span class="nlux-comp-exp_itm_msg">An error occurred</span></div></div>',
+                    '<div class="nlux-comp-exceptionBox"><div class="nlux-comp-exceptionItem"><span class="nlux-comp-exp_itm_msg">An error occurred</span></div></div>',
                 ),
             );
 
@@ -74,7 +74,7 @@ describe('When an exceptions box component is rendered', () => {
             // Assert
             expect(exceptionsBox.outerHTML).toEqual(
                 expect.stringContaining(
-                    '<div class="nlux-comp-exp_box"><div class="nlux-comp-exp_itm"><span class="nlux-comp-exp_itm_msg">Another error occurred</span></div></div>',
+                    '<div class="nlux-comp-exceptionBox"><div class="nlux-comp-exceptionItem"><span class="nlux-comp-exp_itm_msg">Another error occurred</span></div></div>',
                 ),
             );
         });
@@ -92,7 +92,7 @@ describe('When an exceptions box component is rendered', () => {
             vi.advanceTimersByTime(4500 * 2 + 1);
 
             // Assert
-            expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exp_box"></div>'));
+            expect(exceptionsBox.outerHTML).toEqual(expect.stringContaining('<div class="nlux-comp-exceptionBox"></div>'));
         });
     });
 });

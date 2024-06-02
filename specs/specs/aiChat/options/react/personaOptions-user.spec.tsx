@@ -38,12 +38,12 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer';
                 const avatarContainer = container.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
             });
@@ -64,12 +64,12 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
                 const avatarImageContainer = container.querySelector(selector) as HTMLDivElement | null;
                 expect(avatarImageContainer).toBeInTheDocument();
                 expect(avatarImageContainer!.style.backgroundImage).toBe('url(https://user-image-url)');
@@ -92,7 +92,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const {container, rerender} = render(aiChat);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForReactRenderCycle();
 
@@ -116,7 +116,7 @@ describe('<AiChat /> + personaOptions + user', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > .avtr_ctn > .avtr_img';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .avatarContainer > .avatarPicture';
                 const avatarImageContainer = container.querySelectorAll(selector);
                 expect(avatarImageContainer).toHaveLength(2);
                 expect(avatarImageContainer[0]).toHaveStyle('background-image: url(https://xuser-image-url)');
@@ -143,12 +143,12 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
                 const avatarContainer = container.querySelector(selector);
                 expect(avatarContainer).toBeInTheDocument();
             });
@@ -169,12 +169,12 @@ describe('<AiChat /> + personaOptions + user', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForReactRenderCycle();
 
                 // Assert
-                const selector = '.nlux_cht_itm_snt > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr > #jsx-avatar';
+                const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
                 const avatarJsxContainer = container.querySelector(selector);
                 expect(avatarJsxContainer).toBeInTheDocument();
                 expect(avatarJsxContainer).toHaveTextContent('JSX Avatar');

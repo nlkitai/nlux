@@ -4,7 +4,7 @@ import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 import {applyNewStatusClassName} from './utils/applyNewStatusClassName';
 import {createMessageContent} from './utils/createMessageContent';
 
-export const className = 'nlux-comp-msg';
+export const className = 'nlux-comp-message';
 
 export const createMessageDom: DomCreator<MessageProps> = (props): HTMLElement => {
     const element = document.createElement('div');

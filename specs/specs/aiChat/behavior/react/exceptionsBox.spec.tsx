@@ -25,7 +25,7 @@ describe('<AiChat /> + theme', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
 
             // Act
@@ -33,7 +33,7 @@ describe('<AiChat /> + theme', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const exceptionBox = container.querySelector('.nlux-comp-exp_box')!;
+            const exceptionBox = container.querySelector('.nlux-comp-exceptionBox')!;
             expect(exceptionBox).not.toBeNull();
             expect(exceptionBox.textContent).toEqual(NLErrors['failed-to-load-content']);
         });

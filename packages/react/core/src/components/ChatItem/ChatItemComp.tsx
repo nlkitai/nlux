@@ -21,11 +21,11 @@ export const ChatItemComp: <AiMsg>(
 ): ReactElement {
     const participantInfo = useMemo(() => {
         return (
-            <div className="nlux-comp-cht_itm-prt_info">
+            <div className="nlux-comp-chatItem-participantInfo">
                 {(props.avatar !== undefined) && (
                     <AvatarComp name={props.name} avatar={props.avatar}/>
                 )}
-                <span className="nlux-comp-cht_itm-prt_name">{props.name}</span>
+                <span className="nlux-comp-chatItem-participantName">{props.name}</span>
             </div>
         );
 

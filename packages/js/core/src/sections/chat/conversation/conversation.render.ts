@@ -39,7 +39,7 @@ export const renderConversation: CompRenderer<
     segmentsContainer.classList.add('nlux-chtRm-cnv-sgmts-cntr');
 
     const conversationStartersContainer = document.createElement('div') as HTMLElement;
-    conversationStartersContainer.classList.add('nlux-comp-convStrts-cntr');
+    conversationStartersContainer.classList.add('nlux-comp-conversationStarters-container');
 
     appendToRoot(segmentsContainer);
     appendToRoot(conversationStartersContainer);

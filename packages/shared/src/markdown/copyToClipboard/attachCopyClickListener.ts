@@ -1,5 +1,5 @@
 export const attachCopyClickListener = (markdownContainer: HTMLElement) => {
-    markdownContainer.querySelectorAll('.nlux-cpy-btn').forEach((copyButton) => {
+    markdownContainer.querySelectorAll('.nlux-comp-copyButton').forEach((copyButton) => {
         if (!(copyButton instanceof HTMLButtonElement)) {
             return;
         }

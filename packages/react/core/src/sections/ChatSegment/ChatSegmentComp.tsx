@@ -57,7 +57,7 @@ export const ChatSegmentComp: <AiMsg>(
             return null;
         }
 
-        return (<div className={'nlux-chtSgm-ldr-cntr'}>{props.loader ?? <LoaderComp/>}</div>);
+        return (<div className={'nlux-chatSegment-loader-container'}>{props.loader ?? <LoaderComp/>}</div>);
     }, [chatSegment.status, props.loader]);
 
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);

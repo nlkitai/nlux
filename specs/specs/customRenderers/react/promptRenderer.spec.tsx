@@ -1,5 +1,5 @@
 import {AiChat, PromptRenderer} from '@nlux-dev/react/src';
-import {render, waitFor} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
@@ -34,11 +34,11 @@ describe('<AiChat /> + promptRenderer', () => {
                 <AiChat
                     adapter={adapterController!.adapter}
                     messageOptions={{
-                        promptRenderer: promptRendererSpy
+                        promptRenderer: promptRendererSpy,
                     }}
-                />
+                />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello custom renderer!{enter}');
@@ -47,11 +47,11 @@ describe('<AiChat /> + promptRenderer', () => {
             // Assert
             expect(promptRendererSpy).toHaveBeenCalledWith({
                 prompt: 'Hello custom renderer!',
-                uid: expect.any(String)
+                uid: expect.any(String),
             });
 
             expect(container.innerHTML).toContain(
-                '<div><span class="user-prompt">Hello custom renderer!</span></div>'
+                '<div><span class="user-prompt">Hello custom renderer!</span></div>',
             );
         });
     });
@@ -73,9 +73,9 @@ describe('<AiChat /> + promptRenderer', () => {
             const {container} = render(
                 <AiChat
                     adapter={adapterController!.adapter}
-                />
+                />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello default renderer!{enter}');
@@ -84,8 +84,8 @@ describe('<AiChat /> + promptRenderer', () => {
             // Assert
             expect(container.innerHTML).toEqual(
                 expect.stringContaining(
-                    '<div class="nlux-md-strm-root"><div class="nlux-md-cntr"><p>Hello default renderer!</p>\n</div></div>'
-                )
+                    '<div class="nlux-markdownStream-root"><div class="nlux-markdown-container"><p>Hello default renderer!</p>\n</div></div>',
+                ),
             );
         });
     });

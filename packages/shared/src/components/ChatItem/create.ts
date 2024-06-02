@@ -7,10 +7,10 @@ import {ChatItemProps} from './props';
 import {applyNewDirectionClassName} from './utils/applyNewDirectionClassName';
 import {applyNewLayoutClassName} from './utils/applyNewLayoutClassName';
 
-export const className = 'nlux-comp-cht_itm';
+export const className = 'nlux-comp-chatItem';
 
-export const participantInfoContainerClassName = 'nlux-comp-cht_itm-prt_info';
-export const participantNameClassName = 'nlux-comp-cht_itm-prt_name';
+export const participantInfoContainerClassName = 'nlux-comp-chatItem-participantInfo';
+export const participantNameClassName = 'nlux-comp-chatItem-participantName';
 
 export const createChatItemDom: DomCreator<ChatItemProps> = (
     props,

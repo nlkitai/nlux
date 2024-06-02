@@ -24,7 +24,7 @@ describe('<AiChat /> + composer + disableSubmitButton', () => {
             await waitForRenderCycle();
 
             // Act
-            const button = container.querySelector('.nlux-comp-prmptBox > button')!;
+            const button = container.querySelector('.nlux-comp-composer > button')!;
 
             // Assert
             expect(button.getAttribute('disabled')).toBe('');
@@ -35,8 +35,8 @@ describe('<AiChat /> + composer + disableSubmitButton', () => {
                 // Arrange
                 const {container, rerender} = render(<AiChat adapter={adapterController!.adapter}/>);
                 await waitForRenderCycle();
-                const textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
-                const button = container.querySelector('.nlux-comp-prmptBox > button')!;
+                const textArea = container.querySelector('.nlux-comp-composer > textarea')!;
+                const button = container.querySelector('.nlux-comp-composer > button')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello');

@@ -20,16 +20,16 @@ export const renderChatItem: CompRenderer<
         message: undefined,
     });
 
-    const messageContainer = getElement(root, '.nlux-comp-msg');
+    const messageContainer = getElement(root, '.nlux-comp-message');
     if (!messageContainer) {
         throw new Error('Message container not found');
     }
 
     const streamingRoot = document.createElement('div');
-    streamingRoot.classList.add('nlux-md-strm-root');
+    streamingRoot.classList.add('nlux-markdownStream-root');
 
     const markdownContainer = document.createElement('div');
-    markdownContainer.classList.add('nlux-md-cntr');
+    markdownContainer.classList.add('nlux-markdown-container');
     markdownContainer.setAttribute('nlux-message-id', props.uid);
 
     streamingRoot.append(markdownContainer);

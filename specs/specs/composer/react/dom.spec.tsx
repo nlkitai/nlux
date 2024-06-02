@@ -23,7 +23,7 @@ describe('<AiChat /> + composer', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // Act
-            const composer = container.querySelector('.nlux-comp-prmptBox');
+            const composer = container.querySelector('.nlux-comp-composer');
 
             // Assert
             expect(composer).not.toBeFalsy();
@@ -34,7 +34,7 @@ describe('<AiChat /> + composer', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // container
-            const textArea = container.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea = container.querySelector('.nlux-comp-composer > textarea');
 
             // Assert
             expect(textArea).not.toBeFalsy();
@@ -45,7 +45,7 @@ describe('<AiChat /> + composer', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // Act
-            const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
+            const sendButton = container.querySelector('.nlux-comp-composer > button');
 
             // Assert
             expect(sendButton).not.toBeFalsy();
@@ -56,7 +56,7 @@ describe('<AiChat /> + composer', () => {
             const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
 
             // Act
-            const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
+            const sendButton = container.querySelector('.nlux-comp-composer > button');
 
             // Assert
             expect(sendButton).toHaveAttribute('disabled');
@@ -69,11 +69,11 @@ describe('<AiChat /> + composer', () => {
                 await waitForRenderCycle();
 
                 // Act
-                const textArea = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello');
 
                 // Assert
-                const sendButton = container.querySelector('.nlux-comp-prmptBox > button');
+                const sendButton = container.querySelector('.nlux-comp-composer > button');
                 expect(sendButton).not.toHaveAttribute('disabled');
             });
         });

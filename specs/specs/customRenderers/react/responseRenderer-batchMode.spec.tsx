@@ -1,8 +1,5 @@
-import {
-    AiChat,
-    BatchResponseComponentProps,
-} from '@nlux-dev/react/src';
-import {render, waitFor} from '@testing-library/react';
+import {AiChat, BatchResponseComponentProps} from '@nlux-dev/react/src';
+import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {act, FC} from 'react';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
@@ -37,7 +34,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                     messageOptions={{responseRenderer: CustomResponseComponent}}
                 />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await waitForReactRenderCycle();
 
             // Act
@@ -48,7 +45,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_rcvd');
+            const responseElement = container.querySelector('.nlux-comp-chatItem--received');
             expect(responseElement!.innerHTML).toEqual(
                 expect.stringContaining('<div>The AI response is: Yo!</div>'),
             );
@@ -70,7 +67,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                     messageOptions={{responseRenderer: customResponseComponentSpy}}
                 />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await waitForReactRenderCycle();
 
             // Act
@@ -113,7 +110,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                 />);
                 await waitForReactRenderCycle();
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await waitForReactRenderCycle();
 
                 // Act
@@ -124,7 +121,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                 await act(() => waitForMdStreamToComplete());
 
                 // Assert
-                const responseElement = container.querySelector('.nlux_cht_itm_rcvd');
+                const responseElement = container.querySelector('.nlux-comp-chatItem--received');
                 expect(customResponseComponentSpy).not.toHaveBeenCalled();
                 expect(responseElement!.innerHTML).toEqual(
                     expect.stringContaining('Yo!'),

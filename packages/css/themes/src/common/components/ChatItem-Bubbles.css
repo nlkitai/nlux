@@ -1,41 +1,40 @@
-.nlux-comp-cht_itm.nlux_cht_itm_bbl {
+.nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout {
     align-items: var(--nlux-chItm--algnItms);
 
-    > .nlux-comp-msg {
+    > .nlux-comp-message {
         padding: var(--nlux-chItm-mmsg-bblLt--pdng-tpBtm) var(--nlux-chItm-mmsg-bblLt--pdng-lr);
         border-width: var(--nlux-chItm-mmsg-bblLt--brdrWd);
         border-style: solid;
         border-radius: var(--nlux-chItm-mmsg-bblLt--brdrRd);
     }
 
-    > .nlux-comp-cht_itm-prt_info > .nlux-comp-avtr {
+    > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar {
         border-width: var(--nlux-chItm-mmsg-bblLt--brdrWd);
     }
 
-    > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name {
+    > .nlux-comp-chatItem-participantInfo > .nlux-comp-chatItem-participantName {
         display: none;
     }
 
-    &.nlux_cht_itm_snt {
+    &.nlux-comp-chatItem--sent {
         flex-direction: row-reverse;
         padding-left: 65px;
 
-        > .nlux-comp-msg {
+        > .nlux-comp-message {
             color: var(--nlux-hmMsg--txtClr);
             border-color: var(--nlux-hmMsg--brdClr);
             background-color: var(--nlux-hmMsg--bgClr);
         }
     }
 
-    &.nlux_cht_itm_rcvd {
+    &.nlux-comp-chatItem--received {
         flex-direction: row;
         padding-right: 65px;
 
-        > .nlux-comp-msg {
+        > .nlux-comp-message {
             color: var(--nlux-aiMsg--txtClr);
             border-color: var(--nlux-aiMsg--brdClr);
             background-color: var(--nlux-aiMsg--bgClr);
         }
     }
-
 }

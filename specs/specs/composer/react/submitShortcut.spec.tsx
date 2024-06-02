@@ -29,7 +29,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -48,7 +48,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                 const {container} = render(
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, '{enter}');
                 await waitForRenderCycle();
 
@@ -63,7 +63,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
-            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(composer, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -81,7 +81,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
             const {container} = render(
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -101,7 +101,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(composer, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -123,7 +123,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -145,7 +145,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -171,7 +171,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
 
-            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(composer, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -190,7 +190,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
 
-            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(composer, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -209,7 +209,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                 <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
             );
 
-            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(composer, 'Hello, World!');
             await waitForRenderCycle();
 
@@ -229,7 +229,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(composer, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -251,7 +251,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(composer, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -273,7 +273,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -297,7 +297,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const composer: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(composer, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -317,7 +317,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
 
@@ -337,7 +337,7 @@ describe('<AiChat /> + composer + submitShortcut', () => {
                     <AiChat adapter={adapterController!.adapter} composerOptions={composerOptions}/>,
                 );
 
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello, World!');
                 await waitForRenderCycle();
 

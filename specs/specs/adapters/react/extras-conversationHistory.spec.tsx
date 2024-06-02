@@ -10,7 +10,7 @@ import {waitForMdStreamToComplete, waitForReactRenderCycle} from '../../../utils
 describe.each([
         {dataTransferMode: 'batch'},
         // {dataTransferMode: 'stream'},
-    ] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>,
+    ] satisfies Array<{ dataTransferMode: 'stream' | 'batch' }>,
 )('<AiChat /> + withAdapter($mode) + conversationHistory extras', ({dataTransferMode}) => {
     let adapterController: AdapterController | undefined;
 
@@ -36,7 +36,7 @@ describe.each([
             );
 
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -60,7 +60,7 @@ describe.each([
                 );
 
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'So what did you do?{enter}');
@@ -115,7 +115,7 @@ describe.each([
             );
 
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -147,7 +147,7 @@ describe.each([
                 );
 
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello{enter}');

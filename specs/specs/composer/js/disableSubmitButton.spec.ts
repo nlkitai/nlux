@@ -31,7 +31,7 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+            const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
             // Assert
             expect(button.getAttribute('disabled')).toBe('');
@@ -43,8 +43,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
                 aiChat = createAiChat().withAdapter(adapterController!.adapter);
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello');
@@ -66,7 +66,7 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+            const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
             // Assert
             expect(button.getAttribute('disabled')).toBe('');
@@ -81,8 +81,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello');
@@ -102,8 +102,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
                     aiChat.mount(rootElement);
                     await waitForRenderCycle();
 
-                    const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                    const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                    const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                    const button = rootElement.querySelector('.nlux-comp-composer > button')!;
                     await userEvent.type(textArea, 'Hi');
                     await waitForRenderCycle();
 
@@ -133,7 +133,7 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+            const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
             // Assert
             expect(button.getAttribute('disabled')).toBeNull();
@@ -148,8 +148,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                const button = rootElement.querySelector('.nlux-comp-composer > button')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello');
@@ -169,8 +169,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
                     aiChat.mount(rootElement);
                     await waitForRenderCycle();
 
-                    const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                    const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                    const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                    const button = rootElement.querySelector('.nlux-comp-composer > button')!;
                     await userEvent.type(textArea, 'Hi');
                     await waitForRenderCycle();
 
@@ -198,8 +198,8 @@ describe('createAiChat() + composer + disableSubmitButton', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
-                const button = rootElement.querySelector('.nlux-comp-prmptBox > button')!;
+                const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
+                const button = rootElement.querySelector('.nlux-comp-composer > button')!;
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 

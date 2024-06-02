@@ -15,8 +15,8 @@ describe('When an avatar component is rendered with url as avatar', () => {
 
         // Assert
         expect(element.outerHTML).toBe(
-            `<div class="nlux-comp-avtr" title="${name}"><div class="avtr_ctn">` +
-            `<div class="avtr_img" style="background-image: url(https://example.com/photo.jpg);"></div>` +
+            `<div class="nlux-comp-avatar" title="${name}"><div class="avatarContainer">` +
+            `<div class="avatarPicture" style="background-image: url(https://example.com/photo.jpg);"></div>` +
             `</div></div>`,
         );
     });

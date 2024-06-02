@@ -1,4 +1,4 @@
-.nlux-comp-prmptBox {
+.nlux-comp-composer {
     display: flex;
     align-items: stretch;
     flex-direction: row;
@@ -76,11 +76,11 @@
             outline: var(--nlux-sbmBt-fcs-otln--clr) solid var(--nlux-sbmBt-fcs-otln--wd);
         }
 
-        > .nlux_sndIcn {
+        > .nlux-comp-sendIcon {
             width: 100%;
             max-width: 24px;
 
-            > .snd_icn_ctn {
+            > .nlux-comp-sendIcon-ctn {
                 display: inline-block;
                 width: 100%;
                 background-color: currentColor;
@@ -91,7 +91,7 @@
             }
         }
 
-        > .nlux_msg_ldr {
+        > .nlux-comp-messageLoader {
             display: none;
         }
     }
@@ -104,23 +104,23 @@
     }
 }
 
-.nlux-comp-prmptBox.nlux-prmpt-typing {
-    button > .nlux_sndIcn {
+.nlux-comp-composer.nlux-composer--typing {
+    button > .nlux-comp-sendIcon {
         display: inline-block;
     }
 
-    button > .nlux_msg_ldr {
+    button > .nlux-comp-messageLoader {
         display: none;
     }
 }
 
-.nlux-comp-prmptBox.nlux-prmpt-submitting,
-.nlux-comp-prmptBox.nlux-prmpt-waiting {
-    button > .nlux_sndIcn {
+.nlux-comp-composer.nlux-composer--submitting,
+.nlux-comp-composer.nlux-composer--waiting {
+    button > .nlux-comp-sendIcon {
         display: none;
     }
 
-    button > .nlux_msg_ldr {
+    button > .nlux-comp-messageLoader {
         display: inline-block;
     }
 }

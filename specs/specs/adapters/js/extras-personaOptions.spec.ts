@@ -8,7 +8,7 @@ import {waitForMilliseconds, waitForRenderCycle} from '../../../utils/wait';
 describe.each([
     {dataTransferMode: 'batch'},
     {dataTransferMode: 'stream'},
-] satisfies Array<{dataTransferMode: 'stream' | 'batch'}>)(
+] satisfies Array<{ dataTransferMode: 'stream' | 'batch' }>)(
     'createAiChat() + withAdapter($mode) + personaOptions extras',
     ({dataTransferMode}) => {
         let adapterController: AdapterController;
@@ -52,7 +52,7 @@ describe.each([
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -97,7 +97,7 @@ describe.each([
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello{enter}');
                 await waitForRenderCycle();
 

@@ -20,7 +20,7 @@ describe('When welcome message is rendered for update', () => {
             updateWelcomeMessageDom(welcomeMessage, props, {...props, message: newMessage});
 
             // Assert
-            expect(welcomeMessage.querySelector('.nlux-comp-wlc_msg_txt')!.textContent).toBe(newMessage);
+            expect(welcomeMessage.querySelector('.nlux-comp-welcomeMessage-text')!.textContent).toBe(newMessage);
         });
     });
 
@@ -38,7 +38,7 @@ describe('When welcome message is rendered for update', () => {
 
             // Act
             updateWelcomeMessageDom(welcomeMessage, props, {...props, name: newName});
-            const name = welcomeMessage.querySelector('.nlux-comp-wlc_msg_prs_nm')!.textContent;
+            const name = welcomeMessage.querySelector('.nlux-comp-welcomeMessage-personaName')!.textContent;
 
             // Assert
             expect(name).toBe(newName);
@@ -59,7 +59,7 @@ describe('When welcome message is rendered for update', () => {
 
             // Act
             updateWelcomeMessageDom(welcomeMessage, props, {...props, avatar: newAvatar});
-            const personaAvatar = welcomeMessage.querySelector('.nlux-comp-avtr') as HTMLImageElement;
+            const personaAvatar = welcomeMessage.querySelector('.nlux-comp-avatar') as HTMLImageElement;
 
             // Assert
             expect(personaAvatar).not.toBeNull();

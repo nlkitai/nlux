@@ -31,7 +31,7 @@ describe('createAiChat() + composer', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const composer = rootElement.querySelector('.nlux-comp-prmptBox');
+            const composer = rootElement.querySelector('.nlux-comp-composer');
 
             // Assert
             expect(composer).not.toBeFalsy();
@@ -44,7 +44,7 @@ describe('createAiChat() + composer', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea');
+            const textArea = rootElement.querySelector('.nlux-comp-composer > textarea');
 
             // Assert
             expect(textArea).not.toBeFalsy();
@@ -57,7 +57,7 @@ describe('createAiChat() + composer', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const sendButton = rootElement.querySelector('.nlux-comp-prmptBox > button');
+            const sendButton = rootElement.querySelector('.nlux-comp-composer > button');
 
             // Assert
             expect(sendButton).not.toBeFalsy();
@@ -70,7 +70,7 @@ describe('createAiChat() + composer', () => {
             // Act
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const sendButton = rootElement.querySelector('.nlux-comp-prmptBox > button');
+            const sendButton = rootElement.querySelector('.nlux-comp-composer > button');
 
             // Assert
             expect(sendButton).toHaveAttribute('disabled');
@@ -84,12 +84,12 @@ describe('createAiChat() + composer', () => {
                 await waitForRenderCycle();
 
                 // Act
-                const textArea = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea = rootElement.querySelector('.nlux-comp-composer > textarea')!;
                 await userEvent.type(textArea, 'Hello');
                 await waitForRenderCycle();
 
                 // Assert
-                const sendButton = rootElement.querySelector('.nlux-comp-prmptBox > button');
+                const sendButton = rootElement.querySelector('.nlux-comp-composer > button');
                 expect(sendButton).not.toHaveAttribute('disabled');
             });
         });

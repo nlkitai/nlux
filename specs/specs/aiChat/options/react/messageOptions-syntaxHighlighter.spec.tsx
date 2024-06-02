@@ -35,7 +35,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             );
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
             await waitForReactRenderCycle();
@@ -45,7 +45,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement!.innerHTML).toBe(
                 '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;\n</div></pre></div>\n',
             );
@@ -63,7 +63,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             />;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Write some JS code{enter}');
             await waitForReactRenderCycle();
@@ -73,7 +73,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toEqual(
                 expect.stringContaining('<div class="code-block"><pre><div>var someJsCode = true;\n</div></pre></div>'),
             );
@@ -89,7 +89,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
                     messageOptions={{
                         syntaxHighlighter: highlighter,
                         showCodeBlockCopyButton: false,
-                }}
+                    }}
                 />
             );
             const {container, rerender} = render(aiChat);
@@ -102,12 +102,12 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
                     messageOptions={{
                         syntaxHighlighter: undefined,
                         showCodeBlockCopyButton: false,
-                }}
+                    }}
                 />,
             );
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Write some JS code{enter}');
             await waitForReactRenderCycle();
 
@@ -115,7 +115,7 @@ describe('<AiChat /> + messageOptions + syntaxHighlighter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const responseElement = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const responseElement = container.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toEqual(
                 expect.stringContaining(
                     '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;\n</div></pre></div>',

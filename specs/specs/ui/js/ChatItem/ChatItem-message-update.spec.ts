@@ -15,7 +15,7 @@ describe('When a chat item component is complete in received direction', () => {
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-message') as HTMLElement;
 
             // Act
             updateChatItemDom(chatItem, props, {
@@ -47,7 +47,7 @@ describe('When a chat item component is complete in received direction', () => {
             });
 
             // Assert
-            expect(chatItem.classList.contains('nlux_cht_itm_lst')).toBe(true);
+            expect(chatItem.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
         });
     });
 
@@ -62,7 +62,7 @@ describe('When a chat item component is complete in received direction', () => {
                 message: 'Hello, World!',
             };
             const chatItem = createChatItemDom(props);
-            const message = chatItem.querySelector('.nlux-comp-msg') as HTMLElement;
+            const message = chatItem.querySelector('.nlux-comp-message') as HTMLElement;
 
             // Act
             updateChatItemDom(chatItem, props, {

@@ -72,7 +72,7 @@ describe('createAiChat() + mount', () => {
             await waitForRenderCycle();
 
             // Assert
-            const exceptionsBoxContainer = rootElement.querySelector('.nlux-comp-exp_box');
+            const exceptionsBoxContainer = rootElement.querySelector('.nlux-comp-exceptionBox');
             expect(exceptionsBoxContainer).toBeInTheDocument();
         });
 
@@ -86,7 +86,7 @@ describe('createAiChat() + mount', () => {
             await waitForRenderCycle();
 
             // Assert
-            const composerContainer = rootElement.querySelector('.nlux-comp-prmptBox');
+            const composerContainer = rootElement.querySelector('.nlux-comp-composer');
             expect(composerContainer).toBeInTheDocument();
         });
 

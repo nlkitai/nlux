@@ -14,7 +14,7 @@ export const updateNameOnAvatar = (
             propsAfter.name[0].toUpperCase() : '';
 
         const letterContainer = element.querySelector(
-            '* > .avtr_ctn > .avtr_ltr',
+            '* > .avatarContainer > .avtr_ltr',
         );
 
         letterContainer?.replaceChildren(letter);

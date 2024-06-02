@@ -48,7 +48,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.querySelector('.nlux-cpy-btn')).toBeFalsy();
+        expect(rootElement.querySelector('.nlux-comp-copyButton')).toBeFalsy();
     });
 
     it('should render copy to clipboard button when option is set', async () => {
@@ -62,6 +62,6 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.querySelector('.nlux-cpy-btn')).toBeTruthy();
+        expect(rootElement.querySelector('.nlux-comp-copyButton')).toBeTruthy();
     });
 });

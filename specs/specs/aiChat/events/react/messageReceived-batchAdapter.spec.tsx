@@ -31,7 +31,7 @@ describe('<AiChat /> + batch adapter + events + messageReceived', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -56,7 +56,7 @@ describe('<AiChat /> + batch adapter + events + messageReceived', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -87,7 +87,7 @@ describe('<AiChat /> + batch adapter + events + messageReceived', () => {
             const {container, rerender} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -110,7 +110,7 @@ describe('<AiChat /> + batch adapter + events + messageReceived', () => {
             );
 
             await waitForReactRenderCycle();
-            const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea2: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea2, 'Bonjour{enter}');
             await waitForReactRenderCycle();
 

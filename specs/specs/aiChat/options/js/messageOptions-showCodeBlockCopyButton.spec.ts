@@ -36,7 +36,7 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -46,10 +46,10 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
-            const button = markdownContainer!.querySelector('.nlux-cpy-btn');
+            const button = markdownContainer!.querySelector('.nlux-comp-copyButton');
             expect(button).toBeInTheDocument();
         });
     });
@@ -63,7 +63,7 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -73,10 +73,10 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
-            const button = markdownContainer!.querySelector('.nlux-cpy-btn');
+            const button = markdownContainer!.querySelector('.nlux-comp-copyButton');
             expect(button).not.toBeInTheDocument();
         });
     });
@@ -90,7 +90,7 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             await userEvent.type(textArea, 'Give me a link please{enter}');
             await waitForRenderCycle();
@@ -100,10 +100,10 @@ describe('createAiChat() + messageOptions + showCodeBlockCopyButton', () => {
             await waitForMdStreamToComplete(100);
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
-            const button = markdownContainer!.querySelector('.nlux-cpy-btn');
+            const button = markdownContainer!.querySelector('.nlux-comp-copyButton');
             expect(button).toBeInTheDocument();
         });
     });

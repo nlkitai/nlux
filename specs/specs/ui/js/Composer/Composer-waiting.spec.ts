@@ -11,10 +11,10 @@ describe('When a composer component is rendered and is in waiting status', () =>
 
         // Assert
         expect(html).toEqual(
-            expect.stringContaining('<div class="nlux-comp-prmptBox nlux-prmpt-waiting">'),
+            expect.stringContaining('<div class="nlux-comp-composer nlux-composer--waiting">'),
         );
         expect(html).toEqual(
-            expect.stringContaining('<button disabled=""><div class="nlux_sndIcn"><div class="snd_icn_ctn">'));
+            expect.stringContaining('<button disabled=""><div class="nlux-comp-sendIcon"><div class="nlux-comp-sendIcon-ctn">'));
     });
 
     it('the submit button should be disabled', () => {

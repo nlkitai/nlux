@@ -32,7 +32,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
             aiChat = createAiChat().withAdapter(adapterController!.adapter);
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -42,11 +42,11 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
         });
     });
 
@@ -59,7 +59,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -69,11 +69,11 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
         });
 
         describe('When the layout message changes to list layout', () => {
@@ -85,7 +85,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -96,19 +96,19 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = rootElement.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
 
                 // Act
                 aiChat.updateProps({conversationOptions: {layout: 'list'}});
                 await waitForRenderCycle();
 
                 // Assert
-                expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
             });
         });
     });
@@ -122,7 +122,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -132,11 +132,11 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+            const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+            const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-            expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
         });
 
         describe('When the layout message changes to bubbles layout', () => {
@@ -148,7 +148,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
-                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -159,19 +159,19 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
                 // Assert
                 const humanMessage: HTMLTextAreaElement = rootElement.querySelector(
-                    '.nlux-comp-cht_itm.nlux_cht_itm_snt')!;
-                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-cht_itm.nlux_cht_itm_rcvd')!;
+                    '.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
+                const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-                expect(humanMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_lst')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
 
                 // Act
                 aiChat.updateProps({conversationOptions: {layout: 'bubbles'}});
                 await waitForRenderCycle();
 
                 // Assert
-                expect(humanMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
-                expect(aiMessage.classList.contains('nlux_cht_itm_bbl')).toBe(true);
+                expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+                expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
             });
         });
     });
@@ -185,7 +185,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello AI!{enter}');
@@ -195,7 +195,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
             await waitForRenderCycle();
 
             // Assert
-            const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux_cht_itm_rcvd > .nlux-comp-cht_itm-prt_info > .nlux-comp-cht_itm-prt_name')!;
+            const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-chatItem-participantName')!;
             expect(assistantName.textContent).toBe('AI');
         });
     });

@@ -1,8 +1,8 @@
-.nlux-comp-msg > .nlux-md-strm-root {
+.nlux-comp-message > .nlux-markdownStream-root {
     width: 100%;
 }
 
-.nlux-comp-msg .nlux-md-cntr {
+.nlux-comp-message .nlux-markdown-container {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -40,7 +40,7 @@
         background-color: var(--nlux-cdBlk-hover--bgClr);
     }
 
-    button.nlux-cpy-btn {
+    button.nlux-comp-copyButton {
         position: relative;
         z-index: 888888;
         width: var(--nlux-cdBlk-cpBtn--wd);
@@ -68,7 +68,7 @@
         }
     }
 
-    button.nlux-cpy-btn {
+    button.nlux-comp-copyButton {
         &.clicked,
         &.clicked:hover {
             color: var(--nlux-cdBlk-cpBtn-clck--txtClr);

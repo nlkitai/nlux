@@ -28,7 +28,7 @@ describe('<AiChat /> + batch adapter + markdown', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
 
@@ -37,7 +37,7 @@ describe('<AiChat /> + batch adapter + markdown', () => {
             await act(() => waitForMdStreamToComplete());
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_msg_received .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux_msg_received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
             expect(markdownContainer!.innerHTML).toEqual(
                 expect.stringContaining('<strong>Hello Human!</strong>'),

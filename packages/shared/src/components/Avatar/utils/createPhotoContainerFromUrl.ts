@@ -1,5 +1,5 @@
-export const renderedPhotoContainerClassName = 'avtr_ctn';
-export const renderedPhotoClassName = 'avtr_img';
+export const renderedPhotoContainerClassName = 'avatarContainer';
+export const renderedPhotoClassName = 'avatarPicture';
 
 export const createPhotoContainerFromUrl = (url: string | undefined, name: string | undefined): HTMLElement => {
     const photoContainer = document.createElement('div');

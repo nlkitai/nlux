@@ -1,15 +1,15 @@
 import {ChatSegmentStatus} from '../../types/chatSegment/chatSegment';
 
 export const getChatSegmentClassName = (status: ChatSegmentStatus): string => {
-    const baseClassName = 'nlux-chtSgm';
+    const baseClassName = 'nlux-chatSegment';
     if (status === 'complete') {
-        return `${baseClassName} nlux-chtSgm-cmpl`;
+        return `${baseClassName} nlux-chatSegment-cmpl`;
     }
 
     if (status === 'error') {
-        return `${baseClassName} nlux-chtSgm-err`;
+        return `${baseClassName} nlux-chatSegment-err`;
     }
 
     // Active status
-    return `${baseClassName} nlux-chtSgm-actv`;
+    return `${baseClassName} nlux-chatSegment-actv`;
 };

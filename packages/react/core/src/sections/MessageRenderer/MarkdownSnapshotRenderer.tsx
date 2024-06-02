@@ -38,9 +38,9 @@ export const MarkdownSnapshotRenderer = (props: {
     }, [parsedContent, markdownOptions?.htmlSanitizer]);
 
     return (
-        <div className={'nlux-md-strm-root'}>
+        <div className={'nlux-markdownStream-root'}>
             <div
-                className="nlux-md-cntr"
+                className="nlux-markdown-container"
                 ref={markdownContainerRef}
                 dangerouslySetInnerHTML={{__html: trustedHtml}}
             />

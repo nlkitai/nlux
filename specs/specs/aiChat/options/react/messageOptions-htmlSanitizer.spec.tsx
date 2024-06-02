@@ -24,8 +24,8 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
     describe('When htmlSanitizer is not set', () => {
         it('Message content should render the message as is', async () => {
             // Arrange
-            const {container} = render(<AiChat adapter={adapterController!.adapter} />);
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const {container} = render(<AiChat adapter={adapterController!.adapter}/>);
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Give me a link please{enter}');
@@ -35,7 +35,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr');
+            const markdownContainer = container.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
 
             const link = markdownContainer!.querySelector('a');
@@ -51,11 +51,11 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
                 <AiChat
                     adapter={adapterController!.adapter}
                     messageOptions={{
-                        htmlSanitizer: (html: string) => html.toLowerCase().replaceAll('h', 'x')
+                        htmlSanitizer: (html: string) => html.toLowerCase().replaceAll('h', 'x'),
                     }}
-                />
+                />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hi! Henry The Assistant. Help! Give me a hyperlink!{enter}');
@@ -65,7 +65,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const userMessageContainer = container.querySelector('.nlux_cht_itm_snt .nlux-md-cntr') as HTMLElement | null;
+            const userMessageContainer = container.querySelector('.nlux-comp-chatItem--sent .nlux-markdown-container') as HTMLElement | null;
             expect(userMessageContainer!.innerHTML).toBe('<p>xi! xenry txe assistant. xelp! give me a xyperlink!</p>\n');
         });
 
@@ -79,11 +79,11 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
                             .toLowerCase()
                             .replaceAll('h', 'x')
                             .replaceAll('<p>', '<div>')
-                            .replaceAll('</p>', '</div>')
+                            .replaceAll('</p>', '</div>'),
                     }}
-                />
+                />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hi! Henry The Assistant. Help! Give me a hyperlink!{enter}');
@@ -93,7 +93,7 @@ describe('<AiChat /> + messageOptions + htmlSanitizer', () => {
             await act(() => waitForMdStreamToComplete(100));
 
             // Assert
-            const markdownContainer = container.querySelector('.nlux_cht_itm_rcvd .nlux-md-cntr') as HTMLElement | null;
+            const markdownContainer = container.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container') as HTMLElement | null;
             expect(markdownContainer).toBeInTheDocument();
             expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank" rel="noopener noreferrer">xere</a> i xand over a link! xaxa :) !</div>\n');
         });

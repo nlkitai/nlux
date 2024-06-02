@@ -2,7 +2,7 @@ import {DomCreator} from '../../types/dom/DomCreator';
 import {AvatarProps} from './props';
 import {createPhotoContainerFromUrl} from './utils/createPhotoContainerFromUrl';
 
-export const className = 'nlux-comp-avtr';
+export const className = 'nlux-comp-avatar';
 
 export const createAvatarDom: DomCreator<AvatarProps> = (
     props,

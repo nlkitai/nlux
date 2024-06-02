@@ -16,7 +16,7 @@ describe('createAiChat() + exceptionBox', () => {
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 
-            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-composer > textarea')!;
             await userEvent.type(textArea, 'Hello{enter}');
 
             // Act
@@ -24,7 +24,7 @@ describe('createAiChat() + exceptionBox', () => {
             await waitForMilliseconds(50);
 
             // Assert
-            const exceptionBox = rootElement.querySelector('.nlux-comp-exp_box')!;
+            const exceptionBox = rootElement.querySelector('.nlux-comp-exceptionBox')!;
             expect(exceptionBox).not.toBeNull();
             expect(exceptionBox.textContent).toEqual(expect.stringContaining('Failed to load content'));
         });

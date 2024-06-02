@@ -25,7 +25,7 @@ describe('<AiChat /> + composerOptions + autoFocus', () => {
             await waitForReactRenderCycle();
 
             // Act
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(document.activeElement).not.toBe(textArea);
@@ -38,7 +38,7 @@ describe('<AiChat /> + composerOptions + autoFocus', () => {
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Act
             await userEvent.type(textArea, 'Hello{enter}');
@@ -61,7 +61,7 @@ describe('<AiChat /> + composerOptions + autoFocus', () => {
             await waitForReactRenderCycle();
 
             // Act
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
             // Assert
             expect(document.activeElement).toBe(textArea);
@@ -75,7 +75,7 @@ describe('<AiChat /> + composerOptions + autoFocus', () => {
                 }}/>;
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
 
                 // Act
                 textArea.focus();
@@ -92,7 +92,7 @@ describe('<AiChat /> + composerOptions + autoFocus', () => {
                 }}/>;
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
-                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+                const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
                 textArea.blur();
 
                 // Act

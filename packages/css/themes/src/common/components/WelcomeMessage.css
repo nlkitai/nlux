@@ -1,4 +1,4 @@
-.nlux-comp-wlc_msg {
+.nlux-comp-welcomeMessage {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -9,17 +9,17 @@
 
     gap: var(--nlux-wlcMsg--gap);
 
-    > .nlux-comp-wlc_msg_prs_nm {
+    > .nlux-comp-welcomeMessage-personaName {
         font-size: var(--nlux-wlcMsg-prsNm--ftSz);
         font-weight: var(--nlux-wlcMsg-prsNm--ftWg);
     }
 
-    > .nlux-comp-wlc_msg_txt {
+    > .nlux-comp-welcomeMessage-text {
         font-size: var(--nlux-wlcMsg-txt--ftSz);
         font-weight: var(--nlux-wlcMsg-txt--ftWg);
     }
 
-    > .nlux-comp-avtr {
+    > .nlux-comp-avatar {
         width: var(--nlux-wlcMsg-avtr--wd);
         border-color: var(--nlux-wlcMsg-avtr--brdrClr);
     }

@@ -1,11 +1,7 @@
-import {
-    AiChat,
-    ResponseRenderer,
-    StreamResponseComponentProps,
-} from '@nlux-dev/react/src';
+import {AiChat, ResponseRenderer, StreamResponseComponentProps} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {act, FC} from 'react';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -29,9 +25,9 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
         it('Should render the markdown in the custom component as it\'s being generated', async () => {
             // Arrange
             const CustomResponseComponent: ResponseRenderer<string> = ({
-                containerRef,
-                uid,
-            }: StreamResponseComponentProps<string>) => (
+                                                                           containerRef,
+                                                                           uid,
+                                                                       }: StreamResponseComponentProps<string>) => (
                 <div className="some-streamed-response">
                     <div className="content" ref={containerRef}/>
                     <div className="footer">Some footer content</div>
@@ -45,7 +41,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                     messageOptions={{responseRenderer: customResponseComponentSpy}}
                 />,
             );
-            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-prmptBox > textarea')!;
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
             await waitForReactRenderCycle();
 
             // Act
@@ -56,8 +52,8 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             await act(() => waitForMdStreamToComplete());
 
             // Assert
-            const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux_cht_itm_rcvd');
-            const mdContainer = chatItemReceived!.querySelector('.nlux-md-cntr');
+            const chatItemReceived = container.querySelector('.nlux-chtRm-cnv-sgmts-cntr .nlux-comp-chatItem--received');
+            const mdContainer = chatItemReceived!.querySelector('.nlux-markdown-container');
             await waitFor(() => {
                 expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');
             });

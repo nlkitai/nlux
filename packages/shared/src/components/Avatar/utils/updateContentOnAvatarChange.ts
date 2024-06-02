@@ -14,7 +14,7 @@ export const updateContentOnAvatarChange = (
     if (typeof propsAfter.avatar === 'string' && typeof propsBefore.avatar === 'string') {
         // When the avatar is a string, we update the photo container with the new URL
         const photoDomElement: HTMLElement | null = element.querySelector(
-            '* > .avtr_ctn > .avtr_img',
+            '* > .avatarContainer > .avatarPicture',
         );
 
         if (photoDomElement !== null) {

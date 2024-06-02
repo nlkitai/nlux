@@ -1,12 +1,12 @@
-.nlux_msg_ldr {
+.nlux-comp-messageLoader {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    > .spn_ldr_ctn {
+    > .nlux-comp-loaderContainer {
         width: 17px;
 
-        > .spn_ldr {
+        > .spinning-loader {
             display: inline-block;
             width: 15px;
             height: 15px;

@@ -44,7 +44,7 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
             await waitForRenderCycle();
 
             // Assert
-            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-conversationStarter');
             expect(conversationStarterElements).toHaveLength(conversationStarters.length);
             conversationStarterElements.forEach((conversationStarterElement, index) => {
                 expect(conversationStarterElement).toHaveTextContent(conversationStarters[index].prompt);
@@ -71,7 +71,7 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
                 await waitForRenderCycle();
 
                 // Assert
-                const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+                const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-conversationStarter');
                 expect(conversationStarterElements).toHaveLength(0);
             });
         });
@@ -103,7 +103,7 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
 
-                const conversationStarterElements = rootElement.querySelector('.nlux-comp-convStrt') as HTMLElement;
+                const conversationStarterElements = rootElement.querySelector('.nlux-comp-conversationStarter') as HTMLElement;
                 conversationStarterElements.click();
                 await waitForRenderCycle();
 
@@ -121,7 +121,7 @@ describe('createAiChat() + conversationOptions + conversationStarters', () => {
             await waitForRenderCycle();
 
             // Assert
-            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-convStrt');
+            const conversationStarterElements = rootElement.querySelectorAll('.nlux-comp-conversationStarter');
             expect(conversationStarterElements).toHaveLength(0);
         });
     });
