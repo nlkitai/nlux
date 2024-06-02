@@ -5,6 +5,7 @@ import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
+import {useConversationDisplayStyle} from '../../exports/hooks/useConversationDisplayStyle';
 
 export type ConversationCompType = <AiMsg>(
     props: ConversationCompProps<AiMsg>,
@@ -27,6 +28,8 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
         () => !hasMessages && personaOptions?.assistant === undefined && conversationOptions?.showWelcomeMessage !== false,
         [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
     );
+
+    const conversationLayout = useConversationDisplayStyle(conversationOptions);
 
     const showWelcomeMessage = useMemo(
         () => !hasMessages && personaOptions?.assistant !== undefined && conversationOptions?.showWelcomeMessage !== false,
@@ -78,19 +81,12 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         <ForwardRefChatSegmentComp
                             ref={ref}
                             key={segment.uid}
-                            chatSegment={segment}
-                            personaOptions={personaOptions}
-                            layout={props.layout}
-                            loader={props.loader}
-                            responseRenderer={props.responseRenderer}
-                            promptRenderer={props.promptRenderer}
                             containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
-                            syntaxHighlighter={props.syntaxHighlighter}
-                            htmlSanitizer={props.htmlSanitizer}
-                            markdownLinkTarget={props.markdownLinkTarget}
-                            showCodeBlockCopyButton={props.showCodeBlockCopyButton}
-                            skipStreamingAnimation={props.skipStreamingAnimation}
-                            streamingAnimationSpeed={props.streamingAnimationSpeed}
+                            chatSegment={segment}
+                            layout={conversationLayout}
+                            loader={props.loader}
+                            personaOptions={personaOptions}
+                            messageOptions={props.messageOptions}
                         />
                     );
                 })}

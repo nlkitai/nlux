@@ -1,7 +1,7 @@
-import {ConversationLayout, DataTransferMode, HighlighterExtension, SanitizerExtension} from '@nlux/core';
+import {ConversationLayout, DataTransferMode} from '@nlux/core';
 import {ReactElement} from 'react';
 import {MessageDirection} from '@shared/components/Message/props';
-import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
+import {MessageOptions} from '../../exports/messageOptions';
 
 export type ChatItemProps<AiMsg> = {
     uid: string;
@@ -13,16 +13,9 @@ export type ChatItemProps<AiMsg> = {
     fetchedServerResponse?: unknown;
     streamedContent?: AiMsg[];
     streamedServerResponse?: Array<unknown>;
-    responseRenderer?: ResponseRenderer<AiMsg>;
-    promptRenderer?: PromptRenderer;
+    messageOptions?: MessageOptions<AiMsg>;
     name: string;
     avatar?: string | ReactElement;
-    syntaxHighlighter?: HighlighterExtension;
-    htmlSanitizer?: SanitizerExtension;
-    markdownLinkTarget?: 'blank' | 'self';
-    showCodeBlockCopyButton?: boolean;
-    skipStreamingAnimation?: boolean;
-    streamingAnimationSpeed?: number;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {

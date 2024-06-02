@@ -17,11 +17,7 @@ export const createMessageRenderer: <AiMsg>(
         fetchedContent,
         fetchedServerResponse,
         direction,
-        responseRenderer,
-        syntaxHighlighter,
-        htmlSanitizer,
-        markdownLinkTarget,
-        showCodeBlockCopyButton,
+        messageOptions,
     } = props;
 
     // For custom renderer — When the dataTransferMode is 'streaming', the message is undefined and a containerRef
@@ -32,7 +28,8 @@ export const createMessageRenderer: <AiMsg>(
     //
     // A custom response renderer is provided by the user.
     //
-    if (responseRenderer !== undefined) {
+    if (
+        messageOptions?.responseRenderer !== undefined) {
         //
         // Streaming into a custom renderer.
         //
@@ -44,7 +41,7 @@ export const createMessageRenderer: <AiMsg>(
                 containerRef: containerRefToUse as RefObject<never>,
             };
 
-            return () => (responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
+            return () => (messageOptions?.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
         } else {
             //
             // Batching data and displaying it in a custom renderer.
@@ -57,7 +54,7 @@ export const createMessageRenderer: <AiMsg>(
                 dataTransferMode,
             };
 
-            return () => (responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
+            return () => (messageOptions?.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
         }
     }
 
@@ -77,10 +74,10 @@ export const createMessageRenderer: <AiMsg>(
                 messageUid={uid}
                 content={messageToRender}
                 markdownOptions={{
-                    syntaxHighlighter,
-                    htmlSanitizer,
-                    markdownLinkTarget,
-                    showCodeBlockCopyButton,
+                    syntaxHighlighter: messageOptions?.syntaxHighlighter,
+                    htmlSanitizer: messageOptions?.htmlSanitizer,
+                    markdownLinkTarget: messageOptions?.markdownLinkTarget,
+                    showCodeBlockCopyButton: messageOptions?.showCodeBlockCopyButton,
                 }}
             />
         );

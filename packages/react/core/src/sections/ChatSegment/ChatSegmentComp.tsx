@@ -160,17 +160,11 @@ export const ChatSegmentComp: <AiMsg>(
                             status={'complete'}
                             direction={'sent'}
                             layout={props.layout}
-                            promptRenderer={props.promptRenderer}
+                            messageOptions={props.messageOptions}
                             dataTransferMode={'batch'} // User chat items are always in batch mode.
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
-                            syntaxHighlighter={props.syntaxHighlighter}
-                            htmlSanitizer={props.htmlSanitizer}
-                            markdownLinkTarget={props.markdownLinkTarget}
-                            showCodeBlockCopyButton={props.showCodeBlockCopyButton}
-                            skipStreamingAnimation={props.skipStreamingAnimation}
-                            streamingAnimationSpeed={props.streamingAnimationSpeed}
                         />
                     );
                 } else {
@@ -195,17 +189,11 @@ export const ChatSegmentComp: <AiMsg>(
                                     status={'streaming'}
                                     direction={'received'}
                                     layout={props.layout}
+                                    messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     streamedContent={chatItem.content}
-                                    responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    syntaxHighlighter={props.syntaxHighlighter}
-                                    htmlSanitizer={props.htmlSanitizer}
-                                    markdownLinkTarget={props.markdownLinkTarget}
-                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
-                                    skipStreamingAnimation={props.skipStreamingAnimation}
-                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         } else {
@@ -214,7 +202,7 @@ export const ChatSegmentComp: <AiMsg>(
                             // we render the message content. We also check if the content is primitive and if a custom
                             // renderer is provided.
                             //
-                            if (!isPrimitiveReactNodeType(chatItem.content) && !props.responseRenderer) {
+                            if (!isPrimitiveReactNodeType(chatItem.content) && !props.messageOptions?.responseRenderer) {
                                 warn(
                                     `When the type of the AI chat content is not primitive (object or array), ` +
                                     `a custom renderer must be provided — ` +
@@ -233,18 +221,12 @@ export const ChatSegmentComp: <AiMsg>(
                                     status={'complete'}
                                     direction={'received'}
                                     layout={props.layout}
+                                    messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}
                                     fetchedContent={chatItem.content}
                                     fetchedServerResponse={chatItem.serverResponse}
-                                    responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    syntaxHighlighter={props.syntaxHighlighter}
-                                    htmlSanitizer={props.htmlSanitizer}
-                                    markdownLinkTarget={props.markdownLinkTarget}
-                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
-                                    skipStreamingAnimation={props.skipStreamingAnimation}
-                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         }
@@ -262,16 +244,10 @@ export const ChatSegmentComp: <AiMsg>(
                                     status={'streaming'}
                                     direction={'received'}
                                     layout={props.layout}
+                                    messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}
-                                    responseRenderer={props.responseRenderer}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
-                                    syntaxHighlighter={props.syntaxHighlighter}
-                                    htmlSanitizer={props.htmlSanitizer}
-                                    markdownLinkTarget={props.markdownLinkTarget}
-                                    showCodeBlockCopyButton={props.showCodeBlockCopyButton}
-                                    skipStreamingAnimation={props.skipStreamingAnimation}
-                                    streamingAnimationSpeed={props.streamingAnimationSpeed}
                                 />
                             );
                         }

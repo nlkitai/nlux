@@ -53,24 +53,27 @@ export const ChatItemComp: <AiMsg>(
     }, [
         isStreaming,
         props.uid, props.status, props.fetchedContent, props.streamedContent, props.direction,
-        props.responseRenderer, props.syntaxHighlighter, props.htmlSanitizer, props.markdownLinkTarget,
+        props.messageOptions?.responseRenderer, props.messageOptions?.syntaxHighlighter,
+        props.messageOptions?.htmlSanitizer, props.messageOptions?.markdownLinkTarget,
     ]);
 
     const UserMessageRenderer = useCallback(() => {
-        if (props.promptRenderer === undefined) {
+        if (props.messageOptions?.promptRenderer === undefined) {
             return (
                 <MarkdownSnapshotRenderer
                     messageUid={props.uid}
                     content={props.fetchedContent as string}
                     markdownOptions={{
-                        htmlSanitizer: props.htmlSanitizer,
+                        htmlSanitizer: props.messageOptions?.htmlSanitizer,
+                        // User message does not need syntax highlighting, advanced markdown options
+                        // Only HTML sanitization is needed
                     }}
                 />
             );
         }
 
-        return props.promptRenderer({uid: props.uid, prompt: props.fetchedContent as string});
-    }, [props.promptRenderer, props.fetchedContent, props.uid]);
+        return props.messageOptions?.promptRenderer({uid: props.uid, prompt: props.fetchedContent as string});
+    }, [props.messageOptions?.promptRenderer, props.fetchedContent, props.uid]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
         StreamContainerComp<AiMsg>,
@@ -86,14 +89,14 @@ export const ChatItemComp: <AiMsg>(
                     status={'streaming'}
                     ref={streamContainer}
                     direction={props.direction}
-                    responseRenderer={props.responseRenderer}
+                    responseRenderer={props.messageOptions?.responseRenderer}
                     markdownOptions={{
-                        syntaxHighlighter: props.syntaxHighlighter,
-                        htmlSanitizer: props.htmlSanitizer,
-                        markdownLinkTarget: props.markdownLinkTarget,
-                        showCodeBlockCopyButton: props.showCodeBlockCopyButton,
-                        skipStreamingAnimation: props.skipStreamingAnimation,
-                        streamingAnimationSpeed: props.streamingAnimationSpeed,
+                        syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
+                        htmlSanitizer: props.messageOptions?.htmlSanitizer,
+                        markdownLinkTarget: props.messageOptions?.markdownLinkTarget,
+                        showCodeBlockCopyButton: props.messageOptions?.showCodeBlockCopyButton,
+                        skipStreamingAnimation: props.messageOptions?.skipStreamingAnimation,
+                        streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed,
                     }}
                 />
             )}

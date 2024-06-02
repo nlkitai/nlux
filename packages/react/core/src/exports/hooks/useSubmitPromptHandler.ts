@@ -62,7 +62,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
     });
 
     // Callback events can be used by the non-React DOM update code
-    const callbackEvents = useRef<EventsMap<AiMsg>>({});
+    const callbackEvents = useRef<Partial<EventsMap<AiMsg>>>({});
 
     useEffect(() => {
         domToReactRef.current = {

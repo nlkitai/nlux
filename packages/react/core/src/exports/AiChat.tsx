@@ -14,7 +14,6 @@ import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
-import {useConversationDisplayStyle} from './hooks/useConversationDisplayStyle';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
@@ -64,7 +63,6 @@ export const AiChat: <AiMsg>(
     const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
-    const conversationLayout = useConversationDisplayStyle(conversationOptions);
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId, colorScheme}).join(' '),
         [className, themeId, colorScheme],
@@ -122,15 +120,7 @@ export const AiChat: <AiMsg>(
                         segments={segments}
                         conversationOptions={props.conversationOptions}
                         personaOptions={props.personaOptions}
-                        layout={conversationLayout}
-                        responseRenderer={props.messageOptions?.responseRenderer}
-                        promptRenderer={props.messageOptions?.promptRenderer}
-                        syntaxHighlighter={props.messageOptions?.syntaxHighlighter}
-                        htmlSanitizer={props.messageOptions?.htmlSanitizer}
-                        markdownLinkTarget={props.messageOptions?.markdownLinkTarget}
-                        showCodeBlockCopyButton={props.messageOptions?.showCodeBlockCopyButton}
-                        skipStreamingAnimation={props.messageOptions?.skipStreamingAnimation}
-                        streamingAnimationSpeed={props.messageOptions?.streamingAnimationSpeed}
+                        messageOptions={props.messageOptions}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
                     />
                 </div>

@@ -2,7 +2,8 @@ import {ParticipantRole} from '@nlux/core';
 import {PersonaOptions} from '../../../exports/personaOptions';
 
 export const avatarFromMessageAndPersona = (
-    role: ParticipantRole, personaOptions: PersonaOptions
+    role: ParticipantRole,
+    personaOptions?: PersonaOptions,
 ) => {
     if (role === 'assistant') {
         return personaOptions?.assistant?.avatar;

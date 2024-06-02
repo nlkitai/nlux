@@ -16,7 +16,9 @@ describe('When a custom chat item is provided', () => {
             layout={'bubbles'}
             status={'complete'}
             fetchedContent={'Hello'}
-            responseRenderer={({content}: any) => <>{`THE AI SAID [${content}]`}</>}
+            messageOptions={{
+                responseRenderer: ({content}: any) => <>{`THE AI SAID [${content}]`}</>,
+            }}
         />;
 
         // Act
@@ -37,7 +39,9 @@ describe('When a custom chat item is provided', () => {
             layout={'bubbles'}
             status={'complete'}
             fetchedContent={{text: 'Hello Jason!'}}
-            responseRenderer={({content}: BatchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>}
+            messageOptions={{
+                responseRenderer: ({content}: BatchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>,
+            }}
         />;
 
         // Act
