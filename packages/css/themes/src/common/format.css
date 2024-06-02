@@ -9,12 +9,12 @@
 
     font-variation-settings: 'slnt' 0;
 
-    > .nlux-chtRm-cntr {
+    > .nlux-chatRoom-container {
         border: var(--nlux-chtr--brdrWd) solid var(--nlux-chtr--brdClr);
         border-radius: var(--nlux-chtr--brdrRd);
         background-color: var(--nlux-chtr--bgClr);
 
-        > .nlux-chtRm-prmptBox-cntr {
+        > .nlux-composer-container {
             border-top: var(--nlux-dvr--brdrWd) solid var(--nlux-chtr-dvr--clr);
         }
     }

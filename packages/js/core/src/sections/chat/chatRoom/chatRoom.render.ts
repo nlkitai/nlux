@@ -4,8 +4,6 @@ import {getElement} from '../../../utils/dom/getElement';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 
-const className = (styleName: string) => `nlux-chtRm-${styleName}`;
-
 export const renderChatRoom: CompRenderer<
     CompChatRoomProps<AnyAiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > = ({
@@ -14,10 +12,10 @@ export const renderChatRoom: CompRenderer<
          props,
      }) => {
     const conversationContainer = document.createElement('div');
-    conversationContainer.classList.add(className('cnv-cntr'));
+    conversationContainer.classList.add('nlux-conversation-container');
 
     const composerContainer = document.createElement('div');
-    composerContainer.classList.add(className('prmptBox-cntr'));
+    composerContainer.classList.add('nlux-composer-container');
 
     const dom = document.createDocumentFragment();
     dom.appendChild(conversationContainer);
@@ -26,16 +24,16 @@ export const renderChatRoom: CompRenderer<
     const visibleProp = props.visible ?? true;
     const chatRoomElement = document.createElement('div');
 
-    chatRoomElement.className = className('cntr');
+    chatRoomElement.className = 'nlux-chatRoom-container';
     chatRoomElement.append(dom);
     chatRoomElement.style.display = visibleProp ? '' : 'none';
 
     const [conversationElement, removeMessagesContainerListeners] = listenToElement(chatRoomElement,
-        `:scope > .${className('cnv-cntr')}`,
+        ':scope > .nlux-conversation-container',
     ).on('click', compEvent('segments-container-clicked'))
         .get();
 
-    const composerElement = getElement(chatRoomElement, `:scope > .${className('prmptBox-cntr')}`);
+    const composerElement = getElement(chatRoomElement, ':scope > .nlux-composer-container');
     appendToRoot(chatRoomElement);
     compEvent('chat-room-ready')();
 

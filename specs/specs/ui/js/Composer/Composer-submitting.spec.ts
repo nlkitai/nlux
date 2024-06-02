@@ -15,7 +15,7 @@ describe('When a composer component is rendered and is in submitting status', ()
             expect.stringContaining('<div class="nlux-comp-composer nlux-composer--submitting">'),
         );
         expect(html).toEqual(
-            expect.stringContaining('<button disabled=""><div class="nlux-comp-sendIcon"><div class="nlux-comp-sendIcon-ctn">'));
+            expect.stringContaining('<button disabled=""><div class="nlux-comp-sendIcon"><div class="nlux-comp-sendIcon-container">'));
     });
 
     it('Should submit button should be disabled', () => {

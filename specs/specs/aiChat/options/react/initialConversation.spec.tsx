@@ -122,7 +122,7 @@ describe('<AiChat /> + initialConversation prop', () => {
             // Act
             render(aiChat);
             await waitForMilliseconds(200);
-            const aiChatRoomDom = document.querySelector('.nlux-chtRm-cnv-cntr')!;
+            const aiChatRoomDom = document.querySelector('.nlux-conversation-container')!;
 
             // Assert
             expect(aiChatRoomDom?.scrollTo).toHaveBeenCalledWith({behavior: 'smooth', top: 50000});

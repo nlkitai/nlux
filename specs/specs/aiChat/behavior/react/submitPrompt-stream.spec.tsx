@@ -34,7 +34,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).toBeInTheDocument();
         });
@@ -146,7 +146,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await waitForReactRenderCycle();
 
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment';
 
             await userEvent.type(textArea, 'Hello{enter}');
             await waitForReactRenderCycle();
@@ -205,7 +205,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await act(() => waitForReactRenderCycle());
 
             // Assert
-            const activeSegmentSelector = '.nlux-chtRm-cntr > .nlux-chtRm-cnv-cntr > .nlux-chtRm-cnv-sgmts-cntr > .nlux-chatSegment-actv';
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment-actv';
             const activeSegment = container.querySelector(activeSegmentSelector);
             expect(activeSegment).not.toBeInTheDocument();
         });

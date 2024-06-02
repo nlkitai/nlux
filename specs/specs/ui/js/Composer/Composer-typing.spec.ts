@@ -15,7 +15,7 @@ describe('When a composer component is rendered and is in typing status', () => 
         expect(html).toEqual(expect.stringContaining('<div class="nlux-comp-composer nlux-composer--typing">'));
         expect(html).toEqual(expect.stringContaining('<textarea placeholder=""></textarea>'));
         expect(html).toEqual(
-            expect.stringContaining('<button disabled=""><div class="nlux-comp-sendIcon"><div class="nlux-comp-sendIcon-ctn">'),
+            expect.stringContaining('<button disabled=""><div class="nlux-comp-sendIcon"><div class="nlux-comp-sendIcon-container">'),
         );
     });
 

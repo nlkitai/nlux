@@ -129,7 +129,7 @@ describe('createAiChat() + initialConversation prop', () => {
             await waitForRenderCycle();
 
             // Act
-            const aiChatRoomDom = document.querySelector('.nlux-chtRm-cnv-cntr') as HTMLElement;
+            const aiChatRoomDom = document.querySelector('.nlux-conversation-container') as HTMLElement;
             Object.defineProperty(aiChatRoomDom, 'scrollHeight', {value: 500});
             Object.defineProperty(aiChatRoomDom, 'clientHeight', {value: 250});
             await waitForMilliseconds(100);

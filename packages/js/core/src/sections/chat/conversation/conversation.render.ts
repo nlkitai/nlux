@@ -36,7 +36,7 @@ export const renderConversation: CompRenderer<
     };
 
     const segmentsContainer = document.createElement('div') as HTMLElement;
-    segmentsContainer.classList.add('nlux-chtRm-cnv-sgmts-cntr');
+    segmentsContainer.classList.add('nlux-chatSegments-container');
 
     const conversationStartersContainer = document.createElement('div') as HTMLElement;
     conversationStartersContainer.classList.add('nlux-comp-conversationStarters-container');

@@ -80,7 +80,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                     onConversationStarterSelected={props.onConversationStarterSelected}
                 />
             )}
-            <div className="nlux-chtRm-cnv-sgmts-cntr">
+            <div className="nlux-chatSegments-container">
                 {segments.map((segment, index) => {
                     const isLastSegment = index === segments.length - 1;
                     let ref = segmentsController.getRef(segment.uid);

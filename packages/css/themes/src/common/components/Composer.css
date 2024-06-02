@@ -80,7 +80,7 @@
             width: 100%;
             max-width: 24px;
 
-            > .nlux-comp-sendIcon-ctn {
+            > .nlux-comp-sendIcon-container {
                 display: inline-block;
                 width: 100%;
                 background-color: currentColor;

@@ -129,8 +129,8 @@ export const AiChat: <AiMsg>(
     return (
         <div className={rootClassNames} style={rootStyle}>
             <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
-            <div className="nlux-chtRm-cntr">
-                <div className="nlux-chtRm-cnv-cntr" ref={conversationContainerRef}>
+            <div className="nlux-chatRoom-container">
+                <div className="nlux-conversation-container" ref={conversationContainerRef}>
                     <ForwardConversationComp
                         ref={conversationRef}
                         segments={segments}
@@ -141,7 +141,7 @@ export const AiChat: <AiMsg>(
                         onConversationStarterSelected={handleConversationStarterSelected}
                     />
                 </div>
-                <div className="nlux-chtRm-prmptBox-cntr">
+                <div className="nlux-composer-container">
                     <ComposerComp
                         status={composerStatus}
                         prompt={prompt}

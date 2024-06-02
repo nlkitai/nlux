@@ -27,7 +27,7 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-            const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
+            const conversationContainer: any = container.querySelector('.nlux-conversation-container')!;
             conversationContainer.scrollTo = vi.fn();
 
             // Act
@@ -46,7 +46,7 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-                const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
+                const conversationContainer: any = container.querySelector('.nlux-conversation-container')!;
                 conversationContainer.scrollTo = vi.fn();
 
                 // Act
@@ -70,7 +70,7 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
             const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-            const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
+            const conversationContainer: any = container.querySelector('.nlux-conversation-container')!;
             conversationContainer.scrollTo = vi.fn();
 
             // Act
@@ -92,7 +92,7 @@ describe('<AiChat /> + conversationOptions + autoScroll', () => {
                 const {container} = render(aiChat);
                 await waitForReactRenderCycle();
                 const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
-                const conversationContainer: any = container.querySelector('.nlux-chtRm-cnv-cntr')!;
+                const conversationContainer: any = container.querySelector('.nlux-conversation-container')!;
                 conversationContainer.scrollTo = vi.fn();
 
                 // Act

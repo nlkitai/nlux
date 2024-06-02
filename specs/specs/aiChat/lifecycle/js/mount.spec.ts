@@ -100,7 +100,7 @@ describe('createAiChat() + mount', () => {
             await waitForRenderCycle();
 
             // Assert
-            const conversationContainer = rootElement.querySelector('.nlux-chtRm-cnv-cntr');
+            const conversationContainer = rootElement.querySelector('.nlux-conversation-container');
             expect(conversationContainer).toBeInTheDocument();
         });
 
