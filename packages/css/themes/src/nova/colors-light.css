@@ -21,6 +21,9 @@
     /** Participant info in chat */
     --nlux-ChatItem-ParticipantName--Color: #09090B;
 
+    /** Chat item avatar */
+    --nlux-ChatItem-Avatar--BackgroundColor: #09090B;
+
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: #18181B;
     --nlux-HumanMessage--BorderColor: transparent;
