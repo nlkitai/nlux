@@ -1,8 +1,8 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/main.css';
-import {createAvatarDom} from '../../../../../packages/shared/src/components/Avatar/create';
-import {AvatarProps} from '../../../../../packages/shared/src/components/Avatar/props';
-import {updateAvatarDom} from '../../../../../packages/shared/src/components/Avatar/update';
+import {createAvatarDom} from '@shared/components/Avatar/create';
+import {AvatarProps} from '@shared/components/Avatar/props';
+import {updateAvatarDom} from '@shared/components/Avatar/update';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

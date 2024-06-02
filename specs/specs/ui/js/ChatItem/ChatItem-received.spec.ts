@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/create';
-import {ChatItemProps} from '../../../../../packages/shared/src/components/ChatItem/props';
-import {updateChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/update';
+import {createChatItemDom} from '@shared/components/ChatItem/create';
+import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {updateChatItemDom} from '@shared/components/ChatItem/update';
 
 describe('When a chat item component is complete in received direction', () => {
     it('Should render the item with the right direction class', () => {

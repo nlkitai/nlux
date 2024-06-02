@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {createComposerDom} from '../../../../../packages/shared/src/components/Composer/create';
+import {createComposerDom} from '@shared/components/Composer/create';
 
 describe('When a composer component is rendered and is in waiting status', () => {
     it('Should render the composer with a submit button', () => {

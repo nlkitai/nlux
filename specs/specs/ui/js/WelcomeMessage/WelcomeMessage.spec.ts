@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {createWelcomeMessageDom} from '../../../../../packages/shared/src/components/WelcomeMessage/create';
-import {WelcomeMessageProps} from '../../../../../packages/shared/src/components/WelcomeMessage/props';
+import {createWelcomeMessageDom} from '@shared/components/WelcomeMessage/create';
+import {WelcomeMessageProps} from '@shared/components/WelcomeMessage/props';
 
 describe('When welcome message is rendered', () => {
     it('Should render the message with the received class', () => {

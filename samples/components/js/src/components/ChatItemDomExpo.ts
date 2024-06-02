@@ -1,9 +1,9 @@
 import '../style.css';
 import '@nlux-dev/themes/src/luna/main.css';
-import {createChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/create';
-import {ChatItemLayout, ChatItemProps} from '../../../../../packages/shared/src/components/ChatItem/props';
-import {updateChatItemDom} from '../../../../../packages/shared/src/components/ChatItem/update';
-import {MessageDirection, MessageStatus} from '../../../../../packages/shared/src/components/Message/props';
+import {createChatItemDom} from '@shared/components/ChatItem/create';
+import {ChatItemLayout, ChatItemProps} from '@shared/components/ChatItem/props';
+import {updateChatItemDom} from '@shared/components/ChatItem/update';
+import {MessageDirection, MessageStatus} from '@shared/components/Message/props';
 
 const newExpo = document.createElement('div');
 newExpo.innerHTML = `

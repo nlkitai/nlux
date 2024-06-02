@@ -2,7 +2,7 @@ import {AiChat} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
-import {NLErrors} from '../../../../../packages/shared/src/types/exceptions/errors';
+import {NLErrors} from '@shared/types/exceptions/errors';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';

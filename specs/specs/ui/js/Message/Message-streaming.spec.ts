@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createMessageDom} from '../../../../../packages/shared/src/components/Message/create';
-import {MessageProps} from '../../../../../packages/shared/src/components/Message/props';
-import {updateMessageDom} from '../../../../../packages/shared/src/components/Message/update';
+import {createMessageDom} from '@shared/components/Message/create';
+import {MessageProps} from '@shared/components/Message/props';
+import {updateMessageDom} from '@shared/components/Message/update';
 
 describe('When a message component is rendered and is in streaming status', () => {
     it('Should ignore the message', () => {

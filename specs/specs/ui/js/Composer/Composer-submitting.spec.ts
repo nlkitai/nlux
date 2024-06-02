@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {createComposerDom} from '../../../../../packages/shared/src/components/Composer/create';
-import {updateComposerDom} from '../../../../../packages/shared/src/components/Composer/update';
+import {createComposerDom} from '@shared/components/Composer/create';
+import {updateComposerDom} from '@shared/components/Composer/update';
 
 describe('When a composer component is rendered and is in submitting status', () => {
     it('Should render the composer with a submit button', () => {

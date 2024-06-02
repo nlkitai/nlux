@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
-import {createComposerDom} from '../../../../../packages/shared/src/components/Composer/create';
-import {ComposerProps} from '../../../../../packages/shared/src/components/Composer/props';
-import {updateComposerDom} from '../../../../../packages/shared/src/components/Composer/update';
+import {createComposerDom} from '@shared/components/Composer/create';
+import {ComposerProps} from '@shared/components/Composer/props';
+import {updateComposerDom} from '@shared/components/Composer/update';
 
 describe('When a composer component is rendered and is in typing status', () => {
     it('Should render the composer with a textarea and button', () => {
