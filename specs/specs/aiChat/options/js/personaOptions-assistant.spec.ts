@@ -67,10 +67,9 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                 // Assert
                 const selector = '.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer';
-                const nlux;
-                -avatarContainer = rootElement.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
-                expect(nlux - avatarContainer!.querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
+                const avatarContainer = rootElement.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
+                expect(avatarContainer!.querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
                     'background-image: url(https://assistant-image-url)',
                 );
             });
@@ -102,9 +101,8 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
-                const nlux;
-                -avatarContainer = rootElement.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = rootElement.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('Assistant persona photo should be rendered', async () => {
@@ -216,9 +214,8 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                     // Assert
                     const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                    const nlux;
-                    -avatarContainer = rootElement.querySelector(selector);
-                    expect(nlux - avatarContainer).toBeInTheDocument();
+                    const avatarContainer = rootElement.querySelector(selector);
+                    expect(avatarContainer).toBeInTheDocument();
                 });
 
                 it('Assistant persona DOM element should be rendered', async () => {
@@ -383,9 +380,8 @@ describe('createAiChat() + personaOptions + assistant', () => {
             await waitForRenderCycle();
 
             // Assert
-            let nlux;
-            -avatarContainer = rootElement.querySelectorAll(selector);
-            expect(nlux - avatarContainer).toHaveLength(0);
+            let avatarContainer = rootElement.querySelectorAll(selector);
+            expect(avatarContainer).toHaveLength(0);
 
             // Act
             aiChat.updateProps({
@@ -400,14 +396,14 @@ describe('createAiChat() + personaOptions + assistant', () => {
             await waitForRenderCycle();
 
             // Assert
-            nlux - avatarContainer = rootElement.querySelectorAll(selector);
-            expect(nlux - avatarContainer).toHaveLength(2);
+            avatarContainer = rootElement.querySelectorAll(selector);
+            expect(avatarContainer).toHaveLength(2);
 
-            expect(nlux - avatarContainer[0].querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
+            expect(avatarContainer[0].querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
                 'background-image: url(https://assistant-image-url)',
             );
 
-            expect(nlux - avatarContainer[1].querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
+            expect(avatarContainer[1].querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
                 'background-image: url(https://assistant-image-url)',
             );
         });

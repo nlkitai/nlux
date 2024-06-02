@@ -44,9 +44,8 @@ describe('<AiChat /> + personaOptions + user', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
-                const nlux;
-                -avatarContainer = container.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = container.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('Persona photo should be rendered', async () => {
@@ -150,9 +149,8 @@ describe('<AiChat /> + personaOptions + user', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                const nlux;
-                -avatarContainer = container.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = container.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('User persona JSX should be rendered', async () => {

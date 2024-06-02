@@ -58,10 +58,9 @@ describe('<AiChat /> + personaOptions + assistant', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const nlux;
-                -avatarContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
-                expect(nlux - avatarContainer).toBeInTheDocument();
-                expect(nlux - avatarContainer!.querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
+                const avatarContainer = container.querySelector('.nlux-comp-welcomeMessage > .nlux-comp-avatar > .nlux-comp-avatarContainer');
+                expect(avatarContainer).toBeInTheDocument();
+                expect(avatarContainer!.querySelector('.nlux-comp-avatarPicture')).toHaveStyle(
                     'background-image: url(https://assistant-image-url)',
                 );
             });
@@ -95,9 +94,8 @@ describe('<AiChat /> + personaOptions + assistant', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
-                const nlux;
-                -avatarContainer = container.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = container.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('Persona photo should be rendered', async () => {
@@ -210,9 +208,8 @@ describe('<AiChat /> + personaOptions + assistant', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                const nlux;
-                -avatarContainer = container.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = container.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('Assistant persona JSX should be rendered', async () => {

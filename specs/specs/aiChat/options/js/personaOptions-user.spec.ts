@@ -49,9 +49,8 @@ describe('createAiChat() + personaOptions + user', () => {
 
                 // Assert
                 const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > .nlux-comp-avatarContainer';
-                const nlux;
-                -avatarContainer = rootElement.querySelector(selector);
-                expect(nlux - avatarContainer).toBeInTheDocument();
+                const avatarContainer = rootElement.querySelector(selector);
+                expect(avatarContainer).toBeInTheDocument();
             });
 
             it('Persona photo should be rendered', async () => {
@@ -151,9 +150,8 @@ describe('createAiChat() + personaOptions + user', () => {
 
                     // Assert
                     const selector = '.nlux-comp-chatItem--sent > .nlux-comp-chatItem-participantInfo > .nlux-comp-avatar > #jsx-avatar';
-                    const nlux;
-                    -avatarContainer = rootElement.querySelector(selector);
-                    expect(nlux - avatarContainer).toBeInTheDocument();
+                    const avatarContainer = rootElement.querySelector(selector);
+                    expect(avatarContainer).toBeInTheDocument();
                 });
 
                 it('Persona DOM element should be rendered', async () => {
@@ -306,9 +304,8 @@ describe('createAiChat() + personaOptions + user', () => {
             await waitForRenderCycle();
 
             // Assert
-            let nlux;
-            -avatarContainer = rootElement.querySelectorAll(selector);
-            expect(nlux - avatarContainer).toHaveLength(0);
+            let avatarContainer = rootElement.querySelectorAll(selector);
+            expect(avatarContainer).toHaveLength(0);
 
             // Act
             aiChat.updateProps({
@@ -323,8 +320,8 @@ describe('createAiChat() + personaOptions + user', () => {
             await waitForRenderCycle();
 
             // Assert
-            nlux - avatarContainer = rootElement.querySelectorAll(selector);
-            expect(nlux - avatarContainer).toHaveLength(2);
+            avatarContainer = rootElement.querySelectorAll(selector);
+            expect(avatarContainer).toHaveLength(2);
         });
     });
 });
