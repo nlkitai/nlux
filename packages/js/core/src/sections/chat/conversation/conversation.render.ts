@@ -39,10 +39,10 @@ export const renderConversation: CompRenderer<
     segmentsContainer.classList.add('nlux-chatSegments-container');
 
     const conversationStartersContainer = document.createElement('div') as HTMLElement;
-    conversationStartersContainer.classList.add('nlux-comp-conversationStarters-container');
+    conversationStartersContainer.classList.add('nlux-conversationStarters-container');
 
-    appendToRoot(segmentsContainer);
     appendToRoot(conversationStartersContainer);
+    appendToRoot(segmentsContainer);
 
     //
     // Create welcome message container
@@ -63,7 +63,7 @@ export const renderConversation: CompRenderer<
         }
 
         if (renderingContext.welcomeMessageContainer) {
-            segmentsContainer.insertAdjacentElement('afterend', renderingContext.welcomeMessageContainer);
+            conversationStartersContainer.insertAdjacentElement('beforebegin', renderingContext.welcomeMessageContainer);
         }
     }
 
@@ -94,8 +94,8 @@ export const renderConversation: CompRenderer<
                     : createDefaultWelcomeMessageDom();
 
                 if (renderingContext.welcomeMessageContainer) {
-                    segmentsContainer.insertAdjacentElement(
-                        'afterend',
+                    conversationStartersContainer.insertAdjacentElement(
+                        'beforebegin',
                         renderingContext.welcomeMessageContainer,
                     );
                 }
@@ -120,8 +120,8 @@ export const renderConversation: CompRenderer<
                         : createDefaultWelcomeMessageDom();
 
                     if (renderingContext.welcomeMessageContainer) {
-                        segmentsContainer.insertAdjacentElement(
-                            'afterend',
+                        conversationStartersContainer.insertAdjacentElement(
+                            'beforebegin',
                             renderingContext.welcomeMessageContainer,
                         );
                     }

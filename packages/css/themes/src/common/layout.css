@@ -35,6 +35,10 @@
             overflow-y: auto;
             flex: 1;
             padding: var(--nlux-chtr--pdng) var(--nlux-chtr--pdng) var(--nlux-dvr--mrgBtm) var(--nlux-chtr--pdng);
+
+            > .nlux-conversationStarters-container:empty {
+                display: none;
+            }
         }
 
         > .nlux-composer-container {

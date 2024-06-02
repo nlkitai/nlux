@@ -74,12 +74,14 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                     message={personaOptions!.assistant!.tagline}
                 />
             )}
-            {showConversationStarters && (
-                <ConversationStarters
-                    items={conversationOptions!.conversationStarters ?? []}
-                    onConversationStarterSelected={props.onConversationStarterSelected}
-                />
-            )}
+            <div className="nlux-conversationStarters-container">
+                {showConversationStarters && (
+                    <ConversationStarters
+                        items={conversationOptions!.conversationStarters ?? []}
+                        onConversationStarterSelected={props.onConversationStarterSelected}
+                    />
+                )}
+            </div>
             <div className="nlux-chatSegments-container">
                 {segments.map((segment, index) => {
                     const isLastSegment = index === segments.length - 1;
