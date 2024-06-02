@@ -1,0 +1,15 @@
+.nlux-launchPad-container {
+    display: flex;
+    flex-direction: column;
+    height: fill-available;
+    height: -webkit-fill-available;
+    height: -moz-available;
+
+    > .nlux-comp-welcomeMessage {
+        flex: 2;
+    }
+
+    > .nlux-conversationStarters-container {
+        flex: 1;
+    }
+}

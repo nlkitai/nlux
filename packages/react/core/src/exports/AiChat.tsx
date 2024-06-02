@@ -18,6 +18,7 @@ import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentCha
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
 import {ConversationStarter} from '../types/conversationStarter';
+import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -118,6 +119,15 @@ export const AiChat: <AiMsg>(
     useReadyEventTrigger<AiMsg>(props);
     usePreDestroyEventTrigger<AiMsg>(props, segments);
 
+    // Class name specific to the status of the chat room
+    const compChatRoomStatusClassName = useMemo(() => {
+        if (segments.length === 0) {
+            return 'nlux-chatRoom-starting';
+        }
+
+        return 'nlux-chatRoom-active';
+    }, [segments.length, composerStatus]);
+
     const ForwardConversationComp = useMemo(
         () => forwardRef(ConversationComp<AiMsg>), []);
 
@@ -129,7 +139,15 @@ export const AiChat: <AiMsg>(
     return (
         <div className={rootClassNames} style={rootStyle}>
             <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
-            <div className="nlux-chatRoom-container">
+            <div className={`nlux-chatRoom-container ${compChatRoomStatusClassName}`}>
+                <div className="nlux-launchPad-container">
+                    <LaunchPad
+                        segments={segments}
+                        onConversationStarterSelected={handleConversationStarterSelected}
+                        conversationOptions={conversationOptions}
+                        personaOptions={props.personaOptions}
+                    />
+                </div>
                 <div className="nlux-conversation-container" ref={conversationContainerRef}>
                     <ForwardConversationComp
                         ref={conversationRef}
@@ -138,7 +156,6 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         messageOptions={props.messageOptions}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
-                        onConversationStarterSelected={handleConversationStarterSelected}
                     />
                 </div>
                 <div className="nlux-composer-container">

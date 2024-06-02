@@ -1,11 +1,12 @@
-@import './Avatar.css';
+@import './LaunchPad.css';
+@import './WelcomeMessage.css';
 @import './ConversationStarters.css';
+@import './Avatar.css';
+@import './ChatSegment.css';
 @import './ChatItem.css';
 @import './ChatItem-Bubbles.css';
 @import './ChatItem-List.css';
-@import './Loader.css';
 @import './Message.css';
+@import './Loader.css';
 @import './Composer.css';
-@import './WelcomeMessage.css';
 @import './ExceptionsBox.css';
-@import './ChatSegment.css';
