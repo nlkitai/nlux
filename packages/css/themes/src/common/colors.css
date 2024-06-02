@@ -6,6 +6,7 @@
 
     /** Welcome message */
     --nlux-wlcMsg-avtr--brdrClr: var(--nlux-WelcomeMessage-Avatar--BorderColor, grey);
+    --nlux-wlcMsg-avtr--bgClr: var(--nlux-WelcomeMessage-Avatar--BackgroundColor, grey);
 
     /** Conversation loader */
     --nlux-chtr-ldr--clr: var(--nlux-ChatRoom-Loader--Color, grey);
@@ -20,9 +21,6 @@
 
     /** Participant info in chat */
     --nlux-prtInfo-prtNm--clr: var(--nlux-ChatItem-ParticipantName--Color, cyan);
-
-    /** Chat item avatar */
-    --nlux-chItm-avtr--bgClr: var(--nlux-ChatItem-Avatar--BackgroundColor, grey);
 
     /* Human message in chat */
     --nlux-hmMsg--bgClr: var(--nlux-HumanMessage--BackgroundColor, lightgrey);

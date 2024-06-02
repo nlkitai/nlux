@@ -22,5 +22,11 @@
     > .nlux-comp-avatar {
         width: var(--nlux-wlcMsg-avtr--wd);
         border-color: var(--nlux-wlcMsg-avtr--brdrClr);
+
+        > .avatarContainer {
+            > .avatarPicture {
+                background-color: var(--nlux-wlcMsg-avtr--bgClr);
+            }
+        }
     }
 }

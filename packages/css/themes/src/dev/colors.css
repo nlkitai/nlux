@@ -19,6 +19,7 @@
 
     /** Welcome message */
     --nlux-WelcomeMessage-Avatar--BorderColor: darkgoldenrod;
+    --nlux-WelcomeMessage-Avatar--BackgroundColor: lightgrey;
 
     /** Divider between composer and messages */
     --nlux-ChatRoom-Divider--Color: red;
@@ -33,9 +34,6 @@
 
     /** Participant info in chat */
     --nlux-ChatItem-ParticipantName--Color: darkblue;
-
-    /** Chat item avatar */
-    --nlux-ChatItem-Avatar--BackgroundColor: lightgrey;
 
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: lemonchiffon;

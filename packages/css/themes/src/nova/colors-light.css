@@ -6,6 +6,7 @@
 
     /** Welcome message */
     --nlux-WelcomeMessage-Avatar--BorderColor: transparent;
+    --nlux-WelcomeMessage-Avatar--BackgroundColor: transparent;
 
     /** Divider between composer and messages */
     --nlux-ChatRoom-Divider--Color: #71717a;
@@ -20,9 +21,6 @@
 
     /** Participant info in chat */
     --nlux-ChatItem-ParticipantName--Color: #09090B;
-
-    /** Chat item avatar */
-    --nlux-ChatItem-Avatar--BackgroundColor: #09090B;
 
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: #18181B;
