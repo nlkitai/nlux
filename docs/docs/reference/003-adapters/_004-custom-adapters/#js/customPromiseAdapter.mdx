@@ -1,7 +1,7 @@
 ```typescript
-import {Adapter} from '@nlux/core';
+import {ChatAdapter} from '@nlux/core';
 
-export const myCustomAdapter: Adapter = {
+export const myCustomAdapter: ChatAdapter = {
     batchText: (message: string, extras: AdapterExtras): Promise<string> => {
         return fetch('http://localhost:8080', {
             method: 'POST',
