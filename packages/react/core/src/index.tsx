@@ -31,6 +31,7 @@ export type {
     MessageReceivedEventDetails,
     MessageRenderedCallback,
     MessageRenderedEventDetails,
+    IObserver,
 } from '@nlux/core';
 
 // Exporting from — shared
