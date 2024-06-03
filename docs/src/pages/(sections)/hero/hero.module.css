@@ -15,6 +15,10 @@
     gap: 2rem;
 }
 
+.adaptersShowcase {
+    padding: 1rem;
+}
+
 .heroTitleContainer {
     display: flex;
     flex-direction: column;

@@ -29,7 +29,7 @@ export const useChatAdapter = <AiMsg = string>(
             return;
         }
 
-        const newAdapter = getAdapterBuilder(options).create();
+        const newAdapter = getAdapterBuilder<AiMsg>(options).create();
         setAdapter(newAdapter);
     }, [
         isInitialized,
