@@ -26,19 +26,15 @@ export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
 ): ReactElement {
     const {
-        adapter,
-        className,
-        initialConversation,
-        conversationOptions,
-        composerOptions,
-        displayOptions,
+        adapter, className, initialConversation,
+        conversationOptions, composerOptions, displayOptions,
     } = props;
 
     const {themeId, colorScheme} = displayOptions ?? {};
 
     // References to DOM elements and React components:
-    // These are use for advanced interactions such as scrolling, streaming, and
-    // exceptions animation that cannot be done with the usual React state and props.
+    // These are used for advanced interactions such as scrolling, streaming, and exceptions animation
+    // that are not intuitive to implement with React declarative programming model.
     const conversationRef = useRef<ImperativeConversationCompProps<AiMsg>>(null);
     const conversationContainerRef = useRef<HTMLDivElement>(null);
     const lastActiveSegmentIdRef = useRef<string | undefined>(undefined);
@@ -62,7 +58,6 @@ export const AiChat: <AiMsg>(
         [initialSegment, chatSegments],
     );
 
-    const hasValidInput = useMemo(() => prompt.length > 0, [prompt]);
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
     const rootClassNames = useMemo(
@@ -78,11 +73,8 @@ export const AiChat: <AiMsg>(
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
-        aiChatProps: props,
-        adapterToUse,
-        conversationRef,
-        initialSegment, chatSegments,
-        prompt, composerOptions, showException,
+        aiChatProps: props, adapterToUse, conversationRef, initialSegment,
+        chatSegments, prompt, composerOptions, showException,
         setChatSegments, setComposerStatus, setPrompt,
     });
 
@@ -119,18 +111,16 @@ export const AiChat: <AiMsg>(
     useReadyEventTrigger<AiMsg>(props);
     usePreDestroyEventTrigger<AiMsg>(props, segments);
 
-    // Class name specific to the status of the chat room
-    const compChatRoomStatusClassName = useMemo(() => {
-        if (segments.length === 0) {
-            return 'nlux-chatRoom-starting';
-        }
-
-        return 'nlux-chatRoom-active';
-    }, [segments.length, composerStatus]);
-
     const ForwardConversationComp = useMemo(
-        () => forwardRef(ConversationComp<AiMsg>), []);
+        () => forwardRef(ConversationComp<AiMsg>), [],
+    );
 
+    // Variables that do not require memoization or effect
+    const hasValidInput = prompt.length > 0;
+    const compChatRoomStatusClassName = segments.length === 0 ? 'nlux-chatRoom-starting' : 'nlux-chatRoom-active';
+
+    // This should never happen when using typescript, but since adapter critical to the rest of the <AiChat />
+    // component, do add a check and a warning in case it is not provided.
     if (!adapterToUse) {
         warnOnce('AiChat: No valid adapter provided. The component will not render.');
         return <></>;
