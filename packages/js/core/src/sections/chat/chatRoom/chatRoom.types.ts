@@ -7,7 +7,7 @@ import {SanitizerExtension} from '../../../aiChat/sanitizer/sanitizer';
 import {ConversationStarter} from '../../../types/conversationStarter';
 
 export type CompChatRoomEvents = 'chat-room-ready'
-    | 'segments-container-clicked';
+    | 'conversation-container-clicked';
 
 export type CompChatRoomProps<AiMsg> = {
     visible?: boolean;
@@ -28,9 +28,11 @@ export type CompChatRoomProps<AiMsg> = {
 };
 
 export type CompChatRoomElements = {
-    chatRoomContainer: HTMLElement;
     composerContainer: HTMLElement;
     conversationContainer: HTMLElement;
+    launchPadContainer: HTMLElement;
 };
 
-export type CompChatRoomActions = void;
+export type CompChatRoomActions = {
+    updateChatRoomStatus: (status: 'starting' | 'active') => void;
+};

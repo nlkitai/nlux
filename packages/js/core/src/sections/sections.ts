@@ -8,19 +8,28 @@ import {CompConversation} from './chat/conversation/conversation.model';
 import {CompConversationStarters} from './chat/conversationStarters/conversationStarters.model';
 import {CompComposer} from './chat/composer/composer.model';
 import {CompExceptionsBox} from './miscellaneous/exceptionsBox/model';
+import {CompLaunchPad} from './chat/launchPad/launchPad.model';
 
 // Sections, in the Vanilla JavaScript version of NLUX, are a part of the library that combine user interface components,
 // as well as the logic that drives them. They are not called `components` because the term `component` is reserved for
 //` pure `UI components that do not contain any business logic.
 
 const sectionsById = () => ({
+    // The main chat room component
     'chatRoom': CompChatRoom,
-    'exceptionsBox': CompExceptionsBox,
+
+    // Kep top level components
+    'launchPad': CompLaunchPad,
     'conversation': CompConversation,
-    'conversationStarters': CompConversationStarters,
     'composer': CompComposer,
+
+    // Additional sub-components
+    'conversationStarters': CompConversationStarters,
     'chatSegment': CompChatSegment,
     'chatItem': CompChatItem,
+
+    // Miscellaneous
+    'exceptionsBox': CompExceptionsBox,
 });
 
 export const registerAllSections = () => {

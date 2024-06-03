@@ -11,7 +11,6 @@ import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
 import {ConversationLayout, HistoryPayloadSize} from '../../../aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
-import {ConversationStarter} from '../../../types/conversationStarter';
 import {CompChatSegment} from '../chatSegment/chatSegment.model';
 import {CompChatSegmentProps} from '../chatSegment/chatSegment.types';
 import {renderConversation} from './conversation.render';
@@ -22,8 +21,6 @@ import {
     CompConversationProps,
 } from './conversation.types';
 import {updateConversation} from './conversation.update';
-import {CompConversationStarters} from '../conversationStarters/conversationStarters.model';
-import {CompConversationStartersProps} from '../conversationStarters/conversationStarters.types';
 
 @Model('conversation', renderConversation, updateConversation)
 export class CompConversation<AiMsg> extends BaseComp<
@@ -31,14 +28,12 @@ export class CompConversation<AiMsg> extends BaseComp<
 > {
     private chatSegmentCompIdsByIndex: string[] = [];
     private chatSegmentComponentsById: Map<string, CompChatSegment<AiMsg>> = new Map();
-    private conversationStartersComp: CompConversationStarters<AiMsg> | undefined;
 
     constructor(context: ControllerContext<AiMsg>, props: CompConversationProps<AiMsg>) {
         super(context, props);
+
         if (props.messages && props.messages.length > 0) {
             this.addChatSegment('complete', props.messages);
-        } else {
-            this.setConversationStarters(props.conversationStarters);
         }
     }
 
@@ -57,47 +52,11 @@ export class CompConversation<AiMsg> extends BaseComp<
         chatSegment.addChatItem(item);
     }
 
-    public setConversationStarters(conversationStarters: ConversationStarter[] | undefined) {
-        if (!conversationStarters && !this.conversationStartersComp) {
-            return;
-        }
-
-        if (conversationStarters && !this.conversationStartersComp) {
-            this.conversationStartersComp = comp(CompConversationStarters<AiMsg>)
-                .withContext(this.context)
-                .withProps({
-                    conversationStarters,
-                    onConversationStarterClick: this.getProp('onConversationStarterClick') as CompConversationProps<AiMsg>['onConversationStarterClick'],
-                } satisfies CompConversationStartersProps)
-                .create();
-
-            this.addSubComponent(
-                this.conversationStartersComp.id,
-                this.conversationStartersComp,
-                'conversationStartersContainer',
-            );
-
-            return;
-        }
-
-        if (!conversationStarters && this.conversationStartersComp) {
-            this.removeSubComponent(this.conversationStartersComp.id);
-            this.conversationStartersComp = undefined;
-        } else {
-            this.conversationStartersComp?.updateConversationStarters(conversationStarters);
-        }
-    }
-
     public addChatSegment(
         status: ChatSegmentStatus = 'active',
         initialConversation?: ChatItem<AiMsg>[],
     ) {
         this.throwIfDestroyed();
-
-        if (this.conversationStartersComp) {
-            this.removeSubComponent(this.conversationStartersComp.id);
-            this.conversationStartersComp = undefined;
-        }
 
         const segmentId = uid();
         const newChatSegmentComp: CompChatSegment<AiMsg> = comp(CompChatSegment<AiMsg>)
@@ -151,7 +110,7 @@ export class CompConversation<AiMsg> extends BaseComp<
 
         const segmentComponentId = newChatSegmentComp.id;
         this.addSubComponent(segmentComponentId, newChatSegmentComp, 'segmentsContainer');
-        this.executeDomAction('removeWelcomeMessage');
+        this.notifyAboutSegmentCountChange(this.chatSegmentCompIdsByIndex.length);
 
         return segmentId;
     };
@@ -251,10 +210,7 @@ export class CompConversation<AiMsg> extends BaseComp<
             this.chatSegmentCompIdsByIndex.splice(index, 1);
         }
 
-        if (this.chatSegmentCompIdsByIndex.length === 0) {
-            this.executeDomAction('resetWelcomeMessage');
-            this.resetConversationStarters();
-        }
+        this.notifyAboutSegmentCountChange(this.chatSegmentCompIdsByIndex.length);
     }
 
     public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
@@ -262,15 +218,6 @@ export class CompConversation<AiMsg> extends BaseComp<
         this.chatSegmentComponentsById.forEach((comp) => {
             comp.setAssistantPersona(assistantPersona);
         });
-    }
-
-    public setShowWelcomeMessage(showWelcomeMessage: boolean) {
-        this.setProp('showWelcomeMessage', showWelcomeMessage);
-        if (!showWelcomeMessage) {
-            this.executeDomAction('removeWelcomeMessage');
-        } else {
-            this.executeDomAction('resetWelcomeMessage');
-        }
     }
 
     public setConversationLayout(layout: ConversationLayout) {
@@ -311,8 +258,13 @@ export class CompConversation<AiMsg> extends BaseComp<
         }
     }
 
-    private resetConversationStarters() {
-        const conversationStarters = this.getProp('conversationStarters') as ConversationStarter[] | undefined;
-        this.setConversationStarters(conversationStarters);
+    private notifyAboutSegmentCountChange(newCount: number) {
+        const callback = this.getProp(
+            'onSegmentCountChange',
+        ) as CompConversationProps<AiMsg>[ 'onSegmentCountChange'] | undefined;
+
+        if (callback) {
+            callback(newCount);
+        }
     }
 }

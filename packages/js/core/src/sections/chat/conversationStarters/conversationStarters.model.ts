@@ -27,9 +27,9 @@ export class CompConversationStarters<AiMsg> extends BaseComp<
         // TODO
     };
 
-    @CompEventListener('conversation-starter-clicked')
+    @CompEventListener('conversation-starter-selected')
     conversationStarterClicked(conversationStarter: ConversationStarter) {
-        const handler = this.getProp('onConversationStarterClick') as CompConversationStartersProps['onConversationStarterClick'];
+        const handler = this.getProp('onConversationStarterSelected') as CompConversationStartersProps['onConversationStarterSelected'];
         handler(conversationStarter);
     };
 }

@@ -5,7 +5,7 @@ import {
     CompConversationStartersEvents,
     CompConversationStartersProps,
 } from './conversationStarters.types';
-import {createConversationStartersDom} from '../conversation/utils/createConversationStartersDom';
+import {createConversationStartersDom} from './utils/createConversationStartersDom';
 import {listenToElement} from '../../../utils/dom/listenToElement';
 
 export const renderConversationStarters: CompRenderer<
@@ -31,7 +31,7 @@ export const renderConversationStarters: CompRenderer<
             conversationStartersContainer,
             `:scope > :nth-child(${index + 1})`,
         ).on('click', () => {
-            compEvent('conversation-starter-clicked')(conversationStarter);
+            compEvent('conversation-starter-selected')(conversationStarter);
         }).get();
 
         conversationStarterEventListenersCleanupFns.push(removeListener);

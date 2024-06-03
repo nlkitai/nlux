@@ -20,33 +20,42 @@ import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chatRoom.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 import {updateChatRoom} from './chatRoom.update';
+import {CompLaunchPad} from '../launchPad/launchPad.model';
+import {CompLaunchPadProps} from '../launchPad/launchPad.types';
+import {getChatRoomStatus} from './utils/getChatRoomStatus';
 
 @Model('chatRoom', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<
     AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
-    private autoScrollController: AutoScrollController | undefined;
+    private launchPad: CompLaunchPad<AiMsg> | undefined;
     private conversation!: CompConversation<AiMsg>;
-    private composerInstance!: CompComposer<AiMsg>;
-    private composerText: string = '';
+    private composer!: CompComposer<AiMsg>;
 
-    constructor(context: ControllerContext<AiMsg>, {
-                    conversationLayout,
-                    autoScroll,
-                    streamingAnimationSpeed,
-                    visible = true,
-                    composer,
-                    assistantPersona,
-                    userPersona,
-                    showWelcomeMessage,
-                    conversationStarters,
-                    initialConversationContent,
-                    syntaxHighlighter,
-                    htmlSanitizer,
-                    markdownLinkTarget,
-                    showCodeBlockCopyButton,
-                    skipStreamingAnimation,
-                }: CompChatRoomProps<AiMsg>,
+    private prompt: string = '';
+    private autoScrollController: AutoScrollController | undefined;
+
+    private chatRoomStatus: 'starting' | 'active'; // Starting = Display launch pad, Active = Display conversation
+    private segmentCount: number; // How many segments are in the conversation (used to determine the chat room status)
+
+    constructor(
+        context: ControllerContext<AiMsg>, {
+            conversationLayout,
+            autoScroll,
+            streamingAnimationSpeed,
+            visible = true,
+            composer,
+            assistantPersona,
+            userPersona,
+            showWelcomeMessage,
+            conversationStarters,
+            initialConversationContent,
+            syntaxHighlighter,
+            htmlSanitizer,
+            markdownLinkTarget,
+            showCodeBlockCopyButton,
+            skipStreamingAnimation,
+        }: CompChatRoomProps<AiMsg>,
     ) {
         super(context, {
             conversationLayout,
@@ -66,21 +75,28 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             skipStreamingAnimation,
         });
 
-        this.addConversation(
-            assistantPersona,
-            userPersona,
-            initialConversationContent,
-        );
+        // Set status
+        this.segmentCount = initialConversationContent && initialConversationContent.length > 0 ? 1 : 0;
+        this.chatRoomStatus = getChatRoomStatus(initialConversationContent, this.segmentCount);
 
+        // Add optional launch pad component
+        if (this.chatRoomStatus === 'starting') {
+            this.addLaunchPad(
+                showWelcomeMessage, assistantPersona,
+                conversationStarters, this.handleConversationStarterClick,
+            );
+        }
+
+        // Add required conversation and composer components
+        this.addConversation(assistantPersona, userPersona, initialConversationContent);
         this.addComposer(
-            composer?.placeholder,
-            composer?.autoFocus,
-            composer?.disableSubmitButton,
-            composer?.submitShortcut,
+            composer?.placeholder, composer?.autoFocus,
+            composer?.disableSubmitButton, composer?.submitShortcut,
         );
 
-        if (!this.conversation || !this.composerInstance) {
-            throw new Error('Conversation is not initialized');
+        if (!this.conversation || !this.composer) {
+            // The conversation and the composer are mandatory components
+            throw new Error('Chat room not initialized — An error occurred while initializing key components.');
         }
     }
 
@@ -92,9 +108,9 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.setProp('visible', false);
     }
 
-    @CompEventListener('segments-container-clicked')
+    @CompEventListener('conversation-container-clicked')
     messagesContainerClicked() {
-        this.composerInstance?.focusTextInput();
+        this.composer?.focusTextInput();
     }
 
     @CompEventListener('chat-room-ready')
@@ -170,6 +186,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
 
         if (props.hasOwnProperty('assistantPersona')) {
             this.conversation?.setAssistantPersona(props.assistantPersona ?? undefined);
+            this.launchPad?.setAssistantPersona(props.assistantPersona ?? undefined);
         }
 
         if (props.hasOwnProperty('userPersona')) {
@@ -177,22 +194,18 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }
 
         if (props.hasOwnProperty('showWelcomeMessage')) {
-            this.conversation?.setShowWelcomeMessage(props.showWelcomeMessage ?? true);
+            this.launchPad?.setShowWelcomeMessage(props.showWelcomeMessage ?? true);
         }
 
         if (props.hasOwnProperty('conversationStarters')) {
-            this.conversation?.setConversationStarters(props.conversationStarters);
+            this.launchPad?.setConversationStarters(props.conversationStarters);
         }
 
         if (props.hasOwnProperty('composer')) {
-            if (this.composerInstance) {
-                const currentDomProps = this.composerInstance.getProp('domCompProps')!;
-                const newProps: ComposerProps = {
-                    ...currentDomProps,
-                    ...props.composer,
-                };
-
-                this.composerInstance.setDomProps(newProps);
+            if (this.composer) {
+                const currentDomProps = this.composer.getProp('domCompProps')!;
+                const newProps: ComposerProps = {...currentDomProps, ...props.composer};
+                this.composer.setDomProps(newProps);
             }
         }
     }
@@ -214,6 +227,25 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }
     }
 
+    private addLaunchPad(
+        showWelcomeMessage: boolean | undefined,
+        assistantPersona: AssistantPersona | undefined,
+        conversationStarters: ConversationStarter[] | undefined,
+        onConversationStarterSelected: (conversationStarter: ConversationStarter) => void,
+    ) {
+        this.launchPad = comp(CompLaunchPad<AiMsg>)
+            .withContext(this.context)
+            .withProps({
+                showWelcomeMessage,
+                assistantPersona,
+                conversationStarters,
+                onConversationStarterSelected,
+            } satisfies CompLaunchPadProps)
+            .create();
+
+        this.addSubComponent(this.launchPad.id, this.launchPad, 'launchPadContainer');
+    }
+
     private addConversation(
         assistantPersona?: AssistantPersona,
         userPersona?: UserPersona,
@@ -224,9 +256,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             .withProps<CompConversationProps<AiMsg>>({
                 assistantPersona,
                 userPersona,
-                showWelcomeMessage: this.getProp('showWelcomeMessage') as boolean | undefined,
                 messages: initialConversationContent,
-                conversationStarters: this.getProp('conversationStarters') as ConversationStarter[] | undefined,
                 conversationLayout: this.getProp('conversationLayout') as ConversationLayout,
                 markdownLinkTarget: this.getProp('markdownLinkTarget') as 'blank' | 'self' | undefined,
                 showCodeBlockCopyButton: this.getProp('showCodeBlockCopyButton') as boolean | undefined,
@@ -234,15 +264,11 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 streamingAnimationSpeed: this.getProp('streamingAnimationSpeed') as number | undefined,
                 syntaxHighlighter: this.getProp('syntaxHighlighter') as HighlighterExtension | undefined,
                 htmlSanitizer: this.getProp('htmlSanitizer') as ((html: string) => string) | undefined,
-                onConversationStarterClick: this.handleConversationStarterClick,
+                onSegmentCountChange: this.handleSegmentCountChange,
             })
             .create();
 
-        this.addSubComponent(
-            this.conversation.id,
-            this.conversation,
-            'conversationContainer',
-        );
+        this.addSubComponent(this.conversation.id, this.conversation, 'conversationContainer');
     }
 
     private addComposer(
@@ -251,7 +277,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         disableSubmitButton?: boolean,
         submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
-        this.composerInstance = comp(CompComposer<AiMsg>).withContext(this.context).withProps({
+        this.composer = comp(CompComposer<AiMsg>).withContext(this.context).withProps({
             props: {
                 domCompProps: {
                     status: 'typing',
@@ -267,7 +293,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             },
         }).create();
 
-        this.addSubComponent(this.composerInstance.id, this.composerInstance, 'composerContainer');
+        this.addSubComponent(this.composer.id, this.composer, 'composerContainer');
     }
 
     private handleConversationStarterClick = (conversationStarter: ConversationStarter) => {
@@ -276,21 +302,18 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         // Set the composer as waiting
         // Submit the prompt
 
-        this.composerInstance.setDomProps({
-            status: 'submitting-conversation-starter',
-        });
-
-        this.composerInstance.handleTextChange(conversationStarter.prompt);
-        this.composerInstance.handleSendButtonClick();
+        this.composer.setDomProps({status: 'submitting-conversation-starter'});
+        this.composer.handleTextChange(conversationStarter.prompt);
+        this.composer.handleSendButtonClick();
     };
 
     private handleComposerSubmit() {
         const composerProps: Partial<ComposerProps> | undefined = this.props.composer;
         submitPromptFactory({
             context: this.context,
-            composerInstance: this.composerInstance,
+            composerInstance: this.composer,
             conversation: this.conversation,
-            messageToSend: this.composerText,
+            messageToSend: this.prompt,
             autoScrollController: this.autoScrollController,
             resetComposer: (resetTextInput?: boolean) => {
                 // Check to handle edge case when reset is called after the component is destroyed!
@@ -302,37 +325,61 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             },
             setComposerAsWaiting: () => {
                 if (!this.destroyed) {
-                    this.composerInstance.setDomProps({
-                        status: 'waiting',
-                    });
+                    this.composer.setDomProps({status: 'waiting'});
                 }
             },
         })();
     }
 
     private handleComposerTextChange(newValue: string) {
-        this.composerText = newValue;
+        this.prompt = newValue;
     }
 
-    private resetComposer(resetTextInput: boolean = false, focusOnReset: boolean = false) {
-        if (!this.composerInstance) {
+    private handleSegmentCountChange = (newSegmentCount: number) => {
+        if (this.segmentCount === newSegmentCount) {
             return;
         }
 
-        const currentCompProps = this.composerInstance.getProp('domCompProps') as ComposerProps;
-        const newProps: ComposerProps = {
-            ...currentCompProps,
-            status: 'typing',
-        };
+        this.segmentCount = newSegmentCount;
+        const newChatRoomStatus = getChatRoomStatus(
+            (this.getProp('initialConversationContent') || undefined) as ChatItem<AiMsg>[] | undefined,
+            this.segmentCount,
+        );
 
+        if (this.chatRoomStatus !== newChatRoomStatus) {
+            this.chatRoomStatus = newChatRoomStatus;
+            this.executeDomAction('updateChatRoomStatus', this.chatRoomStatus);
+
+            if (this.chatRoomStatus === 'active') {
+                if (this.launchPad?.id) {
+                    this.removeSubComponent(this.launchPad?.id);
+                    this.launchPad = undefined;
+                }
+            } else {
+                this.addLaunchPad(
+                    (this.getProp('showWelcomeMessage') as boolean | undefined) ?? true,
+                    this.getProp('assistantPersona') as AssistantPersona | undefined,
+                    this.getProp('conversationStarters') as ConversationStarter[] | undefined,
+                    this.handleConversationStarterClick,
+                );
+            }
+        }
+    };
+
+    private resetComposer(resetTextInput: boolean = false, focusOnReset: boolean = false) {
+        if (!this.composer) {
+            return;
+        }
+
+        const currentCompProps = this.composer.getProp('domCompProps') as ComposerProps;
+        const newProps: ComposerProps = {...currentCompProps, status: 'typing'};
         if (resetTextInput) {
             newProps.message = '';
         }
 
-        this.composerInstance.setDomProps(newProps);
-
+        this.composer.setDomProps(newProps);
         if (focusOnReset) {
-            this.composerInstance.focusTextInput();
+            this.composer.focusTextInput();
         }
     }
 }
