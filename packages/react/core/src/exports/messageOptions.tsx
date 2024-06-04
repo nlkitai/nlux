@@ -47,7 +47,9 @@ export type BatchResponseComponentProps<AiMsg> = {
     serverResponse: unknown;
 };
 
-export type ResponseRenderer<AiMsg> = FC<StreamResponseComponentProps<AiMsg>> | FC<BatchResponseComponentProps<AiMsg>>;
+export type ResponseRenderer<AiMsg> = FC<
+    StreamResponseComponentProps<AiMsg> | BatchResponseComponentProps<AiMsg>
+>;
 
 export type PromptRendererProps = {
     uid: string;
