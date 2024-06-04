@@ -12,7 +12,7 @@ export const chatItemsToChatSegment = <AiMsg>(
         if (message.role !== 'assistant' && message.role !== 'user') {
             warn(
                 `Invalid role for item at index ${index} in initial conversation: ` +
-                `Role must be "ai" or "user"`,
+                `Role must be "assistant" or "user"`,
             );
 
             return;
