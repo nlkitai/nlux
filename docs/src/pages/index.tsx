@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
     const {siteConfig} = useDocusaurusContext();
     return (
         <Layout
-            title={`${siteConfig.title} | ${siteConfig.tagline}`}
+            title="The Powerful Conversational AI JavaScript Library"
             description={headerDescription}
         >
             <Hero className={styles.nluxHomeSection}/>
