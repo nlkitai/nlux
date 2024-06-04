@@ -58,10 +58,10 @@ export const Hero = ({className}: { className?: string }) => {
                     </div>
                 </div>
                 <div>
-                    <div className={heroStyles.integrationsTitle}>
-                        Integrates with
-                    </div>
                     <div className={heroStyles.adaptersShowcase}>
+                        <div className={heroStyles.integrationsTitle}>
+                            Integrates with
+                        </div>
                         <div className={heroStyles.platformName}>
                             <img src={LangChainLogo} alt="LangChain Logo" width={40}/>
                             <h5 style={{textAlign: 'left'}}>LangChain</h5>
@@ -83,7 +83,7 @@ export const Hero = ({className}: { className?: string }) => {
                 <div className={styles.nluxInAction}>
                     <p>
                         <strong><code>@nlux/react</code> in action</strong> 👇 ―
-                        You can edit the code below to see how it works.
+                        Edit the code below to see how it works.
                     </p>
                     <CodeEditor
                         className={styles.codeEditor}
