@@ -83,4 +83,9 @@
     --nlux-InlineCode--BackgroundColor: #fff9d8;
     --nlux-InlineCode--BorderColor: transparent;
     --nlux-InlineCode--TextColor: black;
+
+    /** Conversation starters */
+    --nlux-ConversationStarter--BackgroundColor: var(--nlux-HumanMessage--BackgroundColor);
+    --nlux-ConversationStarter--BorderColor: transparent;
+    --nlux-ConversationStarter--TextColor: var(--nlux-HumanMessage--TextColor);
 }
