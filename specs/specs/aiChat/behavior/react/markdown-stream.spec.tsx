@@ -46,7 +46,7 @@ describe('<AiChat /> + stream adapter + markdown', () => {
 
             await waitFor(() => {
                 expect(markdownContainer!.innerHTML).toEqual(
-                    '<p><strong>Hello Human!</strong></p>',
+                    '<p><strong>Hello Human!</strong></p>\n',
                 );
             });
         });

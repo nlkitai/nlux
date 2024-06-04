@@ -102,7 +102,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             // Assert
             const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container') as HTMLElement | null;
             expect(markdownContainer).toBeInTheDocument();
-            expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank">xere</a> i xand over a link! xaxa :) !</div>');
+            expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank">xere</a> i xand over a link! xaxa :) !</div>\n');
         });
     });
 });

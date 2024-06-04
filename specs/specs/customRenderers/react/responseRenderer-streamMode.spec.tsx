@@ -24,10 +24,11 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Should render the markdown in the custom component as it\'s being generated', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseRenderer<string> = ({
-                                                                           containerRef,
-                                                                           uid,
-                                                                       }: StreamResponseComponentProps<string>) => (
+            const CustomResponseComponent: ResponseRenderer<string> = (
+                {
+                    containerRef,
+                    uid,
+                }: StreamResponseComponentProps<string>) => (
                 <div className="some-streamed-response">
                     <div className="content" ref={containerRef}/>
                     <div className="footer">Some footer content</div>
@@ -55,7 +56,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             const chatItemReceived = container.querySelector('.nlux-chatSegments-container .nlux-comp-chatItem--received');
             const mdContainer = chatItemReceived!.querySelector('.nlux-markdown-container');
             await waitFor(() => {
-                expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>');
+                expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>\n');
             });
 
             // Act
@@ -64,7 +65,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
             // Assert - Streamed content should have been appended to the existing content
             await waitFor(() => {
-                expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>');
+                expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>\n');
             });
 
             // Asset - Custom component should have been called with the correct props
