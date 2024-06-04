@@ -32,6 +32,17 @@ export const createMdStreamRenderer: StandardStreamParser = (
 
             // Append the new chunk to the raw text and parse
             rawText += chunk;
+
+            //
+            // TODO - Important performance optimization
+            //
+            // We should only parse the last chunk (in it release context) instead of the whole text
+            // In order to do that, we need to distinguish between:
+            //   - We will have WIP text to being parsed, and may be incomplete (example: `# Hello, `)
+            //   - Text that is committed to the DOM and will not change (example: `# Hello World!\n\n`)
+            //
+            // We need to implement logic to handle the WIP text
+            //
             const parsedMarkdown = parseMdSnapshot(rawText, options);
 
             if (typeof parsedMarkdown !== 'string') {

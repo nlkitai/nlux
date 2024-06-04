@@ -28,7 +28,7 @@ export const MarkdownSnapshotRenderer = (props: {
     ]);
 
     useEffect(() => {
-        if (markdownContainerRef.current && markdownOptions?.showCodeBlockCopyButton) {
+        if (markdownContainerRef.current && markdownOptions?.showCodeBlockCopyButton !== false) {
             attachCopyClickListener(markdownContainerRef.current);
         }
     }, [parsedContent, markdownContainerRef.current, markdownOptions?.showCodeBlockCopyButton]);
