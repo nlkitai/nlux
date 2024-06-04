@@ -1,138 +1,58 @@
 import {StandardStreamParser} from '../../types/markdown/streamParser';
-import {RootProcessor} from './processors/Root';
-
-export const markdownDefaultStreamingAnimationSpeed = 10; // We render a new character every 10ms (if available)
+import {marked} from '../snapshot/marked/marked';
+import {warn} from '../../utils/warn';
 
 export const createMdStreamRenderer: StandardStreamParser = (
     root: HTMLElement,
     options,
 ) => {
+    let isComplete = false;
+    let completeStreamTimer = setTimeout(() => {
+        isComplete = true;
+        options?.onComplete?.();
+    }, 2000);
+
     const {
-        syntaxHighlighter,
         htmlSanitizer,
-        streamingAnimationSpeed = markdownDefaultStreamingAnimationSpeed,
-        markdownLinkTarget,
-        showCodeBlockCopyButton,
-        skipStreamingAnimation = false,
         onComplete,
     } = options || {};
-    const rootMarkdownProcessor = new RootProcessor(
-        root,
-        undefined,
-        {
-            syntaxHighlighter,
-            htmlSanitizer,
-            markdownLinkTarget,
-            showCodeBlockCopyButton,
-        },
-    );
 
-    const charactersQueue: string[] = [];
-
-    let numberOfChecksWithEmptyCharactersQueue = 0;
-    let completeStreamCalledByUser = false;
-    let status: 'idle' | 'processing' | 'waitingForMoreCharacters' | 'closed' = 'idle';
-
-    // skipStreamingAnimation => 0 milliseconds between characters (no animation)
-    // streamingAnimationSpeed => speed value that cannot be lower than 0
-    const streamingAnimationSpeedToUse = skipStreamingAnimation ? 0 : Math.max(streamingAnimationSpeed, 0);
-
-    // If no characters are processed for 2 seconds, we consider the stream complete and we close it.
-    // Even if the user did not call the complete() method, we close the stream after 2 seconds.
-    // A closed stream will not accept any more characters.
-    const delayInMsBeforeClosingTheStream = 2000;
-    const delayBetweenChecksBeforeCompletion = streamingAnimationSpeed > 0 ? streamingAnimationSpeed : 20;
-    const numberOfEmptyChecksBeforeCompletion = Math.ceil(
-        delayInMsBeforeClosingTheStream / delayBetweenChecksBeforeCompletion,
-    );
-
-    const processCharactersQueue = () => {
-
-        // We do not process any more characters if the stream is closed.
-        if (status === 'closed') {
-            return;
-        }
-
-        if (status === 'idle') {
-            // We are starting to process characters, and we update the status accordingly.
-            status = 'processing';
-        }
-
-        //
-        // Here we know that status is either 'processing' or 'waitingForMoreCharacters'.
-        //
-
-        //
-        // We only close the stream and stop accepting more characters if the queue is empty AND
-        // if we have waited for several additional checks ( numberOfEmptyChecksBeforeCompletion )
-        // to make sure we are not closing the stream too early.
-        //
-        if (charactersQueue.length === 0) {
-            const shouldWaitForMoreCharacters = (
-                completeStreamCalledByUser === false &&
-                numberOfChecksWithEmptyCharactersQueue < numberOfEmptyChecksBeforeCompletion
-            );
-
-            if (shouldWaitForMoreCharacters) {
-                //
-                // We wait for more characters to be added to the queue
-                //
-                status = 'waitingForMoreCharacters';
-                numberOfChecksWithEmptyCharactersQueue += 1;
-                setTimeout(processCharactersQueue, delayBetweenChecksBeforeCompletion);
-            } else {
-                //
-                // We close the stream and call the onComplete() callback
-                //
-                rootMarkdownProcessor.processCharacter('\n');
-                rootMarkdownProcessor.complete();
-                rootMarkdownProcessor.yield();
-
-                if (options?.htmlSanitizer) {
-                    root.innerHTML = options.htmlSanitizer(root.innerHTML);
-                }
-
-                status = 'closed';
-                onComplete?.();
-            }
-
-            return;
-        }
-
-        //
-        // Queue is not empty, we process the next character
-        //
-        status = 'processing';
-        numberOfChecksWithEmptyCharactersQueue = 0;
-
-        const character = charactersQueue.shift();
-        if (character) {
-            rootMarkdownProcessor.processCharacter(character);
-        }
-
-        setTimeout(
-            processCharactersQueue,
-            streamingAnimationSpeedToUse,
-        );
-    };
+    let rawText = '';
 
     return {
         next: (chunk: string) => {
-            if (!chunk) {
+            if (isComplete) {
+                console.warn('Stream is closed. Chunk will be ignored');
                 return;
             }
 
-            for (let i = 0; i < chunk.length; i++) {
-                charactersQueue.push(chunk[i]);
+            // Set the stream to complete after 2 seconds of no new chunks
+            clearTimeout(completeStreamTimer);
+            completeStreamTimer = setTimeout(() => {
+                isComplete = true;
+                options?.onComplete?.();
+            }, 2000);
+
+            // Append the new chunk to the raw text and parse
+            rawText += chunk;
+            const parsedMarkdown = marked(rawText, {
+                async: false,
+                gfm: true,
+                breaks: true,
+            });
+
+            if (typeof parsedMarkdown !== 'string') {
+                // Remove the last chunk if parsing failed
+                rawText = rawText.slice(0, -chunk.length);
+                warn('Markdown parsing failed');
+                return;
             }
 
-            // Trigger initial processing
-            if (status === 'idle') {
-                processCharactersQueue();
-            }
+            // Sanitize the HTML and update the root element
+            root.innerHTML = htmlSanitizer ? htmlSanitizer(parsedMarkdown) : parsedMarkdown;
         },
         complete: () => {
-            completeStreamCalledByUser = true;
+            onComplete?.();
         },
         error: () => {
             // No error handling for now

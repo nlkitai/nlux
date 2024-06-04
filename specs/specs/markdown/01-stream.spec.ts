@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it, vi} from 'vitest';
-import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/stream/streamParser';
-import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
+import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
+import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 import {waitForMilliseconds} from '../../utils/wait';
 
 describe('MD Stream Parser Streaming', () => {
@@ -16,23 +16,23 @@ describe('MD Stream Parser Streaming', () => {
         it('should render text in a <p /> tag as it\'s being streamed', async () => {
             streamRenderer.next('H');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>H</p>');
+            expect(rootElement.innerHTML).toBe('<p>H</p>\n');
 
             streamRenderer.next('e');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>He</p>');
+            expect(rootElement.innerHTML).toBe('<p>He</p>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>Hel</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hel</p>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>Hell</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hell</p>\n');
 
             streamRenderer.next('o');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>Hello</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hello</p>\n');
 
             streamRenderer.complete!();
         });
@@ -45,12 +45,12 @@ describe('MD Stream Parser Streaming', () => {
 
             streamRenderer.next('H');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>H</p>');
+            expect(rootElement.innerHTML).toBe('<p>H</p>\n');
             expect(onComplete).not.toHaveBeenCalled();
 
             streamRenderer.next('i');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<p>Hi</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hi</p>\n');
             expect(onComplete).not.toHaveBeenCalled();
 
             streamRenderer.complete!();
@@ -65,7 +65,7 @@ describe('MD Stream Parser Streaming', () => {
             streamRenderer.next('Hi');
             await waitForMilliseconds(50);
 
-            expect(rootElement.innerHTML).toBe('<p>Hi</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hi</p>\n');
             expect(onComplete).not.toHaveBeenCalled();
 
             await waitForMilliseconds(2200);
@@ -77,31 +77,31 @@ describe('MD Stream Parser Streaming', () => {
         it('should render text in a <h1 /> tag as it\'s being streamed', async () => {
             streamRenderer.next('#');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('');
+            expect(rootElement.innerHTML).toBe('<h1></h1>\n');
 
             streamRenderer.next(' ');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1></h1>');
+            expect(rootElement.innerHTML).toBe('<h1></h1>\n');
 
             streamRenderer.next('H');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1>H</h1>');
+            expect(rootElement.innerHTML).toBe('<h1>H</h1>\n');
 
             streamRenderer.next('e');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1>He</h1>');
+            expect(rootElement.innerHTML).toBe('<h1>He</h1>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1>Hel</h1>');
+            expect(rootElement.innerHTML).toBe('<h1>Hel</h1>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1>Hell</h1>');
+            expect(rootElement.innerHTML).toBe('<h1>Hell</h1>\n');
 
             streamRenderer.next('o');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h1>Hello</h1>');
+            expect(rootElement.innerHTML).toBe('<h1>Hello</h1>\n');
 
             streamRenderer.complete!();
         });
@@ -111,35 +111,35 @@ describe('MD Stream Parser Streaming', () => {
         it('should render text in a <h2 /> tag as it\'s being streamed', async () => {
             streamRenderer.next('#');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('');
+            expect(rootElement.innerHTML).toBe('<h1></h1>\n');
 
             streamRenderer.next('#');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('');
+            expect(rootElement.innerHTML).toBe('<h2></h2>\n');
 
             streamRenderer.next(' ');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2></h2>');
+            expect(rootElement.innerHTML).toBe('<h2></h2>\n');
 
             streamRenderer.next('H');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2>H</h2>');
+            expect(rootElement.innerHTML).toBe('<h2>H</h2>\n');
 
             streamRenderer.next('e');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2>He</h2>');
+            expect(rootElement.innerHTML).toBe('<h2>He</h2>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2>Hel</h2>');
+            expect(rootElement.innerHTML).toBe('<h2>Hel</h2>\n');
 
             streamRenderer.next('l');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2>Hell</h2>');
+            expect(rootElement.innerHTML).toBe('<h2>Hell</h2>\n');
 
             streamRenderer.next('o');
             await waitForMilliseconds(50);
-            expect(rootElement.innerHTML).toBe('<h2>Hello</h2>');
+            expect(rootElement.innerHTML).toBe('<h2>Hello</h2>\n');
 
             streamRenderer.complete!();
         });

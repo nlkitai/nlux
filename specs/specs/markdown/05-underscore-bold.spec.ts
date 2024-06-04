@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it} from 'vitest';
-import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/stream/streamParser';
-import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
+import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
+import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Underscore Bold Markdowns Parser', () => {
@@ -17,7 +17,7 @@ describe('Underscore Bold Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong>World</strong> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <strong>World</strong> !</p>\n');
     });
 
     it('should render a bold at the end of a paragraph', async () => {
@@ -25,7 +25,7 @@ describe('Underscore Bold Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong>World</strong></p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <strong>World</strong></p>\n');
     });
 
     it('should render a bold at the beginning of a paragraph', async () => {
@@ -33,7 +33,7 @@ describe('Underscore Bold Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><strong>Hello</strong> World</p>');
+        expect(rootElement.innerHTML).toBe('<p><strong>Hello</strong> World</p>\n');
     });
 
     it('should wrap bold in a paragraph', async () => {
@@ -41,7 +41,7 @@ describe('Underscore Bold Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><strong>Hello World</strong></p>');
+        expect(rootElement.innerHTML).toBe('<p><strong>Hello World</strong></p>\n');
     });
 
     it('should embed bold into a paragraph, and code into the bold', async () => {
@@ -49,30 +49,30 @@ describe('Underscore Bold Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><strong>Hello <code>World</code></strong></p>');
+        expect(rootElement.innerHTML).toBe('<p><strong>Hello <code>World</code></strong></p>\n');
     });
 
-    it('should embed code into a paragraph, and bold into the code', async () => {
+    it('should embed code into a paragraph, and but not embed bold into the code', async () => {
         streamRenderer.next('`Hello __World__`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code>Hello <strong>World</strong></code></p>');
+        expect(rootElement.innerHTML).toBe('<p><code>Hello __World__</code></p>\n');
     });
 
-    it('should embed bold at the beginning of inline code', async () => {
+    it('should not embed bold at the beginning of inline code', async () => {
         streamRenderer.next('`__Hello__ World`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code><strong>Hello</strong> World</code></p>');
+        expect(rootElement.innerHTML).toBe('<p><code>__Hello__ World</code></p>\n');
     });
 
-    it('should embed bold at the end of inline code', async () => {
+    it('should not embed bold at the end of inline code', async () => {
         streamRenderer.next('`Hello __World__`');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code>Hello <strong>World</strong></code></p>');
+        expect(rootElement.innerHTML).toBe('<p><code>Hello __World__</code></p>\n');
     });
 });

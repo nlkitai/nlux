@@ -1,7 +1,7 @@
 import {highlighter} from '@nlux/highlighter';
 import {beforeEach, describe, expect, it} from 'vitest';
-import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/stream/streamParser';
-import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
+import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
+import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Code Block Markdown Parser With Syntax Highlighter', () => {

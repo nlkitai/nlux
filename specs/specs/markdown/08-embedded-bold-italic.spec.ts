@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, it} from 'vitest';
-import {createMdStreamRenderer} from '../../../packages/shared/src/markdown/stream/streamParser';
-import {StandardStreamParserOutput} from '../../../packages/shared/src/types/markdown/streamParser';
+import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
+import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
 describe('Embedded Bold Italic Markdowns Parser', () => {
@@ -12,20 +12,20 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
     });
 
-    it('should render an italic with asterisk immediately inside bold', async () => {
+    it('should render a strong with asterisk immediately inside italic', async () => {
         streamRenderer.next('Hello ***World*** !');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>\n');
     });
 
-    it('should render italic with underscores immediately inside bold', async () => {
+    it('should render bold with underscores immediately inside italic', async () => {
         streamRenderer.next('Hello ___World___ !');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>\n');
     });
 
     it('should render bold with asterisks immediately inside italic with underscores', async () => {
@@ -33,7 +33,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>\n');
     });
 
     it('should render bold with underscores immediately inside italic with asterisks', async () => {
@@ -41,7 +41,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em> !</p>\n');
     });
 
     it('should render italic with asterisks immediately inside bold with underscores', async () => {
@@ -49,7 +49,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>\n');
     });
 
     it('should render italic with underscores immediately inside bold with asterisks', async () => {
@@ -57,7 +57,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong> !</p>\n');
     });
 
     it('should render bold with asterisks immediately inside italic with asterisks, followed by extra asterisk',
@@ -66,7 +66,7 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
             streamRenderer.complete!();
             await waitForMdStreamToComplete();
 
-            expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong>** !</p>');
+            expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em>** !</p>\n');
         },
     );
 
@@ -76,14 +76,14 @@ describe('Embedded Bold Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <strong><em>World</em></strong>__ !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><strong>World</strong></em>__ !</p>\n');
     });
 
-    it('should render code inside bold inside code inside italic', async () => {
+    it('should not render code inside bold inside code inside italic', async () => {
         streamRenderer.next('Hello _`**`World`**`_ !');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <em><code><strong><code>World</code></strong></code></em> !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em><code>**</code>World<code>**</code></em> !</p>\n');
     });
 });
