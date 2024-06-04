@@ -99,4 +99,10 @@
     --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth, 6px);
     --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius, 20px);
     --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-Focus-Outline--Width, 6px);
+
+    /** Conversation starters */
+    --nlux-cvStrt--pdng: var(--nlux-ConversationStarter--Padding, 0 10px);
+    --nlux-cvStrt--brdrRd: var(--nlux-ConversationStarter--BorderRadius, 8px);
+    --nlux-cvStrt--brdrWd: var(--nlux-ConversationStarter--BorderWidth, 2px);
+    --nlux-cvStrt--gap: var(--nlux-ConversationStarter--Gap, 10px);
 }

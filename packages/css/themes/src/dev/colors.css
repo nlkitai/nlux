@@ -96,4 +96,9 @@
     --nlux-InlineCode--BackgroundColor: chartreuse;
     --nlux-InlineCode--BorderColor: darkgreen;
     --nlux-InlineCode--TextColor: black;
+
+    /** Conversation starters */
+    --nlux-ConversationStarter--BackgroundColor: yellow;
+    --nlux-ConversationStarter--BorderColor: red;
+    --nlux-ConversationStarter--TextColor: darkgreen;
 }

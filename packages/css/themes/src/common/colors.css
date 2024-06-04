@@ -83,4 +83,9 @@
     --nlux-inlnCd--bgClr: var(--nlux-InlineCode--BackgroundColor, ghostwhite);
     --nlux-inlnCd--brdClr: var(--nlux-InlineCode--BorderColor, grey);
     --nlux-inlnCd--txtClr: var(--nlux-InlineCode--TextColor, black);
+
+    /** Conversation starters */
+    --nlux-cvStrt--bgClr: var(--nlux-ConversationStarter--BackgroundColor, palevioletred);
+    --nlux-cvStrt--brdClr: var(--nlux-ConversationStarter--BorderColor, darkred);
+    --nlux-cvStrt--txtClr: var(--nlux-ConversationStarter--TextColor, white);
 }

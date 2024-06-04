@@ -9,14 +9,20 @@
         gap: 10px;
         width: max-content;
         min-width: 100%;
+        padding: var(--nlux-cvStrt--pdng);
 
         > .nlux-comp-conversationStarter {
             display: inline-block;
             width: 120px;
             height: 80px;
 
-            border-radius: 8px;
-            background-color: palevioletred;
+            border-color: var(--nlux-cvStrt--brdClr);
+            border-width: var(--nlux-cvStrt--brdrWd);
+            border-radius: var(--nlux-cvStrt--brdrRd);
+            border-style: solid;
+
+            color: var(--nlux-cvStrt--txtClr);
+            background-color: var(--nlux-cvStrt--bgClr);
         }
     }
 }
