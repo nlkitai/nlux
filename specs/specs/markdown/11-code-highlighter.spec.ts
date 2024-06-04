@@ -23,7 +23,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;</div></pre></div>',
+            '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;\n</div></pre></div>\n',
         );
     });
 
@@ -33,7 +33,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;</div></pre></div>',
+            '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>;\n</div></pre></div>\n',
         );
     });
 

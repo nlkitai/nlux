@@ -1,28 +1,25 @@
 import {StandardStreamParser} from '../../types/markdown/streamParser';
-import {marked} from '../snapshot/marked/marked';
 import {warn} from '../../utils/warn';
+import {parseMdSnapshot} from '../snapshot/snapshotParser';
+import {attachCopyClickListener} from '../copyToClipboard/attachCopyClickListener';
 
 export const createMdStreamRenderer: StandardStreamParser = (
     root: HTMLElement,
     options,
 ) => {
+    let rawText = '';
     let isComplete = false;
     let completeStreamTimer = setTimeout(() => {
         isComplete = true;
         options?.onComplete?.();
     }, 2000);
 
-    const {
-        htmlSanitizer,
-        onComplete,
-    } = options || {};
-
-    let rawText = '';
+    const {onComplete} = options || {};
 
     return {
         next: (chunk: string) => {
             if (isComplete) {
-                console.warn('Stream is closed. Chunk will be ignored');
+                warn('Stream is closed. Chunk will be ignored');
                 return;
             }
 
@@ -35,11 +32,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
 
             // Append the new chunk to the raw text and parse
             rawText += chunk;
-            const parsedMarkdown = marked(rawText, {
-                async: false,
-                gfm: true,
-                breaks: true,
-            });
+            const parsedMarkdown = parseMdSnapshot(rawText, options);
 
             if (typeof parsedMarkdown !== 'string') {
                 // Remove the last chunk if parsing failed
@@ -49,7 +42,8 @@ export const createMdStreamRenderer: StandardStreamParser = (
             }
 
             // Sanitize the HTML and update the root element
-            root.innerHTML = htmlSanitizer ? htmlSanitizer(parsedMarkdown) : parsedMarkdown;
+            root.innerHTML = options?.htmlSanitizer ? options.htmlSanitizer(parsedMarkdown) : parsedMarkdown;
+            attachCopyClickListener(root);
         },
         complete: () => {
             onComplete?.();
