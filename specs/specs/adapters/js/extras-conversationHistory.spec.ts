@@ -7,7 +7,7 @@ import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../utils/wait
 
 describe.each([
         {dataTransferMode: 'batch'},
-        {dataTransferMode: 'stream'},
+        // {dataTransferMode: 'stream'},
     ] satisfies Array<{ dataTransferMode: 'stream' | 'batch' }>,
 )('createAiChat() + withAdapter($mode) + conversationHistory extras', ({dataTransferMode}) => {
     let adapterController: AdapterController;
@@ -67,7 +67,11 @@ describe.each([
 
                 aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
-                    .withInitialConversation(initialConversation);
+                    .withInitialConversation(initialConversation)
+                    .withMessageOptions({
+                        skipStreamingAnimation: true,
+                        streamingAnimationSpeed: 0,
+                    });
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();

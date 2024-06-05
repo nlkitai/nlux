@@ -9,7 +9,10 @@ describe('MD Stream Parser Streaming', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {
+            skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
+        });
     });
 
     it('should render text in a single paragraph', async () => {
@@ -41,7 +44,7 @@ describe('MD Stream Parser Streaming', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>A##</p>\n<h1>B</h1>');
+        expect(rootElement.innerHTML).toBe('<p>A##</p><h1>B</h1>');
     });
 
     it('should render text in a p even when it ends with uncompleted sequence followed by other markdown', async () => {
@@ -49,7 +52,7 @@ describe('MD Stream Parser Streaming', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello World ##</p>\n<h1>Header</h1>');
+        expect(rootElement.innerHTML).toBe('<p>Hello World ##</p><h1>Header</h1>');
     });
 
     it('should render short text in a p even when it ends with uncompleted sequence followed by other markdown',
@@ -58,7 +61,7 @@ describe('MD Stream Parser Streaming', () => {
             streamRenderer.complete!();
             await waitForMdStreamToComplete();
 
-            expect(rootElement.innerHTML).toBe('<p>A#</p>\n<h1>H</h1>');
+            expect(rootElement.innerHTML).toBe('<p>A#</p><h1>H</h1>');
         },
     );
 
@@ -75,7 +78,7 @@ describe('MD Stream Parser Streaming', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Paragraph 1</p>\n<p>Paragraph 2</p>');
+        expect(rootElement.innerHTML).toBe('<p>Paragraph 1</p><p>Paragraph 2</p>');
     });
 
     it('should render paragraph followed by heading when separated by 1 line break', async () => {
@@ -83,6 +86,6 @@ describe('MD Stream Parser Streaming', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Paragraph</p>\n<h1>Header</h1>');
+        expect(rootElement.innerHTML).toBe('<p>Paragraph</p><h1>Header</h1>');
     });
 });

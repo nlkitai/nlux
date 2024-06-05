@@ -166,7 +166,7 @@ export class NluxRenderer<AiMsg> {
                     markdownLinkTarget: this.theMessageOptions?.markdownLinkTarget,
                     showCodeBlockCopyButton: this.theMessageOptions?.showCodeBlockCopyButton,
                     streamingAnimationSpeed: this.theMessageOptions?.streamingAnimationSpeed,
-                    skipStreamingAnimation: false,
+                    skipStreamingAnimation: this.theMessageOptions?.skipStreamingAnimation,
                     composer: {
                         placeholder: this.theComposerOptions?.placeholder,
                         autoFocus: this.theComposerOptions?.autoFocus,

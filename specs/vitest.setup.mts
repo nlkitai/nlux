@@ -17,7 +17,7 @@ console.info = vi.fn();
 
 (global as any).ResizeObserver = ResizeObserver;
 (global as any).matchMedia = vi.fn();
-(global as any).window.URL = { createObjectURL: vi.fn() };
+(global as any).window.URL = {createObjectURL: vi.fn()};
 
 (global as any).HTMLElement.prototype.scroll = vi.fn();
 (global as any).HTMLElement.prototype.scrollTo = vi.fn();

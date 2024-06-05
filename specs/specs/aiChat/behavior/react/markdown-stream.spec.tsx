@@ -24,7 +24,13 @@ describe('<AiChat /> + stream adapter + markdown', () => {
     describe('When markdown is being streamed', () => {
         it('Should be rendered correctly', async () => {
             // Arrange
-            const aiChat = <AiChat adapter={adapterController!.adapter}/>;
+            const aiChat = (
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    messageOptions={{skipStreamingAnimation: true}}
+                />
+            );
+
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
 

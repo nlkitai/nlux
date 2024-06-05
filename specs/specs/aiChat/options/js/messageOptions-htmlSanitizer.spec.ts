@@ -81,11 +81,15 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             // Arrange
             aiChat = createAiChat().withAdapter(adapterController!.adapter).withMessageOptions({
                 // A dummy sanitizer that replaces all 'x' with '.'
-                htmlSanitizer: (html: string) => html
-                    .toLowerCase()
-                    .replaceAll('h', 'x')
-                    .replaceAll('<p>', '<div>')
-                    .replaceAll('</p>', '</div>'),
+                htmlSanitizer: (html: string) => {
+                    return html
+                        .toLowerCase()
+                        .replaceAll('h', 'x')
+                        .replaceAll('<p>', '<div>')
+                        .replaceAll('</p>', '</div>');
+                },
+                skipStreamingAnimation: true,
+                streamingAnimationSpeed: 0,
             });
 
             aiChat.mount(rootElement);

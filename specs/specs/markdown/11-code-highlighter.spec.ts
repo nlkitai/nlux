@@ -13,6 +13,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         streamRenderer = createMdStreamRenderer(rootElement, {
             syntaxHighlighter: highlighter,
             skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
             showCodeBlockCopyButton: false,
         });
     });
@@ -41,6 +42,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         streamRenderer = createMdStreamRenderer(rootElement, {
             syntaxHighlighter: highlighter,
             skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
             showCodeBlockCopyButton: false,
         });
 
@@ -55,6 +57,7 @@ describe('Code Block Markdown Parser With Syntax Highlighter', () => {
         streamRenderer = createMdStreamRenderer(rootElement, {
             syntaxHighlighter: highlighter,
             skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
             showCodeBlockCopyButton: true,
         });
 

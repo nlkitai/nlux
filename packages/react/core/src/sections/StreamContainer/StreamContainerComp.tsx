@@ -1,5 +1,4 @@
 import {FC, ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
-import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../extra/markdown/src';
 import {className as compMessageClassName} from '@shared/components/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,
@@ -9,6 +8,8 @@ import {warn} from '@shared/utils/warn';
 import {StreamResponseComponentProps} from '../../exports/messageOptions';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomService';
+import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
+import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 
 export const StreamContainerComp = function <AiMsg>(
     props: StreamContainerProps<AiMsg>,
@@ -26,7 +27,7 @@ export const StreamContainerComp = function <AiMsg>(
     // rendering cycle, we don't want to trigger re-renders on every chunk of data received.
     const rootElRef = useRef<HTMLDivElement | null>(null);
     const rootElRefPreviousValue = useRef<HTMLDivElement | null>(null);
-    const mdStreamParserRef = useRef<MarkdownStreamParser | null>(null);
+    const mdStreamParserRef = useRef<StandardStreamParserOutput | null>(null);
 
     const [streamContainer, setStreamContainer] = useState<HTMLDivElement>();
     const [initialMarkdownMessageParsed, setInitialMarkdownMessageParsed] = useState(false);
@@ -50,7 +51,7 @@ export const StreamContainerComp = function <AiMsg>(
     // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter, etc.) change.
     useEffect(() => {
         const element = streamingDomService.getStreamingDomElement(uid);
-        mdStreamParserRef.current = createMarkdownStreamParser(element, {
+        mdStreamParserRef.current = createMdStreamRenderer(element, {
             syntaxHighlighter: markdownOptions?.syntaxHighlighter,
             htmlSanitizer: markdownOptions?.htmlSanitizer,
             markdownLinkTarget: markdownOptions?.markdownLinkTarget,
@@ -99,7 +100,6 @@ export const StreamContainerComp = function <AiMsg>(
     useEffect(() => {
         return () => {
             rootElRefPreviousValue.current = null;
-            mdStreamParserRef.current?.complete();
             mdStreamParserRef.current = null;
             setStreamContainer(undefined);
         };
@@ -113,7 +113,9 @@ export const StreamContainerComp = function <AiMsg>(
                 warn('When using a markdown stream renderer, the chunk must be a string.');
             }
         },
-        completeStream: () => mdStreamParserRef.current?.complete(),
+        completeStream: () => {
+            mdStreamParserRef.current?.complete();
+        },
     }), []);
 
     const compDirectionClassName = compMessageDirectionClassName['received'];

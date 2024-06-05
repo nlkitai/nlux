@@ -122,7 +122,13 @@ describe('createAiChat() + withAdapter(batchAdapter)', () => {
 
     it('Text returned from batchText should be displayed in the conversation', async () => {
         // Arrange
-        aiChat = createAiChat().withAdapter(adapterController!.adapter);
+        aiChat = createAiChat()
+            .withAdapter(adapterController!.adapter)
+            .withMessageOptions({
+                skipStreamingAnimation: true,
+                streamingAnimationSpeed: 0,
+            });
+
         aiChat.mount(rootElement);
         await waitForRenderCycle();
 

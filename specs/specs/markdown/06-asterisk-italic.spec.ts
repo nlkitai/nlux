@@ -9,7 +9,10 @@ describe('Asterisk Italic Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {
+            skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
+        });
     });
 
     it('should render an italic in the middle of a paragraph', async () => {

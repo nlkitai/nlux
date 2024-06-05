@@ -9,7 +9,10 @@ describe('Asterisk Bold Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {
+            skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
+        });
     });
 
     it('should render a bold in the middle of a paragraph', async () => {

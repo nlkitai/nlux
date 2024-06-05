@@ -30,7 +30,13 @@ describe('createAiChat() + batch adapter + markdown', () => {
     describe('When markdown is being fetched', () => {
         it('Should be rendered correctly', async () => {
             // Arrange
-            aiChat = createAiChat().withAdapter(adapterController!.adapter);
+            aiChat = createAiChat()
+                .withAdapter(adapterController!.adapter)
+                .withMessageOptions({
+                    skipStreamingAnimation: true,
+                    streamingAnimationSpeed: 0,
+                });
+
             aiChat.mount(rootElement);
             await waitForRenderCycle();
 

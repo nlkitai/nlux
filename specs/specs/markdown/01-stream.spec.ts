@@ -9,7 +9,10 @@ describe('MD Stream Parser Streaming', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {
+            skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
+        });
     });
 
     afterEach(() => {
@@ -48,7 +51,11 @@ describe('MD Stream Parser Streaming', () => {
         it('should call the onComplete callback when the stream is completed', async () => {
             const onComplete = vi.fn();
             rootElement = document.createElement('div');
-            streamRenderer = createMdStreamRenderer(rootElement, {onComplete});
+            streamRenderer = createMdStreamRenderer(rootElement, {
+                onComplete,
+                skipStreamingAnimation: true,
+                streamingAnimationSpeed: 0,
+            });
 
             streamRenderer.next('H');
             await waitForMilliseconds(10);
@@ -69,10 +76,14 @@ describe('MD Stream Parser Streaming', () => {
         it('Should be called automatically after 2 seconds from last character if stream is not closed', async () => {
             const onComplete = vi.fn();
             rootElement = document.createElement('div');
-            streamRenderer = createMdStreamRenderer(rootElement, {onComplete});
+            streamRenderer = createMdStreamRenderer(rootElement, {
+                onComplete,
+                skipStreamingAnimation: true,
+                streamingAnimationSpeed: 0,
+            });
 
             streamRenderer.next('Hi');
-            await waitForMilliseconds(10);
+            await waitForMilliseconds(20);
 
             expect(rootElement.querySelector('.md-in-progress')!.innerHTML).toBe('<p>Hi</p>');
             expect(onComplete).not.toHaveBeenCalled();

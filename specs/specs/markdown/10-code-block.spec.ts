@@ -26,6 +26,7 @@ describe('Code Block Markdowns Parser', () => {
         rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement, {
             skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
             showCodeBlockCopyButton: false,
         });
     });
@@ -53,7 +54,7 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<h1>Heading</h1>\n<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>');
+            '<h1>Heading</h1><div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>');
     });
 
     it('should render code block followed by a heading', async () => {
@@ -62,16 +63,16 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<h1>Heading</h1>');
+            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div><h1>Heading</h1>');
     });
 
     it('should render code block followed by a paragraph', async () => {
         streamRenderer.next('```js\nconst a = 1;\n```\nSome paragraph');
         streamRenderer.complete!();
-        await waitForMdStreamToComplete();
+        await waitForMdStreamToComplete(120);
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<p>Some paragraph</p>');
+            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div><p>Some paragraph</p>');
     });
 
     it('should render a 1 line code block without trailing or leading new line', async () => {

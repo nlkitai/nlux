@@ -9,7 +9,10 @@ describe('Line Breaks Markdowns Parser', () => {
 
     beforeEach(() => {
         rootElement = document.createElement('div');
-        streamRenderer = createMdStreamRenderer(rootElement, {skipStreamingAnimation: true});
+        streamRenderer = createMdStreamRenderer(rootElement, {
+            skipStreamingAnimation: true,
+            streamingAnimationSpeed: 0,
+        });
     });
 
     it('should render a line break with two spaces and a new line', async () => {
@@ -41,7 +44,7 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi  </p>\n<p>World !</p>');
+        expect(rootElement.innerHTML).toBe('<p>Hi  </p><p>World !</p>');
     });
 
     it('should not render a line break inside an inline code markdown', async () => {

@@ -153,8 +153,9 @@ function App() {
     }, []);
 
     const conversationStarters: ConversationStarter[] = [
-        {prompt: 'Hello, World!'},
-        {prompt: 'How are you?'},
+        {prompt: 'Write Hello World in Python, C++, and Java.'},
+        {prompt: 'Write hello world in Python.'},
+        {prompt: 'Write a poem using markdown and emojis'},
         {prompt: 'What is your name?'},
         {prompt: 'What is your favorite color?'},
     ];
@@ -275,8 +276,9 @@ function App() {
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
                     htmlSanitizer: htmlSanitizer,
-                    // showCodeBlockCopyButton: false,
-                    // streamingAnimationSpeed: 100,
+                    showCodeBlockCopyButton: true,
+                    streamingAnimationSpeed: 100,
+                    skipStreamingAnimation: true,
                     responseRenderer: useCustomResponseComponent ? responseRenderer : undefined,
                     promptRenderer: undefined,
                 }}

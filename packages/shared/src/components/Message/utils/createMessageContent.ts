@@ -10,11 +10,7 @@ export const createMessageContent = (
     if (format === 'markdown') {
         // Render message as a text node to avoid XSS
         const htmlElement = document.createElement('div');
-        const parsedMarkdown = parseMdSnapshot(message, markdownOptions);
-        htmlElement.innerHTML = markdownOptions?.htmlSanitizer
-            ? markdownOptions.htmlSanitizer(parsedMarkdown)
-            : parsedMarkdown;
-
+        htmlElement.innerHTML = parseMdSnapshot(message, markdownOptions);
         attachCopyClickListener(htmlElement);
 
         const fragment = document.createDocumentFragment();

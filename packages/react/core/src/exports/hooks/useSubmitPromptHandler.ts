@@ -215,7 +215,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
                 if (streamedMessageIds.size > 0) {
                     streamedMessageIds.forEach((messageId) => {
-                        conversationRef.current?.completeStream(chatSegmentObservable.segmentId, messageId);
+                        requestAnimationFrame(() => {
+                            conversationRef.current?.completeStream(chatSegmentObservable.segmentId, messageId);
+                        });
                     });
 
                     streamedMessageIds.clear();

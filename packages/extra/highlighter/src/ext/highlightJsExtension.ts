@@ -23,8 +23,9 @@ const createExtension = (): HighlighterExtension => {
     }
 
     const highlighterFunction: Highlighter = (code: string, language: string) => {
+        const languageToUse = hljs.getLanguage(language) ? language : 'plaintext';
         const result = hljs.highlight(code, {
-            language: language,
+            language: languageToUse,
             ignoreIllegals: true,
         });
 
