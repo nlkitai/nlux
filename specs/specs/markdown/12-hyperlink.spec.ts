@@ -3,7 +3,7 @@ import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
 import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 import {waitForMdStreamToComplete} from '../../utils/wait';
 
-describe('Asterisk Italic Markdowns Parser', () => {
+describe('Hyperlinks Markdowns Parser', () => {
     let streamRenderer: StandardStreamParserOutput;
     let rootElement: HTMLElement;
 

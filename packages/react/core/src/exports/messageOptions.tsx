@@ -51,6 +51,9 @@ export type ResponseRenderer<AiMsg> = FC<
     StreamResponseComponentProps<AiMsg> | BatchResponseComponentProps<AiMsg>
 >;
 
+export type BatchResponseRenderer<AiMsg> = FC<BatchResponseComponentProps<AiMsg>>;
+export type StreamResponseRenderer<AiMsg> = FC<StreamResponseComponentProps<AiMsg>>;
+
 export type PromptRendererProps = {
     uid: string;
     prompt: string;
@@ -62,7 +65,10 @@ export type ReactSpecificMessageOptions<AiMsg> = {
     /**
      * Custom React component to render the message received from the AI.
      */
-    responseRenderer?: ResponseRenderer<AiMsg>;
+    responseRenderer?:
+        ResponseRenderer<AiMsg> |
+        FC<BatchResponseComponentProps<AiMsg>> |
+        FC<StreamResponseComponentProps<AiMsg>>;
 
     /**
      * Custom React component to render the message sent by the user.

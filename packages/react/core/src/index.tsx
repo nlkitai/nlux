@@ -79,12 +79,14 @@ export type {
 } from './types/conversationOptions';
 
 export type {
-    BatchResponseComponentProps,
-    StreamResponseComponentProps,
-    ResponseRenderer,
-    PromptRendererProps,
-    PromptRenderer,
     MessageOptions,
+    ResponseRenderer,
+    BatchResponseRenderer,
+    BatchResponseComponentProps,
+    StreamResponseRenderer,
+    StreamResponseComponentProps,
+    PromptRenderer,
+    PromptRendererProps,
 } from './exports/messageOptions';
 
 export {

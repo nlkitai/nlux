@@ -28,8 +28,7 @@ export const createMessageRenderer: <AiMsg>(
     //
     // A custom response renderer is provided by the user.
     //
-    if (
-        messageOptions?.responseRenderer !== undefined) {
+    if (messageOptions?.responseRenderer !== undefined) {
         //
         // Streaming into a custom renderer.
         //
@@ -41,7 +40,7 @@ export const createMessageRenderer: <AiMsg>(
                 containerRef: containerRefToUse as RefObject<never>,
             };
 
-            return () => (messageOptions?.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
+            return () => (messageOptions.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
         } else {
             //
             // Batching data and displaying it in a custom renderer.
@@ -54,7 +53,7 @@ export const createMessageRenderer: <AiMsg>(
                 dataTransferMode,
             };
 
-            return () => (messageOptions?.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
+            return () => (messageOptions.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
         }
     }
 
@@ -78,6 +77,7 @@ export const createMessageRenderer: <AiMsg>(
                     htmlSanitizer: messageOptions?.htmlSanitizer,
                     markdownLinkTarget: messageOptions?.markdownLinkTarget,
                     showCodeBlockCopyButton: messageOptions?.showCodeBlockCopyButton,
+                    skipStreamingAnimation: messageOptions?.skipStreamingAnimation,
                 }}
             />
         );

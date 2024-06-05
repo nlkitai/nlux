@@ -17,6 +17,6 @@ export const waitForMilliseconds = (milliseconds: number) => new Promise(resolve
 });
 
 export const waitForMdStreamToComplete = (streamLength: number = 20) => new Promise(resolve => {
-    const duration = streamLength * 5; // 10ms wait per character
+    const duration = streamLength * 10; // 10ms wait per character
     setTimeout(resolve, duration);
 });

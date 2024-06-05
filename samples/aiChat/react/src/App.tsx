@@ -115,6 +115,10 @@ function App() {
     const initialConversation: ChatItem<string>[] = [
         {
             role: 'assistant',
+            message: 'Hello, **how can I help you?**\n# AI speaking\nCheers!',
+        },
+        {
+            role: 'assistant',
             message: longMessage,
         },
         {role: 'user', message: 'I need help with my account.'},

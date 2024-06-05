@@ -6,6 +6,7 @@ export type SnapshotParserOptions = {
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
+    skipStreamingAnimation?: boolean;
 };
 
 export type SnapshotParser = (
@@ -15,5 +16,6 @@ export type SnapshotParser = (
         htmlSanitizer?: SanitizerExtension;
         markdownLinkTarget?: 'blank' | 'self',
         showCodeBlockCopyButton?: boolean;
+        skipStreamingAnimation?: boolean;
     },
 ) => string;

@@ -3,7 +3,7 @@ import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
+import {waitForMdStreamToComplete, waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
 
 describe('<AiChat /> + initialConversation prop', () => {
     let adapterController: AdapterController | undefined;
@@ -79,6 +79,38 @@ describe('<AiChat /> + initialConversation prop', () => {
             const receivedMessage = aiChatDom.querySelector('.nlux_msg_received')!;
             expect(receivedMessage.textContent).toEqual(expect.stringContaining('Hello, how can I help you?'));
             expect(receivedMessage.textContent).toEqual(expect.stringContaining('We find connection, hand in hand'));
+        });
+
+        it('The markdown in assistant responses should be parsed', async () => {
+            // Arrange
+            const initialConversation: ChatItem<string>[] = [
+                {
+                    role: 'assistant',
+                    message: 'Hello, **how can I help you?**\n# AI speaking\nCheers!',
+                },
+                {
+                    role: 'user', message: 'I need help with my account.',
+                },
+            ];
+
+            const aiChat = (
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    initialConversation={initialConversation}
+                />
+            );
+
+            render(aiChat);
+            await waitForMdStreamToComplete();
+
+            // Act
+            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+
+            // Assert
+            const receivedMessage = aiChatDom.querySelector('.nlux_msg_received')!;
+            expect(receivedMessage.innerHTML).toEqual(expect.stringContaining(
+                '<p>Hello, <strong>how can I help you?</strong></p>\n<h1>AI speaking</h1>\n<p>Cheers!</p>',
+            ));
         });
 
         it('The scroll should be at the bottom of the chat', async () => {
