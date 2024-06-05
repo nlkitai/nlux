@@ -21,20 +21,20 @@ export const useDemoOptions = () => {
     return (
       <div style={optionsSelectorStyle}>
         <label>
-          <input
-            type="checkbox"
-            checked={showWelcomeMessage}
-            onChange={() => setShowWelcomeMessage(!showWelcomeMessage)}
-          />
-          Show Welcome Message
-        </label>
         <label>
           <input
             type="checkbox"
             checked={shouldUseAssistantPersona}
             onChange={() => setShouldUseAssistantPersona(!shouldUseAssistantPersona)}
           />
-          Use Assistant Persona
+          Use assistant persona
+        </label>
+          <input
+            type="checkbox"
+            checked={showWelcomeMessage}
+            onChange={() => setShowWelcomeMessage(!showWelcomeMessage)}
+          />
+          Show welcome message
         </label>
       </div>
     );
