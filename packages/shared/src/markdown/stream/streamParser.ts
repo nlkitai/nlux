@@ -1,6 +1,7 @@
 import {StandardStreamParser} from '../../types/markdown/streamParser';
 import {warn} from '../../utils/warn';
 import {parseMdSnapshot} from '../snapshot/snapshotParser';
+import {attachCopyClickListener} from '../copyToClipboard/attachCopyClickListener';
 
 const defaultDelayInMsBeforeComplete = 2000;
 const defaultDelayInMsBetweenBufferChecks = 2;
@@ -44,7 +45,12 @@ export const createMdStreamRenderer: StandardStreamParser = (
     //
     const commitWipContent = () => {
         while (wipContainer.firstChild) {
-            wipContainer.before(wipContainer.firstChild);
+            const childToCommit = wipContainer.firstChild;
+            if (childToCommit instanceof HTMLElement) {
+                attachCopyClickListener(childToCommit);
+            }
+
+            wipContainer.before(childToCommit);
         }
     };
 
@@ -60,13 +66,13 @@ export const createMdStreamRenderer: StandardStreamParser = (
         onComplete?.();
     };
 
+    const delayBetweenBufferChecks = (
+        !options?.skipStreamingAnimation && options?.streamingAnimationSpeed && options.streamingAnimationSpeed >= 0
+    ) ? options.streamingAnimationSpeed : defaultDelayInMsBetweenBufferChecks;
+
     let timeSinceLastProcessing: number | undefined = undefined;
     let currentMarkdown = '';
     let previousHtml: string | undefined = undefined;
-
-    const parsingIntervalDelay = (
-        !options?.skipStreamingAnimation && options?.streamingAnimationSpeed && options.streamingAnimationSpeed >= 0
-    ) ? options.streamingAnimationSpeed : defaultDelayInMsBetweenBufferChecks;
 
     let parsingInterval: number | undefined = setInterval(() => {
         const nowTime = new Date().getTime();
@@ -110,9 +116,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
                 // Which means that the last parsed markdown is complete and should be committed to the DOM
                 // Commit the last parsed content to the DOM
 
-                while (wipContainer.children.length > 0) {
-                    wipContainer.before(wipContainer.children[0]);
-                }
+                commitWipContent();
 
                 // Extract new HTML and insert it into WIP container
                 const currentHtml = parsedHtml.slice(previousHtml.length).trim();
@@ -133,7 +137,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
                 previousHtml = parsedHtml;
             }
         });
-    }, parsingIntervalDelay) as unknown as number;
+    }, delayBetweenBufferChecks) as unknown as number;
 
     return {
         next: (chunk: string) => {
@@ -154,7 +158,9 @@ export const createMdStreamRenderer: StandardStreamParser = (
             streamIsComplete = true;
         },
         error: () => {
-            // No error handling for now
+            // No special handling for errors
+            // Just complete the stream
+            streamIsComplete = true;
         },
     };
 };
