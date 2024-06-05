@@ -18,7 +18,7 @@ export default () => {
         },
         {
           role: 'assistant',
-          message: 'Arrr, matey! The capital of Antarctica be none other than "Arrrctica," where ye can find a jolly crew of penguins swashbuckling on icy seas!'
+          message: 'Arrr, matey! The **capital** of _Antarctica_ be none other than \`"Arrrctica"\`, where ye can find a jolly crew of penguins swashbuckling on icy seas!'
         }
       ]}
       adapter={adapter}
