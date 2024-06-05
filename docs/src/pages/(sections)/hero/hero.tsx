@@ -47,13 +47,16 @@ export const Hero = ({className}: { className?: string }) => {
                         </p>
                     </div>
                     <div className={heroStyles.adaptersShowcase}>
+                        <div className={heroStyles.integrationsTitle}>
+                            Available in
+                        </div>
                         <div className={heroStyles.platformName}>
                             <img src={ReactJsLogo} alt="React JS Logo" width={40}/>
                             <h5 style={{textAlign: 'left'}}>React JS<br/>Components</h5>
                         </div>
                         <div className={heroStyles.platformName}>
                             <img src={JavaScriptLogo} alt="Vanilla JS Logo" width={40}/>
-                            <h5 style={{textAlign: 'left'}}>JavaScript<br/>API</h5>
+                            <h5 style={{textAlign: 'left'}}>Plain<br/>JavaScript</h5>
                         </div>
                     </div>
                 </div>
