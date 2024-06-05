@@ -31,7 +31,11 @@ describe('createAiChat() + personaOptions + assistant', () => {
         it('The NLUX logo should be rendered as welcome message', async () => {
             // Arrange
             const aiChat = createAiChat()
-                .withAdapter(adapterController!.adapter);
+                .withAdapter(adapterController!.adapter)
+                .withMessageOptions({
+                    streamingAnimationSpeed: 0,
+                    skipStreamingAnimation: true,
+                });
 
             aiChat.mount(rootElement);
             await waitForRenderCycle();
@@ -48,7 +52,11 @@ describe('createAiChat() + personaOptions + assistant', () => {
             it('Assistant persona details should be rendered instead of the NLUX logo', async () => {
                 // Arrange
                 const aiChat = createAiChat()
-                    .withAdapter(adapterController!.adapter);
+                    .withAdapter(adapterController!.adapter)
+                    .withMessageOptions({
+                        streamingAnimationSpeed: 0,
+                        skipStreamingAnimation: true,
+                    });
 
                 aiChat.mount(rootElement);
                 await waitForRenderCycle();
@@ -138,6 +146,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
                 // Arrange
                 const aiChat = createAiChat()
                     .withAdapter(adapterController!.adapter)
+                    .withMessageOptions({
+                        streamingAnimationSpeed: 0,
+                        skipStreamingAnimation: true,
+                    })
                     .withPersonaOptions({
                         assistant: {
                             name: 'Assistant Name',
@@ -195,6 +207,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
+                        .withMessageOptions({
+                            streamingAnimationSpeed: 0,
+                            skipStreamingAnimation: true,
+                        })
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant Name',
@@ -229,6 +245,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
 
                     const aiChat = createAiChat()
                         .withAdapter(adapterController!.adapter)
+                        .withMessageOptions({
+                            streamingAnimationSpeed: 0,
+                            skipStreamingAnimation: true,
+                        })
                         .withPersonaOptions({
                             assistant: {
                                 name: 'Assistant Name',
@@ -261,6 +281,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
             // Arrange
             const aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
+                .withMessageOptions({
+                    streamingAnimationSpeed: 0,
+                    skipStreamingAnimation: true,
+                })
                 .withPersonaOptions({
                     assistant: {
                         name: 'Assistant Name',
@@ -311,6 +335,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
             // Arrange
             const aiChat = createAiChat()
                 .withAdapter(adapterController!.adapter)
+                .withMessageOptions({
+                    streamingAnimationSpeed: 0,
+                    skipStreamingAnimation: true,
+                })
                 .withPersonaOptions({
                     assistant: {
                         name: 'Assistant Name',
@@ -358,6 +386,10 @@ describe('createAiChat() + personaOptions + assistant', () => {
         it('Persona details should be rendered for every chat item', async () => {
             // Arrange
             const aiChat = createAiChat()
+                .withMessageOptions({
+                    streamingAnimationSpeed: 0,
+                    skipStreamingAnimation: true,
+                })
                 .withAdapter(adapterController!.adapter);
 
             aiChat.mount(rootElement);
