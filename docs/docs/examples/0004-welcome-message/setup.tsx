@@ -21,7 +21,6 @@ export const useDemoOptions = () => {
     return (
       <div style={optionsSelectorStyle}>
         <label>
-        <label>
           <input
             type="checkbox"
             checked={shouldUseAssistantPersona}
@@ -29,6 +28,7 @@ export const useDemoOptions = () => {
           />
           Use assistant persona
         </label>
+        <label>
           <input
             type="checkbox"
             checked={showWelcomeMessage}
