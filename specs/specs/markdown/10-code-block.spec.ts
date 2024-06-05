@@ -35,7 +35,7 @@ describe('Code Block Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<div class="code-block"><pre><div>const a = 1;\n</div></pre></div>\n');
+        expect(rootElement.innerHTML).toBe('<div class="code-block"><pre><div>const a = 1;\n</div></pre></div>');
     });
 
     it('should render code block at root level', async () => {
@@ -44,7 +44,7 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<p>Some code:</p>\n<div class="code-block"><pre><div>const a = 1;\n</div></pre></div>\n');
+            '<p>Some code:</p>\n<div class="code-block"><pre><div>const a = 1;\n</div></pre></div>');
     });
 
     it('should render code block that follows a heading', async () => {
@@ -53,7 +53,7 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<h1>Heading</h1>\n<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n');
+            '<h1>Heading</h1>\n<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>');
     });
 
     it('should render code block followed by a heading', async () => {
@@ -62,7 +62,7 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<h1>Heading</h1>\n');
+            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<h1>Heading</h1>');
     });
 
     it('should render code block followed by a paragraph', async () => {
@@ -71,7 +71,7 @@ describe('Code Block Markdowns Parser', () => {
         await waitForMdStreamToComplete();
 
         expect(rootElement.innerHTML).toBe(
-            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<p>Some paragraph</p>\n');
+            '<div class="code-block"><pre data-language="js"><div>const a = 1;\n</div></pre></div>\n<p>Some paragraph</p>');
     });
 
     it('should render a 1 line code block without trailing or leading new line', async () => {

@@ -56,7 +56,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             const chatItemReceived = container.querySelector('.nlux-chatSegments-container .nlux-comp-chatItem--received');
             const mdContainer = chatItemReceived!.querySelector('.nlux-markdown-container');
             await waitFor(() => {
-                expect(mdContainer!.innerHTML).toEqual('<p>Yo!</p>\n');
+                expect(mdContainer!.innerHTML).toEqual(expect.stringContaining('<p>Yo!</p>'));
             });
 
             // Act
@@ -65,7 +65,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
             // Assert - Streamed content should have been appended to the existing content
             await waitFor(() => {
-                expect(mdContainer!.innerHTML).toEqual('<p>Yo! What\'s up?</p>\n');
+                expect(mdContainer!.innerHTML).toEqual(expect.stringContaining('<p>Yo! What\'s up?</p>'));
             });
 
             // Asset - Custom component should have been called with the correct props

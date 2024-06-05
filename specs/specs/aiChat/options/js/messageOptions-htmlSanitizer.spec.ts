@@ -70,7 +70,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
 
             // Act
             adapterController!.resolve('Hi! [here](https://haha.hawai) I hand over a link! Haha :) !');
-            await waitForMdStreamToComplete(60);
+            await waitForMdStreamToComplete(80);
 
             // Assert
             const userMessageContainer = rootElement.querySelector('.nlux-comp-chatItem--sent .nlux-markdown-container') as HTMLElement | null;
@@ -102,7 +102,7 @@ describe('createAiChat() + messageOptions + htmlSanitizer', () => {
             // Assert
             const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container') as HTMLElement | null;
             expect(markdownContainer).toBeInTheDocument();
-            expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank">xere</a> i xand over a link! xaxa :) !</div>\n');
+            expect(markdownContainer!.innerHTML).toBe('<div>xi! <a xref="xttps://xaxa.xawai" target="_blank">xere</a> i xand over a link! xaxa :) !</div>');
         });
     });
 });

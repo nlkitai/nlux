@@ -16,6 +16,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
     });
 
     it('should render a link that opens in a new window by default', async () => {
+        rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true},
         );
@@ -23,7 +24,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi World</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi World</a></p>');
     });
 
     it('should render a link that opens in the same window', async () => {
@@ -31,22 +32,24 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi World</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi World</a></p>');
     });
 
     it('should render a link that opens in a new window', async () => {
+        rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true, markdownLinkTarget: 'blank'},
         );
 
         streamRenderer.next('[Hi New Window](http://world.com)');
         streamRenderer.complete!();
-        await waitForMdStreamToComplete();
+        await waitForMdStreamToComplete(50);
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi New Window</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com" target="_blank">Hi New Window</a></p>');
     });
 
     it('should render a link to the same window', async () => {
+        rootElement = document.createElement('div');
         streamRenderer = createMdStreamRenderer(rootElement,
             {skipStreamingAnimation: true, markdownLinkTarget: 'self'},
         );
@@ -55,7 +58,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi New Window</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">Hi New Window</a></p>');
     });
 
     it('should render an empty link', async () => {
@@ -63,7 +66,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href=""></a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href=""></a></p>');
     });
 
     it('should render an empty link inside a paragraph', async () => {
@@ -71,7 +74,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>I said <a href=""></a> to all!</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>I said <a href=""></a> to all!</p>');
     });
 
     it('should render a link without text', async () => {
@@ -79,7 +82,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete(50);
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"></a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"></a></p>');
     });
 
     it('should render a link without text inside a paragraph', async () => {
@@ -87,7 +90,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>I said <a href="http://world.com"></a> to all!</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>I said <a href="http://world.com"></a> to all!</p>');
     });
 
     it('should render a link without url', async () => {
@@ -95,7 +98,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="">Hi World</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="">Hi World</a></p>');
     });
 
     it('should render a link without url inside text', async () => {
@@ -103,7 +106,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete(50);
 
-        expect(rootElement.innerHTML).toBe('<p>I said <a href="">Hi World</a> to all!</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>I said <a href="">Hi World</a> to all!</p>');
     });
 
     it('should render a link embedded in a sentence', async () => {
@@ -111,7 +114,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi <a href="http://world.com">World</a> !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi <a href="http://world.com">World</a> !</p>');
     });
 
     it('should render a link a link at the beginning of a sentence', async () => {
@@ -119,7 +122,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a> !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a> !</p>');
     });
 
     it('should render a link a link at the end of a sentence', async () => {
@@ -127,7 +130,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <a href="http://world.com">World</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hello <a href="http://world.com">World</a></p>');
     });
 
     it('should render a link inside a heading', async () => {
@@ -135,7 +138,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<h1><a href="http://world.com">World</a></h1>\n');
+        expect(rootElement.innerHTML).toBe('<h1><a href="http://world.com">World</a></h1>');
     });
 
     it('should render a link inside bold', async () => {
@@ -143,7 +146,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><strong><a href="http://world.com">World</a></strong></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><strong><a href="http://world.com">World</a></strong></p>');
     });
 
     it('should render a link inside italic', async () => {
@@ -151,7 +154,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><em><a href="http://world.com">World</a></em></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><em><a href="http://world.com">World</a></em></p>');
     });
 
     it('should render a link followed by a heading', async () => {
@@ -159,7 +162,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a></p>\n<h1>Hello</h1>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a></p>\n<h1>Hello</h1>');
     });
 
     it('should render a link followed by a paragraph', async () => {
@@ -167,7 +170,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a></p>\n<p>Hello</p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com">World</a></p>\n<p>Hello</p>');
     });
 
     it('should render a link located after a heading', async () => {
@@ -175,7 +178,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<h1>Hello</h1>\n<p><a href="http://world.com">World</a></p>\n');
+        expect(rootElement.innerHTML).toBe('<h1>Hello</h1>\n<p><a href="http://world.com">World</a></p>');
     });
 
     it('should render strong inside a link', async () => {
@@ -183,7 +186,7 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"><strong>World</strong></a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"><strong>World</strong></a></p>');
     });
 
     it('should render code inside a link', async () => {
@@ -191,6 +194,6 @@ describe('Asterisk Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"><code>World</code></a></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><a href="http://world.com"><code>World</code></a></p>');
     });
 });

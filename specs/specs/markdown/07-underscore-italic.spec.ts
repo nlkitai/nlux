@@ -17,7 +17,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em> !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em> !</p>');
     });
 
     it('should render an italic at the end of a paragraph', async () => {
@@ -25,7 +25,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em></p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hello <em>World</em></p>');
     });
 
     it('should render an italic at the beginning of a paragraph', async () => {
@@ -33,7 +33,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><em>Hello</em> World</p>\n');
+        expect(rootElement.innerHTML).toBe('<p><em>Hello</em> World</p>');
     });
 
     it('should wrap italic in a paragraph', async () => {
@@ -41,7 +41,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><em>Hello World</em></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><em>Hello World</em></p>');
     });
 
     it('should embed italic into a paragraph, and code into the italic', async () => {
@@ -49,7 +49,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><em>Hello <code>World</code></em></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><em>Hello <code>World</code></em></p>');
     });
 
     it('should embed code into a paragraph, and but not embed italic into the code', async () => {
@@ -57,7 +57,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code>Hello _World_</code></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><code>Hello _World_</code></p>');
     });
 
     it('should not embed italic at the beginning of inline code', async () => {
@@ -65,7 +65,7 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code>_Hello_ World</code></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><code>_Hello_ World</code></p>');
     });
 
     it('should not embed italic at the end of inline code', async () => {
@@ -73,6 +73,6 @@ describe('Underscore Italic Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p><code>Hello _World_</code></p>\n');
+        expect(rootElement.innerHTML).toBe('<p><code>Hello _World_</code></p>');
     });
 });

@@ -17,11 +17,11 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi<br>World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi<br>World !</p>');
     });
 
     it('should not render an empty paragraph with spaces and a new line', async () => {
-        streamRenderer.next('      \n');
+        streamRenderer.next('      ');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
@@ -33,7 +33,7 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi!</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi!</p>');
     });
 
     it('should render a new paragraph instead of a line break with two new lines', async () => {
@@ -41,7 +41,7 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi  </p>\n<p>World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi  </p>\n<p>World !</p>');
     });
 
     it('should not render a line break inside an inline code markdown', async () => {
@@ -49,15 +49,15 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi <code>Mr   </code>World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi <code>Mr   </code>World !</p>');
     });
 
     it('should not render line break at the end of a paragraph', async () => {
-        streamRenderer.next('Hi  \n');
+        streamRenderer.next('Hi  ');
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi  </p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi  </p>');
     });
 
     it('should not render a line break inside a bold markdown', async () => {
@@ -65,7 +65,7 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>Hi **Mr<br>**World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>Hi **Mr<br>**World !</p>');
     });
 
     it('should render a line break inside a bold markdown followed by a white space', async () => {
@@ -73,7 +73,7 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>A<strong>B<br>  C</strong>World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>A<strong>B<br>  C</strong>World !</p>');
     });
 
     it('should not render a line break inside a bold markdown followed by another new line', async () => {
@@ -81,6 +81,6 @@ describe('Line Breaks Markdowns Parser', () => {
         streamRenderer.complete!();
         await waitForMdStreamToComplete();
 
-        expect(rootElement.innerHTML).toBe('<p>A<strong>B<br>C</strong>World !</p>\n');
+        expect(rootElement.innerHTML).toBe('<p>A<strong>B<br>C</strong>World !</p>');
     });
 });

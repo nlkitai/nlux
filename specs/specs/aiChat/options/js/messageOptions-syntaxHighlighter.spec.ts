@@ -52,7 +52,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             // Assert
             const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement!.innerHTML).toBe(
-                '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;\n</div></pre></div>\n',
+                '<div class="code-block"><pre data-language="js" class="highlighter-dark"><div><span class="hljs-keyword">var</span> someJsCode = <span class="hljs-literal">true</span>;\n</div></pre></div>',
             );
         });
     });
@@ -78,7 +78,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             // Assert
             const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toBe(
-                '<div class="code-block"><pre><div>var someJsCode = true;\n</div></pre></div>\n',
+                '<div class="code-block"><pre><div>var someJsCode = true;\n</div></pre></div>',
             );
         });
     });
@@ -112,7 +112,7 @@ describe('createAiChat() + messageOptions + syntaxHighlighter', () => {
             // Assert
             const responseElement = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(responseElement?.innerHTML).toBe(
-                '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;\n</div></pre></div>\n',
+                '<div class="code-block"><pre data-language="js"><div>var someJsCode = true;\n</div></pre></div>',
             );
         });
     });

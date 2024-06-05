@@ -45,7 +45,7 @@ describe('createAiChat() + batch adapter + markdown', () => {
             // Assert
             const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
             expect(markdownContainer).toBeInTheDocument();
-            expect(markdownContainer!.innerHTML).toBe('<p><strong>Hello Human!</strong></p>\n');
+            expect(markdownContainer!.innerHTML).toBe('<p><strong>Hello Human!</strong></p>');
         });
     });
 });
