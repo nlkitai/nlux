@@ -22,7 +22,7 @@ import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
 import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import './App.css';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 
 function App() {
     type ThemeId = 'nova' | 'luna' | 'dev' | 'blank';
@@ -292,7 +292,7 @@ function App() {
     );
 }
 
-const responseRenderer: ResponseRenderer<string> = (props) => {
+const responseRenderer: ResponseRenderer<string> = memo((props) => {
     const {dataTransferMode} = props;
     const propsForBatch = props as BatchResponseComponentProps<string>;
     const propsForStream = props as StreamResponseComponentProps<string>;
@@ -328,6 +328,6 @@ const responseRenderer: ResponseRenderer<string> = (props) => {
             </div>
         </>
     );
-};
+});
 
 export default App;
