@@ -30,7 +30,7 @@ function App() {
     const [useCustomPersonaOptions, setUseCustomPersonaOptions] = useState(true);
     const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
     const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('stream');
-    const [theme, setTheme] = useState<ThemeId>('dev');
+    const [theme, setTheme] = useState<ThemeId>('nova');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),

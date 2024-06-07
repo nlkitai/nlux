@@ -4,7 +4,7 @@ import {parseMdSnapshot} from '../snapshot/snapshotParser';
 import {attachCopyClickListener} from '../copyToClipboard/attachCopyClickListener';
 
 const defaultDelayInMsBeforeComplete = 2000;
-const defaultDelayInMsBetweenBufferChecks = 2;
+const defaultDelayInMsBetweenBufferChecks = 8;
 
 const getScheduler = (type: 'timeout' | 'animationFrame') => {
     if (type === 'timeout') {
@@ -68,26 +68,29 @@ export const createMdStreamRenderer: StandardStreamParser = (
 
     const delayBetweenBufferChecks = (
         !options?.skipStreamingAnimation && options?.streamingAnimationSpeed && options.streamingAnimationSpeed >= 0
-    ) ? options.streamingAnimationSpeed : defaultDelayInMsBetweenBufferChecks;
+    ) ? options.streamingAnimationSpeed : (options?.skipStreamingAnimation ? 0 : defaultDelayInMsBetweenBufferChecks);
 
-    let timeSinceLastProcessing: number | undefined = undefined;
-    let currentMarkdown = '';
-    let previousHtml: string | undefined = undefined;
+    const parsingContext: {
+        timeSinceLastProcessing: number;
+        currentMarkdown: string;
+        previousHtml: string | undefined;
+    } = {
+        timeSinceLastProcessing: new Date().getTime(),
+        currentMarkdown: '',
+        previousHtml: undefined,
+    };
 
     let parsingInterval: number | undefined = setInterval(() => {
         const nowTime = new Date().getTime();
         if (buffer.length === 0) {
-            if (
-                streamIsComplete
-                || (timeSinceLastProcessing && nowTime - timeSinceLastProcessing > defaultDelayInMsBeforeComplete)
-            ) {
+            if (streamIsComplete || nowTime - parsingContext.timeSinceLastProcessing > defaultDelayInMsBeforeComplete) {
                 completeParsing();
             }
 
             return;
         }
 
-        timeSinceLastProcessing = nowTime;
+        parsingContext.timeSinceLastProcessing = nowTime;
         const chunk = buffer.shift();
         if (!chunk) {
             return;
@@ -100,17 +103,21 @@ export const createMdStreamRenderer: StandardStreamParser = (
             //   - Text that is committed to the DOM and will not change (example: `# Hello World!\n\n`)
 
             // Append the new chunk to the raw text and parse
-            const markdownToParse = currentMarkdown + chunk;
+            const markdownToParse = parsingContext.currentMarkdown + chunk;
             const parsedHtml = parseMdSnapshot(markdownToParse, options).trim();
 
             if (typeof parsedHtml !== 'string') {
                 // Remove the last chunk if parsing failed
-                currentMarkdown = currentMarkdown.slice(0, -chunk.length);
+                parsingContext.currentMarkdown = parsingContext.currentMarkdown.slice(0, -chunk.length);
                 warn('Markdown parsing failed');
                 return;
             }
 
-            if (previousHtml && parsedHtml.length > previousHtml.length && parsedHtml.startsWith(previousHtml)) {
+            if (
+                parsingContext.previousHtml &&
+                parsedHtml.length > parsingContext.previousHtml.length &&
+                parsedHtml.startsWith(parsingContext.previousHtml)
+            ) {
                 // Case 1: No changes to the previous HTML — And new HTML added on top of it
                 // Which means the new chunk added new HTML content outside the last parsed markdown
                 // Which means that the last parsed markdown is complete and should be committed to the DOM
@@ -119,12 +126,12 @@ export const createMdStreamRenderer: StandardStreamParser = (
                 commitWipContent();
 
                 // Extract new HTML and insert it into WIP container
-                const currentHtml = parsedHtml.slice(previousHtml.length).trim();
+                const currentHtml = parsedHtml.slice(parsingContext.previousHtml.length).trim();
                 wipContainer.innerHTML = options?.htmlSanitizer ? options.htmlSanitizer(currentHtml) : currentHtml;
 
                 // Focus on everything that is new
-                currentMarkdown = chunk;
-                previousHtml = undefined;
+                parsingContext.currentMarkdown = chunk;
+                parsingContext.previousHtml = undefined;
             } else {
                 // Case 2: Changes to the previous HTML
                 // This means that new chunk goes inside previous HTML and no root level changes
@@ -133,8 +140,8 @@ export const createMdStreamRenderer: StandardStreamParser = (
                 wipContainer.innerHTML = options?.htmlSanitizer ? options.htmlSanitizer(parsedHtml) : parsedHtml;
 
                 // Update the current markdown and previous HTML for the next iteration
-                currentMarkdown = markdownToParse;
-                previousHtml = parsedHtml;
+                parsingContext.currentMarkdown = markdownToParse;
+                parsingContext.previousHtml = parsedHtml;
             }
         });
     }, delayBetweenBufferChecks) as unknown as number;

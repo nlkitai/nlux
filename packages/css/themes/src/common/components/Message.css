@@ -1,5 +1,9 @@
 .nlux-comp-message > .nlux-markdownStream-root {
     width: 100%;
+
+    .md-in-progress:empty {
+        display: none;
+    }
 }
 
 .nlux-comp-message .nlux-markdown-container {
