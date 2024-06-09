@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let colorScheme: 'light' | 'dark' = 'dark';
 
     const htmlSanitizer = (html: string) => {
-        const trustedTypes = window.trustedTypes as unknown as {
+        const trustedTypes = window?.trustedTypes as unknown as {
             createPolicy: (name: string, policy: Record<string, unknown>) => unknown;
         };
 
