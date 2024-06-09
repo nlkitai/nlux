@@ -1,3 +1,4 @@
+'use client';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
