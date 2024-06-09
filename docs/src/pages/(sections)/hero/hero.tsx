@@ -66,7 +66,7 @@ export const Hero = ({className}: { className?: string }) => {
                             Integrates with
                         </div>
                         <div className={heroStyles.platformName}>
-                            <img src={LangChainLogo} alt="LangChain Logo" width={40}/>
+                            <img src={LangChainLogo} alt="LangChain Logo" width={60}/>
                             <h5 style={{textAlign: 'left'}}>LangChain</h5>
                         </div>
                         <div className={heroStyles.platformName}>
