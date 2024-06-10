@@ -62,7 +62,7 @@ export class LangServeStreamAdapter<AiMsg> extends LangServeAbstractAdapter<AiMs
                     const {value, done} = await reader.read();
                     if (done) {
                         doneReading = true;
-                        continue;
+                        break;
                     }
 
                     const chunk = textDecoder.decode(value);

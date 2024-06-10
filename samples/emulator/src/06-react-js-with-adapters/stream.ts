@@ -21,13 +21,11 @@ export const streamAdapter: ChatAdapter<string> = {
         // and feed them to the observer as they are being generated
         const reader = response.body.getReader();
         const textDecoder = new TextDecoder();
-        let doneReading = false;
 
-        while (!doneReading) {
+        while (true) {
             const {value, done} = await reader.read();
             if (done) {
-                doneReading = true;
-                continue;
+              break;
             }
 
             const content = textDecoder.decode(value);
