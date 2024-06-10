@@ -23,6 +23,7 @@ import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain
 import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
 import './App.css';
 import {memo, useCallback, useEffect, useMemo, useState} from 'react';
+import {MessageReceivedCallback} from '@nlux-dev/core/src';
 
 function App() {
     type ThemeId = 'nova' | 'luna' | 'dev' | 'blank';
@@ -32,6 +33,11 @@ function App() {
     const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('stream');
     const [theme, setTheme] = useState<ThemeId>('nova');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
+
+    const messageReceived: MessageReceivedCallback = useCallback((e) => {
+        console.log('Message Received');
+        console.dir(e);
+    }, []);
 
     const onUseCustomResponseComponentChange = useCallback((e) => setUseCustomResponseComponent(e.target.checked),
         [setUseCustomResponseComponent],
@@ -276,6 +282,9 @@ function App() {
                     layout: conversationLayout,
                     // showWelcomeMessage: true,
                     conversationStarters,
+                }}
+                events={{
+                    messageReceived,
                 }}
                 messageOptions={{
                     markdownLinkTarget: 'blank',
