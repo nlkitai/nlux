@@ -95,7 +95,7 @@ export const StreamContainerComp = function <AiMsg>(
         } else {
             return <div className={'nlux-markdownStream-root'} ref={rootElRef}/>;
         }
-    }, [responseRenderer]);
+    }, [responseRenderer, status]);
 
     useEffect(() => {
         return () => {

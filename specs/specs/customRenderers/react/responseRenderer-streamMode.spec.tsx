@@ -1,4 +1,4 @@
-import {AiChat, ResponseRenderer, StreamResponseComponentProps} from '@nlux-dev/react/src';
+import {AiChat, StreamResponseComponentProps, StreamResponseRenderer} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {act} from 'react';
@@ -24,7 +24,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Should render the markdown in the custom component as it\'s being generated', async () => {
             // Arrange
-            const CustomResponseComponent: ResponseRenderer<string> = (
+            const CustomResponseComponent: StreamResponseRenderer<string> = (
                 {
                     containerRef,
                     uid,
@@ -82,6 +82,44 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                 expect.stringContaining('<div class="some-streamed-response">'));
             expect(chatItemReceived!.innerHTML).toEqual(
                 expect.stringContaining('<div class="footer">Some footer content</div>'));
+        });
+
+        it('Status should be streaming when content is being generated', async () => {
+            // Arrange
+            const CustomResponseComponent: StreamResponseRenderer<string> = ({status}: StreamResponseComponentProps<string>) => (
+                <div className="some-streamed-response">
+                    <span className="status-prop">{status}</span>
+                </div>
+            );
+
+            const customResponseComponentSpy = vi.fn(CustomResponseComponent);
+            const {container} = render(
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    messageOptions={{responseRenderer: customResponseComponentSpy}}
+                />,
+            );
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+            await waitForReactRenderCycle();
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            adapterController!.next('Yo!');
+            await act(() => waitForMdStreamToComplete());
+
+            // Assert
+            const statusItem = container.querySelector('.nlux-chatSegments-container .nlux-comp-chatItem--received .status-prop');
+            await waitFor(() => expect(statusItem!.innerHTML).toEqual('streaming'));
+
+            // Act
+            adapterController!.complete();
+            await act(() => waitForMdStreamToComplete());
+
+            // Assert - Streamed content should have been appended to the existing content
+            const statusItem2 = container.querySelector('.nlux-chatSegments-container .nlux-comp-chatItem--received .status-prop');
+            await waitFor(() => expect(statusItem2!.innerHTML).toEqual('complete'));
         });
     });
 });

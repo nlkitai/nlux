@@ -82,18 +82,18 @@ export const ChatItemComp: <AiMsg>(
         StreamContainerComp<AiMsg>,
     ), []);
 
-    const isReceived = props.direction === 'received';
-    const isSent = props.direction === 'sent';
+    const isAssistantMessage = props.direction === 'received';
+    const isUserMessage = props.direction === 'sent';
     const isStreamed = props.dataTransferMode === 'stream';
 
     return (
         <div className={className}>
             {participantInfo}
-            {isReceived && isStreamed && (
+            {isAssistantMessage && isStreamed && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
                     uid={props.uid}
-                    status={'streaming'}
+                    status={props.status}
                     ref={streamContainer}
                     direction={props.direction}
                     responseRenderer={props.messageOptions?.responseRenderer}
@@ -107,7 +107,7 @@ export const ChatItemComp: <AiMsg>(
                     }}
                 />
             )}
-            {isReceived && !isStreamed && (
+            {isAssistantMessage && !isStreamed && (
                 <MessageComp
                     uid={props.uid}
                     message={AiMessageRenderer}
@@ -115,7 +115,7 @@ export const ChatItemComp: <AiMsg>(
                     direction={props.direction}
                 />
             )}
-            {isSent && (
+            {isUserMessage && (
                 <MessageComp
                     uid={props.uid}
                     message={UserMessageRenderer}
