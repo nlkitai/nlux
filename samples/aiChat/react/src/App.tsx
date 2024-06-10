@@ -6,14 +6,12 @@ import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
-    BatchResponseComponentProps,
     ChatItem,
     ConversationLayout,
     DataTransferMode,
     PersonaOptions,
     ResponseRenderer,
     SanitizerExtension,
-    StreamResponseComponentProps,
 } from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
@@ -303,17 +301,14 @@ function App() {
 }
 
 const responseRenderer: ResponseRenderer<string> = memo((props) => {
-    const {dataTransferMode} = props;
-    const propsForBatch = props as BatchResponseComponentProps<string>;
-    const propsForStream = props as StreamResponseComponentProps<string>;
+    const {dataTransferMode, content} = props;
 
-    console.log('Response Renderer Props');
-    console.dir(props);
+    console.log('Response Renderer', content);
 
     return (
         <>
-            {(dataTransferMode === 'batch') && <div>{propsForBatch.content}</div>}
-            {(dataTransferMode === 'stream') && <div ref={propsForStream.containerRef}/>}
+            {(dataTransferMode === 'batch' && content.length > 0) && <div>{content[0]}</div>}
+            {(dataTransferMode === 'stream') && <div ref={props.containerRef}/>}
             <div style={{
                 backgroundColor: 'lightblue',
                 padding: '10px 0',

@@ -2,57 +2,34 @@ import {MessageOptions as JavaScriptMessageOptions} from '@nlux/core';
 import {FC, RefObject} from 'react';
 
 /**
- * Props for the custom React component that renders a message sent by the server in streaming mode.
+ * Props for the custom React component that renders a message sent by the server.
  * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
  *
  * @property {string} uid The unique identifier of the message.
- * @property {'stream'} dataTransferMode The data transfer mode used by the adapter.
- * @property {'streaming' | 'complete'} status The status of the message.
+ * @property {'stream' | 'batch'} dataTransferMode The data transfer mode used by the adapter.
+ * @property {'streaming' | 'complete'} status The status of the message. It's always 'complete' for batch mode.
  *
- * @property {AiMsg[]} content The content of the message. The content is an array of messages. The content is undefined
- * when the status is 'streaming'. The content is an array of messages when the status is 'complete'.
+ * @property {AiMsg} content The content of the message. It's updated as the message is being streamed. The content is
+ * an array of messages when the data transfer mode is 'stream'. The content is an array with a single message when the
+ * data transfer mode is 'batch'.
  *
  * @property {unknown[]} serverResponse The raw server response. The server response is an array of objects or strings
- * representing each raw chunk of the response received from the server. The server response is undefined when the
- * status is 'streaming'. The server response is an array of objects or strings when the status is 'complete'.
+ * representing each raw chunk of the response received from the server. The server response is only provided with
+ * NLUX standard adapters. For custom adapters, everything is handled through the content prop and it will be empty.
  *
- * @property {RefObject<never>} containerRef A reference to the HTML element that contains the message to be streamed.
+ * @property {RefObject<never>} containerRef If you opt for the NLUX markdown renderer, you can use this reference to
+ * attach the rendered content to the DOM. Otherwise, you can ignore this prop and render the `content` directly.
  */
-export type StreamResponseComponentProps<AiMsg> = {
+export type ResponseRendererProps<AiMsg> = {
     uid: string;
-    dataTransferMode: 'stream';
+    dataTransferMode: 'stream' | 'batch';
     status: 'streaming' | 'complete';
-    content?: AiMsg[];
-    serverResponse?: unknown[];
-    containerRef: RefObject<never>;
+    content: AiMsg[];
+    serverResponse: unknown[];
+    containerRef?: RefObject<never>;
 };
 
-/**
- * Props for the custom React component that renders a message sent by the server in batch mode.
- * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
- *
- * @property {string} uid The unique identifier of the message.
- * @property {'batch'} dataTransferMode The data transfer mode used by the adapter.
- * @property {'complete'} status The status of the message.
- *
- * @property {AiMsg} content The content of the message. The content is a single message.
- * @property {unknown} serverResponse The raw server response. The server response is a single object or string
- * representing the raw response received from the server.
- */
-export type BatchResponseComponentProps<AiMsg> = {
-    uid: string;
-    dataTransferMode: 'batch';
-    status: 'complete';
-    content: AiMsg;
-    serverResponse: unknown;
-};
-
-export type ResponseRenderer<AiMsg> = FC<
-    StreamResponseComponentProps<AiMsg> | BatchResponseComponentProps<AiMsg>
->;
-
-export type BatchResponseRenderer<AiMsg> = FC<BatchResponseComponentProps<AiMsg>>;
-export type StreamResponseRenderer<AiMsg> = FC<StreamResponseComponentProps<AiMsg>>;
+export type ResponseRenderer<AiMsg> = FC<ResponseRendererProps<AiMsg>>;
 
 export type PromptRendererProps = {
     uid: string;
@@ -65,10 +42,7 @@ export type ReactSpecificMessageOptions<AiMsg> = {
     /**
      * Custom React component to render the message received from the AI.
      */
-    responseRenderer?:
-        ResponseRenderer<AiMsg> |
-        FC<BatchResponseComponentProps<AiMsg>> |
-        FC<StreamResponseComponentProps<AiMsg>>;
+    responseRenderer?: ResponseRenderer<AiMsg>;
 
     /**
      * Custom React component to render the message sent by the user.

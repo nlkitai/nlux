@@ -2,29 +2,6 @@ import {HighlighterExtension} from '../highlighter/highlighter';
 import {SanitizerExtension} from '../sanitizer/sanitizer';
 
 /**
- * Props for the custom function that renders a message sent by the server in streaming mode.
- * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
- *
- * @property {string} uid The unique identifier of the message.
- * @property {'stream'} dataTransferMode The data transfer mode used by the adapter.
- * @property {'streaming' | 'complete'} status The status of the message.
- *
- * @property {AiMsg[]} content The content of the message. The content is an array of messages. The content is undefined
- * when the status is 'streaming'. The content is an array of messages when the status is 'complete'.
- *
- * @property {unknown[]} serverResponse The raw server response. The server response is an array of objects or strings
- * representing each raw chunk of the response received from the server. The server response is undefined when the
- * status is 'streaming'. The server response is an array of objects or strings when the status is 'complete'.
- */
-export type StreamResponseComponentProps<AiMsg> = {
-    uid: string;
-    dataTransferMode: 'stream';
-    status: 'streaming' | 'complete';
-    content?: AiMsg[];
-    serverResponse?: unknown[];
-};
-
-/**
  * Props for the custom function that renders a message sent by the server in batch mode.
  * @template AiMsg The type of the message received from the AI. Defaults to string for standard NLUX adapters.
  *
@@ -36,19 +13,15 @@ export type StreamResponseComponentProps<AiMsg> = {
  * @property {unknown} serverResponse The raw server response. The server response is a single object or string
  * representing the raw response received from the server.
  */
-export type BatchResponseComponentProps<AiMsg> = {
+export type ResponseRendererProps<AiMsg> = {
     uid: string;
-    dataTransferMode: 'batch';
-    status: 'complete';
-    content: AiMsg;
-    serverResponse: unknown;
+    dataTransferMode: 'stream' | 'batch';
+    status: 'streaming' | 'complete';
+    content: [AiMsg];
+    serverResponse: unknown[];
 };
 
-export type ResponseRenderer<AiMsg> = (
-    (props: StreamResponseComponentProps<AiMsg>) => HTMLElement | null
-    ) | (
-    (props: BatchResponseComponentProps<AiMsg>) => HTMLElement | null
-    );
+export type ResponseRenderer<AiMsg> = (props: ResponseRendererProps<AiMsg>) => HTMLElement | null;
 
 export type PromptRendererProps = {
     uid: string;

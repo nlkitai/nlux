@@ -81,10 +81,7 @@ export type {
 export type {
     MessageOptions,
     ResponseRenderer,
-    BatchResponseRenderer,
-    BatchResponseComponentProps,
-    StreamResponseRenderer,
-    StreamResponseComponentProps,
+    ResponseRendererProps,
     PromptRenderer,
     PromptRendererProps,
 } from './exports/messageOptions';

@@ -1,11 +1,10 @@
-import {FC, ReactElement, Ref, RefObject, useEffect, useImperativeHandle, useMemo, useRef, useState} from 'react';
+import {Ref, RefObject, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import {className as compMessageClassName} from '@shared/components/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,
 } from '@shared/components/Message/utils/applyNewDirectionClassName';
 import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
-import {warn} from '@shared/utils/warn';
-import {StreamResponseComponentProps} from '../../exports/messageOptions';
+import {ResponseRenderer} from '../../exports/messageOptions';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {streamingDomService} from './streamingDomService';
 import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
@@ -23,11 +22,14 @@ export const StreamContainerComp = function <AiMsg>(
         initialMarkdownMessage,
     } = props;
 
+    const [content, setContent] = useState<Array<AiMsg>>([]);
+
     // We use references in this component to avoid re-renders — as streaming happens outside of React
     // rendering cycle, we don't want to trigger re-renders on every chunk of data received.
     const rootElRef = useRef<HTMLDivElement | null>(null);
     const rootElRefPreviousValue = useRef<HTMLDivElement | null>(null);
     const mdStreamParserRef = useRef<StandardStreamParserOutput | null>(null);
+    const appendChunkToStateRef = useRef<((newContent: AiMsg) => void) | null>(null);
 
     const [streamContainer, setStreamContainer] = useState<HTMLDivElement>();
     const [initialMarkdownMessageParsed, setInitialMarkdownMessageParsed] = useState(false);
@@ -47,6 +49,12 @@ export const StreamContainerComp = function <AiMsg>(
             streamContainer.append(element);
         }
     }, [streamContainer]);
+
+    useEffect(() => {
+        appendChunkToStateRef.current = (newContent: AiMsg) => {
+            setContent((prevContent) => [...prevContent, newContent]);
+        };
+    }, [setContent]);
 
     // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter, etc.) change.
     useEffect(() => {
@@ -79,38 +87,25 @@ export const StreamContainerComp = function <AiMsg>(
         markdownOptions?.streamingAnimationSpeed,
     ]);
 
-    const rootElement: ReactElement = useMemo(() => {
-        if (responseRenderer) {
-            const StreamResponseRendererComp = responseRenderer as FC<StreamResponseComponentProps<AiMsg>>;
-            return (
-                <StreamResponseRendererComp
-                    uid={uid}
-                    status={status}
-                    containerRef={rootElRef as RefObject<never>}
-                    content={undefined}
-                    serverResponse={undefined}
-                    dataTransferMode={'stream'}
-                />
-            );
-        } else {
-            return <div className={'nlux-markdownStream-root'} ref={rootElRef}/>;
-        }
-    }, [responseRenderer, status]);
-
     useEffect(() => {
         return () => {
             rootElRefPreviousValue.current = null;
             mdStreamParserRef.current = null;
+            appendChunkToStateRef.current = null;
             setStreamContainer(undefined);
         };
     }, []);
 
     useImperativeHandle(ref, () => ({
         streamChunk: (chunk: AiMsg) => {
+            // This will append the chunk to the state
+            const appendChunkToState = appendChunkToStateRef.current;
+            if (appendChunkToState) {
+                appendChunkToStateRef.current?.(chunk);
+            }
+
             if (typeof chunk === 'string') {
                 mdStreamParserRef.current?.next(chunk);
-            } else {
-                warn('When using a markdown stream renderer, the chunk must be a string.');
             }
         },
         completeStream: () => {
@@ -121,6 +116,21 @@ export const StreamContainerComp = function <AiMsg>(
     const compDirectionClassName = compMessageDirectionClassName['received'];
     const compStatusClassName = compMessageStatusClassName[status];
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
+    const StreamResponseRendererComp = responseRenderer ? responseRenderer as ResponseRenderer<AiMsg> : undefined;
 
-    return <div className={className}>{rootElement}</div>;
+    return <div className={className}>
+        {StreamResponseRendererComp && (
+            <StreamResponseRendererComp
+                uid={uid}
+                status={status}
+                containerRef={rootElRef as RefObject<never>}
+                content={content}
+                serverResponse={[]}
+                dataTransferMode={'stream'}
+            />
+        )}
+        {!StreamResponseRendererComp && (
+            <div className={'nlux-markdownStream-root'} ref={rootElRef}/>
+        )}
+    </div>;
 };

@@ -1,5 +1,5 @@
 import {FC, RefObject} from 'react';
-import {BatchResponseComponentProps, StreamResponseComponentProps} from '../../exports/messageOptions';
+import {ResponseRendererProps} from '../../exports/messageOptions';
 import {ChatItemProps} from '../../components/ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
@@ -18,6 +18,8 @@ export const getMessageRenderer: <AiMsg>(
         dataTransferMode,
         status,
         fetchedContent,
+        streamedContent,
+        streamedServerResponse,
         fetchedServerResponse,
         direction,
         messageOptions,
@@ -36,31 +38,33 @@ export const getMessageRenderer: <AiMsg>(
         // Streaming into a custom renderer.
         //
         if (dataTransferMode === 'stream') {
-            const props: StreamResponseComponentProps<AiMsg> = {
+            const props: ResponseRendererProps<AiMsg> = {
                 uid,
                 status,
                 dataTransferMode,
+                content: streamedContent ?? [],
+                serverResponse: streamedServerResponse ?? [],
                 containerRef: containerRefToUse as RefObject<never>,
             };
 
             return () => {
-                const Comp = (messageOptions.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>);
+                const Comp = (messageOptions.responseRenderer as FC<ResponseRendererProps<AiMsg>>);
                 return <Comp {...props} />;
             };
         } else {
             //
             // Batching data and displaying it in a custom renderer.
             //
-            const props: BatchResponseComponentProps<AiMsg> = {
+            const props: ResponseRendererProps<AiMsg> = {
                 uid,
                 status: 'complete',
-                content: fetchedContent as AiMsg,
-                serverResponse: fetchedServerResponse,
+                content: fetchedContent ? [fetchedContent] : [],
+                serverResponse: fetchedServerResponse ? [fetchedServerResponse] : [],
                 dataTransferMode,
             };
 
             return () => {
-                const Comp = (messageOptions.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>);
+                const Comp = (messageOptions.responseRenderer as FC<ResponseRendererProps<AiMsg>>);
                 return <Comp {...props} />;
             };
         }

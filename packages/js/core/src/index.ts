@@ -15,8 +15,6 @@ export type {
 
 export type {ComposerOptions} from './aiChat/options/composerOptions';
 export type {
-    BatchResponseComponentProps,
-    StreamResponseComponentProps,
     ResponseRenderer,
     PromptRendererProps,
     PromptRenderer,
