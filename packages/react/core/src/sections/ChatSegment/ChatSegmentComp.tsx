@@ -186,7 +186,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     ref={ref}
                                     key={chatItem.uid}
                                     uid={chatItem.uid}
-                                    status={'streaming'}
+                                    status={chatItem.status}
                                     direction={'received'}
                                     layout={props.layout}
                                     messageOptions={props.messageOptions}

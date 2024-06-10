@@ -5,7 +5,7 @@ import {
 } from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
 import {MarkdownSnapshotRenderer} from '../../sections/MessageRenderer/MarkdownSnapshotRenderer';
-import {createMessageRenderer} from '../../sections/MessageRenderer/MessageRenderer';
+import {getMessageRenderer} from '../../sections/MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../../sections/StreamContainer/props';
 import {StreamContainerComp} from '../../sections/StreamContainer/StreamContainerComp';
 import {AvatarComp} from '../Avatar/AvatarComp';
@@ -31,7 +31,6 @@ export const ChatItemComp: <AiMsg>(
 
     }, [props.avatar, props.name]);
 
-    const isStreaming = useMemo(() => props.status === 'streaming', [props.status]);
     const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
 
     useImperativeHandle(ref, () => ({
@@ -48,14 +47,18 @@ export const ChatItemComp: <AiMsg>(
         : conversationLayoutClassName['list'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
-    const AiMessageRenderer = useMemo(() => {
-        return isStreaming ? () => '' : createMessageRenderer<AiMsg>(props);
-    }, [
-        isStreaming,
-        props.uid, props.status, props.fetchedContent, props.streamedContent, props.direction,
-        props.messageOptions?.responseRenderer, props.messageOptions?.syntaxHighlighter,
-        props.messageOptions?.htmlSanitizer, props.messageOptions?.markdownLinkTarget,
-    ]);
+    const AiMessageRenderer = useMemo(
+        () => getMessageRenderer<AiMsg>(props), [
+            props.uid,
+            props.status,
+            props.dataTransferMode,
+            props.fetchedContent,
+            props.streamedContent,
+            props.direction,
+            props.messageOptions?.responseRenderer, props.messageOptions?.syntaxHighlighter,
+            props.messageOptions?.htmlSanitizer, props.messageOptions?.markdownLinkTarget,
+        ],
+    );
 
     const UserMessageRenderer = useCallback(() => {
         if (props.messageOptions?.promptRenderer === undefined) {
@@ -79,10 +82,14 @@ export const ChatItemComp: <AiMsg>(
         StreamContainerComp<AiMsg>,
     ), []);
 
+    const isReceived = props.direction === 'received';
+    const isSent = props.direction === 'sent';
+    const isStreamed = props.dataTransferMode === 'stream';
+
     return (
         <div className={className}>
             {participantInfo}
-            {isStreaming && (
+            {isReceived && isStreamed && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
                     uid={props.uid}
@@ -100,7 +107,7 @@ export const ChatItemComp: <AiMsg>(
                     }}
                 />
             )}
-            {!isStreaming && props.direction === 'received' && (
+            {isReceived && !isStreamed && (
                 <MessageComp
                     uid={props.uid}
                     message={AiMessageRenderer}
@@ -108,7 +115,7 @@ export const ChatItemComp: <AiMsg>(
                     direction={props.direction}
                 />
             )}
-            {!isStreaming && props.direction === 'sent' && (
+            {isSent && (
                 <MessageComp
                     uid={props.uid}
                     message={UserMessageRenderer}

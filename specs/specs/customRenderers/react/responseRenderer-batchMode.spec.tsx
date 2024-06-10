@@ -86,6 +86,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
                     status: 'complete',
                     serverResponse: undefined,
                 }),
+                {},
             );
         });
 

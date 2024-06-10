@@ -3,7 +3,10 @@ import {BatchResponseComponentProps, StreamResponseComponentProps} from '../../e
 import {ChatItemProps} from '../../components/ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
-export const createMessageRenderer: <AiMsg>(
+//
+// Returns a function component that renders the message content.
+//
+export const getMessageRenderer: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     containerRef?: RefObject<HTMLElement>,
 ) => FC<object> = function <AiMsg>(
