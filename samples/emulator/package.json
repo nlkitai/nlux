@@ -8,21 +8,21 @@
     "build": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}'"
   },
   "dependencies": {
-    "react": "18",
-    "react-dom": "18"
+    "react": "^18",
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "25",
-    "@rollup/plugin-node-resolve": "15",
-    "@rollup/plugin-strip": "3",
-    "@rollup/plugin-typescript": "11",
-    "@types/react": "18",
-    "@types/react-dom": "18",
-    "@types/rollup-plugin-generate-package-json": "3",
-    "esbuild": "0",
-    "rollup": "4",
-    "rollup-plugin-dts": "6",
-    "rollup-plugin-esbuild": "6",
-    "tslib": "2"
+    "@rollup/plugin-commonjs": "^25",
+    "@rollup/plugin-node-resolve": "^15",
+    "@rollup/plugin-strip": "^3",
+    "@rollup/plugin-typescript": "^11",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/rollup-plugin-generate-package-json": "^3",
+    "esbuild": "^0",
+    "rollup": "^4",
+    "rollup-plugin-dts": "^6",
+    "rollup-plugin-esbuild": "^6",
+    "tslib": "^2"
   }
 }

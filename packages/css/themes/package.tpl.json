@@ -9,13 +9,13 @@
   "dependencies": {},
   "peerDependencies": {},
   "devDependencies": {
-    "@rollup/plugin-typescript": "11",
-    "@types/postcss-import": "14",
-    "postcss": "8",
-    "postcss-import": "16",
-    "postcss-csso": "6",
-    "postcss-nested": "6",
-    "rollup": "4",
-    "rollup-plugin-postcss": "4"
+    "@rollup/plugin-typescript": "^11",
+    "@types/postcss-import": "^14",
+    "postcss": "^8",
+    "postcss-import": "^16",
+    "postcss-csso": "^6",
+    "postcss-nested": "^6",
+    "rollup": "^4",
+    "rollup-plugin-postcss": "^4"
   }
 }

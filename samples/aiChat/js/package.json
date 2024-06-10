@@ -9,10 +9,10 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "5",
-    "vite": "5"
+    "typescript": "^5",
+    "vite": "^5"
   },
   "dependencies": {
-    "dompurify": "3"
+    "dompurify": "^3"
   }
 }

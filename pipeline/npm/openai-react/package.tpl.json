@@ -11,7 +11,7 @@
   },
   "peerDependencies": {
     "@nlux/react": "{versions.nlux}",
-    "react": "{versions.peerDependencies.react}"
+    "react": "^{versions.peerDependencies.react}"
   },
   "main": "index.js",
   "types": "openai-react.d.ts",

@@ -1,12 +1,12 @@
 import {useColorMode} from '@docusaurus/theme-common';
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 import {
-    SandpackProvider,
+    SandpackCodeEditor,
+    SandpackFiles,
     SandpackLayout,
     SandpackPreview,
-    SandpackCodeEditor,
-} from "@codesandbox/sandpack-react";
-import { SandpackFiles } from '@codesandbox/sandpack-react';
+    SandpackProvider,
+} from '@codesandbox/sandpack-react';
 
 import indexHtmlContent from './indexHtml';
 import indexTsxContent from './indexTsx';
@@ -22,14 +22,14 @@ export type CodeEditorProps = {
 }
 
 export const CodeEditor = ({
-    className,
-    simulatedPrompt,
-    previewOnly = false,
-    editorHeight = 420,
-    files,
-    direction = 'column',
-}: CodeEditorProps) => {
-    const { colorMode } = useColorMode();
+                               className,
+                               simulatedPrompt,
+                               previewOnly = false,
+                               editorHeight = 420,
+                               files,
+                               direction = 'column',
+                           }: CodeEditorProps) => {
+    const {colorMode} = useColorMode();
     const setPromptIntoSimulator = useMemo(() => {
         if (simulatedPrompt === false) {
             return '';
@@ -59,12 +59,12 @@ export const CodeEditor = ({
             }}
             customSetup={{
                 dependencies: {
-                    "react": "18",
-                    "react-dom": "18",
-                    "@nlux/react": "2",
-                    "@nlux/langchain-react": "2",
-                    "@nlux/themes": "2",
-                    "@nlux/highlighter": "2",
+                    'react': '^18',
+                    'react-dom': '18',
+                    '@nlux/react': '2',
+                    '@nlux/langchain-react': '2',
+                    '@nlux/themes': '2',
+                    '@nlux/highlighter': '2',
                 },
             }}
             files={{
@@ -79,7 +79,7 @@ export const CodeEditor = ({
                 height: direction === 'row' ? 'auto' : (previewOnly ? editorHeight : editorHeight * 2),
             }}>
                 <SandpackPreview
-                    style={{ height: editorHeight }}
+                    style={{height: editorHeight}}
                     showNavigator={false}
                     showOpenInCodeSandbox={true}
                     showRefreshButton={true}
@@ -87,7 +87,7 @@ export const CodeEditor = ({
                 />
                 {!previewOnly && (
                     <SandpackCodeEditor
-                        style={{ height: editorHeight }}
+                        style={{height: editorHeight}}
                         showTabs
                         showLineNumbers={true}
                         showInlineErrors
@@ -97,5 +97,5 @@ export const CodeEditor = ({
                 )}
             </SandpackLayout>
         </SandpackProvider>
-    )
+    );
 };

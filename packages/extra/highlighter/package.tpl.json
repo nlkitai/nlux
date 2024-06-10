@@ -8,23 +8,23 @@
   },
   "dependencies": {
     "@nlux/core": "{versions.nlux}",
-    "highlight.js": "{versions.dependencies.highlightJs}"
+    "highlight.js": "^{versions.dependencies.highlightJs}"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "25",
-    "@rollup/plugin-node-resolve": "15",
-    "@rollup/plugin-replace": "5",
-    "@rollup/plugin-strip": "3",
-    "@rollup/plugin-terser": "0",
-    "@rollup/plugin-typescript": "11",
-    "rollup": "4",
-    "rollup-plugin-dts": "6",
-    "rollup-plugin-esbuild": "6",
-    "tslib": "2",
-    "postcss": "8",
-    "postcss-import": "16",
-    "postcss-csso": "6",
-    "rollup-plugin-postcss": "4"
+    "@rollup/plugin-commonjs": "^25",
+    "@rollup/plugin-node-resolve": "^15",
+    "@rollup/plugin-replace": "^5",
+    "@rollup/plugin-strip": "^3",
+    "@rollup/plugin-terser": "^0",
+    "@rollup/plugin-typescript": "^11",
+    "rollup": "^4",
+    "rollup-plugin-dts": "^6",
+    "rollup-plugin-esbuild": "^6",
+    "tslib": "^2",
+    "postcss": "^8",
+    "postcss-import": "^16",
+    "postcss-csso": "^6",
+    "rollup-plugin-postcss": "^4"
   },
   "main": "index.js",
   "types": "highlighters.d.ts",

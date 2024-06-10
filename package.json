@@ -26,13 +26,13 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "@eslint/js": "9",
-    "eslint": "9",
-    "jsdom": "24",
-    "symlink-dir": "6",
-    "typescript": "5",
-    "typescript-eslint": "7",
-    "vite": "5"
+    "@eslint/js": "^9",
+    "eslint": "^9",
+    "jsdom": "^24",
+    "symlink-dir": "^6",
+    "typescript": "^5",
+    "typescript-eslint": "^7",
+    "vite": "^5"
   },
   "bugs": "https://github.com/nluxai/nlux/issues",
   "repository": {
