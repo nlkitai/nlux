@@ -40,7 +40,10 @@ export const createMessageRenderer: <AiMsg>(
                 containerRef: containerRefToUse as RefObject<never>,
             };
 
-            return () => (messageOptions.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>)(props);
+            return () => {
+                const Comp = (messageOptions.responseRenderer as FC<StreamResponseComponentProps<AiMsg>>);
+                return <Comp {...props} />;
+            };
         } else {
             //
             // Batching data and displaying it in a custom renderer.
@@ -53,7 +56,10 @@ export const createMessageRenderer: <AiMsg>(
                 dataTransferMode,
             };
 
-            return () => (messageOptions.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>)(props);
+            return () => {
+                const Comp = (messageOptions.responseRenderer as FC<BatchResponseComponentProps<AiMsg>>);
+                return <Comp {...props} />;
+            };
         }
     }
 
