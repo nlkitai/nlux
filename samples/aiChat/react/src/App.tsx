@@ -60,13 +60,13 @@ function App() {
 
     useEffect(() => {
         if (colorScheme === 'auto') {
-            const osColorScheme = window?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const osColorScheme = globalThis?.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             document.body.style.backgroundColor = osColorScheme === 'dark' ? 'black' : 'white';
         } else {
             document.body.style.backgroundColor = colorScheme === 'dark' ? 'black' : 'white';
         }
 
-    }, [colorScheme, window?.matchMedia]);
+    }, [colorScheme]);
 
     const nlBridgeAdapter = useNlbridgeChatAdapter({
         url: 'http://localhost:8899/',
@@ -146,7 +146,7 @@ function App() {
     };
 
     const htmlSanitizer: SanitizerExtension = useMemo(() => (html: string) => {
-        const trustedTypes = window?.trustedTypes as unknown as {
+        const trustedTypes = globalThis?.trustedTypes as unknown as {
             createPolicy: (name: string, policy: Record<string, unknown>) => unknown;
         } | undefined;
 
@@ -159,7 +159,7 @@ function App() {
         }
 
         return DOMPurify.sanitize(html);
-    }, [window?.trustedTypes]);
+    }, [globalThis?.trustedTypes]);
 
     const conversationStarters: ConversationStarter[] = [
         {prompt: 'Write Hello World in Python, C++, and Java.'},
