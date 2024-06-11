@@ -9,7 +9,7 @@ import {getRootClassNames} from '@shared/utils/dom/getRootClassNames';
 import {warnOnce} from '@shared/utils/warn';
 import {ConversationComp} from '../sections/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../sections/Conversation/props';
-import {ComposerComp} from '../components/Composer/ComposerComp';
+import {ComposerComp} from '../sections/Composer/ComposerComp';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';

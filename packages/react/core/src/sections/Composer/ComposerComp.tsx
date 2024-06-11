@@ -3,8 +3,8 @@ import {className as compComposerClassName} from '@shared/components/Composer/cr
 import {
     statusClassName as compComposerStatusClassName,
 } from '@shared/components/Composer/utils/applyNewStatusClassName';
-import {LoaderComp} from '../Loader/LoaderComp';
-import {SendIconComp} from '../SendIcon/SendIconComp';
+import {LoaderComp} from '../../components/Loader/LoaderComp';
+import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
 
 export const ComposerComp = (props: ComposerProps) => {
