@@ -63,7 +63,7 @@ export const AiChat: <AiMsg>(
     const rootStyle = useAiChatStyle(displayOptions);
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId, colorScheme}).join(' '),
-        [className, themeId, colorScheme, window?.matchMedia],
+        [className, themeId, colorScheme],
     );
 
     // Callbacks and handlers for user interactions and events
