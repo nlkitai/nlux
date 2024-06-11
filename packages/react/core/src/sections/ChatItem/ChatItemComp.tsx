@@ -4,12 +4,12 @@ import {
     directionClassName as compChatItemDirectionClassName,
 } from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
-import {MarkdownSnapshotRenderer} from '../../sections/MessageRenderer/MarkdownSnapshotRenderer';
-import {getMessageRenderer} from '../../sections/MessageRenderer/MessageRenderer';
-import {StreamContainerImperativeProps} from '../../sections/StreamContainer/props';
-import {StreamContainerComp} from '../../sections/StreamContainer/StreamContainerComp';
-import {AvatarComp} from '../Avatar/AvatarComp';
-import {MessageComp} from '../Message/MessageComp';
+import {MarkdownSnapshotRenderer} from '../MessageRenderer/MarkdownSnapshotRenderer';
+import {getMessageRenderer} from '../MessageRenderer/MessageRenderer';
+import {StreamContainerImperativeProps} from '../StreamContainer/props';
+import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
+import {AvatarComp} from '../../components/Avatar/AvatarComp';
+import {MessageComp} from '../../components/Message/MessageComp';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
 
 export const ChatItemComp: <AiMsg>(

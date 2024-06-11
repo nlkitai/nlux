@@ -1,6 +1,6 @@
 import {FC, RefObject} from 'react';
 import {ResponseRendererProps} from '../../exports/messageOptions';
-import {ChatItemProps} from '../../components/ChatItem/props';
+import {ChatItemProps} from '../ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 
 //
