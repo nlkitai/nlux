@@ -1,7 +1,7 @@
 import {ReactNode, useMemo} from 'react';
 import {WelcomeDefaultMessageComp} from '../../components/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
 import {WelcomeMessageComp} from '../../components/WelcomeMessage/WelcomeMessageComp';
-import {ConversationStarters} from '../ConversationStarters/ConversationStarters';
+import {ConversationStarters} from '../../components/ConversationStarters/ConversationStarters';
 import {LaunchPadProps} from './props';
 
 export type LaunchPadCompType = <AiMsg>(
