@@ -1,7 +1,7 @@
-import {AiChat, BatchResponseComponentProps} from '@nlux-dev/react/src';
+import {AiChat, ResponseRenderer} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {act, FC} from 'react';
+import {act} from 'react';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -24,7 +24,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Should render the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content}) => (
+            const CustomResponseComponent: ResponseRenderer<string> = ({content}) => (
                 <div>The AI response is: {content}</div>
             );
 
@@ -53,7 +53,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Should pass uid to the custom component', async () => {
             // Arrange
-            const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content, uid}) => (
+            const CustomResponseComponent: ResponseRenderer<string> = ({content, uid}) => (
                 <div>
                     The AI response is: {content} with uid: {uid}
                 </div>
@@ -81,10 +81,10 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
             expect(customResponseComponentSpy).toHaveBeenCalledWith(
                 expect.objectContaining({
                     uid: expect.any(String),
-                    content: 'Yo!',
+                    content: ['Yo!'],
                     dataTransferMode: 'batch',
                     status: 'complete',
-                    serverResponse: undefined,
+                    serverResponse: [],
                 }),
                 {},
             );
@@ -93,7 +93,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
         describe('When the custom response renderer is removed', () => {
             it('Should render the default response renderer', async () => {
                 // Arrange
-                const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content, uid}) => (
+                const CustomResponseComponent: ResponseRenderer<string> = ({content, uid}) => (
                     <div>The AI response is: {content} with uid: {uid}</div>
                 );
 

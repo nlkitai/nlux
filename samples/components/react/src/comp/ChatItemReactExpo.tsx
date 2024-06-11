@@ -1,4 +1,4 @@
-import {ChatItemComp} from '@nlux-dev/react/src/components/ChatItem/ChatItemComp';
+import {ChatItemComp} from '@nlux-dev/react/src/sections/ChatItem/ChatItemComp';
 import {forwardRef, ReactElement, useMemo, useState} from 'react';
 import {MessageDirection, MessageStatus} from '@shared/components/Message/props';
 import '@nlux-dev/themes/src/luna/main.css';

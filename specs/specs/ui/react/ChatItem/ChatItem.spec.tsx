@@ -1,5 +1,5 @@
-import {BatchResponseComponentProps} from '@nlux-dev/react/src';
-import {ChatItemComp} from '@nlux-dev/react/src/components/ChatItem/ChatItemComp';
+import {ResponseRendererProps} from '@nlux-dev/react/src';
+import {ChatItemComp} from '@nlux-dev/react/src/sections/ChatItem/ChatItemComp';
 import {render} from '@testing-library/react';
 import {forwardRef} from 'react';
 import {describe, expect, it} from 'vitest';
@@ -40,7 +40,7 @@ describe('When a custom chat item is provided', () => {
             status={'complete'}
             fetchedContent={{text: 'Hello Jason!'}}
             messageOptions={{
-                responseRenderer: ({content}: BatchResponseComponentProps<any>) => <>{`THE AI SAID [${content.text}]`}</>,
+                responseRenderer: ({content}: ResponseRendererProps<any>) => <>{`THE AI SAID [${content[0].text}]`}</>,
             }}
         />;
 

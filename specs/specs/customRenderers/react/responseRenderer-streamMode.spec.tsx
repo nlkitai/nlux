@@ -1,4 +1,4 @@
-import {AiChat, StreamResponseComponentProps, StreamResponseRenderer} from '@nlux-dev/react/src';
+import {AiChat, ResponseRenderer, ResponseRendererProps} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {act} from 'react';
@@ -24,11 +24,11 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Should render the markdown in the custom component as it\'s being generated', async () => {
             // Arrange
-            const CustomResponseComponent: StreamResponseRenderer<string> = (
+            const CustomResponseComponent: ResponseRenderer<string> = (
                 {
                     containerRef,
                     uid,
-                }: StreamResponseComponentProps<string>) => (
+                }: ResponseRendererProps<string>) => (
                 <div className="some-streamed-response">
                     <div className="content" ref={containerRef}/>
                     <div className="footer">Some footer content</div>
@@ -86,7 +86,7 @@ describe('<AiChat /> + responseRenderer in batch mode', () => {
 
         it('Status should be streaming when content is being generated', async () => {
             // Arrange
-            const CustomResponseComponent: StreamResponseRenderer<string> = ({status}: StreamResponseComponentProps<string>) => (
+            const CustomResponseComponent: ResponseRenderer<string> = ({status}) => (
                 <div className="some-streamed-response">
                     <span className="status-prop">{status}</span>
                 </div>

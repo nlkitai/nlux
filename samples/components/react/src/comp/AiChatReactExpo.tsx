@@ -1,17 +1,22 @@
-import {AiChat, AiChatProps, DataTransferMode, BatchResponseComponentProps, PersonaOptions} from '@nlux-dev/react/src';
+import {
+    AiChat,
+    AiChatProps,
+    DataTransferMode,
+    PersonaOptions,
+    ResponseRenderer,
+    ResponseRendererProps,
+} from '@nlux-dev/react/src';
 import {ChatItem} from '@nlux/core';
 import {useChatAdapter} from '@nlux/langchain-react';
-import {FC, useMemo, useState} from 'react';
+import {useMemo, useState} from 'react';
 import '@nlux-dev/themes/src/luna/main.css';
 
-type MessageObjectType = {txt: string, color: string, bg: string};
+type MessageObjectType = { txt: string, color: string, bg: string };
 
 const possibleColors = ['red', 'green', 'blue', 'yellow', 'purple'];
 const possibleBackgrounds = ['white', 'black', 'gray', 'lightgray', 'darkgray'];
 
-const CustomMessageComponent: FC<
-    BatchResponseComponentProps<MessageObjectType>
-> = (props) => {
+const CustomMessageComponent: ResponseRenderer<MessageObjectType> = (props) => {
     const color = useMemo(() => possibleColors[Math.floor(Math.random() * possibleColors.length)], []);
     const bg = useMemo(() => possibleBackgrounds[Math.floor(Math.random() * possibleBackgrounds.length)], []);
 
@@ -21,12 +26,13 @@ const CustomMessageComponent: FC<
         return null;
     }
 
-    const {content} = props as BatchResponseComponentProps<MessageObjectType>;
+    const {content} = props as ResponseRendererProps<MessageObjectType>;
+    const item = content.length > 1 ? content[0] : undefined;
 
-    if (typeof content === 'object' && content?.txt !== undefined) {
+    if (typeof content === 'object' && item?.txt !== undefined) {
         return (
-            <div style={{color: content.color, backgroundColor: content.bg}}>
-                {content.txt}
+            <div style={{color: item.color, backgroundColor: item.bg}}>
+                {item.txt}
             </div>
         );
     }

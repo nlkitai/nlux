@@ -1,6 +1,5 @@
-import {AiChat, BatchResponseComponentProps} from '@nlux-dev/react/src';
+import {AiChat, ResponseRenderer} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
-import {FC} from 'react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
@@ -23,10 +22,9 @@ describe('<AiChat /> + responseRenderer + initialConversation', () => {
 
         it('Should render the custom component for the initial conversation messages', async () => {
             // Arrange
-            const CustomResponseComponent: FC<BatchResponseComponentProps<string>> = ({content}) => (
-                <div>The AI response is: {content}</div>
+            const CustomResponseComponent: ResponseRenderer<string> = ({content}) => (
+                <div>The AI response is: {content.length > 0 ? content[0] : `[]`}</div>
             );
-
 
             // Act
             const {container} = render(
