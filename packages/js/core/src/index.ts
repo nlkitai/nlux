@@ -14,12 +14,14 @@ export type {
 } from './aiChat/options/conversationOptions';
 
 export type {ComposerOptions} from './aiChat/options/composerOptions';
+
 export type {
     ResponseRenderer,
     PromptRendererProps,
     PromptRenderer,
     MessageOptions,
 } from './aiChat/options/messageOptions';
+
 export type {DisplayOptions} from './aiChat/options/displayOptions';
 
 export type {
@@ -27,6 +29,10 @@ export type {
     AssistantPersona,
     UserPersona,
 } from './aiChat/options/personaOptions';
+
+export type {
+    ConversationStarter,
+} from './types/conversationStarter';
 
 export type {
     IObserver,

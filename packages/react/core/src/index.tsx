@@ -86,6 +86,10 @@ export type {
     PromptRendererProps,
 } from './exports/messageOptions';
 
+export type {
+    ConversationStarter,
+} from './types/conversationStarter';
+
 export {
     AiChat,
 } from './exports/AiChat';

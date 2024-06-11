@@ -23,6 +23,7 @@ type ConversationLayout = 'bubbles' | 'list';
 | `autoScroll` | `boolean` | `true` | If `true`, the conversation will scroll to the bottom when a new message is being added. |
 | `historyPayloadSize` | `number`&nbsp;\|&nbsp;`'max'` | `'max'` | The number of messages from the conversation history to be sent to the backend whenver a message is submitted. If set to `0`, no messages will be sent to the server. If set to `'max'`, all the conversation messages will be sent to the server everytime time a prompt is submitted. |
 | `showWelcomeMessage` | `boolean` | `true` | If `true`, the assistant's logo and tagline will be displayed when the conversation starts. The NLUX will be shown is no assistant persona is provided. Set to `false` to hide the welcome message. |
+| `conversationStarters` | `ConversationStarter[]` | `[]` | An array of conversation starters to be displayed to initiate the conversation. |
 
 
 > * Usage:
