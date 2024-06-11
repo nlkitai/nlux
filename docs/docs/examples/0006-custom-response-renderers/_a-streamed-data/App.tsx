@@ -1,10 +1,10 @@
-export default (colorMode: 'dark' | 'light') => `import {AiChat, ResponseRendererProps} from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import {AiChat, ResponseRenderer} from '@nlux/react';
 import {useChatAdapter} from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
 import {personaOptions} from './personas';
 import {WavesBackground} from './Waves';
 
-const ColourfulResponseRenderer = <AiMsg = string>(props: ResponseRendererProps<AiMsg>) => {
+const ColourfulResponseRenderer: ResponseRenderer<string> = (props) => {
     console.log('Response Renderer Props:');
     console.dir(props);
 
