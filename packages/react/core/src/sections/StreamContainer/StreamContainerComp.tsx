@@ -66,6 +66,7 @@ export const StreamContainerComp = function <AiMsg>(
             showCodeBlockCopyButton: markdownOptions?.showCodeBlockCopyButton,
             skipStreamingAnimation: markdownOptions?.skipStreamingAnimation,
             streamingAnimationSpeed: markdownOptions?.streamingAnimationSpeed,
+            waitTimeBeforeStreamCompletion: markdownOptions?.waitTimeBeforeStreamCompletion,
         });
 
         if (!initialMarkdownMessageParsed && initialMarkdownMessage) {

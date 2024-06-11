@@ -20,6 +20,7 @@ export type StandardStreamParser = (
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
+        waitTimeBeforeStreamCompletion?: number | 'never';
         onComplete?: () => void;
     },
 ) => StandardStreamParserOutput;

@@ -1,14 +1,14 @@
 import {HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {MessageDirection} from '@shared/components/Message/props';
-import {BatchResponseRenderer, ResponseRenderer, StreamResponseRenderer} from '../../exports/messageOptions';
+import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 
 export type StreamContainerProps<AisMsg> = {
     uid: string,
     direction: MessageDirection,
     status: 'streaming' | 'complete';
     initialMarkdownMessage?: string;
-    responseRenderer?: ResponseRenderer<AisMsg> | BatchResponseRenderer<AisMsg> | StreamResponseRenderer<AisMsg>;
-    promptRenderer?: BatchResponseRenderer<AisMsg>;
+    responseRenderer?: ResponseRenderer<AisMsg>;
+    promptRenderer?: PromptRenderer;
     markdownOptions?: {
         syntaxHighlighter?: HighlighterExtension;
         htmlSanitizer?: SanitizerExtension;
@@ -16,6 +16,7 @@ export type StreamContainerProps<AisMsg> = {
         showCodeBlockCopyButton?: boolean;
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
+        waitTimeBeforeStreamCompletion?: number | 'never';
     }
 };
 

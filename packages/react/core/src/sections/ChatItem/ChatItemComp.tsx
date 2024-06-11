@@ -75,7 +75,10 @@ export const ChatItemComp: <AiMsg>(
             );
         }
 
-        return props.messageOptions?.promptRenderer({uid: props.uid, prompt: props.fetchedContent as string});
+        const PromptRenderer = props.messageOptions.promptRenderer;
+        return (
+            <PromptRenderer uid={props.uid} prompt={props.fetchedContent as string}/>
+        );
     }, [props.messageOptions?.promptRenderer, props.fetchedContent, props.uid]);
 
     const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
@@ -104,6 +107,7 @@ export const ChatItemComp: <AiMsg>(
                         showCodeBlockCopyButton: props.messageOptions?.showCodeBlockCopyButton,
                         skipStreamingAnimation: props.messageOptions?.skipStreamingAnimation,
                         streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed,
+                        waitTimeBeforeStreamCompletion: props.messageOptions?.waitTimeBeforeStreamCompletion,
                     }}
                 />
             )}

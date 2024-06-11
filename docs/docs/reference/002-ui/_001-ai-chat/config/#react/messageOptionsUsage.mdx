@@ -3,14 +3,16 @@ import {AiChat, MessageOptions} from '@nlux/react';
 import {highlighter} from '@nlux/highlighter';
 
 const messageOptions: MessageOptions = {
+    // Markdown parsing options
     markdownLinkTarget: 'self',
     showCodeBlockCopyButton: false,
     skipStreamingAnimation: true,
     streamingAnimationSpeed: 100,
+    waitTimeBeforeStreamCompletion: 5000,
 
     // Renfer to Custom Renderers API doc for futher details and usage examples
-    responseRenderer: ({content}) => <p>The AI said: {content.message}</p>,
-    promptRenderer: ({content}) => <p>The user said: {content.message}</p>,
+    responseRenderer: ({content}) => <p>The AI said: {content}</p>,
+    promptRenderer: ({content}) => <p>The user said: {content}</p>,
 
     // Refer to sytax Syntax Highlighter API doc for details
     syntaxHighlighter: highlighter,

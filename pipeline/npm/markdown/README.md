@@ -55,6 +55,7 @@ export type MarkdownStreamParserOptions = {
     syntaxHighlighter?: HighlighterExtension;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
     showCodeBlockCopyButton?: boolean;
     onComplete?: () => void;
 };

@@ -48,7 +48,7 @@ describe('<AiChat /> + promptRenderer', () => {
             expect(promptRendererSpy).toHaveBeenCalledWith({
                 prompt: 'Hello custom renderer!',
                 uid: expect.any(String),
-            });
+            }, {});
 
             expect(container.innerHTML).toContain(
                 '<div><span class="user-prompt">Hello custom renderer!</span></div>',

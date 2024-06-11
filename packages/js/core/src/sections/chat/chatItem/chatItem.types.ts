@@ -13,6 +13,7 @@ export type CompChatItemProps = {
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
 };
 
 export type CompChatItemElements = Readonly<{

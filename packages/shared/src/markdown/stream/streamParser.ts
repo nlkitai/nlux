@@ -82,8 +82,12 @@ export const createMdStreamRenderer: StandardStreamParser = (
 
     let parsingInterval: number | undefined = setInterval(() => {
         const nowTime = new Date().getTime();
-        if (buffer.length === 0) {
-            if (streamIsComplete || nowTime - parsingContext.timeSinceLastProcessing > defaultDelayInMsBeforeComplete) {
+        const shouldAutomaticallyCompleteAfterDelay = options?.waitTimeBeforeStreamCompletion !== 'never';
+        if (buffer.length === 0 && shouldAutomaticallyCompleteAfterDelay) {
+            const delayBeforeCompleteParsing = (typeof options?.waitTimeBeforeStreamCompletion === 'number')
+                ? options.waitTimeBeforeStreamCompletion : defaultDelayInMsBeforeComplete;
+
+            if (streamIsComplete || nowTime - parsingContext.timeSinceLastProcessing > delayBeforeCompleteParsing) {
                 completeParsing();
             }
 

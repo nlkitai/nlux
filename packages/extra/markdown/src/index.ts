@@ -13,6 +13,7 @@ export type MarkdownStreamParserOptions = {
     htmlSanitizer?: SanitizerExtension;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
     showCodeBlockCopyButton?: boolean;
     onComplete?: CallbackFunction;
 };
@@ -30,6 +31,7 @@ export const createMarkdownStreamParser = (
             showCodeBlockCopyButton: options?.showCodeBlockCopyButton,
             skipStreamingAnimation: options?.skipStreamingAnimation,
             streamingAnimationSpeed: options?.streamingAnimationSpeed,
+            waitTimeBeforeStreamCompletion: options?.waitTimeBeforeStreamCompletion,
             onComplete: options?.onComplete,
         },
     );

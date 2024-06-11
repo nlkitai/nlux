@@ -13,6 +13,7 @@ type MessageOptions<AiMsg = string> = {
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
     skipStreamingAnimation?: boolean;
 };
 

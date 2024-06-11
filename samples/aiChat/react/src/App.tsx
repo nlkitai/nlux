@@ -6,6 +6,7 @@ import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
+    ChatAdapter,
     ChatItem,
     ConversationLayout,
     DataTransferMode,
@@ -87,6 +88,15 @@ function App() {
         model: 'gpt4',
         authToken: 'N/A',
     });
+
+    const customSlowAdapter = useMemo<ChatAdapter<string>>(() => ({
+        streamText: (message, observer) => {
+            observer.next('We are processing ');
+            setTimeout(() => {
+                observer.next('your request!');
+            }, 3000);
+        },
+    }), []);
 
     // const openAiAdapter = useOpenAiChatAdapter()
     //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
@@ -261,7 +271,8 @@ function App() {
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
-                adapter={langChainAdapter}
+                // adapter={langChainAdapter}
+                adapter={customSlowAdapter}
                 // adapter={hfAdapter}
                 // initialConversation={initialConversation}
                 composerOptions={{
@@ -289,8 +300,9 @@ function App() {
                     syntaxHighlighter: highlighter,
                     htmlSanitizer: htmlSanitizer,
                     showCodeBlockCopyButton: true,
-                    streamingAnimationSpeed: 100,
                     skipStreamingAnimation: true,
+                    streamingAnimationSpeed: 100,
+                    waitTimeBeforeStreamCompletion: 5000,
                     responseRenderer: useCustomResponseComponent ? responseRenderer : undefined,
                     promptRenderer: undefined,
                 }}

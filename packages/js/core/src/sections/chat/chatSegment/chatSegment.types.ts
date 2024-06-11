@@ -16,6 +16,7 @@ export type CompChatSegmentProps = Readonly<{
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
 }>;
 
 export type CompChatSegmentElements = {

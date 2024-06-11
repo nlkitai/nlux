@@ -3,10 +3,12 @@ import {createAiChat, MessageOptions} from '@nlux/core';
 import {highlighter} from '@nlux/highlighter';
 
 const messageOptions: MessageOptions = {
+    // Markdown parsing options
     markdownLinkTarget: 'self',
     showCodeBlockCopyButton: false,
     skipStreamingAnimation: true,
     streamingAnimationSpeed: 100,
+    waitTimeBeforeStreamCompletion: 5000,
 
     // Render to custom renderers API doc for usage examples
     responseRenderer: undefined,

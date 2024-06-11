@@ -25,7 +25,7 @@ export type ResponseRenderer<AiMsg> = (props: ResponseRendererProps<AiMsg>) => H
 
 export type PromptRendererProps = {
     uid: string;
-    content: string;
+    prompt: string;
 };
 
 export type PromptRenderer = (props: PromptRendererProps) => HTMLElement | null;
@@ -75,6 +75,18 @@ export type MessageOptions<AiMsg = string> = {
      * @default 10
      */
     streamingAnimationSpeed?: number;
+
+    /**
+     * In streaming data transfer mode, this represents the wait time in milliseconds after last chunk of data
+     * is received before marking the streaming as complete. This can be used to prevent the streaming from being
+     * marked as complete too early.
+     *
+     * If set to 'never', the streaming will never be automatically be marked as complete. It will be up to the
+     * adapter to manually mark the streaming as complete by calling the `observer.complete()` method.
+     *
+     * @default 2000
+     */
+    waitTimeBeforeStreamCompletion?: number | 'never';
 
     /**
      * Custom function to render the message received from the AI.

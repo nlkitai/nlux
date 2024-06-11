@@ -12,8 +12,9 @@ type MessageOptions<AiMsg = string> = {
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
     showCodeBlockCopyButton?: boolean;
-    streamingAnimationSpeed?: number;
     skipStreamingAnimation?: boolean;
+    streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
 };
 
 // Refer to custom renderers API documentation for more information

@@ -25,6 +25,7 @@ export type CompChatRoomProps<AiMsg> = {
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
 };
 
 export type CompChatRoomElements = {

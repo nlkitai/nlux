@@ -17,6 +17,7 @@ export type CompConversationProps<AiMsg> = {
     showCodeBlockCopyButton?: boolean;
     skipStreamingAnimation?: boolean;
     streamingAnimationSpeed?: number;
+    waitTimeBeforeStreamCompletion?: number | 'never';
     onSegmentCountChange?: (count: number) => void;
 };
 
