@@ -34,6 +34,7 @@ yarn-error.log
 
 # Yarn lock files in samples are not committed
 /samples/aiChat/react/yarn.lock
+/samples/aiChat/next/yarn.lock
 /samples/aiChat/js/yarn.lock
 /samples/components/react/yarn.lock
 /samples/components/js/yarn.lock
