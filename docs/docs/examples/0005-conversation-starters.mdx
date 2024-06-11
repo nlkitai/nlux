@@ -1,0 +1,37 @@
+---
+sidebar_label: 'Conversation Starters'
+---
+
+
+
+import Link from '@docusaurus/Link';
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+
+import app from './0005-1-conversation-starters/App.tsx';
+import adapter from './0005-1-conversation-starters/adapter.tsx';
+import setup from './0005-1-conversation-starters/setup.tsx';
+
+# Conversation Starters
+
+---
+
+By default, the assistant persona avatar, name, and tagline are displayed in the chat window when the conversation
+is empty. When no assistant persona is provided, the `NLUX` logo is displayed instead.
+
+You can disable this behavior by setting the `conversationOptions.showWelcomeMessage` prop to `false`.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'adapter.ts': adapter,
+        'setup.tsx': setup,
+    }}
+    editorHeight={420}
+    simulatedPrompt={false}
+/>
+
+---
+
+---
+
+<Link className="button button--secondary" to="/learn/chat-personas">Learn More About Chat Personas</Link>
