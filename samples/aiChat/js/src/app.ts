@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // showWelcomeMessage: false,
             conversationStarters: [
                 {
-                    prompt: 'What can I help you with today?',
+                    prompt: 'What can I help you with today? Imagine I am a chatbot.',
                 },
                 {
                     prompt: 'How can I assist you today?',

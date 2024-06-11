@@ -10,7 +10,9 @@ export const ConversationStarters = (props: ConversationStartersProps) => {
                     className="nlux-comp-conversationStarter"
                     onClick={() => onConversationStarterSelected(conversationStarter)}
                 >
-                    {conversationStarter.prompt}
+                    <span className="nlux-comp-conversationStarter-prompt">
+                        {conversationStarter.prompt}
+                    </span>
                 </button>
             ))}
         </div>

@@ -19,14 +19,21 @@ export default function HomePage() {
                     adapter={adapter}
                     personaOptions={{
                         assistant: {
-                            name: 'HarryBotter',
-                            avatar: 'https://docs.nlkit.com/nlux/images/personas/harry-botter.png',
-                            tagline: 'Mischievously Making Magic With Mirthful AI!',
+                            name: 'Patrick',
+                            avatar: 'https://docs.nlkit.com/nlux/images/personas/patrick.png',
+                            tagline: 'Your Customer Success Assistant',
                         },
                         user: {
                             name: 'Alex',
                             avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
                         },
+                    }}
+                    conversationOptions={{
+                        conversationStarters: [
+                            {prompt: 'I need help with my recent order.'},
+                            {prompt: 'Where can I find the technical documentation?'},
+                            {prompt: 'Can you show me a code example for the API?'},
+                        ],
                     }}
                     displayOptions={{
                         transparentBackground: true,
