@@ -28,7 +28,11 @@ export default function HomePage() {
                             avatar: 'https://docs.nlkit.com/nlux/images/personas/alex.png',
                         },
                     }}
-                    displayOptions={{width: 600, height: 400}}
+                    displayOptions={{
+                        transparentBackground: true,
+                        width: 600,
+                        height: 400,
+                    }}
                 />
             </div>
             <PageFooter/>

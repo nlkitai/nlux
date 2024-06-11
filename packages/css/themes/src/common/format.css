@@ -19,3 +19,9 @@
         }
     }
 }
+
+.nlux-AiChat-root.nlux-transparentBackground {
+    > .nlux-chatRoom-container {
+        background-color: transparent;
+    }
+}

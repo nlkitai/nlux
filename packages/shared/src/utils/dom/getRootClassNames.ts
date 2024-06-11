@@ -13,6 +13,7 @@ export const getRootClassNames = (props: {
     themeId?: string;
     className?: string;
     colorScheme?: 'light' | 'dark' | 'auto';
+    transparentBackground?: boolean;
 }): string[] => {
     const result = [rootClassName];
     const themeId = props.themeId || defaultThemeId;
@@ -27,6 +28,10 @@ export const getRootClassNames = (props: {
 
     if (props.className) {
         result.push(props.className);
+    }
+
+    if (props.transparentBackground) {
+        result.push('nlux-transparentBackground');
     }
 
     return result;

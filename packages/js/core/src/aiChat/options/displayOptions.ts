@@ -25,4 +25,11 @@ export type DisplayOptions = {
      * The height of the component.
      */
     height?: number | string;
+
+    /**
+     * Indicates whether the background of the component should be transparent.
+     *
+     * @default false
+     */
+    transparentBackground?: boolean;
 };
