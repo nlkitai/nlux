@@ -15,6 +15,8 @@ const NluxLogoDark = '/nlux/images/logos/nlux/white.png';
 const JavaScriptLogo = '/nlux/images/logos/platforms/javascript-logo-60pxh.png';
 const ReactJsLogo = '/nlux/images/logos/platforms/react-js-logo-60pxh.png';
 const LangChainLogo = '/nlux/images/logos/platforms/langchain-logo-60pxh.png';
+const NextJsLogoDark = '/nlux/images/logos/platforms/nextjs-logo-dark-120pxh.png';
+const NextJsLogoLight = '/nlux/images/logos/platforms/nextjs-logo-light-120pxh.png';
 const OpenAiLogo = '/nlux/images/logos/platforms/openai-logo-60pxh.png';
 const AdapterLogo = '/nlux/images/logos/platforms/adapters-logo-60pxh.png';
 const HuggingFaceLogo = '/nlux/images/logos/platforms/hugging-face-logo-60pxh.png';
@@ -28,6 +30,8 @@ export const Hero = ({className}: { className?: string }) => {
     useEffect(() => {
         setLogo(colorMode === 'dark' ? NluxLogoDark : NluxLogoLight);
     }, [colorMode]);
+
+    const NextJsLogo = colorMode === 'dark' ? NextJsLogoDark : NextJsLogoLight;
 
     return (
         <header className={clsx(heroStyles.heroBanner, className)}>
@@ -57,6 +61,9 @@ export const Hero = ({className}: { className?: string }) => {
                         <div className={heroStyles.platformName}>
                             <img src={JavaScriptLogo} alt="Vanilla JS Logo" width={40}/>
                             <h5 style={{textAlign: 'left'}}>Plain<br/>JavaScript</h5>
+                        </div>
+                        <div className={heroStyles.platformName}>
+                            <img src={NextJsLogo} alt="Next JS Logo" height={60}/>
                         </div>
                     </div>
                 </div>
