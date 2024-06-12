@@ -35,5 +35,6 @@ type PromptRenderer = FC<PromptRendererProps>;
 | `showCodeBlockCopyButton` | `boolean` | `true` | If `true`, a copy button will be displayed on code blocks created withing messages. |
 | `streamingAnimationSpeed` | `number` | `10` | The interval in milliseconds between streamed AI responses. |
 | `skipStreamingAnimation` | `boolean` | `false` | If `true`, streamed AI responses will be displayed instantly without any animation. |
+| `waitTimeBeforeStreamCompletion` | `number`\|`'never'` | `2000` | Sets the wait time after the last data chunk to prevent premature streaming completion; 'never' requires manual completion. |
 
 * Usage:
