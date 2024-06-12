@@ -6,5 +6,5 @@ This demo is used for development purposes (it imports `@nlux-dev` packages whic
 It's meant to be used by contributors to develop new features.
 
 If you are looking for a demo that showcases how to use `NLUX` AI assistant in a real-world application, please visit
-[github.com/nluxai/demos](https://github.com/nluxai/demos/tree/latest/stock-wiz).
+[github.com/nlkitai/demos](https://github.com/nlkitai/demos/tree/latest/context-aware-conversations/stock-wiz).
 There you can find a more stable version of this same demo that imports published `@nlux` packages.

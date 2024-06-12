@@ -54,6 +54,6 @@ of [OpenAI's API error codes](https://platform.openai.com/docs/guides/error-code
 
 ## Help And Support
 
-* If you need help, you can drop a message on the [GitHub Discussions](https://github.com/nluxai/nlux/discussions)
+* If you need help, you can drop a message on the [GitHub Discussions](https://github.com/nlkitai/nlux/discussions)
   page. Salmen or other members of the community will be happy to help you.
 * OpenAI also has a [developer forum](https://community.openai.com/) where you can ask questions about OpenAI's APIs.

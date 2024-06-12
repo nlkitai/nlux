@@ -34,10 +34,10 @@
     "typescript-eslint": "^7",
     "vite": "^5"
   },
-  "bugs": "https://github.com/nluxai/nlux/issues",
+  "bugs": "https://github.com/nlkitai/nlux/issues",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/nluxai/nlux.git"
+    "url": "git+ssh://git@github.com/nlkitai/nlux.git"
   },
   "keywords": [
     "nlux",

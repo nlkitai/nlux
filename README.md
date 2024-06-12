@@ -6,7 +6,7 @@
 </p>
 <p align=center>
   <img alt="Free & Open Source" src="https://img.shields.io/badge/Free%20%26%20Open%20Source-1ccb61" />
-  <a href="https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml"><img alt="600+ Unit Tests" src="https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg" /></a>
+  <a href="https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml"><img alt="600+ Unit Tests" src="https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml/badge.svg" /></a>
 <br />
   <a href="https://www.npmjs.com/package/@nlux/react"><img alt="npm @nlux/react" src="https://img.shields.io/badge/NPM-@nlux/react-dbda6a" /></a>
   <a href="https://www.npmjs.com/package/@nlux/core"><img alt="npm @nlux/core" src="https://img.shields.io/badge/NPM-@nlux/core-dbda6a" /></a>
@@ -115,7 +115,7 @@ cross platforms, with a focus on performance and usability.
 
 * **Star The Repo** 🌟 ― If you like `NLUX`, please star the repo to show your support.  
   Your support is what keeps this open-source project going 🧡
-* [GitHub Discussions](https://github.com/nluxai/nlux/discussions) ― Ask questions, report issues, and share your
+* [GitHub Discussions](https://github.com/nlkitai/nlux/discussions) ― Ask questions, report issues, and share your
   ideas with the community.
 * [Discord Community](https://discord.gg/SRwDmZghNB) ― Join our Discord server to chat with the community and get
   support.

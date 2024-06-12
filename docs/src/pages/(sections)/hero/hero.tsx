@@ -40,7 +40,7 @@ export const Hero = ({className}: { className?: string }) => {
                     <Heading as="h1" className={heroStyles.heroTitle}>
                         <img src={nluxLogoForHeroBanner} alt="NLUX logo" width={200}/>
                         <a
-                            href="https://github.com/nluxai/nlux"
+                            href="https://github.com/nlkitai/nlux"
                             target="_blank"><img
                             src={'https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342'}/></a>
                     </Heading>

@@ -51,10 +51,10 @@
   "license": "MPL-2.0",
   "private": false,
   "homepage": "https://docs.nlkit.com/nlux",
-  "bugs": "https://github.com/nluxai/nlux/issues",
+  "bugs": "https://github.com/nlkitai/nlux/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nluxai/nlux.git",
+    "url": "https://github.com/nlkitai/nlux.git",
     "directory": null
   }
 }

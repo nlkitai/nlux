@@ -45,7 +45,7 @@ can add conversational AI capabilities and interact with your favourite LLM.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
 * **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
 
-[![200+ Unit Tests](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nluxai/nlux/actions/workflows/run-all-tests.yml)
+[![200+ Unit Tests](https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml)
 
 ### Docs & Examples 📖
 

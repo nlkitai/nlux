@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const footerNote = `<code>NLUX</code> is built and maintained by <a href="https://github.com/salmenus" 
 target="_blank">Salmen Hichri</a> — Copyright © 2024 All rights reserved.<br />The source code of NLUX is licensed 
-under a modified MPL-2.0 license.<br />The full license can be found in the <a href="https://github.com/nluxai/nlux/blob/latest/LICENSE">LICENSE file on GitHub</a>.`;
+under a modified MPL-2.0 license.<br />The full license can be found in the <a href="https://github.com/nlkitai/nlux/blob/latest/LICENSE">LICENSE file on GitHub</a>.`;
 
 const config: Config = {
     title: 'NLUX',
@@ -134,7 +134,7 @@ const config: Config = {
                     className: 'doc-section',
                 },
                 {
-                    href: 'https://github.com/nluxai/nlux',
+                    href: 'https://github.com/nlkitai/nlux',
                     label: 'GitHub',
                     position: 'right',
                 },
@@ -180,7 +180,7 @@ const config: Config = {
                     items: [
                         {
                             label: 'GitHub Discussions',
-                            href: 'https://github.com/nluxai/nlux/discussions',
+                            href: 'https://github.com/nlkitai/nlux/discussions',
                         },
                         {
                             label: 'Discord',

@@ -3,10 +3,10 @@
   "version": "0.0.0-latest",
   "description": "Specs and tests for nlux packages",
   "main": "index.js",
-  "bugs": "https://github.com/nluxai/nlux/issues",
+  "bugs": "https://github.com/nlkitai/nlux/issues",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/nluxai/nlux.git"
+    "url": "git+ssh://git@github.com/nlkitai/nlux.git"
   },
   "author": "Salmen Hichri",
   "license": "SEE LICENSE IN ROOT LICENSE FILE",
