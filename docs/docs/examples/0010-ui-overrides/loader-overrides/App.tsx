@@ -8,12 +8,13 @@ export default () => {
   const adapter = useMemo(() => streamAdapter, []);
   return (
     <AiChat
-      conversationOptions={{layout: 'bubbles'}}
+      conversationOptions={{layout: 'bubbles'}} personaOptions={personas}
       displayOptions={{colorScheme: '${colorMode}'}}
-      personaOptions={personas}
       adapter={adapter}
     >
-        <AiChatUI.Loader><span className="rounded">Loading 🪐</span></AiChatUI.Loader>
+      <AiChatUI.Loader>
+        <span className="rounded">Loading 🪐</span>
+      </AiChatUI.Loader>
     </AiChat>
   );
 };`;
