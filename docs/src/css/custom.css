@@ -1,66 +1,66 @@
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #fc7509;
-  --ifm-color-primary-dark: #fc7509;
-  --ifm-color-primary-darker: #fc7509;
-  --ifm-color-primary-darkest: #fc7509;
-  --ifm-color-primary-light: #fc7509;
-  --ifm-color-primary-lighter: #fc7509;
-  --ifm-color-primary-lightest: #fc7509;
-  --ifm-code-font-size: 100%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+    --ifm-color-primary: #fc7509;
+    --ifm-color-primary-dark: #fc7509;
+    --ifm-color-primary-darker: #fc7509;
+    --ifm-color-primary-darkest: #fc7509;
+    --ifm-color-primary-light: #fc7509;
+    --ifm-color-primary-lighter: #fc7509;
+    --ifm-color-primary-lightest: #fc7509;
+    --ifm-code-font-size: 100%;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
-  --ifm-font-family-base: 'Inter', sans-serif;
-  --ifm-font-family-monospace: monospace;
-  --ifm-font-family-title: 'Manrope', sans-serif;
+    --ifm-font-family-base: 'Inter', sans-serif;
+    --ifm-font-family-monospace: monospace;
+    --ifm-font-family-title: 'Manrope', sans-serif;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #fc7509;
-  --ifm-color-primary-dark: #fc7509;
-  --ifm-color-primary-darker: #fc7509;
-  --ifm-color-primary-darkest: #fc7509;
-  --ifm-color-primary-light: #fc7509;
-  --ifm-color-primary-lighter: #fc7509;
-  --ifm-color-primary-lightest: #fc7509;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+    --ifm-color-primary: #fc7509;
+    --ifm-color-primary-dark: #fc7509;
+    --ifm-color-primary-darker: #fc7509;
+    --ifm-color-primary-darkest: #fc7509;
+    --ifm-color-primary-light: #fc7509;
+    --ifm-color-primary-lighter: #fc7509;
+    --ifm-color-primary-lightest: #fc7509;
+    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
 /* Color overrides */
 .hero--primary {
-  --ifm-hero-background-color: #fbf2ef;
-  --ifm-hero-text-color: #495959;
+    --ifm-hero-background-color: #fbf2ef;
+    --ifm-hero-text-color: #495959;
 }
 
 [data-theme='dark'] .hero--primary {
-  --ifm-hero-background-color: #1b1b1d;
-  --ifm-hero-text-color: #f0f0f0;
+    --ifm-hero-background-color: #1b1b1d;
+    --ifm-hero-text-color: #f0f0f0;
 }
 
 .footer {
-  --ifm-footer-background-color: #fbf2ef;
-  --ifm-footer-title-color: #495959;
-  --ifm-footer-link-color: #495959;
+    --ifm-footer-background-color: #fbf2ef;
+    --ifm-footer-title-color: #495959;
+    --ifm-footer-link-color: #495959;
 }
 
 [data-theme='dark'] .footer {
-  --ifm-footer-background-color: #1b1b1d;
-  --ifm-footer-title-color: #837650;
-  --ifm-footer-link-color: #837650;
+    --ifm-footer-background-color: #1b1b1d;
+    --ifm-footer-title-color: #837650;
+    --ifm-footer-link-color: #837650;
 }
 
 .footer .footer__link-item {
-  --ifm-footer-link-color: #056a6e;
+    --ifm-footer-link-color: #056a6e;
 }
 
 [data-theme='dark'] .footer .footer__link-item {
-  --ifm-footer-link-color: #c29b25;
+    --ifm-footer-link-color: #c29b25;
 }
 
 /* Navbar overrides */
 .navbar {
-  min-height: 80px;
+    min-height: 80px;
 }
 
 .navbar .navbar__items:first-of-type .navbar__title {
@@ -71,17 +71,40 @@
 }
 
 .navbar .navbar__logo {
-  height: 60px;
+    height: 60px;
 }
 
 .navbar .navbar__logo img {
-  width: 60px;
-  height: 60px;
+    width: 60px;
+    height: 60px;
 }
 
 .navbar .doc-section {
-  font-size: 1rem;
-  font-weight: 800;
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+.navbar .github-repo-navlink-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar .github-repo-navlink-container {
+    --ifm-github-logo-image: url('/images/logos/platforms/github-logo-light.png');
+}
+
+html[data-theme='dark'] .navbar .github-repo-navlink-container {
+    --ifm-github-logo-image: url('/images/logos/platforms/github-logo-dark.png');
+}
+
+.navbar .github-repo-navlink-container:after {
+    content: ' ';
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    background: var(--ifm-github-logo-image) no-repeat center;
+    background-size: contain;
 }
 
 /* Version badge overrides */
@@ -91,7 +114,7 @@
 
 /* Font overrides */
 h1, h2, h3 {
-  font-family: var(--ifm-font-family-title);
+    font-family: var(--ifm-font-family-title);
 }
 
 .main-wrapper .container h1 {
@@ -100,21 +123,21 @@ h1, h2, h3 {
 }
 
 .main-wrapper .container h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  background-color: var(--nx-background-color-1);;
-  display: inline-block;
-  padding: 0 0 0 14px;
-  margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    background-color: var(--nx-background-color-1);;
+    display: inline-block;
+    padding: 0 0 0 14px;
+    margin: 0;
 }
 
 .main-wrapper .container h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  background-color: var(--nx-background-color-1);;
-  display: inline-block;
-  padding: 0 0 0 14px;
-  margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background-color: var(--nx-background-color-1);;
+    display: inline-block;
+    padding: 0 0 0 14px;
+    margin: 0;
 }
 
 .main-wrapper .container h1.hero__title {

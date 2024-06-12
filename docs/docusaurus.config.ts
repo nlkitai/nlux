@@ -134,9 +134,15 @@ const config: Config = {
                     className: 'doc-section',
                 },
                 {
-                    href: 'https://github.com/nlkitai/nlux',
-                    label: 'GitHub',
+                    href: 'https://www.nlkit.com/enterprise',
+                    label: 'Enterprise',
                     position: 'right',
+                },
+                {
+                    href: 'https://github.com/nlkitai/nlux',
+                    html: 'GitHub',
+                    position: 'right',
+                    className: 'github-repo-navlink-container',
                 },
                 {
                     href: 'https://www.npmjs.com/package/@nlux/core',
