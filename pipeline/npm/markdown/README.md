@@ -10,6 +10,8 @@ This package is part of the [NLUX](https://docs.nlkit.com/nlux) **UI toolkit for
 
 ## Usage
 
+### Parsing Markdown Stream
+
 ```ts
 import {
     MarkdownStreamParser,
@@ -23,6 +25,7 @@ const options: MarkdownStreamParserOptions = {
     // showCodeBlockCopyButton?: boolean,                           // default: true — for code blocks
     // skipStreamingAnimation?: boolean,                            // default: false
     // streamingAnimationSpeed?: number,                            // default: 10 ( milliseconds )
+    // waitTimeBeforeStreamCompletion?: number | 'never',           // default: 2000 ( milliseconds )
     // onComplete: () => console.log("Parsing complete"),           // triggered after the end of the stream
 };
 
@@ -38,6 +41,13 @@ mdStreamParser.next("## Hello World");
 // To call when the markdown stream is complete
 // This indicates to the parser that now additional text will be added
 mdStreamParser.complete();
+```
+
+### Parsing Markdown Snapshot
+
+```ts
+import { parseMdSnapshot } from "@nlux/markdown";
+const parsedMarkdown = parseMdSnapshot(snapshot, options);
 ```
 
 ## Interfaces
@@ -59,4 +69,17 @@ export type MarkdownStreamParserOptions = {
     showCodeBlockCopyButton?: boolean;
     onComplete?: () => void;
 };
+```
+
+```ts
+export type SnapshotParser = (
+    snapshot: string,
+    options?: {
+        syntaxHighlighter?: HighlighterExtension,
+        htmlSanitizer?: SanitizerExtension;
+        markdownLinkTarget?: 'blank' | 'self',
+        showCodeBlockCopyButton?: boolean;
+        skipStreamingAnimation?: boolean;
+    },
+) => string;
 ```
