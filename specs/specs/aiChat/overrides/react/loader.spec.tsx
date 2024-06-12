@@ -41,9 +41,9 @@ describe('<AiChat /> + UI overrides + loader', () => {
 
             // Assert
             const composerOldLoader = container.querySelector('.nlux-comp-composer .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-            const composerNewLoader = container.querySelector('.custom-loader') as HTMLDivElement | undefined;
+            const composerNewLoader = container.querySelector('.nlux-comp-composer .custom-loader') as HTMLDivElement | undefined;
             const messageOldLoader = container.querySelector('.nlux-chatSegment .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-            const messageNewLoader = container.querySelector('.custom-loader') as HTMLDivElement | undefined;
+            const messageNewLoader = container.querySelector('.nlux-chatSegment .custom-loader') as HTMLDivElement | undefined;
 
             expect(composerOldLoader).not.toBeInTheDocument();
             expect(composerNewLoader).toBeInTheDocument();
@@ -81,10 +81,10 @@ describe('<AiChat /> + UI overrides + loader', () => {
 
                 // Assert
                 const composerOldLoader = container.querySelector('.nlux-comp-composer .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-                const composerNewLoader = container.querySelector('.new-loader') as HTMLDivElement | undefined;
+                const composerNewLoader = container.querySelector('.nlux-comp-composer .new-loader') as HTMLDivElement | undefined;
 
                 const messageOldLoader = container.querySelector('.nlux-chatSegment .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-                const messageNewLoader = container.querySelector('.new-loader') as HTMLDivElement | undefined;
+                const messageNewLoader = container.querySelector('.nlux-chatSegment .new-loader') as HTMLDivElement | undefined;
 
                 expect(composerOldLoader).not.toBeInTheDocument();
                 expect(composerNewLoader).toBeInTheDocument();
@@ -117,15 +117,48 @@ describe('<AiChat /> + UI overrides + loader', () => {
 
                 // Assert
                 const composerDefaultLoader = container.querySelector('.nlux-comp-composer .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-                const composerCustomLoader = container.querySelector('.custom-loader') as HTMLDivElement | undefined;
+                const composerCustomLoader = container.querySelector('.nlux-comp-composer .custom-loader') as HTMLDivElement | undefined;
+
                 const messageDefaultLoader = container.querySelector('.nlux-chatSegment .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
-                const messageCustomLoader = container.querySelector('.custom-loader') as HTMLDivElement | undefined;
+                const messageCustomLoader = container.querySelector('.nlux-chatSegment .custom-loader') as HTMLDivElement | undefined;
 
                 expect(composerDefaultLoader).toBeInTheDocument();
                 expect(composerCustomLoader).not.toBeInTheDocument();
                 expect(messageDefaultLoader).toBeInTheDocument();
                 expect(messageCustomLoader).not.toBeInTheDocument();
             });
+        });
+    });
+
+    describe('When the provided loader is not wrapped in <AiChatUI.Loader>', () => {
+        it('The default loader should be used', async () => {
+            // Arrange
+            const aiChat = (
+                <AiChat adapter={adapterController!.adapter}>
+                    <div className="custom-loader">Custom Loader</div>
+                </AiChat>
+            );
+
+            const {container} = render(aiChat);
+            await waitForReactRenderCycle();
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            // Assert
+            const composerDefaultLoader = container.querySelector('.nlux-comp-composer .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
+            const composerCustomLoader = container.querySelector('.nlux-comp-composer .custom-loader') as HTMLDivElement | undefined;
+
+            const messageDefaultLoader = container.querySelector('.nlux-chatSegment .nlux-comp-loaderContainer') as HTMLDivElement | undefined;
+            const messageCustomLoader = container.querySelector('.nlux-chatSegment .custom-loader') as HTMLDivElement | undefined;
+
+            expect(composerDefaultLoader).toBeInTheDocument();
+            expect(composerCustomLoader).not.toBeInTheDocument();
+
+            expect(messageDefaultLoader).toBeInTheDocument();
+            expect(messageCustomLoader).not.toBeInTheDocument();
         });
     });
 });
