@@ -95,6 +95,14 @@ export {
 } from './exports/AiChat';
 
 export type {
+    AiChatUIOverrides,
+} from './exports/AiChatUI';
+
+export {
+    AiChatUI,
+} from './exports/AiChatUI';
+
+export type {
     UpdateContextItem,
     DiscardContextItem,
 } from './providers/useAiContext';

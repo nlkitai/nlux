@@ -59,9 +59,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
                         chatSegment={segment}
                         layout={conversationLayout}
-                        loader={props.loader}
                         personaOptions={personaOptions}
                         messageOptions={props.messageOptions}
+                        Loader={props.Loader}
                     />
                 );
             })}

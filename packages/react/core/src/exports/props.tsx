@@ -5,6 +5,7 @@ import {ChatItem} from '@shared/types/conversation';
 import {ConversationOptions} from '../types/conversationOptions';
 import {MessageOptions} from './messageOptions';
 import {PersonaOptions} from './personaOptions';
+import {ReactNode} from 'react';
 
 /**
  * Props for the AiChat React component.
@@ -56,4 +57,10 @@ export type AiChatProps<AiMsg = string> = {
      * Options for the persona.
      */
     personaOptions?: PersonaOptions;
+
+    /**
+     * The children of the component, in case you want to render something inside the chat.
+     * Only NLUX UI overrides are accepted at this stage.
+     */
+    children?: ReactNode | undefined
 };

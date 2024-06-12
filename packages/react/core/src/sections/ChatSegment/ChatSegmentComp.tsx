@@ -14,7 +14,6 @@ import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName
 import {warn, warnOnce} from '@shared/utils/warn';
 import {ChatItemComp} from '../ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../ChatItem/props';
-import {LoaderComp} from '../../components/Loader/LoaderComp';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
@@ -52,13 +51,13 @@ export const ChatSegmentComp: <AiMsg>(
         });
     }, [chatSegment.items]);
 
-    const loader = useMemo(() => {
+    const Loader = useMemo(() => {
         if (chatSegment.status !== 'active') {
             return null;
         }
 
-        return (<div className={'nlux-chatSegment-loader-container'}>{props.loader ?? <LoaderComp/>}</div>);
-    }, [chatSegment.status, props.loader]);
+        return (<div className={'nlux-chatSegment-loader-container'}>{props.Loader}</div>);
+    }, [chatSegment.status, props.Loader]);
 
     const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
 
@@ -260,7 +259,7 @@ export const ChatSegmentComp: <AiMsg>(
                     return null;
                 }
             })}
-            {loader}
+            {Loader}
         </div>
     );
 };

@@ -3,7 +3,6 @@ import {className as compComposerClassName} from '@shared/components/Composer/cr
 import {
     statusClassName as compComposerStatusClassName,
 } from '@shared/components/Composer/utils/applyNewStatusClassName';
-import {LoaderComp} from '../../components/Loader/LoaderComp';
 import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
 
@@ -71,7 +70,7 @@ export const ComposerComp = (props: ComposerProps) => {
                 onClick={() => props.onSubmit?.()}
             >
                 {showSendIcon && <SendIconComp/>}
-                {!showSendIcon && <LoaderComp/>}
+                {!showSendIcon && props.Loader}
             </button>
         </div>
     );

@@ -20,6 +20,7 @@ import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
 import {ConversationStarter} from '../types/conversationStarter';
 import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
+import {useUiOverrides} from './hooks/useUiOverrides';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -116,6 +117,9 @@ export const AiChat: <AiMsg>(
         () => forwardRef(ConversationComp<AiMsg>), [],
     );
 
+    // UI overrides
+    const uiOverrides = useUiOverrides(props);
+
     // Variables that do not require memoization or effect
     const hasValidInput = prompt.length > 0;
     const compChatRoomStatusClassName = segments.length === 0 ? 'nlux-chatRoom-starting' : 'nlux-chatRoom-active';
@@ -147,6 +151,7 @@ export const AiChat: <AiMsg>(
                         personaOptions={props.personaOptions}
                         messageOptions={props.messageOptions}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
+                        Loader={uiOverrides.Loader}
                     />
                 </div>
                 <div className="nlux-composer-container">
@@ -159,6 +164,7 @@ export const AiChat: <AiMsg>(
                         submitShortcut={props.composerOptions?.submitShortcut}
                         onChange={handlePromptChange}
                         onSubmit={handleSubmitPrompt}
+                        Loader={uiOverrides.Loader}
                     />
                 </div>
             </div>

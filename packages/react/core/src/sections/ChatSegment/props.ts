@@ -5,12 +5,16 @@ import {MessageOptions} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
 
 export type ChatSegmentProps<AiMsg> = {
+
+    // State and option props
     chatSegment: ChatSegment<AiMsg>
-    loader?: ReactElement;
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     layout: ConversationLayout;
     containerRef?: RefObject<HTMLDivElement>;
+
+    // UI overrides
+    Loader: ReactElement;
 };
 
 export type ChatSegmentImperativeProps<AiMsg> = {

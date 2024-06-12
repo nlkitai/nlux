@@ -5,15 +5,21 @@ import {PersonaOptions} from '../../exports/personaOptions';
 import {ConversationOptions} from '../../types/conversationOptions';
 
 export type ConversationCompProps<AiMsg> = {
+
+    // State and option props
     segments: ChatSegment<AiMsg>[];
     conversationOptions?: ConversationOptions;
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
-    loader?: ReactElement;
+
+    // Event Handlers
     onLastActiveSegmentChange?: (data: {
         uid: string;
         div: HTMLDivElement;
     } | undefined) => void;
+
+    // UI Overrides
+    Loader: ReactElement;
 };
 
 export type ImperativeConversationCompProps<AiMsg> = {
