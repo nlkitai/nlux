@@ -6,6 +6,7 @@
     { "source": "/nlux/examples/react-js-ai-chatbot", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
     { "source": "/nlux/examples/bot-persona", "destination": "/nlux/examples/assistant-persona", "permanent": true },
     { "source": "/nlux/examples/intro", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
+    { "source": "/nlux/examples/customized-theme", "destination": "/nlux/examples/theme-customization", "permanent": true },
     { "source": "/nlux/examples", "destination": "/nlux/examples/react-js-ai-assistant", "permanent": true },
     { "source": "/nlux/api/user-interface/conversation", "destination": "/nlux/reference/ui/ai-chat", "permanent": true },
     { "source": "/nlux/api/adapters/custom-adapter", "destination": "/nlux/reference/adapters/custom-adapters", "permanent": true },
