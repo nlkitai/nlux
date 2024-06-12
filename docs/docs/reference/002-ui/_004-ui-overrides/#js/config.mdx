@@ -1,0 +1,12 @@
+```tsx
+const ResponseCustomRendererComp: ResponseRenderer<AiMsg> = { ... };
+const UserPromptCustomRendererComp: PromptRenderer = { ... };
+```
+```tsx
+const aiChat = createAiChat()
+    .withAdapter(adapter)
+    .withMessageOptions({
+        responseRenderer: ResponseCustomRendererComp,
+        promptRenderer: UserPromptCustomRendererComp,
+    });
+```

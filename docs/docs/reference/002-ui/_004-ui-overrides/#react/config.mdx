@@ -1,0 +1,14 @@
+```tsx
+const ResponseCustomRendererComp: ResponseRenderer<AiMsg> = { ... };
+const UserPromptCustomRendererComp: PromptRenderer = { ... };
+```
+
+```tsx
+<AiChat
+    adapter={adapter}
+    messageOptions={{
+        responseRenderer: ResponseCustomRendererComp,
+        promptRenderer: UserPromptCustomRendererComp,
+    }}
+/>
+```

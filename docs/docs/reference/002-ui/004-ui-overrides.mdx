@@ -1,0 +1,83 @@
+import Link from '@docusaurus/Link';
+
+# UI Overrides
+
+`NLUX` is simply yet very flexible to use. We allow customization via
+<Link to="/reference/ui/ai-chat">config options</Link>.
+We provide a powerful <Link to="/ui/themes">theming system</Link>. We also allow React JS developers to override
+some of the default UI components in the AI chat area.
+
+This reference page details how to override the default UI components in the AI chat area, and the possible overrides
+that you can make.
+
+---
+
+## Usage
+
+You can override the JSX/HTML of certain UI components by passing a custom container component to the `AiChat` component
+with your JSX elements inside it.
+
+Here is an example of how you can override loader component displayed across multiple parts of NLUX:
+
+```jsx
+import {AiChat} from '@nlux/react';
+import {AiChatUI} from '@nlux/react';
+import {useChatAdapter} from '@nlux/<platform>-adapter'; // Or use a custom adapter
+
+const MyAiChatApp = () => {
+    const myAdapter = useChatAdapter({ /* Your adapter options */ });
+    return (
+        <AiChat adapter={myAdapter}>
+            <AiChatUI.Loader>
+                <span className="rounded">Loading 👻</span>
+            </AiChatUI.Loader>
+        </AiChat>
+    );
+};
+```
+
+The inner JSX element `<AiChatUI.Loader><span className="rounded">Loading 👻</span></AiChatUI.Loader>` will instruct
+`NLUX` to replace the default loader component with the custom loader component provided as a child:
+
+```jsx
+<span className="rounded">Loading 👻</span>
+```
+
+---
+
+## UI Overrides Supported
+
+Below is a list of UI component overrides that are currently supported:
+
+---
+
+> ### Loader
+
+This enables overriding the loading spinner displayed in 2 locations:
+
+* Inside the default submit button, when it's in a loading state.
+* Under a message, when it's being loaded from the server or streaming.
+
+> * Overriding Container: `AiChatUI.Loader`
+> * Usage:
+
+```jsx
+<AiChat adapter={myAdapter}>
+    <AiChatUI.Loader>
+        <span className="rounded">Loading 👻</span>
+    </AiChatUI.Loader>
+</AiChat>
+```
+
+---
+
+## Adding More Overrides
+
+We will be adding more customization options and overrides as we receive feedback from the community.
+
+If your project requires more customization options, **please let us know** by:
+
+* Either opening an issue on the [GitHub Discussions](https://github.com/nlkitai/nlux/discussions) page
+* Or by simply suggesting it in the [NLUX Discord server](https://discord.com/invite/SRwDmZghNB)
+
+UI overrides only support React components at the moment.
