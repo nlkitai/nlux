@@ -3,15 +3,17 @@ import styles from './roadmap.module.css';
 import {FeatureImplemented} from '@site/src/pages/(sections)/roadmap/featureImplemented';
 import {FeatureToImplement} from '@site/src/pages/(sections)/roadmap/featureToImplement';
 
-export const Roadmap = ({className}: {className?: string}) => {
+export const Roadmap = ({className}: { className?: string }) => {
     return (
         <div className={clsx(styles.roadmapContainer, className)}>
             <h2 className={styles.roadmapTitle}>
                 Feature Roadmap
             </h2>
             <p className={styles.roadmapDescription}>
-                Over the past months since launching <code>NLUX</code>, we&apos;ve been heads-down delivering rapid value.
-                Here&apos;s a quick overview of some key features that we&apos;ve already built, and a glimpse of what&apos;s to come:
+                Over the past months since launching <code>NLUX</code>, we&apos;ve been heads-down delivering rapid
+                value.
+                Here&apos;s a quick overview of some key features that we&apos;ve already built, and a glimpse of
+                what&apos;s to come:
             </p>
             <div>
                 <FeatureImplemented
@@ -67,8 +69,12 @@ export const Roadmap = ({className}: {className?: string}) => {
                     text="Context-Aware Conversations"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/learn/context-aware-conversations"
-                    text="Co-Pilot Mode"
+                    href="https://docs.nlkit.com/nlux/examples/next-js-ai-assistant"
+                    text="Next.js Support"
+                />
+                <FeatureImplemented
+                    href="https://docs.nlkit.com/nlux/examples/conversation-starters"
+                    text="Conversation Starters"
                 />
                 <FeatureToImplement>File Uploads</FeatureToImplement>
                 <FeatureToImplement>Voice Chat</FeatureToImplement>
@@ -76,5 +82,5 @@ export const Roadmap = ({className}: {className?: string}) => {
                 <FeatureToImplement>Advanced Theming</FeatureToImplement>
             </div>
         </div>
-    )
+    );
 };
