@@ -6,7 +6,6 @@ import {
 import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
 import {ResponseRenderer} from '../../exports/messageOptions';
 import {StreamContainerImperativeProps, StreamContainerProps} from './props';
-import {streamingDomService} from './streamingDomService';
 import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
 import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
 
@@ -20,6 +19,7 @@ export const StreamContainerComp = function <AiMsg>(
         responseRenderer,
         markdownOptions,
         initialMarkdownMessage,
+        markdownContainersController,
     } = props;
 
     const [content, setContent] = useState<Array<AiMsg>>([]);
@@ -30,9 +30,7 @@ export const StreamContainerComp = function <AiMsg>(
     const rootElRefPreviousValue = useRef<HTMLDivElement | null>(null);
     const mdStreamParserRef = useRef<StandardStreamParserOutput | null>(null);
     const appendChunkToStateRef = useRef<((newContent: AiMsg) => void) | null>(null);
-
     const [streamContainer, setStreamContainer] = useState<HTMLDivElement>();
-    const [initialMarkdownMessageParsed, setInitialMarkdownMessageParsed] = useState(false);
 
     useEffect(() => {
         if (rootElRef.current !== rootElRefPreviousValue.current) {
@@ -45,7 +43,7 @@ export const StreamContainerComp = function <AiMsg>(
 
     useEffect(() => {
         if (streamContainer) {
-            const element = streamingDomService.getStreamingDomElement(uid);
+            const element = markdownContainersController.getStreamingDomElement(uid);
             streamContainer.append(element);
         }
     }, [streamContainer]);
@@ -58,7 +56,7 @@ export const StreamContainerComp = function <AiMsg>(
 
     // We update the stream parser when key options (markdownLinkTarget, syntaxHighlighter, etc.) change.
     useEffect(() => {
-        const element = streamingDomService.getStreamingDomElement(uid);
+        const element = markdownContainersController.getStreamingDomElement(uid);
         mdStreamParserRef.current = createMdStreamRenderer(element, {
             syntaxHighlighter: markdownOptions?.syntaxHighlighter,
             htmlSanitizer: markdownOptions?.htmlSanitizer,
@@ -69,24 +67,16 @@ export const StreamContainerComp = function <AiMsg>(
             waitTimeBeforeStreamCompletion: markdownOptions?.waitTimeBeforeStreamCompletion,
         });
 
-        if (!initialMarkdownMessageParsed && initialMarkdownMessage) {
+        if (initialMarkdownMessage) {
             mdStreamParserRef.current.next(initialMarkdownMessage);
-            setInitialMarkdownMessageParsed(true);
         }
 
         return () => {
             // Technical — The DOM element will be re-used if the same message (with the same UID)
-            // is re-rendered in the chat segment. This is handled by the streamingDomService.
-            streamingDomService.deleteStreamingDomElement(uid);
+            // is re-rendered in the chat segment. This is handled by the createStreamingDomService.
+            markdownContainersController.deleteStreamingDomElement(uid);
         };
-    }, [
-        markdownOptions?.syntaxHighlighter,
-        markdownOptions?.htmlSanitizer,
-        markdownOptions?.markdownLinkTarget,
-        markdownOptions?.showCodeBlockCopyButton,
-        markdownOptions?.skipStreamingAnimation,
-        markdownOptions?.streamingAnimationSpeed,
-    ]);
+    }, []); // No dependencies, this effect should run only once.
 
     useEffect(() => {
         return () => {

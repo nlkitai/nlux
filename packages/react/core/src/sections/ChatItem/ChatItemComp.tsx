@@ -34,8 +34,8 @@ export const ChatItemComp: <AiMsg>(
     const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
 
     useImperativeHandle(ref, () => ({
-        streamChunk: (chunk: AiMsg) => streamContainer?.current?.streamChunk(chunk),
-        completeStream: () => streamContainer?.current?.completeStream(),
+        streamChunk: (chunk: AiMsg) => setTimeout(() => streamContainer?.current?.streamChunk(chunk)),
+        completeStream: () => setTimeout(() => streamContainer?.current?.completeStream()),
     }), []);
 
     const compDirectionClassName = props.direction
@@ -100,6 +100,7 @@ export const ChatItemComp: <AiMsg>(
                     ref={streamContainer}
                     direction={props.direction}
                     responseRenderer={props.messageOptions?.responseRenderer}
+                    markdownContainersController={props.markdownContainersController}
                     markdownOptions={{
                         syntaxHighlighter: props.messageOptions?.syntaxHighlighter,
                         htmlSanitizer: props.messageOptions?.htmlSanitizer,

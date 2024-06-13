@@ -57,6 +57,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         ref={ref}
                         key={segment.uid}
                         containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
+                        markdownContainersController={props.markdownContainersController}
                         chatSegment={segment}
                         layout={conversationLayout}
                         personaOptions={personaOptions}

@@ -21,6 +21,7 @@ import {AiChatProps} from './props';
 import {ConversationStarter} from '../types/conversationStarter';
 import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
 import {useUiOverrides} from './hooks/useUiOverrides';
+import {usMarkdownContainers} from './hooks/usMarkdownContainers';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -36,7 +37,6 @@ export const AiChat: <AiMsg>(
 
     // References to DOM elements and React components:
     // These are used for advanced interactions such as scrolling, streaming, and exceptions animation
-    // that are not intuitive to implement with React declarative programming model.
     const conversationRef = useRef<ImperativeConversationCompProps<AiMsg>>(null);
     const conversationContainerRef = useRef<HTMLDivElement>(null);
     const lastActiveSegmentIdRef = useRef<string | undefined>(undefined);
@@ -47,6 +47,7 @@ export const AiChat: <AiMsg>(
     const exceptionBoxController = useMemo(() => {
         return exceptionBoxRef.current ? createExceptionsBoxController(exceptionBoxRef.current) : undefined;
     }, [exceptionBoxRef.current]);
+    const markdownContainersController = usMarkdownContainers();
 
     // Regular component state
     const [prompt, setPrompt] = useState('');
@@ -152,6 +153,7 @@ export const AiChat: <AiMsg>(
                         messageOptions={props.messageOptions}
                         onLastActiveSegmentChange={handleLastActiveSegmentChange}
                         Loader={uiOverrides.Loader}
+                        markdownContainersController={markdownContainersController}
                     />
                 </div>
                 <div className="nlux-composer-container">

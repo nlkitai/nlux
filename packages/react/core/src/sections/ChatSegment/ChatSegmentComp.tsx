@@ -164,6 +164,7 @@ export const ChatSegmentComp: <AiMsg>(
                             fetchedContent={chatItem.content as AiMsg} // Same comp is used for user and AI chat items.
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                            markdownContainersController={props.markdownContainersController}
                         />
                     );
                 } else {
@@ -193,6 +194,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     streamedContent={chatItem.content}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    markdownContainersController={props.markdownContainersController}
                                 />
                             );
                         } else {
@@ -226,6 +228,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     fetchedServerResponse={chatItem.serverResponse}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    markdownContainersController={props.markdownContainersController}
                                 />
                             );
                         }
@@ -247,6 +250,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     dataTransferMode={chatItem.dataTransferMode}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
+                                    markdownContainersController={props.markdownContainersController}
                                 />
                             );
                         }

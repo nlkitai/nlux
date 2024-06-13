@@ -3,6 +3,7 @@ import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {MessageOptions} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
 import {ConversationOptions} from '../../types/conversationOptions';
+import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
 
 export type ConversationCompProps<AiMsg> = {
 
@@ -11,6 +12,7 @@ export type ConversationCompProps<AiMsg> = {
     conversationOptions?: ConversationOptions;
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
+    markdownContainersController: MarkdownContainersController;
 
     // Event Handlers
     onLastActiveSegmentChange?: (data: {

@@ -3,6 +3,7 @@ import {ReactElement, RefObject} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {MessageOptions} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
+import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
 
 export type ChatSegmentProps<AiMsg> = {
 
@@ -11,7 +12,9 @@ export type ChatSegmentProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     layout: ConversationLayout;
+
     containerRef?: RefObject<HTMLDivElement>;
+    markdownContainersController: MarkdownContainersController;
 
     // UI overrides
     Loader: ReactElement;

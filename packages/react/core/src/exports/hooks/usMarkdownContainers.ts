@@ -1,4 +1,4 @@
-import {debug} from '@shared/utils/debug';
+import {useMemo} from 'react';
 
 /**
  * In order to implement an optimized streaming experience, we cannot rely on React to manage the DOM elements
@@ -13,17 +13,25 @@ import {debug} from '@shared/utils/debug';
  * in a very efficient way when new chunks are received.
  */
 
-export type StreamingDomService = {
+export type MarkdownContainersController = {
     getStreamingDomElement: (messageId: string) => HTMLDivElement;
     deleteStreamingDomElement: (messageId: string) => void;
 };
 
-export const streamingDomService: StreamingDomService = (() => {
+export const usMarkdownContainers: () => MarkdownContainersController = () => {
     const streamingDomElementsByMessageId: Record<string, HTMLDivElement> = {};
     const victimMessageIds: Set<string> = new Set();
+    const randomId = Math.random().toString(36).substring(7);
 
-    return {
+    return useMemo<MarkdownContainersController>(() => ({
         getStreamingDomElement: (messageId: string) => {
+            console.dir(victimMessageIds);
+            console.log('Service ID # ', randomId);
+
+            if (victimMessageIds.has(messageId)) {
+                victimMessageIds.delete(messageId);
+            }
+
             if (streamingDomElementsByMessageId[messageId] === undefined) {
                 const newStreamContainer = document.createElement('div');
                 newStreamContainer.setAttribute('nlux-message-id', messageId);
@@ -31,28 +39,20 @@ export const streamingDomService: StreamingDomService = (() => {
                 streamingDomElementsByMessageId[messageId] = newStreamContainer;
             }
 
-            if (victimMessageIds.has(messageId)) {
-                debug('Markdown streaming container deletion canceled', {messageId});
-                victimMessageIds.delete(messageId);
-            }
-
             return streamingDomElementsByMessageId[messageId];
         },
         deleteStreamingDomElement: (messageId: string) => {
             victimMessageIds.add(messageId);
-            debug('Markdown streaming container scheduled for deletion', {messageId});
-
             setTimeout(() => {
                 victimMessageIds.forEach((victimMessageId) => {
                     if (streamingDomElementsByMessageId[victimMessageId]) {
                         streamingDomElementsByMessageId[victimMessageId].remove();
                         delete streamingDomElementsByMessageId[victimMessageId];
-                        debug('Markdown streaming container deleted', {messageId: victimMessageId});
                     }
                 });
 
                 victimMessageIds.clear();
             }, 1000);
         },
-    };
-})();
+    }), []);
+};

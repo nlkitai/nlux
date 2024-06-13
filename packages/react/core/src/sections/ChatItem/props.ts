@@ -2,6 +2,7 @@ import {ConversationLayout, DataTransferMode} from '@nlux/core';
 import {ReactElement} from 'react';
 import {MessageDirection} from '@shared/components/Message/props';
 import {MessageOptions} from '../../exports/messageOptions';
+import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
 
 export type ChatItemProps<AiMsg> = {
     uid: string;
@@ -16,6 +17,7 @@ export type ChatItemProps<AiMsg> = {
     messageOptions?: MessageOptions<AiMsg>;
     name: string;
     avatar?: string | ReactElement;
+    markdownContainersController: MarkdownContainersController;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {
