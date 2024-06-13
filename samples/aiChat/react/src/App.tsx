@@ -6,13 +6,13 @@ import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
-    ChatAdapter,
     ChatItem,
     ConversationLayout,
     DataTransferMode,
     PersonaOptions,
     ResponseRenderer,
     SanitizerExtension,
+    useAsStreamAdapter,
 } from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
@@ -89,14 +89,12 @@ function App() {
         authToken: 'N/A',
     });
 
-    const customSlowAdapter = useMemo<ChatAdapter<string>>(() => ({
-        streamText: (message, observer) => {
-            observer.next('We are processing ');
-            setTimeout(() => {
-                observer.next('your request!');
-            }, 3000);
-        },
-    }), []);
+    const customSlowAdapter = useAsStreamAdapter((message, observer) => {
+        observer.next('We are processing ');
+        setTimeout(() => {
+            observer.next('your request!');
+        }, 3000);
+    });
 
     // const openAiAdapter = useOpenAiChatAdapter()
     //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
