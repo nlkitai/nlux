@@ -90,6 +90,14 @@ export type {
     ConversationStarter,
 } from './types/conversationStarter';
 
+export type {
+    SubmitBatch,
+} from './exports/hooks/useBatchAdapter';
+
+export type {
+    SubmitStream,
+} from './exports/hooks/useStreamAdapter';
+
 export {
     AiChat,
 } from './exports/AiChat';
@@ -103,12 +111,12 @@ export {
 } from './exports/AiChatUI';
 
 export {
-    useAsBatchAdapter,
-} from './exports/hooks/useAsBatchAdapter';
+    useBatchAdapter,
+} from './exports/hooks/useBatchAdapter';
 
 export {
-    useAsStreamAdapter,
-} from './exports/hooks/useAsStreamAdapter';
+    useStreamAdapter,
+} from './exports/hooks/useStreamAdapter';
 
 export type {
     UpdateContextItem,

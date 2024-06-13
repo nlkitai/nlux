@@ -12,7 +12,7 @@ import {
     PersonaOptions,
     ResponseRenderer,
     SanitizerExtension,
-    useAsStreamAdapter,
+    useStreamAdapter,
 } from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
@@ -89,12 +89,12 @@ function App() {
         authToken: 'N/A',
     });
 
-    const customSlowAdapter = useAsStreamAdapter((message, observer) => {
+    const customSlowAdapter = useStreamAdapter((message, observer) => {
         observer.next('We are processing ');
         setTimeout(() => {
             observer.next('your request!');
         }, 3000);
-    });
+    }, []);
 
     // const openAiAdapter = useOpenAiChatAdapter()
     //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
