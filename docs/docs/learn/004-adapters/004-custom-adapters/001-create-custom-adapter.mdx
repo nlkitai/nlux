@@ -44,6 +44,18 @@ interface ChatAdapter {
 }
 ```
 
+:::note
+If you're using the React version of `NLUX`, you can use the `useStreamingAdapter` hook to create a streaming adapter
+as shown below:
+
+```typescript
+const adapter: ChatAdapter = useStreamingAdapter(streamText, []);
+```
+
+Which wraps the `streamText` method in a simple object and offers memoization parameters.
+
+:::
+
 The `streamText` method takes 2 parameters:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
@@ -110,6 +122,17 @@ interface ChatAdapter {
 }
 ```
 
+:::note
+If you're using the React version of `NLUX`, you can use the `useBatchAdapter` hook to create a streaming adapter
+as shown below:
+
+```typescript
+const adapter: ChatAdapter = useStreamingAdapter(batchText, []);
+```
+
+This wraps the `batchText` in a `ChatAdapter` object and offers memoization parameters.
+:::
+
 The `batchText` method takes 2 parameters:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
@@ -126,10 +149,10 @@ The API has a REST endpoint that we can use to send messages and receive respons
 We can create a batch adapter for this API by implementing the `PromiseAdapter` interface:
 
 ```typescript
-import {ChatAdapter} from '@nlux/core';
+import {useBatchAdapter, AdapterExtras} from '@nlux/react';
 
-export const myCustomAdapter: ChatAdapter = {
-    batchText: (message: string, extras: AdapterExtras): Promise<string> => {
+export const myCustomAdapter = useBatchAdapter(
+    (message: string, extras: AdapterExtras): Promise<string> => {
         return fetch('http://localhost:8080', {
             method: 'POST',
             body: JSON.stringify({message})
@@ -137,7 +160,7 @@ export const myCustomAdapter: ChatAdapter = {
             .then(response => response.json())
             .then(json => json.message);
     }
-}
+);
 ```
 
 ## Using Custom Adapters

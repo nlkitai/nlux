@@ -1,8 +1,13 @@
 ```tsx
-import {AiChat} from '@nlux/react';
+import {AiChat, useBatchAdapter} from '@nlux/react';
 
 const App = () => {
-    const adapter = useMemo(() => myCustomAdapter, []);
-    return <AiChat adapter={adapter} />;
+    const myCustomAdapter = useBatchAdapter(
+        async (prompts: string[]) => {
+            // Submit the prompt and get the response ...
+        }
+    );
+
+    return <AiChat adapter={myCustomAdapter} />;
 }
 ```
