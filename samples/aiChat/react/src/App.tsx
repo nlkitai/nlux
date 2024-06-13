@@ -271,8 +271,8 @@ function App() {
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
-                // adapter={langChainAdapter}
-                adapter={customSlowAdapter}
+                adapter={langChainAdapter}
+                // adapter={customSlowAdapter}
                 // adapter={hfAdapter}
                 // initialConversation={initialConversation}
                 composerOptions={{
