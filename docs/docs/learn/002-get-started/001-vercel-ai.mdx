@@ -1,0 +1,228 @@
+---
+sidebar_label: 'with Next.js and Vercel AI'
+title: 'Get Started With NLUX, Next.js and Vercel AI'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Get Started ― NLUX With Next.js And Vercel AI
+
+Next.js is the most popular React framework for building web applications. Combined with Vercel AI SDK and NLUX, it
+provides a perfect combination for building AI  assistants for your web application.
+
+This guide will walk you through the steps to add NLUX with Vercel AI SDK to your Next.js app.
+
+---
+
+## 1. Create Your Next.js Application
+<br />
+<br />
+
+Start by creating a new Next.js app using the following command:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npx create-next-app@latest --ts --app my-ai-app
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn create next-app --ts --app my-ai-app
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm create next-app@latest --ts --app my-ai-app
+        ```
+    </TabItem>
+</Tabs>
+
+You can just accept the default options when prompted.
+
+Then navigate to the newly created directory:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        cd my-ai-app
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        cd my-ai-app
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        cd my-ai-app
+        ```
+    </TabItem>
+</Tabs>
+
+---
+
+## 2. Install Dependencies
+<br />
+<br />
+
+Next, install the `@nlux` dependencies:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm install @nlux/react @nlux/themes
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn add @nlux/react @nlux/themes
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm add @nlux/react @nlux/themes
+        ```
+    </TabItem>
+</Tabs>
+
+And the Vercel AI SDK dependencies:
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm install ai @ai-sdk/openai @ai-sdk/react zod
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn add ai @ai-sdk/openai @ai-sdk/react zod
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm install ai @ai-sdk/openai @ai-sdk/react zod
+        ```
+    </TabItem>
+</Tabs>
+
+---
+
+## 3. Configure OpenAI API key
+<br />
+<br />
+
+In this guide, we are using OpenAI as the AI model provider.<br />
+You are not limited to OpenAI, you can use any other AI model provider with Vercel AI SDK.
+
+Let's start by getting a new API key from OpenAI.
+
+1. If you don't have an account, go to the <a href="https://platform.openai.com/signup" target="_blank">OpenAI signup page</a> and create an account.
+2. Go to the <a href="https://platform.openai.com/api-keys" target="_blank">API keys page</a>
+3. Click the `Creat new secret key` button
+4. Give your API key a name and click `Create secret key`, then copy the key to your clipboard
+5. Create a `.env.local` file in your project root and add your OpenAI API Key. This key is used to authenticate
+your application with the OpenAI service.
+
+```
+touch .env.local
+```
+
+6. Edit the `.env.local` file and add your OpenAI API Key:
+
+```
+OPENAI_API_KEY=your-openai-api-key
+```
+
+---
+
+## 4. Create a Route Handler
+<br />
+<br />
+
+Create a router handler in your Next.js app to handle the chatbot requests.<br />
+The route file path should be `app/api/chat/route.ts`.<br />
+Then add the following code:
+
+```tsx
+import { openai } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+import {NextResponse} from 'next/server';
+
+// Allow streaming responses up to 30 seconds
+export const maxDuration = 30;
+
+export async function POST(req: Request) {
+    const { prompt } = await req.json();
+
+    const result = await generateText({
+        model: openai('gpt-4-turbo'),
+        messages: [{
+            role: 'system',
+            content: prompt,
+        }]
+    });
+
+    return NextResponse.json({ reply: result.responseMessages[0].content[0].text });
+}
+```
+
+---
+
+## 5. Add The NLUX UI Component
+<br />
+<br />
+
+Now that you have a Route Handler that can query an LLM, it's time to set-up your NLUX UI component and
+start interacting with your AI model.
+
+Update your root page (`app/page.tsx`) with the following code to show a list of chat messages
+and provide a user message input:
+
+```tsx
+'use client';
+import '@nlux/themes/nova.css';
+
+import {AiChat} from '@nlux/react';
+
+export default function Chat() {
+    const chatAdapter = {
+        batchText: async (prompt: string) => {
+            const r = {
+                method: 'POST',
+                body: JSON.stringify({prompt: prompt}),
+                headers: {'Content-Type': 'application/json'},
+            };
+
+            const response = await fetch('/api/chat', r);
+            const {reply} = await response.json();
+            return reply;
+        },
+    };
+
+    return (
+        <main className="flex min-h-screen flex-col items-center justify-between p-24">
+            <div className="z-10 w-full max-w-3xl items-center justify-between font-mono text-sm lg:flex">
+                <AiChat adapter={chatAdapter}/>
+            </div>
+        </main>
+    );
+}
+```
+
+---
+
+## 6. Running Your Application and Tweak NLUX
+
+1. Run the Development Server
+2. Run npm run dev to start the development server.
+3. Visit http://localhost:3000 to view your application.
+4. Edit app/page.tsx (or pages/index.tsx) file and save it to see the updated result in your browser.
+
+You can check the documentation and wide range of options available here:
+
+* [Reference](https://docs.nlkit.com/nlux/reference/overview) — Documentation for all the components and configuration options.
+* [Examples](https://docs.nlkit.com/nlux/examples) — Live editable examples to get you started quickly.
+
+If you need help or have any questions, feel free to join our vibrant community on [Discord](https://discord.gg/SRwDmZghNB).
