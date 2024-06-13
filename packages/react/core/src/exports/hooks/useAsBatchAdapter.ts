@@ -1,5 +1,6 @@
 import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
 import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
+import {useMemo} from 'react';
 
 /**
  * A simple hook to convert a callback function to a ChatAdapter to use to fetch data as a stream.
@@ -11,5 +12,5 @@ export const useAsBatchAdapter = function <AiMsg = string>(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ) => Promise<AiMsg>): ChatAdapter<AiMsg> {
-    return {batchText: callback};
+    return useMemo(() => ({batchText: callback}), [callback]);
 };
