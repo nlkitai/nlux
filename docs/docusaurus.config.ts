@@ -155,6 +155,11 @@ const config: Config = {
                     position: 'right',
                 },
                 {
+                    href: 'https://x.com/nluxai',
+                    label: '@nluxai on X',
+                    position: 'right',
+                },
+                {
                     href: 'https://nlkit.com',
                     label: 'nlkit.com',
                     position: 'right',
