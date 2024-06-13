@@ -3,6 +3,21 @@ sidebar_label: 'with Next.js and Vercel AI'
 title: 'Get Started With NLUX, Next.js and Vercel AI'
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
@@ -182,24 +197,19 @@ and provide a user message input:
 
 ```tsx
 'use client';
+import {AiChat, ChatAdapter} from '@nlux/react';
 import '@nlux/themes/nova.css';
 
-import {AiChat} from '@nlux/react';
-
 export default function Chat() {
-    const chatAdapter = {
-        batchText: async (prompt: string) => {
-            const r = {
-                method: 'POST',
-                body: JSON.stringify({prompt: prompt}),
-                headers: {'Content-Type': 'application/json'},
-            };
-
-            const response = await fetch('/api/chat', r);
-            const {reply} = await response.json();
-            return reply;
-        },
-    };
+    const chatAdapter: ChatAdapter = { batchText: async (prompt: string) => {
+        const response = await fetch('/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({prompt: prompt}),
+            headers: {'Content-Type': 'application/json'},
+        });
+        const {reply} = await response.json();
+        return reply;
+    }};
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -210,6 +220,15 @@ export default function Chat() {
     );
 }
 ```
+
+Let's take a look at what is happening in this code:
+
+1. We start by adding `'use client';` to the top of the file.<br />
+    This tells the Next.js framework that **this file is intended to run on the client-side**.
+1. We import `AiChat` from `@nlux/react` and the default theme `@nlux/themes/nova.css`.
+2. We define a `chatAdapter` object that implements the interface `ChatAdapter`.<br />
+    It contains on method `batchText` that handles chat responses generated in a single batch.
+3. We render the `<AiChat />` component with the `chatAdapter` object.
 
 ---
 
