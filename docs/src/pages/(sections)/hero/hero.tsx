@@ -63,7 +63,7 @@ export const Hero = ({className}: { className?: string }) => {
                             <h5 style={{textAlign: 'left'}}>Plain<br/>JavaScript</h5>
                         </div>
                         <div className={heroStyles.platformName}>
-                            <img src={NextJsLogo} alt="Next JS Logo" height={60}/>
+                            <img src={NextJsLogo} alt="Next.js Logo" height={60}/>
                         </div>
                     </div>
                 </div>

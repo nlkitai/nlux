@@ -6,7 +6,7 @@ However, for advanced use cases where an object is expected, a generic type can 
 | **JSX Syntax** | `<AiChat ... />` | `<AiChat<AiResponseType> ... />`<br />where `AiResponseType` is a custom type defined by the user |
 | **AI Reponse Expected** | `string` | Object matching the `AiResponseType` type |
 | **Use Case** | When the LLM only generates plain text or markdown | For AI systems that generate an object or a stream of objects |
-| **Rendering** | The string response will parsed as markdown | For **standard adapters** provided by `NLUX`, the library handles converting objects to markdown, or offers adapter config for that purpose. For **custom adapters**, `custom renderers` is required. |
+| **Rendering** | The string response will be parsed as markdown | For **standard adapters** provided by `NLUX`, the library handles converting objects to markdown, or offers adapter config for that purpose. For **custom adapters**, `custom renderers` is required. |
 
 > For most of the use cases, the default behavior is sufficient.<br />
 > The advanced use case is for custom components with complex AI responses.<br />
