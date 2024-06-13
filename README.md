@@ -34,7 +34,7 @@ lines of code, you can add conversational AI capabilities and interact with your
 * **React Components & Hooks** ― `<AiChat />` for UI and `useChatAdapter` hook for easy integration.
 * **LLM Adapters** ― For `ChatGPT` ― `LangChain` 🦜 `LangServe` APIs ― `Hugging Face` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** 🎯 for any LLM ― with support for stream or batch modes.
-* **Assistant and User Personas** ― Customize the assistant and user personas with names, images, and descriptions.
+* **Assistant and User Personas** ― Customize participant personas with names, images, and descriptions.
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Custom Renderers** ― Render AI messages with custom components inside the chat interface.
 * **Highly Customizable** ― Tune almost every UI aspect through theming, layout options, and more.
