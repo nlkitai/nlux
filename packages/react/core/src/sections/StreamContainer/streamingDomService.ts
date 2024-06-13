@@ -1,3 +1,5 @@
+import {debug} from '@shared/utils/debug';
+
 /**
  * In order to implement an optimized streaming experience, we cannot rely on React to manage the DOM elements
  * of the streaming messages. React UI is a function of state, and re-rendering the entire UI for every message
@@ -29,21 +31,28 @@ export const streamingDomService: StreamingDomService = (() => {
                 streamingDomElementsByMessageId[messageId] = newStreamContainer;
             }
 
-            victimMessageIds.delete(messageId);
+            if (victimMessageIds.has(messageId)) {
+                debug('Markdown streaming container deletion canceled', {messageId});
+                victimMessageIds.delete(messageId);
+            }
+
             return streamingDomElementsByMessageId[messageId];
         },
         deleteStreamingDomElement: (messageId: string) => {
             victimMessageIds.add(messageId);
+            debug('Markdown streaming container scheduled for deletion', {messageId});
+
             setTimeout(() => {
                 victimMessageIds.forEach((victimMessageId) => {
                     if (streamingDomElementsByMessageId[victimMessageId]) {
                         streamingDomElementsByMessageId[victimMessageId].remove();
                         delete streamingDomElementsByMessageId[victimMessageId];
+                        debug('Markdown streaming container deleted', {messageId: victimMessageId});
                     }
                 });
 
                 victimMessageIds.clear();
-            }, 100);
+            }, 1000);
         },
     };
 })();

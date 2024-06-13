@@ -75,8 +75,8 @@ export const StreamContainerComp = function <AiMsg>(
         }
 
         return () => {
-            // Technical — The DOM element will be re-used if the same message (with the same UID) is re-rendered
-            // in the chat segment. This is handled by the streamingDomService.
+            // Technical — The DOM element will be re-used if the same message (with the same UID)
+            // is re-rendered in the chat segment. This is handled by the streamingDomService.
             streamingDomService.deleteStreamingDomElement(uid);
         };
     }, [
