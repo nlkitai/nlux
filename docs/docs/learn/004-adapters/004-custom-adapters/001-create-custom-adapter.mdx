@@ -18,11 +18,14 @@ It also receives responses from the API and sends them to `NLUX` in a format tha
 
 There are 2 types of custom adapters that you can create:
 
-* Streaming Adapters
-* Promise Adapters
+* Streaming Adapters — To stream generated responses in chunks.
+* Batch Adapters — To receive the response in a single request.
+
+---
 
 ## Streaming Adapters
-
+<br />
+<br />
 Streaming adapters are used when the API sends responses in a stream (e.g. WebSockets, or Server-Sent Events).
 
 The advantage of using a streaming adapter is that **the chat UI will be updated in real-time while the LLM is still
@@ -93,13 +96,13 @@ Streaming adapters can also be used with APIs that send responses as Server-Sent
 Another potentially useful configuration is `messageOptions.waitTimeBeforeStreamCompletion`,
 which sets the wait time in milliseconds after the last data chunk; the default value is 2000ms.
 
-## Promise Adapters
+## Batch Adapters
 
-Promise adapters can be used when the API sends responses in a single request (e.g. REST APIs).
+Batch adapters can be used when the API sends responses in a single request (e.g. REST APIs).
 
-The advantage of using a promise adapter is that **it's easier to implement**.
+The advantage of using a batch adapter is that **they are easier to implement**.
 
-To implement a custom promise adapter for `NLUX`, you need to implement the following interface:
+To implement a custom batch adapter for `NLUX`, you need to implement the following interface:
 
 ```typescript
 interface ChatAdapter {
@@ -107,19 +110,20 @@ interface ChatAdapter {
 }
 ```
 
-The `batchText` method takes 1 parameter:
+The `batchText` method takes 2 parameters:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
+* `extras` - An object containing additional information that the adapter might need.
 
 The `batchText` method should return a promise that resolves to the response from the API.
 
-### Example: Promise Adapter
+### Example: Batch Adapter
 
-Let's say we want to create a promise adapter for a custom API that sends responses in a single request.
+Let's say we want to create a batch adapter for a custom API that sends responses in a single request.
 
 The API has a REST endpoint that we can use to send messages and receive responses.
 
-We can create a promise adapter for this API by implementing the `PromiseAdapter` interface:
+We can create a batch adapter for this API by implementing the `PromiseAdapter` interface:
 
 ```typescript
 import {ChatAdapter} from '@nlux/core';

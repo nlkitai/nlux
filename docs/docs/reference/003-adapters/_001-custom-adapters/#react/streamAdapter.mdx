@@ -1,0 +1,49 @@
+Stream adapters can be used to send the response as a stream of chunks, as it's being received from the API.<br />
+Stream adapters provide a more responsive chat experience.
+
+In order to implement a custom streaming adapter for `NLUX`, you can use the following hook:
+
+```tsx
+import {useStreamAdapter} from '@nlux/react';
+```
+
+```tsx
+useStreamAdapter<AiMsg = string>(submit: SubmitStream)
+```
+
+Where `submit` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
+sending the prompt to the API and receiving the responses as a stream of chunks.
+
+The `submit` function has the following signature:
+
+```tsx
+export type SubmitStream<AiMsg> = (
+    message: string,
+    observer: StreamingAdapterObserver<AiMsg>,
+    extras: ChatAdapterExtras<AiMsg>,
+) => void;
+```
+
+It takes 3 parameters:
+
+* `message` - The prompt message typed by the user, to be sent to the API.
+* `observer` - An observer that will receive the responses from the API and pass them to `NLUX`.
+* `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
+
+Below is the definition of the `StreamingAdapterObserver` interface:
+
+```tsx
+interface StreamingAdapterObserver<ChunkType = string> {
+    next: (chunk: ChunkType) => void;
+    error: (error: Error) => void;
+    complete: () => void;
+}
+```
+
+When implementing your `submit`, use the `observer.next(chunk)` method when data is received from the API.<br />
+The `observer.complete()` method should be called when the API has finished sending responses,<br />
+and the `observer.error()` method should be called if an error occurs.
+
+When the `adapter` is used in the `<AiChat adapter={adapter} />` component, `NLUX` will take care of calling the
+`submit` method with the appropriate parameters and updating the chat UI with the response, or an error message if the
+promise is rejected.

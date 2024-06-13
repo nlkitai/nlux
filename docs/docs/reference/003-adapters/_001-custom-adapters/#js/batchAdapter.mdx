@@ -1,0 +1,20 @@
+Batch adapters can be used when the API sends responses in a single request without streaming.<br />
+Batch adapters are ** easier to implement**.
+
+In order to implement a batch promise adapter for `NLUX`, you need to implement the following interface:
+
+```tsx
+interface ChatAdapter<AiMsg = string> {
+    batchText: (
+        message: string,
+        extras: ChatAdapterExtras<AiMsg>,
+    ) => Promise<AiMsg>;
+}
+```
+
+The `batchText` method takes 1 parameter:
+
+* `message` - The prompt message typed by the user, to be sent to the API.
+* `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
+
+The `batchText` method should return a promise that resolves to the response from the API.

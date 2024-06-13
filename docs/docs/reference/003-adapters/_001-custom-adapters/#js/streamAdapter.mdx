@@ -1,0 +1,31 @@
+In order to implement a custom streaming adapter for `NLUX`, you need to implement the following interface:
+
+```tsx
+interface ChatAdapter<AiMsg = string> {
+    streamText: (
+        message: string,
+        observer: StreamingAdapterObserver<AiMsg>,
+        extras: ChatAdapterExtras<AiMsg>,
+    ) => void;
+}
+```
+
+The `streamText` method takes 2 parameters:
+
+* `message` - The prompt message typed by the user, to be sent to the API.
+* `observer` - An observer that will receive the responses from the API and pass them to `NLUX`.
+* `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
+
+Below is the definition of the `StreamingAdapterObserver` interface:
+
+```tsx
+interface StreamingAdapterObserver<ChunkType = string> {
+    next: (chunk: ChunkType) => void;
+    error: (error: Error) => void;
+    complete: () => void;
+}
+```
+
+You can call the `next` method of the observer as responses are received from the API.
+The `complete` method should be called when the API has finished sending responses, and
+The `error` method should be called if an error occurs.

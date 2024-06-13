@@ -2,6 +2,17 @@
 sidebar_label: 'Custom Adapters'
 ---
 
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+
+import StreamAdaptersReactJs from './_001-custom-adapters/#react/streamAdapter.mdx';
+import StreamAdaptersJavaScript from './_001-custom-adapters/#js/streamAdapter.mdx';
+
+import BatchAdaptersReactJs from './_001-custom-adapters/#react/batchAdapter.mdx';
+import BatchAdaptersJavaScript from './_001-custom-adapters/#js/batchAdapter.mdx';
+
+import AdapterExtrasReactJs from './_001-custom-adapters/#react/adapterExtras.mdx';
+import AdapterExtrasJavaScript from './_001-custom-adapters/#js/adapterExtras.mdx';
+
 # Custom Adapters
 
 If you're building your own APIs and you would like to use `NLUX` as the UI for your own AI assistant,
@@ -14,7 +25,7 @@ There are 2 types of custom adapters that you can create:
 
 ---
 
-## Streaming Adapters
+## Stream Adapters
 
 Streaming adapters are used when the API sends responses in a stream (e.g. WebSockets, or Server-Sent Events).
 
@@ -22,107 +33,16 @@ The advantage of using a streaming adapter is that **the chat UI will be updated
 generating text**. This is particularly useful if the API takes a long time to process a request and sends responses
 in a stream. Most major LLM APIs (e.g. OpenAI, Anthropic) support streaming responses.
 
-In order to implement a custom streaming adapter for `NLUX`, you need to implement the following interface:
-
-```tsx
-interface ChatAdapter<AiMsg = string> {
-    streamText: (
-        message: string,
-        observer: StreamingAdapterObserver<AiMsg>,
-        extras: ChatAdapterExtras<AiMsg>,
-    ) => void;
-}
-```
-
-The `streamText` method takes 2 parameters:
-
-* `message` - The prompt message typed by the user, to be sent to the API.
-* `observer` - An observer that will receive the responses from the API and pass them to `NLUX`.
-* `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
-
-Below is the definition of the `StreamingAdapterObserver` interface:
-
-```tsx
-interface StreamingAdapterObserver<ChunkType = string> {
-    next: (chunk: ChunkType) => void;
-    error: (error: Error) => void;
-    complete: () => void;
-}
-```
-
-You can call the `next` method of the observer as responses are received from the API.
-The `complete` method should be called when the API has finished sending responses, and
-The `error` method should be called if an error occurs.
-
-:::tip
-You can check the [Create Custom Adapters](/learn/adapters/custom-adapters/create-custom-adapter) guide for an example of how to
-implement a custom streaming adapter.
-:::
+<PlatformSelector reactJs={StreamAdaptersReactJs} javascript={StreamAdaptersJavaScript}/>
 
 ---
 
 ## Batch Adapters
 
-Batch adapters can be used when the API sends responses in a single request without streaming.<br />
-Batch adapters are ** easier to implement**.
-
-In order to implement a batch promise adapter for `NLUX`, you need to implement the following interface:
-
-```tsx
-interface ChatAdapter<AiMsg = string> {
-    batchText: (
-        message: string,
-        extras: ChatAdapterExtras<AiMsg>,
-    ) => Promise<AiMsg>;
-}
-```
-
-The `batchText` method takes 1 parameter:
-
-* `message` - The prompt message typed by the user, to be sent to the API.
-* `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
-
-The `batchText` method should return a promise that resolves to the response from the API.
-
-:::tip
-You can check the [Create Custom Adapters](/learn/adapters/custom-adapters/create-custom-adapter) guide for an example of how to
-implement a custom promise adapter.
-:::
+<PlatformSelector reactJs={BatchAdaptersReactJs} javascript={BatchAdaptersJavaScript}/>
 
 ---
 
 ## Adapter Extras
 
-The `ChatAdapterExtras` object passed as last parameter to the `batchText` and `streamText` methods contains
-information that the adapter might need. It has the following properties. It has the following properties:
-
-```tsx
-interface ChatAdapterExtras<AiMsg = string> {
-    // The props that were passed to the AiChat component
-    aiChatProps: AiChatPropsInEvents<AiMsg>;
-
-    // The conversation history
-    // Available when `conversationOptions.historyPayloadSize`
-    // is set to a value greater than 0 or to `'max'`
-    conversationHistory?: ChatItem<AiMsg>[];
-
-    // This contains the headers that implementers can use to send additional data such as authentication headers.
-    headers?: Record<string, string>;
-}
-```
-
-The `ChatItem` type is defined as follows:
-
-```tsx
-export type ChatItem<AiMsg = string> = {
-    role: 'assistant';
-    message: AiMsg;
-    serverResponse?: string | object | undefined;
-} | {
-    role: 'user';
-    message: string;
-} | {
-    role: 'system';
-    message: string;
-};
-```
+<PlatformSelector reactJs={AdapterExtrasReactJs} javascript={AdapterExtrasJavaScript}/>
