@@ -156,7 +156,7 @@ const config: Config = {
                 },
                 {
                     href: 'https://x.com/nluxai',
-                    label: '@nluxai on X',
+                    label: 'X',
                     position: 'right',
                 },
                 {
