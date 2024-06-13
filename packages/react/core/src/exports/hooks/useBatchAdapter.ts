@@ -2,7 +2,7 @@ import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
 import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
 
-export type SubmitBatch<AiMsg> = (
+export type SubmitBatch<AiMsg = string> = (
     message: string,
     extras: ChatAdapterExtras<AiMsg>,
 ) => Promise<AiMsg>;

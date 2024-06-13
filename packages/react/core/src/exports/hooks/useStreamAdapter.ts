@@ -2,7 +2,7 @@ import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
 import {ChatAdapter, StreamingAdapterObserver} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
 
-export type SubmitStream<AiMsg> = (
+export type SubmitStream<AiMsg = string> = (
     message: string,
     observer: StreamingAdapterObserver<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
