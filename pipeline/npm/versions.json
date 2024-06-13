@@ -1,6 +1,6 @@
 {
   "inherit": true,
-  "nlux": "2.5.10",
+  "nlux": "2.6.0",
   "peerDependencies": {
     "react": "18",
     "react-dom": "18"
