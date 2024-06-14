@@ -65,7 +65,14 @@ export const ChatSegmentComp: <AiMsg>(
         streamChunk: (chatItemId: string, chunk: AiMsg) => {
             const chatItemCompRef = chatItemsRef.get(chatItemId);
             if (chatItemCompRef?.current) {
-                chatItemCompRef.current.streamChunk(chunk);
+                const streamChunk = chatItemCompRef.current.streamChunk;
+                const chatItemStreamingBuffer = chatItemsStreamingBuffer.get(chatItemId) ?? [];
+                chatItemStreamingBuffer.forEach((bufferedChunk) => {
+                    streamChunk(bufferedChunk);
+                });
+
+                chatItemsStreamingBuffer.delete(chatItemId);
+                streamChunk(chunk);
             } else {
                 // Buffer the chunk if the chat item is not rendered yet.
                 const chatItemStreamingBuffer = chatItemsStreamingBuffer.get(chatItemId) ?? [];

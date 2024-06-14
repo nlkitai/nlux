@@ -5,6 +5,7 @@ import {attachCopyClickListener} from '../copyToClipboard/attachCopyClickListene
 
 const defaultDelayInMsBeforeComplete = 2000;
 const defaultDelayInMsBetweenBufferChecks = 8;
+const endOfStreamChar = '\n';
 
 const getScheduler = (type: 'timeout' | 'animationFrame') => {
     if (type === 'timeout') {
@@ -96,7 +97,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
 
         parsingContext.timeSinceLastProcessing = nowTime;
         const chunk = buffer.shift();
-        if (!chunk) {
+        if (chunk === undefined || typeof chunk !== 'string') {
             return;
         }
 
@@ -166,6 +167,7 @@ export const createMdStreamRenderer: StandardStreamParser = (
             }
         },
         complete: () => {
+            buffer.push(endOfStreamChar);
             streamIsComplete = true;
         },
         error: () => {

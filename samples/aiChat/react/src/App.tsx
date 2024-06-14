@@ -96,6 +96,23 @@ function App() {
         }, 3000);
     }, []);
 
+    const customSimpleAdapter = useAsStreamAdapter((message, observer) => {
+        const values = Array.from({length: 26}, (_, i) =>
+            String.fromCharCode(97 + i),
+        );
+
+        values.push('__Done!');
+
+        for (let index = 0; index < values.length; index++) {
+            //   await new Promise((resolve) => setTimeout(resolve, 100));
+            const element = values[index];
+            console.log(element);
+            observer.next(element);
+        }
+
+        observer.complete();
+    }, []);
+
     // const openAiAdapter = useOpenAiChatAdapter()
     //     .withApiKey(localStorage.getItem('openai-api-key') || 'N/A')
     //     .withDataTransferMode('batch');
@@ -269,10 +286,11 @@ function App() {
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
-                adapter={langChainAdapter}
+                // adapter={langChainAdapter}
                 // adapter={customSlowAdapter}
+                adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
-                initialConversation={initialConversation}
+                // initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
