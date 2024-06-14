@@ -31,7 +31,7 @@ export interface ConversationOptions {
      * - `list`: Chat items are displayed as a list with the AI responses underneath each user message.
      * - `bubbles`: Items are displayed as chat bubbles with the prompts on the right and the AI messages on the left.
      *
-     * @default 'list'
+     * @default 'bubbles'
      */
     layout?: ConversationLayout;
 
