@@ -2,7 +2,7 @@ export default (colorMode: 'dark' | 'light') => `import { AiChat, useAsStreamAda
 import '@nlux/themes/nova.css';
 
 import { send } from './send';
-import { user } from './personas';
+import { user, assistantCssStyle } from './personas';
 
 export default () => {
   const adapter = useAsStreamAdapter(send, []);
@@ -11,13 +11,13 @@ export default () => {
       personaOptions={{
         assistant: {
           name: 'Emo\\'jsx',
-          avatar: <span style={assistantCssStyle}>🤖</span>,
+          avatar: <span style={ assistantCssStyle }>🤖</span>,
           tagline: 'Your Robotic AI Assistant'
         },
         user
       }}
-      adapter={adapter}
-      displayOptions={{colorScheme: '${colorMode}'}}
+      adapter={ adapter }
+      displayOptions={{ colorScheme: '${colorMode}' }}
     />
   );
 };
