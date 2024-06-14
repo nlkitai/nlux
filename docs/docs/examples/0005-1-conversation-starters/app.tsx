@@ -8,7 +8,7 @@ export default () => {
   const adapter = useAsStreamAdapter(send, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '90vh' }}>
+    <div style={{ display: 'flex', width: '100%', flexDirection: 'column', height: '90vh' }}>
       <AiChat
         conversationOptions={{
             conversationStarters: [

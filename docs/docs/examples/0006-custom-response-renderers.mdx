@@ -2,7 +2,6 @@
 sidebar_label: 'Custom Response Renderers'
 ---
 
-
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
 import app1 from './0006-custom-response-renderers/_a-streamed-data/App.tsx';
@@ -26,8 +25,13 @@ The examples in this page show how to create custom message renderer for streame
 <br />
 <br />
 
-Data is streamed to the custom component as it's being generated.<br />
-The renderer uses `<div ref={props.containerRef}/>` to let `NLUX` know where to append the streamed data.
+Data is streamed to the custom component as it's being generated.
+
+This example uses `<div ref={props.containerRef}/>` to let `NLUX` know where to append the streamed data.
+This method is more efficient (only updates DOM matching new markdown), and allows for letter-by-letter animation
+of the rendered data.
+
+Alternatively, you can directly render `props.content`, which contains the entire message's content.
 
 <CodeEditor
     files={{
