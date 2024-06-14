@@ -1,9 +1,8 @@
-export default (colorMode: 'dark' | 'light') => `import {AiChat, ResponseRenderer} from '@nlux/react';
-import {useChatAdapter} from '@nlux/langchain-react';
-import '@nlux/themes/nova.css';
-
+export default (colorMode: 'dark' | 'light') => `import { AiChat, ResponseRenderer } from '@nlux/react';
+import { useChatAdapter } from '@nlux/langchain-react';
 import { personaOptions } from './personas';
 import { WavesBackground } from './Waves';
+import '@nlux/themes/nova.css';
 
 const ColourfulResponseRenderer: ResponseRenderer<string> = (props) => (
     <div className="colourful-response-renderer">
@@ -28,10 +27,10 @@ export default () => {
 
   return (
     <AiChat
-        messageOptions={{
-            // Custom response renderer for the assistant's messages
-            responseRenderer: ColourfulResponseRenderer
-        }}
+      messageOptions={{
+        // Custom response renderer for the assistant's messages
+        responseRenderer: ColourfulResponseRenderer
+      }}
       adapter={ adapter }
       personaOptions={ personaOptions }
       displayOptions={{ colorScheme: '${colorMode}' }}
