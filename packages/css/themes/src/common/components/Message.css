@@ -17,6 +17,14 @@
         padding: 0;
     }
 
+    :is(ul, ol) {
+        padding-left: 1.5em;
+
+        li {
+            margin: 0.5em 0;
+        }
+    }
+
     > .code-block {
         font-family: var(--nlux-cdBlk--ftFm), monospace;
         font-size: var(--nlux-cdBlk--ftSz);
