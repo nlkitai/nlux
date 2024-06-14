@@ -1,4 +1,4 @@
-export default (colorMode: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import { AiChat } from '@nlux/react';
 import { useChatAdapter } from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
 

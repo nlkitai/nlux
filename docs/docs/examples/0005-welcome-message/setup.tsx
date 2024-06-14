@@ -14,8 +14,8 @@ const optionsSelectorStyle = {
 };
 
 export const useDemoOptions = () => {
-  const [shouldUseAssistantPersona, setShouldUseAssistantPersona] = useState(true);
-  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
+  const [ isOption1Checked, setShouldUseAssistantPersona ] = useState(true);
+  const [ isOption2Checked, setShowWelcomeMessage ] = useState(true);
 
   const DemoOptionsComponent = useCallback(() => {
     return (
@@ -23,27 +23,27 @@ export const useDemoOptions = () => {
         <label>
           <input
             type="checkbox"
-            checked={shouldUseAssistantPersona}
-            onChange={() => setShouldUseAssistantPersona(!shouldUseAssistantPersona)}
+            checked={isOption1Checked}
+            onChange={() => setShouldUseAssistantPersona(!isOption1Checked)}
           />
           Use assistant persona
         </label>
         <label>
           <input
             type="checkbox"
-            checked={showWelcomeMessage}
-            onChange={() => setShowWelcomeMessage(!showWelcomeMessage)}
+            checked={isOption2Checked}
+            onChange={() => setShowWelcomeMessage(!isOption2Checked)}
           />
           Show welcome message
         </label>
       </div>
     );
-  }, [shouldUseAssistantPersona, showWelcomeMessage]);
+  }, [ isOption1Checked, isOption2Checked ]);
 
   return [
     DemoOptionsComponent,
-    shouldUseAssistantPersona,
-    showWelcomeMessage
+    isOption1Checked,
+    isOption2Checked
   ];
 };
 

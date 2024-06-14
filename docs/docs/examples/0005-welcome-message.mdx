@@ -6,9 +6,8 @@ sidebar_label: 'Welcome Message'
 import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import app from './0005-welcome-message/App.tsx';
-import adapter from './0005-welcome-message/adapter.tsx';
-import setup from './0005-welcome-message/setup.tsx';
+import app from './0005-welcome-message/app';
+import setup from './0005-welcome-message/setup';
 
 # Welcome Message
 
@@ -22,7 +21,6 @@ You can disable this behavior by setting the `conversationOptions.showWelcomeMes
 <CodeEditor
     files={{
         'App.tsx': app,
-        'adapter.ts': adapter,
         'setup.tsx': setup,
     }}
     editorHeight={380}
