@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import {useColorMode} from '@docusaurus/theme-common';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import exampleIntroFileStreamAdapter from '@site/src/pages/(examples)/intro/adapter';
-import exampleIntroFileAiChatBot from '@site/src/pages/(examples)/intro/aiAssistant';
+import exampleIntroFileSendFunction from '@site/src/pages/(examples)/intro/send';
+import exampleIntroFileAiChatBot from '@site/src/pages/(examples)/intro/example';
 import exampleIntroFilePersonas from '@site/src/pages/(examples)/intro/personas';
 import styles from '@site/src/pages/index.module.css';
 import heroStyles from '@site/src/pages/(sections)/hero/hero.module.css';
@@ -100,7 +100,7 @@ export const Hero = ({className}: { className?: string }) => {
                         direction="row"
                         files={{
                             'App.tsx': exampleIntroFileAiChatBot(colorMode),
-                            'adapter.ts': exampleIntroFileStreamAdapter,
+                            'send.ts': exampleIntroFileSendFunction,
                             'personas.tsx': exampleIntroFilePersonas,
                         }}
                         editorHeight={420}
