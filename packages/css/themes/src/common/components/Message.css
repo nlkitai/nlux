@@ -31,7 +31,7 @@
 
         position: relative;
         overflow: scroll;
-        padding: 0;
+        padding: 10px 0;
 
         color: var(--nlux-cdBlk--txtClr);
         border: var(--nlux-cdBlk--brdrWd) solid var(--nlux-cdBlk--brdClr);

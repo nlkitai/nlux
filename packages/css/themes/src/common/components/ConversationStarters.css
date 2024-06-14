@@ -12,6 +12,8 @@
         padding: var(--nlux-cvStrt--pdng);
 
         > .nlux-comp-conversationStarter {
+            font-family: var(--nlux-chtr--fnFm), sans-serif;
+
             width: 150px;
             height: 100px;
             overflow: hidden;

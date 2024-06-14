@@ -64,13 +64,13 @@
     --nlux-SubmitButton-Focus-Outline--Color: transparent;
 
     /** Code block */
-    --nlux-CodeBlock--BackgroundColor: #ffefd5;
+    --nlux-CodeBlock--BackgroundColor: #2b2b2b;
     --nlux-CodeBlock--BorderColor: transparent;
     --nlux-CodeBlock--TextColor: black;
-    --nlux-CodeBlock-Hover--BackgroundColor: #ffffff;
+    --nlux-CodeBlock-Hover--BackgroundColor: #3b3b3b;
 
     /** Code block copy button */
-    --nlux-CodeBlock-CopyButton--BackgroundColor: #aeaea3;
+    --nlux-CodeBlock-CopyButton--BackgroundColor: #434342;
     --nlux-CodeBlock-CopyButton--BorderColor: #c5c5c3;
     --nlux-CodeBlock-CopyButton--TextColor: #ffffff;
 
