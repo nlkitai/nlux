@@ -1,6 +1,6 @@
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import app from './0009-markdown-streaming/App.tsx';
-import adapter from './0009-markdown-streaming/adapter.tsx';
+import app from './0009-markdown-streaming/app';
+import send from './0009-markdown-streaming/send';
 import personas from './0009-markdown-streaming/personas';
 
 # Markdown Streaming
@@ -13,7 +13,7 @@ The formatted markdown is streamed and displayed to the user as it is being gene
 <CodeEditor
     files={{
         'App.tsx': app,
-        'adapter.ts': adapter,
+        'send.ts': send,
         'personas.tsx': personas,
     }}
     editorHeight={420}

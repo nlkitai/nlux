@@ -1,6 +1,6 @@
 export default `import {PersonaOptions} from '@nlux/react';
 
-export const personaOptions: PersonaOptions = {
+export const personas: PersonaOptions = {
   assistant: {
     name: 'Albert',
     avatar: 'https://docs.nlkit.com/nlux/images/personas/albert.png',
