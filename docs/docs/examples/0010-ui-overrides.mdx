@@ -5,9 +5,9 @@ sidebar_label: 'UI Overrides'
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 import Link from '@docusaurus/Link';
 
-import app from './0010-ui-overrides/loader-overrides/App.tsx';
-import adapter from './0010-ui-overrides/loader-overrides/adapter.tsx';
-import personas from './0010-ui-overrides/loader-overrides/personas.tsx';
+import app from './0010-ui-overrides/loader-overrides/app';
+import send from './0010-ui-overrides/loader-overrides/send';
+import personas from './0010-ui-overrides/loader-overrides/personas';
 
 # UI Overrides
 
@@ -25,7 +25,7 @@ In this example, we override the default `NLUX` loader component with a custom l
     files={{
         'App.tsx': app,
         'personas.tsx': personas,
-        'adapter.ts': adapter,
+        'send.ts': send,
     }}
     editorHeight={380}
     simulatedPrompt={'Write a long poem about the beauty of the universe.'}
