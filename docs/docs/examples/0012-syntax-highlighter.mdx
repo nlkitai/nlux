@@ -1,6 +1,6 @@
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import app from './0012-syntax-highlighter/App.tsx';
-import adapter from './0012-syntax-highlighter/adapter.tsx';
+import app from './0012-syntax-highlighter/app';
+import send from './0012-syntax-highlighter/send';
 
 # Syntax Highlighter
 
@@ -12,7 +12,7 @@ by OpenAI and rendered in the conversational UI.
 <CodeEditor
     files={{
         'App.tsx': app,
-        'adapter.ts': adapter,
+        'send.ts': send,
     }}
     editorHeight={550}
     simulatedPrompt={'Write a \'Hello World\' program in TypeScript, Python, and 2 other languages of your choice'}
