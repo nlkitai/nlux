@@ -1,8 +1,9 @@
 export default (colorMode: 'dark' | 'light') => `import { useMemo } from 'react';
-import { useChatAdapter } from '@nlux/langchain-react';
 import { AiChat, AssistantPersona } from '@nlux/react';
-import { useDemoOptions, userPersona } from './setup';
+import { useChatAdapter } from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
+
+import { useDemoOptions, userPersona } from './setup';
 
 export default () => {
   const [ InteractiveDemoOptions, isOption1Checked, isOption2Checked ] = useDemoOptions();
@@ -25,8 +26,8 @@ export default () => {
           assistant: isOption1Checked ? assistantPersona : undefined,
           user: userPersona
         }}
-        adapter={adapter}
-        displayOptions={{colorScheme: '${colorMode}'}}
+        adapter={ adapter }
+        displayOptions={{ colorScheme: '${colorMode}' }}
       />
     </div>
   );

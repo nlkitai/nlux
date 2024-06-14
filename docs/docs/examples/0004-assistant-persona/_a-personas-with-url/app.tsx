@@ -16,8 +16,8 @@ export default () => {
         },
         user
       }}
-      adapter={adapter}
-      displayOptions={{colorScheme: '${colorMode}'}}
+      adapter={ adapter }
+      displayOptions={{ colorScheme: '${colorMode}' }}
     />
   );
 };`;

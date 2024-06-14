@@ -21,8 +21,8 @@ export default () => {
           assistant: assistantPersona,
           user: userPersona
         }}
-        adapter={adapter}
-        displayOptions={{colorScheme: '${colorMode}'}}
+        adapter={ adapter }
+        displayOptions={{ colorScheme: '${colorMode}' }}
       />
     </div>
   );

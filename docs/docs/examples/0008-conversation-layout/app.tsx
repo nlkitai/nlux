@@ -1,6 +1,7 @@
 export default (colorMode: 'dark' | 'light') => `import { AiChat, ConversationLayout } from '@nlux/react';
 import { useChatAdapter } from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
+
 import { personaOptions, conversationHistory } from './setup';
 import { useLayoutOptions, LayoutSelector } from './layout';
 
