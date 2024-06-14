@@ -105,7 +105,7 @@ function App() {
         + 'typing animation will be shown for this message when it is loaded. This is a very long '
         + 'message. Trust me.\n' + 'In a message, long and true,\n' + 'Words kept flowing, never few.\n'
         + 'Stories told with heartfelt grace,\n' + 'In each line, a sacred space.\n\n'
-        + 'Each word a bridge, connecting souls,\n'
+        + 'Each word a `bridge`, connecting souls,\n'
         + 'Across distances, making us whole.\n'
         + 'Emotions poured, thoughts unfurled,\n'
         + 'In this message, a treasure world.\n\n'
@@ -272,7 +272,7 @@ function App() {
                 adapter={langChainAdapter}
                 // adapter={customSlowAdapter}
                 // adapter={hfAdapter}
-                // initialConversation={initialConversation}
+                initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,

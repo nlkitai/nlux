@@ -66,7 +66,7 @@
     /** Code block */
     --nlux-CodeBlock--BackgroundColor: #2b2b2b;
     --nlux-CodeBlock--BorderColor: transparent;
-    --nlux-CodeBlock--TextColor: black;
+    --nlux-CodeBlock--TextColor: #ffffff;
     --nlux-CodeBlock-Hover--BackgroundColor: #3b3b3b;
 
     /** Code block copy button */
@@ -80,9 +80,9 @@
     --nlux-CodeBlock-CopyButton-Clicked--TextColor: #ffffff;
 
     /** Inline code in markdown */
-    --nlux-InlineCode--BackgroundColor: #fff9d8;
+    --nlux-InlineCode--BackgroundColor: #393930;
     --nlux-InlineCode--BorderColor: transparent;
-    --nlux-InlineCode--TextColor: black;
+    --nlux-InlineCode--TextColor: #ffffff;
 
     /** Conversation starters */
     --nlux-ConversationStarter--BackgroundColor: var(--nlux-HumanMessage--BackgroundColor);

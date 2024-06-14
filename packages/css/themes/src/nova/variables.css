@@ -93,7 +93,7 @@
     /** Inline code in markdown */
     --nlux-InlineCode--BorderRadius: 6px;
     --nlux-InlineCode--BorderWidth: 2px;
-    --nlux-InlineCode--Padding: 2px 4px;
+    --nlux-InlineCode--Padding: 0 2px;
     --nlux-InlineCode--FontSize: 18px;
 
     /** Composer */
