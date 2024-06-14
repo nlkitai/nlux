@@ -1,7 +1,8 @@
-export default (colorScheme: 'dark' | 'light') => `import { AiChat, useAsStreamAdapter } from "@nlux/react";
-import "@nlux/themes/nova.css";
-import { user, assistantAvatar } from "./personas";
-import { send } from "./send";
+export default (colorScheme: 'dark' | 'light') => `import { AiChat, useAsStreamAdapter } from '@nlux/react';
+import '@nlux/themes/nova.css';
+
+import { send } from './send';
+import { user, assistantAvatar } from './personas';
 
 export default () => {
   const adapter = useAsStreamAdapter(send, []);
