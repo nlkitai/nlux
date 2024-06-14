@@ -1,4 +1,4 @@
-export default `import {ChatAdapter, StreamingAdapterObserver} from '@nlux/react';
+export default `import {StreamSend, StreamingAdapterObserver} from '@nlux/react';
 
 // A demo API by NLUX that connects to OpenAI
 // and returns a stream of Server-Sent events

@@ -8,28 +8,28 @@ import {useBatchAdapter} from '@nlux/react';
 ```
 
 ```tsx
-const adapter = useBatchAdapter(submit: BatchSubmit<AiMsg>)
+const adapter = useBatchAdapter(send: BatchSend<AiMsg>)
 ```
 
-Where `submit` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
+Where `send` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
 sending the prompt to the API and receiving the response.
 
-The `submit` function has the following signature:
+The `send` function has the following signature:
 
 ```tsx
-export type BatchSubmit<AiMsg> = (
+export type BatchSend<AiMsg> = (
     message: string,
     extras: ChatAdapterExtras<AiMsg>,
 ) => Promise<AiMsg>;
 ```
 
-The `submit` method takes 2 parameters:
+The `send` method takes 2 parameters:
 
 * `message` - The prompt message typed by the user, to be sent to the API.
 * `extras` - An object containing [additional information](#adapter-extras) that the adapter might need.
 
-The `submit` method should return a promise that resolves to the response from the API.
+The `send` method should return a promise that resolves to the response from the API.
 
 When the `adapter` is used in the `<AiChat adapter={adapter} />` component, `NLUX` will take care of calling the
-`submit` method with the appropriate parameters and updating the chat UI with the response, or an error message if the
+`send` method with the appropriate parameters and updating the chat UI with the response, or an error message if the
 promise is rejected.

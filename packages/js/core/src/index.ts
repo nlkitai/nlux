@@ -93,8 +93,8 @@ export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
-    StreamSubmit,
-    BatchSubmit,
+    StreamSend,
+    BatchSend,
 } from '@shared/types/adapters/chat/chatAdapter';
 
 export type {

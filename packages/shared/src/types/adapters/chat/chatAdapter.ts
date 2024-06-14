@@ -7,8 +7,12 @@ export type DataTransferMode = 'stream' | 'batch';
 
 /**
  * The type for the function used to submit a message to the API in stream mode.
+ *
+ * @param {string} message
+ * @param {StreamingAdapterObserver} observer
+ * @param {ChatAdapterExtras} extras
  */
-export type StreamSubmit<AiMsg = string> = (
+export type StreamSend<AiMsg = string> = (
     message: string,
     observer: StreamingAdapterObserver<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
@@ -16,8 +20,13 @@ export type StreamSubmit<AiMsg = string> = (
 
 /**
  * The type for the function used to submit a message to the API in batch mode.
+ * It should return a promise that resolves to the response from the API.
+ *
+ * @param `string` message
+ * @param `ChatAdapterExtras` extras
+ * @returns Promise<string>
  */
-export type BatchSubmit<AiMsg = string> = (
+export type BatchSend<AiMsg = string> = (
     message: string,
     extras: ChatAdapterExtras<AiMsg>,
 ) => Promise<AiMsg>;
@@ -40,7 +49,7 @@ export interface ChatAdapter<AiMsg = string> {
      * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    batchText?: BatchSubmit<AiMsg>;
+    batchText?: BatchSend<AiMsg>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
@@ -50,7 +59,7 @@ export interface ChatAdapter<AiMsg = string> {
      * @param {StreamingAdapterObserver} observer
      * @param {ChatAdapterExtras} extras
      */
-    streamText?: StreamSubmit<AiMsg>;
+    streamText?: StreamSend<AiMsg>;
 }
 
 /**

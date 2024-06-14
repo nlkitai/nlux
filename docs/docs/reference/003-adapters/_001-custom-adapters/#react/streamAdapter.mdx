@@ -8,16 +8,16 @@ import {useStreamAdapter} from '@nlux/react';
 ```
 
 ```tsx
-useStreamAdapter<AiMsg = string>(submit: StreamSubmit)
+useStreamAdapter<AiMsg = string>(send: StreamSend)
 ```
 
-Where `submit` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
+Where `send` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
 sending the prompt to the API and receiving the responses as a stream of chunks.
 
-The `submit` function has the following signature:
+The `send` function has the following signature:
 
 ```tsx
-export type StreamSubmit<AiMsg> = (
+export type StreamSend<AiMsg> = (
     message: string,
     observer: StreamingAdapterObserver<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
@@ -40,10 +40,10 @@ interface StreamingAdapterObserver<ChunkType = string> {
 }
 ```
 
-When implementing your `submit`, use the `observer.next(chunk)` method when data is received from the API.<br />
+When implementing your `send`, use the `observer.next(chunk)` method when data is received from the API.<br />
 The `observer.complete()` method should be called when the API has finished sending responses,<br />
 and the `observer.error()` method should be called if an error occurs.
 
 When the `adapter` is used in the `<AiChat adapter={adapter} />` component, `NLUX` will take care of calling the
-`submit` method with the appropriate parameters and updating the chat UI with the response, or an error message if the
+`send` method with the appropriate parameters and updating the chat UI with the response, or an error message if the
 promise is rejected.

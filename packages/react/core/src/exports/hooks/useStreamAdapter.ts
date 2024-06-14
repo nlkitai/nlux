@@ -1,4 +1,4 @@
-import {ChatAdapter, StreamSubmit} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapter, StreamSend} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
 
 /**
@@ -8,7 +8,7 @@ import {DependencyList, useMemo} from 'react';
  * @param dependencies
  */
 export const useStreamAdapter = function <AiMsg = string>(
-    submit: StreamSubmit<AiMsg>, dependencies?: DependencyList,
+    submit: StreamSend<AiMsg>, dependencies?: DependencyList,
 ): ChatAdapter<AiMsg> {
 
     return useMemo(
