@@ -5,10 +5,9 @@ sidebar_label: 'Conversation Layout'
 
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import app from './0008-conversation-layout/App.tsx';
-import adapter from './0008-conversation-layout/adapter.tsx';
-import setup from './0008-conversation-layout/setup.tsx';
-import layout from './0008-conversation-layout/layout.tsx';
+import app from './0008-conversation-layout/app';
+import setup from './0008-conversation-layout/setup';
+import layout from './0008-conversation-layout/layout';
 
 # Conversation Layout
 
@@ -20,7 +19,6 @@ list (slack style). The configuration is done via the `conversationOptions.layou
 <CodeEditor
     files={{
         'App.tsx': app,
-        'adapter.ts': adapter,
         'layout.tsx': layout,
         'setup.tsx': setup,
     }}

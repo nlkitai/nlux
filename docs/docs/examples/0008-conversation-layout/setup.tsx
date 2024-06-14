@@ -1,4 +1,4 @@
-export default `import {PersonaOptions, ChatItem} from '@nlux/react';
+export default `import { PersonaOptions, ChatItem } from '@nlux/react';
 
 export const personaOptions: PersonaOptions = {
   assistant: {
@@ -22,5 +22,4 @@ export const conversationHistory: ChatItem[] = [
     message: 'Arrr, matey! The capital of Antarctica be none other than "Arrrctica," where ye can find a jolly crew of penguins swashbuckling on icy seas!'
   }
 ];
-
 `;

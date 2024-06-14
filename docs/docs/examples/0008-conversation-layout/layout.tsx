@@ -1,5 +1,5 @@
 export default `import { useState, useCallback } from 'react';
-import {ConversationLayout} from '@nlux/react';
+import { ConversationLayout } from '@nlux/react';
 
 export const useLayoutOptions = (defaultLayout: ConversationLayout) => {
   const [conversationLayout, setConversationLayout] = useState<ConversationLayout>(defaultLayout);

@@ -1,5 +1,4 @@
-export default (colorMode: 'dark' | 'light') => `import {useState, useCallback} from 'react';
-import { AiChat, ConversationLayout } from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import { AiChat, ConversationLayout } from '@nlux/react';
 import { useChatAdapter } from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
 import { personaOptions, conversationHistory } from './setup';
@@ -21,6 +20,7 @@ export default () => {
       />
       <AiChat
         conversationOptions={{
+            // Possible config values: 'bubbles' or 'list'
             layout: conversationLayout
         }}
         adapter={ adapter }
