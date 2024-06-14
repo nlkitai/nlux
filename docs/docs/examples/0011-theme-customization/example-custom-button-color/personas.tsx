@@ -1,4 +1,4 @@
-export default `import {PersonaOptions} from '@nlux/react';
+export default `import { PersonaOptions } from '@nlux/react';
 
 const assistantCssStyle = {
   background: 'linear-gradient(#4a8582, #00ffbf)',

@@ -5,9 +5,9 @@ sidebar_label: 'Theme Customization'
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 import Link from '@docusaurus/Link';
 import customCss from './0011-theme-customization/example-custom-button-color/theme-overrides.tsx';
-import app from './0011-theme-customization/example-custom-button-color/App.tsx';
-import adapter from './0011-theme-customization/example-custom-button-color/adapter.tsx';
-import personas from './0011-theme-customization/example-custom-button-color/personas.tsx';
+import app from './0011-theme-customization/example-custom-button-color/app';
+import send from './0011-theme-customization/example-custom-button-color/send';
+import personas from './0011-theme-customization/example-custom-button-color/personas';
 
 # Theme Customization
 
@@ -29,7 +29,7 @@ We also set the `conversationOptions`'s layout to `bubbles` to display the messa
         'App.tsx': app,
         'theme-overrides.css': customCss,
         'personas.tsx': personas,
-        'adapter.ts': adapter,
+        'send.ts': send,
     }}
     editorHeight={380}
     simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}
