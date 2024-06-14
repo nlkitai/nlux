@@ -1,7 +1,7 @@
 import {ParticipantRole} from '../../../../js/core/src/index';
 
-const defaultAiName = 'AI';
-const defaultHumanName = 'You';
+const defaultAiName = 'Assistant';
+const defaultHumanName = 'User';
 
 export const participantNameFromRoleAndPersona = (
     role: ParticipantRole,
