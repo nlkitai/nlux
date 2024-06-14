@@ -2,12 +2,12 @@ import {BatchSend, ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
 
 /**
- * A simple hook to convert a callback function to a ChatAdapter to use to fetch data as a stream.
+ * Use the function provided as a batch adapter to send and receive messages in a single batch.
  *
  * @param send
  * @param dependencies
  */
-export const useBatchAdapter = function <AiMsg = string>(
+export const useAsBatchAdapter = function <AiMsg = string>(
     send: BatchSend<AiMsg>,
     dependencies?: DependencyList,
 ): ChatAdapter<AiMsg> {

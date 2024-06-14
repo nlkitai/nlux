@@ -123,7 +123,7 @@ interface ChatAdapter {
 ```
 
 :::note
-If you're using the React version of `NLUX`, you can use the `useBatchAdapter` hook to create a streaming adapter
+If you're using the React version of `NLUX`, you can use the `useAsBatchAdapter` hook to create a streaming adapter
 as shown below:
 
 ```typescript
@@ -149,9 +149,9 @@ The API has a REST endpoint that we can use to send messages and receive respons
 We can create a batch adapter for this API by implementing the `PromiseAdapter` interface:
 
 ```typescript
-import {useBatchAdapter, AdapterExtras} from '@nlux/react';
+import {useAsBatchAdapter, AdapterExtras} from '@nlux/react';
 
-export const myCustomAdapter = useBatchAdapter(
+export const myCustomAdapter = useAsBatchAdapter(
     (message: string, extras: AdapterExtras): Promise<string> => {
         return fetch('http://localhost:8080', {
             method: 'POST',

@@ -2,12 +2,12 @@ import {ChatAdapter, StreamSend} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
 
 /**
- * A simple hook to convert a promise-based function into a ChatAdapter to use to fetch data in a single batch.
+ * Use the function provided as a stream adapter to send messages and receive responses in a stream of chunks.
  *
  * @param submit
  * @param dependencies
  */
-export const useStreamAdapter = function <AiMsg = string>(
+export const useAsStreamAdapter = function <AiMsg = string>(
     submit: StreamSend<AiMsg>, dependencies?: DependencyList,
 ): ChatAdapter<AiMsg> {
 

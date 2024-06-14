@@ -105,12 +105,12 @@ export {
 } from './exports/AiChatUI';
 
 export {
-    useBatchAdapter,
-} from './exports/hooks/useBatchAdapter';
+    useAsBatchAdapter,
+} from './exports/hooks/useAsBatchAdapter';
 
 export {
-    useStreamAdapter,
-} from './exports/hooks/useStreamAdapter';
+    useAsStreamAdapter,
+} from './exports/hooks/useAsStreamAdapter';
 
 export type {
     UpdateContextItem,

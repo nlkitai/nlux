@@ -12,7 +12,7 @@ import {
     PersonaOptions,
     ResponseRenderer,
     SanitizerExtension,
-    useStreamAdapter,
+    useAsStreamAdapter,
 } from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
 import DOMPurify from 'dompurify';
@@ -89,7 +89,7 @@ function App() {
         authToken: 'N/A',
     });
 
-    const customSlowAdapter = useStreamAdapter((message, observer) => {
+    const customSlowAdapter = useAsStreamAdapter((message, observer) => {
         observer.next('We are processing ');
         setTimeout(() => {
             observer.next('your request!');

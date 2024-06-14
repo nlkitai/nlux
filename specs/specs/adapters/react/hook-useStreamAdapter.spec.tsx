@@ -1,16 +1,16 @@
-import {AiChat, useStreamAdapter} from '@nlux-dev/react/src';
+import {AiChat, useAsStreamAdapter} from '@nlux-dev/react/src';
 import {render} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {describe, expect, it, vi} from 'vitest';
 import {waitForReactRenderCycle} from '../../../utils/wait';
 
-describe('<AiChat /> + submit prompt + useStreamAdapter', () => {
-    describe('When a prompt is submitted with an adapter created via useStreamAdapter', () => {
+describe('<AiChat /> + submit prompt + useAsStreamAdapter', () => {
+    describe('When a prompt is submitted with an adapter created via useAsStreamAdapter', () => {
         it('The submit function should be called with the prompt, observable, and an object', async () => {
             // Arrange
             const submit = vi.fn();
             const AiChatWithHookAdapter = () => {
-                const adapter = useStreamAdapter(submit);
+                const adapter = useAsStreamAdapter(submit);
                 return <AiChat adapter={adapter}/>;
             };
 

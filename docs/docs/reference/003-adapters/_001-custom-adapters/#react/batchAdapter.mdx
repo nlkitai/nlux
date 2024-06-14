@@ -4,11 +4,11 @@ Batch adapters are **easier to implement**.
 In order to implement a custom batch adapter for `NLUX`, you can use the following hook:
 
 ```tsx
-import {useBatchAdapter} from '@nlux/react';
+import {useAsBatchAdapter} from '@nlux/react';
 ```
 
 ```tsx
-const adapter = useBatchAdapter(send: BatchSend<AiMsg>)
+const adapter = useAsBatchAdapter(send: BatchSend<AiMsg>)
 ```
 
 Where `send` is a function that developers should implement and pass as a parameter to the hook. It's responsible for

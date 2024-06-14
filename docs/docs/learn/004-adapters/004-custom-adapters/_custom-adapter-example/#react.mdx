@@ -1,8 +1,8 @@
 ```tsx
-import {AiChat, useBatchAdapter} from '@nlux/react';
+import {AiChat, useAsBatchAdapter} from '@nlux/react';
 
 const App = () => {
-    const myCustomAdapter = useBatchAdapter(
+    const myCustomAdapter = useAsBatchAdapter(
         async (prompts: string[]) => {
             // Submit the prompt and get the response ...
         }

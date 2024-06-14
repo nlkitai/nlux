@@ -4,11 +4,11 @@ Stream adapters provide a more responsive chat experience.
 In order to implement a custom streaming adapter for `NLUX`, you can use the following hook:
 
 ```tsx
-import {useStreamAdapter} from '@nlux/react';
+import {useAsStreamAdapter} from '@nlux/react';
 ```
 
 ```tsx
-useStreamAdapter<AiMsg = string>(send: StreamSend)
+useAsStreamAdapter<AiMsg = string>(send: StreamSend)
 ```
 
 Where `send` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
