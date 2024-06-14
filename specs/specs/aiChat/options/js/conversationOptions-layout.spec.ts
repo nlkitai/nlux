@@ -45,8 +45,8 @@ describe('createAiChat() + conversationOptions + layout', () => {
             const humanMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
             const aiMessage: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
-            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
         });
     });
 
@@ -196,7 +196,7 @@ describe('createAiChat() + conversationOptions + layout', () => {
 
             // Assert
             const assistantName: HTMLTextAreaElement = rootElement.querySelector('.nlux-comp-chatItem--received > .nlux-comp-chatItem-participantInfo > .nlux-comp-chatItem-participantName')!;
-            expect(assistantName.textContent).toBe('AI');
+            expect(assistantName.textContent).toBe('Assistant');
         });
     });
 });

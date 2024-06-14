@@ -21,7 +21,7 @@ describe('<AiChat /> + conversationOptions + layout', () => {
     });
 
     describe('When the user adds a message to an AiChat without layout config', () => {
-        it('The default layout used to should be list layout', async () => {
+        it('The default layout used to should be bubbles layout', async () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
@@ -39,8 +39,8 @@ describe('<AiChat /> + conversationOptions + layout', () => {
             const humanMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--sent')!;
             const aiMessage: HTMLTextAreaElement = container.querySelector('.nlux-comp-chatItem.nlux-comp-chatItem--received')!;
 
-            expect(humanMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
-            expect(aiMessage.classList.contains('nlux-comp-chatItem--listLayout')).toBe(true);
+            expect(humanMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
+            expect(aiMessage.classList.contains('nlux-comp-chatItem--bubblesLayout')).toBe(true);
         });
     });
 
