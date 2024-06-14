@@ -2,12 +2,9 @@
 sidebar_label: 'Conversation History'
 ---
 
-
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-
-import app from './0007-conversation-history/App.tsx';
-import adapter from './0007-conversation-history/adapter.tsx';
-import personas from './0007-conversation-history/personas.tsx';
+import app from './0007-conversation-history/app';
+import personas from './0007-conversation-history/personas';
 
 # Conversation History
 
@@ -19,7 +16,6 @@ upon initialization.
 <CodeEditor
     files={{
         'App.tsx': app,
-        'adapter.ts': adapter,
         'personas.tsx': personas,
     }}
     editorHeight={380}

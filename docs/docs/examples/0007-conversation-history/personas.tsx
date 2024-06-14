@@ -1,4 +1,4 @@
-export default `import {PersonaOptions} from '@nlux/react';
+export default `import { PersonaOptions } from '@nlux/react';
 
 export const personaOptions: PersonaOptions = {
   assistant: {

@@ -1,13 +1,12 @@
 export default (colorMode: 'dark' | 'light') => `import {AiChat} from '@nlux/react';
-import {useChatAdapter} from '@nlux/langchain-react';
+import { useChatAdapter } from '@nlux/langchain-react';
 import '@nlux/themes/nova.css';
-import {personaOptions} from './personas';
+
+import { personaOptions } from './personas';
 
 export default () => {
   // LangServe adapter that connects to a demo LangChain Runnable API
-  const adapter = useChatAdapter({
-    url: 'https://pynlux.api.nlkit.com/pirate-speak'
-  });
+  const adapter = useChatAdapter({ url: 'https://pynlux.api.nlkit.com/pirate-speak' });
 
   return (
     <AiChat
@@ -21,9 +20,9 @@ export default () => {
           message: 'Arrr, matey! The **capital** of _Antarctica_ be none other than \`"Arrrctica"\`, where ye can find a jolly crew of penguins swashbuckling on icy seas!'
         }
       ]}
-      adapter={adapter}
-      personaOptions={personaOptions}
-      displayOptions={{colorScheme: '${colorMode}'}}
+      adapter={ adapter }
+      personaOptions={ personaOptions }
+      displayOptions={{ colorScheme: '${colorMode}' }}
     />
   );
 };`;
