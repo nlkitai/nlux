@@ -44,6 +44,8 @@ export type {
     ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
+    StreamSubmit,
+    BatchSubmit,
 } from '@shared/types/adapters/chat/chatAdapter';
 
 export type {
@@ -89,14 +91,6 @@ export type {
 export type {
     ConversationStarter,
 } from './types/conversationStarter';
-
-export type {
-    SubmitBatch,
-} from './exports/hooks/useBatchAdapter';
-
-export type {
-    SubmitStream,
-} from './exports/hooks/useStreamAdapter';
 
 export {
     AiChat,

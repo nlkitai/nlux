@@ -8,7 +8,7 @@ import {useStreamAdapter} from '@nlux/react';
 ```
 
 ```tsx
-useStreamAdapter<AiMsg = string>(submit: SubmitStream)
+useStreamAdapter<AiMsg = string>(submit: StreamSubmit)
 ```
 
 Where `submit` is a function that developers should implement and pass as a parameter to the hook. It's responsible for
@@ -17,7 +17,7 @@ sending the prompt to the API and receiving the responses as a stream of chunks.
 The `submit` function has the following signature:
 
 ```tsx
-export type SubmitStream<AiMsg> = (
+export type StreamSubmit<AiMsg> = (
     message: string,
     observer: StreamingAdapterObserver<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,

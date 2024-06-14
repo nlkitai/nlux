@@ -6,6 +6,23 @@ import {ChatAdapterExtras} from './chatAdapterExtras';
 export type DataTransferMode = 'stream' | 'batch';
 
 /**
+ * The type for the function used to submit a message to the API in stream mode.
+ */
+export type StreamSubmit<AiMsg = string> = (
+    message: string,
+    observer: StreamingAdapterObserver<AiMsg>,
+    extras: ChatAdapterExtras<AiMsg>,
+) => void;
+
+/**
+ * The type for the function used to submit a message to the API in batch mode.
+ */
+export type BatchSubmit<AiMsg = string> = (
+    message: string,
+    extras: ChatAdapterExtras<AiMsg>,
+) => Promise<AiMsg>;
+
+/**
  * This interface exposes methods that should be implemented by any chat adapter to connect the AiChat component
  * to any API or AI backend. Chat adapters can be used to request data from the API in batch mode or stream mode.
  *
@@ -23,10 +40,7 @@ export interface ChatAdapter<AiMsg = string> {
      * @param `ChatAdapterExtras` extras
      * @returns Promise<string>
      */
-    batchText?: (
-        message: string,
-        extras: ChatAdapterExtras<AiMsg>,
-    ) => Promise<AiMsg>;
+    batchText?: BatchSubmit<AiMsg>;
 
     /**
      * This method should be implemented by any adapter to be used with nlux.
@@ -36,11 +50,7 @@ export interface ChatAdapter<AiMsg = string> {
      * @param {StreamingAdapterObserver} observer
      * @param {ChatAdapterExtras} extras
      */
-    streamText?: (
-        message: string,
-        observer: StreamingAdapterObserver<AiMsg>,
-        extras: ChatAdapterExtras<AiMsg>,
-    ) => void;
+    streamText?: StreamSubmit<AiMsg>;
 }
 
 /**

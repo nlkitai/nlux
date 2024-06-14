@@ -1,12 +1,5 @@
-import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
-import {ChatAdapter, StreamingAdapterObserver} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapter, StreamSubmit} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
-
-export type SubmitStream<AiMsg = string> = (
-    message: string,
-    observer: StreamingAdapterObserver<AiMsg>,
-    extras: ChatAdapterExtras<AiMsg>,
-) => void;
 
 /**
  * A simple hook to convert a promise-based function into a ChatAdapter to use to fetch data in a single batch.
@@ -15,8 +8,7 @@ export type SubmitStream<AiMsg = string> = (
  * @param dependencies
  */
 export const useStreamAdapter = function <AiMsg = string>(
-    submit: SubmitStream<AiMsg>,
-    dependencies?: DependencyList,
+    submit: StreamSubmit<AiMsg>, dependencies?: DependencyList,
 ): ChatAdapter<AiMsg> {
 
     return useMemo(
