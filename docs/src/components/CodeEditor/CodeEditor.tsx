@@ -60,11 +60,11 @@ export const CodeEditor = ({
             customSetup={{
                 dependencies: {
                     'react': '^18',
-                    'react-dom': '18',
-                    '@nlux/react': '2',
-                    '@nlux/langchain-react': '2',
-                    '@nlux/themes': '2',
-                    '@nlux/highlighter': '2',
+                    'react-dom': '^18',
+                    '@nlux/react': '^2',
+                    '@nlux/langchain-react': '^2',
+                    '@nlux/themes': '^2',
+                    '@nlux/highlighter': '^2',
                 },
             }}
             files={{
