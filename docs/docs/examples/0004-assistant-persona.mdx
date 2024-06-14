@@ -5,13 +5,13 @@ sidebar_label: 'Assistant And User Personas'
 import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import app1 from './0004-assistant-persona/_a-personas-with-url/aiAssistant.tsx';
-import adapter1 from './0004-assistant-persona/_a-personas-with-url/adapter.tsx';
-import personas1 from './0004-assistant-persona/_a-personas-with-url/personas.tsx';
+import app1 from './0004-assistant-persona/_a-personas-with-url/app';
+import send1 from './0004-assistant-persona/_a-personas-with-url/send';
+import personas1 from './0004-assistant-persona/_a-personas-with-url/personas';
 
-import app2 from './0004-assistant-persona/_b-personas-with-jsx/aiAssistant.tsx';
-import adapter2 from './0004-assistant-persona/_b-personas-with-jsx/adapter.tsx';
-import personas2 from './0004-assistant-persona/_b-personas-with-jsx/personas.tsx';
+import app2 from './0004-assistant-persona/_b-personas-with-jsx/app';
+import send2 from './0004-assistant-persona/_b-personas-with-jsx/send';
+import personas2 from './0004-assistant-persona/_b-personas-with-jsx/personas';
 
 # Assistant And User Personas
 
@@ -25,7 +25,7 @@ Here are some examples of how you can configure the assistant persona.
 <CodeEditor
     files={{
         'App.tsx': app1,
-        'adapter.ts': adapter1,
+        'send.ts': send1,
         'personas.tsx': personas1,
     }}
     editorHeight={380}
@@ -39,7 +39,7 @@ Here are some examples of how you can configure the assistant persona.
 <CodeEditor
     files={{
         'App.tsx': app2,
-        'adapter.ts': adapter2,
+        'send.ts': send2,
         'personas.tsx': personas2,
     }}
     editorHeight={380}

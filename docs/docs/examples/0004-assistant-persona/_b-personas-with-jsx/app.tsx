@@ -1,11 +1,11 @@
-export default (colorMode: 'dark' | 'light') => `import {useMemo} from 'react';
-import {AiChat} from '@nlux/react';
+export default (colorMode: 'dark' | 'light') => `import { AiChat, useAsStreamAdapter } from '@nlux/react';
 import '@nlux/themes/nova.css';
-import {streamAdapter} from './adapter';
-import {user, assistantCssStyle} from './personas';
+
+import { send } from './send';
+import { user } from './personas';
 
 export default () => {
-  const adapter = useMemo(() => streamAdapter, []);
+  const adapter = useAsStreamAdapter(send, []);
   return (
     <AiChat
       personaOptions={{

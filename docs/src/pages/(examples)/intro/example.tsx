@@ -8,7 +8,7 @@ export default () => {
   const adapter = useAsStreamAdapter(send, []);
   return (
     <AiChat
-      adapter={adapter}
+      adapter={ adapter }
       personaOptions={{
         assistant: {
           name: "EinAssistant",
@@ -17,9 +17,11 @@ export default () => {
         },
         user
       }}
-      composerOptions={{ placeholder: "Type your query" }}
       conversationOptions={{ layout: 'bubbles' }}
       displayOptions={{ colorScheme: "dark" }}
+      composerOptions={{ 
+        placeholder: "Type your query"
+      }}
     />
   );
 };
