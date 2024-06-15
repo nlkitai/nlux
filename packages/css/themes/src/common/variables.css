@@ -1,31 +1,31 @@
 .nlux-AiChat-root {
     /** Exceptions box */
     --nlux-exp--pdng: var(--nlux-Exceptions--Padding, 10px);
-    --nlux-exp--brdrWd: var(--nlux-Exceptions--BorderWidth, 6px);
-    --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius, 20px);
+    --nlux-exp--brdrWd: var(--nlux-Exceptions--BorderWidth);
+    --nlux-exp--brdrRd: var(--nlux-Exceptions--BorderRadius);
 
     /** Welcome message */
     --nlux-wlcMsg-avtr--wd: var(--nlux-WelcomeMessage-Avatar--Width, 80px);
-    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-PersonaName--FontSize, 1.6rem);
-    --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-PersonaName--FontWeight, 400);
-    --nlux-wlcMsg-txt--ftSz: var(--nlux-WelcomeMessage-Text--FontSize, 1.2rem);
-    --nlux-wlcMsg-txt--ftWg: var(--nlux-WelcomeMessage-Text--FontWeight, 400);
+    --nlux-wlcMsg-prsNm--ftSz: var(--nlux-WelcomeMessage-PersonaName--FontSize);
+    --nlux-wlcMsg-prsNm--ftWg: var(--nlux-WelcomeMessage-PersonaName--FontWeight, bold);
+    --nlux-wlcMsg-txt--ftSz: var(--nlux-WelcomeMessage-Text--FontSize);
+    --nlux-wlcMsg-txt--ftWg: var(--nlux-WelcomeMessage-Text--FontWeight);
     --nlux-wlcMsg--gap: var(--nlux-WelcomeMessage--Gap, 10px);
 
     /** Divider between conversation and composer */
     --nlux-dvr--mrgTp: var(--nlux-ChatRoom-Divider--MarginTop, 20px); /* Margin top */
     --nlux-dvr--mrgBtm: var(--nlux-ChatRoom-Divider--MarginBottom, 20px); /* Margin bottom */
-    --nlux-dvr--brdrWd: var(--nlux-ChatRoom-Divider--BorderWidth, 6px); /* Border width for divider */
+    --nlux-dvr--brdrWd: var(--nlux-ChatRoom-Divider--BorderWidth);
 
     /** Chat-room container */
-    --nlux-chtr--lnH: var(--nlux-ChatRoom--LineHeight, 1.8); /* Default l height */
-    --nlux-chtr--fnWg: var(--nlux-ChatRoom--FontWeight, 400); /* Default font weight */
-    --nlux-chtr--fnFm: var(--nlux-ChatRoom--FontFamily, 'Arial'); /* Default font family */
-    --nlux-chtr--ftSz: var(--nlux-ChatRoom--FontSize, 22px); /** Default font size */
+    --nlux-chtr--lnH: var(--nlux-ChatRoom--LineHeight);
+    --nlux-chtr--fnWg: var(--nlux-ChatRoom--FontWeight);
+    --nlux-chtr--fnFm: var(--nlux-ChatRoom--FontFamily);
+    --nlux-chtr--ftSz: var(--nlux-ChatRoom--FontSize);
 
-    --nlux-chtr--pdng: var(--nlux-ChatRoom--Padding, 10px);
-    --nlux-chtr--brdrRd: var(--nlux-ChatRoom--BorderRadius, 20px);
-    --nlux-chtr--brdrWd: var(--nlux-ChatRoom--BorderWidth, 6px);
+    --nlux-chtr--pdng: var(--nlux-ChatRoom--Padding);
+    --nlux-chtr--brdrRd: var(--nlux-ChatRoom--BorderRadius);
+    --nlux-chtr--brdrWd: var(--nlux-ChatRoom--BorderWidth);
 
     /** Chat-room loader */
     --nlux-chtr-ldr--wd: var(--nlux-ChatRoom-Loader--Width, 40px);
@@ -37,25 +37,25 @@
     --nlux-comp-chatItem-participantInfo--gap: var(--nlux-ChatItem-ParticipantInfo--Gap, 10px); /* Gap between avatar and name */
 
     /** Chat item participant name */
-    --nlux-prtInfo-prtNm--ftSz: var(--nlux-ChatItem-ParticipantName--FontSize, 20px);
-    --nlux-prtInfo-prtNm--ftWg: var(--nlux-ChatItem-ParticipantName--FontWeight, 700);
+    --nlux-prtInfo-prtNm--ftSz: var(--nlux-ChatItem-ParticipantName--FontSize);
+    --nlux-prtInfo-prtNm--ftWg: var(--nlux-ChatItem-ParticipantName--FontWeight, bold);
 
     /** Chat item avatar */
     --nlux-chItm-avtr--wd: var(--nlux-ChatItem-Avatar--Width, 50px);
-    --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-Avatar--BorderRadius, 30%);
+    --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-Avatar--BorderRadius);
 
     /** Chat item message */
     --nlux-chItm-msg--gap: var(--nlux-ChatItem-Message--Gap, 20px); /* Gap between elements within message */
 
     /** Chat item message in bubbles display layout */
-    --nlux-chItm-mmsg-bblLt--brdrWd: var(--nlux-ChatItem-Message-BubbleLayout--BorderWidth, 6px);
-    --nlux-chItm-mmsg-bblLt--brdrRd: var(--nlux-ChatItem-Message-BubbleLayout--BorderRadius, 20px);
+    --nlux-chItm-mmsg-bblLt--brdrWd: var(--nlux-ChatItem-Message-BubbleLayout--BorderWidth);
+    --nlux-chItm-mmsg-bblLt--brdrRd: var(--nlux-ChatItem-Message-BubbleLayout--BorderRadius);
     --nlux-chItm-mmsg-bblLt--pdng-tpBtm: var(--nlux-ChatItem-Message-BubbleLayout--PaddingTopBottom, 20px);
     --nlux-chItm-mmsg-bblLt--pdng-lr: var(--nlux-ChatItem-Message-BubbleLayout--PaddingLeftRight, 25px);
 
     /** Chat item message in list display layout */
-    --nlux-chItm-msg-lstLt--brdrWd: var(--nlux-ChatItem-Message-ListLayout--BorderWidth, 6px);
-    --nlux-chItm-msg-lstLt--brdrRd: var(--nlux-ChatItem-Message-ListLayout--BorderRadius, 20px);
+    --nlux-chItm-msg-lstLt--brdrWd: var(--nlux-ChatItem-Message-ListLayout--BorderWidth);
+    --nlux-chItm-msg-lstLt--brdrRd: var(--nlux-ChatItem-Message-ListLayout--BorderRadius);
     --nlux-chItm-msg-lstLt--pdng-tpBtm: var(--nlux-ChatItem-Message-ListLayout--PaddingTopBottom, 5px);
     --nlux-chItm-msg-lstLt--pdng-lr: var(--nlux-ChatItem-Message-ListLayout--PaddingLeftRight, 10px);
     --nlux-chItm-msg-lstLt--mrgTp: var(--nlux-ChatItem-Message-ListLayout--MarginTop, 10px);
@@ -66,43 +66,43 @@
     /** Chat item message code block */
     --nlux-cdBlk--ftSz: var(--nlux-CodeBlock--FontSize, 16px);
     --nlux-cdBlk--ftFm: var(--nlux-CodeBlock--FontFamily, 'monospace');
-    --nlux-cdBlk--pdng: var(--nlux-CodeBlock--Padding, 20px);
-    --nlux-cdBlk--brdrWd: var(--nlux-CodeBlock--BorderWidth, 6px);
-    --nlux-cdBlk--brdrRd: var(--nlux-CodeBlock--BorderRadius, 20px);
+    --nlux-cdBlk--pdng: var(--nlux-CodeBlock--Padding, 10px);
+    --nlux-cdBlk--brdrWd: var(--nlux-CodeBlock--BorderWidth, 2px);
+    --nlux-cdBlk--brdrRd: var(--nlux-CodeBlock--BorderRadius);
 
     /** Code block copy button */
     --nlux-cdBlk-cpBtn--wd: var(--nlux-CodeBlock-CopyButton--Width, 30px);
     --nlux-cdBlk-cpBtn--hg: var(--nlux-CodeBlock-CopyButton--Height, 30px);
     --nlux-cdBlk-cpBtn--pdng: var(--nlux-CodeBlock-CopyButton--Padding, 5px);
-    --nlux-cdBlk-cpBtn--brdrWd: var(--nlux-CodeBlock-CopyButton--BorderWidth, 6px);
-    --nlux-cdBlk-cpBtn--brdrRd: var(--nlux-CodeBlock-CopyButton--BorderRadius, 20px);
+    --nlux-cdBlk-cpBtn--brdrWd: var(--nlux-CodeBlock-CopyButton--BorderWidth);
+    --nlux-cdBlk-cpBtn--brdrRd: var(--nlux-CodeBlock-CopyButton--BorderRadius);
 
     /** Inline code in markdown */
-    --nlux-inlnCd--brdrRd: var(--nlux-InlineCode--BorderRadius, 5px);
-    --nlux-inlnCd--brdrWd: var(--nlux-InlineCode--BorderWidth, 1px);
-    --nlux-inlnCd--pdng: var(--nlux-InlineCode--Padding, 2px 4px);
+    --nlux-inlnCd--brdrRd: var(--nlux-InlineCode--BorderRadius);
+    --nlux-inlnCd--brdrWd: var(--nlux-InlineCode--BorderWidth);
+    --nlux-inlnCd--pdng: var(--nlux-InlineCode--Padding);
     --nlux-inlnCd--ftFm: var(--nlux-CodeBlock--FontFamily, 'monospace');
-    --nlux-inlnCd--ftSz: var(--nlux-InlineCode--FontSize, 14px);
+    --nlux-inlnCd--ftSz: var(--nlux-InlineCode--FontSize);
 
     /** Composer */
-    --nlux-prmBx--gap: var(--nlux-Composer--Gap, 15px); /* Gap between prompt input and submit button */
+    --nlux-prmBx--gap: var(--nlux-Composer--Gap, 10px); /* Gap between prompt input and submit button */
 
     /** Submit button */
     --nlux-sbmBt--wd: var(--nlux-SubmitButton--Width, 80px);
-    --nlux-sbmBt--brdrWd: var(--nlux-SubmitButton--BorderWidth, 6px);
-    --nlux-sbmBt--brdrRd: var(--nlux-SubmitButton--BorderRadius, 20px);
+    --nlux-sbmBt--brdrWd: var(--nlux-SubmitButton--BorderWidth);
+    --nlux-sbmBt--brdrRd: var(--nlux-SubmitButton--BorderRadius);
     --nlux-sbmBt-fcs-otln--wd: var(--nlux-SubmitButton-Focus-Outline--Width, 6px);
 
     /** Composer input */
-    --nlux-prmInp--ftFm: var(--nlux-PromptInput--FontFamily, 'Arial');
-    --nlux-prmInp--ftSz: var(--nlux-PromptInput--FontSize, 20px);
-    --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth, 6px);
-    --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius, 20px);
+    --nlux-prmInp--ftFm: var(--nlux-PromptInput--FontFamily);
+    --nlux-prmInp--ftSz: var(--nlux-PromptInput--FontSize);
+    --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth);
+    --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius);
     --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-Focus-Outline--Width, 6px);
 
     /** Conversation starters */
     --nlux-cvStrt--pdng: var(--nlux-ConversationStarter--Padding, 0 10px);
-    --nlux-cvStrt--brdrRd: var(--nlux-ConversationStarter--BorderRadius, 8px);
-    --nlux-cvStrt--brdrWd: var(--nlux-ConversationStarter--BorderWidth, 2px);
+    --nlux-cvStrt--brdrRd: var(--nlux-ConversationStarter--BorderRadius);
+    --nlux-cvStrt--brdrWd: var(--nlux-ConversationStarter--BorderWidth);
     --nlux-cvStrt--gap: var(--nlux-ConversationStarter--Gap, 10px);
 }

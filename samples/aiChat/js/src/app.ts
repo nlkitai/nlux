@@ -1,7 +1,6 @@
 import '@nlux-dev/themes/src/nova/main.css';
-import '@nlux-dev/themes/src/dev/main.css';
+import '@nlux-dev/themes/src/unstyled/main.css';
 import '@nlux-dev/themes/src/luna/main.css';
-import '@nlux-dev/themes/src/blank/main.css';
 import {ChatItem, createAiChat, DisplayOptions} from '@nlux-dev/core/src';
 import DOMPurify from 'dompurify';
 // import {highlighter} from '@nlux-dev/highlighter/src';

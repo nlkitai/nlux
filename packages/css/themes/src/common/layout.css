@@ -49,9 +49,13 @@
             right: 0;
             width: 100%;
             flex: 0 0 auto;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
 
             > .nlux-comp-composer {
                 padding: var(--nlux-dvr--mrgTp) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng);
+                width: 100%;
             }
         }
     }
