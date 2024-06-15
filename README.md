@@ -28,6 +28,18 @@ lines of code, you can add conversational AI capabilities and interact with your
 
 [![NLUX UI For Any LLM](https://content.nlkit.com/images/github/nlux-ui-for-llms-banner.gif)](https://docs.nlkit.com/nlux)
 
+## Docs & Examples 🔥
+
+* The docs website is available at:  
+  [docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)
+
+* Get started guides are available for different platforms:
+  * [Next.js and Vercel AI](https://docs.nlkit.com/nlux/learn/get-started/)
+  * [LangChain LangServe](https://docs.nlkit.com/nlux/learn/get-started/nlux-langchain)
+  * [React with Node.js Backend](https://docs.nlkit.com/nlux/learn/get-started/nlux-nodejs-nlbridge-chatgpt)
+
+You can toggle between `React JS` and `Vanilla JS`, and you can choose the `version` of the library you are using.
+
 ## Key Features 🌟
 
 * **Build AI Chat Interfaces In Minutes** ― High quality conversational AI interfaces with just a few lines of code.
@@ -77,13 +89,6 @@ It is a monorepo that contains code for following NPM packages:
   [Highlight.js](https://highlightjs.org/).
 
 Please visit each package's NPM page for information on how to use it.
-
-## Docs & Examples 🤩
-
-* The docs website is available at:  
-[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux).  
-
-You can toggle between `React JS` and `Vanilla JS`, and you can choose the `version` of the library you are using.
 
 ## Design Principles ⚜️
 

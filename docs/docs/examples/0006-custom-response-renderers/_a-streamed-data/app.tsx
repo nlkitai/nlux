@@ -6,8 +6,14 @@ import { personaOptions } from './personas';
 import { WavesBackground } from './waves';
 
 const ColourfulResponseRenderer: ResponseRenderer<string> = (props) => (
-    <div className="colourful-response-renderer">    
+    <div className="colourful-response-renderer">
+
+        {/* Option 1 — Use containerRef to render message using NLUX markdown parser: */}
         <div className="response-container" ref={ props.containerRef }/>
+
+        {/* Or option 2 — Render the content array yourself:
+           <div className="response-container">{props.content}</div> */}
+
         <div className="rating-container">
             What do you think of this response?
             &nbsp;
