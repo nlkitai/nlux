@@ -230,11 +230,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                     chunk,
                     serverResponse,
                 }) => {
-                requestAnimationFrame(() => {
-                    // We need to wait a bit before streaming the chunk to the chat item
-                    // because of the React lifecycle. The chat item might not be rendered yet.
-                    conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
-                });
+                conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 
             chatSegmentObservable.on('aiMessageStreamed', (streamedMessage) => {
