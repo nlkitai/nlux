@@ -31,14 +31,12 @@ lines of code, you can add conversational AI capabilities and interact with your
 ## Docs & Examples 🔥
 
 * The docs website is available at:  
-  [docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)
+[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)
 
-* Get started guides are available for different platforms:
-  * [Next.js and Vercel AI](https://docs.nlkit.com/nlux/learn/get-started/)
-  * [LangChain LangServe](https://docs.nlkit.com/nlux/learn/get-started/nlux-langchain)
-  * [React with Node.js Backend](https://docs.nlkit.com/nlux/learn/get-started/nlux-nodejs-nlbridge-chatgpt)
-
-You can toggle between `React JS` and `Vanilla JS`, and you can choose the `version` of the library you are using.
+* Several [Get Started](https://docs.nlkit.com/nlux/learn/get-started/) guides are available, including for building
+with [Next.js and Vercel AI](https://docs.nlkit.com/nlux/learn/get-started/vercel-ai/),
+[LangChain LangServe](https://docs.nlkit.com/nlux/learn/get-started/nlux-langchain), and
+[React with Node.js Backend](https://docs.nlkit.com/nlux/learn/get-started/nlux-nodejs-nlbridge-chatgpt).
 
 ## Key Features 🌟
 
