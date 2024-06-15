@@ -25,6 +25,10 @@ export const Roadmap = ({className}: { className?: string }) => {
                     text="React JS Support"
                 />
                 <FeatureImplemented
+                    href="https://docs.nlkit.com/nlux/learn/get-started/vercel-ai"
+                    text="Next.js Support"
+                />
+                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/adapters/open-ai/chat-gpt"
                     text="ChatGPT Adapter"
                 />
@@ -69,17 +73,16 @@ export const Roadmap = ({className}: { className?: string }) => {
                     text="Context-Aware Conversations"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/examples/next-js-ai-assistant"
-                    text="Next.js Support"
-                />
-                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/examples/conversation-starters"
                     text="Conversation Starters"
+                />
+                <FeatureImplemented
+                    href="https://docs.nlkit.com/nlux/learn/customize-theme"
+                    text="Advanced Theming"
                 />
                 <FeatureToImplement>File Uploads</FeatureToImplement>
                 <FeatureToImplement>Voice Chat</FeatureToImplement>
                 <FeatureToImplement>Enhanced Accessibility</FeatureToImplement>
-                <FeatureToImplement>Advanced Theming</FeatureToImplement>
             </div>
         </div>
     );
