@@ -7,7 +7,7 @@ import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSe
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
 import app from './_005-customize-theme/example-custom-button-color/app';
-import adapter from './_005-customize-theme/example-custom-button-color/adapter';
+import send from './_005-customize-theme/example-custom-button-color/send';
 import personas from './_005-customize-theme/example-custom-button-color/personas';
 import themeVariables from './_005-customize-theme/example-custom-button-color/theme-variables';
 
@@ -80,7 +80,7 @@ In the example below, we changed the following details in the `unstyled` theme:
         'App.tsx': app,
         'theme-variables.css': themeVariables,
         'personas.tsx': personas,
-        'adapter.ts': adapter,
+        'send.ts': send,
     }}
     editorHeight={380}
     simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}
@@ -99,29 +99,15 @@ Try updating `theme-variables.css` and see the changes in the chatbot above.
 
 ---
 
-> ### CSS Selector
+> ### CSS Selectors
 
-You only need to provide one CSS selector `.nlux-AiChat-root` which is the root element of the chat interface.<br />
-All the variables should be set under theme-specific CSS selectors.
+One CSS selector `.nlux-theme-MyBrandName` is required to set the theme variables. The value `MyBrandName` should match
+the `displayOptions.themeId` prop passed to the `AiChat` component.
 
-```css
-.nlux-AiChat-root {
-  /* Overrides will go here */
-}
-```
+If you are using the dark and light modes, you can also use the data selectors `[data-color-scheme='light']` and
+`[data-color-scheme='dark']` to set the variables specific to each mode.
 
-If you are using the `NLUX` `displayOptions.colorScheme` option, you can use the following CSS selector to
-distinct between the light and dark mode:
-
-```css
-.nlux-AiChat-root[data-color-scheme='light'] {
-  /* Overrides for light mode */
-}
-
-.nlux-AiChat-root[data-color-scheme='dark'] {
-  /* Overrides for dark mode */
-}
-```
+Is this example, we change the background color of the chat room based on dark/light mode options.
 
 ---
 
@@ -133,7 +119,7 @@ Then we override the variables in the CSS file related to the main component's b
   /* Override top-level chat room colors */
   --nlux-ChatRoom--BackgroundColor: #060524;
   --nlux-ChatRoom--BorderColor: #24233d;
-  --nlux-ChatRoom-Divider--Color: #24233d;
+  --nlux-ChatRoom--BorderColor: #24233d;
   --nlux-ChatRoom--BorderWidth: 2px;
 ```
 
