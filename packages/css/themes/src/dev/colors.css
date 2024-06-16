@@ -1,104 +1,94 @@
+/*
+    🎨 CSS variables to control the colors of your theme.
+*/
 .nlux-AiChat-root.nlux-theme-dev {
-    /** 👇 Theme-specific local variables **/
 
-    --nlux-dev--Outline-Color: blue;
-    --nlux-dev--Input-BorderColor: mediumseagreen;
-    --nlux-dev--Input-Active-BorderColor: limegreen;
-    --nlux-dev--Input-Disabled-BorderColor: darkgrey;
-    --nlux-dev--Input-BackgroundColor: honeydew;
-    --nlux-dev--Input-Active-BackgroundColor: white;
-    --nlux-dev--Input-Disabled-BackgroundColor: lightgrey;
-    --nlux-dev--Input-Disabled-TextColor: grey;
+    /** 👇 Welcome message */
+    --nlux-WelcomeMessage-Avatar--BorderColor: darkgoldenrod;
+    --nlux-WelcomeMessage-Avatar--BackgroundColor: lightgrey;
 
-    /** 👇 Definitions and overrides of required theme variables **/
+    /** 👇 Loader */
+    --nlux-ChatRoom-Loader--Color: red;
 
-    /** Exceptions box */
+    /** 👇 Exceptions box ( displayed when an error occurs ) */
     --nlux-Exceptions--BackgroundColor: tomato;
     --nlux-Exceptions--BorderColor: darkred;
     --nlux-Exceptions--TextColor: white;
 
-    /** Welcome message */
-    --nlux-WelcomeMessage-Avatar--BorderColor: darkgoldenrod;
-    --nlux-WelcomeMessage-Avatar--BackgroundColor: lightgrey;
+    /** 👇 Conversation starters */
+    --nlux-ConversationStarter--BackgroundColor: yellow;
+    --nlux-ConversationStarter--BorderColor: red;
+    --nlux-ConversationStarter--TextColor: darkgreen;
 
-    /** Divider between composer and messages */
-    --nlux-ChatRoom-Divider--Color: red;
-
-    /** Conversation loader */
-    --nlux-ChatRoom-Loader--Color: red;
-
-    /** Conversation content color */
+    /** 👇 Conversation content color */
     --nlux-ChatRoom--BackgroundColor: lavender;
     --nlux-ChatRoom--BorderColor: darkgoldenrod;
     --nlux-ChatRoom--TextColor: black;
 
-    /** Participant info in chat */
+    /** 👇 Participant info in chat */
     --nlux-ChatItem-ParticipantName--Color: darkblue;
 
-    /* Human message in chat */
+    /* 👇 User message in chat */
     --nlux-HumanMessage--BackgroundColor: lemonchiffon;
     --nlux-HumanMessage--BorderColor: darkkhaki;
     --nlux-HumanMessage--TextColor: black;
 
-    /** AI message in chat */
+    /** 👇 Assistant message in chat */
     --nlux-AiMessage--BackgroundColor: dimgrey;
     --nlux-AiMessage--BorderColor: black;
     --nlux-AiMessage--TextColor: white;
 
-    /** Prompt input colors */
-    --nlux-PromptInput--BackgroundColor: var(--nlux-dev--Input-BackgroundColor);
-    --nlux-PromptInput--BorderColor: var(--nlux-dev--Input-BorderColor);
+    /** 👇 Divider between composer and messages */
+    --nlux-ChatRoom-Divider--Color: red;
+
+    /** 👇 Prompt input colors */
+    --nlux-PromptInput--BackgroundColor: honeydew;
+    --nlux-PromptInput--BorderColor: mediumseagreen;
     --nlux-PromptInput--TextColor: black;
 
-    --nlux-PromptInput-Active--BackgroundColor: var(--nlux-dev--Input-Active-BackgroundColor);
-    --nlux-PromptInput-Active--BorderColor: var(--nlux-dev--Input-Active-BorderColor);
+    --nlux-PromptInput-Active--BackgroundColor: white;
+    --nlux-PromptInput-Active--BorderColor: limegreen;
     --nlux-PromptInput-Active--TextColor: black;
 
-    --nlux-PromptInput-Disabled--BackgroundColor: var(--nlux-dev--Input-Disabled-BackgroundColor);
-    --nlux-PromptInput-Disabled--TextColor: var(--nlux-dev--Input-Disabled-TextColor);
-    --nlux-PromptInput-Disabled--BorderColor: var(--nlux-dev--Input-Disabled-BorderColor);
+    --nlux-PromptInput-Disabled--BackgroundColor: lightgrey;
+    --nlux-PromptInput-Disabled--TextColor: grey;
+    --nlux-PromptInput-Disabled--BorderColor: darkgrey;
 
     --nlux-PromptInput-Placeholder--TextColor: darkseagreen;
-    --nlux-PromptInput-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
+    --nlux-PromptInput-Focus-Outline--Color: blue;
 
-    /** Submit button colors */
-    --nlux-SubmitButton--BackgroundColor: var(--nlux-dev--Input-BackgroundColor);
-    --nlux-SubmitButton--BorderColor: var(--nlux-dev--Input-BorderColor);
+    /** 👇 Submit button colors */
+    --nlux-SubmitButton--BackgroundColor: honeydew;
+    --nlux-SubmitButton--BorderColor: mediumseagreen;
     --nlux-SubmitButton--TextColor: mediumseagreen;
 
-    --nlux-SubmitButton-Active--BackgroundColor: var(--nlux-dev--Input-Active-BackgroundColor);
-    --nlux-SubmitButton-Active--BorderColor: var(--nlux-dev--Input-Active-BorderColor);
+    --nlux-SubmitButton-Active--BackgroundColor: white;
+    --nlux-SubmitButton-Active--BorderColor: limegreen;
     --nlux-SubmitButton-Active--TextColor: limegreen;
 
-    --nlux-SubmitButton-Disabled--BackgroundColor: var(--nlux-dev--Input-Disabled-BackgroundColor);
-    --nlux-SubmitButton-Disabled--BorderColor: var(--nlux-dev--Input-Disabled-BorderColor);
-    --nlux-SubmitButton-Disabled--TextColor: var(--nlux-dev--Input-Disabled-TextColor);
+    --nlux-SubmitButton-Disabled--BackgroundColor: lightgrey;
+    --nlux-SubmitButton-Disabled--BorderColor: darkgrey;
+    --nlux-SubmitButton-Disabled--TextColor: grey;
 
-    --nlux-SubmitButton-Focus-Outline--Color: var(--nlux-dev--Outline-Color);
+    --nlux-SubmitButton-Focus-Outline--Color: blue;
 
-    /** Code block */
+    /** 👇 Code block in parsed markdown */
     --nlux-CodeBlock--BackgroundColor: gold;
     --nlux-CodeBlock--BorderColor: deeppink;
     --nlux-CodeBlock--TextColor: black;
     --nlux-CodeBlock-Hover--BackgroundColor: lightgoldenrodyellow;
 
-    /** Code block copy button */
+    /** 👇 Code block copy button */
     --nlux-CodeBlock-CopyButton--BackgroundColor: darkgoldenrod;
     --nlux-CodeBlock-CopyButton--BorderColor: darkred;
     --nlux-CodeBlock-CopyButton--TextColor: white;
 
-    /** Code block copy button in clicked state */
     --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: greenyellow;
     --nlux-CodeBlock-CopyButton-Clicked--BorderColor: limegreen;
     --nlux-CodeBlock-CopyButton-Clicked--TextColor: black;
 
-    /** Inline code in markdown */
+    /** 👇 Inline code in markdown */
     --nlux-InlineCode--BackgroundColor: chartreuse;
     --nlux-InlineCode--BorderColor: darkgreen;
     --nlux-InlineCode--TextColor: black;
-
-    /** Conversation starters */
-    --nlux-ConversationStarter--BackgroundColor: yellow;
-    --nlux-ConversationStarter--BorderColor: red;
-    --nlux-ConversationStarter--TextColor: darkgreen;
 }

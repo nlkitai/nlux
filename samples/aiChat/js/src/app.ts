@@ -14,7 +14,7 @@ import './style.css';
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
 
-    type ThemeId = 'nova' | 'luna' | 'dev' | 'unstyled';
+    type ThemeId = 'nova' | 'luna' | 'unstyled' | 'dev';
     let themeId: ThemeId = 'nova';
     let colorScheme: 'light' | 'dark' | 'auto' = 'dark';
 
