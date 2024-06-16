@@ -43,6 +43,7 @@
     /** Chat item avatar */
     --nlux-chItm-avtr--wd: var(--nlux-ChatItem-Avatar--Width, 50px);
     --nlux-chItm-avtr--brdrRd: var(--nlux-ChatItem-Avatar--BorderRadius);
+    --nlux-chItm-avtr--brdrWd: var(--nlux-ChatItem-Avatar--BorderWidth);
 
     /** Chat item message */
     --nlux-chItm-msg--gap: var(--nlux-ChatItem-Message--Gap, 20px); /* Gap between elements within message */

@@ -6,10 +6,10 @@ sidebar_label: 'Theme Customization'
 import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 
-import app from './_005-customize-theme/example-custom-button-color/aiAssistant.tsx';
-import adapter from './_005-customize-theme/example-custom-button-color/adapter.tsx';
-import personas from './_005-customize-theme/example-custom-button-color/personas.tsx';
-import css from './_005-customize-theme/example-custom-button-color/custom-nova-theme.tsx';
+import app from './_005-customize-theme/example-custom-button-color/app';
+import adapter from './_005-customize-theme/example-custom-button-color/adapter';
+import personas from './_005-customize-theme/example-custom-button-color/personas';
+import themeOverrides from './_005-customize-theme/example-custom-button-color/theme-overrides';
 
 import ThemeIdReactJs from './_005-customize-theme/#react/themeId.mdx';
 import ThemeIdJavaScript from './_005-customize-theme/#js/themeId.mdx';
@@ -18,25 +18,13 @@ import ThemeIdJavaScript from './_005-customize-theme/#js/themeId.mdx';
 
 ---
 
-## Ways To Customize Theme
+`NLUX` comes with a default theme called `Nova` and an `Unstyled` theme that provides a basic look and layout for the
+chat interface with no styling.
 
-There are 2 ways to change the look and feel of the `NLUX` user interface:
+If you would like to fully customize the look and feel of the chat interface, we recommend that you import the `Unstyled`
+theme and override its variables.
 
----
-
-> ### Overriding Default Theme
-
-You can override the default theme variables by adding a new CSS file that defines new values for those variables.
-The new variables should be defined in a CSS selector that has higher specificity than the default theme selector.
-
-The default theme container selector is `.nlux-AiChat-root.nlux-theme-nova`, so you need to make sure that your CSS
-selector has higher specificity than that, e.g., `.custom-ai-chat-comp.nluxc-root.nluxc-theme-nova`.
-
-You can check below for more details on the variables that can be overridden.
-
----
-
-> ### Creating New Theme
+## Customizing The Unstyled Theme
 
 You can create a new custom theme by creating a new CSS file that defines all the theme variables. You can then import
 this CSS file in your HTML file or in your JavaScript/TypeScript file. You will also need to provide a theme ID to the
@@ -48,17 +36,17 @@ this CSS file in your HTML file or in your JavaScript/TypeScript file. You will 
 
 ## Variables To Override
 
-You can find all **Novo theme variables** that can be overridden in the following files on GitHub:
+You can find **all the possible variables** that can be overridden in the following files on GitHub:
 * [`colors.css`](https://github.com/nlkitai/nlux/blob/latest/packages/css/themes/src/dev/colors.css) All the colors
 that can be overridden.
-* [`variables.css`](https://github.com/nlkitai/nlux/blob/latest/packages/css/themes/src/dev/variables.css) All the other
-variables that can be overridden, including font size and family, border radius, etc.
+* [`layout.css`](https://github.com/nlkitai/nlux/blob/latest/packages/css/themes/src/dev/layout.css) All the other
+variables that can be overridden, including layout, font size and family, border radius, etc.
 
 ---
 
 ## Example
 
-In the example below, we changed the following details in thee `Nova` theme:
+In the example below, we changed the following details in the `unstyled` theme:
 
 * Component background color set `#060524` (Dark blue)
 * Assistant message background color set to `#5F9EA0` (Cadet blue)
@@ -66,12 +54,10 @@ In the example below, we changed the following details in thee `Nova` theme:
 * Border radius set to `5px`
 * Send icon replaced with a custom SVG icon.
 
-We also set the `conversationOptions`'s layout to `bubbles` to display the messages in a bubble layout.
-
 <CodeEditor
     files={{
         'App.tsx': app,
-        'theme-overrides.css': css,
+        'theme-overrides.css': themeOverrides,
         'personas.tsx': personas,
         'adapter.ts': adapter,
     }}
@@ -94,17 +80,27 @@ Try updating `theme-overrides.css` and see the changes in the chatbot above.
 
 > ### CSS Selector
 
-We start by creating a new CSS file called `theme-overrides.css` and add the following CSS selector:
+You only need to provide one CSS selector `.nlux-AiChat-root` which is the root element of the chat interface.<br />
+All the overrides should go inside this selector:
 
 ```css
-.my-theme.nlux-AiChat-root.nlux-theme-nova {
+.nlux-AiChat-root {
   /* Overrides will go here */
 }
 ```
 
-:::tip Important
-Notice that the second selector has higher specificity than the default theme selector, as it uses the `my-theme` class.
-:::
+If you are using the `NLUX` `displayOptions.colorScheme` option, you can use the following CSS selector to
+distinct between the light and dark mode:
+
+```css
+.nlux-AiChat-root[data-color-scheme='light'] {
+  /* Overrides for light mode */
+}
+
+.nlux-AiChat-root[data-color-scheme='dark'] {
+  /* Overrides for dark mode */
+}
+```
 
 ---
 

@@ -57,6 +57,7 @@
     /** Chat item avatar */
     --nlux-ChatItem-Avatar--Width: 30px;
     --nlux-ChatItem-Avatar--BorderRadius: 50%;
+    --nlux-ChatItem-Avatar--BorderWidth: var(--nlux-dev--BorderWidth);
 
     /** Chat item message */
     --nlux-ChatItem-Message--Gap: var(--nlux-dev--FlexGap); /** Gap between elements within message */
