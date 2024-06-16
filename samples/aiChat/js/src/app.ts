@@ -14,9 +14,9 @@ import './style.css';
 document.addEventListener('DOMContentLoaded', () => {
     const parent = document.getElementById('root')!;
 
-    type ThemeId = 'nova' | 'luna' | 'dev' | 'blank';
+    type ThemeId = 'nova' | 'luna' | 'dev' | 'unstyled';
     let themeId: ThemeId = 'nova';
-    let colorScheme: 'light' | 'dark' = 'dark';
+    let colorScheme: 'light' | 'dark' | 'auto' = 'dark';
 
     const htmlSanitizer = (html: string) => {
         const trustedTypes = globalThis?.trustedTypes as unknown as {
