@@ -1,7 +1,7 @@
-@import './variables.css';
 @import './colors.css';
-
 @import './layout.css';
+
+@import './structure.css';
 @import './format.css';
 @import './animation.css';
 

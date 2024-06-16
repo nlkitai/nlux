@@ -2,5 +2,5 @@
 @import './colors-light.css';
 @import './colors-dark.css';
 @import './icons.css';
-@import './variables.css';
+@import './layout.css';
 @import '../common/main.css';
