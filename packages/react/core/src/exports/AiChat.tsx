@@ -5,7 +5,7 @@ import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/co
 import {className as compExceptionsBoxClassName} from '@shared/components/ExceptionsBox/create';
 import {ComposerStatus} from '@shared/components/Composer/props';
 import {chatItemsToChatSegment} from '@shared/utils/chat/chatItemsToChatSegment';
-import {getRootClassNames} from '@shared/utils/dom/getRootClassNames';
+import {getRootClassNames, getSystemColorScheme} from '@shared/utils/dom/getRootClassNames';
 import {warnOnce} from '@shared/utils/warn';
 import {ConversationComp} from '../sections/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../sections/Conversation/props';
@@ -63,9 +63,15 @@ export const AiChat: <AiMsg>(
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
+
     const rootClassNames = useMemo(
-        () => getRootClassNames({className, themeId, colorScheme}).join(' '),
-        [className, themeId, colorScheme],
+        () => getRootClassNames({className, themeId}).join(' '),
+        [className, themeId],
+    );
+
+    const colorSchemeToApply = useMemo(
+        () => (colorScheme === 'auto' || !colorScheme) ? getSystemColorScheme() : colorScheme,
+        [colorScheme],
     );
 
     // Callbacks and handlers for user interactions and events
@@ -133,7 +139,7 @@ export const AiChat: <AiMsg>(
     }
 
     return (
-        <div className={rootClassNames} style={rootStyle}>
+        <div className={rootClassNames} style={rootStyle} data-color-scheme={colorSchemeToApply}>
             <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
             <div className={`nlux-chatRoom-container ${compChatRoomStatusClassName}`}>
                 <div className="nlux-launchPad-container">

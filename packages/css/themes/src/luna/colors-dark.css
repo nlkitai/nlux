@@ -1,4 +1,4 @@
-.nlux-AiChat-root.nlux-theme-luna.nlux-colorScheme-dark {
+.nlux-AiChat-root.nlux-theme-luna[data-color-scheme='dark'] {
     /** 👇 Theme-specific local variables **/
 
     --nlux-dev--Outline-Color: #4141ff;

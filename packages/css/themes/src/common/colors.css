@@ -16,7 +16,7 @@
     --nlux-chtr--brdClr: var(--nlux-ChatRoom--BorderColor);
     --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, black);
 
-    &.nlux-colorScheme-dark {
+    &[data-color-scheme='dark'] {
         --nlux-chtr--txtClr: var(--nlux-ChatRoom--TextColor, white);
     }
 

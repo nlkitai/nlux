@@ -3,7 +3,7 @@ import {NluxRenderingError} from '@shared/types/error';
 import {NLErrorId} from '@shared/types/exceptions/errors';
 import {emptyInnerHtml} from '@shared/utils/dom/emptyInnerHtml';
 import {getConversationLayout} from '@shared/utils/dom/getConversationLayout';
-import {getRootClassNames} from '@shared/utils/dom/getRootClassNames';
+import {getRootClassNames, getSystemColorScheme} from '@shared/utils/dom/getRootClassNames';
 import {warn} from '@shared/utils/warn';
 import {CompChatRoom} from '../../sections/chat/chatRoom/chatRoom.model';
 import {CompChatRoomProps} from '../../sections/chat/chatRoom/chatRoom.types';
@@ -477,10 +477,12 @@ export class NluxRenderer<AiMsg> {
         const rootClassNames = getRootClassNames({
             themeId: this.themeId,
             className: this.className,
-            colorScheme: this.colorScheme,
         });
 
         this.rootElement.className = '';
         this.rootElement.classList.add(...rootClassNames);
+        this.rootElement.dataset.colorScheme = (this.colorScheme === 'auto' || !this.colorScheme)
+            ? getSystemColorScheme()
+            : this.colorScheme;
     }
 }
