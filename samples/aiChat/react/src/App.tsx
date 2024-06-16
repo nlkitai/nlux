@@ -1,7 +1,4 @@
-import '@nlux-dev/themes/src/luna/main.css';
-import '@nlux-dev/themes/src/nova/main.css';
-import '@nlux-dev/themes/src/unstyled/main.css';
-import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
@@ -19,9 +16,14 @@ import {useChatAdapter as useHfChatAdapter} from '@nlux-dev/hf-react/src';
 import {highlighter} from '@nlux-dev/highlighter/src';
 import {useChatAdapter as useChatLangChainChatAdapter} from '@nlux-dev/langchain-react/src';
 import {useChatAdapter as useNlbridgeChatAdapter} from '@nlux-dev/nlbridge-react/src';
-import './App.css';
-import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import {MessageReceivedCallback} from '@nlux-dev/core/src';
+
+import './App.css';
+import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
+// import '@nlux-dev/themes/src/luna/main.css';
+// import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/themes/src/unstyled/main.css';
+import './theme-overrides.css';
 
 function App() {
     type ThemeId = 'nova' | 'luna' | 'unstyled';
