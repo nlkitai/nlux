@@ -36,7 +36,6 @@ export default function HomePage() {
                         ],
                     }}
                     displayOptions={{
-                        transparentBackground: true,
                         width: 600,
                         height: 400,
                     }}

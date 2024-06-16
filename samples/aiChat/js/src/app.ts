@@ -105,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 400,
         themeId,
         colorScheme,
-        transparentBackground: true,
     };
 
     const aiChat = createAiChat<string>()

@@ -300,7 +300,6 @@ export class NluxRenderer<AiMsg> {
 
         let themeIdUpdated = false;
         let colorSchemeUpdated = false;
-        let transparentBackgroundUpdated = false;
 
         if (props.hasOwnProperty('displayOptions')) {
             const newDisplayOptions: Partial<DisplayOptions> = {};
@@ -313,11 +312,6 @@ export class NluxRenderer<AiMsg> {
             if (props.displayOptions?.colorScheme !== this.theDisplayOptions.colorScheme) {
                 newDisplayOptions.colorScheme = props.displayOptions?.colorScheme;
                 colorSchemeUpdated = true;
-            }
-
-            if (props.displayOptions?.transparentBackground !== this.theDisplayOptions.transparentBackground) {
-                newDisplayOptions.transparentBackground = props.displayOptions?.transparentBackground;
-                transparentBackgroundUpdated = true;
             }
 
             if (props.displayOptions?.height !== this.theDisplayOptions.height) {
@@ -339,7 +333,7 @@ export class NluxRenderer<AiMsg> {
             }
         }
 
-        if (themeIdUpdated || colorSchemeUpdated || classNameUpdated || transparentBackgroundUpdated) {
+        if (themeIdUpdated || colorSchemeUpdated || classNameUpdated) {
             this.setRootElementClassNames();
         }
 
@@ -484,7 +478,6 @@ export class NluxRenderer<AiMsg> {
             themeId: this.themeId,
             className: this.className,
             colorScheme: this.colorScheme,
-            transparentBackground: this.theDisplayOptions.transparentBackground,
         });
 
         this.rootElement.className = '';

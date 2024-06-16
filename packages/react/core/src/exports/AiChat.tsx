@@ -33,7 +33,7 @@ export const AiChat: <AiMsg>(
         conversationOptions, composerOptions, displayOptions,
     } = props;
 
-    const {themeId, colorScheme, transparentBackground} = displayOptions ?? {};
+    const {themeId, colorScheme} = displayOptions ?? {};
 
     // References to DOM elements and React components:
     // These are used for advanced interactions such as scrolling, streaming, and exceptions animation
@@ -64,8 +64,8 @@ export const AiChat: <AiMsg>(
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
     const rootClassNames = useMemo(
-        () => getRootClassNames({className, themeId, colorScheme, transparentBackground}).join(' '),
-        [className, themeId, colorScheme, transparentBackground],
+        () => getRootClassNames({className, themeId, colorScheme}).join(' '),
+        [className, themeId, colorScheme],
     );
 
     // Callbacks and handlers for user interactions and events
