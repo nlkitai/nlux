@@ -1,12 +1,12 @@
-.nlux-AiChat-root[data-color-scheme='light'] {
-    --nlux-ChatRoom--BackgroundColor: white;
+export default `.nlux-theme-MyBrandName[data-color-scheme='light'] {
+    --nlux-ChatRoom--BackgroundColor: #f9f9f9;
 }
 
-.nlux-AiChat-root[data-color-scheme='dark'] {
+.nlux-theme-MyBrandName[data-color-scheme='dark'] {
     --nlux-ChatRoom--BackgroundColor: #060524;
 }
 
-.nlux-AiChat-root {
+.nlux-theme-MyBrandName {
 
     /* Override top-level chat room colors */
     --nlux-ChatRoom--BorderColor: #24233d;
@@ -50,11 +50,12 @@
     --nlux-ConversationStarter--BackgroundColor: #24233d;
 
     /* Override icon for the send button */
-    --nlux-send-icon: url('data:image/svg+xml,\
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" \
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\
-      <circle cx="12" cy="12" r="10"/>\
-      <path d="M16 12l-4-4-4 4M12 16V9"/>\
-    </svg>\
+    --nlux-send-icon: url('data:image/svg+xml,\\
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" \\
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">\\
+      <circle cx="12" cy="12" r="10"/>\\
+      <path d="M16 12l-4-4-4 4M12 16V9"/>\\
+    </svg>\\
   ');
 }
+`;

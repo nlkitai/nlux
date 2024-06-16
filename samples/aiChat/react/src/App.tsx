@@ -23,7 +23,7 @@ import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import '@nlux-dev/themes/src/luna/main.css';
 // import '@nlux-dev/themes/src/nova/main.css';
 import '@nlux-dev/themes/src/unstyled/main.css';
-import './theme-overrides.css';
+import './theme-variables.css';
 
 function App() {
     type ThemeId = 'nova' | 'luna' | 'unstyled';

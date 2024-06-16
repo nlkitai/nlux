@@ -9,7 +9,7 @@ import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 import app from './_005-customize-theme/example-custom-button-color/app';
 import adapter from './_005-customize-theme/example-custom-button-color/adapter';
 import personas from './_005-customize-theme/example-custom-button-color/personas';
-import themeOverrides from './_005-customize-theme/example-custom-button-color/theme-overrides';
+import themeVariables from './_005-customize-theme/example-custom-button-color/theme-variables';
 
 import ThemeIdReactJs from './_005-customize-theme/#react/themeId.mdx';
 import ThemeIdJavaScript from './_005-customize-theme/#js/themeId.mdx';
@@ -18,11 +18,13 @@ import ThemeIdJavaScript from './_005-customize-theme/#js/themeId.mdx';
 
 ---
 
-`NLUX` comes with a default theme called `Nova` and an `Unstyled` theme that provides a basic look and layout for the
+`NLUX` comes with a default theme called `nova` and an `unstyled` theme that provides a basic look and layout for the
 chat interface with no styling.
 
-If you would like to fully customize the look and feel of the chat interface, we recommend that you import the `Unstyled`
-theme and override its variables.
+If you would like to fully customize the look and feel of the chat interface, you can import the `unstyled`
+theme and set the CSS variables that you want to override.
+
+---
 
 ## Customizing The Unstyled Theme
 
@@ -32,15 +34,31 @@ this CSS file in your HTML file or in your JavaScript/TypeScript file. You will 
 
 <PlatformSelector reactJs={ThemeIdReactJs} javascript={ThemeIdJavaScript}/>
 
+This will enable setting CSS variables via the following CSS selectors:
+
+```css
+.nlux-theme-MyBrandName {
+    /* Theme variables to set, with values that do not depend on color scheme */
+}
+
+.nlux-theme-MyBrandName[data-color-scheme='light'] {
+    /* Values specific to light mode */
+}
+
+.nlux-theme-MyBrandName[data-color-scheme='dark'] {
+    /* Values specific to dark mode */
+}
+```
+
 ---
 
-## Variables To Override
+## Setting Theme Variables
 
-You can find **all the possible variables** that can be overridden in the following files on GitHub:
+You can find **all the possible variables** that can be set in the following files on GitHub:
 * [`colors.css`](https://github.com/nlkitai/nlux/blob/latest/packages/css/themes/src/dev/colors.css) All the colors
 that can be overridden.
 * [`layout.css`](https://github.com/nlkitai/nlux/blob/latest/packages/css/themes/src/dev/layout.css) All the other
-variables that can be overridden, including layout, font size and family, border radius, etc.
+variables that can be set, including layout, font size and family, border radius, etc.
 
 ---
 
@@ -57,7 +75,7 @@ In the example below, we changed the following details in the `unstyled` theme:
 <CodeEditor
     files={{
         'App.tsx': app,
-        'theme-overrides.css': themeOverrides,
+        'theme-variables.css': themeVariables,
         'personas.tsx': personas,
         'adapter.ts': adapter,
     }}
@@ -69,7 +87,7 @@ In the example below, we changed the following details in the `unstyled` theme:
 
 :::info
 You can change code in the live code editor in this example.<br />
-Try updating `theme-overrides.css` and see the changes in the chatbot above.
+Try updating `theme-variables.css` and see the changes in the chatbot above.
 :::
 
 ---
@@ -81,7 +99,7 @@ Try updating `theme-overrides.css` and see the changes in the chatbot above.
 > ### CSS Selector
 
 You only need to provide one CSS selector `.nlux-AiChat-root` which is the root element of the chat interface.<br />
-All the overrides should go inside this selector:
+All the variables should be set under theme-specific CSS selectors.
 
 ```css
 .nlux-AiChat-root {
@@ -181,11 +199,11 @@ The `url` function is used to provide the SVG icon as a data URL.
 You can add the following to your HTML file to import the relevant CSS files:
 
 ```html
-<link rel="stylesheet" href="./theme-overrides.css" />
+<link rel="stylesheet" href="./theme-variables.css" />
 ```
 
 or if you are using a bundler that's configured to load CSS, you can just import the CSS file in your JSX/TSX file:
 
 ```js
-import './theme-overrides.css';
+import './theme-variables.css';
 ```
