@@ -33,10 +33,9 @@ describe('createAiChat() + prop className', () => {
             const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.classList.length).toBe(3);
+            expect(aiChatDom.classList.length).toBe(2);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
             expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
-            expect(aiChatDom.classList[2]).toBe('nlux-colorScheme-light');
         });
 
         describe('When a className is set', () => {
@@ -52,11 +51,10 @@ describe('createAiChat() + prop className', () => {
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
-                expect(aiChatDom.classList.length).toBe(4);
+                expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
-                expect(aiChatDom.classList[2]).toBe('nlux-colorScheme-light');
-                expect(aiChatDom.classList[3]).toBe('my-class');
+                expect(aiChatDom.classList[2]).toBe('my-class');
             });
         });
     });
@@ -72,11 +70,10 @@ describe('createAiChat() + prop className', () => {
             const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
             // Assert
-            expect(aiChatDom.classList.length).toBe(4);
+            expect(aiChatDom.classList.length).toBe(3);
             expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
             expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
-            expect(aiChatDom.classList[2]).toBe('nlux-colorScheme-light');
-            expect(aiChatDom.classList[3]).toBe('my-class');
+            expect(aiChatDom.classList[2]).toBe('my-class');
         });
 
         describe('When a different className is set', () => {
@@ -92,11 +89,10 @@ describe('createAiChat() + prop className', () => {
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
-                expect(aiChatDom.classList.length).toBe(4);
+                expect(aiChatDom.classList.length).toBe(3);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
-                expect(aiChatDom.classList[2]).toBe('nlux-colorScheme-light');
-                expect(aiChatDom.classList[3]).toBe('my-new-class');
+                expect(aiChatDom.classList[2]).toBe('my-new-class');
             });
         });
 
@@ -113,10 +109,9 @@ describe('createAiChat() + prop className', () => {
                 const aiChatDom = rootElement.querySelector('.nlux-AiChat-root')!;
 
                 // Assert
-                expect(aiChatDom.classList.length).toBe(3);
+                expect(aiChatDom.classList.length).toBe(2);
                 expect(aiChatDom.classList[0]).toBe('nlux-AiChat-root');
                 expect(aiChatDom.classList[1]).toBe('nlux-theme-nova');
-                expect(aiChatDom.classList[2]).toBe('nlux-colorScheme-light');
             });
         });
     });

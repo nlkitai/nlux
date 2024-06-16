@@ -32,10 +32,10 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
                 await waitForReactRenderCycle();
 
                 // Act
-                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
 
                 // Assert
-                expect(aiChatDom.className).toContain('nlux-colorScheme-light');
+                expect(aiChatDom.dataset.colorScheme).toContain('light');
             });
         });
 
@@ -48,10 +48,10 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
                 await waitForReactRenderCycle();
 
                 // Act
-                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+                const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
 
                 // Assert
-                expect(aiChatDom.className).toContain('nlux-colorScheme-dark');
+                expect(aiChatDom.dataset.colorScheme).toContain('dark');
             });
         });
     });
@@ -64,10 +64,10 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
             await waitForReactRenderCycle();
 
             // Act
-            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
+            const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
 
             // Assert
-            expect(aiChatDom.className).toContain('nlux-colorScheme-light');
+            expect(aiChatDom.dataset.colorScheme).toContain('light');
         });
 
         describe('When the color scheme is updated after the component is created', () => {
@@ -82,8 +82,8 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-                expect(aiChatDom.className).toContain('nlux-colorScheme-dark');
+                const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
+                expect(aiChatDom.dataset.colorScheme).toContain('dark');
             });
         });
     });
@@ -100,8 +100,8 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-            expect(aiChatDom.className).toContain('nlux-colorScheme-dark');
+            const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
+            expect(aiChatDom.dataset.colorScheme).toContain('dark');
         });
     });
 
@@ -117,8 +117,8 @@ describe('<AiChat /> + displayOptions + colorScheme', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const aiChatDom = document.querySelector('.nlux-AiChat-root')!;
-            expect(aiChatDom.className).toContain('nlux-colorScheme-dark');
+            const aiChatDom = document.querySelector('.nlux-AiChat-root') as HTMLDivElement;
+            expect(aiChatDom.dataset.colorScheme).toContain('dark');
         });
     });
 });
