@@ -7,6 +7,7 @@ import exampleIntroFileSendFunction from '@site/src/pages/(examples)/intro/send'
 import exampleIntroFileAiChatBot from '@site/src/pages/(examples)/intro/example';
 import exampleIntroFilePersonas from '@site/src/pages/(examples)/intro/personas';
 import styles from '@site/src/pages/index.module.css';
+import borderStyles from './border.module.css';
 import heroStyles from '@site/src/pages/(sections)/hero/hero.module.css';
 import Heading from '@theme/Heading';
 
@@ -90,42 +91,28 @@ export const Hero = ({className}: { className?: string }) => {
                         </div>
                     </div>
                 </div>
+                <div className={styles.buttons}>
+                    <Link
+                        className={`shinyButton button button--primary button--lg ${borderStyles.shinyButton}`}
+                        to="/learn/get-started"
+                    >
+                        <div>
+                            Get Started Now
+                        </div>
+                    </Link>
+                </div>
                 <div className={styles.nluxInAction}>
-                    <p>
-                        <strong><code>@nlux/react</code> in action</strong> 👇 ―
-                        Edit the code below to see how it works.
-                    </p>
                     <CodeEditor
                         className={styles.codeEditor}
                         direction="row"
                         files={{
-                            'App.tsx': exampleIntroFileAiChatBot(colorMode),
+                            'App.tsx': exampleIntroFileAiChatBot,
                             'send.ts': exampleIntroFileSendFunction,
                             'personas.tsx': exampleIntroFilePersonas,
                         }}
                         editorHeight={420}
                         simulatedPrompt="How an AI assistant can enhance my website's user experience?"
                     />
-                </div>
-                <div className={styles.buttons}>
-                    <Link
-                        className="button button--primary button--lg"
-                        to="/learn/get-started"
-                    >
-                        Get Started
-                    </Link>
-                    <Link
-                        className="button button--primary button--lg"
-                        to="/examples/react-js-ai-assistant"
-                    >
-                        Examples
-                    </Link>
-                    <Link
-                        className="button button--primary button--lg"
-                        to="/reference/overview"
-                    >
-                        API Reference
-                    </Link>
                 </div>
             </div>
         </header>

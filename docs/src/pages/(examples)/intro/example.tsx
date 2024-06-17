@@ -18,10 +18,8 @@ export default () => {
         user
       }}
       conversationOptions={{ layout: 'bubbles' }}
-      displayOptions={{ colorScheme: "dark" }}
-      composerOptions={{ 
-        placeholder: "Type your query"
-      }}
+      displayOptions={{ colorScheme: "${colorScheme}" }}
+      composerOptions={{ placeholder: "Type your query" }}
     />
   );
 };

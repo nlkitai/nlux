@@ -1,0 +1,120 @@
+HTML CSSResult Skip Results Iframe
+
+/* The secret sauce that enables gradient rotation. NOTE: does not work in all browsers. https://caniuse.com/?search=%40property */
+@property --border-angle-1 {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 0deg;
+}
+
+@property --border-angle-2 {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 90deg;
+}
+
+@property --border-angle-3 {
+    syntax: "<angle>";
+    inherits: true;
+    initial-value: 180deg;
+}
+
+
+/* sRGB color. */
+:root {
+    --bright-blue: rgb(0, 100, 255);
+    --bright-green: rgb(232, 221, 191);
+    --bright-red: rgb(255, 0, 0);
+    --background: black;
+    --foreground: #fbf2ef;
+    --border-size: 2px;
+    --border-radius: 0.75em;
+}
+
+/* Display-P3 color, when supported. */
+@supports (color: color(display-p3 1 1 1)) {
+    :root {
+        --bright-blue: color(display-p3 0 0.2 1);
+        --bright-green: color(display-p3 0.4 1 0);
+        --bright-red: color(display-p3 1 0 0);
+    }
+}
+
+@keyframes rotateBackground {
+    to {
+        --border-angle-1: 360deg;
+    }
+}
+
+@keyframes rotateBackground2 {
+    to {
+        --border-angle-2: -270deg;
+    }
+}
+
+@keyframes rotateBackground3 {
+    to {
+        --border-angle-3: 540deg;
+    }
+}
+
+.shinyButton {
+    --border-angle-1: 0deg;
+    --border-angle-2: 90deg;
+    --border-angle-3: 180deg;
+    color: inherit;
+    font-family: inherit;
+    border: 0;
+    padding: var(--border-size);
+    display: flex;
+    width: max-content;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    background-image: conic-gradient(
+            from var(--border-angle-1) at 10% 15%,
+            transparent,
+            var(--bright-blue) 10%,
+            transparent 30%,
+            transparent
+    ),
+    conic-gradient(
+            from var(--border-angle-2) at 70% 60%,
+            transparent,
+            var(--bright-green) 10%,
+            transparent 60%,
+            transparent
+    ),
+    conic-gradient(
+            from var(--border-angle-3) at 50% 20%,
+            transparent,
+            var(--bright-red) 10%,
+            transparent 50%,
+            transparent
+    );
+
+    animation: rotateBackground 3s linear infinite,
+    rotateBackground2 8s linear infinite,
+    rotateBackground3 13s linear infinite;
+}
+
+/* Change this background to transparent to see how the gradient works */
+.shinyButton div {
+    padding: 0.5em 1em;
+    border-radius: calc(var(--border-radius) - var(--border-size));
+}
+
+html[data-theme="dark"] .shinyButton div {
+    background: var(--background);
+    color: var(--foreground);
+}
+
+html[data-theme="light"] .shinyButton div {
+    background: var(--foreground);
+    color: var(--background);
+}
+
+@font-face {
+    font-family: "Aspekta";
+    font-weight: normal;
+    src: url("https://assets.codepen.io/240751/Aspekta-300.woff2") format("woff2");
+}
