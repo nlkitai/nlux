@@ -1,20 +1,18 @@
 .nlux-comp-chatItem.nlux-comp-chatItem--listLayout {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
 
     > .nlux-comp-message {
         padding: var(--nlux-chItm-msg-lstLt--pdng-tpBtm) var(--nlux-chItm-msg-lstLt--pdng-lr);
-        margin-top: var(--nlux-chItm-msg-lstLt--mrgTp);
-        margin-bottom: var(--nlux-chItm-msg-lstLt--mrgBtm);
-        margin-left: var(--nlux-chItm-msg-lstLt--mrgLft);
-        margin-right: var(--nlux-chItm-msg-lstLt--mrgRgt);
-        width: stretch;
-        width: -webkit-fill-available;
-        width: -moz-available;
+        margin: var(--nlux-chItm-msg-lstLt--mrgTp) var(--nlux-chItm-msg-lstLt--mrgRgt) var(--nlux-chItm-msg-lstLt--mrgBtm) var(--nlux-chItm-msg-lstLt--mrgLft);
 
     }
 
     > .nlux-comp-chatItem-participantInfo {
+        display: flex;
+        align-items: start;
+        justify-content: start;
+
         > .nlux-comp-avatar {
             border-width: var(--nlux-chItm-msg-lstLt--brdrWd);
         }
