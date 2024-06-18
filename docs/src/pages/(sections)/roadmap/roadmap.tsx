@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import styles from './roadmap.module.css';
 import {FeatureImplemented} from '@site/src/pages/(sections)/roadmap/featureImplemented';
 import {FeatureToImplement} from '@site/src/pages/(sections)/roadmap/featureToImplement';
@@ -22,23 +23,23 @@ export const Roadmap = ({className}: { className?: string }) => {
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/examples/react-js-ai-assistant"
-                    text="React JS Support"
+                    text="React Support"
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/get-started/vercel-ai"
                     text="Next.js Support"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/learn/adapters/open-ai/chat-gpt"
-                    text="ChatGPT Adapter"
-                />
-                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/adapters/hugging-face/overview"
                     text="Hugging Face Adapter"
                 />
                 <FeatureImplemented
+                    href="https://docs.nlkit.com/nlux/learn/adapters/langchain/overview"
+                    text="LangChain LangServe Adapters"
+                />
+                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/adapters/custom-adapters/create-custom-adapter"
-                    text="Custom LLM Adapters"
+                    text="Custom Adapters"
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/examples/assistant-persona"
@@ -53,20 +54,12 @@ export const Roadmap = ({className}: { className?: string }) => {
                     text="Syntax Highlighter"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/examples/customized-theme"
-                    text="Theme Customization"
-                />
-                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/reference/ui/events"
                     text="Event Listeners"
                 />
                 <FeatureImplemented
-                    href="https://docs.nlkit.com/nlux/learn/adapters/langchain/overview"
-                    text="LangChain Adapters"
-                />
-                <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/examples/conversation-history"
-                    text="Conversation History Hydration"
+                    text="Conversation History"
                 />
                 <FeatureImplemented
                     href="https://docs.nlkit.com/nlux/learn/context-aware-conversations"
@@ -80,10 +73,24 @@ export const Roadmap = ({className}: { className?: string }) => {
                     href="https://docs.nlkit.com/nlux/learn/customize-theme"
                     text="Advanced Theming"
                 />
+                <FeatureToImplement>Function Calling</FeatureToImplement>
                 <FeatureToImplement>File Uploads</FeatureToImplement>
-                <FeatureToImplement>Voice Chat</FeatureToImplement>
                 <FeatureToImplement>Enhanced Accessibility</FeatureToImplement>
+                <FeatureToImplement>Voice Chat</FeatureToImplement>
+                <FeatureToImplement>[&nbsp;
+                    Add Your Feature Request
+                    &nbsp;]
+                </FeatureToImplement>
             </div>
+            <p style={{textAlign: 'center'}}>
+                Community members can also contribute to the roadmap<br/>
+                by submitting feature requests on our&nbsp;
+                <Link href="https://discord.com/invite/SRwDmZghNB">Discord</Link> server via <Link
+                href="https://github.com/nlkitai/nlux/issues">GitHub issues</Link>.<br/>
+                Companies looking for <Link href="https://www.nlkit.com/enterprise">prioritized feature
+                requests</Link>&nbsp;
+                are also welcome to reach out.
+            </p>
         </div>
     );
 };
