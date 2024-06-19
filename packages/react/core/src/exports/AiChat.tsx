@@ -1,5 +1,5 @@
 'use client';
-import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {createContext, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '@shared/components/ExceptionsBox/create';
@@ -22,6 +22,7 @@ import {ConversationStarter} from '../types/conversationStarter';
 import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
 import {useUiOverrides} from './hooks/useUiOverrides';
 import {usMarkdownContainers} from './hooks/usMarkdownContainers';
+import {usePrimitivesContext} from './hooks/usePrimitivesContext';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -48,6 +49,9 @@ export const AiChat: <AiMsg>(
         return exceptionBoxRef.current ? createExceptionsBoxController(exceptionBoxRef.current) : undefined;
     }, [exceptionBoxRef.current]);
     const markdownContainersController = usMarkdownContainers();
+
+    // Context state
+    const {PrimitivesContextProvider, primitivesContext} = usePrimitivesContext({messageOptions: props.messageOptions});
 
     // Regular component state
     const [prompt, setPrompt] = useState('');
@@ -139,43 +143,45 @@ export const AiChat: <AiMsg>(
     }
 
     return (
-        <div className={rootClassNames} style={rootStyle} data-color-scheme={colorSchemeToApply}>
-            <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
-            <div className={`nlux-chatRoom-container ${compChatRoomStatusClassName}`}>
-                <div className="nlux-launchPad-container">
-                    <LaunchPad
-                        segments={segments}
-                        onConversationStarterSelected={handleConversationStarterSelected}
-                        conversationOptions={conversationOptions}
-                        personaOptions={props.personaOptions}
-                    />
-                </div>
-                <div className="nlux-conversation-container" ref={conversationContainerRef}>
-                    <ForwardConversationComp
-                        ref={conversationRef}
-                        segments={segments}
-                        conversationOptions={props.conversationOptions}
-                        personaOptions={props.personaOptions}
-                        messageOptions={props.messageOptions}
-                        onLastActiveSegmentChange={handleLastActiveSegmentChange}
-                        Loader={uiOverrides.Loader}
-                        markdownContainersController={markdownContainersController}
-                    />
-                </div>
-                <div className="nlux-composer-container">
-                    <ComposerComp
-                        status={composerStatus}
-                        prompt={prompt}
-                        hasValidInput={hasValidInput}
-                        placeholder={props.composerOptions?.placeholder}
-                        autoFocus={props.composerOptions?.autoFocus}
-                        submitShortcut={props.composerOptions?.submitShortcut}
-                        onChange={handlePromptChange}
-                        onSubmit={handleSubmitPrompt}
-                        Loader={uiOverrides.Loader}
-                    />
+        <PrimitivesContextProvider>
+            <div className={rootClassNames} style={rootStyle} data-color-scheme={colorSchemeToApply}>
+                <div className={compExceptionsBoxClassName} ref={exceptionBoxRef}/>
+                <div className={`nlux-chatRoom-container ${compChatRoomStatusClassName}`}>
+                    <div className="nlux-launchPad-container">
+                        <LaunchPad
+                            segments={segments}
+                            onConversationStarterSelected={handleConversationStarterSelected}
+                            conversationOptions={conversationOptions}
+                            personaOptions={props.personaOptions}
+                        />
+                    </div>
+                    <div className="nlux-conversation-container" ref={conversationContainerRef}>
+                        <ForwardConversationComp
+                            ref={conversationRef}
+                            segments={segments}
+                            conversationOptions={props.conversationOptions}
+                            personaOptions={props.personaOptions}
+                            messageOptions={props.messageOptions}
+                            onLastActiveSegmentChange={handleLastActiveSegmentChange}
+                            Loader={uiOverrides.Loader}
+                            markdownContainersController={markdownContainersController}
+                        />
+                    </div>
+                    <div className="nlux-composer-container">
+                        <ComposerComp
+                            status={composerStatus}
+                            prompt={prompt}
+                            hasValidInput={hasValidInput}
+                            placeholder={props.composerOptions?.placeholder}
+                            autoFocus={props.composerOptions?.autoFocus}
+                            submitShortcut={props.composerOptions?.submitShortcut}
+                            onChange={handlePromptChange}
+                            onSubmit={handleSubmitPrompt}
+                            Loader={uiOverrides.Loader}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </PrimitivesContextProvider>
     );
 };

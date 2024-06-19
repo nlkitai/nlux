@@ -22,6 +22,7 @@ import './App.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/themes/src/nova/main.css';
+import {Markdown} from '@nlux-dev/react/src/exports/primitives/Markdown';
 // import '@nlux-dev/themes/src/unstyled/main.css';
 // import '@nlux-dev/themes/src/dev/main.css';
 
@@ -293,7 +294,7 @@ function App() {
                 // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
-                // initialConversation={initialConversation}
+                initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
@@ -338,7 +339,11 @@ const responseRenderer: ResponseRenderer<string> = memo((props) => {
 
     return (
         <>
-            {(dataTransferMode === 'batch' && content.length > 0) && <div>{content[0]}</div>}
+            {(dataTransferMode === 'batch' && content.length > 0) && (
+                <div>
+                    <Markdown>{content[0]}</Markdown>
+                </div>
+            )}
             {(dataTransferMode === 'stream') && <div ref={props.containerRef}/>}
             <div style={{
                 backgroundColor: 'lightblue',
