@@ -21,7 +21,7 @@ export const ConversationStarters = (props: ConversationStartersProps) => {
   );
 };
 
-const ConversationStarterIcon = ({
+export const ConversationStarterIcon = ({
   icon,
 }: {
   icon: ConversationStarter["icon"];
