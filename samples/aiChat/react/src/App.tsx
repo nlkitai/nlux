@@ -190,8 +190,8 @@ function App() {
     }, [globalThis?.trustedTypes]);
 
     const conversationStarters: ConversationStarter[] = [
-        {prompt: 'Write Hello World in Python, C++, and Java.'},
-        {prompt: 'Write hello world in Python.'},
+        {prompt: 'Write Hello World in Python, C++, and Java.', icon: <span>⭐️</span>, label: 'Prompt 1'},
+        {prompt: 'Write hello world in Python.', icon: 'https://content.nlkit.com/logos/nlkit.png', label: 'Prompt 2'},
         {prompt: 'Write a poem using markdown and emojis'},
         {prompt: 'What is your name?'},
         {prompt: 'What is your favorite color?'},
