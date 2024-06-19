@@ -83,13 +83,17 @@ export const Roadmap = ({className}: { className?: string }) => {
                 </FeatureToImplement>
             </div>
             <p style={{textAlign: 'center'}}>
-                Community members can also contribute to the roadmap<br/>
-                by submitting feature requests on our&nbsp;
-                <Link href="https://discord.com/invite/SRwDmZghNB">Discord</Link> server via <Link
-                href="https://github.com/nlkitai/nlux/issues">GitHub issues</Link>.<br/>
-                Companies looking for <Link href="https://www.nlkit.com/enterprise">prioritized feature
-                requests</Link>&nbsp;
-                are also welcome to reach out.
+                <div>
+                    Community members are welcome to contribute to the roadmap<br/>
+                    by submitting feature requests on our&nbsp;
+                    <Link href="https://discord.com/invite/SRwDmZghNB">Discord</Link> server or via <Link
+                    href="https://github.com/nlkitai/nlux/issues">GitHub issues</Link>.<br/>
+                </div>
+                <div style={{marginTop: '8px'}}>
+                    For companies seeking prioritized feature requests and support,<br/>
+                    please consider our&nbsp;
+                    <Link href="https://nlkit.com/enterprise">Enterprise package</Link>.
+                </div>
             </p>
         </div>
     );
