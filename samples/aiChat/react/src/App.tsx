@@ -190,11 +190,26 @@ function App() {
     }, [globalThis?.trustedTypes]);
 
     const conversationStarters: ConversationStarter[] = [
-        {prompt: 'Write Hello World in Python, C++, and Java.'},
-        {prompt: 'Write hello world in Python.'},
-        {prompt: 'Write a poem using markdown and emojis'},
-        {prompt: 'What is your name?'},
-        {prompt: 'What is your favorite color?'},
+      {
+        icon: "https://avatars.githubusercontent.com/u/59267562?v=4",
+        prompt: "Write Hello World in Python, C++, and Java.",
+        label: "Python, C++ and Java Intro",
+      },
+      {
+        icon: (
+          <img
+            src="https://avatars.githubusercontent.com/u/59267562?v=4"
+            width={20}
+          />
+        ),
+        prompt: "Write hello world in Python.",
+      },
+      {
+        prompt: "Write a poem using markdown and emojis",
+        label: "Poem with markdown and emojis",
+      },
+      { prompt: "What is your name?" },
+      { prompt: "What is your favorite color?" },
     ];
 
     return (
