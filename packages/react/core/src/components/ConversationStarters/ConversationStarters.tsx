@@ -13,7 +13,7 @@ export const ConversationStarters = (props: ConversationStartersProps) => {
         >
           <ConversationStarterIcon icon={conversationStarter.icon} />
           <span className="nlux-comp-conversationStarter-prompt">
-            {conversationStarter.prompt}
+            {conversationStarter.label ?? conversationStarter.prompt}
           </span>
         </button>
       ))}
