@@ -122,10 +122,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // showWelcomeMessage: false,
             conversationStarters: [
                 {
-                    prompt: 'What can I help you with today? Imagine I am a chatbot.',
+                  icon: "https://avatars.githubusercontent.com/u/59267562?v=4",
+                  prompt: "Write Hello World in Python, C++, and Java.",
                 },
                 {
-                    prompt: 'How can I assist you today?',
+                  prompt: "What can I help you with today? Imagine I am a chatbot.",
+                  label: "Reverse Roles",
+                },
+                {
+                  prompt: "How can I assist you today?",
                 },
             ],
         })
