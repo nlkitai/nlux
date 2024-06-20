@@ -29,7 +29,7 @@ export const createConversationStartersDom = (
     conversationStarterText.classList.add(
       "nlux-comp-conversationStarter-prompt"
     );
-    conversationStarterText.textContent = item.prompt;
+    conversationStarterText.textContent = item.label ?? item.prompt;
 
     conversationStarter.appendChild(conversationStarterIcon);
     conversationStarter.appendChild(conversationStarterText);
