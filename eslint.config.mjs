@@ -30,6 +30,7 @@ export default tsEslint.config(
             'specs/**',
             'samples/**',
             'packages/js/core/src/aiChat/comp/comp.ts',
+            'packages/react/core/src/exports/hooks/usePrimitivesContext.tsx',
             'packages/shared/src/markdown/snapshot/marked/*.ts',
             'packages/shared/src/utils/dequal.ts',
         ],

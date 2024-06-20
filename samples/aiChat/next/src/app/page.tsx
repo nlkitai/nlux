@@ -1,6 +1,6 @@
 'use client';
 import {AiChat, ChatAdapter} from '@nlux-dev/react/src';
-import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/themes/src/unstyled/main.css';
 import Image from 'next/image';
 import {aiReply} from '@/app/aiReply/route';
 
@@ -38,6 +38,7 @@ export default function HomePage() {
                     displayOptions={{
                         width: 600,
                         height: 400,
+                        themeId: 'MyBRAND',
                     }}
                 />
             </div>

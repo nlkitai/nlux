@@ -197,7 +197,7 @@ export type {
 
 export type {
     SanitizerExtension,
-} from './aiChat/sanitizer/sanitizer';
+} from '@shared/sanitizer/sanitizer';
 
 // CONVERSATION _____________
 

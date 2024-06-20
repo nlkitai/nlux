@@ -8,7 +8,6 @@ export type {
     ConversationLayout,
     HistoryPayloadSize,
     HighlighterExtension,
-    SanitizerExtension,
     AiChatPropsInEvents,
     UpdatableAiChatProps,
 } from '@nlux/core';
@@ -39,6 +38,10 @@ export type {
 export type {
     ChatItem,
 } from '@shared/types/conversation';
+
+export type {
+    SanitizerExtension,
+} from '@shared/sanitizer/sanitizer';
 
 export type {
     ChatAdapter,
@@ -95,6 +98,10 @@ export type {
 export {
     AiChat,
 } from './exports/AiChat';
+
+export {
+    Markdown,
+} from './exports/primitives/Markdown';
 
 export type {
     AiChatUIOverrides,

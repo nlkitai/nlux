@@ -107,6 +107,12 @@ document.addEventListener('DOMContentLoaded', () => {
         colorScheme,
     };
 
+    const domElement = document.createElement('div');
+    domElement.style.width = '24px';
+    domElement.style.height = '24px';
+    domElement.style.backgroundColor = 'red';
+
+
     const aiChat = createAiChat<string>()
         // .withAdapter(nlBridgeAdapter)
         // .withAdapter(openAiAdapter)
@@ -122,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // showWelcomeMessage: false,
             conversationStarters: [
                 {
-                  icon: "https://avatars.githubusercontent.com/u/59267562?v=4",
+                  icon: 'https://content.nlkit.com/logos/nlkit.png',
                   prompt: "Write Hello World in Python, C++, and Java.",
                 },
                 {
@@ -130,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   label: "Reverse Roles",
                 },
                 {
+                  icon: domElement,
                   prompt: "How can I assist you today?",
                 },
             ],
