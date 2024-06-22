@@ -249,7 +249,7 @@ Let's take a look at what is happening in this code:
     This tells the Next.js framework that **this file is intended to run on the client-side**.
 1. We import `AiChat` from `@nlux/react` and the default theme `@nlux/themes/nova.css`.
 2. We define a `chatAdapter` object that implements the interface `ChatAdapter`.<br />
-    It contains on method `batchText` that handles chat responses generated in a single batch.
+    It contains on method `streamText` that handles chat responses streaming.
 3. We render the `<AiChat />` component with the `chatAdapter` object.
 
 ---
