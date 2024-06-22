@@ -218,7 +218,6 @@ export default function Chat() {
             }
       
             const content = textDecoder.decode(value);
-            console.log(content, value)
             if (content) {
               observer.next(content);
             }
