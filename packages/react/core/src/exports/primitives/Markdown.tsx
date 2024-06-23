@@ -1,4 +1,3 @@
-import {MessageOptions} from '../messageOptions';
 import {useContext, useMemo} from 'react';
 import {primitivesContext} from '../hooks/usePrimitivesContext';
 import {MarkdownSnapshotRenderer} from '../../sections/MessageRenderer/MarkdownSnapshotRenderer';
