@@ -6,7 +6,9 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + rsc adapter + events + aiServerComponentStreamStarted', () => {
+// Skipping as useAsRscAdapter is not included in the public GitHub repository.
+describe.skip('<AiChat /> + rsc adapter + events + aiServerComponentStreamStarted', () => {
+
     describe('<AiChat /> + submit prompt + rsc adapter', () => {
         let adapterController: AdapterController | undefined;
 

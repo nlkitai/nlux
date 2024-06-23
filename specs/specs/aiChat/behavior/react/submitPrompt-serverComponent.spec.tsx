@@ -7,7 +7,8 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
 
-describe('<AiChat /> + submit prompt + server component adapter', () => {
+// Skipping as useAsRscAdapter is not included in the public GitHub repository.
+describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
