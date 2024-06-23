@@ -20,7 +20,7 @@ export default function HomePage() {
     };
 
     const rscAdapter: ChatAdapter = useAsRscAdapter(
-        import('@/app/stream-ui/weather'),
+        import('./stream-ui/weather'),
         // import('@/app/stream-ui/hello'),
         // import('@/app/stream-ui/ai-said'),
     );
