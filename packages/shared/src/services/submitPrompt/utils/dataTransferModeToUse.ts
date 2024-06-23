@@ -1,14 +1,18 @@
-import {ChatAdapter, DataTransferMode} from '../../../types/adapters/chat/chatAdapter';
+import {ChatAdapter as CoreChatAdapter, DataTransferMode} from '../../../types/adapters/chat/chatAdapter';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
+import {ServerComponentChatAdapter} from '../../../types/adapters/chat/serverComponentChatAdapter';
 
 export const getDataTransferModeToUse = <AiMsg>(
-    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+    adapter: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
 ): DataTransferMode => {
     const supportedDataTransferModes: DataTransferMode[] = [];
-    if (adapter.streamText !== undefined) {
+    const adapterAsCoreAdapter: CoreChatAdapter<AiMsg> | undefined = adapter as CoreChatAdapter<AiMsg> | undefined;
+    const adapterAsEsmAdapter: ServerComponentChatAdapter<AiMsg> | undefined = adapter as ServerComponentChatAdapter<AiMsg> | undefined;
+
+    if (adapterAsCoreAdapter?.streamText !== undefined || adapterAsEsmAdapter?.streamServerComponent !== undefined) {
         supportedDataTransferModes.push('stream');
     }
-    if (adapter.batchText !== undefined) {
+    if (adapterAsCoreAdapter?.batchText !== undefined) {
         supportedDataTransferModes.push('batch');
     }
 
