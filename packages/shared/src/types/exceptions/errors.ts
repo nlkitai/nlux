@@ -19,6 +19,7 @@ export const NLErrors = {
     //
     'failed-to-load-content': 'Failed to load content',
     'failed-to-stream-content': 'Failed to stream content',
+    'failed-to-stream-server-component': 'Failed to stream server component',
 
     //
     // Content rendering errors

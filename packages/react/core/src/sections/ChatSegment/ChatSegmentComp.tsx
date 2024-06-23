@@ -1,12 +1,13 @@
-import {
+import React, {
     createRef,
-    forwardRef,
+    forwardRef, FunctionComponent, isValidElement,
     ReactNode,
     Ref,
     RefObject,
     useEffect,
     useImperativeHandle,
     useMemo,
+    useRef,
     useState,
 } from 'react';
 import {AiBatchedMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
@@ -18,6 +19,7 @@ import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
 import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
@@ -32,6 +34,14 @@ export const ChatSegmentComp: <AiMsg>(
         () => new Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>(), [],
     );
 
+    const serverComponentsRef = useRef<Map<string, ReactNode>>(
+        new Map(),
+    );
+
+    const serverComponentsFunctionsRef = useRef<Map<string, FunctionComponent>>(
+        new Map<string, FunctionComponent>(),
+    );
+
     const chatItemsStreamingBuffer = useMemo(
         () => new Map<string, Array<AiMsg>>(), [],
     );
@@ -39,6 +49,8 @@ export const ChatSegmentComp: <AiMsg>(
     useEffect(() => {
         if (chatSegment.items.length === 0) {
             chatItemsRef.clear();
+            serverComponentsRef.current.clear();
+            serverComponentsFunctionsRef.current.clear();
             return;
         }
 
@@ -47,6 +59,14 @@ export const ChatSegmentComp: <AiMsg>(
         itemsInRefsMap.forEach((itemInRefsMap) => {
             if (!itemsInSegments.has(itemInRefsMap)) {
                 chatItemsRef.delete(itemInRefsMap);
+            }
+        });
+
+        const serverComponentsInRefsMap = new Set<string>(serverComponentsRef.current.keys());
+        serverComponentsInRefsMap.forEach((itemInRefsMap) => {
+            if (!itemsInSegments.has(itemInRefsMap)) {
+                serverComponentsRef.current.delete(itemInRefsMap);
+                serverComponentsFunctionsRef.current.delete(itemInRefsMap);
             }
         });
     }, [chatSegment.items]);
@@ -134,6 +154,43 @@ export const ChatSegmentComp: <AiMsg>(
                     chatItemsRef.set(chatItem.uid, ref);
                 }
 
+                let contentToUse: AiMsg[] | ReactNode | undefined = chatItem.content;
+                let contentType: 'text' | 'server-component' = 'text';
+
+                if (typeof contentToUse === 'function') {
+                    const functionRef = serverComponentsFunctionsRef.current.get(chatItem.uid);
+                    const serverComponentRef = serverComponentsRef.current.get(chatItem.uid);
+
+                    if (functionRef && serverComponentRef) {
+                        contentToUse = serverComponentRef;
+                        contentType = 'server-component';
+                    } else {
+                        serverComponentsRef.current.delete(chatItem.uid);
+                        serverComponentsFunctionsRef.current.delete(chatItem.uid);
+
+                        try {
+                            const ContentToUseFC = contentToUse as FunctionComponent;
+                            contentToUse = <ContentToUseFC/>;
+
+                            if (!contentToUse || !React.isValidElement(contentToUse)) {
+                                throw new Error(`Invalid React element returned from the AI chat content function.`);
+                            } else {
+                                contentType = 'server-component';
+                                serverComponentsRef.current.set(chatItem.uid, contentToUse as StreamedServerComponent);
+                                serverComponentsFunctionsRef.current.set(chatItem.uid, ContentToUseFC);
+                            }
+                        } catch (_error) {
+                            warn(
+                                `The type of the AI chat content is an invalid function.\n` +
+                                `If you're looking to render a React Server Components, please refer to ` +
+                                `docs.nlkit.com/nlux for more information.\n`,
+                            );
+
+                            return null;
+                        }
+                    }
+                }
+
                 if (chatItem.participantRole === 'user') {
                     //
                     // User chat item — That should always be in complete state.
@@ -148,10 +205,10 @@ export const ChatSegmentComp: <AiMsg>(
                         return null;
                     }
 
-                    if (!isPrimitiveReactNodeType(chatItem.content)) {
+                    if (!isPrimitiveReactNodeType(contentToUse)) {
                         warnOnce(
                             `User chat item should have primitive content (string, number, boolean, null) — ` +
-                            `Current content: ${JSON.stringify(chatItem.content)} — ` +
+                            `Current content: ${JSON.stringify(contentToUse)} — ` +
                             `Segment UID: ${chatSegment.uid}`,
                         );
 
@@ -165,6 +222,7 @@ export const ChatSegmentComp: <AiMsg>(
                             uid={chatItem.uid}
                             status={'complete'}
                             direction={'sent'}
+                            contentType={contentType}
                             layout={props.layout}
                             messageOptions={props.messageOptions}
                             dataTransferMode={'batch'} // User chat items are always in batch mode.
@@ -195,10 +253,11 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={chatItem.status}
                                     direction={'received'}
+                                    contentType={contentType}
                                     layout={props.layout}
                                     messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}
-                                    streamedContent={chatItem.content}
+                                    streamedContent={contentToUse as AiMsg[]}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     markdownContainersController={props.markdownContainersController}
@@ -210,11 +269,11 @@ export const ChatSegmentComp: <AiMsg>(
                             // we render the message content. We also check if the content is primitive and if a custom
                             // renderer is provided.
                             //
-                            if (!isPrimitiveReactNodeType(chatItem.content) && !props.messageOptions?.responseRenderer) {
+                            if (contentType === 'text' && !isPrimitiveReactNodeType(contentToUse) && !props.messageOptions?.responseRenderer) {
                                 warn(
                                     `When the type of the AI chat content is not primitive (object or array), ` +
                                     `a custom renderer must be provided — ` +
-                                    `Current content: ${JSON.stringify(chatItem.content)} — ` +
+                                    `Current content: ${JSON.stringify(contentToUse)} — ` +
                                     `Segment UID: ${chatSegment.uid}`,
                                 );
 
@@ -231,7 +290,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     layout={props.layout}
                                     messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}
-                                    fetchedContent={chatItem.content}
+                                    fetchedContent={contentToUse as AiMsg}
+                                    contentType={contentType}
                                     fetchedServerResponse={chatItem.serverResponse}
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
@@ -245,6 +305,7 @@ export const ChatSegmentComp: <AiMsg>(
                         // No need for custom renderer here.
                         //
                         if (chatItem.status === 'streaming') {
+                            const fetchedContent = (contentType === 'server-component' && isValidElement(contentToUse)) ? contentToUse : undefined;
                             return (
                                 <ForwardRefChatItemComp
                                     ref={ref}
@@ -252,6 +313,8 @@ export const ChatSegmentComp: <AiMsg>(
                                     uid={chatItem.uid}
                                     status={'streaming'}
                                     direction={'received'}
+                                    contentType={contentType}
+                                    fetchedContent={fetchedContent}
                                     layout={props.layout}
                                     messageOptions={props.messageOptions}
                                     dataTransferMode={chatItem.dataTransferMode}

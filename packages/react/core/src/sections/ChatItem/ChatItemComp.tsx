@@ -1,4 +1,4 @@
-import {forwardRef, ReactElement, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import {forwardRef, ReactElement, ReactNode, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
@@ -76,15 +76,15 @@ export const ChatItemComp: <AiMsg>(
         }
 
         const PromptRenderer = props.messageOptions.promptRenderer;
-        return (
-            <PromptRenderer uid={props.uid} prompt={props.fetchedContent as string}/>
-        );
+        return <PromptRenderer uid={props.uid} prompt={props.fetchedContent as string}/>;
     }, [props.messageOptions?.promptRenderer, props.fetchedContent, props.uid]);
 
-    const ForwardRefStreamContainerComp = useMemo(() => forwardRef(
-        StreamContainerComp<AiMsg>,
-    ), []);
+    const ForwardRefStreamContainerComp = useMemo(
+        () => forwardRef(StreamContainerComp<AiMsg>),
+        [],
+    );
 
+    const isServerComponent = props.contentType === 'server-component';
     const isAssistantMessage = props.direction === 'received';
     const isUserMessage = props.direction === 'sent';
     const isStreamed = props.dataTransferMode === 'stream';
@@ -92,7 +92,7 @@ export const ChatItemComp: <AiMsg>(
     return (
         <div className={className}>
             {participantInfo}
-            {isAssistantMessage && isStreamed && (
+            {isAssistantMessage && isStreamed && !isServerComponent && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
                     uid={props.uid}
@@ -112,11 +112,21 @@ export const ChatItemComp: <AiMsg>(
                     }}
                 />
             )}
+            {isAssistantMessage && isStreamed && isServerComponent && (
+                <MessageComp
+                    uid={props.uid}
+                    message={props.fetchedContent as ReactNode}
+                    status={props.status}
+                    contentType={'server-component'}
+                    direction={props.direction}
+                />
+            )}
             {isAssistantMessage && !isStreamed && (
                 <MessageComp
                     uid={props.uid}
                     message={AiMessageRenderer}
                     status={props.status}
+                    contentType={'text'}
                     direction={props.direction}
                 />
             )}
@@ -125,6 +135,7 @@ export const ChatItemComp: <AiMsg>(
                     uid={props.uid}
                     message={UserMessageRenderer}
                     status={props.status}
+                    contentType={'text'}
                     direction={props.direction}
                 />
             )}
