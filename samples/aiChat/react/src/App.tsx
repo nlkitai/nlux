@@ -8,6 +8,7 @@ import {
     PersonaOptions,
     ResponseRenderer,
     SanitizerExtension,
+    useAiChatApi,
     useAsStreamAdapter,
 } from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
@@ -190,6 +191,11 @@ function App() {
         return DOMPurify.sanitize(html);
     }, [globalThis?.trustedTypes]);
 
+    const api = useAiChatApi();
+    const sendHelloWorld = useCallback(() => {
+        api.sendMessage('Hello, World!');
+    }, [api]);
+
     const conversationStarters: ConversationStarter[] = [
         {prompt: 'Write Hello World in Python, C++, and Java.', icon: <span>⭐️</span>, label: 'Prompt 1'},
         {prompt: 'Write hello world in Python.', icon: 'https://content.nlkit.com/logos/nlkit.png', label: 'Prompt 2'},
@@ -307,10 +313,14 @@ function App() {
                     </select>
                 </div>
             </div>
+            <div>
+                <button onClick={sendHelloWorld}>Send Hello World</button>
+            </div>
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
                 adapter={langChainAdapter}
+                api={api}
                 // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
@@ -360,9 +370,7 @@ const responseRenderer: ResponseRenderer<string> = memo((props) => {
     return (
         <>
             {(dataTransferMode === 'batch' && content.length > 0) && (
-                <div>
-                    <Markdown>{content[0]}</Markdown>
-                </div>
+                <Markdown>{content[0]}</Markdown>
             )}
             {(dataTransferMode === 'stream') && <div ref={props.containerRef}/>}
             <div style={{

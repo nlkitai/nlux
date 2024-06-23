@@ -41,6 +41,7 @@ export const MessageReactExpo = () => {
                         uid={'1'}
                         direction={direction}
                         status={status}
+                        contentType={'text'}
                         message={message}
                     />
                 </div>

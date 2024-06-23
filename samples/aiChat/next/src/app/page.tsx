@@ -1,22 +1,37 @@
 'use client';
-import {AiChat, ChatAdapter} from '@nlux-dev/react/src';
-import '@nlux-dev/themes/src/unstyled/main.css';
+import {AiChat} from '@nlux-dev/react/src';
+import '@nlux-dev/themes/src/nova/main.css';
 import Image from 'next/image';
-import {aiReply} from '@/app/aiReply/route';
+import {useAsRscAdapter, ChatAdapter} from '@nlux-dev/react/src';
 
 export default function HomePage() {
-    const adapter: ChatAdapter = {
-        // NLUX supports streaming and batch modes for chat adapters
-        // This example uses batch mode
-        batchText: async (message: string) => aiReply(message),
+    const apiChatAdapter = {
+        batchText: async (prompt: string) => {
+            const r = {
+                method: 'POST',
+                body: JSON.stringify({prompt: prompt}),
+                headers: {'Content-Type': 'application/json'},
+            };
+
+            const response = await fetch('/api/chat', r);
+            const {reply} = await response.json();
+            return reply;
+        },
     };
+
+    const rscAdapter: ChatAdapter = useAsRscAdapter(
+        import('@/app/stream-ui/weather'),
+        // import('@/app/stream-ui/hello'),
+        // import('@/app/stream-ui/ai-said'),
+    );
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
             <PageHeader/>
             <div className="aiChat-container">
                 <AiChat
-                    adapter={adapter}
+                    // adapter={apiChatAdapter}
+                    adapter={rscAdapter}
                     personaOptions={{
                         assistant: {
                             name: 'Patrick',
@@ -38,7 +53,8 @@ export default function HomePage() {
                     displayOptions={{
                         width: 600,
                         height: 400,
-                        themeId: 'MyBRAND',
+                        // themeId: 'MyBRAND',
+                        colorScheme: 'dark',
                     }}
                 />
             </div>

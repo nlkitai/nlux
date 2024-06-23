@@ -1,11 +1,13 @@
+'use server';
+
 // An AI reply in the form of a React Server Component
 // that will get rendered inside NLUX AiChat.
 
 type AiReactComponentReplyProps = {
-    prompt: string;
+    prompt?: string;
 };
 
-export default async function AiReactComponentReply({prompt}: AiReactComponentReplyProps) {
+export const reply = async function AiReactComponentReply({prompt}: AiReactComponentReplyProps = {}) {
     // Fetch a response
     const response = await fetch('https://demo.api.nlux.ai/openai/chat/fetch', {
         method: 'POST',
