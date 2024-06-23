@@ -1,5 +1,6 @@
 import {MessageOptions as JavaScriptMessageOptions} from '@nlux/core';
 import {FC, RefObject} from 'react';
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 /**
  * Props for the custom React component that renders a message sent by the server.
@@ -17,6 +18,9 @@ import {FC, RefObject} from 'react';
  * representing each raw chunk of the response received from the server. The server response is only provided with
  * NLUX standard adapters. For custom adapters, everything is handled through the content prop and it will be empty.
  *
+ * @property {StreamedServerComponent} [serverComponent] The server component to render. This is only provided when
+ * <AiChat /> is used with a server-rendered UI component such as a React Server Component (RSC).
+ *
  * @property {RefObject<never>} containerRef If you opt for the NLUX markdown renderer, you can use this reference to
  * attach the rendered content to the DOM. Otherwise, you can ignore this prop and render the `content` directly.
  */
@@ -24,7 +28,9 @@ export type ResponseRendererProps<AiMsg> = {
     uid: string;
     dataTransferMode: 'stream' | 'batch';
     status: 'streaming' | 'complete';
+    contentType: 'text' | 'server-component';
     content: AiMsg[];
+    serverComponent?: StreamedServerComponent;
     serverResponse: unknown[];
     containerRef?: RefObject<never>;
 };
