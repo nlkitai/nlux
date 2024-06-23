@@ -44,7 +44,6 @@ export type {
 } from '@shared/sanitizer/sanitizer';
 
 export type {
-    ChatAdapter,
     StreamingAdapterObserver,
     DataTransferMode,
     StreamSend,
@@ -80,8 +79,16 @@ export type {
 } from './exports/props';
 
 export type {
+    ChatAdapter,
+} from './types/chatAdapter';
+
+export type {
     ConversationOptions,
 } from './types/conversationOptions';
+
+export type {
+    AiChatApi,
+} from './exports/hooks/useAiChatApi';
 
 export type {
     MessageOptions,
@@ -98,6 +105,10 @@ export type {
 export {
     AiChat,
 } from './exports/AiChat';
+
+export {
+    useAiChatApi,
+} from './exports/hooks/useAiChatApi';
 
 export {
     Markdown,
@@ -118,6 +129,10 @@ export {
 export {
     useAsStreamAdapter,
 } from './exports/hooks/useAsStreamAdapter';
+
+export {
+    useAsRscAdapter,
+} from './exports/hooks/useAsRscAdapter';
 
 export type {
     UpdateContextItem,
