@@ -1,6 +1,6 @@
 import {ChatAdapter, ChatAdapterExtras} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
+import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {waitForMilliseconds} from '../../utils/wait';
@@ -117,6 +117,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
             // Assert
             expect(listenToUserMessageReceived).toHaveBeenCalledWith({
                 content: prompt,
+                contentType: 'text',
                 participantRole: 'user',
                 status: 'complete',
                 time: expect.any(Date),
@@ -459,6 +460,7 @@ describe('submitPrompt() + stream data transfer mode', () => {
                         participantRole: 'assistant',
                         dataTransferMode: 'stream',
                         content: ['The', ' weather', ' is', ' sunny'],
+                        contentType: 'text',
                         serverResponse: undefined,
                     });
             });
@@ -538,12 +540,14 @@ describe('submitPrompt() + stream data transfer mode', () => {
                                 status: 'complete',
                                 participantRole: 'user',
                                 content: prompt,
+                                contentType: 'text',
                             },
                             {
                                 uid: expect.any(String),
                                 time: expect.any(Date),
                                 status: 'complete',
                                 content: ['The', ' weather', ' is', ' sunny'],
+                                contentType: 'text',
                                 participantRole: 'assistant',
                                 dataTransferMode: 'stream',
                                 serverResponse: [],

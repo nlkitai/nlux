@@ -1,6 +1,6 @@
 import {ChatAdapter, ChatAdapterExtras} from '@nlux-dev/core/src';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
-import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
+import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
 import {adapterBuilder} from '../../utils/adapterBuilder';
 import {AdapterController} from '../../utils/adapters';
 import {waitForMilliseconds} from '../../utils/wait';
@@ -119,6 +119,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                 content: prompt,
                 participantRole: 'user',
                 status: 'complete',
+                contentType: 'text',
                 time: expect.any(Date),
                 uid: expect.any(String),
             });
@@ -175,6 +176,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                     time: expect.any(Date),
                     dataTransferMode: 'batch',
                     content: 'Hi! The weather is sunny today.',
+                    contentType: 'text',
                     participantRole: 'assistant',
                     status: 'complete',
                 });
@@ -233,6 +235,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                     items: expect.arrayContaining([
                         {
                             content: prompt,
+                            contentType: 'text',
                             participantRole: 'user',
                             status: 'complete',
                             time: expect.any(Date),
@@ -240,6 +243,7 @@ describe('submitPrompt() + fetch data transfer mode', () => {
                         },
                         {
                             content: 'Hi! The weather is sunny today.',
+                            contentType: 'text',
                             participantRole: 'assistant',
                             status: 'complete',
                             dataTransferMode: 'batch',
