@@ -150,7 +150,7 @@ part of a training dataset to develop or improve AI models, or as an input for c
 translation tools.
 
 > Paragraphs (3.6) and (3.7) were added to the original MPL 2.0 license.  
-> The full license text can be found in the [LICENSE](LICENSE) file.
+> The full license text can be found in the [LICENSE](../LICENSE) file.
 
 **In a nutshell:**
 
@@ -161,7 +161,7 @@ translation tools.
 
 Wondering what it means to use software licensed under MPL 2.0? Learn more
 on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).  
-Please read the full license text in the [LICENSE](LICENSE) file for details.
+Please read the full license text in the [LICENSE](../LICENSE) file for details.
 
 ## About The Project 👨‍💻
 
