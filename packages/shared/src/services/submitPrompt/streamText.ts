@@ -16,7 +16,7 @@ import {uid} from '../../utils/uid';
 import {warn} from '../../utils/warn';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
-export const submitInStreamingMode = <AiMsg>(
+export const submitAndStreamTextResponse = <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
@@ -121,6 +121,7 @@ export const submitInStreamingMode = <AiMsg>(
                         uid: streamedMessageId,
                         status: 'complete',
                         content: streamedContent,
+                        contentType: 'text',
                         serverResponse: undefined,
                         time: new Date(),
                         participantRole: 'assistant',
@@ -150,6 +151,7 @@ export const submitInStreamingMode = <AiMsg>(
                             {
                                 uid: streamedMessageId,
                                 status: 'complete',
+                                contentType: 'text',
                                 content: streamedContent,
                                 serverResponse: streamedRawContent,
                                 time: new Date(),

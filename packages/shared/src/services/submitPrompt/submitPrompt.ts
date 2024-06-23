@@ -1,8 +1,9 @@
-import {ChatAdapter, DataTransferMode} from '../../types/adapters/chat/chatAdapter';
+import {ChatAdapter as CoreChatAdapter, DataTransferMode} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
 import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
 import {ChatSegmentObservable} from '../../types/chatSegment/chatSegmentObservable';
+import {ServerComponentChatAdapter} from '../../types/adapters/chat/serverComponentChatAdapter';
 
 /**
  * Represents a function that can be used to submit a prompt to the chat adapter.
@@ -11,10 +12,10 @@ import {ChatSegmentObservable} from '../../types/chatSegment/chatSegmentObservab
  */
 export type SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+    adapter: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     adapterExtras: ChatAdapterExtras<AiMsg>,
 ) => {
-    segment: ChatSegment<AiMsg>,
     dataTransferMode: DataTransferMode,
+    segment: ChatSegment<AiMsg>,
     observable: ChatSegmentObservable<AiMsg>,
 };

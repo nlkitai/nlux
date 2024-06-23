@@ -2,7 +2,7 @@ import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
 import {isStandardChatAdapter, StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
-import {AiBatchedMessage, ChatSegmentAiMessage} from '../../types/chatSegment/chatSegmentAiMessage';
+import {AiBatchedMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiMessageReceivedCallback,
     ChatSegmentCompleteCallback,
@@ -14,7 +14,7 @@ import {uid} from '../../utils/uid';
 import {warn} from '../../utils/warn';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
-export const submitInBatchMode = async <AiMsg>(
+export const submitAndBatchTextResponse = async <AiMsg>(
     segmentId: string,
     userMessage: ChatSegmentUserMessage,
     adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
@@ -47,6 +47,7 @@ export const submitInBatchMode = async <AiMsg>(
                 aiResponse = {
                     uid: responseUid,
                     content: preProcessedResponse,
+                    contentType: 'text',
                     serverResponse: rawResponse,
                     participantRole, status, time, dataTransferMode,
                 };
@@ -56,6 +57,7 @@ export const submitInBatchMode = async <AiMsg>(
             aiResponse = {
                 uid: responseUid,
                 content: response,
+                contentType: 'text',
                 serverResponse: undefined,
                 participantRole, status, time, dataTransferMode,
             };
@@ -68,7 +70,10 @@ export const submitInBatchMode = async <AiMsg>(
         //
         // We emit the AI message received event.
         //
-        const validAiResponse: ChatSegmentAiMessage<AiMsg> = aiResponse;
+        const validAiResponse = aiResponse as AiBatchedMessage<AiMsg> & {
+            status: 'complete';
+        };
+
         triggerAsyncCallback(() => {
             aiMessageReceivedCallbacks.forEach((callback) => {
                 callback(validAiResponse);

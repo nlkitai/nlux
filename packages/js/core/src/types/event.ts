@@ -11,6 +11,14 @@ export type MessageStreamStartedEventDetails = {
     uid: string;
 };
 
+export type ServerComponentStreamStartedEventDetails = {
+    uid: string;
+};
+
+export type ServerComponentRenderedEventDetails = {
+    uid: string;
+};
+
 export type MessageRenderedEventDetails<AiMsg = string> = {
     uid: string;
     message: AiMsg;
@@ -62,6 +70,18 @@ export type MessageSentCallback = (event: MessageSentEventDetails) => void;
 export type MessageStreamStartedCallback = (event: MessageStreamStartedEventDetails) => void;
 
 /**
+ * The callback for when a server component stream starts.
+ * This is used with React Server Component adapters to trigger an event when the component is about
+ * to get mounted.
+ */
+export type ServerComponentStreamStartedCallback = (event: ServerComponentStreamStartedEventDetails) => void;
+
+/**
+ * The callback for when a server component is loaded and successfully rendered on the screen.
+ */
+export type ServerComponentRenderedCallback = (event: ServerComponentRenderedEventDetails) => void;
+
+/**
  * The callback for when a message is received.
  * This is called when the chat component receives the full response from the adapter.
  * This does not mean that the message has been rendered yet. You should use the messageRendered
@@ -102,6 +122,8 @@ export type EventsMap<AiMsg> = {
     messageStreamStarted: MessageStreamStartedCallback;
     messageReceived: MessageReceivedCallback<AiMsg>;
     messageRendered: MessageReceivedCallback<AiMsg>;
+    serverComponentStreamStarted: ServerComponentStreamStartedCallback;
+    serverComponentRendered: ServerComponentRenderedCallback;
     error: ErrorCallback;
 };
 

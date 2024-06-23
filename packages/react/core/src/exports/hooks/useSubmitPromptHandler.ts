@@ -1,18 +1,20 @@
 import {ComposerOptions, EventsMap} from '@nlux/core';
 import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
-import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapter as CoreChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
-import {StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
+import {isStandardChatAdapter, StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '@shared/types/chatSegment/chatSegmentUserMessage';
 import {NLErrors} from '@shared/types/exceptions/errors';
 import {ComposerStatus} from '@shared/components/Composer/props';
 import {warn} from '@shared/utils/warn';
+import {ChatAdapter} from '../../types/chatAdapter';
 import {ImperativeConversationCompProps} from '../../sections/Conversation/props';
 import {AiChatProps} from '../props';
 import {useAdapterExtras} from './useAdapterExtras';
+import {ServerComponentChatAdapter} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 type SubmitPromptHandlerProps<AiMsg> = {
     aiChatProps: AiChatProps<AiMsg>;
@@ -103,12 +105,27 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             const promptToSubmit = promptTyped;
             const streamedMessageIds: Set<string> = new Set();
 
+            const adapterBridge: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> = isStandardChatAdapter(adapterToUse)
+                ? adapterToUse as StandardChatAdapter<AiMsg>
+                : (
+                    ((adapterToUse as ChatAdapter<AiMsg>).streamServerComponent) ? ({
+                        streamServerComponent: (adapterToUse as ChatAdapter<AiMsg>).streamServerComponent!,
+                    } satisfies ServerComponentChatAdapter<AiMsg>) : ({
+                        batchText: (adapterToUse as CoreChatAdapter<AiMsg>).batchText,
+                        streamText: (adapterToUse as CoreChatAdapter<AiMsg>).streamText,
+                    } satisfies CoreChatAdapter<AiMsg>)
+                );
+
+            //
+            // ⭐️ Important
+            // This is where the prompt is submitted to the API.
+            //
             const {
                 segment: chatSegment,
                 observable: chatSegmentObservable,
             } = submitPrompt<AiMsg>(
                 promptToSubmit,
-                adapterToUse,
+                adapterBridge,
                 adapterExtras,
             );
 
@@ -171,6 +188,25 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 streamedMessageIds.add(aiStreamedMessage.uid);
                 if (callbackEvents.current?.messageStreamStarted) {
                     callbackEvents.current.messageStreamStarted({uid: aiStreamedMessage.uid});
+                }
+            });
+
+            chatSegmentObservable.on('aiServerComponentStreamStarted', (aiServerComponentMessage) => {
+                handleSegmentItemReceived(aiServerComponentMessage);
+                domToReactRef.current.setComposerStatus('waiting');
+                if (promptTypedRef.current === promptToSubmit) {
+                    domToReactRef.current.setPrompt('');
+                }
+
+                streamedMessageIds.add(aiServerComponentMessage.uid);
+                if (callbackEvents.current?.serverComponentStreamStarted) {
+                    callbackEvents.current?.serverComponentStreamStarted({uid: aiServerComponentMessage.uid});
+                }
+            });
+
+            chatSegmentObservable.on('aiServerComponentStreamed', (streamedServerComponent) => {
+                if (callbackEvents.current?.serverComponentRendered) {
+                    callbackEvents.current?.serverComponentRendered({uid: streamedServerComponent.uid});
                 }
             });
 
