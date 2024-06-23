@@ -134,8 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 {
                     icon: domElement,
                     prompt: 'How can I assist you today?',
-                    icon: 'https://avatars.githubusercontent.com/u/59267562?v=4',
-                    prompt: 'Write Hello World in Python, C++, and Java.',
                 },
                 {
                     prompt: 'What can I help you with today? Imagine I am a chatbot.',
