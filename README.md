@@ -22,33 +22,52 @@
 
 ------
 
-`NLUX` (_for Natural Language User Experience_) is an open-source JavaScript and React JS library that makes it super
-simple to integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few
-lines of code, you can add conversational AI capabilities and interact with your favourite LLM.
+`NLUX` is React and JavaScript open-source library for building conversational AI interfaces. It makes it super simple
+to build web applications powered by Large Language Models (LLMs) and AI. With just a few  lines of code, you can add
+conversational AI capabilities and interact with your favourite AI models.
 
-[![NLUX UI For Any LLM](https://content.nlkit.com/images/github/nlux-ui-for-llms-banner.gif)](https://docs.nlkit.com/nlux)
+## Try `NLUX` 🚀
+
+Use `nlux-cli` to quickly spin up a new `Next.js`, `React`, or `Vanilla TypeScript` project with NLUX integrated.
+
+[![NLUX UI For Any LLM](https://content.nlkit.com/images/github/nlux-cli-animation.gif)](https://docs.nlkit.com/nlux)
+
+**Get started with `NLUX` and your favourite web framework under a minute:**
+
+```sh
+# Next.js 🔼 with NLUX 
+npx nlux-cli create next my-next-app
+```
+```sh
+# React ⚛️ , Vite, with NLUX
+npx nlux-cli create react my-react-app
+```
+```sh
+# Or, vanilla TypeScript 🟨 , Vite, with NLUX
+npx nlux-cli create vanilla my-vanilla-app
+```
 
 ## Docs & Examples 🔥
 
 * The docs website is available at:  
-**[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)**
+  **[docs.nlkit.com/nlux](https://docs.nlkit.com/nlux)**
 
 * Several **Get Started Guides** are available, including for:  
-  [Next.js and Vercel AI](https://docs.nlkit.com/nlux/learn/get-started/vercel-ai/) — 
-[LangChain LangServe](https://docs.nlkit.com/nlux/learn/get-started/nlux-langchain) — 
-[React with Node.js Backend](https://docs.nlkit.com/nlux/learn/get-started/nlux-nodejs-nlbridge-chatgpt)
+  [Next.js and Vercel AI](https://docs.nlkit.com/nlux/learn/get-started/vercel-ai/) —
+  [LangChain LangServe](https://docs.nlkit.com/nlux/learn/get-started/nlux-langchain) —
+  [React with Node.js Backend](https://docs.nlkit.com/nlux/learn/get-started/nlux-nodejs-nlbridge-chatgpt)
 
 ## Key Features 🌟
 
 * **Build AI Chat Interfaces In Minutes** ― High quality conversational AI interfaces with just a few lines of code.
 * **React Components & Hooks** ― `<AiChat />` for UI and `useChatAdapter` hook for easy integration.
+* **Next.js & Vercel AI** ― Out-of-the-box support, demos, and examples for Next.js and Vercel AI.
+* **React Server Components (RSC) and Generative UI** 🔥 ― With Next.js or any RSC compatible framework.
 * **LLM Adapters** ― For `ChatGPT` ― `LangChain` 🦜 `LangServe` APIs ― `Hugging Face` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** 🎯 for any LLM ― with support for stream or batch modes.
 * **Assistant and User Personas** ― Customize participant personas with names, images, and descriptions.
-* **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
-* **Custom Renderers** ― Render AI messages with custom components inside the chat interface.
 * **Highly Customizable** ― Tune almost every UI aspect through theming, layout options, and more.
-* **Zero Dependencies** ― Lightweight codebase ― Core with zero dependency and no external UI libraries.
+* **Zero Dependency** ― Lightweight codebase ― Core with zero dependency and no external UI libraries.
 
 ## Repo Content 📦
 
@@ -96,11 +115,11 @@ The following design principles guide the development of `NLUX`:
   Usage should unfold naturally without obstacles or friction. No teaching or thinking
   should be required to use UI built with `NLUX`.
 
-* **Performance** ― `NLUX` should be as fast as possible. Fast to load, fast to render
+* **Performant** ― `NLUX` should be as fast as possible. Fast to load, fast to render
   and update, fast to respond to user input. To achieve that, we should avoid unnecessary
   work, optimize for performance, minimize bundle size, and not depend on external libraries.
 
-* **Accessibility** ― UI built with `NLUX` should be accessible to everyone. It should be usable
+* **Accessible** ― UI built with `NLUX` should be accessible to everyone. It should be usable
   by people with disabilities, on various devices, in various environments, and using various
   input methods (keyboard, touch, voice).
 
@@ -144,8 +163,10 @@ Wondering what it means to use software licensed under MPL 2.0? Learn more
 on [MPL 2.0 FAQ](https://www.mozilla.org/en-US/MPL/2.0/FAQ/).  
 Please read the full license text in the [LICENSE](LICENSE) file for details.
 
-## About The Developer 👨‍💻
+## About The Project 👨‍💻
 
-`NLUX` is a new open-source project that's being led by [Salmen Hichri](https://github.com/salmenus), a senior front-end
-engineer with over a decade of experience building user interfaces and developer
+The project fits under the umbrella of [NLKit](https://nlkit.com), a suite of tools and libraries for building
+conversational AI applications. `NLUX` is the first project in the NLKit suite, with more to come.
+
+The project is being led by [Salmen Hichri](https://github.com/salmenus), a senior software engineer with over a decade of experience building user interfaces and developer
 tools at companies like Amazon and Goldman Sachs, and contributions to open-source projects.
