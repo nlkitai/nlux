@@ -1,5 +1,6 @@
-import {BatchSend, ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
+import {BatchSend} from '@shared/types/adapters/chat/chatAdapter';
+import {ChatAdapter} from '../../types/chatAdapter';
 
 /**
  * Use the function provided as a batch adapter to send and receive messages in a single batch.
