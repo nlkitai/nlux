@@ -66,6 +66,10 @@ export type {
     StandardAdapterInfo,
 } from '@shared/types/adapters/chat/standardAdapterConfig';
 
+export type {
+    StreamedServerComponent,
+} from '@shared/types/adapters/chat/serverComponentChatAdapter';
+
 // Exporting from — @nlux/react
 
 export type {
