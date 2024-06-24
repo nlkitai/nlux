@@ -37,7 +37,7 @@ describe("createConversationStartersDom", () => {
 
     expect(img).not.toBeNull();
     expect(img?.getAttribute("src")).toBe("http://example.com/icon.png");
-    expect(img?.getAttribute("width")).toBe("20px");
+    expect(img?.getAttribute("width")).toBe("16px");
   });
 
   it("should handle icons as HTML elements", () => {
