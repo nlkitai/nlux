@@ -33,7 +33,7 @@ We recommend using [`NLUX`'s custom adapters feature](/learn/adapters/custom-ada
 
 ## OpenAI Adapter + Proxies
 
-In order to connect to OpenAI's API, you need to [create an account and get an API key](/learn/adapters/open-ai/authentication).
+In order to connect to OpenAI's API, you need to create an account and get an API key.
 That API key is unique to your account, and it should be kept secret. **When building frontend applications, you should
 never expose your API key on a public page. Instead, you should use a proxy server to make requests to OpenAI's API**
 (Example: A Node.js server that handles authentication and makes requests to OpenAI's API on behalf of the user).
