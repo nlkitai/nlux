@@ -2,12 +2,24 @@
 sidebar_label: 'Generative UIs, Vercel AI, and NLUX RSC Adapter'
 ---
 
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
 # Generative UIs, Vercel AI, and NLUX RSC Adapter
 
-In this guide, you will learn about **React Server Components**, **Generative User Interfaces** (in the context of
-Vercel AI), how NLUX supports those features, and how to use them to build an AI-powered rich chat interface.
+Generative UIs allow developers to create dynamic and rich content powered by Large Language Models (LLMs).
+In this guide, you will learn about Generative UIs, and how to use them as chat responses in NLUX.
+
+<center>
+    <video controls={false} autoPlay={true} loop style={{ width: '600px', height: '407px', borderRadius: '20px', backgroundColor: 'black' }}>
+        <source src={useBaseUrl('/videos/learn/generative-ui-demo.mp4')} type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+</center>
+
+---
 
 ## What Are Generative UIs?
+<br /><br />
 
 Generative User Interfaces (UIs) are a new paradigm in web development that allows developers to create dynamic and
 interactive user interfaces using AI-generated content. One of the pioneer projects in this space is
@@ -19,7 +31,11 @@ Today, the production-ready version of Generative UIs is less about generating U
 prompts and more about using AI to pre-fill UI components with data. This feature was introduced in
 [Vercel AI SDK](https://vercel.com/blog/ai-sdk-3-generative-ui) and is now supported by NLUX.
 
+---
+
 ## What Are React Server Components?
+<br /><br />
+
 React Server Components are a new feature in React that allows developers to render HTML an HTML representation on the
 server and send it to the client in a serialized form that can be interpreted in the browser and rendered as a part of
 React component tree.
@@ -27,7 +43,11 @@ React component tree.
 Combining Generative UIs with React Server Components allows developers to create rich and interactive React Components
 on the server-side using AI-generated content.
 
-## Where Does NLUX Come In?
+---
+
+## How Do They Integrate With NLUX?
+<br /><br />
+
 `NLUX` is a library that simplifies the process of building AI-powered conversational interfaces. It provides a set of
 adapters that allow developers to connect their chat UIs to different AI services and models.
 
