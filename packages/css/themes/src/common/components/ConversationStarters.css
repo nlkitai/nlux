@@ -41,6 +41,14 @@
         text-overflow: ellipsis;
         line-height: 1.3rem;
       }
+      > .nlux-comp-conversaationStarter-icon-container {
+        width: 12px;
+        height: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
     }
   }
 }
