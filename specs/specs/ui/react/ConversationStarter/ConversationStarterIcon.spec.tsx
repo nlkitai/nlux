@@ -19,7 +19,7 @@ describe("When conversationStarters is provided", () => {
       "src",
       "https://avatars.githubusercontent.com/u/59267562?v=4"
     );
-    expect(imgElement).toHaveAttribute("width", "20");
+    expect(imgElement).toHaveAttribute("width", "16");
   });
 
   it("Should render the custom element", async () => {
