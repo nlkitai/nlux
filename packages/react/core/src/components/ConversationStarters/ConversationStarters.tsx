@@ -28,5 +28,7 @@ export const ConversationStarterIcon = ({
 }) => {
   if (!icon) return null;
   if (typeof icon === "string") return <img src={icon} width={16} />;
-  return <div className="nlux-comp-conversaationStarter-icon-container">{icon}</div>;
+  return (
+    <div className="nlux-comp-conversationStarter-icon-container">{icon}</div>
+  );
 };
