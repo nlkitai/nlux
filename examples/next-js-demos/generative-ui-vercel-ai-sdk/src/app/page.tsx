@@ -36,7 +36,7 @@ export default function HomePage() {
                     conversationOptions={{
                         conversationStarters: [
                             // Funny prompts as if you're talking to HarryBotter
-                            {prompt: 'Generate a sales chart'},
+                            {label: 'Generate sales chart', prompt: 'Generate a chart with top 3 performing enterprise sales products in my company'},
                             {prompt: 'What is the weather in San Francisco?'},
                             {prompt: 'Tell me a funny joke'},
                         ],

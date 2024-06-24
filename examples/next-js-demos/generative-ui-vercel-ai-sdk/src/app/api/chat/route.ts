@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     const result = await streamText({
         model: openai('gpt-4-turbo'),
         messages: [{
-            role: 'system',
+            role: 'user',
             content: prompt,
         }],
         async onFinish() {
