@@ -25,6 +25,19 @@ const getCategories = (colorScheme) => ([
         )
     },
     {
+        name: 'Generative UI With Next.js',
+        content: (
+            <iframe
+                style={{
+                    width: 840,
+                    maxWidth: '100%',
+                    height: 520,
+                }}
+                src={`https://genui-demo-rho.vercel.app/`}
+            ></iframe>
+        )
+    },
+    {
         name: 'ChatGPT-Inspired UI',
         content: (
             <iframe
