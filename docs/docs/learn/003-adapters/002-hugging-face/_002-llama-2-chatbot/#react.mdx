@@ -1,7 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## How to connect to Llama 2 on Hugging Face
+## How to connect to Llama on Hugging Face
 
 ### Installation
 
@@ -36,7 +36,7 @@ const Component = () => {
     const adapter = useChatAdapter({
         dataTransferMode: 'stream',
         model: '<MODEL NAME OR URL>',
-        systemMessage: '<SYSTEM MESSAGE FOR LLAMA 2>',
+        systemMessage: '<SYSTEM MESSAGE FOR LLAMA>',
         preProcessors: {
             input: llama2InputPreProcessor,
             output: llama2OutputPreProcessor,
