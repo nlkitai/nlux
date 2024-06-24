@@ -1,0 +1,145 @@
+---
+sidebar_label: 'LangChain LangServe'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+
+import InstallationReactJs from './_003-langchain-langserve/#react/installation.mdx';
+import InstallationJavaScript from './_003-langchain-langserve/#js/installation.mdx';
+
+import UsageReactJs from './_003-langchain-langserve/#react/usage.mdx';
+import UsageJavaScript from './_003-langchain-langserve/#js/usage.mdx';
+
+import UsageWithGenericsReactJs from './_003-langchain-langserve/#react/usage-generics.mdx';
+import UsageWithGenericsJavaScript from './_003-langchain-langserve/#js/usage-generics.mdx';
+
+import ConfigUrlReactJs from './_003-langchain-langserve/#react/config/url.mdx';
+import ConfigUrlJavaScript from './_003-langchain-langserve/#js/config/url.mdx';
+
+import ConfigUseInputSchemaReactJs from './_003-langchain-langserve/#react/config/useInputSchema.mdx';
+import ConfigUseInputSchemaJavaScript from './_003-langchain-langserve/#js/config/useInputSchema.mdx';
+
+import ConfigLangServeConfigReactJs from './_003-langchain-langserve/#react/config/langServeConfig.mdx';
+import ConfigLangServeConfigJavaScript from './_003-langchain-langserve/#js/config/langServeConfig.mdx';
+
+import ConfigDataTransferModeReactJs from './_003-langchain-langserve/#react/config/dataTransferMode.mdx';
+import ConfigDataTransferModeJavaScript from './_003-langchain-langserve/#js/config/dataTransferMode.mdx';
+
+import ConfigInputPreProcessorReactJs from './_003-langchain-langserve/#react/config/inputPreProcessor.mdx';
+import ConfigInputPreProcessorJavaScript from './_003-langchain-langserve/#js/config/inputPreProcessor.mdx';
+
+import ConfigOutputPreProcessorReactJs from './_003-langchain-langserve/#react/config/outputPreProcessor.mdx';
+import ConfigOutputPreProcessorJavaScript from './_003-langchain-langserve/#js/config/outputPreProcessor.mdx';
+
+# LangChain LangServe
+
+[LangChain](https://www.langchain.com/) is a popular framework for building backend services powered by large language
+models. It enables applications that are context-aware. It allows connecting a language model to sources of context
+such as databases, APIs, and other services. It also relies on language models to reason about the context.
+
+[LangServe](https://www.langchain.com/langserve) is a library that comes with LangChain, and that allows developers to
+build Restful APIs that can be used to interact with language models. A LangServe API provides a set of pre-defined
+endpoints and an input/out schema that can be used to interact with the language model.
+
+This documentation page is about the standard adapter provided by `NLUX` for APIs built using LangServe.
+
+---
+
+## Installation
+
+<PlatformSelector reactJs={InstallationReactJs} javascript={InstallationJavaScript}/>
+
+---
+
+## Usage
+
+<PlatformSelector reactJs={UsageReactJs} javascript={UsageJavaScript}/>
+
+> ### Response Type and Generics
+
+By default, the `LangServe` adapter assumes that the parsed response from the LangServe API is a `string`.<br />
+If you provide an output pre-processor that returns a different type, you can specify the type of the response using
+generics, so it can be used in custom renderers, and other parts of the `NLUX` library.
+
+<PlatformSelector reactJs={UsageWithGenericsReactJs} javascript={UsageWithGenericsJavaScript}/>
+
+---
+
+## Configuration
+
+---
+
+> ### Runnable URL
+
+This is the URL of the LangServe API.<br />
+Example: `https://my-langserver-api.example.com/parrot-speaks`
+
+Do **NOT** append the specific LangServe endpoint (such as `/invoke` `/stream` or `/input_schema`) to the URL.
+The adapter will automatically append the endpoint to the URL based on other configuration.
+
+<PlatformSelector reactJs={ConfigUrlReactJs} javascript={ConfigUrlJavaScript}/>
+
+---
+
+> ### Data Transfer Mode
+
+The data transfer mode to use when communicating with the LangServe runnable.
+`NLUX` LangServe adapter supports `stream` and `batch` modes.
+
+When the adapter is configured to use `stream` mode, the `/stream` endpoint of the LangServe API will be used to
+communicate with the runnable. When the adapter is configured to use `batch` mode, the `/invoke` endpoint will be used.
+
+<PlatformSelector reactJs={ConfigDataTransferModeReactJs} javascript={ConfigDataTransferModeJavaScript}/>
+
+---
+
+> ### Input Pre-Processor
+
+The input pre-processor is a function that is called before sending the input to the LangServe API.
+It can be used to transform the input before sending it to the runnable.
+
+Whatever this function returns will be sent to the runnable under the `input` property.
+
+Example: If your runnable expects an object with `user_prompt` and `additional_data` properties, you can use the
+following input pre-processor in the example below to transform the input.
+
+<PlatformSelector reactJs={ConfigInputPreProcessorReactJs} javascript={ConfigInputPreProcessorJavaScript}/>
+
+---
+
+> ### Output Pre-Processor
+
+The output pre-processor is a function that is called after receiving the output from the LangServe API.
+The `output` parameter of this function will get the part of the response from the runnable returned
+under the `output` property.
+
+This function returns a string that will be used displayed in the `NLUX` conversational UI.
+
+Example: If your runnable returns an object with `value` and `base` properties, you can use the out in the
+example below to transform the output to a string.
+
+<PlatformSelector reactJs={ConfigOutputPreProcessorReactJs} javascript={ConfigOutputPreProcessorJavaScript}/>
+
+---
+
+> ### LangServe Config
+
+The LangServe config object is a set of key-value pairs that will be sent to the LangServe runnable as part of the
+request body.
+
+Example: If your runnable expects a `session_id` and `requester_info` properties, you can use the config in the
+example below to send these properties to the runnable.
+
+<PlatformSelector reactJs={ConfigLangServeConfigReactJs} javascript={ConfigLangServeConfigJavaScript}/>
+
+---
+
+> ### Use Input Schema
+
+When no `inputPreProcessor` is provided, the LangServe adapter will attempt to call `/input_schema`
+endpoint on the LangServe runnable and build the input according to the schema retrieved.
+Set this option to `false` to disable this behavior.
+
+If disabled, the input will be sent to the runnable as a string without any transformation.
+
+<PlatformSelector reactJs={ConfigUseInputSchemaReactJs} javascript={ConfigUseInputSchemaJavaScript}/>

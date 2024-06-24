@@ -16,7 +16,7 @@ export const MessageComp = function (props: MessageProps) {
 
     const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
-    if (props.status === 'streaming') {
+    if (props.status === 'streaming' && props.contentType === 'text') {
         // When streaming, the message is not rendered — As content is streamed in real-time and appended
         // to the DOM directly.
         return (
@@ -27,7 +27,6 @@ export const MessageComp = function (props: MessageProps) {
     // When the message is complete, render the message content.
     // If the message is a function, it means that it's a custom message renderer.
     const message = typeof props.message === 'function' ? <props.message/> : props.message;
-
     return (
         <div className={className}>
             {message}

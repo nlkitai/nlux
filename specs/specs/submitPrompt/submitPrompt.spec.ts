@@ -1,6 +1,6 @@
 import {ChatAdapterExtras, StandardAdapterInfo, StandardChatAdapter} from '@nlux-dev/core/src';
 import {describe, expect, it, vi} from 'vitest';
-import {submitPrompt} from '../../../packages/shared/src/services/submitPrompt/submitPromptImpl';
+import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
 import {waitForMilliseconds} from '../../utils/wait';
 
 describe('submitPrompt()', () => {

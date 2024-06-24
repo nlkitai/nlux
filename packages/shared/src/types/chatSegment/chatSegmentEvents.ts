@@ -1,12 +1,15 @@
 import {AnyAiMsg} from '../anyAiMsg';
 import {NLErrorId} from '../exceptions/errors';
 import {ChatSegment, ChatSegmentEvent} from './chatSegment';
-import {AiStreamedMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
+import {AiStreamedMessage, AiStreamedServerComponentMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
+import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
 
 export type ChatSegmentEventsMap<AiMsg> = {
     userMessageReceived: UserMessageReceivedCallback;
     aiMessageReceived: AiMessageReceivedCallback<AiMsg>;
+    aiServerComponentStreamStarted: AiServerComponentStreamStartedCallback;
+    aiServerComponentStreamed: AiServerComponentStreamedCallback;
     aiMessageStreamStarted: AiMessageStreamStartedCallback<AiMsg>;
     aiChunkReceived: AiMessageChunkReceivedCallback<AiMsg>;
     aiMessageStreamed: AiMessageStreamedCallback<AiMsg>;
@@ -22,6 +25,16 @@ export type AiMessageReceivedCallback<AiMsg> = (aiMessage: ChatSegmentAiMessage<
     status: 'complete';
     content: AiMsg;
     serverResponse: string | object | undefined;
+}) => void;
+
+export type AiServerComponentStreamStartedCallback = (aiMessage: AiStreamedServerComponentMessage & {
+    status: 'streaming';
+    content: StreamedServerComponent;
+}) => void;
+
+export type AiServerComponentStreamedCallback = (aiMessage: AiStreamedServerComponentMessage & {
+    status: 'complete';
+    content: StreamedServerComponent;
 }) => void;
 
 export type AiMessageStreamStartedCallback<AiMsg> = (aiMessage: AiStreamedMessage<AiMsg> & {

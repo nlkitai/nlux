@@ -1,0 +1,44 @@
+---
+sidebar_label: 'sendMessage'
+---
+
+# Send Message
+
+> * Method Name:
+
+**`sendMessage(message)`**
+
+> * Description
+
+This method sends a message submits a message to the AI backend for processing, on the user's behalf.
+When called, it will fill the composer's input field with the provided message and submit it to the chatbot.
+
+> * Arguments:
+
+| Argument | Type | Description |
+| -------- | ---- | ----------- |
+| `message` | `string` | The prompt to be submitted to the chatbot. |
+
+> * Usage:
+
+```tsx
+import {AiChat, useAiChatApi} from 'nlux';
+
+export default function App() {
+  // Create an instance of the AiChatApi using the useAiChatApi hook
+  const api = useAiChatApi();
+
+  // Call `api.sendMessage(...)` to send a message to the chatbot
+  const onClick = useCallback(() => {
+    api.sendMessage('Hello, World!'); // Sending message on click 🚀 🙌
+  }, [api]);
+
+  // When creating the AiChat component, pass the `api` object as a prop
+  return (
+    <div>
+      <AiChat api={api} adapter={adapter} />
+      <button onClick={onClick}>Send Message Programmatically</button>
+    </div>
+  );
+}
+```

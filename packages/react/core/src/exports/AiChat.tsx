@@ -1,5 +1,5 @@
 'use client';
-import {createContext, forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '@shared/components/ExceptionsBox/create';
@@ -23,6 +23,7 @@ import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
 import {useUiOverrides} from './hooks/useUiOverrides';
 import {usMarkdownContainers} from './hooks/usMarkdownContainers';
 import {usePrimitivesContext} from './hooks/usePrimitivesContext';
+import {AiChatInternalApi} from './hooks/useAiChatApi';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -51,7 +52,7 @@ export const AiChat: <AiMsg>(
     const markdownContainersController = usMarkdownContainers();
 
     // Context state
-    const {PrimitivesContextProvider, primitivesContext} = usePrimitivesContext({messageOptions: props.messageOptions});
+    const {PrimitivesContextProvider} = usePrimitivesContext({messageOptions: props.messageOptions});
 
     // Regular component state
     const [prompt, setPrompt] = useState('');
@@ -105,7 +106,7 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
-        if (composerStatus === 'submitting-conversation-starter') {
+        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message') {
             handleSubmitPrompt();
         }
     }, [composerStatus, handleSubmitPrompt]);
@@ -120,10 +121,32 @@ export const AiChat: <AiMsg>(
         }
     }, [initialSegment]);
 
+    const internalApiRef = useRef<AiChatInternalApi | undefined>(undefined);
+
+    useEffect(() => {
+        const internalApi = props.api as unknown as AiChatInternalApi | undefined;
+        if (internalApi !== internalApiRef.current) {
+            internalApiRef.current = internalApi;
+            if (typeof internalApi?.__setHost === 'function') {
+                internalApi.__setHost({
+                    sendMessage: (prompt: string) => {
+                        setPrompt(prompt);
+                        setComposerStatus('submitting-external-message');
+                    },
+                });
+            }
+        }
+    }, [props.api, setPrompt, handleSubmitPrompt]);
+
+    useEffect(() => () => {
+        if (typeof internalApiRef.current?.__unsetHost === 'function') {
+            internalApiRef.current.__unsetHost();
+        }
+    }, []);
+
     // Lifecycle event triggers
     useReadyEventTrigger<AiMsg>(props);
     usePreDestroyEventTrigger<AiMsg>(props, segments);
-
     const ForwardConversationComp = useMemo(
         () => forwardRef(ConversationComp<AiMsg>), [],
     );

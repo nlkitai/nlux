@@ -116,6 +116,7 @@ export const StreamContainerComp = function <AiMsg>(
                 status={status}
                 containerRef={rootElRef as RefObject<never>}
                 content={content}
+                contentType={'text'}
                 serverResponse={[]}
                 dataTransferMode={'stream'}
             />

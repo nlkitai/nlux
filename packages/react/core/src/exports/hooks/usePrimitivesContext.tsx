@@ -17,15 +17,15 @@ export const usePrimitivesContext = function <AiMsg>(
         setContextState(contextData);
     }, [
         // Right now, the only primitive relying on contextData is <Markdown />
-        // contextData?.messageOptions?.htmlSanitizer,
-        // contextData?.messageOptions?.syntaxHighlighter,
-        // contextData?.messageOptions?.markdownLinkTarget,
-        // contextData?.messageOptions?.showCodeBlockCopyButton,
-        // contextData?.messageOptions?.skipStreamingAnimation,
-        // contextData?.messageOptions?.streamingAnimationSpeed,
-        // contextData?.messageOptions?.waitTimeBeforeStreamCompletion,
-        // contextData?.messageOptions?.responseRenderer,
-        // contextData?.messageOptions?.promptRenderer,
+        contextData?.messageOptions?.htmlSanitizer,
+        contextData?.messageOptions?.syntaxHighlighter,
+        contextData?.messageOptions?.markdownLinkTarget,
+        contextData?.messageOptions?.showCodeBlockCopyButton,
+        contextData?.messageOptions?.skipStreamingAnimation,
+        contextData?.messageOptions?.streamingAnimationSpeed,
+        contextData?.messageOptions?.waitTimeBeforeStreamCompletion,
+        contextData?.messageOptions?.responseRenderer,
+        contextData?.messageOptions?.promptRenderer,
     ]);
 
     const PrimitivesContextProvider = useMemo(() =>

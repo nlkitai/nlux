@@ -12,9 +12,18 @@ export default () => {
       <AiChat
         conversationOptions={{
             conversationStarters: [
-                {prompt: 'Write a poem using markdown and emojis'},
-                {prompt: 'What is your name?'},
-                {prompt: 'What is your favorite color?'}
+                {
+                    icon: <span>📝</span>,
+                    label: 'Write a poem',
+                    prompt: 'Write a poem about the stars and magic, using the words "twinkle" and "sparkle".'
+                },
+                {
+                    icon: 'https://content.nlkit.com/logos/nlkit.png',
+                    prompt: 'What is your favorite color?'
+                },
+                {
+                    prompt: 'When did you decide to become a magician?'
+                }
             ]
         }}
         personaOptions={{

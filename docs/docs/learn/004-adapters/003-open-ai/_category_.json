@@ -1,9 +1,0 @@
-{
-  "label": "OpenAI Adapter From Browser (Unsafe)",
-  "collapsible": true,
-  "collapsed": true,
-  "link": {
-    "type": "generated-index",
-    "slug": "/learn/adapters/open-ai"
-  }
-}

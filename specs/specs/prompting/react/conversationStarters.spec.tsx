@@ -1,11 +1,11 @@
+import {act} from 'react';
+import {render} from '@testing-library/react';
 import {AiChat} from '@nlux-dev/react/src';
 import {ConversationStarter} from '@nlux-dev/react/src/types/conversationStarter';
-import {render} from '@testing-library/react';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {AdapterController} from '../../../utils/adapters';
 import {waitForReactRenderCycle} from '../../../utils/wait';
-import {act} from 'react';
 
 describe('<AiChat /> + conversationOptions + conversationStarters', () => {
     let adapterController: AdapterController | undefined;

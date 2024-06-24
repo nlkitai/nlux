@@ -129,6 +129,22 @@ export const submitPromptFactory = <
                     }
                 });
 
+                result.observable.on('aiServerComponentStreamStarted', (aiMessage) => {
+                    conversation.addChatItem(segmentId, aiMessage);
+                    setComposerAsWaiting();
+                    context.emit('messageStreamStarted', {uid: aiMessage.uid});
+                });
+
+                result.observable.on('aiServerComponentStreamed', (aiMessage) => {
+                    if (aiMessage.status === 'complete') {
+                        context.emit('messageReceived', {
+                            uid: aiMessage.uid,
+                            // We only pass the response to custom renderer when the status is 'complete'.
+                            message: aiMessage.content as AiMsg,
+                        });
+                    }
+                });
+
                 result.observable.on('complete', () => {
                     conversation.completeChatSegment(segmentId);
 

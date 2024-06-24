@@ -1,5 +1,5 @@
 import {ConversationLayout, DataTransferMode} from '@nlux/core';
-import {ReactElement} from 'react';
+import {ReactElement, ReactNode} from 'react';
 import {MessageDirection} from '@shared/components/Message/props';
 import {MessageOptions} from '../../exports/messageOptions';
 import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
@@ -10,7 +10,8 @@ export type ChatItemProps<AiMsg> = {
     layout: ConversationLayout;
     dataTransferMode: DataTransferMode;
     status: 'streaming' | 'complete';
-    fetchedContent?: AiMsg;
+    contentType: 'text' | 'server-component';
+    fetchedContent?: AiMsg | ReactNode;
     fetchedServerResponse?: unknown;
     streamedContent?: AiMsg[];
     streamedServerResponse?: Array<unknown>;

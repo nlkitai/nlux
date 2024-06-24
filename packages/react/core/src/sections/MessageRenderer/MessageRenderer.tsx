@@ -1,7 +1,8 @@
-import {FC, RefObject} from 'react';
+import React, {FC, RefObject} from 'react';
 import {ResponseRendererProps} from '../../exports/messageOptions';
 import {ChatItemProps} from '../ChatItem/props';
 import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 //
 // Returns a function component that renders the message content.
@@ -15,8 +16,9 @@ export const getMessageRenderer: <AiMsg>(
 ) {
     const {
         uid,
-        dataTransferMode,
         status,
+        dataTransferMode,
+        contentType,
         fetchedContent,
         streamedContent,
         streamedServerResponse,
@@ -42,6 +44,7 @@ export const getMessageRenderer: <AiMsg>(
                 uid,
                 status,
                 dataTransferMode,
+                contentType,
                 content: streamedContent ?? [],
                 serverResponse: streamedServerResponse ?? [],
                 containerRef: containerRefToUse as RefObject<never>,
@@ -55,12 +58,18 @@ export const getMessageRenderer: <AiMsg>(
             //
             // Batching data and displaying it in a custom renderer.
             //
+            const isServerComponent = React.isValidElement(fetchedContent);
+            const content: AiMsg[] | StreamedServerComponent = !fetchedContent
+                ? []
+                : (isServerComponent ? fetchedContent : [fetchedContent]);
+
             const props: ResponseRendererProps<AiMsg> = {
                 uid,
                 status: 'complete',
-                content: fetchedContent ? [fetchedContent] : [],
-                serverResponse: fetchedServerResponse ? [fetchedServerResponse] : [],
                 dataTransferMode,
+                contentType,
+                content,
+                serverResponse: fetchedServerResponse ? [fetchedServerResponse] : [],
             };
 
             return () => {
@@ -94,6 +103,10 @@ export const getMessageRenderer: <AiMsg>(
                 }}
             />
         );
+    }
+
+    if (React.isValidElement(fetchedContent)) {
+        return () => <>{fetchedContent}</>;
     }
 
     // No custom renderer and message is not a string!

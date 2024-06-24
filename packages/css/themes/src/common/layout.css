@@ -47,6 +47,7 @@
 
     /** Chat item message */
     --nlux-chItm-msg--gap: var(--nlux-ChatItem-Message--Gap, 20px); /* Gap between elements within message */
+    --nlux-chItm-msg--mnHt: var(--nlux-ChatItem-Message--MinHeight, 50px);
 
     /** Chat item message in bubbles display layout */
     --nlux-chItm-mmsg-bblLt--brdrWd: var(--nlux-ChatItem-Message-BubbleLayout--BorderWidth);

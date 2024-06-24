@@ -6,23 +6,28 @@ import {
     AiMessageReceivedCallback,
     AiMessageStreamedCallback,
     AiMessageStreamStartedCallback,
+    AiServerComponentStreamedCallback,
+    AiServerComponentStreamStartedCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
     UserMessageReceivedCallback,
 } from '../../types/chatSegment/chatSegmentEvents';
+import {ServerComponentChatAdapter} from '../../types/adapters/chat/serverComponentChatAdapter';
 import {uid} from '../../utils/uid';
-import {submitInBatchMode} from './submitInBatchMode';
-import {submitInStreamingMode} from './submitInStreamingMode';
+import {submitAndBatchTextResponse} from './batchText';
+import {submitAndStreamTextResponse} from './streamText';
 import {SubmitPrompt} from './submitPrompt';
 import {getDataTransferModeToUse} from './utils/dataTransferModeToUse';
 import {createEmptyCompleteSegment} from './utils/emptyCompleteSegment';
 import {createEmptyErrorSegment} from './utils/emptyErrorSegment';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
+import {getContentTypeToGenerate} from './utils/contentTypeToGenerate';
+import {submitAndStreamServerComponentResponse} from './streamServerComponent';
 
 export const submitPrompt: SubmitPrompt = <AiMsg>(
     prompt: string,
-    adapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+    adapter: ChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
     extras: ChatAdapterExtras<AiMsg>,
 ) => {
     //
@@ -32,7 +37,8 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
         return createEmptyCompleteSegment<AiMsg>();
     }
 
-    if (adapter.streamText === undefined && adapter.batchText === undefined) {
+    const adapterAsAny = adapter as Record<string, unknown>;
+    if (adapterAsAny.streamText === undefined && adapterAsAny.batchText === undefined && adapterAsAny.streamServerComponent === undefined) {
         return createEmptyErrorSegment<AiMsg>('no-data-transfer-mode-supported');
     }
 
@@ -51,7 +57,11 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     // (b). AI MESSAGE RECEIVED
     let aiMessageReceivedCallbacks: Set<AiMessageReceivedCallback<AiMsg>> | undefined = undefined;
 
-    // (c). AI MESSAGE STREAMED ( 3 events )
+    // (c). AI ESM RECEIVED
+    let aiEsmStreamStartedCallbacks: Set<AiServerComponentStreamStartedCallback> | undefined = undefined;
+    let aiEsmStreamedCallbacks: Set<AiServerComponentStreamedCallback> | undefined = undefined;
+
+    // (d). AI MESSAGE STREAMED ( 3 events )
     let aiMessageStreamStartedCallbacks: Set<AiMessageStreamStartedCallback<AiMsg>> | undefined = undefined;
     let aiMessageStreamedCallbacks: Set<AiMessageStreamedCallback<AiMsg>> | undefined = undefined;
     let aiMessageChunkReceivedCallbacks: Set<AiMessageChunkReceivedCallback<AiMsg>> | undefined = undefined;
@@ -79,51 +89,77 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     });
 
     const dataTransferModeToUse = getDataTransferModeToUse(adapter);
+    const contentTypeToGenerate = getContentTypeToGenerate(adapter);
 
-    if (dataTransferModeToUse === 'batch') {
-        // (b). AI MESSAGE RECEIVED — Only needed in batch mode.
-        aiMessageReceivedCallbacks = new Set();
+    if (contentTypeToGenerate === 'server-component') {
+        // (c). AI ESM RECEIVED — Only needed in ESM mode.
+        aiEsmStreamedCallbacks = new Set();
+        aiEsmStreamStartedCallbacks = new Set();
 
-        submitInBatchMode(
+        submitAndStreamServerComponentResponse(
             segmentId,
             userMessage,
-            adapter,
+            adapter as ServerComponentChatAdapter<AiMsg>,
             extras,
-            aiMessageReceivedCallbacks,
+            aiEsmStreamStartedCallbacks,
+            aiEsmStreamedCallbacks,
             chatSegmentCompleteCallbacks,
             chatSegmentExceptionCallbacks,
         ).finally(() => {
-            // Finally -> Final status of the segment after complete or error has been emitted.
-            // At this point:
-            //   - No more items can be added to the segment.
-            //   - No more events will be emitted.
-            // We remove all listeners in an async manner to ensure that all events have been emitted.
-            triggerAsyncCallback(() => removeAllListeners());
-        });
+                // Finally -> Final status of the segment after complete or error has been emitted.
+                // At this point:
+                //   - No more items can be added to the segment.
+                //   - No more events will be emitted.
+                // We remove all listeners in an async manner to ensure that all events have been emitted.
+                triggerAsyncCallback(() => removeAllListeners());
+            },
+        );
     } else {
-        // (c). AI MESSAGE STREAMED ( 3 events ) — Only needed in streaming mode.
-        aiMessageStreamStartedCallbacks = new Set();
-        aiMessageStreamedCallbacks = new Set();
-        aiMessageChunkReceivedCallbacks = new Set();
+        if (dataTransferModeToUse === 'batch') {
+            // (b). AI MESSAGE RECEIVED — Only needed in batch mode.
+            aiMessageReceivedCallbacks = new Set();
 
-        submitInStreamingMode(
-            segmentId,
-            userMessage,
-            adapter,
-            extras,
-            aiMessageStreamStartedCallbacks,
-            aiMessageStreamedCallbacks,
-            aiMessageChunkReceivedCallbacks,
-            chatSegmentCompleteCallbacks,
-            chatSegmentExceptionCallbacks,
-        ).finally(() => {
-            // Finally -> Final status of the segment after complete or error has been emitted.
-            // At this point:
-            //   - No more items can be added to the segment.
-            //   - No more events will be emitted.
-            // We remove all listeners in an async manner to ensure that all events have been emitted.
-            triggerAsyncCallback(() => removeAllListeners());
-        });
+            submitAndBatchTextResponse(
+                segmentId,
+                userMessage,
+                adapter as ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+                extras,
+                aiMessageReceivedCallbacks,
+                chatSegmentCompleteCallbacks,
+                chatSegmentExceptionCallbacks,
+            ).finally(() => {
+                // Finally -> Final status of the segment after complete or error has been emitted.
+                // At this point:
+                //   - No more items can be added to the segment.
+                //   - No more events will be emitted.
+                // We remove all listeners in an async manner to ensure that all events have been emitted.
+                triggerAsyncCallback(() => removeAllListeners());
+            });
+        } else {
+            // (d). AI MESSAGE STREAMED ( 3 events ) — Only needed in streaming mode.
+            aiMessageStreamStartedCallbacks = new Set();
+            aiMessageStreamedCallbacks = new Set();
+            aiMessageChunkReceivedCallbacks = new Set();
+
+            submitAndStreamTextResponse(
+                segmentId,
+                userMessage,
+                adapter as ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,
+                extras,
+                aiMessageStreamStartedCallbacks,
+                aiMessageStreamedCallbacks,
+                aiMessageChunkReceivedCallbacks,
+                chatSegmentCompleteCallbacks,
+                chatSegmentExceptionCallbacks,
+            ).finally(() => {
+                // Finally -> Final status of the segment after complete or error has been emitted.
+                // At this point:
+                //   - No more items can be added to the segment.
+                //   - No more events will be emitted.
+                // We remove all listeners in an async manner to ensure that all events have been emitted.
+                triggerAsyncCallback(() => removeAllListeners());
+            });
+        }
     }
 
     // Remove all listeners and destroy the segment.
@@ -133,6 +169,12 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
 
         aiMessageReceivedCallbacks?.clear();
         aiMessageReceivedCallbacks = undefined;
+
+        aiEsmStreamStartedCallbacks?.clear();
+        aiEsmStreamStartedCallbacks = undefined;
+
+        aiEsmStreamedCallbacks?.clear();
+        aiEsmStreamedCallbacks = undefined;
 
         aiMessageStreamStartedCallbacks?.clear();
         aiMessageStreamStartedCallbacks = undefined;
@@ -172,6 +214,20 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
                 if (event === 'aiMessageReceived' && aiMessageReceivedCallbacks) {
                     aiMessageReceivedCallbacks.add(
                         callback as AiMessageReceivedCallback<AiMsg>,
+                    );
+                    return;
+                }
+
+                if (event === 'aiServerComponentStreamStarted' && aiEsmStreamStartedCallbacks) {
+                    aiEsmStreamStartedCallbacks.add(
+                        callback as unknown as AiServerComponentStreamStartedCallback,
+                    );
+                    return;
+                }
+
+                if (event === 'aiServerComponentStreamed' && aiEsmStreamedCallbacks) {
+                    aiEsmStreamedCallbacks.add(
+                        callback as unknown as AiServerComponentStreamedCallback,
                     );
                     return;
                 }

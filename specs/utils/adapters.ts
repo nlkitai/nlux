@@ -1,10 +1,17 @@
 import {ChatAdapter, ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
+import {
+    BatchedServerComponent,
+    ServerComponentChatAdapter,
+} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 import {vi} from 'vitest';
 
-export const createAdapterController = <AiMsg = string>({
-    includeBatchText = false,
-    includeStreamText = false,
-} = {}) => {
+export const createAdapterController = <AiMsg = string>(
+    {
+        includeBatchText = false,
+        includeStreamServerComponent = false,
+        includeStreamText = false,
+    } = {},
+) => {
     let resolvePromise: Function | null = null;
     let rejectPromise: Function | null = null;
     let lastMessageSent: string | null = null;
@@ -12,6 +19,7 @@ export const createAdapterController = <AiMsg = string>({
     let extrasFromLastMessage: ChatAdapterExtras<AiMsg> | undefined | null = null;
 
     let batchTextMock = vi.fn();
+    let streamServerComponentMock = vi.fn();
     let streamTextMock = vi.fn();
 
     const createNewBatchTextMock = () => (
@@ -24,6 +32,20 @@ export const createAdapterController = <AiMsg = string>({
 
         return new Promise<AiMsg>((resolve, reject) => {
             resolvePromise = resolve;
+            rejectPromise = reject;
+        });
+    };
+
+    const createNewStreamServerComponentMock = () => (
+        message: string,
+        extras: ChatAdapterExtras<AiMsg>,
+    ) => {
+        lastMessageSent = message;
+        extrasFromLastMessage = extras;
+        streamServerComponentMock(message);
+
+        return new Promise<AiMsg | BatchedServerComponent>((resolve, reject) => {
+            resolvePromise = (defaultEsmExport: any) => resolve({default: defaultEsmExport});
             rejectPromise = reject;
         });
     };
@@ -45,16 +67,23 @@ export const createAdapterController = <AiMsg = string>({
         });
     };
 
-    const adapter: ChatAdapter<AiMsg> = {
+    const adapter: ChatAdapter<AiMsg> & Partial<ServerComponentChatAdapter<AiMsg>> = {
         batchText: includeBatchText ? createNewBatchTextMock() : undefined,
         streamText: includeStreamText ? createNewStreamTextMock() : undefined,
     };
+
+    const streamServerComponentFunction = includeStreamServerComponent ? createNewStreamServerComponentMock() : undefined;
+    if (streamServerComponentFunction) {
+        // @ts-ignore
+        (adapter as ServerComponentChatAdapter<AiMsg>).streamServerComponent = streamServerComponentFunction;
+    }
 
     return Object.freeze({
         getLastMessage: () => lastMessageSent,
         getLastExtras: () => extrasFromLastMessage,
         adapter: adapter,
         batchTextMock,
+        streamServerComponentMock,
         streamTextMock,
         resolve: (message: string) => {
             resolvePromise && resolvePromise(message);

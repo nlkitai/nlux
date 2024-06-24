@@ -21,13 +21,9 @@ export type MarkdownContainersController = {
 export const usMarkdownContainers: () => MarkdownContainersController = () => {
     const streamingDomElementsByMessageId: Record<string, HTMLDivElement> = {};
     const victimMessageIds: Set<string> = new Set();
-    const randomId = Math.random().toString(36).substring(7);
 
     return useMemo<MarkdownContainersController>(() => ({
         getStreamingDomElement: (messageId: string) => {
-            console.dir(victimMessageIds);
-            console.log('Service ID # ', randomId);
-
             if (victimMessageIds.has(messageId)) {
                 victimMessageIds.delete(messageId);
             }

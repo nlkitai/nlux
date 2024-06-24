@@ -8,5 +8,6 @@ export const getUserMessageFromPrompt = (prompt: string): ChatSegmentUserMessage
         status: 'complete',
         participantRole: 'user',
         content: prompt,
+        contentType: 'text',
     };
 };

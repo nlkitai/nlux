@@ -1,0 +1,61 @@
+## useAiChatApi() Hook
+<br />
+<br />
+
+The `useAiChatApi` hook is used to create an instance of the `AiChatApi` object. This object is used to interact with
+the chatbot UI, such as sending messages, getting the chat history, and more.
+
+```tsx
+const api = useAiChatApi();
+```
+
+Once created, the `api` object can be passed to the `AiChat` component as a prop, and its methods can be called to
+interact with the AiChat UI.
+
+```tsx
+<AiChat api={api} adapter={adapter} />
+```
+
+---
+
+## API And Component Lifecycle
+<br />
+<br />
+
+The `AiChatApi` object has a lifecycle that is tied to the `AiChat` component. When the `AiChat` component is
+unmounted, the `AiChatApi` object will be destroyed and any subsequent calls to its methods will result in an exception
+being thrown.
+
+In order to prevent this, it is recommended to create the `AiChatApi` object inside the same component that renders the
+`AiChat` component, and to not store the `AiChatApi` object in a state variable or a context.
+
+---
+
+## Example
+<br />
+<br />
+
+The API features work by providing creating an `AiChatApi` object and passing it to the `AiChat` component as a prop.
+Calls on functions of the `AiChatApi` object will be reflected in the chatbot UI.
+
+```jsx
+import {AiChat, useAiChatApi} from 'nlux';
+
+export default function App() {
+  // Create an instance of the AiChatApi using the useAiChatApi hook
+  const api = useAiChatApi();
+
+  // Call `api.sendMessage(...)` to send a message to the chatbot
+  const onClick = useCallback(() => {
+    api.sendMessage('Hello, World!');
+  }, [api]);
+
+  // When creating the AiChat component, pass the `api` object as a prop
+  return (
+    <div>
+      <AiChat api={api} adapter={adapter} />
+      <button onClick={onClick}>Send Message Programmatically</button>
+    </div>
+  );
+}
+```

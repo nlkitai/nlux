@@ -1,5 +1,6 @@
-import {ChatAdapter, StreamSend} from '@shared/types/adapters/chat/chatAdapter';
+import {StreamSend} from '@shared/types/adapters/chat/chatAdapter';
 import {DependencyList, useMemo} from 'react';
+import {ChatAdapter} from '../../types/chatAdapter';
 
 /**
  * Use the function provided as a stream adapter to send messages and receive responses in a stream of chunks.

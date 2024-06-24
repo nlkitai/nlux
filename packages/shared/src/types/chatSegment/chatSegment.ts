@@ -1,5 +1,6 @@
 import {ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
+import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
 
 /**
  * A conversation is series of exchanges of items between multiple participants.
@@ -34,7 +35,7 @@ export type ChatSegmentStatus = 'active' | 'complete' | 'error';
  *
  * System messages are not included in the chat segment items.
  */
-export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage;
+export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage | StreamedServerComponent;
 
 /**
  * The events that can be emitted by a chat segment.
@@ -56,6 +57,12 @@ export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUs
  * - aiMessageStreamed: A message from the AI has been fully streamed. This is only emitted for segments with data
  * transfer mode set to 'stream', and when a message has been fully streamed.
  *
+ * - aiServerComponentStreamStarted: A server component from the AI has started streaming. This is only emitted for
+ * segments with data transfer mode set to 'stream' when the adapter used is a server component adapter.
+ *
+ * - aiServerComponentStreamed: A server component from the AI has been fully streamed. This is only emitted for
+ * segments with data transfer mode set to 'stream' when the adapter used is a server component adapter.
+ *
  * - complete: The chat segment has concluded and no more items will be added or updated. It does not imply that the
  * segment was successful, only that it has ended. You should check the status of the segment to determine if it was
  * successful or not.
@@ -71,5 +78,7 @@ export type ChatSegmentEvent =
     'aiMessageStreamStarted' |
     'aiChunkReceived' |
     'aiMessageStreamed' |
+    'aiServerComponentStreamStarted' |
+    'aiServerComponentStreamed' |
     'complete' |
     'error';

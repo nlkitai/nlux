@@ -1,0 +1,51 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+## How to connect to Llama on Hugging Face
+
+### Installation
+
+<Tabs groupId="package" queryString>
+    <TabItem value="npm" label="NPM">
+        ```bash
+        npm install @nlux/hf-react
+        ```
+    </TabItem>
+    <TabItem value="yarn" label="Yarn">
+        ```bash
+        yarn add @nlux/hf-react
+        ```
+    </TabItem>
+    <TabItem value="pnpm" label="PNPM">
+        ```bash
+        pnpm add @nlux/hf-react
+        ```
+    </TabItem>
+</Tabs>
+
+### Usage
+
+```tsx
+import {
+    useChatAdapter,
+    llama2InputPreProcessor,
+    llama2OutputPreProcessor,
+} from '@nlux/hf-react';
+
+const Component = () => {
+    const adapter = useChatAdapter({
+        dataTransferMode: 'stream',
+        model: '<MODEL NAME OR URL>',
+        systemMessage: '<SYSTEM MESSAGE FOR LLAMA>',
+        preProcessors: {
+            input: llama2InputPreProcessor,
+            output: llama2OutputPreProcessor,
+        },
+        maxNewTokens: 800,
+    });
+
+    return (
+        <AiChat adapter={adapter} />
+    );
+}
+```
