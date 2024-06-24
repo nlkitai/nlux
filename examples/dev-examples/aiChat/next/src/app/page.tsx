@@ -45,7 +45,10 @@ export default function HomePage() {
                     }}
                     conversationOptions={{
                         conversationStarters: [
-                            {prompt: 'I need help with my recent order.'},
+                            {
+                                prompt: 'I need help with my recent order.',
+                                icon: <span>✅</span>
+                            },
                             {prompt: 'Where can I find the technical documentation?'},
                             {prompt: 'Can you show me a code example for the API?'},
                         ],

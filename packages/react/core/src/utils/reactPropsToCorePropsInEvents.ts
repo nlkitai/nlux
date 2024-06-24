@@ -51,5 +51,15 @@ export const reactPropsToCorePropsInEvents = <AiMsg>(
         };
     }
 
+    if (props.conversationOptions?.conversationStarters) {
+        result.conversationOptions = {
+            ...props.conversationOptions,
+            conversationStarters: props.conversationOptions.conversationStarters.map((starter) => ({
+                ...starter,
+                icon: starter.icon ? '<REACT ELEMENT />' : undefined,
+            })),
+        };
+    }
+
     return result as AiChatPropsInEvents<AiMsg>;
 };
