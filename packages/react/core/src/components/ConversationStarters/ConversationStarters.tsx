@@ -27,6 +27,6 @@ export const ConversationStarterIcon = ({
   icon: ConversationStarter["icon"];
 }) => {
   if (!icon) return null;
-  if (typeof icon === "string") return <img src={icon} width={20} />;
+  if (typeof icon === "string") return <img src={icon} width={16} />;
   return icon;
 };
