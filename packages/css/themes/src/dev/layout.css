@@ -24,6 +24,8 @@
     --nlux-ConversationStarter--BorderRadius: 50px;
     --nlux-ConversationStarter--BorderWidth: 5px;
     --nlux-ConversationStarter--Gap: 12px;
+    --nlux-ConversationStarter--Width: 160px;
+    --nlux-ConversationStarter--Height: 101px;
 
     /** 👇 Conversation content */
     --nlux-ChatRoom--LineHeight: 1.4;

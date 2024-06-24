@@ -119,4 +119,6 @@
     --nlux-ConversationStarter--BorderRadius: var(--nlux-luna--BorderRadius);
     --nlux-ConversationStarter--BorderWidth: 0;
     --nlux-ConversationStarter--Gap: var(--nlux-luna--FlexGap);
+    --nlux-ConversationStarter--Width: 160px;
+    --nlux-ConversationStarter--Height: 101px;
 }

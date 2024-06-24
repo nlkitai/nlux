@@ -19,8 +19,8 @@
       align-items: start;
       gap: 0.5rem;
 
-      width: 160px;
-      height: 101px;
+      width: var(--nlux-cvStrt--wd);
+      height: var(--nlux-cvStrt--hg);
       overflow: hidden;
       padding: 12px;
 
@@ -42,8 +42,8 @@
         line-height: 1.3rem;
       }
       > .nlux-comp-conversationStarter-icon-container {
-        width: 12px;
-        height: 12px;
+        width: 16px;
+        height: 16px;
         display: flex;
         justify-content: center;
         align-items: center;

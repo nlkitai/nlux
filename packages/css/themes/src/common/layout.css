@@ -106,4 +106,6 @@
     --nlux-cvStrt--brdrRd: var(--nlux-ConversationStarter--BorderRadius);
     --nlux-cvStrt--brdrWd: var(--nlux-ConversationStarter--BorderWidth);
     --nlux-cvStrt--gap: var(--nlux-ConversationStarter--Gap, 10px);
+    --nlux-cvStrt--wd: var(--nlux-ConversationStarter--Width, 160px);
+    --nlux-cvStrt--hg: var(--nlux-ConversationStarter--Height, 101px);
 }
