@@ -13,15 +13,18 @@ export const createConversationStartersDom = (
     // start with empty html tag
     let conversationStarterIcon: HTMLElement = document.createElement("div");
     if (item.icon) {
-        // if icon is specified 
-        // check if it is a string
+      // if icon is specified
+      // check if it is a string
       if (typeof item.icon === "string") {
         conversationStarterIcon = document.createElement("img");
         conversationStarterIcon.setAttribute("src", item.icon);
-        conversationStarterIcon.setAttribute("width", "20px");
+        conversationStarterIcon.setAttribute("width", "16px");
       } else {
         // if not, icon must be a html element
-        conversationStarterIcon = item.icon;
+        conversationStarterIcon.className =
+          "nlux-comp-conversationStarter-icon-container";
+
+        conversationStarterIcon.appendChild(item.icon);
       }
     }
 
