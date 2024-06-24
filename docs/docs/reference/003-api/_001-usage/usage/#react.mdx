@@ -13,7 +13,7 @@ Once created, the `api` object can be passed to the `AiChat` component as a prop
 interact with the AiChat UI.
 
 ```tsx
-<AiChat api={api} />
+<AiChat api={api} adapter={adapter} />
 ```
 
 ---
@@ -53,7 +53,7 @@ export default function App() {
   // When creating the AiChat component, pass the `api` object as a prop
   return (
     <div>
-      <AiChat api={api} />
+      <AiChat api={api} adapter={adapter} />
       <button onClick={onClick}>Send Message Programmatically</button>
     </div>
   );

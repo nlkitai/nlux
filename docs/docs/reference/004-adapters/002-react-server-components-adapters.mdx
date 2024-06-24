@@ -1,0 +1,68 @@
+---
+sidebar_label: 'React Server Components'
+---
+
+# React Server Components as Adapters
+
+With `NLUX`, **React Server Components** (RSC) can be directly used as a chat response and rendered to the user in the
+chat UI. This enables a rich and more interactive experience, and an enhanced chatbot interface.
+
+---
+
+## About React Server Components
+<br /><br />
+
+At their core, [React Server Components](https://react.dev/reference/rsc/server-components) (RSC) are an HTML
+representation that's being written in React/JSX syntax. They are rendered on the server and sent to the client in a
+serialized form that can be interpreted by the React client runtime and rendered as a part of the React component tree.
+
+:::note RSC and Next.js
+React Server Components are tightly integrated with Next.js. Pages in Next.js are server components by default, and
+the `'use server'` directive is widely used to explicitly indicate that a component should be rendered on the server
+(as page, or server component).
+
+The NLUX RSC adapter has been designed and developed with Next.js as the primary use-case. However, it can be used with
+any other RSC compatible server-side rendering setup.
+:::
+
+---
+
+## Usage
+<br /><br />
+
+```tsx
+export default async function MyServerComponent<AiMsg>(
+    message: string,
+    extras: ChatAdapterExtras<AiMsg>,
+) {
+    // Your logic here
+    // ...
+
+    // Return the generated content in JSX format
+    return <div>Generated Content</div>;
+}
+```
+
+The React Server Component should be **a default export function** that takes 2 parameters:
+* `message` - The prompt message typed by the user, to be sent to the API.
+* `extras` - An object containing [additional information](/reference/adapters/custom-adapters#adapter-extras) that the adapter might need.
+
+> **On The Client:**
+
+```tsx
+import {AiChat, useAsRscAdapter} from '@nlux/react';
+```
+```tsx
+useAsRscAdapter<AiMsg = string>(
+    import('path/to/server-component'),
+    loader?: ReactNode,
+);
+```
+
+The `useAsRscAdapter` hook takes 2 parameters:
+* `import('path/to/server-component')` - The path to the server component that should be used as the adapter.
+* `loader` - An optional ReactNode that will be displayed while the server component is being loaded.
+
+The `useAsRscAdapter` hook returns an adapter that can be used in the `<AiChat adapter={adapter} />` component.
+When a user sends a message, NLUX will take care of calling the server component with the appropriate parameters and
+updating the chat UI with the response as it's being received.

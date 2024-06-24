@@ -26,12 +26,13 @@ There are 2 types of custom adapters that you can create:
 ---
 
 ## Stream Adapters
+<br /><br />
 
-Streaming adapters are used when the API sends responses in a stream (e.g. WebSockets, or Server-Sent Events).
+Stream adapters are used when the API sends responses in a stream (e.g. Server-Sent Events, WebSockets).
 
-The advantage of using a streaming adapter is that **the chat UI will be updated in real-time while the LLM is still
+The advantage of using a stream adapter is that **the chat UI will be updated in real-time while the LLM is still
 generating text**. This is particularly useful if the API takes a long time to process a request and sends responses
-in a stream. Most major LLM APIs (e.g. OpenAI, Anthropic) support streaming responses.
+in a stream. Most major LLM providers (e.g. OpenAI, Llama Index, Hugging Face) support streaming responses.
 
 <PlatformSelector reactJs={StreamAdaptersReactJs} javascript={StreamAdaptersJavaScript}/>
 

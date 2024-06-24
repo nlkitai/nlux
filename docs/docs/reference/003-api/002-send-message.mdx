@@ -36,7 +36,7 @@ export default function App() {
   // When creating the AiChat component, pass the `api` object as a prop
   return (
     <div>
-      <AiChat api={api} />
+      <AiChat api={api} adapter={adapter} />
       <button onClick={onClick}>Send Message Programmatically</button>
     </div>
   );
