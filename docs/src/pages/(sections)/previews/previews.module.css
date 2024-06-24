@@ -1,0 +1,25 @@
+.tabList {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 840px;
+}
+
+.tab {
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    background: none;
+    font-weight: bold;
+    border-bottom: 2px solid #f75f02;
+}
+
+.tab[aria-selected="true"] {
+    font-weight: bolder;
+    color: #f75f02;
+}
+
+.tab:active,
+.tab:hover {
+    cursor: pointer;
+}

@@ -2,12 +2,9 @@ import {useEffect, useState} from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import {useColorMode} from '@docusaurus/theme-common';
-import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
-import exampleIntroFileSendFunction from '@site/src/pages/(examples)/intro/send';
-import exampleIntroFileAiChatBot from '@site/src/pages/(examples)/intro/example';
-import exampleIntroFilePersonas from '@site/src/pages/(examples)/intro/personas';
 import styles from '@site/src/pages/index.module.css';
 import borderStyles from './border.module.css';
+import Previews from '@site/src/pages/(sections)/previews/previews';
 import heroStyles from '@site/src/pages/(sections)/hero/hero.module.css';
 import Heading from '@theme/Heading';
 
@@ -102,17 +99,8 @@ export const Hero = ({className}: { className?: string }) => {
                     </Link>
                 </div>
                 <div className={styles.nluxInAction}>
-                    <CodeEditor
-                        className={styles.codeEditor}
-                        direction="row"
-                        files={{
-                            'App.tsx': exampleIntroFileAiChatBot,
-                            'send.ts': exampleIntroFileSendFunction,
-                            'personas.tsx': exampleIntroFilePersonas,
-                        }}
-                        editorHeight={420}
-                        simulatedPrompt="How an AI assistant can enhance my website's user experience?"
-                    />
+                    <Previews/>
+
                 </div>
             </div>
         </header>
