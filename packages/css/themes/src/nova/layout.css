@@ -118,4 +118,6 @@
     --nlux-ConversationStarter--BorderRadius: 6px;
     --nlux-ConversationStarter--BorderWidth: 0;
     --nlux-ConversationStarter--Gap: var(--nlux-nova--FlexGap);
+    --nlux-ConversationStarter--Width: 160px;
+    --nlux-ConversationStarter--Height: 101px;
 }
