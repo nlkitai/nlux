@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0",
-    "@nlux/react": "2.8.0-beta.1",
-    "@nlux/themes": "2.8.0-beta.1",
+    "@nlux/react": "^2",
+    "@nlux/themes": "^2",
     "ai": "3.1.31",
     "next": "^14",
     "react": "^18",
