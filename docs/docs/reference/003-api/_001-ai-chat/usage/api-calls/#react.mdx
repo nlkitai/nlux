@@ -1,0 +1,25 @@
+You can call `api.<yourApiMethod>()` inside your component.<br />
+Since API calls are considered side effects, you should ensure that they are properly called (e.g. inside a `useEffect`
+hook) to avoid unnecessary re-renders, and to ensure they do not interfere with the React rendering cycle.
+
+```jsx
+import {AiChat, useAiChatApi} from 'nlux';
+
+export default function App() {
+  // Create an instance of the AiChatApi using the useAiChatApi hook
+  const api = useAiChatApi();
+
+  // Call `api.sendMessage(...)` to send a message to the chatbot
+  const onClick = useCallback(() => {
+    api.sendMessage('Hello, World!');
+  }, [api]);
+
+  // When creating the AiChat component, pass the `api` object as a prop
+  return (
+    <div>
+      <AiChat api={api} adapter={adapter} />
+      <button onClick={onClick}>Send Message Programmatically</button>
+    </div>
+  );
+}
+```

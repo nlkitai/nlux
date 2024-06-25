@@ -1,0 +1,31 @@
+> * Method Name:
+
+**`resetConversation()`**
+
+> * Description
+
+This method resets the conversation UI and empties the chat history.
+
+> * Usage:
+
+```tsx
+import {AiChat, useAiChatApi} from 'nlux';
+
+export default function App() {
+  // Create an instance of the AiChatApi using the useAiChatApi hook
+  const api = useAiChatApi();
+
+  // Call `api.sendMessage(...)` to send a message to the chatbot
+  const onClick = useCallback(() => {
+    api.resetConversation(); // Resetting conversation on click 🔄
+  }, [api]);
+
+  // When creating the AiChat component, pass the `api` object as a prop
+  return (
+    <div>
+      <AiChat api={api} adapter={adapter} />
+      <button onClick={onClick}>Reset</button>
+    </div>
+  );
+}
+```

@@ -1,6 +1,8 @@
 # Overview
 
 ## Layers
+<br />
+<br />
 
 `NLUX` is a highly customizable and fully featured conversational AI UI library with 3 layers:
 
@@ -13,10 +15,18 @@
   response streaming, and more. It also allows for `custom adapters` to be built for any backend.
 
 ## Platforms
+<br />
+<br />
 
-`NLUX` is available in 2 flavors:
+The core `NLUX` library is available in 2 flavors:
 
 * **`NLUX` React JS** ⚛️ — React JS implementation using the React rendering engine, components, and hooks.
 * **`NLUX` JavaScript** 🟨 — Pure JavaScript library that can be used with any web framework (such as Vue) or with plain HTML.
+
+As per the compatibility with other frameworks:
+
+* **`Next.js` Integration:** All the `React JS` features have been developed and tested with the `Next.js` as a primary use-case.
+* **Non-React Frameworks Integration:** The vanilla `JavaScript` library can be used with any non-React framework or library,
+such as `Vue.js`, `Angular`, or `Svelte`. Or even with plain HTML and JavaScript.
 
 You'll find a toggle at the top of each documentation page that allows switching between the 2 platforms. 

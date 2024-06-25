@@ -196,6 +196,10 @@ function App() {
         api.sendMessage('Hello, World!');
     }, [api]);
 
+    const resetConversation = useCallback(() => {
+        api.resetConversation();
+    }, [api]);
+
     const conversationStarters: ConversationStarter[] = [
         {prompt: 'Write Hello World in Python, C++, and Java.', icon: <span>⭐️</span>, label: 'Prompt 1'},
         {prompt: 'Write hello world in Python.', icon: 'https://content.nlkit.com/logos/nlkit.png', label: 'Prompt 2'},
@@ -315,6 +319,7 @@ function App() {
             </div>
             <div>
                 <button onClick={sendHelloWorld}>Send Hello World</button>
+                <button onClick={resetConversation}>Reset Conversation</button>
             </div>
             <AiChat
                 // adapter={nlBridgeAdapter}

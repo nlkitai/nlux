@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {waitForReactRenderCycle} from '../../../utils/wait';
 import {act} from 'react';
 
-describe('<AiChat /> + api + submitPrompt', () => {
+describe('<AiChat /> + api + sendMessage', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
