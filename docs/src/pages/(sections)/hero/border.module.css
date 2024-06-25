@@ -1,5 +1,3 @@
-HTML CSSResult Skip Results Iframe
-
 /* The secret sauce that enables gradient rotation. NOTE: does not work in all browsers. https://caniuse.com/?search=%40property */
 @property --border-angle-1 {
     syntax: "<angle>";
@@ -21,10 +19,10 @@ HTML CSSResult Skip Results Iframe
 
 
 /* sRGB color. */
-:root {
-    --bright-blue: rgb(0, 100, 255);
-    --bright-green: rgb(232, 221, 191);
-    --bright-red: rgb(255, 0, 0);
+.shinyButton {
+    --bright-blue: transparent;
+    --bright-green: #43b13e;
+    --bright-red: #cc550d;
     --background: black;
     --foreground: #fbf2ef;
     --border-size: 2px;
