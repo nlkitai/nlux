@@ -73,6 +73,10 @@ export const Roadmap = ({className}: { className?: string }) => {
                     href="https://docs.nlkit.com/nlux/learn/customize-theme"
                     text="Advanced Theming"
                 />
+                <FeatureImplemented
+                    href="http://localhost:3000/nlux/reference/adapters/react-server-components-adapters"
+                    text="React Server Components"
+                />
                 <FeatureToImplement>Function Calling</FeatureToImplement>
                 <FeatureToImplement>File Uploads</FeatureToImplement>
                 <FeatureToImplement>Enhanced Accessibility</FeatureToImplement>
