@@ -9,7 +9,7 @@ chat UI. This enables a rich and more interactive experience, and an enhanced ch
 
 ---
 
-## About React Server Components
+## Overview
 <br /><br />
 
 At their core, [React Server Components](https://react.dev/reference/rsc/server-components) (RSC) are an HTML
@@ -25,12 +25,25 @@ The NLUX RSC adapter has been designed and developed with Next.js as the primary
 any other RSC compatible server-side rendering setup.
 :::
 
+With `NLUX RSC adapters`, you can create a server component that will **receive the user's message**, and conversation
+history, and **return the generated content** in JSX format. This content will be rendered in the chat UI as a response
+to the user's message.
+
+This feature enables a wide range of possibilities, such as:
+
+* **Generative user interfaces** that can be powered by large language models (using Vercel AI, LangChain)
+* **Advanced response generation logic** that can be implemented on the server.
+
 ---
 
 ## Usage
 <br /><br />
 
+> **On the server:**
+
 ```tsx
+'use server';
+
 export default async function MyServerComponent<AiMsg>(
     message: string,
     extras: ChatAdapterExtras<AiMsg>,
