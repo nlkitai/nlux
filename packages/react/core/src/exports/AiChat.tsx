@@ -133,6 +133,10 @@ export const AiChat: <AiMsg>(
                         setPrompt(prompt);
                         setComposerStatus('submitting-external-message');
                     },
+                    resetConversation: () => {
+                        setChatSegments([]);
+                        setInitialSegment(undefined);
+                    },
                 });
             }
         }

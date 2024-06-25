@@ -2,6 +2,7 @@ import {useRef} from 'react';
 
 export type AiChatApi = {
     sendMessage: (prompt: string) => void;
+    resetConversation: () => void;
 };
 
 export type AiChatInternalApi = AiChatApi & {
@@ -11,12 +12,17 @@ export type AiChatInternalApi = AiChatApi & {
 
 export type AiChatHost = {
     sendMessage: (prompt: string) => void;
+    resetConversation: () => void;
 };
 
 const createVoidInternalApi = (setHost: (host: AiChatHost) => void = () => {
 }) => {
     return {
         sendMessage: (prompt: string) => {
+            throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
+        },
+
+        resetConversation: () => {
             throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
         },
 
@@ -42,6 +48,14 @@ export const useAiChatApi = (): AiChatApi => {
         }
 
         currentHost.current.sendMessage(prompt);
+    };
+
+    api.current.resetConversation = () => {
+        if (!currentHost.current) {
+            throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
+        }
+
+        currentHost.current.resetConversation();
     };
 
     // @ts-ignore
