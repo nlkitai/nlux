@@ -13,7 +13,7 @@ The main features shown in this starter project are:
 
 * `React` — Latest `18.x` version.
 * `Next.js` — Latest `14.x` version.
-* `Vercel AI` — Version `3.1.31` specifically required.
+* `Vercel AI` — Version `3.2.10` or higher.
 * `NLUX` — Latest `2.x` version.
 
 ## Learn More

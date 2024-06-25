@@ -12,7 +12,7 @@
     "@ai-sdk/openai": "^0",
     "@nlux/react": "^2",
     "@nlux/themes": "^2",
-    "ai": "3.1.31",
+    "ai": "^3",
     "next": "^14",
     "react": "^18",
     "react-dom": "^18",
