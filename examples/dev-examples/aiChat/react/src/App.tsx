@@ -2,6 +2,7 @@ import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
+    AiChatUI,
     ChatItem,
     ConversationLayout,
     DataTransferMode,
@@ -329,7 +330,7 @@ function App() {
                 // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
-                initialConversation={initialConversation}
+                // initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
@@ -346,6 +347,7 @@ function App() {
                     layout: conversationLayout,
                     // showWelcomeMessage: true,
                     conversationStarters,
+                    showWelcomeMessage: false,
                 }}
                 events={{
                     messageReceived,
@@ -362,7 +364,11 @@ function App() {
                     promptRenderer: undefined,
                 }}
                 personaOptions={useCustomPersonaOptions ? personaOptions : undefined}
-            />
+            >
+                <AiChatUI.Greeting>
+                    Hello!
+                </AiChatUI.Greeting>
+            </AiChat>
         </>
     );
 }

@@ -180,6 +180,7 @@ export const AiChat: <AiMsg>(
                             onConversationStarterSelected={handleConversationStarterSelected}
                             conversationOptions={conversationOptions}
                             personaOptions={props.personaOptions}
+                            userDefinedGreeting={uiOverrides.Greeting}
                         />
                     </div>
                     <div className="nlux-conversation-container" ref={conversationContainerRef}>

@@ -1,3 +1,4 @@
+import {ReactNode} from 'react';
 import {
     className as compGreetingClassName,
     personaNameClassName as compGreetingPersonaNameClassName,
@@ -21,6 +22,14 @@ export const GreetingComp = (props: GreetingProps) => {
             {props.message && (
                 <div className={compGreetingTextClassName}>{props.message}</div>
             )}
+        </div>
+    );
+};
+
+export const GreetingContainer = ({children}: {children: ReactNode}) => {
+    return (
+        <div className={compGreetingClassName}>
+            {children}
         </div>
     );
 };

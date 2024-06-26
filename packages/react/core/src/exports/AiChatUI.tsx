@@ -4,7 +4,7 @@ import {Greeting} from './elements/Greeting';
 
 export type AiChatUIOverrides = {
     Loader: ReactElement;
-    Greeting: ReactElement;
+    Greeting?: ReactElement;
 }
 
 /**
