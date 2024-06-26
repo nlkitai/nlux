@@ -145,6 +145,7 @@ export const AiChat: <AiMsg>(
     useEffect(() => () => {
         if (typeof internalApiRef.current?.__unsetHost === 'function') {
             internalApiRef.current.__unsetHost();
+            internalApiRef.current = undefined;
         }
     }, []);
 
