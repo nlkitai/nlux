@@ -66,6 +66,9 @@ export const LaunchPad: LaunchPadCompType = (props) => {
         userDefinedGreeting,
     ]);
 
+    const showEmptyGreeting = !showDefaultGreeting && !showGreetingFromPersonaOptions
+        && !showUserDefinedGreeting && !hasMessages;
+
     return (
         <>
             {showDefaultGreeting && (
@@ -83,7 +86,7 @@ export const LaunchPad: LaunchPadCompType = (props) => {
                     {userDefinedGreeting}
                 </GreetingContainer>
             )}
-            {!showDefaultGreeting && !showGreetingFromPersonaOptions && !showUserDefinedGreeting && (
+            {showEmptyGreeting && (
                 <GreetingContainer>{null}</GreetingContainer>
             )}
             <div className="nlux-conversationStarters-container">
