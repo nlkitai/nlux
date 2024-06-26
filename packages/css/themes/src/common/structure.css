@@ -32,14 +32,14 @@
         > .nlux-conversation-container {
             /* position: absolute; */
             height: calc(100% - 60px);
+            /* flex-shrink: 1; */
+            flex-grow: 1;
           
         }
 
         > .nlux-composer-container {
-            /* position: absolute; */
             height: 60px;
             width: 100%;
-            flex: 0 0 auto;
             display: flex;
             flex-direction: row;
             align-items: stretch;
