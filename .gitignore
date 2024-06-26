@@ -60,4 +60,6 @@ lerna-debug.log*
 *.sw?
 .idea
 /examples/dev-examples/**/yarn.lock
+/examples/dev-examples/**/package-lock.json
 /examples/next-js-demos/**/yarn.lock
+/examples/next-js-demos/**/package-lock.json

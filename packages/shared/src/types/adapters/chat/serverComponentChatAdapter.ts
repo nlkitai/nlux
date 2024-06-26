@@ -5,7 +5,7 @@ import {ChatAdapterExtras} from './chatAdapterExtras';
  * The result of an import() call that loads a React Server Component (RSC) from the server.
  */
 export type StreamedServerComponent = {
-    default: FunctionComponent<StreamedServerComponentProps>;
+    default: Function;
 };
 
 /**
