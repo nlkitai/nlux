@@ -1,6 +1,6 @@
 import {ReactElement} from 'react';
 
-export type WelcomeMessageProps = {
+export type GreetingProps = {
     name: string;
     avatar: string | ReactElement;
     message?: string;

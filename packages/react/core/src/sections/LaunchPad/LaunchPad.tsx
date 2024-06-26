@@ -1,6 +1,6 @@
 import {ReactNode, useMemo} from 'react';
-import {WelcomeDefaultMessageComp} from '../../components/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
-import {WelcomeMessageComp} from '../../components/WelcomeMessage/WelcomeMessageComp';
+import {DefaultGreetingComp} from '../../components/DefaultGreeting/DefaultGreetingComp';
+import {GreetingComp} from '../../components/Greeting/GreetingComp';
 import {ConversationStarters} from '../../components/ConversationStarters/ConversationStarters';
 import {LaunchPadProps} from './props';
 
@@ -16,12 +16,12 @@ export const LaunchPad: LaunchPadCompType = (props) => {
     } = props;
 
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
-    const showWelcomeDefaultMessage = useMemo(
+    const showDefaultGreeting = useMemo(
         () => !hasMessages && personaOptions?.assistant === undefined && conversationOptions?.showWelcomeMessage !== false,
         [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
     );
 
-    const showWelcomeMessage = useMemo(
+    const showGreetingFromPersonaOptions = useMemo(
         () => !hasMessages && personaOptions?.assistant !== undefined && conversationOptions?.showWelcomeMessage !== false,
         [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
     );
@@ -33,11 +33,11 @@ export const LaunchPad: LaunchPadCompType = (props) => {
 
     return (
         <>
-            {showWelcomeDefaultMessage && (
-                <WelcomeDefaultMessageComp/>
+            {showDefaultGreeting && (
+                <DefaultGreetingComp/>
             )}
-            {showWelcomeMessage && (
-                <WelcomeMessageComp
+            {showGreetingFromPersonaOptions && (
+                <GreetingComp
                     name={personaOptions!.assistant!.name}
                     avatar={personaOptions!.assistant!.avatar}
                     message={personaOptions!.assistant!.tagline}

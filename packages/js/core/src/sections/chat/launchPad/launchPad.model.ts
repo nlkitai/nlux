@@ -60,9 +60,9 @@ export class CompLaunchPad<AiMsg> extends BaseComp<
         }
     }
 
-    public setShowWelcomeMessage(showWelcomeMessage: boolean) {
-        this.setProp('showWelcomeMessage', showWelcomeMessage);
-        this.executeDomAction('resetWelcomeMessage', showWelcomeMessage);
+    public setShowGreeting(showGreeting: boolean) {
+        this.setProp('showGreeting', showGreeting);
+        this.executeDomAction('resetGreeting', showGreeting);
     }
 
     public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {

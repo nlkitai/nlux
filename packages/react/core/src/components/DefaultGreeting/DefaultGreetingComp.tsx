@@ -1,12 +1,12 @@
 import {useMemo} from 'react';
 import {getNluxSmallPngLogo} from '@shared/components/Logo/getNluxSmallPngLogo';
-import {WelcomeMessageComp} from '../WelcomeMessage/WelcomeMessageComp';
+import {GreetingComp} from '../Greeting/GreetingComp';
 
 // Default message to show when no messages are present in the chat room
 // and when no assistant persona is configured.
-export const WelcomeDefaultMessageComp = () => {
+export const DefaultGreetingComp = () => {
     const urlEncodedLogo = useMemo(() => getNluxSmallPngLogo(), []);
     return (
-        <WelcomeMessageComp avatar={urlEncodedLogo} name={''}/>
+        <GreetingComp avatar={urlEncodedLogo} name={''}/>
     );
 };

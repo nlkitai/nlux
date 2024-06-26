@@ -158,7 +158,7 @@ export class NluxRenderer<AiMsg> {
                     assistantPersona: this.thePersonasOptions?.assistant ?? undefined,
                     userPersona: this.thePersonasOptions?.user ?? undefined,
                     conversationStarters: this.theConversationOptions?.conversationStarters ?? undefined,
-                    showWelcomeMessage: this.theConversationOptions?.showWelcomeMessage,
+                    showGreeting: this.theConversationOptions?.showWelcomeMessage,
                     initialConversationContent: this.theInitialConversationContent ?? undefined,
                     autoScroll: this.theConversationOptions?.autoScroll,
                     syntaxHighlighter: this.context.syntaxHighlighter,
@@ -353,7 +353,7 @@ export class NluxRenderer<AiMsg> {
 
             if (props.conversationOptions?.showWelcomeMessage !== this.theConversationOptions.showWelcomeMessage) {
                 newConversationOptions.showWelcomeMessage = props.conversationOptions?.showWelcomeMessage;
-                newProps.showWelcomeMessage = props.conversationOptions?.showWelcomeMessage;
+                newProps.showGreeting = props.conversationOptions?.showWelcomeMessage;
             }
 
             if (props.conversationOptions?.conversationStarters !== this.theConversationOptions.conversationStarters) {

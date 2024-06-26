@@ -19,7 +19,7 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
 
     describe('When assistant persona is configured and a tagline is provided', () => {
         describe('When no initial conversation is provided', () => {
-            it('The welcome message should be displayed', async () => {
+            it('The greeting component should be displayed', async () => {
                 // Arrange
                 const aiChat = (
                     <AiChat
@@ -37,9 +37,9 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                 await waitForReactRenderCycle();
 
                 // Act
-                const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage')!;
-                expect(welcomeMessage).not.toBeNull();
-                expect(welcomeMessage.textContent).toContain('Welcome to the chat');
+                const greeting = container.querySelector('.nlux-comp-welcomeMessage')!;
+                expect(greeting).not.toBeNull();
+                expect(greeting.textContent).toContain('Welcome to the chat');
             });
 
             describe('When the user submits a message', () => {
@@ -68,8 +68,8 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                     await waitForReactRenderCycle();
 
                     // Assert
-                    const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage');
-                    expect(welcomeMessage).toBeNull();
+                    const greeting = container.querySelector('.nlux-comp-welcomeMessage');
+                    expect(greeting).toBeNull();
                 });
             });
 
@@ -102,15 +102,15 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                     await waitForReactRenderCycle();
 
                     // Assert
-                    const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage')!;
-                    expect(welcomeMessage).not.toBeNull();
-                    expect(welcomeMessage.textContent).toContain('Welcome to the chat');
+                    const greeting = container.querySelector('.nlux-comp-welcomeMessage')!;
+                    expect(greeting).not.toBeNull();
+                    expect(greeting.textContent).toContain('Welcome to the chat');
                 });
             });
         });
 
         describe('When an initial conversation is provided', () => {
-            it('The welcome message should not be displayed', async () => {
+            it('The greeting should not be displayed', async () => {
                 // Arrange
                 const aiChat = (
                     <AiChat
@@ -140,8 +140,8 @@ describe('<AiChat /> + assistant persona + welcome message', () => {
                 await waitForReactRenderCycle();
 
                 // Assert
-                const welcomeMessage = container.querySelector('.nlux-comp-welcomeMessage');
-                expect(welcomeMessage).toBeNull();
+                const greeting = container.querySelector('.nlux-comp-welcomeMessage');
+                expect(greeting).toBeNull();
             });
         });
     });

@@ -1,9 +1,9 @@
 import {DomCreator} from '../../types/dom/DomCreator';
 import {getNluxSmallPngLogo} from '../Logo/getNluxSmallPngLogo';
-import {createWelcomeMessageDom} from '../WelcomeMessage/create';
+import {createGreetingDom} from '../Greeting/create';
 
-export const createDefaultWelcomeMessageDom: DomCreator<void> = (): HTMLElement => {
-    return createWelcomeMessageDom({
+export const createDefaultGreetingDom: DomCreator<void> = (): HTMLElement => {
+    return createGreetingDom({
         name: '',
         avatar: getNluxSmallPngLogo(),
     });

@@ -2,10 +2,10 @@ import {DomUpdater} from '../../types/dom/DomUpdater';
 import {className as avatarClassName} from '../Avatar/create';
 import {updateAvatarDom} from '../Avatar/update';
 import {personaNameClassName} from './create';
-import {WelcomeMessageProps} from './props';
-import {updateWelcomeMessageText} from './utils/updateWelcomeMessageText';
+import {GreetingProps} from './props';
+import {updateGreetingText} from './utils/updateGreetingText';
 
-export const updateWelcomeMessageDom: DomUpdater<WelcomeMessageProps> = (
+export const updateGreetingDom: DomUpdater<GreetingProps> = (
     element,
     propsBefore,
     propsAfter,
@@ -19,7 +19,7 @@ export const updateWelcomeMessageDom: DomUpdater<WelcomeMessageProps> = (
     }
 
     if (propsBefore.message !== propsAfter.message) {
-        updateWelcomeMessageText(element, propsAfter.message);
+        updateGreetingText(element, propsAfter.message);
     }
 
     if (propsBefore.name !== propsAfter.name) {

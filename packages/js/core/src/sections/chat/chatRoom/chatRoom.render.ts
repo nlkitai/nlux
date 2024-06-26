@@ -49,7 +49,9 @@ export const renderChatRoom: CompRenderer<
     // And add listeners
     //
     chatRoomContainer.classList.add('nlux-chatRoom-container');
-    setChatRoomStatusClass(getChatRoomStatus(props.initialConversationContent));
+    setChatRoomStatusClass(
+        getChatRoomStatus(props.initialConversationContent)
+    );
 
     chatRoomContainer.append(dom);
     chatRoomContainer.style.display = visibleProp ? '' : 'none';

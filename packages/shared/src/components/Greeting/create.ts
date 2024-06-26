@@ -1,12 +1,12 @@
 import {DomCreator} from '../../types/dom/DomCreator';
 import {createAvatarDom} from '../Avatar/create';
-import {WelcomeMessageProps} from './props';
-import {updateWelcomeMessageText} from './utils/updateWelcomeMessageText';
+import {GreetingProps} from './props';
+import {updateGreetingText} from './utils/updateGreetingText';
 
 export const className = 'nlux-comp-welcomeMessage';
 export const personaNameClassName = 'nlux-comp-welcomeMessage-personaName';
 
-export const createWelcomeMessageDom: DomCreator<WelcomeMessageProps> = (
+export const createGreetingDom: DomCreator<GreetingProps> = (
     props,
 ): HTMLElement => {
     const element = document.createElement('div');
@@ -24,7 +24,7 @@ export const createWelcomeMessageDom: DomCreator<WelcomeMessageProps> = (
     personaName.classList.add(personaNameClassName);
     element.append(personaName);
 
-    updateWelcomeMessageText(element, props.message);
+    updateGreetingText(element, props.message);
 
     return element;
 };
