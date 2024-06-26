@@ -2,7 +2,7 @@ import {AiChat, useAsRscAdapter} from '@nlux-dev/react/src';
 import {render, waitFor} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {act} from 'react';
-import {afterEach, beforeEach, describe, expect, it} from 'vitest';
+import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
@@ -61,8 +61,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
     describe('When the adapter starts streaming', () => {
         it('Should stream the component to the active segment', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({default: () => <div>HiXxx!</div>}),
             );
 
@@ -83,8 +82,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
 
         it('Should display loader while streaming', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({
                     default: async () => {
                         await waitForMilliseconds(10000);
@@ -116,8 +114,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
 
         it('Should reset the composer', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({default: () => <div>HiXxx!</div>}),
             );
             const aiChat = <AiChat adapter={rscAdapter}/>;
@@ -140,8 +137,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
     describe('When streaming is complete', () => {
         it('The active segment should be marked as complete', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({default: () => <div>HiXxx!</div>}),
             );
             const aiChat = <AiChat adapter={rscAdapter}/>;
@@ -165,8 +161,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
 
         it('The loader should be removed from the active segment', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({default: () => <div>HiXxx!</div>}),
             );
             const aiChat = <AiChat adapter={rscAdapter}/>;
@@ -198,7 +193,9 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
             const createAdapter = useAsRscAdapter;
             let rscAdapter;
             try {
-                rscAdapter = createAdapter(Promise.reject(new Error('An error occurred')));
+                rscAdapter = createAdapter(new Promise((resolve, reject) => {
+                    setTimeout(() => reject(new Error('An error occurred')), 100);
+                }));
             } catch (_e) {
                 // Ignore
             }
@@ -218,15 +215,14 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
             // Assert
             const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment--active';
             const activeSegment = container.querySelector(activeSegmentSelector);
-            expect(activeSegment).not.toBeInTheDocument();
+            await waitFor(() => expect(activeSegment).not.toBeInTheDocument());
         });
 
         it('The prompt should be restored to the composer', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
-                Promise.reject(new Error('An error occurred')),
-            );
+            const rscAdapter = useAsRscAdapter(new Promise((resolve, reject) => {
+                setTimeout(() => reject(new Error('An error occurred')), 100);
+            }));
             const aiChat = <AiChat adapter={rscAdapter}/>;
             const {container} = render(aiChat);
             await waitForReactRenderCycle();
@@ -240,15 +236,14 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
             await act(() => waitForReactRenderCycle());
 
             // Assert
-            expect(textArea.value).toBe('Hello');
+            await waitFor(() => expect(textArea.value).toBe('Hello'));
         });
     });
 
     describe('When the RSC is an async component', () => {
         it('Should await and render the RSC', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({
                     default: async () => {
                         await waitForMilliseconds(500);
@@ -274,8 +269,7 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
     describe('When the RSC is a synchronous component', () => {
         it('Should be rendered immediately', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
                 Promise.resolve({
                     default: () => <div>HiXxx!</div>,
                 }),
@@ -298,8 +292,8 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
     describe('When the RSC is an invalid component', () => {
         it('Should show an error message', async () => {
             // Arrange
-            const createAdapter = useAsRscAdapter;
-            const rscAdapter = createAdapter(
+            const rscAdapter = useAsRscAdapter(
+                // @ts-ignore
                 Promise.resolve({default: 'Invalid'}),
             );
             const aiChat = <AiChat adapter={rscAdapter}/>;
