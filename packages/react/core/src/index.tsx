@@ -68,6 +68,7 @@ export type {
 
 export type {
     StreamedServerComponent,
+    StreamedServerComponentProps,
 } from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 // Exporting from — @nlux/react

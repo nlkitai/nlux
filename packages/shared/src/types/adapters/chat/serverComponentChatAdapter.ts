@@ -1,19 +1,20 @@
+import {FunctionComponent} from 'react';
 import {ChatAdapterExtras} from './chatAdapterExtras';
 
 /**
- * The server component receives the following props:
- * - `message`: The message that was sent to the API.
- * - `extras`: The extras object that was passed to the adapter.
+ * The result of an import() call that loads a React Server Component (RSC) from the server.
  */
-export type StreamedServerComponent = any;
+export type StreamedServerComponent = {
+    default: FunctionComponent<StreamedServerComponentProps>;
+};
 
 /**
- * The props that are passed to the server component.
+ * The props that are passed to the server component it's used with useAsRscAdapter().
  * - `message`: The message that was sent to the API.
  * - `extras`: The extras object that was passed to the adapter.
  */
 export type StreamedServerComponentProps = {
-    prompt: string;
+    message: string;
     extras: ChatAdapterExtras;
 };
 
@@ -28,7 +29,7 @@ export type StreamSendServerComponent<AiMsg = string> = (
         onServerComponentReceived: () => void;
         onError: (error: Error) => void;
     },
-) => () => StreamedServerComponent;
+) => () => void;
 
 /**
  * Adapter used to submit a message to the API and get a response in the form of an ESM module.
