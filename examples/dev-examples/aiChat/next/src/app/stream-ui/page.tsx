@@ -24,18 +24,18 @@ const WeatherComponent = (props: WeatherProps) => (
     </div>
 );
 
-export default async function streamComponent() {
+export default async function StreamComponent() {
     const result = await streamUI({
         model: openai('gpt-4o'),
         prompt: 'Get the weather for San Francisco',
-        text: ({content}) => <div>{content}</div>,
+        text: ({ content }) => <div>{content}</div>,
         tools: {
             getWeather: {
                 description: 'Get the weather for a location',
                 parameters: z.object({
                     location: z.string(),
                 }),
-                generate: async function ({location}) {
+                generate: async function ({ location }) {
                     // yield <LoadingComponent/>;
                     const weather = await getWeather(location);
                     return <WeatherComponent weather={weather} location={location}/>;

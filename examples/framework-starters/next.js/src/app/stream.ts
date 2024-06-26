@@ -4,6 +4,7 @@ import {StreamingAdapterObserver} from '@nlux/react';
 // We use HTTP POST to send the prompt to the server, and receive a stream of server-sent events
 // We use the observer object passed by NLUX to send chunks of text to <AiChat />
 export const streamText = async (prompt: string, observer: StreamingAdapterObserver) => {
+
     const response = await fetch('/api/chat', {
         method: 'POST',
         body: JSON.stringify({prompt: prompt}),
