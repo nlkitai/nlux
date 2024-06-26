@@ -21,6 +21,6 @@ export const insertCopyToClipboardButton = (markdownContainer: HTMLElement) => {
         copyIcon.classList.add('icon-copy');
         copyButton.appendChild(copyIcon);
 
-        codeBlockContainer.insertAdjacentElement('beforebegin', copyButton);
+        codeBlockContainer.appendChild(copyButton);
     });
 };

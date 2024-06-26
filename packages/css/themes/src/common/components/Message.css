@@ -30,8 +30,7 @@
         font-size: var(--nlux-cdBlk--ftSz);
 
         position: relative;
-        overflow: scroll;
-        padding: 10px 0;
+        max-width: 100%;
 
         color: var(--nlux-cdBlk--txtClr);
         border: var(--nlux-cdBlk--brdrWd) solid var(--nlux-cdBlk--brdClr);
@@ -40,7 +39,9 @@
     }
 
     > .code-block > pre {
-        width: fit-content;
+        overflow: auto;
+        padding: 10px 0;
+        width: 100%;
         min-width: 100%;
     }
 
@@ -53,7 +54,9 @@
     }
 
     button.nlux-comp-copyButton {
-        position: relative;
+        position: absolute;
+        top:5px;
+        right:0;
         z-index: 888888;
         width: var(--nlux-cdBlk-cpBtn--wd);
 
@@ -62,7 +65,7 @@
         margin-left: auto;
 
         padding: var(--nlux-cdBlk-cpBtn--pdng);
-
+        
         cursor: pointer;
         color: var(--nlux-cdBlk-cpBtn--txtClr);
         border: var(--nlux-cdBlk-cpBtn--brdrWd) solid var(--nlux-cdBlk-cpBtn--brdClr);
