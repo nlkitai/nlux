@@ -9,7 +9,7 @@
 simple
 to
 integrate powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines
-of code, you can add conversational AI capabilities and interact with your favourite LLM.
+of code, you can add conversational AI capabilities and interact with your favorite LLM.
 
 ## Key Features 🌟
 

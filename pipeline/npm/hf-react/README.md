@@ -20,7 +20,7 @@ the [`@nlux/hf`](https://www.npmjs.com/package/@nlux/hf) package.
 
 NLUX _(for Natural Language User Experience)_ is an open-source JavaScript library that makes it simple to integrate
 powerful large language models (LLMs) like ChatGPT into your web app or website. With just a few lines of code, you
-can add conversational AI capabilities and interact with your favourite LLM.
+can add conversational AI capabilities and interact with your favorite LLM.
 
 ### Key Features 🌟
 
