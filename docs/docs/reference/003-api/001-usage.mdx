@@ -1,0 +1,43 @@
+---
+sidebar_label: 'Usage'
+description: 'The AI chat API enables programmatic interaction with the conversational UI.'
+---
+
+import {PlatformSelector} from '@site/src/components/PlatformSelector/PlatformSelector';
+import {PlatformSection} from '@site/src/components/PlatformSection/PlatformSection';
+
+import UsageSetupReact from './001-usage/_001-usage/#react.mdx';
+import UsageSetupJavaScript from './001-usage/_001-usage/#js.mdx';
+
+import UsageCallsReact from './001-usage/_002-api-calls/#react.mdx';
+import UsageCallsJavaScript from './001-usage/_002-api-calls/#js.mdx';
+
+import UsageLifecycleReact from './001-usage/_003-lifecycle/#react.mdx';
+import UsageLifecycleJavaScript from './001-usage/_003-lifecycle/#js.mdx';
+
+# AI Chat API
+
+---
+
+The API layer provides a way to programmatically interact with the chatbot. It enables operations such as sending
+messages, getting the chat history, and more.
+
+<PlatformSelector reactJs={() => null} javascript={() => null}/>
+
+---
+
+## Usage
+
+<PlatformSection reactJs={UsageSetupReact} javascript={UsageSetupJavaScript}/>
+
+---
+
+## API Calls
+
+<PlatformSection reactJs={UsageCallsReact} javascript={UsageCallsJavaScript}/>
+
+---
+
+## Lifecycle
+
+<PlatformSection reactJs={UsageLifecycleReact} javascript={UsageLifecycleJavaScript}/>
