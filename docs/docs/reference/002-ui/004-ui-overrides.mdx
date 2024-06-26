@@ -17,10 +17,6 @@ with your JSX elements inside it.
 Here is an example of how you can override loader component displayed across multiple parts of NLUX:
 
 ```jsx
-import {AiChat} from '@nlux/react';
-import {AiChatUI} from '@nlux/react';
-import {useChatAdapter} from '@nlux/<platform>-adapter'; // Or use a custom adapter
-
 const MyAiChatApp = () => {
     const myAdapter = useChatAdapter({ /* Your adapter options */ });
     return (
