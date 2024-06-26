@@ -98,15 +98,17 @@ Create a new file `src/app/generativeUi.tsx`, and add the following code:
 
 ```jsx
 'use server';
+
 import { openai } from '@ai-sdk/openai';
 import { generateText } from 'ai';
+import { StreamedServerComponentProps } from '@nlux/react';
 
-export default async function streamComponent(prompt: string) {
+export default async function StreamedComponent({ message } : StreamedServerComponentProps) {
     const result = await generateText({
-        model: openai('gpt-4-turbo'),
+        model: openai('gpt-4o'),
         messages: [{
             role: 'user',
-            content: prompt,
+            content: message,
         }],
     });
 
@@ -187,23 +189,25 @@ Modify the `src/app/generativeUi.tsx` file as follows:
 ```jsx
 'use server';
 
-import SalesOverview from '@/app/sales-graph';
-import {streamUI} from 'ai/rsc';
-import {openai} from '@ai-sdk/openai';
-import {z} from 'zod';
+import { streamUI } from 'ai/rsc';
+import { openai } from '@ai-sdk/openai';
+import { z } from 'zod';
+
+import { StreamedServerComponentProps } from '@nlux/react';
+import SalesOverviewChart from '@/app/sales-chart';
 
 const LoadingComponent = () => (
     <div className="animate-pulse p-4">Generating</div>
 );
 
-export default async function streamComponent(prompt: string) {
+export default async function GenUiComponent({ message } : StreamedServerComponentProps) {
     const result = await streamUI({
         model: openai('gpt-4o'),
         prompt,
         text: ({content}) => <div>{content}</div>,
         tools: {
             salesOverview: {
-                description: 'Show a graph with an overview of sales',
+                description: 'Show a chart with an overview of sales',
                 parameters: z.object({
                     title: z.string(),
                     data: z.array(z.object({
@@ -213,7 +217,7 @@ export default async function streamComponent(prompt: string) {
                 }),
                 generate: async function* ({title, data}) {
                     yield <LoadingComponent/>;
-                    return <SalesOverview title={title} data={data} />;
+                    return <SalesOverviewChart title={title} data={data} />;
                 },
             },
         },
@@ -223,10 +227,10 @@ export default async function streamComponent(prompt: string) {
 }
 ```
 
-And add the following RSC component in `src/app/sales-graph.tsx`:
+And add the following RSC component in `src/app/sales-chart.tsx`:
 
 ```tsx
-export default function sales({data, title} : {title: string, data: SalesData}) {
+export default function SalesOverviewChart({data, title} : {title: string, data: SalesData}) {
     return (
         <div>
             <div>{title}</div>
@@ -239,14 +243,14 @@ export default function sales({data, title} : {title: string, data: SalesData}) 
 ```
 
 When you run the project, if prompted about generating a sales overview, the chatbot will respond with a React component
-that displays a graph of sales data.
+that displays a chart of sales data.
 
 Let's review the changes made to the `src/app/generativeUi.tsx` file:
 
-* We import the `SalesOverview` component from `src/app/sales-graph.tsx`.
+* We import the `SalesOverviewChart` component from `src/app/sales-chart.tsx`.
 * We use `streamUI` from the `ai/rsc` module to generate UI components.
-* We define a tool called `salesOverview` that generates a sales graph component.
-* The `generate` function yields a loading component while the data is being fetched, and then returns the `SalesOverview`
+* We define a tool called `salesOverview` that generates a sales chart component.
+* The `generate` function yields a loading component while the data is being fetched, and then returns the `<SalesOverviewChart />`
 component with the fetched data.
 
 Those features are part of the Vercel AI SDK and are now supported by NLUX through the RSC adapter.

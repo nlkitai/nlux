@@ -44,10 +44,9 @@ This feature enables a wide range of possibilities, such as:
 ```tsx
 'use server';
 
-export default async function MyServerComponent<AiMsg>(
-    message: string,
-    extras: ChatAdapterExtras<AiMsg>,
-) {
+import { StreamedServerComponentProps } from '@nlux/react';
+
+export default async function MyServerComponent<AiMsg>({ message, extras }: StreamedServerComponentProps) {
     // Your logic here
     // ...
 
@@ -56,14 +55,15 @@ export default async function MyServerComponent<AiMsg>(
 }
 ```
 
-The React Server Component should be **a default export function** that takes 2 parameters:
+The React Server Component should be **a default export function** that takes an object with the following properties:
 * `message` - The prompt message typed by the user, to be sent to the API.
-* `extras` - An object containing [additional information](/reference/adapters/custom-adapters#adapter-extras) that the adapter might need.
+* `extras` - An object containing [additional information](/reference/adapters/custom-adapters#adapter-extras) that the
+adapter might need, such as the conversation history.
 
 > **On The Client:**
 
 ```tsx
-import {AiChat, useAsRscAdapter} from '@nlux/react';
+import { AiChat, useAsRscAdapter } from '@nlux/react';
 ```
 ```tsx
 useAsRscAdapter<AiMsg = string>(
@@ -72,10 +72,10 @@ useAsRscAdapter<AiMsg = string>(
 );
 ```
 
-The `useAsRscAdapter` hook takes 2 parameters:
+The `useAsRscAdapter()` hook takes 2 parameters:
 * `import('path/to/server-component')` - The path to the server component that should be used as the adapter.
 * `loader` - An optional ReactNode that will be displayed while the server component is being loaded.
 
-The `useAsRscAdapter` hook returns an adapter that can be used in the `<AiChat adapter={adapter} />` component.
+The `useAsRscAdapter()` hook returns an adapter that can be used in the `<AiChat adapter={adapter} />` component.
 When a user sends a message, NLUX will take care of calling the server component with the appropriate parameters and
 updating the chat UI with the response as it's being received.
