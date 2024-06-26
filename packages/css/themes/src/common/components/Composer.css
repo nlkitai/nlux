@@ -4,22 +4,20 @@
     align-items: stretch;
     flex-direction: row;
     justify-content: center;
-
     background-color: transparent;
     gap: var(--nlux-prmBx--gap);
 
     > textarea {
+        height: 100%;
         font-family: var(--nlux-prmInp--ftFm), sans-serif;
         font-size: var(--nlux-prmInp--ftSz);
-        height: 20px;
         font-weight: 400;
-        line-height: 1;
-        padding: var(--nlux-chtr--pdng);
+        line-height: 0.5;
+        box-sizing: border-box;
+        padding:  var(--nlux-chtr--pdng);
         flex: 1;
         resize: none;
         cursor: pointer;
-        overflow: visible;
-        
 
         color: var(--nlux-prmInp--txtClr);
         
