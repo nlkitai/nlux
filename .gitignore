@@ -60,3 +60,4 @@ lerna-debug.log*
 *.sw?
 .idea
 /examples/dev-examples/**/yarn.lock
+/examples/next-js-demos/**/yarn.lock
