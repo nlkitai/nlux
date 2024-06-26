@@ -243,4 +243,83 @@ describe.skip('<AiChat /> + submit prompt + server component adapter', () => {
             expect(textArea.value).toBe('Hello');
         });
     });
+
+    describe('When the RSC is an async component', () => {
+        it('Should await and render the RSC', async () => {
+            // Arrange
+            const createAdapter = useAsRscAdapter;
+            const rscAdapter = createAdapter(
+                Promise.resolve({
+                    default: async () => {
+                        await waitForMilliseconds(500);
+                        return <div>HiXxx!</div>;
+                    },
+                }),
+            );
+            const aiChat = <AiChat adapter={rscAdapter}/>;
+            const {container} = render(aiChat);
+            await waitForReactRenderCycle();
+
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            // Assert
+            await waitFor(() => expect(container.textContent).toContain('HiXxx!'));
+        });
+    });
+
+    describe('When the RSC is a synchronous component', () => {
+        it('Should be rendered immediately', async () => {
+            // Arrange
+            const createAdapter = useAsRscAdapter;
+            const rscAdapter = createAdapter(
+                Promise.resolve({
+                    default: () => <div>HiXxx!</div>,
+                }),
+            );
+            const aiChat = <AiChat adapter={rscAdapter}/>;
+            const {container} = render(aiChat);
+            await waitForReactRenderCycle();
+
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            // Assert
+            await waitFor(() => expect(container.textContent).toContain('HiXxx!'));
+        });
+    });
+
+    describe('When the RSC is an invalid component', () => {
+        it('Should show an error message', async () => {
+            // Arrange
+            const createAdapter = useAsRscAdapter;
+            const rscAdapter = createAdapter(
+                Promise.resolve({default: 'Invalid'}),
+            );
+            const aiChat = <AiChat adapter={rscAdapter}/>;
+            const {container} = render(aiChat);
+            await waitForReactRenderCycle();
+
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+
+            // Act
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            // Assert
+            const exceptionContainer = container.querySelector('.nlux-comp-exceptionItem');
+            expect(exceptionContainer).toBeInTheDocument();
+            expect(exceptionContainer!.textContent).toContain('Failed to stream server component');
+
+            const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment';
+            const activeSegment = container.querySelector(activeSegmentSelector);
+            expect(activeSegment).not.toBeInTheDocument();
+        });
+    });
 });
