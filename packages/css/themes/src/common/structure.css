@@ -21,7 +21,8 @@
 
     > .nlux-chatRoom-container {
         position: relative;
-        display: block;
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
         width: 100%;
         height: 100%;
@@ -29,28 +30,21 @@
 
         > .nlux-launchPad-container,
         > .nlux-conversation-container {
-            position: absolute;
-            z-index: 999988;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 80px;
+            /* position: absolute; */
+            height: calc(100% - 60px);
+            /* flex-shrink: 1; */
+            flex-grow: 1;
+          
         }
 
         > .nlux-composer-container {
-            position: absolute;
-            height: 80px;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            height: 60px;
             width: 100%;
-            flex: 0 0 auto;
             display: flex;
             flex-direction: row;
             align-items: stretch;
 
             > .nlux-comp-composer {
-                padding: var(--nlux-dvr--mrgTp) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng) var(--nlux-chtr--pdng);
                 width: 100%;
             }
         }

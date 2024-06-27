@@ -38,7 +38,7 @@
     --nlux-ChatRoom--FontFamily: var(--nlux-nova--FontFamily);
     --nlux-ChatRoom--FontSize: 16px;
 
-    --nlux-ChatRoom--Padding: 10px;
+    --nlux-ChatRoom--Padding: 20px;
     --nlux-ChatRoom--BorderRadius: 18px;
     --nlux-ChatRoom--BorderWidth: var(--nlux-nova--BorderWidth);
 

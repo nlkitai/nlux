@@ -1,24 +1,26 @@
 .nlux-comp-composer {
+    height: 100%;
     display: flex;
     align-items: stretch;
     flex-direction: row;
     justify-content: center;
-
     background-color: transparent;
     gap: var(--nlux-prmBx--gap);
 
     > textarea {
+        height: 100%;
         font-family: var(--nlux-prmInp--ftFm), sans-serif;
         font-size: var(--nlux-prmInp--ftSz);
-
         font-weight: 400;
-        line-height: 1.5;
+        line-height: 0.5;
+        box-sizing: border-box;
+        padding:  var(--nlux-chtr--pdng);
         flex: 1;
-        padding: .375rem .75rem;
         resize: none;
         cursor: pointer;
-        color: var(--nlux-prmInp--txtClr);
 
+        color: var(--nlux-prmInp--txtClr);
+        
         border-width: var(--nlux-prmInp--brdrWd);
         border-style: solid;
         border-color: var(--nlux-prmInp--brdClr);
