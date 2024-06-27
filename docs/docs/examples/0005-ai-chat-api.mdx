@@ -1,0 +1,25 @@
+---
+sidebar_label: 'AI Chat API And Events'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import app from './0005-ai-chat-api/app';
+import setup from './0005-ai-chat-api/setup';
+import lastMessage from './0005-ai-chat-api/lastMessage';
+
+# AI Chat API And Events
+
+---
+
+This example shows how to use the AI Chat API along with events to submit a message programmatically, and use the
+response outside the AI Chat component.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'setup.ts': setup,
+        'lastMessage.tsx': lastMessage,
+    }}
+    editorHeight={450}
+    simulatedPrompt={false}
+/>
