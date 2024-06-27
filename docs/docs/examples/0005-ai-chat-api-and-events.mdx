@@ -2,6 +2,7 @@
 sidebar_label: 'API And Events'
 ---
 
+import Link from '@docusaurus/Link';
 import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
 import app from './0005-ai-chat-api-and-events/app';
 import setup from './0005-ai-chat-api-and-events/setup';
@@ -23,3 +24,10 @@ response outside the AI Chat component.
     editorHeight={450}
     simulatedPrompt={false}
 />
+
+---
+
+<div style={{display: 'flex', justifyContent: 'flex-start', gap: '1rem'}}>
+    <Link className="learn-more-link button button--secondary" to="/reference/api/usage">AI Chat API Reference</Link>
+    <Link className="learn-more-link button button--secondary" to="/reference/ui/events">Events Reference</Link>
+</div>
