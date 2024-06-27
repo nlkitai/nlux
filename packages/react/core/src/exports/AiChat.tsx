@@ -125,29 +125,32 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         const internalApi = props.api as unknown as AiChatInternalApi | undefined;
-        if (internalApi !== internalApiRef.current) {
-            internalApiRef.current = internalApi;
-            if (typeof internalApi?.__setHost === 'function') {
-                internalApi.__setHost({
-                    sendMessage: (prompt: string) => {
-                        setPrompt(prompt);
-                        setComposerStatus('submitting-external-message');
-                    },
-                    resetConversation: () => {
-                        setChatSegments([]);
-                        setInitialSegment(undefined);
-                    },
-                    cancelLastMessageRequest: () => {
-                        const lastSegment = segments.length > 0 ? segments[segments.length - 1] : undefined;
-                        if (lastSegment?.status === 'active') {
-                            // Cancel the HTTP request for the last message
-                            // Remove the last message from the conversation
-                        }
+        internalApiRef.current = internalApi;
+
+        if (typeof internalApi?.__setHost === 'function') {
+            internalApi.__setHost({
+                sendMessage: (prompt: string) => {
+                    setPrompt(prompt);
+                    setComposerStatus('submitting-external-message');
+                },
+                resetConversation: () => {
+                    setChatSegments([]);
+                    setInitialSegment(undefined);
+                },
+                cancelLastMessageRequest: () => {
+                    const lastSegment = segments.length > 0
+                        ? segments[segments.length - 1]
+                        : undefined;
+
+                    if (lastSegment?.status === 'active') {
+                        // Cancel the HTTP request for the last message
+                        // Remove the last message from the conversation
+                        setChatSegments(segments.slice(0, -1));
                     }
-                });
-            }
+                }
+            });
         }
-    }, [props.api, setPrompt, handleSubmitPrompt]);
+    }, [props.api, setPrompt, handleSubmitPrompt, segments, setChatSegments]);
 
     useEffect(() => () => {
         if (typeof internalApiRef.current?.__unsetHost === 'function') {

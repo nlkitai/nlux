@@ -16,8 +16,9 @@ export type AiChatApi = {
         send: (prompt: string) => void;
 
         /**
-         * Cancel the last message request. If a message is being sent, it will be cancelled.
-         * If a message is being generated (in streaming mode), the generation will be stopped and the message will removed.
+         * Cancel the last message request.
+         * If a message is being sent, it will be cancelled.
+         * If a message is being generated (in streaming mode), the generation will stop and the message will removed.
          * If no message is being sent, this method does nothing.
          */
         cancelLastRequest: () => void;
