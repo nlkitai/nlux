@@ -20,6 +20,12 @@ export type ConversationCompProps<AiMsg> = {
         div: HTMLDivElement;
     } | undefined) => void;
 
+    onPromptResubmit: (
+        segmentId: string,
+        messageId: string,
+        newPrompt: string,
+    ) => void;
+
     // UI Overrides
     Loader: ReactElement;
 };

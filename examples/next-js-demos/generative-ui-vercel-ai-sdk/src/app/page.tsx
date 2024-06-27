@@ -5,9 +5,6 @@ import Image from 'next/image';
 import {AiChat, useAsRscAdapter, useAsStreamAdapter} from '@nlux/react';
 import '@nlux/themes/nova.css';
 
-// Basic text streaming that will link <AiChat /> to our API endpoint:
-import {streamText} from './stream';
-
 export default function HomePage() {
 
     // We transform the streamText function into an adapter that <AiChat /> can use

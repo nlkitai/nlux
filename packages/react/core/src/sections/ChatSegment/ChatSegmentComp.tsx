@@ -230,6 +230,7 @@ export const ChatSegmentComp: <AiMsg>(
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             markdownContainersController={props.markdownContainersController}
+                            onPromptResubmit={(newPrompt) => props.onPromptResubmit(props.chatSegment.uid, chatItem.uid, newPrompt)}
                         />
                     );
                 } else {

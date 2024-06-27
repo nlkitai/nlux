@@ -1,4 +1,4 @@
-import {Component, PropsWithChildren, useEffect, useMemo, useRef} from 'react';
+import {Component, PropsWithChildren, KeyboardEvent, useEffect, useMemo, useRef, useState} from 'react';
 import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
 import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
 import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';
@@ -9,6 +9,8 @@ type MarkdownSnapshotRendererProps = {
     content: string;
     markdownOptions?: SnapshotParserOptions;
     onMarkdownRenderingError?: (error: Error) => void;
+    canResubmit?: boolean;
+    onResubmit?: (newPrompt: string) => void;
 };
 
 const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
@@ -41,6 +43,35 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
         return markdownOptions?.htmlSanitizer ? markdownOptions.htmlSanitizer(parsedContent) : parsedContent;
     }, [parsedContent, markdownOptions?.htmlSanitizer]);
 
+    const [isEditing, setIsEditing] = useState(false);
+    const handleBlur = () => setIsEditing(false);
+    const handleFocus = () => {
+        if (props.canResubmit) {
+            setIsEditing(true);
+        }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
+        const newPromptTyped = event.currentTarget.textContent;
+        if (!newPromptTyped) {
+            return;
+        }
+
+        if (event.key === 'Enter' && event.ctrlKey && props.onResubmit) {
+            console.log('Resubmitting prompt:');
+            console.log(newPromptTyped);
+
+            event.preventDefault();
+            const newPrompt = event.currentTarget.textContent;
+            props.onResubmit(newPrompt || '');
+        }
+    }
+
+
     return (
         <MarkdownParserErrorBoundary>
             <div className={'nlux-markdownStream-root'}>
@@ -48,6 +79,10 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
                     className="nlux-markdown-container"
                     ref={markdownContainerRef}
                     dangerouslySetInnerHTML={{__html: trustedHtml}}
+                    contentEditable={props.canResubmit}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
                 />
             </div>
         </MarkdownParserErrorBoundary>

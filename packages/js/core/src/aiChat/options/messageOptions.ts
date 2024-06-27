@@ -97,4 +97,12 @@ export type MessageOptions<AiMsg = string> = {
      * Custom function to render the message sent by the user.
      */
     promptRenderer?: PromptRenderer;
+
+    /**
+     * Indicates whether the user should be able to edit the message after sending it.
+     * Editing a message will replace the original message and will remove all subsequent messages in the conversation.
+     *
+     * @default false
+     */
+    enableEditing?: boolean;
 }

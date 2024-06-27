@@ -1,4 +1,5 @@
 'use client';
+import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
@@ -92,6 +93,19 @@ export const AiChat: <AiMsg>(
         setChatSegments, setComposerStatus, setPrompt,
     });
 
+    const handleResubmitPrompt = useCallback((segmentId: string, messageId: string, newPrompt: string) => {
+        // Find the segment
+        const segmentIndex = chatSegments.findIndex((segment) => segment.uid === segmentId);
+
+        // Remove the segment from the chatSegments array
+        const newChatSegments = chatSegments.slice(0, segmentIndex);
+        setChatSegments(newChatSegments);
+
+        // Submit the new prompt
+        setPrompt(newPrompt);
+        setComposerStatus('submitting-edit');
+    }, [chatSegments, setChatSegments]);
+
     const handleConversationStarterSelected = useCallback(
         (conversationStarter: ConversationStarter) => {
             setPrompt(conversationStarter.prompt);
@@ -106,7 +120,11 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
-        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message') {
+        if (
+            composerStatus === 'submitting-conversation-starter' ||
+            composerStatus === 'submitting-external-message' ||
+            composerStatus === 'submitting-edit'
+        ) {
             handleSubmitPrompt();
         }
     }, [composerStatus, handleSubmitPrompt]);
@@ -204,6 +222,7 @@ export const AiChat: <AiMsg>(
                             onLastActiveSegmentChange={handleLastActiveSegmentChange}
                             Loader={uiOverrides.Loader}
                             markdownContainersController={markdownContainersController}
+                            onPromptResubmit={handleResubmitPrompt}
                         />
                     </div>
                     <div className="nlux-composer-container">

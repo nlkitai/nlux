@@ -19,6 +19,7 @@ export type ChatItemProps<AiMsg> = {
     name: string;
     avatar?: string | ReactElement;
     markdownContainersController: MarkdownContainersController;
+    onPromptResubmit?: (newPrompt: string) => void;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {

@@ -16,6 +16,9 @@ export type ChatSegmentProps<AiMsg> = {
     containerRef?: RefObject<HTMLDivElement>;
     markdownContainersController: MarkdownContainersController;
 
+    // Callbacks
+    onPromptResubmit: (segmentId: string, messageId: string, newPrompt: string) => void;
+
     // UI overrides
     Loader: ReactElement;
 };

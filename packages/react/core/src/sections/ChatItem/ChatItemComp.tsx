@@ -71,12 +71,25 @@ export const ChatItemComp: <AiMsg>(
                         // User message does not need syntax highlighting, advanced markdown options
                         // Only HTML sanitization is needed
                     }}
+                    canResubmit={props.messageOptions?.enableEditing}
+                    onResubmit={(newPrompt) => {
+                        props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
+                    }}
                 />
             );
         }
 
         const PromptRenderer = props.messageOptions.promptRenderer;
-        return <PromptRenderer uid={props.uid} prompt={props.fetchedContent as string}/>;
+        return (
+            <PromptRenderer
+                uid={props.uid}
+                prompt={props.fetchedContent as string}
+                isEditable={props.messageOptions.enableEditing ?? false}
+                onResubmit={(newPrompt) => {
+                    props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
+                }}
+            />
+        );
     }, [props.messageOptions?.promptRenderer, props.fetchedContent, props.uid]);
 
     const ForwardRefStreamContainerComp = useMemo(
