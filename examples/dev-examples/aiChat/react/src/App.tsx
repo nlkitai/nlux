@@ -347,7 +347,7 @@ function App() {
                     layout: conversationLayout,
                     // showWelcomeMessage: true,
                     conversationStarters,
-                    showWelcomeMessage: false,
+                    // showWelcomeMessage: false,
                 }}
                 events={{
                     messageReceived,
