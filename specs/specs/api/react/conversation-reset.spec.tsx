@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {waitForReactRenderCycle} from '../../../utils/wait';
 import {act} from 'react';
 
-describe('<AiChat /> + api + reset', () => {
+describe('<AiChat /> + api + conversation.reset', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -20,7 +20,7 @@ describe('<AiChat /> + api + reset', () => {
         adapterController = undefined;
     });
 
-    describe('When resetConversation is called', () => {
+    describe('When conversation.reset() is called', () => {
         it('It should clear the chat segments', async () => {
             // Arrange
             let apiFromOutside: AiChatApi | undefined = undefined;
@@ -68,7 +68,7 @@ describe('<AiChat /> + api + reset', () => {
             expect(containerFromOutside!.textContent).toContain('Hello, world!');
 
             // Act
-            act(() => apiFromOutside!.resetConversation());
+            act(() => apiFromOutside!.conversation.reset());
             await waitForReactRenderCycle();
 
             // Assert

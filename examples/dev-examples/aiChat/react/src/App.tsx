@@ -194,11 +194,11 @@ function App() {
 
     const api = useAiChatApi();
     const sendHelloWorld = useCallback(() => {
-        api.sendMessage('Hello, World!');
+        api.composer.send('Hello, World!');
     }, [api]);
 
     const resetConversation = useCallback(() => {
-        api.resetConversation();
+        api.conversation.reset();
     }, [api]);
 
     const conversationStarters: ConversationStarter[] = [

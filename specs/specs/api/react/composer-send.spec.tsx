@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {waitForReactRenderCycle} from '../../../utils/wait';
 import {act} from 'react';
 
-describe('<AiChat /> + api + sendMessage', () => {
+describe('<AiChat /> + api + composer.send', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -45,7 +45,7 @@ describe('<AiChat /> + api + sendMessage', () => {
             expect(apiFromOutside).toBeDefined();
 
             // Act
-            act(() => apiFromOutside!.sendMessage(prompt));
+            act(() => apiFromOutside!.composer.send(prompt));
             await waitForReactRenderCycle();
 
             // Assert
@@ -79,7 +79,7 @@ describe('<AiChat /> + api + sendMessage', () => {
 
             // Assert
             expect(apiFromOutside).toBeDefined();
-            expect(() => apiFromOutside!.sendMessage(prompt)).toThrow();
+            expect(() => apiFromOutside!.composer.send(prompt)).toThrow();
         });
     });
 });

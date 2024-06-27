@@ -1,15 +1,15 @@
 ---
-sidebar_label: 'resetConversation()'
-description: 'Programmatically reset the conversation.'
+sidebar_label: 'conversation.reset()'
+description: 'Programmatically reset the conversation history.'
 ---
 
-# `resetConversation()`
+# `conversation.reset()`
 
 ---
 
 > * Method Name:
 
-**`resetConversation()`**
+**`conversation.reset()`**
 
 > * Description
 
@@ -24,9 +24,9 @@ export default function App() {
   // Create an instance of the AiChatApi using the useAiChatApi hook
   const api = useAiChatApi();
 
-  // Call `api.sendMessage(...)` to send a message to the chatbot
+  // Call `api.conversation.reset(...)` to reset the conversation chat history
   const onClick = useCallback(() => {
-    api.resetConversation(); // Resetting conversation on click 🔄
+    api.conversation.reset(); // Resetting conversation on click 🔄
   }, [api]);
 
   // When creating the AiChat component, pass the `api` object as a prop

@@ -13,8 +13,8 @@ export default () => {
   const api = useAiChatApi();
 
   // Callbacks that use the API
-  const onResetClick = useCallback(() => api.resetConversation(), [api]);
-  const onSendClick = useCallback(() => api.sendMessage('Where can I find this treasure chest?'), [api]);
+  const onResetClick = useCallback(() => api.conversation.reset(), [api]);
+  const onSendClick = useCallback(() => api.composer.send('Where can I find this treasure chest?'), [api]);
   const onMessageReceived = useCallback((payload) => setLastMessageReceived(payload.message), [setLastMessageReceived]);
 
   return (

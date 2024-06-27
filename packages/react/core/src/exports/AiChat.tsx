@@ -137,6 +137,13 @@ export const AiChat: <AiMsg>(
                         setChatSegments([]);
                         setInitialSegment(undefined);
                     },
+                    cancelLastMessageRequest: () => {
+                        const lastSegment = segments.length > 0 ? segments[segments.length - 1] : undefined;
+                        if (lastSegment?.status === 'active') {
+                            // Cancel the HTTP request for the last message
+                            // Remove the last message from the conversation
+                        }
+                    }
                 });
             }
         }
