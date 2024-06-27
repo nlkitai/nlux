@@ -1,7 +1,26 @@
 import {useRef} from 'react';
 
+/**
+ * AiChat API methods.
+ */
 export type AiChatApi = {
+    /**
+     * Types the message in the composer and sends it to the chat adapter automatically.
+     *
+     * @param {string} prompt
+     */
     sendMessage: (prompt: string) => void;
+
+    /**
+     * Cancel the last message request. If a message is being sent, it will be cancelled.
+     * If a message is being generated (in streaming mode), the generation will be stopped and the message will removed.
+     * If no message is being sent, this method does nothing.
+     */
+    cancelLastMessageRequest: () => void;
+
+    /**
+     * Reset the conversation.
+     */
     resetConversation: () => void;
 };
 
@@ -38,6 +57,11 @@ const createVoidInternalApi = (setHost: (host: AiChatHost) => void = () => {
     };
 };
 
+/**
+ * Hook to get the AiChat API reference.
+ *
+ * @returns {AiChatApi}
+ */
 export const useAiChatApi = (): AiChatApi => {
     const currentHost = useRef<AiChatHost | null>(null);
     const api = useRef<AiChatInternalApi>(createVoidInternalApi());
