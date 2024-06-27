@@ -16,12 +16,12 @@ export type AiChatApi = {
         send: (prompt: string) => void;
 
         /**
-         * Cancel the last message request.
+         * Cancel the request being sent.
          * If a message is being sent, it will be cancelled.
-         * If a message is being generated (in streaming mode), the generation will stop and the message will removed.
+         * If a message is being generated (in streaming mode), the generation will stop and the message will deleted.
          * If no message is being sent, this method does nothing.
          */
-        cancelLastRequest: () => void;
+        cancel: () => void;
     },
     /**
      * API methods related to the conversation.
@@ -52,7 +52,7 @@ const createVoidInternalApi = (setHost: (host: AiChatHost) => void = () => {
             send: (prompt: string) => {
                 throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
             },
-            cancelLastRequest: () => {
+            cancel: () => {
                 throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
             },
         },
@@ -92,7 +92,7 @@ export const useAiChatApi = (): AiChatApi => {
         currentHost.current.sendMessage(prompt);
     };
 
-    api.current.composer.cancelLastRequest = () => {
+    api.current.composer.cancel = () => {
         if (!currentHost.current) {
             throw new Error('AiChatApi is not connected to a host <AiChat /> component.');
         }

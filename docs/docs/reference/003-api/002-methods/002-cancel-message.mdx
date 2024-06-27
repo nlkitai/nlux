@@ -1,15 +1,15 @@
 ---
-sidebar_label: 'composer.cancelLastRequest()'
-description: 'Suggest a new method for the AI Chat API.'
+sidebar_label: 'composer.cancel()'
+description: 'Cancel the request that is currently being made.'
 ---
 
-# `composer.cancelLastRequest()`
+# `composer.cancel()`
 
 ---
 
 > * Method Name:
 
-**`composer.cancelLastRequest()`**
+**`composer.cancel()`**
 
 > * Description
 
@@ -23,7 +23,7 @@ export default function App() {
   const api = useAiChatApi();
 
   // Call `api.composer.send(...)` to send a message to the chatbot
-  const onClick = useCallback(() => api.composer.cancelLastRequest(), [api]);
+  const onClick = useCallback(() => api.composer.cancel(), [api]);
 
   // When creating the AiChat component, pass the `api` object as a prop
   return (

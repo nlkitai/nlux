@@ -6,7 +6,7 @@ import {adapterBuilder} from '../../../utils/adapterBuilder';
 import {waitForReactRenderCycle} from '../../../utils/wait';
 import {act} from 'react';
 
-describe('<AiChat /> + api + composer.cancelLastRequest', () => {
+describe('<AiChat /> + api + composer.cancel', () => {
     let adapterController: AdapterController | undefined;
 
     beforeEach(() => {
@@ -55,7 +55,7 @@ describe('<AiChat /> + api + composer.cancelLastRequest', () => {
             await waitFor(() => expect(activeSegment).toBeInTheDocument());
 
             // Act
-            act(() => apiFromOutside!.composer.cancelLastRequest());
+            act(() => apiFromOutside!.composer.cancel());
             await waitForReactRenderCycle();
 
             // Assert
