@@ -1,0 +1,36 @@
+---
+sidebar_label: 'composer.cancelLastRequest()'
+description: 'Suggest a new method for the AI Chat API.'
+---
+
+# `composer.cancelLastRequest()`
+
+---
+
+> * Method Name:
+
+**`composer.cancelLastRequest()`**
+
+> * Description
+
+This method cancels the last request made to the AI backend. If no request is in progress, this method does nothing.
+
+```tsx
+import {AiChat, useAiChatApi} from 'nlux';
+
+export default function App() {
+  // Create an instance of the AiChatApi using the useAiChatApi hook
+  const api = useAiChatApi();
+
+  // Call `api.composer.send(...)` to send a message to the chatbot
+  const onClick = useCallback(() => api.composer.cancelLastRequest(), [api]);
+
+  // When creating the AiChat component, pass the `api` object as a prop
+  return (
+    <div>
+      <AiChat api={api} adapter={adapter} />
+      <button onClick={onClick}>Cancel Generation</button>
+    </div>
+  );
+}
+```
