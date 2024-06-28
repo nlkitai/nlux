@@ -12,12 +12,13 @@ const NluxLogoLight = '/nlux/images/logos/nlux/black.png';
 const NluxLogoDark = '/nlux/images/logos/nlux/white.png';
 const JavaScriptLogo = '/nlux/images/logos/platforms/javascript-logo-60pxh.png';
 const ReactJsLogo = '/nlux/images/logos/platforms/react-js-logo-60pxh.png';
-const LangChainLogo = '/nlux/images/logos/platforms/langchain-logo-60pxh.png';
+const LangChainDarkLogo = '/nlux/images/logos/platforms/langchain-logo-dark-60pxh.png';
+const LangChainLightLogo = '/nlux/images/logos/platforms/langchain-logo-light-60pxh.png';
 const NextJsLogoDark = '/nlux/images/logos/platforms/nextjs-logo-dark-120pxh.png';
 const NextJsLogoLight = '/nlux/images/logos/platforms/nextjs-logo-light-120pxh.png';
-const OpenAiLogo = '/nlux/images/logos/platforms/openai-logo-60pxh.png';
+const VercelAiDarkLogo = '/nlux/images/logos/platforms/vercel-logo-dark-60pxh.png';
+const VercelAiLightLogo = '/nlux/images/logos/platforms/vercel-logo-light-60pxh.png';
 const AdapterLogo = '/nlux/images/logos/platforms/adapters-logo-60pxh.png';
-const HuggingFaceLogo = '/nlux/images/logos/platforms/hugging-face-logo-60pxh.png';
 
 export const Hero = ({className}: { className?: string }) => {
     const {colorMode} = useColorMode();
@@ -71,16 +72,11 @@ export const Hero = ({className}: { className?: string }) => {
                             Integrates with
                         </div>
                         <div className={heroStyles.platformName}>
-                            <img src={LangChainLogo} alt="LangChain Logo" width={60}/>
-                            <h5 style={{textAlign: 'left'}}>LangChain</h5>
+                            <img src={colorMode === 'dark' ? LangChainDarkLogo : LangChainLightLogo} alt="LangChain Logo" height={25}/>
                         </div>
-                        <div className={heroStyles.platformName}>
-                            <img src={HuggingFaceLogo} alt="Hugging Face Logo" width={40}/>
-                            <h5 style={{textAlign: 'left'}}>Hugging&nbsp;Face</h5>
-                        </div>
-                        <div className={heroStyles.platformName}>
-                            <img src={OpenAiLogo} alt="OpenAI Logo" width={40}/>
-                            <h5 style={{textAlign: 'left'}}>OpenAI</h5>
+                        <div className={heroStyles.vercelPlatformName}>
+                            <img src={colorMode === 'dark' ? VercelAiDarkLogo : VercelAiLightLogo} alt="Vercel Logo" height={25}/>
+                            <h5 style={{textAlign: 'left'}}>Vercel AI</h5>
                         </div>
                         <div className={heroStyles.platformName}>
                             <img src={AdapterLogo} alt="Adapters Logo" width={40}/>
@@ -100,7 +96,6 @@ export const Hero = ({className}: { className?: string }) => {
                 </div>
                 <div className={styles.nluxInAction}>
                     <Previews/>
-
                 </div>
             </div>
         </header>

@@ -69,6 +69,7 @@
     flex-wrap: wrap;
 }
 
+.adaptersShowcase > .vercelPlatformName,
 .adaptersShowcase > .platformName {
     display: flex;
     flex-direction: row;
@@ -77,11 +78,21 @@
     gap: 10px;
 }
 
+.adaptersShowcase > .vercelPlatformName > h5,
 .adaptersShowcase > .platformName > h5 {
     font-size: 1.1rem;
     font-weight: bold;
     padding: 0;
     margin: 0;
+}
+
+.adaptersShowcase > .vercelPlatformName > h5 {
+    font-family: 'Geist', sans-serif;
+    color: black;
+}
+
+html[data-theme='dark'] .adaptersShowcase > .vercelPlatformName > h5 {
+    color: white;
 }
 
 .adaptersShowcase > .platformName > img {

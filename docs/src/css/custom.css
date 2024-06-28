@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Geist';
+    src: url('GeistVF.woff') format('woff');
+}
+
 /* You can override the default Infima variables here. */
 :root {
     --ifm-color-primary: #fc7509;
