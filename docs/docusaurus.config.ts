@@ -54,6 +54,13 @@ const config: Config = {
         },
     ],
 
+    scripts: [
+        {
+            src: 'https://platform.twitter.com/widgets.js',
+            async: true,
+        }
+    ],
+
     presets: [
         [
             '@docusaurus/preset-classic',
@@ -124,6 +131,13 @@ const config: Config = {
                     sidebarId: 'examplesSidebar',
                     position: 'left',
                     label: 'Examples',
+                    className: 'doc-section',
+                },
+                {
+                    type: 'docSidebar',
+                    sidebarId: 'videosSidebar',
+                    position: 'left',
+                    label: 'Videos',
                     className: 'doc-section',
                 },
                 {

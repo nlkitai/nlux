@@ -29,7 +29,8 @@
     "react": "^18",
     "react-dom": "^18",
     "react-live": "^4",
-    "react-syntax-highlighter": "^15"
+    "react-syntax-highlighter": "^15",
+    "react-twitter-embed": "^4.0.4"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3",
