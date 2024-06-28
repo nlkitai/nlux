@@ -14,22 +14,22 @@ export const ComposerComp = (props: ComposerProps) => {
     const disableButton = !props.hasValidInput || props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt' || props.status === 'waiting';
     const showSendIcon = props.status === 'typing';
 
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const textInputRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
-        if (props.status === 'typing' && props.autoFocus && textareaRef.current) {
-            textareaRef.current.focus();
+        if (props.status === 'typing' && props.autoFocus && textInputRef.current) {
+            textInputRef.current.focus();
         }
-    }, [props.status, props.autoFocus, textareaRef.current]);
+    }, [props.status, props.autoFocus, textInputRef.current]);
 
-    const handleChange = useMemo(() => (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.onChange?.(e.target.value);
+    const handleChange = useMemo(() => (e: ChangeEvent<HTMLDivElement>) => {
+        props.onChange?.(e.currentTarget.innerText ?? "");
     }, [props.onChange]);
 
     const handleSubmit = useMemo(() => () => {
         props.onSubmit?.();
     }, [props.onSubmit]);
 
-    const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLDivElement>) => {
         if (!props.submitShortcut || props.submitShortcut === 'Enter') {
             const isEnter = e.key === 'Enter';
             const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
@@ -55,15 +55,17 @@ export const ComposerComp = (props: ComposerProps) => {
 
     return (
         <div className={className}>
-            <textarea
-                tabIndex={0}
-                ref={textareaRef}
-                disabled={disableTextarea}
-                placeholder={props.placeholder}
-                value={props.prompt}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-            />
+            <div 
+            tabIndex={0}
+            ref={textInputRef}
+            contentEditable={!disableTextarea}
+            // Don't use onInput , it causes weird behavior
+            onBlur={handleChange}
+            onKeyDown={handleKeyDown}
+            data-placeholder={props.placeholder}
+            >   
+            {props.prompt}
+            </div>
             <button
                 tabIndex={0}
                 disabled={disableButton}
