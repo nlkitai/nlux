@@ -215,6 +215,7 @@ export const AiChat: <AiMsg>(
                             Loader={uiOverrides.Loader}
                             markdownContainersController={markdownContainersController}
                             onPromptResubmit={handleResubmitPrompt}
+                            submitShortcutKey={props.composerOptions?.submitShortcut}
                         />
                     </div>
                     <div className="nlux-composer-container">

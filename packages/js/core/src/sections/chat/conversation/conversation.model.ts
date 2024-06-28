@@ -87,6 +87,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                         status: 'complete',
                         content: item.message,
                         serverResponse: item.serverResponse,
+                        contentType: 'text',
                     });
                 } else {
                     if (item.role === 'user') {
@@ -96,6 +97,7 @@ export class CompConversation<AiMsg> extends BaseComp<
                             time: new Date(),
                             status: 'complete',
                             content: item.message,
+                            contentType: 'text',
                         });
                     } else {
                         // System messages will not be displayed in the chat

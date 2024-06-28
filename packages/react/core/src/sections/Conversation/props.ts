@@ -13,6 +13,7 @@ export type ConversationCompProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
 
     // Event Handlers
     onLastActiveSegmentChange?: (data: {

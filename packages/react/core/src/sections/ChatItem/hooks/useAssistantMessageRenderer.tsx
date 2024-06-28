@@ -1,12 +1,12 @@
 import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
-import {FC, isValidElement} from 'react';
+import {FC, FunctionComponent, isValidElement} from 'react';
 import {ResponseRendererProps} from '../../../exports/messageOptions';
 import {MarkdownSnapshotRenderer} from '../../MessageRenderer/MarkdownSnapshotRenderer';
 import {ChatItemProps} from '../props';
 
 export const useAssistantMessageRenderer = function<AiMsg>(
     props: ChatItemProps<AiMsg>,
-) {
+): FunctionComponent {
     const {
         uid,
         status,

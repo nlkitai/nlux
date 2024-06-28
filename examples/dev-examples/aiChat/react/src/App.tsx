@@ -335,6 +335,7 @@ function App() {
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
                     // submitShortcut: 'CommandEnter',
+                    submitShortcut: 'Enter',
                 }}
                 displayOptions={{
                     width: 500,

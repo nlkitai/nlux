@@ -64,6 +64,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         messageOptions={props.messageOptions}
                         Loader={props.Loader}
                         onPromptResubmit={props.onPromptResubmit}
+                        submitShortcutKey={props.submitShortcutKey}
                     />
                 );
             })}

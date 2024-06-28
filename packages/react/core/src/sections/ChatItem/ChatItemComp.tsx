@@ -36,8 +36,8 @@ export const ChatItemComp: <AiMsg>(
 
     const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
 
+    const AiMessage = useAssistantMessageRenderer(props);
     const UserMessage = useUserMessageRenderer(props);
-    const AiMessageRenderer = useAssistantMessageRenderer(props);
     const ParticipantInfo = useParticipantInfoRenderer(props);
 
     const ForwardRefStreamContainerComp = useMemo(
@@ -85,7 +85,7 @@ export const ChatItemComp: <AiMsg>(
             {isAssistantMessage && !isStreamed && (
                 <MessageComp
                     uid={props.uid}
-                    message={AiMessageRenderer}
+                    message={AiMessage}
                     status={props.status}
                     contentType={'text'}
                     direction={props.direction}

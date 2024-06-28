@@ -1,10 +1,10 @@
-import {useMemo} from 'react';
+import {FunctionComponent, useMemo} from 'react';
 import {AvatarComp} from '../../../components/Avatar/AvatarComp';
 import {ChatItemProps} from '../props';
 
 export const useParticipantInfoRenderer = function<AiMsg>(
     props: ChatItemProps<AiMsg>
-) {
+): FunctionComponent {
     const participantInfo = useMemo(() => {
         return (
             <div className="nlux-comp-chatItem-participantInfo">

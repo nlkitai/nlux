@@ -15,6 +15,7 @@ export type ChatSegmentProps<AiMsg> = {
 
     containerRef?: RefObject<HTMLDivElement>;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
 
     // Callbacks
     onPromptResubmit: (segmentId: string, messageId: string, newPrompt: string) => void;

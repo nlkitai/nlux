@@ -19,6 +19,7 @@ export type ChatItemProps<AiMsg> = {
     name: string;
     avatar?: string | ReactElement;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
     onPromptResubmit?: (newPrompt: string) => void;
 };
 

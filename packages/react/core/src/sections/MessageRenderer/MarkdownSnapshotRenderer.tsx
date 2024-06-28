@@ -1,4 +1,5 @@
-import {Component, PropsWithChildren, KeyboardEvent, useEffect, useMemo, useRef, useState} from 'react';
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
+import {Component, PropsWithChildren, KeyboardEvent, FocusEvent, useEffect, useMemo, useRef, useState, useCallback} from 'react';
 import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
 import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
 import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';
@@ -11,6 +12,7 @@ type MarkdownSnapshotRendererProps = {
     onMarkdownRenderingError?: (error: Error) => void;
     canResubmit?: boolean;
     onResubmit?: (newPrompt: string) => void;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
 };
 
 const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
@@ -43,15 +45,7 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
         return markdownOptions?.htmlSanitizer ? markdownOptions.htmlSanitizer(parsedContent) : parsedContent;
     }, [parsedContent, markdownOptions?.htmlSanitizer]);
 
-    const [isEditing, setIsEditing] = useState(false);
-    const handleBlur = () => setIsEditing(false);
-    const handleFocus = () => {
-        if (props.canResubmit) {
-            setIsEditing(true);
-        }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
         if (!props.canResubmit) {
             return;
         }
@@ -61,16 +55,27 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
             return;
         }
 
-        if (event.key === 'Enter' && event.ctrlKey && props.onResubmit) {
-            console.log('Resubmitting prompt:');
-            console.log(newPromptTyped);
-
+        if (isSubmitShortcutKey(event, props.submitShortcutKey)) {
             event.preventDefault();
-            const newPrompt = event.currentTarget.textContent;
-            props.onResubmit(newPrompt || '');
-        }
-    }
+            if (props.onResubmit) {
+                props.onResubmit(newPromptTyped);
+            }
 
+            return;
+        }
+
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            event.currentTarget.textContent = props.content;
+            event.currentTarget.blur();
+        }
+    }, [props.canResubmit, props.onResubmit, props.content]);
+
+    const handleBlur = useCallback((event: FocusEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        event.currentTarget.textContent = props.content;
+        event.currentTarget.blur();
+    }, [props.content]);
 
     return (
         <MarkdownParserErrorBoundary>
@@ -80,9 +85,8 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
                     ref={markdownContainerRef}
                     dangerouslySetInnerHTML={{__html: trustedHtml}}
                     contentEditable={props.canResubmit}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
                     onKeyDown={handleKeyDown}
+                    onBlur={handleBlur}
                 />
             </div>
         </MarkdownParserErrorBoundary>
