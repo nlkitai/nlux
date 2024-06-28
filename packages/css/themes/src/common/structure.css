@@ -36,14 +36,11 @@
             flex-grow: 1;
           
         }
-
         > .nlux-composer-container {
-            height: 60px;
             width: 100%;
             display: flex;
             flex-direction: row;
             align-items: stretch;
-
             > .nlux-comp-composer {
                 width: 100%;
             }
