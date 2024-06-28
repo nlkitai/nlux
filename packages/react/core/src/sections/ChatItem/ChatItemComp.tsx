@@ -1,4 +1,4 @@
-import {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
+import {forwardRef, ReactElement, ReactNode, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
@@ -19,22 +19,20 @@ export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     ref: Ref<ChatItemImperativeProps<AiMsg>>,
 ): ReactElement {
-    const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
+    const streamContainer = useRef<
+        StreamContainerImperativeProps<AiMsg> | null>(null);
 
     useImperativeHandle(ref, () => ({
         streamChunk: (chunk: AiMsg) => setTimeout(() => streamContainer?.current?.streamChunk(chunk)),
         completeStream: () => setTimeout(() => streamContainer?.current?.completeStream()),
     }), []);
 
-    const compDirectionClassName = props.direction
-        ? compChatItemDirectionClassName[props.direction]
-        : compChatItemDirectionClassName['received'];
-
-    const compConStyleClassName = props.layout === 'bubbles'
-        ? conversationLayoutClassName['bubbles']
-        : conversationLayoutClassName['list'];
-
-    const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
+    const markdownStreamRendered = useCallback(
+        () => {
+            props.onMarkdownStreamRendered?.(props.uid);
+        },
+        [props.uid],
+    );
 
     const AiMessage = useAssistantMessageRenderer(props);
     const UserMessage = useUserMessageRenderer(props);
@@ -49,6 +47,17 @@ export const ChatItemComp: <AiMsg>(
     const isAssistantMessage = props.direction === 'received';
     const isUserMessage = props.direction === 'sent';
     const isStreamed = props.dataTransferMode === 'stream';
+
+    const compDirectionClassName = props.direction
+        ? compChatItemDirectionClassName[props.direction]
+        : compChatItemDirectionClassName['received'];
+
+    const compConStyleClassName = props.layout === 'bubbles'
+        ? conversationLayoutClassName['bubbles']
+        : conversationLayoutClassName['list'];
+
+    const className = `${compChatItemClassName} ${compDirectionClassName} ` +
+        `${compConStyleClassName} ${compConStyleClassName}`;
 
     return (
         <div className={className}>
@@ -70,6 +79,7 @@ export const ChatItemComp: <AiMsg>(
                         skipStreamingAnimation: props.messageOptions?.skipStreamingAnimation,
                         streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed,
                         waitTimeBeforeStreamCompletion: props.messageOptions?.waitTimeBeforeStreamCompletion,
+                        onStreamComplete: markdownStreamRendered,
                     }}
                 />
             )}

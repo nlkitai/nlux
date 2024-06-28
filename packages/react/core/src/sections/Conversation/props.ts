@@ -27,6 +27,11 @@ export type ConversationCompProps<AiMsg> = {
         newPrompt: string,
     ) => void;
 
+    onMarkdownStreamRendered: (
+        segmentId: string,
+        messageId: string,
+    ) => void;
+
     // UI Overrides
     Loader: ReactElement;
 };

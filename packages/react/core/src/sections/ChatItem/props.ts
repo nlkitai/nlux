@@ -21,6 +21,7 @@ export type ChatItemProps<AiMsg> = {
     markdownContainersController: MarkdownContainersController;
     submitShortcutKey?: 'Enter' | 'CommandEnter';
     onPromptResubmit?: (newPrompt: string) => void;
+    onMarkdownStreamRendered?: (chatItemId: string) => void;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {

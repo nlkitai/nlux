@@ -1,5 +1,6 @@
 'use client';
 import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
+import {uid} from '@shared/utils/uid';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
@@ -97,6 +98,12 @@ export const AiChat: <AiMsg>(
     const handleResubmitPrompt = useResubmitPromptHandler(
         initialSegment, setInitialSegment, chatSegments, setChatSegments, setPrompt, setComposerStatus,
     );
+
+    const handleMarkdownStreamRendered = useCallback((segmentId: string, messageId: string) => {
+        if (props.events?.messageRendered) {
+            props.events.messageRendered({ uid: messageId });
+        }
+    }, []);
 
     const handleConversationStarterSelected = useCallback(
         (conversationStarter: ConversationStarter) => {
@@ -214,8 +221,9 @@ export const AiChat: <AiMsg>(
                             onLastActiveSegmentChange={handleLastActiveSegmentChange}
                             Loader={uiOverrides.Loader}
                             markdownContainersController={markdownContainersController}
-                            onPromptResubmit={handleResubmitPrompt}
                             submitShortcutKey={props.composerOptions?.submitShortcut}
+                            onPromptResubmit={handleResubmitPrompt}
+                            onMarkdownStreamRendered={handleMarkdownStreamRendered}
                         />
                     </div>
                     <div className="nlux-composer-container">

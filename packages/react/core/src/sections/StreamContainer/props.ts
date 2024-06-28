@@ -19,6 +19,7 @@ export type StreamContainerProps<AisMsg> = {
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
         waitTimeBeforeStreamCompletion?: number | 'never';
+        onStreamComplete?: () => void;
     }
 };
 

@@ -19,6 +19,7 @@ export type ChatSegmentProps<AiMsg> = {
 
     // Callbacks
     onPromptResubmit: (segmentId: string, messageId: string, newPrompt: string) => void;
+    onMarkdownStreamRendered: (segmentId: string, messageId: string) => void;
 
     // UI overrides
     Loader: ReactElement;

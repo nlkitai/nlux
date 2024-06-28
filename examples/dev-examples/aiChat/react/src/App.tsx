@@ -352,6 +352,7 @@ function App() {
                 }}
                 events={{
                     messageReceived,
+                    messageRendered: (e) => console.log('Message Rendered', e),
                 }}
                 messageOptions={{
                     editableUserMessages: true,

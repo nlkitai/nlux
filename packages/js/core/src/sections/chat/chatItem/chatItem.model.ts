@@ -105,9 +105,6 @@ export class CompChatItem<AiMsg> extends BaseComp<
 
     @CompEventListener('markdown-stream-complete')
     private onMarkdownStreamComplete(messageRendered: AiMsg) {
-        this.context.emit('messageRendered', {
-            uid: this.props.uid,
-            message: messageRendered,
-        });
+        this.context.emit('messageRendered', { uid: this.props.uid });
     }
 }

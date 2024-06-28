@@ -21,7 +21,6 @@ export type ServerComponentRenderedEventDetails = {
 
 export type MessageRenderedEventDetails<AiMsg = string> = {
     uid: string;
-    message: AiMsg;
 };
 
 export type MessageReceivedEventDetails<AiMsg = string> = {
@@ -78,6 +77,8 @@ export type ServerComponentStreamStartedCallback = (event: ServerComponentStream
 
 /**
  * The callback for when a server component is loaded and successfully rendered on the screen.
+ *
+ * @param event The event details such as the uid of the message.
  */
 export type ServerComponentRenderedCallback = (event: ServerComponentRenderedEventDetails) => void;
 
@@ -87,14 +88,14 @@ export type ServerComponentRenderedCallback = (event: ServerComponentRenderedEve
  * This does not mean that the message has been rendered yet. You should use the messageRendered
  * event if you want to know when the message has been rendered.
  *
- * @param message The message that was received.
+ * @param event The event details such as the uid of the message and the message content.
  */
 export type MessageReceivedCallback<AiMsg = string> = (event: MessageReceivedEventDetails<AiMsg>) => void;
 
 /**
  * The callback for when a message is fully rendered on the screen.
  *
- * @param message The message that was received.
+ * @param event The event details such as the uid of the message.
  */
 export type MessageRenderedCallback<AiMsg = string> = (event: MessageRenderedEventDetails<AiMsg>) => void;
 
@@ -121,7 +122,7 @@ export type EventsMap<AiMsg> = {
     messageSent: MessageSentCallback;
     messageStreamStarted: MessageStreamStartedCallback;
     messageReceived: MessageReceivedCallback<AiMsg>;
-    messageRendered: MessageReceivedCallback<AiMsg>;
+    messageRendered: MessageRenderedCallback<AiMsg>;
     serverComponentStreamStarted: ServerComponentStreamStartedCallback;
     serverComponentRendered: ServerComponentRenderedCallback;
     error: ErrorCallback;

@@ -1,4 +1,4 @@
-import {createRef, forwardRef, ReactNode, Ref, useCallback, useImperativeHandle, useMemo} from 'react';
+import {createRef, forwardRef, ReactNode, Ref, useCallback, useEffect, useImperativeHandle, useMemo} from 'react';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
@@ -63,8 +63,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         personaOptions={personaOptions}
                         messageOptions={props.messageOptions}
                         Loader={props.Loader}
-                        onPromptResubmit={props.onPromptResubmit}
                         submitShortcutKey={props.submitShortcutKey}
+                        onPromptResubmit={props.onPromptResubmit}
+                        onMarkdownStreamRendered={props.onMarkdownStreamRendered}
                     />
                 );
             })}
