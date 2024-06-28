@@ -26,7 +26,6 @@ export const useUserMessageRenderer = function<AiMsg>(
         }
 
         const PromptRenderer = props.messageOptions.promptRenderer;
-        const isEditable = props.messageOptions.editableUserMessages ?? false;
         const onResubmit = (newPrompt: string) => {
             props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
         };
@@ -35,7 +34,6 @@ export const useUserMessageRenderer = function<AiMsg>(
             <PromptRenderer
                 uid={props.uid}
                 prompt={props.fetchedContent as string}
-                isEditable={isEditable}
                 onResubmit={onResubmit}
             />
         );

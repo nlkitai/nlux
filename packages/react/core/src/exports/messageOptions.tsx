@@ -40,7 +40,6 @@ export type ResponseRenderer<AiMsg> = FC<ResponseRendererProps<AiMsg>>;
 export type PromptRendererProps = {
     uid: string;
     prompt: string;
-    isEditable: boolean;
     onResubmit: (newPrompt: string) => void;
 };
 

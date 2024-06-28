@@ -72,21 +72,44 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
     }, [props.canResubmit, props.onResubmit, props.content]);
 
     const handleBlur = useCallback((event: FocusEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
         event.preventDefault();
         event.currentTarget.textContent = props.content;
         event.currentTarget.blur();
-    }, [props.content]);
+    }, [props.canResubmit, props.content]);
+
+    const handleFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
+        event.preventDefault();
+        // Select all text when the user focuses on the content
+        const range = document.createRange();
+        range.selectNodeContents(event.currentTarget);
+
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+
+    }, [props.canResubmit]);
+
+    const editableStyle = props.canResubmit ? 'editable-markdown-container' : '';
 
     return (
         <MarkdownParserErrorBoundary>
-            <div className={'nlux-markdownStream-root'}>
+            <div className={`nlux-markdownStream-root ${editableStyle}`}>
                 <div
-                    className="nlux-markdown-container"
+                    className={`nlux-markdown-container`}
                     ref={markdownContainerRef}
                     dangerouslySetInnerHTML={{__html: trustedHtml}}
                     contentEditable={props.canResubmit}
                     onKeyDown={handleKeyDown}
                     onBlur={handleBlur}
+                    onFocus={handleFocus}
                 />
             </div>
         </MarkdownParserErrorBoundary>
