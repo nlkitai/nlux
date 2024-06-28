@@ -64,10 +64,10 @@ describe('<AiChat /> + messageOptions + editableUserMessages', () => {
 
             // Act
             userMessage.click();
-            await userEvent.type(userMessage, ' AI!');
+            await userEvent.type(userMessage, 'Hi AI!');
 
             // Assert
-            expect(userMessage.textContent).toBe('Hello\n AI!');
+            expect(userMessage.textContent).toBe('Hi AI!');
         });
 
         describe('On blur without submit', () => {
@@ -92,7 +92,7 @@ describe('<AiChat /> + messageOptions + editableUserMessages', () => {
                 // Act
                 await act(async () => {
                     userMessage.click();
-                    await userEvent.type(userMessage, ' AI!');
+                    await userEvent.type(userMessage, 'Hi AI!');
                     userMessage.blur();
                 });
 
@@ -128,7 +128,7 @@ describe('<AiChat /> + messageOptions + editableUserMessages', () => {
                 // Act
                 await act(async () => {
                     userMessage.click();
-                    await userEvent.type(userMessage, ' AI!{enter}');
+                    await userEvent.type(userMessage, 'Yo AI!{enter}');
                     userMessage.blur();
                 });
                 await waitForReactRenderCycle();
@@ -139,7 +139,7 @@ describe('<AiChat /> + messageOptions + editableUserMessages', () => {
                 const allUserMessages = container.querySelectorAll('.nlux-comp-message.nlux_msg_sent');
                 expect(allUserMessages.length).toBe(1); // Messages after the edited message should be removed
 
-                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Hello\n AI!');
+                expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Yo AI!');
             });
         });
 
@@ -179,12 +179,12 @@ describe('<AiChat /> + messageOptions + editableUserMessages', () => {
 
             // Act — Edit last message
             lastUserMessage.click();
-            await userEvent.type(lastUserMessage, ' AI!{enter}');
+            await userEvent.type(lastUserMessage, 'Help pleeaaazze!{enter}');
             await waitForReactRenderCycle();
 
             // Assert
-            expect(lastUserMessage).toHaveTextContent('Can you help me? AI!');
-            expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Can you help me?\n AI!');
+            expect(lastUserMessage).toHaveTextContent('Help pleeaaazze!');
+            expect(adapterController!.batchTextMock).toHaveBeenCalledWith('Help pleeaaazze!');
         });
     });
 });

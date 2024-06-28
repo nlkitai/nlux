@@ -101,7 +101,7 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
 
     return (
         <MarkdownParserErrorBoundary>
-            <div className={`nlux-markdownStream-root ${editableStyle}`}>
+            <div className={`nlux-markdownStream-root${editableStyle ? ` ${editableStyle}` : ''}`}>
                 <div
                     className={`nlux-markdown-container`}
                     ref={markdownContainerRef}
