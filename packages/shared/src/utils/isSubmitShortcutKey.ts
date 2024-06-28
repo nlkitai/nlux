@@ -1,11 +1,11 @@
-import {KeyboardEvent } from 'react';
+import {KeyboardEvent} from 'react';
 
 export const isSubmitShortcutKey = (
     event: KeyboardEvent,
     submitShortcut?: 'Enter' | 'CommandEnter',
 ): boolean => {
     if (!submitShortcut || submitShortcut === 'Enter') {
-        const isEnter = event.key === 'Enter';
+        const isEnter = event.key === 'Enter' && !event.nativeEvent.isComposing;
         const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
         return isEnter && !aModifierKeyIsPressed;
     }
