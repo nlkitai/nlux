@@ -17,6 +17,7 @@ import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
+import {useResubmitPromptHandler} from './hooks/useResubmitPromptHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
 import {ConversationStarter} from '../types/conversationStarter';
@@ -93,18 +94,9 @@ export const AiChat: <AiMsg>(
         setChatSegments, setComposerStatus, setPrompt,
     });
 
-    const handleResubmitPrompt = useCallback((segmentId: string, messageId: string, newPrompt: string) => {
-        // Find the segment
-        const segmentIndex = chatSegments.findIndex((segment) => segment.uid === segmentId);
-
-        // Remove the segment from the chatSegments array
-        const newChatSegments = chatSegments.slice(0, segmentIndex);
-        setChatSegments(newChatSegments);
-
-        // Submit the new prompt
-        setPrompt(newPrompt);
-        setComposerStatus('submitting-edit');
-    }, [chatSegments, setChatSegments]);
+    const handleResubmitPrompt = useResubmitPromptHandler(
+        initialSegment, setInitialSegment, chatSegments, setChatSegments, setPrompt, setComposerStatus,
+    );
 
     const handleConversationStarterSelected = useCallback(
         (conversationStarter: ConversationStarter) => {

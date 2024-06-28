@@ -1,3 +1,4 @@
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
 import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {className as compComposerClassName} from '@shared/components/Composer/create';
 import {
@@ -30,26 +31,9 @@ export const ComposerComp = (props: ComposerProps) => {
     }, [props.onSubmit]);
 
     const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (!props.submitShortcut || props.submitShortcut === 'Enter') {
-            const isEnter = e.key === 'Enter';
-            const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
-            if (isEnter && !aModifierKeyIsPressed) {
-                handleSubmit();
-                e.preventDefault();
-            }
-
-            return;
-        }
-
-        if (props.submitShortcut === 'CommandEnter') {
-            const isCommandEnter = e.key === 'Enter' && (
-                e.getModifierState('Control') || e.getModifierState('Meta')
-            );
-
-            if (isCommandEnter) {
-                handleSubmit();
-                e.preventDefault();
-            }
+        if (isSubmitShortcutKey(e, props.submitShortcut)) {
+            e.preventDefault();
+            handleSubmit();
         }
     }, [handleSubmit, props.submitShortcut]);
 

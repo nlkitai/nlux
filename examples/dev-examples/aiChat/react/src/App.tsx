@@ -149,8 +149,8 @@ function App() {
 
     const initialConversation: ChatItem<string>[] = [
         {
-            role: 'assistant',
-            message: 'Hello, **how can I help you?**\n# AI speaking\nCheers!',
+            role: 'user',
+            message: 'You start the conversation.',
         },
         {
             role: 'assistant',
@@ -330,7 +330,7 @@ function App() {
                 // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
-                // initialConversation={initialConversation}
+                initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
@@ -353,7 +353,7 @@ function App() {
                     messageReceived,
                 }}
                 messageOptions={{
-                    enableEditing: true,
+                    editingEnabled: true,
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
                     htmlSanitizer: htmlSanitizer,

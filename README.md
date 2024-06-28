@@ -23,7 +23,7 @@
 ------
 
 `NLUX` is React and JavaScript open-source library for building conversational AI interfaces. It makes it super simple
-to build web applications powered by Large Language Models (LLMs) and AI. With just a few  lines of code, you can add
+to build web applications powered by Large Language Models (LLMs). With just a few  lines of code, you can add
 conversational AI capabilities and interact with your favorite AI models.
 
 ## Try `NLUX` 🚀

@@ -1,16 +1,16 @@
-import {forwardRef, ReactElement, ReactNode, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import {forwardRef, ReactElement, ReactNode, Ref, useImperativeHandle, useMemo, useRef} from 'react';
 import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
 } from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
 import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
-import {MarkdownSnapshotRenderer} from '../MessageRenderer/MarkdownSnapshotRenderer';
-import {getMessageRenderer} from '../MessageRenderer/MessageRenderer';
 import {StreamContainerImperativeProps} from '../StreamContainer/props';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
-import {AvatarComp} from '../../components/Avatar/AvatarComp';
 import {MessageComp} from '../../components/Message/MessageComp';
+import {useAssistantMessageRenderer} from './hooks/useAssistantMessageRenderer';
+import {useParticipantInfoRenderer} from './hooks/userParticipantInfoRenderer';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
+import {useUserMessageRenderer} from './hooks/useUserMessageRenderer';
 
 export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
@@ -19,18 +19,6 @@ export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
     ref: Ref<ChatItemImperativeProps<AiMsg>>,
 ): ReactElement {
-    const participantInfo = useMemo(() => {
-        return (
-            <div className="nlux-comp-chatItem-participantInfo">
-                {(props.avatar !== undefined) && (
-                    <AvatarComp name={props.name} avatar={props.avatar}/>
-                )}
-                <span className="nlux-comp-chatItem-participantName">{props.name}</span>
-            </div>
-        );
-
-    }, [props.avatar, props.name]);
-
     const streamContainer = useRef<StreamContainerImperativeProps<AiMsg> | null>(null);
 
     useImperativeHandle(ref, () => ({
@@ -47,50 +35,10 @@ export const ChatItemComp: <AiMsg>(
         : conversationLayoutClassName['list'];
 
     const className = `${compChatItemClassName} ${compDirectionClassName} ${compConStyleClassName} ${compConStyleClassName}`;
-    const AiMessageRenderer = useMemo(
-        () => getMessageRenderer<AiMsg>(props), [
-            props.uid,
-            props.status,
-            props.dataTransferMode,
-            props.fetchedContent,
-            props.streamedContent,
-            props.direction,
-            props.messageOptions?.responseRenderer, props.messageOptions?.syntaxHighlighter,
-            props.messageOptions?.htmlSanitizer, props.messageOptions?.markdownLinkTarget,
-        ],
-    );
 
-    const UserMessageRenderer = useCallback(() => {
-        if (props.messageOptions?.promptRenderer === undefined) {
-            return (
-                <MarkdownSnapshotRenderer
-                    messageUid={props.uid}
-                    content={props.fetchedContent as string}
-                    markdownOptions={{
-                        htmlSanitizer: props.messageOptions?.htmlSanitizer,
-                        // User message does not need syntax highlighting, advanced markdown options
-                        // Only HTML sanitization is needed
-                    }}
-                    canResubmit={props.messageOptions?.enableEditing}
-                    onResubmit={(newPrompt) => {
-                        props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
-                    }}
-                />
-            );
-        }
-
-        const PromptRenderer = props.messageOptions.promptRenderer;
-        return (
-            <PromptRenderer
-                uid={props.uid}
-                prompt={props.fetchedContent as string}
-                isEditable={props.messageOptions.enableEditing ?? false}
-                onResubmit={(newPrompt) => {
-                    props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
-                }}
-            />
-        );
-    }, [props.messageOptions?.promptRenderer, props.fetchedContent, props.uid]);
+    const UserMessage = useUserMessageRenderer(props);
+    const AiMessageRenderer = useAssistantMessageRenderer(props);
+    const ParticipantInfo = useParticipantInfoRenderer(props);
 
     const ForwardRefStreamContainerComp = useMemo(
         () => forwardRef(StreamContainerComp<AiMsg>),
@@ -104,7 +52,7 @@ export const ChatItemComp: <AiMsg>(
 
     return (
         <div className={className}>
-            {participantInfo}
+            <ParticipantInfo />
             {isAssistantMessage && isStreamed && !isServerComponent && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
@@ -146,7 +94,7 @@ export const ChatItemComp: <AiMsg>(
             {isUserMessage && (
                 <MessageComp
                     uid={props.uid}
-                    message={UserMessageRenderer}
+                    message={UserMessage}
                     status={props.status}
                     contentType={'text'}
                     direction={props.direction}

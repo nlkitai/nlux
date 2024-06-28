@@ -1,18 +1,11 @@
-import React, {FC, RefObject} from 'react';
-import {ResponseRendererProps} from '../../exports/messageOptions';
-import {ChatItemProps} from '../ChatItem/props';
-import {MarkdownSnapshotRenderer} from './MarkdownSnapshotRenderer';
 import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
+import {FC, isValidElement} from 'react';
+import {ResponseRendererProps} from '../../../exports/messageOptions';
+import {MarkdownSnapshotRenderer} from '../../MessageRenderer/MarkdownSnapshotRenderer';
+import {ChatItemProps} from '../props';
 
-//
-// Returns a function component that renders the message content.
-//
-export const getMessageRenderer: <AiMsg>(
+export const useAssistantMessageRenderer = function<AiMsg>(
     props: ChatItemProps<AiMsg>,
-    containerRef?: RefObject<HTMLElement>,
-) => FC<object> = function <AiMsg>(
-    props: ChatItemProps<AiMsg>,
-    containerRef?: RefObject<HTMLElement>,
 ) {
     const {
         uid,
@@ -26,11 +19,6 @@ export const getMessageRenderer: <AiMsg>(
         direction,
         messageOptions,
     } = props;
-
-    // For custom renderer — When the dataTransferMode is 'streaming', the message is undefined and a containerRef
-    // must be provided. The containerRef is used to append the streaming message to the container.
-    // When the dataTransferMode is 'batch', the message is defined and the containerRef is not needed.
-    const containerRefToUse = containerRef ?? {current: null} satisfies RefObject<HTMLElement>;
 
     //
     // A custom response renderer is provided by the user.
@@ -47,7 +35,6 @@ export const getMessageRenderer: <AiMsg>(
                 contentType,
                 content: streamedContent ?? [],
                 serverResponse: streamedServerResponse ?? [],
-                containerRef: containerRefToUse as RefObject<never>,
             };
 
             return () => {
@@ -58,7 +45,7 @@ export const getMessageRenderer: <AiMsg>(
             //
             // Batching data and displaying it in a custom renderer.
             //
-            const isServerComponent = React.isValidElement(fetchedContent);
+            const isServerComponent = isValidElement(fetchedContent);
             const content: AiMsg[] | StreamedServerComponent = !fetchedContent
                 ? []
                 : (isServerComponent ? fetchedContent : [fetchedContent]);
@@ -105,7 +92,7 @@ export const getMessageRenderer: <AiMsg>(
         );
     }
 
-    if (React.isValidElement(fetchedContent)) {
+    if (isValidElement(fetchedContent)) {
         return () => <>{fetchedContent}</>;
     }
 
