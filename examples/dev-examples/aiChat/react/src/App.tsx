@@ -353,7 +353,7 @@ function App() {
                     messageReceived,
                 }}
                 messageOptions={{
-                    editingEnabled: true,
+                    editableUserMessages: true,
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
                     htmlSanitizer: htmlSanitizer,

@@ -104,5 +104,5 @@ export type MessageOptions<AiMsg = string> = {
      *
      * @default false
      */
-    editingEnabled?: boolean;
+    editableUserMessages?: boolean;
 }

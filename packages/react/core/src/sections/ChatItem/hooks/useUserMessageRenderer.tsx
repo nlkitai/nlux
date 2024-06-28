@@ -16,7 +16,7 @@ export const useUserMessageRenderer = function<AiMsg>(
                         // User message does not need syntax highlighting, advanced markdown options
                         // Only HTML sanitization is needed
                     }}
-                    canResubmit={props.messageOptions?.editingEnabled}
+                    canResubmit={props.messageOptions?.editableUserMessages}
                     onResubmit={(newPrompt) => {
                         props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
                     }}
@@ -25,7 +25,7 @@ export const useUserMessageRenderer = function<AiMsg>(
         }
 
         const PromptRenderer = props.messageOptions.promptRenderer;
-        const isEditable = props.messageOptions.editingEnabled ?? false;
+        const isEditable = props.messageOptions.editableUserMessages ?? false;
         const onResubmit = (newPrompt: string) => {
             props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
         };
