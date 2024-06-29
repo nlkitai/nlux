@@ -65,8 +65,6 @@ export const Hero = ({className}: { className?: string }) => {
                             <img src={NextJsLogo} alt="Next.js Logo" height={60}/>
                         </div>
                     </div>
-                </div>
-                <div>
                     <div className={heroStyles.adaptersShowcase}>
                         <div className={heroStyles.integrationsTitle}>
                             Integrates with
