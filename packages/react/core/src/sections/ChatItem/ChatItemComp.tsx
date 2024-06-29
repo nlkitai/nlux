@@ -25,6 +25,7 @@ export const ChatItemComp: <AiMsg>(
     useImperativeHandle(ref, () => ({
         streamChunk: (chunk: AiMsg) => setTimeout(() => streamContainer?.current?.streamChunk(chunk)),
         completeStream: () => setTimeout(() => streamContainer?.current?.completeStream()),
+        cancelStream: () => streamContainer?.current?.cancelStream(),
     }), []);
 
     const markdownStreamRendered = useCallback(

@@ -28,4 +28,5 @@ export type ChatSegmentProps<AiMsg> = {
 export type ChatSegmentImperativeProps<AiMsg> = {
     streamChunk: (messageId: string, chunk: AiMsg) => void;
     completeStream: (messageId: string) => void;
+    cancelStreams: () => void;
 };

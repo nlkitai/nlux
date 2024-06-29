@@ -73,6 +73,12 @@ export const ChatSegmentComp: <AiMsg>(
             chatItemCompRef.current.completeStream();
             chatItemsRef.delete(chatItemId);
         },
+        cancelStreams: () => {
+            chatItemsStreamingBuffer.clear();
+            chatItemsRef.forEach((ref) => {
+                ref.current?.cancelStream();
+            });
+        }
     }), [
         // setCompleteOnInitialRender is not needed as a dependency here, even though it is used inside.
     ]);

@@ -27,4 +27,5 @@ export type ChatItemProps<AiMsg> = {
 export type ChatItemImperativeProps<AiMsg> = {
     streamChunk: (chunk: AiMsg) => void;
     completeStream: () => void;
+    cancelStream: () => void;
 };

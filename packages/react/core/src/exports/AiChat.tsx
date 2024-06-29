@@ -93,7 +93,6 @@ export const AiChat: <AiMsg>(
     const cancelLastMessageRequest = useCallback(() => {
         const lastSegment = newSegments.length > 0 ? newSegments[newSegments.length - 1] : undefined;
         if (lastSegment?.status === 'active') {
-            // Cancel the HTTP request for the last message
             // Remove the last message from the conversation
             setChatSegments(newSegments.slice(0, -1));
             setCancelledSegmentIds([...cancelledSegmentIds, lastSegment.uid]);
@@ -101,6 +100,11 @@ export const AiChat: <AiMsg>(
                 ...cancelledMessageIds,
                 ...lastSegment.items.map(item => item.uid)
             ]);
+
+            // Instructions to cancel markdown streaming, if it is still active
+            conversationRef.current?.cancelSegmentStreams(lastSegment.uid);
+
+            // TODO - Cancel the HTTP request if it is still pending or streaming
         }
 
         setComposerStatus('typing');
