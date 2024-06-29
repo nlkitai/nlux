@@ -82,12 +82,12 @@ export class CompComposer<AiMsg> extends BaseComp<
 
     @CompEventListener('text-updated')
     handleTextInputUpdated(event: Event) {
-        const target = event.target;
-        if (!(target instanceof HTMLTextAreaElement)) {
+        const target = event.currentTarget;
+        if (!(target instanceof HTMLDivElement)) {
             return;
         }
 
-        this.handleTextChange(target.value);
+        this.handleTextChange(target.innerText);
     }
 
     public setDomProps(props: ComposerProps) {

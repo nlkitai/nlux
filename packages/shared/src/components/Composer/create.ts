@@ -10,9 +10,11 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     const element = document.createElement('div');
     element.classList.add(className);
 
-    const textarea = document.createElement('textarea');
-    textarea.placeholder = props.placeholder ?? '';
-    textarea.value = props.message ?? '';
+    const textarea = document.createElement('div');
+    textarea.contentEditable="true"
+
+    textarea.setAttribute("data-placeholder",props.placeholder ?? '')
+    textarea.innerText = props.message ?? '';
 
     if (props.autoFocus) {
         textarea.autofocus = true;
@@ -27,7 +29,7 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     applyNewStatusClassName(element, props.status);
 
     if (props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt') {
-        textarea.disabled = true;
+        textarea.contentEditable = "false";
         submitButton.disabled = true;
     }
 
@@ -36,7 +38,7 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     }
 
     if (props.status === 'typing') {
-        submitButton.disabled = props.disableSubmitButton ?? textarea.value === '';
+        submitButton.disabled = props.disableSubmitButton ?? textarea.innerText === '';
     }
 
     return element;
