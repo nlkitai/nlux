@@ -31,6 +31,7 @@
 
       color: var(--nlux-cvStrt--txtClr);
       background-color: var(--nlux-cvStrt--bgClr);
+      cursor: pointer;
 
       > .nlux-comp-conversationStarter-prompt {
         display: block;
