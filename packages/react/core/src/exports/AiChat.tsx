@@ -17,6 +17,7 @@ import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
+import {useCancelLastMessage} from './hooks/useCancelLastMessage';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
 import {useResubmitPromptHandler} from './hooks/useResubmitPromptHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
@@ -73,7 +74,6 @@ export const AiChat: <AiMsg>(
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
-
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId}).join(' '),
         [className, themeId],
@@ -90,25 +90,11 @@ export const AiChat: <AiMsg>(
         [exceptionBoxController],
     );
 
-    const cancelLastMessageRequest = useCallback(() => {
-        const lastSegment = newSegments.length > 0 ? newSegments[newSegments.length - 1] : undefined;
-        if (lastSegment?.status === 'active') {
-            // Remove the last message from the conversation
-            setChatSegments(newSegments.slice(0, -1));
-            setCancelledSegmentIds([...cancelledSegmentIds, lastSegment.uid]);
-            setCancelledMessageIds([
-                ...cancelledMessageIds,
-                ...lastSegment.items.map(item => item.uid)
-            ]);
-
-            // Instructions to cancel markdown streaming, if it is still active
-            conversationRef.current?.cancelSegmentStreams(lastSegment.uid);
-
-            // TODO - Cancel the HTTP request if it is still pending or streaming
-        }
-
-        setComposerStatus('typing');
-    }, [newSegments, setChatSegments, setComposerStatus]);
+    const cancelLastMessageRequest = useCancelLastMessage<AiMsg>(
+        newSegments, cancelledSegmentIds, cancelledMessageIds,
+        setChatSegments, setCancelledSegmentIds, setCancelledMessageIds,
+        conversationRef, setComposerStatus,
+    );
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
@@ -141,11 +127,7 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
-        if (
-            composerStatus === 'submitting-conversation-starter' ||
-            composerStatus === 'submitting-external-message' ||
-            composerStatus === 'submitting-edit'
-        ) {
+        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message' || composerStatus === 'submitting-edit') {
             handleSubmitPrompt();
         }
     }, [composerStatus, handleSubmitPrompt]);
