@@ -23,7 +23,8 @@ export const ComposerComp = (props: ComposerProps) => {
     const disableTextarea = submittingPromptStatuses.includes(props.status);
     const disableButton = !props.hasValidInput || props.status === 'waiting' || submittingPromptStatuses.includes(props.status);
     const showSendIcon = props.status === 'typing' || props.status === 'waiting';
-    const showCancelButton = submittingPromptStatuses.includes(props.status) || props.status === 'waiting';
+    const hideCancelButton = props.hideStopButton === true;
+    const showCancelButton = !hideCancelButton && (submittingPromptStatuses.includes(props.status) || props.status === 'waiting');
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -58,14 +59,16 @@ export const ComposerComp = (props: ComposerProps) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
-            <button
-                tabIndex={0}
-                disabled={disableButton}
-                onClick={() => props.onSubmit()}
-            >
-                {showSendIcon && <SendIconComp/>}
-                {!showSendIcon && props.Loader}
-            </button>
+            {!showCancelButton && (
+                <button
+                    tabIndex={0}
+                    disabled={disableButton}
+                    onClick={() => props.onSubmit()}
+                >
+                    {showSendIcon && <SendIconComp/>}
+                    {!showSendIcon && props.Loader}
+                </button>
+            )}
             {showCancelButton && (
                 <button
                     tabIndex={0}

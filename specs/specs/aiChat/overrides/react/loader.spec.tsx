@@ -24,7 +24,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
         it('Should show the user-provided loader', async () => {
             // Arrange
             const aiChat = (
-                <AiChat adapter={adapterController!.adapter}>
+                <AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}>
                     <AiChatUI.Loader>
                         <div className="custom-loader">Custom Loader 👻</div>
                     </AiChatUI.Loader>
@@ -56,7 +56,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
             it('Should show the new loader', async () => {
                 // Arrange
                 const aiChat = (
-                    <AiChat adapter={adapterController!.adapter}>
+                    <AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}>
                         <AiChatUI.Loader>
                             <div className="custom-loader">Custom Loader</div>
                         </AiChatUI.Loader>
@@ -71,7 +71,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
 
                 // Act
                 rerender(
-                    <AiChat adapter={adapterController!.adapter}>
+                    <AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}>
                         <AiChatUI.Loader>
                             <div className="new-loader">New Loader</div>
                         </AiChatUI.Loader>
@@ -98,7 +98,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
             it('Should show the default loader', async () => {
                 // Arrange
                 const aiChat = (
-                    <AiChat adapter={adapterController!.adapter}>
+                    <AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}>
                         <AiChatUI.Loader>
                             <div className="custom-loader">Custom Loader</div>
                         </AiChatUI.Loader>
@@ -112,7 +112,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
                 await waitForReactRenderCycle();
 
                 // Act
-                rerender(<AiChat adapter={adapterController!.adapter}/>);
+                rerender(<AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}/>);
                 await waitForReactRenderCycle();
 
                 // Assert
@@ -134,7 +134,7 @@ describe('<AiChat /> + UI overrides + loader', () => {
         it('The default loader should be used', async () => {
             // Arrange
             const aiChat = (
-                <AiChat adapter={adapterController!.adapter}>
+                <AiChat adapter={adapterController!.adapter} composerOptions={{ hideStopButton: true }}>
                     <div className="custom-loader">Custom Loader</div>
                 </AiChat>
             );

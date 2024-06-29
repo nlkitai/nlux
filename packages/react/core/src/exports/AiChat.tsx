@@ -236,6 +236,7 @@ export const AiChat: <AiMsg>(
                             placeholder={props.composerOptions?.placeholder}
                             autoFocus={props.composerOptions?.autoFocus}
                             submitShortcut={props.composerOptions?.submitShortcut}
+                            hideStopButton={props.composerOptions?.hideStopButton}
                             onChange={handlePromptChange}
                             onSubmit={handleSubmitPrompt}
                             onCancel={cancelLastMessageRequest}

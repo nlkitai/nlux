@@ -8,6 +8,7 @@ export type ComposerProps = {
     prompt?: string;
     placeholder?: string;
     autoFocus?: boolean;
+    hideStopButton?: boolean;
 
     hasValidInput?: boolean;
     submitShortcut?: 'Enter' | 'CommandEnter';
