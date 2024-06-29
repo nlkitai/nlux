@@ -18,5 +18,6 @@ type ComposerOptions = {
 | `autoFocus` | `boolean` | `false` | If `true`, the composer input will be focused when `AiChat` is mounted. |
 | `disableSubmitButton` | `boolean` | `false` | This will override the disabled state of the submit button when the composer is in `typing` status. It will not have any impact in the composer `submitting` and `waiting` statuses, as the submit button is always disabled in these statuses. |
 | `submitShortcut` | `'Enter'`&nbsp;\|&nbsp;`'CommandEnter'` | `'Enter'` | The keyboard shortcut to submit the prompt message.<br />— `Enter`: The user can submit the prompt message by pressing the `Enter` key. In order to add a new line, the user can press `Shift + Enter`.<br />— `CommandEnter`: When this is used, the user can submit the prompt message by pressing `Ctrl + Enter` on Windows/Linux or `Cmd + Enter` on macOS. In order to add a new line, the user can press `Enter`. |
+| `hideStopButton` | `boolean` | `false` | If `true`, the stop button will not be shown when a prompt is in progress, and the loading spinner will be shown instead. |
 
 * Usage:
