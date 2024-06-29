@@ -5,6 +5,7 @@ import {className as compComposerClassName} from '@shared/components/Composer/cr
 import {
     statusClassName as compComposerStatusClassName,
 } from '@shared/components/Composer/utils/applyNewStatusClassName';
+import {CancelIconComp} from '../../components/CancelIcon/CancelIconComp';
 import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
 
@@ -70,7 +71,7 @@ export const ComposerComp = (props: ComposerProps) => {
                     tabIndex={0}
                     onClick={props.onCancel}
                 >
-                    Cancel
+                    <CancelIconComp/>
                 </button>
             )}
         </div>

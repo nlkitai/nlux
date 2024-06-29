@@ -93,6 +93,21 @@
             }
         }
 
+        > .nlux-comp-cancelIcon {
+            width: 100%;
+            max-width: 24px;
+
+            > .nlux-comp-cancelIcon-container {
+                display: inline-block;
+                width: 100%;
+                background-color: currentColor;
+                background-repeat: no-repeat;
+                background-size: contain;
+                mask: var(--nlux-cancel-icon);
+                aspect-ratio: 1;
+            }
+        }
+
         > .nlux-comp-messageLoader {
             display: none;
         }
