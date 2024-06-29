@@ -21,8 +21,10 @@ type SubmitPromptHandlerProps<AiMsg> = {
     adapterToUse?: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>;
     prompt: string;
     composerOptions?: ComposerOptions;
-    chatSegments: ChatSegment<AiMsg>[];
     initialSegment?: ChatSegment<AiMsg>;
+    cancelledSegmentIds: Array<string>;
+    cancelledMessageIds: Array<string>;
+    newSegments: ChatSegment<AiMsg>[];
     showException: (message: string) => void;
     setChatSegments: (segments: ChatSegment<AiMsg>[]) => void;
     setComposerStatus: (status: ComposerStatus) => void;
@@ -37,8 +39,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         prompt: promptTyped,
         composerOptions,
         showException,
-        chatSegments,
         initialSegment,
+        newSegments,
+        cancelledSegmentIds,
+        cancelledMessageIds,
         setChatSegments,
         setComposerStatus,
         setPrompt,
@@ -56,7 +60,9 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
     // React functions and state that can be accessed by non-React DOM update code
     const domToReactRef = useRef({
-        chatSegments,
+        newSegments,
+        cancelledSegmentIds,
+        cancelledMessageIds,
         setChatSegments,
         setComposerStatus,
         showException,
@@ -68,17 +74,22 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
 
     useEffect(() => {
         domToReactRef.current = {
-            chatSegments,
+            newSegments,
+            cancelledSegmentIds,
+            cancelledMessageIds,
             setChatSegments,
             setComposerStatus,
             showException,
             setPrompt,
         };
-    }, [chatSegments, setChatSegments, setComposerStatus, showException, setPrompt]);
+    }, [
+        newSegments, cancelledSegmentIds, cancelledMessageIds,
+        setChatSegments, setComposerStatus, showException, setPrompt
+    ]);
 
     const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
         aiChatProps,
-        initialSegment ? [initialSegment, ...chatSegments] : chatSegments,
+        initialSegment ? [initialSegment, ...newSegments] : newSegments,
         aiChatProps.conversationOptions?.historyPayloadSize,
     );
 
@@ -148,7 +159,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             // the reference of the parts array by creating a new array.
 
             const handleSegmentItemReceived = (item: ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage) => {
-                const currentChatSegments = domToReactRef.current.chatSegments;
+                const currentChatSegments = domToReactRef.current.newSegments;
                 const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
                     (currentChatSegment) => {
                         if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
@@ -169,6 +180,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             };
 
             chatSegmentObservable.on('userMessageReceived', (userMessage) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(userMessage.uid)) {
+                    return;
+                }
+
                 handleSegmentItemReceived(userMessage);
                 if (callbackEvents.current?.messageSent) {
                     callbackEvents.current.messageSent({
@@ -179,6 +194,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('aiMessageStreamStarted', (aiStreamedMessage) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(aiStreamedMessage.uid)) {
+                    return;
+                }
+
                 handleSegmentItemReceived(aiStreamedMessage);
                 domToReactRef.current.setComposerStatus('waiting');
                 if (promptTypedRef.current === promptToSubmit) {
@@ -192,6 +211,10 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('aiServerComponentStreamStarted', (aiServerComponentMessage) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(aiServerComponentMessage.uid)) {
+                    return;
+                }
+
                 handleSegmentItemReceived(aiServerComponentMessage);
                 domToReactRef.current.setComposerStatus('waiting');
                 if (promptTypedRef.current === promptToSubmit) {
@@ -205,13 +228,21 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('aiServerComponentStreamed', (streamedServerComponent) => {
-                if (callbackEvents.current?.serverComponentRendered) {
+                if (domToReactRef.current?.cancelledMessageIds.includes(streamedServerComponent.uid)) {
+                    return;
+                }
+
+                if (callbackEvents.current?.serverComponentRendered && !domToReactRef.current.cancelledMessageIds.includes(streamedServerComponent.uid)) {
                     callbackEvents.current?.serverComponentRendered({uid: streamedServerComponent.uid});
                 }
             });
 
             chatSegmentObservable.on('aiMessageReceived', (aiMessage) => {
-                const currentChatSegments = domToReactRef.current.chatSegments;
+                if (domToReactRef.current?.cancelledMessageIds.includes(aiMessage.uid)) {
+                    return;
+                }
+
+                const currentChatSegments = domToReactRef.current.newSegments;
                 const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
                     (currentChatSegment) => {
                         if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
@@ -232,8 +263,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('complete', (completeChatSegment) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(completeChatSegment.uid)) {
+                    return;
+                }
+
                 domToReactRef.current.setComposerStatus('typing');
-                const currentChatSegments = domToReactRef.current.chatSegments;
+                const currentChatSegments = domToReactRef.current.newSegments;
                 const newChatSegments: ChatSegment<AiMsg>[] = currentChatSegments.map(
                     (currentChatSegment) => {
                         if (currentChatSegment.uid !== chatSegmentObservable.segmentId) {
@@ -260,16 +295,19 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 }
             });
 
-            chatSegmentObservable.on('aiChunkReceived', (
-                {
-                    messageId,
-                    chunk,
-                    serverResponse,
-                }) => {
+            chatSegmentObservable.on('aiChunkReceived', ({messageId, chunk}) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(messageId)) {
+                    return;
+                }
+
                 conversationRef.current?.streamChunk(chatSegment.uid, messageId, chunk);
             });
 
             chatSegmentObservable.on('aiMessageStreamed', (streamedMessage) => {
+                if (domToReactRef.current?.cancelledMessageIds.includes(streamedMessage.uid)) {
+                    return;
+                }
+
                 if (callbackEvents.current?.messageReceived) {
                     callbackEvents.current?.messageReceived({
                         uid: streamedMessage.uid,
@@ -280,7 +318,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             chatSegmentObservable.on('error', (errorId, errorObject) => {
-                const parts = domToReactRef.current.chatSegments;
+                const parts = domToReactRef.current.newSegments;
                 const newParts = parts.filter((part) => part.uid !== chatSegment.uid);
                 const errorMessage = NLErrors[errorId];
 
@@ -302,7 +340,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             });
 
             domToReactRef.current.setChatSegments([
-                ...domToReactRef.current.chatSegments,
+                ...domToReactRef.current.newSegments,
                 chatSegment,
             ]);
         },

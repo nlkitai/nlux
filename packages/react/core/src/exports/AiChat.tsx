@@ -61,12 +61,14 @@ export const AiChat: <AiMsg>(
     const [prompt, setPrompt] = useState('');
     const [composerStatus, setComposerStatus] = useState<ComposerStatus>('typing');
     const [initialSegment, setInitialSegment] = useState<ChatSegment<AiMsg>>();
-    const [chatSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
+    const [newSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
+    const [cancelledSegmentIds, setCancelledSegmentIds] = useState<Array<string>>([]);
+    const [cancelledMessageIds, setCancelledMessageIds] = useState<Array<string>>([]);
 
     // Derived state and memoized values
     const segments = useMemo(
-        () => (initialSegment ? [initialSegment, ...chatSegments] : chatSegments),
-        [initialSegment, chatSegments],
+        () => (initialSegment ? [initialSegment, ...newSegments] : newSegments),
+        [initialSegment, newSegments],
     );
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
@@ -88,15 +90,31 @@ export const AiChat: <AiMsg>(
         [exceptionBoxController],
     );
 
+    const cancelLastMessageRequest = useCallback(() => {
+        const lastSegment = newSegments.length > 0 ? newSegments[newSegments.length - 1] : undefined;
+        if (lastSegment?.status === 'active') {
+            // Cancel the HTTP request for the last message
+            // Remove the last message from the conversation
+            setChatSegments(newSegments.slice(0, -1));
+            setCancelledSegmentIds([...cancelledSegmentIds, lastSegment.uid]);
+            setCancelledMessageIds([
+                ...cancelledMessageIds,
+                ...lastSegment.items.map(item => item.uid)
+            ]);
+        }
+
+        setComposerStatus('typing');
+    }, [newSegments, setChatSegments, setComposerStatus]);
+
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
-        aiChatProps: props, adapterToUse, conversationRef, initialSegment,
-        chatSegments, prompt, composerOptions, showException,
+        aiChatProps: props, adapterToUse, conversationRef, initialSegment, newSegments,
+        cancelledMessageIds, cancelledSegmentIds, prompt, composerOptions, showException,
         setChatSegments, setComposerStatus, setPrompt,
     });
 
     const handleResubmitPrompt = useResubmitPromptHandler(
-        initialSegment, setInitialSegment, chatSegments, setChatSegments, setPrompt, setComposerStatus,
+        initialSegment, setInitialSegment, newSegments, setChatSegments, setPrompt, setComposerStatus,
     );
 
     const handleMarkdownStreamRendered = useCallback((segmentId: string, messageId: string) => {
@@ -154,20 +172,18 @@ export const AiChat: <AiMsg>(
                     setChatSegments([]);
                     setInitialSegment(undefined);
                 },
-                cancelLastMessageRequest: () => {
-                    const lastSegment = segments.length > 0
-                        ? segments[segments.length - 1]
-                        : undefined;
-
-                    if (lastSegment?.status === 'active') {
-                        // Cancel the HTTP request for the last message
-                        // Remove the last message from the conversation
-                        setChatSegments(segments.slice(0, -1));
-                    }
-                }
+                cancelLastMessageRequest,
             });
+        } else {
+            warnOnce(
+                'API object passed was is not compatible with AiChat.\n' +
+                'Only use API objects created by the useAiChatApi() hook.'
+            );
         }
-    }, [props.api, setPrompt, handleSubmitPrompt, segments, setChatSegments]);
+    }, [
+        props.api, cancelLastMessageRequest,
+        setPrompt, setComposerStatus, setChatSegments, setInitialSegment,
+    ]);
 
     useEffect(() => () => {
         if (typeof internalApiRef.current?.__unsetHost === 'function') {
@@ -236,6 +252,7 @@ export const AiChat: <AiMsg>(
                             submitShortcut={props.composerOptions?.submitShortcut}
                             onChange={handlePromptChange}
                             onSubmit={handleSubmitPrompt}
+                            onCancel={cancelLastMessageRequest}
                             Loader={uiOverrides.Loader}
                         />
                     </div>

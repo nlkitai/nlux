@@ -1,3 +1,4 @@
+import {ComposerStatus} from '@shared/components/Composer/props';
 import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
 import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {className as compComposerClassName} from '@shared/components/Composer/create';
@@ -7,13 +8,21 @@ import {
 import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
 
+const submittingPromptStatuses: Array<ComposerStatus> = [
+    'submitting-prompt',
+    'submitting-edit',
+    'submitting-conversation-starter',
+    'submitting-external-message',
+];
+
 export const ComposerComp = (props: ComposerProps) => {
     const compClassNameFromStats = compComposerStatusClassName[props.status] || '';
     const className = `${compComposerClassName} ${compClassNameFromStats}`;
 
-    const disableTextarea = props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt';
-    const disableButton = !props.hasValidInput || props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt' || props.status === 'waiting';
-    const showSendIcon = props.status === 'typing';
+    const disableTextarea = submittingPromptStatuses.includes(props.status);
+    const disableButton = !props.hasValidInput || props.status === 'waiting' || submittingPromptStatuses.includes(props.status);
+    const showSendIcon = props.status === 'typing' || props.status === 'waiting';
+    const showCancelButton = submittingPromptStatuses.includes(props.status) || props.status === 'waiting';
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -51,11 +60,19 @@ export const ComposerComp = (props: ComposerProps) => {
             <button
                 tabIndex={0}
                 disabled={disableButton}
-                onClick={() => props.onSubmit?.()}
+                onClick={() => props.onSubmit()}
             >
                 {showSendIcon && <SendIconComp/>}
                 {!showSendIcon && props.Loader}
             </button>
+            {showCancelButton && (
+                <button
+                    tabIndex={0}
+                    onClick={props.onCancel}
+                >
+                    Cancel
+                </button>
+            )}
         </div>
     );
 };

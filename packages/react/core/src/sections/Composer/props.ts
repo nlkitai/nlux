@@ -13,8 +13,9 @@ export type ComposerProps = {
     submitShortcut?: 'Enter' | 'CommandEnter';
 
     // Event Handlers
-    onChange?: (value: string) => void;
-    onSubmit?: () => void;
+    onChange: (value: string) => void;
+    onSubmit: () => void;
+    onCancel: () => void;
 
     // UI Overrides
     Loader: ReactElement;
