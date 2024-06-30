@@ -11,9 +11,14 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     element.classList.add(className);
 
     const textarea = document.createElement('textarea');
+
     textarea.placeholder = props.placeholder ?? '';
     textarea.value = props.message ?? '';
-
+    const adjustHeight = () => {
+          textarea.style.height = 'auto'; // Reset height
+          textarea.style.height = `${textarea.scrollHeight}px`; // Set new height based on content
+    };
+    textarea.addEventListener('input',adjustHeight);
     if (props.autoFocus) {
         textarea.autofocus = true;
     }
