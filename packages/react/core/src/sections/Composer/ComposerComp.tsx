@@ -48,6 +48,20 @@ export const ComposerComp = (props: ComposerProps) => {
         }
     }, [handleSubmit, props.submitShortcut]);
 
+    useEffect(()=>{
+        if(!textareaRef.current) return;
+        const adjustHeight = () => {
+            const textarea = textareaRef.current;
+            if (textarea) {
+              textarea.style.height = 'auto'; // Reset height
+              textarea.style.height = `${textarea.scrollHeight}px`; // Set new height based on content
+            }
+        };
+        textareaRef.current.addEventListener('input',adjustHeight);
+        return ()=>{textareaRef.current?.removeEventListener('input',adjustHeight)}
+
+    },[textareaRef.current])
+
     return (
         <div className={className}>
             <textarea
