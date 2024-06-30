@@ -38,7 +38,7 @@
         }
 
         > .nlux-composer-container {
-            height: 60px;
+            min-height: 60px;
             width: 100%;
             display: flex;
             flex-direction: row;
