@@ -1,4 +1,4 @@
-import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
+import {createRef, forwardRef, ReactNode, Ref, useCallback, useEffect, useImperativeHandle, useMemo} from 'react';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
@@ -36,6 +36,10 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
             const chatSegment = segmentsController.get(segmentId);
             chatSegment?.completeStream(messageId);
         },
+        cancelSegmentStreams: (segmentId: string) => {
+            const chatSegment = segmentsController.get(segmentId);
+            chatSegment?.cancelStreams();
+        }
     }), []);
 
     const ForwardRefChatSegmentComp = useMemo(() => forwardRef(
@@ -63,6 +67,9 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         personaOptions={personaOptions}
                         messageOptions={props.messageOptions}
                         Loader={props.Loader}
+                        submitShortcutKey={props.submitShortcutKey}
+                        onPromptResubmit={props.onPromptResubmit}
+                        onMarkdownStreamRendered={props.onMarkdownStreamRendered}
                     />
                 );
             })}

@@ -15,6 +15,11 @@ export type ChatSegmentProps<AiMsg> = {
 
     containerRef?: RefObject<HTMLDivElement>;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
+
+    // Callbacks
+    onPromptResubmit: (segmentId: string, messageId: string, newPrompt: string) => void;
+    onMarkdownStreamRendered: (segmentId: string, messageId: string) => void;
 
     // UI overrides
     Loader: ReactElement;
@@ -23,4 +28,5 @@ export type ChatSegmentProps<AiMsg> = {
 export type ChatSegmentImperativeProps<AiMsg> = {
     streamChunk: (messageId: string, chunk: AiMsg) => void;
     completeStream: (messageId: string) => void;
+    cancelStreams: () => void;
 };

@@ -21,7 +21,7 @@ export const renderChatbox: CompRenderer<
     const [textBoxElement, removeTextBoxListeners] = listenToElement(composerRoot, ':scope > textarea')
         .on('input', compEvent('text-updated'))
         .on('keydown', ((event: KeyboardEvent) => {
-            const isEnter = event.key === 'Enter';
+            const isEnter = event.key === 'Enter' && !event.isComposing;
             const aModifierKeyIsPressed = event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
             if (isEnter && !aModifierKeyIsPressed) {
                 compEvent('enter-key-pressed')(event);

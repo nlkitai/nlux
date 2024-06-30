@@ -35,7 +35,7 @@ export type ChatSegmentStatus = 'active' | 'complete' | 'error';
  *
  * System messages are not included in the chat segment items.
  */
-export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage | StreamedServerComponent;
+export type ChatSegmentItem<AiMsg> = ChatSegmentAiMessage<AiMsg> | ChatSegmentUserMessage;
 
 /**
  * The events that can be emitted by a chat segment.

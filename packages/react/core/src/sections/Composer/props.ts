@@ -8,13 +8,15 @@ export type ComposerProps = {
     prompt?: string;
     placeholder?: string;
     autoFocus?: boolean;
+    hideStopButton?: boolean;
 
     hasValidInput?: boolean;
     submitShortcut?: 'Enter' | 'CommandEnter';
 
     // Event Handlers
-    onChange?: (value: string) => void;
-    onSubmit?: () => void;
+    onChange: (value: string) => void;
+    onSubmit: () => void;
+    onCancel: () => void;
 
     // UI Overrides
     Loader: ReactElement;

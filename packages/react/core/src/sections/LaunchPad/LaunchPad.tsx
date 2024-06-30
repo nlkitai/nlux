@@ -1,6 +1,7 @@
-import {ReactNode, useMemo} from 'react';
-import {WelcomeDefaultMessageComp} from '../../components/DefaultWelcomeMessage/WelcomeDefaultMessageComp';
-import {WelcomeMessageComp} from '../../components/WelcomeMessage/WelcomeMessageComp';
+import {warnOnce} from '@shared/utils/warn';
+import {ReactNode, useEffect, useMemo} from 'react';
+import {DefaultGreetingComp} from '../../components/DefaultGreeting/DefaultGreetingComp';
+import {GreetingComp, GreetingContainer} from '../../components/Greeting/GreetingComp';
 import {ConversationStarters} from '../../components/ConversationStarters/ConversationStarters';
 import {LaunchPadProps} from './props';
 
@@ -13,17 +14,34 @@ export const LaunchPad: LaunchPadCompType = (props) => {
         segments,
         personaOptions,
         conversationOptions,
+        userDefinedGreeting,
     } = props;
 
     const hasMessages = useMemo(() => segments.some((segment) => segment.items.length > 0), [segments]);
-    const showWelcomeDefaultMessage = useMemo(
-        () => !hasMessages && personaOptions?.assistant === undefined && conversationOptions?.showWelcomeMessage !== false,
-        [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
+    const showDefaultGreeting = useMemo(
+        () => !userDefinedGreeting // Only show the default greeting if the user has not provided a custom greeting
+            && !hasMessages
+            && personaOptions?.assistant === undefined
+            && conversationOptions?.showWelcomeMessage !== false,
+        [
+            hasMessages,
+            personaOptions?.assistant,
+            conversationOptions?.showWelcomeMessage,
+            userDefinedGreeting,
+        ],
     );
 
-    const showWelcomeMessage = useMemo(
-        () => !hasMessages && personaOptions?.assistant !== undefined && conversationOptions?.showWelcomeMessage !== false,
-        [hasMessages, personaOptions?.assistant, conversationOptions?.showWelcomeMessage],
+    const showGreetingFromPersonaOptions = useMemo(
+        () => !userDefinedGreeting
+            && !hasMessages
+            && personaOptions?.assistant !== undefined
+            && conversationOptions?.showWelcomeMessage !== false,
+        [
+            userDefinedGreeting,
+            hasMessages,
+            personaOptions?.assistant,
+            conversationOptions?.showWelcomeMessage,
+        ],
     );
 
     const showConversationStarters = useMemo(
@@ -31,17 +49,45 @@ export const LaunchPad: LaunchPadCompType = (props) => {
         [hasMessages, conversationOptions?.conversationStarters],
     );
 
+    const showUserDefinedGreeting = useMemo(
+        () => userDefinedGreeting !== undefined && conversationOptions?.showWelcomeMessage !== false,
+        [userDefinedGreeting],
+    );
+
+    useEffect(() => {
+        if (userDefinedGreeting && conversationOptions?.showWelcomeMessage === false) {
+            warnOnce(
+                'Configuration conflict: The greeting UI override provided via <AiChatUI.Greeting> will not be shown ' +
+                'because conversationOptions.showWelcomeMessage is set to false.'
+            );
+        }
+    }, [
+        conversationOptions?.showWelcomeMessage,
+        userDefinedGreeting,
+    ]);
+
+    const showEmptyGreeting = !showDefaultGreeting && !showGreetingFromPersonaOptions
+        && !showUserDefinedGreeting && !hasMessages;
+
     return (
         <>
-            {showWelcomeDefaultMessage && (
-                <WelcomeDefaultMessageComp/>
+            {showDefaultGreeting && (
+                <DefaultGreetingComp/>
             )}
-            {showWelcomeMessage && (
-                <WelcomeMessageComp
+            {showGreetingFromPersonaOptions && (
+                <GreetingComp
                     name={personaOptions!.assistant!.name}
                     avatar={personaOptions!.assistant!.avatar}
                     message={personaOptions!.assistant!.tagline}
                 />
+            )}
+            {showUserDefinedGreeting && (
+                <GreetingContainer>
+                    {userDefinedGreeting}
+                </GreetingContainer>
+            )}
+            {showEmptyGreeting && (
+                <GreetingContainer>{null}</GreetingContainer>
             )}
             <div className="nlux-conversationStarters-container">
                 {showConversationStarters && (

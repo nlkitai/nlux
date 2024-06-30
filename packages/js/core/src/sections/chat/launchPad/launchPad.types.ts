@@ -5,8 +5,8 @@ export type CompLaunchPadEvents = 'conversation-starter-clicked';
 
 export type CompLaunchPadProps = {
     // By default, either the assistant greeting message or NLUX logo will be shown
-    // When this is set to false, no welcome message will be shown
-    showWelcomeMessage?: boolean;
+    // When this is set to false, no greeting will be shown
+    showGreeting?: boolean;
 
     // Use to display the assistant greeting message
     assistantPersona?: AssistantPersona;
@@ -21,6 +21,6 @@ export type CompLaunchPadElements = {
 };
 
 export type CompLaunchPadActions = {
-    resetWelcomeMessage: () => void;
+    resetGreeting: () => void;
     updateAssistantPersona: (assistantPersona: AssistantPersona | undefined) => void;
 };

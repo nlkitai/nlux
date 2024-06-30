@@ -113,7 +113,7 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             expect(textArea.value).toBe('');
         });
 
-        it('Should keep submit button disabled when user types', async () => {
+        it('Should show the stop button in the composer', async () => {
             // Arrange
             const aiChat = <AiChat adapter={adapterController!.adapter}/>;
             const {container} = render(aiChat);
@@ -131,10 +131,10 @@ describe('<AiChat /> + submit prompt + stream adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const composer = container.querySelector('.nlux-comp-composer')!;
+            const stopButton = container.querySelector('.nlux-comp-composer .nlux-comp-cancelIcon');
+            expect(stopButton).toBeInTheDocument();
             const sendButton = container.querySelector('.nlux-comp-composer > button')!;
-            expect(composer).toHaveClass('nlux-composer--waiting');
-            expect(sendButton).toBeDisabled();
+            expect(sendButton).not.toBeDisabled();
         });
     });
 

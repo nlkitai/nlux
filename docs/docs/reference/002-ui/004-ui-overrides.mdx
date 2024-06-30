@@ -17,10 +17,6 @@ with your JSX elements inside it.
 Here is an example of how you can override loader component displayed across multiple parts of NLUX:
 
 ```jsx
-import {AiChat} from '@nlux/react';
-import {AiChatUI} from '@nlux/react';
-import {useChatAdapter} from '@nlux/<platform>-adapter'; // Or use a custom adapter
-
 const MyAiChatApp = () => {
     const myAdapter = useChatAdapter({ /* Your adapter options */ });
     return (
@@ -55,6 +51,10 @@ This enables overriding the loading spinner displayed in 2 locations:
 * Inside the default submit button, when it's in a loading state.
 * Under a message, when it's being loaded from the server or streaming.
 
+![Nova Theme Overview](/images/reference/ui-overrides/loader-overrides.png)
+
+You can override it with your own JSX element by using the `AiChatUI.Loader` component:
+
 > * Overriding Container: `AiChatUI.Loader`
 > * Usage:
 
@@ -68,7 +68,30 @@ This enables overriding the loading spinner displayed in 2 locations:
 
 ---
 
+> ### Greeting
+
+The `Greeting` component (previously referred to as the `Welcome Message` component) is displayed when the chat is first
+opened, and when the conversation history is empty.
+
+![Nova Theme Overview](/images/reference/ui-overrides/greeting-overrides.png)
+
+You can override it with your own JSX element by using the `AiChatUI.Greeting` component:
+
+> * Overriding Container: `AiChatUI.Greeting`
+> * Usage:
+
+```jsx
+<AiChat adapter={myAdapter}>
+    <AiChatUI.Greeting>
+        <span className="rounded">Hello! 👋</span>
+    </AiChatUI.Greeting>
+</AiChat>
+```
+
+---
+
 ## Adding More Overrides
+<br /><br />
 
 We will be adding more customization options and overrides as we receive feedback from the community.
 

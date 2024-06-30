@@ -19,10 +19,12 @@ export type StreamContainerProps<AisMsg> = {
         skipStreamingAnimation?: boolean;
         streamingAnimationSpeed?: number;
         waitTimeBeforeStreamCompletion?: number | 'never';
+        onStreamComplete?: () => void;
     }
 };
 
 export type StreamContainerImperativeProps<AiMsg> = {
     streamChunk: (chunk: AiMsg) => void;
     completeStream: () => void;
+    cancelStream: () => void;
 };

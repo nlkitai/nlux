@@ -1,5 +1,5 @@
-import {ComposerComp} from '@nlux-dev/react/src/components/Composer/ComposerComp';
 import '@nlux-dev/themes/src/luna/main.css';
+import {ComposerComp} from '@nlux-dev/react/src/sections/Composer/ComposerComp';
 import {useState} from 'react';
 import {ComposerStatus} from '@shared/components/Composer/props';
 
@@ -35,6 +35,10 @@ export const ComposerReactExpo = () => {
                         prompt={prompt}
                         status={status}
                         placeholder={placeholder}
+                        onChange={(value) => console.log(value)}
+                        onSubmit={() => console.log('Submit')}
+                        onCancel={() => console.log('Cancel')}
+                        Loader={<div>Loading...</div>}
                     />
                 </div>
             </div>

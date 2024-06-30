@@ -47,7 +47,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             composer,
             assistantPersona,
             userPersona,
-            showWelcomeMessage,
+            showGreeting,
             conversationStarters,
             initialConversationContent,
             syntaxHighlighter,
@@ -65,7 +65,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             assistantPersona,
             userPersona,
             conversationStarters,
-            showWelcomeMessage,
+            showGreeting,
             initialConversationContent,
             composer,
             syntaxHighlighter,
@@ -82,7 +82,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         // Add optional launch pad component
         if (this.chatRoomStatus === 'starting') {
             this.addLaunchPad(
-                showWelcomeMessage, assistantPersona,
+                showGreeting, assistantPersona,
                 conversationStarters, this.handleConversationStarterClick,
             );
         }
@@ -193,8 +193,8 @@ export class CompChatRoom<AiMsg> extends BaseComp<
             this.conversation?.setUserPersona(props.userPersona ?? undefined);
         }
 
-        if (props.hasOwnProperty('showWelcomeMessage')) {
-            this.launchPad?.setShowWelcomeMessage(props.showWelcomeMessage ?? true);
+        if (props.hasOwnProperty('showGreeting')) {
+            this.launchPad?.setShowGreeting(props.showGreeting ?? true);
         }
 
         if (props.hasOwnProperty('conversationStarters')) {
@@ -228,7 +228,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     }
 
     private addLaunchPad(
-        showWelcomeMessage: boolean | undefined,
+        showGreeting: boolean | undefined,
         assistantPersona: AssistantPersona | undefined,
         conversationStarters: ConversationStarter[] | undefined,
         onConversationStarterSelected: (conversationStarter: ConversationStarter) => void,
@@ -236,7 +236,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.launchPad = comp(CompLaunchPad<AiMsg>)
             .withContext(this.context)
             .withProps({
-                showWelcomeMessage,
+                showGreeting,
                 assistantPersona,
                 conversationStarters,
                 onConversationStarterSelected,
@@ -357,7 +357,7 @@ export class CompChatRoom<AiMsg> extends BaseComp<
                 }
             } else {
                 this.addLaunchPad(
-                    (this.getProp('showWelcomeMessage') as boolean | undefined) ?? true,
+                    (this.getProp('showGreeting') as boolean | undefined) ?? true,
                     this.getProp('assistantPersona') as AssistantPersona | undefined,
                     this.getProp('conversationStarters') as ConversationStarter[] | undefined,
                     this.handleConversationStarterClick,

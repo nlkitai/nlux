@@ -170,6 +170,15 @@ export const createMdStreamRenderer: StandardStreamParser = (
             buffer.push(endOfStreamChar);
             streamIsComplete = true;
         },
+        cancel: () => {
+            if (parsingInterval) {
+                clearInterval(parsingInterval);
+                parsingInterval = undefined;
+            }
+
+            streamIsComplete = true;
+            wipContainer.remove();
+        },
         error: () => {
             // No special handling for errors
             // Just complete the stream

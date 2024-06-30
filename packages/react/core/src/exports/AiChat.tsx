@@ -1,4 +1,6 @@
 'use client';
+import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
+import {uid} from '@shared/utils/uid';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
@@ -15,7 +17,9 @@ import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
+import {useCancelLastMessage} from './hooks/useCancelLastMessage';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
+import {useResubmitPromptHandler} from './hooks/useResubmitPromptHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {AiChatProps} from './props';
 import {ConversationStarter} from '../types/conversationStarter';
@@ -58,17 +62,18 @@ export const AiChat: <AiMsg>(
     const [prompt, setPrompt] = useState('');
     const [composerStatus, setComposerStatus] = useState<ComposerStatus>('typing');
     const [initialSegment, setInitialSegment] = useState<ChatSegment<AiMsg>>();
-    const [chatSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
+    const [newSegments, setChatSegments] = useState<ChatSegment<AiMsg>[]>([]);
+    const [cancelledSegmentIds, setCancelledSegmentIds] = useState<Array<string>>([]);
+    const [cancelledMessageIds, setCancelledMessageIds] = useState<Array<string>>([]);
 
     // Derived state and memoized values
     const segments = useMemo(
-        () => (initialSegment ? [initialSegment, ...chatSegments] : chatSegments),
-        [initialSegment, chatSegments],
+        () => (initialSegment ? [initialSegment, ...newSegments] : newSegments),
+        [initialSegment, newSegments],
     );
 
     const adapterToUse = useMemo(() => adapterParamToUsableAdapter<AiMsg>(adapter), [adapter]);
     const rootStyle = useAiChatStyle(displayOptions);
-
     const rootClassNames = useMemo(
         () => getRootClassNames({className, themeId}).join(' '),
         [className, themeId],
@@ -85,12 +90,28 @@ export const AiChat: <AiMsg>(
         [exceptionBoxController],
     );
 
+    const cancelLastMessageRequest = useCancelLastMessage<AiMsg>(
+        newSegments, cancelledSegmentIds, cancelledMessageIds,
+        setChatSegments, setCancelledSegmentIds, setCancelledMessageIds,
+        conversationRef, setComposerStatus,
+    );
+
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
     const handleSubmitPrompt = useSubmitPromptHandler<AiMsg>({
-        aiChatProps: props, adapterToUse, conversationRef, initialSegment,
-        chatSegments, prompt, composerOptions, showException,
+        aiChatProps: props, adapterToUse, conversationRef, initialSegment, newSegments,
+        cancelledMessageIds, cancelledSegmentIds, prompt, composerOptions, showException,
         setChatSegments, setComposerStatus, setPrompt,
     });
+
+    const handleResubmitPrompt = useResubmitPromptHandler(
+        initialSegment, setInitialSegment, newSegments, setChatSegments, setPrompt, setComposerStatus,
+    );
+
+    const handleMarkdownStreamRendered = useCallback((segmentId: string, messageId: string) => {
+        if (props.events?.messageRendered) {
+            props.events.messageRendered({ uid: messageId });
+        }
+    }, []);
 
     const handleConversationStarterSelected = useCallback(
         (conversationStarter: ConversationStarter) => {
@@ -106,7 +127,7 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
-        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message') {
+        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message' || composerStatus === 'submitting-edit') {
             handleSubmitPrompt();
         }
     }, [composerStatus, handleSubmitPrompt]);
@@ -125,26 +146,35 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         const internalApi = props.api as unknown as AiChatInternalApi | undefined;
-        if (internalApi !== internalApiRef.current) {
-            internalApiRef.current = internalApi;
-            if (typeof internalApi?.__setHost === 'function') {
-                internalApi.__setHost({
-                    sendMessage: (prompt: string) => {
-                        setPrompt(prompt);
-                        setComposerStatus('submitting-external-message');
-                    },
-                    resetConversation: () => {
-                        setChatSegments([]);
-                        setInitialSegment(undefined);
-                    },
-                });
-            }
+        internalApiRef.current = internalApi;
+
+        if (typeof internalApi?.__setHost === 'function') {
+            internalApi.__setHost({
+                sendMessage: (prompt: string) => {
+                    setPrompt(prompt);
+                    setComposerStatus('submitting-external-message');
+                },
+                resetConversation: () => {
+                    setChatSegments([]);
+                    setInitialSegment(undefined);
+                },
+                cancelLastMessageRequest,
+            });
+        } else {
+            warnOnce(
+                'API object passed was is not compatible with AiChat.\n' +
+                'Only use API objects created by the useAiChatApi() hook.'
+            );
         }
-    }, [props.api, setPrompt, handleSubmitPrompt]);
+    }, [
+        props.api, cancelLastMessageRequest,
+        setPrompt, setComposerStatus, setChatSegments, setInitialSegment,
+    ]);
 
     useEffect(() => () => {
         if (typeof internalApiRef.current?.__unsetHost === 'function') {
             internalApiRef.current.__unsetHost();
+            internalApiRef.current = undefined;
         }
     }, []);
 
@@ -180,6 +210,7 @@ export const AiChat: <AiMsg>(
                             onConversationStarterSelected={handleConversationStarterSelected}
                             conversationOptions={conversationOptions}
                             personaOptions={props.personaOptions}
+                            userDefinedGreeting={uiOverrides.Greeting}
                         />
                     </div>
                     <div className="nlux-conversation-container" ref={conversationContainerRef}>
@@ -192,6 +223,9 @@ export const AiChat: <AiMsg>(
                             onLastActiveSegmentChange={handleLastActiveSegmentChange}
                             Loader={uiOverrides.Loader}
                             markdownContainersController={markdownContainersController}
+                            submitShortcutKey={props.composerOptions?.submitShortcut}
+                            onPromptResubmit={handleResubmitPrompt}
+                            onMarkdownStreamRendered={handleMarkdownStreamRendered}
                         />
                     </div>
                     <div className="nlux-composer-container">
@@ -202,8 +236,10 @@ export const AiChat: <AiMsg>(
                             placeholder={props.composerOptions?.placeholder}
                             autoFocus={props.composerOptions?.autoFocus}
                             submitShortcut={props.composerOptions?.submitShortcut}
+                            hideStopButton={props.composerOptions?.hideStopButton}
                             onChange={handlePromptChange}
                             onSubmit={handleSubmitPrompt}
+                            onCancel={cancelLastMessageRequest}
                             Loader={uiOverrides.Loader}
                         />
                     </div>

@@ -1,9 +1,10 @@
 ```tsx
-import {AiChat, MessageRenderedCallback, MessageRenderedEventDetails, } from '@nlux/react';
+import {MessageRenderedCallback, MessageRenderedEventDetails, } from '@nlux/react';
 import {useCallback} from 'react';
 
 const messageRenderedCallback = useCallback<MessageRenderedCallback>((eventDetails: MessageRenderedEventDetails) => {
-    console.log(eventDetails.message);
+    // On message rendered, log the message to the console
+    console.log(eventDetails.uid);
 }, [/* Callback dependencies */]);
 ```
 

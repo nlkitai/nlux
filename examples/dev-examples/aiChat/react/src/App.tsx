@@ -2,6 +2,7 @@ import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 // import {createUnsafeChatAdapter as useOpenAiChatAdapter} from '@nlux-dev/openai/src';
 import {
     AiChat,
+    AiChatUI,
     ChatItem,
     ConversationLayout,
     DataTransferMode,
@@ -33,9 +34,9 @@ function App() {
     type ThemeId = 'nova' | 'luna' | 'unstyled' | 'dev';
     const [useCustomResponseComponent, setUseCustomResponseComponent] = useState(false);
     const [useCustomPersonaOptions, setUseCustomPersonaOptions] = useState(true);
-    const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('list');
+    const [conversationLayout, setConversationLayout] = useState<ConversationLayout>('bubbles');
     const [dataTransferMode, setDataTransferMode] = useState<DataTransferMode>('stream');
-    const [theme, setTheme] = useState<ThemeId>('unstyled');
+    const [theme, setTheme] = useState<ThemeId>('nova');
     const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>('dark');
 
     const messageReceived: MessageReceivedCallback = useCallback((e) => {
@@ -97,8 +98,14 @@ function App() {
     const customSlowAdapter = useAsStreamAdapter((message, observer) => {
         observer.next('We are processing ');
         setTimeout(() => {
-            observer.next('your request!');
+            observer.next('your request! ');
         }, 3000);
+        setTimeout(() => {
+            observer.next('Please wait!');
+        }, 6000);
+        setTimeout(() => {
+            observer.complete();
+        }, 9000);
     }, []);
 
     const customSimpleAdapter = useAsStreamAdapter((message, observer) => {
@@ -148,18 +155,19 @@ function App() {
 
     const initialConversation: ChatItem<string>[] = [
         {
-            role: 'assistant',
-            message: 'Hello, **how can I help you?**\n# AI speaking\nCheers!',
+            role: 'user',
+            message: 'You start the conversation.',
         },
         {
             role: 'assistant',
-            message: longMessage,
+            // message: longMessage,
+            message: 'Hello, how can I help you today?',
         },
-        {role: 'user', message: 'I need help with my account.'},
-        {
-            role: 'assistant',
-            message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
-        },
+        // {role: 'user', message: 'I need help with my account.'},
+        // {
+        //     role: 'assistant',
+        //     message: 'Sure, I can help you with that.\n\nLet\'s start with some python code:\n\n' + messageWithCode,
+        // },
     ];
 
     const personaOptions: PersonaOptions = {
@@ -193,11 +201,11 @@ function App() {
 
     const api = useAiChatApi();
     const sendHelloWorld = useCallback(() => {
-        api.sendMessage('Hello, World!');
+        api.composer.send('Hello, World!');
     }, [api]);
 
     const resetConversation = useCallback(() => {
-        api.resetConversation();
+        api.conversation.reset();
     }, [api]);
 
     const conversationStarters: ConversationStarter[] = [
@@ -324,9 +332,9 @@ function App() {
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
-                adapter={langChainAdapter}
+                // adapter={langChainAdapter}
                 api={api}
-                // adapter={customSlowAdapter}
+                adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
                 initialConversation={initialConversation}
@@ -334,6 +342,7 @@ function App() {
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
                     // submitShortcut: 'CommandEnter',
+                    submitShortcut: 'Enter',
                 }}
                 displayOptions={{
                     width: 500,
@@ -346,11 +355,14 @@ function App() {
                     layout: conversationLayout,
                     // showWelcomeMessage: true,
                     conversationStarters,
+                    // showWelcomeMessage: false,
                 }}
                 events={{
                     messageReceived,
+                    messageRendered: (e) => console.log('Message Rendered', e),
                 }}
                 messageOptions={{
+                    editableUserMessages: true,
                     markdownLinkTarget: 'blank',
                     syntaxHighlighter: highlighter,
                     htmlSanitizer: htmlSanitizer,
@@ -362,7 +374,11 @@ function App() {
                     promptRenderer: undefined,
                 }}
                 personaOptions={useCustomPersonaOptions ? personaOptions : undefined}
-            />
+            >
+                <AiChatUI.Greeting>
+                    Hello!
+                </AiChatUI.Greeting>
+            </AiChat>
         </>
     );
 }

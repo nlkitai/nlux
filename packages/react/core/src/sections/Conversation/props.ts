@@ -13,12 +13,24 @@ export type ConversationCompProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
 
     // Event Handlers
     onLastActiveSegmentChange?: (data: {
         uid: string;
         div: HTMLDivElement;
     } | undefined) => void;
+
+    onPromptResubmit: (
+        segmentId: string,
+        messageId: string,
+        newPrompt: string,
+    ) => void;
+
+    onMarkdownStreamRendered: (
+        segmentId: string,
+        messageId: string,
+    ) => void;
 
     // UI Overrides
     Loader: ReactElement;
@@ -27,4 +39,5 @@ export type ConversationCompProps<AiMsg> = {
 export type ImperativeConversationCompProps<AiMsg> = {
     streamChunk: (segmentId: string, messageId: string, chunk: AiMsg) => void;
     completeStream: (segmentId: string, messageId: string) => void;
+    cancelSegmentStreams: (segmentId: string) => void;
 };

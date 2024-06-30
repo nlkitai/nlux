@@ -1,4 +1,5 @@
-import {Component, PropsWithChildren, useEffect, useMemo, useRef} from 'react';
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
+import {Component, PropsWithChildren, KeyboardEvent, FocusEvent, useEffect, useMemo, useRef, useState, useCallback} from 'react';
 import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
 import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
 import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';
@@ -9,6 +10,9 @@ type MarkdownSnapshotRendererProps = {
     content: string;
     markdownOptions?: SnapshotParserOptions;
     onMarkdownRenderingError?: (error: Error) => void;
+    canResubmit?: boolean;
+    onResubmit?: (newPrompt: string) => void;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
 };
 
 const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
@@ -41,13 +45,71 @@ const MarkdownSnapshotRendererImpl = (props: MarkdownSnapshotRendererProps) => {
         return markdownOptions?.htmlSanitizer ? markdownOptions.htmlSanitizer(parsedContent) : parsedContent;
     }, [parsedContent, markdownOptions?.htmlSanitizer]);
 
+    const handleKeyDown = useCallback((event: KeyboardEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
+        const newPromptTyped = event.currentTarget.textContent;
+        if (!newPromptTyped) {
+            return;
+        }
+
+        if (isSubmitShortcutKey(event, props.submitShortcutKey)) {
+            event.preventDefault();
+            if (props.onResubmit) {
+                props.onResubmit(newPromptTyped);
+            }
+
+            return;
+        }
+
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            event.currentTarget.textContent = props.content;
+            event.currentTarget.blur();
+        }
+    }, [props.canResubmit, props.onResubmit, props.content]);
+
+    const handleBlur = useCallback((event: FocusEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
+        event.preventDefault();
+        event.currentTarget.textContent = props.content;
+        event.currentTarget.blur();
+    }, [props.canResubmit, props.content]);
+
+    const handleFocus = useCallback((event: FocusEvent<HTMLDivElement>) => {
+        if (!props.canResubmit) {
+            return;
+        }
+
+        event.preventDefault();
+        // Select all text when the user focuses on the content
+        const range = document.createRange();
+        range.selectNodeContents(event.currentTarget);
+
+        const selection = window.getSelection();
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+
+    }, [props.canResubmit]);
+
+    const editableStyle = props.canResubmit ? 'editable-markdown-container' : '';
+
     return (
         <MarkdownParserErrorBoundary>
-            <div className={'nlux-markdownStream-root'}>
+            <div className={`nlux-markdownStream-root${editableStyle ? ` ${editableStyle}` : ''}`}>
                 <div
-                    className="nlux-markdown-container"
+                    className={`nlux-markdown-container`}
                     ref={markdownContainerRef}
                     dangerouslySetInnerHTML={{__html: trustedHtml}}
+                    contentEditable={props.canResubmit}
+                    onKeyDown={handleKeyDown}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
                 />
             </div>
         </MarkdownParserErrorBoundary>

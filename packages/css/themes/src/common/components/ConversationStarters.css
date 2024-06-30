@@ -15,9 +15,9 @@
       font-family: var(--nlux-chtr--fnFm), sans-serif;
       display: flex;
       flex-direction: column;
-      justify-content: start;
+      justify-content: center;
       align-items: start;
-      gap: 0.5rem;
+      gap: 0.7rem;
 
       width: var(--nlux-cvStrt--wd);
       height: var(--nlux-cvStrt--hg);
@@ -31,6 +31,7 @@
 
       color: var(--nlux-cvStrt--txtClr);
       background-color: var(--nlux-cvStrt--bgClr);
+      cursor: pointer;
 
       > .nlux-comp-conversationStarter-prompt {
         display: block;

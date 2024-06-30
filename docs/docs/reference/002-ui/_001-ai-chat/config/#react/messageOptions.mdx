@@ -8,6 +8,7 @@ listed below.
 type MessageOptions<AiMsg = string> = {
     responseRenderer?: ResponseRenderer<AiMsg>;
     promptRenderer?: PromptRenderer;
+    editableUserMessages?: boolean;
     syntaxHighlighter?: HighlighterExtension;
     htmlSanitizer?: SanitizerExtension;
     markdownLinkTarget?: 'blank' | 'self';
@@ -29,6 +30,7 @@ type PromptRenderer = FC<PromptRendererProps>;
 | --- | --- | --- | --- |
 | `responseRenderer` | `ResponseRenderer<AiMsg>` | - | A custom renderer for AI responses. API documentation  for custom renderers can be found [here](/reference/ui/custom-renderers). |
 | `promptRenderer` | `PromptRenderer` | - | A custom renderer for user prompts. API documentation for custom renderers can be found [here](/reference/ui/custom-renderers). |
+| `editableUserMessages` | `boolean` | `false` | If `true`, user messages can be edited and re-submitted. |
 | `syntaxHighlighter` | `HighlighterExtension` | - | A custom syntax highlighter for code blocks within messages. |
 | `htmlSanitizer` | `SanitizerExtension` | - | A custom HTML sanitizer for HTML and parsed markdown. It does not apply to preformatted code blocks. Use a syntax highlighter for code blocks. |
 | `markdownLinkTarget` | `'blank'`&nbsp;\|&nbsp;`'self'` | `'blank'` | The target attribute for markdown links. Use `self` to open links in the same tab and `blank` to open links in a new tab. |

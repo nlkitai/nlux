@@ -1,7 +1,6 @@
 import React, {
-    createRef,
-    forwardRef, FunctionComponent, isValidElement,
     ReactNode,
+    FunctionComponent,
     Ref,
     RefObject,
     useEffect,
@@ -9,6 +8,10 @@ import React, {
     useMemo,
     useRef,
     useState,
+    createRef,
+    forwardRef,
+    isValidElement,
+    useCallback,
 } from 'react';
 import {AiBatchedMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
@@ -16,6 +19,7 @@ import {warn, warnOnce} from '@shared/utils/warn';
 import {ChatItemComp} from '../ChatItem/ChatItemComp';
 import {ChatItemImperativeProps} from '../ChatItem/props';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
+import {useItemsRefs} from './useItemsRefs';
 import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
 import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
@@ -31,55 +35,15 @@ export const ChatSegmentComp: <AiMsg>(
     const {chatSegment, containerRef} = props;
     const [completeOnInitialRender, setCompleteOnInitialRender] = useState<boolean>(false);
     const chatItemsRef = useMemo(
-        () => new Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>(), [],
-    );
+        () => new Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>(), []);
 
-    const serverComponentsRef = useRef<Map<string, ReactNode>>(
-        new Map(),
-    );
+    const chatItemsStreamingBuffer = useMemo(() => new Map<string, Array<AiMsg>>(), []);
+    const serverComponentsRef = useRef<Map<string, ReactNode>>(new Map());
+    const serverComponentsFunctionsRef = useRef<Map<string, FunctionComponent>>(new Map<string, FunctionComponent>());
 
-    const serverComponentsFunctionsRef = useRef<Map<string, FunctionComponent>>(
-        new Map<string, FunctionComponent>(),
-    );
-
-    const chatItemsStreamingBuffer = useMemo(
-        () => new Map<string, Array<AiMsg>>(), [],
-    );
-
-    useEffect(() => {
-        if (chatSegment.items.length === 0) {
-            chatItemsRef.clear();
-            serverComponentsRef.current.clear();
-            serverComponentsFunctionsRef.current.clear();
-            return;
-        }
-
-        const itemsInRefsMap = new Set<string>(chatItemsRef.keys());
-        const itemsInSegments = new Set<string>(chatSegment.items.map((item) => item.uid));
-        itemsInRefsMap.forEach((itemInRefsMap) => {
-            if (!itemsInSegments.has(itemInRefsMap)) {
-                chatItemsRef.delete(itemInRefsMap);
-            }
-        });
-
-        const serverComponentsInRefsMap = new Set<string>(serverComponentsRef.current.keys());
-        serverComponentsInRefsMap.forEach((itemInRefsMap) => {
-            if (!itemsInSegments.has(itemInRefsMap)) {
-                serverComponentsRef.current.delete(itemInRefsMap);
-                serverComponentsFunctionsRef.current.delete(itemInRefsMap);
-            }
-        });
-    }, [chatSegment.items]);
-
-    const Loader = useMemo(() => {
-        if (chatSegment.status !== 'active') {
-            return null;
-        }
-
-        return (<div className={'nlux-chatSegment-loader-container'}>{props.Loader}</div>);
-    }, [chatSegment.status, props.Loader]);
-
-    const rootClassName = useMemo(() => getChatSegmentClassName(chatSegment.status), [chatSegment.status]);
+    // Updates server component and chat item refs, and server component functions refs
+    // when the chat segment items change.
+    useItemsRefs(chatSegment.items, serverComponentsRef, serverComponentsFunctionsRef, chatItemsRef);
 
     useImperativeHandle(ref, () => ({
         streamChunk: (chatItemId: string, chunk: AiMsg) => {
@@ -109,6 +73,12 @@ export const ChatSegmentComp: <AiMsg>(
             chatItemCompRef.current.completeStream();
             chatItemsRef.delete(chatItemId);
         },
+        cancelStreams: () => {
+            chatItemsStreamingBuffer.clear();
+            chatItemsRef.forEach((ref) => {
+                ref.current?.cancelStream();
+            });
+        }
     }), [
         // setCompleteOnInitialRender is not needed as a dependency here, even though it is used inside.
     ]);
@@ -140,10 +110,24 @@ export const ChatSegmentComp: <AiMsg>(
         }
     }); // No dependencies — We always want to run this effect after every render.
 
+    const Loader = useMemo(() => {
+        if (chatSegment.status !== 'active') {
+            return null;
+        }
+
+        return (<div className={'nlux-chatSegment-loader-container'}>{props.Loader}</div>);
+    }, [chatSegment.status, props.Loader]);
+
+    const onMarkdownStreamRendered = useCallback((chatItemId: string) => {
+        props.onMarkdownStreamRendered?.(chatSegment.uid, chatItemId);
+    }, []);
+
     const chatItems = chatSegment.items;
     if (chatItems.length === 0) {
         return null;
     }
+
+    const rootClassName = getChatSegmentClassName(chatSegment.status);
 
     return (
         <div className={rootClassName} ref={containerRef}>
@@ -230,6 +214,8 @@ export const ChatSegmentComp: <AiMsg>(
                             name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                             avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                             markdownContainersController={props.markdownContainersController}
+                            submitShortcutKey={props.submitShortcutKey}
+                            onPromptResubmit={(newPrompt) => props.onPromptResubmit(props.chatSegment.uid, chatItem.uid, newPrompt)}
                         />
                     );
                 } else {
@@ -261,6 +247,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     markdownContainersController={props.markdownContainersController}
+                                    onMarkdownStreamRendered={onMarkdownStreamRendered}
                                 />
                             );
                         } else {
@@ -321,6 +308,7 @@ export const ChatSegmentComp: <AiMsg>(
                                     name={participantNameFromRoleAndPersona(chatItem.participantRole, props.personaOptions)}
                                     avatar={avatarFromMessageAndPersona(chatItem.participantRole, props.personaOptions)}
                                     markdownContainersController={props.markdownContainersController}
+                                    onMarkdownStreamRendered={onMarkdownStreamRendered}
                                 />
                             );
                         }

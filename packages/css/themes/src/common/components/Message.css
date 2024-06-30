@@ -1,9 +1,20 @@
 .nlux-comp-message > .nlux-markdownStream-root {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
 
     .md-in-progress:empty {
         display: none;
     }
+}
+
+.nlux-comp-message .nlux-markdown-container:focus {
+    outline: none;
+}
+
+.nlux-comp-message .editable-markdown-container {
+    cursor: text;
 }
 
 .nlux-comp-message .nlux-markdown-container {

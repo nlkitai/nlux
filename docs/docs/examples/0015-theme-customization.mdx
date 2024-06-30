@@ -1,0 +1,40 @@
+---
+sidebar_label: 'Theme Customization'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import Link from '@docusaurus/Link';
+import app from './0015-theme-customization/example-custom-button-color/app';
+import send from './0015-theme-customization/example-custom-button-color/send';
+import personas from './0015-theme-customization/example-custom-button-color/personas';
+import themeVariables from './0015-theme-customization/example-custom-button-color/theme-variables';
+
+# Theme Customization
+
+---
+
+`NLUX` comes with 2 themes: `nova` and `unstyled`.
+
+In the example below, we style the `unstyled` theme by changing the following details:
+
+* Border with set to `0`
+* Border radius set to `5px`
+* Send icon replaced with a custom SVG icon.
+* User message background color set to `#dc143c` (Crimson)
+* Assistant message background color set to `#00bfff` (Cadet blue)
+* Component background color set `#060524` (Dark blue) or `#f9f9f9` (Light gray) depending on dark/light mode.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'theme-variables.css': themeVariables,
+        'personas.tsx': personas,
+        'send.ts': send,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'Do you think we could have a thoughtful debate about physics with ChatGPT?'}
+/>
+
+---
+
+<Link className="learn-more-link button button--secondary" to="/learn/customize-theme">Learn More Theme Customization</Link>

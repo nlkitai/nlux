@@ -2161,9 +2161,9 @@
     "@huggingface/tasks" "^0.10.0"
 
 "@huggingface/tasks@^0.10.0":
-  version "0.10.18"
-  resolved "https://registry.yarnpkg.com/@huggingface/tasks/-/tasks-0.10.18.tgz#f8f0291aa7a503833554ba1a44e6ea65057f6fcf"
-  integrity sha512-3dAp03pZ3AONAEX0J6hr7G5i1F0xuvi7C8ki+8o9nmw8fksNfN0rNuqEBiE2xLP2CG9roOtAUlkq4gIrJBbKSA==
+  version "0.10.21"
+  resolved "https://registry.yarnpkg.com/@huggingface/tasks/-/tasks-0.10.21.tgz#07cf39dea837b4a0c02cf74a2fb841f5799341ef"
+  integrity sha512-IryAkW/F9XxXRQNUjkmva2fOqEQ0cjiF9P3BPBijuzIdGykyCd8TO7Ju0cxqYLqjp1Cf4NQSpiF7HUZQ4/gKfA==
 
 "@humanwhocodes/module-importer@^1.0.1":
   version "1.0.1"
@@ -8558,9 +8558,9 @@ open@^8.0.9, open@^8.4.0:
     is-wsl "^2.2.0"
 
 openai@^4:
-  version "4.52.0"
-  resolved "https://registry.yarnpkg.com/openai/-/openai-4.52.0.tgz#5f93bdbef05ca3407d92f7a68717234ac0ffd09e"
-  integrity sha512-xmiNcdA9QJ5wffHpZDpIsge6AsPTETJ6h5iqDNuFQ7qGSNtonHn8Qe0VHy4UwLE8rBWiSqh4j+iSvuYZSeKkPg==
+  version "4.52.1"
+  resolved "https://registry.yarnpkg.com/openai/-/openai-4.52.1.tgz#44acc362a844fa2927b0cfa1fb70fb51e388af65"
+  integrity sha512-kv2hevAWZZ3I/vd2t8znGO2rd8wkowncsfcYpo8i+wU9ML+JEcdqiViANXXjWWGjIhajFNixE6gOY1fEgqILAg==
   dependencies:
     "@types/node" "^18.11.18"
     "@types/node-fetch" "^2.6.4"
@@ -9832,6 +9832,13 @@ react-syntax-highlighter@^15:
     prismjs "^1.27.0"
     refractor "^3.6.0"
 
+react-twitter-embed@^4.0.4:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/react-twitter-embed/-/react-twitter-embed-4.0.4.tgz#4a6b8354acc266876ff1110b9f648518ea20db6d"
+  integrity sha512-2JIL7qF+U62zRzpsh6SZDXNI3hRNVYf5vOZ1WRcMvwKouw+xC00PuFaD0aEp2wlyGaZ+f4x2VvX+uDadFQ3HVA==
+  dependencies:
+    scriptjs "^2.5.9"
+
 react@^18:
   version "18.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-18.3.1.tgz#49ab892009c53933625bd16b2533fc754cab2891"
@@ -10338,6 +10345,11 @@ schema-utils@^4.0.0, schema-utils@^4.0.1:
     ajv "^8.9.0"
     ajv-formats "^2.1.1"
     ajv-keywords "^5.1.0"
+
+scriptjs@^2.5.9:
+  version "2.5.9"
+  resolved "https://registry.yarnpkg.com/scriptjs/-/scriptjs-2.5.9.tgz#343915cd2ec2ed9bfdde2b9875cd28f59394b35f"
+  integrity sha512-qGVDoreyYiP1pkQnbnFAUIS5AjenNwwQBdl7zeos9etl+hYKWahjRTfzAZZYBv5xNHx7vNKCmaLDQZ6Fr2AEXg==
 
 section-matter@^1.0.0:
   version "1.0.0"

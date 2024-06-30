@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Geist';
+    src: url('GeistVF.woff') format('woff');
+}
+
 /* You can override the default Infima variables here. */
 :root {
     --ifm-color-primary: #fc7509;
@@ -42,6 +47,17 @@
     --ifm-footer-background-color: #fbf2ef;
     --ifm-footer-title-color: #495959;
     --ifm-footer-link-color: #495959;
+}
+
+.twitter-tweet-container {
+    display: inline-block;
+    min-height: 520px;
+    max-width: 570px;
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: white;
 }
 
 [data-theme='dark'] .footer {

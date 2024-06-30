@@ -43,7 +43,7 @@ export class CompComposer<AiMsg> extends BaseComp<
     @CompEventListener('enter-key-pressed')
     handleEnterKeyPressed(event?: KeyboardEvent) {
         const submitShortcut = this.getProp('domCompProps')?.submitShortcut;
-        if (!submitShortcut || submitShortcut === 'Enter') {
+        if (!submitShortcut || (submitShortcut === 'Enter' && !event?.isComposing)) {
             this.handleSendButtonClick();
             event?.preventDefault();
         }

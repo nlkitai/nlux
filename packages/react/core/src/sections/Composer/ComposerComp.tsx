@@ -1,18 +1,30 @@
+import {ComposerStatus} from '@shared/components/Composer/props';
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
 import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {className as compComposerClassName} from '@shared/components/Composer/create';
 import {
     statusClassName as compComposerStatusClassName,
 } from '@shared/components/Composer/utils/applyNewStatusClassName';
+import {CancelIconComp} from '../../components/CancelIcon/CancelIconComp';
 import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
+
+const submittingPromptStatuses: Array<ComposerStatus> = [
+    'submitting-prompt',
+    'submitting-edit',
+    'submitting-conversation-starter',
+    'submitting-external-message',
+];
 
 export const ComposerComp = (props: ComposerProps) => {
     const compClassNameFromStats = compComposerStatusClassName[props.status] || '';
     const className = `${compComposerClassName} ${compClassNameFromStats}`;
 
-    const disableTextarea = props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt';
-    const disableButton = !props.hasValidInput || props.status === 'submitting-conversation-starter' || props.status === 'submitting-prompt' || props.status === 'waiting';
-    const showSendIcon = props.status === 'typing';
+    const disableTextarea = submittingPromptStatuses.includes(props.status);
+    const disableButton = !props.hasValidInput || props.status === 'waiting' || submittingPromptStatuses.includes(props.status);
+    const showSendIcon = props.status === 'typing' || props.status === 'waiting';
+    const hideCancelButton = props.hideStopButton === true;
+    const showCancelButton = !hideCancelButton && (submittingPromptStatuses.includes(props.status) || props.status === 'waiting');
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -30,26 +42,9 @@ export const ComposerComp = (props: ComposerProps) => {
     }, [props.onSubmit]);
 
     const handleKeyDown = useMemo(() => (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (!props.submitShortcut || props.submitShortcut === 'Enter') {
-            const isEnter = e.key === 'Enter';
-            const aModifierKeyIsPressed = e.altKey || e.ctrlKey || e.metaKey || e.shiftKey;
-            if (isEnter && !aModifierKeyIsPressed) {
-                handleSubmit();
-                e.preventDefault();
-            }
-
-            return;
-        }
-
-        if (props.submitShortcut === 'CommandEnter') {
-            const isCommandEnter = e.key === 'Enter' && (
-                e.getModifierState('Control') || e.getModifierState('Meta')
-            );
-
-            if (isCommandEnter) {
-                handleSubmit();
-                e.preventDefault();
-            }
+        if (isSubmitShortcutKey(e, props.submitShortcut)) {
+            e.preventDefault();
+            handleSubmit();
         }
     }, [handleSubmit, props.submitShortcut]);
 
@@ -64,14 +59,24 @@ export const ComposerComp = (props: ComposerProps) => {
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
             />
-            <button
-                tabIndex={0}
-                disabled={disableButton}
-                onClick={() => props.onSubmit?.()}
-            >
-                {showSendIcon && <SendIconComp/>}
-                {!showSendIcon && props.Loader}
-            </button>
+            {!showCancelButton && (
+                <button
+                    tabIndex={0}
+                    disabled={disableButton}
+                    onClick={() => props.onSubmit()}
+                >
+                    {showSendIcon && <SendIconComp/>}
+                    {!showSendIcon && props.Loader}
+                </button>
+            )}
+            {showCancelButton && (
+                <button
+                    tabIndex={0}
+                    onClick={props.onCancel}
+                >
+                    <CancelIconComp/>
+                </button>
+            )}
         </div>
     );
 };

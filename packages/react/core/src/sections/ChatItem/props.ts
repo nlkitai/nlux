@@ -19,9 +19,13 @@ export type ChatItemProps<AiMsg> = {
     name: string;
     avatar?: string | ReactElement;
     markdownContainersController: MarkdownContainersController;
+    submitShortcutKey?: 'Enter' | 'CommandEnter';
+    onPromptResubmit?: (newPrompt: string) => void;
+    onMarkdownStreamRendered?: (chatItemId: string) => void;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {
     streamChunk: (chunk: AiMsg) => void;
     completeStream: () => void;
+    cancelStream: () => void;
 };

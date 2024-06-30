@@ -1,0 +1,36 @@
+---
+sidebar_label: 'UI Overrides'
+---
+
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import Link from '@docusaurus/Link';
+
+import app from './0014-ui-overrides/loader-overrides/app';
+import send from './0014-ui-overrides/loader-overrides/send';
+import personas from './0014-ui-overrides/loader-overrides/personas';
+
+# UI Overrides
+
+---
+
+In this example, we demonstrate how to override certain UI elements in the `NLUX` chat interface using JSX syntax.
+
+## Loader Component Overrides
+
+<br />
+<br />
+In this example, we override the default `NLUX` loader component with a custom loader component provided via JSX.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'personas.tsx': personas,
+        'send.ts': send,
+    }}
+    editorHeight={380}
+    simulatedPrompt={'Write a long poem about the beauty of the universe.'}
+/>
+
+---
+
+<Link className="learn-more-link button button--secondary" to="/reference/ui/ui-overrides">Reference Documentation for UI Overrides</Link>

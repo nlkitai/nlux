@@ -1,0 +1,19 @@
+import {CodeEditor} from '@site/src/components/CodeEditor/CodeEditor';
+import app from './0016-syntax-highlighter/app';
+import send from './0016-syntax-highlighter/send';
+
+# Syntax Highlighter
+
+---
+
+In this example, we will use the `@nlux/highlighter` package to add syntax highlighting to code generated
+by OpenAI and rendered in the conversational UI.
+
+<CodeEditor
+    files={{
+        'App.tsx': app,
+        'send.ts': send,
+    }}
+    editorHeight={550}
+    simulatedPrompt={'Write a \'Hello World\' program in TypeScript, Python, and 2 other languages of your choice'}
+/>

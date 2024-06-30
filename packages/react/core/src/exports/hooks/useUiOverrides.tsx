@@ -21,7 +21,17 @@ export const useUiOverrides = (props: PropsWithChildren): AiChatUIOverrides => {
         return loaderOverride || <LoaderComp/>;
     }, [possibleUiOverrides]);
 
+    const Greeting: ReactElement | undefined = useMemo(() => {
+        if (possibleUiOverrides.length === 0) {
+            return undefined;
+        }
+
+        return possibleUiOverrides
+            .find((child) => child.type === AiChatUI.Greeting);
+    }, [possibleUiOverrides]);
+
     return {
         Loader,
+        Greeting,
     };
 };

@@ -2,9 +2,9 @@ import {CompRenderer} from '../../../types/comp';
 import {CompLaunchPadActions, CompLaunchPadElements, CompLaunchPadEvents, CompLaunchPadProps} from './launchPad.types';
 import {AssistantPersona} from '../../../aiChat/options/personaOptions';
 import {ConversationStarter} from '../../../types/conversationStarter';
-import {createWelcomeMessageDom} from '@shared/components/WelcomeMessage/create';
-import {createDefaultWelcomeMessageDom} from '@shared/components/DefaultWelcomeMessage/create';
-import {updateWelcomeMessageDom} from '@shared/components/WelcomeMessage/update';
+import {createGreetingDom} from '@shared/components/Greeting/create';
+import {createDefaultGreetingDom} from '@shared/components/DefaultGreeting/create';
+import {updateGreetingDom} from '@shared/components/Greeting/update';
 
 export const renderLaunchPad: CompRenderer<
     CompLaunchPadProps,
@@ -17,39 +17,39 @@ export const renderLaunchPad: CompRenderer<
     const renderingContext: {
         assistantPersona: AssistantPersona | undefined;
         conversationStarters: ConversationStarter[] | undefined;
-        showWelcomeMessage: boolean;
+        showGreeting: boolean;
 
-        welcomeMessageElement?: HTMLElement,
+        greetingElement?: HTMLElement,
         conversationStartersContainer?: HTMLElement,
     } = {
         assistantPersona: props.assistantPersona,
         conversationStarters: props.conversationStarters,
-        showWelcomeMessage: props.showWelcomeMessage !== false,
+        showGreeting: props.showGreeting !== false,
     };
 
     //
-    // Create welcome message container
+    // Create greetings container
     // and append it to the root if personaOptions are provided
     //
-    let welcomeMessageDom: HTMLElement | undefined;
-    if (renderingContext.showWelcomeMessage) {
+    let greetingDom: HTMLElement | undefined;
+    if (renderingContext.showGreeting) {
         if (props.assistantPersona) {
             const assistant = props.assistantPersona;
-            welcomeMessageDom = createWelcomeMessageDom({
+            greetingDom = createGreetingDom({
                 name: assistant.name,
                 avatar: assistant.avatar,
                 message: assistant.tagline,
             });
         } else {
-            // No assistant persona provided, render default welcome message
+            // No assistant persona provided, render default greeting message
             // which is the NLUX logo
-            welcomeMessageDom = createDefaultWelcomeMessageDom();
+            greetingDom = createDefaultGreetingDom();
         }
     }
 
-    if (welcomeMessageDom) {
-        appendToRoot(welcomeMessageDom);
-        renderingContext.welcomeMessageElement = welcomeMessageDom;
+    if (greetingDom) {
+        appendToRoot(greetingDom);
+        renderingContext.greetingElement = greetingDom;
     }
 
     //
@@ -60,30 +60,30 @@ export const renderLaunchPad: CompRenderer<
     conversationStartersContainer.classList.add('nlux-conversationStarters-container');
     appendToRoot(conversationStartersContainer);
 
-    const resetWelcomeMessage = (showWelcomeMessage: boolean = true) => {
-        renderingContext.showWelcomeMessage = showWelcomeMessage;
+    const resetGreeting = (showGreeting: boolean = true) => {
+        renderingContext.showGreeting = showGreeting;
 
-        if (renderingContext.welcomeMessageElement) {
-            renderingContext.welcomeMessageElement.remove();
-            renderingContext.welcomeMessageElement = undefined;
+        if (renderingContext.greetingElement) {
+            renderingContext.greetingElement.remove();
+            renderingContext.greetingElement = undefined;
         }
 
-        if (!showWelcomeMessage) {
+        if (!showGreeting) {
             return;
         }
 
-        renderingContext.welcomeMessageElement = renderingContext.assistantPersona
-            ? createWelcomeMessageDom({
+        renderingContext.greetingElement = renderingContext.assistantPersona
+            ? createGreetingDom({
                 name: renderingContext.assistantPersona.name,
                 avatar: renderingContext.assistantPersona.avatar,
                 message: renderingContext.assistantPersona.tagline,
             })
-            : createDefaultWelcomeMessageDom();
+            : createDefaultGreetingDom();
 
-        if (renderingContext.welcomeMessageElement) {
+        if (renderingContext.greetingElement) {
             conversationStartersContainer.insertAdjacentElement(
                 'beforebegin',
-                renderingContext.welcomeMessageElement,
+                renderingContext.greetingElement,
             );
         }
     };
@@ -93,30 +93,30 @@ export const renderLaunchPad: CompRenderer<
             conversationStartersContainer,
         },
         actions: {
-            resetWelcomeMessage: (showWelcomeMessage: boolean = true) => {
+            resetGreeting: (showGreeting: boolean = true) => {
                 // This will reset the assistant greeting
                 // It can either result in displaying the NLUX logo or the assistant greeting
                 // depending on the assistant persona value provided
-                resetWelcomeMessage(showWelcomeMessage);
+                resetGreeting(showGreeting);
             },
             updateAssistantPersona: (newValue: AssistantPersona | undefined) => {
                 const previousAssistantPersona = renderingContext.assistantPersona;
                 renderingContext.assistantPersona = newValue;
 
                 // Nothing has changed, do nothing
-                if ((!previousAssistantPersona && !newValue) || !renderingContext.showWelcomeMessage) {
+                if ((!previousAssistantPersona && !newValue) || !renderingContext.showGreeting) {
                     return;
                 }
 
                 // This will remove the assistant greeting and display the NLUX logo
                 if (!newValue) {
-                    resetWelcomeMessage();
+                    resetGreeting();
                     return;
                 }
 
                 if (previousAssistantPersona) {
                     // This will update the assistant greeting
-                    updateWelcomeMessageDom(renderingContext.welcomeMessageElement!, {
+                    updateGreetingDom(renderingContext.greetingElement!, {
                         name: previousAssistantPersona?.name,
                         avatar: previousAssistantPersona?.avatar,
                         message: previousAssistantPersona?.tagline,
@@ -127,12 +127,12 @@ export const renderLaunchPad: CompRenderer<
                     });
                 } else {
                     // This will add the assistant greeting
-                    resetWelcomeMessage();
+                    resetGreeting();
                 }
             },
         },
         onDestroy: () => {
-            renderingContext.welcomeMessageElement?.remove();
+            renderingContext.greetingElement?.remove();
             conversationStartersContainer.remove();
         },
     };

@@ -9,6 +9,7 @@ export type StreamParser = (
 export type StandardStreamParserOutput = {
     next(value: string): void;
     complete(): void;
+    cancel(): void;
     error(error: Error): void;
 };
 

@@ -30,4 +30,11 @@ export interface ComposerOptions {
      * @default 'Enter'
      */
     submitShortcut?: 'Enter' | 'CommandEnter';
+
+    /**
+     * Indicates whether the stop button should be hidden.
+     *
+     * @default false
+     */
+    hideStopButton?: boolean;
 }

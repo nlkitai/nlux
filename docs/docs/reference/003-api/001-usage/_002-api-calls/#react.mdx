@@ -9,9 +9,9 @@ export default function App() {
   // Create an instance of the AiChatApi using the useAiChatApi hook
   const api = useAiChatApi();
 
-  // Call `api.sendMessage(...)` to send a message to the chatbot
+  // Call `api.composer.send(...)` to send a message to the chatbot
   const onClick = useCallback(() => {
-    api.sendMessage('Hello, World!');
+    api.composer.send('Hello, World!');
   }, [api]);
 
   // When creating the AiChat component, pass the `api` object as a prop
