@@ -65,6 +65,7 @@
     }
 
     button.nlux-comp-copyButton {
+        display: flex;
         position: absolute;
         top:5px;
         right:0;
