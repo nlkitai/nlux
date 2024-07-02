@@ -188,3 +188,9 @@ h1, h2, h3 {
     --ifm-tabs-padding-vertical: 0.5rem;
     --ifm-tabs-padding-horizontal: 1rem;
 }
+
+@media (max-width: 1250px) {
+    .navbar__link[href*="nlkit.com"] {
+        display: none;
+    }
+}
