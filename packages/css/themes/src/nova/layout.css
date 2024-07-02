@@ -50,6 +50,7 @@
 
     /** Chat item participant info */
     --nlux-ChatItem-ParticipantInfo--Gap: var(--nlux-nova--FlexGap);
+    --nlux-ChatItem-ParticipantInfo--Padding: 0px;
     --nlux-ChatItem-ParticipantName--FontSize: 16px;
     --nlux-ChatItem-ParticipantName--FontWeight: 700;
 

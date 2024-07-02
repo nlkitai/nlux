@@ -24,6 +24,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
+        padding:  var(--nlux-comp-chatItem-participantInfo--pdng) ;
         gap: var(--nlux-comp-chatItem-participantInfo--gap);
 
         > .nlux-comp-chatItem-participantName {
