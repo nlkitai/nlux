@@ -35,6 +35,8 @@
     --nlux-aiMsg--bgClr: var(--nlux-AiMessage--BackgroundColor);
     --nlux-aiMsg--brdClr: var(--nlux-AiMessage--BorderColor);
     --nlux-aiMsg--txtClr: var(--nlux-AiMessage--TextColor);
+    /** Prompt container */
+    --nlux-cmp-cnt--bgClr: var(--nlux-composer-container--BackgroundColor, transparent);
 
     /** Prompt input colors */
     --nlux-prmInp--bgClr: var(--nlux-PromptInput--BackgroundColor);

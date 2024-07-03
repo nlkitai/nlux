@@ -25,6 +25,9 @@
     --nlux-ChatRoom--BorderColor: transparent;
     --nlux-ChatRoom--TextColor: #ffffff;
 
+    /** Prompt container */
+    --nlux-composer-container--BackgroundColor: transparent;
+    
     /** Participant info in chat */
     --nlux-ChatItem-ParticipantName--Color: #E0E0E0;
 
