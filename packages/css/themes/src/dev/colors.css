@@ -41,6 +41,9 @@
     /** 👇 Divider between composer and messages */
     --nlux-ChatRoom-Divider--Color: red;
 
+    /** 👇 Prompt container */
+    --nlux-composer-container--BackgroundColor: transparent;
+    
     /** 👇 Prompt input colors */
     --nlux-PromptInput--BackgroundColor: honeydew;
     --nlux-PromptInput--BorderColor: mediumseagreen;
