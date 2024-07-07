@@ -23,12 +23,12 @@
     --nlux-ChatItem-ParticipantName--Color: #09090B;
 
     /* Human message in chat */
-    --nlux-HumanMessage--BackgroundColor: #18181B;
+    --nlux-HumanMessage--BackgroundColor: #F4F4F4;
     --nlux-HumanMessage--BorderColor: transparent;
-    --nlux-HumanMessage--TextColor: #ffffff;
+    --nlux-HumanMessage--TextColor: #000000;
 
     /** AI message in chat */
-    --nlux-AiMessage--BackgroundColor: #F4F4F5;
+    --nlux-AiMessage--BackgroundColor: #FFFFFF;
     --nlux-AiMessage--BorderColor: transparent;
     --nlux-AiMessage--TextColor: #09090B;
 
@@ -48,7 +48,7 @@
     --nlux-PromptInput-Disabled--TextColor: #71717A;
     --nlux-PromptInput-Disabled--BorderColor: transprent;
 
-    --nlux-PromptInput-Placeholder--TextColor: #71717a;
+    --nlux-PromptInput-Placeholder--TextColor: #b4b4b4;
     --nlux-PromptInput-Focus-Outline--Color: transparent;
 
     /** Submit button colors */
@@ -62,18 +62,18 @@
 
     --nlux-SubmitButton-Disabled--BackgroundColor: transparent;
     --nlux-SubmitButton-Disabled--BorderColor: transparent;
-    --nlux-SubmitButton-Disabled--TextColor: #71717a;
+    --nlux-SubmitButton-Disabled--TextColor: #b4b4b4;
 
     --nlux-SubmitButton-Focus-Outline--Color: transparent;
 
     /** Code block */
-    --nlux-CodeBlock--BackgroundColor: #ffefd5;
+    --nlux-CodeBlock--BackgroundColor: #0D0D0D;
     --nlux-CodeBlock--BorderColor: transparent;
-    --nlux-CodeBlock--TextColor: black;
-    --nlux-CodeBlock-Hover--BackgroundColor: #efe2cf;
+    --nlux-CodeBlock--TextColor: white;
+    --nlux-CodeBlock-Hover--BackgroundColor: #0D0D0D;
 
     /** Code block copy button */
-    --nlux-CodeBlock-CopyButton--BackgroundColor: #aeaea3;
+    --nlux-CodeBlock-CopyButton--BackgroundColor: #2F2F2F;
     --nlux-CodeBlock-CopyButton--BorderColor: #c5c5c3;
     --nlux-CodeBlock-CopyButton--TextColor: #ffffff;
 

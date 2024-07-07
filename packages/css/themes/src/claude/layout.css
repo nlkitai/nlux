@@ -46,7 +46,7 @@
     --nlux-ChatRoom-Loader--Width: 25px;
 
     /** Chat item */
-    --nlux-ChatItem--AlignItems: flex-end;
+    --nlux-ChatItem--AlignItems: flex-start;
 
     /** Chat item participant info */
     --nlux-ChatItem-ParticipantInfo--Gap: var(--nlux-nova--FlexGap);

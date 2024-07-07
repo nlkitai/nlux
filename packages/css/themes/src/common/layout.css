@@ -35,6 +35,7 @@
 
     /** Chat item participant info: Avatar + Name */
     --nlux-comp-chatItem-participantInfo--gap: var(--nlux-ChatItem-ParticipantInfo--Gap, 10px); /* Gap between avatar and name */
+    --nlux-comp-chatItem-participantInfo--pdng: var(--nlux-ChatItem-ParticipantInfo--Padding, 0);
 
     /** Chat item participant name */
     --nlux-prtInfo-prtNm--ftSz: var(--nlux-ChatItem-ParticipantName--FontSize);
