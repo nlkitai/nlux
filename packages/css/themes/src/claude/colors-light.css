@@ -1,4 +1,4 @@
-.nlux-AiChat-root.nlux-theme-nova[data-color-scheme='light'] {
+.nlux-AiChat-root.nlux-theme-claude[data-color-scheme='light'] {
     /** Exceptions box */
     --nlux-Exceptions--BackgroundColor: tomato;
     --nlux-Exceptions--BorderColor: darkred;

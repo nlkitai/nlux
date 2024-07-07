@@ -1,6 +1,5 @@
 import {ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
-import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
 
 /**
  * A conversation is series of exchanges of items between multiple participants.
