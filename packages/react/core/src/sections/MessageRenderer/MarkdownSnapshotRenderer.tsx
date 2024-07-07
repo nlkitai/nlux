@@ -1,5 +1,5 @@
 import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
-import {Component, PropsWithChildren, KeyboardEvent, FocusEvent, useEffect, useMemo, useRef, useState, useCallback} from 'react';
+import {Component, PropsWithChildren, KeyboardEvent, FocusEvent, useEffect, useMemo, useRef, useCallback} from 'react';
 import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
 import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
 import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';

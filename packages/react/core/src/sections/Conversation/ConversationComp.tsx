@@ -1,4 +1,4 @@
-import {createRef, forwardRef, ReactNode, Ref, useCallback, useEffect, useImperativeHandle, useMemo} from 'react';
+import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
