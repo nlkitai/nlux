@@ -1,5 +1,4 @@
 .nlux-comp-composer {
-    /* height: 100%; */
     display: flex;
     align-items: stretch;
     flex-direction: row;
@@ -9,8 +8,7 @@
 
     > textarea {
         height:100%;
-        max-height: 80px; /* Set the initial height */
-        /* overflow-y: hidden; */
+        max-height: 80px; /* Set maximum height the textarea can expand to */ 
         field-sizing: content;
 
         font-family: var(--nlux-prmInp--ftFm), sans-serif;
