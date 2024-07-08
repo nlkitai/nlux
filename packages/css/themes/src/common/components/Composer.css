@@ -8,7 +8,7 @@
 
     > textarea {
         height:100%;
-        max-height: 80px; /* Set maximum height the textarea can expand to */ 
+        max-height: var(--nlux-prmInp-mxhg); /* Set maximum height the textarea can expand to */ 
         field-sizing: content;
 
         font-family: var(--nlux-prmInp--ftFm), sans-serif;

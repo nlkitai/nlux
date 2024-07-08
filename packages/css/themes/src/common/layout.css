@@ -102,7 +102,8 @@
     --nlux-prmInp--brdrWd: var(--nlux-PromptInput--BorderWidth);
     --nlux-prmInp--brdrRd: var(--nlux-PromptInput--BorderRadius);
     --nlux-prmInp-fcs-otln--wd: var(--nlux-PromptInput-Focus-Outline--Width, 6px);
-
+    --nlux-prmInp-mxhg: var(--nlux-PromptInput-Max-Height, 80px);
+    --nlux-prmInp-hg: var(--nlux-PromptInput-Height, 60px);
     /** Conversation starters */
     --nlux-cvStrt--pdng: var(--nlux-ConversationStarter--Padding, 0 10px);
     --nlux-cvStrt--brdrRd: var(--nlux-ConversationStarter--BorderRadius);
