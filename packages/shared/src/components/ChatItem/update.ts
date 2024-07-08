@@ -56,10 +56,12 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
                 direction: propsBefore.direction,
                 status: propsBefore.status,
                 message: propsBefore.message,
+                htmlSanitizer: propsBefore.htmlSanitizer,
             }, {
                 direction: propsAfter.direction,
                 status: propsAfter.status,
                 message: propsAfter.message,
+                htmlSanitizer: propsBefore.htmlSanitizer,
             });
         }
     }

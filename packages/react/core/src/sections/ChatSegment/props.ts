@@ -12,6 +12,7 @@ export type ChatSegmentProps<AiMsg> = {
     personaOptions?: PersonaOptions;
     messageOptions?: MessageOptions<AiMsg>;
     layout: ConversationLayout;
+    isInitialSegment: boolean;
 
     containerRef?: RefObject<HTMLDivElement>;
     markdownContainersController: MarkdownContainersController;

@@ -1,4 +1,19 @@
-import {forwardRef, ReactElement, ReactNode, Ref, useCallback, useImperativeHandle, useMemo, useRef} from 'react';
+import {className as compMessageClassName} from '@shared/components/Message/create';
+import {
+    directionClassName as compMessageDirectionClassName
+} from '@shared/components/Message/utils/applyNewDirectionClassName';
+import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
+import {
+    forwardRef,
+    ReactElement,
+    ReactNode,
+    Ref,
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+} from 'react';
 import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
 import {
     directionClassName as compChatItemDirectionClassName,
@@ -6,7 +21,6 @@ import {
 import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
 import {StreamContainerImperativeProps} from '../StreamContainer/props';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
-import {MessageComp} from '../../components/Message/MessageComp';
 import {useAssistantMessageRenderer} from './hooks/useAssistantMessageRenderer';
 import {useParticipantInfoRenderer} from './hooks/userParticipantInfoRenderer';
 import {ChatItemImperativeProps, ChatItemProps} from './props';
@@ -28,40 +42,34 @@ export const ChatItemComp: <AiMsg>(
         cancelStream: () => streamContainer?.current?.cancelStream(),
     }), []);
 
-    const markdownStreamRendered = useCallback(
-        () => {
-            props.onMarkdownStreamRendered?.(props.uid);
-        },
-        [props.uid],
-    );
-
-    const AiMessage = useAssistantMessageRenderer(props);
-    const UserMessage = useUserMessageRenderer(props);
-    const ParticipantInfo = useParticipantInfoRenderer(props);
-
-    const ForwardRefStreamContainerComp = useMemo(
-        () => forwardRef(StreamContainerComp<AiMsg>),
-        [],
-    );
-
     const isServerComponent = props.contentType === 'server-component';
     const isAssistantMessage = props.direction === 'received';
     const isUserMessage = props.direction === 'sent';
     const isStreamed = props.dataTransferMode === 'stream';
+    const isPartOfInitialSegment = props.isPartOfInitialSegment;
 
-    const compDirectionClassName = props.direction
-        ? compChatItemDirectionClassName[props.direction]
-        : compChatItemDirectionClassName['received'];
+    const markdownStreamRenderedCallback = useCallback(() => props.onMarkdownStreamRendered?.(props.uid), [props.uid]);
+    useEffect(() => {
+        if (!isStreamed && !isServerComponent && !isPartOfInitialSegment) {
+            props.onMarkdownStreamRendered?.(props.uid);
+        }
+    }, []);
 
-    const compConStyleClassName = props.layout === 'bubbles'
-        ? conversationLayoutClassName['bubbles']
-        : conversationLayoutClassName['list'];
+    const AssistantBatchedMessage = useAssistantMessageRenderer(props);
+    const UserMessage = useUserMessageRenderer(props);
+    const ForwardRefStreamContainerComp = useMemo( () => forwardRef(StreamContainerComp<AiMsg>), []);
+    const ParticipantInfo = useParticipantInfoRenderer(props);
 
-    const className = `${compChatItemClassName} ${compDirectionClassName} ` +
-        `${compConStyleClassName} ${compConStyleClassName}`;
+    const directionClassNameForChatItem = props.direction ? compChatItemDirectionClassName[props.direction] : compChatItemDirectionClassName['received'];
+    const convStyleClassName = props.layout === 'bubbles' ? conversationLayoutClassName['bubbles'] : conversationLayoutClassName['list'];
+    const containerClassName = `${compChatItemClassName} ${directionClassNameForChatItem} ${convStyleClassName}`;
+
+    const messageStatusClassName = props.status ? compMessageStatusClassName[props.status] : compMessageStatusClassName['rendered'];
+    const messageDirectionClassName = props.direction ? compMessageDirectionClassName[props.direction] : compMessageDirectionClassName['received'];
+    const messageClassName = `${compMessageClassName} ${messageStatusClassName} ${messageDirectionClassName}`;
 
     return (
-        <div className={className}>
+        <div className={containerClassName}>
             <ParticipantInfo />
             {isAssistantMessage && isStreamed && !isServerComponent && (
                 <ForwardRefStreamContainerComp
@@ -80,36 +88,24 @@ export const ChatItemComp: <AiMsg>(
                         skipStreamingAnimation: props.messageOptions?.skipStreamingAnimation,
                         streamingAnimationSpeed: props.messageOptions?.streamingAnimationSpeed,
                         waitTimeBeforeStreamCompletion: props.messageOptions?.waitTimeBeforeStreamCompletion,
-                        onStreamComplete: markdownStreamRendered,
+                        onStreamComplete: markdownStreamRenderedCallback,
                     }}
                 />
             )}
             {isAssistantMessage && isStreamed && isServerComponent && (
-                <MessageComp
-                    uid={props.uid}
-                    message={props.fetchedContent as ReactNode}
-                    status={props.status}
-                    contentType={'server-component'}
-                    direction={props.direction}
-                />
+                <div className={messageClassName}>
+                    {props.fetchedContent as ReactNode}
+                </div>
             )}
             {isAssistantMessage && !isStreamed && (
-                <MessageComp
-                    uid={props.uid}
-                    message={AiMessage}
-                    status={props.status}
-                    contentType={'text'}
-                    direction={props.direction}
-                />
+                <div className={messageClassName}>
+                    <AssistantBatchedMessage />
+                </div>
             )}
             {isUserMessage && (
-                <MessageComp
-                    uid={props.uid}
-                    message={UserMessage}
-                    status={props.status}
-                    contentType={'text'}
-                    direction={props.direction}
-                />
+                <div className={messageClassName}>
+                    <UserMessage />
+                </div>
             )}
         </div>
     );

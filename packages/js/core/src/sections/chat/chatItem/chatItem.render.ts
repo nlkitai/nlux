@@ -17,6 +17,7 @@ export const renderChatItem: CompRenderer<
 
     const root = createChatItemDom({
         ...props.domProps,
+        htmlSanitizer: props.htmlSanitizer,
         message: undefined,
     });
 

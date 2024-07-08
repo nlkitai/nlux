@@ -390,7 +390,7 @@ function App() {
 const responseRenderer: ResponseRenderer<string> = memo((props) => {
     const {dataTransferMode, content} = props;
 
-    console.log('Response Renderer', content);
+    useEffect(() => console.log('Response Renderer', props));
 
     return (
         <>

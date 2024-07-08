@@ -6,22 +6,26 @@ import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContai
 
 export type ChatItemProps<AiMsg> = {
     uid: string;
-    direction: MessageDirection;
-    layout: ConversationLayout;
-    dataTransferMode: DataTransferMode;
     status: 'streaming' | 'complete';
+    direction: MessageDirection;
     contentType: 'text' | 'server-component';
+    dataTransferMode: DataTransferMode;
+
+    markdownContainersController: MarkdownContainersController;
+    onMarkdownStreamRendered?: (chatItemId: string) => void;
+
     fetchedContent?: AiMsg | ReactNode;
     fetchedServerResponse?: unknown;
     streamedContent?: AiMsg[];
     streamedServerResponse?: Array<unknown>;
+
     messageOptions?: MessageOptions<AiMsg>;
+    layout: ConversationLayout;
+    isPartOfInitialSegment: boolean;
     name: string;
     avatar?: string | ReactElement;
-    markdownContainersController: MarkdownContainersController;
     submitShortcutKey?: 'Enter' | 'CommandEnter';
     onPromptResubmit?: (newPrompt: string) => void;
-    onMarkdownStreamRendered?: (chatItemId: string) => void;
 };
 
 export type ChatItemImperativeProps<AiMsg> = {

@@ -1,12 +1,28 @@
-import {MessageComp} from '@nlux-dev/react/src/components/Message/MessageComp';
 import '@nlux-dev/themes/src/luna/main.css';
 import {useState} from 'react';
 import {MessageDirection, MessageStatus} from '@shared/components/Message/props';
+import {className as compMessageClassName} from '../../../../../../packages/shared/src/components/Message/create';
+import {
+    directionClassName as compMessageDirectionClassName
+} from '../../../../../../packages/shared/src/components/Message/utils/applyNewDirectionClassName';
+import {
+    statusClassName as compMessageStatusClassName
+} from '../../../../../../packages/shared/src/components/Message/utils/applyNewStatusClassName';
 
 export const MessageReactExpo = () => {
     const [direction, setDirection] = useState<MessageDirection>('received');
     const [status, setStatus] = useState<MessageStatus>('complete');
     const [message, setMessage] = useState<string>('Hello, World!');
+
+    const compStatusClassName = status
+        ? compMessageStatusClassName[status]
+        : compMessageStatusClassName['rendered'];
+
+    const compDirectionClassName = direction
+        ? compMessageDirectionClassName[direction]
+        : compMessageDirectionClassName['received'];
+
+    const className = `${compMessageClassName} ${compStatusClassName} ${compDirectionClassName}`;
 
     return (
         <div style={{border: '2px solid #B0B0B0', padding: 20, margin: 20, borderRadius: 10}}>
@@ -37,13 +53,9 @@ export const MessageReactExpo = () => {
                     />
                 </div>
                 <div className="content">
-                    <MessageComp
-                        uid={'1'}
-                        direction={direction}
-                        status={status}
-                        contentType={'text'}
-                        message={message}
-                    />
+                    <div className={className}>
+                        {message}
+                    </div>
                 </div>
             </div>
         </div>
