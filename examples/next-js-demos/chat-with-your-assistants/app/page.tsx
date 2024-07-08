@@ -162,7 +162,7 @@ function App() {
     <div className="grid min-h-screen w-full md:grid-cols-[300px_1fr]">
       <div className="border-r bg-muted/40">
         <div className="flex h-full max-h-screen flex-col">
-          <div className="flex h-16 gap-4 bg-muted justify-between  items-center border-b px-4 lg:h-[60px] lg:px-6">
+          <div className="flex h-16 bg-muted items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Sheet>
               <SheetTrigger>
                 <SimpleAvatar avatar={userImgUrl} name={userName || ""} />
@@ -328,15 +328,32 @@ function App() {
               Chat with your assistants
             </h3>
             <p className="text-lg font-normal text-muted-foreground">
-              This demo uses{" "}
+              This demo uses{' '}
               <a
-                href="https://github.com/nlkitai/nlux"
-                target="_blank"
-                className="underline text-foreground"
+                  href="https://docs.nlkit.com/nlux"
+                  target="_blank"
+                  className="underline text-foreground"
               >
                 <span>NLUX</span>
               </a>
-              , a conversational AI library
+              , the conversational AI library.
+              <br/>
+              <br/>
+              Source code available on the{' '}
+              <a
+                  href="https://github.com/nlkitai/nlux/tree/latest/examples/next-js-demos/chat-with-your-assistants"
+                  target="_blank"
+                  className="underline text-foreground"
+              >
+                <span className="font-bold">NLUX GitHub repo</span>
+              </a>.
+              <br/>
+              Contributor{' '}
+              <a
+                  href="https://github.com/FranciscoMoretti"
+                  target="_blank"
+                  className="underline text-foreground"
+              >github.com/FranciscoMoretti</a>.
             </p>
           </div>
         )}

@@ -46,7 +46,7 @@ const getCategories = (colorScheme) => ([
                     maxWidth: '100%',
                     height: 520,
                 }}
-                src={`https://nlux-shadcn-chatgpt-ui.vercel.app/?colorScheme=${colorScheme}`}
+                src={`https://chat-with-your-assistants.vercel.app/?colorScheme=${colorScheme}`}
             ></iframe>
         )
     },
