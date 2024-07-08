@@ -1,10 +1,11 @@
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {FunctionComponent, MutableRefObject, ReactNode, RefObject, useEffect} from 'react';
 import {ChatItemImperativeProps} from '../ChatItem/props';
 
 export const useItemsRefs = <AiMsg>(
     chatSegmentItems: ChatSegmentItem<AiMsg>[],
-    serverComponentsRef: MutableRefObject<Map<string, ReactNode>>,
+    serverComponentsRef: MutableRefObject<Map<string, ReactNode | StreamedServerComponent>>,
     serverComponentsFunctionsRef: MutableRefObject<Map<string, FunctionComponent>>,
     chatItemsRef: Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>,
 ) => {

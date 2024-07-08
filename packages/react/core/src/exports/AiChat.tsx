@@ -1,6 +1,4 @@
 'use client';
-import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
-import {uid} from '@shared/utils/uid';
 import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
@@ -107,7 +105,7 @@ export const AiChat: <AiMsg>(
         initialSegment, setInitialSegment, newSegments, setChatSegments, setPrompt, setComposerStatus,
     );
 
-    const handleMarkdownStreamRendered = useCallback((segmentId: string, messageId: string) => {
+    const handleMarkdownStreamRendered = useCallback((_segmentId: string, messageId: string) => {
         if (props.events?.messageRendered) {
             props.events.messageRendered({ uid: messageId });
         }

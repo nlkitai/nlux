@@ -1,4 +1,4 @@
-import {createRef, forwardRef, ReactNode, Ref, useCallback, useEffect, useImperativeHandle, useMemo} from 'react';
+import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
@@ -50,6 +50,8 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
         <div className="nlux-chatSegments-container">
             {segments.map((segment, index) => {
                 const isLastSegment = index === segments.length - 1;
+                const isInitialSegment = segment.uid === 'initial';
+
                 let ref = segmentsController.getRef(segment.uid);
                 if (!ref) {
                     ref = createRef();
@@ -63,6 +65,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
                         containerRef={isLastSegment ? lastSegmentContainerRef : undefined}
                         markdownContainersController={props.markdownContainersController}
                         chatSegment={segment}
+                        isInitialSegment={isInitialSegment}
                         layout={conversationLayout}
                         personaOptions={personaOptions}
                         messageOptions={props.messageOptions}

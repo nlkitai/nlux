@@ -16,6 +16,8 @@ export const updateContentOnMessageChange = (
 
     emptyInnerHtml(element);
     element.append(
-        createMessageContent(propsAfter.message ?? '', propsAfter.format),
+        createMessageContent(propsAfter.message ?? '', propsAfter.format, {
+            htmlSanitizer: propsAfter.htmlSanitizer,
+        }),
     );
 };

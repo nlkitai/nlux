@@ -21,6 +21,7 @@ export type ServerComponentRenderedEventDetails = {
 
 export type MessageRenderedEventDetails<AiMsg = string> = {
     uid: string;
+    message?: AiMsg;
 };
 
 export type MessageReceivedEventDetails<AiMsg = string> = {
@@ -94,6 +95,9 @@ export type MessageReceivedCallback<AiMsg = string> = (event: MessageReceivedEve
 
 /**
  * The callback for when a message is fully rendered on the screen.
+ * This event is only relevant when the user is using the NLUX markdown renderer.
+ * If the user is using a custom renderer and directly accessing the props.content property to render the message,
+ * this event will not be relevant.
  *
  * @param event The event details such as the uid of the message.
  */

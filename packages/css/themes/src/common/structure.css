@@ -44,6 +44,8 @@
             flex-direction: row;
             align-items: stretch;
 
+            background-color: var(--nlux-cmp-cnt--bgClr);
+            
             > .nlux-comp-composer {
                 width: 100%;
             }

@@ -24,6 +24,8 @@ import './App.css';
 import '@nlux-dev/highlighter/src/themes/stackoverflow/dark.css';
 // import '@nlux-dev/themes/src/luna/main.css';
 import '@nlux-dev/themes/src/nova/main.css';
+import '@nlux-dev/themes/src/claude/main.css';
+import '@nlux-dev/themes/src/openai/main.css';
 import {Markdown} from '@nlux-dev/react/src/exports/primitives/Markdown';
 // import '@nlux-dev/themes/src/unstyled/main.css';
 // import '@nlux-dev/themes/src/dev/main.css';
@@ -314,6 +316,8 @@ function App() {
                     <select value={theme} onChange={onThemeChange}>
                         <option value="nova">Nova</option>
                         <option value="luna">Luna</option>
+                        <option value="claude">Claude</option>
+                        <option value="openai">OpenAI</option>
                         <option value="unstyled">Unstyled</option>
                         <option value="dev">Dev</option>
                     </select>
@@ -332,9 +336,9 @@ function App() {
             <AiChat
                 // adapter={nlBridgeAdapter}
                 // adapter={openAiAdapter}
-                // adapter={langChainAdapter}
+                adapter={langChainAdapter}
                 api={api}
-                adapter={customSlowAdapter}
+                // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
                 initialConversation={initialConversation}
@@ -386,7 +390,7 @@ function App() {
 const responseRenderer: ResponseRenderer<string> = memo((props) => {
     const {dataTransferMode, content} = props;
 
-    console.log('Response Renderer', content);
+    useEffect(() => console.log('Response Renderer', props));
 
     return (
         <>
