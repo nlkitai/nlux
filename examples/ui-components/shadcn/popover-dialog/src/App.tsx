@@ -218,6 +218,24 @@ export function App() {
               <DialogContent>{chatComponent}</DialogContent>
             </Dialog>
           )}
+          <div>
+            <br/>
+            Demo source code available on{' '}
+            <a
+                href="https://github.com/nlkitai/nlux/tree/latest/examples/ui-components/shadcn/popover-dialog"
+                target="_blank"
+                className="underline text-foreground"
+            >
+              <span className="font-bold">NLUX GitHub repo</span>
+            </a>.
+            <br/>
+            Contributor:{' '}
+            <a
+                href="https://github.com/somebodyawesome-dev"
+                target="_blank"
+                className="underline text-foreground"
+            >github.com/somebodyawesome-dev</a>.
+          </div>
         </main>
       </div>
     </div>

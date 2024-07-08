@@ -339,7 +339,7 @@ function App() {
               , the conversational AI library.
               <br/>
               <br/>
-              Source code available on the{' '}
+              Source code available on:{' '}
               <a
                   href="https://github.com/nlkitai/nlux/tree/latest/examples/next-js-demos/chat-with-your-assistants"
                   target="_blank"
@@ -348,7 +348,7 @@ function App() {
                 <span className="font-bold">NLUX GitHub repo</span>
               </a>.
               <br/>
-              Contributor{' '}
+              Contributor:{' '}
               <a
                   href="https://github.com/FranciscoMoretti"
                   target="_blank"
