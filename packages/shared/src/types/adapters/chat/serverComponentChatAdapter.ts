@@ -1,10 +1,11 @@
+import {FunctionComponent} from 'react';
 import {ChatAdapterExtras} from './chatAdapterExtras';
 
 /**
  * The result of an import() call that loads a React Server Component (RSC) from the server.
  */
 export type StreamedServerComponent = {
-    default: Function;
+    default: FunctionComponent;
 };
 
 /**

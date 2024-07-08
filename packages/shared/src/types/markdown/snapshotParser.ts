@@ -11,11 +11,5 @@ export type SnapshotParserOptions = {
 
 export type SnapshotParser = (
     snapshot: string,
-    options?: {
-        syntaxHighlighter?: HighlighterExtension,
-        htmlSanitizer?: SanitizerExtension;
-        markdownLinkTarget?: 'blank' | 'self',
-        showCodeBlockCopyButton?: boolean;
-        skipStreamingAnimation?: boolean;
-    },
+    options?: SnapshotParserOptions,
 ) => string;
