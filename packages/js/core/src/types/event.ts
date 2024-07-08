@@ -19,8 +19,9 @@ export type ServerComponentRenderedEventDetails = {
     uid: string;
 };
 
-export type MessageRenderedEventDetails = {
+export type MessageRenderedEventDetails<AiMsg = string> = {
     uid: string;
+    message?: AiMsg;
 };
 
 export type MessageReceivedEventDetails<AiMsg = string> = {
