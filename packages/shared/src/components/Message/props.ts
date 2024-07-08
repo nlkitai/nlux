@@ -14,4 +14,5 @@ export type MessageProps = {
     status: MessageStatus;
     message?: string;
     format?: 'text' | 'markdown'; // Default is 'text'
+    htmlSanitizer?: (html: string) => string;
 };

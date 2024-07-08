@@ -23,7 +23,9 @@ export const createMessageDom: DomCreator<MessageProps> = (props): HTMLElement =
     //
 
     if (props.message) {
-        element.append(createMessageContent(props.message, props.format));
+        element.append(createMessageContent(props.message, props.format, {
+            htmlSanitizer: props.htmlSanitizer,
+        }));
     }
 
     return element;

@@ -22,6 +22,7 @@ export const createChatItemDom: DomCreator<ChatItemProps> = (
         direction: props.direction,
         status: props.status,
         message: props.message,
+        htmlSanitizer: props.htmlSanitizer,
     };
 
     // Create an avatar if avatar is provided

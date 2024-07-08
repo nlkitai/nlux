@@ -10,4 +10,5 @@ export type ChatItemProps = {
 
     message?: string;
     avatar?: string | HTMLElement;
+    htmlSanitizer?: (html: string) => string;
 };
