@@ -84,6 +84,8 @@
     --nlux-PromptInput--BorderWidth: 5px;
     --nlux-PromptInput--BorderRadius: 8px;
     --nlux-PromptInput-Focus-Outline--Width: 5px;
+    --nlux-PromptInput-Max-Height: 80px;
+    --nlux-PromptInput-Height: 60px;
 
     /** 👇 Submit button */
     --nlux-SubmitButton--Width: 65px;

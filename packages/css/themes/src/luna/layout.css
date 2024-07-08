@@ -114,7 +114,9 @@
     --nlux-PromptInput--BorderWidth: var(--nlux-luna--BorderWidth);
     --nlux-PromptInput--BorderRadius: var(--nlux-luna--BorderRadius);
     --nlux-PromptInput-Focus-Outline--Width: var(--nlux-luna--BorderWidth);
-
+    --nlux-PromptInput-Max-Height: 80px;
+    --nlux-PromptInput-Height: 60px;
+    
     /** Conversation starters */
     --nlux-ConversationStarter--Padding: 0 10px;
     --nlux-ConversationStarter--BorderRadius: var(--nlux-luna--BorderRadius);
