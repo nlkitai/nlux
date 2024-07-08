@@ -164,6 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
             },
         });
 
+    aiChat.on('messageReceived', (event) => console.log('messageReceived', event));
+    aiChat.on('messageRendered', (event) => console.log('messageRendered', event));
+
     aiChat.mount(parent);
     (window as any).aiChat = aiChat;
 

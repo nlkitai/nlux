@@ -41,29 +41,34 @@ export const useAssistantMessageRenderer = function<AiMsg>(
                 const Comp = (messageOptions.responseRenderer as FC<ResponseRendererProps<AiMsg>>);
                 return <Comp {...props} />;
             };
-        } else {
-            //
-            // Batching data and displaying it in a custom renderer.
-            //
-            const isServerComponent = isValidElement(fetchedContent);
-            const content: AiMsg[] | StreamedServerComponent = !fetchedContent
-                ? []
-                : (isServerComponent ? fetchedContent : [fetchedContent]);
-
-            const props: ResponseRendererProps<AiMsg> = {
-                uid,
-                status: 'complete',
-                dataTransferMode,
-                contentType,
-                content,
-                serverResponse: fetchedServerResponse ? [fetchedServerResponse] : [],
-            };
-
-            return () => {
-                const Comp = (messageOptions.responseRenderer as FC<ResponseRendererProps<AiMsg>>);
-                return <Comp {...props} />;
-            };
         }
+
+        //
+        // Batching data and displaying it in a custom renderer.
+        //
+        const isServerComponent = isValidElement(fetchedContent);
+        const serverComponent = isServerComponent ?
+            (fetchedContent as unknown as StreamedServerComponent)
+            : undefined;
+
+        const content: AiMsg[] = !fetchedContent
+            ? []
+            : (isServerComponent ? [] : [ (fetchedContent as AiMsg) ]);
+
+        const props: ResponseRendererProps<AiMsg> = {
+            uid,
+            status: 'complete',
+            dataTransferMode,
+            contentType,
+            content,
+            serverComponent,
+            serverResponse: fetchedServerResponse ? [fetchedServerResponse] : [],
+        };
+
+        return () => {
+            const Comp = (messageOptions.responseRenderer as FC<ResponseRendererProps<AiMsg>>);
+            return <Comp {...props} />;
+        };
     }
 
     if (direction === 'sent') {
