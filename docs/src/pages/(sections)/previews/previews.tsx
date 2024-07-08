@@ -50,6 +50,19 @@ const getCategories = (colorScheme) => ([
             ></iframe>
         )
     },
+    {
+        name: 'Chat pop-up with shadcn/ui',
+        content: (
+            <iframe
+                style={{
+                    width: 840,
+                    maxWidth: '100%',
+                    height: 520,
+                }}
+                src={`https://nlux-shadcn-ui-components.vercel.app/?colorScheme=${colorScheme}`}
+            ></iframe>
+        )
+    },
 ]);
 
 export default function Previews() {
