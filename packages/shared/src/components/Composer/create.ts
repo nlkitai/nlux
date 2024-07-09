@@ -11,9 +11,9 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     element.classList.add(className);
 
     const textarea = document.createElement('textarea');
+
     textarea.placeholder = props.placeholder ?? '';
     textarea.value = props.message ?? '';
-
     if (props.autoFocus) {
         textarea.autofocus = true;
     }

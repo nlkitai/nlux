@@ -17,14 +17,16 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
     ) {
         return;
     }
-
+    
+    const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
     if (propsBefore.status !== propsAfter.status) {
         applyNewStatusClassName(element, propsAfter.status);
         updateContentOnStatusChange(element, propsBefore, propsAfter);
+        //try to update textarea height after recieving new value or after sumbit 
+        adjustHeight(textArea);
         return;
     }
 
-    const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
 
     if (propsBefore.placeholder !== propsAfter.placeholder) {
         textArea.placeholder = propsAfter.placeholder ?? '';
@@ -36,6 +38,8 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
 
     if (propsBefore.message !== propsAfter.message) {
         textArea.value = propsAfter.message ?? '';
+        //try to update textarea height after recieving new value or after sumbit 
+        adjustHeight(textArea);
     }
 
     if (propsBefore.status === 'typing') {
@@ -49,4 +53,9 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
             button.disabled = shouldDisableSubmit;
         }
     }
+};
+
+const adjustHeight = (target:HTMLElement) => {
+    target.style.height = 'auto'; // Reset height
+    target.style.height = `${target.scrollHeight}px`; // Set new height based on content
 };
