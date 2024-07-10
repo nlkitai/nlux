@@ -1,0 +1,31 @@
+{
+  "name": "@nlux-dev/bedrock",
+  "version": "{versions.nlux}",
+  "license": "SEE LICENSE IN ROOT LICENSE FILE",
+  "scripts": {
+    "build": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}'",
+    "watch": "rollup --config rollup.config.ts --configPlugin 'typescript={moduleResolution: \"bundler\"}' --watch"
+  },
+  "dependencies": {
+    "@nlux/core": "{versions.nlux}",
+    "@aws-sdk/client-bedrock-runtime": "^{versions.dependencies.bedrock}"
+  },
+  "peerDependencies": {},
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25",
+    "@rollup/plugin-node-resolve": "^15",
+    "@rollup/plugin-replace": "^5",
+    "@rollup/plugin-strip": "^3",
+    "@rollup/plugin-terser": "^0",
+    "@rollup/plugin-typescript": "^11",
+    "@rollup/plugin-alias": "^5",
+    "rollup": "^4",
+    "rollup-plugin-dts": "^6",
+    "rollup-plugin-esbuild": "^6",
+    "tslib": "^2"
+  },
+  "main": "index.js",
+  "types": "bedrock.d.ts",
+  "module": "esm/bedrock.js",
+  "browser": "umd/bedrock.js"
+}
