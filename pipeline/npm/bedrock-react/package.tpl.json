@@ -1,0 +1,20 @@
+{
+  "name": "@nlux/bedrock-react",
+  "version": "{versions.nlux}",
+  "license": "MPL-2.0",
+  "description": "The Bedrock adapters for nlux React, the React JS library for building conversational AI interfaces.",
+  "repository": {
+    "directory": "packages/react/bedrock"
+  },
+  "dependencies": {
+    "@nlux/bedrock": "{versions.nlux}"
+  },
+  "peerDependencies": {
+    "@nlux/react": "{versions.nlux}",
+    "react": "^{versions.peerDependencies.react}"
+  },
+  "main": "index.js",
+  "types": "bedrock-react.d.ts",
+  "module": "esm/bedrock-react.js",
+  "browser": "umd/bedrock-react.js"
+}
