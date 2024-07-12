@@ -2,7 +2,7 @@ import {ChatAdapter, StreamingAdapterObserver} from '@nlux/react';
 
 // A endpoint that connects to OpenAI and returns result
 // as a stream of Server-Sent events
-const demoProxyServerUrl = 'https://demo.api.nlux.ai/openai/chat/stream';
+const demoProxyServerUrl = 'https://gptalks.api.nlux.dev/openai/chat/stream';
 
 export const streamAdapter: ChatAdapter<string> = {
     streamText: async (prompt: string, observer: StreamingAdapterObserver) => {
