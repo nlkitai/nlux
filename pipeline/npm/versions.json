@@ -8,6 +8,7 @@
   "dependencies": {
     "openai": "4",
     "hfInference": "2",
-    "highlightJs": "11"
+    "highlightJs": "11",
+    "bedrock": "3.614.0"
   }
 }
