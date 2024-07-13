@@ -19,7 +19,7 @@ export const useChatAdapter = <AiMsg = string>(
     getAdapterBuilder<AiMsg>(options).create()
   );
 
-  const { dataTransferMode, model, maxNewTokens } = options || {};
+  const { dataTransferMode, model } = options || {};
 
   useEffect(() => {
     if (!isInitialized) {
@@ -35,7 +35,7 @@ export const useChatAdapter = <AiMsg = string>(
         "with the new parameter. or user adapter methods to change the options and behaviour of " +
         "the adapter.",
     });
-  }, [dataTransferMode, model, maxNewTokens]);
+  }, [dataTransferMode, model]);
 
   return adapter;
 };

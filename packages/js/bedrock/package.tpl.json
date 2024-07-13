@@ -22,6 +22,7 @@
     "rollup": "^4",
     "rollup-plugin-dts": "^6",
     "rollup-plugin-esbuild": "^6",
+    "@rollup/plugin-json": "^6.1.0",
     "tslib": "^2"
   },
   "main": "index.js",

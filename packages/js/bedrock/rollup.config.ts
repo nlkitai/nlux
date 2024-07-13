@@ -10,6 +10,7 @@ import esbuild from "rollup-plugin-esbuild";
 import { generateDts } from "../../../pipeline/utils/rollup/generateDts";
 import { generateOutputConfig } from "../../../pipeline/utils/rollup/generateOutputConfig";
 import { resolve } from "path";
+import json from "@rollup/plugin-json";
 
 const isProduction = process.env.NODE_ENV === "production";
 const packageName = "@nlux/bedrock";
@@ -32,6 +33,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
         ],
       }),
       commonjs(),
+      json(),
       esbuild(),
       isProduction &&
         strip({
@@ -50,7 +52,9 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
       isProduction && terser(),
     ],
     external: ["@nlux/core"],
-    output: generateOutputConfig(packageName, outputFile, isProduction),
+    output: generateOutputConfig(packageName, outputFile, isProduction).map(
+      (val) => ({ ...val, inlineDynamicImports: true })
+    ),
   },
   generateDts(outputFile, isProduction),
 ];
