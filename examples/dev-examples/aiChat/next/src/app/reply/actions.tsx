@@ -9,7 +9,7 @@ type AiReactComponentReplyProps = {
 
 export const reply = async function AiReactComponentReply({prompt}: AiReactComponentReplyProps = {}) {
     // Fetch a response
-    const response = await fetch('https://demo.api.nlux.ai/openai/chat/fetch', {
+    const response = await fetch('https://gptalks.api.nlux.dev/openai/chat/fetch', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

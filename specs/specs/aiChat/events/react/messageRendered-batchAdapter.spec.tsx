@@ -17,9 +17,7 @@ describe('<AiChat /> + batch adapter + events + messageRendered', () => {
             .create();
     });
 
-    afterEach(() => {
-        adapterController = undefined;
-    });
+    afterEach(() => adapterController = undefined);
 
     describe('When a message is rendered by the markdown renderer', () => {
         it('It should trigger the messageRendered event once rendering is complete', async () => {
@@ -48,7 +46,43 @@ describe('<AiChat /> + batch adapter + events + messageRendered', () => {
             // Assert
             await waitFor(() => expect(messageRenderedCallback).toHaveBeenCalledOnce());
         });
-    }, {
-        timeout: 120000,
+    });
+
+    describe('When messageRendered and messageReceived events are both registered', () => {
+        it('It should trigger message rendered after message received', async () => {
+            // Arrange
+            const messageReceivedCallback = vi.fn();
+            const messageRenderedCallback = vi.fn();
+            const aiChat = (
+                <AiChat
+                    adapter={adapterController!.adapter}
+                    events={{
+                        messageReceived: messageReceivedCallback,
+                        messageRendered: messageRenderedCallback,
+                    }}
+                />
+            );
+
+            const {container} = render(aiChat);
+            await waitForReactRenderCycle();
+
+            const textArea: HTMLTextAreaElement = container.querySelector('.nlux-comp-composer > textarea')!;
+            await userEvent.type(textArea, 'Hello{enter}');
+            await waitForReactRenderCycle();
+
+            // Act
+            await act(async () => {
+                adapterController!.resolve('Yo!');
+                await waitForMdStreamToComplete();
+            });
+
+            // Assert
+            await waitFor(() => {
+                expect(messageReceivedCallback).toHaveBeenCalledOnce();
+                expect(messageRenderedCallback).toHaveBeenCalledOnce();
+                expect(messageReceivedCallback.mock.invocationCallOrder[0])
+                    .toBeLessThan(messageRenderedCallback.mock.invocationCallOrder[0]);
+            });
+        });
     });
 });

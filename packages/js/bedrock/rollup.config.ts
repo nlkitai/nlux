@@ -4,6 +4,7 @@ import replace from "@rollup/plugin-replace";
 import strip from "@rollup/plugin-strip";
 import terser from "@rollup/plugin-terser";
 import alias from "@rollup/plugin-alias";
+
 import { RollupOptions } from "rollup";
 import esbuild from "rollup-plugin-esbuild";
 
@@ -32,8 +33,13 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
           },
         ],
       }),
+<<<<<<< HEAD
       commonjs(),
       json(),
+=======
+      json(),
+      commonjs(),
+>>>>>>> latest
       esbuild(),
       isProduction &&
         strip({
