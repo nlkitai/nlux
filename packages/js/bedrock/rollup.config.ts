@@ -33,13 +33,8 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
           },
         ],
       }),
-<<<<<<< HEAD
       commonjs(),
       json(),
-=======
-      json(),
-      commonjs(),
->>>>>>> latest
       esbuild(),
       isProduction &&
         strip({
