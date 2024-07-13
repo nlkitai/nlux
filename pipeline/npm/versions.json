@@ -1,6 +1,6 @@
 {
   "inherit": true,
-  "nlux": "2.14.0",
+  "nlux": "2.15.0",
   "peerDependencies": {
     "react": "18",
     "react-dom": "18"
@@ -9,6 +9,6 @@
     "openai": "4",
     "hfInference": "2",
     "highlightJs": "11",
-    "bedrock": "3.614.0"
+    "bedrock": "3"
   }
 }
