@@ -23,9 +23,9 @@ export class BedrockChatAdapterImpl<AiMsg>
   private readonly __instanceId: string;
 
   private client: BedrockRuntimeClient;
-  private readonly options: ChatAdapterOptions<AiMsg>;
+  private readonly options: ChatAdapterOptions;
 
-  constructor(options: ChatAdapterOptions<AiMsg>) {
+  constructor(options: ChatAdapterOptions) {
     if (!options.model || !options.credentials || !options.region) {
       throw new NluxValidationError({
         source: this.constructor.name,

@@ -5,9 +5,7 @@ import { getAdapterBuilder } from "./getAdapterBuilder";
 
 const source = "hooks/useChatAdapter";
 
-export const useChatAdapter = <AiMsg = string>(
-  options: ChatAdapterOptions<AiMsg>
-): StandardChatAdapter<AiMsg> => {
+export const useChatAdapter = <AiMsg = string>(options: ChatAdapterOptions): StandardChatAdapter<AiMsg> => {
   if (!options.model) {
     throw new Error(
       "You must provide either a model or an endpoint to use Hugging Face Inference API."

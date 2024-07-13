@@ -4,7 +4,7 @@ import {
   InferenceConfiguration,
 } from "@aws-sdk/client-bedrock-runtime";
 
-export type ChatAdapterOptions<AiMsg> = {
+export type ChatAdapterOptions = {
   dataTransferMode?: DataTransferMode;
   model: string;
 

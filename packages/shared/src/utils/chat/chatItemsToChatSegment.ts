@@ -34,6 +34,7 @@ export const chatItemsToChatSegment = <AiMsg>(
                 status: 'complete',
                 participantRole: 'user',
                 content: message.message,
+                contentType: 'text',
             } satisfies ChatSegmentUserMessage;
         }
 
@@ -43,6 +44,7 @@ export const chatItemsToChatSegment = <AiMsg>(
             status: 'complete',
             participantRole: 'assistant',
             content: message.message,
+            contentType: 'text',
             serverResponse: message.serverResponse,
             dataTransferMode: 'batch',
         } satisfies ChatSegmentAiMessage<AiMsg>;
