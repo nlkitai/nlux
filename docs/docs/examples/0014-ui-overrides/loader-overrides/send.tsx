@@ -2,7 +2,7 @@ export default `import { StreamSend, StreamingAdapterObserver } from '@nlux/reac
 
 // A demo API by NLUX that connects to OpenAI
 // and returns a stream of Server-Sent events
-const demoProxyServerUrl = 'https://demo.api.nlux.ai/openai/chat/stream';
+const demoProxyServerUrl = 'https://gptalks.api.nlux.dev/openai/chat/stream';
 
 // Function to send query to the server and receive a stream of chunks as response
 export const send: StreamSend = async (
