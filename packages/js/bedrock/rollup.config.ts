@@ -53,9 +53,7 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
       isProduction && terser(),
     ],
     external: ["@nlux/core"],
-    output: generateOutputConfig(packageName, outputFile, isProduction).map(
-      (val) => ({ ...val, inlineDynamicImports: true })
-    ),
+    output: generateOutputConfig(packageName, outputFile, isProduction),
   },
   generateDts(outputFile, isProduction),
 ];
