@@ -3,7 +3,6 @@ import replace from "@rollup/plugin-replace";
 import strip from "@rollup/plugin-strip";
 import terser from "@rollup/plugin-terser";
 import alias from "@rollup/plugin-alias";
-import json from "@rollup/plugin-json";
 import { RollupOptions } from "rollup";
 import esbuild from "rollup-plugin-esbuild";
 import { generateDts } from "../../../pipeline/utils/rollup/generateDts";
@@ -30,7 +29,6 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
           },
         ],
       }),
-      json(),
       commonjs(),
       esbuild(),
       isProduction &&

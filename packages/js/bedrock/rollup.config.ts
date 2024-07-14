@@ -4,13 +4,14 @@ import replace from "@rollup/plugin-replace";
 import strip from "@rollup/plugin-strip";
 import terser from "@rollup/plugin-terser";
 import alias from "@rollup/plugin-alias";
-import json from "@rollup/plugin-json";
+
 import { RollupOptions } from "rollup";
 import esbuild from "rollup-plugin-esbuild";
 
 import { generateDts } from "../../../pipeline/utils/rollup/generateDts";
 import { generateOutputConfig } from "../../../pipeline/utils/rollup/generateOutputConfig";
 import { resolve } from "path";
+import json from "@rollup/plugin-json";
 
 const isProduction = process.env.NODE_ENV === "production";
 const packageName = "@nlux/bedrock";
@@ -32,8 +33,8 @@ const packageConfig: () => Promise<RollupOptions[]> = async () => [
           },
         ],
       }),
-      json(),
       commonjs(),
+      json(),
       esbuild(),
       isProduction &&
         strip({
