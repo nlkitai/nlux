@@ -1,7 +1,7 @@
 import {StandardStreamParser} from '../../types/markdown/streamParser';
 import {warn} from '../../utils/warn';
-import {parseMdSnapshot} from '../snapshot/snapshotParser';
 import {attachCopyClickListener} from '../copyToClipboard/attachCopyClickListener';
+import {parseMdSnapshot} from '../snapshot/snapshotParser';
 
 const defaultDelayInMsBeforeComplete = 2000;
 const defaultDelayInMsBetweenBufferChecks = 8;

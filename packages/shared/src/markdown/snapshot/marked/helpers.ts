@@ -5,12 +5,12 @@ const escapeTest = /[&<>"']/;
 const escapeReplace = new RegExp(escapeTest.source, 'g');
 const escapeTestNoEncode = /[<>"']|&(?!(#\d{1,7}|#[Xx][a-fA-F0-9]{1,6}|\w+);)/;
 const escapeReplaceNoEncode = new RegExp(escapeTestNoEncode.source, 'g');
-const escapeReplacements: { [index: string]: string } = {
+const escapeReplacements: {[index: string]: string} = {
     '&': '&amp;',
     '<': '&lt;',
     '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;'
+    '\'': '&#39;',
 };
 const getEscapeReplacement = (ch: string) => escapeReplacements[ch];
 
@@ -34,7 +34,9 @@ export function unescape(html: string) {
     // explicitly match decimal, hex, and named HTML entities
     return html.replace(unescapeTest, (_, n) => {
         n = n.toLowerCase();
-        if (n === 'colon') return ':';
+        if (n === 'colon') {
+            return ':';
+        }
         if (n.charAt(0) === '#') {
             return n.charAt(1) === 'x'
                 ? String.fromCharCode(parseInt(n.substring(2), 16))
@@ -58,7 +60,7 @@ export function edit(regex: string | RegExp, opt?: string) {
         },
         getRegex: () => {
             return new RegExp(source, opt);
-        }
+        },
     };
     return obj;
 }
@@ -80,7 +82,9 @@ export function splitCells(tableRow: string, count?: number) {
     const row = tableRow.replace(/\|/g, (match, offset, str) => {
             let escaped = false;
             let curr = offset;
-            while (--curr >= 0 && str[curr] === '\\') escaped = !escaped;
+            while (--curr >= 0 && str[curr] === '\\') {
+                escaped = !escaped;
+            }
             if (escaped) {
                 // odd number of slashes means | is escaped
                 // so we leave it alone
@@ -105,7 +109,9 @@ export function splitCells(tableRow: string, count?: number) {
         if (cells.length > count) {
             cells.splice(count);
         } else {
-            while (cells.length < count) cells.push('');
+            while (cells.length < count) {
+                cells.push('');
+            }
         }
     }
 
@@ -138,10 +144,12 @@ export function rtrim(str: string, c: string, invert?: boolean) {
         const currChar = str.charAt(l - suffLen - 1);
         if (currChar === c && !invert) {
             suffLen++;
-        } else if (currChar !== c && invert) {
-            suffLen++;
         } else {
-            break;
+            if (currChar !== c && invert) {
+                suffLen++;
+            } else {
+                break;
+            }
         }
     }
 
@@ -157,12 +165,16 @@ export function findClosingBracket(str: string, b: string) {
     for (let i = 0; i < str.length; i++) {
         if (str[i] === '\\') {
             i++;
-        } else if (str[i] === b[0]) {
-            level++;
-        } else if (str[i] === b[1]) {
-            level--;
-            if (level < 0) {
-                return i;
+        } else {
+            if (str[i] === b[0]) {
+                level++;
+            } else {
+                if (str[i] === b[1]) {
+                    level--;
+                    if (level < 0) {
+                        return i;
+                    }
+                }
             }
         }
     }

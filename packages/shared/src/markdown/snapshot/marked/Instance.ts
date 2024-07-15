@@ -319,14 +319,14 @@ export class Marked {
 
             if (opt.async) {
                 return Promise.resolve(opt.hooks ? opt.hooks.preprocess(src) : src)
-                    .then(src => lexer(src, opt))
-                    .then(tokens => opt.hooks ? opt.hooks.processAllTokens(tokens) : tokens)
-                    .then(
-                        tokens => opt.walkTokens ? Promise.all(this.walkTokens(tokens, opt.walkTokens)).then(
-                            () => tokens) : tokens)
-                    .then(tokens => parser(tokens, opt))
-                    .then(html => opt.hooks ? opt.hooks.postprocess(html) : html)
-                    .catch(throwError);
+                              .then(src => lexer(src, opt))
+                              .then(tokens => opt.hooks ? opt.hooks.processAllTokens(tokens) : tokens)
+                              .then(
+                                  tokens => opt.walkTokens ? Promise.all(this.walkTokens(tokens, opt.walkTokens)).then(
+                                      () => tokens) : tokens)
+                              .then(tokens => parser(tokens, opt))
+                              .then(html => opt.hooks ? opt.hooks.postprocess(html) : html)
+                              .catch(throwError);
             }
 
             try {

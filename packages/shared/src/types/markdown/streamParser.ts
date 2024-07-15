@@ -1,5 +1,5 @@
-import {HighlighterExtension, IObserver} from '../../../../js/core/src';
 import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
+import {HighlighterExtension, IObserver} from '../../../../js/core/src';
 
 export type StreamParser = (
     root: HTMLElement,

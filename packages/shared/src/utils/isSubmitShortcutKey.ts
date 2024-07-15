@@ -21,4 +21,4 @@ export const isSubmitShortcutKey = (
     }
 
     return false;
-}
+};

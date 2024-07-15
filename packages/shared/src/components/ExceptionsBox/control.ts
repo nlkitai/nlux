@@ -9,7 +9,7 @@ export type ExceptionsBoxController = {
 };
 
 export const createExceptionsBoxController = (root: HTMLElement): ExceptionsBoxController => {
-    const exceptionsQueue = new Set<{ message: string }>();
+    const exceptionsQueue = new Set<{message: string}>();
 
     let exceptionShown: boolean = false;
     let exceptionItem: HTMLElement | null = null;

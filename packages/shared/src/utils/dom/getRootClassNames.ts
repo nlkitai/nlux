@@ -2,7 +2,8 @@ const rootClassName = 'nlux-AiChat-root';
 const defaultThemeId = 'nova';
 
 export const getSystemColorScheme = () => {
-    if (typeof globalThis !== undefined && globalThis.matchMedia && globalThis.matchMedia('(prefers-color-scheme: dark)')?.matches) {
+    if (typeof globalThis !== undefined && globalThis.matchMedia && globalThis.matchMedia(
+        '(prefers-color-scheme: dark)')?.matches) {
         return 'dark';
     }
 

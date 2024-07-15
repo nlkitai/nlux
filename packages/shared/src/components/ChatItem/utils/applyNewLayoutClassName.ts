@@ -1,6 +1,6 @@
 import {ConversationLayout} from '../../../../../js/core/src/aiChat/options/conversationOptions';
 
-export const conversationLayoutClassName: { [key: string]: string } = {
+export const conversationLayoutClassName: {[key: string]: string} = {
     bubbles: 'nlux-comp-chatItem--bubblesLayout',
     list: 'nlux-comp-chatItem--listLayout',
 };

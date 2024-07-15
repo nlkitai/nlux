@@ -1,9 +1,9 @@
+import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
 import {AnyAiMsg} from '../anyAiMsg';
 import {NLErrorId} from '../exceptions/errors';
 import {ChatSegment, ChatSegmentEvent} from './chatSegment';
 import {AiStreamedMessage, AiStreamedServerComponentMessage, ChatSegmentAiMessage} from './chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from './chatSegmentUserMessage';
-import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
 
 export type ChatSegmentEventsMap<AiMsg> = {
     userMessageReceived: UserMessageReceivedCallback;

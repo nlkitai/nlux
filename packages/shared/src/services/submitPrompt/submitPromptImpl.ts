@@ -1,5 +1,6 @@
 import {ChatAdapter} from '../../types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {ServerComponentChatAdapter} from '../../types/adapters/chat/serverComponentChatAdapter';
 import {StandardChatAdapter} from '../../types/adapters/chat/standardChatAdapter';
 import {
     AiMessageChunkReceivedCallback,
@@ -12,18 +13,17 @@ import {
     ChatSegmentErrorCallback,
     UserMessageReceivedCallback,
 } from '../../types/chatSegment/chatSegmentEvents';
-import {ServerComponentChatAdapter} from '../../types/adapters/chat/serverComponentChatAdapter';
 import {uid} from '../../utils/uid';
 import {submitAndBatchTextResponse} from './batchText';
+import {submitAndStreamServerComponentResponse} from './streamServerComponent';
 import {submitAndStreamTextResponse} from './streamText';
 import {SubmitPrompt} from './submitPrompt';
+import {getContentTypeToGenerate} from './utils/contentTypeToGenerate';
 import {getDataTransferModeToUse} from './utils/dataTransferModeToUse';
 import {createEmptyCompleteSegment} from './utils/emptyCompleteSegment';
 import {createEmptyErrorSegment} from './utils/emptyErrorSegment';
 import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 import {getUserMessageFromPrompt} from './utils/userMessageFromPrompt';
-import {getContentTypeToGenerate} from './utils/contentTypeToGenerate';
-import {submitAndStreamServerComponentResponse} from './streamServerComponent';
 
 export const submitPrompt: SubmitPrompt = <AiMsg>(
     prompt: string,
@@ -38,7 +38,8 @@ export const submitPrompt: SubmitPrompt = <AiMsg>(
     }
 
     const adapterAsAny = adapter as Record<string, unknown>;
-    if (adapterAsAny.streamText === undefined && adapterAsAny.batchText === undefined && adapterAsAny.streamServerComponent === undefined) {
+    if (adapterAsAny.streamText === undefined && adapterAsAny.batchText === undefined
+        && adapterAsAny.streamServerComponent === undefined) {
         return createEmptyErrorSegment<AiMsg>('no-data-transfer-mode-supported');
     }
 

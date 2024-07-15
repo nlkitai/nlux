@@ -6,30 +6,26 @@ import {StandardAdapterInfo} from './standardAdapterConfig';
  * This interface is used by standard adapters provided by nlux to communicate with the AiChat component.
  */
 export interface StandardChatAdapter<AiMsg = string> {
-    get dataTransferMode(): DataTransferMode;
-
     batchText(
         message: string,
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;
-
+    get dataTransferMode(): DataTransferMode;
     get id(): string;
 
     get info(): StandardAdapterInfo;
 
     // Receives a message from the API and returns a message that can be sent to the user.
-    // This method is called by AiChat when the API sends a message to convert that message into a format that
-    preProcessAiStreamedChunk(
-        chunk: string | object | undefined,
-        extras: ChatAdapterExtras<AiMsg>,
-    ): AiMsg | undefined;
-
     // can be displayed to the user (either text or input for a custom component).
     preProcessAiBatchedMessage(
         message: string | object | undefined,
         extras: ChatAdapterExtras<AiMsg>,
     ): AiMsg | undefined;
-
+    // This method is called by AiChat when the API sends a message to convert that message into a format that
+    preProcessAiStreamedChunk(
+        chunk: string | object | undefined,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): AiMsg | undefined;
     streamText(
         message: string,
         observer: StreamingAdapterObserver<string | object | undefined>,

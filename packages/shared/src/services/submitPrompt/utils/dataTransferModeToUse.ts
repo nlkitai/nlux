@@ -1,6 +1,6 @@
 import {ChatAdapter as CoreChatAdapter, DataTransferMode} from '../../../types/adapters/chat/chatAdapter';
-import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 import {ServerComponentChatAdapter} from '../../../types/adapters/chat/serverComponentChatAdapter';
+import {isStandardChatAdapter, StandardChatAdapter} from '../../../types/adapters/chat/standardChatAdapter';
 
 export const getDataTransferModeToUse = <AiMsg>(
     adapter: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg>,

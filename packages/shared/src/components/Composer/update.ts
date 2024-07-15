@@ -17,7 +17,7 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
     ) {
         return;
     }
-    
+
     const textArea: HTMLTextAreaElement = element.querySelector('* > textarea')!;
     if (propsBefore.status !== propsAfter.status) {
         applyNewStatusClassName(element, propsAfter.status);
@@ -55,7 +55,7 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
     }
 };
 
-const adjustHeight = (target:HTMLElement) => {
+const adjustHeight = (target: HTMLElement) => {
     target.style.height = 'auto'; // Reset height
     target.style.height = `${target.scrollHeight}px`; // Set new height based on content
 };

@@ -1,21 +1,21 @@
-import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
+import {
+    ServerComponentChatAdapter,
+    StreamedServerComponent,
+} from '../../types/adapters/chat/serverComponentChatAdapter';
+import {ChatSegment} from '../../types/chatSegment/chatSegment';
+import {AiStreamedServerComponentMessage} from '../../types/chatSegment/chatSegmentAiMessage';
 import {
     AiServerComponentStreamedCallback,
     AiServerComponentStreamStartedCallback,
     ChatSegmentCompleteCallback,
     ChatSegmentErrorCallback,
 } from '../../types/chatSegment/chatSegmentEvents';
-import {
-    ServerComponentChatAdapter,
-    StreamedServerComponent,
-} from '../../types/adapters/chat/serverComponentChatAdapter';
-import {uid} from '../../utils/uid';
-import {AiStreamedServerComponentMessage} from '../../types/chatSegment/chatSegmentAiMessage';
-import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
-import {warn} from '../../utils/warn';
+import {ChatSegmentUserMessage} from '../../types/chatSegment/chatSegmentUserMessage';
 import {NLErrorId} from '../../types/exceptions/errors';
-import {ChatSegment} from '../../types/chatSegment/chatSegment';
+import {uid} from '../../utils/uid';
+import {warn} from '../../utils/warn';
+import {triggerAsyncCallback} from './utils/triggerAsyncCallback';
 
 export const submitAndStreamServerComponentResponse = <AiMsg>(
     segmentId: string,

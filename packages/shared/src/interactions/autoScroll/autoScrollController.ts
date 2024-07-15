@@ -9,7 +9,7 @@ export const createAutoScrollController = (
     let shouldScrollWhenGenerating: boolean = autoScroll;
     let conversationContainer: HTMLElement | undefined = newConversationContainer;
     let scrollingStickToConversationEnd: boolean = true;
-    let activeChatSegment: { uid: string; container: HTMLElement } | undefined = undefined;
+    let activeChatSegment: {uid: string; container: HTMLElement} | undefined = undefined;
 
     const scrollHandler = throttle(createConversationScrollHandler((
         {

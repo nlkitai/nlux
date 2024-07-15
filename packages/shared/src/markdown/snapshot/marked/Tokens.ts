@@ -25,33 +25,33 @@ export type Token = (
 
 export namespace Tokens {
     export interface Space {
-        type: 'space';
         raw: string;
+        type: 'space';
     }
 
     export interface Code {
-        type: 'code';
-        raw: string;
         codeBlockStyle?: 'indented' | undefined;
-        lang?: string | undefined;
-        text: string;
         escaped?: boolean;
+        lang?: string | undefined;
+        raw: string;
+        text: string;
+        type: 'code';
     }
 
     export interface Heading {
-        type: 'heading';
-        raw: string;
         depth: number;
+        raw: string;
         text: string;
         tokens: Token[];
+        type: 'heading';
     }
 
     export interface Table {
-        type: 'table';
-        raw: string;
         align: Array<'center' | 'left' | 'right' | null>;
         header: TableCell[];
+        raw: string;
         rows: TableCell[][];
+        type: 'table';
     }
 
     export interface TableCell {
@@ -60,136 +60,135 @@ export namespace Tokens {
     }
 
     export interface Hr {
-        type: 'hr';
         raw: string;
+        type: 'hr';
     }
 
     export interface Blockquote {
-        type: 'blockquote';
         raw: string;
         text: string;
         tokens: Token[];
+        type: 'blockquote';
     }
 
     export interface List {
-        type: 'list';
-        raw: string;
-        ordered: boolean;
-        start: number | '';
-        loose: boolean;
         items: ListItem[];
+        loose: boolean;
+        ordered: boolean;
+        raw: string;
+        start: number | '';
+        type: 'list';
     }
 
     export interface ListItem {
-        type: 'list_item';
-        raw: string;
-        task: boolean;
         checked?: boolean | undefined;
         loose: boolean;
+        raw: string;
+        task: boolean;
         text: string;
         tokens: Token[];
+        type: 'list_item';
     }
 
     export interface Paragraph {
-        type: 'paragraph';
-        raw: string;
         pre?: boolean | undefined;
+        raw: string;
         text: string;
         tokens: Token[];
+        type: 'paragraph';
     }
 
     export interface HTML {
-        type: 'html';
-        raw: string;
-        pre: boolean;
-        text: string;
         block: boolean;
+        pre: boolean;
+        raw: string;
+        text: string;
+        type: 'html';
     }
 
     export interface Text {
-        type: 'text';
         raw: string;
         text: string;
         tokens?: Token[];
+        type: 'text';
     }
 
     export interface Def {
-        type: 'def';
+        href: string;
         raw: string;
         tag: string;
-        href: string;
         title: string;
+        type: 'def';
     }
 
     export interface Escape {
-        type: 'escape';
         raw: string;
         text: string;
+        type: 'escape';
     }
 
     export interface Tag {
-        type: 'text' | 'html';
-        raw: string;
+        block: boolean;
         inLink: boolean;
         inRawBlock: boolean;
+        raw: string;
         text: string;
-        block: boolean;
+        type: 'text' | 'html';
     }
 
     export interface Link {
-        type: 'link';
-        raw: string;
         href: string;
-        title?: string | null;
+        raw: string;
         text: string;
+        title?: string | null;
         tokens: Token[];
+        type: 'link';
     }
 
     export interface Image {
-        type: 'image';
-        raw: string;
         href: string;
-        title: string | null;
+        raw: string;
         text: string;
+        title: string | null;
+        type: 'image';
     }
 
     export interface Strong {
-        type: 'strong';
         raw: string;
         text: string;
         tokens: Token[];
+        type: 'strong';
     }
 
     export interface Em {
-        type: 'em';
         raw: string;
         text: string;
         tokens: Token[];
+        type: 'em';
     }
 
     export interface Codespan {
-        type: 'codespan';
         raw: string;
         text: string;
+        type: 'codespan';
     }
 
     export interface Br {
-        type: 'br';
         raw: string;
+        type: 'br';
     }
 
     export interface Del {
-        type: 'del';
         raw: string;
         text: string;
         tokens: Token[];
+        type: 'del';
     }
 
     export interface Generic {
-        type: string;
         raw: string;
         tokens?: Token[] | undefined;
-
+        type: string;
         [index: string]: any;
     }
 }

@@ -13,7 +13,8 @@ export const updateContentOnStatusChange = (
     if ((propsAfter.status === 'typing' || propsAfter.status === 'waiting') && textArea.disabled) {
         textArea.disabled = false;
     } else {
-        if ((propsAfter.status === 'submitting-prompt' || propsAfter.status === 'submitting-conversation-starter') && !textArea.disabled) {
+        if ((propsAfter.status === 'submitting-prompt' || propsAfter.status === 'submitting-conversation-starter')
+            && !textArea.disabled) {
             textArea.disabled = true;
         }
     }
