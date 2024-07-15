@@ -29,7 +29,7 @@ export const usePrimitivesContext = function <AiMsg>(
     ]);
 
     const PrimitivesContextProvider = useMemo(() =>
-            ({children}: { children: ReactElement }) => {
+            ({children}: {children: ReactElement}) => {
                 return (
                     <primitivesContext.Provider value={contextState}>
                         {children}

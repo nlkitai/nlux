@@ -1,6 +1,11 @@
+import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
+import {
+    directionClassName as compChatItemDirectionClassName,
+} from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
+import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
 import {className as compMessageClassName} from '@shared/components/Message/create';
 import {
-    directionClassName as compMessageDirectionClassName
+    directionClassName as compMessageDirectionClassName,
 } from '@shared/components/Message/utils/applyNewDirectionClassName';
 import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
 import {
@@ -14,17 +19,12 @@ import {
     useMemo,
     useRef,
 } from 'react';
-import {className as compChatItemClassName} from '@shared/components/ChatItem/create';
-import {
-    directionClassName as compChatItemDirectionClassName,
-} from '@shared/components/ChatItem/utils/applyNewDirectionClassName';
-import {conversationLayoutClassName} from '@shared/components/ChatItem/utils/applyNewLayoutClassName';
 import {StreamContainerImperativeProps} from '../StreamContainer/props';
 import {StreamContainerComp} from '../StreamContainer/StreamContainerComp';
 import {useAssistantMessageRenderer} from './hooks/useAssistantMessageRenderer';
 import {useParticipantInfoRenderer} from './hooks/userParticipantInfoRenderer';
-import {ChatItemImperativeProps, ChatItemProps} from './props';
 import {useUserMessageRenderer} from './hooks/useUserMessageRenderer';
+import {ChatItemImperativeProps, ChatItemProps} from './props';
 
 export const ChatItemComp: <AiMsg>(
     props: ChatItemProps<AiMsg>,
@@ -57,20 +57,28 @@ export const ChatItemComp: <AiMsg>(
 
     const AssistantBatchedMessage = useAssistantMessageRenderer(props);
     const UserMessage = useUserMessageRenderer(props);
-    const ForwardRefStreamContainerComp = useMemo( () => forwardRef(StreamContainerComp<AiMsg>), []);
+    const ForwardRefStreamContainerComp = useMemo(() => forwardRef(StreamContainerComp<AiMsg>), []);
     const ParticipantInfo = useParticipantInfoRenderer(props);
 
-    const directionClassNameForChatItem = props.direction ? compChatItemDirectionClassName[props.direction] : compChatItemDirectionClassName['received'];
-    const convStyleClassName = props.layout === 'bubbles' ? conversationLayoutClassName['bubbles'] : conversationLayoutClassName['list'];
+    const directionClassNameForChatItem = props.direction
+        ? compChatItemDirectionClassName[props.direction]
+        : compChatItemDirectionClassName['received'];
+    const convStyleClassName = props.layout === 'bubbles'
+        ? conversationLayoutClassName['bubbles']
+        : conversationLayoutClassName['list'];
     const containerClassName = `${compChatItemClassName} ${directionClassNameForChatItem} ${convStyleClassName}`;
 
-    const messageStatusClassName = props.status ? compMessageStatusClassName[props.status] : compMessageStatusClassName['rendered'];
-    const messageDirectionClassName = props.direction ? compMessageDirectionClassName[props.direction] : compMessageDirectionClassName['received'];
+    const messageStatusClassName = props.status
+        ? compMessageStatusClassName[props.status]
+        : compMessageStatusClassName['rendered'];
+    const messageDirectionClassName = props.direction
+        ? compMessageDirectionClassName[props.direction]
+        : compMessageDirectionClassName['received'];
     const messageClassName = `${compMessageClassName} ${messageStatusClassName} ${messageDirectionClassName}`;
 
     return (
         <div className={containerClassName}>
-            <ParticipantInfo />
+            <ParticipantInfo/>
             {isAssistantMessage && isStreamed && !isServerComponent && (
                 <ForwardRefStreamContainerComp
                     key={'do-not-change'}
@@ -99,12 +107,12 @@ export const ChatItemComp: <AiMsg>(
             )}
             {isAssistantMessage && !isStreamed && (
                 <div className={messageClassName}>
-                    <AssistantBatchedMessage />
+                    <AssistantBatchedMessage/>
                 </div>
             )}
             {isUserMessage && (
                 <div className={messageClassName}>
-                    <UserMessage />
+                    <UserMessage/>
                 </div>
             )}
         </div>

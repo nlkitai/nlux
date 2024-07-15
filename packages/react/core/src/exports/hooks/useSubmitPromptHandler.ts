@@ -1,20 +1,20 @@
 import {ComposerOptions, EventsMap} from '@nlux/core';
-import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
+import {ComposerStatus} from '@shared/components/Composer/props';
 import {submitPrompt} from '@shared/services/submitPrompt/submitPromptImpl';
 import {ChatAdapter as CoreChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {ChatAdapterExtras} from '@shared/types/adapters/chat/chatAdapterExtras';
+import {ServerComponentChatAdapter} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 import {isStandardChatAdapter, StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '@shared/types/chatSegment/chatSegmentUserMessage';
 import {NLErrors} from '@shared/types/exceptions/errors';
-import {ComposerStatus} from '@shared/components/Composer/props';
 import {warn} from '@shared/utils/warn';
-import {ChatAdapter} from '../../types/chatAdapter';
+import {MutableRefObject, useCallback, useEffect, useMemo, useRef} from 'react';
 import {ImperativeConversationCompProps} from '../../sections/Conversation/props';
+import {ChatAdapter} from '../../types/chatAdapter';
 import {AiChatProps} from '../props';
 import {useAdapterExtras} from './useAdapterExtras';
-import {ServerComponentChatAdapter} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 type SubmitPromptHandlerProps<AiMsg> = {
     aiChatProps: AiChatProps<AiMsg>;
@@ -84,7 +84,7 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
         };
     }, [
         newSegments, cancelledSegmentIds, cancelledMessageIds,
-        setChatSegments, setComposerStatus, showException, setPrompt
+        setChatSegments, setComposerStatus, showException, setPrompt,
     ]);
 
     const adapterExtras: ChatAdapterExtras<AiMsg> = useAdapterExtras(
@@ -116,7 +116,8 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
             const promptToSubmit = promptTyped;
             const streamedMessageIds: Set<string> = new Set();
 
-            const adapterBridge: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> = isStandardChatAdapter(adapterToUse)
+            const adapterBridge: CoreChatAdapter<AiMsg> | ServerComponentChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> = isStandardChatAdapter(
+                adapterToUse)
                 ? adapterToUse as StandardChatAdapter<AiMsg>
                 : (
                     ((adapterToUse as ChatAdapter<AiMsg>).streamServerComponent) ? ({
@@ -232,7 +233,8 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                     return;
                 }
 
-                if (callbackEvents.current?.serverComponentRendered && !domToReactRef.current.cancelledMessageIds.includes(streamedServerComponent.uid)) {
+                if (callbackEvents.current?.serverComponentRendered
+                    && !domToReactRef.current.cancelledMessageIds.includes(streamedServerComponent.uid)) {
                     callbackEvents.current?.serverComponentRendered({uid: streamedServerComponent.uid});
                 }
             });

@@ -92,7 +92,8 @@ export const updateChatItemDom: DomUpdater<ChatItemProps> = (
                     };
 
                     const persona = createAvatarDom(avatarProps);
-                    const participantInfoDom = element.querySelector<HTMLElement>(`.${participantInfoContainerClassName}`);
+                    const participantInfoDom = element.querySelector<HTMLElement>(
+                        `.${participantInfoContainerClassName}`);
                     if (participantInfoDom) {
                         participantInfoDom.prepend(persona);
                     }

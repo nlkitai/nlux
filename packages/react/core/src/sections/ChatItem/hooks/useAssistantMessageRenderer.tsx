@@ -4,7 +4,7 @@ import {ResponseRendererProps} from '../../../exports/messageOptions';
 import {MarkdownSnapshotRenderer} from '../../MessageRenderer/MarkdownSnapshotRenderer';
 import {ChatItemProps} from '../props';
 
-export const useAssistantMessageRenderer = function<AiMsg>(
+export const useAssistantMessageRenderer = function <AiMsg>(
     props: ChatItemProps<AiMsg>,
 ): FunctionComponent {
     const {
@@ -53,7 +53,7 @@ export const useAssistantMessageRenderer = function<AiMsg>(
 
         const content: AiMsg[] = !fetchedContent
             ? []
-            : (isServerComponent ? [] : [ (fetchedContent as AiMsg) ]);
+            : (isServerComponent ? [] : [(fetchedContent as AiMsg)]);
 
         const props: ResponseRendererProps<AiMsg> = {
             uid,

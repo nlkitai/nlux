@@ -1,31 +1,31 @@
 'use client';
-import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
+import {ComposerStatus} from '@shared/components/Composer/props';
 import {createExceptionsBoxController} from '@shared/components/ExceptionsBox/control';
 import {className as compExceptionsBoxClassName} from '@shared/components/ExceptionsBox/create';
-import {ComposerStatus} from '@shared/components/Composer/props';
+import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
 import {chatItemsToChatSegment} from '@shared/utils/chat/chatItemsToChatSegment';
 import {getRootClassNames, getSystemColorScheme} from '@shared/utils/dom/getRootClassNames';
 import {warnOnce} from '@shared/utils/warn';
+import {forwardRef, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {ComposerComp} from '../sections/Composer/ComposerComp';
 import {ConversationComp} from '../sections/Conversation/ConversationComp';
 import {ImperativeConversationCompProps} from '../sections/Conversation/props';
-import {ComposerComp} from '../sections/Composer/ComposerComp';
+import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
+import {ConversationStarter} from '../types/conversationStarter';
 import {adapterParamToUsableAdapter} from '../utils/adapterParamToUsableAdapter';
 import {usePreDestroyEventTrigger} from './events/usePreDestroyEventTrigger';
 import {useReadyEventTrigger} from './events/useReadyEventTrigger';
+import {AiChatInternalApi} from './hooks/useAiChatApi';
 import {useAiChatStyle} from './hooks/useAiChatStyle';
 import {useAutoScrollController} from './hooks/useAutoScrollController';
 import {useCancelLastMessage} from './hooks/useCancelLastMessage';
 import {useLastActiveSegmentChangeHandler} from './hooks/useLastActiveSegmentChangeHandler';
+import {usePrimitivesContext} from './hooks/usePrimitivesContext';
 import {useResubmitPromptHandler} from './hooks/useResubmitPromptHandler';
 import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
-import {AiChatProps} from './props';
-import {ConversationStarter} from '../types/conversationStarter';
-import {LaunchPad} from '../sections/LaunchPad/LaunchPad';
 import {useUiOverrides} from './hooks/useUiOverrides';
 import {usMarkdownContainers} from './hooks/usMarkdownContainers';
-import {usePrimitivesContext} from './hooks/usePrimitivesContext';
-import {AiChatInternalApi} from './hooks/useAiChatApi';
+import {AiChatProps} from './props';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -107,7 +107,7 @@ export const AiChat: <AiMsg>(
 
     const handleMarkdownStreamRendered = useCallback((_segmentId: string, messageId: string) => {
         if (props.events?.messageRendered) {
-            props.events.messageRendered({ uid: messageId });
+            props.events.messageRendered({uid: messageId});
         }
     }, []);
 
@@ -125,7 +125,8 @@ export const AiChat: <AiMsg>(
 
     useEffect(() => {
         // Effect used to wait for the 'submitting-conversation-starter' status to submit the prompt
-        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message' || composerStatus === 'submitting-edit') {
+        if (composerStatus === 'submitting-conversation-starter' || composerStatus === 'submitting-external-message'
+            || composerStatus === 'submitting-edit') {
             handleSubmitPrompt();
         }
     }, [composerStatus, handleSubmitPrompt]);
@@ -161,7 +162,7 @@ export const AiChat: <AiMsg>(
         } else {
             warnOnce(
                 'API object passed was is not compatible with AiChat.\n' +
-                'Only use API objects created by the useAiChatApi() hook.'
+                'Only use API objects created by the useAiChatApi() hook.',
             );
         }
     }, [

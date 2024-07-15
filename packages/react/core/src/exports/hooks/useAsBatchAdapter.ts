@@ -1,5 +1,5 @@
-import {DependencyList, useMemo} from 'react';
 import {BatchSend} from '@shared/types/adapters/chat/chatAdapter';
+import {DependencyList, useMemo} from 'react';
 import {ChatAdapter} from '../../types/chatAdapter';
 
 /**

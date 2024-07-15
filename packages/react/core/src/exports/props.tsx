@@ -1,12 +1,12 @@
-import {ReactNode} from 'react';
 import {ComposerOptions, DisplayOptions, EventsConfig, StandardChatAdapter} from '@nlux/core';
 import {ChatAdapterBuilder} from '@shared/types/adapters/chat/chatAdapterBuilder';
 import {ChatItem} from '@shared/types/conversation';
+import {ReactNode} from 'react';
+import {ChatAdapter} from '../types/chatAdapter';
+import {ConversationOptions} from '../types/conversationOptions';
+import {AiChatApi} from './hooks/useAiChatApi';
 import {MessageOptions} from './messageOptions';
 import {PersonaOptions} from './personaOptions';
-import {AiChatApi} from './hooks/useAiChatApi';
-import {ConversationOptions} from '../types/conversationOptions';
-import {ChatAdapter} from '../types/chatAdapter';
 
 /**
  * Props for the AiChat React component.

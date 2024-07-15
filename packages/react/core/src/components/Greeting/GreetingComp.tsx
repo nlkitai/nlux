@@ -1,4 +1,3 @@
-import {ReactNode} from 'react';
 import {
     className as compGreetingClassName,
     personaNameClassName as compGreetingPersonaNameClassName,
@@ -6,6 +5,7 @@ import {
 import {
     greetingTextClassName as compGreetingTextClassName,
 } from '@shared/components/Greeting/utils/updateGreetingText';
+import {ReactNode} from 'react';
 import {AvatarComp} from '../Avatar/AvatarComp';
 import {GreetingProps} from './props';
 

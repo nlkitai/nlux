@@ -1,13 +1,13 @@
+import alias from '@rollup/plugin-alias';
 import commonjs from '@rollup/plugin-commonjs';
 import replace from '@rollup/plugin-replace';
 import strip from '@rollup/plugin-strip';
 import terser from '@rollup/plugin-terser';
-import alias from '@rollup/plugin-alias';
+import {resolve} from 'path';
 import {RollupOptions} from 'rollup';
 import esbuild from 'rollup-plugin-esbuild';
 import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
 import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
-import {resolve} from 'path';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const packageName = '@nlux/hf-react';

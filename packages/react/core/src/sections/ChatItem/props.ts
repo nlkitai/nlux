@@ -1,8 +1,8 @@
 import {ConversationLayout, DataTransferMode} from '@nlux/core';
-import {ReactElement, ReactNode} from 'react';
 import {MessageDirection} from '@shared/components/Message/props';
-import {MessageOptions} from '../../exports/messageOptions';
+import {ReactElement, ReactNode} from 'react';
 import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
+import {MessageOptions} from '../../exports/messageOptions';
 
 export type ChatItemProps<AiMsg> = {
     uid: string;

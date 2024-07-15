@@ -1,10 +1,10 @@
 export type {
-  ChatAdapter,
-  StandardChatAdapter,
-  DataTransferMode,
-  ChatAdapterOptions,
-  ChatAdapterBuilder,
-  StreamingAdapterObserver,
-} from "@nlux/bedrock";
+    ChatAdapter,
+    StandardChatAdapter,
+    DataTransferMode,
+    ChatAdapterOptions,
+    ChatAdapterBuilder,
+    StreamingAdapterObserver,
+} from '@nlux/bedrock';
 
-export { useChatAdapter } from "./hooks/useChatAdapter";
+export {useChatAdapter} from './hooks/useChatAdapter';

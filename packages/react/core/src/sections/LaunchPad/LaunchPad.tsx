@@ -1,8 +1,8 @@
 import {warnOnce} from '@shared/utils/warn';
 import {ReactNode, useEffect, useMemo} from 'react';
+import {ConversationStarters} from '../../components/ConversationStarters/ConversationStarters';
 import {DefaultGreetingComp} from '../../components/DefaultGreeting/DefaultGreetingComp';
 import {GreetingComp, GreetingContainer} from '../../components/Greeting/GreetingComp';
-import {ConversationStarters} from '../../components/ConversationStarters/ConversationStarters';
 import {LaunchPadProps} from './props';
 
 export type LaunchPadCompType = <AiMsg>(
@@ -45,7 +45,8 @@ export const LaunchPad: LaunchPadCompType = (props) => {
     );
 
     const showConversationStarters = useMemo(
-        () => !hasMessages && conversationOptions?.conversationStarters && conversationOptions?.conversationStarters.length > 0,
+        () => !hasMessages && conversationOptions?.conversationStarters
+            && conversationOptions?.conversationStarters.length > 0,
         [hasMessages, conversationOptions?.conversationStarters],
     );
 
@@ -58,7 +59,7 @@ export const LaunchPad: LaunchPadCompType = (props) => {
         if (userDefinedGreeting && conversationOptions?.showWelcomeMessage === false) {
             warnOnce(
                 'Configuration conflict: The greeting UI override provided via <AiChatUI.Greeting> will not be shown ' +
-                'because conversationOptions.showWelcomeMessage is set to false.'
+                'because conversationOptions.showWelcomeMessage is set to false.',
             );
         }
     }, [

@@ -5,8 +5,8 @@
 // * License: MIT
 //
 
-import {useEffect, useMemo, useRef} from 'react';
 import {dequal as deepEqual} from '@shared/utils/dequal';
+import {useEffect, useMemo, useRef} from 'react';
 
 type UseEffectParams = Parameters<typeof useEffect>
 type EffectCallback = UseEffectParams[0]

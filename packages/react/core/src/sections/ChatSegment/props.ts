@@ -1,9 +1,9 @@
 import {ConversationLayout} from '@nlux/core';
-import {ReactElement, RefObject} from 'react';
 import {ChatSegment} from '@shared/types/chatSegment/chatSegment';
+import {ReactElement, RefObject} from 'react';
+import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
 import {MessageOptions} from '../../exports/messageOptions';
 import {PersonaOptions} from '../../exports/personaOptions';
-import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
 
 export type ChatSegmentProps<AiMsg> = {
 

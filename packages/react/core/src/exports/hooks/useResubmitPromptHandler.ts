@@ -10,7 +10,7 @@ export const useResubmitPromptHandler = <AiMsg>(
     setPrompt: (prompt: string) => void,
     setComposerStatus: (status: ComposerStatus) => void,
 ) => {
-    return  useCallback((segmentId: string, messageId: string, newPrompt: string) => {
+    return useCallback((segmentId: string, messageId: string, newPrompt: string) => {
         //
         // Handle the case where the message being edited is in the initial segment
         //

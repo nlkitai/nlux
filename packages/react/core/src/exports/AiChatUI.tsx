@@ -1,6 +1,6 @@
 import {ReactElement} from 'react';
-import {Loader} from './elements/Loader';
 import {Greeting} from './elements/Greeting';
+import {Loader} from './elements/Loader';
 
 export type AiChatUIOverrides = {
     Loader: ReactElement;

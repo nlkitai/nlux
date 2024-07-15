@@ -2,8 +2,8 @@ import {FunctionComponent, useCallback} from 'react';
 import {MarkdownSnapshotRenderer} from '../../MessageRenderer/MarkdownSnapshotRenderer';
 import {ChatItemProps} from '../props';
 
-export const useUserMessageRenderer = function<AiMsg>(
-    props: ChatItemProps<AiMsg>
+export const useUserMessageRenderer = function <AiMsg>(
+    props: ChatItemProps<AiMsg>,
 ): FunctionComponent {
     return useCallback(() => {
         if (props.messageOptions?.promptRenderer === undefined) {
@@ -19,7 +19,7 @@ export const useUserMessageRenderer = function<AiMsg>(
                     canResubmit={props.messageOptions?.editableUserMessages}
                     submitShortcutKey={props.submitShortcutKey}
                     onResubmit={(newPrompt) => {
-                        props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
+                        props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined;
                     }}
                 />
             );
@@ -27,7 +27,7 @@ export const useUserMessageRenderer = function<AiMsg>(
 
         const PromptRenderer = props.messageOptions.promptRenderer;
         const onResubmit = (newPrompt: string) => {
-            props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined
+            props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined;
         };
 
         return (

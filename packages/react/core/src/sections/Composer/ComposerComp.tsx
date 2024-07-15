@@ -1,10 +1,10 @@
-import {ComposerStatus} from '@shared/components/Composer/props';
-import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
-import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {className as compComposerClassName} from '@shared/components/Composer/create';
+import {ComposerStatus} from '@shared/components/Composer/props';
 import {
     statusClassName as compComposerStatusClassName,
 } from '@shared/components/Composer/utils/applyNewStatusClassName';
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
+import {ChangeEvent, KeyboardEvent, useEffect, useMemo, useRef} from 'react';
 import {CancelIconComp} from '../../components/CancelIcon/CancelIconComp';
 import {SendIconComp} from '../../components/SendIcon/SendIconComp';
 import {ComposerProps} from './props';
@@ -21,10 +21,12 @@ export const ComposerComp = (props: ComposerProps) => {
     const className = `${compComposerClassName} ${compClassNameFromStats}`;
 
     const disableTextarea = submittingPromptStatuses.includes(props.status);
-    const disableButton = !props.hasValidInput || props.status === 'waiting' || submittingPromptStatuses.includes(props.status);
+    const disableButton = !props.hasValidInput || props.status === 'waiting' || submittingPromptStatuses.includes(
+        props.status);
     const showSendIcon = props.status === 'typing' || props.status === 'waiting';
     const hideCancelButton = props.hideStopButton === true;
-    const showCancelButton = !hideCancelButton && (submittingPromptStatuses.includes(props.status) || props.status === 'waiting');
+    const showCancelButton = !hideCancelButton && (submittingPromptStatuses.includes(props.status) || props.status
+        === 'waiting');
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
@@ -48,19 +50,23 @@ export const ComposerComp = (props: ComposerProps) => {
         }
     }, [handleSubmit, props.submitShortcut]);
 
-    useEffect(()=>{
-        if(!textareaRef.current) return;
+    useEffect(() => {
+        if (!textareaRef.current) {
+            return;
+        }
         const adjustHeight = () => {
             const textarea = textareaRef.current;
             if (textarea) {
-              textarea.style.height = 'auto'; // Reset height
-              textarea.style.height = `${textarea.scrollHeight}px`; // Set new height based on content
+                textarea.style.height = 'auto'; // Reset height
+                textarea.style.height = `${textarea.scrollHeight}px`; // Set new height based on content
             }
         };
-        textareaRef.current.addEventListener('input',adjustHeight);
-        return ()=>{textareaRef.current?.removeEventListener('input',adjustHeight)}
+        textareaRef.current.addEventListener('input', adjustHeight);
+        return () => {
+            textareaRef.current?.removeEventListener('input', adjustHeight);
+        };
 
-    },[textareaRef.current])
+    }, [textareaRef.current]);
 
     return (
         <div className={className}>

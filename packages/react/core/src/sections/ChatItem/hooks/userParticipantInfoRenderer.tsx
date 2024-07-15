@@ -2,8 +2,8 @@ import {FunctionComponent, useMemo} from 'react';
 import {AvatarComp} from '../../../components/Avatar/AvatarComp';
 import {ChatItemProps} from '../props';
 
-export const useParticipantInfoRenderer = function<AiMsg>(
-    props: ChatItemProps<AiMsg>
+export const useParticipantInfoRenderer = function <AiMsg>(
+    props: ChatItemProps<AiMsg>,
 ): FunctionComponent {
     const participantInfo = useMemo(() => {
         return (
@@ -17,5 +17,5 @@ export const useParticipantInfoRenderer = function<AiMsg>(
 
     }, [props.avatar, props.name]);
 
-    return () => <>{participantInfo}</>
+    return () => <>{participantInfo}</>;
 };

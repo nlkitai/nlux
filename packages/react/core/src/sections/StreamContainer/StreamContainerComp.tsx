@@ -1,13 +1,13 @@
-import {Ref, RefObject, useEffect, useImperativeHandle, useRef, useState} from 'react';
 import {className as compMessageClassName} from '@shared/components/Message/create';
 import {
     directionClassName as compMessageDirectionClassName,
 } from '@shared/components/Message/utils/applyNewDirectionClassName';
 import {statusClassName as compMessageStatusClassName} from '@shared/components/Message/utils/applyNewStatusClassName';
-import {ResponseRenderer} from '../../exports/messageOptions';
-import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 import {createMdStreamRenderer} from '@shared/markdown/stream/streamParser';
 import {StandardStreamParserOutput} from '@shared/types/markdown/streamParser';
+import {Ref, RefObject, useEffect, useImperativeHandle, useRef, useState} from 'react';
+import {ResponseRenderer} from '../../exports/messageOptions';
+import {StreamContainerImperativeProps, StreamContainerProps} from './props';
 
 export const StreamContainerComp = function <AiMsg>(
     props: StreamContainerProps<AiMsg>,

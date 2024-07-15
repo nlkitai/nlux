@@ -1,9 +1,9 @@
-import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
-import {Component, PropsWithChildren, KeyboardEvent, FocusEvent, useEffect, useMemo, useRef, useCallback} from 'react';
 import {attachCopyClickListener} from '@shared/markdown/copyToClipboard/attachCopyClickListener';
 import {parseMdSnapshot} from '@shared/markdown/snapshot/snapshotParser';
 import {SnapshotParserOptions} from '@shared/types/markdown/snapshotParser';
+import {isSubmitShortcutKey} from '@shared/utils/isSubmitShortcutKey';
 import {warn} from '@shared/utils/warn';
+import {Component, FocusEvent, KeyboardEvent, PropsWithChildren, useCallback, useEffect, useMemo, useRef} from 'react';
 
 type MarkdownSnapshotRendererProps = {
     messageUid: string;

@@ -1,7 +1,7 @@
 import {HighlighterExtension, SanitizerExtension} from '@nlux/core';
 import {MessageDirection} from '@shared/components/Message/props';
-import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 import {MarkdownContainersController} from '../../exports/hooks/usMarkdownContainers';
+import {PromptRenderer, ResponseRenderer} from '../../exports/messageOptions';
 
 export type StreamContainerProps<AisMsg> = {
     uid: string,

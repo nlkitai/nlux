@@ -1,9 +1,9 @@
 import {createRef, forwardRef, ReactNode, Ref, useImperativeHandle, useMemo} from 'react';
+import {useConversationDisplayStyle} from '../../exports/hooks/useConversationDisplayStyle';
 import {ChatSegmentComp} from '../ChatSegment/ChatSegmentComp';
 import {useChatSegmentsController} from './hooks/useChatSegmentsController';
 import {useLastActiveSegment} from './hooks/useLastActiveSegment';
 import {ConversationCompProps, ImperativeConversationCompProps} from './props';
-import {useConversationDisplayStyle} from '../../exports/hooks/useConversationDisplayStyle';
 
 export type ConversationCompType = <AiMsg>(
     props: ConversationCompProps<AiMsg>,
@@ -39,7 +39,7 @@ export const ConversationComp: ConversationCompType = function <AiMsg>(
         cancelSegmentStreams: (segmentId: string) => {
             const chatSegment = segmentsController.get(segmentId);
             chatSegment?.cancelStreams();
-        }
+        },
     }), []);
 
     const ForwardRefChatSegmentComp = useMemo(() => forwardRef(

@@ -11,7 +11,7 @@ export const useCancelLastMessage = function <AiMsg>(
     setCancelledSegmentIds: Dispatch<SetStateAction<string[]>>,
     setCancelledMessageIds: Dispatch<SetStateAction<string[]>>,
     conversationRef: RefObject<ImperativeConversationCompProps<AiMsg>>,
-    setComposerStatus: Dispatch<SetStateAction<ComposerStatus>>
+    setComposerStatus: Dispatch<SetStateAction<ComposerStatus>>,
 ) {
     return useCallback(() => {
         const lastSegment = newSegments.length > 0 ? newSegments[newSegments.length - 1] : undefined;
@@ -21,7 +21,7 @@ export const useCancelLastMessage = function <AiMsg>(
             setCancelledSegmentIds([...cancelledSegmentIds, lastSegment.uid]);
             setCancelledMessageIds([
                 ...cancelledMessageIds,
-                ...lastSegment.items.map(item => item.uid)
+                ...lastSegment.items.map(item => item.uid),
             ]);
 
             // TODO - Cancel the HTTP request if it is still pending or streaming
@@ -39,6 +39,6 @@ export const useCancelLastMessage = function <AiMsg>(
         setCancelledSegmentIds,
         setCancelledMessageIds,
         conversationRef,
-        setComposerStatus
+        setComposerStatus,
     ]);
 };

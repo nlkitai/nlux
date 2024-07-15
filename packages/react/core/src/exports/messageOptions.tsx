@@ -1,6 +1,6 @@
 import {MessageOptions as JavaScriptMessageOptions} from '@nlux/core';
-import {FC, RefObject} from 'react';
 import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
+import {FC, RefObject} from 'react';
 
 /**
  * Props for the custom React component that renders a message sent by the server.

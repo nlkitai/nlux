@@ -1,33 +1,33 @@
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 import {ChatSegment, ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
-import {
-    ReactNode,
-    FunctionComponent,
-    Ref,
-    RefObject,
-    ForwardRefExoticComponent,
-    RefAttributes,
-    MutableRefObject,
-    useState,
-    useEffect,
-    useCallback,
-    useMemo,
-    useRef,
-    useImperativeHandle,
-    createRef,
-    forwardRef,
-    isValidElement,
-} from 'react';
 import {AiBatchedMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
+import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
 import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
 import {warn, warnOnce} from '@shared/utils/warn';
-import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
-import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
+import {
+    createRef,
+    forwardRef,
+    ForwardRefExoticComponent,
+    FunctionComponent,
+    isValidElement,
+    MutableRefObject,
+    ReactNode,
+    Ref,
+    RefAttributes,
+    RefObject,
+    useCallback,
+    useEffect,
+    useImperativeHandle,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import {ChatItemComp} from '../ChatItem/ChatItemComp';
 import {ChatItemImperativeProps, ChatItemProps} from '../ChatItem/props';
-import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
-import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {useItemsRefs} from './useItemsRefs';
+import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
+import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
@@ -82,7 +82,7 @@ export const ChatSegmentComp: <AiMsg>(
             chatItemsRef.forEach((ref) => {
                 ref.current?.cancelStream();
             });
-        }
+        },
     }), [
         // setCompleteOnInitialRender is not needed as a dependency here, even though it is used inside.
     ]);
@@ -171,7 +171,9 @@ const chatItemToReactNode = function <AiMsg>(
     // - contentToUse: The content to be used in the chat item component.
     // - contentType: The type of the content to be used in the chat item component.
     //
-    let contentToUse: AiMsg[] | ReactNode | StreamedServerComponent | undefined = (chatItem as { content?: Array<AiMsg> }).content;
+    let contentToUse: AiMsg[] | ReactNode | StreamedServerComponent | undefined = (chatItem as {
+        content?: Array<AiMsg>
+    }).content;
     let contentType: 'text' | 'server-component' = 'text';
 
     //
@@ -280,7 +282,7 @@ const chatItemToReactNode = function <AiMsg>(
         // We do not rely on custom renderer here since the content is streamed as string.
         //
         if (chatItem.dataTransferMode === 'stream') {
-            const typedChatItem = chatItem as { serverResponse?: Array<string | object | undefined> };
+            const typedChatItem = chatItem as {serverResponse?: Array<string | object | undefined>};
             return (
                 <ForwardRefChatItemComp
                     ref={ref}
@@ -312,7 +314,8 @@ const chatItemToReactNode = function <AiMsg>(
             // we render the message content. We also check if the content is primitive and if a custom
             // renderer is provided.
             //
-            if (contentType === 'text' && !isPrimitiveReactNodeType(contentToUse) && !props.messageOptions?.responseRenderer) {
+            if (contentType === 'text' && !isPrimitiveReactNodeType(contentToUse)
+                && !props.messageOptions?.responseRenderer) {
                 warn(
                     `When the type of the AI chat content is not primitive (object or array), ` +
                     `a custom renderer must be provided — ` +
@@ -358,13 +361,14 @@ const chatItemToReactNode = function <AiMsg>(
     if (chatItem.status === 'streaming') {
 
         // In the case of a server component, we render the server component content.
-        // The server component will be rendered as a React component and its content will be streamed via React RSC API.
+        // The server component will be rendered as a React component and its content will be streamed via React RSC
+        // API.
         const serverComponent = (contentType === 'server-component' && isValidElement(contentToUse))
             ? contentToUse // Server component content that is being streamed.
             : undefined;
 
-        // When the content is not a React server component, the streaming will be handled via markdownContainersController.
-        // which will stream the content as a string.
+        // When the content is not a React server component, the streaming will be handled via
+        // markdownContainersController. which will stream the content as a string.
 
         return (
             <ForwardRefChatItemComp
@@ -397,4 +401,4 @@ const chatItemToReactNode = function <AiMsg>(
     // We do render a chat item on 'loading' or 'error' states:
     // - On 'loading' state — A loading spinner will be displayed.
     // - On 'error' state — An error message will be shown.
-}
+};
