@@ -1,5 +1,5 @@
-import {Hero} from '@site/src/pages/(sections)/hero/hero';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import {Hero} from '@site/src/pages/(sections)/hero/hero';
 import {Newsletter} from '@site/src/pages/(sections)/newsletter/newsletter';
 import {Roadmap} from '@site/src/pages/(sections)/roadmap/roadmap';
 import {Talk} from '@site/src/pages/(sections)/talk/talk';

@@ -51,12 +51,12 @@
 
 .twitter-tweet-container {
     display: inline-block;
-    min-height: 520px;
-    max-width: 570px;
+    overflow: hidden;
     width: 100%;
+    max-width: 570px;
+    min-height: 520px;
     padding: 0 10px;
     border-radius: 10px;
-    overflow: hidden;
     background-color: white;
 }
 
@@ -81,8 +81,8 @@
 
 .navbar .navbar__items:first-of-type .navbar__title {
     font-family: var(--ifm-font-family-title);
-    font-weight: 900;
     font-size: 1.5rem;
+    font-weight: 900;
     letter-spacing: -1px;
 }
 
@@ -115,10 +115,10 @@ html[data-theme='dark'] .navbar .github-repo-navlink-container {
 }
 
 .navbar .github-repo-navlink-container:after {
-    content: ' ';
+    display: inline-block;
     width: 30px;
     height: 30px;
-    display: inline-block;
+    content: ' ';
     background: var(--ifm-github-logo-image) no-repeat center;
     background-size: contain;
 }
@@ -141,19 +141,19 @@ h1, h2, h3 {
 .main-wrapper .container h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    background-color: var(--nx-background-color-1);;
     display: inline-block;
-    padding: 0 0 0 14px;
     margin: 0;
+    padding: 0 0 0 14px;
+    background-color: var(--nx-background-color-1);;
 }
 
 .main-wrapper .container h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    background-color: var(--nx-background-color-1);;
     display: inline-block;
-    padding: 0 0 0 14px;
     margin: 0;
+    padding: 0 0 0 14px;
+    background-color: var(--nx-background-color-1);;
 }
 
 .main-wrapper .container h1.hero__title {
@@ -170,9 +170,9 @@ h1, h2, h3 {
 /* Embedded code editor */
 .sp-wrapper .sp-preview-iframe,
 .sp-wrapper .sp-preview-container {
+    align-items: center;
     border-radius: 0;
     background-color: transparent;
-    align-items: center;
 }
 
 .prism-code {
@@ -181,16 +181,16 @@ h1, h2, h3 {
 
 .platform-selector {
     display: flex;
-    background-color: #00000012;
-    border-radius: 10px;
     margin-top: 1rem;
+    border-radius: 10px;
+    background-color: #00000012;
 
     --ifm-tabs-padding-vertical: 0.5rem;
     --ifm-tabs-padding-horizontal: 1rem;
 }
 
 @media (max-width: 1250px) {
-    .navbar__link[href*="nlkit.com"] {
+    .navbar__link[href*='nlkit.com'] {
         display: none;
     }
 }

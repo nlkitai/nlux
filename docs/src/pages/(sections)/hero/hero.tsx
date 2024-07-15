@@ -20,7 +20,7 @@ const VercelAiDarkLogo = '/nlux/images/logos/platforms/vercel-logo-dark-60pxh.pn
 const VercelAiLightLogo = '/nlux/images/logos/platforms/vercel-logo-light-60pxh.png';
 const AdapterLogo = '/nlux/images/logos/platforms/adapters-logo-60pxh.png';
 
-export const Hero = ({className}: { className?: string }) => {
+export const Hero = ({className}: {className?: string}) => {
     const {colorMode} = useColorMode();
     const [nluxLogoForHeroBanner, setLogo] = useState(
         colorMode === 'dark' ? NluxLogoDark : NluxLogoLight,
@@ -70,10 +70,12 @@ export const Hero = ({className}: { className?: string }) => {
                             Integrates with
                         </div>
                         <div className={heroStyles.platformName}>
-                            <img src={colorMode === 'dark' ? LangChainDarkLogo : LangChainLightLogo} alt="LangChain Logo" height={25}/>
+                            <img src={colorMode === 'dark' ? LangChainDarkLogo : LangChainLightLogo}
+                                 alt="LangChain Logo" height={25}/>
                         </div>
                         <div className={heroStyles.vercelPlatformName}>
-                            <img src={colorMode === 'dark' ? VercelAiDarkLogo : VercelAiLightLogo} alt="Vercel Logo" height={25}/>
+                            <img src={colorMode === 'dark' ? VercelAiDarkLogo : VercelAiLightLogo} alt="Vercel Logo"
+                                 height={25}/>
                             <h5 style={{textAlign: 'left'}}>Vercel AI</h5>
                         </div>
                         <div className={heroStyles.platformName}>
