@@ -1,4 +1,4 @@
-import {StreamedServerComponent} from '../adapters/chat/serverComponentChatAdapter';
+import {ServerComponentExecutionResult} from '../adapters/chat/serverComponentChatAdapter';
 
 export type AiStreamedMessage<AiMsg> = {
     uid: string;
@@ -50,10 +50,10 @@ export type AiStreamedServerComponentMessage = {
 } & ({
     status: 'streaming';
     contentType: 'server-component';
-    content: StreamedServerComponent;
+    content: ServerComponentExecutionResult;
 } | {
     status: 'complete';
-    content: StreamedServerComponent;
+    content: ServerComponentExecutionResult;
 } | {
     status: 'error';
     error: string;

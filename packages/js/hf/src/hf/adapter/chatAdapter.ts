@@ -1,4 +1,4 @@
-import {HfInference, TextGenerationOutput, TextGenerationStreamOutput} from '@huggingface/inference';
+import {HfInference} from '@huggingface/inference';
 import {
     ChatAdapterExtras,
     DataTransferMode,
@@ -73,7 +73,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
         };
 
         try {
-            let output: TextGenerationOutput | undefined = undefined;
+            let output = undefined;
             if (this.options.endpoint) {
                 const endpoint = this.inference.endpoint(this.options.endpoint);
                 output = await endpoint.textGeneration(parameters);
@@ -126,7 +126,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                 },
             };
 
-            let output: AsyncGenerator<TextGenerationStreamOutput> | undefined = undefined;
+            let output: AsyncGenerator<unknown> | undefined = undefined;
 
             try {
                 if (this.options.endpoint) {
@@ -151,7 +151,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
                     }
 
                     observer.next(
-                        await this.decode(value.token) as string, // We are forced to cast here!
+                        await this.decode((value as Record<string, unknown> | undefined)?.token) as string, // We are forced to cast here!
                     );
                 }
 
@@ -188,7 +188,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
             }
 
             const generated_text = payload
-                ? (payload as TextGenerationStreamOutput).generated_text
+                ? (payload as Record<string, unknown>).generated_text
                 : undefined;
 
             if (typeof generated_text === 'string') {

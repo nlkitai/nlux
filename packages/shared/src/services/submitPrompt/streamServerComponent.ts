@@ -1,7 +1,7 @@
 import {ChatAdapterExtras} from '../../types/adapters/chat/chatAdapterExtras';
 import {
     ServerComponentChatAdapter,
-    StreamedServerComponent,
+    ServerComponentExecutionResult,
 } from '../../types/adapters/chat/serverComponentChatAdapter';
 import {ChatSegment} from '../../types/chatSegment/chatSegment';
 import {AiStreamedServerComponentMessage} from '../../types/chatSegment/chatSegmentAiMessage';
@@ -37,7 +37,7 @@ export const submitAndStreamServerComponentResponse = <AiMsg>(
             const dataTransferMode = 'stream';
 
             let aiResponse: AiStreamedServerComponentMessage | undefined = undefined;
-            let serverComponent: StreamedServerComponent | undefined = undefined;
+            let serverComponent: ServerComponentExecutionResult | undefined = undefined;
 
             const handleComplete = () => {
                 //

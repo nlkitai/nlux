@@ -7,6 +7,8 @@ export type StreamedServerComponent = {
     default: Function;
 };
 
+export type ServerComponentExecutionResult = any;
+
 /**
  * The props that are passed to the server component it's used with useAsRscAdapter().
  * - `message`: The message that was sent to the API.
@@ -28,7 +30,7 @@ export type StreamSendServerComponent<AiMsg = string> = (
         onServerComponentReceived: () => void;
         onError: (error: Error) => void;
     },
-) => StreamedServerComponent;
+) => ServerComponentExecutionResult;
 
 /**
  * Adapter used to submit a message to the API and get a response in the form of an ESM module.

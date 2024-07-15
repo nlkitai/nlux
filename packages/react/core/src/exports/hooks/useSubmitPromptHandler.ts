@@ -120,12 +120,12 @@ export const useSubmitPromptHandler = <AiMsg>(props: SubmitPromptHandlerProps<Ai
                 adapterToUse)
                 ? adapterToUse as StandardChatAdapter<AiMsg>
                 : (
-                    ((adapterToUse as ChatAdapter<AiMsg>).streamServerComponent) ? ({
+                    (adapterToUse as ChatAdapter<AiMsg>).streamServerComponent ? {
                         streamServerComponent: (adapterToUse as ChatAdapter<AiMsg>).streamServerComponent!,
-                    } satisfies ServerComponentChatAdapter<AiMsg>) : ({
+                    } satisfies ServerComponentChatAdapter<AiMsg> : {
                         batchText: (adapterToUse as CoreChatAdapter<AiMsg>).batchText,
                         streamText: (adapterToUse as CoreChatAdapter<AiMsg>).streamText,
-                    } satisfies CoreChatAdapter<AiMsg>)
+                    } satisfies CoreChatAdapter<AiMsg>
                 );
 
             //

@@ -83,5 +83,6 @@
     "language",
     "natural-language",
     "understanding"
-  ]
+  ],
+  "packageManager": "yarn@1.22.19"
 }
