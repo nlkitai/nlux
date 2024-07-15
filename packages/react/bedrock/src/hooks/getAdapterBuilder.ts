@@ -7,9 +7,7 @@ import { NluxUsageError } from "@shared/types/error";
 
 const source = "hooks/getAdapterBuilder";
 
-export const getAdapterBuilder = <AiMsg>(
-  options: ChatAdapterOptions<AiMsg>
-): ChatAdapterBuilder<AiMsg> => {
+export const getAdapterBuilder = <AiMsg>(options: ChatAdapterOptions): ChatAdapterBuilder<AiMsg> => {
   const { model, credentials, dataTransferMode } = options || {};
 
   if (

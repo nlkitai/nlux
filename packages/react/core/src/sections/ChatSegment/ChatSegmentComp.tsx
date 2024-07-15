@@ -1,30 +1,33 @@
 import {ChatSegment, ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
-import React, {
+import {
     ReactNode,
     FunctionComponent,
     Ref,
     RefObject,
+    ForwardRefExoticComponent,
+    RefAttributes,
+    MutableRefObject,
+    useState,
     useEffect,
-    useImperativeHandle,
+    useCallback,
     useMemo,
     useRef,
-    useState,
+    useImperativeHandle,
     createRef,
     forwardRef,
     isValidElement,
-    useCallback, ForwardRefExoticComponent, RefAttributes,
 } from 'react';
 import {AiBatchedMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
 import {getChatSegmentClassName} from '@shared/utils/dom/getChatSegmentClassName';
 import {warn, warnOnce} from '@shared/utils/warn';
+import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
+import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 import {ChatItemComp} from '../ChatItem/ChatItemComp';
 import {ChatItemImperativeProps, ChatItemProps} from '../ChatItem/props';
+import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
+import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
 import {ChatSegmentImperativeProps, ChatSegmentProps} from './props';
 import {useItemsRefs} from './useItemsRefs';
-import {isPrimitiveReactNodeType} from './utils/isPrimitiveReactNodeType';
-import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
-import {avatarFromMessageAndPersona} from './utils/avatarFromMessageAndPersona';
-import {StreamedServerComponent} from '@shared/types/adapters/chat/serverComponentChatAdapter';
 
 export const ChatSegmentComp: <AiMsg>(
     props: ChatSegmentProps<AiMsg>,
@@ -151,8 +154,8 @@ const chatItemToReactNode = function <AiMsg>(
     chatSegment: ChatSegment<AiMsg>,
     chatItem: ChatSegmentItem<AiMsg>,
     chatItemsRef: Map<string, RefObject<ChatItemImperativeProps<AiMsg>>>,
-    serverComponentsFunctionsRef: React.MutableRefObject<Map<string, FunctionComponent>>,
-    serverComponentsRef: React.MutableRefObject<Map<string, ReactNode | StreamedServerComponent>>,
+    serverComponentsFunctionsRef: MutableRefObject<Map<string, FunctionComponent>>,
+    serverComponentsRef: MutableRefObject<Map<string, ReactNode | StreamedServerComponent>>,
     onMarkdownStreamRendered: (chatItemId: string) => void,
 ): ReactNode {
 
@@ -191,7 +194,7 @@ const chatItemToReactNode = function <AiMsg>(
                 const ContentToUseFC = contentToUse as FunctionComponent;
                 contentToUse = <ContentToUseFC/>;
 
-                if (!contentToUse || !React.isValidElement(contentToUse)) {
+                if (!contentToUse || !isValidElement(contentToUse)) {
                     throw new Error(`Invalid React element returned from the AI chat content function.`);
                 } else {
                     contentType = 'server-component';
@@ -277,6 +280,7 @@ const chatItemToReactNode = function <AiMsg>(
         // We do not rely on custom renderer here since the content is streamed as string.
         //
         if (chatItem.dataTransferMode === 'stream') {
+            const typedChatItem = chatItem as { serverResponse?: Array<string | object | undefined> };
             return (
                 <ForwardRefChatItemComp
                     ref={ref}
@@ -290,7 +294,7 @@ const chatItemToReactNode = function <AiMsg>(
                     markdownContainersController={props.markdownContainersController}
                     onMarkdownStreamRendered={onMarkdownStreamRendered}
                     streamedContent={contentToUse as AiMsg[]}
-                    streamedServerResponse={chatItem.serverResponse}
+                    streamedServerResponse={typedChatItem.serverResponse}
                     // fetchedContent not used in stream mode.
                     // fetchedServerResponse not used in stream mode.
 

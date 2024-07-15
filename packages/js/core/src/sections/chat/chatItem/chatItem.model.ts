@@ -51,6 +51,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
                 uid: this.props.uid,
                 participantRole: 'assistant',
                 content: this.getItemContent() as AiMsg,
+                contentType: 'text',
                 serverResponse: this.serverResponse,
                 status: 'complete',
                 dataTransferMode: 'batch',
@@ -62,6 +63,7 @@ export class CompChatItem<AiMsg> extends BaseComp<
             uid: this.props.uid,
             participantRole: 'user',
             content: this.getItemContent() as string,
+            contentType: 'text',
             status: 'complete',
             time: new Date(),
         } satisfies ChatSegmentUserMessage;

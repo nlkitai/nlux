@@ -59,4 +59,4 @@ export type AiStreamedServerComponentMessage = {
     error: string;
 });
 
-export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage<AiMsg> | AiBatchedMessage<AiMsg>;
+export type ChatSegmentAiMessage<AiMsg> = AiStreamedMessage<AiMsg> | AiBatchedMessage<AiMsg> | AiStreamedServerComponentMessage;

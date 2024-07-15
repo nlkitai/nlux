@@ -63,7 +63,7 @@ export const submitAndStreamServerComponentResponse = <AiMsg>(
                     status: 'complete',
                     items: [
                         userMessage,
-                        aiResponse,
+                        aiResponse!,
                     ],
                 };
 

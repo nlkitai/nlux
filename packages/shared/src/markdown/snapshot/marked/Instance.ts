@@ -149,6 +149,7 @@ export class Marked {
                     const prevTokenizer = tokenizer[tokenizerProp] as UnknownFunction;
 
                     // Replace tokenizer with func to run extension, but fall back if false
+                    // @ts-ignore
                     tokenizer[tokenizerProp] = (...args: unknown[]) => {
                         let ret = tokenizerFunc.apply(tokenizer, args);
                         if (ret === false) {
@@ -175,6 +176,7 @@ export class Marked {
                     const hooksFunc = pack.hooks[hooksProp] as UnknownFunction;
                     const prevHook = hooks[hooksProp] as UnknownFunction;
                     if (_Hooks.passThroughHooks.has(prop)) {
+                        // @ts-ignore
                         hooks[hooksProp] = (arg: unknown) => {
                             if (this.defaults.async) {
                                 return Promise.resolve(hooksFunc.call(hooks, arg)).then(ret => {
@@ -186,6 +188,7 @@ export class Marked {
                             return prevHook.call(hooks, ret);
                         };
                     } else {
+                        // @ts-ignore
                         hooks[hooksProp] = (...args: unknown[]) => {
                             let ret = hooksFunc.apply(hooks, args);
                             if (ret === false) {
