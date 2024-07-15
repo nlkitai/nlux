@@ -7,7 +7,7 @@ export const comp = <
     compClass: CompClass,
 ) => {
     const compId = typeof compClass === 'function'
-        ? (compClass as unknown as { __compId: string }).__compId
+        ? (compClass as unknown as {__compId: string}).__compId
         : undefined;
 
     if (!compId) {
@@ -35,7 +35,9 @@ export const comp = <
                 withProps: <PropsType = unknown>(newProps: PropsType) => {
                     return {
                         create: (): InstanceType<CompClass> => {
-                            return new CompClass(newContext as unknown as ControllerContext<object>, newProps as object);
+                            return new CompClass(newContext as unknown as ControllerContext<object>,
+                                newProps as object,
+                            );
                         },
                     };
                 },

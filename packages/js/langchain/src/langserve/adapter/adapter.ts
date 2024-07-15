@@ -106,6 +106,8 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         return this.theInputSchemaUrlToUse;
     }
 
+    abstract batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined>;
+
     async fetchSchema(url: string): Promise<object | undefined> {
         try {
             const response = await fetch(url);
@@ -122,39 +124,12 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         }
     }
 
-    abstract batchText(message: string, extras: ChatAdapterExtras<AiMsg>): Promise<string | object | undefined>;
-
     init() {
         if (this.useInputSchema) {
             this.fetchSchema(this.inputSchemaUrl).then((schema) => {
                 this.theInputSchemaToUse = schema;
             });
         }
-    }
-
-    preProcessAiStreamedChunk(
-        chunk: string | object | undefined,
-        extras: ChatAdapterExtras<AiMsg>,
-    ): AiMsg | undefined {
-        if (this.outputPreProcessor) {
-            return this.outputPreProcessor(chunk);
-        }
-
-        if (typeof chunk === 'string') {
-            return chunk as AiMsg;
-        }
-
-        const content = (chunk as Record<string, unknown>)?.content;
-        if (typeof content === 'string') {
-            return content as AiMsg;
-        }
-
-        warn(
-            'LangServe adapter is unable to process the chunk from the runnable. Returning empty string. ' +
-            'You may want to implement an output pre-processor to handle chunks of custom responses.',
-        );
-
-        return undefined;
     }
 
     preProcessAiBatchedMessage(
@@ -177,6 +152,31 @@ export abstract class LangServeAbstractAdapter<AiMsg> implements StandardChatAda
         warn(
             'LangServe adapter is unable to process the response from the runnable. Returning empty string. ' +
             'You may want to implement an output pre-processor to handle custom responses.',
+        );
+
+        return undefined;
+    }
+
+    preProcessAiStreamedChunk(
+        chunk: string | object | undefined,
+        extras: ChatAdapterExtras<AiMsg>,
+    ): AiMsg | undefined {
+        if (this.outputPreProcessor) {
+            return this.outputPreProcessor(chunk);
+        }
+
+        if (typeof chunk === 'string') {
+            return chunk as AiMsg;
+        }
+
+        const content = (chunk as Record<string, unknown>)?.content;
+        if (typeof content === 'string') {
+            return content as AiMsg;
+        }
+
+        warn(
+            'LangServe adapter is unable to process the chunk from the runnable. Returning empty string. ' +
+            'You may want to implement an output pre-processor to handle chunks of custom responses.',
         );
 
         return undefined;

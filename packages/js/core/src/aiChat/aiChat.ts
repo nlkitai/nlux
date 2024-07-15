@@ -9,32 +9,29 @@ import {AiChatStatus, IAiChat} from '../types/aiChat/aiChat';
 import {UpdatableAiChatProps} from '../types/aiChat/props';
 import {EventCallback, EventName, EventsMap} from '../types/event';
 import {NluxController} from './controller/controller';
+import {ComposerOptions} from './options/composerOptions';
 import {ConversationOptions} from './options/conversationOptions';
 import {DisplayOptions} from './options/displayOptions';
 import {MessageOptions} from './options/messageOptions';
 import {PersonaOptions} from './options/personaOptions';
-import {ComposerOptions} from './options/composerOptions';
 
 export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
     protected theAdapter: ChatAdapter<AiMsg> | StandardChatAdapter<AiMsg> | null = null;
     protected theAdapterBuilder: ChatAdapterBuilder<AiMsg> | null = null;
     protected theAdapterType: 'builder' | 'instance' | null = null;
     protected theClassName: string | null = null;
+    protected theComposerOptions: ComposerOptions | null = null;
     protected theConversationOptions: ConversationOptions | null = null;
     protected theDisplayOptions: DisplayOptions | null = null;
     protected theInitialConversation: ChatItem<AiMsg>[] | null = null;
     protected theMessageOptions: MessageOptions<AiMsg> | null = null;
     protected thePersonasOptions: PersonaOptions | null = null;
-    protected theComposerOptions: ComposerOptions | null = null;
-
-    // Controller instance
-    private controller: NluxController<AiMsg> | null = null;
-
-    // Event listeners provided before the controller is mounted, when the aiChat instance is being built.
-    private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
-
     // Variable to track if the chat component was unmounted (and thus cannot be used anymore).
     private aiChatStatus: AiChatStatus = 'idle';
+    // Controller instance
+    private controller: NluxController<AiMsg> | null = null;
+    // Event listeners provided before the controller is mounted, when the aiChat instance is being built.
+    private unregisteredEventListeners: Map<EventName, Set<EventCallback<AiMsg>>> = new Map();
 
     public get status(): AiChatStatus {
         return this.aiChatStatus;
@@ -299,6 +296,26 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         return this;
     }
 
+    public withComposerOptions(composerOptions: ComposerOptions) {
+        if (!this.isIdle) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to set composer options. nlux is already or was previously mounted. ' +
+                    'You can only set the composer options once, when the status is `idle`.',
+            });
+        }
+
+        if (this.theComposerOptions) {
+            throw new NluxUsageError({
+                source: this.constructor.name,
+                message: 'Unable to change config. Composer options were already set.',
+            });
+        }
+
+        this.theComposerOptions = {...composerOptions};
+        return this;
+    }
+
     public withConversationOptions(conversationOptions: ConversationOptions) {
         if (!this.isIdle) {
             throw new NluxUsageError({
@@ -396,26 +413,6 @@ export class AiChat<AiMsg = string> implements IAiChat<AiMsg> {
         }
 
         this.thePersonasOptions = {...personaOptions};
-        return this;
-    }
-
-    public withComposerOptions(composerOptions: ComposerOptions) {
-        if (!this.isIdle) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to set composer options. nlux is already or was previously mounted. ' +
-                    'You can only set the composer options once, when the status is `idle`.',
-            });
-        }
-
-        if (this.theComposerOptions) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Unable to change config. Composer options were already set.',
-            });
-        }
-
-        this.theComposerOptions = {...composerOptions};
         return this;
     }
 

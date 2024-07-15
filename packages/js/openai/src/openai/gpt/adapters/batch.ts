@@ -1,7 +1,7 @@
 import {ChatAdapterExtras, StreamingAdapterObserver} from '@nlux/core';
-import OpenAI from 'openai';
 import {NluxUsageError} from '@shared/types/error';
 import {warn} from '@shared/utils/warn';
+import OpenAI from 'openai';
 import {adapterErrorToExceptionId} from '../../../utils/adapterErrorToExceptionId';
 import {conversationHistoryToMessagesList} from '../../../utils/conversationHistoryToMessagesList';
 import {ChatAdapterOptions} from '../types/chatAdapterOptions';
@@ -9,10 +9,10 @@ import {OpenAiAbstractAdapter} from './adapter';
 
 export class OpenAiBatchAdapter<AiMsg> extends OpenAiAbstractAdapter<AiMsg> {
     constructor({
-                    apiKey,
-                    model,
-                    systemMessage,
-                }: ChatAdapterOptions) {
+        apiKey,
+        model,
+        systemMessage,
+    }: ChatAdapterOptions) {
         super({
             apiKey,
             model,

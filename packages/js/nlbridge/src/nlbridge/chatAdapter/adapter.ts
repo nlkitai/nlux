@@ -71,21 +71,21 @@ export abstract class NLBridgeAbstractAdapter<AiMsg> implements StandardChatAdap
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;
 
-    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
-        if (typeof chunk === 'string') {
-            return chunk as AiMsg;
-        }
-
-        warn('NLBridge adapter received a non-string chunk from the server. Returning empty string.');
-        return '' as AiMsg;
-    }
-
     preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         if (typeof message === 'string') {
             return message as AiMsg;
         }
 
         warn('NLBridge adapter received a non-string message from the server. Returning empty string.');
+        return '' as AiMsg;
+    }
+
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+        if (typeof chunk === 'string') {
+            return chunk as AiMsg;
+        }
+
+        warn('NLBridge adapter received a non-string chunk from the server. Returning empty string.');
         return '' as AiMsg;
     }
 

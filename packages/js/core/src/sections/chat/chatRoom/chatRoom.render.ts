@@ -50,7 +50,7 @@ export const renderChatRoom: CompRenderer<
     //
     chatRoomContainer.classList.add('nlux-chatRoom-container');
     setChatRoomStatusClass(
-        getChatRoomStatus(props.initialConversationContent)
+        getChatRoomStatus(props.initialConversationContent),
     );
 
     chatRoomContainer.append(dom);
@@ -59,7 +59,7 @@ export const renderChatRoom: CompRenderer<
     const [_, removeConversationContainerListeners] = listenToElement(chatRoomContainer,
         ':scope > .nlux-conversation-container',
     ).on('click', compEvent('conversation-container-clicked'))
-        .get();
+     .get();
 
     //
     // Render the chat room

@@ -9,15 +9,15 @@ import {CompChatRoom} from '../../sections/chat/chatRoom/chatRoom.model';
 import {CompChatRoomProps} from '../../sections/chat/chatRoom/chatRoom.types';
 import {CompExceptionsBox} from '../../sections/miscellaneous/exceptionsBox/model';
 import {AiChatInternalProps, UpdatableAiChatProps} from '../../types/aiChat/props';
+import {ControllerContext} from '../../types/controllerContext';
 import {propsToCorePropsInEvents} from '../../utils/propsToCorePropsInEvents';
 import {comp} from '../comp/comp';
 import {CompRegistry} from '../comp/registry';
+import {ComposerOptions} from '../options/composerOptions';
 import {ConversationOptions} from '../options/conversationOptions';
 import {DisplayOptions} from '../options/displayOptions';
 import {MessageOptions} from '../options/messageOptions';
 import {PersonaOptions} from '../options/personaOptions';
-import {ComposerOptions} from '../options/composerOptions';
-import {ControllerContext} from '../../types/controllerContext';
 
 export class NluxRenderer<AiMsg> {
     private readonly __context: ControllerContext<AiMsg>;
@@ -31,12 +31,12 @@ export class NluxRenderer<AiMsg> {
     private rootElementInitialClassName: string | null;
 
     private theClassName: string | null = null;
+    private theComposerOptions: ComposerOptions = {};
     private theConversationOptions: ConversationOptions = {};
     private theDisplayOptions: DisplayOptions = {};
     private theInitialConversationContent: ChatItem<AiMsg>[] | null = null;
     private theMessageOptions: MessageOptions<AiMsg> = {};
     private thePersonasOptions: PersonaOptions = {};
-    private theComposerOptions: ComposerOptions = {};
 
     constructor(
         context: ControllerContext<AiMsg>,

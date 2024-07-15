@@ -56,9 +56,9 @@ export class NLBridgeStreamAdapter<AiMsg> extends NLBridgeAbstractAdapter<AiMsg>
                 while (true) {
                     const {value, done} = await reader.read();
                     if (done) {
-                      break;
+                        break;
                     }
-              
+
                     try {
                         const chunk = textDecoder.decode(value);
                         observer.next(chunk);

@@ -1,10 +1,10 @@
-import {CompRenderer} from '../../../types/comp';
-import {CompLaunchPadActions, CompLaunchPadElements, CompLaunchPadEvents, CompLaunchPadProps} from './launchPad.types';
-import {AssistantPersona} from '../../../aiChat/options/personaOptions';
-import {ConversationStarter} from '../../../types/conversationStarter';
-import {createGreetingDom} from '@shared/components/Greeting/create';
 import {createDefaultGreetingDom} from '@shared/components/DefaultGreeting/create';
+import {createGreetingDom} from '@shared/components/Greeting/create';
 import {updateGreetingDom} from '@shared/components/Greeting/update';
+import {AssistantPersona} from '../../../aiChat/options/personaOptions';
+import {CompRenderer} from '../../../types/comp';
+import {ConversationStarter} from '../../../types/conversationStarter';
+import {CompLaunchPadActions, CompLaunchPadElements, CompLaunchPadEvents, CompLaunchPadProps} from './launchPad.types';
 
 export const renderLaunchPad: CompRenderer<
     CompLaunchPadProps,

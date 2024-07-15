@@ -1,7 +1,7 @@
+import {ComposerProps} from '@shared/components/Composer/props';
 import {createAutoScrollController} from '@shared/interactions/autoScroll/autoScrollController';
 import {AutoScrollController} from '@shared/interactions/autoScroll/type';
 import {ChatItem} from '@shared/types/conversation';
-import {ComposerProps} from '@shared/components/Composer/props';
 import {domOp} from '@shared/utils/dom/domOp';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {comp} from '../../../aiChat/comp/comp';
@@ -12,30 +12,68 @@ import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOpti
 import {ControllerContext} from '../../../types/controllerContext';
 import {ConversationStarter} from '../../../types/conversationStarter';
 import {propsToCorePropsInEvents} from '../../../utils/propsToCorePropsInEvents';
-import {CompConversation} from '../conversation/conversation.model';
-import {CompConversationProps} from '../conversation/conversation.types';
 import {CompComposer} from '../composer/composer.model';
 import {CompComposerProps} from '../composer/composer.types';
+import {CompConversation} from '../conversation/conversation.model';
+import {CompConversationProps} from '../conversation/conversation.types';
+import {CompLaunchPad} from '../launchPad/launchPad.model';
+import {CompLaunchPadProps} from '../launchPad/launchPad.types';
 import {submitPromptFactory} from './actions/submitPrompt';
 import {renderChatRoom} from './chatRoom.render';
 import {CompChatRoomActions, CompChatRoomElements, CompChatRoomEvents, CompChatRoomProps} from './chatRoom.types';
 import {updateChatRoom} from './chatRoom.update';
-import {CompLaunchPad} from '../launchPad/launchPad.model';
-import {CompLaunchPadProps} from '../launchPad/launchPad.types';
 import {getChatRoomStatus} from './utils/getChatRoomStatus';
 
 @Model('chatRoom', renderChatRoom, updateChatRoom)
 export class CompChatRoom<AiMsg> extends BaseComp<
     AiMsg, CompChatRoomProps<AiMsg>, CompChatRoomElements, CompChatRoomEvents, CompChatRoomActions
 > {
-    private launchPad: CompLaunchPad<AiMsg> | undefined;
-    private conversation!: CompConversation<AiMsg>;
-    private composer!: CompComposer<AiMsg>;
-
-    private prompt: string = '';
     private autoScrollController: AutoScrollController | undefined;
-
     private chatRoomStatus: 'starting' | 'active'; // Starting = Display launch pad, Active = Display conversation
+    private composer!: CompComposer<AiMsg>;
+    private conversation!: CompConversation<AiMsg>;
+    private handleConversationStarterClick = (conversationStarter: ConversationStarter) => {
+        // Set the prompt
+        // Disable the composer and submit button
+        // Set the composer as waiting
+        // Submit the prompt
+
+        this.composer.setDomProps({status: 'submitting-conversation-starter'});
+        this.composer.handleTextChange(conversationStarter.prompt);
+        this.composer.handleSendButtonClick();
+    };
+    private handleSegmentCountChange = (newSegmentCount: number) => {
+        if (this.segmentCount === newSegmentCount) {
+            return;
+        }
+
+        this.segmentCount = newSegmentCount;
+        const newChatRoomStatus = getChatRoomStatus(
+            (this.getProp('initialConversationContent') || undefined) as ChatItem<AiMsg>[] | undefined,
+            this.segmentCount,
+        );
+
+        if (this.chatRoomStatus !== newChatRoomStatus) {
+            this.chatRoomStatus = newChatRoomStatus;
+            this.executeDomAction('updateChatRoomStatus', this.chatRoomStatus);
+
+            if (this.chatRoomStatus === 'active') {
+                if (this.launchPad?.id) {
+                    this.removeSubComponent(this.launchPad?.id);
+                    this.launchPad = undefined;
+                }
+            } else {
+                this.addLaunchPad(
+                    (this.getProp('showGreeting') as boolean | undefined) ?? true,
+                    this.getProp('assistantPersona') as AssistantPersona | undefined,
+                    this.getProp('conversationStarters') as ConversationStarter[] | undefined,
+                    this.handleConversationStarterClick,
+                );
+            }
+        }
+    };
+    private launchPad: CompLaunchPad<AiMsg> | undefined;
+    private prompt: string = '';
     private segmentCount: number; // How many segments are in the conversation (used to determine the chat room status)
 
     constructor(
@@ -227,23 +265,29 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         }
     }
 
-    private addLaunchPad(
-        showGreeting: boolean | undefined,
-        assistantPersona: AssistantPersona | undefined,
-        conversationStarters: ConversationStarter[] | undefined,
-        onConversationStarterSelected: (conversationStarter: ConversationStarter) => void,
+    private addComposer(
+        placeholder?: string,
+        autoFocus?: boolean,
+        disableSubmitButton?: boolean,
+        submitShortcut?: 'Enter' | 'CommandEnter',
     ) {
-        this.launchPad = comp(CompLaunchPad<AiMsg>)
-            .withContext(this.context)
-            .withProps({
-                showGreeting,
-                assistantPersona,
-                conversationStarters,
-                onConversationStarterSelected,
-            } satisfies CompLaunchPadProps)
-            .create();
+        this.composer = comp(CompComposer<AiMsg>).withContext(this.context).withProps({
+            props: {
+                domCompProps: {
+                    status: 'typing',
+                    placeholder,
+                    autoFocus,
+                    disableSubmitButton,
+                    submitShortcut,
+                },
+            } satisfies CompComposerProps,
+            eventListeners: {
+                onTextUpdated: (newValue: string) => this.handleComposerTextChange(newValue),
+                onSubmit: () => this.handleComposerSubmit(),
+            },
+        }).create();
 
-        this.addSubComponent(this.launchPad.id, this.launchPad, 'launchPadContainer');
+        this.addSubComponent(this.composer.id, this.composer, 'composerContainer');
     }
 
     private addConversation(
@@ -271,41 +315,24 @@ export class CompChatRoom<AiMsg> extends BaseComp<
         this.addSubComponent(this.conversation.id, this.conversation, 'conversationContainer');
     }
 
-    private addComposer(
-        placeholder?: string,
-        autoFocus?: boolean,
-        disableSubmitButton?: boolean,
-        submitShortcut?: 'Enter' | 'CommandEnter',
+    private addLaunchPad(
+        showGreeting: boolean | undefined,
+        assistantPersona: AssistantPersona | undefined,
+        conversationStarters: ConversationStarter[] | undefined,
+        onConversationStarterSelected: (conversationStarter: ConversationStarter) => void,
     ) {
-        this.composer = comp(CompComposer<AiMsg>).withContext(this.context).withProps({
-            props: {
-                domCompProps: {
-                    status: 'typing',
-                    placeholder,
-                    autoFocus,
-                    disableSubmitButton,
-                    submitShortcut,
-                },
-            } satisfies CompComposerProps,
-            eventListeners: {
-                onTextUpdated: (newValue: string) => this.handleComposerTextChange(newValue),
-                onSubmit: () => this.handleComposerSubmit(),
-            },
-        }).create();
+        this.launchPad = comp(CompLaunchPad<AiMsg>)
+            .withContext(this.context)
+            .withProps({
+                showGreeting,
+                assistantPersona,
+                conversationStarters,
+                onConversationStarterSelected,
+            } satisfies CompLaunchPadProps)
+            .create();
 
-        this.addSubComponent(this.composer.id, this.composer, 'composerContainer');
+        this.addSubComponent(this.launchPad.id, this.launchPad, 'launchPadContainer');
     }
-
-    private handleConversationStarterClick = (conversationStarter: ConversationStarter) => {
-        // Set the prompt
-        // Disable the composer and submit button
-        // Set the composer as waiting
-        // Submit the prompt
-
-        this.composer.setDomProps({status: 'submitting-conversation-starter'});
-        this.composer.handleTextChange(conversationStarter.prompt);
-        this.composer.handleSendButtonClick();
-    };
 
     private handleComposerSubmit() {
         const composerProps: Partial<ComposerProps> | undefined = this.props.composer;
@@ -334,37 +361,6 @@ export class CompChatRoom<AiMsg> extends BaseComp<
     private handleComposerTextChange(newValue: string) {
         this.prompt = newValue;
     }
-
-    private handleSegmentCountChange = (newSegmentCount: number) => {
-        if (this.segmentCount === newSegmentCount) {
-            return;
-        }
-
-        this.segmentCount = newSegmentCount;
-        const newChatRoomStatus = getChatRoomStatus(
-            (this.getProp('initialConversationContent') || undefined) as ChatItem<AiMsg>[] | undefined,
-            this.segmentCount,
-        );
-
-        if (this.chatRoomStatus !== newChatRoomStatus) {
-            this.chatRoomStatus = newChatRoomStatus;
-            this.executeDomAction('updateChatRoomStatus', this.chatRoomStatus);
-
-            if (this.chatRoomStatus === 'active') {
-                if (this.launchPad?.id) {
-                    this.removeSubComponent(this.launchPad?.id);
-                    this.launchPad = undefined;
-                }
-            } else {
-                this.addLaunchPad(
-                    (this.getProp('showGreeting') as boolean | undefined) ?? true,
-                    this.getProp('assistantPersona') as AssistantPersona | undefined,
-                    this.getProp('conversationStarters') as ConversationStarter[] | undefined,
-                    this.handleConversationStarterClick,
-                );
-            }
-        }
-    };
 
     private resetComposer(resetTextInput: boolean = false, focusOnReset: boolean = false) {
         if (!this.composer) {

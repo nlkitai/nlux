@@ -1,12 +1,9 @@
-import { DataTransferMode } from "@nlux/core";
-import {
-  BedrockRuntimeClientConfigType,
-  InferenceConfiguration,
-} from "@aws-sdk/client-bedrock-runtime";
+import {BedrockRuntimeClientConfigType, InferenceConfiguration} from '@aws-sdk/client-bedrock-runtime';
+import {DataTransferMode} from '@nlux/core';
 
 export type ChatAdapterOptions = {
-  dataTransferMode?: DataTransferMode;
-  model: string;
+    dataTransferMode?: DataTransferMode;
+    model: string;
 
-  inferenceConfig?: InferenceConfiguration;
+    inferenceConfig?: InferenceConfiguration;
 } & BedrockRuntimeClientConfigType;

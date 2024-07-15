@@ -1,8 +1,8 @@
+import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
 import {ChatSegmentStatus} from '@shared/types/chatSegment/chatSegment';
 import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
-import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
 
 export type CompChatSegmentProps = Readonly<{
     uid: string;

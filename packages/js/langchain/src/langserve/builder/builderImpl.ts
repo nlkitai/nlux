@@ -11,9 +11,9 @@ import {getDataTransferModeToUse} from '../utils/getDataTransferModeToUse';
 import {ChatAdapterBuilder} from './builder';
 
 export class LangServeAdapterBuilderImpl<AiMsg> implements ChatAdapterBuilder<AiMsg> {
+    private theConfig?: LangServeConfig;
     private theDataTransferMode?: DataTransferMode;
     private theHeaders?: LangServeHeaders;
-    private theConfig?: LangServeConfig;
     private theInputPreProcessor?: LangServeInputPreProcessor<AiMsg>;
     private theOutputPreProcessor?: LangServeOutputPreProcessor<AiMsg>;
     private theUrl?: string;

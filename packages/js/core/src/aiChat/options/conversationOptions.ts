@@ -11,7 +11,11 @@ export interface ConversationOptions {
      * @default true
      */
     autoScroll?: boolean;
-
+    /**
+     * Suggested prompts to display in the UI to help the user start a conversation.
+     * Conversation starters are only displayed when the conversation is empty, and no conversation history is present.
+     */
+    conversationStarters?: ConversationStarter[];
     /**
      * Indicates the number of messages from conversation history that should be sent to the backend with each message.
      * For custom adapters, the history will be available as part of `extras.conversationHistory` attribute.
@@ -24,7 +28,6 @@ export interface ConversationOptions {
      * @default 'max'
      */
     historyPayloadSize?: HistoryPayloadSize;
-
     /**
      * Indicates how items in the conversation should be displayed.
      *
@@ -34,7 +37,6 @@ export interface ConversationOptions {
      * @default 'bubbles'
      */
     layout?: ConversationLayout;
-
     /**
      * Indicates whether the welcome message should be displayed when no conversation history is provided.
      * The welcome message consists of:
@@ -44,11 +46,4 @@ export interface ConversationOptions {
      * When no assistant persona is provided, the welcome message will be the NLUX logo.
      */
     showWelcomeMessage?: boolean;
-
-
-    /**
-     * Suggested prompts to display in the UI to help the user start a conversation.
-     * Conversation starters are only displayed when the conversation is empty, and no conversation history is present.
-     */
-    conversationStarters?: ConversationStarter[];
 }

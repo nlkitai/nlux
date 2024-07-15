@@ -1,4 +1,5 @@
 import {CompRenderer} from '../../../types/comp';
+import {listenToElement} from '../../../utils/dom/listenToElement';
 import {
     CompConversationStartersActions,
     CompConversationStartersElements,
@@ -6,7 +7,6 @@ import {
     CompConversationStartersProps,
 } from './conversationStarters.types';
 import {createConversationStartersDom} from './utils/createConversationStartersDom';
-import {listenToElement} from '../../../utils/dom/listenToElement';
 
 export const renderConversationStarters: CompRenderer<
     CompConversationStartersProps,
@@ -14,10 +14,10 @@ export const renderConversationStarters: CompRenderer<
     CompConversationStartersEvents,
     CompConversationStartersActions
 > = ({
-         appendToRoot,
-         props,
-         compEvent,
-     }) => {
+    appendToRoot,
+    props,
+    compEvent,
+}) => {
     const conversationStartersContainer = createConversationStartersDom(
         props.conversationStarters,
     );

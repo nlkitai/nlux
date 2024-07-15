@@ -5,9 +5,9 @@ import {
     StandardChatAdapter,
     StreamingAdapterObserver,
 } from '@nlux/core';
-import OpenAI from 'openai';
 import {uid} from '@shared/utils/uid';
 import {warn} from '@shared/utils/warn';
+import OpenAI from 'openai';
 import {decodeChunk} from '../../../utils/decodeChunk';
 import {decodePayload} from '../../../utils/decodePayload';
 import {gptAdapterInfo} from '../config';
@@ -25,11 +25,11 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
     private readonly __instanceId: string;
 
     protected constructor({
-                              systemMessage,
-                              apiKey,
-                              dataTransferMode,
-                              model,
-                          }: ChatAdapterOptions) {
+        systemMessage,
+        apiKey,
+        dataTransferMode,
+        model,
+    }: ChatAdapterOptions) {
         this.__instanceId = `${this.info.id}-${uid()}`;
 
         this.theDataTransferMode = dataTransferMode ?? defaultDataTransferMode;
@@ -71,22 +71,22 @@ export abstract class OpenAiAbstractAdapter<AiMsg> implements StandardChatAdapte
         extras: ChatAdapterExtras<AiMsg>,
     ): Promise<string | object | undefined>;
 
-    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         try {
-            return decodeChunk(chunk as OpenAI.Chat.Completions.ChatCompletionChunk) as AiMsg;
+            return decodePayload(message as OpenAI.Chat.Completions.ChatCompletion);
         } catch (error) {
-            warn('Error while decoding streamed chunk');
+            warn('Error while decoding batched message');
             warn(error);
 
             return undefined;
         }
     }
 
-    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         try {
-            return decodePayload(message as OpenAI.Chat.Completions.ChatCompletion);
+            return decodeChunk(chunk as OpenAI.Chat.Completions.ChatCompletionChunk) as AiMsg;
         } catch (error) {
-            warn('Error while decoding batched message');
+            warn('Error while decoding streamed chunk');
             warn(error);
 
             return undefined;

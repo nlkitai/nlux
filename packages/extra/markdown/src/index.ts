@@ -1,7 +1,7 @@
 import {HighlighterExtension} from '../../../js/core/src';
 import {createMdStreamRenderer} from '../../../shared/src/markdown/stream/streamParser';
-import {CallbackFunction} from '../../../shared/src/types/callbackFunction';
 import {SanitizerExtension} from '../../../shared/src/sanitizer/sanitizer';
+import {CallbackFunction} from '../../../shared/src/types/callbackFunction';
 
 export type {SnapshotParser, SnapshotParserOptions} from '../../../shared/src/types/markdown/snapshotParser';
 export {parseMdSnapshot} from '../../../shared/src/markdown/snapshot/snapshotParser';

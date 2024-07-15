@@ -13,12 +13,16 @@ export interface ComposerOptions {
      * @default: Submit button is only enabled when the message is not empty.
      */
     disableSubmitButton?: boolean;
-
+    /**
+     * Indicates whether the stop button should be hidden.
+     *
+     * @default false
+     */
+    hideStopButton?: boolean;
     /**
      * The placeholder message to be displayed in the prompt input field when empty.
      */
     placeholder?: string;
-
     /**
      * The shortcut to submit the prompt message.
      *
@@ -30,11 +34,4 @@ export interface ComposerOptions {
      * @default 'Enter'
      */
     submitShortcut?: 'Enter' | 'CommandEnter';
-
-    /**
-     * Indicates whether the stop button should be hidden.
-     *
-     * @default false
-     */
-    hideStopButton?: boolean;
 }

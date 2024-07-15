@@ -1,61 +1,61 @@
-import commonjs from "@rollup/plugin-commonjs";
-import { nodeResolve } from "@rollup/plugin-node-resolve";
-import replace from "@rollup/plugin-replace";
-import strip from "@rollup/plugin-strip";
-import terser from "@rollup/plugin-terser";
-import alias from "@rollup/plugin-alias";
+import alias from '@rollup/plugin-alias';
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import {nodeResolve} from '@rollup/plugin-node-resolve';
+import replace from '@rollup/plugin-replace';
+import strip from '@rollup/plugin-strip';
+import terser from '@rollup/plugin-terser';
+import {resolve} from 'path';
 
-import { RollupOptions } from "rollup";
-import esbuild from "rollup-plugin-esbuild";
+import {RollupOptions} from 'rollup';
+import esbuild from 'rollup-plugin-esbuild';
 
-import { generateDts } from "../../../pipeline/utils/rollup/generateDts";
-import { generateOutputConfig } from "../../../pipeline/utils/rollup/generateOutputConfig";
-import { resolve } from "path";
-import json from "@rollup/plugin-json";
+import {generateDts} from '../../../pipeline/utils/rollup/generateDts';
+import {generateOutputConfig} from '../../../pipeline/utils/rollup/generateOutputConfig';
 
-const isProduction = process.env.NODE_ENV === "production";
-const packageName = "@nlux/bedrock";
-const outputFile = "bedrock";
+const isProduction = process.env.NODE_ENV === 'production';
+const packageName = '@nlux/bedrock';
+const outputFile = 'bedrock';
 
-const absolutePath = (path: string) => resolve("..", "..", "..", path);
+const absolutePath = (path: string) => resolve('..', '..', '..', path);
 const packageConfig: () => Promise<RollupOptions[]> = async () => [
-  {
-    input: "./src/index.ts",
-    logLevel: "silent",
-    treeshake: "smallest",
-    strictDeprecations: true,
-    plugins: [
-      alias({
-        entries: [
-          {
-            find: /^@shared\/(.*)/,
-            replacement: `${absolutePath("packages/shared/src")}/$1.ts`,
-          },
+    {
+        input: './src/index.ts',
+        logLevel: 'silent',
+        treeshake: 'smallest',
+        strictDeprecations: true,
+        plugins: [
+            alias({
+                entries: [
+                    {
+                        find: /^@shared\/(.*)/,
+                        replacement: `${absolutePath('packages/shared/src')}/$1.ts`,
+                    },
+                ],
+            }),
+            commonjs(),
+            json(),
+            esbuild(),
+            isProduction &&
+            strip({
+                include: '**/*.(mjs|js|ts)',
+                functions: ['debug', 'console.log', 'console.info'],
+            }),
+            !isProduction && nodeResolve(),
+            replace({
+                values: {
+                    'process.env.NLUX_DEBUG_ENABLED': JSON.stringify(
+                        isProduction ? 'false' : 'true',
+                    ),
+                },
+                preventAssignment: true,
+            }),
+            isProduction && terser(),
         ],
-      }),
-      commonjs(),
-      json(),
-      esbuild(),
-      isProduction &&
-        strip({
-          include: "**/*.(mjs|js|ts)",
-          functions: ["debug", "console.log", "console.info"],
-        }),
-      !isProduction && nodeResolve(),
-      replace({
-        values: {
-          "process.env.NLUX_DEBUG_ENABLED": JSON.stringify(
-            isProduction ? "false" : "true"
-          ),
-        },
-        preventAssignment: true,
-      }),
-      isProduction && terser(),
-    ],
-    external: ["@nlux/core"],
-    output: generateOutputConfig(packageName, outputFile, isProduction),
-  },
-  generateDts(outputFile, isProduction),
+        external: ['@nlux/core'],
+        output: generateOutputConfig(packageName, outputFile, isProduction),
+    },
+    generateDts(outputFile, isProduction),
 ];
 
 export default packageConfig;

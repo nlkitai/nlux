@@ -6,20 +6,20 @@ import {NLErrors} from '@shared/types/exceptions/errors';
 import {domOp} from '@shared/utils/dom/domOp';
 import {warn} from '@shared/utils/warn';
 import {ControllerContext} from '../../../../types/controllerContext';
-import {CompConversation} from '../../conversation/conversation.model';
 import {CompComposer} from '../../composer/composer.model';
+import {CompConversation} from '../../conversation/conversation.model';
 
 export const submitPromptFactory = <
     AiMsg
 >({
-      context,
-      composerInstance,
-      conversation,
-      autoScrollController,
-      messageToSend,
-      resetComposer,
-      setComposerAsWaiting,
-  }: {
+    context,
+    composerInstance,
+    conversation,
+    autoScrollController,
+    messageToSend,
+    resetComposer,
+    setComposerAsWaiting,
+}: {
     context: ControllerContext<AiMsg>;
     composerInstance: CompComposer<AiMsg>;
     conversation: CompConversation<AiMsg>;

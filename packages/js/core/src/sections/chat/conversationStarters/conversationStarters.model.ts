@@ -1,6 +1,7 @@
 import {BaseComp} from '../../../aiChat/comp/base';
 import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
 import {ControllerContext} from '../../../types/controllerContext';
+import {ConversationStarter} from '../../../types/conversationStarter';
 import {renderConversationStarters} from './conversationStarters.renderer';
 import {
     CompConversationStartersActions,
@@ -9,7 +10,6 @@ import {
     CompConversationStartersProps,
 } from './conversationStarters.types';
 import {updateConversationStarters} from './conversationStarters.update';
-import {ConversationStarter} from '../../../types/conversationStarter';
 
 @Model('conversationStarters', renderConversationStarters, updateConversationStarters)
 export class CompConversationStarters<AiMsg> extends BaseComp<
@@ -19,17 +19,18 @@ export class CompConversationStarters<AiMsg> extends BaseComp<
     CompConversationStartersEvents,
     CompConversationStartersActions
 > {
-    constructor(context: ControllerContext<AiMsg>, props: CompConversationStartersProps) {
-        super(context, props);
-    }
-
     public updateConversationStarters = (items: ConversationStarter[] | undefined): void => {
         // TODO
     };
 
+    constructor(context: ControllerContext<AiMsg>, props: CompConversationStartersProps) {
+        super(context, props);
+    }
+
     @CompEventListener('conversation-starter-selected')
     conversationStarterClicked(conversationStarter: ConversationStarter) {
-        const handler = this.getProp('onConversationStarterSelected') as CompConversationStartersProps['onConversationStarterSelected'];
+        const handler = this.getProp(
+            'onConversationStarterSelected') as CompConversationStartersProps['onConversationStarterSelected'];
         handler(conversationStarter);
     };
 }

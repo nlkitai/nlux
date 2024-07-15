@@ -1,5 +1,5 @@
-import {ConversationStarter} from '../../../types/conversationStarter';
 import {AssistantPersona} from '../../../aiChat/options/personaOptions';
+import {ConversationStarter} from '../../../types/conversationStarter';
 
 export type CompLaunchPadEvents = 'conversation-starter-clicked';
 

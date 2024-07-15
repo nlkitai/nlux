@@ -1,8 +1,8 @@
-import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {createChatItemDom} from '@shared/components/ChatItem/create';
 import {ChatItemProps} from '@shared/components/ChatItem/props';
 import {updateChatItemDom} from '@shared/components/ChatItem/update';
 import {createMessageContent} from '@shared/components/Message/utils/createMessageContent';
+import {createMarkdownStreamParser, MarkdownStreamParser} from '../../../../../../extra/markdown/src';
 import {CompRenderer} from '../../../types/comp';
 import {getElement} from '../../../utils/dom/getElement';
 import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatItemProps} from './chatItem.types';
@@ -10,10 +10,10 @@ import {CompChatItemActions, CompChatItemElements, CompChatItemEvents, CompChatI
 export const renderChatItem: CompRenderer<
     CompChatItemProps, CompChatItemElements, CompChatItemEvents, CompChatItemActions
 > = ({
-         props,
-         appendToRoot,
-         compEvent,
-     }) => {
+    props,
+    appendToRoot,
+    compEvent,
+}) => {
 
     const root = createChatItemDom({
         ...props.domProps,

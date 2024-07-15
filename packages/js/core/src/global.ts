@@ -11,7 +11,7 @@ export const getGlobalMetaData = (): typeof globalMetaData | undefined => {
         return undefined;
     }
 
-    const theGlobalObject = window as unknown as Window & { NLUX?: typeof globalMetaData };
+    const theGlobalObject = window as unknown as Window & {NLUX?: typeof globalMetaData};
     if (typeof theGlobalObject.NLUX === 'object' && typeof theGlobalObject.NLUX.version === 'string') {
         return theGlobalObject.NLUX;
     }

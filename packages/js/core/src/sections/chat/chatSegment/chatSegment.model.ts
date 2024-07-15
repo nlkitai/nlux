@@ -1,5 +1,5 @@
-import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {domOp} from '@shared/utils/dom/domOp';
 import {warnOnce} from '@shared/utils/warn';
 import {BaseComp} from '../../../aiChat/comp/base';
@@ -122,6 +122,13 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         ).filter((comp) => !!comp) as CompChatItem<AiMsg>[];
     }
 
+    @CompEventListener('loader-shown')
+    onLoaderShown(loader: HTMLElement) {
+        if (this.renderedDom?.elements) {
+            this.renderedDom.elements.loaderContainer = loader;
+        }
+    }
+
     public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
         this.setProp('assistantPersona', assistantPersona);
         const newProps: Partial<ChatItemProps> = {
@@ -164,13 +171,6 @@ export class CompChatSegment<AiMsg> extends BaseComp<
         newValue: CompChatSegmentProps[keyof CompChatSegmentProps],
     ) {
         this.setProp(newProp, newValue);
-    }
-
-    @CompEventListener('loader-shown')
-    onLoaderShown(loader: HTMLElement) {
-        if (this.renderedDom?.elements) {
-            this.renderedDom.elements.loaderContainer = loader;
-        }
     }
 
     protected setProp<K extends keyof CompChatSegmentProps>(key: K, value: CompChatSegmentProps[K]) {

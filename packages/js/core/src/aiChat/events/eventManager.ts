@@ -3,11 +3,6 @@ import {EventName, EventsConfig, EventsMap} from '../../types/event';
 
 export class EventManager<AiMsg> {
 
-    private readonly eventListeners: Map<
-        EventName,
-        Set<EventsMap<AiMsg>[EventName]>
-    > = new Map();
-
     public emit = <EventToEmit extends EventName>(
         event: EventToEmit,
         ...params: Parameters<EventsMap<AiMsg>[EventToEmit]>
@@ -24,7 +19,6 @@ export class EventManager<AiMsg> {
             (callback as CallbackFunction)(...params);
         });
     };
-
     public on = <EventToAdd extends EventName>(
         event: EventToAdd,
         callback: EventsMap<AiMsg>[EventToAdd],
@@ -35,11 +29,8 @@ export class EventManager<AiMsg> {
 
         this.eventListeners.get(event)?.add(callback);
     };
-
     public removeAllEventListeners = (eventName: EventName) => this.eventListeners.delete(eventName);
-
     public removeAllEventListenersForAllEvent = () => this.eventListeners.clear();
-
     public removeEventListener = <EventToUpdate extends EventName>(
         event: EventToUpdate,
         callback: EventsMap<AiMsg>[EventToUpdate],
@@ -53,7 +44,6 @@ export class EventManager<AiMsg> {
             this.eventListeners.delete(event);
         }
     };
-
     public updateEventListeners = (
         events: EventsConfig<AiMsg>,
     ) => {
@@ -70,4 +60,8 @@ export class EventManager<AiMsg> {
             );
         }
     };
+    private readonly eventListeners: Map<
+        EventName,
+        Set<EventsMap<AiMsg>[EventName]>
+    > = new Map();
 }

@@ -1,5 +1,5 @@
-import {HighlighterExtension} from '../highlighter/highlighter';
 import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
+import {HighlighterExtension} from '../highlighter/highlighter';
 
 /**
  * Props for the custom function that renders a message sent by the server in batch mode.

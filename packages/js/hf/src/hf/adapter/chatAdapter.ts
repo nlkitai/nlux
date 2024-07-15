@@ -97,11 +97,11 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
         }
     }
 
-    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         throw new Error('Method not implemented.');
     }
 
-    preProcessAiBatchedMessage(message: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
+    preProcessAiStreamedChunk(chunk: string | object | undefined, extras: ChatAdapterExtras<AiMsg>): AiMsg | undefined {
         throw new Error('Method not implemented.');
     }
 
@@ -196,7 +196,7 @@ export class HfChatAdapterImpl<AiMsg> implements StandardChatAdapter<AiMsg> {
             }
 
             const text = payload && typeof payload === 'object' && 'text' in payload
-                ? (payload as { text: string }).text
+                ? (payload as {text: string}).text
                 : undefined;
 
             if (text === 'string') {

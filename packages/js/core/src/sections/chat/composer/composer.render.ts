@@ -1,6 +1,6 @@
+import {createComposerDom} from '@shared/components/Composer/create';
 import {CallbackFunction} from '@shared/types/callbackFunction';
 import {NluxRenderingError} from '@shared/types/error';
-import {createComposerDom} from '@shared/components/Composer/create';
 import {domOp} from '@shared/utils/dom/domOp';
 import {CompRenderer} from '../../../types/comp';
 import {listenToElement} from '../../../utils/dom/listenToElement';
@@ -10,10 +10,10 @@ import {CompComposerActions, CompComposerElements, CompComposerEvents, CompCompo
 export const renderChatbox: CompRenderer<
     CompComposerProps, CompComposerElements, CompComposerEvents, CompComposerActions
 > = ({
-         appendToRoot,
-         props,
-         compEvent,
-     }) => {
+    appendToRoot,
+    props,
+    compEvent,
+}) => {
     const composerRoot = createComposerDom(props.domCompProps);
 
     appendToRoot(composerRoot);

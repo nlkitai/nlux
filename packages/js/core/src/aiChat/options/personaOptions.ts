@@ -1,12 +1,12 @@
 export interface AssistantPersona {
-    name: string;
     avatar: string | Readonly<HTMLElement>;
+    name: string;
     tagline?: string;
 }
 
 export interface UserPersona {
-    name: string;
     avatar: string | Readonly<HTMLElement>;
+    name: string;
 }
 
 export interface PersonaOptions {

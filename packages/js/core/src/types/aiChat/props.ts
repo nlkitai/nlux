@@ -1,11 +1,11 @@
 import {ChatAdapter} from '@shared/types/adapters/chat/chatAdapter';
 import {StandardChatAdapter} from '@shared/types/adapters/chat/standardChatAdapter';
 import {ChatItem} from '@shared/types/conversation';
+import {ComposerOptions} from '../../aiChat/options/composerOptions';
 import {ConversationOptions} from '../../aiChat/options/conversationOptions';
 import {DisplayOptions} from '../../aiChat/options/displayOptions';
 import {MessageOptions} from '../../aiChat/options/messageOptions';
 import {PersonaOptions} from '../../aiChat/options/personaOptions';
-import {ComposerOptions} from '../../aiChat/options/composerOptions';
 import {EventsConfig} from '../event';
 
 /**

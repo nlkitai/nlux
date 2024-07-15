@@ -1,5 +1,5 @@
-import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {ChatItemProps} from '@shared/components/ChatItem/props';
+import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {participantNameFromRoleAndPersona} from '@shared/utils/chat/participantNameFromRoleAndPersona';
 import {conversationDefaultLayout} from '@shared/utils/dom/getConversationLayout';
 import {stringifyRandomResponse} from '@shared/utils/stringifyRandomResponse';

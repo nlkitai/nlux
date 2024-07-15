@@ -1,7 +1,7 @@
+import {ChatItemProps} from '@shared/components/ChatItem/props';
 import {ChatSegmentItem} from '@shared/types/chatSegment/chatSegment';
 import {ChatSegmentAiMessage} from '@shared/types/chatSegment/chatSegmentAiMessage';
 import {ChatSegmentUserMessage} from '@shared/types/chatSegment/chatSegmentUserMessage';
-import {ChatItemProps} from '@shared/components/ChatItem/props';
 import {BaseComp} from '../../../aiChat/comp/base';
 import {CompEventListener, Model} from '../../../aiChat/comp/decorators';
 import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
@@ -107,6 +107,6 @@ export class CompChatItem<AiMsg> extends BaseComp<
 
     @CompEventListener('markdown-stream-complete')
     private onMarkdownStreamComplete(messageRendered: AiMsg) {
-        this.context.emit('messageRendered', { uid: this.props.uid });
+        this.context.emit('messageRendered', {uid: this.props.uid});
     }
 }

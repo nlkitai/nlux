@@ -1,14 +1,14 @@
 import {BaseComp} from '../../../aiChat/comp/base';
+import {comp} from '../../../aiChat/comp/comp';
 import {Model} from '../../../aiChat/comp/decorators';
+import {AssistantPersona} from '../../../aiChat/options/personaOptions';
 import {ControllerContext} from '../../../types/controllerContext';
+import {ConversationStarter} from '../../../types/conversationStarter';
+import {CompConversationStarters} from '../conversationStarters/conversationStarters.model';
+import {CompConversationStartersProps} from '../conversationStarters/conversationStarters.types';
 import {renderLaunchPad} from './launchPad.renderer';
 import {CompLaunchPadActions, CompLaunchPadElements, CompLaunchPadEvents, CompLaunchPadProps} from './launchPad.types';
 import {updateLaunchPad} from './launchPad.update';
-import {ConversationStarter} from '../../../types/conversationStarter';
-import {comp} from '../../../aiChat/comp/comp';
-import {CompConversationStarters} from '../conversationStarters/conversationStarters.model';
-import {CompConversationStartersProps} from '../conversationStarters/conversationStarters.types';
-import {AssistantPersona} from '../../../aiChat/options/personaOptions';
 
 @Model('launchPad', renderLaunchPad, updateLaunchPad)
 export class CompLaunchPad<AiMsg> extends BaseComp<
@@ -23,6 +23,11 @@ export class CompLaunchPad<AiMsg> extends BaseComp<
     constructor(context: ControllerContext<AiMsg>, props: CompLaunchPadProps) {
         super(context, props);
         this.setConversationStarters(props.conversationStarters);
+    }
+
+    public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
+        this.setProp('assistantPersona', assistantPersona);
+        this.executeDomAction('updateAssistantPersona', assistantPersona);
     }
 
     public setConversationStarters(conversationStarters: ConversationStarter[] | undefined) {
@@ -63,11 +68,6 @@ export class CompLaunchPad<AiMsg> extends BaseComp<
     public setShowGreeting(showGreeting: boolean) {
         this.setProp('showGreeting', showGreeting);
         this.executeDomAction('resetGreeting', showGreeting);
-    }
-
-    public setAssistantPersona(assistantPersona: AssistantPersona | undefined) {
-        this.setProp('assistantPersona', assistantPersona);
-        this.executeDomAction('updateAssistantPersona', assistantPersona);
     }
 
     private resetConversationStarters() {

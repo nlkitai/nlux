@@ -1,8 +1,8 @@
+import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
 import {ChatItem} from '@shared/types/conversation';
 import {HighlighterExtension} from '../../../aiChat/highlighter/highlighter';
 import {ConversationLayout} from '../../../aiChat/options/conversationOptions';
 import {AssistantPersona, UserPersona} from '../../../aiChat/options/personaOptions';
-import {SanitizerExtension} from '@shared/sanitizer/sanitizer';
 
 export type CompConversationEvents = void;
 

@@ -5,7 +5,7 @@ export type LangServeConfigItem =
     string
     | number
     | boolean
-    | { [key: string]: LangServeConfigItem }
+    | {[key: string]: LangServeConfigItem}
     | LangServeConfigItem[];
 
 export type LangServeConfig = {

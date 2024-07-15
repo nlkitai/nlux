@@ -4,10 +4,10 @@ import {CompChatItemActions, CompChatItemElements, CompChatItemProps} from './ch
 export const updateChatItem: CompUpdater<
     CompChatItemProps, CompChatItemElements, CompChatItemActions
 > = ({
-         propName,
-         newValue,
-         dom,
-     }) => {
+    propName,
+    newValue,
+    dom,
+}) => {
     switch (propName) {
         case 'markdownLinkTarget':
         case 'skipStreamingAnimation':
