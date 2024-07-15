@@ -27,9 +27,9 @@
 
     /** Prompt container */
     --nlux-composer-container--BackgroundColor: transparent;
-    
+
     /** Participant info in chat */
-    --nlux-ChatItem-ParticipantName--Color: #E0E0E0;
+    --nlux-ChatItem-ParticipantName--Color: #e0e0e0;
 
     /* Human message in chat */
     --nlux-HumanMessage--BackgroundColor: #5fe095;

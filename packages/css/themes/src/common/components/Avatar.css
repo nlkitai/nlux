@@ -3,9 +3,9 @@
     overflow: hidden;
     width: var(--nlux-chItm-avtr--wd);
 
+    border-width: var(--nlux-chItm-avtr--brdrWd);
     border-style: solid;
     border-radius: var(--nlux-chItm-avtr--brdrRd);
-    border-width: var(--nlux-chItm-avtr--brdrWd);
 
     aspect-ratio: 1;
 

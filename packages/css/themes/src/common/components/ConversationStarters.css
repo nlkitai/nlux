@@ -1,55 +1,56 @@
 .nlux-conversationStarters-container {
-  overflow-y: scroll;
+    overflow-y: scroll;
 
-  > .nlux-comp-conversationStarters {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: max-content;
-    min-width: 100%;
-    padding: var(--nlux-cvStrt--pdng);
-
-    > .nlux-comp-conversationStarter {
-      font-family: var(--nlux-chtr--fnFm), sans-serif;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: start;
-      gap: 0.7rem;
-
-      width: var(--nlux-cvStrt--wd);
-      height: var(--nlux-cvStrt--hg);
-      overflow: hidden;
-      padding: 12px;
-
-      border-color: var(--nlux-cvStrt--brdClr);
-      border-width: var(--nlux-cvStrt--brdrWd);
-      border-radius: var(--nlux-cvStrt--brdrRd);
-      border-style: solid;
-
-      color: var(--nlux-cvStrt--txtClr);
-      background-color: var(--nlux-cvStrt--bgClr);
-      cursor: pointer;
-
-      > .nlux-comp-conversationStarter-prompt {
-        display: block;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        line-height: 1.3rem;
-      }
-      > .nlux-comp-conversationStarter-icon-container {
-        width: 16px;
-        height: 16px;
+    > .nlux-comp-conversationStarters {
         display: flex;
-        justify-content: center;
         align-items: center;
-        overflow: hidden;
-      }
+        flex-wrap: nowrap;
+        justify-content: center;
+        width: max-content;
+        min-width: 100%;
+        padding: var(--nlux-cvStrt--pdng);
+        gap: 10px;
+
+        > .nlux-comp-conversationStarter {
+            font-family: var(--nlux-chtr--fnFm), sans-serif;
+            display: flex;
+            overflow: hidden;
+            align-items: start;
+            flex-direction: column;
+            justify-content: center;
+
+            width: var(--nlux-cvStrt--wd);
+            height: var(--nlux-cvStrt--hg);
+            padding: 12px;
+            cursor: pointer;
+
+            color: var(--nlux-cvStrt--txtClr);
+            border-width: var(--nlux-cvStrt--brdrWd);
+            border-style: solid;
+            border-color: var(--nlux-cvStrt--brdClr);
+
+            border-radius: var(--nlux-cvStrt--brdrRd);
+            background-color: var(--nlux-cvStrt--bgClr);
+            gap: 0.7rem;
+
+            > .nlux-comp-conversationStarter-prompt {
+                line-height: 1.3rem;
+                display: block;
+                display: -webkit-box;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+
+            > .nlux-comp-conversationStarter-icon-container {
+                display: flex;
+                overflow: hidden;
+                align-items: center;
+                justify-content: center;
+                width: 16px;
+                height: 16px;
+            }
+        }
     }
-  }
 }

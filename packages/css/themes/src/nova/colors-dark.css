@@ -34,7 +34,7 @@
 
     /** Prompt container */
     --nlux-composer-container--BackgroundColor: transparent;
-    
+
     /** Prompt input colors */
     --nlux-PromptInput--BackgroundColor: transparent;
     --nlux-PromptInput--BorderColor: transparent;

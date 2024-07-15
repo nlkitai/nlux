@@ -7,29 +7,29 @@
     gap: var(--nlux-prmBx--gap);
 
     > textarea {
-        height:100%;
-        max-height: var(--nlux-prmInp-mxhg); /* Set maximum height the textarea can expand to */ 
-        field-sizing: content;
-
         font-family: var(--nlux-prmInp--ftFm), sans-serif;
         font-size: var(--nlux-prmInp--ftSz);
         font-weight: 400;
+
         line-height: 1;
-        box-sizing: border-box;
-        padding:  var(--nlux-chtr--pdng);
         flex: 1;
+        box-sizing: border-box;
+        height: 100%;
+        max-height: var(--nlux-prmInp-mxhg); /* Set maximum height the textarea can expand to */
+        padding: var(--nlux-chtr--pdng);
         resize: none;
         cursor: pointer;
-
         color: var(--nlux-prmInp--txtClr);
-        
+
         border-width: var(--nlux-prmInp--brdrWd);
+
         border-style: solid;
         border-color: var(--nlux-prmInp--brdClr);
         border-radius: var(--nlux-prmInp--brdrRd);
-
         outline: none;
+
         background-color: var(--nlux-prmInp--bgClr);
+        field-sizing: content;
 
         &:focus {
             outline: var(--nlux-prmInp-fcs-otln--clr) solid var(--nlux-prmInp-fcs-otln--wd);

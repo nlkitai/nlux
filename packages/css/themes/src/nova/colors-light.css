@@ -17,24 +17,24 @@
     /** Conversation content color */
     --nlux-ChatRoom--BackgroundColor: #ffffff;
     --nlux-ChatRoom--BorderColor: transparent;
-    --nlux-ChatRoom--TextColor: #09090B;
+    --nlux-ChatRoom--TextColor: #09090b;
 
     /** Participant info in chat */
-    --nlux-ChatItem-ParticipantName--Color: #09090B;
+    --nlux-ChatItem-ParticipantName--Color: #09090b;
 
     /* Human message in chat */
-    --nlux-HumanMessage--BackgroundColor: #18181B;
+    --nlux-HumanMessage--BackgroundColor: #18181b;
     --nlux-HumanMessage--BorderColor: transparent;
     --nlux-HumanMessage--TextColor: #ffffff;
 
     /** AI message in chat */
-    --nlux-AiMessage--BackgroundColor: #F4F4F5;
+    --nlux-AiMessage--BackgroundColor: #f4f4f5;
     --nlux-AiMessage--BorderColor: transparent;
-    --nlux-AiMessage--TextColor: #09090B;
+    --nlux-AiMessage--TextColor: #09090b;
 
     /** Prompt container */
     --nlux-composer-container--BackgroundColor: transparent;
-    
+
     /** Prompt input colors */
     --nlux-PromptInput--BackgroundColor: transparent;
     --nlux-PromptInput--BorderColor: transparent;
@@ -45,7 +45,7 @@
     --nlux-PromptInput-Active--TextColor: #000000;
 
     --nlux-PromptInput-Disabled--BackgroundColor: transprent;
-    --nlux-PromptInput-Disabled--TextColor: #71717A;
+    --nlux-PromptInput-Disabled--TextColor: #71717a;
     --nlux-PromptInput-Disabled--BorderColor: transprent;
 
     --nlux-PromptInput-Placeholder--TextColor: #71717a;

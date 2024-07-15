@@ -40,7 +40,7 @@
 
     /** Prompt container */
     --nlux-composer-container--BackgroundColor: transparent;
-    
+
     /** Prompt input colors */
     --nlux-PromptInput--BackgroundColor: #ffffff;
     --nlux-PromptInput--BorderColor: #c5d7c9;

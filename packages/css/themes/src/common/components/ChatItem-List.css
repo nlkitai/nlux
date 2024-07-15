@@ -1,14 +1,14 @@
 .nlux-comp-chatItem.nlux-comp-chatItem--listLayout {
-    flex-direction: column;
     align-items: stretch;
+    flex-direction: column;
 
     > .nlux-comp-message {
         display: flex;
-        flex-direction: column;
         align-items: stretch;
+        flex-direction: column;
 
-        padding: var(--nlux-chItm-msg-lstLt--pdng-tpBtm) var(--nlux-chItm-msg-lstLt--pdng-lr);
         margin: var(--nlux-chItm-msg-lstLt--mrgTp) var(--nlux-chItm-msg-lstLt--mrgRgt) var(--nlux-chItm-msg-lstLt--mrgBtm) var(--nlux-chItm-msg-lstLt--mrgLft);
+        padding: var(--nlux-chItm-msg-lstLt--pdng-tpBtm) var(--nlux-chItm-msg-lstLt--pdng-lr);
     }
 
     > .nlux-comp-chatItem-participantInfo {

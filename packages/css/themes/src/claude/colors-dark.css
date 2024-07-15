@@ -15,7 +15,7 @@
     --nlux-ChatRoom-Loader--Color: #71717a;
 
     /** Conversation content color */
-    --nlux-ChatRoom--BackgroundColor: #2D2D2A;
+    --nlux-ChatRoom--BackgroundColor: #2d2d2a;
     --nlux-ChatRoom--BorderColor: transparent;
     --nlux-ChatRoom--TextColor: #ffffff;
 
@@ -23,7 +23,7 @@
     --nlux-ChatItem-ParticipantName--Color: #ffffff;
 
     /* Human message in chat */
-    --nlux-HumanMessage--BackgroundColor: #1A1915;
+    --nlux-HumanMessage--BackgroundColor: #1a1915;
     --nlux-HumanMessage--BorderColor: transparent;
     --nlux-HumanMessage--TextColor: #ffffff;
 
@@ -34,7 +34,7 @@
 
     /** Prompt container */
     --nlux-composer-container--BackgroundColor: #393937;
-    
+
     /** Prompt input colors */
     --nlux-PromptInput--BackgroundColor: transparent;
     --nlux-PromptInput--BorderColor: transparent;
@@ -67,18 +67,18 @@
     --nlux-SubmitButton-Focus-Outline--Color: transparent;
 
     /** Code block */
-    --nlux-CodeBlock--BackgroundColor: #282C34;
+    --nlux-CodeBlock--BackgroundColor: #282c34;
     --nlux-CodeBlock--BorderColor: transparent;
     --nlux-CodeBlock--TextColor: #ffffff;
-    --nlux-CodeBlock-Hover--BackgroundColor: #282C34;
+    --nlux-CodeBlock-Hover--BackgroundColor: #282c34;
 
     /** Code block copy button */
-    --nlux-CodeBlock-CopyButton--BackgroundColor: #21201C;
+    --nlux-CodeBlock-CopyButton--BackgroundColor: #21201c;
     --nlux-CodeBlock-CopyButton--BorderColor: #c5c5c3;
     --nlux-CodeBlock-CopyButton--TextColor: #ffffff;
 
     /** Code block copy button in clicked state */
-    --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: #21201C;
+    --nlux-CodeBlock-CopyButton-Clicked--BackgroundColor: #21201c;
     --nlux-CodeBlock-CopyButton-Clicked--BorderColor: #393930;
     --nlux-CodeBlock-CopyButton-Clicked--TextColor: #ffffff;
 
