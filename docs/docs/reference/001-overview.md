@@ -1,10 +1,6 @@
 # Overview
 
----
-
 ## Layers
-<br />
-<br />
 
 `NLUX` is a highly customizable and fully featured conversational AI UI library with 3 layers
 
@@ -16,11 +12,7 @@
 * **[The Adapters Layer](/learn/adapters)** 🔌 — Which enables the `integration with AI backends` by handling API calls,
   response streaming, and more. It also allows for `custom adapters` to be built for any backend.
 
----
-
 ## Platforms
-<br />
-<br />
 
 The core `NLUX` library is available in 2 flavors:
 

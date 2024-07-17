@@ -7,15 +7,11 @@ sidebar_label: 'Markdown'
 `NLUX` comes with its own markdown parser that can be used to render markdown content in the chat area.<br />
 On top of that, a `<Markdown>` primitive is provided to render markdown in custom renderers.
 
----
-
 ## Usage
 
 ---
 
 ### With Streaming Custom Renderers
-<br />
-<br />
 
 In order to use markdown stream parser with custom renderers, you can simply pass the `props.containerRef`
 to the container element where you would like to add the rendered markdown content, and `NLUX` will
@@ -39,8 +35,6 @@ const responseRenderer: ResponseRenderer<string> = memo((props) => {
 ---
 
 ### With Batched Custom Renderers
-<br />
-<br />
 
 If you are using batched custom renderers, or your would like to add markdown to initial conversation messages,
 you can use the `<Markdown>` primitive.

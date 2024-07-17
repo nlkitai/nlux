@@ -135,31 +135,51 @@ h1, h2, h3 {
 
 .main-wrapper .container h1 {
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: bolder;
+    margin: 12px 0;
+    padding: 8px 12px;
+    background-color: var(--nx-background-color-2);
 }
 
 .main-wrapper .container h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    display: inline-block;
-    margin: 0;
-    padding: 0 0 0 14px;
+    margin: 8px 0;
+    padding: 4px 8px 4px 24px;
     background-color: var(--nx-background-color-1);;
 }
 
 .main-wrapper .container h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    display: inline-block;
-    margin: 0;
-    padding: 0 0 0 14px;
+    max-width: 60%;
+    margin: 8px 0;
+    padding: 4px 8px 4px 12px;
     background-color: var(--nx-background-color-1);;
+}
+
+.main-wrapper .container h1,
+.main-wrapper .container h2,
+.main-wrapper .container h3 {
+    display: block;
+    border-radius: 5px;
+}
+
+.main-wrapper .container blockquote h1,
+.main-wrapper .container blockquote h2,
+.main-wrapper .container blockquote h3 {
+    display: inline-block;
 }
 
 .main-wrapper .container h1.hero__title {
     font-family: var(--ifm-font-family-title);
     font-size: 2.5rem;
     font-weight: 600;
+}
+
+.main-wrapper hr {
+    background-color: var(--ifm-blockquote-border-color);
+    height: 2px;
 }
 
 /* Code example page */

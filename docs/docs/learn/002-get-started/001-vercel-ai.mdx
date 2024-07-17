@@ -16,8 +16,6 @@ This guide will walk you through the steps to add NLUX with Vercel AI SDK to you
 ---
 
 ## 1. Create Your Next.js Application
-<br />
-<br />
 
 Start by creating a new Next.js app using the following command:
 
@@ -64,8 +62,6 @@ Then navigate to the newly created directory:
 ---
 
 ## 2. Install Dependencies
-<br />
-<br />
 
 Next, install the `@nlux` dependencies:
 
@@ -110,8 +106,6 @@ And the Vercel AI SDK dependencies:
 ---
 
 ## 3. Configure OpenAI API key
-<br />
-<br />
 
 In this guide, we are using OpenAI as the AI model provider.<br />
 You are not limited to OpenAI, you can use any other AI model provider with Vercel AI SDK.
@@ -138,8 +132,6 @@ OPENAI_API_KEY=your-openai-api-key
 ---
 
 ## 4. Create a Route Handler
-<br />
-<br />
 
 Create a router handler in your Next.js app to handle the chatbot requests.<br />
 The route file path should be `app/api/chat/route.ts`.<br />
@@ -174,8 +166,6 @@ export async function POST(req: Request) {
 ---
 
 ## 5. Add The NLUX UI Component
-<br />
-<br />
 
 Now that you have a Route Handler that can query an LLM, it's time to set-up your NLUX UI component and
 start interacting with your AI model.
