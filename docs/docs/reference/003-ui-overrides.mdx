@@ -1,20 +1,14 @@
 # UI Overrides
 
-`NLUX` is a very flexible conversational AI UI library.<br />
-We allow for customization via a wide range of config options,
-and we provide a powerful theming system.
-
-On top of all that, **developers can also override some of the default UI components** in the AI chat area with their own
-React components and JSX, as explained in this reference page.
-
----
+Developers can also override some of the default UI components in the AI chat area with their own
+React components.
 
 ## Usage
 
-You can override the JSX of certain UI components by passing a custom container component to the `AiChat` component
+You can override the JSX of certain UI components by including a custom container component to the `AiChat` component
 with your JSX elements inside it.
 
-Here is an example of how you can override loader component displayed across multiple parts of NLUX:
+Example where the default loader spinner is replaced with a custom spinner:
 
 ```jsx
 const MyAiChatApp = () => {
@@ -29,16 +23,7 @@ const MyAiChatApp = () => {
 };
 ```
 
-The inner JSX element `<AiChatUI.Loader><span className="rounded">Loading 👻</span></AiChatUI.Loader>` will instruct
-`NLUX` to replace the default loader component with the custom loader component provided as a child:
-
-```jsx
-<span className="rounded">Loading 👻</span>
-```
-
----
-
-## UI Overrides Supported
+## Overrides Available
 
 Below is a list of UI component overrides that are currently supported:
 
@@ -88,13 +73,9 @@ You can override it with your own JSX element by using the `AiChatUI.Greeting` c
 </AiChat>
 ```
 
----
-
 ## Adding More Overrides
-<br /><br />
 
-We will be adding more customization options and overrides as we receive feedback from the community.
-
+We will be adding more customization options and overrides as we receive feedback from the community.<br />
 If your project requires more customization options, **please let us know**:
 
 * You can either open an issue on the [GitHub Discussions](https://github.com/nlkitai/nlux/discussions) page
