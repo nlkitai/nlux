@@ -41,18 +41,14 @@ export const Hero = ({className}: {className?: string}) => {
                         <a
                             href="https://github.com/nlkitai/nlux"
                             target="_blank"><img
-                            src={'https://img.shields.io/badge/Free%20%26%20Open%20Source-%2348c342'}/></a>
+                            src={'https://img.shields.io/badge/Open%20Source-%2348c342'}/></a>
                     </Heading>
                     <div className={heroStyles.heroSubtitleContainer}>
                         <p className={clsx('hero__subtitle', heroStyles.heroSubtitleContent)}>
-                            The <strong>Powerful</strong> Conversational AI<br/>
-                            JavaScript Library
+                            The <strong>Powerful</strong> AI Chat UI Library
                         </p>
                     </div>
                     <div className={heroStyles.adaptersShowcase}>
-                        <div className={heroStyles.integrationsTitle}>
-                            Available in
-                        </div>
                         <div className={heroStyles.platformName}>
                             <img src={ReactJsLogo} alt="React JS Logo" width={40}/>
                             <h5 style={{textAlign: 'left'}}>React JS<br/>Components</h5>
