@@ -10,6 +10,7 @@ const dirNamesToRemove = [
     '.cache',
     '.rollup.cache',
     '.docusaurus',
+    '.next',
 ];
 
 const cleanUp = (dirToCleanup) => {
