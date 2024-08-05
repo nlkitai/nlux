@@ -341,7 +341,7 @@ function App() {
                 // adapter={customSlowAdapter}
                 // adapter={customSimpleAdapter}
                 // adapter={hfAdapter}
-                initialConversation={initialConversation}
+                // initialConversation={initialConversation}
                 composerOptions={{
                     placeholder: 'Type your prompt here',
                     autoFocus: true,
