@@ -212,7 +212,7 @@ export const AiChat: <AiMsg>(
                             userDefinedGreeting={uiOverrides.Greeting}
                         />
                     </div>
-                    <div className="nlux-conversation-container" ref={conversationContainerRef}>
+                    <div className="nlux-conversation-container" ref={conversationContainerRef} aria-label="Chat conversation" role="log">
                         <ForwardConversationComp
                             ref={conversationRef}
                             segments={segments}

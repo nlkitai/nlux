@@ -78,12 +78,14 @@ export const ComposerComp = (props: ComposerProps) => {
                 value={props.prompt}
                 onChange={handleChange}
                 onKeyDown={handleKeyDown}
+                aria-label={props.placeholder}
             />
             {!showCancelButton && (
                 <button
                     tabIndex={0}
                     disabled={disableButton}
                     onClick={() => props.onSubmit()}
+                    aria-label="Send"
                 >
                     {showSendIcon && <SendIconComp/>}
                     {!showSendIcon && props.Loader}
@@ -93,6 +95,7 @@ export const ComposerComp = (props: ComposerProps) => {
                 <button
                     tabIndex={0}
                     onClick={props.onCancel}
+                    aria-label="Cancel"
                 >
                     <CancelIconComp/>
                 </button>
