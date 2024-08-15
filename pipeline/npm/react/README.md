@@ -17,11 +17,13 @@ of code, you can add conversational AI capabilities and interact with your favor
 * **React Components & Hooks** ― `<AiChat />` for UI and `useChatAdapter` hook for easy integration.
 * **LLM Adapters** ― For `ChatGPT` / `LangChain` 🦜 LangServe / `HuggingFace` 🤗 Inference.
 * A flexible interface to **Create Your Own Adapter** for any LLM or API.
+* **Next.js & Vercel AI** ― Out-of-the-box support, demos, and examples for Next.js and Vercel AI.
+* **React Server Components (RSC) and Generative UI** 🔥 ― With Next.js or any RSC compatible framework.
 * **Assistant and User Personas** ― Customize the assistant and user personas with names, images, and more.
 * **Streaming LLM Output** ― Stream the chat response to the UI as it's being generated.
 * **Customizable Theme** - Easily customize the look and feel of the chat interface using CSS variables.
 * **Event Listeners** - Listen to messages, errors, and other events to customize the UI and behaviour.
-* **Zero Dependencies** ― Lightweight codebase, with zero-dep except for LLM front-end libraries.
+* **Zero Dependency** ― Lightweight codebase ― Core with zero dependency and no external UI libraries.
 
 [![200+ Unit Tests](https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml/badge.svg)](https://github.com/nlkitai/nlux/actions/workflows/run-all-tests.yml)
 
