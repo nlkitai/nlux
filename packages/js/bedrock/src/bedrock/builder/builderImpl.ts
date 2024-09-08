@@ -1,102 +1,144 @@
-import {BedrockRuntimeClientConfigType, InferenceConfiguration} from '@aws-sdk/client-bedrock-runtime';
-import {DataTransferMode} from '@nlux/core';
-import {NluxUsageError, NluxValidationError} from '@shared/types/error';
-import {BedrockChatAdapterImpl} from '../adapter/chatAdapter';
-import {ChatAdapterBuilder} from './builder';
+import {
+  BedrockRuntimeClientConfigType,
+  InferenceConfiguration,
+} from "@aws-sdk/client-bedrock-runtime";
+import { DataTransferMode } from "@nlux/core";
+import { NluxUsageError, NluxValidationError } from "@shared/types/error";
+import { BedrockChatAdapterImpl } from "../adapter/chatAdapter";
+import { ChatAdapterBuilder } from "./builder";
 
 export class ChatAdapterBuilderImpl<AiMsg>
-    implements ChatAdapterBuilder<AiMsg> {
-    private credentials: BedrockRuntimeClientConfigType['credentials'] | null =
-        null;
-    private inferenceConfig: InferenceConfiguration | null = null;
-    private region: string | null = null;
-    private theDataTransferMode: DataTransferMode = 'stream';
-    private theModel: string | null = null;
-    private withDataTransferModeCalled = false;
+  implements ChatAdapterBuilder<AiMsg>
+{
+  private credentials: BedrockRuntimeClientConfigType["credentials"] | null =
+    null;
+  private inferenceConfig: InferenceConfiguration | null = null;
+  private region: string | null = null;
+  private endpoint: string | null = null;
+  private theDataTransferMode: DataTransferMode = "stream";
+  private theModel: string | null = null;
+  private serviceId: string | null = null;
+  private maxAttempts: number | null = null;
+  private withDataTransferModeCalled = false;
 
-    create(): BedrockChatAdapterImpl<AiMsg> {
-        if (!this.theModel) {
-            throw new NluxValidationError({
-                source: this.constructor.name,
-                message:
-                    'You must provide a model or an endpoint using the "withModel()" method or the ' +
-                    '"withEndpoint()" method!',
-            });
-        }
-
-        return new BedrockChatAdapterImpl({
-            dataTransferMode: this.theDataTransferMode,
-            model: this.theModel ?? undefined,
-            credentials: this.credentials ?? undefined,
-            region: this.region ?? undefined,
-
-            inferenceConfig: this.inferenceConfig ?? undefined,
-        });
+  create(): BedrockChatAdapterImpl<AiMsg> {
+    if (!this.theModel) {
+      throw new NluxValidationError({
+        source: this.constructor.name,
+        message:
+          'You must provide a model or an endpoint using the "withModel()" method or the ' +
+          '"withEndpoint()" method!',
+      });
     }
 
-    withCredintial(
-        cred: BedrockRuntimeClientConfigType['credentials'],
-    ): ChatAdapterBuilder<AiMsg> {
-        if (this.credentials !== null) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot set the cred token more than once',
-            });
-        }
+    return new BedrockChatAdapterImpl({
+      dataTransferMode: this.theDataTransferMode,
+      model: this.theModel ?? undefined,
+      credentials: this.credentials ?? undefined,
+      region: this.region ?? undefined,
+      inferenceConfig: this.inferenceConfig ?? undefined,
+      endpoint: this.endpoint ?? undefined,
+      maxAttempts: this.maxAttempts ?? undefined,
+      serviceId: this.serviceId ?? undefined,
+    });
+  }
 
-        this.credentials = cred;
-        return this;
+  withCredintial(
+    cred: BedrockRuntimeClientConfigType["credentials"]
+  ): ChatAdapterBuilder<AiMsg> {
+    if (this.credentials !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the cred token more than once",
+      });
     }
 
-    withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<AiMsg> {
-        if (this.withDataTransferModeCalled) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot set the data loading mode more than once',
-            });
-        }
+    this.credentials = cred;
+    return this;
+  }
 
-        this.theDataTransferMode = mode;
-        this.withDataTransferModeCalled = true;
-        return this;
+  withDataTransferMode(mode: DataTransferMode): ChatAdapterBuilder<AiMsg> {
+    if (this.withDataTransferModeCalled) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the data loading mode more than once",
+      });
     }
 
-    withInferenceConfig(
-        inferenceConfig: InferenceConfiguration,
-    ): ChatAdapterBuilder<AiMsg> {
-        if (this.inferenceConfig !== null) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message: 'Cannot set the Inference Config more than once',
-            });
-        }
-        this.inferenceConfig = inferenceConfig;
-        return this;
+    this.theDataTransferMode = mode;
+    this.withDataTransferModeCalled = true;
+    return this;
+  }
+
+  withInferenceConfig(
+    inferenceConfig: InferenceConfiguration
+  ): ChatAdapterBuilder<AiMsg> {
+    if (this.inferenceConfig !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the Inference Config more than once",
+      });
+    }
+    this.inferenceConfig = inferenceConfig;
+    return this;
+  }
+
+  withModel(model: string) {
+    if (this.theModel !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message:
+          "Cannot set the model because a model or an endpoint has already been set",
+      });
     }
 
-    withModel(model: string) {
-        if (this.theModel !== null) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message:
-                    'Cannot set the model because a model or an endpoint has already been set',
-            });
-        }
+    this.theModel = model;
+    return this;
+  }
 
-        this.theModel = model;
-        return this;
+  withRegion(region: string): ChatAdapterBuilder<AiMsg> {
+    if (this.region !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the region because an region has already been set",
+      });
     }
 
-    withRegion(region: string): ChatAdapterBuilder<AiMsg> {
-        if (this.region !== null) {
-            throw new NluxUsageError({
-                source: this.constructor.name,
-                message:
-                    'Cannot set the endpoint because a model or an endpoint has already been set',
-            });
-        }
-
-        this.region = region;
-        return this;
+    this.region = region;
+    return this;
+  }
+  withEndpoint(endpoint: string): ChatAdapterBuilder<AiMsg> {
+    if (this.endpoint !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message:
+          "Cannot set the endpoint because endpoint has already been set",
+      });
     }
+
+    this.endpoint = endpoint;
+
+    return this;
+  }
+
+  withMaxAttempts(maxAttempts: number): ChatAdapterBuilder<AiMsg> {
+    if (this.maxAttempts !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the max attempts because  it has already been set",
+      });
+    }
+    this.maxAttempts = maxAttempts;
+    return this;
+  }
+  withServiceId(serviceId: string): ChatAdapterBuilder<AiMsg> {
+    if (this.serviceId !== null) {
+      throw new NluxUsageError({
+        source: this.constructor.name,
+        message: "Cannot set the serviceId because  it has already been set",
+      });
+    }
+    this.serviceId = serviceId;
+    return this;
+  }
 }
