@@ -35,6 +35,7 @@ export const AiChat: <AiMsg>(
     const {
         adapter, className, initialConversation,
         conversationOptions, composerOptions, displayOptions,
+        onCancel
     } = props;
 
     const {themeId, colorScheme} = displayOptions ?? {};
@@ -92,6 +93,7 @@ export const AiChat: <AiMsg>(
         newSegments, cancelledSegmentIds, cancelledMessageIds,
         setChatSegments, setCancelledSegmentIds, setCancelledMessageIds,
         conversationRef, setComposerStatus,
+        onCancel,
     );
 
     const handlePromptChange = useCallback((value: string) => setPrompt(value), [setPrompt]);
