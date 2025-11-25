@@ -1,13 +1,21 @@
 export default `import {Adapter, StreamingAdapterObserver} from '@nlux/react';
 
-// A demo endpoint by NLUX that connects to OpenAI
-// and returns a stream of Server-Sent events
-const demoProxyServerUrl = 'https://gptalks.api.nlux.dev/openai/chat/stream';
+// OpenAI-compatible API endpoint (py-demo-api)
+// Supports multiple providers (OpenAI, Anthropic, Google)
+const apiUrl = 'https://py-demo-api.fly.dev/api/v1/chat/completions';
 
 export const streamAdapter: Adapter = {
   streamText: async (prompt: string, observer: StreamingAdapterObserver) => {
-    const body = { prompt };
-    const response = await fetch(demoProxyServerUrl, {
+    const body = {
+      messages: [
+        {role: 'user', content: prompt}
+      ],
+      stream: true,
+      provider: 'openai',
+      temperature: 0.7
+    };
+
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -26,6 +34,7 @@ export const streamAdapter: Adapter = {
     // and feed them to the observer as they are being generated
     const reader = response.body.getReader();
     const textDecoder = new TextDecoder();
+    let buffer = '';
 
     while (true) {
       const { value, done } = await reader.read();
@@ -33,9 +42,35 @@ export const streamAdapter: Adapter = {
         break;
       }
 
-      const content = textDecoder.decode(value);
-      if (content) {
-        observer.next(content);
+      buffer += textDecoder.decode(value, {stream: true});
+      const lines = buffer.split('\\n');
+      
+      // Keep the last incomplete line in the buffer
+      buffer = lines.pop() || '';
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          try {
+            const data = JSON.parse(line.slice(6));
+            
+            if (data.error) {
+              observer.error(new Error(data.error));
+              return;
+            }
+            
+            if (data.content) {
+              observer.next(data.content);
+            }
+            
+            if (data.done) {
+              observer.complete();
+              return;
+            }
+          } catch (e) {
+            // Skip invalid JSON lines
+            console.warn('Failed to parse SSE data:', line);
+          }
+        }
       }
     }
 
