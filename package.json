@@ -1,11 +1,11 @@
 {
-  "name": "@nlux/monorepo",
-  "version": "latest",
-  "description": "NLUX is a JavaScript and React library for building conversational AI experiences.",
-  "author": "Salmen Hichri",
+  "name": "remix-nlux",
+  "version": "2.17.5",
+  "description": "Remix IDE NLUX integration. Remix IDE is the leading IDE for building and deploying smart contracts on Ethereum. NLUX is a JavaScript and React library for building conversational AI experiences.",
+  "author": "Remix IDE Project & Salmen Hichri",
   "license": "SEE LICENSE IN ROOT LICENSE FILE",
   "homepage": "https://docs.nlkit.com/nlux",
-  "private": true,
+  "private": false,
   "workspaces": [
     "dist/dev/*",
     "packages/*",
@@ -33,12 +33,14 @@
     "typescript-eslint": "^7",
     "vite": "^5"
   },
-  "bugs": "https://github.com/nlkitai/nlux/issues",
+  "bugs": "https://github.com/joeizang/nlux/issues",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/nlkitai/nlux.git"
+    "url": "git+ssh://git@github.com/joeizang/nlux.git"
   },
   "keywords": [
+    "remix-project",
+    "remix-project ai",
     "nlux",
     "js",
     "llm",

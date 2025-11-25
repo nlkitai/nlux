@@ -1,10 +1,11 @@
-import {ReactElement} from 'react';
-import {Greeting} from './elements/Greeting';
-import {Loader} from './elements/Loader';
-
+import {ReactElement} from 'react'
+import {Greeting} from './elements/Greeting'
+import {Loader} from './elements/Loader'
+import {Composer} from './elements/Composer'
 export type AiChatUIOverrides = {
-    Loader: ReactElement;
-    Greeting?: ReactElement;
+    Loader: ReactElement
+    Greeting?: ReactElement
+    Composer?: ReactElement
 }
 
 /**
@@ -13,4 +14,5 @@ export type AiChatUIOverrides = {
 export const AiChatUI = {
     Loader,
     Greeting,
+    Composer,
 };

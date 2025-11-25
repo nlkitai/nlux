@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface ComposerOptions {
     /**
      * Indicates whether the prompt input field should be focused when the prompt is shown.
@@ -34,4 +35,10 @@ export interface ComposerOptions {
      * @default 'Enter'
      */
     submitShortcut?: 'Enter' | 'CommandEnter';
+}
+
+export interface RemixComposerOptions extends ComposerOptions {
+    remixMethodList: Array<string>
+    
+    addContextFiles: (pluginName: any, methodName: string, payload: { context: 'currentFile' | 'workspace'|'openedFiles' | 'none', files?: Array<string> }) => Promise<any>
 }

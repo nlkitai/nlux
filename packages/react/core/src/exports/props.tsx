@@ -1,12 +1,13 @@
-import {ComposerOptions, DisplayOptions, EventsConfig, StandardChatAdapter} from '@nlux/core';
-import {ChatAdapterBuilder} from '@shared/types/adapters/chat/chatAdapterBuilder';
-import {ChatItem} from '@shared/types/conversation';
-import {ReactNode} from 'react';
-import {ChatAdapter} from '../types/chatAdapter';
-import {ConversationOptions} from '../types/conversationOptions';
-import {AiChatApi} from './hooks/useAiChatApi';
-import {MessageOptions} from './messageOptions';
-import {PersonaOptions} from './personaOptions';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {ComposerOptions, DisplayOptions, EventsConfig, RemixComposerOptions, StandardChatAdapter} from '@nlux/core'
+import {ChatAdapterBuilder} from '@shared/types/adapters/chat/chatAdapterBuilder'
+import {ChatItem} from '@shared/types/conversation'
+import {ReactNode} from 'react'
+import {ChatAdapter} from '../types/chatAdapter'
+import {ConversationOptions} from '../types/conversationOptions'
+import {AiChatApi} from './hooks/useAiChatApi'
+import {MessageOptions} from './messageOptions'
+import {PersonaOptions} from './personaOptions'
 
 /**
  * Props for the AiChat React component.
@@ -58,7 +59,18 @@ export type AiChatProps<AiMsg = string> = {
     /**
      * Options for the composer.
      */
-    composerOptions?: ComposerOptions;
+    composerOptions?: RemixComposerOptions
+
+    /**
+     * Function to add context files to the chat.
+     * This is used to provide file context to the AI model.
+     */
+    addContextFiles?: (pluginName: any, methodName: string, payload?: { context: 'currentFile' | 'workspace'|'openedFiles' | 'none', files?: Array<string> }) => Promise<any>
+
+    /**
+     * Function to track sentiment on matomo.
+     */
+    trackSentiment?: (sentiment: string) => void
 
     /**
      * Options for the persona.

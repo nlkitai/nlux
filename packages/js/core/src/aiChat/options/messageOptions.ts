@@ -14,11 +14,12 @@ import {HighlighterExtension} from '../highlighter/highlighter';
  * representing the raw response received from the server.
  */
 export type ResponseRendererProps<AiMsg> = {
-    uid: string;
-    dataTransferMode: 'stream' | 'batch';
-    status: 'streaming' | 'complete';
-    content: [AiMsg];
-    serverResponse: unknown[];
+    uid: string
+    dataTransferMode: 'stream' | 'batch'
+    status: 'streaming' | 'complete'
+    content: [AiMsg]
+    serverResponse: unknown[]
+    trackSentiment?: (sentiment: string) => void
 };
 
 export type ResponseRenderer<AiMsg> = (props: ResponseRendererProps<AiMsg>) => HTMLElement | null;

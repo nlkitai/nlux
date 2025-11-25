@@ -19,6 +19,7 @@ export const renderChatRoom: CompRenderer<
     // Contains the input field and submit button
     //
     const composerContainer = document.createElement('div');
+    // composerContainer.classList.add('nlux-composer-container');
     composerContainer.classList.add('nlux-composer-container');
 
     //

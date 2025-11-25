@@ -8,7 +8,7 @@ export const ConversationStarters = (props: ConversationStartersProps) => {
             {props.items.map((conversationStarter, index) => (
                 <button
                     key={index}
-                    className="nlux-comp-conversationStarter"
+                    className="nlux-comp-conversationStarter btn btn-secondary btn-block"
                     onClick={() => onConversationStarterSelected(conversationStarter)}
                 >
                     <ConversationStarterIcon icon={conversationStarter.icon}/>

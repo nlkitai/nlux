@@ -25,14 +25,15 @@ import {FC, RefObject} from 'react';
  * attach the rendered content to the DOM. Otherwise, you can ignore this prop and render the `content` directly.
  */
 export type ResponseRendererProps<AiMsg> = {
-    uid: string;
-    dataTransferMode: 'stream' | 'batch';
-    status: 'streaming' | 'complete';
-    contentType: 'text' | 'server-component';
-    content: AiMsg[];
-    serverComponent?: StreamedServerComponent;
-    serverResponse: unknown[];
-    containerRef?: RefObject<never>;
+    uid: string
+    dataTransferMode: 'stream' | 'batch'
+    status: 'streaming' | 'complete'
+    contentType: 'text' | 'server-component'
+    content: AiMsg[]
+    serverComponent?: StreamedServerComponent
+    serverResponse: unknown[]
+    containerRef?: RefObject<never>
+    trackSentiment?: (sentiment: string) => void
 };
 
 export type ResponseRenderer<AiMsg> = FC<ResponseRendererProps<AiMsg>>;

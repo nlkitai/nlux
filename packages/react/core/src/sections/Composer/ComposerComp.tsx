@@ -69,7 +69,7 @@ export const ComposerComp = (props: ComposerProps) => {
     }, [textareaRef.current]);
 
     return (
-        <div className={className}>
+        <div className={className} id="composer-container">
             <textarea
                 tabIndex={0}
                 ref={textareaRef}

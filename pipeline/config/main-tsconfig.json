@@ -22,6 +22,15 @@
     "paths": {
       "@shared/*": [
         "../../packages/shared/src/*"
+      ],
+      "@nlux/core": [
+        "../../packages/js/core/src"
+      ],
+      "@nlux/react": [
+        "../../packages/react/core/src"
+      ],
+      "@nlux/nlbridge": [
+        "../../packages/js/nlbridge/src"
       ]
     }
   }

@@ -26,6 +26,7 @@ import {useSubmitPromptHandler} from './hooks/useSubmitPromptHandler';
 import {useUiOverrides} from './hooks/useUiOverrides';
 import {usMarkdownContainers} from './hooks/usMarkdownContainers';
 import {AiChatProps} from './props';
+import { RemixComposerComp } from '../sections/Composer/RemixComposer';
 
 export const AiChat: <AiMsg>(
     props: AiChatProps<AiMsg>,
@@ -99,11 +100,11 @@ export const AiChat: <AiMsg>(
         aiChatProps: props, adapterToUse, conversationRef, initialSegment, newSegments,
         cancelledMessageIds, cancelledSegmentIds, prompt, composerOptions, showException,
         setChatSegments, setComposerStatus, setPrompt,
-    });
+    })
 
     const handleResubmitPrompt = useResubmitPromptHandler(
         initialSegment, setInitialSegment, newSegments, setChatSegments, setPrompt, setComposerStatus,
-    );
+    )
 
     const handleMarkdownStreamRendered = useCallback((_segmentId: string, messageId: string) => {
         if (props.events?.messageRendered) {
@@ -227,20 +228,22 @@ export const AiChat: <AiMsg>(
                             onMarkdownStreamRendered={handleMarkdownStreamRendered}
                         />
                     </div>
-                    <div className="nlux-composer-container">
-                        <ComposerComp
-                            status={composerStatus}
-                            prompt={prompt}
-                            hasValidInput={hasValidInput}
-                            placeholder={props.composerOptions?.placeholder}
-                            autoFocus={props.composerOptions?.autoFocus}
-                            submitShortcut={props.composerOptions?.submitShortcut}
-                            hideStopButton={props.composerOptions?.hideStopButton}
-                            onChange={handlePromptChange}
-                            onSubmit={handleSubmitPrompt}
-                            onCancel={cancelLastMessageRequest}
-                            Loader={uiOverrides.Loader}
-                        />
+                    <div id="remix-composer-container" className="nlux-composer-container">
+                        {uiOverrides.Composer ? (
+                            uiOverrides.Composer
+                        ) : (
+                            <RemixComposerComp
+                                status={composerStatus}
+                                prompt={prompt}
+                                hasValidInput={hasValidInput}
+                                onChange={handlePromptChange}
+                                onSubmit={handleSubmitPrompt}
+                                onCancel={cancelLastMessageRequest}
+                                addContextFiles={props.addContextFiles}
+                                trackSentiment={props.trackSentiment}
+                                Loader={uiOverrides.Loader}
+                            />
+                        )}
                     </div>
                 </div>
             </div>
