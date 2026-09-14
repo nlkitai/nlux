@@ -48,7 +48,7 @@ export const updateComposerDom: DomUpdater<ComposerProps> = (
             propsAfter.disableSubmitButton :
             propsBefore.disableSubmitButton;
 
-        const shouldDisableSubmit = disableSubmitButton ?? textArea.value === '';
+        const shouldDisableSubmit = disableSubmitButton ?? textArea.value.trim() === '';
         if (button.disabled !== shouldDisableSubmit) {
             button.disabled = shouldDisableSubmit;
         }

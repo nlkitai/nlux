@@ -25,7 +25,7 @@ export const updateContentOnStatusChange = (
             propsAfter.disableSubmitButton :
             propsBefore.disableSubmitButton;
 
-        const shouldDisableSubmit = disableSubmitButton ?? textArea.value === '';
+        const shouldDisableSubmit = disableSubmitButton ?? textArea.value.trim() === '';
         if (submitButton.disabled !== shouldDisableSubmit) {
             submitButton.disabled = shouldDisableSubmit;
         }
