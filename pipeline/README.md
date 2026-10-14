@@ -1,78 +1,72 @@
-# Pipeline
+# Development pipeline
 
-This folder contains build scripts, config, and utils for the dev pipeline.
-It also includes `npm` preset and README files for published packages.
+Use **Node 24.21.0** (see `.nvmrc` or `.tool-versions`) and **Yarn 1.22.22**.
+For example, `nvm install && nvm use` selects the pinned Node version when nvm is installed.
+Install the pinned Yarn version with `npm install --global yarn@1.22.22` if needed.
 
-## Dev Pipeline
+## First run
 
-The repository was designed to be used with `yarn`.<br />
-For example, we use `yarn` for mono-repo packages structure instead of lerna.
+From the repository root:
 
-**Node 18 or higher** is required to run the dev pipeline.
-
-### Running The Dev Server
-
-In order to run the dev server, you can follow the following steps (that
-should be run from the root of the repository):
-
-```bash
-yarn run reset
-yarn run dev
+```sh
+yarn install --frozen-lockfile
+yarn set
+yarn dev
 ```
 
-`yarn run reset` will reset the repository to a clean state.<br />
-It will remove all the `node_modules` folders and install all the dependencies
-It will also symlink all the packages in the repository.
+`yarn set` generates local package manifests and TypeScript configurations, links the
+workspaces, and builds development bundles in `dist/dev`. It replaces `dist/`, so rerun
+`yarn build` afterwards if you also need production output.
 
-`yarn run dev` will build the examples present under `samples` folder and will run
-the dev server on port `9090`.
+`yarn dev` opens a Vite server at **http://127.0.0.1:9090**. The canonical demo in
+`examples/baseline` imports the built `@nlux/core` and `@nlux/themes` packages and uses
+a local streaming mock adapter. It needs no API key or external backend. Send two
+messages to check streaming and conversation history: the replies are numbered.
+Use `PORT=9091 yarn dev` to choose a different port.
 
-### Running The Specs / Unit Tests
+## Working on the library
 
-The specs / unit tests are located under `specs/specs` folder.<br />
-In order to run the specs, you need to first build the project by running:
+Keep `yarn dev` running and run this in a second terminal to rebuild library bundles:
 
-```bash
-yarn run set
-
-// or
-yarn run reset
+```sh
+yarn watch
 ```
 
-Then you can run the specs using the following command:
+After a library rebuild, refresh the demo if Vite has retained a cached dependency.
+The other folders under `examples/` are older development and integration examples;
+they are not part of this baseline setup and may need their own backend or dependencies.
 
-```bash
-yarn run test
+## Verification
+
+After `yarn set`:
+
+```sh
+yarn lint
+yarn build
+yarn test
+yarn build-demo
 ```
 
-### Watching File Changes
+- `yarn lint` checks library source with ESLint.
+- `yarn build` produces production library bundles in `dist/prod`.
+- `yarn test` runs the Vitest suite against the development setup.
+- `yarn build-demo` bundles the mock demo into `dist/demo`.
 
-If you're editing code when the dev server is running, you can use the following
-command to watch for file changes and rebuild the examples:
+CI runs the install, setup, lint, production build, tests, and demo build with the pinned
+runtime. Tests require generated development packages; `yarn install` alone is not enough.
 
-```bash
-yarn run watch
-```
+## Cleanup
 
-## Bundle Types
+`yarn cleanup` removes generated manifests, build output, and dependency directories.
+`yarn reset` runs cleanup followed by setup. These are destructive rebuild commands,
+not necessary for normal development; prefer the first-run commands above.
 
-The build script will always emit `ESM`, `CJS`, and `UMD` bundles.
+## Package configuration
 
-By default, the dev server will run with `ESM` bundling.
+Edit `packages/**/package.tpl.json`, `pipeline/npm/**/package.tpl.json`, and
+`pipeline/npm/versions.json` rather than generated package manifests. Run `yarn set`
+after changing templates. Intentional dependency changes require updating and reviewing
+`yarn.lock` before verifying a frozen install.
 
-If you would like to run the dev script in `CJS` or `UMD` mode, you can use
-the environment variable `NLUX_BUNDLER_PACKAGE_TYPE` as following:
-
-### Dev Server With `CJS` Bundling:
-
-```bash
-NLUX_BUNDLER_PACKAGE_TYPE=cjs yarn reset
-NLUX_BUNDLER_PACKAGE_TYPE=cjs yarn dev
-```
-
-### Dev Server With `UMD` Bundling:
-
-```bash
-NLUX_BUNDLER_PACKAGE_TYPE=umd yarn reset
-NLUX_BUNDLER_PACKAGE_TYPE=umd yarn dev
-```
+The library build emits ESM, CommonJS, UMD, and TypeScript declaration files. The baseline
+demo uses ESM. No bundler-mode environment variable is required to start it.

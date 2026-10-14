@@ -47,6 +47,20 @@ npx nlux-cli create react my-react-app
 npx nlux-cli create vanilla my-vanilla-app
 ```
 
+## Developing this repository
+
+Use Node **24.21.0** and Yarn **1.22.22**. From a fresh checkout:
+
+```sh
+yarn install --frozen-lockfile
+yarn set
+yarn dev
+```
+
+Open **http://127.0.0.1:9090** for a local streaming chat demo that needs no API key.
+Run `yarn lint`, `yarn build`, `yarn test`, and `yarn build-demo` to verify changes.
+See [the pipeline guide](pipeline/README.md) for runtime setup, watch mode, and cleanup.
+
 ## Docs & Examples 🔥
 
 * The docs website is available at:  
