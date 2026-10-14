@@ -71,6 +71,15 @@ yarn install --frozen-lockfile --non-interactive
 yarn build:dev
 ```
 
+Shared build dependency ranges live in the `devDependencies` map in
+`pipeline/npm/versions.json`. Source templates reference them by exact package name,
+for example `"rollup": "{versions.devDependencies.rollup}"`. Generation resolves only
+those dependencies a package declares; it does not add tools to every package or to
+published manifests. Package-specific tools may keep literal ranges. For a dependency
+already in the shared map, use its reference in every source template; generation rejects
+literal overrides and missing or malformed references. To centralize another tool, add
+its existing range to the map and replace its literal ranges in the source templates.
+
 If you intentionally changed dependency requirements and the frozen install fails, run
 `yarn install --non-interactive`, review and commit the lockfile changes, then verify a
 frozen install. Edit template files rather than generated package manifests.
