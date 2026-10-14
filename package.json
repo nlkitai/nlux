@@ -82,5 +82,9 @@
     "natural-language",
     "understanding"
   ],
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.22",
+  "engines": {
+    "node": "24.x",
+    "yarn": "1.22.22"
+  }
 }

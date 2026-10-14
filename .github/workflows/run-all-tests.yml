@@ -16,16 +16,14 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [ 20.x ]
-
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use the repository Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: '.nvmrc'
+      - name: Use Yarn 1.22.22
+        run: npm install --global yarn@1.22.22
       - name: Install dependencies
         run: yarn --frozen-lockfile
       - name: Run linting
