@@ -34,3 +34,5 @@ jobs:
         run: yarn build
       - name: Run all tests
         run: yarn test
+      - name: Build the local demo
+        run: yarn build-demo

@@ -1,0 +1,15 @@
+:root {
+    font-family: system-ui, sans-serif;
+    color: #172033;
+    background: #f4f6fa;
+}
+
+body { margin: 0; }
+main { max-width: 800px; margin: 48px auto; padding: 0 20px; }
+h1 { font-size: 28px; }
+main > p { line-height: 1.5; color: #475569; }
+#chat { margin-top: 24px; background: white; border-radius: 12px; overflow: hidden; }
+
+@media (max-width: 600px) {
+    main { margin: 24px auto; padding: 0 12px; }
+}
