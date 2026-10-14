@@ -17,6 +17,7 @@ coverage/
 
 # Local config
 *.local
+/.repo-upgrade/
 
 # Packages
 node_modules
