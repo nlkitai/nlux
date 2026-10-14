@@ -193,3 +193,46 @@ test('cleanup is repeatable and preserves links, metadata, sources, and unrelate
 test('a signal-terminated command rejects rather than reporting success', async () => {
     await assert.rejects(run('kill -TERM $$'), /Command failed \(SIGTERM\)/);
 });
+
+test('shared build versions propagate only to declared dependencies', t => {
+    const root = fixture(t);
+    const path = join(root, 'pipeline/npm/versions.json');
+    const versions = JSON.parse(readFileSync(path, 'utf8'));
+    versions.devDependencies.rollup = '4.99.0';
+    writeFileSync(path, JSON.stringify(versions));
+    generate(root);
+    for (const pkg of packagesList) {
+        const template = JSON.parse(readFileSync(join(root, `packages/${pkg.directory}/package.tpl.json`), 'utf8'));
+        const generated = JSON.parse(readFileSync(join(root, `packages/${pkg.directory}/package.json`), 'utf8'));
+        assert.deepEqual(Object.keys(generated.devDependencies), Object.keys(template.devDependencies));
+        assert.equal(generated.devDependencies.rollup, '4.99.0');
+        for (const [name, range] of Object.entries(template.devDependencies)) {
+            assert.equal(generated.devDependencies[name], versions.devDependencies[name] ?? range);
+        }
+        for (const mode of ['dev', 'prod']) {
+            const distribution = JSON.parse(readFileSync(join(root, `dist/${mode}/${pkg.name}/package.json`), 'utf8'));
+            assert.equal(distribution.devDependencies, undefined);
+        }
+    }
+});
+
+test('generation rejects missing shared versions and literal overrides', t => {
+    for (const invalid of ['missing', 'empty', 'literal', 'unknown']) {
+        const root = fixture(t);
+        const path = join(root, 'pipeline/npm/versions.json');
+        const versions = JSON.parse(readFileSync(path, 'utf8'));
+        if (invalid === 'missing') delete versions.devDependencies.rollup;
+        if (invalid === 'empty') versions.devDependencies.rollup = '';
+        writeFileSync(path, JSON.stringify(versions));
+        if (invalid === 'literal' || invalid === 'unknown') {
+            const templatePath = join(root, 'packages/js/core/package.tpl.json');
+            const template = JSON.parse(readFileSync(templatePath, 'utf8'));
+            template.devDependencies.rollup = invalid === 'literal' ? '^4' : '{versions.devDependencies.typo}';
+            writeFileSync(templatePath, JSON.stringify(template));
+        }
+        const result = execute(root, 'generate.mjs');
+        assert.notEqual(result.status, 0, invalid);
+        assert.match(result.stderr, /Invalid build dependency rollup/);
+        assert.match(result.stderr, /pipeline\/npm\/versions.json/);
+    }
+});
