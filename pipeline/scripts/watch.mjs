@@ -1,17 +1,14 @@
-import {info, nl} from '../utils/log.mjs';
 import {packagesList} from './packages.mjs';
 import {run} from './run.mjs';
-
-nl(1);
-info(' ############################################### ');
-info(` # 🔎 Pipeline Step: Watch                     # `);
-info(' ############################################### ');
-nl(1);
+import {assertDevelopmentBuild} from './workspaces.mjs';
 
 try {
-    packagesList.forEach(pkg => {
-        run(`yarn workspace ${pkg.devName} watch`);
-    });
-} catch (_error) {
-    process.exit(1);
+    assertDevelopmentBuild();
+    await run('yarn run tsc --project pipeline/utils/tsconfig.json');
+    await Promise.all(packagesList.map(pkg =>
+        run(`yarn workspace ${pkg.devName} watch`, false, {NODE_ENV: 'development'}),
+    ));
+} catch (error) {
+    console.error(error.message);
+    process.exitCode = 1;
 }

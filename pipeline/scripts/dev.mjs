@@ -7,7 +7,8 @@ const requiredFiles = [
 ];
 
 if (requiredFiles.some(file => !existsSync(file))) {
-    console.error('Build artifacts are missing. Run `yarn set` before `yarn dev`.');
+    console.error('Build artifacts are missing. Run `yarn generate`, ' +
+        '`yarn install --frozen-lockfile --non-interactive`, and `yarn build:dev` before `yarn dev`.');
     process.exit(1);
 }
 

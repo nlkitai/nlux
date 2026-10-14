@@ -1,24 +1,7 @@
-import {existsSync, readdirSync, readFileSync, statSync, unlinkSync, writeFileSync} from 'fs';
-import {join} from 'path';
+import {existsSync, readFileSync, unlinkSync, writeFileSync} from 'fs';
 import {info, rawLog, throwError} from '../utils/log.mjs';
 
 let versionsFileContent = null;
-
-const readAllPackageTemplates = (packagesPath) => {
-    const result = [];
-
-    readdirSync(packagesPath).forEach(file => {
-        const filePath = join(packagesPath, file);
-        if (statSync(filePath).isDirectory()) {
-            const packageJsonPath = join(filePath, 'package.tpl.json');
-            if (existsSync(packageJsonPath)) {
-                result.push(packageJsonPath);
-            }
-        }
-    });
-
-    return result;
-};
 
 const readVersionsFile = () => {
     const versionsPath = 'pipeline/npm/versions.json';
@@ -105,9 +88,7 @@ const replaceDependencyVersions = (dependencies, nluxVersion, dependenciesVersio
     return updatedDependencies;
 };
 
-export const applyDevVersion = (packagesPath) => {
-    info('Applying dev version to packages: ' + packagesPath);
-    const packageJsonTemplateFiles = readAllPackageTemplates(packagesPath);
+export const applyDevVersion = (packageJsonTemplateFiles) => {
     const nluxVersion = '0.0.0-latest';
     if (!versionsFileContent) {
         versionsFileContent = readVersionsFile();
@@ -141,14 +122,12 @@ export const applyDevVersion = (packagesPath) => {
     });
 };
 
-export const applyReleaseVersion = (packagesPath) => {
-    const packageJsonFiles = readAllPackageTemplates(packagesPath);
+export const applyReleaseVersion = (packageJsonFiles) => {
 
     if (!versionsFileContent) {
         versionsFileContent = readVersionsFile();
     }
 
-    info('Applying release version to packages: ' + packagesPath);
     info(versionsFileContent);
 
     const {
