@@ -1,5 +1,4 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+# Generate the complete workspace before the single frozen dependency install.
 
 name: 700+ Unit Tests
 
@@ -24,12 +23,16 @@ jobs:
           node-version-file: '.nvmrc'
       - name: Use Yarn 1.22.22
         run: npm install --global yarn@1.22.22
+      - name: Test pipeline boundaries
+        run: yarn test:pipeline
+      - name: Generate workspace metadata
+        run: yarn generate
       - name: Install dependencies
-        run: yarn --frozen-lockfile
+        run: yarn install --frozen-lockfile --non-interactive
       - name: Run linting
         run: yarn lint
-      - name: Set up testing environment
-        run: yarn set
+      - name: Build development packages
+        run: yarn build:dev
       - name: Build project
         run: yarn build
       - name: Run all tests

@@ -1,4 +1,7 @@
 #!/bin/sh
+set -eu
 echo "Running tests before push..."
-yarn reset
+yarn test:pipeline
+yarn build:dev
+yarn lint
 yarn test
