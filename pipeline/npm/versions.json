@@ -10,5 +10,23 @@
     "hfInference": "2",
     "highlightJs": "11",
     "bedrock": "3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-alias": "^5",
+    "@rollup/plugin-commonjs": "^25",
+    "@rollup/plugin-node-resolve": "^15",
+    "@rollup/plugin-replace": "^5",
+    "@rollup/plugin-strip": "^3",
+    "@rollup/plugin-terser": "^0",
+    "@rollup/plugin-typescript": "^11",
+    "esbuild": "^0",
+    "postcss": "^8",
+    "postcss-csso": "^6",
+    "postcss-import": "^16",
+    "rollup": "^4",
+    "rollup-plugin-dts": "^6",
+    "rollup-plugin-esbuild": "^6",
+    "rollup-plugin-postcss": "^4",
+    "tslib": "^2"
   }
 }

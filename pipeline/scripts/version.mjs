@@ -30,6 +30,7 @@ const readVersionsFile = () => {
         nlux: result.nlux,
         peerDependencies: result.peerDependencies,
         dependencies: result.dependencies,
+        devDependencies: result.devDependencies,
     };
 }
 
@@ -88,6 +89,23 @@ const replaceDependencyVersions = (dependencies, nluxVersion, dependenciesVersio
     return updatedDependencies;
 };
 
+const replaceDevDependencyVersions = (dependencies, versions, templatePath) => {
+    if (!dependencies) return dependencies;
+    return Object.fromEntries(Object.entries(dependencies).map(([name, range]) => {
+        const reference = `{versions.devDependencies.${name}}`;
+        const shared = versions && Object.hasOwn(versions, name);
+        if (range === reference && shared && typeof versions[name] === 'string' &&
+            versions[name].trim() && !versions[name].includes('{')) {
+            return [name, versions[name]];
+        }
+        if (shared || typeof range !== 'string' || range.includes('{versions.')) {
+            throw new Error(`Invalid build dependency ${name} in ${templatePath}: ` +
+                `use ${reference} with a valid entry in pipeline/npm/versions.json.`);
+        }
+        return [name, range];
+    }));
+};
+
 export const applyDevVersion = (packageJsonTemplateFiles) => {
     const nluxVersion = '0.0.0-latest';
     if (!versionsFileContent) {
@@ -115,6 +133,12 @@ export const applyDevVersion = (packageJsonTemplateFiles) => {
             nluxVersion,
             dependenciesVersions
         ) ?? {};
+
+        if (packageJson.devDependencies) {
+            packageJson.devDependencies = replaceDevDependencyVersions(
+                packageJson.devDependencies, versionsFileContent.devDependencies, packageJsonTemplatePath,
+            );
+        }
 
         const newPackageJsonPath = packageJsonTemplatePath.replace('package.tpl.json', 'package.json');
         writeFileSync(newPackageJsonPath, JSON.stringify(packageJson, null, 2));

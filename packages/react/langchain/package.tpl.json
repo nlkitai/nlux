@@ -12,17 +12,17 @@
     "react": "^{versions.peerDependencies.react}"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^25",
-    "@rollup/plugin-node-resolve": "^15",
-    "@rollup/plugin-replace": "^5",
-    "@rollup/plugin-strip": "^3",
-    "@rollup/plugin-terser": "^0",
-    "@rollup/plugin-typescript": "^11",
-    "@rollup/plugin-alias": "^5",
-    "rollup": "^4",
-    "rollup-plugin-dts": "^6",
-    "rollup-plugin-esbuild": "^6",
-    "tslib": "^2"
+    "@rollup/plugin-commonjs": "{versions.devDependencies.@rollup/plugin-commonjs}",
+    "@rollup/plugin-node-resolve": "{versions.devDependencies.@rollup/plugin-node-resolve}",
+    "@rollup/plugin-replace": "{versions.devDependencies.@rollup/plugin-replace}",
+    "@rollup/plugin-strip": "{versions.devDependencies.@rollup/plugin-strip}",
+    "@rollup/plugin-terser": "{versions.devDependencies.@rollup/plugin-terser}",
+    "@rollup/plugin-typescript": "{versions.devDependencies.@rollup/plugin-typescript}",
+    "@rollup/plugin-alias": "{versions.devDependencies.@rollup/plugin-alias}",
+    "rollup": "{versions.devDependencies.rollup}",
+    "rollup-plugin-dts": "{versions.devDependencies.rollup-plugin-dts}",
+    "rollup-plugin-esbuild": "{versions.devDependencies.rollup-plugin-esbuild}",
+    "tslib": "{versions.devDependencies.tslib}"
   },
   "main": "index.js",
   "types": "langchain-react.d.ts",
