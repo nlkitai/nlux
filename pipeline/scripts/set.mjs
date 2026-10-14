@@ -46,7 +46,7 @@ try {
     // Install dev packages
     //
     for (const pkg of packagesList) {
-        await run(`yarn workspace ${pkg.devName} install`);
+        await run(`yarn workspace ${pkg.devName} install --frozen-lockfile --non-interactive`);
     }
 
     //

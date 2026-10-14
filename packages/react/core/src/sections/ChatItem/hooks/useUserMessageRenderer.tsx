@@ -19,7 +19,7 @@ export const useUserMessageRenderer = function <AiMsg>(
                     canResubmit={props.messageOptions?.editableUserMessages}
                     submitShortcutKey={props.submitShortcutKey}
                     onResubmit={(newPrompt) => {
-                        props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined;
+                        props.onPromptResubmit?.(newPrompt);
                     }}
                 />
             );
@@ -27,7 +27,7 @@ export const useUserMessageRenderer = function <AiMsg>(
 
         const PromptRenderer = props.messageOptions.promptRenderer;
         const onResubmit = (newPrompt: string) => {
-            props.onPromptResubmit ? props.onPromptResubmit(newPrompt) : undefined;
+            props.onPromptResubmit?.(newPrompt);
         };
 
         return (

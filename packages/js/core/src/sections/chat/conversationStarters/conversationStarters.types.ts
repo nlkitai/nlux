@@ -7,10 +7,6 @@ export type CompConversationStartersProps = {
     onConversationStarterSelected: (conversationStarter: ConversationStarter) => void;
 };
 
-export type CompConversationStartersElements = {
-    // No elements
-}
+export type CompConversationStartersElements = Record<string, never>;
 
-export type CompConversationStartersActions = {
-    // No actions
-};
+export type CompConversationStartersActions = Record<string, never>;

@@ -25,6 +25,4 @@ export type CompConversationElements = {
     segmentsContainer: HTMLElement;
 };
 
-export type CompConversationActions = {
-    // No actions
-};
+export type CompConversationActions = Record<string, never>;
