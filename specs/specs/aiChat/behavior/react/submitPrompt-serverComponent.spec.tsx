@@ -7,7 +7,6 @@ import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
 import {waitForMilliseconds, waitForReactRenderCycle} from '../../../../utils/wait';
 
-// Skipping as useAsRscAdapter is not included in the public GitHub repository.
 describe('<AiChat /> + submit prompt + server component adapter', () => {
     let adapterController: AdapterController | undefined;
 
@@ -180,8 +179,7 @@ describe('<AiChat /> + submit prompt + server component adapter', () => {
             await act(() => waitForReactRenderCycle());
 
             // Assert
-            const loader = container.querySelector(loaderSelector);
-            expect(loader).not.toBeInTheDocument();
+            await waitFor(() => expect(container.querySelector(loaderSelector)).not.toBeInTheDocument());
         });
     });
 
@@ -305,9 +303,11 @@ describe('<AiChat /> + submit prompt + server component adapter', () => {
             await waitForReactRenderCycle();
 
             // Assert
-            const exceptionContainer = container.querySelector('.nlux-comp-exceptionItem');
-            expect(exceptionContainer).toBeInTheDocument();
-            expect(exceptionContainer!.textContent).toContain('Failed to stream server component');
+            await waitFor(() => {
+                const exceptionContainer = container.querySelector('.nlux-comp-exceptionItem');
+                expect(exceptionContainer).toBeInTheDocument();
+                expect(exceptionContainer!.textContent).toContain('Failed to stream server component');
+            });
 
             const activeSegmentSelector = '.nlux-chatRoom-container > .nlux-conversation-container > .nlux-chatSegments-container > .nlux-chatSegment';
             const activeSegment = container.querySelector(activeSegmentSelector);

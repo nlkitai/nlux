@@ -1,4 +1,5 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
+import {waitFor} from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 import '@testing-library/jest-dom';
@@ -48,7 +49,7 @@ describe('createAiChat() + stream adapter + events + messageReceived', () => {
             await waitForRenderCycle();
 
             // Assert
-            expect(messageReceivedCallback).toHaveBeenCalledOnce();
+            await waitFor(() => expect(messageReceivedCallback).toHaveBeenCalledOnce());
         });
     });
 });

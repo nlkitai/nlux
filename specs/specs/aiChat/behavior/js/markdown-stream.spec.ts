@@ -1,9 +1,10 @@
 import {AiChat, createAiChat} from '@nlux-dev/core/src';
+import {waitFor} from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import {afterEach, beforeEach, describe, expect, it} from 'vitest';
 import {adapterBuilder} from '../../../../utils/adapterBuilder';
 import {AdapterController} from '../../../../utils/adapters';
-import {waitForMdStreamToComplete, waitForRenderCycle} from '../../../../utils/wait';
+import {waitForRenderCycle} from '../../../../utils/wait';
 
 describe('createAiChat() + stream adapter + markdown', () => {
     let adapterController: AdapterController | undefined = undefined;
@@ -41,12 +42,13 @@ describe('createAiChat() + stream adapter + markdown', () => {
             // Act
             adapterController!.next('**Hello');
             adapterController!.next(' Human!**');
-            await waitForMdStreamToComplete();
 
             // Assert
-            const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
-            expect(markdownContainer).toBeInTheDocument();
-            expect(markdownContainer!.innerHTML).toEqual(expect.stringContaining('<strong>Hello Human!</strong>'));
+            await waitFor(() => {
+                const markdownContainer = rootElement.querySelector('.nlux-comp-chatItem--received .nlux-markdown-container');
+                expect(markdownContainer).toBeInTheDocument();
+                expect(markdownContainer!.innerHTML).toContain('<strong>Hello Human!</strong>');
+            });
         });
     });
 });
