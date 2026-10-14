@@ -52,13 +52,14 @@ npx nlux-cli create vanilla my-vanilla-app
 Use Node **24.21.0** and Yarn **1.22.22**. From a fresh checkout:
 
 ```sh
-yarn install --frozen-lockfile
-yarn set
+yarn generate
+yarn install --frozen-lockfile --non-interactive
+yarn build:dev
 yarn dev
 ```
 
 Open **http://127.0.0.1:9090** for a local streaming chat demo that needs no API key.
-Run `yarn lint`, `yarn build`, `yarn test`, and `yarn build-demo` to verify changes.
+Run `yarn test:pipeline`, `yarn lint`, `yarn build`, `yarn test`, and `yarn build-demo` to verify changes.
 See [the pipeline guide](pipeline/README.md) for runtime setup, watch mode, and cleanup.
 
 ## Docs & Examples 🔥
