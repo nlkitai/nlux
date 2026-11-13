@@ -36,7 +36,7 @@ export const createComposerDom: DomCreator<ComposerProps> = (props) => {
     }
 
     if (props.status === 'typing') {
-        submitButton.disabled = props.disableSubmitButton ?? textarea.value === '';
+        submitButton.disabled = props.disableSubmitButton ?? textarea.value.trim() === '';
     }
 
     return element;

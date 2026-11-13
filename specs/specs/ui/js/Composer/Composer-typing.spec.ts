@@ -44,6 +44,13 @@ describe('When a composer component is rendered and is in typing status', () => 
         expect(submitButton.disabled).toBe(true);
     });
 
+    it('The submit button should stay disabled for whitespace-only messages', () => {
+        const dom = createComposerDom({status: 'typing', message: ' \t\n '});
+        const submitButton = dom.querySelector('button')!;
+
+        expect(submitButton.disabled).toBe(true);
+    });
+
     describe('With a placeholder', () => {
         it('Should render the placeholder', () => {
             // Arrange
@@ -100,6 +107,17 @@ describe('When a composer component is rendered and is in typing status', () => 
 
                 // Assert
                 expect(textarea.value).toBe('Goodbye, World!');
+            });
+
+            it('Should disable submit when the updated message contains only whitespace', () => {
+                const beforeProps: ComposerProps = {status: 'typing', message: 'Hello'};
+                const props: ComposerProps = {status: 'typing', message: '   '};
+                const dom = createComposerDom(beforeProps);
+                const submitButton = dom.querySelector('button')!;
+
+                updateComposerDom(dom, beforeProps, props);
+
+                expect(submitButton.disabled).toBe(true);
             });
         });
     });
